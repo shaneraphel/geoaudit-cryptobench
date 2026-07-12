@@ -8,6 +8,24 @@ This repository publishes **computational evidence packs** for Foliation multi-t
 
 Proprietary GCU hardware RTL, Verilog, AIG netlists, and EDA synthesis tooling are **omitted**.
 
+
+## Wave-8 clinical computational asset (2026-07-13)
+
+Lead **LEUKEMIA-019** vs FDA chemotype **ponatinib/0LI** on PDB **3OXZ**:
+
+| Metric | Value |
+|------|------|
+| SMILES | `Cc1ccc(C(=O)Nc2ccc(CN3CCN(C)CC3)c(C(F)(F)F)c2)cc1C#Cc1cnc2cc(F)cnn12` |
+| Vina mean | **-13.01** vs ponatinib **-10.04** (Δ **-2.97**) |
+| Binding | non-covalent vs non-covalent (no covalent warhead) |
+| GCU driver | electrostatic_coulomb_dominant (Core5 Born-unroll; public scalars only) |
+| SA / lead | 3.07 / designated computational lead |
+| clinical_grade | **false** |
+
+Full package: [`releases/wave8-clinical-asset-2026-07-13/`](releases/wave8-clinical-asset-2026-07-13/)
+
+Also includes PI3Kα multi-indication Δβ₀ panel and TRPC6 orphan chemotype (EMD-30908 / 7DXG).
+
 ## Target matrix & indications
 
 ### 1. PI3Kα (multi-indication allosteric pocket)
