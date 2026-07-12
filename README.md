@@ -10,6 +10,15 @@ Proprietary GCU hardware RTL, Verilog, AIG netlists, and EDA synthesis tooling a
 
 
 
+
+## Wave-10 spiro-indoline breakthrough (2026-07-13)
+
+**LEUKEMIA-029** local Vina **−13.93** vs ponatinib **−10.04** (Δ **−3.89**) on 3OXZ/0LI.
+
+Pack: [`releases/wave10-spiro-indoline-breakthrough-2026-07-13/`](releases/wave10-spiro-indoline-breakthrough-2026-07-13/)
+
+`clinical_grade=false`. hERG geometry not cleared.
+
 ## Wave-10 novel chemotypes + authenticity audit (2026-07-13)
 
 Evidence-only pack: [`releases/wave10-audit-novel-2026-07-13/`](releases/wave10-audit-novel-2026-07-13/)
