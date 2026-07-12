@@ -9,6 +9,16 @@ This repository publishes **computational evidence packs** for Foliation multi-t
 Proprietary GCU hardware RTL, Verilog, AIG netlists, and EDA synthesis tooling are **omitted**.
 
 
+
+## Wave-10 novel chemotypes + authenticity audit (2026-07-13)
+
+Evidence-only pack: [`releases/wave10-audit-novel-2026-07-13/`](releases/wave10-audit-novel-2026-07-13/)
+
+- Standing win: LEUKEMIA-019 vs ponatinib (−13.01, Δ −2.97)
+- New Wave-10 cards: oxaspiro/azetidine/oxetane/norbornane leukemia; azabridge/oxaspiro/macro leukocyte cages (Fsp³≈0.8)
+- Full defect/plan: `README_AUDIT_AND_PLAN.md` inside the release
+- `clinical_grade=false`
+
 ## Wave-8 clinical computational asset (2026-07-13)
 
 Lead **LEUKEMIA-019** vs FDA chemotype **ponatinib/0LI** on PDB **3OXZ**:
