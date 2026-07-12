@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="380">
+<rect width="100%" height="100%" fill="#f7f7f5"/>
+<text x="60" y="28" font-family="Georgia,serif" font-size="16">Wave-4 Vina mean vs OHT / vepdegestrant</text>
+<line x1="60" y1="276.25454595358667" x2="760" y2="276.25454595358667" stroke="#b45309" stroke-dasharray="4 3"/>
+<text x="764" y="280.25454595358667" font-size="11" fill="#b45309">OHT -13.56</text>
+<line x1="60" y1="302.15927649004345" x2="760" y2="302.15927649004345" stroke="#7c2d12" stroke-dasharray="4 3"/>
+<text x="764" y="306.15927649004345" font-size="11" fill="#7c2d12">VEP -14.29</text>
+<circle cx="60.0" cy="252.5" r="4.5" fill="#1d4ed8"/>
+<text x="60.0" y="366" font-size="8" text-anchor="middle">014</text>
+<circle cx="106.7" cy="251.7" r="4.5" fill="#1d4ed8"/>
+<text x="106.7" y="366" font-size="8" text-anchor="middle">004</text>
+<circle cx="153.3" cy="246.6" r="4.5" fill="#1d4ed8"/>
+<text x="153.3" y="366" font-size="8" text-anchor="middle">012</text>
+<circle cx="200.0" cy="235.9" r="4.5" fill="#1d4ed8"/>
+<text x="200.0" y="366" font-size="8" text-anchor="middle">002</text>
+<circle cx="246.7" cy="234.3" r="4.5" fill="#1d4ed8"/>
+<text x="246.7" y="366" font-size="8" text-anchor="middle">005</text>
+<circle cx="293.3" cy="228.6" r="4.5" fill="#1d4ed8"/>
+<text x="293.3" y="366" font-size="8" text-anchor="middle">006</text>
+<circle cx="340.0" cy="219.6" r="4.5" fill="#1d4ed8"/>
+<text x="340.0" y="366" font-size="8" text-anchor="middle">007</text>
+<circle cx="386.7" cy="212.9" r="4.5" fill="#1d4ed8"/>
+<text x="386.7" y="366" font-size="8" text-anchor="middle">015</text>
+<circle cx="433.3" cy="211.8" r="4.5" fill="#1d4ed8"/>
+<text x="433.3" y="366" font-size="8" text-anchor="middle">008</text>
+<circle cx="480.0" cy="210.7" r="4.5" fill="#1d4ed8"/>
+<text x="480.0" y="366" font-size="8" text-anchor="middle">016</text>
+<circle cx="526.7" cy="208.5" r="4.5" fill="#1d4ed8"/>
+<text x="526.7" y="366" font-size="8" text-anchor="middle">013</text>
+<circle cx="573.3" cy="199.3" r="4.5" fill="#1d4ed8"/>
+<text x="573.3" y="366" font-size="8" text-anchor="middle">003</text>
+<circle cx="620.0" cy="167.6" r="4.5" fill="#1d4ed8"/>
+<text x="620.0" y="366" font-size="8" text-anchor="middle">001</text>
+<circle cx="666.7" cy="151.7" r="4.5" fill="#1d4ed8"/>
+<text x="666.7" y="366" font-size="8" text-anchor="middle">010</text>
+<circle cx="713.3" cy="148.4" r="4.5" fill="#1d4ed8"/>
+<text x="713.3" y="366" font-size="8" text-anchor="middle">009</text>
+<circle cx="760.0" cy="108.8" r="4.5" fill="#1d4ed8"/>
+<text x="760.0" y="366" font-size="8" text-anchor="middle">011</text>
+<polyline fill="none" stroke="#1d4ed8" stroke-width="1.5" points="60.0,252.5 106.7,251.7 153.3,246.6 200.0,235.9 246.7,234.3 293.3,228.6 340.0,219.6 386.7,212.9 433.3,211.8 480.0,210.7 526.7,208.5 573.3,199.3 620.0,167.6 666.7,151.7 713.3,148.4 760.0,108.8"/>
+</svg>
