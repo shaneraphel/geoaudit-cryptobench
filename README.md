@@ -118,3 +118,12 @@ Follow-on: hERG-unblock series 030–037 all beat ponatinib locally; non-basic b
 
 Release: [`releases/wave10-herg-dualtrack-leukemia041-2026-07-13/`](releases/wave10-herg-dualtrack-leukemia041-2026-07-13/)
 
+## Sprint pack 2026-07-13
+
+- **LEUKEMIA-058** dual-track lead (Vina −13.47, best-case hERG); **strict hERG still fail**; `n_validated=0`
+- ER Wave-10 + redesign: **no OHT beat** (honest)
+- BTK-009 local Vina edge with **covalent skew labeled**
+- KRAS/BCL2 novel forges + cryo figure pack + wet-lab handoff sheet
+
+Release: [`releases/sprint-clinical-evidence-2026-07-13/`](releases/sprint-clinical-evidence-2026-07-13/)
+
