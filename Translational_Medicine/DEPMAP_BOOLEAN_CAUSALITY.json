@@ -1,0 +1,289 @@
+{
+  "schema": "foliation.depmap_boolean_causality.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-15T04:38:47.956982+00:00",
+  "source": {
+    "file": "experimental_v2/chem_pipeline/data/depmap_cache/CRISPRGeneEffect.csv",
+    "note": "Figshare CRISPRGeneEffect matrix (ndownloader 43346616); portal API Cloudflare-blocked"
+  },
+  "thresholds": {
+    "pan_median_lt": -0.5,
+    "lineage_median_lt": -0.5,
+    "selective_frac_lt_minus_1": 0.02,
+    "selective_p10_lt": -1.0
+  },
+  "programs": [
+    {
+      "program": "leukemia_ABL1",
+      "gene": "ABL1",
+      "decision": "PASS",
+      "boolean_kill_switch": true,
+      "pan_cancer": {
+        "n_cell_lines": 1100,
+        "dep_median": 0.04200215621875679,
+        "dep_p10": -0.13663432770245512,
+        "dep_p90": 0.201207150740296,
+        "frac_lt_minus_1_0": 0.0055,
+        "boolean_kill_switch_pan": false,
+        "boolean_kill_switch_selective": false,
+        "top10_model_ids": [
+          {
+            "model_id": "ACH-000604",
+            "score": -2.096049827124799
+          },
+          {
+            "model_id": "ACH-000076",
+            "score": -2.0308237343590267
+          },
+          {
+            "model_id": "ACH-000326",
+            "score": -1.8502399407237715
+          },
+          {
+            "model_id": "ACH-000551",
+            "score": -1.626307042892218
+          },
+          {
+            "model_id": "ACH-000983",
+            "score": -1.5487494896532679
+          },
+          {
+            "model_id": "ACH-000074",
+            "score": -1.3884646145151884
+          },
+          {
+            "model_id": "ACH-000262",
+            "score": -0.6932265562354812
+          },
+          {
+            "model_id": "ACH-002061",
+            "score": -0.6455201915839193
+          },
+          {
+            "model_id": "ACH-000295",
+            "score": -0.564500763575294
+          },
+          {
+            "model_id": "ACH-000491",
+            "score": -0.5082204182092115
+          }
+        ]
+      },
+      "indication_lineage": {
+        "n_indication_lines": 5,
+        "indication_median": -1.8502399407237715,
+        "indication_min": -2.096049827124799,
+        "boolean_kill_switch_lineage": true,
+        "lines": [
+          {
+            "model_id": "ACH-000604",
+            "cell_line": "MEG-01",
+            "score": -2.096049827124799
+          },
+          {
+            "model_id": "ACH-000076",
+            "cell_line": "KU812",
+            "score": -2.0308237343590267
+          },
+          {
+            "model_id": "ACH-000326",
+            "cell_line": "LAMA-84",
+            "score": -1.8502399407237715
+          },
+          {
+            "model_id": "ACH-000551",
+            "cell_line": "K562",
+            "score": -1.626307042892218
+          },
+          {
+            "model_id": "ACH-000983",
+            "cell_line": "EM-2",
+            "score": -1.5487494896532679
+          }
+        ]
+      },
+      "wetlab_cell_line": "K562",
+      "assay": "KinaseGlo_or_ADPGlo_ABL1",
+      "validated_candidates": [
+        "CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e",
+        "CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41"
+      ],
+      "abort_reason": null
+    },
+    {
+      "program": "kras_G12C",
+      "gene": "KRAS",
+      "decision": "PASS",
+      "boolean_kill_switch": true,
+      "pan_cancer": {
+        "n_cell_lines": 1100,
+        "dep_median": -0.49668749740728335,
+        "dep_p10": -1.5469894212127122,
+        "dep_p90": -0.2520366584200591,
+        "frac_lt_minus_1_0": 0.1773,
+        "boolean_kill_switch_pan": false,
+        "boolean_kill_switch_selective": true,
+        "top10_model_ids": [
+          {
+            "model_id": "ACH-000222",
+            "score": -4.397056773539802
+          },
+          {
+            "model_id": "ACH-000417",
+            "score": -3.7990204103536365
+          },
+          {
+            "model_id": "ACH-000505",
+            "score": -3.711189539311931
+          },
+          {
+            "model_id": "ACH-001399",
+            "score": -3.192912315627345
+          },
+          {
+            "model_id": "ACH-001494",
+            "score": -3.1454001715726125
+          },
+          {
+            "model_id": "ACH-000235",
+            "score": -3.0710159945951747
+          },
+          {
+            "model_id": "ACH-000601",
+            "score": -3.0340385831135634
+          },
+          {
+            "model_id": "ACH-000042",
+            "score": -3.0093919528268955
+          },
+          {
+            "model_id": "ACH-000264",
+            "score": -2.978002179144654
+          },
+          {
+            "model_id": "ACH-000532",
+            "score": -2.9648771921702477
+          }
+        ]
+      },
+      "indication_lineage": {
+        "n_indication_lines": 4,
+        "indication_median": -1.2710789999573375,
+        "indication_min": -4.397056773539802,
+        "boolean_kill_switch_lineage": true,
+        "lines": [
+          {
+            "model_id": "ACH-000222",
+            "cell_line": "KP4",
+            "score": -4.397056773539802
+          },
+          {
+            "model_id": "ACH-000417",
+            "cell_line": "Panc 08.13",
+            "score": -3.7990204103536365
+          },
+          {
+            "model_id": "ACH-000768",
+            "cell_line": "NCI-H358",
+            "score": -1.2710789999573375
+          },
+          {
+            "model_id": "ACH-000045",
+            "cell_line": "A549",
+            "score": -0.5079360780513751
+          }
+        ]
+      },
+      "wetlab_cell_line": "NCI-H358",
+      "assay": "KRAS_G12C_cellular_viability",
+      "validated_candidates": [],
+      "abort_reason": null
+    },
+    {
+      "program": "pik3ca_H1047R",
+      "gene": "PIK3CA",
+      "decision": "PASS",
+      "boolean_kill_switch": true,
+      "pan_cancer": {
+        "n_cell_lines": 1100,
+        "dep_median": -0.4539621313459162,
+        "dep_p10": -0.9337668292625907,
+        "dep_p90": -0.19035766514973268,
+        "frac_lt_minus_1_0": 0.08,
+        "boolean_kill_switch_pan": false,
+        "boolean_kill_switch_selective": false,
+        "top10_model_ids": [
+          {
+            "model_id": "ACH-000934",
+            "score": -3.4031863306587535
+          },
+          {
+            "model_id": "ACH-000554",
+            "score": -2.360704417585968
+          },
+          {
+            "model_id": "ACH-000847",
+            "score": -2.141142706582183
+          },
+          {
+            "model_id": "ACH-002179",
+            "score": -1.92469824655918
+          },
+          {
+            "model_id": "ACH-001345",
+            "score": -1.8231604640610835
+          },
+          {
+            "model_id": "ACH-000518",
+            "score": -1.7675975503082397
+          },
+          {
+            "model_id": "ACH-001544",
+            "score": -1.6971286954287947
+          },
+          {
+            "model_id": "ACH-000880",
+            "score": -1.654180250152562
+          },
+          {
+            "model_id": "ACH-000192",
+            "score": -1.622279793581244
+          },
+          {
+            "model_id": "ACH-000866",
+            "score": -1.5881410743489983
+          }
+        ]
+      },
+      "indication_lineage": {
+        "n_indication_lines": 2,
+        "indication_median": -1.0469504122001227,
+        "indication_min": -1.251988644134733,
+        "boolean_kill_switch_lineage": true,
+        "lines": [
+          {
+            "model_id": "ACH-000019",
+            "cell_line": "T47D",
+            "score": -1.251988644134733
+          },
+          {
+            "model_id": "ACH-000147",
+            "cell_line": "MCF7",
+            "score": -1.0469504122001227
+          }
+        ]
+      },
+      "wetlab_cell_line": "T47D",
+      "assay": "ADPGlo_PI3Kalpha",
+      "validated_candidates": [],
+      "abort_reason": null
+    }
+  ],
+  "n_pass": 3,
+  "n_abort": 0,
+  "VALIDATED_CANDIDATE_POOL": [
+    "CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e",
+    "CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41"
+  ],
+  "truth_boundary": "Chronos gene-effect scores are computational CRISPR dependencies, not wet confirmation of a specific chemotype IC50."
+}

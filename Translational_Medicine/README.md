@@ -1,34 +1,28 @@
 # Translational Medicine · Pre-Clinical Asset Pack
 
-Generated: `2026-07-15T04:19:45.011303+00:00`
+Generated: `2026-07-15T04:38:54.343037+00:00`
 
 > **`clinical_grade = false`**
-> This pack connects **public clinical databases** (DepMap, TCGA/cBioPortal, ChEMBL) to
-> a **Wet-Lab Execution Package** for the computational lead.
-> It does **not** claim patient efficacy, measured IC50, or regulatory readiness.
+> DepMap Chronos kill-switch gate → TCGA TME constraints → Wet-Lab Execution Package.
+> Computational docking ≠ measured IC50. No regulatory claim.
 
-## 1. Why these targets (DepMap + TCGA)
+## 1. DepMap Boolean causality (kill-switch gate)
 
-### DepMap CRISPR dependency (gene_dep API + Chronos priors fallback)
+See [`DEPMAP_KILL_SWITCH_JUSTIFICATION.md`](DEPMAP_KILL_SWITCH_JUSTIFICATION.md).
 
-| Gene | Program | n lines | median dep | strong? | lineage-selective? | source |
-|------|---------|---------|------------|---------|--------------------|--------|
-| **PIK3CA** | PI3KA program | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
-| **ESR1** | ER-100 program | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
-| **ABL1** | leukemia BCR-ABL program | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
-| **BCL2** | apoptosis / leukocyte adjacency | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
-| **KRAS** | KRAS G12C cryo program | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
+| Program | Gene | Decision | Pan median | Selective? | Lineage median | Wet line |
+|---------|------|----------|------------|------------|----------------|----------|
+| `leukemia_ABL1` | **ABL1** | **PASS** | 0.04200215621875679 | False | -1.8502399407237715 | K562 |
+| `kras_G12C` | **KRAS** | **PASS** | -0.49668749740728335 | True | -1.2710789999573375 | NCI-H358 |
+| `pik3ca_H1047R` | **PIK3CA** | **PASS** | -0.4539621313459162 | False | -1.0469504122001227 | T47D |
 
-### TCGA co-mutation rule (cBioPortal)
+## 2. TCGA tumor microenvironment (after causality PASS)
 
-- Rule: `PIK3CA_H1047R_AND_PTEN_LOSS`
-- Boolean: **True**
-- Note: TCGA breast/endometrial PanCan mutations/fetch: PIK3CA hotspot with PTEN co-alteration defines a distinct TME manifold (Δβ0 boundary).
+- Co-mutation rule: `PIK3CA_H1047R_AND_PTEN_LOSS` · Boolean **True**
+- H1047-like samples: **186** · H1047∩PTEN: **36**
+- Dictionary milli-pH priors: `{"breast_ER_pos": 680, "leukemia_BM_niche": 720, "solid_hypoxic_core": 650}`
 
-## 2. Clinical attrition → Boolean toxicity masks
-
-Phase-fail / withdrawn motifs flattened into **deterministic Boolean masks**
-(no SoftMax at inference):
+## 3. Clinical attrition → Boolean toxicity masks
 
 | Mask | Banned | Failure class |
 |------|--------|---------------|
@@ -38,39 +32,32 @@ Phase-fail / withdrawn motifs flattened into **deterministic Boolean masks**
 | `catechol` | True | quinone_tox |
 | `flat_polyaryl_basic_amine` | False | herg_qt |
 
-Tumor niche milli-pH priors: `{"breast_ER_pos": 680, "leukemia_BM_niche": 720, "solid_hypoxic_core": 650}`
+## 4. VALIDATED_CANDIDATE_POOL (top orphans)
 
-## 3. Lead candidate (computational)
+- `CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e`
+- `CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41`
 
-| Field | Value |
-|-------|-------|
-| ID | `CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e` |
-| Indication | leukemia / ABL1 (3OXZ) |
-| Local Vina | -13.96 vs ponatinib (-10.04) |
-| Beat local FDA docking baseline | **True** |
-| DepMap gene link | `ABL1` |
+## 5. Wet-Lab Execution Packages
 
-## 4. Wet-Lab Execution Package
+### `CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e`
 
-See:
-
-- [`wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_WETLAB_SOP.md`](wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_WETLAB_SOP.md)
-- [`wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_RETROSYNTHESIS.json`](wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_RETROSYNTHESIS.json)
-
-### Assays specified
-
+- Docking: -13.96 vs ponatinib (-10.04)
 - Biochem: `KinaseGlo_or_ADPGlo_ABL1`
-- Cell: `['K562', 'BaF3_BCR_ABL']`
-- Safety: `hERG_patch_clamp`
-- In vivo: `['K562_CDX', 'CML_PDX_if_available']`
+- DepMap cell line: **K562**
+- SOP: [`wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_WETLAB_SOP.md`](wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_WETLAB_SOP.md)
+- Retro: [`wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_RETROSYNTHESIS.json`](wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_RETROSYNTHESIS.json)
 
-### Retrosynthesis
+### `CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41`
 
-RDKit template sketch (AiZynthFinder optional upgrade). Building-block classes and reagents listed in the JSON.
+- Docking: -13.24 vs ponatinib (-10.04)
+- Biochem: `KinaseGlo_or_ADPGlo_ABL1`
+- DepMap cell line: **K562**
+- SOP: [`wetlab/CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41_WETLAB_SOP.md`](wetlab/CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41_WETLAB_SOP.md)
+- Retro: [`wetlab/CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41_RETROSYNTHESIS.json`](wetlab/CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41_RETROSYNTHESIS.json)
 
-## 5. Refusals
+## 6. Refusals / IP air-gap
 
 - Not a wet IC50 / PK / PDX result
 - Not FDA efficacy
-- No proprietary accelerator RTL or collapsed netlists
+- No proprietary accelerator RTL, netlists, or hardware architecture disclosure
 
