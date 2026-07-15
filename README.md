@@ -1,15 +1,34 @@
 # Geometric Computation for Clinical Oncology: Multi-Target Pipeline
 
 This repository publishes **computational evidence packs** for Foliation multi-target pharmacology  
-(PI3Kα · ER-100 · TRPC6). Molecules are ranked with discrete geometric / docking / topology operators.
+(PI3Kα · ER-100 · TRPC6 · leukemia ABL). Molecules are ranked with discrete geometric / docking / topology operators.
 
 > **`clinical_grade=false` until wet measurements.**  
 > Docking ≠ affinity. Geometric hERG ≠ patch-clamp. Δβ₀ ≠ efficacy. No fabricated IC50/TGI%.
 
-Proprietary GCU hardware RTL, Verilog, AIG netlists, and EDA synthesis tooling are **omitted**.
+Proprietary accelerator RTL and synthesis deliverables are **omitted**.
 
+## Computational oncology evidence pack (2026-07-15)
 
+**Flagship:** `CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e`  
+Local AutoDock Vina **−13.96** vs ponatinib **−10.04** (Δ **−3.92**) on ABL1/3OXZ.
 
+Also beats: azaspiro–oxetane (−13.24) and prior lead LEUKEMIA-029 (−13.93).
+
+**Honest residual:** ESR1 estrane–cage designs do **not** beat local 4-hydroxytamoxifen (−13.56).
+
+Pack: [`releases/computational-oncology-evidence-2026-07-15/`](releases/computational-oncology-evidence-2026-07-15/)
+
+![Vina vs FDA baselines](figures/2026-07-15/pfizer_vina_vs_fda.png)
+
+![Lexicon / ADME discrete gates](figures/2026-07-15/pfizer_lexicon_gates.png)
+
+![Multi-pillar readiness](figures/2026-07-15/pfizer_pillar_readiness.png)
+
+Evidence includes cryo-EM context figures, TME fragmentation panel, chirality/element/CYP lexicon audit, and SMILES SHA-256 digests.  
+`clinical_grade=false`. Not wet IC50 / not FDA efficacy.
+
+---
 
 ## Wave-10 spiro-indoline breakthrough (2026-07-13)
 
