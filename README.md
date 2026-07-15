@@ -8,6 +8,29 @@ This repository publishes **computational evidence packs** for Foliation multi-t
 
 Proprietary accelerator RTL and synthesis deliverables are **omitted**.
 
+## Clinical Cryo-EM + ER-100 showcase (2026-07-15)
+
+Autonomous EMDB forage → **KRAS G12C** (8VGQ / EMD-43221) and **NTSR1 GPCR** (7L0Q / EMD-23100).
+
+| Target | Density-mask PASS | Notes |
+|--------|-------------------|-------|
+| KRAS-G12C-CRYO | **5/5** orphans | High-Fsp3 spiro/bridged seeds on 64³ cavity tensor |
+| NTSR1-GPCR-CRYO | **3/4** orphans | Peptide-mimetic cages in orthosteric volume |
+| ER-100 vs OHT (−13.56) | **NOT_BREACHED** | Prior Wave-4 best ≈ −12.90; residual reported honestly |
+| TME Δβ₀ (real Visium) | **57** | Hypothetical ESR1-edge deletion on real adjacency |
+
+Pack: [`releases/clinical-cryo-er100-showcase-2026-07-15/`](releases/clinical-cryo-er100-showcase-2026-07-15/)
+
+![Orphan cryo embedding](releases/clinical-cryo-er100-showcase-2026-07-15/figures/clinical_orphan_cryo_embedding.png)
+
+![ER-100 profile](releases/clinical-cryo-er100-showcase-2026-07-15/figures/clinical_er100_admet_radar.png)
+
+![TME Δβ₀](releases/clinical-cryo-er100-showcase-2026-07-15/figures/clinical_er100_tme_delta_beta0.png)
+
+`clinical_grade=false`. Density-mask PASS ≠ wet occupancy. Docking ≠ IC50.
+
+---
+
 ## Computational oncology evidence pack (2026-07-15)
 
 **Flagship:** `CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e`  
