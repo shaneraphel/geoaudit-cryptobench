@@ -1,0 +1,115 @@
+{
+  "schema": "foliation.clinical_ground_truth_ingest.v1",
+  "generated_at": "2026-07-15T04:03:00.676984+00:00",
+  "clinical_grade": false,
+  "depmap_genes": [
+    {
+      "gene": "PIK3CA",
+      "program": "PI3KA program",
+      "error": "empty_scores",
+      "n": 0
+    },
+    {
+      "gene": "ESR1",
+      "program": "ER-100 program",
+      "error": "empty_scores",
+      "n": 0
+    },
+    {
+      "gene": "ABL1",
+      "program": "leukemia BCR-ABL program",
+      "error": "empty_scores",
+      "n": 0
+    },
+    {
+      "gene": "BCL2",
+      "program": "apoptosis / leukocyte adjacency",
+      "error": "empty_scores",
+      "n": 0
+    },
+    {
+      "gene": "KRAS",
+      "program": "KRAS G12C cryo program",
+      "error": "empty_scores",
+      "n": 0
+    }
+  ],
+  "tcga_comutation_rule": {
+    "rule_id": "PIK3CA_H1047R_AND_PTEN_LOSS",
+    "boolean": true,
+    "programs": [
+      "PI3KA-H1047R-CRYO"
+    ],
+    "delta_beta0_boundary_flag": true,
+    "clinical_note": "TCGA breast/endometrial cohorts enrich PIK3CA hotspot with PTEN pathway loss \u2014 TME graph interventions must treat dual-hit as distinct manifold",
+    "api_rows": [
+      {
+        "study": "brca_tcga_pan_can_atlas_2018",
+        "gene": "PIK3CA",
+        "n_mutations_returned": 0,
+        "n_pik3ca_h1047_like": 0
+      },
+      {
+        "study": "brca_tcga_pan_can_atlas_2018",
+        "gene": "PTEN",
+        "n_mutations_returned": 0,
+        "n_pik3ca_h1047_like": null
+      },
+      {
+        "study": "ucec_tcga_pan_can_atlas_2018",
+        "gene": "PIK3CA",
+        "n_mutations_returned": 0,
+        "n_pik3ca_h1047_like": 0
+      },
+      {
+        "study": "ucec_tcga_pan_can_atlas_2018",
+        "gene": "PTEN",
+        "n_mutations_returned": 0,
+        "n_pik3ca_h1047_like": null
+      }
+    ]
+  },
+  "toxicity_masks": [
+    {
+      "id": "anilide_primary_aniline",
+      "smarts": "[NH2]c1ccccc1",
+      "banned_default": true,
+      "warn_default": false,
+      "failure_class": "reactive_metabolite_hepatotox"
+    },
+    {
+      "id": "nitroaromatic",
+      "smarts": "[N+](=O)[O-]",
+      "banned_default": true,
+      "warn_default": false,
+      "failure_class": "genotox_risk"
+    },
+    {
+      "id": "unsubstituted_michael",
+      "smarts": "C=CC(=O)[!N]",
+      "banned_default": true,
+      "warn_default": false,
+      "failure_class": "covalent_offtarget"
+    },
+    {
+      "id": "catechol",
+      "smarts": "c1ccc(O)c(O)c1",
+      "banned_default": true,
+      "warn_default": false,
+      "failure_class": "quinone_tox"
+    },
+    {
+      "id": "flat_polyaryl_basic_amine",
+      "smarts": "c1ccccc1.[NX3;H2,H1;!$(NC=O)]",
+      "banned_default": false,
+      "warn_default": true,
+      "failure_class": "herg_qt"
+    }
+  ],
+  "tumor_ph_milli": {
+    "breast_ER_pos": 680,
+    "leukemia_BM_niche": 720,
+    "solid_hypoxic_core": 650
+  },
+  "truth_boundary": "Public clinical databases guide target selection and Boolean safety masks. They do not constitute wet proof that Foliation candidates work in patients."
+}

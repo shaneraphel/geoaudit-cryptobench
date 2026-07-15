@@ -1,0 +1,60 @@
+{
+  "schema": "foliation.clinical_survival_rules.v1",
+  "clinical_grade": false,
+  "toxicity_masks": [
+    {
+      "id": "anilide_primary_aniline",
+      "smarts": "[NH2]c1ccccc1",
+      "banned_default": true,
+      "warn_default": false,
+      "failure_class": "reactive_metabolite_hepatotox"
+    },
+    {
+      "id": "nitroaromatic",
+      "smarts": "[N+](=O)[O-]",
+      "banned_default": true,
+      "warn_default": false,
+      "failure_class": "genotox_risk"
+    },
+    {
+      "id": "unsubstituted_michael",
+      "smarts": "C=CC(=O)[!N]",
+      "banned_default": true,
+      "warn_default": false,
+      "failure_class": "covalent_offtarget"
+    },
+    {
+      "id": "catechol",
+      "smarts": "c1ccc(O)c(O)c1",
+      "banned_default": true,
+      "warn_default": false,
+      "failure_class": "quinone_tox"
+    },
+    {
+      "id": "flat_polyaryl_basic_amine",
+      "smarts": "c1ccccc1.[NX3;H2,H1;!$(NC=O)]",
+      "banned_default": false,
+      "warn_default": true,
+      "failure_class": "herg_qt"
+    }
+  ],
+  "tumor_ph_milli": {
+    "breast_ER_pos": 680,
+    "leukemia_BM_niche": 720,
+    "solid_hypoxic_core": 650
+  },
+  "tautomer_policy": {
+    "breast_ER_pos": "prefer_neutral_at_ph_milli_680",
+    "leukemia_BM_niche": "allow_weak_base_at_ph_milli_720",
+    "solid_hypoxic_core": "prefer_neutral_permeable_at_ph_milli_650"
+  },
+  "depmap_required_genes_any": [
+    "ABL1",
+    "PIK3CA",
+    "ESR1"
+  ],
+  "comutation_flags": [
+    "PIK3CA_H1047R_AND_PTEN_LOSS"
+  ],
+  "combinatorial_note": "All fields are absolute Boolean / milli-integer \u2014 no SoftMax over clinical chaos at inference."
+}
