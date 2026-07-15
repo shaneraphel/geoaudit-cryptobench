@@ -8,6 +8,28 @@ This repository publishes **computational evidence packs** for Foliation multi-t
 
 Proprietary accelerator RTL and synthesis deliverables are **omitted**.
 
+## Cryo-EM tensor homology (2026-07-15)
+
+KRAS G12C (8VGQ / EMD-43221): native MRC → 64³ tensor → Kähler L_k Geometric Brake → Betti one-shot SMT orphans → SE(3) Lie frame align.
+
+| Gate | Result |
+|------|--------|
+| Pocket Betti (β₀/β₁/β₂) | 5 / 0 / 0 |
+| SMT one-shot | SAT (bcp + morpholine) |
+| Orphans (high-Fsp3) | 4 |
+| SE(3) distance preservation | ~1e-14 |
+| TME Δβ₀ (Visium) | 57 |
+
+Pack: [`releases/cryo-tensor-homology-2026-07-15/`](releases/cryo-tensor-homology-2026-07-15/)
+
+![Betti](releases/cryo-tensor-homology-2026-07-15/figures/homology_betti_kras.png)
+
+![Kähler brake](releases/cryo-tensor-homology-2026-07-15/figures/homology_kahler_brake.png)
+
+`clinical_grade=false`. Density topology ≠ wet occupancy.
+
+---
+
 ## Clinical Cryo-EM + ER-100 showcase (2026-07-15)
 
 Autonomous EMDB forage → **KRAS G12C** (8VGQ / EMD-43221) and **NTSR1 GPCR** (7L0Q / EMD-23100).
