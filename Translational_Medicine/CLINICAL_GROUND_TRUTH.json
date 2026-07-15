@@ -1,37 +1,67 @@
 {
   "schema": "foliation.clinical_ground_truth_ingest.v1",
-  "generated_at": "2026-07-15T04:03:00.676984+00:00",
+  "generated_at": "2026-07-15T04:19:44.903696+00:00",
   "clinical_grade": false,
   "depmap_genes": [
     {
       "gene": "PIK3CA",
       "program": "PI3KA program",
-      "error": "empty_scores",
-      "n": 0
+      "n_cell_lines": null,
+      "dep_median": null,
+      "dep_p10": null,
+      "dep_p90": null,
+      "strong_dependency_boolean": false,
+      "lineage_selective_boolean": true,
+      "source": "depmap_chronos_priors_v1_fallback",
+      "live_error": "depmap_cloudflare_challenge_html"
     },
     {
       "gene": "ESR1",
       "program": "ER-100 program",
-      "error": "empty_scores",
-      "n": 0
+      "n_cell_lines": null,
+      "dep_median": null,
+      "dep_p10": null,
+      "dep_p90": null,
+      "strong_dependency_boolean": false,
+      "lineage_selective_boolean": true,
+      "source": "depmap_chronos_priors_v1_fallback",
+      "live_error": "depmap_cloudflare_challenge_html"
     },
     {
       "gene": "ABL1",
       "program": "leukemia BCR-ABL program",
-      "error": "empty_scores",
-      "n": 0
+      "n_cell_lines": null,
+      "dep_median": null,
+      "dep_p10": null,
+      "dep_p90": null,
+      "strong_dependency_boolean": false,
+      "lineage_selective_boolean": true,
+      "source": "depmap_chronos_priors_v1_fallback",
+      "live_error": "depmap_cloudflare_challenge_html"
     },
     {
       "gene": "BCL2",
       "program": "apoptosis / leukocyte adjacency",
-      "error": "empty_scores",
-      "n": 0
+      "n_cell_lines": null,
+      "dep_median": null,
+      "dep_p10": null,
+      "dep_p90": null,
+      "strong_dependency_boolean": false,
+      "lineage_selective_boolean": true,
+      "source": "depmap_chronos_priors_v1_fallback",
+      "live_error": "depmap_cloudflare_challenge_html"
     },
     {
       "gene": "KRAS",
       "program": "KRAS G12C cryo program",
-      "error": "empty_scores",
-      "n": 0
+      "n_cell_lines": null,
+      "dep_median": null,
+      "dep_p10": null,
+      "dep_p90": null,
+      "strong_dependency_boolean": false,
+      "lineage_selective_boolean": true,
+      "source": "depmap_chronos_priors_v1_fallback",
+      "live_error": "depmap_cloudflare_challenge_html"
     }
   ],
   "tcga_comutation_rule": {
@@ -41,31 +71,29 @@
       "PI3KA-H1047R-CRYO"
     ],
     "delta_beta0_boundary_flag": true,
-    "clinical_note": "TCGA breast/endometrial cohorts enrich PIK3CA hotspot with PTEN pathway loss \u2014 TME graph interventions must treat dual-hit as distinct manifold",
+    "n_h1047_samples_total": 186,
+    "n_h1047_and_pten_total": 36,
+    "clinical_note": "TCGA breast/endometrial PanCan mutations/fetch: PIK3CA hotspot with PTEN co-alteration defines a distinct TME manifold (\u0394\u03b20 boundary).",
     "api_rows": [
       {
         "study": "brca_tcga_pan_can_atlas_2018",
-        "gene": "PIK3CA",
-        "n_mutations_returned": 0,
-        "n_pik3ca_h1047_like": 0
-      },
-      {
-        "study": "brca_tcga_pan_can_atlas_2018",
-        "gene": "PTEN",
-        "n_mutations_returned": 0,
-        "n_pik3ca_h1047_like": null
-      },
-      {
-        "study": "ucec_tcga_pan_can_atlas_2018",
-        "gene": "PIK3CA",
-        "n_mutations_returned": 0,
-        "n_pik3ca_h1047_like": 0
+        "molecular_profile": "brca_tcga_pan_can_atlas_2018_mutations",
+        "n_mutations_returned": 451,
+        "n_pik3ca_samples": 347,
+        "n_pten_samples": 58,
+        "n_pik3ca_h1047_like": 144,
+        "n_pik3ca_and_pten": 19,
+        "n_pik3ca_h1047_and_pten": 6
       },
       {
         "study": "ucec_tcga_pan_can_atlas_2018",
-        "gene": "PTEN",
-        "n_mutations_returned": 0,
-        "n_pik3ca_h1047_like": null
+        "molecular_profile": "ucec_tcga_pan_can_atlas_2018_mutations",
+        "n_mutations_returned": 978,
+        "n_pik3ca_samples": 259,
+        "n_pten_samples": 337,
+        "n_pik3ca_h1047_like": 42,
+        "n_pik3ca_and_pten": 191,
+        "n_pik3ca_h1047_and_pten": 30
       }
     ]
   },

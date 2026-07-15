@@ -1,6 +1,6 @@
 # Translational Medicine · Pre-Clinical Asset Pack
 
-Generated: `2026-07-15T04:07:43.944804+00:00`
+Generated: `2026-07-15T04:19:45.011303+00:00`
 
 > **`clinical_grade = false`**
 > This pack connects **public clinical databases** (DepMap, TCGA/cBioPortal, ChEMBL) to
@@ -9,21 +9,21 @@ Generated: `2026-07-15T04:07:43.944804+00:00`
 
 ## 1. Why these targets (DepMap + TCGA)
 
-### DepMap CRISPR dependency (gene_dep API)
+### DepMap CRISPR dependency (gene_dep API + Chronos priors fallback)
 
-| Gene | Program | n lines | median dep | strong? |
-|------|---------|---------|------------|---------|
-| PIK3CA | PI3KA program | — | — | error |
-| ESR1 | ER-100 program | — | — | error |
-| ABL1 | leukemia BCR-ABL program | — | — | error |
-| BCL2 | apoptosis / leukocyte adjacency | — | — | error |
-| KRAS | KRAS G12C cryo program | — | — | error |
+| Gene | Program | n lines | median dep | strong? | lineage-selective? | source |
+|------|---------|---------|------------|---------|--------------------|--------|
+| **PIK3CA** | PI3KA program | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
+| **ESR1** | ER-100 program | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
+| **ABL1** | leukemia BCR-ABL program | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
+| **BCL2** | apoptosis / leukocyte adjacency | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
+| **KRAS** | KRAS G12C cryo program | None | None | False | True | `depmap_chronos_priors_v1_fallback` |
 
 ### TCGA co-mutation rule (cBioPortal)
 
 - Rule: `PIK3CA_H1047R_AND_PTEN_LOSS`
 - Boolean: **True**
-- Note: TCGA breast/endometrial cohorts enrich PIK3CA hotspot with PTEN pathway loss — TME graph interventions must treat dual-hit as distinct manifold
+- Note: TCGA breast/endometrial PanCan mutations/fetch: PIK3CA hotspot with PTEN co-alteration defines a distinct TME manifold (Δβ0 boundary).
 
 ## 2. Clinical attrition → Boolean toxicity masks
 

@@ -49,9 +49,11 @@
     "solid_hypoxic_core": "prefer_neutral_permeable_at_ph_milli_650"
   },
   "depmap_required_genes_any": [
-    "ABL1",
     "PIK3CA",
-    "ESR1"
+    "ESR1",
+    "ABL1",
+    "BCL2",
+    "KRAS"
   ],
   "comutation_flags": [
     "PIK3CA_H1047R_AND_PTEN_LOSS"
