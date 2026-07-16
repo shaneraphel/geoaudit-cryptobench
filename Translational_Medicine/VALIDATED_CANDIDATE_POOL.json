@@ -1,0 +1,41 @@
+{
+  "schema": "foliation.validated_candidate_pool.v2",
+  "clinical_grade": false,
+  "generated_at": "2026-07-16T10:33:47.079191+00:00",
+  "ranking": "Clinical_Readiness_Index",
+  "vina_not_used_for_rank": true,
+  "pool": [
+    "serm_biphenyl_amine",
+    "serm_stilbene_amine",
+    "serm_oht_parent",
+    "serm_oht_fluorophenyl",
+    "serm_oht_tolyl",
+    "serm_oht_bcp",
+    "serm_oht_azaspiro"
+  ],
+  "n": 7,
+  "frozen": [
+    {
+      "candidate_id": "serm_oht_piperidine",
+      "cri_score": 3,
+      "freeze_reasons": [
+        "chemical_sanity_veto"
+      ]
+    },
+    {
+      "candidate_id": "CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41",
+      "cri_score": 3,
+      "freeze_reasons": [
+        "chemical_sanity_veto"
+      ]
+    },
+    {
+      "candidate_id": "CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e",
+      "cri_score": 3,
+      "freeze_reasons": [
+        "chemical_sanity_veto"
+      ]
+    }
+  ],
+  "full_ledger": "experimental_v2/chem_pipeline/outputs/clinical_ground_truth/UNIFIED_CLINICAL_LEDGER.json"
+}

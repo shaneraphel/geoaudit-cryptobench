@@ -1,0 +1,7 @@
+# ChimeraX — ESR1 conquest candidate
+# Usage: chimerax ESR1_view.cxc
+open ligands/ESR1_serm_stilbene_amine.sdf
+# open public receptor PDB of choice for ESR1
+show atoms
+style stick
+view

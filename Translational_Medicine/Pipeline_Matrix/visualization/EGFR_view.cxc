@@ -1,0 +1,7 @@
+# ChimeraX — EGFR conquest candidate
+# Usage: chimerax EGFR_view.cxc
+open ligands/EGFR_egfr_anilinoquinazoline.sdf
+# open public receptor PDB of choice for EGFR
+show atoms
+style stick
+view

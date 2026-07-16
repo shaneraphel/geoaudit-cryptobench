@@ -1,0 +1,339 @@
+{
+  "schema": "foliation.compensatory_network_atlas.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-16T13:45:36.160187+00:00",
+  "paradigm": "non_lethal_targets_retained_as_SECONDARY_BYPASS_NODE",
+  "policy": {
+    "purge_on_depmap_fail": false,
+    "reclassify_as": "SECONDARY_BYPASS_NODE",
+    "generation_for_secondary": "FROZEN",
+    "link_type": "ESCAPE_ROUTE"
+  },
+  "nodes": [
+    {
+      "gene": "ABL1",
+      "role": "PRIMARY_KILL_SWITCH",
+      "depmap_kill_switch": true,
+      "pipeline_status": "ACTIVE",
+      "generation_frozen": false,
+      "pan_median": 0.04200215621875679,
+      "indication_lineage_median": -1.8502399407237715
+    },
+    {
+      "gene": "AKT1",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": -0.03672761676032363,
+      "indication_lineage_median": -0.15065027031524597,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "BCL2",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": -0.013384857400670074,
+      "indication_lineage_median": -0.04864651925720278,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "BRAF",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": -0.058930504803426306,
+      "indication_lineage_median": -0.25952994847646504,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "EGFR",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": -0.24189831971788384,
+      "indication_lineage_median": -0.3613018012968354,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "ERBB2",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": -0.2694361475547698,
+      "indication_lineage_median": -0.155464115565005,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "ESR1",
+      "role": "PRIMARY_KILL_SWITCH",
+      "depmap_kill_switch": true,
+      "pipeline_status": "ACTIVE",
+      "generation_frozen": false,
+      "pan_median": -0.06777620305794746,
+      "indication_lineage_median": -1.4622495827007858
+    },
+    {
+      "gene": "FGFR1",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": 0.01778708674470114,
+      "indication_lineage_median": null,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "KRAS",
+      "role": "PRIMARY_KILL_SWITCH",
+      "depmap_kill_switch": true,
+      "pipeline_status": "ACTIVE",
+      "generation_frozen": false,
+      "pan_median": -0.49668749740728335,
+      "indication_lineage_median": -1.2710789999573375
+    },
+    {
+      "gene": "LYN",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": 0.03782982429222507,
+      "indication_lineage_median": null,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "MAPK1",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": -0.14184942235857542,
+      "indication_lineage_median": null,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "MET",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": -0.09146268334214958,
+      "indication_lineage_median": -0.09097084459889856,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "PIK3CA",
+      "role": "PRIMARY_KILL_SWITCH",
+      "depmap_kill_switch": true,
+      "pipeline_status": "ACTIVE",
+      "generation_frozen": false,
+      "pan_median": -0.4539621313459162,
+      "indication_lineage_median": -1.0469504122001227
+    },
+    {
+      "gene": "RAF1",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": -0.15839538755121257,
+      "indication_lineage_median": null,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    },
+    {
+      "gene": "SRC",
+      "role": "SECONDARY_BYPASS_NODE",
+      "depmap_kill_switch": false,
+      "pipeline_status": "FROZEN_ATLAS",
+      "generation_frozen": true,
+      "pan_median": -0.18473198105951824,
+      "indication_lineage_median": -0.23717956915893074,
+      "note": "Non-lethal Chronos profile retained as compensatory atlas asset"
+    }
+  ],
+  "n_primary": 4,
+  "n_secondary_bypass": 11,
+  "escape_routes": [
+    {
+      "primary_gene": "KRAS",
+      "bypass_gene": "EGFR",
+      "link_type": "ESCAPE_ROUTE",
+      "evidence_rule_id": "KRAS_BLOCK_EGFR_BYPASS",
+      "rationale": "KRAS-mutant lineages rewire through EGFR/RTK feedback after KRAS blockade; EGFR fails pan Chronos kill-switch \u2192 SECONDARY_BYPASS_NODE.",
+      "generation_frozen": true,
+      "chronos": {
+        "primary_indication_median": -1.2710789999573375,
+        "bypass_indication_median": -0.05440698268435323,
+        "primary_pan_median": -0.49668749740728335,
+        "bypass_pan_median": -0.24189831971788384,
+        "bypass_fails_pan_kill_switch": true
+      },
+      "tcga_flags": []
+    },
+    {
+      "primary_gene": "PIK3CA",
+      "bypass_gene": "AKT1",
+      "link_type": "ESCAPE_ROUTE",
+      "evidence_rule_id": "PIK3CA_BLOCK_AKT1_BYPASS",
+      "rationale": "PI3K\u03b1 blockade escaped via AKT1 parallel signaling; TCGA PIK3CA_H1047R_AND_PTEN_LOSS sharpens this context.",
+      "generation_frozen": true,
+      "chronos": {
+        "primary_indication_median": -1.0469504122001227,
+        "bypass_indication_median": -0.15065027031524597,
+        "primary_pan_median": -0.4539621313459162,
+        "bypass_pan_median": -0.03672761676032363,
+        "bypass_fails_pan_kill_switch": true
+      },
+      "tcga_flags": [
+        "PIK3CA_H1047R_AND_PTEN_LOSS"
+      ]
+    },
+    {
+      "primary_gene": "ABL1",
+      "bypass_gene": "BCL2",
+      "link_type": "ESCAPE_ROUTE",
+      "evidence_rule_id": "ABL1_BLOCK_BCL2_APOPTOSIS_BYPASS",
+      "rationale": "BCR-ABL inhibition selects for BCL2 apoptotic buffering in hematopoietic niches; BCL2 is not an ABL1-class Boolean kill-switch \u2192 ESCAPE_ROUTE.",
+      "generation_frozen": true,
+      "chronos": {
+        "primary_indication_median": -1.8502399407237715,
+        "bypass_indication_median": -0.04864651925720278,
+        "primary_pan_median": 0.04200215621875679,
+        "bypass_pan_median": -0.013384857400670074,
+        "bypass_fails_pan_kill_switch": true
+      },
+      "tcga_flags": []
+    },
+    {
+      "primary_gene": "ESR1",
+      "bypass_gene": "EGFR",
+      "link_type": "ESCAPE_ROUTE",
+      "evidence_rule_id": "ESR1_BLOCK_EGFR_BYPASS",
+      "rationale": "ER+ resistance engages EGFR/RTK crosstalk after SERM/SERD pressure.",
+      "generation_frozen": true,
+      "chronos": {
+        "primary_indication_median": -1.4622495827007858,
+        "bypass_indication_median": -0.3613018012968354,
+        "primary_pan_median": -0.06777620305794746,
+        "bypass_pan_median": -0.24189831971788384,
+        "bypass_fails_pan_kill_switch": true
+      },
+      "tcga_flags": []
+    },
+    {
+      "primary_gene": "ESR1",
+      "bypass_gene": "ERBB2",
+      "link_type": "ESCAPE_ROUTE",
+      "evidence_rule_id": "ESR1_BLOCK_ERBB2_BYPASS",
+      "rationale": "HER2/ERBB2 upregulation is a classic escape after ER blockade.",
+      "generation_frozen": true,
+      "chronos": {
+        "primary_indication_median": -1.4622495827007858,
+        "bypass_indication_median": -0.155464115565005,
+        "primary_pan_median": -0.06777620305794746,
+        "bypass_pan_median": -0.2694361475547698,
+        "bypass_fails_pan_kill_switch": true
+      },
+      "tcga_flags": []
+    },
+    {
+      "primary_gene": "KRAS",
+      "bypass_gene": "BRAF",
+      "link_type": "ESCAPE_ROUTE",
+      "evidence_rule_id": "KRAS_BLOCK_BRAF_MAPK_BYPASS",
+      "rationale": "MAPK reactivation via BRAF after KRAS inhibition.",
+      "generation_frozen": true,
+      "chronos": {
+        "primary_indication_median": -1.2710789999573375,
+        "bypass_indication_median": -0.25952994847646504,
+        "primary_pan_median": -0.49668749740728335,
+        "bypass_pan_median": -0.058930504803426306,
+        "bypass_fails_pan_kill_switch": true
+      },
+      "tcga_flags": []
+    },
+    {
+      "primary_gene": "KRAS",
+      "bypass_gene": "MET",
+      "link_type": "ESCAPE_ROUTE",
+      "evidence_rule_id": "KRAS_BLOCK_MET_BYPASS",
+      "rationale": "MET amplification / dependency as RTK bypass of KRAS blockade.",
+      "generation_frozen": true,
+      "chronos": {
+        "primary_indication_median": -1.2710789999573375,
+        "bypass_indication_median": -0.09097084459889856,
+        "primary_pan_median": -0.49668749740728335,
+        "bypass_pan_median": -0.09146268334214958,
+        "bypass_fails_pan_kill_switch": true
+      },
+      "tcga_flags": []
+    },
+    {
+      "primary_gene": "ABL1",
+      "bypass_gene": "SRC",
+      "link_type": "ESCAPE_ROUTE",
+      "evidence_rule_id": "ABL1_BLOCK_SRC_BYPASS",
+      "rationale": "SRC-family compensation after ABL1 pressure in CML models.",
+      "generation_frozen": true,
+      "chronos": {
+        "primary_indication_median": -1.8502399407237715,
+        "bypass_indication_median": -0.23717956915893074,
+        "primary_pan_median": 0.04200215621875679,
+        "bypass_pan_median": -0.18473198105951824,
+        "bypass_fails_pan_kill_switch": true
+      },
+      "tcga_flags": []
+    },
+    {
+      "primary_gene": "PIK3CA",
+      "bypass_gene": "EGFR",
+      "link_type": "ESCAPE_ROUTE",
+      "evidence_rule_id": "PIK3CA_BLOCK_EGFR_BYPASS",
+      "rationale": "RTK/EGFR input restores PI3K pathway tone after PIK3CA blockade.",
+      "generation_frozen": true,
+      "chronos": {
+        "primary_indication_median": -1.0469504122001227,
+        "bypass_indication_median": -0.3613018012968354,
+        "primary_pan_median": -0.4539621313459162,
+        "bypass_pan_median": -0.24189831971788384,
+        "bypass_fails_pan_kill_switch": true
+      },
+      "tcga_flags": [
+        "PIK3CA_H1047R_AND_PTEN_LOSS"
+      ]
+    }
+  ],
+  "first_three_secondary_links": [
+    {
+      "rank": 1,
+      "primary_gene": "KRAS",
+      "bypass_gene": "EGFR",
+      "role": "SECONDARY_BYPASS_NODE",
+      "evidence_rule_id": "KRAS_BLOCK_EGFR_BYPASS",
+      "rationale": "KRAS-mutant lineages rewire through EGFR/RTK feedback after KRAS blockade; EGFR fails pan Chronos kill-switch \u2192 SECONDARY_BYPASS_NODE."
+    },
+    {
+      "rank": 2,
+      "primary_gene": "PIK3CA",
+      "bypass_gene": "AKT1",
+      "role": "SECONDARY_BYPASS_NODE",
+      "evidence_rule_id": "PIK3CA_BLOCK_AKT1_BYPASS",
+      "rationale": "PI3K\u03b1 blockade escaped via AKT1 parallel signaling; TCGA PIK3CA_H1047R_AND_PTEN_LOSS sharpens this context."
+    },
+    {
+      "rank": 3,
+      "primary_gene": "ABL1",
+      "bypass_gene": "BCL2",
+      "role": "SECONDARY_BYPASS_NODE",
+      "evidence_rule_id": "ABL1_BLOCK_BCL2_APOPTOSIS_BYPASS",
+      "rationale": "BCR-ABL inhibition selects for BCL2 apoptotic buffering in hematopoietic niches; BCL2 is not an ABL1-class Boolean kill-switch \u2192 ESCAPE_ROUTE."
+    }
+  ],
+  "truth_boundary": "ESCAPE_ROUTE links are deterministic oncology + Chronos co-dependency priors for combination-therapy planning. They are not measured clinical resistance outcomes or wet IC50. clinical_grade=false."
+}

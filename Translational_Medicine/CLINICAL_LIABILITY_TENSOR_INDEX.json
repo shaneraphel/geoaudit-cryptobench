@@ -1,0 +1,1126 @@
+{
+  "schema": "foliation.clinical_liability_tensor_index.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-16T10:33:47.078991+00:00",
+  "n_liabilities": 50,
+  "grid": 64,
+  "liabilities": [
+    {
+      "id": "hERG",
+      "failure_class": "qt_prolongation",
+      "rank": 1,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 126,
+        "sample_linear_indices": [
+          257210,
+          125257,
+          247380,
+          111719,
+          236406,
+          16773,
+          203784,
+          145851
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": {
+        "id": "flat_polyaryl_basic_amine",
+        "smarts": "c1ccccc1.[NX3;H2,H1;!$(NC=O)]",
+        "banned_default": false,
+        "warn_default": true,
+        "failure_class": "herg_qt"
+      }
+    },
+    {
+      "id": "CYP3A4",
+      "failure_class": "metabolic_clearance",
+      "rank": 2,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 65,
+        "sample_linear_indices": [
+          196291,
+          118965,
+          40999,
+          233621,
+          16643,
+          12925,
+          9839,
+          62813
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "CYP2D6",
+      "failure_class": "metabolic_clearance",
+      "rank": 3,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 223,
+        "sample_linear_indices": [
+          65373,
+          142797,
+          219897,
+          234409,
+          242973,
+          247949,
+          140337,
+          196833
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "CYP2C9",
+      "failure_class": "metabolic_clearance",
+      "rank": 4,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 137,
+        "sample_linear_indices": [
+          39643,
+          149,
+          41999,
+          219301,
+          128315,
+          234045,
+          68279,
+          64781
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "CYP1A2",
+      "failure_class": "metabolic_clearance",
+      "rank": 5,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 90,
+        "sample_linear_indices": [
+          168270,
+          5593,
+          177376,
+          216975,
+          7026,
+          243877,
+          223692,
+          56531
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "Pgp_MDR1",
+      "failure_class": "efflux",
+      "rank": 6,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 143,
+        "sample_linear_indices": [
+          242477,
+          81293,
+          140841,
+          68425,
+          4525,
+          124941,
+          246689,
+          129345
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "BCRP",
+      "failure_class": "efflux",
+      "rank": 7,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 81,
+        "sample_linear_indices": [
+          79411,
+          209397,
+          108855,
+          373,
+          39091,
+          127229,
+          227519,
+          190333
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "OATP1B1",
+      "failure_class": "transporter",
+      "rank": 8,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 148,
+        "sample_linear_indices": [
+          87740,
+          26593,
+          136838,
+          49259,
+          103368,
+          220373,
+          56850,
+          104479
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "albumin_HSA",
+      "failure_class": "plasma_binding",
+      "rank": 9,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 122,
+        "sample_linear_indices": [
+          230958,
+          248665,
+          208064,
+          90447,
+          122834,
+          1445,
+          149676,
+          257171
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "AAG",
+      "failure_class": "plasma_binding",
+      "rank": 10,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 210,
+        "sample_linear_indices": [
+          179638,
+          76793,
+          202168,
+          202367,
+          59706,
+          115941,
+          58116,
+          237155
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "Nav1_5",
+      "failure_class": "cardiac_ion",
+      "rank": 11,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 157,
+        "sample_linear_indices": [
+          140119,
+          196037,
+          136947,
+          142269,
+          147727,
+          157853,
+          176163,
+          104693
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "Cav1_2",
+      "failure_class": "cardiac_ion",
+      "rank": 12,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 160,
+        "sample_linear_indices": [
+          112160,
+          58417,
+          227202,
+          65875,
+          46436,
+          154485,
+          129094,
+          219671
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "Kir2_1",
+      "failure_class": "cardiac_ion",
+      "rank": 13,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 248,
+        "sample_linear_indices": [
+          131944,
+          139345,
+          148282,
+          158659,
+          179084,
+          250805,
+          184350,
+          78695
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "MAO_A",
+      "failure_class": "offtarget_enzyme",
+      "rank": 14,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 157,
+        "sample_linear_indices": [
+          199831,
+          115397,
+          39219,
+          29757,
+          11983,
+          5789,
+          131043,
+          34677
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "MAO_B",
+      "failure_class": "offtarget_enzyme",
+      "rank": 15,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 103,
+        "sample_linear_indices": [
+          65077,
+          33837,
+          3681,
+          233849,
+          72981,
+          170829,
+          139449,
+          109009
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "COX1",
+      "failure_class": "offtarget_enzyme",
+      "rank": 16,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 84,
+        "sample_linear_indices": [
+          106492,
+          240865,
+          195014,
+          86763,
+          234376,
+          51925,
+          1490,
+          18079
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "COX2",
+      "failure_class": "offtarget_enzyme",
+      "rank": 17,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 174,
+        "sample_linear_indices": [
+          208586,
+          190985,
+          68548,
+          12423,
+          74822,
+          149253,
+          87672,
+          238235
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "PDE3",
+      "failure_class": "offtarget_enzyme",
+      "rank": 18,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 180,
+        "sample_linear_indices": [
+          36828,
+          247393,
+          138406,
+          225963,
+          43368,
+          8149,
+          95666,
+          101471
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "PDE4",
+      "failure_class": "offtarget_enzyme",
+      "rank": 19,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 215,
+        "sample_linear_indices": [
+          143109,
+          102637,
+          86225,
+          144153,
+          65189,
+          45773,
+          153385,
+          201905
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "HDAC",
+      "failure_class": "epigenetic",
+      "rank": 20,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 188,
+        "sample_linear_indices": [
+          175668,
+          60225,
+          165070,
+          209275,
+          239584,
+          148885,
+          53434,
+          48271
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "DNMT",
+      "failure_class": "epigenetic",
+      "rank": 21,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 217,
+        "sample_linear_indices": [
+          80971,
+          207317,
+          104223,
+          5509,
+          27243,
+          114877,
+          224967,
+          170797
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "PARP1",
+      "failure_class": "dna_repair",
+      "rank": 22,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 190,
+        "sample_linear_indices": [
+          123066,
+          129353,
+          119380,
+          109671,
+          100214,
+          24965,
+          96264,
+          135611
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "TOP1",
+      "failure_class": "dna_repair",
+      "rank": 23,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 250,
+        "sample_linear_indices": [
+          160110,
+          14425,
+          188672,
+          167887,
+          21906,
+          254885,
+          233068,
+          30483
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "TOP2",
+      "failure_class": "dna_repair",
+      "rank": 24,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 64,
+        "sample_linear_indices": [
+          34112,
+          97969,
+          97186,
+          223123,
+          223876,
+          93813,
+          87526,
+          213591
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "AURKA",
+      "failure_class": "kinase_liability",
+      "rank": 25,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 98,
+        "sample_linear_indices": [
+          77094,
+          190521,
+          198280,
+          14175,
+          219242,
+          148325,
+          220500,
+          243715
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "AURKB",
+      "failure_class": "kinase_liability",
+      "rank": 26,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 216,
+        "sample_linear_indices": [
+          237960,
+          241361,
+          65114,
+          77315,
+          106028,
+          52917,
+          147134,
+          18855
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "CDK2",
+      "failure_class": "kinase_liability",
+      "rank": 27,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 93,
+        "sample_linear_indices": [
+          155607,
+          21445,
+          67187,
+          185021,
+          27791,
+          210077,
+          247203,
+          244213
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "CDK9",
+      "failure_class": "kinase_liability",
+      "rank": 28,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 85,
+        "sample_linear_indices": [
+          145727,
+          210405,
+          44043,
+          139117,
+          222039,
+          129245,
+          160155,
+          60677
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "GSK3B",
+      "failure_class": "kinase_liability",
+      "rank": 29,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 165,
+        "sample_linear_indices": [
+          253423,
+          43813,
+          78939,
+          120525,
+          153159,
+          181597,
+          213995,
+          253349
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "ROCK1",
+      "failure_class": "kinase_liability",
+      "rank": 30,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 112,
+        "sample_linear_indices": [
+          37904,
+          90993,
+          86546,
+          214323,
+          215060,
+          87541,
+          91670,
+          201015
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "JAK2",
+      "failure_class": "kinase_liability",
+      "rank": 31,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 252,
+        "sample_linear_indices": [
+          120820,
+          157249,
+          169102,
+          115451,
+          200992,
+          221077,
+          89594,
+          39951
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "BTK",
+      "failure_class": "kinase_liability",
+      "rank": 32,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 116,
+        "sample_linear_indices": [
+          230108,
+          96865,
+          161702,
+          92331,
+          24680,
+          92117,
+          152242,
+          88671
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "EGFR",
+      "failure_class": "kinase_liability",
+      "rank": 33,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 77,
+        "sample_linear_indices": [
+          236583,
+          240005,
+          63267,
+          87389,
+          101023,
+          49181,
+          134739,
+          23381
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "VEGFR2",
+      "failure_class": "kinase_liability",
+      "rank": 34,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 80,
+        "sample_linear_indices": [
+          75888,
+          193265,
+          204146,
+          15859,
+          218484,
+          161525,
+          238454,
+          233463
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "FGFR1",
+      "failure_class": "kinase_liability",
+      "rank": 35,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 238,
+        "sample_linear_indices": [
+          57034,
+          43529,
+          15300,
+          249991,
+          87110,
+          182021,
+          149112,
+          115355
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "MET",
+      "failure_class": "kinase_liability",
+      "rank": 36,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 172,
+        "sample_linear_indices": [
+          244612,
+          56577,
+          97982,
+          72219,
+          165616,
+          141589,
+          256170,
+          215151
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "SRC",
+      "failure_class": "kinase_liability",
+      "rank": 37,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 199,
+        "sample_linear_indices": [
+          143893,
+          188845,
+          134465,
+          133433,
+          142581,
+          151629,
+          150553,
+          110481
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "LCK",
+      "failure_class": "kinase_liability",
+      "rank": 38,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 168,
+        "sample_linear_indices": [
+          97336,
+          252945,
+          81002,
+          38243,
+          247580,
+          11061,
+          44686,
+          249287
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "FYN",
+      "failure_class": "kinase_liability",
+      "rank": 39,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 234,
+        "sample_linear_indices": [
+          190654,
+          127513,
+          56816,
+          244847,
+          37538,
+          30501,
+          24604,
+          3827
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "YES1",
+      "failure_class": "kinase_liability",
+      "rank": 40,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 114,
+        "sample_linear_indices": [
+          171030,
+          889,
+          174616,
+          218431,
+          258074,
+          234981,
+          200292,
+          57635
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "PIK3CB",
+      "failure_class": "isoform_liability",
+      "rank": 41,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 163,
+        "sample_linear_indices": [
+          230313,
+          251453,
+          206861,
+          92737,
+          120305,
+          16237,
+          151773,
+          255241
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "PIK3CD",
+      "failure_class": "isoform_liability",
+      "rank": 42,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 214,
+        "sample_linear_indices": [
+          240770,
+          82665,
+          145740,
+          78871,
+          286,
+          71365,
+          253856,
+          116619
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "PIK3CG",
+      "failure_class": "isoform_liability",
+      "rank": 43,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 236,
+        "sample_linear_indices": [
+          237124,
+          1025,
+          110206,
+          86427,
+          195888,
+          236309,
+          131306,
+          190959
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "mTOR",
+      "failure_class": "pathway_liability",
+      "rank": 44,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 188,
+        "sample_linear_indices": [
+          213300,
+          208705,
+          237518,
+          61307,
+          163552,
+          118165,
+          72122,
+          166543
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "AKT1",
+      "failure_class": "pathway_liability",
+      "rank": 45,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 79,
+        "sample_linear_indices": [
+          151085,
+          201101,
+          28969,
+          192841,
+          217261,
+          110605,
+          143521,
+          87873
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "MAPK1",
+      "failure_class": "pathway_liability",
+      "rank": 46,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 185,
+        "sample_linear_indices": [
+          50923,
+          51797,
+          21439,
+          254149,
+          105483,
+          133053,
+          167655,
+          70253
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "GSTP1",
+      "failure_class": "conjugation",
+      "rank": 47,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 202,
+        "sample_linear_indices": [
+          202782,
+          219545,
+          252752,
+          23855,
+          188034,
+          73765,
+          103036,
+          132019
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "UGT1A1",
+      "failure_class": "conjugation",
+      "rank": 48,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 82,
+        "sample_linear_indices": [
+          164022,
+          12281,
+          186552,
+          224383,
+          12346,
+          249061,
+          219140,
+          1123
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "SULT1A1",
+      "failure_class": "conjugation",
+      "rank": 49,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 180,
+        "sample_linear_indices": [
+          146524,
+          187489,
+          261158,
+          136619,
+          132328,
+          142293,
+          159538,
+          150879
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    },
+    {
+      "id": "reactive_metabolite",
+      "failure_class": "bioactivation",
+      "rank": 50,
+      "tensor": {
+        "grid": 64,
+        "occupied_voxels_proxy": 78,
+        "sample_linear_indices": [
+          21098,
+          178825,
+          116580,
+          182727,
+          258918,
+          189957,
+          11544,
+          146395
+        ],
+        "rejection_rule": "G_inv_to_0_on_occupied",
+        "note": "Boolean tensor identity for anti-target clash; not a crystal structure deposit"
+      },
+      "smarts_gate": null
+    }
+  ],
+  "hydration_shell": {
+    "engine": "8bit_tensor_core_rigid_hydration_network",
+    "pass_rule": "connected_water_shell_without_desolvation_catastrophe",
+    "truth_boundary": "Computational hydration graph \u2260 measured \u0394G_solv"
+  },
+  "cyp450_cleavage": {
+    "engine": "core5_born_unroll_barrier_proxy",
+    "pass_rule": "no_banned_bioactivation_SMARTS AND barrier_proxy_above_floor",
+    "truth_boundary": "Barrier proxy \u2260 measured Clint"
+  },
+  "truth_boundary": "64\u00b3 Boolean liability masks are steric/occupancy shields derived from clinical attrition classes; they are not wet IC50 measurements."
+}

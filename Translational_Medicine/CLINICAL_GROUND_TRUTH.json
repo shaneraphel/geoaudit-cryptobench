@@ -73,7 +73,7 @@
     "delta_beta0_boundary_flag": true,
     "n_h1047_samples_total": 186,
     "n_h1047_and_pten_total": 36,
-    "clinical_note": "TCGA breast/endometrial PanCan mutations/fetch: PIK3CA hotspot with PTEN co-alteration defines a distinct TME manifold (\u0394\u03b20 boundary).",
+    "clinical_note": "TCGA breast/endometrial PanCan mutations/fetch: PIK3CA hotspot with PTEN co-alteration defines a distinct TME context (\u0394\u03b20 boundary).",
     "api_rows": [
       {
         "study": "brca_tcga_pan_can_atlas_2018",

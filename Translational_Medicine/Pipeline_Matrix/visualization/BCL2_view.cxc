@@ -1,0 +1,7 @@
+# ChimeraX — BCL2 conquest candidate
+# Usage: chimerax BCL2_view.cxc
+open ligands/BCL2_bcl2_sulfonylbenzamide.sdf
+# open public receptor PDB of choice for BCL2
+show atoms
+style stick
+view

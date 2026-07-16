@@ -1,7 +1,7 @@
 {
   "schema": "foliation.depmap_boolean_causality.v1",
   "clinical_grade": false,
-  "generated_at": "2026-07-15T04:38:47.956982+00:00",
+  "generated_at": "2026-07-16T10:33:47.076018+00:00",
   "source": {
     "file": "experimental_v2/chem_pipeline/data/depmap_cache/CRISPRGeneEffect.csv",
     "note": "Figshare CRISPRGeneEffect matrix (ndownloader 43346616); portal API Cloudflare-blocked"
@@ -17,6 +17,7 @@
       "program": "leukemia_ABL1",
       "gene": "ABL1",
       "decision": "PASS",
+      "pipeline_status": "ACTIVE",
       "boolean_kill_switch": true,
       "pan_cancer": {
         "n_cell_lines": 1100,
@@ -104,16 +105,24 @@
       },
       "wetlab_cell_line": "K562",
       "assay": "KinaseGlo_or_ADPGlo_ABL1",
+      "tme_niche": "leukemia_BM_niche",
+      "pipeline_targets": [
+        "CRYOML-LEUK",
+        "ABL1",
+        "ponatinib_orphans"
+      ],
       "validated_candidates": [
         "CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e",
         "CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41"
       ],
-      "abort_reason": null
+      "abort_reason": null,
+      "freeze_reason": null
     },
     {
       "program": "kras_G12C",
       "gene": "KRAS",
       "decision": "PASS",
+      "pipeline_status": "ACTIVE",
       "boolean_kill_switch": true,
       "pan_cancer": {
         "n_cell_lines": 1100,
@@ -196,13 +205,21 @@
       },
       "wetlab_cell_line": "NCI-H358",
       "assay": "KRAS_G12C_cellular_viability",
+      "tme_niche": "solid_hypoxic_core",
+      "pipeline_targets": [
+        "KRAS",
+        "G12C",
+        "G12D"
+      ],
       "validated_candidates": [],
-      "abort_reason": null
+      "abort_reason": null,
+      "freeze_reason": null
     },
     {
       "program": "pik3ca_H1047R",
       "gene": "PIK3CA",
       "decision": "PASS",
+      "pipeline_status": "ACTIVE",
       "boolean_kill_switch": true,
       "pan_cancer": {
         "n_cell_lines": 1100,
@@ -275,15 +292,126 @@
       },
       "wetlab_cell_line": "T47D",
       "assay": "ADPGlo_PI3Kalpha",
+      "tme_niche": "breast_ER_pos",
+      "pipeline_targets": [
+        "PI3K\u03b1",
+        "PIK3CA",
+        "H1047R"
+      ],
       "validated_candidates": [],
-      "abort_reason": null
+      "abort_reason": null,
+      "freeze_reason": null
+    },
+    {
+      "program": "esr1_ER_positive_breast",
+      "gene": "ESR1",
+      "decision": "PASS",
+      "pipeline_status": "ACTIVE",
+      "boolean_kill_switch": true,
+      "pan_cancer": {
+        "n_cell_lines": 1100,
+        "dep_median": -0.06777620305794746,
+        "dep_p10": -0.20903711661802382,
+        "dep_p90": 0.04773666814948607,
+        "frac_lt_minus_1_0": 0.0082,
+        "boolean_kill_switch_pan": false,
+        "boolean_kill_switch_selective": false,
+        "top10_model_ids": [
+          {
+            "model_id": "ACH-000147",
+            "score": -1.8389255561023794
+          },
+          {
+            "model_id": "ACH-000352",
+            "score": -1.7225084172076097
+          },
+          {
+            "model_id": "ACH-000876",
+            "score": -1.4957233871038884
+          },
+          {
+            "model_id": "ACH-000019",
+            "score": -1.4622495827007858
+          },
+          {
+            "model_id": "ACH-000330",
+            "score": -1.4506145542595832
+          },
+          {
+            "model_id": "ACH-000934",
+            "score": -1.1995204158919999
+          },
+          {
+            "model_id": "ACH-000783",
+            "score": -1.114777972797317
+          },
+          {
+            "model_id": "ACH-001632",
+            "score": -1.0700891604884255
+          },
+          {
+            "model_id": "ACH-000277",
+            "score": -1.0414793926831676
+          },
+          {
+            "model_id": "ACH-000028",
+            "score": -0.9415975463553673
+          }
+        ]
+      },
+      "indication_lineage": {
+        "n_indication_lines": 2,
+        "indication_median": -1.4622495827007858,
+        "indication_min": -1.8389255561023794,
+        "boolean_kill_switch_lineage": true,
+        "lines": [
+          {
+            "model_id": "ACH-000147",
+            "cell_line": "MCF7",
+            "score": -1.8389255561023794
+          },
+          {
+            "model_id": "ACH-000019",
+            "cell_line": "T47D",
+            "score": -1.4622495827007858
+          }
+        ]
+      },
+      "wetlab_cell_line": "MCF7",
+      "assay": "ER_alpha_competitive_binding_or_reporter",
+      "tme_niche": "breast_ER_pos",
+      "pipeline_targets": [
+        "ER-100",
+        "ESR1",
+        "ER_alpha",
+        "SERD",
+        "SERM"
+      ],
+      "validated_candidates": [
+        "serm_biphenyl_amine",
+        "serm_stilbene_amine",
+        "serm_oht_parent",
+        "serm_oht_tolyl",
+        "serm_oht_fluorophenyl",
+        "serm_oht_azaspiro",
+        "serm_oht_bcp"
+      ],
+      "abort_reason": null,
+      "freeze_reason": null
     }
   ],
-  "n_pass": 3,
+  "n_pass": 4,
   "n_abort": 0,
   "VALIDATED_CANDIDATE_POOL": [
     "CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e",
-    "CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41"
+    "CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41",
+    "serm_biphenyl_amine",
+    "serm_stilbene_amine",
+    "serm_oht_parent",
+    "serm_oht_tolyl",
+    "serm_oht_fluorophenyl",
+    "serm_oht_azaspiro",
+    "serm_oht_bcp"
   ],
   "truth_boundary": "Chronos gene-effect scores are computational CRISPR dependencies, not wet confirmation of a specific chemotype IC50."
 }
