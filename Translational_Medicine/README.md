@@ -1,12 +1,13 @@
 # Translational Medicine · 转化医学证据包
 
-**EN / 中文 bilingual** · Generated: `2026-07-17T14:54:35.087359+00:00`
+**EN / 中文 bilingual** · Generated: `2026-07-17T16:46:40.850375+00:00`
 
 ![Boolean pocket tensor × synthon ligand graph](hero_banner.png)
 
 > **`clinical_grade = false`**
 >
-> **EN:** Chemical Sanity is primary. Docking affinity is secondary / informational only. Computational gates ≠ measured IC50.
+> **EN:** Chemical Sanity is primary. Docking affinity is secondary / informational only.
+> Computational gates ≠ measured IC50.
 >
 > **中文：** 化学合理性门控优先；对接亲和力仅作次级参考。计算分数 ≠ 湿实验 IC50 / 临床疗效。
 
@@ -24,9 +25,10 @@
 
 ## 1. ER-100 (ESR1) · 雌激素受体项目
 
-**EN:** ER-100 is the flagship ER+ breast program. Leads are SERM-class graphs that pass the full Clinical Readiness Index (DepMap · TME pH · liability shields · Chemical Sanity). Docking is secondary.
-
-**中文：** ER-100 为 ER+ 乳腺癌旗舰项目。候选为 SERM 类分子图，需通过完整临床就绪指数（DepMap · 肿瘤微环境 pH · 脱靶屏蔽 · 化学合理性）。对接分数仅作次级指标。
+**EN:** ER-100 is the flagship ER+ breast program. Leads are SERM-class graphs that pass the
+full Clinical Readiness Index (DepMap · TME pH · liability shields · Chemical Sanity).
+**中文：** ER-100 为 ER+ 乳腺癌旗舰项目。候选为 SERM 类分子图，需通过完整临床就绪指数
+（DepMap · 肿瘤微环境 pH · 脱靶屏蔽 · 化学合理性）。
 
 | ID | Formula · 分子式 | HA | MW | Vina (secondary) | CRI |
 |----|------------------|----|----|------------------|-----|
@@ -37,51 +39,43 @@ SMILES:
 - `serm_stilbene_amine`: `Oc1ccc(/C=C/c2ccc(OCCN(C)C)cc2)cc1`
 - `serm_biphenyl_amine`: `Oc1ccc(-c2ccc(OCCN(C)C)cc2)cc1`
 
-ACTIVE pool (n=7) also includes `serm_oht_parent`, `serm_oht_fluorophenyl`, `serm_oht_tolyl`, `serm_oht_bcp`, `serm_oht_azaspiro` — see [`VALIDATED_CANDIDATE_POOL.json`](VALIDATED_CANDIDATE_POOL.json).
-
-Hero visual (ESR1 64³ pocket × stilbene amine): [`hero_banner.png`](hero_banner.png)
-
 ---
 
 ## 2. Retinal regeneration · 视网膜再造
 
-**EN:** Small-molecule induction chemotypes for retinal reprogramming (Pax6/Rax axis). GSK3β is treated as a **modulatory** (not plug-only) target; discovery SDFs are high-Fsp³ / oxetane–bicyclo motifs. Companion cryo maps: DOT1L (epigenetic co-target).
-
-**中文：** 面向视网膜细胞重编程（Pax6/Rax）的小分子诱导化学型。GSK3β 按**调谐/变构逻辑**（非单纯堵孔）筛选；发现集为高 Fsp³ / 氧杂环丁烷–双环骨架。表观共靶 DOT1L 冷冻电镜图已归档于本地 vault。
-
-### GSK3β modulatory lead · 调谐先导
+**EN:** Small-molecule induction chemotypes for retinal reprogramming (Pax6/Rax axis).
+GSK3β is treated as a **modulatory** target; discovery SDFs are high-Fsp³ / oxetane–bicyclo motifs.
+**中文：** 面向视网膜细胞重编程（Pax6/Rax）的小分子诱导化学型。GSK3β 按**调谐/变构逻辑**筛选；
+发现集为高 Fsp³ / 氧杂环丁烷–双环骨架。
 
 | ID | Formula · 分子式 | HA | MW | Vina |
 |----|------------------|----|----|------|
 | `gsk_x10` | **C15H17FN4O** | 21 | 288.33 | -7.648 |
 
-SMILES: `Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1`
-
-### Discovery chemotypes · 发现化学型（RETINA_REGEN）
-
-| ID | Formula · 分子式 | HA | MW |
-|----|------------------|----|----|
-| `DISC-RETINA_REGEN-emix_bicyclo_F-8a573f6edf` | **C17H24FNO2** | 21 | 293.38 |
-| `DISC-RETINA_REGEN-emix_oxetane_F-4d5df33d4a` | **C13H18FNO3** | 18 | 255.29 |
-| `DISC-RETINA_REGEN-emix_pyridyl_oxetane-899943b081` | **C12H18N2O3** | 17 | 238.29 |
-
-SDF files: [`../Wave2_Disease_Expansion/retina_ligands/`](../Wave2_Disease_Expansion/retina_ligands/)
+SMILES: `Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1` · SDFs: [`../Wave2_Disease_Expansion/retina_ligands/`](../Wave2_Disease_Expansion/retina_ligands/)
 
 ---
 
-## 3. Hematologic oncology · 血液肿瘤 / 淋巴瘤
+## 3. Hematologic oncology · 血液肿瘤 / 淋巴瘤（Sprint M5）
 
-**EN:** R3 warheads (Fsp³≈0) grown in Sprint M5 to high-Fsp³ solvent-tailed clinical leads. Formulas RDKit-verified before README publish.
+**EN:** Mass-screen warheads (Fsp³ ≈ 0) grown into high-Fsp³ solvent-tailed clinical leads.
+Formulas RDKit-verified. Full figures, spec sheets, data sources, and a docking guide live in
+the Wave-2 pack.
+**中文：** 筛选弹头（Fsp³ ≈ 0）扩展为高 Fsp³ 溶剂尾临床先导。分子式经 RDKit 校验。完整结构图、
+分子说明书、数据来源与对接指南见 Wave-2 数据包。
 
-**中文：** R3 片段弹头（Fsp³≈0）经 Sprint M5 扩展为高 Fsp³ 溶剂尾临床先导。分子式经 RDKit 校验后方可上架 README。
+![Warhead to lead overview](../Wave2_Disease_Expansion/images/M5_overview.png)
 
 | Gene | Disease | Lead ID | Formula · 分子式 | Fsp³ | cLogP | Vina* |
 |------|---------|---------|------------------|------|-------|-------|
 | **FLT3** | AML / FLT3-ITD | `flt3_m5_11` | **C22H25FN4O2** | 0.3182 | 3.186 | **-10.91** |
 | **BCL2** | B-cell lymphoma | `bcl2_m5_12` | **C24H27N3O4S** | 0.2917 | 2.585 | **-10.14** |
-| **ABL1** | CML / Ph+ | `abl1_m5_07` | **C21H25N5O2** | 0.3333 | 2.441 | **-10.57** |
+| **ABL1** | CML / Ph+ leukemia | `abl1_m5_07` | **C21H25N5O2** | 0.3333 | 2.441 | **-10.57** |
 
-Details: [`../Wave2_Disease_Expansion/README.md`](../Wave2_Disease_Expansion/README.md) · ABL1 wet-lab (K562): [`wetlab/`](wetlab/)
+\* secondary metric only. Details + reproduction: [`../Wave2_Disease_Expansion/README.md`](../Wave2_Disease_Expansion/README.md)
+· data sources [`../Wave2_Disease_Expansion/DATA_SOURCES.json`](../Wave2_Disease_Expansion/DATA_SOURCES.json)
+· guide [`../Wave2_Disease_Expansion/DOCKING_GUIDE.md`](../Wave2_Disease_Expansion/DOCKING_GUIDE.md)
+· ABL1 wet-lab (K562) [`wetlab/`](wetlab/)
 
 ---
 
@@ -94,14 +88,8 @@ Details: [`../Wave2_Disease_Expansion/README.md`](../Wave2_Disease_Expansion/REA
 
 ---
 
-## 5. Compensatory atlas · 代偿网络
-
-Targets that fail DepMap kill-switch are retained as escape / bypass nodes — [`Compensatory_Atlas/README.md`](Compensatory_Atlas/README.md).
-
----
-
 ## Disclaimer · 免责声明
 
-**EN:** This repository publishes computational evidence only. No fabricated wet IC50 / TGI%. Proprietary silicon RTL omitted.
-
+**EN:** This repository publishes computational evidence only. No fabricated wet IC50 / TGI%.
+Proprietary silicon RTL omitted.
 **中文：** 本仓库仅发布计算证据包。不虚构湿实验 IC50 / TGI%。专有硅实现细节不公开。
