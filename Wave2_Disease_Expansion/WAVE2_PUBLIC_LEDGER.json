@@ -1,245 +1,99 @@
 {
-  "schema": "hematology_lymphoma_expansion.public.v1",
+  "schema": "wave2_public_ledger.bilingual.v1",
   "clinical_grade": false,
-  "generated_at": "2026-07-17T03:50:56.653825+00:00",
-  "focus": "hematologic malignancies \u2014 AML / leukemia / B-cell lymphoma",
-  "method": "Chemical Sanity (\u226435 HA) primary; 64\u00b3 pocket gate; Vina secondary (exh\u226510, multi-seed). All molecular formulas RDKit-verified.",
-  "truth_boundary": "Computational scores \u2260 wet IC50 / clinical efficacy.",
-  "formula_audit": {
-    "all_best_formulas_verified": true,
-    "engine": "rdkit.Chem.rdMolDescriptors.CalcMolFormula"
-  },
-  "hematology_targets": [
-    {
-      "gene": "FLT3",
-      "class": "blood_cancer",
-      "indication": "AML / FLT3-ITD leukemia",
-      "logic": "ATP-site steric fill + Chemical Sanity",
-      "structure_note": "PDB 4RT7 / 6JQR / 5X02 / 4XUF",
-      "n_candidates": 40,
-      "n_docked": 31,
-      "best": {
-        "candidate_id": "flt3_r2_00",
-        "gene": "FLT3",
-        "indication": "AML",
-        "smiles": "O=C(Nc1ccc(F)cc1)c1c[nH]c2ccc(F)cc12",
-        "molecular_formula": "C15H10F2N2O",
-        "heavy_atoms": 20,
-        "mw": 272.25,
-        "formula_verified": true,
-        "vina_best": -10.25,
-        "wall_hits": 8
-      },
-      "top": [
+  "generated_at": "2026-07-17T08:58:45.469076+00:00",
+  "languages": [
+    "en",
+    "zh"
+  ],
+  "programs": {
+    "ER100_ESR1": {
+      "indication_en": "ER+ breast cancer",
+      "indication_zh": "\u96cc\u6fc0\u7d20\u53d7\u4f53\u9633\u6027\u4e73\u817a\u764c",
+      "leads": [
         {
-          "candidate_id": "flt3_r2_00",
-          "smiles": "O=C(Nc1ccc(F)cc1)c1c[nH]c2ccc(F)cc12",
-          "molecular_formula": "C15H10F2N2O",
-          "heavy_atoms": 20,
+          "id": "serm_stilbene_amine",
+          "smiles": "Oc1ccc(/C=C/c2ccc(OCCN(C)C)cc2)cc1",
+          "formula": "C18H21NO2",
+          "ha": 21,
+          "mw": 283.37,
+          "vina": -7.045
+        },
+        {
+          "id": "serm_biphenyl_amine",
+          "smiles": "Oc1ccc(-c2ccc(OCCN(C)C)cc2)cc1",
+          "formula": "C16H19NO2",
+          "ha": 19,
+          "mw": 257.33,
+          "vina": -6.823
+        }
+      ]
+    },
+    "retina_regen": {
+      "indication_en": "Retinal stem-cell regeneration / Pax6-Rax",
+      "indication_zh": "\u89c6\u7f51\u819c\u5e72\u7ec6\u80de\u518d\u9020 / Pax6-Rax",
+      "gsk3b_lead": {
+        "id": "gsk_x10",
+        "smiles": "Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1",
+        "formula": "C15H17FN4O",
+        "ha": 21,
+        "mw": 288.33,
+        "vina": -7.648
+      },
+      "discovery": [
+        {
+          "id": "DISC-RETINA_REGEN-emix_bicyclo_F-8a573f6edf",
+          "smiles": "NCC[C@H](O)c1cc(F)cc(OC[C@@H]2C[C@H]3CC[C@@H]2C3)c1",
+          "formula": "C17H24FNO2",
+          "ha": 21,
+          "mw": 293.38
+        },
+        {
+          "id": "DISC-RETINA_REGEN-emix_oxetane_F-4d5df33d4a",
+          "smiles": "NCC[C@H](O)c1cc(F)cc(OCC2COC2)c1",
+          "formula": "C13H18FNO3",
+          "ha": 18,
+          "mw": 255.29
+        },
+        {
+          "id": "DISC-RETINA_REGEN-emix_pyridyl_oxetane-899943b081",
+          "smiles": "NCC[C@@H](O)c1ccnc(OCC2COC2)c1",
+          "formula": "C12H18N2O3",
+          "ha": 17,
+          "mw": 238.29
+        }
+      ]
+    },
+    "hematology_r3": {
+      "indication_en": "AML / B-cell lymphoma / CML",
+      "indication_zh": "\u6025\u6027\u9ad3\u7cfb\u767d\u8840\u75c5 / B\u7ec6\u80de\u6dcb\u5df4\u7624 / \u6162\u6027\u7c92\u7ec6\u80de\u767d\u8840\u75c5",
+      "leads": {
+        "FLT3": {
+          "id": "flt3_r3_x10",
+          "smiles": "O=C(Nc1ccc(F)cc1F)c1c[nH]c2ccccc12",
+          "formula": "C15H10F2N2O",
+          "ha": 20,
           "mw": 272.25,
-          "formula_verified": true,
-          "vina_best": -10.25,
-          "wall_hits": 8
+          "vina": -10.34
         },
-        {
-          "candidate_id": "flt3_r2_06",
-          "smiles": "O=C(c1ccccc1F)Nc1ccc2[nH]ccc2c1",
-          "molecular_formula": "C15H11FN2O",
-          "heavy_atoms": 19,
-          "mw": 254.26,
-          "formula_verified": true,
-          "vina_best": -10.13,
-          "wall_hits": 8
+        "BCL2": {
+          "id": "bcl2_r3_29",
+          "smiles": "O=C(NS(=O)(=O)c1ccc2ccccc2c1)c1ccccc1",
+          "formula": "C17H13NO3S",
+          "ha": 22,
+          "mw": 311.36,
+          "vina": -9.372
         },
-        {
-          "candidate_id": "flt3_carboxamide_indole",
-          "smiles": "O=C(Nc1ccccc1)c1c[nH]c2ccccc12",
-          "molecular_formula": "C15H12N2O",
-          "heavy_atoms": 18,
-          "mw": 236.27,
-          "formula_verified": true,
-          "vina_best": -9.991,
-          "wall_hits": 9
-        },
-        {
-          "candidate_id": "flt3_r2_01",
-          "smiles": "Fc1ccc(Nc2nc(N3CCN(C)CC3)nc(N)n2)cc1F",
-          "molecular_formula": "C14H17F2N7",
-          "heavy_atoms": 23,
-          "mw": 321.33,
-          "formula_verified": true,
-          "vina_best": -9.746,
-          "wall_hits": 10
-        },
-        {
-          "candidate_id": "flt3_r2_04",
-          "smiles": "c1ccc(Nc2nc(N3CCOCC3)c3ncccc3n2)cc1",
-          "molecular_formula": "C17H17N5O",
-          "heavy_atoms": 23,
-          "mw": 307.36,
-          "formula_verified": true,
-          "vina_best": -9.721,
-          "wall_hits": 11
-        },
-        {
-          "candidate_id": "flt3_x06",
-          "smiles": "O=C(Nc1cccc(F)c1)c1ccc(N2CCCC2)cc1",
-          "molecular_formula": "C17H17FN2O",
-          "heavy_atoms": 21,
-          "mw": 284.33,
-          "formula_verified": true,
-          "vina_best": -9.697,
-          "wall_hits": 13
-        },
-        {
-          "candidate_id": "flt3_r2_09",
-          "smiles": "c1ccc(-c2nc(Nc3ccccc3)ncc2)cc1",
-          "molecular_formula": "C16H13N3",
-          "heavy_atoms": 19,
-          "mw": 247.3,
-          "formula_verified": true,
-          "vina_best": -9.386,
-          "wall_hits": 9
-        },
-        {
-          "candidate_id": "flt3_fluoro_anilino",
-          "smiles": "Fc1cc(F)cc(Nc2ncnc3ccccc23)c1",
-          "molecular_formula": "C14H9F2N3",
-          "heavy_atoms": 19,
-          "mw": 257.24,
-          "formula_verified": true,
-          "vina_best": -9.113,
-          "wall_hits": 8
+        "ABL1": {
+          "id": "abl1_r3_23",
+          "smiles": "Fc1ccc(C(=O)Nc2n[nH]c3ccccc23)cc1",
+          "formula": "C14H10FN3O",
+          "ha": 19,
+          "mw": 255.25,
+          "vina": -10.52
         }
-      ]
-    },
-    {
-      "gene": "BCL2",
-      "class": "lymphoma",
-      "indication": "B-cell lymphoma / apoptotic escape after kinase pressure",
-      "logic": "BH3-mimetic pocket occupancy + Chemical Sanity",
-      "structure_note": "PDB 6O0K BCL2",
-      "n_candidates": 24,
-      "n_docked": 23,
-      "best": {
-        "candidate_id": "bcl2_naphthyl_SO2",
-        "gene": "BCL2",
-        "indication": "lymphoma",
-        "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc2ccccc2c1",
-        "molecular_formula": "C18H15NO3S",
-        "heavy_atoms": 23,
-        "mw": 325.39,
-        "formula_verified": true,
-        "vina_best": -9.174,
-        "wall_hits": 20
-      },
-      "top": [
-        {
-          "candidate_id": "bcl2_naphthyl_SO2",
-          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc2ccccc2c1",
-          "molecular_formula": "C18H15NO3S",
-          "heavy_atoms": 23,
-          "mw": 325.39,
-          "formula_verified": true,
-          "vina_best": -9.174,
-          "wall_hits": 20
-        },
-        {
-          "candidate_id": "bcl2_biphenyl_SO2",
-          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc(-c2ccccc2)cc1",
-          "molecular_formula": "C20H17NO3S",
-          "heavy_atoms": 25,
-          "mw": 351.43,
-          "formula_verified": true,
-          "vina_best": -9.116,
-          "wall_hits": 22
-        },
-        {
-          "candidate_id": "bcl2_CF3_SO2",
-          "smiles": "O=C(NS(=O)(=O)c1ccc(C(F)(F)F)cc1)c1ccccc1",
-          "molecular_formula": "C14H10F3NO3S",
-          "heavy_atoms": 22,
-          "mw": 329.3,
-          "formula_verified": true,
-          "vina_best": -8.904,
-          "wall_hits": 15
-        },
-        {
-          "candidate_id": "bcl2_r2_00",
-          "smiles": "O=C(NS(=O)(=O)c1ccccc1)c1ccc(N2CCOCC2)cc1",
-          "molecular_formula": "C17H18N2O4S",
-          "heavy_atoms": 24,
-          "mw": 346.41,
-          "formula_verified": true,
-          "vina_best": -8.455,
-          "wall_hits": 24
-        },
-        {
-          "candidate_id": "bcl2_r2_01",
-          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc(F)c(F)c1",
-          "molecular_formula": "C14H11F2NO3S",
-          "heavy_atoms": 21,
-          "mw": 311.31,
-          "formula_verified": true,
-          "vina_best": -8.36,
-          "wall_hits": 18
-        },
-        {
-          "candidate_id": "bcl2_fluoro_biphenyl",
-          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc(F)cc1",
-          "molecular_formula": "C14H12FNO3S",
-          "heavy_atoms": 20,
-          "mw": 293.32,
-          "formula_verified": true,
-          "vina_best": -8.306,
-          "wall_hits": 15
-        },
-        {
-          "candidate_id": "bcl2_sulfonyl_F",
-          "smiles": "O=C(NS(=O)(=O)c1ccc(F)cc1)c1ccccc1",
-          "molecular_formula": "C13H10FNO3S",
-          "heavy_atoms": 19,
-          "mw": 279.29,
-          "formula_verified": true,
-          "vina_best": -8.077,
-          "wall_hits": 16
-        },
-        {
-          "candidate_id": "bcl2_sulfonylbenzamide",
-          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccccc1",
-          "molecular_formula": "C14H13NO3S",
-          "heavy_atoms": 19,
-          "mw": 275.33,
-          "formula_verified": true,
-          "vina_best": -8.069,
-          "wall_hits": 17
-        }
-      ]
+      }
     }
-  ],
-  "companion_non_heme_programs": [
-    {
-      "gene": "ALK5",
-      "role": "non_hematologic_companion",
-      "indication": "renal fibrosis",
-      "best_id": "alk5_x00",
-      "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(N2CCOCC2)nc1",
-      "molecular_formula": "C16H16FN3O2",
-      "heavy_atoms": 22,
-      "vina_best": -8.997,
-      "formula_verified": true
-    },
-    {
-      "gene": "GSK3B",
-      "role": "non_hematologic_companion",
-      "indication": "retinal reprogramming (companion)",
-      "best_id": "gsk_x10",
-      "smiles": "Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1",
-      "molecular_formula": "C15H17FN4O",
-      "heavy_atoms": 21,
-      "vina_best": -7.648,
-      "formula_verified": true
-    }
-  ],
-  "abl1_leukemia_pointer": "See Translational_Medicine wetlab packs (K562 / ABL1) for BCR-ABL leukemia line."
+  },
+  "truth_boundary": "Computational scores \u2260 wet IC50 / clinical efficacy."
 }

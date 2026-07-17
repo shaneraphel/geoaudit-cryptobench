@@ -1,136 +1,107 @@
-# Translational Medicine · Hematologic Oncology Focus
+# Translational Medicine · 转化医学证据包
 
-Generated: `2026-07-17T03:50:56.653825+00:00`
+**EN / 中文 bilingual** · Generated: `2026-07-17T08:58:45.469076+00:00`
 
 ![Boolean pocket tensor × synthon ligand graph](hero_banner.png)
 
 > **`clinical_grade = false`**
-> Primary clinical lane: **leukemia & lymphoma** (ABL1 / FLT3 / BCL2).
-> DepMap Chronos kill-switch → TME pH lock → Chemical Sanity (≤35 heavy atoms) → Clinical Readiness Index.
-> Docking affinity is **secondary / informational only**. Computational gates ≠ measured IC50.
+>
+> **EN:** Chemical Sanity is primary. Docking affinity is secondary / informational only. Computational gates ≠ measured IC50.
+>
+> **中文：** 化学合理性门控优先；对接亲和力仅作次级参考。计算分数 ≠ 湿实验 IC50 / 临床疗效。
 
-## Hematologic focus
+---
 
-| Disease | Gene | Status | Where |
-|---------|------|--------|-------|
-| CML / Ph+ leukemia | **ABL1** | Wet-lab packs (K562) | [`wetlab/`](wetlab/) below |
-| AML / FLT3-ITD | **FLT3** | Mass Chemical Sanity + Vina | [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) |
-| B-cell lymphoma | **BCL2** | Mass BH3-pocket screen (formula-audited) | [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) |
+## Program map · 项目地图
 
-Lead formulas (RDKit-verified):
+| Lane · 赛道 | Gene · 靶点 | Indication · 适应症 | Pack · 数据包 |
+|-------------|-------------|---------------------|---------------|
+| **ER-100** | **ESR1** | ER+ breast · 雌激素受体阳性乳腺癌 | [`Pipeline_Matrix/`](Pipeline_Matrix/) · CRI **4/4** SERMs |
+| **Retina regen · 视网膜再造** | **GSK3β** (+ discovery chemotypes) | Stem-cell / Pax6–Rax induction · 视网膜干细胞诱导 | [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) |
+| **Heme · 血癌/淋巴癌** | **FLT3 / BCL2 / ABL1** | AML · B-cell lymphoma · CML | [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) · [`wetlab/`](wetlab/) |
 
-- FLT3 AML: **C15H10F2N2O** (`flt3_r2_00`) · Vina -10.25
-- BCL2 lymphoma: **C18H15NO3S** (`bcl2_naphthyl_SO2`) · Vina -9.174
+---
 
+## 1. ER-100 (ESR1) · 雌激素受体项目
 
-## 1. DepMap Boolean causality (Phase 1 veto)
+**EN:** ER-100 is the flagship ER+ breast program. Leads are SERM-class graphs that pass the full Clinical Readiness Index (DepMap · TME pH · liability shields · Chemical Sanity). Docking is secondary.
 
-See [`DEPMAP_KILL_SWITCH_JUSTIFICATION.md`](DEPMAP_KILL_SWITCH_JUSTIFICATION.md).
+**中文：** ER-100 为 ER+ 乳腺癌旗舰项目。候选为 SERM 类分子图，需通过完整临床就绪指数（DepMap · 肿瘤微环境 pH · 脱靶屏蔽 · 化学合理性）。对接分数仅作次级指标。
 
-| Program | Gene | Decision | Pipeline | Pan median | Selective? | Lineage median | Wet line |
-|---------|------|----------|----------|------------|------------|----------------|----------|
-| `leukemia_ABL1` | **ABL1** | **PASS** | **ACTIVE** | 0.04200215621875679 | False | -1.8502399407237715 | K562 |
-| `kras_G12C` | **KRAS** | **PASS** | **ACTIVE** | -0.49668749740728335 | True | -1.2710789999573375 | NCI-H358 |
-| `pik3ca_H1047R` | **PIK3CA** | **PASS** | **ACTIVE** | -0.4539621313459162 | False | -1.0469504122001227 | T47D |
-| `esr1_ER_positive_breast` | **ESR1** | **PASS** | **ACTIVE** | -0.06777620305794746 | False | -1.4622495827007858 | MCF7 |
+| ID | Formula · 分子式 | HA | MW | Vina (secondary) | CRI |
+|----|------------------|----|----|------------------|-----|
+| `serm_stilbene_amine` | **C18H21NO2** | 21 | 283.37 | -7.045 | 4/4 ACTIVE |
+| `serm_biphenyl_amine` | **C16H19NO2** | 19 | 257.33 | -6.823 | 4/4 ACTIVE |
 
-## 2. TCGA tumor microenvironment → ProtonationState lock
+SMILES:
+- `serm_stilbene_amine`: `Oc1ccc(/C=C/c2ccc(OCCN(C)C)cc2)cc1`
+- `serm_biphenyl_amine`: `Oc1ccc(-c2ccc(OCCN(C)C)cc2)cc1`
 
-- Co-mutation rule: `PIK3CA_H1047R_AND_PTEN_LOSS` · Boolean **True**
-- H1047-like samples: **186** · H1047∩PTEN: **36**
-- Dictionary milli-pH priors: `{"breast_ER_pos": 680, "leukemia_BM_niche": 720, "solid_hypoxic_core": 650}`
-- Generations lock `ProtonationState` to the disease niche (neutral for acidic breast/hypoxic cores; weak-base allowed in BM niche).
+ACTIVE pool (n=7) also includes `serm_oht_parent`, `serm_oht_fluorophenyl`, `serm_oht_tolyl`, `serm_oht_bcp`, `serm_oht_azaspiro` — see [`VALIDATED_CANDIDATE_POOL.json`](VALIDATED_CANDIDATE_POOL.json).
 
-## 3. Chemical Sanity Gate (pre-computation)
+Hero visual (ESR1 64³ pocket × stilbene amine): [`hero_banner.png`](hero_banner.png)
 
-- Absolute primary filter: **MAX_HEAVY_ATOMS = 35**, PAINS / reactive motifs, Bredt / strain proxies, Lipinski ceilings.
-- Graphs that fail are annihilated before docking metrics are consulted.
+---
 
-## 4. Clinical attrition + proteome liability shields
+## 2. Retinal regeneration · 视网膜再造
 
-| Mask | Banned | Failure class |
-|------|--------|---------------|
-| `anilide_primary_aniline` | True | reactive_metabolite_hepatotox |
-| `nitroaromatic` | True | genotox_risk |
-| `unsubstituted_michael` | True | covalent_offtarget |
-| `catechol` | True | quinone_tox |
-| `flat_polyaryl_basic_amine` | False | herg_qt |
+**EN:** Small-molecule induction chemotypes for retinal reprogramming (Pax6/Rax axis). GSK3β is treated as a **modulatory** (not plug-only) target; discovery SDFs are high-Fsp³ / oxetane–bicyclo motifs. Companion cryo maps: DOT1L (epigenetic co-target).
 
-Top-50 clinical liabilities (including hERG) are registered as 64³ Boolean clash shields; CYP cleavage and hydration-shell checks are Boolean proxies only (see [`CLINICAL_LIABILITY_TENSOR_INDEX.json`](CLINICAL_LIABILITY_TENSOR_INDEX.json)).
+**中文：** 面向视网膜细胞重编程（Pax6/Rax）的小分子诱导化学型。GSK3β 按**调谐/变构逻辑**（非单纯堵孔）筛选；发现集为高 Fsp³ / 氧杂环丁烷–双环骨架。表观共靶 DOT1L 冷冻电镜图已归档于本地 vault。
 
-## 5. Unified Clinical Ledger · Clinical Readiness Index
+### GSK3β modulatory lead · 调谐先导
 
-Full ledger: [`UNIFIED_CLINICAL_LEDGER.md`](UNIFIED_CLINICAL_LEDGER.md).
+| ID | Formula · 分子式 | HA | MW | Vina |
+|----|------------------|----|----|------|
+| `gsk_x10` | **C15H17FN4O** | 21 | 288.33 | -7.648 |
 
-Ranking dimensions (all Boolean — **not** Vina):
+SMILES: `Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1`
 
-1. DepMap Causality
-2. TME pH Compliance
-3. Off-Target Orthogonality
-4. Chemical Sanity / Synthesizability
+### Discovery chemotypes · 发现化学型（RETINA_REGEN）
 
-| Rank | Candidate | CRI | Status |
-|------|-----------|-----|--------|
-| 1 | `serm_biphenyl_amine` | **4/4** | **ACTIVE** |
-| 2 | `serm_stilbene_amine` | **4/4** | **ACTIVE** |
-| 3 | `serm_oht_parent` | **4/4** | **ACTIVE** |
-| 4 | `serm_oht_fluorophenyl` | **4/4** | **ACTIVE** |
-| 5 | `serm_oht_tolyl` | **4/4** | **ACTIVE** |
-| 6 | `serm_oht_bcp` | **4/4** | **ACTIVE** |
-| 7 | `serm_oht_azaspiro` | **4/4** | **ACTIVE** |
-| 8 | `serm_oht_piperidine` | **3/4** | **FROZEN** |
-| 9 | `CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41` | **3/4** | **FROZEN** |
-| 10 | `CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e` | **3/4** | **FROZEN** |
+| ID | Formula · 分子式 | HA | MW |
+|----|------------------|----|----|
+| `DISC-RETINA_REGEN-emix_bicyclo_F-8a573f6edf` | **C17H24FNO2** | 21 | 293.38 |
+| `DISC-RETINA_REGEN-emix_oxetane_F-4d5df33d4a` | **C13H18FNO3** | 18 | 255.29 |
+| `DISC-RETINA_REGEN-emix_pyridyl_oxetane-899943b081` | **C12H18N2O3** | 17 | 238.29 |
 
-## 6. ACTIVE VALIDATED_CANDIDATE_POOL (n=7)
+SDF files: [`../Wave2_Disease_Expansion/retina_ligands/`](../Wave2_Disease_Expansion/retina_ligands/)
 
-- `serm_biphenyl_amine`
-- `serm_stilbene_amine`
-- `serm_oht_parent`
-- `serm_oht_fluorophenyl`
-- `serm_oht_tolyl`
-- `serm_oht_bcp`
-- `serm_oht_azaspiro`
+---
 
-## 7. Wet-Lab Execution Packages (planning only)
+## 3. Hematologic oncology · 血液肿瘤 / 淋巴瘤
 
-### `CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e`
+**EN:** Mass Chemical Sanity + secondary Vina (R3: exhaustiveness 16 × 6 seeds). Formulas RDKit-verified.
 
-- Local docking (secondary): -13.96 vs ponatinib (-10.04)
-- Biochem: `KinaseGlo_or_ADPGlo_ABL1`
-- DepMap cell line: **K562**
-- SOP: [`wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_WETLAB_SOP.md`](wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_WETLAB_SOP.md)
-- Retro: [`wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_RETROSYNTHESIS.json`](wetlab/CRYOML-LEUK-pona_norbornyl_spiro-e8c146ed2e_RETROSYNTHESIS.json)
+**中文：** 大规模化学合理性筛选 + 次级对接（R3：exhaustiveness 16 × 6 随机种子）。分子式均经 RDKit 校验。
 
-### `CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41`
+| Gene | Disease · 病种 | Best ID | Formula · 分子式 | Vina |
+|------|----------------|---------|------------------|------|
+| **FLT3** | AML / FLT3-ITD | `{r3map['FLT3']['id']}` | **{r3map['FLT3']['formula']}** | **{r3map['FLT3']['vina']}** |
+| **BCL2** | B-cell lymphoma · B 细胞淋巴瘤 | `{r3map['BCL2']['id']}` | **{r3map['BCL2']['formula']}** | **{r3map['BCL2']['vina']}** |
+| **ABL1** | CML / Ph+ leukemia · 慢粒 | `{r3map['ABL1']['id']}` | **{r3map['ABL1']['formula']}** | **{r3map['ABL1']['vina']}** |
 
-- Local docking (secondary): -13.24 vs ponatinib (-10.04)
-- Biochem: `KinaseGlo_or_ADPGlo_ABL1`
-- DepMap cell line: **K562**
-- SOP: [`wetlab/CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41_WETLAB_SOP.md`](wetlab/CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41_WETLAB_SOP.md)
-- Retro: [`wetlab/CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41_RETROSYNTHESIS.json`](wetlab/CRYOML-LEUK-pona_azaspiro_oxetane_distal-7840c84c41_RETROSYNTHESIS.json)
+Details: [`../Wave2_Disease_Expansion/README.md`](../Wave2_Disease_Expansion/README.md) · ABL1 wet-lab (K562): [`wetlab/`](wetlab/)
 
-## 8. Compensatory Network Atlas (polypharmacology)
+---
 
-Targets that **fail** DepMap Boolean kill-switch are **not deleted**. They are re-indexed as `SECONDARY_BYPASS_NODE` and linked to primary leads via `ESCAPE_ROUTE` edges.
+## 4. Pipeline gates · 管线门控（shared）
 
-See [`Compensatory_Atlas/README.md`](Compensatory_Atlas/README.md).
+1. **DepMap Boolean causality** — [`DEPMAP_KILL_SWITCH_JUSTIFICATION.md`](DEPMAP_KILL_SWITCH_JUSTIFICATION.md)
+2. **TCGA TME → ProtonationState lock** — breast milli-pH 680 · BM niche 720
+3. **Chemical Sanity** — MAX_HEAVY_ATOMS ≤ 35 · PAINS · strain
+4. **Clinical Readiness Index** — Boolean ranking (**not** Vina) — [`UNIFIED_CLINICAL_LEDGER.md`](UNIFIED_CLINICAL_LEDGER.md)
 
-## Pipeline Matrix · Multi-Target Conquest
+---
 
-Mass deployment across Compensatory Atlas escape nodes + crystal-tensor primary.
-Details: [`Pipeline_Matrix/README.md`](Pipeline_Matrix/README.md).
+## 5. Compensatory atlas · 代偿网络
 
-| Target | Role | Top SMILES | Chem sanity | Docking (secondary) |
-|--------|------|------------|-------------|---------------------|
-| **EGFR** | `SECONDARY_BYPASS_NODE` | `Fc1ccc(Nc2ncnc3ccccc23)cc1` | Pass | -6.58 |
-| **AKT1** | `SECONDARY_BYPASS_NODE` | `Cc1nc(Nc2ccccc2)cc(N3CCOCC3)n1` | Pass | -8.34 |
-| **BCL2** | `SECONDARY_BYPASS_NODE` | `O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccccc1` | Pass | -8.06 |
-| **ESR1** | `PRIMARY_KILL_SWITCH` | `Oc1ccc(/C=C/c2ccc(OCCN(C)C)cc2)cc1` | Pass | -7.04 |
+Targets that fail DepMap kill-switch are retained as escape / bypass nodes — [`Compensatory_Atlas/README.md`](Compensatory_Atlas/README.md).
 
-Ligand SDFs + PyMOL/ChimeraX scripts ship under `Pipeline_Matrix/`.
+---
 
+## Disclaimer · 免责声明
 
-## Wave-2 hematology expansion
+**EN:** This repository publishes computational evidence only. No fabricated wet IC50 / TGI%. Proprietary silicon RTL omitted.
 
-See [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) for AML (FLT3) and lymphoma (BCL2) formula-audited leads.
+**中文：** 本仓库仅发布计算证据包。不虚构湿实验 IC50 / TGI%。专有硅实现细节不公开。
