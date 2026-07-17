@@ -1,0 +1,325 @@
+{
+  "schema": "wave2_disease_expansion.public.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-17T03:45:02.393379+00:00",
+  "method": "Chemical Sanity (\u226435 heavy atoms, PAINS, strain) primary; 64\u00b3 Boolean pocket occupancy secondary gate; AutoDock Vina affinity secondary only (exhaustiveness=12, 4 seeds). ALK5: CYP bioactivation motif shield. GSK3B: modulatory chemotypes.",
+  "truth_boundary": "Computational scores \u2260 wet IC50 / clinical efficacy.",
+  "rounds": 2,
+  "targets": [
+    {
+      "gene": "FLT3",
+      "logic": "steric_fill_ATP_pocket",
+      "structure_note": "PDB 4RT7 / 6JQR / 5X02 / 4XUF (kinase domain)",
+      "n_candidates": 40,
+      "n_sanity_cyp_pass": 31,
+      "n_docked": 31,
+      "best": {
+        "candidate_id": "flt3_r2_00",
+        "smiles": "O=C(Nc1ccc(F)cc1)c1c[nH]c2ccc(F)cc12",
+        "vina_best": -10.25,
+        "vina_mean": -10.2025,
+        "wall_hits": 8
+      },
+      "top": [
+        {
+          "candidate_id": "flt3_r2_00",
+          "smiles": "O=C(Nc1ccc(F)cc1)c1c[nH]c2ccc(F)cc12",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 8,
+          "vina_best": -10.25,
+          "vina_mean": -10.2025,
+          "logic": "steric_fill_ATP_pocket",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "flt3_r2_06",
+          "smiles": "O=C(c1ccccc1F)Nc1ccc2[nH]ccc2c1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 8,
+          "vina_best": -10.13,
+          "vina_mean": -10.094999999999999,
+          "logic": "steric_fill_ATP_pocket",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "flt3_carboxamide_indole",
+          "smiles": "O=C(Nc1ccccc1)c1c[nH]c2ccccc12",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 9,
+          "vina_best": -9.991,
+          "vina_mean": -9.98475,
+          "logic": "steric_fill_ATP_pocket",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "flt3_r2_01",
+          "smiles": "Fc1ccc(Nc2nc(N3CCN(C)CC3)nc(N)n2)cc1F",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 10,
+          "vina_best": -9.746,
+          "vina_mean": -9.72875,
+          "logic": "steric_fill_ATP_pocket",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "flt3_r2_04",
+          "smiles": "c1ccc(Nc2nc(N3CCOCC3)c3ncccc3n2)cc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 11,
+          "vina_best": -9.721,
+          "vina_mean": -9.70375,
+          "logic": "steric_fill_ATP_pocket",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "flt3_x06",
+          "smiles": "O=C(Nc1cccc(F)c1)c1ccc(N2CCCC2)cc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 13,
+          "vina_best": -9.697,
+          "vina_mean": -9.679749999999999,
+          "logic": "steric_fill_ATP_pocket",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "flt3_r2_09",
+          "smiles": "c1ccc(-c2nc(Nc3ccccc3)ncc2)cc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 9,
+          "vina_best": -9.386,
+          "vina_mean": -9.3555,
+          "logic": "steric_fill_ATP_pocket",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "flt3_fluoro_anilino",
+          "smiles": "Fc1cc(F)cc(Nc2ncnc3ccccc23)c1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 8,
+          "vina_best": -9.113,
+          "vina_mean": -9.10175,
+          "logic": "steric_fill_ATP_pocket",
+          "status": "DOCKED"
+        }
+      ]
+    },
+    {
+      "gene": "ALK5",
+      "logic": "geodesic_kinase_block_plus_CYP_shield",
+      "structure_note": "PDB 3TZM / 5E8S / 1VJY (TGFBR1 kinase); cryo ECD EMD-50519",
+      "n_candidates": 42,
+      "n_sanity_cyp_pass": 39,
+      "n_docked": 39,
+      "best": {
+        "candidate_id": "alk5_x00",
+        "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(N2CCOCC2)nc1",
+        "vina_best": -8.997,
+        "vina_mean": -8.99325,
+        "wall_hits": 6
+      },
+      "top": [
+        {
+          "candidate_id": "alk5_x00",
+          "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(N2CCOCC2)nc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 6,
+          "vina_best": -8.997,
+          "vina_mean": -8.99325,
+          "logic": "geodesic_kinase_block_plus_CYP_shield",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "alk5_r2_00",
+          "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(N2CCCC2)nc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 8,
+          "vina_best": -8.919,
+          "vina_mean": -8.89175,
+          "logic": "geodesic_kinase_block_plus_CYP_shield",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "alk5_bicyclo",
+          "smiles": "O=C(Nc1ccccc1)C12CC3CC(CC(C3)C1)C2",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 3,
+          "vina_best": -8.843,
+          "vina_mean": -8.8255,
+          "logic": "geodesic_kinase_block_plus_CYP_shield",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "alk5_x06",
+          "smiles": "O=C(Nc1ccc(C(F)(F)F)cc1)c1ccncc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 4,
+          "vina_best": -8.764,
+          "vina_mean": -8.7595,
+          "logic": "geodesic_kinase_block_plus_CYP_shield",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "alk5_r2_02",
+          "smiles": "O=C(Nc1ccccc1F)c1cnc(N2CCOCC2)nc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 6,
+          "vina_best": -8.75,
+          "vina_mean": -8.743,
+          "logic": "geodesic_kinase_block_plus_CYP_shield",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "alk5_x09",
+          "smiles": "Fc1cccc(Nc2ncnc3ccccc23)c1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 2,
+          "vina_best": -8.738,
+          "vina_mean": -8.729500000000002,
+          "logic": "geodesic_kinase_block_plus_CYP_shield",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "alk5_x01",
+          "smiles": "Fc1ccc(Nc2nccc(-c3ccn[nH]3)n2)cc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 4,
+          "vina_best": -8.633,
+          "vina_mean": -8.595749999999999,
+          "logic": "geodesic_kinase_block_plus_CYP_shield",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "alk5_x05",
+          "smiles": "c1ccc(-c2nc(N3CCOCC3)ncc2)cc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 0,
+          "vina_best": -8.595,
+          "vina_mean": -8.5785,
+          "logic": "geodesic_kinase_block_plus_CYP_shield",
+          "status": "DOCKED"
+        }
+      ]
+    },
+    {
+      "gene": "GSK3B",
+      "logic": "allosteric_modulatory_not_plug",
+      "structure_note": "PDB 1Q3D / 6B8J / 4ACC; DOT1L cryo EMD-9843 / EMD-22692",
+      "n_candidates": 44,
+      "n_sanity_cyp_pass": 39,
+      "n_docked": 39,
+      "best": {
+        "candidate_id": "gsk_x10",
+        "smiles": "Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1",
+        "vina_best": -7.648,
+        "vina_mean": -7.6385,
+        "wall_hits": 8
+      },
+      "top": [
+        {
+          "candidate_id": "gsk_x10",
+          "smiles": "Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 8,
+          "vina_best": -7.648,
+          "vina_mean": -7.6385,
+          "logic": "allosteric_modulatory_not_plug",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "gsk_x02",
+          "smiles": "c1ccc2c(c1)nc(Nc1ccccc1)c1ccncc12",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 7,
+          "vina_best": -7.549,
+          "vina_mean": -7.512499999999999,
+          "logic": "allosteric_modulatory_not_plug",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "gsk_x01",
+          "smiles": "O=C(Nc1ccc(F)cc1)c1cnc(N2CCOCC2)cn1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 7,
+          "vina_best": -7.506,
+          "vina_mean": -7.4955,
+          "logic": "allosteric_modulatory_not_plug",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "gsk_r2_00",
+          "smiles": "Cc1nc(N2CCN(C)CC2)nc(Nc2ccc(F)cc2)n1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 10,
+          "vina_best": -7.473,
+          "vina_mean": -7.37425,
+          "logic": "allosteric_modulatory_not_plug",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "gsk_morpholino",
+          "smiles": "Fc1ccc(Nc2ncnc(N3CCOCC3)n2)cc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 8,
+          "vina_best": -7.471,
+          "vina_mean": -7.272,
+          "logic": "allosteric_modulatory_not_plug",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "gsk_r2_07",
+          "smiles": "c1ccc(Nc2nc3ccccc3c(=O)[nH]2)cc1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 10,
+          "vina_best": -7.32,
+          "vina_mean": -7.281,
+          "logic": "allosteric_modulatory_not_plug",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "gsk_r2_01",
+          "smiles": "O=C(Nc1ccc(F)cc1)c1cnc(N2CCCC2)cn1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 10,
+          "vina_best": -7.301,
+          "vina_mean": -7.24425,
+          "logic": "allosteric_modulatory_not_plug",
+          "status": "DOCKED"
+        },
+        {
+          "candidate_id": "gsk_r2_11",
+          "smiles": "Nc1nc(N2CCOCC2)cc(Nc2cccc(F)c2)n1",
+          "chemical_sanity_pass": true,
+          "cyp_pass": true,
+          "wall_hits": 11,
+          "vina_best": -7.29,
+          "vina_mean": -7.229749999999999,
+          "logic": "allosteric_modulatory_not_plug",
+          "status": "DOCKED"
+        }
+      ]
+    }
+  ]
+}

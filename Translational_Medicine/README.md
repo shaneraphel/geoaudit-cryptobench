@@ -2,6 +2,8 @@
 
 Generated: `2026-07-16T13:45:36.200076+00:00`
 
+![Boolean pocket tensor × synthon ligand graph](hero_banner.png)
+
 > **`clinical_grade = false`**
 > DepMap Chronos kill-switch → TCGA TME pH lock → Chemical Sanity (≤35 heavy atoms) → proteome liability shields → **Clinical Readiness Index** ranking.
 > Docking affinity is **secondary / informational only**. Computational gates ≠ measured IC50.
@@ -117,3 +119,6 @@ Details: [`Pipeline_Matrix/README.md`](Pipeline_Matrix/README.md).
 
 Ligand SDFs + PyMOL/ChimeraX scripts ship under `Pipeline_Matrix/`.
 
+## Wave-2 disease expansion
+
+See [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) for FLT3 / ALK5 / GSK3β mass Chemical Sanity + secondary docking results.
