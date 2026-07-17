@@ -10,20 +10,23 @@
 | Pack | Focus · 方向 | Link |
 |------|--------------|------|
 | **Translational Medicine** | **ER-100** · Retina regen · Heme | [`Translational_Medicine/`](Translational_Medicine/) |
-| **Wave-2 Expansion** | ER-100 links · **视网膜再造** · AML/淋巴瘤/CML | [`Wave2_Disease_Expansion/`](Wave2_Disease_Expansion/) |
+| **Wave-2 Expansion** | ER-100 links · **视网膜再造** · AML/淋巴瘤/CML · **M5 leads** | [`Wave2_Disease_Expansion/`](Wave2_Disease_Expansion/) |
 
-### Snapshot · 快照（RDKit formulas）
+### Snapshot · 快照（RDKit formulas · verified）
 
-| Program | Lead | Formula · 分子式 | Vina* |
-|---------|------|------------------|-------|
-| ER-100 / ESR1 | `serm_stilbene_amine` | **C18H21NO2** | -7.045 |
-| Retina / GSK3β | `gsk_x10` | **C15H17FN4O** | -7.648 |
-| Retina discovery | `DISC-RETINA_REGEN-emix_bicyclo_F-8a573f6edf` | **C17H24FNO2** | — |
-| AML / FLT3 | `flt3_r3_x10` | **C15H10F2N2O** | -10.34 |
-| Lymphoma / BCL2 | `bcl2_r3_29` | **C17H13NO3S** | -9.372 |
-| CML / ABL1 | `abl1_r3_23` | **C14H10FN3O** | -10.52 |
+| Program | Lead | Formula · 分子式 | Fsp³ | Vina* |
+|---------|------|------------------|------|-------|
+| ER-100 / ESR1 | `serm_stilbene_amine` | **C18H21NO2** | — | -7.045 |
+| Retina / GSK3β | `gsk_x10` | **C15H17FN4O** | — | -7.648 |
+| Retina discovery | `DISC-RETINA_REGEN-emix_bicyclo_F-8a573f6edf` | **C17H24FNO2** | — | — |
+| AML / FLT3 **M5** | `flt3_m5_11` | **C22H25FN4O2** | 0.3182 | -10.91 |
+| Lymphoma / BCL2 **M5** | `bcl2_m5_12` | **C24H27N3O4S** | 0.2917 | -10.14 |
+| CML / ABL1 **M5** | `abl1_m5_07` | **C21H25N5O2** | 0.3333 | -10.57 |
 
 \* Vina is secondary / informational only · 对接分仅供参考.
+
+**EN:** Heme M5 = locked R3 warheads + high-Fsp³ N-methylpiperazine ethoxy solvent tails (formulas RDKit-verified).  
+**中文：** 血液肿瘤 M5 = 锁定 R3 弹头 + 高 Fsp³ N-甲基哌嗪乙氧基溶剂尾（分子式经 RDKit 校验）。
 
 ## Other releases · 其他发布
 

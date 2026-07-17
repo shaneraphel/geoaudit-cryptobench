@@ -1,6 +1,6 @@
 # Translational Medicine · 转化医学证据包
 
-**EN / 中文 bilingual** · Generated: `2026-07-17T08:58:45.469076+00:00`
+**EN / 中文 bilingual** · Generated: `2026-07-17T14:54:35.087359+00:00`
 
 ![Boolean pocket tensor × synthon ligand graph](hero_banner.png)
 
@@ -18,7 +18,7 @@
 |-------------|-------------|---------------------|---------------|
 | **ER-100** | **ESR1** | ER+ breast · 雌激素受体阳性乳腺癌 | [`Pipeline_Matrix/`](Pipeline_Matrix/) · CRI **4/4** SERMs |
 | **Retina regen · 视网膜再造** | **GSK3β** (+ discovery chemotypes) | Stem-cell / Pax6–Rax induction · 视网膜干细胞诱导 | [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) |
-| **Heme · 血癌/淋巴癌** | **FLT3 / BCL2 / ABL1** | AML · B-cell lymphoma · CML | [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) · [`wetlab/`](wetlab/) |
+| **Heme · 血癌/淋巴癌** | **FLT3 / BCL2 / ABL1** | AML · B-cell lymphoma · CML · **M5 leads** | [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) · [`wetlab/`](wetlab/) |
 
 ---
 
@@ -71,15 +71,15 @@ SDF files: [`../Wave2_Disease_Expansion/retina_ligands/`](../Wave2_Disease_Expan
 
 ## 3. Hematologic oncology · 血液肿瘤 / 淋巴瘤
 
-**EN:** Mass Chemical Sanity + secondary Vina (R3: exhaustiveness 16 × 6 seeds). Formulas RDKit-verified.
+**EN:** R3 warheads (Fsp³≈0) grown in Sprint M5 to high-Fsp³ solvent-tailed clinical leads. Formulas RDKit-verified before README publish.
 
-**中文：** 大规模化学合理性筛选 + 次级对接（R3：exhaustiveness 16 × 6 随机种子）。分子式均经 RDKit 校验。
+**中文：** R3 片段弹头（Fsp³≈0）经 Sprint M5 扩展为高 Fsp³ 溶剂尾临床先导。分子式经 RDKit 校验后方可上架 README。
 
-| Gene | Disease · 病种 | Best ID | Formula · 分子式 | Vina |
-|------|----------------|---------|------------------|------|
-| **FLT3** | AML / FLT3-ITD | `{r3map['FLT3']['id']}` | **{r3map['FLT3']['formula']}** | **{r3map['FLT3']['vina']}** |
-| **BCL2** | B-cell lymphoma · B 细胞淋巴瘤 | `{r3map['BCL2']['id']}` | **{r3map['BCL2']['formula']}** | **{r3map['BCL2']['vina']}** |
-| **ABL1** | CML / Ph+ leukemia · 慢粒 | `{r3map['ABL1']['id']}` | **{r3map['ABL1']['formula']}** | **{r3map['ABL1']['vina']}** |
+| Gene | Disease | Lead ID | Formula · 分子式 | Fsp³ | cLogP | Vina* |
+|------|---------|---------|------------------|------|-------|-------|
+| **FLT3** | AML / FLT3-ITD | `flt3_m5_11` | **C22H25FN4O2** | 0.3182 | 3.186 | **-10.91** |
+| **BCL2** | B-cell lymphoma | `bcl2_m5_12` | **C24H27N3O4S** | 0.2917 | 2.585 | **-10.14** |
+| **ABL1** | CML / Ph+ | `abl1_m5_07` | **C21H25N5O2** | 0.3333 | 2.441 | **-10.57** |
 
 Details: [`../Wave2_Disease_Expansion/README.md`](../Wave2_Disease_Expansion/README.md) · ABL1 wet-lab (K562): [`wetlab/`](wetlab/)
 
@@ -89,7 +89,7 @@ Details: [`../Wave2_Disease_Expansion/README.md`](../Wave2_Disease_Expansion/REA
 
 1. **DepMap Boolean causality** — [`DEPMAP_KILL_SWITCH_JUSTIFICATION.md`](DEPMAP_KILL_SWITCH_JUSTIFICATION.md)
 2. **TCGA TME → ProtonationState lock** — breast milli-pH 680 · BM niche 720
-3. **Chemical Sanity** — MAX_HEAVY_ATOMS ≤ 35 · PAINS · strain
+3. **Chemical Sanity** — MAX_HEAVY_ATOMS ≤ 35 (M5 heme growth ≤ 40) · PAINS · strain
 4. **Clinical Readiness Index** — Boolean ranking (**not** Vina) — [`UNIFIED_CLINICAL_LEDGER.md`](UNIFIED_CLINICAL_LEDGER.md)
 
 ---

@@ -1,0 +1,120 @@
+{
+  "all_ok": true,
+  "rows": [
+    {
+      "gene": "FLT3",
+      "label": "warhead",
+      "id": "flt3_r3_x10",
+      "smiles": "O=C(Nc1ccc(F)cc1F)c1c[nH]c2ccccc12",
+      "reported": "C15H10F2N2O",
+      "calc": "C15H10F2N2O",
+      "ok": true,
+      "mw_rep": 272.25,
+      "mw_calc": 272.25,
+      "fsp3": 0.0,
+      "clogp": 3.698,
+      "vina": null,
+      "delta": null,
+      "attachment": null
+    },
+    {
+      "gene": "FLT3",
+      "label": "lead",
+      "id": "flt3_m5_11",
+      "smiles": "O=C(Nc1ccc(OCCN2CCN(C)CC2)cc1F)c1c[nH]c2ccccc12",
+      "reported": "C22H25FN4O2",
+      "calc": "C22H25FN4O2",
+      "ok": true,
+      "mw_rep": 396.47,
+      "mw_calc": 396.47,
+      "fsp3": 0.3182,
+      "clogp": 3.186,
+      "vina": -10.91,
+      "delta": {
+        "delta_fsp3": 0.3182,
+        "delta_clogp": -0.512,
+        "delta_mw": 124.22,
+        "delta_ha": 9,
+        "delta_tpsa": 15.71
+      },
+      "attachment": "anil_para_ethoxy_MePip"
+    },
+    {
+      "gene": "BCL2",
+      "label": "warhead",
+      "id": "bcl2_r3_29",
+      "smiles": "O=C(NS(=O)(=O)c1ccc2ccccc2c1)c1ccccc1",
+      "reported": "C17H13NO3S",
+      "calc": "C17H13NO3S",
+      "ok": true,
+      "mw_rep": 311.36,
+      "mw_calc": 311.36,
+      "fsp3": 0.0,
+      "clogp": 2.959,
+      "vina": null,
+      "delta": null,
+      "attachment": null
+    },
+    {
+      "gene": "BCL2",
+      "label": "lead",
+      "id": "bcl2_m5_12",
+      "smiles": "O=C(NS(=O)(=O)c1ccc2cc(OCCN3CCN(C)CC3)ccc2c1)c1ccccc1",
+      "reported": "C24H27N3O4S",
+      "calc": "C24H27N3O4S",
+      "ok": true,
+      "mw_rep": 453.56,
+      "mw_calc": 453.56,
+      "fsp3": 0.2917,
+      "clogp": 2.585,
+      "vina": -10.14,
+      "delta": {
+        "delta_fsp3": 0.2917,
+        "delta_clogp": -0.374,
+        "delta_mw": 142.2,
+        "delta_ha": 10,
+        "delta_tpsa": 15.71
+      },
+      "attachment": "naphthyl_6_ethoxy_MePip"
+    },
+    {
+      "gene": "ABL1",
+      "label": "warhead",
+      "id": "abl1_r3_23",
+      "smiles": "Fc1ccc(C(=O)Nc2n[nH]c3ccccc23)cc1",
+      "reported": "C14H10FN3O",
+      "calc": "C14H10FN3O",
+      "ok": true,
+      "mw_rep": 255.25,
+      "mw_calc": 255.25,
+      "fsp3": 0.0,
+      "clogp": 2.954,
+      "vina": null,
+      "delta": null,
+      "attachment": null
+    },
+    {
+      "gene": "ABL1",
+      "label": "lead",
+      "id": "abl1_m5_07",
+      "smiles": "O=C(Nc1n[nH]c2ccccc12)c1ccc(OCCN2CCN(C)CC2)cc1",
+      "reported": "C21H25N5O2",
+      "calc": "C21H25N5O2",
+      "ok": true,
+      "mw_rep": 379.46,
+      "mw_calc": 379.46,
+      "fsp3": 0.3333,
+      "clogp": 2.441,
+      "vina": -10.57,
+      "delta": {
+        "delta_fsp3": 0.3333,
+        "delta_clogp": -0.513,
+        "delta_mw": 124.21,
+        "delta_ha": 9,
+        "delta_tpsa": 15.71
+      },
+      "attachment": "benzoyl_para_ethoxy_MePip"
+    }
+  ],
+  "generated_from": "SPRINT_M5_FRAGMENT_TO_LEAD.json"
+}
