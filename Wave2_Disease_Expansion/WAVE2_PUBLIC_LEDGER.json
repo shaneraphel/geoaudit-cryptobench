@@ -1,325 +1,245 @@
 {
-  "schema": "wave2_disease_expansion.public.v1",
+  "schema": "hematology_lymphoma_expansion.public.v1",
   "clinical_grade": false,
-  "generated_at": "2026-07-17T03:45:02.393379+00:00",
-  "method": "Chemical Sanity (\u226435 heavy atoms, PAINS, strain) primary; 64\u00b3 Boolean pocket occupancy secondary gate; AutoDock Vina affinity secondary only (exhaustiveness=12, 4 seeds). ALK5: CYP bioactivation motif shield. GSK3B: modulatory chemotypes.",
+  "generated_at": "2026-07-17T03:50:56.653825+00:00",
+  "focus": "hematologic malignancies \u2014 AML / leukemia / B-cell lymphoma",
+  "method": "Chemical Sanity (\u226435 HA) primary; 64\u00b3 pocket gate; Vina secondary (exh\u226510, multi-seed). All molecular formulas RDKit-verified.",
   "truth_boundary": "Computational scores \u2260 wet IC50 / clinical efficacy.",
-  "rounds": 2,
-  "targets": [
+  "formula_audit": {
+    "all_best_formulas_verified": true,
+    "engine": "rdkit.Chem.rdMolDescriptors.CalcMolFormula"
+  },
+  "hematology_targets": [
     {
       "gene": "FLT3",
-      "logic": "steric_fill_ATP_pocket",
-      "structure_note": "PDB 4RT7 / 6JQR / 5X02 / 4XUF (kinase domain)",
+      "class": "blood_cancer",
+      "indication": "AML / FLT3-ITD leukemia",
+      "logic": "ATP-site steric fill + Chemical Sanity",
+      "structure_note": "PDB 4RT7 / 6JQR / 5X02 / 4XUF",
       "n_candidates": 40,
-      "n_sanity_cyp_pass": 31,
       "n_docked": 31,
       "best": {
         "candidate_id": "flt3_r2_00",
+        "gene": "FLT3",
+        "indication": "AML",
         "smiles": "O=C(Nc1ccc(F)cc1)c1c[nH]c2ccc(F)cc12",
+        "molecular_formula": "C15H10F2N2O",
+        "heavy_atoms": 20,
+        "mw": 272.25,
+        "formula_verified": true,
         "vina_best": -10.25,
-        "vina_mean": -10.2025,
         "wall_hits": 8
       },
       "top": [
         {
           "candidate_id": "flt3_r2_00",
           "smiles": "O=C(Nc1ccc(F)cc1)c1c[nH]c2ccc(F)cc12",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 8,
+          "molecular_formula": "C15H10F2N2O",
+          "heavy_atoms": 20,
+          "mw": 272.25,
+          "formula_verified": true,
           "vina_best": -10.25,
-          "vina_mean": -10.2025,
-          "logic": "steric_fill_ATP_pocket",
-          "status": "DOCKED"
+          "wall_hits": 8
         },
         {
           "candidate_id": "flt3_r2_06",
           "smiles": "O=C(c1ccccc1F)Nc1ccc2[nH]ccc2c1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 8,
+          "molecular_formula": "C15H11FN2O",
+          "heavy_atoms": 19,
+          "mw": 254.26,
+          "formula_verified": true,
           "vina_best": -10.13,
-          "vina_mean": -10.094999999999999,
-          "logic": "steric_fill_ATP_pocket",
-          "status": "DOCKED"
+          "wall_hits": 8
         },
         {
           "candidate_id": "flt3_carboxamide_indole",
           "smiles": "O=C(Nc1ccccc1)c1c[nH]c2ccccc12",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 9,
+          "molecular_formula": "C15H12N2O",
+          "heavy_atoms": 18,
+          "mw": 236.27,
+          "formula_verified": true,
           "vina_best": -9.991,
-          "vina_mean": -9.98475,
-          "logic": "steric_fill_ATP_pocket",
-          "status": "DOCKED"
+          "wall_hits": 9
         },
         {
           "candidate_id": "flt3_r2_01",
           "smiles": "Fc1ccc(Nc2nc(N3CCN(C)CC3)nc(N)n2)cc1F",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 10,
+          "molecular_formula": "C14H17F2N7",
+          "heavy_atoms": 23,
+          "mw": 321.33,
+          "formula_verified": true,
           "vina_best": -9.746,
-          "vina_mean": -9.72875,
-          "logic": "steric_fill_ATP_pocket",
-          "status": "DOCKED"
+          "wall_hits": 10
         },
         {
           "candidate_id": "flt3_r2_04",
           "smiles": "c1ccc(Nc2nc(N3CCOCC3)c3ncccc3n2)cc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 11,
+          "molecular_formula": "C17H17N5O",
+          "heavy_atoms": 23,
+          "mw": 307.36,
+          "formula_verified": true,
           "vina_best": -9.721,
-          "vina_mean": -9.70375,
-          "logic": "steric_fill_ATP_pocket",
-          "status": "DOCKED"
+          "wall_hits": 11
         },
         {
           "candidate_id": "flt3_x06",
           "smiles": "O=C(Nc1cccc(F)c1)c1ccc(N2CCCC2)cc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 13,
+          "molecular_formula": "C17H17FN2O",
+          "heavy_atoms": 21,
+          "mw": 284.33,
+          "formula_verified": true,
           "vina_best": -9.697,
-          "vina_mean": -9.679749999999999,
-          "logic": "steric_fill_ATP_pocket",
-          "status": "DOCKED"
+          "wall_hits": 13
         },
         {
           "candidate_id": "flt3_r2_09",
           "smiles": "c1ccc(-c2nc(Nc3ccccc3)ncc2)cc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 9,
+          "molecular_formula": "C16H13N3",
+          "heavy_atoms": 19,
+          "mw": 247.3,
+          "formula_verified": true,
           "vina_best": -9.386,
-          "vina_mean": -9.3555,
-          "logic": "steric_fill_ATP_pocket",
-          "status": "DOCKED"
+          "wall_hits": 9
         },
         {
           "candidate_id": "flt3_fluoro_anilino",
           "smiles": "Fc1cc(F)cc(Nc2ncnc3ccccc23)c1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 8,
+          "molecular_formula": "C14H9F2N3",
+          "heavy_atoms": 19,
+          "mw": 257.24,
+          "formula_verified": true,
           "vina_best": -9.113,
-          "vina_mean": -9.10175,
-          "logic": "steric_fill_ATP_pocket",
-          "status": "DOCKED"
+          "wall_hits": 8
         }
       ]
     },
     {
-      "gene": "ALK5",
-      "logic": "geodesic_kinase_block_plus_CYP_shield",
-      "structure_note": "PDB 3TZM / 5E8S / 1VJY (TGFBR1 kinase); cryo ECD EMD-50519",
-      "n_candidates": 42,
-      "n_sanity_cyp_pass": 39,
-      "n_docked": 39,
+      "gene": "BCL2",
+      "class": "lymphoma",
+      "indication": "B-cell lymphoma / apoptotic escape after kinase pressure",
+      "logic": "BH3-mimetic pocket occupancy + Chemical Sanity",
+      "structure_note": "PDB 6O0K BCL2",
+      "n_candidates": 24,
+      "n_docked": 23,
       "best": {
-        "candidate_id": "alk5_x00",
-        "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(N2CCOCC2)nc1",
-        "vina_best": -8.997,
-        "vina_mean": -8.99325,
-        "wall_hits": 6
+        "candidate_id": "bcl2_naphthyl_SO2",
+        "gene": "BCL2",
+        "indication": "lymphoma",
+        "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc2ccccc2c1",
+        "molecular_formula": "C18H15NO3S",
+        "heavy_atoms": 23,
+        "mw": 325.39,
+        "formula_verified": true,
+        "vina_best": -9.174,
+        "wall_hits": 20
       },
       "top": [
         {
-          "candidate_id": "alk5_x00",
-          "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(N2CCOCC2)nc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 6,
-          "vina_best": -8.997,
-          "vina_mean": -8.99325,
-          "logic": "geodesic_kinase_block_plus_CYP_shield",
-          "status": "DOCKED"
+          "candidate_id": "bcl2_naphthyl_SO2",
+          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc2ccccc2c1",
+          "molecular_formula": "C18H15NO3S",
+          "heavy_atoms": 23,
+          "mw": 325.39,
+          "formula_verified": true,
+          "vina_best": -9.174,
+          "wall_hits": 20
         },
         {
-          "candidate_id": "alk5_r2_00",
-          "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(N2CCCC2)nc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 8,
-          "vina_best": -8.919,
-          "vina_mean": -8.89175,
-          "logic": "geodesic_kinase_block_plus_CYP_shield",
-          "status": "DOCKED"
+          "candidate_id": "bcl2_biphenyl_SO2",
+          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc(-c2ccccc2)cc1",
+          "molecular_formula": "C20H17NO3S",
+          "heavy_atoms": 25,
+          "mw": 351.43,
+          "formula_verified": true,
+          "vina_best": -9.116,
+          "wall_hits": 22
         },
         {
-          "candidate_id": "alk5_bicyclo",
-          "smiles": "O=C(Nc1ccccc1)C12CC3CC(CC(C3)C1)C2",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 3,
-          "vina_best": -8.843,
-          "vina_mean": -8.8255,
-          "logic": "geodesic_kinase_block_plus_CYP_shield",
-          "status": "DOCKED"
+          "candidate_id": "bcl2_CF3_SO2",
+          "smiles": "O=C(NS(=O)(=O)c1ccc(C(F)(F)F)cc1)c1ccccc1",
+          "molecular_formula": "C14H10F3NO3S",
+          "heavy_atoms": 22,
+          "mw": 329.3,
+          "formula_verified": true,
+          "vina_best": -8.904,
+          "wall_hits": 15
         },
         {
-          "candidate_id": "alk5_x06",
-          "smiles": "O=C(Nc1ccc(C(F)(F)F)cc1)c1ccncc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 4,
-          "vina_best": -8.764,
-          "vina_mean": -8.7595,
-          "logic": "geodesic_kinase_block_plus_CYP_shield",
-          "status": "DOCKED"
+          "candidate_id": "bcl2_r2_00",
+          "smiles": "O=C(NS(=O)(=O)c1ccccc1)c1ccc(N2CCOCC2)cc1",
+          "molecular_formula": "C17H18N2O4S",
+          "heavy_atoms": 24,
+          "mw": 346.41,
+          "formula_verified": true,
+          "vina_best": -8.455,
+          "wall_hits": 24
         },
         {
-          "candidate_id": "alk5_r2_02",
-          "smiles": "O=C(Nc1ccccc1F)c1cnc(N2CCOCC2)nc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 6,
-          "vina_best": -8.75,
-          "vina_mean": -8.743,
-          "logic": "geodesic_kinase_block_plus_CYP_shield",
-          "status": "DOCKED"
+          "candidate_id": "bcl2_r2_01",
+          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc(F)c(F)c1",
+          "molecular_formula": "C14H11F2NO3S",
+          "heavy_atoms": 21,
+          "mw": 311.31,
+          "formula_verified": true,
+          "vina_best": -8.36,
+          "wall_hits": 18
         },
         {
-          "candidate_id": "alk5_x09",
-          "smiles": "Fc1cccc(Nc2ncnc3ccccc23)c1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 2,
-          "vina_best": -8.738,
-          "vina_mean": -8.729500000000002,
-          "logic": "geodesic_kinase_block_plus_CYP_shield",
-          "status": "DOCKED"
+          "candidate_id": "bcl2_fluoro_biphenyl",
+          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc(F)cc1",
+          "molecular_formula": "C14H12FNO3S",
+          "heavy_atoms": 20,
+          "mw": 293.32,
+          "formula_verified": true,
+          "vina_best": -8.306,
+          "wall_hits": 15
         },
         {
-          "candidate_id": "alk5_x01",
-          "smiles": "Fc1ccc(Nc2nccc(-c3ccn[nH]3)n2)cc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 4,
-          "vina_best": -8.633,
-          "vina_mean": -8.595749999999999,
-          "logic": "geodesic_kinase_block_plus_CYP_shield",
-          "status": "DOCKED"
+          "candidate_id": "bcl2_sulfonyl_F",
+          "smiles": "O=C(NS(=O)(=O)c1ccc(F)cc1)c1ccccc1",
+          "molecular_formula": "C13H10FNO3S",
+          "heavy_atoms": 19,
+          "mw": 279.29,
+          "formula_verified": true,
+          "vina_best": -8.077,
+          "wall_hits": 16
         },
         {
-          "candidate_id": "alk5_x05",
-          "smiles": "c1ccc(-c2nc(N3CCOCC3)ncc2)cc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 0,
-          "vina_best": -8.595,
-          "vina_mean": -8.5785,
-          "logic": "geodesic_kinase_block_plus_CYP_shield",
-          "status": "DOCKED"
-        }
-      ]
-    },
-    {
-      "gene": "GSK3B",
-      "logic": "allosteric_modulatory_not_plug",
-      "structure_note": "PDB 1Q3D / 6B8J / 4ACC; DOT1L cryo EMD-9843 / EMD-22692",
-      "n_candidates": 44,
-      "n_sanity_cyp_pass": 39,
-      "n_docked": 39,
-      "best": {
-        "candidate_id": "gsk_x10",
-        "smiles": "Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1",
-        "vina_best": -7.648,
-        "vina_mean": -7.6385,
-        "wall_hits": 8
-      },
-      "top": [
-        {
-          "candidate_id": "gsk_x10",
-          "smiles": "Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 8,
-          "vina_best": -7.648,
-          "vina_mean": -7.6385,
-          "logic": "allosteric_modulatory_not_plug",
-          "status": "DOCKED"
-        },
-        {
-          "candidate_id": "gsk_x02",
-          "smiles": "c1ccc2c(c1)nc(Nc1ccccc1)c1ccncc12",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 7,
-          "vina_best": -7.549,
-          "vina_mean": -7.512499999999999,
-          "logic": "allosteric_modulatory_not_plug",
-          "status": "DOCKED"
-        },
-        {
-          "candidate_id": "gsk_x01",
-          "smiles": "O=C(Nc1ccc(F)cc1)c1cnc(N2CCOCC2)cn1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 7,
-          "vina_best": -7.506,
-          "vina_mean": -7.4955,
-          "logic": "allosteric_modulatory_not_plug",
-          "status": "DOCKED"
-        },
-        {
-          "candidate_id": "gsk_r2_00",
-          "smiles": "Cc1nc(N2CCN(C)CC2)nc(Nc2ccc(F)cc2)n1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 10,
-          "vina_best": -7.473,
-          "vina_mean": -7.37425,
-          "logic": "allosteric_modulatory_not_plug",
-          "status": "DOCKED"
-        },
-        {
-          "candidate_id": "gsk_morpholino",
-          "smiles": "Fc1ccc(Nc2ncnc(N3CCOCC3)n2)cc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 8,
-          "vina_best": -7.471,
-          "vina_mean": -7.272,
-          "logic": "allosteric_modulatory_not_plug",
-          "status": "DOCKED"
-        },
-        {
-          "candidate_id": "gsk_r2_07",
-          "smiles": "c1ccc(Nc2nc3ccccc3c(=O)[nH]2)cc1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 10,
-          "vina_best": -7.32,
-          "vina_mean": -7.281,
-          "logic": "allosteric_modulatory_not_plug",
-          "status": "DOCKED"
-        },
-        {
-          "candidate_id": "gsk_r2_01",
-          "smiles": "O=C(Nc1ccc(F)cc1)c1cnc(N2CCCC2)cn1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 10,
-          "vina_best": -7.301,
-          "vina_mean": -7.24425,
-          "logic": "allosteric_modulatory_not_plug",
-          "status": "DOCKED"
-        },
-        {
-          "candidate_id": "gsk_r2_11",
-          "smiles": "Nc1nc(N2CCOCC2)cc(Nc2cccc(F)c2)n1",
-          "chemical_sanity_pass": true,
-          "cyp_pass": true,
-          "wall_hits": 11,
-          "vina_best": -7.29,
-          "vina_mean": -7.229749999999999,
-          "logic": "allosteric_modulatory_not_plug",
-          "status": "DOCKED"
+          "candidate_id": "bcl2_sulfonylbenzamide",
+          "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccccc1",
+          "molecular_formula": "C14H13NO3S",
+          "heavy_atoms": 19,
+          "mw": 275.33,
+          "formula_verified": true,
+          "vina_best": -8.069,
+          "wall_hits": 17
         }
       ]
     }
-  ]
+  ],
+  "companion_non_heme_programs": [
+    {
+      "gene": "ALK5",
+      "role": "non_hematologic_companion",
+      "indication": "renal fibrosis",
+      "best_id": "alk5_x00",
+      "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(N2CCOCC2)nc1",
+      "molecular_formula": "C16H16FN3O2",
+      "heavy_atoms": 22,
+      "vina_best": -8.997,
+      "formula_verified": true
+    },
+    {
+      "gene": "GSK3B",
+      "role": "non_hematologic_companion",
+      "indication": "retinal reprogramming (companion)",
+      "best_id": "gsk_x10",
+      "smiles": "Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1",
+      "molecular_formula": "C15H17FN4O",
+      "heavy_atoms": 21,
+      "vina_best": -7.648,
+      "formula_verified": true
+    }
+  ],
+  "abl1_leukemia_pointer": "See Translational_Medicine wetlab packs (K562 / ABL1) for BCR-ABL leukemia line."
 }

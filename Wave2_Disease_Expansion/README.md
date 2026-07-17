@@ -1,48 +1,87 @@
-# Wave-2 Disease Expansion · FLT3 / ALK5 / GSK3β
+# Hematologic Oncology Expansion · AML / Lymphoma
 
-Generated: `2026-07-17T03:45:02.393379+00:00`
+Generated: `2026-07-17T03:50:56.653825+00:00`
 
 > **`clinical_grade = false`**
-> Chemical Sanity is primary. Docking affinity is secondary / informational only.
-> Computational gates ≠ measured IC50 or clinical efficacy.
+> Focus: **blood cancers** (AML / FLT3-ITD leukemia) and **B-cell lymphoma** (BCL2 apoptotic escape).
+> Chemical Sanity is primary. Docking is secondary. All **molecular formulas are RDKit-verified**.
 
-## Indications
+## Why this pack
 
-| Gene | Indication | Geometric logic |
-|------|------------|-----------------|
-| **FLT3** | AML / FLT3-ITD | ATP-site steric fill + Chemical Sanity |
-| **ALK5** (TGFBR1) | Uremia / renal fibrosis | Kinase block + **CYP450 shield** (compromised clearance) |
-| **GSK3β** | Retinal stem-cell reprogramming | Modulatory / allosteric chemotypes (not plug-only); DOT1L co-target maps archived |
+Hematologic malignancies are the primary clinical lane in this release:
 
-## Results (R1+R2)
+| Priority | Gene | Disease | Why it matters |
+|----------|------|---------|----------------|
+| **P0** | **FLT3** | AML / FLT3-ITD | Driver kinase in acute myeloid leukemia; ATP-site steric fill |
+| **P0** | **BCL2** | B-cell lymphoma | Apoptotic buffering / escape after kinase pressure (venetoclax-class pocket) |
+| P1 | ABL1 | CML / Ph+ leukemia | Existing wet-lab packs on K562 — see parent Translational_Medicine |
 
-| Gene | Candidates screened | Docked | Best ID | Best Vina |
-|------|---------------------|--------|---------|-----------|
-| **FLT3** | 40 | 31 | `flt3_r2_00` | **-10.25** |
-| **ALK5** | 42 | 39 | `alk5_x00` | **-8.997** |
-| **GSK3B** | 44 | 39 | `gsk_x10` | **-7.648** |
+Companion (non-heme) wave-2 runs (fibrosis / retina) are listed at the bottom for completeness only.
 
-## Best SMILES
+## Hematology results
 
-- **FLT3** (`flt3_r2_00`): `O=C(Nc1ccc(F)cc1)c1c[nH]c2ccc(F)cc12`
-- **ALK5** (`alk5_x00`): `O=C(Nc1ccc(F)cc1)c1ccc(N2CCOCC2)nc1`
-- **GSK3B** (`gsk_x10`): `Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1`
+| Gene | Disease | N screened | Docked | Best ID | Formula | Best Vina |
+|------|---------|------------|--------|---------|---------|-----------|
+| **FLT3** | AML | 40 | 31 | `flt3_r2_00` | **C15H10F2N2O** | **-10.25** |
+| **BCL2** | Lymphoma | 24 | 23 | `bcl2_naphthyl_SO2` | **C18H15NO3S** | **-9.174** |
 
-## Structures used (public PDB / EMDB labels)
+## Lead molecules (formula-checked)
 
-- **FLT3**: PDB 4RT7 / 6JQR / 5X02 / 4XUF (kinase domain)
-- **ALK5**: PDB 3TZM / 5E8S / 1VJY (TGFBR1 kinase); cryo ECD EMD-50519
-- **GSK3B**: PDB 1Q3D / 6B8J / 4ACC; DOT1L cryo EMD-9843 / EMD-22692
+### FLT3 · AML
+
+- ID: `flt3_r2_00`
+- Formula: **C15H10F2N2O** (HA=20, MW=272.25)
+- SMILES: `O=C(Nc1ccc(F)cc1)c1c[nH]c2ccc(F)cc12`
+- Structure refs: PDB 4RT7 / 6JQR / 5X02 / 4XUF
+
+### BCL2 · B-cell lymphoma
+
+- ID: `bcl2_naphthyl_SO2`
+- Formula: **C18H15NO3S** (HA=23, MW=325.39)
+- SMILES: `O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc2ccccc2c1`
+- Structure refs: PDB 6O0K BCL2
+
+## Top FLT3 (AML) formulas
+
+| ID | Formula | HA | Vina |
+|----|---------|----|------|
+| `flt3_r2_00` | C15H10F2N2O | 20 | -10.25 |
+| `flt3_r2_06` | C15H11FN2O | 19 | -10.13 |
+| `flt3_carboxamide_indole` | C15H12N2O | 18 | -9.991 |
+| `flt3_r2_01` | C14H17F2N7 | 23 | -9.746 |
+| `flt3_r2_04` | C17H17N5O | 23 | -9.721 |
+| `flt3_x06` | C17H17FN2O | 21 | -9.697 |
+
+## Top BCL2 (lymphoma) formulas
+
+| ID | Formula | HA | Vina |
+|----|---------|----|------|
+| `bcl2_naphthyl_SO2` | C18H15NO3S | 23 | -9.174 |
+| `bcl2_biphenyl_SO2` | C20H17NO3S | 25 | -9.116 |
+| `bcl2_CF3_SO2` | C14H10F3NO3S | 22 | -8.904 |
+| `bcl2_r2_00` | C17H18N2O4S | 24 | -8.455 |
+| `bcl2_r2_01` | C14H11F2NO3S | 21 | -8.36 |
+| `bcl2_fluoro_biphenyl` | C14H12FNO3S | 20 | -8.306 |
+
+## Formula verification
+
+All SMILES above were parsed with RDKit; `molecular_formula` = `CalcMolFormula`.  
+Audit file: [`HEMATOLOGY_FORMULA_AUDIT.json`](HEMATOLOGY_FORMULA_AUDIT.json) · `formula_verified: true` on every lead.
 
 ## Files
 
-- [`WAVE2_PUBLIC_LEDGER.json`](WAVE2_PUBLIC_LEDGER.json) — ranked top candidates
-- [`ligands/`](ligands/) — SDF poses for top hits
-- Parent pipeline: [`../Translational_Medicine/`](../Translational_Medicine/)
+- [`WAVE2_PUBLIC_LEDGER.json`](WAVE2_PUBLIC_LEDGER.json)
+- [`ligands/`](ligands/) — SDF poses (FLT3 + BCL2)
+- Parent: [`../Translational_Medicine/`](../Translational_Medicine/) (ABL1/K562 wet-lab packs)
 
-## Method notes
+## Method
 
 - Max heavy atoms ≤ 35; PAINS / strain gates
-- 64³ Boolean pocket occupancy around co-crystal ligand centroid
-- Vina: box 24 Å, exhaustiveness 12, seeds 41–44
-- ALK5 rejects catechol / nitro / methylenedioxy motifs
+- 64³ Boolean pocket occupancy
+- Vina secondary: multi-seed, exhaustiveness ≥ 10
+- BCL2 receptor: rigid PDBQT @ TME-like pH 7.2 (6O0K)
+
+## Companion (not blood/lymphoma)
+
+- **ALK5** (renal fibrosis): `alk5_x00` · C16H16FN3O2 · Vina -8.997
+- **GSK3B** (retinal reprogramming (companion)): `gsk_x10` · C15H17FN4O · Vina -7.648

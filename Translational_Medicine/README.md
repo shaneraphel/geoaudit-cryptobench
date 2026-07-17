@@ -1,16 +1,27 @@
-# Translational Medicine · Global Clinical Ground-Truth Pipeline
+# Translational Medicine · Hematologic Oncology Focus
 
-Generated: `2026-07-16T13:45:36.200076+00:00`
+Generated: `2026-07-17T03:50:56.653825+00:00`
 
 ![Boolean pocket tensor × synthon ligand graph](hero_banner.png)
 
 > **`clinical_grade = false`**
-> DepMap Chronos kill-switch → TCGA TME pH lock → Chemical Sanity (≤35 heavy atoms) → proteome liability shields → **Clinical Readiness Index** ranking.
+> Primary clinical lane: **leukemia & lymphoma** (ABL1 / FLT3 / BCL2).
+> DepMap Chronos kill-switch → TME pH lock → Chemical Sanity (≤35 heavy atoms) → Clinical Readiness Index.
 > Docking affinity is **secondary / informational only**. Computational gates ≠ measured IC50.
 
-## Paradigm
+## Hematologic focus
 
-Isolated docking scores are demoted. Every active target (PI3Kα, ER-100/ESR1, KRAS, Cryo-EM orphans) must survive a unified first-principles clinical reality check before any molecule remains in `VALIDATED_CANDIDATE_POOL`.
+| Disease | Gene | Status | Where |
+|---------|------|--------|-------|
+| CML / Ph+ leukemia | **ABL1** | Wet-lab packs (K562) | [`wetlab/`](wetlab/) below |
+| AML / FLT3-ITD | **FLT3** | Mass Chemical Sanity + Vina | [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) |
+| B-cell lymphoma | **BCL2** | Mass BH3-pocket screen (formula-audited) | [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) |
+
+Lead formulas (RDKit-verified):
+
+- FLT3 AML: **C15H10F2N2O** (`flt3_r2_00`) · Vina -10.25
+- BCL2 lymphoma: **C18H15NO3S** (`bcl2_naphthyl_SO2`) · Vina -9.174
+
 
 ## 1. DepMap Boolean causality (Phase 1 veto)
 
@@ -119,6 +130,7 @@ Details: [`Pipeline_Matrix/README.md`](Pipeline_Matrix/README.md).
 
 Ligand SDFs + PyMOL/ChimeraX scripts ship under `Pipeline_Matrix/`.
 
-## Wave-2 disease expansion
 
-See [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) for FLT3 / ALK5 / GSK3β mass Chemical Sanity + secondary docking results.
+## Wave-2 hematology expansion
+
+See [`../Wave2_Disease_Expansion/`](../Wave2_Disease_Expansion/) for AML (FLT3) and lymphoma (BCL2) formula-audited leads.

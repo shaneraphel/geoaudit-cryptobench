@@ -1,0 +1,53 @@
+{
+  "schema": "hematology_formula_audit.public.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-17T03:50:56.653825+00:00",
+  "verified": [
+    {
+      "candidate_id": "flt3_r2_00",
+      "gene": "FLT3",
+      "indication": "AML / FLT3-ITD leukemia",
+      "smiles": "O=C(Nc1ccc(F)cc1)c1c[nH]c2ccc(F)cc12",
+      "molecular_formula": "C15H10F2N2O",
+      "heavy_atoms": 20,
+      "mw": 272.25,
+      "formula_verified": true,
+      "vina_best": -10.25,
+      "wall_hits": 8
+    },
+    {
+      "candidate_id": "bcl2_naphthyl_SO2",
+      "gene": "BCL2",
+      "indication": "B-cell lymphoma / apoptotic escape after kinase pressure",
+      "smiles": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccc2ccccc2c1",
+      "molecular_formula": "C18H15NO3S",
+      "heavy_atoms": 23,
+      "mw": 325.39,
+      "formula_verified": true,
+      "vina_best": -9.174,
+      "wall_hits": 20
+    },
+    {
+      "gene": "ALK5",
+      "role": "non_hematologic_companion",
+      "indication": "renal fibrosis",
+      "best_id": "alk5_x00",
+      "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(N2CCOCC2)nc1",
+      "molecular_formula": "C16H16FN3O2",
+      "heavy_atoms": 22,
+      "vina_best": -8.997,
+      "formula_verified": true
+    },
+    {
+      "gene": "GSK3B",
+      "role": "non_hematologic_companion",
+      "indication": "retinal reprogramming (companion)",
+      "best_id": "gsk_x10",
+      "smiles": "Cc1nc(N2CCOCC2)cc(Nc2ccccc2F)n1",
+      "molecular_formula": "C15H17FN4O",
+      "heavy_atoms": 21,
+      "vina_best": -7.648,
+      "formula_verified": true
+    }
+  ]
+}
