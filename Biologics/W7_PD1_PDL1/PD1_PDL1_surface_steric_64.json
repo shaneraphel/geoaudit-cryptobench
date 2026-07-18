@@ -1,0 +1,39 @@
+{
+  "schema": "foliation.surface_steric_64.v1",
+  "clinical_grade": false,
+  "grid": 64,
+  "origin_ang": [
+    -29.4054,
+    18.7439,
+    80.7545
+  ],
+  "center_ang": [
+    0.5946,
+    48.7439,
+    110.7545
+  ],
+  "spacing_ang": 0.952381,
+  "half_box_ang": 30.0,
+  "vdw_ang": 1.7,
+  "shell_thickness_ang": 2.4,
+  "method": "Interface-contact atoms seed a cubic window; protein heavy atoms are rasterized to a Boolean steric wall. An exterior one-shell clamp volume is retained only near the interface. No pocket-detection heuristic.",
+  "n_protein_atoms": 1650,
+  "n_interface_atoms": 185,
+  "occupied_steric_voxels": 22312,
+  "occupied_clamp_shell_voxels": 12487,
+  "occupancy_fraction_steric": 0.085114,
+  "disclaimer": "64\u00b3 Boolean surface topology constraint only. Not a binding pose, not affinity, not FTO, not wet-lab proof.",
+  "target_key": "PD1_PDL1",
+  "label": "PD-1 / PD-L1 extracellular interface (4ZQK)",
+  "pdb_id": "4ZQK",
+  "chains_requested": [
+    "A",
+    "B"
+  ],
+  "chains_used": [
+    "A",
+    "B"
+  ],
+  "planar_note": "Extended half_box=30\u00c5 for extracellular IgV interface; still fixed 64\u00b3 Boolean (coarser spacing), not pocket hunt.",
+  "generated_at": "2026-07-18T15:29:51.840320+00:00"
+}
