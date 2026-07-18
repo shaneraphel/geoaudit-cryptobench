@@ -5,7 +5,7 @@
 
 **Target:** Epidermal growth factor receptor (EGFR, UniProt [P00533](https://www.uniprot.org/uniprotkb/P00533/entry))
 **Lane:** Oncology · **Indication:** NSCLC / KRAS-bypass resistance (ATP site)
-**Structure:** [1M17](https://www.rcsb.org/structure/1M17) — EGFR tyrosine kinase domain with the 4-anilinoquinazoline inhibitor erlotinib
+**Structure:** [1M17](https://www.rcsb.org/structure/1M17) — EGFR tyrosine kinase domain with the 4-anilinoquinazoline inhibitor erlotinib (representative chemotype-matched structure; docking used an in-repo first-principles kinase-domain prep, residues 672+, source PDB id not recorded)
 **DepMap causality:** Compensatory escape for KRAS (RTK bypass)
 
 ![lead](../../Visualizations/EGFR_lead.png)

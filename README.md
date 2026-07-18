@@ -1,6 +1,6 @@
 # Foliation Clinical Evidence Packs · 转化医学计算证据包
 
-**EN / 中文** · `clinical_grade = false` · Generated `2026-07-18T05:14:50.247271+00:00`
+**EN / 中文** · `clinical_grade = false` · Generated `2026-07-18T05:56:22.766971+00:00`
 
 **EN:** One unified, industrial **computational** pipeline across four tracks —
 **Primary Oncology · Compensatory Oncology · Fibrosis · Regeneration**. Docking is a

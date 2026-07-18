@@ -1,7 +1,7 @@
 {
   "schema": "foliation.autonomous_ci.v1",
   "clinical_grade": false,
-  "generated_at": "2026-07-18T05:14:50.246986+00:00",
+  "generated_at": "2026-07-18T05:56:22.766778+00:00",
   "pipeline": "autonomous bio-infrastructure CI/CD (native-tool fallback)",
   "tme_profiles": "experimental_v2/chem_pipeline/tme_profiles.json",
   "targets": [

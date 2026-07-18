@@ -129,6 +129,31 @@
           "placed_at_pocket": true
         },
         "clinical_grade": false
+      },
+      "clinical_lead": {
+        "candidate_id": "egfr_lead",
+        "gene": "EGFR",
+        "smiles": "COc1cc2ncnc(Nc3ccc(F)cc3)c2cc1OCCN1CCN(C)CC1",
+        "role": "SECONDARY_BYPASS_NODE",
+        "escape_for": "KRAS",
+        "formula": "C22H26FN5O2",
+        "fsp3": 0.3636,
+        "heavy_atom_count": 30,
+        "mw": 411.48,
+        "qed": 0.6408,
+        "warhead_lineage": "egfr_anilinoquinazoline",
+        "cavity_betti": [
+          218,
+          492,
+          0
+        ],
+        "rotational_barrier_kcal": 1.214,
+        "chemical_sanity": "PASS",
+        "recursive_attempts": 3,
+        "vina_secondary": -8.124,
+        "vina_secondary_metric_only": true,
+        "clinical_grade": false,
+        "expansion": "Fragment-to-Lead solvent-channel growth (Fsp3 increase, HAC<40)"
       }
     },
     {
@@ -270,6 +295,31 @@
           -6.828309523809522,
           12.622214285714284
         ]
+      },
+      "clinical_lead": {
+        "candidate_id": "akt1_lead",
+        "gene": "AKT1",
+        "smiles": "Cc1nc(Nc2ccc(OCCN3CCN(C)CC3)cc2)cc(N2CCOCC2)n1",
+        "role": "SECONDARY_BYPASS_NODE",
+        "escape_for": "PIK3CA",
+        "formula": "C22H32N6O2",
+        "fsp3": 0.5455,
+        "heavy_atom_count": 30,
+        "mw": 412.54,
+        "qed": 0.7408,
+        "warhead_lineage": "akt_morpholino_pyrimidine",
+        "cavity_betti": [
+          191,
+          347,
+          0
+        ],
+        "rotational_barrier_kcal": 2.63,
+        "chemical_sanity": "PASS",
+        "recursive_attempts": 3,
+        "vina_secondary": -9.435,
+        "vina_secondary_metric_only": true,
+        "clinical_grade": false,
+        "expansion": "Fragment-to-Lead solvent-channel growth (Fsp3 increase, HAC<40)"
       }
     },
     {
@@ -541,8 +591,8 @@
     }
   ],
   "top_smiles_by_target": {
-    "EGFR": "Fc1ccc(Nc2ncnc3ccccc23)cc1",
-    "AKT1": "Cc1nc(Nc2ccccc2)cc(N3CCOCC3)n1",
+    "EGFR": "COc1cc2ncnc(Nc3ccc(F)cc3)c2cc1OCCN1CCN(C)CC1",
+    "AKT1": "Cc1nc(Nc2ccc(OCCN3CCN(C)CC3)cc2)cc(N2CCOCC2)n1",
     "BCL2": "O=C(NS(=O)(=O)c1ccc(C)cc1)c1ccccc1",
     "ESR1": "Oc1ccc(/C=C/c2ccc(OCCN(C)C)cc2)cc1"
   },
@@ -553,5 +603,58 @@
     "findings": []
   },
   "staged_public": null,
-  "akt1_bcl2_receptor_prep_complete": true
+  "akt1_bcl2_receptor_prep_complete": true,
+  "compensatory_clinical_leads": [
+    {
+      "candidate_id": "egfr_lead",
+      "gene": "EGFR",
+      "smiles": "COc1cc2ncnc(Nc3ccc(F)cc3)c2cc1OCCN1CCN(C)CC1",
+      "role": "SECONDARY_BYPASS_NODE",
+      "escape_for": "KRAS",
+      "formula": "C22H26FN5O2",
+      "fsp3": 0.3636,
+      "heavy_atom_count": 30,
+      "mw": 411.48,
+      "qed": 0.6408,
+      "warhead_lineage": "egfr_anilinoquinazoline",
+      "cavity_betti": [
+        218,
+        492,
+        0
+      ],
+      "rotational_barrier_kcal": 1.214,
+      "chemical_sanity": "PASS",
+      "recursive_attempts": 3,
+      "vina_secondary": -8.124,
+      "vina_secondary_metric_only": true,
+      "clinical_grade": false,
+      "expansion": "Fragment-to-Lead solvent-channel growth (Fsp3 increase, HAC<40)"
+    },
+    {
+      "candidate_id": "akt1_lead",
+      "gene": "AKT1",
+      "smiles": "Cc1nc(Nc2ccc(OCCN3CCN(C)CC3)cc2)cc(N2CCOCC2)n1",
+      "role": "SECONDARY_BYPASS_NODE",
+      "escape_for": "PIK3CA",
+      "formula": "C22H32N6O2",
+      "fsp3": 0.5455,
+      "heavy_atom_count": 30,
+      "mw": 412.54,
+      "qed": 0.7408,
+      "warhead_lineage": "akt_morpholino_pyrimidine",
+      "cavity_betti": [
+        191,
+        347,
+        0
+      ],
+      "rotational_barrier_kcal": 2.63,
+      "chemical_sanity": "PASS",
+      "recursive_attempts": 3,
+      "vina_secondary": -9.435,
+      "vina_secondary_metric_only": true,
+      "clinical_grade": false,
+      "expansion": "Fragment-to-Lead solvent-channel growth (Fsp3 increase, HAC<40)"
+    }
+  ],
+  "matrix_unification_note": "EGFR/AKT1 upgraded from fragments to Fragment-to-Lead clinical leads and unified into Primary/Compensatory Oncology, Fibrosis, Regeneration tracks. clinical_grade=false; Vina secondary only."
 }
