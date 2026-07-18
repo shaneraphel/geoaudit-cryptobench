@@ -1,0 +1,12 @@
+{
+  "clinical_grade": false,
+  "scope": "w10_gf4_algebraic_settlement",
+  "status": "PASS",
+  "n_findings": 0,
+  "findings": [],
+  "artifacts": [
+    "experimental_v2/chem_pipeline/outputs/w10_theory/GF4_ALGEBRAIC_SETTLEMENT.tex",
+    "experimental_v2/chem_pipeline/outputs/w10_theory/GF4_ALGEBRAIC_SETTLEMENT.pdf"
+  ],
+  "note": "Phase-3 forbid list: GCU/RTL/silicon/EDA identifiers. Kaehler metric retained as demanded math."
+}
