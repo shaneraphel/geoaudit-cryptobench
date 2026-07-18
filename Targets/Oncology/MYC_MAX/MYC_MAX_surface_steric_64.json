@@ -1,0 +1,40 @@
+{
+  "schema": "foliation.surface_steric_64.v1",
+  "clinical_grade": false,
+  "grid": 64,
+  "origin_ang": [
+    40.8489,
+    30.4723,
+    27.0241
+  ],
+  "center_ang": [
+    62.8489,
+    52.4723,
+    49.0241
+  ],
+  "spacing_ang": 0.698413,
+  "half_box_ang": 22.0,
+  "vdw_ang": 1.7,
+  "shell_thickness_ang": 2.4,
+  "method": "Interface-contact atoms seed a cubic window; protein heavy atoms are rasterized to a Boolean steric wall. An exterior one-shell clamp volume is retained only near the interface. No pocket-detection heuristic.",
+  "n_protein_atoms": 4325,
+  "n_interface_atoms": 409,
+  "occupied_steric_voxels": 38994,
+  "occupied_clamp_shell_voxels": 42678,
+  "occupancy_fraction_steric": 0.14875,
+  "disclaimer": "64\u00b3 Boolean surface topology constraint only. Not a binding pose, not affinity, not FTO, not wet-lab proof.",
+  "target_key": "MYC_MAX",
+  "label": "MYC / MAX heterodimer interface (1NKP)",
+  "pdb_id": "1NKP",
+  "chains_requested": [
+    "A",
+    "B"
+  ],
+  "chains_used": [
+    "A",
+    "B"
+  ],
+  "source_pdb": "experimental_v2/chem_pipeline/outputs/w6_mass_ingest/structures/1NKP.pdb",
+  "cleaned_pdb": "experimental_v2/chem_pipeline/outputs/w6_mass_ingest/structures/MYC_MAX_clean.pdb",
+  "generated_at": "2026-07-18T14:44:23.357972+00:00"
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "foliation.surface_steric_64.v1",
+  "clinical_grade": false,
+  "grid": 64,
+  "origin_ang": [
+    -4.8395,
+    -0.7016,
+    19.6718
+  ],
+  "center_ang": [
+    17.1605,
+    21.2984,
+    41.6718
+  ],
+  "spacing_ang": 0.698413,
+  "half_box_ang": 22.0,
+  "vdw_ang": 1.7,
+  "shell_thickness_ang": 2.4,
+  "method": "Interface-contact atoms seed a cubic window; protein heavy atoms are rasterized to a Boolean steric wall. An exterior one-shell clamp volume is retained only near the interface. No pocket-detection heuristic.",
+  "n_protein_atoms": 6092,
+  "n_interface_atoms": 6092,
+  "occupied_steric_voxels": 31601,
+  "occupied_clamp_shell_voxels": 61114,
+  "occupancy_fraction_steric": 0.120548,
+  "disclaimer": "64\u00b3 Boolean surface topology constraint only. Not a binding pose, not affinity, not FTO, not wet-lab proof.",
+  "target_key": "TP53_MUT",
+  "label": "p53 DNA-binding domain mutant state (2OCJ; R273-proximal)",
+  "pdb_id": "2OCJ",
+  "chains_requested": [
+    "A"
+  ],
+  "chains_used": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "source_pdb": "experimental_v2/chem_pipeline/outputs/w6_mass_ingest/structures/2OCJ.pdb",
+  "cleaned_pdb": "experimental_v2/chem_pipeline/outputs/w6_mass_ingest/structures/TP53_MUT_clean.pdb",
+  "generated_at": "2026-07-18T14:45:10.766028+00:00"
+}
