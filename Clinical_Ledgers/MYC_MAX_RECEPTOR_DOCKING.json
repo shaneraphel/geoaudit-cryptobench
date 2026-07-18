@@ -1,0 +1,81 @@
+{
+  "schema": "foliation.myc_receptor_docking.v1",
+  "clinical_grade": false,
+  "generated": "2026-07-18T08:06:08.758773+00:00",
+  "ligand": "MYC_MAX_CLAMP_001",
+  "ligand_smiles": "CN1CCN(CC(=O)NC23CC4CC(CC(C4)C2)C3)CC1",
+  "receptor": {
+    "pdb": "1NKP",
+    "desc": "c-Myc/Max bHLHZip heterodimer (2 copies) from RCSB",
+    "prep": "prody protein-only extract; obabel pH7.4 rigid pdbqt",
+    "source": "https://www.rcsb.org/structure/1NKP"
+  },
+  "pocket_detection": {
+    "tool": "fpocket 4.0",
+    "top_pockets": [
+      {
+        "pocket": 22,
+        "druggability": 0.248,
+        "volume": 1177.141
+      },
+      {
+        "pocket": 1,
+        "score": 0.081,
+        "druggability": 0.158,
+        "volume": 277.035
+      },
+      {
+        "pocket": 26,
+        "druggability": 0.026,
+        "volume": 948.12
+      },
+      {
+        "pocket": 3,
+        "score": 0.04,
+        "druggability": 0.013,
+        "volume": 389.998
+      },
+      {
+        "pocket": 5,
+        "score": 0.026,
+        "druggability": 0.011,
+        "volume": 389.097
+      }
+    ],
+    "interpretation": "Highest druggability = 0.248 (fpocket). Druggable pockets typically >0.5; MYC/MAX pockets are shallow/low-druggability, consistent with a hard PPI/IDP target."
+  },
+  "docking": {
+    "tool": "AutoDock Vina 1.2.5",
+    "box_center": [
+      50.81,
+      29.58,
+      69.41
+    ],
+    "box_size": [
+      22,
+      22,
+      22
+    ],
+    "exhaustiveness": 8,
+    "seed": 42,
+    "modes_kcal": [
+      -6.229,
+      -6.181,
+      -5.76,
+      -5.704,
+      -5.597,
+      -5.458,
+      -5.349,
+      -5.027,
+      -4.916
+    ],
+    "best_affinity_kcal": -6.229,
+    "interpretation": "Best Vina = -6.229 kcal/mol into the top shallow pocket — a WEAK/modest score, honestly consistent with low fpocket druggability. Not a strong hit; a starting hypothesis only."
+  },
+  "honesty": {
+    "receptor_docking_now_performed": true,
+    "strong_hit_claimed": false,
+    "wet_validation_required": true,
+    "note": "Docking is a secondary geometry metric, not affinity/IC50. Weak score reflects the genuine difficulty of drugging MYC/MAX."
+  }
+}

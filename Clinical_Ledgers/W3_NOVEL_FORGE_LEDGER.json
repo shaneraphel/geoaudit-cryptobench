@@ -1,0 +1,302 @@
+{
+  "schema": "foliation.w3_novel_forge.v1",
+  "generated_at": "2026-07-18T11:56:20.493818+00:00",
+  "clinical_grade": false,
+  "method": "STRICT Murcko novelty + same-box (co-crystal), prefilter exh=8, strict exh=16 seeds 41-44",
+  "disclaimer": "Vina secondary metric; strict novelty typically costs docking score (tradeoff quantified, not hidden).",
+  "results": {
+    "FLT3": {
+      "target": "FLT3",
+      "pdb": "6JQR",
+      "fda_drug": "gilteritinib",
+      "fda_mean_same_box": -8.719,
+      "novelty_rule": "Murcko Tanimoto <= 0.4 vs blacklist + no blacklisted core substructure",
+      "blacklist": [
+        "gilteritinib",
+        "ponatinib",
+        "venetoclax",
+        "flt3_m5_11",
+        "abl1_m5_07",
+        "bcl2_m5_12",
+        "w3_abl1_indazole_alkyne"
+      ],
+      "candidates": [
+        {
+          "name": "flt3_nv_cubane_carbox",
+          "smiles": "O=C(NC12CC3(CC1C1CC31)C2)c1ccc(F)cc1N1CCOCC1",
+          "murcko": "O=C(NC12CC3(CC1C1CC13)C2)c1ccccc1N1CCOCC1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.213,
+          "prefilter": -10.402,
+          "strict": {
+            "scores": [
+              -10.402,
+              -10.406,
+              -10.403,
+              -10.406
+            ],
+            "mean": -10.404,
+            "ci95_low": -10.408,
+            "ci95_high": -10.401
+          },
+          "delta_vs_fda": -1.685,
+          "beats_fda_same_box": true
+        },
+        {
+          "name": "flt3_nv_spiro_chromane",
+          "smiles": "O=C(NC1CCC2(CCc3ccccc3O2)C1)c1ccc(F)cc1N1CCOCC1",
+          "murcko": "O=C(NC1CCC2(CCc3ccccc3O2)C1)c1ccccc1N1CCOCC1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.216,
+          "prefilter": -9.438,
+          "strict": {
+            "scores": [
+              -9.438,
+              -9.411,
+              -9.483,
+              -9.387
+            ],
+            "mean": -9.43,
+            "ci95_low": -9.495,
+            "ci95_high": -9.364
+          },
+          "delta_vs_fda": -0.711,
+          "beats_fda_same_box": true
+        },
+        {
+          "name": "flt3_nv_spiro_indane",
+          "smiles": "O=C(NC1(c2ccccc2)CCC2(CCOCC2)C1)c1ccc(F)cc1",
+          "murcko": "O=C(NC1(c2ccccc2)CCC2(CCOCC2)C1)c1ccccc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.209,
+          "prefilter": -9.105
+        },
+        {
+          "name": "flt3_nv_bcp_biaryl",
+          "smiles": "OC12CC(C1)(C2)c1ccc(NC(=O)C2CC3CCC2C3)cc1F",
+          "murcko": "O=C(Nc1ccc(C23CC(C2)C3)cc1)C1CC2CCC1C2",
+          "novelty_max_tanimoto_vs_fda_w1": 0.16,
+          "prefilter": -8.616
+        },
+        {
+          "name": "flt3_nv_bicyclo_oxa",
+          "smiles": "O=C(NC12CCC(CC1)OCC2)c1ccc(N2CCN(C)CC2)cc1F",
+          "murcko": "O=C(NC12CCOC(CC1)CC2)c1ccc(N2CCNCC2)cc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.314,
+          "prefilter": -8.596
+        },
+        {
+          "name": "flt3_nv_adamantyl_amide",
+          "smiles": "O=C(NC12CC3CC(CC(C3)C1)C2)c1ccc(OCCN2CCOCC2)cc1F",
+          "murcko": "O=C(NC12CC3CC(CC(C3)C1)C2)c1ccc(OCCN2CCOCC2)cc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.386,
+          "prefilter": -7.662
+        },
+        {
+          "name": "flt3_nv_macrolactam",
+          "smiles": "O=C1CCCCNC(=O)c2ccc(OCCN3CCOCC3)cc2CN1",
+          "murcko": "O=C1CCCCNC(=O)c2ccc(OCCN3CCOCC3)cc2CN1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.308,
+          "prefilter": -7.522
+        },
+        {
+          "name": "flt3_nv_azaspiro_pyridine",
+          "smiles": "O=C(NC1CC2(CCN(c3ccncc3F)CC2)C1)C1CCOCC1",
+          "murcko": "O=C(NC1CC2(CCN(c3ccncc3)CC2)C1)C1CCOCC1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.282,
+          "prefilter": -7.433
+        }
+      ]
+    },
+    "ABL1": {
+      "target": "ABL1",
+      "pdb": "3OXZ",
+      "fda_drug": "ponatinib",
+      "fda_mean_same_box": -12.845,
+      "novelty_rule": "Murcko Tanimoto <= 0.4 vs blacklist + no blacklisted core substructure",
+      "blacklist": [
+        "gilteritinib",
+        "ponatinib",
+        "venetoclax",
+        "flt3_m5_11",
+        "abl1_m5_07",
+        "bcl2_m5_12",
+        "w3_abl1_indazole_alkyne"
+      ],
+      "candidates": [
+        {
+          "name": "abl1_nv_cubane_diamide",
+          "smiles": "O=C(NC12CC3(CC1C1CC31)C2)c1ccc(NC(=O)c2ccncc2)cc1C(F)(F)F",
+          "murcko": "O=C(Nc1ccc(C(=O)NC23CC4(CC2C2CC24)C3)cc1)c1ccncc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.205,
+          "prefilter": -11.427,
+          "strict": {
+            "scores": [
+              -11.429,
+              -11.434,
+              -11.417,
+              -11.433
+            ],
+            "mean": -11.428,
+            "ci95_low": -11.441,
+            "ci95_high": -11.416
+          },
+          "delta_vs_fda": 1.417,
+          "beats_fda_same_box": false
+        },
+        {
+          "name": "abl1_nv_macrocycle_amide",
+          "smiles": "O=C1NCCOCCNC(=O)c2ccc(-c3ccc(C(F)(F)F)cc3)cc2CN1C",
+          "murcko": "O=C1NCCOCCNC(=O)c2ccc(-c3ccccc3)cc2CN1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.165,
+          "prefilter": -9.658,
+          "strict": {
+            "scores": [
+              -9.638,
+              -9.67,
+              -9.659,
+              -9.642
+            ],
+            "mean": -9.652,
+            "ci95_low": -9.676,
+            "ci95_high": -9.628
+          },
+          "delta_vs_fda": 3.193,
+          "beats_fda_same_box": false
+        },
+        {
+          "name": "abl1_nv_adamantyl_urea",
+          "smiles": "O=C(NC12CC3CC(CC(C3)C1)C2)Nc1ccc(CN2CCOCC2)cc1C(F)(F)F",
+          "murcko": "O=C(Nc1ccc(CN2CCOCC2)cc1)NC12CC3CC(CC(C3)C1)C2",
+          "novelty_max_tanimoto_vs_fda_w1": 0.278,
+          "prefilter": -9.426
+        },
+        {
+          "name": "abl1_nv_bridged_pyrazole",
+          "smiles": "O=C(NC1CC2CCC1C2)c1cc(-c2ccc(CN3CCOCC3)cc2)n[nH]1",
+          "murcko": "O=C(NC1CC2CCC1C2)c1cc(-c2ccc(CN3CCOCC3)cc2)n[nH]1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.258,
+          "prefilter": -9.334
+        },
+        {
+          "name": "abl1_nv_spiro_quinolinone",
+          "smiles": "O=C1C=Cc2ccccc2N1C1(CCN(Cc2ccc(C(F)(F)F)cc2)CC1)C1CC1",
+          "murcko": "O=c1ccc2ccccc2n1C1(C2CC2)CCN(Cc2ccccc2)CC1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.19,
+          "prefilter": -9.075
+        },
+        {
+          "name": "abl1_nv_spiro_oxindole",
+          "smiles": "O=C1Nc2ccccc2C11CCN(Cc2ccc(C(F)(F)F)cc2)CC1",
+          "murcko": "O=C1Nc2ccccc2C12CCN(Cc1ccccc1)CC2",
+          "novelty_max_tanimoto_vs_fda_w1": 0.211,
+          "prefilter": -8.502
+        },
+        {
+          "name": "abl1_nv_bicyclo_hinge",
+          "smiles": "O=C(Nc1ncc2c(n1)CC1(CCOCC1)C2)C12CC3CC(C1)CC(C3)C2",
+          "murcko": "O=C(Nc1ncc2c(n1)CC1(CCOCC1)C2)C12CC3CC(CC(C3)C1)C2",
+          "novelty_max_tanimoto_vs_fda_w1": 0.16,
+          "prefilter": -8.351
+        }
+      ]
+    },
+    "BCL2": {
+      "target": "BCL2",
+      "pdb": "6O0K",
+      "fda_drug": "venetoclax",
+      "fda_mean_same_box": -10.595,
+      "novelty_rule": "Murcko Tanimoto <= 0.4 vs blacklist + no blacklisted core substructure",
+      "blacklist": [
+        "gilteritinib",
+        "ponatinib",
+        "venetoclax",
+        "flt3_m5_11",
+        "abl1_m5_07",
+        "bcl2_m5_12",
+        "w3_abl1_indazole_alkyne"
+      ],
+      "candidates": [
+        {
+          "name": "bcl2_nv_bridged_naphthalene",
+          "smiles": "OC(=O)C1CC2CCC1C2c1ccc2ccc(-c3ccc(Cl)cc3)cc2c1",
+          "murcko": "c1ccc(-c2ccc3ccc(C4C5CCC4CC5)cc3c2)cc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.143,
+          "prefilter": -9.316,
+          "strict": {
+            "scores": [
+              -9.311,
+              -9.317,
+              -9.328,
+              -9.313
+            ],
+            "mean": -9.317,
+            "ci95_low": -9.329,
+            "ci95_high": -9.305
+          },
+          "delta_vs_fda": 1.278,
+          "beats_fda_same_box": false
+        },
+        {
+          "name": "bcl2_nv_macrocycle_hydrophobe",
+          "smiles": "O=C1CCc2ccc(-c3ccc(Cl)cc3)cc2C(=O)NCCCCN1CC1CCOCC1",
+          "murcko": "O=C1NCCCCN(CC2CCOCC2)C(=O)CCc2ccc(-c3ccccc3)cc21",
+          "novelty_max_tanimoto_vs_fda_w1": 0.287,
+          "prefilter": -9.261,
+          "strict": {
+            "scores": [
+              -9.182,
+              -9.195,
+              -9.174,
+              -9.199
+            ],
+            "mean": -9.188,
+            "ci95_low": -9.206,
+            "ci95_high": -9.169
+          },
+          "delta_vs_fda": 1.408,
+          "beats_fda_same_box": false
+        },
+        {
+          "name": "bcl2_nv_azaspiro_carboxy",
+          "smiles": "O=C(O)c1ccc(N2CCC3(CCOCC3)CC2)cc1-c1ccc(Cl)cc1",
+          "murcko": "c1ccc(-c2cccc(N3CCC4(CCOCC4)CC3)c2)cc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.22,
+          "prefilter": -9.179
+        },
+        {
+          "name": "bcl2_nv_bcp_biaryl_acid",
+          "smiles": "OC(=O)C12CC(C1)(C2)c1ccc(-c2ccc(Cl)cc2)c(-c2ccccc2)c1",
+          "murcko": "c1ccc(-c2ccc(C34CC(C3)C4)cc2-c2ccccc2)cc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.133,
+          "prefilter": -9.089
+        },
+        {
+          "name": "bcl2_nv_dispiro",
+          "smiles": "O=C(O)C1CC2(CCC3(CCOCC3)CC2)CC1c1ccc(-c2ccc(Cl)cc2)cc1",
+          "murcko": "c1ccc(-c2ccc(C3CCC4(CCC5(CCOCC5)CC4)C3)cc2)cc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.174,
+          "prefilter": -8.827
+        },
+        {
+          "name": "bcl2_nv_spiro_indane_acid",
+          "smiles": "O=C(O)C1(c2ccc(-c3ccc(Cl)cc3)cc2)CCC2(Cc3ccccc3C2)C1",
+          "murcko": "c1ccc(-c2ccc(C3CCC4(Cc5ccccc5C4)C3)cc2)cc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.126,
+          "prefilter": -8.624
+        },
+        {
+          "name": "bcl2_nv_adamantyl_biaryl",
+          "smiles": "O=C(O)C12CC3CC(CC(C3)C1)C2c1ccc(-c2ccc(Cl)cc2)cc1",
+          "murcko": "c1ccc(-c2ccc(C3C4CC5CC(C4)CC3C5)cc2)cc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.123,
+          "prefilter": -8.349
+        },
+        {
+          "name": "bcl2_nv_spiro_biaryl",
+          "smiles": "OC(=O)C1(c2ccc(-c3ccc(Cl)cc3)cc2)CCC2(CCOCC2)CC1",
+          "murcko": "c1ccc(-c2ccc(C3CCC4(CCOCC4)CC3)cc2)cc1",
+          "novelty_max_tanimoto_vs_fda_w1": 0.183,
+          "prefilter": -8.038
+        }
+      ]
+    }
+  }
+}

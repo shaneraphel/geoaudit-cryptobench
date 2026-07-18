@@ -1,0 +1,360 @@
+{
+  "schema": "foliation.myc_clamp.v1",
+  "clinical_grade": false,
+  "generated": "2026-07-18T07:54:19.209951+00:00",
+  "id": "MYC_MAX_CLAMP_001",
+  "target": "MYC/MAX heterodimer interface (IDP/PPI, flat surface)",
+  "receptor_docking": {
+    "performed": true,
+    "structure": "1NKP (MYC/Max)",
+    "fpocket_top_druggability": 0.248,
+    "vina_best_kcal": -6.229,
+    "detail_file": "MYC_MAX_RECEPTOR_DOCKING.json",
+    "note": "Now performed with a real RCSB MYC/Max structure + fpocket + Vina. Weak score consistent with hard PPI; not a strong hit."
+  },
+  "phase1_bounded_enumeration": {
+    "space_definition": {
+      "heads": [
+        "methylpiperazine_acetyl",
+        "morpholine_acetyl",
+        "oxetane_carbonyl",
+        "hydroxyacetyl",
+        "glycol_ether_amide",
+        "primary_carboxamide"
+      ],
+      "cores": [
+        "norbornan-2-yl",
+        "adamantan-1-yl",
+        "bicyclo222octan-1-yl",
+        "spiro33heptan-2-yl"
+      ],
+      "note": "BOUNDED scaffold grid (heads x rigid cages). Stereochemical space is accounted by stereocenter count (2^k nominal isomers per scaffold); a representative is 3D-embedded. This is NOT a full exhaustion of chemical space (intractable) and is labeled bounded."
+    },
+    "counts": {
+      "scaffolds_valid": 24,
+      "nominal_stereoisomers_bounded": 174,
+      "passed_filters": 8
+    },
+    "filters": {
+      "fsp3_min": 0.5,
+      "aromatic_rings_max": 2,
+      "mw_window": [
+        200,
+        420
+      ],
+      "pains": "excluded",
+      "embed": "ETKDGv3 must succeed"
+    },
+    "top": [
+      {
+        "head": "methylpiperazine_acetyl",
+        "core": "adamantan-1-yl",
+        "stereocenters": 4,
+        "smiles": "CN1CCN(CC(=O)NC23CC4CC(CC(C4)C2)C3)CC1",
+        "formula": "C17H29N3O",
+        "mw": 291.4,
+        "hac": 21,
+        "fsp3": 0.9412,
+        "ar_rings": 0,
+        "hbd": 1,
+        "hba": 3,
+        "tpsa": 35.6,
+        "clogp": 1.32,
+        "qed": 0.852,
+        "rotb": 3,
+        "rank_score_2d": 7.28,
+        "pains_free": true,
+        "conformers": {
+          "n_conf": 12,
+          "e_min_kcal": 112.25,
+          "ensemble_spread_kcal": 14.97
+        },
+        "rank_score": 6.906
+      },
+      {
+        "head": "morpholine_acetyl",
+        "core": "adamantan-1-yl",
+        "stereocenters": 4,
+        "smiles": "O=C(CN1CCOCC1)NC12CC3CC(CC(C3)C1)C2",
+        "formula": "C16H26N2O2",
+        "mw": 278.4,
+        "hac": 20,
+        "fsp3": 0.9375,
+        "ar_rings": 0,
+        "hbd": 1,
+        "hba": 3,
+        "tpsa": 41.6,
+        "clogp": 1.4,
+        "qed": 0.848,
+        "rotb": 3,
+        "rank_score_2d": 7.141,
+        "pains_free": true,
+        "conformers": {
+          "n_conf": 12,
+          "e_min_kcal": 105.32,
+          "ensemble_spread_kcal": 10.02
+        },
+        "rank_score": 6.891
+      },
+      {
+        "head": "methylpiperazine_acetyl",
+        "core": "bicyclo222octan-1-yl",
+        "stereocenters": 2,
+        "smiles": "CN1CCN(CC(=O)NC23CCC(CC2)CC3)CC1",
+        "formula": "C15H27N3O",
+        "mw": 265.4,
+        "hac": 19,
+        "fsp3": 0.9333,
+        "ar_rings": 0,
+        "hbd": 1,
+        "hba": 3,
+        "tpsa": 35.6,
+        "clogp": 1.07,
+        "qed": 0.829,
+        "rotb": 3,
+        "rank_score_2d": 6.969,
+        "pains_free": true,
+        "conformers": {
+          "n_conf": 12,
+          "e_min_kcal": 113.56,
+          "ensemble_spread_kcal": 12.1
+        },
+        "rank_score": 6.667
+      },
+      {
+        "head": "oxetane_carbonyl",
+        "core": "adamantan-1-yl",
+        "stereocenters": 4,
+        "smiles": "O=C(NC12CC3CC(CC(C3)C1)C2)C1COC1",
+        "formula": "C14H21NO2",
+        "mw": 235.3,
+        "hac": 17,
+        "fsp3": 0.9286,
+        "ar_rings": 0,
+        "hbd": 1,
+        "hba": 2,
+        "tpsa": 38.3,
+        "clogp": 1.72,
+        "qed": 0.791,
+        "rotb": 2,
+        "rank_score_2d": 6.614,
+        "pains_free": true,
+        "conformers": {
+          "n_conf": 12,
+          "e_min_kcal": -4.45,
+          "ensemble_spread_kcal": 0.83
+        },
+        "rank_score": 6.593
+      },
+      {
+        "head": "morpholine_acetyl",
+        "core": "bicyclo222octan-1-yl",
+        "stereocenters": 2,
+        "smiles": "O=C(CN1CCOCC1)NC12CCC(CC1)CC2",
+        "formula": "C14H24N2O2",
+        "mw": 252.4,
+        "hac": 18,
+        "fsp3": 0.9286,
+        "ar_rings": 0,
+        "hbd": 1,
+        "hba": 3,
+        "tpsa": 41.6,
+        "clogp": 1.16,
+        "qed": 0.819,
+        "rotb": 3,
+        "rank_score_2d": 6.813,
+        "pains_free": true,
+        "conformers": {
+          "n_conf": 12,
+          "e_min_kcal": 100.24,
+          "ensemble_spread_kcal": 9.49
+        },
+        "rank_score": 6.576
+      },
+      {
+        "head": "glycol_ether_amide",
+        "core": "adamantan-1-yl",
+        "stereocenters": 4,
+        "smiles": "COCCOCC(=O)NC12CC3CC(CC(C3)C1)C2",
+        "formula": "C15H25NO3",
+        "mw": 267.4,
+        "hac": 19,
+        "fsp3": 0.9333,
+        "ar_rings": 0,
+        "hbd": 1,
+        "hba": 3,
+        "tpsa": 47.6,
+        "clogp": 1.73,
+        "qed": 0.746,
+        "rotb": 6,
+        "rank_score_2d": 6.82,
+        "pains_free": true,
+        "conformers": {
+          "n_conf": 12,
+          "e_min_kcal": 61.31,
+          "ensemble_spread_kcal": 9.82
+        },
+        "rank_score": 6.575
+      },
+      {
+        "head": "methylpiperazine_acetyl",
+        "core": "spiro33heptan-2-yl",
+        "stereocenters": 0,
+        "smiles": "CN1CCN(CC(=O)NC2CC3(CCC3)C2)CC1",
+        "formula": "C14H25N3O",
+        "mw": 251.4,
+        "hac": 18,
+        "fsp3": 0.9286,
+        "ar_rings": 0,
+        "hbd": 1,
+        "hba": 3,
+        "tpsa": 35.6,
+        "clogp": 0.68,
+        "qed": 0.801,
+        "rotb": 3,
+        "rank_score_2d": 6.769,
+        "pains_free": true,
+        "conformers": {
+          "n_conf": 12,
+          "e_min_kcal": 117.68,
+          "ensemble_spread_kcal": 16.13
+        },
+        "rank_score": 6.366
+      },
+      {
+        "head": "methylpiperazine_acetyl",
+        "core": "norbornan-2-yl",
+        "stereocenters": 3,
+        "smiles": "CN1CCN(CC(=O)NC2CC3CCC2C3)CC1",
+        "formula": "C14H25N3O",
+        "mw": 251.4,
+        "hac": 18,
+        "fsp3": 0.9286,
+        "ar_rings": 0,
+        "hbd": 1,
+        "hba": 3,
+        "tpsa": 35.6,
+        "clogp": 0.54,
+        "qed": 0.795,
+        "rotb": 3,
+        "rank_score_2d": 6.757,
+        "pains_free": true,
+        "conformers": {
+          "n_conf": 12,
+          "e_min_kcal": 106.09,
+          "ensemble_spread_kcal": 19.46
+        },
+        "rank_score": 6.27
+      }
+    ]
+  },
+  "phase2_atomic_refinement": {
+    "smiles": "CN1CCN(CC(=O)NC23CC4CC(CC(C4)C2)C3)CC1",
+    "props": {
+      "smiles": "CN1CCN(CC(=O)NC23CC4CC(CC(C4)C2)C3)CC1",
+      "formula": "C17H29N3O",
+      "mw": 291.4,
+      "hac": 21,
+      "fsp3": 0.9412,
+      "ar_rings": 0,
+      "hbd": 1,
+      "hba": 3,
+      "tpsa": 35.6,
+      "clogp": 1.32,
+      "qed": 0.852,
+      "rotb": 3
+    },
+    "conformer_refinement": {
+      "n_conf": 80,
+      "e_min_kcal": 112.25,
+      "ensemble_spread_kcal": 15.71
+    },
+    "intrinsic_capacity_only": {
+      "note": "No MYC/MAX receptor available locally + no web fetch; these are the ligand's intrinsic capacities, NOT measured interface interactions.",
+      "h_bond_donors": 1,
+      "h_bond_acceptors": 3,
+      "tpsa": 35.6,
+      "aromatic_rings_for_pi": 0,
+      "nonaromatic_N_for_cationpi_or_salt_bridge": 3
+    }
+  },
+  "phase3_offtarget_selectivity_hypothesis": {
+    "method": "2D Morgan(2,2048) Tanimoto + 3D USRCAT shape vs LOCAL panel leads",
+    "panel": [
+      "EGFR_lead",
+      "ALK5_lead",
+      "FLT3_lead",
+      "GSK3B_lead",
+      "AKT1_lead",
+      "ABL1_lead",
+      "BCL2_lead"
+    ],
+    "clamp_fsp3": 0.941,
+    "clamp_ar_rings": 0,
+    "rows": [
+      {
+        "target": "ABL1_lead",
+        "tanimoto_2d": 0.224,
+        "usrcat_shape_3d": 0.08,
+        "panel_ar_rings": 3,
+        "panel_fsp3": 0.333
+      },
+      {
+        "target": "BCL2_lead",
+        "tanimoto_2d": 0.224,
+        "usrcat_shape_3d": 0.079,
+        "panel_ar_rings": 3,
+        "panel_fsp3": 0.292
+      },
+      {
+        "target": "FLT3_lead",
+        "tanimoto_2d": 0.205,
+        "usrcat_shape_3d": 0.081,
+        "panel_ar_rings": 3,
+        "panel_fsp3": 0.318
+      },
+      {
+        "target": "AKT1_lead",
+        "tanimoto_2d": 0.169,
+        "usrcat_shape_3d": 0.093,
+        "panel_ar_rings": 2,
+        "panel_fsp3": 0.545
+      },
+      {
+        "target": "EGFR_lead",
+        "tanimoto_2d": 0.167,
+        "usrcat_shape_3d": 0.108,
+        "panel_ar_rings": 3,
+        "panel_fsp3": 0.364
+      },
+      {
+        "target": "ALK5_lead",
+        "tanimoto_2d": 0.106,
+        "usrcat_shape_3d": 0.122,
+        "panel_ar_rings": 2,
+        "panel_fsp3": 0.25
+      },
+      {
+        "target": "GSK3B_lead",
+        "tanimoto_2d": 0.074,
+        "usrcat_shape_3d": 0.137,
+        "panel_ar_rings": 2,
+        "panel_fsp3": 0.333
+      }
+    ],
+    "max_tanimoto_to_panel": 0.224,
+    "max_shape_to_panel": 0.137,
+    "interpretation": "Low 2D/3D similarity to ATP-site-style panel leads is consistent with a distinct aliphatic-cage chemotype (selectivity HYPOTHESIS).",
+    "what_this_does_NOT_prove": [
+      "Does NOT prove proteome-wide inertness or off-target safety.",
+      "Does NOT prove target engagement or lethality to MYC.",
+      "Ligand-only comparison; no receptor docking to MYC (no local structure).",
+      "Requires wet kinome-wide / selectivity panels + cellular assays."
+    ]
+  },
+  "honesty": {
+    "full_exhaustion_claimed": false,
+    "proteome_inertness_proven": false,
+    "wet_validation_required": true
+  }
+}
