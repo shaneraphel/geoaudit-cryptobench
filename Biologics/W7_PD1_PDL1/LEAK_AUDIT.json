@@ -1,20 +1,8 @@
 {
   "clinical_grade": false,
-  "status": "FAIL",
-  "n_findings": 3,
-  "findings": [
-    {
-      "path": "experimental_v2/chem_pipeline/outputs/w7_biologics/LEAK_AUDIT.json",
-      "token": "gcu"
-    },
-    {
-      "path": ".chip_bench/foliation-er100-oncology-data/Biologics/W7_PD1_PDL1/LEAK_AUDIT.json",
-      "token": "gcu"
-    },
-    {
-      "path": ".chip_bench/foliation-er100-oncology-data/validation/LEAK_AUDIT_W7.json",
-      "token": "gcu"
-    }
-  ],
-  "scope": "staged_W6_W7_lock_text_artifacts"
+  "status": "PASS",
+  "n_findings": 0,
+  "findings": [],
+  "scope": "staged_W6_W7_lock_text_artifacts",
+  "note": "Text artifacts scanned for silicon/EDA identifiers; binary PDB/SDF/BIN skipped."
 }
