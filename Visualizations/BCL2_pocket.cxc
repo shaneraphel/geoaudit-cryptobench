@@ -1,0 +1,11 @@
+# ChimeraX :: BCL2 pocket + clinical lead  (clinical_grade=false; docking secondary)
+# Usage: chimerax BCL2_pocket.cxc
+open 6O0K
+hide atoms
+show cartoon
+color light gray
+marker #100 position -10.291,2.335,-9.415 color orange radius 1.2
+open ../Targets/Oncology/BCL2/bcl2_m5_12.sdf
+style stick
+zoom
+set bgColor white

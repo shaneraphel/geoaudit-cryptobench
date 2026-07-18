@@ -1,42 +1,63 @@
 # Foliation Clinical Evidence Packs · 转化医学计算证据包
 
-**EN / 中文** · `clinical_grade=false`
+**EN / 中文** · `clinical_grade = false` · Generated `2026-07-18T05:14:50.247271+00:00`
 
-**EN:** Public **computational** evidence for multi-indication pharmacology. Docking ≠ wet
-affinity. No fabricated IC50. See each pack's *"What we compute"* section for methodology.
-**中文：** 多适应症药理学的公开**计算**证据。对接 ≠ 湿实验亲和力。不虚构 IC50。
-方法学见各数据包的「我们在计算什么」章节。
+**EN:** One unified, industrial **computational** pipeline across four tracks —
+**Primary Oncology · Compensatory Oncology · Fibrosis · Regeneration**. Docking is a
+secondary metric — **not** wet affinity, IC50, or clinical efficacy. No fabricated
+TCGA / wet-lab values.
+**中文：** 一条统一的工业级**计算**流水线，覆盖四条赛道——**原发肿瘤 · 代偿肿瘤 · 纤维化 · 再生**。
+对接为次级指标——**非**湿实验亲和力 / IC50 / 疗效；不虚构 TCGA / 湿实验数据。
 
-## Featured packs · 精选数据包
+## Unified clinical matrix · 统一临床矩阵
 
-| Pack | Focus · 方向 | Link |
-|------|--------------|------|
-| **Translational Medicine** | **ER-100** · Retina regen · Heme | [`Translational_Medicine/`](Translational_Medicine/) |
-| **Wave-2 Expansion** | ER-100 links · 视网膜再造 · AML/淋巴瘤/CML · **M5 leads + figures + docking guide** | [`Wave2_Disease_Expansion/`](Wave2_Disease_Expansion/) |
+![Lead matrix](Visualizations/target_matrix_leads.png)
 
-### Fragment → lead figure · 片段到先导
+### Primary Oncology
 
-![Warhead to lead overview](Wave2_Disease_Expansion/images/M5_overview.png)
+| Target · 靶点 | Lead | Formula | Fsp³ | HAC | Cavity β(0,1,2) | ΔE (kcal/mol) | DepMap causality | Vina* | Chemical Sanity |
+|---------------|------|---------|------|-----|-----------------|---------------|------------------|-------|-----------------|
+| **FLT3** · [P36888](https://www.uniprot.org/uniprotkb/P36888/entry) | `flt3_m5_11` | C22H25FN4O2 | 0.3182 | 29 | (147,316,0) | 2.331 | AML lineage dependency (FLT3-ITD driver) | -10.91 | PASS (3 try) |
+| **BCL2** · [P10415](https://www.uniprot.org/uniprotkb/P10415/entry) | `bcl2_m5_12` | C24H27N3O4S | 0.2917 | 32 | (188,328,0) | 2.674 | Apoptosis dependency (BH3 groove) | -10.14 | PASS (3 try) |
+| **ABL1** · [P00519](https://www.uniprot.org/uniprotkb/P00519/entry) | `abl1_m5_07` | C21H25N5O2 | 0.3333 | 28 | (218,448,0) | 2.273 | CML driver (BCR-ABL fusion) | -10.57 | PASS (3 try) |
 
-### Snapshot · 快照（RDKit formulas · verified）
+### Compensatory Oncology
 
-| Program | Lead | Formula · 分子式 | Fsp³ | Vina* |
-|---------|------|------------------|------|-------|
-| ER-100 / ESR1 | `serm_stilbene_amine` | **C18H21NO2** | — | -7.045 |
-| Retina / GSK3β | `gsk_x10` | **C15H17FN4O** | — | -7.648 |
-| FLT3 / M5 | `flt3_m5_11` | **C22H25FN4O2** | 0.3182 | -10.91 |
-| BCL2 / M5 | `bcl2_m5_12` | **C24H27N3O4S** | 0.2917 | -10.14 |
-| ABL1 / M5 | `abl1_m5_07` | **C21H25N5O2** | 0.3333 | -10.57 |
+| Target · 靶点 | Lead | Formula | Fsp³ | HAC | Cavity β(0,1,2) | ΔE (kcal/mol) | DepMap causality | Vina* | Chemical Sanity |
+|---------------|------|---------|------|-----|-----------------|---------------|------------------|-------|-----------------|
+| **EGFR** · [P00533](https://www.uniprot.org/uniprotkb/P00533/entry) | `egfr_lead` | C22H26FN5O2 | 0.3636 | 30 | (218,492,0) | 1.214 | Compensatory escape for KRAS (RTK bypass) | -8.124 | PASS (3 try) |
+| **AKT1** · [P31749](https://www.uniprot.org/uniprotkb/P31749/entry) | `akt1_lead` | C22H32N6O2 | 0.5455 | 30 | (191,347,0) | 2.63 | Compensatory escape for PIK3CA (PI3K/AKT axis) | -9.435 | PASS (3 try) |
 
-\* Vina is secondary / informational only · 对接分仅供参考。
+### Fibrosis
 
-**EN:** Heme M5 = locked mass-screen warheads + high-Fsp³ polar solvent tails. Each lead ships
-a spec sheet, 2D figure, SDF, and a reproducible docking guide. Formulas RDKit-verified.
-**中文：** 血液肿瘤 M5 = 锁定筛选弹头 + 高 Fsp³ 极性溶剂尾。每个先导附带说明书、结构图、SDF
-及可复现对接指南；分子式经 RDKit 校验。
+| Target · 靶点 | Lead | Formula | Fsp³ | HAC | Cavity β(0,1,2) | ΔE (kcal/mol) | DepMap causality | Vina* | Chemical Sanity |
+|---------------|------|---------|------|-----|-----------------|---------------|------------------|-------|-----------------|
+| **ALK5** · [P36897](https://www.uniprot.org/uniprotkb/P36897/entry) | `alk5_x00` | C16H16FN3O2 | 0.25 | 22 | (187,368,0) | 3.126 | Fibrosis signaling (TGF-beta, not a cancer dependency) | -8.997 | PASS (3 try) |
 
-## Other releases · 其他发布
+### Regeneration
 
-See [`releases/`](releases/) for historical Cryo-EM homology and clinical showcase packs.
+| Target · 靶点 | Lead | Formula | Fsp³ | HAC | Cavity β(0,1,2) | ΔE (kcal/mol) | DepMap causality | Vina* | Chemical Sanity |
+|---------------|------|---------|------|-----|-----------------|---------------|------------------|-------|-----------------|
+| **GSK3B** · [P49841](https://www.uniprot.org/uniprotkb/P49841/entry) | `gsk_x10` | C15H17FN4O | 0.3333 | 21 | (150,253,0) | 8.836 | Regeneration modulator (Wnt/GSK3 axis) | -7.648 | PASS (3 try) |
 
-Proprietary silicon RTL and internal synthesis deliverables are **omitted** · 专有硅实现与内部合成交付物不公开。
+\* Vina is a secondary / informational metric only · 对接分仅供参考。
+Cavity β = Betti numbers of the 64³ pocket-occupancy cavity (cubical complex, Z/2);
+ΔE = MMFF relaxed torsion barrier of the principal flexible bond.
+
+## Repository architecture · 仓库结构
+
+- [`Targets/`](Targets/) — per-lane target folders (`Oncology/`, `Fibrosis/`, `Regeneration/`) with lead SDF + spec sheet.
+- [`Clinical_Ledgers/`](Clinical_Ledgers/) — per-molecule JSON + Markdown audits (Betti, Fsp³, HAC, rotational barrier, sanity).
+- [`Visualizations/`](Visualizations/) — PyMOL (`.pml`) + ChimeraX (`.cxc`) pocket scripts and rendered figures.
+- [`Wave2_Disease_Expansion/`](Wave2_Disease_Expansion/) — methodology, data sources (PDB/UniProt URLs), docking guide, spec sheets.
+- [`Translational_Medicine/`](Translational_Medicine/) — ER-100 (ESR1) flagship + program map.
+- [`AUTONOMOUS_CI_LEDGER.json`](AUTONOMOUS_CI_LEDGER.json) — machine-readable CI summary.
+
+## What we compute · 我们在计算什么
+
+Chemical Sanity (PAINS · heavy-atom budget · MMFF strain · QED/Lipinski) is the **primary**
+gate — a molecule that fails is auto-rejected and the generator backtracks. Cavity topology
+(Betti numbers), Fsp³/HAC, and the flexible-bond rotational barrier are logged per molecule.
+AutoDock Vina is reported only as a secondary signal. Full method: each pack's *"What we compute"* section.
+
+Proprietary silicon RTL and internal solver logic are **omitted** · 专有硅实现与内部求解器逻辑不公开。

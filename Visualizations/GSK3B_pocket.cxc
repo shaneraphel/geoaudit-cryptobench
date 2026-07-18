@@ -1,0 +1,11 @@
+# ChimeraX :: GSK3B pocket + clinical lead  (clinical_grade=false; docking secondary)
+# Usage: chimerax GSK3B_pocket.cxc
+open 1Q3D
+hide atoms
+show cartoon
+color light gray
+marker #100 position 30.497,-5.134,21.762 color orange radius 1.2
+open ../Targets/Regeneration/GSK3B/gsk_x10.sdf
+style stick
+zoom
+set bgColor white

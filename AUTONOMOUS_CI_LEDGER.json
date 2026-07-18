@@ -1,0 +1,136 @@
+{
+  "schema": "foliation.autonomous_ci.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-18T05:14:50.246986+00:00",
+  "pipeline": "autonomous bio-infrastructure CI/CD (native-tool fallback)",
+  "tme_profiles": "experimental_v2/chem_pipeline/tme_profiles.json",
+  "targets": [
+    {
+      "gene": "FLT3",
+      "lane": "Oncology",
+      "track": "Primary Oncology",
+      "lead_id": "flt3_m5_11",
+      "formula": "C22H25FN4O2",
+      "fsp3": 0.3182,
+      "hac": 29,
+      "cavity_betti": [
+        147,
+        316,
+        0
+      ],
+      "rotational_barrier_kcal": 2.331,
+      "vina_secondary": -10.91,
+      "chemical_sanity": "PASS",
+      "recursive_attempts": 3
+    },
+    {
+      "gene": "BCL2",
+      "lane": "Oncology",
+      "track": "Primary Oncology",
+      "lead_id": "bcl2_m5_12",
+      "formula": "C24H27N3O4S",
+      "fsp3": 0.2917,
+      "hac": 32,
+      "cavity_betti": [
+        188,
+        328,
+        0
+      ],
+      "rotational_barrier_kcal": 2.674,
+      "vina_secondary": -10.14,
+      "chemical_sanity": "PASS",
+      "recursive_attempts": 3
+    },
+    {
+      "gene": "ABL1",
+      "lane": "Oncology",
+      "track": "Primary Oncology",
+      "lead_id": "abl1_m5_07",
+      "formula": "C21H25N5O2",
+      "fsp3": 0.3333,
+      "hac": 28,
+      "cavity_betti": [
+        218,
+        448,
+        0
+      ],
+      "rotational_barrier_kcal": 2.273,
+      "vina_secondary": -10.57,
+      "chemical_sanity": "PASS",
+      "recursive_attempts": 3
+    },
+    {
+      "gene": "ALK5",
+      "lane": "Fibrosis",
+      "track": "Fibrosis",
+      "lead_id": "alk5_x00",
+      "formula": "C16H16FN3O2",
+      "fsp3": 0.25,
+      "hac": 22,
+      "cavity_betti": [
+        187,
+        368,
+        0
+      ],
+      "rotational_barrier_kcal": 3.126,
+      "vina_secondary": -8.997,
+      "chemical_sanity": "PASS",
+      "recursive_attempts": 3
+    },
+    {
+      "gene": "GSK3B",
+      "lane": "Regeneration",
+      "track": "Regeneration",
+      "lead_id": "gsk_x10",
+      "formula": "C15H17FN4O",
+      "fsp3": 0.3333,
+      "hac": 21,
+      "cavity_betti": [
+        150,
+        253,
+        0
+      ],
+      "rotational_barrier_kcal": 8.836,
+      "vina_secondary": -7.648,
+      "chemical_sanity": "PASS",
+      "recursive_attempts": 3
+    },
+    {
+      "gene": "EGFR",
+      "lane": "Oncology",
+      "track": "Compensatory Oncology",
+      "lead_id": "egfr_lead",
+      "formula": "C22H26FN5O2",
+      "fsp3": 0.3636,
+      "hac": 30,
+      "cavity_betti": [
+        218,
+        492,
+        0
+      ],
+      "rotational_barrier_kcal": 1.214,
+      "vina_secondary": -8.124,
+      "chemical_sanity": "PASS",
+      "recursive_attempts": 3
+    },
+    {
+      "gene": "AKT1",
+      "lane": "Oncology",
+      "track": "Compensatory Oncology",
+      "lead_id": "akt1_lead",
+      "formula": "C22H32N6O2",
+      "fsp3": 0.5455,
+      "hac": 30,
+      "cavity_betti": [
+        191,
+        347,
+        0
+      ],
+      "rotational_barrier_kcal": 2.63,
+      "vina_secondary": -9.435,
+      "chemical_sanity": "PASS",
+      "recursive_attempts": 3
+    }
+  ],
+  "truth_boundary": "Computational topologies; docking secondary; no wet-lab/TCGA values."
+}

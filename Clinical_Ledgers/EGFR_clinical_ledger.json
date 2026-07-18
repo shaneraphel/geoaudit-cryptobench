@@ -1,0 +1,92 @@
+{
+  "schema": "foliation.clinical_ledger_entry.v1",
+  "clinical_grade": false,
+  "gene": "EGFR",
+  "gene_full": "Epidermal growth factor receptor",
+  "uniprot": "P00533",
+  "lane": "Oncology",
+  "track": "Compensatory Oncology",
+  "indication": "NSCLC / KRAS-bypass resistance (ATP site)",
+  "depmap_causality": "Compensatory escape for KRAS (RTK bypass)",
+  "structure": {
+    "pdb_primary": "1M17",
+    "pdb_desc": "EGFR tyrosine kinase domain with the 4-anilinoquinazoline inhibitor erlotinib",
+    "pdb_cross": null,
+    "pdb_url": "https://www.rcsb.org/structure/1M17"
+  },
+  "warhead": {
+    "id": "egfr_anilinoquinazoline",
+    "smiles": "Fc1ccc(Nc2ncnc3ccccc23)cc1",
+    "smiles_canonical": "Fc1ccc(Nc2ncnc3ccccc23)cc1",
+    "inchikey": "LXIVRQQISZPNPL-UHFFFAOYSA-N",
+    "formula": "C14H10FN3",
+    "mw": 239.25,
+    "heavy_atom_count": 18,
+    "fsp3": 0.0,
+    "clogp": 3.513,
+    "tpsa": 37.81,
+    "hbd": 1,
+    "hba": 3,
+    "rotatable_bonds": 2,
+    "aromatic_rings": 3,
+    "qed": 0.7432,
+    "lipinski_violations": 0
+  },
+  "lead": {
+    "id": "egfr_lead",
+    "smiles": "COc1cc2ncnc(Nc3ccc(F)cc3)c2cc1OCCN1CCN(C)CC1",
+    "smiles_canonical": "COc1cc2ncnc(Nc3ccc(F)cc3)c2cc1OCCN1CCN(C)CC1",
+    "inchikey": "PVMFDKNLULFNHJ-UHFFFAOYSA-N",
+    "formula": "C22H26FN5O2",
+    "mw": 411.48,
+    "heavy_atom_count": 30,
+    "fsp3": 0.3636,
+    "clogp": 3.147,
+    "tpsa": 62.75,
+    "hbd": 1,
+    "hba": 7,
+    "rotatable_bonds": 7,
+    "aromatic_rings": 3,
+    "qed": 0.6408,
+    "lipinski_violations": 0
+  },
+  "cavity_topology": {
+    "beta0": 218,
+    "beta1": 492,
+    "beta2": 0,
+    "euler_characteristic": -274,
+    "cavity_voxels": 46716,
+    "method": "cubical complex (Z/2), 6-connectivity; chi=V-E+F-C; beta1=beta0+beta2-chi"
+  },
+  "rotational_barrier": {
+    "barrier_kcal": 1.214,
+    "barrier_milli_kcal": 1214,
+    "bond_atoms": [
+      19,
+      20
+    ],
+    "fragment_balance": 25,
+    "scan_steps_deg": 30,
+    "method": "MMFF relaxed (constrained) torsion scan; principal-hinge bond"
+  },
+  "tme_ph_prior": {
+    "milli_ph": 650,
+    "source": "physiological_prior"
+  },
+  "chemical_sanity": {
+    "status": "PASS",
+    "recursive_attempts": 3,
+    "pass": true,
+    "reasons": [],
+    "strain_kcal": 0.225,
+    "qed": 0.6408,
+    "heavy_atoms": 30
+  },
+  "vina_secondary": -8.124,
+  "vault_inputs": {
+    "vault_dir": null,
+    "pdb": [],
+    "mrc": [],
+    "density_json": []
+  }
+}

@@ -1,0 +1,11 @@
+# ChimeraX :: EGFR pocket + clinical lead  (clinical_grade=false; docking secondary)
+# Usage: chimerax EGFR_pocket.cxc
+open 1M17
+hide atoms
+show cartoon
+color light gray
+marker #100 position 23.271,9.822,59.343 color orange radius 1.2
+open ../Targets/Oncology/EGFR/egfr_lead.sdf
+style stick
+zoom
+set bgColor white

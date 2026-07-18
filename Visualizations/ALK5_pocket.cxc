@@ -1,0 +1,11 @@
+# ChimeraX :: ALK5 pocket + clinical lead  (clinical_grade=false; docking secondary)
+# Usage: chimerax ALK5_pocket.cxc
+open 3TZM
+hide atoms
+show cartoon
+color light gray
+marker #100 position 4.527,8.717,6.784 color orange radius 1.2
+open ../Targets/Fibrosis/ALK5/alk5_x00.sdf
+style stick
+zoom
+set bgColor white
