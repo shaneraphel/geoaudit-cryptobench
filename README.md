@@ -60,4 +60,41 @@ gate — a molecule that fails is auto-rejected and the generator backtracks. Ca
 (Betti numbers), Fsp³/HAC, and the flexible-bond rotational barrier are logged per molecule.
 AutoDock Vina is reported only as a secondary signal. Full method: each pack's *"What we compute"* section.
 
-Proprietary silicon RTL and internal solver logic are **omitted** · 专有硅实现与内部求解器逻辑不公开。
+Proprietary silicon implementation and internal solver logic are **omitted** · 专有硅实现与内部求解器逻辑不公开。
+
+## W5 — Weak-Box Eradication & Honest Synthesizability (clinical_grade=false)
+
+**Core philosophy: Novelty & Synthesizability vs Affinity is a real trade-off we report, not hide.**
+
+Same-box docking (co-crystal box, AutoDock Vina 1.2.5, seeds 41-44, exhaustiveness 16).
+Vina is a **secondary geometric metric, NOT** measured affinity / IC50 / clinical efficacy.
+
+| Target | Novel candidate | Same-box Vina | Native reference | Delta | SA (lower=easier) | Novelty (Murcko Tanimoto) |
+|--------|-----------------|---------------|------------------|-------|-------------------|---------------------------|
+| BRD4 (weak-box) | quinolone-spiro | -9.23 | JQ1 -8.69 | -0.54 | 2.94 | 0.20 |
+| KRAS G12C (weak-box) | azaspiro-biaryl | -8.50 | 21Q -6.64 | -1.86 | 2.53 | 0.22 |
+| FLT3 (cubane isostere) | norbornyl | -9.05 | gilteritinib -8.72 | -0.33 | 3.85 | 0.24 |
+
+- **BRD4 / KRAS G12C**: novel, PAINS-free, low-SA (synthesizable) scaffolds that beat weak native binders in the same box. Strict novelty enforced (Murcko Tanimoto < 0.40 vs FDA drugs + all prior leads; no cubane core).
+- **FLT3 isostere (SA tax, reported honestly)**: replacing the synthetically hard cubane core (SA 5.23, same-box -10.40) with a synthesizable norbornyl (SA 3.85) costs ~1.35 kcal/mol (same-box -9.05). The synthesizable isostere still beats gilteritinib but does **not** reach the cubane score. We publish this trade-off rather than hide it.
+- Boundaries: `clinical_grade=false`; no wet validation (n_validated=0); docking deltas of ~1 kcal are within Vina error and require wet IC50 confirmation.
+
+## W5 — Weak-box eradication + honest synthesizability trade-off
+
+Same-box AutoDock Vina vs the deposited reference binder (co-crystal box), seeds
+41–44, exhaustiveness 16. Vina is a **secondary docking metric, not affinity**.
+
+| Target | New candidate | Vina mean | Reference (same box) | Δ | SA score | Murcko Tanimoto vs known |
+|--------|---------------|-----------|----------------------|---|----------|--------------------------|
+| BRD4 (weak-box) | quinolone-spiro | −9.23 | JQ1 −8.69 | −0.54 | 2.94 | 0.20 |
+| KRAS G12C (weak-box) | azaspiro-biaryl | −8.50 | 21Q −6.64 | −1.86 | 2.53 | 0.22 |
+| FLT3 (isostere) | norbornyl amide | −9.05 | gilteritinib −8.72 | −0.33 | 3.85 | 0.24 |
+
+### Core philosophy — Novelty & Synthesizability vs Affinity
+Our FLT3 cubane lead docked at −10.40 but its cubane core is hard to synthesize
+(SA 5.23). Replacing it with a synthesizable isostere (SA < 4) costs ~1.35
+kcal/mol of docking score (−10.40 → −9.05). **We report this trade-off openly**
+rather than shipping a synthetically impractical number.
+
+All W5 candidates: PAINS-free, Murcko-distinct from known drugs (Tanimoto < 0.40),
+high-Fsp³, cubane-free. `clinical_grade=false`; no wet validation; docking ≠ affinity.

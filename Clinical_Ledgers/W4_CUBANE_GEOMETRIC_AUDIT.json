@@ -1,0 +1,51 @@
+{
+  "schema": "foliation.w4_geometric_audit.v1",
+  "generated_at": "2026-07-18T12:25:21.120232+00:00",
+  "clinical_grade": false,
+  "disclaimer": "Docking is a secondary geometric indicator, NOT proof of hERG safety, selectivity, or affinity. hERG/selectivity require wet electrophysiology/panels.",
+  "herg_geometric_screen": {
+    "structure": "5VA1",
+    "box_center": [
+      93.37,
+      57.65,
+      52.04
+    ],
+    "box_size": [
+      26.0,
+      26.0,
+      30.0
+    ],
+    "cubane_vina": -6.867,
+    "known_blocker_dofetilide_vina": -6.424,
+    "delta_cubane_minus_blocker": -0.443,
+    "indicator": "inconclusive/see values",
+    "is_proof": false
+  },
+  "kinome_offtarget_and_weakbox": {
+    "ABL1_3OXZ": {
+      "native_ref_ligand": "0LI",
+      "native_ref_vina": -13.573,
+      "cubane_crossdock_vina": -8.03,
+      "weak_box": false,
+      "cubane_selectivity_gap_vs_native": 5.543
+    },
+    "BRD4_3MXF": {
+      "native_ref_ligand": "JQ1",
+      "native_ref_vina": -8.687,
+      "cubane_crossdock_vina": -8.521,
+      "weak_box": true,
+      "cubane_selectivity_gap_vs_native": 0.166
+    },
+    "KRAS_4LYW": {
+      "native_ref_ligand": "21Q",
+      "native_ref_vina": -6.642,
+      "cubane_crossdock_vina": -8.891,
+      "weak_box": true,
+      "cubane_selectivity_gap_vs_native": -2.249
+    }
+  },
+  "interpretation": {
+    "selectivity": "cubane cross-dock much weaker than its FLT3 score (-10.4) => geometric selectivity indicator (NOT proof).",
+    "weak_box": "targets with native_ref_vina > -9.0 are 'weak-box' expansion candidates (like FLT3/gilteritinib -8.7)."
+  }
+}

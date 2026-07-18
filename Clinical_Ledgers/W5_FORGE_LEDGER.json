@@ -1,0 +1,381 @@
+{
+  "schema": "foliation.w5_forge.v1",
+  "generated_at": "2026-07-18T12:39:18.084659+00:00",
+  "clinical_grade": false,
+  "method": "same-box (co-crystal), strict novelty (Murcko Tanimoto<=0.40, no cubane), SA-gated, prefilter exh=8 strict exh=16",
+  "disclaimer": "Vina secondary metric; not affinity/IC50/efficacy.",
+  "results": {
+    "FLT3_iso": {
+      "target": "FLT3_iso",
+      "pdb": "6JQR.pdb",
+      "het": "C6F",
+      "native_mean": -8.719,
+      "phase": "isostere",
+      "sa_max": 4.0,
+      "candidates": [
+        {
+          "name": "flt3_iso_norbornyl",
+          "smiles": "O=C(NC1CC2CCC1C2)c1ccc(F)cc1N1CCOCC1",
+          "sa": 3.85,
+          "fsp3": 0.611,
+          "mw": 318.4,
+          "hac": 23,
+          "qed": 0.931,
+          "murcko": "O=C(NC1CC2CCC1C2)c1ccccc1N1CCOCC1",
+          "novelty_tan": 0.24,
+          "prefilter": -9.06,
+          "strict": {
+            "scores": [
+              -9.06,
+              -9.046,
+              -9.038,
+              -9.048
+            ],
+            "mean": -9.048,
+            "ci95_low": -9.062,
+            "ci95_high": -9.034
+          },
+          "delta_vs_native": -0.329,
+          "beats_native": true
+        },
+        {
+          "name": "flt3_iso_bicyclo222",
+          "smiles": "O=C(NC12CCC(CC1)CC2)c1ccc(F)cc1N1CCOCC1",
+          "sa": 3.37,
+          "fsp3": 0.632,
+          "mw": 332.4,
+          "hac": 24,
+          "qed": 0.925,
+          "murcko": "O=C(NC12CCC(CC1)CC2)c1ccccc1N1CCOCC1",
+          "novelty_tan": 0.23,
+          "prefilter": -8.714,
+          "strict": {
+            "scores": [
+              -8.725,
+              -8.726,
+              -8.715,
+              -8.711
+            ],
+            "mean": -8.719,
+            "ci95_low": -8.731,
+            "ci95_high": -8.707
+          },
+          "delta_vs_native": -0.0,
+          "beats_native": true
+        },
+        {
+          "name": "flt3_iso_bcp_dimethyl",
+          "smiles": "O=C(NC12CC(C1)(C2)C(C)C)c1ccc(F)cc1N1CCOCC1",
+          "sa": 3.39,
+          "fsp3": 0.632,
+          "mw": 332.4,
+          "hac": 24,
+          "qed": 0.922,
+          "murcko": "O=C(NC12CC(C1)C2)c1ccccc1N1CCOCC1",
+          "novelty_tan": 0.22,
+          "prefilter": -8.427
+        },
+        {
+          "name": "flt3_iso_spiro33hept",
+          "smiles": "O=C(NC1CC2(CCC2)C1)c1ccc(F)cc1N1CCOCC1",
+          "sa": 2.81,
+          "fsp3": 0.611,
+          "mw": 318.4,
+          "hac": 23,
+          "qed": 0.932,
+          "murcko": "O=C(NC1CC2(CCC2)C1)c1ccccc1N1CCOCC1",
+          "novelty_tan": 0.22,
+          "prefilter": -8.4
+        },
+        {
+          "name": "flt3_iso_gemdifluorocb",
+          "smiles": "O=C(NC1CC(F)(F)C1)c1ccc(F)cc1N1CCOCC1",
+          "sa": 2.41,
+          "fsp3": 0.533,
+          "mw": 314.3,
+          "hac": 22,
+          "qed": 0.93,
+          "murcko": "O=C(NC1CCC1)c1ccccc1N1CCOCC1",
+          "novelty_tan": 0.25,
+          "prefilter": -8.25
+        },
+        {
+          "name": "flt3_iso_bcp",
+          "smiles": "O=C(NC12CC(C1)(C2)C)c1ccc(F)cc1N1CCOCC1",
+          "sa": 3.21,
+          "fsp3": 0.588,
+          "mw": 304.4,
+          "hac": 22,
+          "qed": 0.932,
+          "murcko": "O=C(NC12CC(C1)C2)c1ccccc1N1CCOCC1",
+          "novelty_tan": 0.22,
+          "prefilter": -8.179
+        },
+        {
+          "name": "flt3_iso_1me_cyclobutyl",
+          "smiles": "O=C(NC1(C)CCC1)c1ccc(F)cc1N1CCOCC1",
+          "sa": 2.3,
+          "fsp3": 0.562,
+          "mw": 292.4,
+          "hac": 21,
+          "qed": 0.929,
+          "murcko": "O=C(NC1CCC1)c1ccccc1N1CCOCC1",
+          "novelty_tan": 0.25,
+          "prefilter": -7.98
+        },
+        {
+          "name": "flt3_iso_2oxaspiro",
+          "smiles": "O=C(NC1CC2(COC2)C1)c1ccc(F)cc1N1CCOCC1",
+          "sa": 2.96,
+          "fsp3": 0.588,
+          "mw": 320.4,
+          "hac": 23,
+          "qed": 0.918,
+          "murcko": "O=C(NC1CC2(COC2)C1)c1ccccc1N1CCOCC1",
+          "novelty_tan": 0.21,
+          "prefilter": -7.787
+        }
+      ]
+    },
+    "BRD4": {
+      "target": "BRD4",
+      "pdb": "3MXF.pdb",
+      "het": "JQ1",
+      "native_mean": -8.69,
+      "phase": "weakbox",
+      "sa_max": 6.0,
+      "candidates": [
+        {
+          "name": "brd4_quinolone_spiro",
+          "smiles": "O=c1cc(-c2ccc(C3CC4(CCOCC4)C3)cc2)[nH]c2ccccc12",
+          "sa": 2.94,
+          "fsp3": 0.348,
+          "mw": 345.4,
+          "hac": 26,
+          "qed": 0.72,
+          "murcko": "O=c1cc(-c2ccc(C3CC4(CCOCC4)C3)cc2)[nH]c2ccccc12",
+          "novelty_tan": 0.2,
+          "prefilter": -9.249,
+          "strict": {
+            "scores": [
+              -9.239,
+              -9.219,
+              -9.253,
+              -9.216
+            ],
+            "mean": -9.232,
+            "ci95_low": -9.26,
+            "ci95_high": -9.204
+          },
+          "delta_vs_native": -0.542,
+          "beats_native": true
+        },
+        {
+          "name": "brd4_dmisox_bicyclo",
+          "smiles": "Cc1onc(C)c1-c1ccc(NC(=O)C23CCC(CC2)CC3)cc1",
+          "sa": 3.32,
+          "fsp3": 0.5,
+          "mw": 324.4,
+          "hac": 24,
+          "qed": 0.876,
+          "murcko": "O=C(Nc1ccc(-c2cnoc2)cc1)C12CCC(CC1)CC2",
+          "novelty_tan": 0.19,
+          "prefilter": -7.856,
+          "strict": {
+            "scores": [
+              -7.845,
+              -7.92,
+              -7.858,
+              -7.897
+            ],
+            "mean": -7.88,
+            "ci95_low": -7.935,
+            "ci95_high": -7.825
+          },
+          "delta_vs_native": 0.81,
+          "beats_native": false
+        },
+        {
+          "name": "brd4_dmisox_azaspiro",
+          "smiles": "Cc1onc(C)c1-c1ccc(N2CCC3(CCOCC3)CC2)cc1",
+          "sa": 2.92,
+          "fsp3": 0.55,
+          "mw": 326.4,
+          "hac": 24,
+          "qed": 0.822,
+          "murcko": "c1cc(N2CCC3(CCOCC3)CC2)ccc1-c1cnoc1",
+          "novelty_tan": 0.26,
+          "prefilter": -7.846
+        },
+        {
+          "name": "brd4_actriazole_spiro",
+          "smiles": "Cc1nnc(NC(=O)C2CC3(CCOCC3)C2)n1-c1ccccc1",
+          "sa": 3.11,
+          "fsp3": 0.5,
+          "mw": 326.4,
+          "hac": 24,
+          "qed": 0.941,
+          "murcko": "O=C(Nc1nncn1-c1ccccc1)C1CC2(CCOCC2)C1",
+          "novelty_tan": 0.24,
+          "prefilter": -7.696
+        },
+        {
+          "name": "brd4_dmisox_spiro",
+          "smiles": "Cc1onc(C)c1-c1ccc(NC(=O)C2CC3(CCOCC3)C2)cc1",
+          "sa": 2.95,
+          "fsp3": 0.5,
+          "mw": 340.4,
+          "hac": 25,
+          "qed": 0.913,
+          "murcko": "O=C(Nc1ccc(-c2cnoc2)cc1)C1CC2(CCOCC2)C1",
+          "novelty_tan": 0.2,
+          "prefilter": -7.678
+        },
+        {
+          "name": "brd4_dmisox_oxetane",
+          "smiles": "Cc1onc(C)c1-c1ccc(NC(=O)C2(CO)COC2)cc1",
+          "sa": 2.54,
+          "fsp3": 0.375,
+          "mw": 302.3,
+          "hac": 22,
+          "qed": 0.901,
+          "murcko": "O=C(Nc1ccc(-c2cnoc2)cc1)C1COC1",
+          "novelty_tan": 0.17,
+          "prefilter": -7.13
+        }
+      ]
+    },
+    "KRAS_G12C": {
+      "target": "KRAS_G12C",
+      "pdb": "4LYW.pdb",
+      "het": "21Q",
+      "native_mean": -6.64,
+      "phase": "weakbox",
+      "sa_max": 6.0,
+      "candidates": [
+        {
+          "name": "kras_azaspiro_biaryl",
+          "smiles": "O=C(N1CCC2(CC1)OCCO2)c1ccc(-c2ccc(F)cc2)cc1",
+          "sa": 2.53,
+          "fsp3": 0.35,
+          "mw": 341.4,
+          "hac": 25,
+          "qed": 0.839,
+          "murcko": "O=C(c1ccc(-c2ccccc2)cc1)N1CCC2(CC1)OCCO2",
+          "novelty_tan": 0.22,
+          "prefilter": -8.493,
+          "strict": {
+            "scores": [
+              -8.493,
+              -8.501,
+              -8.511,
+              -8.503
+            ],
+            "mean": -8.502,
+            "ci95_low": -8.514,
+            "ci95_high": -8.49
+          },
+          "delta_vs_native": -1.862,
+          "beats_native": true
+        },
+        {
+          "name": "kras_spiro_biaryl",
+          "smiles": "O=C(NC1CC2(CCOCC2)C1)c1ccc(-c2ccc(F)cc2)cc1",
+          "sa": 2.6,
+          "fsp3": 0.381,
+          "mw": 339.4,
+          "hac": 25,
+          "qed": 0.911,
+          "murcko": "O=C(NC1CC2(CCOCC2)C1)c1ccc(-c2ccccc2)cc1",
+          "novelty_tan": 0.27,
+          "prefilter": -8.219,
+          "strict": {
+            "scores": [
+              -8.216,
+              -8.229,
+              -8.216,
+              -8.225
+            ],
+            "mean": -8.221,
+            "ci95_low": -8.232,
+            "ci95_high": -8.211
+          },
+          "delta_vs_native": -1.581,
+          "beats_native": true
+        },
+        {
+          "name": "kras_norbornyl_biaryl",
+          "smiles": "O=C(NC1CC2CCC1C2)c1ccc(-c2ccc(F)cc2)cc1",
+          "sa": 3.45,
+          "fsp3": 0.35,
+          "mw": 309.4,
+          "hac": 23,
+          "qed": 0.894,
+          "murcko": "O=C(NC1CC2CCC1C2)c1ccc(-c2ccccc2)cc1",
+          "novelty_tan": 0.24,
+          "prefilter": -8.115
+        },
+        {
+          "name": "kras_azaspiro_amide",
+          "smiles": "O=C(N1CCC2(CCOCC2)CC1)c1ccc(Cl)cc1-c1ccncc1",
+          "sa": 2.84,
+          "fsp3": 0.429,
+          "mw": 370.9,
+          "hac": 26,
+          "qed": 0.785,
+          "murcko": "O=C(c1ccccc1-c1ccncc1)N1CCC2(CCOCC2)CC1",
+          "novelty_tan": 0.26,
+          "prefilter": -8.104
+        },
+        {
+          "name": "kras_spiro_pyridine",
+          "smiles": "O=C(NC1CC2(COC2)C1)c1cc(-c2ccccc2Cl)ccn1",
+          "sa": 2.87,
+          "fsp3": 0.333,
+          "mw": 328.8,
+          "hac": 23,
+          "qed": 0.94,
+          "murcko": "O=C(NC1CC2(COC2)C1)c1cc(-c2ccccc2)ccn1",
+          "novelty_tan": 0.22,
+          "prefilter": -8.092
+        },
+        {
+          "name": "kras_bicyclo_aryl",
+          "smiles": "O=C(NC12CCC(CC1)CC2)c1ccc(-c2ccc(F)cc2)nc1",
+          "sa": 3.17,
+          "fsp3": 0.4,
+          "mw": 324.4,
+          "hac": 24,
+          "qed": 0.912,
+          "murcko": "O=C(NC12CCC(CC1)CC2)c1ccc(-c2ccccc2)nc1",
+          "novelty_tan": 0.2,
+          "prefilter": -7.986
+        },
+        {
+          "name": "kras_dispiro",
+          "smiles": "O=C(NC1CC2(CCC3(CCOCC3)C2)C1)c1ccc(Cl)cc1",
+          "sa": 3.34,
+          "fsp3": 0.632,
+          "mw": 333.9,
+          "hac": 23,
+          "qed": 0.88,
+          "murcko": "O=C(NC1CC2(CCC3(CCOCC3)C2)C1)c1ccccc1",
+          "novelty_tan": 0.29,
+          "prefilter": -7.924
+        },
+        {
+          "name": "kras_oxaspiro_pyrimidine",
+          "smiles": "O=C(NC1CC2(COC2)C1)c1ncc(-c2ccccc2Cl)cn1",
+          "sa": 3.09,
+          "fsp3": 0.353,
+          "mw": 329.8,
+          "hac": 23,
+          "qed": 0.94,
+          "murcko": "O=C(NC1CC2(COC2)C1)c1ncc(-c2ccccc2)cn1",
+          "novelty_tan": 0.23,
+          "prefilter": -7.702
+        }
+      ]
+    }
+  }
+}
