@@ -1,0 +1,35 @@
+{
+  "api_key_used": false,
+  "api_request_count": 2,
+  "biopython_version": "1.87",
+  "candidate_transcripts": 1870,
+  "contact_email_configured": true,
+  "entrez_max_tries": 1,
+  "genbank_records_parsed": 1870,
+  "generated_at": "2026-07-19T06:28:11.549805+00:00",
+  "ncbi_result_count": 1870,
+  "official_api_documentation": "https://www.ncbi.nlm.nih.gov/books/NBK25501/",
+  "query": "\"Homo sapiens\"[Organism] AND srcdb_refseq[PROP] AND biomol_mrna[PROP] AND (\"AKT1\"[Gene Name] OR \"ALK\"[Gene Name] OR \"APC\"[Gene Name] OR \"AR\"[Gene Name] OR \"ARID1A\"[Gene Name] OR \"ARID2\"[Gene Name] OR \"ASXL1\"[Gene Name] OR \"ATM\"[Gene Name] OR \"ATRX\"[Gene Name] OR \"BCR\"[Gene Name] OR \"BRAF\"[Gene Name] OR \"BRCA1\"[Gene Name] OR \"BRCA2\"[Gene Name] OR \"CALR\"[Gene Name] OR \"CCND1\"[Gene Name] OR \"CDK4\"[Gene Name] OR \"CDK6\"[Gene Name] OR \"CDKN2A\"[Gene Name] OR \"CEBPA\"[Gene Name] OR \"CHEK2\"[Gene Name] OR \"CTNNB1\"[Gene Name] OR \"DNMT3A\"[Gene Name] OR \"EGFR\"[Gene Name] OR \"ERBB2\"[Gene Name] OR \"ESR1\"[Gene Name] OR \"EZH2\"[Gene Name] OR \"FBXW7\"[Gene Name] OR \"FGFR1\"[Gene Name] OR \"FGFR2\"[Gene Name] OR \"FGFR3\"[Gene Name] OR \"FLT3\"[Gene Name] OR \"FOXA1\"[Gene Name] OR \"GATA3\"[Gene Name] OR \"GNAS\"[Gene Name] OR \"HRAS\"[Gene Name] OR \"IDH1\"[Gene Name] OR \"IDH2\"[Gene Name] OR \"JAK2\"[Gene Name] OR \"KDM6A\"[Gene Name] OR \"KEAP1\"[Gene Name] OR \"KIT\"[Gene Name] OR \"KMT2A\"[Gene Name] OR \"KRAS\"[Gene Name] OR \"MAP2K1\"[Gene Name] OR \"MAP2K2\"[Gene Name] OR \"MDM2\"[Gene Name] OR \"MET\"[Gene Name] OR \"MPL\"[Gene Name] OR \"MTOR\"[Gene Name] OR \"MYC\"[Gene Name] OR \"MYCN\"[Gene Name] OR \"NF1\"[Gene Name] OR \"NF2\"[Gene Name] OR \"NFE2L2\"[Gene Name] OR \"NOTCH1\"[Gene Name] OR \"NPM1\"[Gene Name] OR \"NRAS\"[Gene Name] OR \"NTRK1\"[Gene Name] OR \"NTRK2\"[Gene Name] OR \"NTRK3\"[Gene Name] OR \"PALB2\"[Gene Name] OR \"PBRM1\"[Gene Name] OR \"PIK3CA\"[Gene Name] OR \"PML\"[Gene Name] OR \"PPP2R1A\"[Gene Name] OR \"PTEN\"[Gene Name] OR \"RAC1\"[Gene Name] OR \"RB1\"[Gene Name] OR \"RET\"[Gene Name] OR \"RHEB\"[Gene Name] OR \"ROS1\"[Gene Name] OR \"RUNX1\"[Gene Name] OR \"SETD2\"[Gene Name] OR \"SF3B1\"[Gene Name] OR \"SMAD4\"[Gene Name] OR \"SRSF2\"[Gene Name] OR \"STK11\"[Gene Name] OR \"TET2\"[Gene Name] OR \"TGFBR2\"[Gene Name] OR \"TP53\"[Gene Name] OR \"U2AF1\"[Gene Name] OR \"VHL\"[Gene Name] OR \"WT1\"[Gene Name])",
+  "requests": [
+    {
+      "biopython_entrez": true,
+      "database": "nuccore",
+      "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+      "method": "POST/GET selected by Biopython",
+      "query_sha256": "1e74f9ce937fd69a2a2d0b075512a09464d0377047bd08262c283ff3b1fa07c8"
+    },
+    {
+      "biopython_entrez": true,
+      "database": "nuccore",
+      "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+      "method": "history-backed batch fetch"
+    }
+  ],
+  "resolved_targets": 100,
+  "schema": "foliation.ncbi_entrez_batch_fetch.v1",
+  "sequential_polling": false,
+  "tool": "Biopython Entrez + SeqIO",
+  "unique_gene_count": 83,
+  "unresolved": [],
+  "unresolved_targets": 0
+}
