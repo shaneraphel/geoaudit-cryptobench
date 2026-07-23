@@ -1,0 +1,29 @@
+{
+  "schema": "foliation.pocket_bench.locked_hparams.v1",
+  "clinical_grade": false,
+  "selected_on": "validation",
+  "unit_of_analysis": "one_pdb_structure",
+  "foliation_pocket_ro": {
+    "grid_step": 1.2,
+    "top_k": 5,
+    "dca_threshold_a": 4.0
+  },
+  "validation_trials": [
+    {
+      "grid_step": 1.2,
+      "top1_rate": 0.0,
+      "n": 4
+    },
+    {
+      "grid_step": 1.5,
+      "top1_rate": 0.0,
+      "n": 4
+    },
+    {
+      "grid_step": 2.0,
+      "top1_rate": 0.0,
+      "n": 4
+    }
+  ],
+  "note": "Radius/grid hyperparams chosen on validation only; locked_test uses these frozen values."
+}

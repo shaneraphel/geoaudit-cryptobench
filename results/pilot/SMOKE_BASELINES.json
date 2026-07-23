@@ -1,0 +1,32 @@
+{
+  "schema": "foliation.pocket_bench.smoke.v1",
+  "clinical_grade": false,
+  "pdb_id": "3ERT",
+  "receptor_pdb": "data/pocket_bench/esr1/receptors/3ERT_A_receptor.pdb",
+  "results": {
+    "foliation": {
+      "status": "OK",
+      "n_pockets": 5,
+      "error": null
+    },
+    "fpocket": {
+      "status": "OK",
+      "n_pockets": 5,
+      "error": null
+    },
+    "p2rank": {
+      "status": "OK",
+      "n_pockets": 3,
+      "error": null
+    },
+    "deeppocket": {
+      "status": "TOOL_UNAVAILABLE",
+      "n_pockets": 0,
+      "error": "DeepPocket not installed. Set DEEPPOCKET_CMD to a CLI that reads a receptor-only PDB and writes JSON pockets to stdout."
+    }
+  },
+  "policy": {
+    "TOOL_UNAVAILABLE_not_counted_as_miss": true,
+    "fpocket_p2rank_must_ok_for_full_suite": true
+  }
+}
