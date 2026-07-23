@@ -1,8 +1,0 @@
-# MYC/MAX first-in-class computational clamp candidates
-# clinical_grade=false · not wet-validated · no FTO
-
-myc_spiro_ketal	O=C(C1CC2(CCC2)C1)N1CCC2(CC1)OCCO2	sa=3.44	fsp3=0.933
-myc_azetidine_acetyl__bicyclo222_1yl	O=C(CN1CCC1)NC12CCC(CC1)CC2	sa=3.38	fsp3=0.923
-myc_azetidine_acetyl__spiro33hept_2yl	O=C(CN1CCC1)NC1CC2(CCC2)C1	sa=2.71	fsp3=0.917
-myc_azetidine_acetyl__norbornan_2yl	O=C(CN1CCC1)NC1CC2CCC1C2	sa=3.73	fsp3=0.917
-myc_morpholine_acetyl__oxaspiro_amine	O=C(CN1CCOCC1)NC1CC2(CCOCC2)C1	sa=2.93	fsp3=0.929

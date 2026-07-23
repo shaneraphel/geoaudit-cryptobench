@@ -1292,8 +1292,8 @@
     "in_primary_table": false,
     "forbidden_claims": [
       "proves affinity",
-      "beats FDA drug",
-      "candidate superior to approved therapy"
+      "proves efficacy",
+      "establishes therapeutic superiority"
     ]
   },
   "accounting": {

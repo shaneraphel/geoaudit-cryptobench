@@ -1,7 +1,0 @@
-# ChimeraX — AKT1 conquest candidate
-# Usage: chimerax AKT1_view.cxc
-open ligands/AKT1_akt_morpholino_pyrimidine.sdf
-# open public receptor PDB of choice for AKT1
-show atoms
-style stick
-view

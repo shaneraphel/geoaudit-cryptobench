@@ -1,11 +1,11 @@
-# ESR1 receptor-only evidence correction
+# ER100: ESR1 receptor-only pocket benchmark
 
 `clinical_grade=false`
 
-This repository no longer presents legacy “ER100”, `40/40 PASS`, FDA
-percentile, DUD-E, retina, docking, or clinical-showcase records as primary
-benchmark evidence. Their original files are retained under
-`legacy/quarantine/2026-07-22/` with checksums and invalidation reasons.
+This paper repository has one scientific scope: receptor-only pocket
+prediction on experimental ESR1 structures. It contains no cross-domain
+campaign material, hardware evidence, regulatory-readiness material, or other
+disease programs.
 
 ## Current evidence status
 
@@ -46,7 +46,6 @@ data/manifests/      source URLs, checksums, split and clustering ledgers
 configs/             frozen seeds and pilot hyperparameters
 results/pilot/       retrospective results; not locked evidence
 tests/               leakage, accounting, and schema tests
-legacy/quarantine/   historical records excluded from primary claims
 ```
 
 ## Reproduction
@@ -61,16 +60,12 @@ P2Rank installations. CI validates schemas, leakage guards, statistics, and
 published checksums; it does not relabel an unavailable external tool as a
 miss.
 
-## Excluded interpretations
+## Claim boundary
 
-- “ER100” does not mean 100 independent receptor structures in the legacy data.
-- `40/40 PASS` means only that 40 legacy Vina runs returned negative scores.
-- Docking scores are not affinity, efficacy, or superiority evidence.
-- The legacy DUD-E comparison used unmatched pose-generation/search conditions.
-- The legacy FDA percentile used hard-coded/null comparator fields.
-- The legacy retina demonstration used synthetic deterministic data, not
-  patient single-cell validation.
-- Similarity screens do not establish patentability or non-infringement.
+- The present dataset has six ESR1 structures, not 100 independent structures.
+- Docking scores are not affinity, efficacy, or therapeutic evidence.
+- The current split is not cluster-disjoint, so this is a retrospective pilot.
+- Comparative significance and hidden-pocket superiority are not claimed.
 
 Sources:
 
