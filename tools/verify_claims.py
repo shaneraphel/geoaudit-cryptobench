@@ -14,7 +14,8 @@ FORBIDDEN_PRIMARY = re.compile(
 )
 OUT_OF_SCOPE = re.compile(
     r"(?i)\b(silicon|EDA|IND\s+readiness|retina|kidney|"
-    r"uremia|leukemia|FDA\s+comparison)\b"
+    r"uremia|leukemia|FDA\s+comparison|systems\s+biology|"
+    r"cross[- ]disease)\b"
 )
 # Campaign/generator names may appear only as companion release directory
 # pointers, never as primary scientific claims in this paper tree.
