@@ -73,6 +73,25 @@ def main() -> int:
         and companion.get("counts", {}).get("chemistry_ready") == 4000
         and set((companion.get("counts") or {}).get("targets") or {}) == TARGET_PANEL
     )
+    protocol = companion.get("v8_1_protocol_requalification") or {}
+    scale = companion.get("requested_1000_per_target_per_modality_scale") or {}
+    expansion = companion.get("v8_1_expansion_readiness") or {}
+    checks["protocol_requalification_truth_boundary"] = (
+        protocol.get("records_requalified") == 4000
+        and protocol.get("candidate_geometry_route_ready") == 167
+        and protocol.get("structural_protocol_blocked") == 3833
+        and protocol.get("method_template_records_quarantined") == 334
+        and protocol.get("pdb_5t35_panel_geometry_eligible") is False
+        and protocol.get("pdb_5fqd_panel_geometry_eligible") is False
+        and protocol.get("target_pose_computed") is False
+        and scale.get("requested_record_slots") == 24000
+        and scale.get("druggable_candidates_established") == 0
+        and expansion.get("cells_ready_for_1000") == 0
+        and expansion.get("internal_diversity_seeds") == 875
+        and expansion.get("diversity_and_protocol_seeds") == 52
+        and expansion.get("global_novelty_claim") is False
+        and expansion.get("druggability_claim") is False
+    )
 
     primary_text = "\n".join(
         [

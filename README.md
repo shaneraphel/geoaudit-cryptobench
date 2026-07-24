@@ -66,6 +66,10 @@ The companion release currently reports:
   force-field minimizations converged, NCGD convergence was 0/24 (`MAX_ITER`),
   GCU integer software-reference parity was 24/24; no target pose, physical
   hardware execution or new netlist is claimed
+- v8.1 protocol requalification: all 24 target × modality cells and all 4,000
+  records were re-evaluated; only 167 KRAS-G12C small-molecule records are
+  geometry-route-ready, 3,833 remain structurally blocked, and 334 assignments
+  to the 5T35/5FQD method templates are quarantined
 
 `CHEMISTRY_READY` is a computational triage state. It is not experimental
 acceptance, affinity, efficacy, degradation, safety, novelty, patentability,
@@ -79,6 +83,32 @@ The SDF coordinates are depictions, not target poses. The internal diversity
 audit is not a global novelty or patentability search. PROTAC ternary complexes,
 molecular-glue partner interfaces and accepted macrocycle conformer ensembles
 remain missing evidence, not implied results.
+
+“Geometry-route-ready” does not mean that a target pose was computed. It means
+that a target-local package may receive a future pose-plausibility calculation.
+The v8.1 ledger contains English/Chinese protocol rationale, next steps and
+HTTPS source URLs for every record. Specifically:
+
+- ESR1 must split WT, Y537S and D538G; D538G `4Q13` remains observation-only.
+- KRAS G12C may route through `6OIM`, but covalent chemistry is a separate
+  reaction-model question.
+- FLT3 D835-context structures do not represent ITD.
+- PIM1 `5EOL` remains a macrocycle route and still needs conformer ensembles.
+- PIK3CA E542K `8GUA` is not transferred to E545K.
+- CDK4 `7SJ3` and CDK6 `5L2S` require isoform/cyclin assignment.
+- 5T35 (BRD4/VHL) and 5FQD (CRBN/CK1A) are method templates, not panel-target
+  PROTAC or molecular-glue evidence.
+
+The requested scale of 1,000 records per target per structure-defined modality
+is 24,000 records. The current release has 166–167 per cell. Neither a count nor
+`CHEMISTRY_READY` establishes druggability; the paper therefore does not call
+these 4,000 records “4,000 druggable candidates.”
+
+The preliminary expansion gate retains 875 internal one-per-cluster/scaffold
+diversity seeds after excluding public exact matches from novelty-focused
+selection. Only 52 also have a route-ready structural protocol, all in the
+KRAS-G12C small-molecule cell. Zero of 24 cells is currently ready for
+1,000-record expansion.
 
 The companion v8 contract also allocates 1,000 planning slots each for
 biologics, gene medicines and engineered stem/progenitor-cell products. These

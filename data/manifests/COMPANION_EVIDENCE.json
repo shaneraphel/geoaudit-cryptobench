@@ -1,5 +1,5 @@
 {
-  "schema": "foliation.er100.companion_evidence_pointer.v2",
+  "schema": "foliation.er100.companion_evidence_pointer.v3",
   "clinical_grade": false,
   "companion_repo": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry",
   "companion_pr_v7_merged": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/1",
@@ -72,6 +72,38 @@
     "physical_hardware_executed": false,
     "new_aig_or_netlist_created": false,
     "target_pose_computed": false
+  },
+  "v8_1_protocol_requalification": {
+    "target_modality_cells": 24,
+    "records_requalified": 4000,
+    "previous_geometry_eligible_assignments": 835,
+    "candidate_geometry_route_ready": 167,
+    "structural_protocol_blocked": 3833,
+    "method_template_records_quarantined": 334,
+    "pdb_5t35_panel_geometry_eligible": false,
+    "pdb_5fqd_panel_geometry_eligible": false,
+    "target_pose_computed": false,
+    "bilingual_protocol_rationale_records": 4000,
+    "meaning_of_route_ready": "May enter a future target-local pose-plausibility computation; not a computed pose or binding claim."
+  },
+  "requested_1000_per_target_per_modality_scale": {
+    "targets": 6,
+    "structure_defined_modalities": 4,
+    "requested_record_slots": 24000,
+    "current_records_per_cell_min": 166,
+    "current_records_per_cell_max": 167,
+    "druggable_candidates_established": 0,
+    "truth_boundary": "Record count and CHEMISTRY_READY do not establish druggability."
+  },
+  "v8_1_expansion_readiness": {
+    "target_modality_cells": 24,
+    "cells_ready_for_1000": 0,
+    "internal_diversity_seeds": 875,
+    "diversity_and_protocol_seeds": 52,
+    "diversity_and_protocol_seed_scope": "KRAS_G12C_targeted_small_molecule_only",
+    "public_exact_matches_excluded_from_novelty_focused_seed": true,
+    "global_novelty_claim": false,
+    "druggability_claim": false
   },
   "v8_planned_slots_not_materialized_candidates": {
     "biologic": 1000,
