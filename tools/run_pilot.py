@@ -22,7 +22,13 @@ import time
 from pathlib import Path
 
 from pocket_bench.dataset.catalog import CURATED_ENTRIES
-from pocket_bench.methods import foliation_pocket, fpocket_wrap, p2rank_wrap, prediction
+from pocket_bench.methods import (
+    foliation_pocket,
+    fpocket_wrap,
+    geometric_foundation,
+    p2rank_wrap,
+    prediction,
+)
 from pocket_bench.metrics import score_prediction
 from pocket_bench.pdb_io import parse_pdb_atoms
 
@@ -80,6 +86,9 @@ def main() -> int:
     methods = {
         "foliation_pocket_ro": lambda rec, pid: foliation_pocket.predict(
             rec, pdb_id=pid, grid_step=GRID_STEP, top_k=TOP_K
+        ),
+        "geometric_foundation": lambda rec, pid: geometric_foundation.predict(
+            rec, pdb_id=pid, top_k=TOP_K
         ),
         "fpocket": lambda rec, pid: fpocket_wrap.predict(rec, pdb_id=pid, top_k=TOP_K),
         "p2rank": lambda rec, pid: p2rank_wrap.predict(rec, pdb_id=pid, top_k=TOP_K),

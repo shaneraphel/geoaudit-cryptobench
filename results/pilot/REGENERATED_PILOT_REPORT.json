@@ -1,6 +1,6 @@
 {
   "schema": "foliation.pocket_bench.regenerated_report.v1",
-  "generated_at": "2026-07-24T23:57:08+0800",
+  "generated_at": "2026-07-25T02:19:41+0800",
   "clinical_grade": false,
   "not_a_locked_test": true,
   "split": "all",
@@ -9,32 +9,13 @@
   "dca_threshold_a": 4.0,
   "unit_of_analysis": "one_pdb_structure",
   "n_structures": 14,
-  "summaries": {
-    "foliation_pocket_ro": {
-      "top1_dca_le_4A_hits": 0,
-      "intention_to_evaluate_denominator": 14,
-      "tool_unavailable": 0,
-      "crash_or_empty": 0
-    },
-    "fpocket": {
-      "top1_dca_le_4A_hits": 0,
-      "intention_to_evaluate_denominator": 14,
-      "tool_unavailable": 0,
-      "crash_or_empty": 0
-    },
-    "p2rank": {
-      "top1_dca_le_4A_hits": 14,
-      "intention_to_evaluate_denominator": 14,
-      "tool_unavailable": 0,
-      "crash_or_empty": 0
-    },
-    "random_bbox": {
-      "top1_dca_le_4A_hits": 0,
-      "intention_to_evaluate_denominator": 14,
-      "tool_unavailable": 0,
-      "crash_or_empty": 0
-    }
-  },
+  "summaries": [
+    "foliation_pocket_ro",
+    "geometric_foundation",
+    "fpocket",
+    "p2rank",
+    "random_bbox"
+  ],
   "per_method": {
     "foliation_pocket_ro": {
       "ok": 14,
@@ -139,6 +120,112 @@
           "top1_success": false,
           "best_dca": 8.796161043014104,
           "dcc_top1": 12.743192451173767
+        }
+      ]
+    },
+    "geometric_foundation": {
+      "ok": 14,
+      "top1_hits": 14,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8286543308279933,
+          "dcc_top1": 3.5082152748940603
+        },
+        {
+          "pdb": "1GWR",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.5859598962386418,
+          "dcc_top1": 3.1401348573747603
+        },
+        {
+          "pdb": "1X7R",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.6952422896652544,
+          "dcc_top1": 3.0190813292291416
+        },
+        {
+          "pdb": "3UUD",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.8452614990835297,
+          "dcc_top1": 3.37060341111202
+        },
+        {
+          "pdb": "2IOK",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.529903950745956,
+          "dcc_top1": 4.1205693882439745
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8264998487598172,
+          "dcc_top1": 0.883296675223507
+        },
+        {
+          "pdb": "5DXB",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.9803065846968514,
+          "dcc_top1": 2.552398016571866
+        },
+        {
+          "pdb": "4PXM",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8629449576884975,
+          "dcc_top1": 2.5061692161544125
+        },
+        {
+          "pdb": "3ERT",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.9138571002036702,
+          "dcc_top1": 2.0519247294003877
+        },
+        {
+          "pdb": "3OS8",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.4694958319097058,
+          "dcc_top1": 3.2289338294156624
+        },
+        {
+          "pdb": "1UOM",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8717115348554243,
+          "dcc_top1": 1.0506219400609806
+        },
+        {
+          "pdb": "5U2B",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.3885985741026834,
+          "dcc_top1": 2.2416229506013567
+        },
+        {
+          "pdb": "6CHW",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.5624576794268683,
+          "dcc_top1": 2.603065290900799
+        },
+        {
+          "pdb": "4Q50",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.9204929054802522,
+          "dcc_top1": 3.3156396715609815
         }
       ]
     },
@@ -461,5 +548,6 @@
       ]
     }
   },
-  "truth_boundary": "Regenerated on CORRECTED chain-scoped labels. Splits are NOT cluster-disjoint, so NO comparative-superiority claim is made. TOOL_UNAVAILABLE is excluded from the denominator, never counted as a miss. clinical_grade=false."
+  "truth_boundary": "Regenerated on CORRECTED chain-scoped labels. Splits are NOT cluster-disjoint, so NO comparative-superiority claim is made. TOOL_UNAVAILABLE is excluded from the denominator, never counted as a miss. clinical_grade=false.",
+  "geometric_foundation_note": "geometric_foundation computed this run (deterministic, ligand-free); p2rank/fpocket/random/foliation rows carried over from the pinned baseline run (BASELINE_ENV.json) since fpocket/P2Rank are not currently on PATH \u2014 reinstall via bin/install-*.sh to rerun all methods together with tools/run_pilot.py."
 }

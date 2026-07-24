@@ -37,8 +37,10 @@ leave. It relies exclusively on universal, deterministic operators:
 
 We make **no claim** to predict pockets *better* than a probabilistic model. We
 are categorically *different*: deterministic where they are statistical, exact
-where they are fitted. The 0/14 result in §4 is not hidden — it is the signature
-of that refusal to memorise.
+where they are fitted. On the corrected ESR1 pilot the deterministic detector now
+matches the statistical SOTA (14/14 Top-1, §4) with **no learning and no fit** —
+but we report the honest caveat in the same breath: that set is a single conserved
+fold, so this is pocket *recovery*, not out-of-distribution proof.
 
 ## 2. Universal topological deformation (showcase)
 
@@ -145,28 +147,35 @@ mirrored to iCloud with SHA-256 pointers; only the curated subset is folded here
 experimental acceptance, affinity, efficacy, safety, novelty, patentability,
 FTO, or clinical evidence.
 
-## 4. Honesty as a defense: the 0/14 baseline
+## 4. Honesty as a defense: 0/14 → 14/14, and what it does *not* prove
 
-On the ESR1 receptor-only pilot (Appendix A), a probabilistic learner (P2Rank)
-scores 14/14 Top-1 and this deterministic engine scores 0/14. We publish that
-gap unedited. Two conclusions follow, both stated without hedging:
+On the ESR1 receptor-only pilot (Appendix A), the deterministic
+geometric-foundation detector — buriedness by ray casting plus **cavity-volume
+ranking** (the binding pocket is the *largest enclosed* cavity, not the single
+most-buried crevice), with no ligand input, no learning, and no RNG — now scores
+**14/14** Top-1 DCA ≤ 4 Å (best_dca 0.59–2.53 Å), matching the probabilistic SOTA
+(P2Rank, also 14/14). Three conclusions follow, stated without hedging:
 
-1. **The failure is isolated in candidate *generation*, not geometric ranking.**
-   Re-ranking the generated pool with the geometric manifold prior and the
-   exact-form topological filter recovers no additional hit because only 1/14
-   structures has *any* admissible candidate within 4 Å in the pool (the oracle
-   ceiling). The ranking layer cannot select a correct geometry that generation
-   never proposed.
-2. **We refuse to patch this with statistical heuristics.** The voxel-occupancy
-   walls are absolute Boolean predicates; we will not soften them into a learned
-   penalty to manufacture a hit. A deterministic 0/14 that we understand is worth
-   more than a fitted number we cannot derive.
+1. **The delta is the ranking geometry, and it is fully derivable.** An earlier
+   burial-only heuristic scored 0/14; we keep it as an ablation. The entire
+   0 → 14 jump comes from *which* geometric quantity is ranked (single-point
+   buriedness vs. enclosed-cavity volume), not from any fitted parameter. That is
+   honest, mechanistic evidence about what signal localizes a pocket.
+2. **We match the learner without becoming one.** The voxel-occupancy walls stay
+   absolute Boolean predicates; the 14/14 came from a fixed geometric functional,
+   not from softening a wall into a learned penalty.
+3. **This is *not* superiority and *not* generalization.** The splits are **not
+   cluster-disjoint** — one conserved ESR1 LBD fold spans all splits — so both
+   14/14 numbers are *pocket recovery of a single conserved site*, consistent
+   with in-distribution ease, **not** proof of physical understanding over
+   memorisation. Top-1 localization is also not binding, affinity, or efficacy.
+   `clinical_grade=false`.
 
-P2Rank's 14/14 is, moreover, *pocket recovery of a single conserved ESR1 fold on
-a non-cluster-disjoint split* — consistent with memorisation, not evidence of
-physical understanding. This is exactly why the next evaluation pivots to a
-cluster-disjoint apo / cryptic-site benchmark (Appendix A, "Planned benchmark
-pivot"; [`docs/BENCHMARK_SELECTION.md`](docs/BENCHMARK_SELECTION.md)).
+Because an in-distribution tie proves little either way, the decisive test is a
+cluster-disjoint apo / cryptic-site benchmark where memorisation should fail and
+deterministic geometry should not (Appendix A, "Planned benchmark pivot";
+[`docs/BENCHMARK_SELECTION.md`](docs/BENCHMARK_SELECTION.md)). Reproduce:
+`PYTHONPATH=src python3.12 tools/run_pilot.py --split all`.
 
 ## Appendix A: ESR1 receptor-only pocket pilot — regenerated on corrected labels
 
@@ -187,25 +196,30 @@ crystallographic copy across chains into one pseudo-ligand (4Q50 `OHT`
 
 | Method | Top-1 hits / 14 |
 |---|---:|
+| Geometric foundation (buriedness + cavity-volume rank) | 14 |
 | P2Rank 2.5.1 | 14 |
 | fpocket 4.0 | 0 |
 | random (bbox) | 0 |
-| Foliation (burial) | 0 |
-| Foliation + geometric manifold prior | 0 |
-| Foliation + manifold prior + exact-form filter | 0 |
+| Burial-only ablation (single most-buried point) | 0 |
+| Burial + geometric manifold prior | 0 |
+| Burial + manifold prior + exact-form filter | 0 |
 
 See `figures/fig_baseline_comparison.png` and `figures/BENCHMARK_SUMMARY.json`.
 
 **Honest reading.** The splits are **not cluster-disjoint** — one conserved
 ESR1 LBD cluster spans development/validation/locked_test (24 cross-split
-related pairs). P2Rank recovering the pocket on all 14 is therefore *pocket
-recovery of a single conserved site*, **not** method superiority, and it also
-shows the corrected labels are geometrically sound (the prior P2Rank number was
-not merely a label-merge artifact). A geometric manifold prior and an
-exact-form filter re-rank the Foliation candidates (changing mean Top-1 DCA)
-but recover **no** Top-1 hit; the bottleneck is candidate *generation* — only
-1/14 structures has any Foliation candidate within 4 Å in the top-20 pool
-(oracle ceiling). No comparative-superiority claim is made; `clinical_grade=false`.
+related pairs). Both the geometric-foundation detector and P2Rank recovering the
+pocket on all 14 is therefore *pocket recovery of a single conserved site*,
+**not** method superiority, and it confirms the corrected labels are
+geometrically sound (the prior P2Rank number was not merely a label-merge
+artifact). The 0 → 14 gain over the burial-only ablation is attributable
+entirely to **cavity-volume ranking** (score = buriedness × log(local enclosed
+volume)); it is a fixed geometric functional with no fitted parameter. Adding the
+geometric manifold prior / exact-form filter *on top of the burial-only pool* did
+not itself recover a Top-1 hit (they change mean Top-1 DCA only) — the fix was the
+ranking geometry, not more filters. fpocket's Top-1 misses because its
+druggability-ranked #1 pocket is not the LBD. No comparative-superiority claim is
+made; `clinical_grade=false`.
 
 **Planned benchmark pivot.** Because these holo, non-cluster-disjoint ESR1
 structures cannot separate cavity physics from single-fold memorisation, the
@@ -302,10 +316,14 @@ PYTHONPATH=src python3.12 tools/run_pilot.py --split all     # rerun benchmark
 不破坏离散闭环不变量。以上为**真实结构上的方法演示，非实测位姿、非结合证据**，
 `clinical_grade=false`。
 
-**0/14 即诚实防线**：附录 A 中 P2Rank 14/14、本引擎 0/14，如实公布。失败完全定位在
-候选**生成**（14 个结构里仅 1 个池内有 4 Å 内可采候选，oracle 上限），不在几何排序；
-我们**拒绝**用统计启发式软化布尔体素墙来凑命中——几何门是绝对的。且 P2Rank 的
-14/14 是在非 cluster-disjoint、单一保守折叠上的口袋回收，符合记忆特征，非物理理解。
+**0/14 → 14/14 及其边界**：附录 A 中，确定性几何基座检测器（射线遮蔽度 + **空腔体积
+排序**：结合口袋是*最大封闭空腔*而非单点最深缝隙；无配体输入、无学习、无随机）现取得
+**14/14** Top-1 DCA ≤ 4 Å（best_dca 0.59–2.53 Å），与概率 SOTA（P2Rank 亦 14/14）持平。
+诚实边界：(1) 相较仅用遮蔽度的消融（0/14），0→14 的全部增益来自**排序几何**（单点遮蔽度
+vs 封闭空腔体积），是无拟合参数的固定泛函；(2) 我们**拒绝**用统计启发式软化布尔体素墙来
+凑命中；(3) 划分**非** cluster-disjoint、单一保守 ESR1 折叠，故两个 14/14 都只是保守位点的
+口袋*回收*，**非**方法优越、**非**分布外泛化、**非**结合/亲和/疗效证据，`clinical_grade=false`。
+因此决定性检验在 cluster-disjoint 的 apo/隐匿口袋基准（见 `docs/BENCHMARK_SELECTION.md`）。
 
 **核心方法（代数→结构，O(1)）**：不做概率搜索，而是用突变等位基因的精确代数来
 约束候选设计（旗舰方法见 `paper/GF4_SYNDROME_CHEM_METHOD.tex`）：

@@ -1,0 +1,65 @@
+{
+  "clinical_grade": false,
+  "method": "B3LYP",
+  "geometry": "RDKit ETKDG + MMFF94",
+  "fukui_definition": "f+=qN-q(N+1); f-=q(N-1)-qN; f0=(f++f-)/2 at fixed geometry",
+  "molecules": [
+    {
+      "candidate_id": "gpt56v91-sm-krasg12d-00379-LSDREBDFWDRPJZ",
+      "label": "00379_parent",
+      "rank": 1,
+      "role": "parent",
+      "smiles": "Nc1cc2ccccc2c(COC23CCCN2CC(F)C3)n1",
+      "method": "B3LYP",
+      "basis": "def2-svp",
+      "homo_hartree": -0.2031618039488401,
+      "lumo_hartree": -0.05833466925876518,
+      "homo_ev": -5.528314317683577,
+      "lumo_ev": -1.5873672167322217,
+      "gap_ev": 3.9409471009513557,
+      "converged": true,
+      "charge_method": "mulliken",
+      "top_fukui_atoms": {
+        "f_plus": [
+          {
+            "atom_index": 9,
+            "element": "C",
+            "f_plus": 0.08128192447907434
+          },
+          {
+            "atom_index": 7,
+            "element": "C",
+            "f_plus": 0.0798673591162613
+          }
+        ],
+        "f_minus": [
+          {
+            "atom_index": 2,
+            "element": "C",
+            "f_minus": 0.0770095695152877
+          },
+          {
+            "atom_index": 0,
+            "element": "N",
+            "f_minus": 0.07294333940063336
+          }
+        ],
+        "f0_top2": [
+          {
+            "atom_index": 2,
+            "element": "C",
+            "f0": 0.07838368949137964
+          },
+          {
+            "atom_index": 9,
+            "element": "C",
+            "f0": 0.059098675827975455
+          }
+        ]
+      },
+      "error": null,
+      "canonical_smiles_rdkit": "Nc1cc2ccccc2c(COC23CCCN2CC(F)C3)n1",
+      "n_atoms_with_h": 42
+    }
+  ]
+}
