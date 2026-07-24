@@ -1,0 +1,465 @@
+{
+  "schema": "foliation.pocket_bench.regenerated_report.v1",
+  "generated_at": "2026-07-24T23:21:16+0800",
+  "clinical_grade": false,
+  "not_a_locked_test": true,
+  "split": "all",
+  "labels": "chain_scoped_single_instance_corrected",
+  "primary_metric": "top1_dca_le_4A",
+  "dca_threshold_a": 4.0,
+  "unit_of_analysis": "one_pdb_structure",
+  "n_structures": 14,
+  "summaries": {
+    "foliation_pocket_ro": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    },
+    "fpocket": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 0,
+      "tool_unavailable": 14,
+      "crash_or_empty": 0
+    },
+    "p2rank": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 0,
+      "tool_unavailable": 14,
+      "crash_or_empty": 0
+    },
+    "random_bbox": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    }
+  },
+  "per_method": {
+    "foliation_pocket_ro": {
+      "ok": 14,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.224807150347537,
+          "dcc_top1": 10.757408622093143
+        },
+        {
+          "pdb": "1GWR",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.6244372376334,
+          "dcc_top1": 10.97725961630406
+        },
+        {
+          "pdb": "1X7R",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.554854561914636,
+          "dcc_top1": 10.479837007558674
+        },
+        {
+          "pdb": "3UUD",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.517653519411278,
+          "dcc_top1": 10.747925842159983
+        },
+        {
+          "pdb": "2IOK",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.315770379820522,
+          "dcc_top1": 12.41645443902346
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.408435178075154,
+          "dcc_top1": 12.610920412523738
+        },
+        {
+          "pdb": "5DXB",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.488709439561013,
+          "dcc_top1": 11.7145951928151
+        },
+        {
+          "pdb": "4PXM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.184352471805562,
+          "dcc_top1": 11.496860626313321
+        },
+        {
+          "pdb": "3ERT",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.19664259213211,
+          "dcc_top1": 13.799648442332593
+        },
+        {
+          "pdb": "3OS8",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 7.9377727544443495,
+          "dcc_top1": 10.649180382829444
+        },
+        {
+          "pdb": "1UOM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.198463720254999,
+          "dcc_top1": 12.912017060685026
+        },
+        {
+          "pdb": "5U2B",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 23.099859399146368,
+          "dcc_top1": 25.280726461464074
+        },
+        {
+          "pdb": "6CHW",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 10.28812886080525,
+          "dcc_top1": 15.842184241637275
+        },
+        {
+          "pdb": "4Q50",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.796161043014104,
+          "dcc_top1": 12.743192451173767
+        }
+      ]
+    },
+    "fpocket": {
+      "ok": 0,
+      "top1_hits": 0,
+      "unavailable": 14,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "1GWR",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "1X7R",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "3UUD",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "2IOK",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "5DXB",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "4PXM",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "3ERT",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "3OS8",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "1UOM",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "5U2B",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "6CHW",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "4Q50",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        }
+      ]
+    },
+    "p2rank": {
+      "ok": 0,
+      "top1_hits": 0,
+      "unavailable": 14,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "1GWR",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "1X7R",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "3UUD",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "2IOK",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "5DXB",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "4PXM",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "3ERT",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "3OS8",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "1UOM",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "5U2B",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "6CHW",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        },
+        {
+          "pdb": "4Q50",
+          "status": "TOOL_UNAVAILABLE",
+          "top1_success": null,
+          "best_dca": null,
+          "dcc_top1": null
+        }
+      ]
+    },
+    "random_bbox": {
+      "ok": 14,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 22.595273692989757,
+          "dcc_top1": 25.950800138146356
+        },
+        {
+          "pdb": "1GWR",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 23.93652262635857,
+          "dcc_top1": 25.990932277855457
+        },
+        {
+          "pdb": "1X7R",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 31.931336031302994,
+          "dcc_top1": 35.40320955729629
+        },
+        {
+          "pdb": "3UUD",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 28.53941114362505,
+          "dcc_top1": 30.895376592008088
+        },
+        {
+          "pdb": "2IOK",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 41.66533779666923,
+          "dcc_top1": 44.46420899146594
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 22.824518073381668,
+          "dcc_top1": 25.286030974145252
+        },
+        {
+          "pdb": "5DXB",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 19.33969774142796,
+          "dcc_top1": 20.378569827348624
+        },
+        {
+          "pdb": "4PXM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 19.295510442178145,
+          "dcc_top1": 20.384210258649798
+        },
+        {
+          "pdb": "3ERT",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 20.135369597484736,
+          "dcc_top1": 26.701562995904176
+        },
+        {
+          "pdb": "3OS8",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 20.56378537386833,
+          "dcc_top1": 22.764393599097627
+        },
+        {
+          "pdb": "1UOM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 38.1771488654994,
+          "dcc_top1": 40.09995194380679
+        },
+        {
+          "pdb": "5U2B",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 21.071572899877996,
+          "dcc_top1": 27.482656806034324
+        },
+        {
+          "pdb": "6CHW",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 23.38802333497833,
+          "dcc_top1": 28.10744140592595
+        },
+        {
+          "pdb": "4Q50",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 37.225544836358175,
+          "dcc_top1": 39.619085546294336
+        }
+      ]
+    }
+  },
+  "truth_boundary": "Regenerated on CORRECTED chain-scoped labels. Splits are NOT cluster-disjoint, so NO comparative-superiority claim is made. TOOL_UNAVAILABLE is excluded from the denominator, never counted as a miss. clinical_grade=false."
+}
