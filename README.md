@@ -48,20 +48,46 @@ logic is not reused as PROTAC ternary evidence or as a macrocycle surrogate.
 
 The companion release currently reports:
 
-- Phase 1: 4,000 globally unique `IDENTITY_READY` graph identities
+- Phase 1: 4,000 campaign-unique `IDENTITY_READY` graph identities
 - Phase 2: 4,000 `CHEMISTRY_READY` records after modality-specific chemistry
   gates, with target allocation preserved
 - Per-candidate bilingual chemistry / biology / pharmacology text
 - HTTPS source URLs and inherited SHA256 digests
 - Target-local structural observations without docking claims
+- v8: one deterministic 4,000-record 2D SDF, a per-record bond-graph index,
+  4,000 RDKit ligand-feature records (67,686 features), and a 24-structure
+  modality × target gallery
+- v8 internal diversity audit: dense analogue/template families are explicit;
+  the largest macrocycle scaffold occupies 11.6% of that modality
+- v8 public exact-match snapshot: 81/4,000 exact InChIKey matches in retrieved
+  PubChem/ChEMBL snapshots (44 small molecules, 37 molecular glues); 3,919
+  no-hits remain bounded public-database results, not global novelty or FTO
+- v8 bounded accelerator sidecar: 24 ligand-only 3D representatives; 18
+  force-field minimizations converged, NCGD convergence was 0/24 (`MAX_ITER`),
+  GCU integer software-reference parity was 24/24; no target pose, physical
+  hardware execution or new netlist is claimed
 
 `CHEMISTRY_READY` is a computational triage state. It is not experimental
 acceptance, affinity, efficacy, degradation, safety, novelty, patentability,
 or clinical evidence.
 
-Open companion PR:
+Merged companion v7 PR:
 
 - https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/1
+
+The SDF coordinates are depictions, not target poses. The internal diversity
+audit is not a global novelty or patentability search. PROTAC ternary complexes,
+molecular-glue partner interfaces and accepted macrocycle conformer ensembles
+remain missing evidence, not implied results.
+
+The companion v8 contract also allocates 1,000 planning slots each for
+biologics, gene medicines and engineered stem/progenitor-cell products. These
+are not 3,000 materialized candidates. Sequence-defined proteins and
+oligonucleotides receive a theoretical formula only when every chain/sequence,
+terminus, covalent modification and charge convention is explicit. Living
+engineered-cell products, heterogeneous biologics, viral vectors and delivery
+assemblies do not have one molecular formula; they require product or component
+specifications.
 
 ## Appendix A: ESR1 receptor-only pocket pilot
 

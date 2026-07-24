@@ -20,6 +20,40 @@ class TestPaperScope(unittest.TestCase):
             {"ESR1", "KRAS", "FLT3", "PIM1", "PIK3CA", "CDK4/6"},
         )
         self.assertEqual(companion["counts"]["chemistry_ready"], 4000)
+        self.assertEqual(companion["v8_structure_assets"]["sdf_records"], 4000)
+        self.assertEqual(
+            companion["v8_structure_assets"]["ligand_feature_count"], 67686
+        )
+        self.assertIs(
+            companion["v8_structure_assets"]["target_pose_computed"], False
+        )
+        self.assertIs(
+            companion["v8_internal_diversity_audit"]["global_novelty_claim"],
+            False,
+        )
+        public_exact = companion["v8_public_exact_match_snapshot"]
+        self.assertEqual(public_exact["public_exact_matches"], 81)
+        self.assertEqual(
+            public_exact["no_exact_match_in_queried_snapshots"], 3919
+        )
+        self.assertIs(public_exact["all_queries_complete"], True)
+        self.assertIs(public_exact["global_novelty_claim"], False)
+        self.assertIs(public_exact["patentability_claim"], False)
+        self.assertIs(public_exact["freedom_to_operate_claim"], False)
+        accelerator = companion["v8_bounded_accelerator_sidecar"]
+        self.assertEqual(accelerator["representative_ligand_only_3d_records"], 24)
+        self.assertEqual(accelerator["gcu_integer_reference_parity"], 24)
+        self.assertEqual(accelerator["ncgd_converged"], 0)
+        self.assertIs(accelerator["physical_hardware_executed"], False)
+        self.assertIs(accelerator["new_aig_or_netlist_created"], False)
+        self.assertEqual(
+            sum(
+                companion[
+                    "v8_planned_slots_not_materialized_candidates"
+                ].values()
+            ),
+            3000,
+        )
         self.assertIn(
             "foliation-er100-multimodal-chemistry", companion["companion_repo"]
         )
