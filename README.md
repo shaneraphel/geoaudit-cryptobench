@@ -28,7 +28,7 @@ boundaries. Computation specializes by target pocket/family:
 | Panel slot | Specialization focus |
 |---|---|
 | ESR1 | Nuclear-receptor LBD / Helix-12 / AF2; genotype-separated WT, Y537S, D538G |
-| KRAS | G12C Switch-II; PDB `6OIM` (not BRD4 `4LYW`) |
+| KRAS | G12C Switch-II (`6OIM`) and G12D binary refs (`9BL0` noncovalent primary, `9GBJ` covalent observation-only); not BRD4 `4LYW` |
 | FLT3 | Kinase-domain activation-loop context; ITD is not a KD-crystal surrogate |
 | PIM1 | Hinge / P-loop ATP site with macrocycle occupancy references |
 | PIK3CA | Helical vs kinase-domain mutants kept separate; `8W9A` for H1047R allostery |
@@ -245,3 +245,28 @@ historical identities are lineage-only and blocked from v9 migration: mixed
 genotype/isoform packs, CDK `5L2I` route drift, conflicting geometry flags,
 24-cell biology/pharmacology boilerplate and null-valued hard gates must be
 repaired before any identity expansion or experimental-priority claim.
+
+## v9.1 companion-evidence update / KRAS G12D computational priority
+
+The companion evidence repository now ships an additive KRAS G12D
+noncovalent small-molecule **computational-priority** campaign:
+
+- Generated 1,335 source-backed medchem/BRICS variants from 84 MW≤800 G12D
+  parents; accepted **494** identities under Morgan-0.8 / Murcko-cap-10 gates
+  without quota forcing.
+- Primary geometry `9BL0`; covalent `9GBJ` observation-only.
+- Full packaging in companion
+  `releases/v9_1/KRAS_G12D_SM_v2026-07-24/`: JSONL.gz, Parquet, 2D SDF.gz,
+  top-100 3D ensemble SDF.gz, novelty/patent ledger, top-20 wet-lab plans.
+- Novelty: ChEMBL exact hits = 3; PubChem successful exact queries found 0 CIDs;
+  SureChEMBL remains remote-query metadata only (no 15GB snapshot claim).
+- This does **not** clear the v9 `MAJOR_REVISION` lineage-migration block, does
+  **not** claim 1,000 druggable candidates, and does **not** establish global
+  novelty, FTO, affinity, or clinical readiness.
+
+伴随证据库现已发布附加的 KRAS G12D 非共价小分子**计算优先**战役：由 84 个
+MW≤800 G12D 亲本生成 1,335 个有来源药化/BRICS 变体，在 Morgan-0.8 /
+Murcko≤10 硬门下接受 **494** 个身份且不强制凑满 1,000；主几何为 `9BL0`，
+`9GBJ` 仅作共价观察。完整 JSONL/Parquet/SDF/三维/新颖性/湿实验包在伴随库
+`releases/v9_1/KRAS_G12D_SM_v2026-07-24/`。这不解除 v9 `MAJOR_REVISION`
+谱系迁移封锁，也不构成可成药、全球新颖性、FTO、亲和力或临床就绪主张。
