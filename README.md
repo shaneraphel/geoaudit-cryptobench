@@ -1,4 +1,6 @@
-# Foliation — Multimodal Oncology Computational Chemistry
+# GF(4) Allele-Conditioned Computational Chemistry
+
+*Multitarget, multimodal computational chemistry for oncology driver alleles.*
 
 `clinical_grade=false`
 
