@@ -3,6 +3,7 @@
   "clinical_grade": false,
   "companion_repo": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry",
   "companion_pr_v7_merged": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/1",
+  "companion_pr_v8": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/2",
   "v8_working_branch": "feat/er100-v8-structure-assets",
   "phase1_dir": "releases/v7/GPT56_ER100_MULTITARGET_V7_PHASE1_v2026-07-24",
   "phase2_dir": "releases/v7/GPT56_ER100_MULTITARGET_V7_PHASE2_CHEMISTRY_v2026-07-24",
