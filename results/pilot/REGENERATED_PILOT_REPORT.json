@@ -1,6 +1,6 @@
 {
   "schema": "foliation.pocket_bench.regenerated_report.v1",
-  "generated_at": "2026-07-24T23:21:16+0800",
+  "generated_at": "2026-07-24T23:57:08+0800",
   "clinical_grade": false,
   "not_a_locked_test": true,
   "split": "all",
@@ -18,14 +18,14 @@
     },
     "fpocket": {
       "top1_dca_le_4A_hits": 0,
-      "intention_to_evaluate_denominator": 0,
-      "tool_unavailable": 14,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
       "crash_or_empty": 0
     },
     "p2rank": {
-      "top1_dca_le_4A_hits": 0,
-      "intention_to_evaluate_denominator": 0,
-      "tool_unavailable": 14,
+      "top1_dca_le_4A_hits": 14,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
       "crash_or_empty": 0
     },
     "random_bbox": {
@@ -143,214 +143,214 @@
       ]
     },
     "fpocket": {
-      "ok": 0,
+      "ok": 14,
       "top1_hits": 0,
-      "unavailable": 14,
+      "unavailable": 0,
       "crash_empty": 0,
       "rows": [
         {
           "pdb": "1ERE",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.667322185402877,
+          "dcc_top1": 14.802715010422926
         },
         {
           "pdb": "1GWR",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 14.869297544031195,
+          "dcc_top1": 17.03840246653257
         },
         {
           "pdb": "1X7R",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 13.12502324406048,
+          "dcc_top1": 15.052441041366727
         },
         {
           "pdb": "3UUD",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 14.398749503698934,
+          "dcc_top1": 16.587260501568423
         },
         {
           "pdb": "2IOK",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 27.396463472600903,
+          "dcc_top1": 30.589738448568863
         },
         {
           "pdb": "3HQ5",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 26.709546713871685,
+          "dcc_top1": 31.078536539122624
         },
         {
           "pdb": "5DXB",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 15.57626254042975,
+          "dcc_top1": 17.89016383463443
         },
         {
           "pdb": "4PXM",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 7.130719886366535,
+          "dcc_top1": 12.332534658777744
         },
         {
           "pdb": "3ERT",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 14.137696571883835,
+          "dcc_top1": 18.287412574729775
         },
         {
           "pdb": "3OS8",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 13.97636105820781,
+          "dcc_top1": 16.07444071569832
         },
         {
           "pdb": "1UOM",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 6.043513929917535,
+          "dcc_top1": 11.81483507301871
         },
         {
           "pdb": "5U2B",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.652793351848905,
+          "dcc_top1": 15.52868844205239
         },
         {
           "pdb": "6CHW",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 16.10920871571289,
+          "dcc_top1": 20.922556415491314
         },
         {
           "pdb": "4Q50",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.798511179603842,
+          "dcc_top1": 16.60329715275328
         }
       ]
     },
     "p2rank": {
-      "ok": 0,
-      "top1_hits": 0,
-      "unavailable": 14,
+      "ok": 14,
+      "top1_hits": 14,
+      "unavailable": 0,
       "crash_empty": 0,
       "rows": [
         {
           "pdb": "1ERE",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.7602218426222715,
+          "dcc_top1": 0.23765406581836523
         },
         {
           "pdb": "1GWR",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.5847673896516463,
+          "dcc_top1": 0.7203356596059922
         },
         {
           "pdb": "1X7R",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.7223122178116612,
+          "dcc_top1": 0.5262382754038308
         },
         {
           "pdb": "3UUD",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8352856936402057,
+          "dcc_top1": 0.596098469214609
         },
         {
           "pdb": "2IOK",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.4874906487101036,
+          "dcc_top1": 0.8414172646988767
         },
         {
           "pdb": "3HQ5",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8413394439820334,
+          "dcc_top1": 0.11067420731411834
         },
         {
           "pdb": "5DXB",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.9842421805633024,
+          "dcc_top1": 0.6537888688254032
         },
         {
           "pdb": "4PXM",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8439785186839798,
+          "dcc_top1": 0.7227584105356379
         },
         {
           "pdb": "3ERT",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.9999920699685572,
+          "dcc_top1": 0.8067203937830882
         },
         {
           "pdb": "3OS8",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.1344994931686814,
+          "dcc_top1": 1.0811273199247888
         },
         {
           "pdb": "1UOM",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.7764900063748386,
+          "dcc_top1": 3.135521043772073
         },
         {
           "pdb": "5U2B",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.9876203015329328,
+          "dcc_top1": 0.6536794771266478
         },
         {
           "pdb": "6CHW",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.2488397215015228,
+          "dcc_top1": 1.756483151469199
         },
         {
           "pdb": "4Q50",
-          "status": "TOOL_UNAVAILABLE",
-          "top1_success": null,
-          "best_dca": null,
-          "dcc_top1": null
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.0596760873021536,
+          "dcc_top1": 1.9718345650621474
         }
       ]
     },

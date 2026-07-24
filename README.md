@@ -104,8 +104,31 @@ crystallographic copy across chains into one pseudo-ligand (4Q50 `OHT`
   (`tools/build_labels.py`, raw PDBs pinned by SHA-256 in iCloud).
 - The prior pilot numbers are marked `INVALIDATED_PENDING_LABEL_REGENERATION`
   and are not citable; the run harness `tools/run_pilot.py` regenerates results
-  on corrected labels. Splits are not yet cluster-disjoint, so **no
-  comparative-superiority claim** is made and `clinical_grade=false`.
+  on corrected labels.
+
+### Results on corrected labels (Top-1 DCA ≤ 4 Å, n=14)
+
+| Method | Top-1 hits / 14 |
+|---|---:|
+| P2Rank 2.5.1 | 14 |
+| fpocket 4.0 | 0 |
+| random (bbox) | 0 |
+| Foliation (burial) | 0 |
+| Foliation + geometric manifold prior | 0 |
+| Foliation + manifold prior + exact-form filter | 0 |
+
+See `figures/fig_baseline_comparison.png` and `figures/BENCHMARK_SUMMARY.json`.
+
+**Honest reading.** The splits are **not cluster-disjoint** — one conserved
+ESR1 LBD cluster spans development/validation/locked_test (24 cross-split
+related pairs). P2Rank recovering the pocket on all 14 is therefore *pocket
+recovery of a single conserved site*, **not** method superiority, and it also
+shows the corrected labels are geometrically sound (the prior P2Rank number was
+not merely a label-merge artifact). A geometric manifold prior and an
+exact-form filter re-rank the Foliation candidates (changing mean Top-1 DCA)
+but recover **no** Top-1 hit; the bottleneck is candidate *generation* — only
+1/14 structures has any Foliation candidate within 4 Å in the top-20 pool
+(oracle ceiling). No comparative-superiority claim is made; `clinical_grade=false`.
 
 ### Leakage boundary
 
