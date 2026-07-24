@@ -1,173 +1,198 @@
-# ER100: multitarget, multimodal computational chemistry (single paper repo)
+# Foliation — Multimodal Oncology Computational Chemistry
 
 `clinical_grade=false`
 
-This is the **single** ER100 paper repository. The scientific program is
-multitarget and multimodal computational chemistry for oncology resistance — it
-is not a single-target ESR1 showcase and not a cross-disease paper. This README
-describes only the **current** state. Per-version internal history is kept
-local and unpublished.
+A single-repository, falsifiable computational-chemistry program for **oncology
+driver alleles**. The scientific target is a tumor driver mutation (KRAS
+G12C/G12D/G12V, ESR1 LBD mutants, FLT3, PIM1, PIK3CA, CDK4/6), not a
+regenerative-medicine or cell-state program. It is multitarget and multimodal.
+This README describes only the **current** state; internal version history is
+kept local and unpublished.
 
-> One paper, one repo. Full bulk evidence (all accepted identities, 3D
-> ensembles, ledgers) is kept in a **local private evidence tree**
-> (`foliation-er100-multimodal-chemistry/`) mirrored to iCloud with SHA-256
-> pointers. A curated top-N subset is folded into this repo so reviewers can
-> reproduce the headline evidence without downloading the bulk archive.
+## The idea: algebra → structure, in O(1)
 
-## Scope: shared principles, target-specific computation
+Instead of a probabilistic search, we condition candidate design on the exact
+algebra of the mutant allele. The flagship method paper is in
+[`paper/GF4_SYNDROME_CHEM_METHOD.tex`](paper/GF4_SYNDROME_CHEM_METHOD.tex):
 
-All six panel targets share fail-closed identity, provenance, and claim
-boundaries. Computation specializes by target pocket/family:
+1. **GF(4) isomorphism.** Nucleotide bases map to the finite field
+   \(GF(4)\cong\mathbb{F}_2[x]/(x^2+x+1)\): \(\phi(A)=0,\ \phi(C)=1,\
+   \phi(G)=\alpha,\ \phi(U)=\alpha^2\).
+2. **Sparse allele residual \(\delta\).** A 48-mer window centered on the codon
+   (e.g. KRAS G12) yields a mutant tensor; field addition against the wild-type
+   reference gives a sparse residual \(\delta = s_{\mathrm{mut}}\oplus
+   s_{\mathrm{ref}}\). Unmutated background loci annihilate; only the mutation
+   site survives (e.g. G12C → \(\delta=1\), G12D → \(\delta=\alpha\)).
+3. **Constrained syndrome solver \(Hx = B\delta\).** The candidate tensor \(x\)
+   is *conditioning evidence*: a geometry is algebraically admissible iff it
+   absorbs the topological tension \(\delta\) induced by the allele. The
+   tautological null \(T(s)=s+\alpha\) is deprecated.
+4. **Background-conditioned Toeplitz operators \(\mathcal{F}/\mathcal{G}\).**
+   \(H=\mathcal{F}(S_{\mathrm{bg}})\), \(B=\mathcal{G}(S_{\mathrm{bg}})\) are
+   Toeplitz spatial filters over the 47-mer genomic background, so two alleles
+   that share a raw residual (e.g. KRAS G12C vs FLT3 D835Y) are diverted into
+   non-colliding solution spaces.
 
-| Panel slot | Target-specific computational focus |
+The algebra is then projected to chemistry — SMILES, bond graphs,
+pharmacophores — and to 3D pocket geometry / van der Waals walls, where each
+modality gets its own protocol.
+
+The method encodes **algebraic conditioning only**. It does not claim a unique
+molecular inverse, docking affinity, steric clearance, synthesis, novelty, or
+clinical performance.
+
+## Scope: shared algebra, target-specific geometry
+
+| Panel target | Target-specific geometry focus |
 |---|---|
-| ESR1 | Nuclear-receptor LBD / Helix-12 / AF2; genotypes WT, Y537S, D538G kept separate |
-| KRAS | G12C Switch-II (`6OIM`) vs G12D binary refs (`9BL0` noncovalent primary, `9GBJ` covalent observation-only) |
-| FLT3 | Kinase-domain activation-loop context; ITD is not a KD-crystal surrogate |
+| ESR1 | Nuclear-receptor LBD / Helix-12 / AF2; genotypes WT, Y537S, D538G separated |
+| KRAS | G12C Switch-II (`6OIM`) vs G12D binary (`9BL0` noncovalent primary, `9GBJ` covalent observation-only) |
+| FLT3 | Kinase-domain activation loop; ITD is not a KD-crystal surrogate |
 | PIM1 | Hinge / P-loop ATP site with macrocycle occupancy references |
 | PIK3CA | Helical vs kinase-domain mutants separated; `8W9A` for H1047R allostery |
 | CDK4/6 | Explicit CDK4 vs CDK6 isoform labeling with cyclin context |
 
-Structure-defined modalities:
+Structure-defined modalities and their non-interchangeable protocols:
 
-1. targeted small molecule
-2. PROTAC
-3. molecular glue
-4. cyclic peptide / macrocycle
-
-### Modality protocols are not interchangeable
-
-- **Small molecule** → single-pocket geometry (e.g. KRAS G12D `9BL0`).
-- **PROTAC** → target–PROTAC–E3 ternary complex; a single-pocket score is
-  never accepted as PROTAC evidence.
-- **Molecular glue** → declared partner interface required.
-- **Macrocycle** → only structures with a target-matched wall and a
-  multi-conformer / ring-strain package; single-pocket Vina is not a
-  macrocycle surrogate.
+1. **targeted small molecule** → single-pocket geometry (e.g. KRAS G12D `9BL0`).
+2. **PROTAC** → target–PROTAC–E3 ternary complex; a single-pocket score is
+   never accepted as PROTAC evidence.
+3. **molecular glue** → declared partner interface required.
+4. **cyclic peptide / macrocycle** → target-matched wall + multi-conformer /
+   ring-strain package; single-pocket docking is not a macrocycle surrogate.
 
 ## Current materialized evidence
 
-The current release materializes one fully worked cell — **KRAS G12D
-noncovalent small molecule** — plus a sourced reference foundation for the
-other cells:
+One fully worked cell — **KRAS G12D noncovalent small molecule**:
 
 - **798** accepted identities from 2,783 source-backed medicinal-chemistry /
-  BRICS variants of MW≤800 G12D parents, under hard diversity gates
-  (Morgan/ECFP Tanimoto ≤ 0.8, Murcko-scaffold cap 10) with **no quota
-  forcing**. The shortfall against the 1,000-per-cell aspiration is reported,
-  not hidden — a count is not druggability.
-- Primary docking geometry `9BL0`; covalent `9GBJ` is observation-only.
-- Pocket-wall clash check uses **per-element Bondi (1964) van der Waals radii**
-  (element-aware), with a disclosed fixed-threshold `clash_severity_band`. This
-  is a geometric observation, not affinity.
-- **Toxicology screen**: RDKit structural-alert screen (literature-cited
-  alerts) across all 798 candidates; a hERG (`5VA1`) central-cavity geometric
-  compatibility probe. These are liability flags, not safety clearance.
-- Each candidate carries **bilingual (EN/中文)** chemistry / biology /
-  pharmacology rationale, HTTPS source URLs, and inherited SHA-256 digests.
+  BRICS variants of MW≤800 G12D parents, under hard diversity gates (ECFP
+  Tanimoto ≤ 0.8, Murcko-scaffold cap 10), **no quota forcing**. A count is not
+  druggability; the shortfall against 1,000 is reported, not hidden.
+- Primary docking geometry `9BL0`; covalent `9GBJ` observation-only. Pocket-wall
+  clash uses per-element Bondi (1964) van der Waals radii with a disclosed
+  fixed-threshold clash-severity band (geometry, not affinity).
+- Toxicology screen: RDKit structural-alert screen across all 798, plus a hERG
+  (`5VA1`) central-cavity geometric-compatibility probe (liability flags, not
+  safety clearance).
+- A curated top-24 subset (`evidence/kras_g12d_sm/`) carries bilingual (EN/中文)
+  chemistry/biology/pharmacology rationale, HTTPS source URLs, SHA-256 digests,
+  and 2D structures. Figures are in `figures/`.
 - Source foundation: ChEMBL_37 (2026-05-01) reference identities and diverse
-  chemotype anchors; **no synthetic assay or patient data** is used.
+  chemotype anchors; **no synthetic assay or patient data**.
 
-`CHEMISTRY_READY` / "accepted" is a computational triage state. It is **not**
-experimental acceptance, affinity, efficacy, degradation, safety, novelty,
-patentability, FTO, or clinical evidence.
+Full bulk evidence (all accepted identities, 3D ensembles, ledgers) is kept in a
+**local private evidence tree** (`foliation-er100-multimodal-chemistry/`)
+mirrored to iCloud with SHA-256 pointers; only the curated subset is folded here.
 
-## Appendix A: ESR1 receptor-only pocket pilot — **INVALIDATED, pending regeneration**
+`CHEMISTRY_READY` / "accepted" is a computational triage state — not
+experimental acceptance, affinity, efficacy, safety, novelty, patentability,
+FTO, or clinical evidence.
 
-This repository retains a retrospective six-structure ESR1 receptor-only pocket
-pilot as a methods appendix. **The previously reported pilot numbers are
-invalidated** and are not citable:
+## Appendix A: ESR1 receptor-only pocket pilot — regenerated on corrected labels
 
-- Root cause: labels were built by ligand *resname only*, merging every
-  crystallographic copy of the ligand across all chains into one pseudo-ligand
-  (e.g. 4Q50 `OHT` 29 → 232 heavy atoms ≈ 8 copies), so DCA could match the
-  wrong copy.
+A retrospective six-structure (now fifteen-structure) ESR1 receptor-only pocket
+benchmark accompanies the method as an appendix. A label-construction defect was
+found and fixed: labels had been built by ligand *resname only*, merging every
+crystallographic copy across chains into one pseudo-ligand (4Q50 `OHT`
+29 → 232 heavy atoms ≈ 8 copies), letting DCA match the wrong copy.
+
 - Fix: `pdb_io.ligand_heavy_coords` now selects a single chain-scoped ligand
-  instance (regression test included). `results/pilot/CLAIMS.json` and the pilot
-  report are marked `INVALIDATED_PENDING_LABEL_REGENERATION`.
-- No pilot number (Foliation / fpocket / P2Rank / random, including the prior
-  P2Rank 6/6) may be cited until labels are regenerated per chain and all
-  methods are re-run on a preregistered, cluster-disjoint holdout.
-
-Until then this appendix contributes only deterministic receptor-geometry
-auditing, with no hidden-pocket or comparative-significance claim.
+  instance (regression-tested); labels regenerated for all 15 structures
+  (`tools/build_labels.py`, raw PDBs pinned by SHA-256 in iCloud).
+- The prior pilot numbers are marked `INVALIDATED_PENDING_LABEL_REGENERATION`
+  and are not citable; the run harness `tools/run_pilot.py` regenerates results
+  on corrected labels. Splits are not yet cluster-disjoint, so **no
+  comparative-superiority claim** is made and `clinical_grade=false`.
 
 ### Leakage boundary
 
-Prediction and scoring are separate commands: prediction receives
-checksum-pinned, ATOM-only receptor PDBs; scoring joins ligand-derived labels
-only after prediction files are closed. `TOOL_UNAVAILABLE` is never a miss;
-`CRASH`/`EMPTY` is a failure in the intention-to-evaluate denominator.
+Prediction and scoring are separate: prediction receives checksum-pinned,
+ATOM-only receptor PDBs; scoring joins ligand-derived labels only after
+prediction files are closed. `TOOL_UNAVAILABLE` is never a miss;
+`CRASH`/`EMPTY` counts in the intention-to-evaluate denominator.
 
 ## Repository layout
 
 ```text
+paper/               flagship GF(4) allele-conditioned method (LaTeX)
 contracts/           paper scope and evidence pointers
 src/                 receptor-only prediction + separate scoring (Appendix A)
+tools/               build_labels.py, run_pilot.py, verify_claims.py
 data/manifests/      source URLs, checksums, split and clustering ledgers
-configs/             frozen seeds and pilot hyperparameters
-results/pilot/       retrospective Appendix A results (currently INVALIDATED)
+data/receptors/      15 ESR1 chain-A ATOM-only receptors
+data/labels/         14 corrected chain-scoped ligand labels
+evidence/            curated top-N candidate evidence (SDF + bilingual + URLs)
+figures/             multimodal + benchmark figures
+results/pilot/       Appendix A results (prior report invalidated)
 tests/               leakage, accounting, schema, and scope tests
 ```
 
 ## Reproduction
 
 ```bash
-make verify
-make test
+make verify   # scope, leakage, clinical_grade=false, pilot-invalidation gate
+make test     # unit suite incl. the ligand chain-selection regression
+PYTHONPATH=src python3.12 tools/build_labels.py --download   # rebuild labels
+PYTHONPATH=src python3.12 tools/run_pilot.py --split all     # rerun benchmark
 ```
-
-`make verify` enforces scope, leakage, `clinical_grade=false`, and the pilot
-invalidation marker. `make test` runs the unit suite (including the ligand
-chain-selection regression). Full Appendix A external-tool reproduction
-additionally requires pinned fpocket and P2Rank.
 
 ## Claim boundary
 
-- ER100 is multitarget and multimodal; this paper does not collapse all targets
-  into one ESR1 pocket score.
+- Multitarget and multimodal; the paper does not collapse all targets into one
+  ESR1 pocket score.
+- The GF(4) method encodes algebraic conditioning; it does not claim a unique
+  molecular inverse, affinity, or therapeutic effect.
 - Docking scores are not affinity, efficacy, or therapeutic evidence.
-- The Appendix A dataset has six ESR1 structures, is not a cluster-disjoint
-  locked holdout, and is currently invalidated.
-- Other organ or disease programs belong in separate paper repositories.
+- The Appendix A dataset is not a cluster-disjoint locked holdout.
+- Regenerative-medicine / cell-state programs belong in separate repositories.
 
 ## Sources
 
 - ESR1 UniProt: https://www.uniprot.org/uniprotkb/P03372/entry
-- RCSB PDB (ESR1 example): https://files.rcsb.org/download/3ERT.pdb
 - KRAS G12D binary: https://files.rcsb.org/download/9BL0.pdb
 - KRAS G12C: https://files.rcsb.org/download/6OIM.pdb
+- ESR1 example: https://files.rcsb.org/download/3ERT.pdb
 - hERG cryo-EM: https://files.rcsb.org/download/5VA1.pdb
 - ChEMBL: https://www.ebi.ac.uk/chembl/
 - fpocket: https://github.com/Discngine/fpocket
 - P2Rank: https://github.com/rdk/p2rank
-- Pocket-benchmark metric context: https://doi.org/10.1093/bioinformatics/btaa105
+- DCA metric context: https://doi.org/10.1093/bioinformatics/btaa105
 - Bondi van der Waals radii (1964): https://doi.org/10.1021/j100785a001
 
 ---
 
 ## 中文说明（最新版本）
 
-这是**唯一**的 ER100 论文仓库。研究主题是面向肿瘤耐药的**多靶点、多模态计算
-化学**，既不是单靶点 ESR1 展示，也不是跨疾病论文。本 README 只描述**当前**状态；
-逐版本的内部历史保存在本地、不发布。
+这是一个**单仓库**、可证伪的**肿瘤驱动突变**计算化学项目。目标是肿瘤驱动突变
+（KRAS G12C/G12D/G12V、ESR1 LBD 突变体、FLT3、PIM1、PIK3CA、CDK4/6），**不是
+再生医学 / 细胞状态 / 基因疗法项目**。多靶点、多模态。本 README 只描述当前状态，
+逐版本内部历史保存在本地、不发布。
 
-- 六个靶点共享同一套 fail-closed 身份、来源与主张边界，但按靶点口袋/家族做计算
-  特化（见上表）。四种结构定义模态各有独立协议：小分子用单口袋；PROTAC 用
-  三元复合物；分子胶需声明伙伴界面；大环只用有匹配墙体与多构象/环张力包的结构。
-- **当前物化证据**：KRAS G12D 非共价小分子单元，接受 **798** 个身份（Tanimoto
-  ≤0.8、Murcko 上限 10，硬门、不强制凑满 1,000）；主几何 `9BL0`，`9GBJ` 仅共价
-  观察；口袋墙体采用**逐元素 Bondi(1964) 范德华半径**并给出固定阈值
-  `clash_severity_band`（几何观察，非亲和力）。
-- **毒性审查**：对全部 798 条做 RDKit 结构预警筛查，并对 hERG(`5VA1`) 中心腔做
-  几何相容性探针；这些是风险标记，不是安全放行。
-- 每条候选附**中英双语**化学/生物/药理原理、HTTPS 来源 URL 与 SHA-256；来源为
-  ChEMBL_37(2026-05-01)，**不使用合成实验或患者数据**。
-- **附录 A（ESR1 口袋回顾性 pilot）当前作废**：旧标签仅按配体名合并了所有晶体
-  拷贝（如 4Q50 `OHT` 29→232 重原子≈8 份），导致 DCA 可能匹配错误拷贝。已修复
-  `ligand_heavy_coords`（按链选单一实例，含回归测试），并把 pilot 报告标记为
-  `INVALIDATED_PENDING_LABEL_REGENERATION`。在按链重建标签并在预注册的
-  cluster-disjoint 留出集上重跑之前，任何 pilot 数值（含 P2Rank 6/6）都不可引用。
-- 全量证据（所有接受身份、三维构象、账本）保存在**本地私有证据树**
-  `foliation-er100-multimodal-chemistry/` 并镜像到 iCloud（附 SHA-256 指针）；
-  仓库内只并入 curated 子集，便于复现头部证据。
+**核心思想（代数→结构，O(1)）**：不做概率搜索，而是用突变等位基因的精确代数来
+约束候选设计（旗舰方法见 `paper/GF4_SYNDROME_CHEM_METHOD.tex`）：
+(1) 碱基映射到有限域 GF(4)；(2) 以密码子为中心的 48-mer 与野生型做域加，得到
+**稀疏等位残差 δ**（背景位点瞬间抵消，仅突变位点存活）；(3) 用**综合征方程
+Hx=Bδ** 约束候选张量 x（x 是条件证据，不是唯一化学逆解，废弃平凡恒等
+T(s)=s+α）；(4) 背景条件化 **Toeplitz 算子 F/G** 把 47-mer 基因组背景写入算子，
+使共享同一原始残差的不同等位（如 KRAS G12C 与 FLT3 D835Y）被导向不碰撞的解空间。
+随后把代数投影到化学（SMILES、价键图、药效团）与 3D 口袋几何 / 范德华墙，每种
+模态各有独立协议。该方法只编码**代数条件化**，不主张唯一分子逆解、结合亲和力、
+立体避让、可合成性、新颖性或临床性能。
+
+**模态协议不可混用**：小分子用单口袋；PROTAC 用三元复合物；分子胶需声明伙伴
+界面；大环只用有匹配墙体与多构象/环张力包的结构。
+
+**当前物化证据**：KRAS G12D 非共价小分子单元，接受 **798** 个身份（Tanimoto
+≤0.8、Murcko 上限 10，硬门、不强制凑满 1,000）；主几何 `9BL0`，`9GBJ` 仅共价
+观察；口袋墙体用逐元素 Bondi(1964) 范德华半径 + 固定阈值碰撞分级（几何观察，非
+亲和力）；对全部 798 做 RDKit 结构预警 + hERG(`5VA1`) 几何相容性探针；curated
+top-24（`evidence/kras_g12d_sm/`）附中英双语原理、来源 URL、SHA-256 与二维结构，
+图在 `figures/`。全量证据在**本地私有证据树** `foliation-er100-multimodal-chemistry/`
+并镜像 iCloud（附 SHA-256）。
+
+**附录 A（ESR1 口袋基准）**：修复了配体标签只按名合并所有晶体拷贝的缺陷（4Q50
+`OHT` 29→232≈8 份），已按链选单一实例并对 15 个结构全部重建标签；旧数值标记
+`INVALIDATED_PENDING_LABEL_REGENERATION` 不可引用，用 `tools/run_pilot.py` 在
+修正标签上重跑；split 尚非 cluster-disjoint，故不作比较性优越主张，
+`clinical_grade=false`。
