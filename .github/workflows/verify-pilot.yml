@@ -15,7 +15,7 @@ jobs:
           python-version: "3.12"
       - name: Install test dependencies
         run: pip install numpy==1.26.4
-      - name: Verify ESR1-only scope and claims
+      - name: Verify multitarget paper scope and Appendix A claims
         run: make verify
       - name: Unit tests without external pocket tools
         run: make test
