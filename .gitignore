@@ -1,0 +1,8 @@
+# Local-only, never published: internal changelog, chip/EDA/AIG/GCU notes,
+# NCGD/PinEKF source, simulated peer-review transcripts, scratch.
+*.local.md
+*.local.json
+_local/
+__pycache__/
+*.pyc
+.DS_Store

@@ -56,6 +56,16 @@ def main() -> int:
         and (scope.get("appendices") or {}).get("A", {}).get("evidence_level")
         == "retrospective_pilot_only"
     )
+    # Science-honesty gate: the retrospective pilot numbers were produced with a
+    # now-fixed label-merge defect (ligand selected by resname only). Until the
+    # labels are regenerated per chain, every pilot number is non-citable and
+    # MUST be marked invalidated in both the claims file and the report.
+    checks["pilot_marked_invalidated_pending_regeneration"] = (
+        claims.get("status") == "INVALIDATED_PENDING_LABEL_REGENERATION"
+        and bool(claims.get("invalidation_reason"))
+        and pilot.get("invalidated") is True
+        and bool(pilot.get("invalidation_reason"))
+    )
     checks["clinical_grade_false"] = (
         claims.get("clinical_grade") is False
         and pilot.get("clinical_grade") is False
@@ -192,11 +202,19 @@ def main() -> int:
         and "Appendix A" in readme
     )
 
+    def _is_local_only(path: Path) -> bool:
+        # Never-published local-only material (internal changelog, chip/EDA/AIG
+        # notes, NCGD/PinEKF source, peer-review transcripts). Gitignored via
+        # *.local.* and _local/ ; excluded here so it cannot trip scope gates.
+        parts = set(path.parts)
+        return "_local" in parts or ".local" in "".join(path.suffixes)
+
     primary_files = [
         path
         for path in root.rglob("*")
         if path.is_file()
         and ".git" not in path.parts
+        and not _is_local_only(path)
         and path.suffix.lower() in {".md", ".json", ".py", ".yml", ".yaml"}
     ]
     tree_text = "\n".join(path.read_text(errors="ignore") for path in primary_files)
