@@ -78,7 +78,7 @@ def main() -> int:
         and len(scope.get("structure_defined_modalities") or []) == 4
     )
     checks["companion_pointer_present"] = (
-        "foliation-er100-multimodal-chemistry"
+        "gf4-allele-conditioned-evidence"
         in str(companion.get("companion_repo") or "")
         and companion.get("counts", {}).get("chemistry_ready") == 4000
         and set((companion.get("counts") or {}).get("targets") or {}) == TARGET_PANEL
@@ -198,7 +198,7 @@ def main() -> int:
         and "clinical_grade=false" in readme.lower()
         and "ESR1" in readme
         and "multitarget" in readme.lower()
-        and "foliation-er100-multimodal-chemistry" in readme
+        and "gf4-allele-conditioned-evidence" in readme
         and "Appendix A" in readme
     )
 

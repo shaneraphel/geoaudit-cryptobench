@@ -84,7 +84,7 @@ One fully worked cell — **KRAS G12D noncovalent small molecule**:
   chemotype anchors; **no synthetic assay or patient data**.
 
 Full bulk evidence (all accepted identities, 3D ensembles, ledgers) is kept in a
-**local private evidence tree** (`foliation-er100-multimodal-chemistry/`)
+**local private evidence tree** (`gf4-allele-conditioned-evidence/`)
 mirrored to iCloud with SHA-256 pointers; only the curated subset is folded here.
 
 `CHEMISTRY_READY` / "accepted" is a computational triage state — not
@@ -213,7 +213,7 @@ T(s)=s+α）；(4) 背景条件化 **Toeplitz 算子 F/G** 把 47-mer 基因组�
 观察；口袋墙体用逐元素 Bondi(1964) 范德华半径 + 固定阈值碰撞分级（几何观察，非
 亲和力）；对全部 798 做 RDKit 结构预警 + hERG(`5VA1`) 几何相容性探针；curated
 top-24（`evidence/kras_g12d_sm/`）附中英双语原理、来源 URL、SHA-256 与二维结构，
-图在 `figures/`。全量证据在**本地私有证据树** `foliation-er100-multimodal-chemistry/`
+图在 `figures/`。全量证据在**本地私有证据树** `gf4-allele-conditioned-evidence/`
 并镜像 iCloud（附 SHA-256）。
 
 **附录 A（ESR1 口袋基准）**：修复了配体标签只按名合并所有晶体拷贝的缺陷（4Q50

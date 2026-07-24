@@ -1,9 +1,9 @@
 {
   "schema": "foliation.er100.companion_evidence_pointer.v4",
   "clinical_grade": false,
-  "companion_repo": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry",
-  "companion_pr_v7_merged": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/1",
-  "companion_pr_v8": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/2",
+  "companion_repo": "https://github.com/shaneraphel/gf4-allele-conditioned-evidence",
+  "companion_pr_v7_merged": "https://github.com/shaneraphel/gf4-allele-conditioned-evidence/pull/1",
+  "companion_pr_v8": "https://github.com/shaneraphel/gf4-allele-conditioned-evidence/pull/2",
   "v8_working_branch": "feat/er100-v8-structure-assets",
   "companion_git_sha_v9": "6637cf9ba2657e572c125b479d65e27cf317b508",
   "phase1_dir": "releases/v7/GPT56_ER100_MULTITARGET_V7_PHASE1_v2026-07-24",

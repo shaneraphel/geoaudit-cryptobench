@@ -14,7 +14,7 @@
   ],
   "repository_roles": {
     "this_repo": "paper_scope_and_appendix",
-    "companion_evidence_repo": "shaneraphel/foliation-er100-multimodal-chemistry"
+    "companion_evidence_repo": "shaneraphel/gf4-allele-conditioned-evidence"
   },
   "appendices": {
     "A": {

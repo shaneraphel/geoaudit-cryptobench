@@ -136,7 +136,7 @@ class TestPaperScope(unittest.TestCase):
         self.assertEqual(len(v91["companion_git_sha_v9_1"]), 40)
         int(v91["companion_git_sha_v9_1"], 16)
         self.assertIn(
-            "foliation-er100-multimodal-chemistry", companion["companion_repo"]
+            "gf4-allele-conditioned-evidence", companion["companion_repo"]
         )
         self.assertEqual(len(companion["companion_git_sha_v9"]), 40)
         int(companion["companion_git_sha_v9"], 16)
