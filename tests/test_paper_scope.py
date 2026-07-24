@@ -78,26 +78,45 @@ class TestPaperScope(unittest.TestCase):
         self.assertEqual(v9_slots["v9_identity_ready"], 0)
         self.assertEqual(v9_slots["druggable_candidates_established"], 0)
         v9_sources = companion["v9_real_source_snapshot"]
-        self.assertEqual(v9_sources["raw_payloads"], 423)
-        self.assertEqual(v9_sources["raw_payload_bytes"], 200130606)
+        self.assertEqual(v9_sources["chembl_db_version"], "ChEMBL_37")
+        self.assertIs(v9_sources["declared_activity_query_fully_paginated"], True)
+        self.assertEqual(v9_sources["raw_payloads"], 420)
+        self.assertEqual(v9_sources["raw_payload_bytes"], 244652474)
         self.assertEqual(
-            v9_sources["chembl_reported_reference_identities"], 20397
+            v9_sources["chembl_reported_reference_identities"], 26543
         )
         self.assertEqual(
-            v9_sources["source_backed_diverse_chemotype_anchors"], 6985
+            v9_sources["source_backed_diverse_chemotype_anchors"], 9002
         )
+        self.assertEqual(v9_sources["rdkit_chembl_inchikey_match"], 26502)
+        self.assertEqual(
+            v9_sources["rdkit_chembl_inchikey_mismatch_retained"], 41
+        )
+        self.assertIs(v9_sources["null_variant_inferred_as_wild_type"], False)
         self.assertIs(v9_sources["synthetic_assay_or_patient_data_used"], False)
         self.assertIs(v9_sources["icloud_account_sync_completion_claimed"], False)
         v9_routes = companion["v9_genotype_isoform_and_modality_routes"]
         self.assertEqual(v9_routes["flt3_itd_structure_route"], "BLOCKED")
         self.assertEqual(v9_routes["esr1_mgprotac_reference_pdb"], "9SV3")
+        self.assertEqual(
+            set(v9_routes["kras_protac_reference_pdbs"]),
+            {"8QU8", "9RKE", "9RKN", "9RKC"},
+        )
         self.assertIs(
             v9_routes["reference_structure_activates_arbitrary_candidate"], False
         )
         self.assertEqual(v9_routes["cells_safe_expansion_ready"], 0)
+        openreview = companion["v9_openreview_and_lineage_migration"]
+        self.assertEqual(openreview["recommendation"], "MAJOR_REVISION")
+        self.assertEqual(openreview["lineage_migration_blocked"], 4000)
+        self.assertEqual(openreview["dual_geometry_truth_conflict_records"], 1002)
+        self.assertEqual(openreview["biology_exact_unique_values"], 24)
+        self.assertIs(openreview["expansion_authorized"], False)
         self.assertIn(
             "foliation-er100-multimodal-chemistry", companion["companion_repo"]
         )
+        self.assertEqual(len(companion["companion_git_sha_v9"]), 40)
+        int(companion["companion_git_sha_v9"], 16)
         self.assertFalse(
             (ROOT / "releases").exists(),
             "bulk candidate releases must stay in the companion evidence repo",

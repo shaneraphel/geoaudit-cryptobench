@@ -207,24 +207,27 @@ identity to `IDENTITY_READY`, and established druggable candidates remain 0.
 v7/v8 谱系引用和 20,000 个空槽位。它们不是 24,000 个分子；v9 尚无
 `IDENTITY_READY` 身份，已证明可成药候选仍为 0。
 
-The non-synthetic source snapshot stores 423 RCSB/ChEMBL payloads
-(200,130,606 bytes) in the configured iCloud data container and publishes
-portable URLs and SHA-256 digests. It yields 20,397 ChEMBL reported reference
-identities and 6,985 deterministic diverse chemotype anchors with bilingual
+The non-synthetic source snapshot stores 420 RCSB/ChEMBL payloads
+(244,652,474 bytes) in the configured iCloud data container and publishes
+portable URLs and SHA-256 digests. It pins ChEMBL_37 (2026-05-01), completes
+the declared non-null-pChEMBL pagination and yields 26,543 ChEMBL reported
+reference identities and 9,002 deterministic diverse chemotype anchors with bilingual
 chemistry, biology, clinical-boundary and wet-lab-control text. These are known
 experimental references, not novel designs; their reported activity does not
 transfer to derivatives.
 
-真实来源快照把 423 个 RCSB/ChEMBL 载荷（200,130,606 字节）保存在配置的 iCloud
-数据容器，并公开可移植 URL 与 SHA-256。由此得到 20,397 个 ChEMBL 报告参考身份和
-6,985 个确定性多样化学型锚点，每条含中英文化学、生物、临床边界与湿实验对照说明。
+真实来源快照把 420 个 RCSB/ChEMBL 载荷（244,652,474 字节）保存在配置的 iCloud
+数据容器，并公开可移植 URL 与 SHA-256。快照固定 ChEMBL_37（2026-05-01）并完整
+遍历声明的非空 pChEMBL 分页，由此得到 26,543 个 ChEMBL 报告参考身份和
+9,002 个确定性多样化学型锚点，每条含中英文化学、生物、临床边界与湿实验对照说明。
 它们是已知实验参考，不是新设计；效力不得转移给衍生物。
 
 The v9 genotype/isoform registry separates ESR1 WT/Y537S/D538G, KRAS
 G12C/G12D/G12V/G12R, FLT3 reference/D835/ITD, PIK3CA H1047R/E542K and CDK4
 from CDK6. It adds source-backed reference structures for the ESR1
 14-3-3/VHL hybrid MGPROTAC (`9SV3`), KRAS G12D binary complexes (`9BL0`,
-`9GBJ`) and KRAS/CypA induced tri-complexes (`9BFY`, `9BI1`, `8TBM`, `9BGC`).
+`9GBJ`), KRAS PROTAC references (`8QU8`, `9RKE`, `9RKN`, `9RKC`) and
+KRAS/CypA induced tri-complexes (`9BFY`, `9BI1`, `8TBM`, `9BGC`).
 These do not license protocol transfer: PROTACs still require
 target–PROTAC–E3 ensembles, glues require declared partner interfaces, and
 macrocycles require target-matched multi-conformer/ring-strain packages.
@@ -236,3 +239,9 @@ PubChem/ChEMBL no-hit remains snapshot-specific and is not global novelty,
 patentability or FTO. No patient data, wet-lab measurement, clinical result,
 regulatory-dossier readiness or organization-specific reporting status is
 created by this update.
+
+The companion OpenReview self-audit remains `MAJOR_REVISION`. All 4,000
+historical identities are lineage-only and blocked from v9 migration: mixed
+genotype/isoform packs, CDK `5L2I` route drift, conflicting geometry flags,
+24-cell biology/pharmacology boilerplate and null-valued hard gates must be
+repaired before any identity expansion or experimental-priority claim.

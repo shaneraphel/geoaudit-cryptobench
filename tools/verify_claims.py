@@ -72,6 +72,10 @@ def main() -> int:
         in str(companion.get("companion_repo") or "")
         and companion.get("counts", {}).get("chemistry_ready") == 4000
         and set((companion.get("counts") or {}).get("targets") or {}) == TARGET_PANEL
+        and re.fullmatch(
+            r"[0-9a-f]{40}", str(companion.get("companion_git_sha_v9") or "")
+        )
+        is not None
     )
     protocol = companion.get("v8_1_protocol_requalification") or {}
     scale = companion.get("requested_1000_per_target_per_modality_scale") or {}
@@ -101,16 +105,35 @@ def main() -> int:
         and v9_slots.get("empty_design_slots") == 20000
         and v9_slots.get("v9_identity_ready") == 0
         and v9_slots.get("druggable_candidates_established") == 0
-        and v9_sources.get("raw_payloads") == 423
-        and v9_sources.get("raw_payload_bytes") == 200130606
+        and v9_sources.get("chembl_db_version") == "ChEMBL_37"
+        and v9_sources.get("declared_activity_query_fully_paginated") is True
+        and v9_sources.get("raw_payloads") == 420
+        and v9_sources.get("raw_payload_bytes") == 244652474
         and v9_sources.get("synthetic_assay_or_patient_data_used") is False
-        and v9_sources.get("chembl_reported_reference_identities") == 20397
-        and v9_sources.get("source_backed_diverse_chemotype_anchors") == 6985
+        and v9_sources.get("chembl_reported_reference_identities") == 26543
+        and v9_sources.get("rdkit_parseable_reference_smiles") == 26543
+        and v9_sources.get("rdkit_chembl_inchikey_match") == 26502
+        and v9_sources.get("rdkit_chembl_inchikey_mismatch_retained") == 41
+        and v9_sources.get("null_variant_inferred_as_wild_type") is False
+        and v9_sources.get("source_backed_diverse_chemotype_anchors") == 9002
         and v9_sources.get("icloud_account_sync_completion_claimed") is False
         and v9_routes.get("flt3_itd_structure_route") == "BLOCKED"
         and v9_routes.get("reference_structure_activates_arbitrary_candidate")
         is False
         and v9_routes.get("cells_safe_expansion_ready") == 0
+    )
+    openreview = companion.get("v9_openreview_and_lineage_migration") or {}
+    checks["v9_openreview_blocks_unsafe_migration"] = (
+        openreview.get("recommendation") == "MAJOR_REVISION"
+        and openreview.get("historical_lineage_records") == 4000
+        and openreview.get("v9_identity_migrated") == 0
+        and openreview.get("lineage_migration_blocked") == 4000
+        and openreview.get("cdk_5l2i_route_drift_records") == 664
+        and openreview.get("dual_geometry_truth_conflict_records") == 1002
+        and openreview.get("records_with_nonrecomputable_hard_gate") == 4000
+        and openreview.get("biology_exact_unique_values") == 24
+        and openreview.get("pharmacology_exact_unique_values") == 24
+        and openreview.get("expansion_authorized") is False
     )
 
     primary_text = "\n".join(

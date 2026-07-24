@@ -5,6 +5,7 @@
   "companion_pr_v7_merged": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/1",
   "companion_pr_v8": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/2",
   "v8_working_branch": "feat/er100-v8-structure-assets",
+  "companion_git_sha_v9": "8d6d6f2e5c90ec2fb69ee43583e5866aa7c3d032",
   "phase1_dir": "releases/v7/GPT56_ER100_MULTITARGET_V7_PHASE1_v2026-07-24",
   "phase2_dir": "releases/v7/GPT56_ER100_MULTITARGET_V7_PHASE2_CHEMISTRY_v2026-07-24",
   "counts": {
@@ -121,16 +122,24 @@
     "truth_boundary": "Design slots are quota arithmetic, not molecules."
   },
   "v9_real_source_snapshot": {
-    "raw_payloads": 423,
-    "raw_payload_bytes": 200130606,
-    "raw_payload_storage": "Foliation_Clinical_Data_2026/inputs/raw/er100_v9_real_sources_2026-07-24",
+    "snapshot_id": "er100_v9_real_sources_2026-07-24r2",
+    "chembl_db_version": "ChEMBL_37",
+    "chembl_release_date": "2026-05-01",
+    "declared_activity_query_fully_paginated": true,
+    "raw_payloads": 420,
+    "raw_payload_bytes": 244652474,
+    "raw_payload_storage": "Foliation_Clinical_Data_2026/inputs/raw/er100_v9_real_sources_2026-07-24r2",
     "raw_payloads_embedded_in_paper_repo": false,
     "portable_urls_and_sha256_manifested": true,
     "local_raw_checksum_verification_passed": true,
     "icloud_account_sync_completion_claimed": false,
     "synthetic_assay_or_patient_data_used": false,
-    "chembl_reported_reference_identities": 20397,
-    "source_backed_diverse_chemotype_anchors": 6985
+    "chembl_reported_reference_identities": 26543,
+    "rdkit_parseable_reference_smiles": 26543,
+    "rdkit_chembl_inchikey_match": 26502,
+    "rdkit_chembl_inchikey_mismatch_retained": 41,
+    "null_variant_inferred_as_wild_type": false,
+    "source_backed_diverse_chemotype_anchors": 9002
   },
   "v9_genotype_isoform_and_modality_routes": {
     "esr1_routes": ["WT", "Y537S", "D538G", "F_DOMAIN_14_3_3_HYBRID"],
@@ -139,10 +148,25 @@
     "pik3ca_routes": ["H1047R", "E542K"],
     "cdk4_cdk6_isoform_routes_separate": true,
     "esr1_mgprotac_reference_pdb": "9SV3",
+    "kras_protac_reference_pdbs": ["8QU8", "9RKE", "9RKN", "9RKC"],
     "kras_g12d_binary_reference_pdbs": ["9BL0", "9GBJ"],
     "kras_cypa_tricomplex_reference_pdbs": ["9BFY", "9BI1", "8TBM", "9BGC"],
     "reference_structure_activates_arbitrary_candidate": false,
     "cells_safe_expansion_ready": 0
+  },
+  "v9_openreview_and_lineage_migration": {
+    "recommendation": "MAJOR_REVISION",
+    "historical_lineage_records": 4000,
+    "v9_identity_migrated": 0,
+    "lineage_migration_blocked": 4000,
+    "mixed_or_unassigned_mutation_pack_records": 500,
+    "conditioning_target_pending_records": 2666,
+    "cdk_5l2i_route_drift_records": 664,
+    "dual_geometry_truth_conflict_records": 1002,
+    "records_with_nonrecomputable_hard_gate": 4000,
+    "biology_exact_unique_values": 24,
+    "pharmacology_exact_unique_values": 24,
+    "expansion_authorized": false
   },
   "truth_boundary_en": "Pointer only. Presence of this manifest does not embed candidate files into the paper repository and does not create experimental, target-pose, global-novelty, regulatory, or clinical evidence."
 }
