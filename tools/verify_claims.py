@@ -72,6 +72,95 @@ def main() -> int:
         in str(companion.get("companion_repo") or "")
         and companion.get("counts", {}).get("chemistry_ready") == 4000
         and set((companion.get("counts") or {}).get("targets") or {}) == TARGET_PANEL
+        and re.fullmatch(
+            r"[0-9a-f]{40}", str(companion.get("companion_git_sha_v9") or "")
+        )
+        is not None
+    )
+    protocol = companion.get("v8_1_protocol_requalification") or {}
+    scale = companion.get("requested_1000_per_target_per_modality_scale") or {}
+    expansion = companion.get("v8_1_expansion_readiness") or {}
+    checks["protocol_requalification_truth_boundary"] = (
+        protocol.get("records_requalified") == 4000
+        and protocol.get("candidate_geometry_route_ready") == 167
+        and protocol.get("structural_protocol_blocked") == 3833
+        and protocol.get("method_template_records_quarantined") == 334
+        and protocol.get("pdb_5t35_panel_geometry_eligible") is False
+        and protocol.get("pdb_5fqd_panel_geometry_eligible") is False
+        and protocol.get("target_pose_computed") is False
+        and scale.get("requested_record_slots") == 24000
+        and scale.get("druggable_candidates_established") == 0
+        and expansion.get("cells_ready_for_1000") == 0
+        and expansion.get("internal_diversity_seeds") == 875
+        and expansion.get("diversity_and_protocol_seeds") == 52
+        and expansion.get("global_novelty_claim") is False
+        and expansion.get("druggability_claim") is False
+    )
+    v9_slots = companion.get("v9_design_slot_ledger") or {}
+    v9_sources = companion.get("v9_real_source_snapshot") or {}
+    v9_routes = companion.get("v9_genotype_isoform_and_modality_routes") or {}
+    checks["v9_source_and_expansion_truth_boundary"] = (
+        v9_slots.get("total_design_slots") == 24000
+        and v9_slots.get("v7_v8_lineage_references") == 4000
+        and v9_slots.get("empty_design_slots") == 20000
+        and v9_slots.get("v9_identity_ready") == 0
+        and v9_slots.get("druggable_candidates_established") == 0
+        and v9_sources.get("chembl_db_version") == "ChEMBL_37"
+        and v9_sources.get("declared_activity_query_fully_paginated") is True
+        and v9_sources.get("raw_payloads") == 420
+        and v9_sources.get("raw_payload_bytes") == 244652474
+        and v9_sources.get("synthetic_assay_or_patient_data_used") is False
+        and v9_sources.get("chembl_reported_reference_identities") == 26543
+        and v9_sources.get("rdkit_parseable_reference_smiles") == 26543
+        and v9_sources.get("rdkit_chembl_inchikey_match") == 26502
+        and v9_sources.get("rdkit_chembl_inchikey_mismatch_retained") == 41
+        and v9_sources.get("null_variant_inferred_as_wild_type") is False
+        and v9_sources.get("source_backed_diverse_chemotype_anchors") == 9002
+        and v9_sources.get("icloud_account_sync_completion_claimed") is False
+        and v9_routes.get("flt3_itd_structure_route") == "BLOCKED"
+        and v9_routes.get("reference_structure_activates_arbitrary_candidate")
+        is False
+        and v9_routes.get("cells_safe_expansion_ready") == 0
+    )
+    openreview = companion.get("v9_openreview_and_lineage_migration") or {}
+    checks["v9_openreview_blocks_unsafe_migration"] = (
+        openreview.get("recommendation") == "MAJOR_REVISION"
+        and openreview.get("historical_lineage_records") == 4000
+        and openreview.get("v9_identity_migrated") == 0
+        and openreview.get("lineage_migration_blocked") == 4000
+        and openreview.get("cdk_5l2i_route_drift_records") == 664
+        and openreview.get("dual_geometry_truth_conflict_records") == 1002
+        and openreview.get("records_with_nonrecomputable_hard_gate") == 4000
+        and openreview.get("biology_exact_unique_values") == 24
+        and openreview.get("pharmacology_exact_unique_values") == 24
+        and openreview.get("expansion_authorized") is False
+    )
+    v91 = companion.get(
+        "v9_1_kras_g12d_targeted_small_molecule_computational_priority"
+    ) or {}
+    checks["v9_1_computational_priority_truth_boundary"] = (
+        v91.get("clinical_grade") is False
+        and v91.get("campaign_scope") == "KRAS_G12D_targeted_small_molecule_only"
+        and v91.get("paper_scope_preserved") is True
+        and v91.get("priority_label") == "computational_priority"
+        and v91.get("primary_geometry_pdb") == "9BL0"
+        and v91.get("covalent_observation_only_pdb") == "9GBJ"
+        and v91.get("accepted_count") == 494
+        and int(v91.get("representative_count") or 0)
+        < int(v91.get("accepted_count") or 0)
+        and v91.get("druggability_claim") is False
+        and v91.get("global_novelty_claim") is False
+        and v91.get("clinical_readiness_claim") is False
+        and v91.get("target_pose_is_affinity_claim") is False
+        and v91.get("surechembl_full_15gb_snapshot_claimed") is False
+        and str(v91.get("records_jsonl") or "").endswith(
+            "ACCEPTED_CANDIDATES.jsonl.gz"
+        )
+        and str(v91.get("records_parquet") or "").endswith(".parquet")
+        and str(v91.get("structures_sdf") or "").endswith(".sdf.gz")
+        and bool(
+            re.fullmatch(r"[0-9a-f]{40}", str(v91.get("companion_git_sha_v9_1") or ""))
+        )
     )
 
     primary_text = "\n".join(
