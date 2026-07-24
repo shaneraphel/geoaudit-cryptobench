@@ -71,6 +71,30 @@ class TestPaperScope(unittest.TestCase):
             ),
             3000,
         )
+        v9_slots = companion["v9_design_slot_ledger"]
+        self.assertEqual(v9_slots["total_design_slots"], 24000)
+        self.assertEqual(v9_slots["v7_v8_lineage_references"], 4000)
+        self.assertEqual(v9_slots["empty_design_slots"], 20000)
+        self.assertEqual(v9_slots["v9_identity_ready"], 0)
+        self.assertEqual(v9_slots["druggable_candidates_established"], 0)
+        v9_sources = companion["v9_real_source_snapshot"]
+        self.assertEqual(v9_sources["raw_payloads"], 423)
+        self.assertEqual(v9_sources["raw_payload_bytes"], 200130606)
+        self.assertEqual(
+            v9_sources["chembl_reported_reference_identities"], 20397
+        )
+        self.assertEqual(
+            v9_sources["source_backed_diverse_chemotype_anchors"], 6985
+        )
+        self.assertIs(v9_sources["synthetic_assay_or_patient_data_used"], False)
+        self.assertIs(v9_sources["icloud_account_sync_completion_claimed"], False)
+        v9_routes = companion["v9_genotype_isoform_and_modality_routes"]
+        self.assertEqual(v9_routes["flt3_itd_structure_route"], "BLOCKED")
+        self.assertEqual(v9_routes["esr1_mgprotac_reference_pdb"], "9SV3")
+        self.assertIs(
+            v9_routes["reference_structure_activates_arbitrary_candidate"], False
+        )
+        self.assertEqual(v9_routes["cells_safe_expansion_ready"], 0)
         self.assertIn(
             "foliation-er100-multimodal-chemistry", companion["companion_repo"]
         )

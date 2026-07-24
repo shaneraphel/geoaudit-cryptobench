@@ -1,5 +1,5 @@
 {
-  "schema": "foliation.er100.companion_evidence_pointer.v3",
+  "schema": "foliation.er100.companion_evidence_pointer.v4",
   "clinical_grade": false,
   "companion_repo": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry",
   "companion_pr_v7_merged": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/1",
@@ -109,6 +109,40 @@
     "biologic": 1000,
     "gene_medicine": 1000,
     "engineered_stem_or_progenitor_cell_product": 1000
+  },
+  "v9_design_slot_ledger": {
+    "target_modality_cells": 24,
+    "slots_per_cell": 1000,
+    "total_design_slots": 24000,
+    "v7_v8_lineage_references": 4000,
+    "empty_design_slots": 20000,
+    "v9_identity_ready": 0,
+    "druggable_candidates_established": 0,
+    "truth_boundary": "Design slots are quota arithmetic, not molecules."
+  },
+  "v9_real_source_snapshot": {
+    "raw_payloads": 423,
+    "raw_payload_bytes": 200130606,
+    "raw_payload_storage": "Foliation_Clinical_Data_2026/inputs/raw/er100_v9_real_sources_2026-07-24",
+    "raw_payloads_embedded_in_paper_repo": false,
+    "portable_urls_and_sha256_manifested": true,
+    "local_raw_checksum_verification_passed": true,
+    "icloud_account_sync_completion_claimed": false,
+    "synthetic_assay_or_patient_data_used": false,
+    "chembl_reported_reference_identities": 20397,
+    "source_backed_diverse_chemotype_anchors": 6985
+  },
+  "v9_genotype_isoform_and_modality_routes": {
+    "esr1_routes": ["WT", "Y537S", "D538G", "F_DOMAIN_14_3_3_HYBRID"],
+    "kras_routes": ["G12C", "G12D", "G12V", "G12R"],
+    "flt3_itd_structure_route": "BLOCKED",
+    "pik3ca_routes": ["H1047R", "E542K"],
+    "cdk4_cdk6_isoform_routes_separate": true,
+    "esr1_mgprotac_reference_pdb": "9SV3",
+    "kras_g12d_binary_reference_pdbs": ["9BL0", "9GBJ"],
+    "kras_cypa_tricomplex_reference_pdbs": ["9BFY", "9BI1", "8TBM", "9BGC"],
+    "reference_structure_activates_arbitrary_candidate": false,
+    "cells_safe_expansion_ready": 0
   },
   "truth_boundary_en": "Pointer only. Presence of this manifest does not embed candidate files into the paper repository and does not create experimental, target-pose, global-novelty, regulatory, or clinical evidence."
 }

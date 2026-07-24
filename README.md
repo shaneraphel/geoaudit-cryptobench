@@ -195,3 +195,44 @@ Sources:
 - fpocket: https://github.com/Discngine/fpocket
 - P2Rank: https://github.com/rdk/p2rank
 - Pocket benchmark metric context: https://doi.org/10.1093/bioinformatics/btaa105
+
+## v9 companion-evidence update / v9 伴随证据更新
+
+The evidence repository now materializes 24,000 deterministic target ×
+modality **design slots**: 4,000 immutable v7/v8 lineage references plus
+20,000 empty slots. These are not 24,000 molecules. v9 has not yet promoted an
+identity to `IDENTITY_READY`, and established druggable candidates remain 0.
+
+伴随证据库现已物化 24,000 个确定性“靶点 × 模态”**设计槽位**：4,000 个不可变
+v7/v8 谱系引用和 20,000 个空槽位。它们不是 24,000 个分子；v9 尚无
+`IDENTITY_READY` 身份，已证明可成药候选仍为 0。
+
+The non-synthetic source snapshot stores 423 RCSB/ChEMBL payloads
+(200,130,606 bytes) in the configured iCloud data container and publishes
+portable URLs and SHA-256 digests. It yields 20,397 ChEMBL reported reference
+identities and 6,985 deterministic diverse chemotype anchors with bilingual
+chemistry, biology, clinical-boundary and wet-lab-control text. These are known
+experimental references, not novel designs; their reported activity does not
+transfer to derivatives.
+
+真实来源快照把 423 个 RCSB/ChEMBL 载荷（200,130,606 字节）保存在配置的 iCloud
+数据容器，并公开可移植 URL 与 SHA-256。由此得到 20,397 个 ChEMBL 报告参考身份和
+6,985 个确定性多样化学型锚点，每条含中英文化学、生物、临床边界与湿实验对照说明。
+它们是已知实验参考，不是新设计；效力不得转移给衍生物。
+
+The v9 genotype/isoform registry separates ESR1 WT/Y537S/D538G, KRAS
+G12C/G12D/G12V/G12R, FLT3 reference/D835/ITD, PIK3CA H1047R/E542K and CDK4
+from CDK6. It adds source-backed reference structures for the ESR1
+14-3-3/VHL hybrid MGPROTAC (`9SV3`), KRAS G12D binary complexes (`9BL0`,
+`9GBJ`) and KRAS/CypA induced tri-complexes (`9BFY`, `9BI1`, `8TBM`, `9BGC`).
+These do not license protocol transfer: PROTACs still require
+target–PROTAC–E3 ensembles, glues require declared partner interfaces, and
+macrocycles require target-matched multi-conformer/ring-strain packages.
+Zero of 24 cells is yet safe-expansion-ready.
+
+The paper therefore reports a stronger sourced foundation and clearer
+negative results, not “1,000 druggable candidates per cell.” Exact
+PubChem/ChEMBL no-hit remains snapshot-specific and is not global novelty,
+patentability or FTO. No patient data, wet-lab measurement, clinical result,
+regulatory-dossier readiness or organization-specific reporting status is
+created by this update.

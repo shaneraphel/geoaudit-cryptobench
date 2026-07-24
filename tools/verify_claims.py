@@ -92,6 +92,26 @@ def main() -> int:
         and expansion.get("global_novelty_claim") is False
         and expansion.get("druggability_claim") is False
     )
+    v9_slots = companion.get("v9_design_slot_ledger") or {}
+    v9_sources = companion.get("v9_real_source_snapshot") or {}
+    v9_routes = companion.get("v9_genotype_isoform_and_modality_routes") or {}
+    checks["v9_source_and_expansion_truth_boundary"] = (
+        v9_slots.get("total_design_slots") == 24000
+        and v9_slots.get("v7_v8_lineage_references") == 4000
+        and v9_slots.get("empty_design_slots") == 20000
+        and v9_slots.get("v9_identity_ready") == 0
+        and v9_slots.get("druggable_candidates_established") == 0
+        and v9_sources.get("raw_payloads") == 423
+        and v9_sources.get("raw_payload_bytes") == 200130606
+        and v9_sources.get("synthetic_assay_or_patient_data_used") is False
+        and v9_sources.get("chembl_reported_reference_identities") == 20397
+        and v9_sources.get("source_backed_diverse_chemotype_anchors") == 6985
+        and v9_sources.get("icloud_account_sync_completion_claimed") is False
+        and v9_routes.get("flt3_itd_structure_route") == "BLOCKED"
+        and v9_routes.get("reference_structure_activates_arbitrary_candidate")
+        is False
+        and v9_routes.get("cells_safe_expansion_ready") == 0
+    )
 
     primary_text = "\n".join(
         [
