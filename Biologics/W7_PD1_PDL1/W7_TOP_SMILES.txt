@@ -1,6 +1,0 @@
-# W7 PD-1/PD-L1 macrocycle candidates
-# clinical_grade=false · no affinity/FTO
-
-pd1_oxetane_peptide	N=C(N)NCCC[C@@H]1NC(=O)[C@H](CC(=O)O)NC(=O)[C@@H](C2COC2)NC(=O)[C@H](Cc2ccccc2)NC(=O)C(=O)CNC1=O	ring=16	dE_span=13.3	rigid=True
-pd1_macro_aib_staple	CC1(C)NC(=O)[C@H](Cc2ccccc2)NC(=O)CNC(=O)[C@H](CC(=O)O)NC(=O)[C@@H](CCCNC(=N)N)NC(=O)CCCCC=CCCCCCNC1=O	ring=28	dE_span=15.77	rigid=True
-pd1_macro_aib_pentapeptoid	CN1CC(=O)N[C@@H](Cc2ccccc2)C(=O)N[C@H](C(C)(C)C)C(=O)N[C@@H](CC(=O)O)C(=O)N[C@@H](CO)C(=O)NC1=O	ring=17	dE_span=17.59	rigid=True

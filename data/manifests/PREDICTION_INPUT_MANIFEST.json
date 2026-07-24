@@ -1,0 +1,128 @@
+{
+  "schema": "foliation.pocket_bench.prediction_inputs.v1",
+  "clinical_grade": false,
+  "ligand_fields_present": false,
+  "entries": [
+    {
+      "pdb_id": "1ERE",
+      "genotype": "WT",
+      "split": "development",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/pocket_bench/esr1/receptors/1ERE_A_receptor.pdb",
+      "receptor_sha256": "d4cca9a96272a8b962591551f38c55a3873dab6a7d940db3cf0bb814d67a967f"
+    },
+    {
+      "pdb_id": "1GWR",
+      "genotype": "WT",
+      "split": "development",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/pocket_bench/esr1/receptors/1GWR_A_receptor.pdb",
+      "receptor_sha256": "1741302707a3ab5c697169011e7c3578f7fcbae48e519bbf378a699c179ccd41"
+    },
+    {
+      "pdb_id": "1X7R",
+      "genotype": "WT",
+      "split": "development",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/pocket_bench/esr1/receptors/1X7R_A_receptor.pdb",
+      "receptor_sha256": "530b2cd1594104b9f00bc483901323dcc917258caaca50f6d7b13ccec6653f0e"
+    },
+    {
+      "pdb_id": "3UUD",
+      "genotype": "Y537S",
+      "split": "development",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/pocket_bench/esr1/receptors/3UUD_A_receptor.pdb",
+      "receptor_sha256": "638954f18c73bc672c9afd0344fadd32903b67bb1af1057a7bfd32a1ffc47fe7"
+    },
+    {
+      "pdb_id": "4Q13",
+      "genotype": "D538G",
+      "split": "development",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/receptors/4Q13_A_receptor.pdb",
+      "receptor_sha256": "a12964d467875b8178174ceb75077c96c0f075ce441890ca8672dd753c64c6ee"
+    },
+    {
+      "pdb_id": "2IOK",
+      "genotype": "WT",
+      "split": "validation",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/pocket_bench/esr1/receptors/2IOK_A_receptor.pdb",
+      "receptor_sha256": "3a30c4af611f67acbaabf9f54baaf810f8d3df32b516d5ddded1f0ff8a699f88"
+    },
+    {
+      "pdb_id": "3HQ5",
+      "genotype": "WT",
+      "split": "validation",
+      "structure_cluster_id": "esr1-struct-002",
+      "receptor_pdb": "data/pocket_bench/esr1/receptors/3HQ5_A_receptor.pdb",
+      "receptor_sha256": "bfc899bafcd7d5e7ded6c294cf1cd8da8a7038e2847a1873963918e0be0ace17"
+    },
+    {
+      "pdb_id": "5DXB",
+      "genotype": "Y537S",
+      "split": "validation",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/pocket_bench/esr1/receptors/5DXB_A_receptor.pdb",
+      "receptor_sha256": "46e5464135cc2ce35ba052b3fe40c234a2bff7829e77790578ea4c5e818e9f88"
+    },
+    {
+      "pdb_id": "4PXM",
+      "genotype": "D538G",
+      "split": "validation",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/pocket_bench/esr1/receptors/4PXM_A_receptor.pdb",
+      "receptor_sha256": "60c99fa3942b61fe5e031bf3ca0fb69b6186c53e21c88988e8ff18f573f051a0"
+    },
+    {
+      "pdb_id": "3ERT",
+      "genotype": "WT",
+      "split": "locked_test",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/receptors/3ERT_A_receptor.pdb",
+      "receptor_sha256": "65882f4537a005d71dc4a78dc79cb166abb7c560aeb748485da9a8fe09af9468"
+    },
+    {
+      "pdb_id": "3OS8",
+      "genotype": "WT",
+      "split": "locked_test",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/receptors/3OS8_A_receptor.pdb",
+      "receptor_sha256": "daf9307b881b14a979fc6b918e161bf6466935afef72b1d5466cc163118a58c0"
+    },
+    {
+      "pdb_id": "1UOM",
+      "genotype": "WT",
+      "split": "locked_test",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/receptors/1UOM_A_receptor.pdb",
+      "receptor_sha256": "7e56b6997f7079f5c2a541f2272231dc0c0044975a5a4b60bf06f24f356caad9"
+    },
+    {
+      "pdb_id": "5U2B",
+      "genotype": "Y537S",
+      "split": "locked_test",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/receptors/5U2B_A_receptor.pdb",
+      "receptor_sha256": "a7e22d8cb9173e3ab89810ccaba65843b754898405959b7f4c837dfdae7b4f6e"
+    },
+    {
+      "pdb_id": "6CHW",
+      "genotype": "Y537S",
+      "split": "locked_test",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/receptors/6CHW_A_receptor.pdb",
+      "receptor_sha256": "e5b471cdf5a38c8635e7a70e0e5dbe7654874e31f641ee9c9cb5b117590e9114"
+    },
+    {
+      "pdb_id": "4Q50",
+      "genotype": "D538G",
+      "split": "locked_test",
+      "structure_cluster_id": "esr1-struct-001",
+      "receptor_pdb": "data/receptors/4Q50_A_receptor.pdb",
+      "receptor_sha256": "388cf0d824f3714f0ea40431d6a3d9821c313a29b80221e35841e6ebf35b6ff4"
+    }
+  ],
+  "truth_boundary": "This is the complete prediction-process manifest. It contains no ligand identity, coordinates, centroid, label path, or pocket anchor."
+}

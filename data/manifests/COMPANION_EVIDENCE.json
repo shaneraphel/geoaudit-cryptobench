@@ -1,0 +1,33 @@
+{
+  "schema": "foliation.er100.companion_evidence_pointer.v1",
+  "clinical_grade": false,
+  "companion_repo": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry",
+  "companion_pr": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/1",
+  "release_branch": "feat/er100-multitarget-v7",
+  "phase1_dir": "releases/v7/GPT56_ER100_MULTITARGET_V7_PHASE1_v2026-07-24",
+  "phase2_dir": "releases/v7/GPT56_ER100_MULTITARGET_V7_PHASE2_CHEMISTRY_v2026-07-24",
+  "counts": {
+    "identity_ready": 4000,
+    "chemistry_ready": 4000,
+    "modalities": {
+      "targeted_small_molecule": 1000,
+      "protac": 1000,
+      "molecular_glue": 1000,
+      "cyclic_peptide_or_macrocycle": 1000
+    },
+    "targets": {
+      "ESR1": 668,
+      "KRAS": 668,
+      "FLT3": 668,
+      "PIM1": 668,
+      "PIK3CA": 664,
+      "CDK4/6": 664
+    }
+  },
+  "source_corrections": [
+    "PDB 4LYW is BRD4 and is forbidden as a KRAS panel source",
+    "KRAS G12C uses 6OIM",
+    "PIK3CA H1047R uses 8W9A as an allosteric/kinase-domain context"
+  ],
+  "truth_boundary_en": "Pointer only. Presence of this manifest does not embed candidate files into the paper repository and does not create experimental or clinical evidence."
+}

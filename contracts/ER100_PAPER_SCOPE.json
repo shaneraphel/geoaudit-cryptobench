@@ -1,0 +1,34 @@
+{
+  "schema": "foliation.er100.paper_scope.v1",
+  "clinical_grade": false,
+  "paper_id": "er100-multitarget-multimodal",
+  "title_en": "ER100 multitarget multimodal computational chemistry",
+  "title_zh": "ER100 多靶点多模态计算化学",
+  "scientific_question_en": "Can a shared fail-closed Foliation chemistry methodology produce target-specialized, modality-protocoled computational candidates without transferring pocket, binding, or clinical claims across targets or disease programs?",
+  "target_panel": ["ESR1", "KRAS", "FLT3", "PIM1", "PIK3CA", "CDK4/6"],
+  "structure_defined_modalities": [
+    "targeted_small_molecule",
+    "protac",
+    "molecular_glue",
+    "cyclic_peptide_or_macrocycle"
+  ],
+  "repository_roles": {
+    "this_repo": "paper_scope_and_appendix",
+    "companion_evidence_repo": "shaneraphel/foliation-er100-multimodal-chemistry"
+  },
+  "appendices": {
+    "A": {
+      "name": "esr1_receptor_only_pocket_pilot",
+      "evidence_level": "retrospective_pilot_only",
+      "comparative_claim_allowed": false
+    }
+  },
+  "forbidden_in_this_tree": [
+    "cross_disease_or_other_organ_programs",
+    "hardware_acceleration_packages",
+    "ind_or_regulatory_readiness_packages",
+    "bulk_candidate_json_dumps",
+    "binding_affinity_or_clinical_claims"
+  ],
+  "truth_boundary_en": "Paper-facing scope and Appendix A pilot only. Candidate evidence lives in the companion repository. CHEMISTRY_READY and pocket DCA are not clinical, IND, novelty, or efficacy claims."
+}

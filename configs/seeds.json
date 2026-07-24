@@ -1,0 +1,8 @@
+{
+  "global": 42,
+  "bootstrap": 42,
+  "deeppocket": 42,
+  "foliation_pocket": 42,
+  "label_permutation": 7,
+  "random_surface": 13
+}

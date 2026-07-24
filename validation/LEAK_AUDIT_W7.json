@@ -1,8 +1,0 @@
-{
-  "clinical_grade": false,
-  "status": "PASS",
-  "n_findings": 0,
-  "findings": [],
-  "scope": "staged_W6_W7_lock_text_artifacts",
-  "note": "Text artifacts scanned for silicon/EDA identifiers; binary PDB/SDF/BIN skipped."
-}

@@ -1,0 +1,1307 @@
+{
+  "schema": "foliation.pocket_bench.locked_test.v1",
+  "generated_at": "2026-07-14T14:35:13.583012+00:00",
+  "clinical_grade": false,
+  "primary_metric": "top1_dca_le_4A",
+  "dca_threshold_a": 4.0,
+  "n_locked_test_structures": 6,
+  "unit_of_analysis": "one_pdb_structure",
+  "not_counted_as_n": "pdb_times_radius",
+  "locked_hparams": {
+    "schema": "foliation.pocket_bench.locked_hparams.v1",
+    "clinical_grade": false,
+    "selected_on": "validation",
+    "unit_of_analysis": "one_pdb_structure",
+    "foliation_pocket_ro": {
+      "grid_step": 1.2,
+      "top_k": 5,
+      "dca_threshold_a": 4.0
+    },
+    "validation_trials": [
+      {
+        "grid_step": 1.2,
+        "top1_rate": 0.0,
+        "n": 4
+      },
+      {
+        "grid_step": 1.5,
+        "top1_rate": 0.0,
+        "n": 4
+      },
+      {
+        "grid_step": 2.0,
+        "top1_rate": 0.0,
+        "n": 4
+      }
+    ],
+    "note": "Radius/grid hyperparams chosen on validation only; locked_test uses these frozen values."
+  },
+  "methods": [
+    "foliation_pocket_ro",
+    "fpocket",
+    "p2rank",
+    "deeppocket",
+    "random_surface"
+  ],
+  "summaries": {
+    "foliation_pocket_ro": {
+      "n_structures_scored": 6,
+      "n_eligible_primary": 6,
+      "n_tool_failures": 0,
+      "failure_rate": 0.0,
+      "top1_success_rate": 0.0,
+      "top3_success_rate": 0.0,
+      "mean_dcc_top1": 23.839554123841495,
+      "top1_bootstrap_95ci": {
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n": 6,
+        "n_boot": 2000,
+        "alpha": 0.05
+      },
+      "note": "TOOL_UNAVAILABLE/CRASH/EMPTY excluded from miss denominator; counted in failure_rate only"
+    },
+    "fpocket": {
+      "n_structures_scored": 6,
+      "n_eligible_primary": 6,
+      "n_tool_failures": 0,
+      "failure_rate": 0.0,
+      "top1_success_rate": 0.0,
+      "top3_success_rate": 0.0,
+      "mean_dcc_top1": 32.219190300641365,
+      "top1_bootstrap_95ci": {
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n": 6,
+        "n_boot": 2000,
+        "alpha": 0.05
+      },
+      "note": "TOOL_UNAVAILABLE/CRASH/EMPTY excluded from miss denominator; counted in failure_rate only"
+    },
+    "p2rank": {
+      "n_structures_scored": 6,
+      "n_eligible_primary": 6,
+      "n_tool_failures": 0,
+      "failure_rate": 0.0,
+      "top1_success_rate": 1.0,
+      "top3_success_rate": 1.0,
+      "mean_dcc_top1": 13.248544788333497,
+      "top1_bootstrap_95ci": {
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n": 6,
+        "n_boot": 2000,
+        "alpha": 0.05
+      },
+      "note": "TOOL_UNAVAILABLE/CRASH/EMPTY excluded from miss denominator; counted in failure_rate only"
+    },
+    "deeppocket": {
+      "n_structures_scored": 6,
+      "n_eligible_primary": 0,
+      "n_tool_failures": 6,
+      "failure_rate": 1.0,
+      "top1_success_rate": null,
+      "top3_success_rate": null,
+      "mean_dcc_top1": null,
+      "top1_bootstrap_95ci": {
+        "mean": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n": 0
+      },
+      "note": "TOOL_UNAVAILABLE/CRASH/EMPTY excluded from miss denominator; counted in failure_rate only"
+    },
+    "random_surface": {
+      "n_structures_scored": 6,
+      "n_eligible_primary": 6,
+      "n_tool_failures": 0,
+      "failure_rate": 0.0,
+      "top1_success_rate": 0.0,
+      "top3_success_rate": 0.0,
+      "mean_dcc_top1": 23.93426395280291,
+      "top1_bootstrap_95ci": {
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n": 6,
+        "n_boot": 2000,
+        "alpha": 0.05
+      },
+      "note": "TOOL_UNAVAILABLE/CRASH/EMPTY excluded from miss denominator; counted in failure_rate only"
+    }
+  },
+  "paired_foliation_vs_baseline": {
+    "fpocket": {
+      "pdb_ids": [
+        "3ERT",
+        "3OS8",
+        "1UOM",
+        "5U2B",
+        "6CHW",
+        "4Q50"
+      ],
+      "mcnemar": {
+        "n": 6,
+        "b01": 0,
+        "b10": 0,
+        "chi2": 0.0,
+        "p_approx": 1.0
+      },
+      "paired_bootstrap_delta_fol_minus_baseline": {
+        "delta_mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n": 6
+      }
+    },
+    "p2rank": {
+      "pdb_ids": [
+        "3ERT",
+        "3OS8",
+        "1UOM",
+        "5U2B",
+        "6CHW",
+        "4Q50"
+      ],
+      "mcnemar": {
+        "n": 6,
+        "b01": 6,
+        "b10": 0,
+        "chi2": 4.166666666666667,
+        "p_approx": 0.04122683333716367
+      },
+      "paired_bootstrap_delta_fol_minus_baseline": {
+        "delta_mean": -1.0,
+        "ci_low": -1.0,
+        "ci_high": -1.0,
+        "n": 6
+      }
+    },
+    "deeppocket": {
+      "pdb_ids": [],
+      "mcnemar": {
+        "n": 0,
+        "b01": null,
+        "b10": null,
+        "p_approx": null
+      },
+      "paired_bootstrap_delta_fol_minus_baseline": {
+        "delta_mean": null,
+        "ci_low": null,
+        "ci_high": null
+      }
+    },
+    "random_surface": {
+      "pdb_ids": [
+        "3ERT",
+        "3OS8",
+        "1UOM",
+        "5U2B",
+        "6CHW",
+        "4Q50"
+      ],
+      "mcnemar": {
+        "n": 6,
+        "b01": 0,
+        "b10": 0,
+        "chi2": 0.0,
+        "p_approx": 1.0
+      },
+      "paired_bootstrap_delta_fol_minus_baseline": {
+        "delta_mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n": 6
+      }
+    }
+  },
+  "controls": {
+    "label_permutation_foliation": {
+      "n_structures_scored": 6,
+      "n_eligible_primary": 6,
+      "n_tool_failures": 0,
+      "failure_rate": 0.0,
+      "top1_success_rate": 0.0,
+      "top3_success_rate": 0.0,
+      "mean_dcc_top1": 51.49919681664105,
+      "top1_bootstrap_95ci": {
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n": 6,
+        "n_boot": 2000,
+        "alpha": 0.05
+      },
+      "note": "TOOL_UNAVAILABLE/CRASH/EMPTY excluded from miss denominator; counted in failure_rate only"
+    },
+    "apo_holo": [
+      {
+        "pair": {
+          "apo_pdb_id": "4Q13",
+          "holo_pdb_id": "4Q50",
+          "note": "D538G apo receptor vs D538G holo OHT label (leakage stress)"
+        },
+        "prediction_status": "OK",
+        "score": {
+          "method": "foliation_pocket_ro",
+          "pdb_id": "4Q13",
+          "status": "OK",
+          "runtime_s": 3.467743082997913,
+          "primary_metric": "top1_dca_le_4A",
+          "clinical_grade": false,
+          "eligible_for_primary": true,
+          "top1": {
+            "success": false,
+            "best_dca": 24.944057448618878,
+            "dcas": [
+              24.944057448618878
+            ],
+            "k": 1,
+            "threshold_a": 4.0
+          },
+          "top3": {
+            "success": false,
+            "best_dca": 17.346286893741826,
+            "dcas": [
+              24.944057448618878,
+              17.346286893741826,
+              21.438311547321042
+            ],
+            "k": 3,
+            "threshold_a": 4.0
+          },
+          "dcc_top1": 61.39083841477537,
+          "residue_f1": {
+            "f1": null,
+            "precision": null,
+            "recall": null,
+            "available": false
+          }
+        }
+      }
+    ],
+    "random_surface_is_method": true
+  },
+  "per_structure": {
+    "foliation_pocket_ro": [
+      {
+        "method": "foliation_pocket_ro",
+        "pdb_id": "3ERT",
+        "status": "OK",
+        "runtime_s": 3.2540796250032145,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 9.197276227231601,
+          "dcas": [
+            9.197276227231601
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 9.197276227231601,
+          "dcas": [
+            9.197276227231601,
+            21.88804835977844,
+            12.617864914477407
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 13.779277116516122,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "foliation_pocket_ro",
+        "pdb_id": "3OS8",
+        "status": "OK",
+        "runtime_s": 3.574313291996077,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 7.834220956802359,
+          "dcas": [
+            7.834220956802359
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 7.834220956802359,
+          "dcas": [
+            7.834220956802359,
+            22.305738992465592,
+            20.452451980141674
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 31.96507907386974,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "foliation_pocket_ro",
+        "pdb_id": "1UOM",
+        "status": "OK",
+        "runtime_s": 4.403221209002368,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 8.724423247412954,
+          "dcas": [
+            8.724423247412954
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 8.724423247412954,
+          "dcas": [
+            8.724423247412954,
+            20.128378076735356,
+            20.471866500150885
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 13.43340543052792,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "foliation_pocket_ro",
+        "pdb_id": "5U2B",
+        "status": "OK",
+        "runtime_s": 4.207666708003671,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 22.42118393394962,
+          "dcas": [
+            22.42118393394962
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 12.501931410786105,
+          "dcas": [
+            22.42118393394962,
+            23.224122997435238,
+            12.501931410786105
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 22.625924255687462,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "Y537S"
+      },
+      {
+        "method": "foliation_pocket_ro",
+        "pdb_id": "6CHW",
+        "status": "OK",
+        "runtime_s": 5.028489084004832,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 10.221751904639406,
+          "dcas": [
+            10.221751904639406
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 10.221751904639406,
+          "dcas": [
+            10.221751904639406,
+            21.747935511215758,
+            21.73265312841485
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 15.822250249656195,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "Y537S"
+      },
+      {
+        "method": "foliation_pocket_ro",
+        "pdb_id": "4Q50",
+        "status": "OK",
+        "runtime_s": 3.6063853749947157,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 8.813335861068651,
+          "dcas": [
+            8.813335861068651
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 8.813335861068651,
+          "dcas": [
+            8.813335861068651,
+            22.125074892528616,
+            11.329066113321044
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 45.411388616791534,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "D538G"
+      }
+    ],
+    "fpocket": [
+      {
+        "method": "fpocket",
+        "pdb_id": "3ERT",
+        "status": "OK",
+        "runtime_s": 0.24924741699942388,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 20.923150522499956,
+          "dcas": [
+            20.923150522499956
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 6.029795494666467,
+          "dcas": [
+            20.923150522499956,
+            20.237297877272468,
+            6.029795494666467
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 24.870521343068894,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "fpocket",
+        "pdb_id": "3OS8",
+        "status": "OK",
+        "runtime_s": 0.36108512499777135,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 13.97636105820781,
+          "dcas": [
+            13.97636105820781
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 6.98801240739423,
+          "dcas": [
+            13.97636105820781,
+            6.98801240739423,
+            12.972574304242839
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 30.875534408521606,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "fpocket",
+        "pdb_id": "1UOM",
+        "status": "OK",
+        "runtime_s": 0.31262612499995157,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 28.330083764088076,
+          "dcas": [
+            28.330083764088076
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 12.459728087861212,
+          "dcas": [
+            28.330083764088076,
+            12.459728087861212,
+            13.517603259296363
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 32.70178446285575,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "fpocket",
+        "pdb_id": "5U2B",
+        "status": "OK",
+        "runtime_s": 0.2853630840036203,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 24.238664998082577,
+          "dcas": [
+            24.238664998082577
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 14.550473273983688,
+          "dcas": [
+            24.238664998082577,
+            22.496462512065904,
+            14.550473273983688
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 30.79028717185679,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "Y537S"
+      },
+      {
+        "method": "fpocket",
+        "pdb_id": "6CHW",
+        "status": "OK",
+        "runtime_s": 0.3759451670048293,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 13.30060681073903,
+          "dcas": [
+            13.30060681073903
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 4.13816988897046,
+          "dcas": [
+            13.30060681073903,
+            4.13816988897046,
+            6.548931874589563
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 21.154316041760683,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "Y537S"
+      },
+      {
+        "method": "fpocket",
+        "pdb_id": "4Q50",
+        "status": "OK",
+        "runtime_s": 0.2607313749977038,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 27.23777570570936,
+          "dcas": [
+            27.23777570570936
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 8.50515301188377,
+          "dcas": [
+            27.23777570570936,
+            8.50515301188377,
+            18.274418021491723
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 52.92269837578448,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "D538G"
+      }
+    ],
+    "p2rank": [
+      {
+        "method": "p2rank",
+        "pdb_id": "3ERT",
+        "status": "OK",
+        "runtime_s": 3.9894852500001434,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": true,
+          "best_dca": 1.0443485289882877,
+          "dcas": [
+            1.0443485289882877
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": true,
+          "best_dca": 1.0443485289882877,
+          "dcas": [
+            1.0443485289882877,
+            6.792794159254349,
+            13.791630772682396
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 0.8524191580360687,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "p2rank",
+        "pdb_id": "3OS8",
+        "status": "OK",
+        "runtime_s": 6.231986000006145,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": true,
+          "best_dca": 1.3082790757326974,
+          "dcas": [
+            1.3082790757326974
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": true,
+          "best_dca": 1.3082790757326974,
+          "dcas": [
+            1.3082790757326974,
+            6.377591385468341,
+            13.29217522755399
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 22.94693646171589,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "p2rank",
+        "pdb_id": "1UOM",
+        "status": "OK",
+        "runtime_s": 6.379608082999766,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": true,
+          "best_dca": 0.9161641992568793,
+          "dcas": [
+            0.9161641992568793
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": true,
+          "best_dca": 0.9161641992568793,
+          "dcas": [
+            0.9161641992568793,
+            6.544814736873763,
+            21.570764897657195
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 3.146162932992744,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "p2rank",
+        "pdb_id": "5U2B",
+        "status": "OK",
+        "runtime_s": 5.664305584003159,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": true,
+          "best_dca": 0.7671568353342112,
+          "dcas": [
+            0.7671568353342112
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": true,
+          "best_dca": 0.7671568353342112,
+          "dcas": [
+            0.7671568353342112,
+            8.417889641709493,
+            14.880197403260482
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 14.223596202925611,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "Y537S"
+      },
+      {
+        "method": "p2rank",
+        "pdb_id": "6CHW",
+        "status": "OK",
+        "runtime_s": 7.168762500004959,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": true,
+          "best_dca": 1.2139403156663007,
+          "dcas": [
+            1.2139403156663007
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": true,
+          "best_dca": 1.2139403156663007,
+          "dcas": [
+            1.2139403156663007,
+            6.884687703156913,
+            16.175978877644468
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 1.4633330314233437,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "Y537S"
+      },
+      {
+        "method": "p2rank",
+        "pdb_id": "4Q50",
+        "status": "OK",
+        "runtime_s": 5.566038375000062,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": true,
+          "best_dca": 1.0245090238743653,
+          "dcas": [
+            1.0245090238743653
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": true,
+          "best_dca": 1.0245090238743653,
+          "dcas": [
+            1.0245090238743653,
+            7.180184678683412,
+            9.433647081590449
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 36.85882094290732,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "D538G"
+      }
+    ],
+    "deeppocket": [
+      {
+        "method": "deeppocket",
+        "pdb_id": "3ERT",
+        "status": "TOOL_UNAVAILABLE",
+        "runtime_s": 0.00017862499953480437,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": false,
+        "top1": null,
+        "top3": null,
+        "dcc_top1": null,
+        "residue_f1": {
+          "available": false
+        },
+        "reason": "TOOL_UNAVAILABLE",
+        "genotype": "WT"
+      },
+      {
+        "method": "deeppocket",
+        "pdb_id": "3OS8",
+        "status": "TOOL_UNAVAILABLE",
+        "runtime_s": 0.00023712500114925206,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": false,
+        "top1": null,
+        "top3": null,
+        "dcc_top1": null,
+        "residue_f1": {
+          "available": false
+        },
+        "reason": "TOOL_UNAVAILABLE",
+        "genotype": "WT"
+      },
+      {
+        "method": "deeppocket",
+        "pdb_id": "1UOM",
+        "status": "TOOL_UNAVAILABLE",
+        "runtime_s": 0.00023208399943541735,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": false,
+        "top1": null,
+        "top3": null,
+        "dcc_top1": null,
+        "residue_f1": {
+          "available": false
+        },
+        "reason": "TOOL_UNAVAILABLE",
+        "genotype": "WT"
+      },
+      {
+        "method": "deeppocket",
+        "pdb_id": "5U2B",
+        "status": "TOOL_UNAVAILABLE",
+        "runtime_s": 0.00021541699970839545,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": false,
+        "top1": null,
+        "top3": null,
+        "dcc_top1": null,
+        "residue_f1": {
+          "available": false
+        },
+        "reason": "TOOL_UNAVAILABLE",
+        "genotype": "Y537S"
+      },
+      {
+        "method": "deeppocket",
+        "pdb_id": "6CHW",
+        "status": "TOOL_UNAVAILABLE",
+        "runtime_s": 0.00023525000142399222,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": false,
+        "top1": null,
+        "top3": null,
+        "dcc_top1": null,
+        "residue_f1": {
+          "available": false
+        },
+        "reason": "TOOL_UNAVAILABLE",
+        "genotype": "Y537S"
+      },
+      {
+        "method": "deeppocket",
+        "pdb_id": "4Q50",
+        "status": "TOOL_UNAVAILABLE",
+        "runtime_s": 0.00020454100013012066,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": false,
+        "top1": null,
+        "top3": null,
+        "dcc_top1": null,
+        "residue_f1": {
+          "available": false
+        },
+        "reason": "TOOL_UNAVAILABLE",
+        "genotype": "D538G"
+      }
+    ],
+    "random_surface": [
+      {
+        "method": "random_surface",
+        "pdb_id": "3ERT",
+        "status": "OK",
+        "runtime_s": 0.0,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 7.941383632591991,
+          "dcas": [
+            7.941383632591991
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 7.941383632591991,
+          "dcas": [
+            7.941383632591991,
+            24.165913576771725,
+            13.368483347036792
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 13.252628785105783,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "random_surface",
+        "pdb_id": "3OS8",
+        "status": "OK",
+        "runtime_s": 0.0,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 20.049577776102918,
+          "dcas": [
+            20.049577776102918
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 13.574884861390169,
+          "dcas": [
+            20.049577776102918,
+            13.617868775986938,
+            13.574884861390169
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 29.16383867147607,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "random_surface",
+        "pdb_id": "1UOM",
+        "status": "OK",
+        "runtime_s": 0.0,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 11.618321436421013,
+          "dcas": [
+            11.618321436421013
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 11.618321436421013,
+          "dcas": [
+            11.618321436421013,
+            15.90023462091047,
+            17.83201584229893
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 15.100360909128547,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "WT"
+      },
+      {
+        "method": "random_surface",
+        "pdb_id": "5U2B",
+        "status": "OK",
+        "runtime_s": 0.0,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 12.424047367907127,
+          "dcas": [
+            12.424047367907127
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 4.165065545702733,
+          "dcas": [
+            12.424047367907127,
+            4.165065545702733,
+            8.95236091765742
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 24.788590221025277,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "Y537S"
+      },
+      {
+        "method": "random_surface",
+        "pdb_id": "6CHW",
+        "status": "OK",
+        "runtime_s": 0.0,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 28.92243115645709,
+          "dcas": [
+            28.92243115645709
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 24.721170704479185,
+          "dcas": [
+            28.92243115645709,
+            24.721170704479185,
+            26.09858067022036
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 34.13552300860285,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "Y537S"
+      },
+      {
+        "method": "random_surface",
+        "pdb_id": "4Q50",
+        "status": "OK",
+        "runtime_s": 0.0,
+        "primary_metric": "top1_dca_le_4A",
+        "clinical_grade": false,
+        "eligible_for_primary": true,
+        "top1": {
+          "success": false,
+          "best_dca": 16.21392568133948,
+          "dcas": [
+            16.21392568133948
+          ],
+          "k": 1,
+          "threshold_a": 4.0
+        },
+        "top3": {
+          "success": false,
+          "best_dca": 14.118786279280524,
+          "dcas": [
+            16.21392568133948,
+            14.118786279280524,
+            28.050378410994746
+          ],
+          "k": 3,
+          "threshold_a": 4.0
+        },
+        "dcc_top1": 27.164642121478934,
+        "residue_f1": {
+          "f1": null,
+          "precision": null,
+          "recall": null,
+          "available": false
+        },
+        "genotype": "D538G"
+      }
+    ]
+  },
+  "docking": {
+    "role": "auxiliary_structural_plausibility_only",
+    "in_primary_table": false,
+    "forbidden_claims": [
+      "proves affinity",
+      "proves efficacy",
+      "establishes therapeutic superiority"
+    ]
+  },
+  "accounting": {
+    "TOOL_UNAVAILABLE_in_miss_denominator": false,
+    "TOOL_UNAVAILABLE_in_failure_rate": true
+  },
+  "truth_boundary": "Receptor-only retrospective pilot on ESR1. Ligand coords are labels only. Cluster overlap prevents locked-test claims. clinical_grade=false.",
+  "evidence_level": "retrospective_pilot_only",
+  "comparative_claim_allowed": false,
+  "not_a_locked_test": true
+}

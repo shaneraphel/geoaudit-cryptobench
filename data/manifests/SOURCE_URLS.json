@@ -1,0 +1,17 @@
+{
+  "schema": "foliation.pocket_bench.source_urls.v1",
+  "clinical_grade": false,
+  "urls": [
+    {"role": "uniprot", "source_url": "https://www.uniprot.org/uniprotkb/P03372/entry"},
+    {"role": "structure", "source_url": "https://files.rcsb.org/download/3ERT.pdb"},
+    {"role": "structure", "source_url": "https://files.rcsb.org/download/3OS8.pdb"},
+    {"role": "structure", "source_url": "https://files.rcsb.org/download/1UOM.pdb"},
+    {"role": "structure", "source_url": "https://files.rcsb.org/download/5U2B.pdb"},
+    {"role": "structure", "source_url": "https://files.rcsb.org/download/6CHW.pdb"},
+    {"role": "structure", "source_url": "https://files.rcsb.org/download/4Q50.pdb"},
+    {"role": "structure", "source_url": "https://files.rcsb.org/download/4Q13.pdb"},
+    {"role": "baseline", "source_url": "https://github.com/Discngine/fpocket"},
+    {"role": "baseline", "source_url": "https://github.com/rdk/p2rank"},
+    {"role": "metric_context", "source_url": "https://doi.org/10.1093/bioinformatics/btaa105"}
+  ]
+}
