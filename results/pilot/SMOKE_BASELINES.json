@@ -1,32 +1,33 @@
 {
   "schema": "foliation.pocket_bench.smoke.v1",
   "clinical_grade": false,
+  "superseded_by": "results/pilot/REGENERATED_PILOT_REPORT.json",
+  "note": "Full benchmark (all 14 labeled structures, all methods) is in the regenerated report; this smoke file only records the corrected single-structure path and baseline environment.",
   "pdb_id": "3ERT",
-  "receptor_pdb": "data/pocket_bench/esr1/receptors/3ERT_A_receptor.pdb",
-  "results": {
-    "foliation": {
-      "status": "OK",
-      "n_pockets": 5,
-      "error": null
+  "receptor_pdb": "data/receptors/3ERT_A_receptor.pdb",
+  "baseline_env": {
+    "schema": "gf4cc.baseline_env.v1",
+    "clinical_grade": false,
+    "python": "3.12",
+    "tools": {
+      "fpocket": {
+        "version": "4.0 (git tag 4.2.3)",
+        "build": "from source, Discngine/fpocket"
+      },
+      "p2rank": {
+        "version": "2.5.1",
+        "java": "OpenJDK 17"
+      },
+      "deeppocket": {
+        "version": null,
+        "status": "TOOL_UNAVAILABLE"
+      }
     },
-    "fpocket": {
-      "status": "OK",
-      "n_pockets": 5,
-      "error": null
+    "commands": {
+      "labels": "PYTHONPATH=src python3.12 tools/build_labels.py --download",
+      "benchmark": "PYTHONPATH=src python3.12 tools/run_pilot.py --split all"
     },
-    "p2rank": {
-      "status": "OK",
-      "n_pockets": 3,
-      "error": null
-    },
-    "deeppocket": {
-      "status": "TOOL_UNAVAILABLE",
-      "n_pockets": 0,
-      "error": "DeepPocket not installed. Set DEEPPOCKET_CMD to a CLI that reads a receptor-only PDB and writes JSON pockets to stdout."
-    }
-  },
-  "policy": {
-    "TOOL_UNAVAILABLE_not_counted_as_miss": true,
-    "fpocket_p2rank_must_ok_for_full_suite": true
+    "report": "results/pilot/REGENERATED_PILOT_REPORT.json",
+    "note": "Prior P2Rank 6/6 was on merged (buggy) labels and is invalidated. Current numbers are on corrected chain-scoped labels; splits are NOT cluster-disjoint, so no comparative-superiority claim is made."
   }
 }

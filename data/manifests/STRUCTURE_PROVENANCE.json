@@ -1,0 +1,21 @@
+{
+  "schema": "gf4cc.structure_provenance.v1",
+  "clinical_grade": false,
+  "source": "RCSB",
+  "retrieved": "2026-07-25",
+  "note": "RCSB updates/re-versions coordinate files over time; these SHA-256 digests pin the exact files used here. Mismatch with a later RCSB fetch means RCSB re-released the entry, not that our record is wrong.",
+  "entries": {
+    "9BL0": {
+      "role": "KRAS G12D noncovalent primary docking geometry",
+      "url": "https://files.rcsb.org/download/9BL0.pdb",
+      "sha256": "719c4a6c728a85c577cf61d87786934f49068e90bf1c1b3e255b65ba9b508fe0",
+      "bytes": 289737
+    },
+    "5VA1": {
+      "role": "hERG cryo-EM (cardiotoxicity geometric-compatibility probe)",
+      "url": "https://files.rcsb.org/download/5VA1.pdb",
+      "sha256": "946f89bb727f063d07e6df1b15d7130a914597d6524cd364e3fdeea83fc7f472",
+      "bytes": 402732
+    }
+  }
+}

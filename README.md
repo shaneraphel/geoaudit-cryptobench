@@ -130,6 +130,15 @@ but recover **no** Top-1 hit; the bottleneck is candidate *generation* — only
 1/14 structures has any Foliation candidate within 4 Å in the top-20 pool
 (oracle ceiling). No comparative-superiority claim is made; `clinical_grade=false`.
 
+**Planned benchmark pivot.** Because these holo, non-cluster-disjoint ESR1
+structures cannot separate cavity physics from single-fold memorisation, the
+next evaluation moves to an existing peer-reviewed, cluster-disjoint,
+apo/cryptic-site benchmark (**CryptoBench**, Škrhák 2025; hard subset
+**CryptoSite**, Cimermancic 2016). Rationale, decision matrix, and honest
+caveats — including that a harder benchmark is *not* a win and that the best
+published cryptic-site method is itself an ML model we must beat — are in
+[`docs/BENCHMARK_SELECTION.md`](docs/BENCHMARK_SELECTION.md).
+
 ### Leakage boundary
 
 Prediction and scoring are separate: prediction receives checksum-pinned,
@@ -179,6 +188,8 @@ PYTHONPATH=src python3.12 tools/run_pilot.py --split all     # rerun benchmark
 - KRAS G12C: https://files.rcsb.org/download/6OIM.pdb
 - ESR1 example: https://files.rcsb.org/download/3ERT.pdb
 - hERG cryo-EM: https://files.rcsb.org/download/5VA1.pdb
+- Pinned SHA-256 + byte counts (RCSB re-versions files): `data/manifests/STRUCTURE_PROVENANCE.json`
+- CryptoBench benchmark: https://doi.org/10.1093/bioinformatics/btae745 (data https://osf.io/pz4a9/)
 - ChEMBL: https://www.ebi.ac.uk/chembl/
 - fpocket: https://github.com/Discngine/fpocket
 - P2Rank: https://github.com/rdk/p2rank

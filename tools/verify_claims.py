@@ -173,6 +173,66 @@ def main() -> int:
         )
     )
 
+    # --- Science-invariant gate -------------------------------------------
+    # Reviewer #3: CI previously only checked scope wording, never a scientific
+    # invariant, so a 232-heavy-atom merged label passed. These checks re-read
+    # the actual artifacts and fail closed on the specific defect classes.
+    label_dir = root / "data/labels"
+    label_files = sorted(label_dir.glob("*_labels.json")) if label_dir.exists() else []
+    label_ok = len(label_files) >= 14
+    for lf in label_files:
+        lab = json.loads(lf.read_text())
+        n_heavy = len(lab.get("ligand_heavy_coords") or [])
+        # A single small-molecule ligand instance is ~10-70 heavy atoms; the
+        # merge bug inflated OHT to 232 (~8 copies). Reject anything >80 or <3.
+        if not (3 <= n_heavy <= 80) or len(lab.get("ligand_centroid") or []) != 3:
+            label_ok = False
+    checks["labels_single_instance_physical"] = label_ok
+
+    regen_path = root / "results/pilot/REGENERATED_PILOT_REPORT.json"
+    if regen_path.exists():
+        regen = json.loads(regen_path.read_text())
+        per = regen.get("per_method") or {}
+        methods_present = {"foliation_pocket_ro", "fpocket", "p2rank", "random_bbox"} <= set(per)
+        denom_ok = all(
+            (m.get("ok", 0) + m.get("unavailable", 0) + m.get("crash_empty", 0))
+            == regen.get("n_structures")
+            for m in per.values()
+        )
+        checks["regenerated_report_honest"] = (
+            regen.get("n_structures") == 14
+            and regen.get("labels") == "chain_scoped_single_instance_corrected"
+            and regen.get("clinical_grade") is False
+            and methods_present
+            and denom_ok
+        )
+    else:
+        checks["regenerated_report_honest"] = False
+
+    prov_path = root / "data/manifests/STRUCTURE_PROVENANCE.json"
+    if prov_path.exists():
+        prov = json.loads(prov_path.read_text()).get("entries") or {}
+        checks["structure_provenance_pinned"] = all(
+            re.fullmatch(r"[0-9a-f]{64}", str((prov.get(p) or {}).get("sha256") or ""))
+            and int((prov.get(p) or {}).get("bytes") or 0) > 5000
+            for p in ("9BL0", "5VA1")
+        )
+    else:
+        checks["structure_provenance_pinned"] = False
+
+    # Every receptor path referenced by the input/smoke manifests must exist and
+    # must not use the retired data/pocket_bench/esr1/receptors/ location.
+    pim = json.loads((root / "data/manifests/PREDICTION_INPUT_MANIFEST.json").read_text())
+    smoke = json.loads((root / "results/pilot/SMOKE_BASELINES.json").read_text())
+    referenced = [e.get("receptor_pdb") for e in pim.get("entries") or []]
+    referenced.append(smoke.get("receptor_pdb"))
+    checks["manifest_receptor_paths_resolve"] = bool(referenced) and all(
+        rp
+        and "data/pocket_bench/esr1/receptors" not in rp
+        and (root / rp).exists()
+        for rp in referenced
+    )
+
     primary_text = "\n".join(
         [
             json.dumps(claims),
