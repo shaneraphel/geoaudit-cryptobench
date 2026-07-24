@@ -22,6 +22,13 @@ OUT_OF_SCOPE = re.compile(
 CAMPAIGN_CLAIM = re.compile(
     r"(?i)\b(GPT[- ]?5\.6\s+campaign|free[- ]reasoning\s+campaign)\b"
 )
+# Proprietary engine names must stay LOCAL only; public docs use abstract
+# descriptors ("geometric manifold prior", "exact-form topological filter",
+# "discrete conformal rescaling"). This gate hard-fails if a brand leaks back in.
+PROPRIETARY_ENGINE = re.compile(
+    r"(?i)\b(NCGD|PINEKF|PINEFK|Non[- ]Commutative\s+Geometric|"
+    r"Conformal\s+Squeeze|Kähler|Kahler)\b"
+)
 ABSOLUTE_PATH = re.compile(r"(?<![A-Za-z])/(?:Users|home|private)/")
 CREDENTIAL = re.compile(
     r"(?i)(?:password|passwd|api[_-]?key|secret|token)\s*[:=]\s*[\"']?[^\s,\"']{8,}"
@@ -264,8 +271,9 @@ def main() -> int:
     )
 
     def _is_local_only(path: Path) -> bool:
-        # Never-published local-only material (internal changelog, chip/EDA/AIG
-        # notes, NCGD/PinEKF source, peer-review transcripts). Gitignored via
+        # Never-published local-only material (internal changelog, hardware/
+        # accelerator notes, proprietary engine source, peer-review transcripts).
+        # Gitignored via
         # *.local.* and _local/ ; excluded here so it cannot trip scope gates.
         parts = set(path.parts)
         return "_local" in parts or ".local" in "".join(path.suffixes)
@@ -286,6 +294,9 @@ def main() -> int:
     )
     checks["no_out_of_scope_paper_material"] = OUT_OF_SCOPE.search(scope_text) is None
     checks["no_campaign_claim_language"] = CAMPAIGN_CLAIM.search(scope_text) is None
+    checks["no_proprietary_engine_names_public"] = (
+        PROPRIETARY_ENGINE.search(scope_text) is None
+    )
     checks["no_local_absolute_paths_in_primary_docs"] = (
         ABSOLUTE_PATH.search(tree_text) is None
     )

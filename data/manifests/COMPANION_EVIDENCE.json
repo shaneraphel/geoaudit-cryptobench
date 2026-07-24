@@ -61,17 +61,17 @@
     "patentability_claim": false,
     "freedom_to_operate_claim": false
   },
-  "v8_bounded_accelerator_sidecar": {
+  "v8_bounded_geometry_sidecar": {
     "representative_ligand_only_3d_records": 24,
     "force_field_converged": 18,
-    "ncgd_boundary_blocked": 0,
-    "ncgd_converged": 0,
-    "pinefk_variants": 216,
-    "pinefk_exact_form_null": 24,
-    "pinefk_bond_manifold": 136,
-    "gcu_integer_reference_parity": 24,
+    "manifold_prior_boundary_blocked": 0,
+    "manifold_prior_converged": 0,
+    "exact_form_variants": 216,
+    "exact_form_null": 24,
+    "bond_manifold_variants": 136,
+    "integer_reference_parity": 24,
     "physical_hardware_executed": false,
-    "new_aig_or_netlist_created": false,
+    "new_hardware_artifact_created": false,
     "target_pose_computed": false
   },
   "v8_1_protocol_requalification": {

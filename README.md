@@ -24,15 +24,15 @@ leave. It relies exclusively on universal, deterministic operators:
 
 - **GF(4) algebraic mapping** — the allele is reduced to an exact finite-field
   residual (§3), not to a learned embedding.
-- **NCGD (Non-Commutative Geometric Dynamics)** — Kähler-metric traces and
-  Kähler-horizon evaluation over the candidate manifold; a geometric brake, not
-  a gradient fit.
-- **Boolean Voxel Oracle** — the pocket wall is a discrete van der Waals
-  occupancy oracle; clearance is a Boolean predicate, not a soft penalty.
-- **Discrete Weyl rescaling (Conformal Squeeze)** — integer conformal rescaling
-  of local geometry that resolves strain against the Voxel Oracle without
-  breaking discrete invariants.
-- **PinEKF exact-form null filter** — an exact differential-form closure test
+- **Geometric manifold prior** — a deterministic curvature/packing
+  admissibility field over the candidate manifold; a geometric brake, not a
+  gradient fit.
+- **Boolean voxel-occupancy oracle** — the pocket wall is a discrete van der
+  Waals occupancy predicate; clearance is Boolean, not a soft penalty.
+- **Discrete conformal rescaling** — integer conformal rescaling of local
+  geometry that resolves strain against the wall without breaking discrete
+  invariants.
+- **Exact-form topological filter** — an exact differential-form closure test
   that rigidifies admissible trajectories.
 
 We make **no claim** to predict pockets *better* than a probabilistic model. We
@@ -42,7 +42,7 @@ of that refusal to memorise.
 
 ## 2. Universal topological deformation (showcase)
 
-The same combinatorial logic — GF(4) operators composed with NCGD — applies
+The same combinatorial logic — GF(4) operators composed with the geometric manifold prior — applies
 unchanged across different pockets and different drug modalities. Only the target
 wall and the modality protocol change; the operator grammar does not.
 
@@ -55,9 +55,9 @@ wall and the modality protocol change; the operator grammar does not.
 
 | Modality | Target (real reference) | Deformation computed by the engine |
 |---|---|---|
-| Targeted small molecule | KRAS G12D (`9BL0`, MRTX-1133 complex) | Single-pass Conformal Squeeze on aniline components to strictly clear the Boolean Voxel Oracle wall while preserving the declared 1.227 Å minimum-bond-length invariant. |
-| PROTAC ternary complex | ESR1 (ERα)–VHL (`9SV3` cryo-EM context) | PinEKF exact-form null filter rigidifies the linker trajectory, driving a non-commutative topological pump that evades target–ligase interface clashes. |
-| Structure-defined macrocycle | FLT3 WT kinase domain (`4XUF` context) | 16-bit spinor projection with internal Kähler-horizon evaluation resolves severe ring strain without breaking the discrete loop-closure invariant. |
+| Targeted small molecule | KRAS G12D (`9BL0`, MRTX-1133 complex) | Single-pass discrete conformal rescaling of aniline components to strictly clear the voxel-occupancy wall while preserving the declared 1.227 Å minimum-bond-length invariant. |
+| PROTAC ternary complex | ESR1 (ERα)–VHL (`9SV3` cryo-EM context) | An exact-form topological filter rigidifies the linker trajectory, driving a topological pump that evades target–ligase interface clashes. |
+| Structure-defined macrocycle | FLT3 WT kinase domain (`4XUF` context) | 16-bit spinor projection with an internal curvature-admissibility evaluation resolves severe ring strain without breaking the discrete loop-closure invariant. |
 
 The reference structures are genuine depositions (`9BL0` KRAS G12D/MRTX-1133;
 `9SV3` ERα/EloB/EloC/VHL/14-3-3ζ cryo-EM; `4XUF` FLT3 KD/quizartinib). The
@@ -89,8 +89,9 @@ algebra of the mutant allele. The flagship method paper is in
    non-colliding solution spaces.
 
 The algebra is then projected to chemistry — SMILES, bond graphs,
-pharmacophores — and to 3D geometry, where NCGD's Kähler brake, the Boolean
-Voxel Oracle wall, and Conformal Squeeze act under each modality's protocol.
+pharmacophores — and to 3D geometry, where the geometric manifold prior, the
+voxel-occupancy wall, and discrete conformal rescaling act under each modality's
+protocol.
 
 The method encodes **algebraic + geometric conditioning only**. It does not claim
 a unique molecular inverse, docking affinity, steric guarantee, synthesis,
@@ -151,12 +152,12 @@ scores 14/14 Top-1 and this deterministic engine scores 0/14. We publish that
 gap unedited. Two conclusions follow, both stated without hedging:
 
 1. **The failure is isolated in candidate *generation*, not geometric ranking.**
-   Re-ranking the generated pool with the Kähler-brake (NCGD) manifold prior and
-   the PinEKF exact-form filter recovers no additional hit because only 1/14
+   Re-ranking the generated pool with the geometric manifold prior and the
+   exact-form topological filter recovers no additional hit because only 1/14
    structures has *any* admissible candidate within 4 Å in the pool (the oracle
    ceiling). The ranking layer cannot select a correct geometry that generation
    never proposed.
-2. **We refuse to patch this with statistical heuristics.** The Voxel Oracle
+2. **We refuse to patch this with statistical heuristics.** The voxel-occupancy
    walls are absolute Boolean predicates; we will not soften them into a learned
    penalty to manufacture a hit. A deterministic 0/14 that we understand is worth
    more than a fitted number we cannot derive.
@@ -256,9 +257,9 @@ PYTHONPATH=src python3.12 tools/run_pilot.py --split all     # rerun benchmark
   metabolic stability, or clinical safety.
 - Multitarget and multimodal; the program does not collapse all targets into one
   ESR1 pocket score.
-- The GF(4) + NCGD engine encodes algebraic + geometric conditioning; it does not
-  claim a unique molecular inverse, affinity, or therapeutic effect.
-- Docking scores and Voxel Oracle clearance are geometry, not affinity, efficacy,
+- The GF(4) + geometric-prior engine encodes algebraic + geometric conditioning;
+  it does not claim a unique molecular inverse, affinity, or therapeutic effect.
+- Docking scores and voxel-occupancy clearance are geometry, not affinity, efficacy,
   or therapeutic evidence.
 - The Appendix A dataset is not a cluster-disjoint locked holdout.
 - Regenerative-medicine / cell-state programs belong in separate repositories.
@@ -289,16 +290,17 @@ PYTHONPATH=src python3.12 tools/run_pilot.py --split all     # rerun benchmark
 
 **身份定位**：这是一个**确定性的多模态几何计算基座**，不是统计打分函数。统计模型
 靠记忆已见结构的表面特征来插值泛化，因而在分布外（未见折叠、apo/隐匿构象）崩溃；
-本基座没有训练分布可离开，只依赖普适数学律：GF(4) 代数映射、NCGD（非交换几何
-动力学，Kähler 度量迹/视界评估）、布尔体素神谕（Boolean Voxel Oracle，离散范德华
-占据）、离散 Weyl 重标（Conformal Squeeze）、PinEKF 精确形式零滤子。我们**不主张**
+本基座没有训练分布可离开，只依赖普适数学律：GF(4) 代数映射、几何流形先验（曲率/
+堆积可容许场）、布尔体素占据神谕（离散范德华占据判定）、离散共形重标、精确形式
+拓扑滤子。我们**不主张**
 比概率模型"更会"预测口袋，只主张**本质不同**（确定性 vs 概率性）。
 
-**普适拓扑形变（示例，仅方法演示）**：同一套 GF(4)+NCGD 组合逻辑在不同口袋、不同
-模态间不变地施加形变——小分子 KRAS G12D(`9BL0`) 单次 Conformal Squeeze 清墙并保
-1.227 Å 最小键长不变量；PROTAC ERα–VHL(`9SV3` 语境) 用 PinEKF 刚化 linker 轨迹避
-界面碰撞；大环 FLT3(`4XUF` 语境) 16-bit 旋量投影 + Kähler 视界解环张力而不破坏离散
-闭环不变量。以上为**真实结构上的方法演示，非实测位姿、非结合证据**，`clinical_grade=false`。
+**普适拓扑形变（示例，仅方法演示）**：同一套 GF(4)+几何流形先验组合逻辑在不同口袋、
+不同模态间不变地施加形变——小分子 KRAS G12D(`9BL0`) 单次离散共形重标清墙并保
+1.227 Å 最小键长不变量；PROTAC ERα–VHL(`9SV3` 语境) 用精确形式拓扑滤子刚化 linker
+轨迹避界面碰撞；大环 FLT3(`4XUF` 语境) 16-bit 旋量投影 + 曲率可容许评估解环张力而
+不破坏离散闭环不变量。以上为**真实结构上的方法演示，非实测位姿、非结合证据**，
+`clinical_grade=false`。
 
 **0/14 即诚实防线**：附录 A 中 P2Rank 14/14、本引擎 0/14，如实公布。失败完全定位在
 候选**生成**（14 个结构里仅 1 个池内有 4 Å 内可采候选，oracle 上限），不在几何排序；

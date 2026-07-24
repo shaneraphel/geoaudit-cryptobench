@@ -146,7 +146,7 @@ def gate_label_physical(labels: list[dict]) -> bool:
                and len(l["ligand_centroid"]) == 3 for l in labels)
 
 def gate_candidate_feasibility(cands: list[dict], oracle) -> bool:
-    # every ACCEPTED candidate clears the Boolean Voxel Oracle and respects the
+    # every ACCEPTED candidate clears the Boolean voxel-occupancy wall and respects the
     # 1.227 Å minimum-bond invariant — recomputed here, not trusted from the file
     for c in cands:
         if any(oracle.occupied(p) for p in c["atom_xyz"]):          return False
@@ -177,16 +177,16 @@ straight-line pass with no clock and no fixed-point loop.
 ### 4.1 Objects (all precomputed, deterministic)
 
 - Grid `G = Z³ ∩ box`, spacing `h`. Bitplanes over `G`:
-  - **Boolean Voxel Oracle** `O(v)=1` iff `‖center(v) − nearest_protein_heavy‖ <
+  - **Boolean voxel-occupancy wall** `O(v)=1` iff `‖center(v) − nearest_protein_heavy‖ <
     r_Bondi(element)`. Free space `F = ¬O`.
-  - **Kähler-horizon admissibility** `K(v)=1` iff `κ(v) ≤ κ*`, where `κ` is the
-    NCGD local Kähler-metric trace (a curvature/packing proxy), precomputed once.
+  - **Curvature-admissibility field** `K(v)=1` iff `κ(v) ≤ κ*`, where `κ` is a
+    local curvature/packing proxy from the geometric manifold prior, precomputed once.
 - **Allele seed** `s₀ = embed( solve(H x = B δ) )`, a bitplane of proposed atom
   centres from the GF(4) syndrome solution for residual `δ` (§ method paper).
 - **Bond LUT** `Λ`: the fixed table of admissible neighbour offsets whose length
   lies in `[1.227 Å, d_max]`. Membership is a lookup, never a search.
-- **Weyl set** `W`: a fixed, finite set of integer conformal rescales (the
-  Conformal Squeeze) — bounded, evaluated in parallel, no convergence loop.
+- **Rescale set** `W`: a fixed, finite set of integer conformal rescales
+  (discrete conformal rescaling) — bounded, evaluated in parallel, no loop.
 
 ### 4.2 The map (straight-line / clockless)
 
@@ -234,9 +234,9 @@ manifest.
 
 The "Foliation-lite burial heuristic" narrative is retired. The method is the
 **Multimodal Geometric Foundation**: a deterministic engine that computes exact
-topological deformations from universal law — GF(4) allele algebra, NCGD
-Kähler-horizon evaluation, the Boolean Voxel Oracle, discrete Weyl rescaling
-(Conformal Squeeze), and the PinEKF exact-form null filter — applied unchanged
+topological deformations from universal law — GF(4) allele algebra, a geometric
+manifold prior (curvature-admissibility field), the Boolean voxel-occupancy wall,
+discrete conformal rescaling, and an exact-form topological filter — applied unchanged
 across pockets and modalities. Burial counting is gone; feasibility is an
 algebraic property of the one-pass map, not a heuristic score.
 
@@ -246,9 +246,9 @@ The same operator grammar, three modalities, real deposited references:
 
 | Modality | Target (real reference) | Deformation |
 |---|---|---|
-| Small molecule | KRAS G12D `9BL0` | Single-pass Conformal Squeeze on aniline components clears the Boolean Voxel Oracle wall while `Λ` preserves the 1.227 Å minimum-bond invariant. |
-| PROTAC ternary | ESR1 (ERα)–VHL `9SV3` | PinEKF exact-form null filter rigidifies the linker trajectory, driving a non-commutative topological pump that evades the target–ligase interface. |
-| Macrocycle | FLT3 WT `4XUF` | 16-bit spinor projection + Kähler-horizon evaluation resolves ring strain without breaking the discrete loop-closure invariant. |
+| Small molecule | KRAS G12D `9BL0` | Single-pass discrete conformal rescaling on aniline components clears the voxel-occupancy wall while `Λ` preserves the 1.227 Å minimum-bond invariant. |
+| PROTAC ternary | ESR1 (ERα)–VHL `9SV3` | An exact-form topological filter rigidifies the linker trajectory, driving a topological pump that evades the target–ligase interface. |
+| Macrocycle | FLT3 WT `4XUF` | 16-bit spinor projection + curvature-admissibility evaluation resolves ring strain without breaking the discrete loop-closure invariant. |
 
 These are **illustrative operator demonstrations on real geometries**, not
 measured poses or binding evidence.

@@ -40,12 +40,12 @@ class TestPaperScope(unittest.TestCase):
         self.assertIs(public_exact["global_novelty_claim"], False)
         self.assertIs(public_exact["patentability_claim"], False)
         self.assertIs(public_exact["freedom_to_operate_claim"], False)
-        accelerator = companion["v8_bounded_accelerator_sidecar"]
-        self.assertEqual(accelerator["representative_ligand_only_3d_records"], 24)
-        self.assertEqual(accelerator["gcu_integer_reference_parity"], 24)
-        self.assertEqual(accelerator["ncgd_converged"], 0)
-        self.assertIs(accelerator["physical_hardware_executed"], False)
-        self.assertIs(accelerator["new_aig_or_netlist_created"], False)
+        sidecar = companion["v8_bounded_geometry_sidecar"]
+        self.assertEqual(sidecar["representative_ligand_only_3d_records"], 24)
+        self.assertEqual(sidecar["integer_reference_parity"], 24)
+        self.assertEqual(sidecar["manifold_prior_converged"], 0)
+        self.assertIs(sidecar["physical_hardware_executed"], False)
+        self.assertIs(sidecar["new_hardware_artifact_created"], False)
         protocol = companion["v8_1_protocol_requalification"]
         self.assertEqual(protocol["records_requalified"], 4000)
         self.assertEqual(protocol["candidate_geometry_route_ready"], 167)
