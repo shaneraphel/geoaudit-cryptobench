@@ -205,6 +205,11 @@ crystallographic copy across chains into one pseudo-ligand (4Q50 `OHT`
 | Burial + manifold prior + exact-form filter | 0 |
 
 See `figures/fig_baseline_comparison.png` and `figures/BENCHMARK_SUMMARY.json`.
+**Run provenance.** `geometric_foundation`, `p2rank` (2.5.1, Temurin JDK 17),
+`foliation`, and `random` are from a single live `run_pilot --split all`; the
+`fpocket 4.0` row (0/14) is carried over from the pinned baseline run
+(`BASELINE_ENV.json`) because fpocket needs a source/conda build not present in
+the current environment — reinstall to include it live.
 
 **Honest reading.** The splits are **not cluster-disjoint** — one conserved
 ESR1 LBD cluster spans development/validation/locked_test (24 cross-split

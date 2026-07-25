@@ -19,6 +19,39 @@
     "TOP100_3D_ENSEMBLE.sdf.gz": "b20c331ac4aaef9f27f873d65b6ff7b88cc32b62b4da78ea15549dcf8688c239",
     "TOP20_WET_LAB_PLANS.json": "5c905defa035580daa622df282dfd38635ae7109180356e1f31fe7cf98b1ae1a"
   },
+  "stereo_provenance": {
+    "authoritative_structure_field": "isomeric_smiles",
+    "identity_key_field": "inchi_key",
+    "note": "isomeric_smiles is the authoritative stereochemical structure; inchi_key is derived from it. canonical_smiles is a 2D stereo-free convenience/display string and is NOT authoritative. This removes any SMILES stereo ambiguity for peer review / lot-to-lot comparison.",
+    "verification": {
+      "method": "InchiToInchiKey(MolToInchi(MolFromSmiles(isomeric_smiles))) == stored inchi_key, per candidate (RDKit 2026.03.3)",
+      "n_candidates": 24,
+      "inchi_key_matches_isomeric": 24,
+      "inchi_key_mismatches": 0,
+      "chiral_candidates": 16,
+      "achiral_candidates": 8,
+      "isomeric_unassigned_stereocenters_total": 0,
+      "isomeric_fully_specified": true
+    },
+    "verified_at": "2026-07-25T12:01:26+0800"
+  },
+  "adversarial_review_summary": {
+    "scope": "top-3 by rank; Author-vs-Reviewer causal loop + B3LYP/def2-SVP DFT corroboration",
+    "assassinated": [
+      "gpt56v91-sm-krasg12d-02621-FLRZLMYSWNATQP"
+    ],
+    "survived_with_modification": [
+      "gpt56v91-sm-krasg12d-00379-LSDREBDFWDRPJZ",
+      "gpt56v91-sm-krasg12d-00553-JTQKZCJFKLCOKZ"
+    ],
+    "evidence": [
+      "evidence/kras_g12d_sm/ADVERSARIAL_PEER_REVIEW.md",
+      "evidence/kras_g12d_sm/TOXICOLOGY_CAUSAL_REASONING_REPORT.md",
+      "evidence/kras_g12d_sm/DFT_QUANTUM_METRICS.json"
+    ],
+    "note": "Assassinated records are retained (not deleted) with excluded_from_survivors=true for auditability. clinical_grade=false.",
+    "reviewed_at": "2026-07-25T12:02:18+0800"
+  },
   "candidates": [
     {
       "rank": 1,
@@ -60,7 +93,18 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true,
+      "adversarial_review": {
+        "adversarial_verdict": "SURVIVED_WITH_MODIFICATION",
+        "repaired_isomeric_smiles": "Nc1cc2ccccc2c(COC3CN(C)CC(F)C3)n1",
+        "repaired_inchi_key": "FEMGRWXZTHITSN-UHFFFAOYSA-N",
+        "repair": "aminal / N,O-acetal ether -> N-methyl fluoropiperidine ether (removes metabolically labile aminal)",
+        "excluded_from_survivors": false,
+        "evidence": "evidence/kras_g12d_sm/ADVERSARIAL_PEER_REVIEW.md"
+      }
     },
     {
       "rank": 2,
@@ -102,7 +146,16 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 1,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true,
+      "adversarial_review": {
+        "adversarial_verdict": "ASSASSINATED",
+        "reason": "Irreducible 2-aminothiophene-3-carbonitrile liability: thiophene S-oxide + nitrenium reactive-intermediate pathway (DFT: S14 tops both Fukui f+ and f-, confirming S-oxidation); N-acetyl repair rejected (loses pharmacophore / does not remove the S-oxide route).",
+        "excluded_from_survivors": true,
+        "evidence": "evidence/kras_g12d_sm/ADVERSARIAL_PEER_REVIEW.md"
+      }
     },
     {
       "rank": 3,
@@ -144,7 +197,18 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 0,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true,
+      "adversarial_review": {
+        "adversarial_verdict": "SURVIVED_WITH_MODIFICATION",
+        "repaired_isomeric_smiles": "Cc1cccc2cc(O)cc(OCCN3CCOCC3)c12",
+        "repaired_inchi_key": "BBPVRZAZOXDXGZ-UHFFFAOYSA-N",
+        "repair": "cyclopropane aminal -> morpholinoethyl ether (removes N,O-cyclopropane aminal)",
+        "excluded_from_survivors": false,
+        "evidence": "evidence/kras_g12d_sm/ADVERSARIAL_PEER_REVIEW.md"
+      }
     },
     {
       "rank": 4,
@@ -186,7 +250,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 5,
@@ -228,7 +295,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 6,
@@ -270,7 +340,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 0,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 7,
@@ -312,7 +385,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 0,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 8,
@@ -353,7 +429,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 9,
@@ -395,7 +474,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 0,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 10,
@@ -437,7 +519,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 11,
@@ -478,7 +563,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 0,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 12,
@@ -520,7 +608,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 0,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 13,
@@ -562,7 +653,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 0,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 14,
@@ -604,7 +698,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 1,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 15,
@@ -646,7 +743,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 1,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 16,
@@ -688,7 +788,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 1,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 17,
@@ -730,7 +833,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 18,
@@ -772,7 +878,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 19,
@@ -814,7 +923,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 20,
@@ -856,7 +968,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 21,
@@ -898,7 +1013,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 22,
@@ -940,7 +1058,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 1,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 23,
@@ -982,7 +1103,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 2,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     },
     {
       "rank": 24,
@@ -1024,7 +1148,10 @@
       "modality": "targeted_small_molecule",
       "acceptance_state": "COMPUTATIONAL_PRIORITY",
       "truth_boundary_en": "Curated computational-priority subset only. Not binding, affinity, efficacy, novelty, freedom-to-operate, or developability evidence.",
-      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。"
+      "truth_boundary_zh": "仅为计算优先策展子集。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性证据。",
+      "n_stereocenters": 0,
+      "stereo_fully_specified": true,
+      "inchi_key_verified_from_isomeric": true
     }
   ]
 }

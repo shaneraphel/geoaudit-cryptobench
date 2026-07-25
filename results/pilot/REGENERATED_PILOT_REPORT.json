@@ -1,6 +1,6 @@
 {
   "schema": "foliation.pocket_bench.regenerated_report.v1",
-  "generated_at": "2026-07-25T02:19:41+0800",
+  "generated_at": "2026-07-25T12:07:52+0800",
   "clinical_grade": false,
   "not_a_locked_test": true,
   "split": "all",
@@ -9,13 +9,38 @@
   "dca_threshold_a": 4.0,
   "unit_of_analysis": "one_pdb_structure",
   "n_structures": 14,
-  "summaries": [
-    "foliation_pocket_ro",
-    "geometric_foundation",
-    "fpocket",
-    "p2rank",
-    "random_bbox"
-  ],
+  "summaries": {
+    "foliation_pocket_ro": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    },
+    "geometric_foundation": {
+      "top1_dca_le_4A_hits": 14,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    },
+    "fpocket": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    },
+    "p2rank": {
+      "top1_dca_le_4A_hits": 14,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    },
+    "random_bbox": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    }
+  },
   "per_method": {
     "foliation_pocket_ro": {
       "ok": 14,
@@ -333,7 +358,8 @@
           "best_dca": 12.798511179603842,
           "dcc_top1": 16.60329715275328
         }
-      ]
+      ],
+      "_provenance": "carried_over_from_pinned_baseline_run (fpocket 4.0, BASELINE_ENV.json); fpocket requires a source/conda build not available in the current run env"
     },
     "p2rank": {
       "ok": 14,
@@ -549,5 +575,5 @@
     }
   },
   "truth_boundary": "Regenerated on CORRECTED chain-scoped labels. Splits are NOT cluster-disjoint, so NO comparative-superiority claim is made. TOOL_UNAVAILABLE is excluded from the denominator, never counted as a miss. clinical_grade=false.",
-  "geometric_foundation_note": "geometric_foundation computed this run (deterministic, ligand-free); p2rank/fpocket/random/foliation rows carried over from the pinned baseline run (BASELINE_ENV.json) since fpocket/P2Rank are not currently on PATH \u2014 reinstall via bin/install-*.sh to rerun all methods together with tools/run_pilot.py."
+  "baseline_provenance_note": "Single live run (this report): foliation, geometric_foundation, p2rank (2.5.1, JDK17 Temurin), random_bbox. fpocket row carried over from the pinned baseline run (0/14) \u2014 fpocket needs a source/conda build unavailable here; reinstall to include it live."
 }
