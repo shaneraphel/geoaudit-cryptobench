@@ -1,4 +1,4 @@
-"""Paper-scope tests for the GeoAudit multitarget multimodal repository."""
+"""Paper-scope tests: CryptoBench receptor-only benchmark claim + appendix boundary."""
 from __future__ import annotations
 
 import json
@@ -14,11 +14,24 @@ class TestPaperScope(unittest.TestCase):
         companion = json.loads(
             (ROOT / "data/manifests/COMPANION_EVIDENCE.json").read_text()
         )
-        self.assertEqual(scope["paper_id"], "geoaudit-multitarget-multimodal")
+        # Primary claim is the CryptoBench receptor-only benchmark; allele
+        # conditioning and candidate generation are appendix / future work.
+        self.assertEqual(scope["paper_id"], "geoaudit-cryptobench-zero-shot")
+        bench = scope["primary_benchmark"]
+        self.assertEqual(bench["input_contract"], "receptor_only_apo")
+        self.assertIn("cryptobench", bench["name"].lower())
         self.assertEqual(
-            set(scope["target_panel"]),
-            {"ESR1", "KRAS", "FLT3", "PIM1", "PIK3CA", "CDK4/6"},
+            set(bench["primary_metrics"]),
+            {"residue_auc", "residue_pr_auc", "residue_mcc", "residue_f1"},
         )
+        self.assertNotIn("target_panel", scope)
+        for appendix in ("A", "B"):
+            self.assertIs(
+                scope["appendices"][appendix]["excluded_from_primary_claim"], True
+            )
+            self.assertIs(
+                scope["appendices"][appendix]["comparative_claim_allowed"], False
+            )
         self.assertEqual(companion["counts"]["chemistry_ready"], 4000)
         self.assertEqual(companion["v8_structure_assets"]["sdf_records"], 4000)
         self.assertEqual(

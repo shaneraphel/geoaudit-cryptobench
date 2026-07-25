@@ -80,10 +80,21 @@ def main() -> int:
         and scope.get("clinical_grade") is False
         and companion.get("clinical_grade") is False
     )
-    checks["multitarget_paper_scope"] = (
-        scope.get("paper_id") == "geoaudit-multitarget-multimodal"
-        and set(scope.get("target_panel") or []) == TARGET_PANEL
-        and len(scope.get("structure_defined_modalities") or []) == 4
+    # The paper claim is the CryptoBench receptor-only benchmark. Allele-conditioning
+    # and candidate generation are appendix / future work and must NOT re-enter the
+    # primary claim.
+    bench = scope.get("primary_benchmark") or {}
+    checks["benchmark_paper_scope"] = (
+        scope.get("paper_id") == "geoaudit-cryptobench-zero-shot"
+        and bench.get("input_contract") == "receptor_only_apo"
+        and "cryptobench" in str(bench.get("name") or "").lower()
+        and "mmseqs2" in str(bench.get("split") or "").lower()
+        and set(bench.get("primary_metrics") or []) == {
+            "residue_auc", "residue_pr_auc", "residue_mcc", "residue_f1"
+        }
+        and (scope.get("appendices") or {}).get("B", {}).get(
+            "excluded_from_primary_claim"
+        ) is True
     )
     checks["companion_pointer_present"] = (
         "gf4-allele-conditioned-evidence"
@@ -261,13 +272,18 @@ def main() -> int:
     checks["no_forbidden_primary_phrases"] = FORBIDDEN_PRIMARY.search(primary_text) is None
 
     readme = (root / "README.md").read_text(errors="ignore")
-    checks["readme_scopes_paper_and_appendix"] = (
-        "retrospective" in readme.lower()
-        and "clinical_grade=false" in readme.lower()
+    # The README must lead with the benchmark claim and keep ESR1 / allele
+    # conditioning demarcated in appendices.
+    low = readme.lower()
+    checks["readme_scopes_benchmark_and_appendix"] = (
+        "cryptobench" in low
+        and "zero-shot" in low
+        and "receptor-only" in low
+        and "retrospective" in low
+        and "clinical_grade=false" in low
         and "ESR1" in readme
-        and "multitarget" in readme.lower()
-        and "gf4-allele-conditioned-evidence" in readme
         and "Appendix A" in readme
+        and "Appendix B" in readme
     )
 
     def _is_local_only(path: Path) -> bool:

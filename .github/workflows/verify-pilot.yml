@@ -14,8 +14,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install test dependencies
-        run: pip install numpy==1.26.4
-      - name: Verify multitarget paper scope and Appendix A claims
+        # scipy is required by the spectral (anisotropic shear) modes; without it
+        # those tests silently degrade instead of running.
+        run: pip install numpy==1.26.4 "scipy>=1.11"
+      - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools
         run: make test

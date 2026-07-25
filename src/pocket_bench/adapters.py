@@ -91,19 +91,29 @@ def load_official_test_fold(root: Path = ROOT, *, verify_hashes: bool = True) ->
     if not isinstance(entries, list) or not entries:
         raise ValueError("official fold: 'entries' must be a non-empty list")
 
-    seen_cluster_split: dict[str, str] = {}
+    # Cluster-leak detection. The split of an entry is read from the manifest
+    # (``entry.split``, else ``foreign_split_clusters``, else the manifest ``fold``);
+    # it is NOT assumed to be "test". Hardcoding "test" made the check vacuous: every
+    # cluster mapped to the same split, so an overlap could never be observed.
+    foreign: dict[str, str] = {}
+    for cid in (manifest.get("foreign_split_clusters") or {}):
+        foreign[str(cid)] = str(manifest["foreign_split_clusters"][cid])
+
+    seen_cluster_split: dict[str, str] = dict(foreign)
     for e in entries:
         for key in ("pdb", "chain", "cluster_id", "receptor_path", "receptor_sha256",
                     "label_path", "label_sha256"):
             if key not in e:
                 raise ValueError(f"official fold: entry {e.get('pdb')} missing '{key}'")
-        # a TEST-fold cluster_id must not also be declared in another split
-        prior = seen_cluster_split.get(e["cluster_id"])
-        if prior is not None and prior != "test":
+        split = str(e.get("split") or manifest.get("fold"))
+        cid = str(e["cluster_id"])
+        prior = seen_cluster_split.get(cid)
+        if prior is not None and prior != split:
             raise ValueError(
-                f"official fold: cluster_id {e['cluster_id']} spans splits (leakage)"
+                f"official fold: cluster_id {cid} spans splits "
+                f"({prior} and {split}) — leakage"
             )
-        seen_cluster_split[e["cluster_id"]] = "test"
+        seen_cluster_split[cid] = split
         if verify_hashes:
             for path_key, sha_key in (("receptor_path", "receptor_sha256"),
                                       ("label_path", "label_sha256")):

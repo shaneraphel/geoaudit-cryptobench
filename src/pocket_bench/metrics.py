@@ -42,10 +42,19 @@ def topk_dca_success(
     }
 
 
-def residue_f1(pred_residues: Sequence[str] | None, true_residues: Sequence[str] | None) -> dict[str, Any]:
+def residue_f1(pred_residues: Sequence[Any] | None, true_residues: Sequence[Any] | None) -> dict[str, Any]:
+    """Set-F1 over residue numbers.
+
+    Both sides are normalized through ``_resseq`` so that a detector emitting
+    'A:ALA123'-style ids joins against integer labels; a raw set intersection of
+    mixed conventions would silently score 0.
+    """
     if not pred_residues or not true_residues:
         return {"f1": None, "precision": None, "recall": None, "available": False}
-    pset, tset = set(pred_residues), set(true_residues)
+    pset = {r for r in (_resseq(p) for p in pred_residues) if r is not None}
+    tset = {r for r in (_resseq(t) for t in true_residues) if r is not None}
+    if not pset or not tset:
+        return {"f1": None, "precision": None, "recall": None, "available": False}
     tp = len(pset & tset)
     prec = tp / len(pset) if pset else 0.0
     rec = tp / len(tset) if tset else 0.0
@@ -146,12 +155,32 @@ def residue_auc_pr(
     keys = sorted(scores_by_res)
     s = [scores_by_res[k] for k in keys]
     y = [1 if k in truth else 0 for k in keys]
+    # Threshold-dependent metrics at the detector's natural operating point:
+    # predicted-positive == residue lies in ANY returned pocket (score > 0).
+    tp = fp = tn = fn = 0
+    for si, yi in zip(s, y):
+        pred = 1 if si > 0.0 else 0
+        if pred and yi:
+            tp += 1
+        elif pred and not yi:
+            fp += 1
+        elif not pred and yi:
+            fn += 1
+        else:
+            tn += 1
+    denom = math.sqrt((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn))
+    mcc_v = ((tp * tn - fp * fn) / denom) if denom else None
+    f1_d = 2 * tp + fp + fn
+    f1_v = (2 * tp / f1_d) if f1_d else None
     return {
         "residue_auc": roc_auc(s, y),
         "residue_pr_auc": average_precision(s, y),
+        "residue_mcc": mcc_v,
+        "residue_f1_universe": f1_v,
         "available": True,
         "n_universe": len(keys),
         "n_true": sum(y),
+        "operating_point": "residue_in_any_predicted_pocket",
     }
 
 

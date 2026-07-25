@@ -1,6 +1,7 @@
 """Fail-closed adapter gates: official CryptoBench fold + PocketMiner baseline."""
 from __future__ import annotations
 
+import hashlib
 import json
 import tempfile
 import unittest
@@ -13,6 +14,46 @@ from pocket_bench.adapters import (
     official_fold_available,
     pocketminer_available,
 )
+
+
+def _entries() -> list[dict]:
+    return [
+        {"pdb": "aaaa", "chain": "A", "cluster_id": "P00001"},
+        {"pdb": "bbbb", "chain": "B", "cluster_id": "P00002"},
+    ]
+
+
+def _write_manifest(root: Path, entries: list[dict], *,
+                    receptor_sha: str | None = None,
+                    extra: dict | None = None) -> Path:
+    """Materialize a syntactically valid official-fold manifest under ``root``."""
+    base = root / "data/cryptobench_apo"
+    base.mkdir(parents=True, exist_ok=True)
+    out = []
+    for e in entries:
+        stem = f"{e['pdb']}_{e['chain']}"
+        rec = base / f"{stem}_receptor.pdb"
+        lab = base / f"{stem}_labels.json"
+        rec.write_text(f"ATOM  {stem}\n")
+        lab.write_text(json.dumps({"pdb_id": e["pdb"], "chain": e["chain"],
+                                   "cryptic_residues": [1, 2]}) + "\n")
+        row = dict(e)
+        row.update({
+            "receptor_path": str(rec.relative_to(root)),
+            "receptor_sha256": receptor_sha or hashlib.sha256(rec.read_bytes()).hexdigest(),
+            "label_path": str(lab.relative_to(root)),
+            "label_sha256": hashlib.sha256(lab.read_bytes()).hexdigest(),
+        })
+        out.append(row)
+    manifest = {
+        "schema": "cryptobench.official_test_fold.v1",
+        "fold": "test",
+        "clustering": {"method": "mmseqs2", "sequence_identity_threshold": 0.10},
+        "entries": out,
+    }
+    manifest.update(extra or {})
+    (base / "official_manifest.json").write_text(json.dumps(manifest, indent=2))
+    return root
 
 
 class TestOfficialFold(unittest.TestCase):
@@ -45,32 +86,44 @@ class TestOfficialFold(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_official_test_fold(root)
 
-    def test_cluster_leak_rejected(self) -> None:
+    def test_hash_mismatch_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as d:
-            root = Path(d)
-            base = root / "data/cryptobench_apo"
-            base.mkdir(parents=True)
-            (base / "r.pdb").write_text("ATOM\n")
-            (base / "l.json").write_text("{}\n")
-            # duplicate cluster in a foreign split is impossible here (single fold),
-            # but a malformed entry with a non-test prior split must raise; emulate by
-            # skipping hash checks and using a manifest with duplicated cluster ok.
-            manifest = {
-                "schema": "cryptobench.official_test_fold.v1",
-                "fold": "test",
-                "clustering": {"method": "mmseqs2",
-                               "sequence_identity_threshold": 0.10},
-                "entries": [
-                    {"pdb": "a", "chain": "A", "cluster_id": "c1",
-                     "receptor_path": "data/cryptobench_apo/r.pdb",
-                     "receptor_sha256": "x", "label_path": "data/cryptobench_apo/l.json",
-                     "label_sha256": "y"},
-                ],
-            }
-            (base / "official_manifest.json").write_text(json.dumps(manifest))
-            # hash mismatch must fail closed (verify_hashes on real files)
-            with self.assertRaises(ValueError):
+            root = _write_manifest(Path(d), _entries(), receptor_sha="deadbeef")
+            with self.assertRaises(ValueError) as ctx:
                 load_official_test_fold(root, verify_hashes=True)
+            self.assertIn("SHA-256", str(ctx.exception))
+
+    def test_clean_single_split_manifest_loads(self) -> None:
+        with tempfile.TemporaryDirectory() as d:
+            root = _write_manifest(Path(d), _entries())
+            manifest = load_official_test_fold(root, verify_hashes=True)
+            self.assertEqual(len(manifest["entries"]), 2)
+
+    def test_cluster_spanning_two_splits_rejected(self) -> None:
+        """Deliberate cross-split overlap: same cluster_id in test AND train."""
+        entries = _entries()
+        entries[0]["split"] = "test"
+        entries[1]["split"] = "train"
+        entries[1]["cluster_id"] = entries[0]["cluster_id"]  # inject the overlap
+        with tempfile.TemporaryDirectory() as d:
+            root = _write_manifest(Path(d), entries)
+            with self.assertRaises(ValueError) as ctx:
+                load_official_test_fold(root, verify_hashes=True)
+            msg = str(ctx.exception)
+            self.assertIn("spans splits", msg)
+            self.assertIn("leakage", msg)
+
+    def test_cluster_declared_in_foreign_split_rejected(self) -> None:
+        """A test cluster also declared in the train split must fail closed."""
+        entries = _entries()
+        with tempfile.TemporaryDirectory() as d:
+            root = _write_manifest(
+                Path(d), entries,
+                extra={"foreign_split_clusters": {entries[0]["cluster_id"]: "train"}},
+            )
+            with self.assertRaises(ValueError) as ctx:
+                load_official_test_fold(root, verify_hashes=True)
+            self.assertIn("spans splits", str(ctx.exception))
 
 
 class TestPocketMiner(unittest.TestCase):

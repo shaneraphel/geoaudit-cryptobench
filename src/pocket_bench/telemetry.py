@@ -57,9 +57,12 @@ def telemetry_row(
     scored = scored or {}
     top1 = scored.get("top1") or {}
     pockets = (prediction or {}).get("pockets") or []
+    # Single ground-truth key for BOTH metrics. Previously F1 keyed on
+    # 'binding_residues' while the CryptoBench labels only carry
+    # 'cryptic_residues', so residue_f1 was structurally always null.
     true_res = (label or {}).get("cryptic_residues") or (label or {}).get("binding_residues")
     pred_res = pockets[0].get("residues") if pockets else None
-    res_f1 = residue_f1(pred_res, (label or {}).get("binding_residues"))
+    res_f1 = residue_f1(pred_res, true_res)
     res_auc = residue_auc_pr(pockets, true_res, universe_residues)
     return {
         "schema": SCHEMA,
@@ -79,10 +82,15 @@ def telemetry_row(
         "best_dca": top1.get("best_dca"),
         "dcc_top1": scored.get("dcc_top1"),
         "n_pockets": len(pockets),
-        # CryptoBench-faithful per-residue metrics
+        # CryptoBench-faithful per-residue metrics, all four over the SAME residue
+        # universe and the same operating point (residue in any predicted pocket).
         "residue_auc": res_auc.get("residue_auc"),
         "residue_pr_auc": res_auc.get("residue_pr_auc"),
-        "residue_f1": res_f1.get("f1"),
+        "residue_mcc": res_auc.get("residue_mcc"),
+        "residue_f1": res_auc.get("residue_f1_universe"),
+        "residue_operating_point": res_auc.get("operating_point"),
+        # legacy set-F1 of the rank-1 pocket vs truth (retained for continuity)
+        "residue_f1_top1_set": res_f1.get("f1"),
         "residue_metrics_available": bool(res_auc.get("available")),
     }
 
@@ -135,7 +143,8 @@ def aggregate(rows: list[dict[str, Any]], n_attempted_by_method: dict[str, int])
         "schema": SCHEMA,
         "clinical_grade": False,
         "primary_metric": "top1_dca_le_4A",
-        "faithful_metrics": ["residue_auc", "residue_pr_auc", "residue_f1"],
+        "faithful_metrics": ["residue_auc", "residue_pr_auc", "residue_mcc",
+                             "residue_f1"],
         "per_method": by_method,
     }
 

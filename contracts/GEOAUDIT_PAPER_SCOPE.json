@@ -1,29 +1,50 @@
 {
-  "schema": "geoaudit.paper_scope.v1",
+  "schema": "geoaudit.paper_scope.v2",
   "clinical_grade": false,
-  "paper_id": "geoaudit-multitarget-multimodal",
+  "paper_id": "geoaudit-cryptobench-zero-shot",
   "program_name": "GeoAudit",
-  "title_en": "GeoAudit: deterministic geometry auditing of binding pockets across oncology targets and modalities",
-  "title_zh": "GeoAudit：面向肿瘤靶点与多模态的确定性结合口袋几何审计",
-  "scientific_question_en": "Can a shared fail-closed Foliation chemistry methodology produce target-specialized, modality-protocoled computational candidates without transferring pocket, binding, or clinical claims across targets or disease programs?",
-  "target_panel": ["ESR1", "KRAS", "FLT3", "PIM1", "PIK3CA", "CDK4/6"],
-  "structure_defined_modalities": [
-    "targeted_small_molecule",
-    "protac",
-    "molecular_glue",
-    "cyclic_peptide_or_macrocycle"
-  ],
-  "repository_roles": {
-    "this_repo": "paper_scope_and_appendix",
-    "companion_evidence_repo": "shaneraphel/gf4-allele-conditioned-evidence"
+  "title_en": "Evaluating zero-shot geometric cryptic-pocket detectors on the official CryptoBench receptor-only benchmark",
+  "title_zh": "在官方 CryptoBench 仅受体基准上评估零样本几何隐蔽口袋检测器",
+  "scientific_question_en": "How well do deterministic, training-free geometric detectors recover cryptic binding-site residues from apo receptors on the official CryptoBench MMseqs2 10% cluster-disjoint test fold?",
+  "primary_benchmark": {
+    "name": "CryptoBench official test fold",
+    "source_url": "https://osf.io/pz4a9/",
+    "citation": "Skrhak et al., Bioinformatics 41(1):btae745 (2025), doi:10.1093/bioinformatics/btae745",
+    "split": "MMseqs2 clustering at 10% sequence identity; cluster-disjoint test fold",
+    "input_contract": "receptor_only_apo",
+    "primary_metrics": ["residue_auc", "residue_pr_auc", "residue_mcc", "residue_f1"],
+    "uncertainty": "paired bootstrap over structures, 10000 resamples, 95% CI"
   },
+  "primary_claim_en": "Deterministic geometric detectors, with no training and no fitted parameters, obtain a quantified and reproducible margin over a residue-level chance baseline on the official CryptoBench test fold.",
+  "explicitly_not_claimed": [
+    "parity_with_trained_baselines",
+    "binding_affinity",
+    "drug_design_or_candidate_efficacy",
+    "clinical_readiness_claim",
+    "global_novelty"
+  ],
   "appendices": {
     "A": {
       "name": "esr1_receptor_only_pocket_pilot",
       "evidence_level": "retrospective_pilot_only",
-      "comparative_claim_allowed": false
+      "comparative_claim_allowed": false,
+      "excluded_from_primary_claim": true,
+      "excluded_from_generalization": true
+    },
+    "B": {
+      "name": "finite_field_allele_conditioning_ablation",
+      "evidence_level": "algebraic_ablation_future_work",
+      "comparative_claim_allowed": false,
+      "excluded_from_primary_claim": true,
+      "note": "Algebraic negative control only; carries no chemical, binding or efficacy content."
     }
   },
+  "future_work": [
+    "finite_field_allele_conditioned_generation",
+    "structure_defined_modality_protocols",
+    "localized_anisotropic_shear_for_void_absent_pockets"
+  ],
+  "companion_evidence_repo": "shaneraphel/gf4-allele-conditioned-evidence",
   "forbidden_in_this_tree": [
     "cross_disease_or_other_organ_programs",
     "hardware_acceleration_packages",
@@ -31,5 +52,5 @@
     "bulk_candidate_json_dumps",
     "binding_affinity_or_clinical_claims"
   ],
-  "truth_boundary_en": "Paper-facing scope and Appendix A pilot only. Candidate evidence lives in the companion repository. CHEMISTRY_READY and pocket DCA are not clinical, IND, novelty, or efficacy claims."
+  "truth_boundary_en": "The primary claim is confined to receptor-only cryptic-residue classification on the official CryptoBench test fold. Appendix A (ESR1) and Appendix B (allele-conditioning ablation) are excluded from the primary claim and from every generalization statement. Candidate evidence lives in the companion repository and is not part of this paper's claim."
 }

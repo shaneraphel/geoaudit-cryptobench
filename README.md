@@ -1,21 +1,28 @@
-# GeoAudit — GF(4) allele-conditioned geometry auditing
+# GeoAudit — zero-shot geometric cryptic-pocket detection on CryptoBench
 
 `clinical_grade=false`
 
 Repository specification. This document defines scope, execution, data provenance,
 telemetry schema, and CI gates. It is not a paper and makes no comparative or
-clinical claim. Method exposition lives in `paper/GF4_SYNDROME_CHEM_METHOD.tex`.
+clinical claim.
 
-- Scope: multitarget / multimodal oncology driver alleles — target panel
-  `{ESR1, KRAS, FLT3, PIM1, PIK3CA, CDK4/6}`; structure-defined modalities
-  `{small molecule, PROTAC, molecular glue, macrocycle}`.
-- Task: deterministic geometry auditing of binding-pocket cavity/wall structure
-  (no learning, no fit) plus a finite-field allele-conditioning ledger.
-- Bulk candidate evidence is external: companion tree
-  `gf4-allele-conditioned-evidence` (pointer in `data/manifests/COMPANION_EVIDENCE.json`).
-- The ESR1 receptor-only run is a **retrospective** pilot, `Appendix A` only
-  (`contracts/GEOAUDIT_PAPER_SCOPE.json`, `evidence_level=retrospective_pilot_only`,
-  `comparative_claim_allowed=false`, invalidated pending label regeneration).
+**Scope (single claim).** Evaluating zero-shot geometric cryptic-pocket detectors on
+the official CryptoBench receptor-only benchmark.
+
+- Task: recover cryptic binding-site residues from **apo receptors only**, using
+  deterministic geometry with no training, no fitted parameters, and no exposure to
+  any CryptoBench partition.
+- Benchmark: the official CryptoBench test fold (MMseqs2 clustering at 10 % sequence
+  identity, cluster-disjoint), loaded fail-closed with per-file SHA-256 verification.
+- Primary metrics: per-residue `residue_auc`, `residue_pr_auc`, `residue_mcc`,
+  `residue_f1`, each with a 95 % paired-bootstrap CI over structures.
+- Not claimed: parity with trained baselines, binding affinity, candidate efficacy,
+  or global novelty. See `contracts/GEOAUDIT_PAPER_SCOPE.json`.
+
+Appendices are excluded from the primary claim and from every generalization
+statement: **Appendix A** is a retrospective ESR1 receptor-only pilot (invalidated
+pending label regeneration); **Appendix B** is a finite-field allele-conditioning
+ablation retained as future work (algebraic negative control only).
 
 ---
 
@@ -45,7 +52,8 @@ External baselines (not pip-installable), versions pinned in
 |---|---|---|
 | `make verify` | run `tools/verify_claims.py` scope/science gates | stdout JSON, exit≠0 on fail |
 | `make test` | `unittest discover -s tests` | test report |
-| `PYTHONPATH=src python3.12 tools/run_cryptobench_apo.py` | apo pilot (n=15) | `results/cryptobench_apo/{APO_BENCHMARK,TELEMETRY}.json` |
+| `PYTHONPATH=src python3.12 tools/run_cryptobench_apo.py --dataset official` | **primary**: official CryptoBench test fold (fail-closed; never falls back to the pilot) | `results/cryptobench_official/{APO_BENCHMARK,TELEMETRY}.json` |
+| `PYTHONPATH=src python3.12 tools/run_cryptobench_apo.py --dataset pilot` | apo pilot (n=15, Appendix only) | `results/cryptobench_apo/{APO_BENCHMARK,TELEMETRY}.json` |
 | `PYTHONPATH=src python3.12 -m pocket_bench.metrics_bootstrap` | paired bootstrap CIs | `results/cryptobench_apo/BOOTSTRAP_CI.json` |
 | `PYTHONPATH=src python3.12 tools/fetch_official_data.py --build-manifest --fold-file data/cryptobench_apo/_osf/test.json` | materialize official test fold from OSF (hash-verified) | `data/cryptobench_apo/official_manifest.json` (+ receptors/labels, gitignored) |
 | `PYTHONPATH=src python3.12 tools/run_official_fold.py` | official test-fold residue metrics + bootstrap CIs | `results/official_fold/{OFFICIAL_FOLD_METRICS,PER_STRUCTURE}.json` |
@@ -199,7 +207,10 @@ All four Δ CIs exclude 0 (`crosses_zero=false`, bootstrap p≈0). `real_ml_base
 published on OSF (only a trained pLM-NN model binary), so no paired CI against them
 is computed; absence is reported, never imputed.
 
-### 3.5 GF(4) ablation — `results/gf4_ablation/GF4_ALLELE_ABLATION.json` (`geoaudit.gf4_allele_ablation.v1`)
+### 3.5 Appendix B artifact — allele-conditioning ablation (`results/gf4_ablation/GF4_ALLELE_ABLATION.json`, `geoaudit.gf4_allele_ablation.v1`)
+
+Excluded from the primary claim; an algebraic negative control only, with no chemical,
+binding or efficacy content. Schema:
 
 `syndromes{allele:vector}`, `syndrome_nonzero_index`, `all_syndromes_distinct`,
 `correct_allele_G12D_admissible`, `wrong_allele_fail_closed{allele:{admissible,
@@ -225,7 +236,29 @@ all fail-closed.
 | Provenance pinned | `verify_claims` | `9BL0`/`5VA1` SHA-256 or byte size unset |
 | Scope hygiene | `verify_claims` regexes | out-of-scope terms, proprietary engine names, absolute local paths, or credential patterns in primary docs |
 
-Current state: `verify_claims` 24/24 checks pass; test suite green.
+Current state: `verify_claims` all checks pass; test suite green.
+
+---
+
+## 5. Appendices and future work
+
+Everything in this section is **outside the primary claim** and is excluded from every
+generalization statement. Machine-enforced by
+`contracts/GEOAUDIT_PAPER_SCOPE.json` and the CI gates above.
+
+| Item | Status | Boundary |
+|---|---|---|
+| **Appendix A** — ESR1 receptor-only pilot | `retrospective_pilot_only`, invalidated pending label regeneration | `comparative_claim_allowed=false`; contributes nothing to the CryptoBench result |
+| **Appendix B** — finite-field allele-conditioning ablation | `algebraic_ablation_future_work` | Algebraic negative control; no chemical, binding, or efficacy claim |
+| Candidate generation / structure-defined modalities | future work | Bulk evidence lives in the companion tree `gf4-allele-conditioned-evidence` (`data/manifests/COMPANION_EVIDENCE.json`); not a claim of this repository |
+| Localized anisotropic shear for void-absent pockets | future work | Global low-frequency modes caused surface drift; see `results/cryptobench_apo/` |
+
+Numerical record: all counts and metrics are read from the JSON artifacts
+(`results/official_fold/OFFICIAL_FOLD_METRICS.json`,
+`results/gf4_ablation/GF4_ALLELE_ABLATION.json`,
+`data/manifests/COMPANION_EVIDENCE.json`). Where earlier narrative text disagreed with
+those artifacts, the narrative has been deleted rather than reconciled; the JSON is the
+sole source of truth.
 
 ---
 

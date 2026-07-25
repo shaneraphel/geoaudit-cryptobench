@@ -195,21 +195,30 @@ def main() -> int:
         ),
         "metrics": {},
     }
-    for metric_key in ("residue_auc", "residue_pr_auc"):
+    for metric_key in ("residue_auc", "residue_pr_auc", "residue_mcc", "residue_f1"):
         vals = per_structure_values(rows, metric_key)
+        if not any(v is not None for vs in vals.values() for v in vs):
+            report["metrics"][metric_key] = {"status": "UNAVAILABLE_NO_VALUES"}
+            continue
         report["metrics"][metric_key] = paired_bootstrap(vals, baseline=baseline)
     out = root / "results/cryptobench_apo/BOOTSTRAP_CI.json"
     out.write_text(json.dumps(report, indent=2) + "\n")
+    def _f(v: float | None, spec: str = "+.3f") -> str:
+        return "n/a" if v is None else format(v, spec)
+
     for mk, res in report["metrics"].items():
+        if res.get("status"):
+            print(f"== {mk}: {res['status']} ==")
+            continue
         print(f"== {mk} (baseline={baseline}, n={res['n_structures']}, "
               f"boot={res['n_boot']}) ==")
         for m, s in res["per_method"].items():
-            print(f"  {m:22s} {s['point']:.3f}  "
-                  f"[{s['ci_low']:.3f}, {s['ci_high']:.3f}]")
+            print(f"  {m:22s} {_f(s['point'], '.3f')}  "
+                  f"[{_f(s['ci_low'], '.3f')}, {_f(s['ci_high'], '.3f')}]")
         for m, d in res["paired_vs_baseline"].items():
-            print(f"    Δ({m} - {baseline}) = {d['delta_point']:+.3f} "
-                  f"[{d['delta_ci_low']:+.3f}, {d['delta_ci_high']:+.3f}]  "
-                  f"p≈{d['p_two_sided_bootstrap']:.3f} "
+            print(f"    Δ({m} - {baseline}) = {_f(d['delta_point'])} "
+                  f"[{_f(d['delta_ci_low'])}, {_f(d['delta_ci_high'])}]  "
+                  f"p≈{_f(d['p_two_sided_bootstrap'], '.3f')} "
                   f"{'(CI crosses 0)' if d['crosses_zero'] else '(CI excludes 0)'}")
     print("-> results/cryptobench_apo/BOOTSTRAP_CI.json")
     return 0
