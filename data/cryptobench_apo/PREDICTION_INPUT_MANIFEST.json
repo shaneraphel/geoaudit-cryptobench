@@ -1,0 +1,189 @@
+{
+  "schema": "gf4cc.cryptobench_apo.manifest.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-25T12:15:55+0800",
+  "source": {
+    "labels": {
+      "url": "https://raw.githubusercontent.com/skrhakv/CryptoBench/master/src/F-statistics/conservation/label_dataset.json",
+      "sha256": "effd00f26af1cc614771321697e7ca6dbc9fb1d851c46c54e652b115d5f3c221",
+      "bytes": 358013,
+      "citation": "Skrhak et al., Bioinformatics 2025, doi:10.1093/bioinformatics/btae745; dataset https://osf.io/pz4a9/"
+    },
+    "structures": "RCSB https://files.rcsb.org/download/<PDBID>.pdb"
+  },
+  "selection": {
+    "rule": "deterministic stride over sorted label_dataset.json keys",
+    "stride": 36,
+    "n_target": 15
+  },
+  "entries": [
+    {
+      "pdb": "1a4u",
+      "chain": "B",
+      "raw_sha256": "7b92cacb47bf3c2dadeb9ce1f135f55071a0efe043d5da9d45bc13e74a122722",
+      "raw_bytes": 366363,
+      "receptor_sha256": "25062de9c2f85b354189012a02e939634daeb72661ce81a5587933af543af71b",
+      "receptor_atoms": 1963,
+      "n_cryptic_residues": 40,
+      "n_label_atoms": 293
+    },
+    {
+      "pdb": "1ffh",
+      "chain": "A",
+      "raw_sha256": "3b54b8feff50da76aff8936a081fb2adb73ddbbbeda932381e4fc1f04930350d",
+      "raw_bytes": 222507,
+      "receptor_sha256": "5d1e04bf02e169f513e63fead2925aa36d809055f35adc27813ce7a41dff128e",
+      "receptor_atoms": 2225,
+      "n_cryptic_residues": 10,
+      "n_label_atoms": 68
+    },
+    {
+      "pdb": "1pfz",
+      "chain": "C",
+      "raw_sha256": "f21139d26f8fa0937646fa1a94352ba3b2401e96c700088d90bab2a96c1c1471",
+      "raw_bytes": 1082646,
+      "receptor_sha256": "68e744bb3137629ce3cb10b887d39ba30bf216d09886cd306412765d285b3262",
+      "receptor_atoms": 2866,
+      "n_cryptic_residues": 43,
+      "n_label_atoms": 367
+    },
+    {
+      "pdb": "1uiu",
+      "chain": "A",
+      "raw_sha256": "971a2270c7683c0abc4e1ea5ccceb0589b49c8a439b6d63924f31cb0ddaf01cc",
+      "raw_bytes": 732159,
+      "receptor_sha256": "54b46d0bbaec29b69932c479f1e3e363e6561879de984927a921255d330220a7",
+      "receptor_atoms": 3941,
+      "n_cryptic_residues": 15,
+      "n_label_atoms": 149
+    },
+    {
+      "pdb": "2aka",
+      "chain": "A",
+      "raw_sha256": "58c10988c4973bfed22139e02947fb2d837b327245cc8baf32b7ae9a0ad1964f",
+      "raw_bytes": 805464,
+      "receptor_sha256": "07248120c1746ac02ed8379ec126882391ae14ad941151518977f780cda9d29b",
+      "receptor_atoms": 6227,
+      "n_cryptic_residues": 32,
+      "n_label_atoms": 260
+    },
+    {
+      "pdb": "2fhz",
+      "chain": "B",
+      "raw_sha256": "0d14b624d6e979e343c4d3622187de3adb27d02041d3b02cc198d5485e815c74",
+      "raw_bytes": 180873,
+      "receptor_sha256": "796337b68cf3bc39da7085edd28992db566e9949dddc4de0e8b7c11847582c39",
+      "receptor_atoms": 729,
+      "n_cryptic_residues": 14,
+      "n_label_atoms": 119
+    },
+    {
+      "pdb": "2jkl",
+      "chain": "A",
+      "raw_sha256": "2d4cb570b3e4150e2c052b55615c0ff6102e8b72b244baf598c9941b06625562",
+      "raw_bytes": 711342,
+      "receptor_sha256": "9a39f88c0dbccd4676f6c13bf1c7c30d0f134e94ba0ab06f03bbc5af03361be1",
+      "receptor_atoms": 1050,
+      "n_cryptic_residues": 5,
+      "n_label_atoms": 35
+    },
+    {
+      "pdb": "3a7g",
+      "chain": "A",
+      "raw_sha256": "162b019dfdee111dfce6ce1ded85bc2f677bf7b42c5d1867d356b3f25c9c7d0e",
+      "raw_bytes": 458622,
+      "receptor_sha256": "6c8922b41cbd0c47ba464574bc7f43d582fd9f5bb032c4e8e905b3095f5b30b2",
+      "receptor_atoms": 2308,
+      "n_cryptic_residues": 22,
+      "n_label_atoms": 163
+    },
+    {
+      "pdb": "3flg",
+      "chain": "A",
+      "raw_sha256": "2895104e5e1bdbd9ef0a29b742b7ccf89f56cd915594ba66afaceb40a5fea82b",
+      "raw_bytes": 128547,
+      "receptor_sha256": "49849f086e99e4c07c28611ba39cd216147982964840a2faaeddcbe825f17685",
+      "receptor_atoms": 1058,
+      "n_cryptic_residues": 9,
+      "n_label_atoms": 84
+    },
+    {
+      "pdb": "3mo7",
+      "chain": "A",
+      "raw_sha256": "4ac0020caab37ea786afae331296b1daeb53e60dc7c4440a99417ebcc5754e88",
+      "raw_bytes": 247860,
+      "receptor_sha256": "80d29708edfd9e8519577ccda07130c8e6c5ab99dc8594e4cdd9d4d726814e17",
+      "receptor_atoms": 2279,
+      "n_cryptic_residues": 4,
+      "n_label_atoms": 32
+    },
+    {
+      "pdb": "3wmg",
+      "chain": "A",
+      "raw_sha256": "08cff97af74bd6cbd3ee7c9a43f0eaa1d8aae81ba71d58c9a5accc965623d5b3",
+      "raw_bytes": 804897,
+      "receptor_sha256": "a3cdb3170dd5ddbd00979ec4d8f2de76718e3ba7593258636956fe31decd0b0c",
+      "receptor_atoms": 4401,
+      "n_cryptic_residues": 27,
+      "n_label_atoms": 206
+    },
+    {
+      "pdb": "4faf",
+      "chain": "A",
+      "raw_sha256": "3b4dfb8ae53da6557cbc26e7ca4eca5fc13ae1a85771451d6cfe32f6c9f2b3fb",
+      "raw_bytes": 187434,
+      "receptor_sha256": "c695749f8aa51cde26f5fcc05c803f65ed5ba136c0bad70713fe41c8acc809a0",
+      "receptor_atoms": 769,
+      "n_cryptic_residues": 13,
+      "n_label_atoms": 88
+    },
+    {
+      "pdb": "4l6w",
+      "chain": "A",
+      "raw_sha256": "4617187f20899c023384ff79bf36afaed6cb3bd9d9f7bae423e91f3408bc7ad4",
+      "raw_bytes": 1087911,
+      "receptor_sha256": "9206e659379b236d7475d722da521d3e326180d89cad1526e0c0bb3b2a544f88",
+      "receptor_atoms": 3032,
+      "n_cryptic_residues": 15,
+      "n_label_atoms": 103
+    },
+    {
+      "pdb": "4pvr",
+      "chain": "A",
+      "raw_sha256": "2c5a56285e21c0860bef9c884b6bf7781881b4376fdf8ba3e9d9cdc7c43dcccb",
+      "raw_bytes": 422577,
+      "receptor_sha256": "90f254521ef91a458fba5681edbbb9875c577a4bd9d743309fe884521bc0f285",
+      "receptor_atoms": 2196,
+      "n_cryptic_residues": 10,
+      "n_label_atoms": 63
+    },
+    {
+      "pdb": "5cxy",
+      "chain": "B",
+      "raw_sha256": "27972dff3b2e5ac22687661530f14c743e19cf228c934db93e6a1e868b436a17",
+      "raw_bytes": 500742,
+      "receptor_sha256": "7a6a9b0900067a7be3b3e5335b88a9e21b2fa729a27999854fc2c910ec77802f",
+      "receptor_atoms": 2410,
+      "n_cryptic_residues": 5,
+      "n_label_atoms": 41
+    }
+  ],
+  "skipped": [
+    {
+      "pdb": "1l0w",
+      "reason": "rec=4667 lab=0"
+    },
+    {
+      "pdb": "2was",
+      "reason": "rec=871 lab=0"
+    },
+    {
+      "pdb": "3rmy",
+      "reason": "rec=3294 lab=0"
+    },
+    {
+      "pdb": "4xv1",
+      "reason": "rec=2001 lab=0"
+    }
+  ]
+}

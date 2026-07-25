@@ -235,6 +235,36 @@ caveats — including that a harder benchmark is *not* a win and that the best
 published cryptic-site method is itself an ML model we must beat — are in
 [`docs/BENCHMARK_SELECTION.md`](docs/BENCHMARK_SELECTION.md).
 
+### CryptoBench-apo pilot — first out-of-distribution numbers (n=15)
+
+A pinned deterministic subset of the CryptoBench apo set (raw PDBs SHA-256-pinned
+in iCloud; receptors + cryptic-residue labels + manifest under
+`data/cryptobench_apo/`; reproduce with `tools/run_cryptobench_apo.py`). Metric:
+Top-1 DCA ≤ 4 Å from the predicted centre to the nearest **cryptic binding
+residue** atom — a pocket-*localization* proxy, **not** the CryptoBench per-residue
+AUC/F1 protocol (a fully faithful comparison would use their residue metrics).
+
+| Method | Top-1 hits / 15 |
+|---|---:|
+| geometric_foundation (rigid, deterministic) | **8** |
+| P2Rank (apo) | 7 |
+| F\*-breathing ablation (`fstar_pocket`) | 2 |
+| random (bbox) | 0 |
+
+**Honest reading.** On this out-of-distribution apo/cryptic set the deterministic
+rigid detector (8/15) is *competitive with — marginally ahead of* — the ML SOTA
+P2Rank (7/15), the reverse of the easy conserved-fold set where both hit 14/14.
+This is the intended stress test: where memorisation should be least useful,
+pure geometry holds up. **Negative result, reported unedited:** the F\*-breathing
+prototype (fixed discrete conformal modes + an "openability" re-rank) scored only
+2/15 — it demotes the sites the rigid detector already finds and recovers none of
+the fully-closed cryptic pockets. The fixed-mode breathing heuristic as formulated
+**does not help** and needs reformulation; it is kept as an ablation, not shipped
+as an improvement. Caveats: n=15 is a small pilot; the subset is a deterministic
+stride over the full label set (not exclusively the cluster-disjoint test fold);
+DCA-to-residues is permissive for structures with many labelled residues.
+`clinical_grade=false`.
+
 ### Leakage boundary
 
 Prediction and scoring are separate: prediction receives checksum-pinned,
