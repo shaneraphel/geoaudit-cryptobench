@@ -47,6 +47,8 @@ External baselines (not pip-installable), versions pinned in
 | `make test` | `unittest discover -s tests` | test report |
 | `PYTHONPATH=src python3.12 tools/run_cryptobench_apo.py` | apo pilot (n=15) | `results/cryptobench_apo/{APO_BENCHMARK,TELEMETRY}.json` |
 | `PYTHONPATH=src python3.12 -m pocket_bench.metrics_bootstrap` | paired bootstrap CIs | `results/cryptobench_apo/BOOTSTRAP_CI.json` |
+| `PYTHONPATH=src python3.12 tools/fetch_official_data.py --build-manifest --fold-file data/cryptobench_apo/_osf/test.json` | materialize official test fold from OSF (hash-verified) | `data/cryptobench_apo/official_manifest.json` (+ receptors/labels, gitignored) |
+| `PYTHONPATH=src python3.12 tools/run_official_fold.py` | official test-fold residue metrics + bootstrap CIs | `results/official_fold/{OFFICIAL_FOLD_METRICS,PER_STRUCTURE}.json` |
 | `PYTHONPATH=src python3.12 tools/gf4_allele_shuffle_ablation.py` | GF(4) wrong-allele control | `results/gf4_ablation/GF4_ALLELE_ABLATION.json` |
 | `PYTHONPATH=src python3.12 tools/build_split_ledger.py` | rebuild split ledger | `data/manifests/SPLIT_LEDGER.json` |
 | `PYTHONPATH=src python3.12 tools/build_labels.py --download` | ESR1 labels (Appendix A) | `data/labels/*_labels.json` |
@@ -83,15 +85,32 @@ later fetch that mismatches means RCSB re-released the entry.
   (`SPLIT_LEDGER.json` → `cryptobench_apo.is_official_cryptobench_test_fold=false`;
   `BOOTSTRAP_CI.json` → `is_official_mmseqs2_10pct_test_fold=false`).
 
-### 2.2 Official CryptoBench MMseqs2 10% test fold (not present)
+### 2.2 Official CryptoBench MMseqs2 10% test fold (ingested)
 
-- Source: `https://github.com/skrhakv/CryptoBench` (dataset `https://osf.io/pz4a9/`).
-- Required file: `data/cryptobench_apo/official_manifest.json`,
-  schema `cryptobench.official_test_fold.v1`, fields
-  `{fold=="test", clustering.method=="mmseqs2", clustering.sequence_identity_threshold==0.10, entries[]}`;
-  each entry: `{pdb, chain, cluster_id, receptor_path, receptor_sha256, label_path, label_sha256}`.
-- Loader `adapters.load_official_test_fold()` verifies every SHA-256 and rejects any
-  `cluster_id` crossing splits.
+- Source: OSF node `https://osf.io/pz4a9/` (Skrhak et al., Bioinformatics 2025,
+  doi:10.1093/bioinformatics/btae745). Split construction: MMseqs2 @ 10% sequence
+  identity, 80:20 train:test, test = 222 apo structures.
+- Verified OSF files (SHA-256 checked against OSF-reported digests; pinned in
+  `data/cryptobench_apo/PROVENANCE.json`):
+  - `cryptobench-dataset/folds.json` — `sha256=ced97a50…3c6ac67d`, 17826 bytes
+    (fold membership).
+  - `cryptobench-dataset/folds/test.json` — `sha256=28f5630e…09a7560838`, 1705224
+    bytes (test membership + `apo_pocket_selection` cryptic labels).
+- Materialization: `tools/fetch_official_data.py` builds
+  `data/cryptobench_apo/official_manifest.json` (schema
+  `cryptobench.official_test_fold.v1`; `fold=="test"`, `clustering.method=="mmseqs2"`,
+  `sequence_identity_threshold==0.10`). Each entry
+  `{pdb, chain, cluster_id, receptor_path, receptor_sha256, label_path, label_sha256}`;
+  receptors fetched chain-scoped and ligand-stripped from
+  `https://files.rcsb.org/download/<PDBID>.pdb`; `cluster_id` = `uniprot_id`
+  sequence-cluster surrogate. Loader `adapters.load_official_test_fold()` verifies
+  every SHA-256 and rejects any `cluster_id` crossing splits.
+- Evaluable scope: 222 test apo PDBs → 193 single-chain units; 38 multi-chain
+  (compound `apo_chain`) units excluded (chain-agnostic `resseq` indexing would be
+  ambiguous — recorded in the manifest, not silently dropped); `7nbc` skipped (RCSB
+  serves mmCIF only) → **192 manifest entries**.
+- The 35 MB materialized receptor set is git-ignored; it is regenerated from the
+  hash-pinned fetcher on demand.
 
 ### 2.3 PocketMiner baseline (not present)
 
@@ -155,7 +174,32 @@ n_structures_scored}` and `paired_vs_baseline{delta_point, delta_ci_low,
 delta_ci_high, p_two_sided_bootstrap, crosses_zero}`. Params `{n_boot=10000, seed,
 ci_level, baseline}`. Paired resampling over structures.
 
-### 3.4 GF(4) ablation — `results/gf4_ablation/GF4_ALLELE_ABLATION.json` (`geoaudit.gf4_allele_ablation.v1`)
+### 3.4 Official test-fold report — `results/official_fold/OFFICIAL_FOLD_METRICS.json` (`geoaudit.official_fold_report.v1`)
+
+Residue-classification protocol on the official fold (apo frame): universe = all
+residues of the apo chain; `y=1` iff residue ∈ cryptic `apo_pocket_selection`;
+`geometric_foundation` score = rank-weighted pocket membership; `random_residue` =
+uniform[0,1] per-residue null (fixed seed). Fields: `n_structures_scored`,
+per-metric `bootstrap{per_method{point,ci_low,ci_high}, paired_vs_baseline{
+delta_point,delta_ci_low,delta_ci_high,p_two_sided_bootstrap,crosses_zero}}`
+(`n_boot=10000`, 95% CI), `real_ml_baseline_status`.
+
+Frozen readout (n=192 scored; MCC/F1 operating points: `geometric_foundation` =
+residue in any predicted pocket, `random_residue` = score ≥ 0.5):
+
+| metric | geometric_foundation [95% CI] | random null | Δ vs null [95% CI] |
+|---|---|---|---|
+| ROC-AUC | 0.664 [0.643, 0.684] | 0.491 | +0.173 [0.148, 0.197] |
+| PR-AUC | 0.276 [0.246, 0.306] | 0.087 | +0.190 [0.163, 0.216] |
+| MCC | 0.237 [0.208, 0.266] | −0.007 | +0.244 [0.213, 0.275] |
+| F1 | 0.285 [0.257, 0.313] | 0.113 | +0.172 [0.148, 0.196] |
+
+All four Δ CIs exclude 0 (`crosses_zero=false`, bootstrap p≈0). `real_ml_baseline_status`:
+`p2rank` and `pocketminer` = `DATA_UNAVAILABLE` — per-residue predictions are not
+published on OSF (only a trained pLM-NN model binary), so no paired CI against them
+is computed; absence is reported, never imputed.
+
+### 3.5 GF(4) ablation — `results/gf4_ablation/GF4_ALLELE_ABLATION.json` (`geoaudit.gf4_allele_ablation.v1`)
 
 `syndromes{allele:vector}`, `syndrome_nonzero_index`, `all_syndromes_distinct`,
 `correct_allele_G12D_admissible`, `wrong_allele_fail_closed{allele:{admissible,
@@ -193,10 +237,12 @@ contracts/    GEOAUDIT_PAPER_SCOPE.json (scope contract)
 src/pocket_bench/
   methods/    receptor-only detectors (firewalled) + anisotropic_shear_oracle
   metrics.py metrics_bootstrap.py telemetry.py adapters.py paths.py pdb_io.py
-tools/        run_cryptobench_apo.py, run_pilot.py, build_labels.py,
-              build_split_ledger.py, gf4_allele_shuffle_ablation.py, verify_claims.py
-data/         cryptobench_apo/ (receptors, labels, manifest), manifests/, labels/
-results/      cryptobench_apo/, gf4_ablation/, pilot/
+tools/        run_cryptobench_apo.py, run_official_fold.py, fetch_official_data.py,
+              run_pilot.py, build_labels.py, build_split_ledger.py,
+              gf4_allele_shuffle_ablation.py, verify_claims.py
+data/         cryptobench_apo/ (PROVENANCE.json + gitignored materialized fold),
+              manifests/, labels/
+results/      cryptobench_apo/, official_fold/, gf4_ablation/, pilot/
 tests/        firewall, split-disjoint, denominator, bootstrap, adapters, ablation
 ```
 
