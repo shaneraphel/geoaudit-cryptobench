@@ -7,6 +7,7 @@ NOT the CryptoBench per-residue classification protocol (AUC/F1); a fully faithf
 comparison to the CryptoBench baselines would use their residue-level metrics.
 
 Methods: geometric_foundation (rigid), fstar_pocket (F*-breathing ablation),
+sstar_pocket (anisotropic-shear S* oracle, dynamic spectral amplitudes),
 p2rank (needs JAVA_HOME + P2Rank on PATH), random_bbox. TOOL_UNAVAILABLE is never
 counted as a miss.
 
@@ -25,6 +26,7 @@ from pocket_bench.methods import (
     geometric_foundation,
     p2rank_wrap,
     prediction,
+    sstar_pocket,
 )
 from pocket_bench.metrics import score_prediction
 from pocket_bench.pdb_io import parse_pdb_atoms
@@ -71,6 +73,7 @@ def main() -> int:
     methods = {
         "geometric_foundation": lambda rec, pid: geometric_foundation.predict(rec, pdb_id=pid),
         "fstar_pocket": lambda rec, pid: fstar_pocket.predict(rec, pdb_id=pid),
+        "sstar_pocket": lambda rec, pid: sstar_pocket.predict(rec, pdb_id=pid),
         "p2rank": lambda rec, pid: p2rank_wrap.predict(rec, pdb_id=pid, top_k=5),
         "random_bbox": lambda rec, pid: _random_baseline(rec, pdb_id=pid),
     }

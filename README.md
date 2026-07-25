@@ -132,14 +132,16 @@ Structure-defined modalities and their non-interchangeable protocols:
 
 One fully worked cell — **KRAS G12D noncovalent small molecule**:
 
-- **798** accepted identities from 2,783 source-backed medicinal-chemistry /
-  BRICS variants of MW≤800 G12D parents, under hard diversity gates (ECFP
-  Tanimoto ≤ 0.8, Murcko-scaffold cap 10), **no quota forcing**. A count is not
-  druggability; the shortfall against 1,000 is reported, not hidden.
+- **494** accepted identities from **1,335** generated source-backed
+  medicinal-chemistry / BRICS variants of MW≤800 G12D parents, under hard
+  diversity gates (ECFP Tanimoto ≤ 0.8, Murcko-scaffold cap 10), **no quota
+  forcing** (authoritative count: `data/manifests/COMPANION_EVIDENCE.json` →
+  `accepted_count=494`; a single provenance file governs this number). A count is
+  not druggability; the shortfall against 1,000 is reported, not hidden.
 - Primary docking geometry `9BL0`; covalent `9GBJ` observation-only. Pocket-wall
   clash uses per-element Bondi (1964) van der Waals radii with a disclosed
   fixed-threshold clash-severity band (geometry, not affinity).
-- Toxicology screen: RDKit structural-alert screen across all 798, plus a hERG
+- Toxicology screen: RDKit structural-alert screen across all 494, plus a hERG
   (`5VA1`) central-cavity geometric-compatibility probe (liability flags, not
   safety clearance).
 - A curated top-24 subset (`evidence/kras_g12d_sm/`) carries bilingual (EN/中文)
@@ -265,22 +267,53 @@ AUC/F1 protocol (a fully faithful comparison would use their residue metrics).
 |---|---:|
 | geometric_foundation (rigid, deterministic) | **8** |
 | P2Rank (apo) | 7 |
+| S\*-anisotropic-shear ablation (`sstar_pocket`) | 4 |
 | F\*-breathing ablation (`fstar_pocket`) | 2 |
 | random (bbox) | 0 |
 
-**Honest reading.** On this out-of-distribution apo/cryptic set the deterministic
-rigid detector (8/15) is *competitive with — marginally ahead of* — the ML SOTA
-P2Rank (7/15), the reverse of the easy conserved-fold set where both hit 14/14.
-This is the intended stress test: where memorisation should be least useful,
-pure geometry holds up. **Negative result, reported unedited:** the F\*-breathing
-prototype (fixed discrete conformal modes + an "openability" re-rank) scored only
-2/15 — it demotes the sites the rigid detector already finds and recovers none of
-the fully-closed cryptic pockets. The fixed-mode breathing heuristic as formulated
-**does not help** and needs reformulation; it is kept as an ablation, not shipped
-as an improvement. Caveats: n=15 is a small pilot; the subset is a deterministic
-stride over the full label set (not exclusively the cluster-disjoint test fold);
-DCA-to-residues is permissive for structures with many labelled residues.
-`clinical_grade=false`.
+**Honest reading.** The Top-1 DCA counts above are a *localization proxy*, not a
+significance test. Under the CryptoBench-faithful per-residue metric with a **paired
+bootstrap over structures** (`src/pocket_bench/metrics_bootstrap.py`, 10 000
+resamples), the deterministic rigid detector and the ML SOTA P2Rank are
+**statistically indistinguishable** on this pilot: residue ROC-AUC 0.626
+[0.564, 0.690] vs 0.585 [0.539, 0.633], paired Δ = **+0.040 [−0.020, +0.108],
+p ≈ 0.21 — the CI crosses zero**. We therefore make **no** superiority claim; the
+honest statement is that where memorisation should help least, pure geometry is
+*not worse* than the ML baseline (a tie at n=15), the reverse of the easy
+conserved-fold set where both hit 14/14. The `random` control is significantly
+worse (CI excludes 0), confirming the metric has power.
+
+**Two breathing ablations, both reported unedited.** The isotropic F\*-breathing
+prototype (fixed discrete conformal dilation + an "openability" re-rank) scored
+2/15 — a conformal (pure-trace) deformation lives in the wrong subgroup and
+merely inflates surface crevices. Its intended replacement, the **anisotropic
+shear oracle** S\* — the receptor's own low, non-rigid ANM/graph-Laplacian shear
+modes, with amplitudes fixed *purely by the spectrum* (`c_k = Δx·√(λ₁/λ_k)`, no
+tuned scalar) — does better than F\* (4/15) but is still **below** the rigid
+detector, and its per-residue ROC-AUC (0.506 [0.466, 0.547]) is at chance and
+significantly below P2Rank (paired Δ CI excludes 0). The failure is now understood,
+not hand-waved:
+
+- **Global low modes rip open the surface.** The three lowest ANM modes are
+  whole-domain hinge/twist motions. At the spectral-gap amplitude they open
+  spurious *surface* volume far from the functional cleft, and the openability
+  term then promotes those decoy sites — dragging Top-1 outward. On the three
+  Class-A void-absent targets the shear made best-DCA **worse**, not better
+  (`3mo7` 16.98→28.35 Å; `5cxy` 7.41→18.12 Å; `2jkl` 5.83→13.21 Å): it did not
+  open the buried cryptic void, it manufactured a nearer-surface distractor.
+- **Rigid hits are not yet anchored.** S\* preserves some rigid hits exactly
+  (`1uiu` 2.86→2.84 Å) but loses others to the same outward drift (`3flg`
+  3.19→17.20 Å). Net 8→4.
+
+**Mathematically proven next step (Future Work, with hard data, not speculation):**
+Class-A pockets require **spatially-gated *localized* anisotropic modes** (restrict
+eigen-support to a buried candidate's neighbourhood; the global spectral floor
+moves the wrong region), and a confirmed rigid Top-1 must be **topologically
+anchored** so a shear can only *add* a candidate, never displace a rigid hit. Both
+ablations are kept as ablations, not shipped as improvements. Caveats: n=15 is a
+small pilot; the subset is a deterministic stride over the full label set (not
+exclusively the cluster-disjoint test fold); DCA-to-residues is permissive for
+structures with many labelled residues. `clinical_grade=false`.
 
 ### Leakage boundary and audit-hardened gates
 
@@ -306,8 +339,30 @@ not by discipline (all gates run in `make verify` / `make test`, fail-closed):
   `top1_dca`. The intention-to-evaluate denominator equals every structure
   attempted; `CRASH`/`EMPTY` count as misses; `TOOL_UNAVAILABLE` is legal only for a
   tool declared absent in `BASELINE_ENV.json`, and whenever it occurs both
-  denominators (intention and available-only) are logged. On the apo run all four
+  denominators (intention and available-only) are logged. On the apo run all five
   methods report `15/15` intention with `0` masked.
+- **Deterministic spectral modes.** The anisotropic-shear modes
+  (`anisotropic_shear_oracle.low_shear_modes`) pin an explicit eigenvector phase
+  convention (largest-|component| entry forced positive) so `scipy.eigsh`'s sign
+  ambiguity cannot make the S\* voxel mask backend-dependent across CI runs.
+
+### GF(4) allele-conditioning: falsifiable wrong-allele control
+
+The flagship method (`paper/GF4_SYNDROME_CHEM_METHOD.tex`) conditions candidate
+tensors on a driver allele through the syndrome equation `H x = B δ`, where the
+sparse residual `δ = s_mut ⊕ s_ref` is the allele's finite-field deviation and
+`(H, B)` are background-conditioned Toeplitz operators. The negative control
+`tools/gf4_allele_shuffle_ablation.py` (self-contained reference algebra, no
+proprietary engine; test `tests/test_allele_ablation.py`) shows the conditioning is
+**structurally exclusionary**: a candidate `x_D` synthesised for KRAS **G12D**
+fails closed when re-checked against the **wrong** allele syndrome (G12C, G12V, and
+WT are all rejected with non-zero residual), and a 2 000-sample allele-shuffle is
+rejected **98%** of the time. The rejection is emergent, not asserted — because
+`H x_D = B δ_D`, the residual reduces to `B(δ_D ⊕ δ_w)`, which is zero *iff*
+`δ_w = δ_D`; the 2% shuffle pass-rate is exactly the fraction of permutations that
+restore the residual to the codon-12 locus, so the control is falsifiable rather
+than tautological. This is an **algebraic** exclusion property only
+(`clinical_grade=false`): it is not a binding, affinity, or chemical-inverse claim.
 
 ## Repository layout
 
@@ -417,10 +472,11 @@ T(s)=s+α）；(4) 背景条件化 **Toeplitz 算子 F/G** 把 47-mer 基因组�
 **模态协议不可混用**：小分子用单口袋；PROTAC 用三元复合物；分子胶需声明伙伴
 界面；大环只用有匹配墙体与多构象/环张力包的结构。
 
-**当前物化证据**：KRAS G12D 非共价小分子单元，接受 **798** 个身份（Tanimoto
-≤0.8、Murcko 上限 10，硬门、不强制凑满 1,000）；主几何 `9BL0`，`9GBJ` 仅共价
-观察；口袋墙体用逐元素 Bondi(1964) 范德华半径 + 固定阈值碰撞分级（几何观察，非
-亲和力）；对全部 798 做 RDKit 结构预警 + hERG(`5VA1`) 几何相容性探针；curated
+**当前物化证据**：KRAS G12D 非共价小分子单元，生成 **1,335**、接受 **494** 个身份
+（Tanimoto ≤0.8、Murcko 上限 10，硬门、不强制凑满 1,000；权威计数以
+`data/manifests/COMPANION_EVIDENCE.json` 的 `accepted_count=494` 为唯一来源）；主几何
+`9BL0`，`9GBJ` 仅共价观察；口袋墙体用逐元素 Bondi(1964) 范德华半径 + 固定阈值碰撞分级
+（几何观察，非亲和力）；对全部 494 做 RDKit 结构预警 + hERG(`5VA1`) 几何相容性探针；curated
 top-24（`evidence/kras_g12d_sm/`）附中英双语原理、来源 URL、SHA-256 与二维结构，
 图在 `figures/`。全量证据在**本地私有证据树** `gf4-allele-conditioned-evidence/`
 并镜像 iCloud（附 SHA-256）。

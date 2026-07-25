@@ -1,6 +1,6 @@
 {
   "schema": "gf4cc.cryptobench_apo.report.v1",
-  "generated_at": "2026-07-25T15:28:14+0800",
+  "generated_at": "2026-07-25T16:22:47+0800",
   "clinical_grade": false,
   "benchmark": "CryptoBench apo (Skrhak 2025) \u2014 pinned deterministic subset",
   "n_structures": 15,
@@ -15,6 +15,11 @@
     },
     "fstar_pocket": {
       "top1_dca_le_4A_hits": 2,
+      "intention_to_evaluate_denominator": 15,
+      "tool_unavailable": 0
+    },
+    "sstar_pocket": {
+      "top1_dca_le_4A_hits": 4,
       "intention_to_evaluate_denominator": 15,
       "tool_unavailable": 0
     },
@@ -223,6 +228,104 @@
           "status": "OK",
           "top1_success": false,
           "best_dca": 11.3219972178057
+        }
+      ]
+    },
+    "sstar_pocket": {
+      "ok": 15,
+      "top1_hits": 4,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1a4u",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.727528001689441
+        },
+        {
+          "pdb": "1ffh",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 18.2233342997378
+        },
+        {
+          "pdb": "1pfz",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 10.289152831987684
+        },
+        {
+          "pdb": "1uiu",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.838936772807735
+        },
+        {
+          "pdb": "2aka",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 27.870132256593255
+        },
+        {
+          "pdb": "2fhz",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 7.942905639625843
+        },
+        {
+          "pdb": "2jkl",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 13.211576628094015
+        },
+        {
+          "pdb": "3a7g",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.1757569176497116
+        },
+        {
+          "pdb": "3flg",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 17.199273269530895
+        },
+        {
+          "pdb": "3mo7",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 28.34665902712346
+        },
+        {
+          "pdb": "3wmg",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 27.949246948710446
+        },
+        {
+          "pdb": "4faf",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.965521539291193
+        },
+        {
+          "pdb": "4l6w",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 26.692126591937182
+        },
+        {
+          "pdb": "4pvr",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.02777352630153
+        },
+        {
+          "pdb": "5cxy",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 18.119205860081177
         }
       ]
     },

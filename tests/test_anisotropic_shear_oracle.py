@@ -50,8 +50,13 @@ class TestAnisotropicShearOracle(unittest.TestCase):
         # A pure homothety would give parallel displacement ~ r - r_c everywhere.
         # A real shear mode must vary in direction across atoms.
         coords = _two_lobe_protein()
-        modes = aso.low_shear_modes(coords, k=3)
+        modes, lambdas = aso.low_shear_modes(coords, k=3)
         self.assertEqual(modes.shape[0], 3)
+        self.assertEqual(lambdas.shape[0], 3)
+        # spectral gap anchors amplitude: c_1 == dx, later modes attenuated
+        c_k = aso.dynamic_shear_amplitudes(lambdas, 1.5)
+        self.assertAlmostEqual(float(c_k[0]), 1.5, places=6)
+        self.assertTrue(bool(np.all(c_k[1:] <= c_k[0] + 1e-9)))
         u = modes[0]
         centered = coords - coords.mean(0)
         # cosine alignment of the mode with the radial (homothety) field

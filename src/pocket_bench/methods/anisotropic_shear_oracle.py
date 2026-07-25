@@ -20,12 +20,15 @@ The admissibility mask is the Boolean OR of the free space over a fixed,
 predetermined set of discrete shear amplitudes:
 
     S*(v) = OR over m in M of  free_space( V_wall + d_m )(v)
-    d_m   = amplitude * sum_k a_k^(m) * u_k ,   a_k in {-c, 0, +c}
+    d_m   = sum_k s_k^(m) * c_k * u_k ,   s_k in {-1, 0, +1}
 
-with M the Cartesian product of the discrete amplitudes over the K modes. The
-all-zero amplitude reproduces the rigid apo wall, so S* is always a superset of
-apo free space; the *new* voxels (S* & ~apo_free) are the breathable cryptic
-volume that a rigid detector cannot see. Everything is geometry.
+with M the Cartesian product of the signs over the K modes. There is no tuned
+amplitude: the per-mode magnitude is fixed by the spectrum via the dynamic
+algebraic scaling `c_k = dx * sqrt(lambda_1 / lambda_k)` (spectral-gap-anchored
+equipotential; softer modes move more, stiffer modes are attenuated by
+1/sqrt(lambda)). The all-zero combo reproduces the rigid apo wall, so S* is always
+a superset of apo free space; the *new* voxels (S* & ~apo_free) are the breathable
+cryptic volume that a rigid detector cannot see. Everything is geometry.
 `clinical_grade=false`: a free voxel is a topological admissibility statement,
 never evidence of binding, potency, or safety.
 """
@@ -37,8 +40,7 @@ import numpy as np
 
 CONTACT_CUTOFF = 12.0          # Angstrom, ANM contact radius
 K_MODES = 3                    # non-rigid modes retained
-DISCRETE_AMPLITUDES = (-1.0, 0.0, 1.0)   # {-c, 0, +c}
-SHEAR_AMPLITUDE_A = 3.0        # Angstrom, per-unit shear magnitude (RMS-normalized modes)
+SHEAR_SIGNS = (-1.0, 0.0, 1.0)  # per-mode {-c_k, 0, +c_k}; c_k is derived, not tuned
 DEFAULT_VDW_RADIUS = 1.7       # Angstrom, ~carbon Bondi hard wall
 _RIGID_EPS = 1e-6              # eigenvalue below (eps * lambda_max) == rigid/disconnected
 _MAX_VOXELS = 40_000_000
@@ -104,7 +106,14 @@ def anm_hessian(coords: np.ndarray, cutoff: float = CONTACT_CUTOFF):
 
 
 def low_shear_modes(coords: np.ndarray, *, k: int = K_MODES, cutoff: float = CONTACT_CUTOFF):
-    """The K lowest non-rigid ANM eigenvectors as (K, N, 3) RMS-normalized fields."""
+    """The K lowest non-rigid ANM modes.
+
+    Returns ``(modes, eigenvalues)`` where ``modes`` is (K, N, 3) RMS-normalized
+    displacement fields and ``eigenvalues`` is (K,) the corresponding non-zero
+    eigenvalues (ascending). Rigid-body / disconnected near-zero modes
+    (``lambda <= _RIGID_EPS * lambda_max``) are dropped so no negative or
+    numerically-zero eigenvalue ever reaches the amplitude formula.
+    """
     from scipy.sparse.linalg import eigsh
 
     n = len(coords)
@@ -126,11 +135,41 @@ def low_shear_modes(coords: np.ndarray, *, k: int = K_MODES, cutoff: float = CON
         raise ValueError("insufficient non-rigid modes; increase cutoff or atoms")
 
     modes = []
+    lambdas = []
     for col in picked:
-        u = vecs[:, col].reshape(n, 3)
+        raw = vecs[:, col]
+        # Deterministic phase convention: ARPACK/eigsh fixes an eigenvector only up
+        # to an overall sign (and, for degeneracies, up to a subspace rotation). Pin
+        # the global sign so the largest-|component| entry is strictly positive; ties
+        # in |value| are broken by the lowest flat index. This makes the returned
+        # modes byte-identical across runs / BLAS backends, so downstream S* voxel
+        # masks are reproducible under peer-review CI.
+        flat = np.ascontiguousarray(raw)
+        amax = float(np.max(np.abs(flat)))
+        lead = int(np.argmax(np.abs(flat) >= amax - 1e-12))  # first index attaining max |.|
+        if flat[lead] < 0.0:
+            raw = -raw
+        u = raw.reshape(n, 3)
         rms = np.sqrt((u * u).sum() / n)
         modes.append(u / (rms if rms > 1e-12 else 1.0))
-    return np.stack(modes, axis=0)  # (k, N, 3), unit RMS displacement
+        lambdas.append(float(vals[col]))
+    return np.stack(modes, axis=0), np.asarray(lambdas, dtype=np.float64)
+
+
+def dynamic_shear_amplitudes(eigenvalues: np.ndarray, grid_resolution: float) -> np.ndarray:
+    """c_k = dx * sqrt(lambda_1 / lambda_k), anchored to the spectral gap lambda_1.
+
+    Softer (lower-lambda) modes get the largest amplitude; stiffer modes are
+    attenuated by the inverse square root of their eigenvalue. No empirical
+    hyperparameter enters: amplitude is fixed by the spectrum and the voxel
+    resolution alone. Non-positive / non-finite eigenvalues are masked to c_k=0.
+    """
+    lam = np.asarray(eigenvalues, dtype=np.float64)
+    lam1 = float(lam[0])
+    c = np.zeros_like(lam)
+    safe = np.isfinite(lam) & (lam > 0.0) & np.isfinite(lam1) & (lam1 > 0.0)
+    c[safe] = grid_resolution * np.sqrt(lam1 / lam[safe])
+    return c
 
 
 # --------------------------------------------------------------------------- #
@@ -174,8 +213,7 @@ def build_anisotropic_shear_oracle(
     *,
     contact_cutoff: float = CONTACT_CUTOFF,
     k_modes: int = K_MODES,
-    shear_amplitude: float = SHEAR_AMPLITUDE_A,
-    discrete_amplitudes: tuple[float, ...] = DISCRETE_AMPLITUDES,
+    shear_signs: tuple[float, ...] = SHEAR_SIGNS,
     vdw_radius: float = DEFAULT_VDW_RADIUS,
     return_components: bool = False,
 ):
@@ -194,23 +232,24 @@ def build_anisotropic_shear_oracle(
     free space and the cryptic gain ``s_star & ~apo_free``.
     """
     coords = np.asarray(apo_receptor_coords, dtype=np.float64)
-    modes = low_shear_modes(coords, k=k_modes, cutoff=contact_cutoff)  # (k,N,3)
+    modes, lambdas = low_shear_modes(coords, k=k_modes, cutoff=contact_cutoff)  # (k,N,3),(k,)
 
-    # max per-atom displacement across the extreme corner of the mode box
-    c = max(abs(a) for a in discrete_amplitudes) or 1.0
-    max_disp = shear_amplitude * c * float(
-        np.max(np.linalg.norm(np.abs(modes).sum(axis=0), axis=1))
-    )
+    # Dynamic algebraic amplitude per mode: c_k = dx * sqrt(lambda_1 / lambda_k).
+    c_k = dynamic_shear_amplitudes(lambdas, grid_resolution)          # (k,)
+
+    # max per-atom displacement at the extreme corner of the mode box, using c_k
+    corner = (c_k[:, None, None] * np.abs(modes)).sum(axis=0)          # (N,3)
+    max_disp = float(np.max(np.linalg.norm(corner, axis=1)))
     margin = max_disp + vdw_radius + grid_resolution
     origin, dims = _grid(coords, grid_resolution, margin)
     ball = _ball_offsets(vdw_radius, grid_resolution)
 
     s_star = np.zeros(tuple(int(d) for d in dims), dtype=bool)
     apo_free = None
-    # M = Cartesian product of discrete amplitudes over the K modes
-    for combo in product(discrete_amplitudes, repeat=k_modes):
-        a = np.asarray(combo, dtype=np.float64)             # (k,)
-        disp = shear_amplitude * np.tensordot(a, modes, axes=(0, 0))  # (N,3)
+    # M = Cartesian product of {-c_k, 0, +c_k} over the K modes (signs x c_k)
+    for signs in product(shear_signs, repeat=k_modes):
+        a = np.asarray(signs, dtype=np.float64) * c_k                 # (k,) signed amplitudes
+        disp = np.tensordot(a, modes, axes=(0, 0))                    # (N,3)
         deformed = coords + disp
         occ = _occupied_mask(deformed, origin, dims, grid_resolution, ball)
         free = ~occ
@@ -227,7 +266,9 @@ def build_anisotropic_shear_oracle(
             "grid_resolution": grid_resolution,
             "apo_free": apo_free,
             "cryptic_gain": s_star & ~apo_free,
-            "n_modes_evaluated": len(discrete_amplitudes) ** k_modes,
+            "eigenvalues": lambdas.tolist(),
+            "shear_amplitudes_c_k": c_k.tolist(),
+            "n_modes_evaluated": len(shear_signs) ** k_modes,
             "clinical_grade": False,
         }
     return s_star, origin

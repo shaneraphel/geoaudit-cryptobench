@@ -30,6 +30,7 @@ SCHEMA = "geoaudit.telemetry.v1"
 METHOD_TOOL = {
     "geometric_foundation": "",
     "fstar_pocket": "",
+    "sstar_pocket": "",
     "foliation": "",
     "random_bbox": "",
     "p2rank": "p2rank",

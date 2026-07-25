@@ -1,0 +1,151 @@
+{
+  "schema": "geoaudit.bootstrap_report.v1",
+  "clinical_grade": false,
+  "dataset": "cryptobench_apo_pilot_n15",
+  "is_official_mmseqs2_10pct_test_fold": false,
+  "official_fold_note": "n=15 deterministic stride, NOT the official CryptoBench cluster-disjoint test fold; official-fold rerun requires that fold's structure list + labels (absent in this repo).",
+  "metrics": {
+    "residue_auc": {
+      "schema": "geoaudit.bootstrap_ci.v1",
+      "clinical_grade": false,
+      "baseline": "p2rank",
+      "n_structures": 15,
+      "n_boot": 10000,
+      "seed": 20260725,
+      "ci_level": 0.95,
+      "per_method": {
+        "fstar_pocket": {
+          "point": 0.5690115447491397,
+          "ci_low": 0.5116847271594321,
+          "ci_high": 0.6288169550903042,
+          "n_structures_scored": 15
+        },
+        "geometric_foundation": {
+          "point": 0.625671821508114,
+          "ci_low": 0.5640872403018569,
+          "ci_high": 0.6895980935176982,
+          "n_structures_scored": 15
+        },
+        "p2rank": {
+          "point": 0.585224269404267,
+          "ci_low": 0.5388148878825773,
+          "ci_high": 0.6330578464851255,
+          "n_structures_scored": 15
+        },
+        "random_bbox": {
+          "point": 0.5,
+          "ci_low": 0.5,
+          "ci_high": 0.5,
+          "n_structures_scored": 15
+        },
+        "sstar_pocket": {
+          "point": 0.5060713345875633,
+          "ci_low": 0.46592826087831496,
+          "ci_high": 0.5468642740841708,
+          "n_structures_scored": 15
+        }
+      },
+      "paired_vs_baseline": {
+        "fstar_pocket": {
+          "delta_point": -0.016212724655127242,
+          "delta_ci_low": -0.07142550217230695,
+          "delta_ci_high": 0.04689541519510686,
+          "p_two_sided_bootstrap": 0.5732,
+          "crosses_zero": true
+        },
+        "geometric_foundation": {
+          "delta_point": 0.040447552103846984,
+          "delta_ci_low": -0.019634564835037314,
+          "delta_ci_high": 0.10849539923769277,
+          "p_two_sided_bootstrap": 0.2085999999999999,
+          "crosses_zero": true
+        },
+        "random_bbox": {
+          "delta_point": -0.08522426940426697,
+          "delta_ci_low": -0.13305784648512556,
+          "delta_ci_high": -0.038814887882577254,
+          "p_two_sided_bootstrap": 0.0002,
+          "crosses_zero": false
+        },
+        "sstar_pocket": {
+          "delta_point": -0.07915293481670371,
+          "delta_ci_low": -0.13241882831404878,
+          "delta_ci_high": -0.02679244446649545,
+          "p_two_sided_bootstrap": 0.0024,
+          "crosses_zero": false
+        }
+      }
+    },
+    "residue_pr_auc": {
+      "schema": "geoaudit.bootstrap_ci.v1",
+      "clinical_grade": false,
+      "baseline": "p2rank",
+      "n_structures": 15,
+      "n_boot": 10000,
+      "seed": 20260725,
+      "ci_level": 0.95,
+      "per_method": {
+        "fstar_pocket": {
+          "point": 0.1816284785995692,
+          "ci_low": 0.10168336128080463,
+          "ci_high": 0.27074809950974327,
+          "n_structures_scored": 15
+        },
+        "geometric_foundation": {
+          "point": 0.20914074584472392,
+          "ci_low": 0.12011101726035887,
+          "ci_high": 0.31248539199572456,
+          "n_structures_scored": 15
+        },
+        "p2rank": {
+          "point": 0.22206279942333657,
+          "ci_low": 0.134983758482796,
+          "ci_high": 0.3203351524745436,
+          "n_structures_scored": 15
+        },
+        "random_bbox": {
+          "point": 0.0850019018212147,
+          "ci_low": 0.05620190887095416,
+          "ci_high": 0.1166932325144354,
+          "n_structures_scored": 15
+        },
+        "sstar_pocket": {
+          "point": 0.10844748777901177,
+          "ci_low": 0.06154209503366065,
+          "ci_high": 0.16318876096937374,
+          "n_structures_scored": 15
+        }
+      },
+      "paired_vs_baseline": {
+        "fstar_pocket": {
+          "delta_point": -0.040434320823767356,
+          "delta_ci_low": -0.12461161289471341,
+          "delta_ci_high": 0.0385116998673518,
+          "p_two_sided_bootstrap": 0.334,
+          "crosses_zero": true
+        },
+        "geometric_foundation": {
+          "delta_point": -0.012922053578612647,
+          "delta_ci_low": -0.08945936004428912,
+          "delta_ci_high": 0.0666263117189557,
+          "p_two_sided_bootstrap": 0.734,
+          "crosses_zero": true
+        },
+        "random_bbox": {
+          "delta_point": -0.13706089760212187,
+          "delta_ci_low": -0.22062767830036026,
+          "delta_ci_high": -0.06246807624924027,
+          "p_two_sided_bootstrap": 0.0,
+          "crosses_zero": false
+        },
+        "sstar_pocket": {
+          "delta_point": -0.1136153116443248,
+          "delta_ci_low": -0.18687397634743988,
+          "delta_ci_high": -0.04981052503824079,
+          "p_two_sided_bootstrap": 0.0,
+          "crosses_zero": false
+        }
+      }
+    }
+  }
+}
