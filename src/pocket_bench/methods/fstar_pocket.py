@@ -17,11 +17,13 @@ This reuses the deterministic buriedness + free-grid helpers of
 from __future__ import annotations
 
 import time
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 import numpy as np
 
+from pocket_bench import native
 from pocket_bench.methods import prediction
 from pocket_bench.methods.firewall import ligand_leak_guard
 from pocket_bench.methods.geometric_foundation import (
@@ -36,16 +38,26 @@ from pocket_bench.pdb_io import parse_pdb_atoms, residues_near_center
 BREATHING_SCALARS: tuple[float, ...] = (1.1, 1.25)  # fixed discrete conformal modes
 
 
-def _local_free_enclosed(c, coords, *, r_local, step, atom_r, enclose_cut, enclose_min):
-    """# of grid points within r_local of c that are free AND still enclosed."""
+@lru_cache(maxsize=32)
+def _probe_offsets(r_local: float, step: float) -> np.ndarray:
+    """Probe lattice inside the local sphere. Depends only on (r_local, step)."""
     axes = [np.arange(-r_local, r_local + step, step) for _ in range(3)]
     gx, gy, gz = np.meshgrid(*axes, indexing="ij")
     off = np.stack([gx.ravel(), gy.ravel(), gz.ravel()], axis=1)
     off = off[(off**2).sum(1) <= r_local * r_local]
-    pts = c + off
+    off.flags.writeable = False
+    return off
+
+
+def _local_free_enclosed(c, coords, *, r_local, step, atom_r, enclose_cut, enclose_min):
+    """# of grid points within r_local of c that are free AND still enclosed."""
+    pts = c + _probe_offsets(r_local, step)
     near = coords[((coords - c) ** 2).sum(1) <= (enclose_cut + r_local) ** 2]
     if len(near) == 0:
         return 0
+    hit = native.local_free_enclosed(pts, near, atom_r, enclose_cut, enclose_min)
+    if hit is not None:
+        return hit
     d2 = ((pts[:, None, :] - near[None, :, :]) ** 2).sum(-1)
     dmin = np.sqrt(d2.min(1))
     n_within = (d2 <= enclose_cut * enclose_cut).sum(1)

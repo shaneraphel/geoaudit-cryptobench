@@ -1,6 +1,6 @@
 {
   "schema": "geoaudit.cryptobench.report.v1",
-  "generated_at": "2026-07-25T22:30:04+0800",
+  "generated_at": "2026-07-26T00:31:54+0800",
   "clinical_grade": false,
   "dataset": "pilot",
   "is_official_mmseqs2_10pct_test_fold": false,
@@ -136,16 +136,16 @@
       ]
     },
     "fstar_pocket": {
-      "ok": 15,
+      "ok": 14,
       "top1_hits": 2,
       "unavailable": 0,
-      "crash_empty": 0,
+      "crash_empty": 1,
       "rows": [
         {
           "pdb": "1a4u",
-          "status": "OK",
-          "top1_success": false,
-          "best_dca": 4.127889170023828
+          "status": "CRASH",
+          "top1_success": null,
+          "best_dca": null
         },
         {
           "pdb": "1ffh",

@@ -15,3 +15,6 @@ data/cryptobench_apo/official_labels/
 data/cryptobench_apo/official_manifest.json
 # Superseded earlier partial run
 results/cryptobench_official/
+
+# Rust build artefacts for the optional native kernels
+native/geoaudit_kernels/target/

@@ -17,11 +17,24 @@ from __future__ import annotations
 
 import argparse
 import glob
+import itertools
 import json
+import multiprocessing
+import os
 import random
 import sys
 import time
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+
+# Pin BLAS/OMP to a single thread PER WORKER before numpy/scipy are imported.
+# The spectral step (ARPACK shift-invert on a 3N x 3N sparse Hessian) is the
+# runtime hotspot; running P worker processes that each spawn a full BLAS thread
+# pool oversubscribes the cores and is slower than serial. Parallelism is taken
+# across structures instead, which is where it actually scales.
+for _v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS",
+           "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
+    os.environ.setdefault(_v, "1")
 
 from pocket_bench.adapters import load_official_test_fold
 from pocket_bench.methods import (
@@ -97,45 +110,108 @@ def _official_items() -> list[tuple[dict, Path]]:
     return items
 
 
+def _predict(method: str, rec: Path, pdb: str) -> dict:
+    if method == "geometric_foundation":
+        return geometric_foundation.predict(rec, pdb_id=pdb)
+    if method == "fstar_pocket":
+        return fstar_pocket.predict(rec, pdb_id=pdb)
+    if method == "sstar_pocket":
+        return sstar_pocket.predict(rec, pdb_id=pdb)
+    if method == "p2rank":
+        return p2rank_wrap.predict(rec, pdb_id=pdb, top_k=5)
+    if method == "random_bbox":
+        return _random_baseline(rec, pdb_id=pdb)
+    raise KeyError(method)
+
+
+METHOD_NAMES = ("geometric_foundation", "fstar_pocket", "sstar_pocket",
+                "p2rank", "random_bbox")
+
+
+def _run_one(item: tuple[dict, Path],
+             method_names: tuple[str, ...] = METHOD_NAMES,
+             ) -> tuple[list[int], dict[str, tuple[dict, dict]]]:
+    """Score every method on ONE structure. Module-level so it is picklable.
+
+    Pure function of (label, receptor): no shared state, no RNG dependence on
+    evaluation order (random_bbox is seeded per structure), so the parallel result
+    is identical to the serial one.
+    """
+    lab, rec = item
+    pdb, ch = lab["pdb_id"], lab["chain"]
+    universe = _receptor_residue_universe(rec, ch)
+    res: dict[str, tuple[dict, dict]] = {}
+    for m in method_names:
+        pred = _predict(m, rec, pdb)
+        if "ligand_heavy_coords" in lab:
+            sc = score_prediction(pred, lab)
+        else:
+            # Official apo labels carry cryptic residues but no holo ligand
+            # coordinates; DCA is undefined there, so it is reported null rather
+            # than fabricated. Residue-level metrics remain valid.
+            sc = {"method": m, "pdb_id": pdb, "status": pred.get("status", "OK"),
+                  "runtime_s": pred.get("runtime_s"),
+                  "primary_metric": "residue_level_only",
+                  "clinical_grade": False, "top1": None, "top3": None,
+                  "dcc_top1": None, "residue_f1": {"available": False}}
+        res[m] = (pred, sc)
+    return universe, res
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dataset", choices=("pilot", "official"), default="pilot",
                     help="'official' = CryptoBench MMseqs2 10%% test fold "
                          "(fail-closed, never falls back to the pilot)")
+    ap.add_argument("--jobs", type=int, default=1,
+                    help="parallel worker processes over structures "
+                         "(results are order-preserving and identical to --jobs 1)")
+    ap.add_argument("--methods", default=",".join(METHOD_NAMES),
+                    help="comma-separated subset of: " + ",".join(METHOD_NAMES))
     args = ap.parse_args(argv)
+    mnames = tuple(m.strip() for m in args.methods.split(",") if m.strip())
+    unknown = set(mnames) - set(METHOD_NAMES)
+    if unknown:
+        raise SystemExit(f"unknown methods: {sorted(unknown)}")
     is_official = args.dataset == "official"
     items = _official_items() if is_official else _pilot_items()
     out = ROOT / ("results/cryptobench_official" if is_official
                   else "results/cryptobench_apo")
 
-    methods = {
-        "geometric_foundation": lambda rec, pid: geometric_foundation.predict(rec, pdb_id=pid),
-        "fstar_pocket": lambda rec, pid: fstar_pocket.predict(rec, pdb_id=pid),
-        "sstar_pocket": lambda rec, pid: sstar_pocket.predict(rec, pdb_id=pid),
-        "p2rank": lambda rec, pid: p2rank_wrap.predict(rec, pdb_id=pid, top_k=5),
-        "random_bbox": lambda rec, pid: _random_baseline(rec, pdb_id=pid),
-    }
+    # One BLAS/OpenMP thread per worker: the parallelism is across structures, so
+    # nested threading would oversubscribe the cores and slow the run down.
+    if args.jobs > 1:
+        for var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+                    "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"):
+            os.environ[var] = "1"
+
+    methods = {m: None for m in mnames}
     env = json.loads(BASELINE_ENV.read_text())
     p2rank_version = ((env.get("tools") or {}).get("p2rank") or {}).get("version")
     per = {m: {"ok": 0, "top1_hits": 0, "unavailable": 0, "crash_empty": 0, "rows": []} for m in methods}
     telem_rows: list[dict] = []
     n_attempted = {m: 0 for m in methods}
-    for lab, rec in items:
+    t_start = time.perf_counter()
+    if args.jobs > 1:
+        ctx = multiprocessing.get_context("spawn")
+        with ProcessPoolExecutor(max_workers=args.jobs, mp_context=ctx) as ex:
+            results = []
+            stream = ex.map(_run_one, items, itertools.repeat(mnames), chunksize=1)
+            for done, r in enumerate(stream, 1):
+                results.append(r)
+                if done % 10 == 0 or done == len(items):
+                    el = time.perf_counter() - t_start
+                    print(f"  [{done}/{len(items)}] {el:.0f}s elapsed, "
+                          f"~{el / done * (len(items) - done):.0f}s left", flush=True)
+    else:
+        results = [_run_one(it, mnames) for it in items]
+    print(f"  predictions done in {time.perf_counter() - t_start:.0f}s "
+          f"(jobs={args.jobs})", flush=True)
+
+    for idx, ((lab, rec), (universe, res)) in enumerate(zip(items, results), 1):
         pdb, ch = lab["pdb_id"], lab["chain"]
-        universe = _receptor_residue_universe(rec, ch)
-        for m, fn in methods.items():
-            pred = fn(rec, pdb)
-            if "ligand_heavy_coords" in lab:
-                sc = score_prediction(pred, lab)
-            else:
-                # Official apo labels carry cryptic residues but no holo ligand
-                # coordinates; DCA is undefined there, so it is reported null
-                # rather than fabricated. Residue-level metrics remain valid.
-                sc = {"method": m, "pdb_id": pdb, "status": pred.get("status", "OK"),
-                      "runtime_s": pred.get("runtime_s"),
-                      "primary_metric": "residue_level_only",
-                      "clinical_grade": False, "top1": None, "top3": None,
-                      "dcc_top1": None, "residue_f1": {"available": False}}
+        for m in methods:
+            pred, sc = res[m]
             agg = per[m]; st = sc["status"]; top1 = sc.get("top1") or {}
             n_attempted[m] += 1
             if st == "TOOL_UNAVAILABLE":

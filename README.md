@@ -52,9 +52,10 @@ External baselines (not pip-installable), versions pinned in
 |---|---|---|
 | `make verify` | run `tools/verify_claims.py` scope/science gates | stdout JSON, exit≠0 on fail |
 | `make test` | `unittest discover -s tests` | test report |
-| `PYTHONPATH=src python3.12 tools/run_cryptobench_apo.py --dataset official` | **primary**: official CryptoBench test fold (fail-closed; never falls back to the pilot) | `results/cryptobench_official/{APO_BENCHMARK,TELEMETRY}.json` |
+| `bash tools/build_native.sh` | optional Rust geometry kernels (arm64 / amd64; bit-identical to NumPy) | `native/geoaudit_kernels/target/release/libgeoaudit_kernels.{dylib,so}` |
+| `PYTHONPATH=src python3.12 tools/run_cryptobench_apo.py --dataset official --jobs 6` | **primary**: official CryptoBench test fold (fail-closed; never falls back to the pilot; `--jobs` = structure-parallel workers) | `results/cryptobench_official/{APO_BENCHMARK,TELEMETRY}.json` |
 | `PYTHONPATH=src python3.12 tools/run_cryptobench_apo.py --dataset pilot` | apo pilot (n=15, Appendix only) | `results/cryptobench_apo/{APO_BENCHMARK,TELEMETRY}.json` |
-| `PYTHONPATH=src python3.12 -m pocket_bench.metrics_bootstrap` | paired bootstrap CIs | `results/cryptobench_apo/BOOTSTRAP_CI.json` |
+| `PYTHONPATH=src python3.12 -m pocket_bench.metrics_bootstrap --dataset official` | paired bootstrap CIs on the official fold | `results/cryptobench_official/BOOTSTRAP_CI.json` (frozen copy: `results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json`) |
 | `PYTHONPATH=src python3.12 tools/fetch_official_data.py --build-manifest --fold-file data/cryptobench_apo/_osf/test.json` | materialize official test fold from OSF (hash-verified) | `data/cryptobench_apo/official_manifest.json` (+ receptors/labels, gitignored) |
 | `PYTHONPATH=src python3.12 tools/run_official_fold.py` | official test-fold residue metrics + bootstrap CIs | `results/official_fold/{OFFICIAL_FOLD_METRICS,PER_STRUCTURE}.json` |
 | `PYTHONPATH=src python3.12 tools/gf4_allele_shuffle_ablation.py` | GF(4) wrong-allele control | `results/gf4_ablation/GF4_ALLELE_ABLATION.json` |
@@ -182,30 +183,34 @@ n_structures_scored}` and `paired_vs_baseline{delta_point, delta_ci_low,
 delta_ci_high, p_two_sided_bootstrap, crosses_zero}`. Params `{n_boot=10000, seed,
 ci_level, baseline}`. Paired resampling over structures.
 
-### 3.4 Official test-fold report — `results/official_fold/OFFICIAL_FOLD_METRICS.json` (`geoaudit.official_fold_report.v1`)
+### 3.4 Official test-fold report — `results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json`
 
-Residue-classification protocol on the official fold (apo frame): universe = all
-residues of the apo chain; `y=1` iff residue ∈ cryptic `apo_pocket_selection`;
-`geometric_foundation` score = rank-weighted pocket membership; `random_residue` =
-uniform[0,1] per-residue null (fixed seed). Fields: `n_structures_scored`,
-per-metric `bootstrap{per_method{point,ci_low,ci_high}, paired_vs_baseline{
-delta_point,delta_ci_low,delta_ci_high,p_two_sided_bootstrap,crosses_zero}}`
-(`n_boot=10000`, 95% CI), `real_ml_baseline_status`.
+Primary freeze: residue-classification metrics from
+`tools/run_cryptobench_apo.py --dataset official` +
+`python -m pocket_bench.metrics_bootstrap --dataset official`
+(`n_boot=10000`, seed `20260725`, 95% CI). Fold size n=192 single-chain evaluable
+units; residue metrics scored on n=190 (two structures lack a joinable cryptic-
+residue universe). Method status on the freeze run: `geometric_foundation` /
+`fstar_pocket` / `sstar_pocket` / `random_bbox` = 192/192 `OK`; `p2rank` =
+186/192 `OK` + 6 `EMPTY`. Runtime on Apple M4: ~11 min with `--jobs 6` and the
+optional Rust kernels (`tools/build_native.sh`).
 
-Frozen readout (n=192 scored; MCC/F1 operating points: `geometric_foundation` =
-residue in any predicted pocket, `random_residue` = score ≥ 0.5):
+Point estimates [95% CI], baseline = `p2rank` (REQUESTED):
 
-| metric | geometric_foundation [95% CI] | random null | Δ vs null [95% CI] |
-|---|---|---|---|
-| ROC-AUC | 0.664 [0.643, 0.684] | 0.491 | +0.173 [0.148, 0.197] |
-| PR-AUC | 0.276 [0.246, 0.306] | 0.087 | +0.190 [0.163, 0.216] |
-| MCC | 0.237 [0.208, 0.266] | −0.007 | +0.244 [0.213, 0.275] |
-| F1 | 0.285 [0.257, 0.313] | 0.113 | +0.172 [0.148, 0.196] |
+| method | ROC-AUC | PR-AUC | MCC | F1 |
+|---|---|---|---|---|
+| `geometric_foundation` | 0.662 [0.641, 0.682] | 0.274 [0.246, 0.304] | 0.234 [0.205, 0.263] | 0.282 [0.255, 0.310] |
+| `p2rank` | 0.620 [0.604, 0.637] | 0.264 [0.237, 0.293] | 0.219 [0.191, 0.248] | 0.250 [0.224, 0.278] |
+| `fstar_pocket` | 0.595 [0.576, 0.615] | 0.202 [0.175, 0.230] | 0.129 [0.105, 0.154] | 0.195 [0.172, 0.219] |
+| `sstar_pocket` | 0.559 [0.542, 0.577] | 0.132 [0.115, 0.151] | 0.083 [0.062, 0.104] | 0.155 [0.135, 0.176] |
+| `random_bbox` | 0.500 [0.500, 0.500] | 0.093 [0.083, 0.103] | n/a | 0.000 [0.000, 0.000] |
 
-All four Δ CIs exclude 0 (`crosses_zero=false`, bootstrap p≈0). `real_ml_baseline_status`:
-`p2rank` and `pocketminer` = `DATA_UNAVAILABLE` — per-residue predictions are not
-published on OSF (only a trained pLM-NN model binary), so no paired CI against them
-is computed; absence is reported, never imputed.
+Paired Δ (`geometric_foundation` − `p2rank`): ROC-AUC +0.042 [0.023, 0.061]
+(`crosses_zero=false`, bootstrap p=0); F1 +0.031 [0.006, 0.057]
+(`crosses_zero=false`, p=0.015); PR-AUC and MCC CIs include 0. `pocketminer`
+remains `DATA_UNAVAILABLE` (no per-residue OSF scores). A legacy null-only freeze
+(`OFFICIAL_FOLD_METRICS.json`, vs `random_residue`) is retained for appendix
+comparison and is not the primary readout.
 
 ### 3.5 Appendix B artifact — allele-conditioning ablation (`results/gf4_ablation/GF4_ALLELE_ABLATION.json`, `geoaudit.gf4_allele_ablation.v1`)
 
@@ -254,7 +259,7 @@ generalization statement. Machine-enforced by
 | Localized anisotropic shear for void-absent pockets | future work | Global low-frequency modes caused surface drift; see `results/cryptobench_apo/` |
 
 Numerical record: all counts and metrics are read from the JSON artifacts
-(`results/official_fold/OFFICIAL_FOLD_METRICS.json`,
+(`results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json`,
 `results/gf4_ablation/GF4_ALLELE_ABLATION.json`,
 `data/manifests/COMPANION_EVIDENCE.json`). Where earlier narrative text disagreed with
 those artifacts, the narrative has been deleted rather than reconciled; the JSON is the
@@ -269,14 +274,17 @@ paper/        method (LaTeX): GF4_SYNDROME_CHEM_METHOD.tex
 contracts/    GEOAUDIT_PAPER_SCOPE.json (scope contract)
 src/pocket_bench/
   methods/    receptor-only detectors (firewalled) + anisotropic_shear_oracle
+  native.py   ctypes loader for optional Rust kernels (NumPy fallback)
   metrics.py metrics_bootstrap.py telemetry.py adapters.py paths.py pdb_io.py
-tools/        run_cryptobench_apo.py, run_official_fold.py, fetch_official_data.py,
-              run_pilot.py, build_labels.py, build_split_ledger.py,
-              gf4_allele_shuffle_ablation.py, verify_claims.py
+native/       geoaudit_kernels (Rust cdylib: free-grid, buriedness, local_free_enclosed)
+tools/        run_cryptobench_apo.py, build_native.sh, run_official_fold.py,
+              fetch_official_data.py, run_pilot.py, build_labels.py,
+              build_split_ledger.py, gf4_allele_shuffle_ablation.py, verify_claims.py
 data/         cryptobench_apo/ (PROVENANCE.json + gitignored materialized fold),
               manifests/, labels/
 results/      cryptobench_apo/, official_fold/, gf4_ablation/, pilot/
-tests/        firewall, split-disjoint, denominator, bootstrap, adapters, ablation
+tests/        firewall, native kernels, split-disjoint, denominator, bootstrap,
+              adapters, ablation
 ```
 
 Local-only material (never published) is gitignored (`*.local.*`, `_local/`) and

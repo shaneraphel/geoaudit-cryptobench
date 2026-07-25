@@ -1,0 +1,22 @@
+# Standalone crate: not a member of any parent cargo workspace.
+[workspace]
+
+[package]
+name = "geoaudit_kernels"
+version = "0.1.0"
+edition = "2021"
+description = "Deterministic geometry kernels (free-grid mask, buriedness) for GeoAudit"
+
+[lib]
+name = "geoaudit_kernels"
+crate-type = ["cdylib"]
+
+# No external dependencies: parallelism uses std::thread::scope so the build is
+# fully offline and the binary is reproducible.
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"

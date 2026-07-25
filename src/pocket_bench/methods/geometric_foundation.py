@@ -20,6 +20,7 @@ from typing import Any
 
 import numpy as np
 
+from pocket_bench import native
 from pocket_bench.methods import prediction
 from pocket_bench.methods.firewall import ligand_leak_guard
 from pocket_bench.paths import STATUS_CRASH, STATUS_EMPTY, STATUS_OK
@@ -61,15 +62,19 @@ def _free_grid(coords, step, atom_r, max_pts):
     pts = np.stack([gx.ravel(), gy.ravel(), gz.ravel()], axis=1)
     # keep only free points (outside vdW) that are not far from the protein
     # (a shell around the surface), via nearest-atom distance in chunks.
-    keep = np.zeros(len(pts), dtype=bool)
-    near = np.zeros(len(pts), dtype=bool)
-    chunk = 4096
-    for s in range(0, len(pts), chunk):
-        blk = pts[s : s + chunk]
-        d2 = ((blk[:, None, :] - coords[None, :, :]) ** 2).sum(-1)
-        dmin = np.sqrt(d2.min(1))
-        keep[s : s + chunk] = dmin > atom_r
-        near[s : s + chunk] = dmin < 6.0
+    fast = native.free_grid_mask(pts, coords, atom_r, 6.0)
+    if fast is not None:
+        keep, near = fast
+    else:
+        keep = np.zeros(len(pts), dtype=bool)
+        near = np.zeros(len(pts), dtype=bool)
+        chunk = 4096
+        for s in range(0, len(pts), chunk):
+            blk = pts[s : s + chunk]
+            d2 = ((blk[:, None, :] - coords[None, :, :]) ** 2).sum(-1)
+            dmin = np.sqrt(d2.min(1))
+            keep[s : s + chunk] = dmin > atom_r
+            near[s : s + chunk] = dmin < 6.0
     sel = pts[keep & near]
     if len(sel) > max_pts:  # deterministic stride subsample
         sel = sel[:: int(np.ceil(len(sel) / max_pts))]
@@ -78,6 +83,9 @@ def _free_grid(coords, step, atom_r, max_pts):
 
 def _buriedness(pts, coords, dirs, cutoff, perp):
     """Fraction of directions blocked by an atom within the ray cylinder."""
+    fast = native.buriedness(pts, coords, dirs, cutoff, perp)
+    if fast is not None:
+        return fast
     out = np.zeros(len(pts))
     perp2 = perp * perp
     for k, p in enumerate(pts):

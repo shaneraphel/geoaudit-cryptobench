@@ -21,9 +21,11 @@ Honesty boundaries (do not remove):
 """
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import random
+import sys
 from pathlib import Path
 from typing import Any, Callable, Sequence
 
@@ -178,30 +180,67 @@ def per_structure_values(
     return out
 
 
-def main() -> int:
+def _pick_baseline(vals: dict[str, list[float | None]],
+                   preferred: str | None) -> tuple[str, str]:
+    """Choose a baseline that actually has values; never silently compare to nulls."""
+    scored = [m for m, v in vals.items() if any(x is not None for x in v)]
+    if preferred and preferred in scored:
+        return preferred, "REQUESTED"
+    if preferred:
+        note = f"REQUESTED_{preferred}_HAS_NO_VALUES"
+    else:
+        note = "AUTO"
+    for cand in ("p2rank", "pocketminer", "random_residue", "random_bbox"):
+        if cand in scored:
+            return cand, note
+    # no external/null baseline scored: fall back to self (per-method CIs only)
+    return (scored[0] if scored else next(iter(vals))), note + "_NO_BASELINE_AVAILABLE"
+
+
+def main(argv: list[str] | None = None) -> int:
     root = Path(__file__).resolve().parents[2]
-    telem = json.loads((root / "results/cryptobench_apo/TELEMETRY.json").read_text())
+    ap = argparse.ArgumentParser(description="Paired bootstrap CIs over structures.")
+    ap.add_argument("--dataset", choices=("pilot", "official"), default="pilot")
+    ap.add_argument("--telemetry", type=Path, default=None,
+                    help="explicit TELEMETRY.json (overrides --dataset)")
+    ap.add_argument("--baseline", default=None,
+                    help="baseline method; auto-selected if absent/valueless")
+    args = ap.parse_args(argv)
+    is_official = args.dataset == "official"
+    sub = "results/cryptobench_official" if is_official else "results/cryptobench_apo"
+    telem_path = args.telemetry or (root / sub / "TELEMETRY.json")
+    telem = json.loads(Path(telem_path).read_text())
     rows = telem["rows"]
-    baseline = "p2rank"  # the ML SOTA baseline present on this run
     report: dict[str, Any] = {
         "schema": "geoaudit.bootstrap_report.v1",
         "clinical_grade": False,
-        "dataset": "cryptobench_apo_pilot_n15",
-        "is_official_mmseqs2_10pct_test_fold": False,
+        "dataset": ("cryptobench_official_mmseqs2_10pct_test_fold" if is_official
+                    else "cryptobench_apo_pilot_n15"),
+        "is_official_mmseqs2_10pct_test_fold": is_official,
         "official_fold_note": (
+            "Official CryptoBench cluster-disjoint TEST fold (MMseqs2 @10% identity), "
+            "loaded fail-closed with per-file SHA-256 verification."
+            if is_official else
             "n=15 deterministic stride, NOT the official CryptoBench cluster-disjoint "
-            "test fold; official-fold rerun requires that fold's structure list + "
-            "labels (absent in this repo)."
+            "test fold."
         ),
+        "telemetry_source": str(Path(telem_path).relative_to(root)),
         "metrics": {},
     }
+    baseline = args.baseline
     for metric_key in ("residue_auc", "residue_pr_auc", "residue_mcc", "residue_f1"):
         vals = per_structure_values(rows, metric_key)
         if not any(v is not None for vs in vals.values() for v in vs):
             report["metrics"][metric_key] = {"status": "UNAVAILABLE_NO_VALUES"}
             continue
-        report["metrics"][metric_key] = paired_bootstrap(vals, baseline=baseline)
-    out = root / "results/cryptobench_apo/BOOTSTRAP_CI.json"
+        base, note = _pick_baseline(vals, args.baseline)
+        baseline = base
+        res = paired_bootstrap(vals, baseline=base)
+        res["baseline_selection"] = note
+        report["metrics"][metric_key] = res
+    report["baseline"] = baseline
+    out = root / sub / "BOOTSTRAP_CI.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2) + "\n")
     def _f(v: float | None, spec: str = "+.3f") -> str:
         return "n/a" if v is None else format(v, spec)
@@ -210,19 +249,21 @@ def main() -> int:
         if res.get("status"):
             print(f"== {mk}: {res['status']} ==")
             continue
-        print(f"== {mk} (baseline={baseline}, n={res['n_structures']}, "
-              f"boot={res['n_boot']}) ==")
+        base = res.get("baseline")
+        print(f"== {mk} (baseline={base} [{res.get('baseline_selection')}], "
+              f"n={res['n_structures']}, boot={res['n_boot']}) ==")
         for m, s in res["per_method"].items():
             print(f"  {m:22s} {_f(s['point'], '.3f')}  "
-                  f"[{_f(s['ci_low'], '.3f')}, {_f(s['ci_high'], '.3f')}]")
+                  f"[{_f(s['ci_low'], '.3f')}, {_f(s['ci_high'], '.3f')}]"
+                  f"  n={s['n_structures_scored']}")
         for m, d in res["paired_vs_baseline"].items():
-            print(f"    Δ({m} - {baseline}) = {_f(d['delta_point'])} "
+            print(f"    Δ({m} - {base}) = {_f(d['delta_point'])} "
                   f"[{_f(d['delta_ci_low'])}, {_f(d['delta_ci_high'])}]  "
                   f"p≈{_f(d['p_two_sided_bootstrap'], '.3f')} "
                   f"{'(CI crosses 0)' if d['crosses_zero'] else '(CI excludes 0)'}")
-    print("-> results/cryptobench_apo/BOOTSTRAP_CI.json")
+    print(f"-> {out.relative_to(root)}")
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(sys.argv[1:]))
