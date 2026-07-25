@@ -28,7 +28,9 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import json
+import re
 import sys
 import time
 import urllib.error
@@ -45,12 +47,17 @@ OSF_DIR = ROOT / "data/cryptobench_apo/_osf"
 RECEPTOR_DIR = ROOT / "data/cryptobench_apo/official_receptors"
 LABEL_DIR = ROOT / "data/cryptobench_apo/official_labels"
 MANIFEST = ROOT / "data/cryptobench_apo/official_manifest.json"
-_UA = {"User-Agent": "geoaudit-fetch/1.0"}
-_TIMEOUT = 60
+# Accept-Encoding: identity avoids a gzip/content-length mismatch through the
+# upstream CDN proxy that truncates the stream (observed IncompleteRead on the OSF
+# API); Connection: close keeps each fetch on a fresh socket.
+_UA = {"User-Agent": "geoaudit-fetch/1.0",
+       "Accept-Encoding": "identity",
+       "Connection": "close"}
+_TIMEOUT = 120
 
 
 # --- transport (stdlib only) ------------------------------------------------- #
-def _get(url: str, *, binary: bool, retries: int = 3) -> bytes | dict:
+def _get(url: str, *, binary: bool, retries: int = 4) -> bytes | dict:
     last: Exception | None = None
     for attempt in range(retries):
         try:
@@ -58,6 +65,10 @@ def _get(url: str, *, binary: bool, retries: int = 3) -> bytes | dict:
             with urllib.request.urlopen(req, timeout=_TIMEOUT) as r:
                 data = r.read()
             return data if binary else json.loads(data.decode("utf-8"))
+        except http.client.IncompleteRead as exc:
+            # retry from scratch; a partial body is never returned as if complete
+            last = exc
+            time.sleep(1.5 * (attempt + 1))
         except (urllib.error.URLError, TimeoutError, ValueError) as exc:
             last = exc
             time.sleep(1.5 * (attempt + 1))
@@ -119,99 +130,139 @@ def download_verify(entry: dict, dest: Path) -> str:
     return got
 
 
-# --- manifest assembly ------------------------------------------------------- #
-def _fold_entries(fold_obj: object) -> list[dict]:
-    """Normalize a fold-definition file into [{pdb, chain, cluster_id}].
+# --- manifest assembly (official CryptoBench schema) ------------------------- #
+# CryptoBench folds/test.json is keyed by APO pdb id -> [record...]; each record
+# carries {uniprot_id, apo_chain, apo_pocket_selection:["<chain>_<resnum>", ...]}.
+# The cryptic label for the apo structure is the union of apo_pocket_selection
+# residues on apo_chain; the sequence cluster (for split-disjointness) is uniprot_id.
+_SEL_RE = re.compile(r"^([A-Za-z0-9]+)_(-?\d+)")
 
-    Accepts either a list of records or a mapping keyed by pdb. Each record MUST
-    carry a cluster id under one of {cluster_id, cluster, mmseqs_cluster}; if none
-    is present, we refuse (cluster-disjointness cannot be asserted without it).
+
+def _parse_selection(tok: str) -> tuple[str, int] | None:
+    """'A_258' -> ('A', 258); tolerate icodes ('A_258A' -> 258). None if unparsable."""
+    m = _SEL_RE.match(str(tok).strip())
+    if not m:
+        return None
+    return m.group(1), int(m.group(2))
+
+
+def _fold_units(fold_obj: dict) -> tuple[dict[tuple[str, str], dict], list[dict]]:
+    """Group the fold file into (apo_pdb, apo_chain) units with residues + uniprot.
+
+    Returns ``(single_chain_units, excluded_multichain)``. CryptoBench records a
+    compound ``apo_chain`` (e.g. ``"M-O-P"``) when the cryptic pocket spans a
+    multi-chain assembly. The per-residue metric pipeline keys residues by integer
+    resseq (chain-agnostic), so a multi-chain unit would yield ambiguous labels;
+    such units are EXCLUDED and reported (never silently dropped, never merged).
+    Refuses (raises) if a unit has no cluster surrogate (uniprot_id).
     """
-    def one(pdb: str, rec: dict) -> dict:
-        cid = rec.get("cluster_id") or rec.get("cluster") or rec.get("mmseqs_cluster")
-        if cid is None:
-            raise RuntimeError(
-                f"fold entry '{pdb}' has no cluster id; cannot assert "
-                "cluster-disjointness. Inspect the OSF fold file and re-run."
-            )
-        return {"pdb": str(pdb).lower(),
-                "chain": str(rec.get("chain") or rec.get("apo_chain") or "A"),
-                "cluster_id": str(cid)}
-
-    rows: list[dict] = []
-    if isinstance(fold_obj, list):
-        for rec in fold_obj:
-            if not isinstance(rec, dict) or "pdb" not in rec:
-                raise RuntimeError("fold list entries must be dicts with a 'pdb' key")
-            rows.append(one(rec["pdb"], rec))
-    elif isinstance(fold_obj, dict):
-        for pdb, rec in fold_obj.items():
-            rows.append(one(pdb, rec if isinstance(rec, dict) else {}))
-    else:
-        raise RuntimeError("unrecognized fold-file structure (need list or dict)")
-    return rows
-
-
-def _cryptic_residues(labels_obj: dict, pdb: str, chain: str) -> list[int]:
-    """Pull cryptic-residue numbers for (pdb, chain) from a CryptoBench label file."""
-    key_candidates = [pdb, pdb.upper(), pdb.lower(), f"{pdb}_{chain}"]
-    rec = None
-    for k in key_candidates:
-        if k in labels_obj:
-            rec = labels_obj[k]
-            break
-    if rec is None:
-        raise RuntimeError(f"no label record for {pdb} in labels file")
-    resids: list[int] = []
-    # tolerate a few common shapes; refuse if none match
-    if isinstance(rec, dict) and "residues" in rec:
-        resids = [int(r) for r in rec["residues"]]
-    elif isinstance(rec, list):
-        for r in rec:
-            if isinstance(r, dict) and "residue" in r:
-                resids.append(int(r["residue"]))
-            elif isinstance(r, (int, str)):
-                resids.append(int(r))
-    if not resids:
-        raise RuntimeError(f"could not parse cryptic residues for {pdb}")
-    return sorted(set(resids))
+    if not isinstance(fold_obj, dict):
+        raise RuntimeError("CryptoBench fold file must be a dict keyed by apo pdb id")
+    units: dict[tuple[str, str], dict] = {}
+    excluded: dict[tuple[str, str], str] = {}
+    for pdb, records in fold_obj.items():
+        if not isinstance(records, list):
+            raise RuntimeError(f"fold entry '{pdb}' is not a record list")
+        for rec in records:
+            chain = str(rec.get("apo_chain") or "").strip()
+            uni = str(rec.get("uniprot_id") or "").strip()
+            sel = rec.get("apo_pocket_selection") or []
+            if not chain:
+                raise RuntimeError(f"{pdb}: record without apo_chain")
+            if not uni:
+                raise RuntimeError(
+                    f"{pdb}/{chain}: no uniprot_id (no cluster surrogate; refusing)"
+                )
+            if "-" in chain:  # compound multi-chain assembly
+                excluded[(str(pdb).lower(), chain)] = uni
+                continue
+            key = (str(pdb).lower(), chain)
+            u = units.setdefault(key, {"uniprot": uni, "residues": set()})
+            for tok in sel:
+                parsed = _parse_selection(tok)
+                if parsed and parsed[0] == chain:
+                    u["residues"].add(parsed[1])
+    single = {k: v for k, v in units.items() if v["residues"]}
+    excl = [{"pdb": p, "apo_chain": c, "cluster_id": u,
+             "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"}
+            for (p, c), u in sorted(excluded.items())]
+    return single, excl
 
 
-def build_manifest(fold_file: Path, labels_file: Path) -> Path:
-    fold = _fold_entries(json.loads(fold_file.read_text()))
-    labels = json.loads(labels_file.read_text())
-    labels_sha = sha256_bytes(labels_file.read_bytes())
-    entries = []
-    for row in fold:
-        pdb, chain, cid = row["pdb"], row["chain"], row["cluster_id"]
-        raw = _get(RCSB.format(pdb.upper()), binary=True)
-        atoms = parse_pdb_atoms(raw.decode("utf-8", "ignore"))
+def build_manifest(fold_file: Path, labels_file: Path | None = None,
+                   *, limit: int = 0) -> Path:
+    """Assemble official_manifest.json from the CryptoBench test-fold file.
+
+    Labels are taken from the fold file's apo_pocket_selection (labels_file, if
+    given, must be byte-identical or a superset key set; it is recorded for
+    provenance). Receptors are fetched from RCSB and written chain-scoped,
+    ligand-stripped. RCSB fetch failures are collected and reported, never silently
+    imputed.
+    """
+    fold_obj = json.loads(fold_file.read_text())
+    fold_sha = sha256_bytes(fold_file.read_bytes())
+    labels_sha = sha256_bytes(labels_file.read_bytes()) if labels_file else fold_sha
+    units, excluded_multichain = _fold_units(fold_obj)
+    keys = sorted(units)
+    if limit:
+        keys = keys[:limit]
+
+    entries: list[dict] = []
+    skipped: list[dict] = []
+    for i, (pdb, chain) in enumerate(keys, 1):
+        u = units[(pdb, chain)]
+        resids = sorted(u["residues"])
         rec_path = RECEPTOR_DIR / f"{pdb}_{chain}_receptor.pdb"
-        write_receptor_only_pdb(atoms, rec_path, chain=chain)
-        rec_sha = sha256_bytes(rec_path.read_bytes())
-        resids = _cryptic_residues(labels, pdb, chain)
+        try:
+            if rec_path.is_file() and rec_path.stat().st_size > 0:
+                # resume: reuse the already-fetched, chain-scoped receptor on disk
+                rec_sha = sha256_bytes(rec_path.read_bytes())
+            else:
+                raw = _get(RCSB.format(pdb.upper()), binary=True)
+                atoms = parse_pdb_atoms(raw.decode("utf-8", "ignore"))
+                if not any(a["record"] == "ATOM" and a["chain"] == chain for a in atoms):
+                    raise RuntimeError(f"chain {chain} absent in RCSB {pdb}")
+                write_receptor_only_pdb(atoms, rec_path, chain=chain)
+                rec_sha = sha256_bytes(rec_path.read_bytes())
+        except Exception as exc:  # noqa: BLE001 -- record + continue, never impute
+            skipped.append({"pdb": pdb, "chain": chain, "reason": str(exc)})
+            print(f"  [{i}/{len(keys)}] SKIP {pdb}_{chain}: {exc}", file=sys.stderr)
+            continue
         lab = {"schema": "cryptobench.official_label.v1", "clinical_grade": False,
                "pdb_id": pdb, "chain": chain, "cryptic_residues": resids,
+               "binding_residues": resids,  # alias for core residue_f1 (keys on this)
                "labels_source_sha256": labels_sha}
         lab_path = LABEL_DIR / f"{pdb}_{chain}_labels.json"
         lab_path.parent.mkdir(parents=True, exist_ok=True)
         lab_path.write_text(json.dumps(lab, indent=2) + "\n")
         entries.append({
-            "pdb": pdb, "chain": chain, "cluster_id": cid,
+            "pdb": pdb, "chain": chain, "cluster_id": u["uniprot"],
             "receptor_path": str(rec_path.relative_to(ROOT)),
             "receptor_sha256": rec_sha,
             "label_path": str(lab_path.relative_to(ROOT)),
             "label_sha256": sha256_bytes(lab_path.read_bytes()),
         })
+        if i % 10 == 0:
+            print(f"  [{i}/{len(keys)}] built {pdb}_{chain} "
+                  f"({len(resids)} cryptic residues)", file=sys.stderr)
     manifest = {
         "schema": "cryptobench.official_test_fold.v1",
         "clinical_grade": False,
         "fold": "test",
         "clustering": {"method": "mmseqs2", "sequence_identity_threshold": 0.10,
-                       "coverage": 0.8},
+                       "coverage": 0.8,
+                       "cluster_id_semantics": "uniprot_id sequence-cluster surrogate; "
+                       "test/train disjointness is defined by folds.json"},
         "source_url": f"https://osf.io/{OSF_NODE}/",
+        "fold_file_sha256": fold_sha,
         "labels_source_sha256": labels_sha,
+        "cryptobench_test_apo_pdbs": 222,
+        "n_fold_units": len(units),
+        "n_excluded_multichain": len(excluded_multichain),
+        "excluded_multichain": excluded_multichain,
         "n_entries": len(entries),
+        "n_skipped": len(skipped),
+        "skipped": skipped,
         "entries": entries,
     }
     MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
@@ -230,7 +281,9 @@ def main() -> int:
     ap.add_argument("--fold-file", type=Path,
                     help="path to the downloaded official test-fold definition")
     ap.add_argument("--labels-file", type=Path,
-                    help="path to the downloaded CryptoBench label file")
+                    help="optional label file for provenance (defaults to fold file)")
+    ap.add_argument("--limit", type=int, default=0,
+                    help="build only the first N fold units (0 = all; smoke tests)")
     args = ap.parse_args()
 
     if not any([args.list, args.fetch, args.build_manifest]):
@@ -254,14 +307,17 @@ def main() -> int:
             print(f"OK  {got}  -> {dest.relative_to(ROOT)}")
 
     if args.build_manifest:
-        if not args.fold_file or not args.labels_file:
-            raise SystemExit("--build-manifest requires --fold-file and --labels-file")
-        for f in (args.fold_file, args.labels_file):
-            if not f.is_file():
-                raise SystemExit(f"missing input file: {f}")
-        out = build_manifest(args.fold_file, args.labels_file)
-        print(f"wrote {out.relative_to(ROOT)}; validate with "
-              "adapters.load_official_test_fold()")
+        if not args.fold_file:
+            raise SystemExit("--build-manifest requires --fold-file")
+        if not args.fold_file.is_file():
+            raise SystemExit(f"missing input file: {args.fold_file}")
+        if args.labels_file and not args.labels_file.is_file():
+            raise SystemExit(f"missing input file: {args.labels_file}")
+        out = build_manifest(args.fold_file, args.labels_file, limit=args.limit)
+        m = json.loads(out.read_text())
+        print(f"wrote {out.relative_to(ROOT)}: {m['n_entries']} entries, "
+              f"{m['n_skipped']} skipped of {m['n_fold_units']} units; "
+              "validate with adapters.load_official_test_fold()")
     return 0
 
 

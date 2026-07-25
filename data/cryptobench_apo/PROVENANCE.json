@@ -1,0 +1,32 @@
+{
+  "schema": "cryptobench.provenance.v1",
+  "clinical_grade": false,
+  "dataset": "CryptoBench",
+  "citation": "Skrhak, Novotny, Feidakis, Krivak, Hoksza. CryptoBench: cryptic protein-ligand binding sites dataset and benchmark. Bioinformatics 41(1):btae745 (2025). doi:10.1093/bioinformatics/btae745",
+  "osf_node": "https://osf.io/pz4a9/",
+  "split_construction": "MMseqs2 clustering at 10% sequence identity; 80:20 train:test; test = 222 apo structures",
+  "retrieved_utc": "2026-07-25",
+  "verified_files": {
+    "cryptobench-dataset/folds.json": {
+      "size_bytes": 17826,
+      "sha256": "ced97a50b55504007216165167a1b3995312434ee50f7f93f8728fca3c6ac67d",
+      "osf_download": "https://osf.io/download/5s93p/",
+      "role": "fold membership (test + train-0..3)"
+    },
+    "cryptobench-dataset/folds/test.json": {
+      "size_bytes": 1705224,
+      "sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838",
+      "osf_download": "https://osf.io/download/q2n43/",
+      "role": "test fold membership + apo_pocket_selection cryptic labels"
+    }
+  },
+  "materialization": "tools/fetch_official_data.py --build-manifest --fold-file data/cryptobench_apo/_osf/test.json rebuilds official_manifest.json + per-structure receptor/label files (RCSB receptors, chain-scoped, ligand-stripped). SHA-256 of every fetched OSF file is verified against the OSF-reported digest.",
+  "evaluable_scope": {
+    "test_apo_pdbs": 222,
+    "single_chain_units": 193,
+    "excluded_multichain_units": 38,
+    "skipped_rcsb_pdb_format_unavailable": ["7nbc"],
+    "manifest_entries": 192,
+    "note": "38 records carry a compound multi-chain apo_chain (e.g. 'M-O-P'); the per-residue metric pipeline indexes residues by chain-agnostic resseq, so those units are excluded to avoid ambiguous labels (documented, not silently dropped)."
+  }
+}

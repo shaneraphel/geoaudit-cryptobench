@@ -6,3 +6,12 @@ _local/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Materialized CryptoBench official fold (35 MB of RCSB receptors): reproducible
+# via tools/fetch_official_data.py against OSF-pinned hashes; not bulk-committed.
+data/cryptobench_apo/_osf/
+data/cryptobench_apo/official_receptors/
+data/cryptobench_apo/official_labels/
+data/cryptobench_apo/official_manifest.json
+# Superseded earlier partial run
+results/cryptobench_official/
