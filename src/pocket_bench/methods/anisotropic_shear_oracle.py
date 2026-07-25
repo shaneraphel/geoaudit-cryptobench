@@ -1,0 +1,233 @@
+"""Anisotropic Shear Oracle (S*) — Class-A cryptic-pocket opening.
+
+Replaces the failed *isotropic* breathing oracle (F*, which dilated shell atoms
+radially about a guessed centre and therefore inflated surface pseudo-pockets and
+drifted the predicted centre outward). Isotropic dilation is a pure-trace
+(conformal) deformation `r -> gamma * r`; it lives in the wrong subgroup of the
+deformation algebra and cannot open a closed cleft.
+
+The correct deformation is *anisotropic*: a collective shear/rotation living in
+so(3) (x) Sym_0(3) (rotation + traceless-symmetric). Those are exactly the low
+non-rigid normal modes of an elastic network. We obtain them from the
+**vector-valued graph Laplacian** of the receptor contact graph — the Anisotropic
+Network Model (ANM) Hessian, which is the block form of `L = D - A` with 3x3
+super-elements `gamma_ij * (e_ij (x) e_ij)`. Its six lowest eigenvalues are the
+rigid-body zero modes (3 translation + 3 rotation); the next K eigenvectors are
+collective anisotropic shears — displacement fields in R^{3N}, never a scalar
+homothety.
+
+The admissibility mask is the Boolean OR of the free space over a fixed,
+predetermined set of discrete shear amplitudes:
+
+    S*(v) = OR over m in M of  free_space( V_wall + d_m )(v)
+    d_m   = amplitude * sum_k a_k^(m) * u_k ,   a_k in {-c, 0, +c}
+
+with M the Cartesian product of the discrete amplitudes over the K modes. The
+all-zero amplitude reproduces the rigid apo wall, so S* is always a superset of
+apo free space; the *new* voxels (S* & ~apo_free) are the breathable cryptic
+volume that a rigid detector cannot see. Everything is geometry.
+`clinical_grade=false`: a free voxel is a topological admissibility statement,
+never evidence of binding, potency, or safety.
+"""
+from __future__ import annotations
+
+from itertools import product
+
+import numpy as np
+
+CONTACT_CUTOFF = 12.0          # Angstrom, ANM contact radius
+K_MODES = 3                    # non-rigid modes retained
+DISCRETE_AMPLITUDES = (-1.0, 0.0, 1.0)   # {-c, 0, +c}
+SHEAR_AMPLITUDE_A = 3.0        # Angstrom, per-unit shear magnitude (RMS-normalized modes)
+DEFAULT_VDW_RADIUS = 1.7       # Angstrom, ~carbon Bondi hard wall
+_RIGID_EPS = 1e-6              # eigenvalue below (eps * lambda_max) == rigid/disconnected
+_MAX_VOXELS = 40_000_000
+_MAX_ATOMS = 20_000            # eigsh guard
+
+
+# --------------------------------------------------------------------------- #
+# 1-2. ANM Hessian (block graph Laplacian) and its low non-rigid modes
+# --------------------------------------------------------------------------- #
+def anm_hessian(coords: np.ndarray, cutoff: float = CONTACT_CUTOFF):
+    """Sparse (3N,3N) ANM Hessian = vector-valued, distance-weighted `L = D - A`.
+
+    Super-element for contact (i,j): `gamma_ij * (e_ij outer e_ij)`, with a
+    distance-weighted spring constant `gamma_ij = 1 / d_ij^2` inside `cutoff`.
+    """
+    from scipy import sparse
+    from scipy.spatial import cKDTree
+
+    coords = np.asarray(coords, dtype=np.float64)
+    n = len(coords)
+    if n < 4:
+        raise ValueError("need >= 4 atoms to define non-trivial shear modes")
+    if n > _MAX_ATOMS:
+        raise ValueError(f"{n} atoms exceeds ANM guard {_MAX_ATOMS}; pre-decimate to CA")
+
+    tree = cKDTree(coords)
+    pairs = tree.query_pairs(r=cutoff, output_type="ndarray")
+    if len(pairs) == 0:
+        raise ValueError("no contacts within cutoff; increase cutoff")
+
+    i_idx = pairs[:, 0]
+    j_idx = pairs[:, 1]
+    diff = coords[j_idx] - coords[i_idx]
+    d2 = np.einsum("ij,ij->i", diff, diff)
+    d2 = np.maximum(d2, 1e-9)
+    e = diff / np.sqrt(d2)[:, None]              # unit contact vectors
+    gamma = 1.0 / d2                             # distance-weighted spring
+    # 3x3 outer-product super-elements, scaled by gamma
+    blocks = gamma[:, None, None] * (e[:, :, None] * e[:, None, :])  # (P,3,3)
+
+    rows: list[np.ndarray] = []
+    cols: list[np.ndarray] = []
+    data: list[np.ndarray] = []
+
+    def emit(bi, bj, blk):
+        a, b = np.meshgrid(np.arange(3), np.arange(3), indexing="ij")
+        rows.append((3 * bi)[:, None, None] + a[None])
+        cols.append((3 * bj)[:, None, None] + b[None])
+        data.append(blk)
+
+    # off-diagonal: H_ij = H_ji = -block
+    emit(i_idx, j_idx, -blocks)
+    emit(j_idx, i_idx, -blocks)
+    # diagonal: H_ii += block, H_jj += block
+    emit(i_idx, i_idx, blocks)
+    emit(j_idx, j_idx, blocks)
+
+    R = np.concatenate([r.ravel() for r in rows])
+    C = np.concatenate([c.ravel() for c in cols])
+    V = np.concatenate([d.ravel() for d in data])
+    H = sparse.coo_matrix((V, (R, C)), shape=(3 * n, 3 * n)).tocsr()
+    return H
+
+
+def low_shear_modes(coords: np.ndarray, *, k: int = K_MODES, cutoff: float = CONTACT_CUTOFF):
+    """The K lowest non-rigid ANM eigenvectors as (K, N, 3) RMS-normalized fields."""
+    from scipy.sparse.linalg import eigsh
+
+    n = len(coords)
+    H = anm_hessian(coords, cutoff)
+    n_want = 6 + k + 2          # 6 rigid + K wanted + slack
+    n_want = min(n_want, 3 * n - 1)
+    try:
+        vals, vecs = eigsh(H, k=n_want, sigma=0.0, which="LM")  # shift-invert near 0
+    except Exception:  # noqa: BLE001 -- singular factorization / ARPACK issues
+        vals, vecs = eigsh(H, k=n_want, which="SA")
+
+    order = np.argsort(vals)
+    vals = vals[order]
+    vecs = vecs[:, order]
+    lam_max = float(vals[-1]) if vals[-1] > 0 else 1.0
+    nontrivial = np.where(vals > _RIGID_EPS * lam_max)[0]
+    picked = nontrivial[:k]
+    if len(picked) < k:
+        raise ValueError("insufficient non-rigid modes; increase cutoff or atoms")
+
+    modes = []
+    for col in picked:
+        u = vecs[:, col].reshape(n, 3)
+        rms = np.sqrt((u * u).sum() / n)
+        modes.append(u / (rms if rms > 1e-12 else 1.0))
+    return np.stack(modes, axis=0)  # (k, N, 3), unit RMS displacement
+
+
+# --------------------------------------------------------------------------- #
+# 3-4. Discrete anisotropic mode set + vdW voxel carving + Boolean OR
+# --------------------------------------------------------------------------- #
+def _grid(coords: np.ndarray, res: float, margin: float):
+    origin = coords.min(axis=0) - margin
+    far = coords.max(axis=0) + margin
+    dims = np.ceil((far - origin) / res).astype(int) + 1
+    if int(np.prod(dims)) > _MAX_VOXELS:
+        raise ValueError(
+            f"grid {tuple(dims)} = {int(np.prod(dims))} voxels exceeds {_MAX_VOXELS}; "
+            f"use a coarser grid_resolution"
+        )
+    return origin.astype(np.float64), dims
+
+
+def _ball_offsets(radius: float, res: float) -> np.ndarray:
+    n = int(np.ceil(radius / res))
+    rng = np.arange(-n, n + 1)
+    dx, dy, dz = np.meshgrid(rng, rng, rng, indexing="ij")
+    off = np.stack([dx.ravel(), dy.ravel(), dz.ravel()], axis=1)
+    keep = (off**2).sum(1) * (res * res) <= radius * radius
+    return off[keep]
+
+
+def _occupied_mask(coords: np.ndarray, origin, dims, res, ball) -> np.ndarray:
+    """Boolean occupancy: True where a voxel centre lies within vdW of any atom."""
+    occ = np.zeros(tuple(int(d) for d in dims), dtype=bool)
+    base = np.round((coords - origin) / res).astype(np.int64)   # (N,3)
+    stamped = (base[:, None, :] + ball[None, :, :]).reshape(-1, 3)  # (N*B,3)
+    in_bounds = np.all((stamped >= 0) & (stamped < dims), axis=1)
+    s = stamped[in_bounds]
+    occ[s[:, 0], s[:, 1], s[:, 2]] = True
+    return occ
+
+
+def build_anisotropic_shear_oracle(
+    apo_receptor_coords: np.ndarray,
+    grid_resolution: float = 1.0,
+    *,
+    contact_cutoff: float = CONTACT_CUTOFF,
+    k_modes: int = K_MODES,
+    shear_amplitude: float = SHEAR_AMPLITUDE_A,
+    discrete_amplitudes: tuple[float, ...] = DISCRETE_AMPLITUDES,
+    vdw_radius: float = DEFAULT_VDW_RADIUS,
+    return_components: bool = False,
+):
+    """Compute the S* anisotropic-shear admissibility mask.
+
+    Parameters
+    ----------
+    apo_receptor_coords : (N, 3) float array of apo heavy-atom coordinates.
+    grid_resolution     : voxel edge length in Angstrom.
+
+    Returns
+    -------
+    (s_star_mask, grid_origin) where ``s_star_mask`` is a 3D Boolean numpy array
+    (True == admissible in at least one shear mode) and ``grid_origin`` is (3,).
+    If ``return_components`` is True, returns a dict additionally exposing the apo
+    free space and the cryptic gain ``s_star & ~apo_free``.
+    """
+    coords = np.asarray(apo_receptor_coords, dtype=np.float64)
+    modes = low_shear_modes(coords, k=k_modes, cutoff=contact_cutoff)  # (k,N,3)
+
+    # max per-atom displacement across the extreme corner of the mode box
+    c = max(abs(a) for a in discrete_amplitudes) or 1.0
+    max_disp = shear_amplitude * c * float(
+        np.max(np.linalg.norm(np.abs(modes).sum(axis=0), axis=1))
+    )
+    margin = max_disp + vdw_radius + grid_resolution
+    origin, dims = _grid(coords, grid_resolution, margin)
+    ball = _ball_offsets(vdw_radius, grid_resolution)
+
+    s_star = np.zeros(tuple(int(d) for d in dims), dtype=bool)
+    apo_free = None
+    # M = Cartesian product of discrete amplitudes over the K modes
+    for combo in product(discrete_amplitudes, repeat=k_modes):
+        a = np.asarray(combo, dtype=np.float64)             # (k,)
+        disp = shear_amplitude * np.tensordot(a, modes, axes=(0, 0))  # (N,3)
+        deformed = coords + disp
+        occ = _occupied_mask(deformed, origin, dims, grid_resolution, ball)
+        free = ~occ
+        s_star |= free
+        if not np.any(a):  # the all-zero combo == rigid apo wall
+            apo_free = free
+
+    if return_components:
+        if apo_free is None:
+            apo_free = np.zeros_like(s_star)
+        return {
+            "s_star_mask": s_star,
+            "grid_origin": origin,
+            "grid_resolution": grid_resolution,
+            "apo_free": apo_free,
+            "cryptic_gain": s_star & ~apo_free,
+            "n_modes_evaluated": len(discrete_amplitudes) ** k_modes,
+            "clinical_grade": False,
+        }
+    return s_star, origin
