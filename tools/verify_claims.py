@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed if the ER100 paper tree exceeds its declared scope."""
+"""Fail closed if the GeoAudit paper tree exceeds its declared scope."""
 from __future__ import annotations
 
 import argparse
@@ -50,7 +50,7 @@ def main() -> int:
     clusters = json.loads(
         (root / "data/manifests/STRUCTURE_CLUSTER_LEDGER.json").read_text()
     )
-    scope = json.loads((root / "contracts/ER100_PAPER_SCOPE.json").read_text())
+    scope = json.loads((root / "contracts/GEOAUDIT_PAPER_SCOPE.json").read_text())
     companion = json.loads(
         (root / "data/manifests/COMPANION_EVIDENCE.json").read_text()
     )
@@ -81,7 +81,7 @@ def main() -> int:
         and companion.get("clinical_grade") is False
     )
     checks["multitarget_paper_scope"] = (
-        scope.get("paper_id") == "er100-multitarget-multimodal"
+        scope.get("paper_id") == "geoaudit-multitarget-multimodal"
         and set(scope.get("target_panel") or []) == TARGET_PANEL
         and len(scope.get("structure_defined_modalities") or []) == 4
     )

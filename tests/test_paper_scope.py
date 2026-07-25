@@ -1,4 +1,4 @@
-"""Paper-scope tests for the ER100 multitarget multimodal repository."""
+"""Paper-scope tests for the GeoAudit multitarget multimodal repository."""
 from __future__ import annotations
 
 import json
@@ -10,11 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class TestPaperScope(unittest.TestCase):
     def test_scope_contract_and_companion_pointer(self) -> None:
-        scope = json.loads((ROOT / "contracts/ER100_PAPER_SCOPE.json").read_text())
+        scope = json.loads((ROOT / "contracts/GEOAUDIT_PAPER_SCOPE.json").read_text())
         companion = json.loads(
             (ROOT / "data/manifests/COMPANION_EVIDENCE.json").read_text()
         )
-        self.assertEqual(scope["paper_id"], "er100-multitarget-multimodal")
+        self.assertEqual(scope["paper_id"], "geoaudit-multitarget-multimodal")
         self.assertEqual(
             set(scope["target_panel"]),
             {"ESR1", "KRAS", "FLT3", "PIM1", "PIK3CA", "CDK4/6"},

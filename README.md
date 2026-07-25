@@ -1,14 +1,23 @@
-# GF(4) Allele-Conditioned Computational Chemistry
+# GeoAudit — GF(4) Allele-Conditioned Computational Chemistry
 
-*Multitarget, multimodal computational chemistry for oncology driver alleles.*
+*Deterministic geometry auditing of binding pockets across oncology targets and drug modalities.*
 
 `clinical_grade=false`
 
-A single-repository, deterministic **Multimodal Geometric Computational
-Foundation** for **oncology driver alleles** (KRAS G12C/G12D/G12V, ESR1 LBD
-mutants, FLT3, PIM1, PIK3CA, CDK4/6) — not a regenerative-medicine or cell-state
-program. It is multitarget and multimodal. This README describes only the
-**current** state; internal version history is kept local and unpublished.
+**GeoAudit** is a single-repository, deterministic **Multimodal Geometric
+Computational Foundation** for **oncology driver alleles** (KRAS G12C/G12D/G12V,
+ESR1 LBD mutants, FLT3, PIM1, PIK3CA, CDK4/6) — not a regenerative-medicine or
+cell-state program. It is multitarget and multimodal.
+
+Its role is **auditing**, not discovery: given a receptor, GeoAudit computes —
+from fixed mathematical law, with no learning and no fit — where the enclosed,
+buriable cavity geometry is, and whether a proposed candidate geometry clears the
+van der Waals wall. Where traditional detectors already succeed we make **no**
+"we found a pocket they missed" claim (see §4). This README describes only the
+**current** state; internal version history is kept local and unpublished. The
+former working name "ER100" is retired; only immutable provenance run-tags
+(e.g. generation-run identifiers) retain their original strings for
+reproducibility.
 
 ## 1. The core philosophy: a foundation, not a scoring function
 
@@ -222,9 +231,17 @@ entirely to **cavity-volume ranking** (score = buriedness × log(local enclosed
 volume)); it is a fixed geometric functional with no fitted parameter. Adding the
 geometric manifold prior / exact-form filter *on top of the burial-only pool* did
 not itself recover a Top-1 hit (they change mean Top-1 DCA only) — the fix was the
-ranking geometry, not more filters. fpocket's Top-1 misses because its
-druggability-ranked #1 pocket is not the LBD. No comparative-superiority claim is
-made; `clinical_grade=false`.
+ranking geometry, not more filters.
+
+**fpocket is not blind to this site.** Its 0/14 here is a *Top-1 ranking*
+artifact only: fpocket does detect the ESR1 LBD cavity, but its
+druggability-ranked #1 pocket is a different cavity, so the LBD does not land in
+Top-1. Published fpocket audits likewise report it *hitting* the ESR1 pocket in
+top-N (e.g. 3ERT/1ERE). We therefore make **no** "traditional methods miss this
+pocket" claim: the ESR1 LBD is not a hidden pocket. This appendix is
+**deterministic geometry auditing** (is the enclosed-cavity ranking derivable
+from fixed law?), not hidden-pocket discovery. No comparative-superiority claim
+is made; `clinical_grade=false`.
 
 **Planned benchmark pivot.** Because these holo, non-cluster-disjoint ESR1
 structures cannot separate cavity physics from single-fold memorisation, the
@@ -332,10 +349,13 @@ PYTHONPATH=src python3.12 tools/run_pilot.py --split all     # rerun benchmark
 
 ## 中文说明（最新版本）
 
-这是一个**单仓库**、可证伪的**肿瘤驱动突变**计算化学项目。目标是肿瘤驱动突变
+**GeoAudit** 是一个**单仓库**、可证伪的**肿瘤驱动突变**计算化学项目。目标是肿瘤驱动突变
 （KRAS G12C/G12D/G12V、ESR1 LBD 突变体、FLT3、PIM1、PIK3CA、CDK4/6），**不是
-再生医学 / 细胞状态 / 基因疗法项目**。多靶点、多模态。本 README 只描述当前状态，
-逐版本内部历史保存在本地、不发布。
+再生医学 / 细胞状态 / 基因疗法项目**。多靶点、多模态。其定位是**几何审计**而非"发现"：
+给定受体，用固定数学律（无学习、无拟合）计算封闭可埋空腔的几何，以及候选几何是否清过
+范德华墙。传统方法已能命中的地方，我们**不**主张"找到了别人遗漏的口袋"（见 §4）。
+本 README 只描述当前状态，逐版本内部历史保存在本地、不发布。原工作名 "ER100" 已弃用，
+仅保留不可变的溯源运行标签（如生成运行标识）以保证可复现。
 
 **身份定位**：这是一个**确定性的多模态几何计算基座**，不是统计打分函数。统计模型
 靠记忆已见结构的表面特征来插值泛化，因而在分布外（未见折叠、apo/隐匿构象）崩溃；
@@ -358,7 +378,10 @@ PYTHONPATH=src python3.12 tools/run_pilot.py --split all     # rerun benchmark
 vs 封闭空腔体积），是无拟合参数的固定泛函；(2) 我们**拒绝**用统计启发式软化布尔体素墙来
 凑命中；(3) 划分**非** cluster-disjoint、单一保守 ESR1 折叠，故两个 14/14 都只是保守位点的
 口袋*回收*，**非**方法优越、**非**分布外泛化、**非**结合/亲和/疗效证据，`clinical_grade=false`。
-因此决定性检验在 cluster-disjoint 的 apo/隐匿口袋基准（见 `docs/BENCHMARK_SELECTION.md`）。
+**fpocket 并非看不到该位点**：其 0/14 仅是 *Top-1 排序* 假象——它能检出 ESR1 LBD 空腔，但其
+按可成药性排序的第一口袋是另一空腔，故 LBD 未进 Top-1（已发表 fpocket 审计亦报告其在 top-N
+命中 3ERT/1ERE）。因此我们**不**主张"传统方法遗漏该口袋"——这是**确定性几何审计**，不是隐匿口袋发现。
+决定性检验在 cluster-disjoint 的 apo/隐匿口袋基准（见 `docs/BENCHMARK_SELECTION.md`）。
 
 **核心方法（代数→结构，O(1)）**：不做概率搜索，而是用突变等位基因的精确代数来
 约束候选设计（旗舰方法见 `paper/GF4_SYNDROME_CHEM_METHOD.tex`）：

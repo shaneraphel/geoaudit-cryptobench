@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geoaudit"
+version = "0.9.0"
+description = "GeoAudit — GF(4) allele-conditioned, deterministic geometry auditing of binding pockets across oncology targets and modalities."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE" }
+authors = [{ name = "GeoAudit maintainers" }]
+keywords = [
+  "computational-chemistry",
+  "pocket-detection",
+  "structural-biology",
+  "deterministic-geometry",
+  "gf4",
+]
+# Core pilot (prediction + scoring + verifier + unit suite) is numpy-only.
+dependencies = ["numpy==1.26.4"]
+
+[project.optional-dependencies]
+# Cheminformatics for the curated evidence dictionary (not needed for the pilot).
+chem = ["rdkit>=2023.9"]
+# Spectral F* oracle formulation A.
+spectral = ["scipy>=1.11"]
+# Test/dev tooling.
+test = ["pytest>=8", "jsonschema>=4.20"]
+
+[project.urls]
+Homepage = "https://github.com/shaneraphel/gf4-allele-conditioned-chemistry"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
