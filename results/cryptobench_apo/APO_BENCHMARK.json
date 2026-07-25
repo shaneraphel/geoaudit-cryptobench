@@ -1,6 +1,6 @@
 {
   "schema": "gf4cc.cryptobench_apo.report.v1",
-  "generated_at": "2026-07-25T12:48:48+0800",
+  "generated_at": "2026-07-25T15:28:14+0800",
   "clinical_grade": false,
   "benchmark": "CryptoBench apo (Skrhak 2025) \u2014 pinned deterministic subset",
   "n_structures": 15,
@@ -422,5 +422,6 @@
         }
       ]
     }
-  }
+  },
+  "telemetry_ref": "TELEMETRY.json"
 }

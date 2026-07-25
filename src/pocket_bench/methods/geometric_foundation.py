@@ -21,6 +21,7 @@ from typing import Any
 import numpy as np
 
 from pocket_bench.methods import prediction
+from pocket_bench.methods.firewall import ligand_leak_guard
 from pocket_bench.paths import STATUS_CRASH, STATUS_EMPTY, STATUS_OK
 from pocket_bench.pdb_io import (
     assert_no_hetatm,
@@ -93,6 +94,7 @@ def _buriedness(pts, coords, dirs, cutoff, perp):
     return out
 
 
+@ligand_leak_guard("geometric_foundation")
 def predict(
     receptor_pdb: Path,
     *,

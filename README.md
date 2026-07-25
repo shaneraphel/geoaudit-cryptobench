@@ -282,12 +282,32 @@ stride over the full label set (not exclusively the cluster-disjoint test fold);
 DCA-to-residues is permissive for structures with many labelled residues.
 `clinical_grade=false`.
 
-### Leakage boundary
+### Leakage boundary and audit-hardened gates
 
-Prediction and scoring are separate: prediction receives checksum-pinned,
-ATOM-only receptor PDBs; scoring joins ligand-derived labels only after
-prediction files are closed. `TOOL_UNAVAILABLE` is never a miss;
-`CRASH`/`EMPTY` counts in the intention-to-evaluate denominator.
+Prediction and scoring are separate, and the separation is enforced structurally,
+not by discipline (all gates run in `make verify` / `make test`, fail-closed):
+
+- **Zero-leakage firewall.** Every predictor is wrapped by a `ligand_leak_guard`
+  decorator (`src/pocket_bench/methods/firewall.py`): it refuses (hard `CRASH`) any
+  receptor carrying a non-solvent `HETATM` or a non-polymer residue smuggled into
+  an `ATOM` record, and stamps each output with atom-only provenance
+  (`input_receptor_sha256`, `input_atom_only_verified`). An AST import-graph test
+  asserts **no** `pocket_bench.methods.*` module imports the scorer, so a predictor
+  is physically unable to reach a label.
+- **Cluster-disjoint split ledger.** `data/manifests/SPLIT_LEDGER.json`
+  (built by `tools/build_split_ledger.py`) governs development / validation / test.
+  A group that declares `cluster_disjoint_required` must have no `cluster_id`
+  spanning two splits (gate fails closed otherwise); a group that is *not* disjoint
+  (the ESR1 pilot) must declare `split_integrity_passed=false` with a reason — it
+  cannot hide leakage.
+- **0-masking telemetry.** `results/cryptobench_apo/TELEMETRY.json`
+  (`geoaudit.telemetry.v1`) logs, per (method, structure), the CryptoBench-faithful
+  per-residue `residue_auc` / `residue_pr_auc` / `residue_f1` **alongside**
+  `top1_dca`. The intention-to-evaluate denominator equals every structure
+  attempted; `CRASH`/`EMPTY` count as misses; `TOOL_UNAVAILABLE` is legal only for a
+  tool declared absent in `BASELINE_ENV.json`, and whenever it occurs both
+  denominators (intention and available-only) are logged. On the apo run all four
+  methods report `15/15` intention with `0` masked.
 
 ## Repository layout
 

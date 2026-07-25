@@ -23,6 +23,7 @@ from typing import Any
 import numpy as np
 
 from pocket_bench.methods import prediction
+from pocket_bench.methods.firewall import ligand_leak_guard
 from pocket_bench.methods.geometric_foundation import (
     _buriedness,
     _fibonacci_directions,
@@ -62,6 +63,7 @@ def _dilate_local(coords, c, gamma, shell_radius):
     return out
 
 
+@ligand_leak_guard("fstar_pocket")
 def predict(
     receptor_pdb: Path,
     *,

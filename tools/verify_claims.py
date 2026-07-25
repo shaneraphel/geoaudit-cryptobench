@@ -313,6 +313,55 @@ def main() -> int:
         )
     )
 
+    # Fail-closed cluster-disjoint split ledger: groups that require disjointness
+    # must be disjoint; groups that are not disjoint must declare it (no hiding).
+    ledger_path = root / "data/manifests/SPLIT_LEDGER.json"
+    if ledger_path.exists():
+        ledger = json.loads(ledger_path.read_text())
+        groups = ledger.get("groups") or {}
+        split_ok = ledger.get("schema") == "geoaudit.split_ledger.v1" and bool(groups)
+        for g in groups.values():
+            cmap: dict[str, set] = {}
+            for a in g.get("assignments") or []:
+                cmap.setdefault(a.get("cluster_id"), set()).add(a.get("split"))
+            overlap = {c for c, s in cmap.items() if len(s) > 1}
+            if g.get("cluster_disjoint_required"):
+                if overlap:
+                    split_ok = False
+            else:
+                if g.get("split_integrity_passed") is not False or not str(
+                    g.get("reason_not_disjoint") or ""
+                ).strip():
+                    split_ok = False
+        checks["split_ledger_cluster_disjoint_where_required"] = split_ok
+    else:
+        checks["split_ledger_cluster_disjoint_where_required"] = False
+
+    # Zero-leakage firewall: GeoAudit predictors are decorated, and no predictor
+    # module imports the scorer (predictor is physically blind to labels).
+    import ast
+
+    methods_dir = root / "src/pocket_bench/methods"
+    forbidden = {"pocket_bench.metrics", "pocket_bench.scoring"}
+    imports_clean = True
+    for py in methods_dir.glob("*.py"):
+        tree = ast.parse(py.read_text())
+        for node in ast.walk(tree):
+            mods = []
+            if isinstance(node, ast.Import):
+                mods = [a.name for a in node.names]
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                mods = [node.module]
+            if any(m in forbidden or m.split(".")[-1] == "scoring" for m in mods):
+                imports_clean = False
+    gf_src = (methods_dir / "geometric_foundation.py").read_text()
+    fs_src = (methods_dir / "fstar_pocket.py").read_text()
+    guarded = (
+        'ligand_leak_guard("geometric_foundation")' in gf_src
+        and 'ligand_leak_guard("fstar_pocket")' in fs_src
+    )
+    checks["leakage_firewall_enforced"] = imports_clean and guarded
+
     failed = sorted(name for name, ok in checks.items() if not ok)
     print(json.dumps({"ok": not failed, "checks": checks, "failed": failed}, indent=2))
     return 0 if not failed else 2

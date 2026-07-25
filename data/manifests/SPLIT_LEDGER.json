@@ -1,0 +1,200 @@
+{
+  "schema": "geoaudit.split_ledger.v1",
+  "clinical_grade": false,
+  "roles": {
+    "development": "threshold / hyperparameter tuning ONLY",
+    "validation": "model / variant selection ONLY",
+    "test": "cluster-disjoint where required; evaluated once; frozen"
+  },
+  "clustering": {
+    "target_seq_id_threshold": 0.1,
+    "coverage": 0.8,
+    "note": "CryptoBench test folds are cluster-disjoint at 10% identity."
+  },
+  "invariants": {
+    "disjoint_required_groups_are_cluster_disjoint": true,
+    "non_disjoint_groups_must_declare_split_integrity_false": true
+  },
+  "groups": {
+    "esr1_receptor_only_pilot": {
+      "cluster_disjoint_required": false,
+      "split_integrity_passed": false,
+      "reason_not_disjoint": "Single conserved ESR1 LBD fold spans development/validation/locked_test; comparative-superiority claims are disallowed for this group (verify_claims enforces comparative_claim_allowed=false).",
+      "cluster_source": "STRUCTURE_CLUSTER_LEDGER.json (Kabsch C\u03b1 RMSD <=1.5A + shared primary-citation DOI, connected components).",
+      "assignments": [
+        {
+          "pdb_id": "1ERE",
+          "split": "development",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "1GWR",
+          "split": "development",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "1X7R",
+          "split": "development",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "3UUD",
+          "split": "development",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "4Q13",
+          "split": "development",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "2IOK",
+          "split": "validation",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "3HQ5",
+          "split": "validation",
+          "cluster_id": "esr1-struct-002"
+        },
+        {
+          "pdb_id": "5DXB",
+          "split": "validation",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "4PXM",
+          "split": "validation",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "3ERT",
+          "split": "locked_test",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "3OS8",
+          "split": "locked_test",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "1UOM",
+          "split": "locked_test",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "5U2B",
+          "split": "locked_test",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "6CHW",
+          "split": "locked_test",
+          "cluster_id": "esr1-struct-001"
+        },
+        {
+          "pdb_id": "4Q50",
+          "split": "locked_test",
+          "cluster_id": "esr1-struct-001"
+        }
+      ]
+    },
+    "cryptobench_apo": {
+      "cluster_disjoint_required": true,
+      "is_official_cryptobench_test_fold": false,
+      "cluster_source": "singleton_pending_mmseqs2 \u2014 each distinct apo protein is its own cluster; conservative (cannot hide leakage). Replace with MMseqs2 @10% sequence identity to match the CryptoBench cluster-disjoint test fold before any comparative claim.",
+      "assignments": [
+        {
+          "pdb_id": "1a4u",
+          "chain": "B",
+          "split": "test",
+          "cluster_id": "cbapo-1a4u"
+        },
+        {
+          "pdb_id": "1ffh",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-1ffh"
+        },
+        {
+          "pdb_id": "1pfz",
+          "chain": "C",
+          "split": "test",
+          "cluster_id": "cbapo-1pfz"
+        },
+        {
+          "pdb_id": "1uiu",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-1uiu"
+        },
+        {
+          "pdb_id": "2aka",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-2aka"
+        },
+        {
+          "pdb_id": "2fhz",
+          "chain": "B",
+          "split": "test",
+          "cluster_id": "cbapo-2fhz"
+        },
+        {
+          "pdb_id": "2jkl",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-2jkl"
+        },
+        {
+          "pdb_id": "3a7g",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-3a7g"
+        },
+        {
+          "pdb_id": "3flg",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-3flg"
+        },
+        {
+          "pdb_id": "3mo7",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-3mo7"
+        },
+        {
+          "pdb_id": "3wmg",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-3wmg"
+        },
+        {
+          "pdb_id": "4faf",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-4faf"
+        },
+        {
+          "pdb_id": "4l6w",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-4l6w"
+        },
+        {
+          "pdb_id": "4pvr",
+          "chain": "A",
+          "split": "test",
+          "cluster_id": "cbapo-4pvr"
+        },
+        {
+          "pdb_id": "5cxy",
+          "chain": "B",
+          "split": "test",
+          "cluster_id": "cbapo-5cxy"
+        }
+      ]
+    }
+  }
+}
