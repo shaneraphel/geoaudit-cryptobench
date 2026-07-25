@@ -46,6 +46,16 @@ class TestAnisotropicShearOracle(unittest.TestCase):
         self.assertTrue(np.array_equal(m1, m2))
         self.assertTrue(np.allclose(o1, o2))
 
+    def test_modes_bytewise_deterministic_across_calls(self) -> None:
+        # Regression for the eigsh unseeded-start hole: with a pinned v0 the raw
+        # modes AND eigenvalues must be byte-identical across repeated calls, not
+        # merely equal up to sign.
+        coords = _two_lobe_protein()
+        m1, l1 = aso.low_shear_modes(coords, k=3)
+        m2, l2 = aso.low_shear_modes(coords, k=3)
+        self.assertTrue(np.array_equal(m1, m2))
+        self.assertTrue(np.array_equal(l1, l2))
+
     def test_modes_are_anisotropic_not_scalar(self) -> None:
         # A pure homothety would give parallel displacement ~ r - r_c everywhere.
         # A real shear mode must vary in direction across atoms.

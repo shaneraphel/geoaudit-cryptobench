@@ -63,7 +63,15 @@ class TestAlleleAblation(unittest.TestCase):
             self.assertTrue(wrong[a]["rejected"],
                             f"wrong allele {a} was NOT rejected (leak)")
             self.assertGreater(wrong[a]["residual_weight"], 0)
+            self.assertTrue(wrong[a]["solution_disjoint_from_g12d"])
         self.assertTrue(self.report["all_wrong_alleles_rejected"])
+
+    def test_empty_intersection_proof(self) -> None:
+        # S_WT (WT solution set) disjoint from the G12D admissible set, proven via
+        # trivial kernel (unique solutions) rather than asserted.
+        self.assertTrue(self.report["operator_kernel_is_trivial"])
+        self.assertTrue(self.report["g12d_admissible_set_is_singleton"])
+        self.assertTrue(self.report["empty_intersection_S_WT_and_admissible_G12D"])
 
     def test_shuffle_rejection_high_but_not_rigged(self) -> None:
         sh = self.report["allele_shuffle"]

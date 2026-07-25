@@ -242,24 +242,31 @@
   "all_syndromes_distinct": true,
   "correct_allele_G12D_admissible": true,
   "correct_residual_zero": true,
+  "operator_kernel_is_trivial": true,
+  "g12d_admissible_set_is_singleton": true,
   "wrong_allele_fail_closed": {
     "G12C": {
       "admissible": false,
       "rejected": true,
-      "residual_weight": 19
+      "residual_weight": 19,
+      "solution_disjoint_from_g12d": true
     },
     "G12V": {
       "admissible": false,
       "rejected": true,
-      "residual_weight": 19
+      "residual_weight": 19,
+      "solution_disjoint_from_g12d": true
     },
     "WT": {
       "admissible": false,
       "rejected": true,
-      "residual_weight": 19
+      "residual_weight": 19,
+      "solution_disjoint_from_g12d": true
     }
   },
   "all_wrong_alleles_rejected": true,
+  "wt_solution_disjoint_from_g12d_admissible": true,
+  "empty_intersection_S_WT_and_admissible_G12D": true,
   "allele_shuffle": {
     "n_shuffles": 2000,
     "seed": 20260725,

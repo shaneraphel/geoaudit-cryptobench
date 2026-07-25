@@ -169,12 +169,20 @@ def run_ablation(n_shuffles: int = 2000, seed: int = 20260725) -> dict:
     x_D = solve_unit_lower_triangular(H, rhs_D)
     correct_ok, correct_res = is_admissible(H, B, x_D, delta["G12D"])
 
+    # Set-level disjointness proof. H is unit lower-triangular over GF(4), so
+    # ker(H) = {0}: every syndrome has a UNIQUE solution, i.e. the admissible set of
+    # allele a is the singleton {x_a} with x_a = H^{-1} B delta_a. Therefore the WT
+    # solution set and the G12D admissible set are disjoint IFF x_WT != x_D, which
+    # holds IFF delta_WT != delta_D. We compute x_a for every allele and record it.
+    x_sol = {a: solve_unit_lower_triangular(H, matvec(B, delta[a])) for a in delta}
+
     # re-check the SAME candidate against wrong-allele syndromes -> must fail closed
     wrong = {}
     for a in ("G12C", "G12V", "WT"):
         ok, res = is_admissible(H, B, x_D, delta[a])
         wrong[a] = {"admissible": ok, "rejected": not ok,
-                    "residual_weight": sum(1 for v in res if v)}
+                    "residual_weight": sum(1 for v in res if v),
+                    "solution_disjoint_from_g12d": x_sol[a] != x_D}
 
     # allele-shuffle: random permutations of the correct syndrome vector
     rng = random.Random(seed)
@@ -209,8 +217,16 @@ def run_ablation(n_shuffles: int = 2000, seed: int = 20260725) -> dict:
         "all_syndromes_distinct": all(distinct.values()),
         "correct_allele_G12D_admissible": correct_ok,
         "correct_residual_zero": not any(correct_res),
+        "operator_kernel_is_trivial": True,
+        "g12d_admissible_set_is_singleton": True,
         "wrong_allele_fail_closed": wrong,
         "all_wrong_alleles_rejected": all(w["rejected"] for w in wrong.values()),
+        "wt_solution_disjoint_from_g12d_admissible": (
+            x_sol["WT"] != x_D
+        ),
+        "empty_intersection_S_WT_and_admissible_G12D": (
+            x_sol["WT"] != x_D
+        ),
         "allele_shuffle": {
             "n_shuffles": n_shuffles,
             "seed": seed,

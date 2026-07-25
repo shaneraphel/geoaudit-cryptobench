@@ -120,10 +120,17 @@ def low_shear_modes(coords: np.ndarray, *, k: int = K_MODES, cutoff: float = CON
     H = anm_hessian(coords, cutoff)
     n_want = 6 + k + 2          # 6 rigid + K wanted + slack
     n_want = min(n_want, 3 * n - 1)
+    # Determinism: ARPACK seeds its Lanczos iteration from an UNSEEDED random start
+    # vector unless one is supplied, so for clustered/degenerate eigenvalues the
+    # returned basis can vary run-to-run BEFORE any sign convention applies. Pin an
+    # explicit, structure-independent start vector and a fixed tolerance so the
+    # iteration itself is reproducible; the sign convention below then removes the
+    # residual +/- ambiguity.
+    v0 = np.full(3 * n, 1.0 / np.sqrt(3 * n), dtype=np.float64)
     try:
-        vals, vecs = eigsh(H, k=n_want, sigma=0.0, which="LM")  # shift-invert near 0
+        vals, vecs = eigsh(H, k=n_want, sigma=0.0, which="LM", v0=v0, tol=0.0)
     except Exception:  # noqa: BLE001 -- singular factorization / ARPACK issues
-        vals, vecs = eigsh(H, k=n_want, which="SA")
+        vals, vecs = eigsh(H, k=n_want, which="SA", v0=v0, tol=0.0)
 
     order = np.argsort(vals)
     vals = vals[order]
