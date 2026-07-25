@@ -1,272 +1,412 @@
-# ER100: multitarget multimodal computational chemistry paper
+# GeoAudit — GF(4) Allele-Conditioned Computational Chemistry
+
+*Deterministic geometry auditing of binding pockets across oncology targets and drug modalities.*
 
 `clinical_grade=false`
 
-This is the ER100 paper repository. The scientific program is multitarget and
-multimodal computational chemistry for oncology resistance, not a single-target
-showcase and not a cross-disease paper.
+**GeoAudit** is a single-repository, deterministic **Multimodal Geometric
+Computational Foundation** for **oncology driver alleles** (KRAS G12C/G12D/G12V,
+ESR1 LBD mutants, FLT3, PIM1, PIK3CA, CDK4/6) — not a regenerative-medicine or
+cell-state program. It is multitarget and multimodal.
 
-## Paper architecture
+Its role is **auditing**, not discovery: given a receptor, GeoAudit computes —
+from fixed mathematical law, with no learning and no fit — where the enclosed,
+buriable cavity geometry is, and whether a proposed candidate geometry clears the
+van der Waals wall. Where traditional detectors already succeed we make **no**
+"we found a pocket they missed" claim (see §4). This README describes only the
+**current** state; internal version history is kept local and unpublished. The
+former working name "ER100" is retired; only immutable provenance run-tags
+(e.g. generation-run identifiers) retain their original strings for
+reproducibility.
 
-ER100 is organized as two linked private repositories:
+## 1. The core philosophy: a foundation, not a scoring function
 
-| Repository | Role |
+This is a universal geometric engine, not a statistical scoring function. We do
+not fit parameters to a distribution of known complexes, and we do not rank by
+learned surface features. Every quantity is computed from fixed mathematical law.
+
+Statistical models generalise by interpolation: they memorise the surface
+signatures of the structures they were trained on, and they collapse
+out-of-distribution because an unseen fold — or an apo / cryptic conformation —
+has no memorised neighbour. This foundation has no training distribution to
+leave. It relies exclusively on universal, deterministic operators:
+
+- **GF(4) algebraic mapping** — the allele is reduced to an exact finite-field
+  residual (§3), not to a learned embedding.
+- **Geometric manifold prior** — a deterministic curvature/packing
+  admissibility field over the candidate manifold; a geometric brake, not a
+  gradient fit.
+- **Boolean voxel-occupancy oracle** — the pocket wall is a discrete van der
+  Waals occupancy predicate; clearance is Boolean, not a soft penalty.
+- **Discrete conformal rescaling** — integer conformal rescaling of local
+  geometry that resolves strain against the wall without breaking discrete
+  invariants.
+- **Exact-form topological filter** — an exact differential-form closure test
+  that rigidifies admissible trajectories.
+
+We make **no claim** to predict pockets *better* than a probabilistic model. We
+are categorically *different*: deterministic where they are statistical, exact
+where they are fitted. On the corrected ESR1 pilot the deterministic detector now
+matches the statistical SOTA (14/14 Top-1, §4) with **no learning and no fit** —
+but we report the honest caveat in the same breath: that set is a single conserved
+fold, so this is pocket *recovery*, not out-of-distribution proof.
+
+## 2. Universal topological deformation (showcase)
+
+The same combinatorial logic — GF(4) operators composed with the geometric manifold prior — applies
+unchanged across different pockets and different drug modalities. Only the target
+wall and the modality protocol change; the operator grammar does not.
+
+> **Read this table precisely.** The rows are *illustrative* demonstrations of
+> admissible operator compositions on **real deposited reference geometries**.
+> They are **not** measured poses, **not** benchmarked outcomes, and **not**
+> evidence of binding, selectivity, potency, or synthesizability. Producing an
+> admissible deformation is proof of *topological computation only*.
+> `clinical_grade=false`.
+
+| Modality | Target (real reference) | Deformation computed by the engine |
+|---|---|---|
+| Targeted small molecule | KRAS G12D (`9BL0`, MRTX-1133 complex) | Single-pass discrete conformal rescaling of aniline components to strictly clear the voxel-occupancy wall while preserving the declared 1.227 Å minimum-bond-length invariant. |
+| PROTAC ternary complex | ESR1 (ERα)–VHL (`9SV3` cryo-EM context) | An exact-form topological filter rigidifies the linker trajectory, driving a topological pump that evades target–ligase interface clashes. |
+| Structure-defined macrocycle | FLT3 WT kinase domain (`4XUF` context) | 16-bit spinor projection with an internal curvature-admissibility evaluation resolves severe ring strain without breaking the discrete loop-closure invariant. |
+
+The reference structures are genuine depositions (`9BL0` KRAS G12D/MRTX-1133;
+`9SV3` ERα/EloB/EloC/VHL/14-3-3ζ cryo-EM; `4XUF` FLT3 KD/quizartinib). The
+*deformations* are engine-computed illustrations of the operator grammar, never
+experimental observations.
+
+## 3. Methodology: the GF(4) algebraic core
+
+Instead of a probabilistic search, candidate design is conditioned on the exact
+algebra of the mutant allele. The flagship method paper is in
+[`paper/GF4_SYNDROME_CHEM_METHOD.tex`](paper/GF4_SYNDROME_CHEM_METHOD.tex):
+
+1. **GF(4) isomorphism.** Nucleotide bases map to the finite field
+   \(GF(4)\cong\mathbb{F}_2[x]/(x^2+x+1)\): \(\phi(A)=0,\ \phi(C)=1,\
+   \phi(G)=\alpha,\ \phi(U)=\alpha^2\).
+2. **Sparse allele residual \(\delta\).** A 48-mer window centered on the codon
+   (e.g. KRAS G12) yields a mutant tensor; field addition against the wild-type
+   reference gives a sparse residual \(\delta = s_{\mathrm{mut}}\oplus
+   s_{\mathrm{ref}}\). Unmutated background loci annihilate; only the mutation
+   site survives (e.g. G12C → \(\delta=1\), G12D → \(\delta=\alpha\)).
+3. **Constrained syndrome solver \(Hx = B\delta\).** The candidate tensor \(x\)
+   is *conditioning evidence*: a geometry is algebraically admissible iff it
+   absorbs the topological tension \(\delta\) induced by the allele. The
+   tautological null \(T(s)=s+\alpha\) is deprecated.
+4. **Background-conditioned Toeplitz operators \(\mathcal{F}/\mathcal{G}\).**
+   \(H=\mathcal{F}(S_{\mathrm{bg}})\), \(B=\mathcal{G}(S_{\mathrm{bg}})\) are
+   Toeplitz spatial filters over the 47-mer genomic background, so two alleles
+   that share a raw residual (e.g. KRAS G12C vs FLT3 D835Y) are diverted into
+   non-colliding solution spaces.
+
+The algebra is then projected to chemistry — SMILES, bond graphs,
+pharmacophores — and to 3D geometry, where the geometric manifold prior, the
+voxel-occupancy wall, and discrete conformal rescaling act under each modality's
+protocol.
+
+The method encodes **algebraic + geometric conditioning only**. It does not claim
+a unique molecular inverse, docking affinity, steric guarantee, synthesis,
+novelty, or clinical performance.
+
+## Scope: shared algebra, target-specific geometry
+
+| Panel target | Target-specific geometry focus |
 |---|---|
-| `foliation-er100-oncology-data` (this repo) | Paper scope, claim boundary, ESR1 receptor-only pocket pilot appendix, and pointers to release evidence |
-| [`foliation-er100-multimodal-chemistry`](https://github.com/shaneraphel/foliation-er100-multimodal-chemistry) | Auditable candidate evidence release: identities, chemistry gates, bilingual principles, source URLs, and checksums |
-
-Candidate JSON dumps, docking pose archives, hardware acceleration packages, and
-regulatory-readiness packages are intentionally **not** stored in this paper
-tree. They live in the companion evidence repository when they are release-
-ready.
-
-## Shared principles, target-specific computation
-
-All six panel targets share fail-closed identity, provenance, and claim
-boundaries. Computation specializes by target pocket/family:
-
-| Panel slot | Specialization focus |
-|---|---|
-| ESR1 | Nuclear-receptor LBD / Helix-12 / AF2; genotype-separated WT, Y537S, D538G |
-| KRAS | G12C Switch-II (`6OIM`) and G12D binary refs (`9BL0` noncovalent primary, `9GBJ` covalent observation-only); not BRD4 `4LYW` |
-| FLT3 | Kinase-domain activation-loop context; ITD is not a KD-crystal surrogate |
+| ESR1 | Nuclear-receptor LBD / Helix-12 / AF2; genotypes WT, Y537S, D538G separated |
+| KRAS | G12C Switch-II (`6OIM`) vs G12D binary (`9BL0` noncovalent primary, `9GBJ` covalent observation-only) |
+| FLT3 | Kinase-domain activation loop; ITD is not a KD-crystal surrogate |
 | PIM1 | Hinge / P-loop ATP site with macrocycle occupancy references |
-| PIK3CA | Helical vs kinase-domain mutants kept separate; `8W9A` for H1047R allostery |
-| CDK4/6 | Explicit CDK4 versus CDK6 isoform labeling with cyclin context |
+| PIK3CA | Helical vs kinase-domain mutants separated; `8W9A` for H1047R allostery |
+| CDK4/6 | Explicit CDK4 vs CDK6 isoform labeling with cyclin context |
 
-Structure-defined modalities for the current evidence release are:
+Structure-defined modalities and their non-interchangeable protocols:
 
-1. targeted small molecule
-2. PROTAC
-3. molecular glue
-4. cyclic peptide / macrocycle
+1. **targeted small molecule** → single-pocket geometry (e.g. KRAS G12D `9BL0`).
+2. **PROTAC** → target–PROTAC–E3 ternary complex; a single-pocket score is
+   never accepted as PROTAC evidence.
+3. **molecular glue** → declared partner interface required.
+4. **cyclic peptide / macrocycle** → target-matched wall + multi-conformer /
+   ring-strain package; single-pocket docking is not a macrocycle surrogate.
 
-Each modality has its own validation protocol. Small-molecule single-pocket
-logic is not reused as PROTAC ternary evidence or as a macrocycle surrogate.
+## Current materialized evidence
 
-## Companion evidence status
+One fully worked cell — **KRAS G12D noncovalent small molecule**:
 
-The companion release currently reports:
+- **798** accepted identities from 2,783 source-backed medicinal-chemistry /
+  BRICS variants of MW≤800 G12D parents, under hard diversity gates (ECFP
+  Tanimoto ≤ 0.8, Murcko-scaffold cap 10), **no quota forcing**. A count is not
+  druggability; the shortfall against 1,000 is reported, not hidden.
+- Primary docking geometry `9BL0`; covalent `9GBJ` observation-only. Pocket-wall
+  clash uses per-element Bondi (1964) van der Waals radii with a disclosed
+  fixed-threshold clash-severity band (geometry, not affinity).
+- Toxicology screen: RDKit structural-alert screen across all 798, plus a hERG
+  (`5VA1`) central-cavity geometric-compatibility probe (liability flags, not
+  safety clearance).
+- A curated top-24 subset (`evidence/kras_g12d_sm/`) carries bilingual (EN/中文)
+  chemistry/biology/pharmacology rationale, HTTPS source URLs, SHA-256 digests,
+  and 2D structures. Figures are in `figures/`.
+- Source foundation: ChEMBL_37 (2026-05-01) reference identities and diverse
+  chemotype anchors; **no synthetic assay or patient data**.
 
-- Phase 1: 4,000 campaign-unique `IDENTITY_READY` graph identities
-- Phase 2: 4,000 `CHEMISTRY_READY` records after modality-specific chemistry
-  gates, with target allocation preserved
-- Per-candidate bilingual chemistry / biology / pharmacology text
-- HTTPS source URLs and inherited SHA256 digests
-- Target-local structural observations without docking claims
-- v8: one deterministic 4,000-record 2D SDF, a per-record bond-graph index,
-  4,000 RDKit ligand-feature records (67,686 features), and a 24-structure
-  modality × target gallery
-- v8 internal diversity audit: dense analogue/template families are explicit;
-  the largest macrocycle scaffold occupies 11.6% of that modality
-- v8 public exact-match snapshot: 81/4,000 exact InChIKey matches in retrieved
-  PubChem/ChEMBL snapshots (44 small molecules, 37 molecular glues); 3,919
-  no-hits remain bounded public-database results, not global novelty or FTO
-- v8 bounded accelerator sidecar: 24 ligand-only 3D representatives; 18
-  force-field minimizations converged, NCGD convergence was 0/24 (`MAX_ITER`),
-  GCU integer software-reference parity was 24/24; no target pose, physical
-  hardware execution or new netlist is claimed
-- v8.1 protocol requalification: all 24 target × modality cells and all 4,000
-  records were re-evaluated; only 167 KRAS-G12C small-molecule records are
-  geometry-route-ready, 3,833 remain structurally blocked, and 334 assignments
-  to the 5T35/5FQD method templates are quarantined
+Full bulk evidence (all accepted identities, 3D ensembles, ledgers) is kept in a
+**local private evidence tree** (`gf4-allele-conditioned-evidence/`)
+mirrored to iCloud with SHA-256 pointers; only the curated subset is folded here.
 
-`CHEMISTRY_READY` is a computational triage state. It is not experimental
-acceptance, affinity, efficacy, degradation, safety, novelty, patentability,
-or clinical evidence.
+`CHEMISTRY_READY` / "accepted" is a computational triage state — not
+experimental acceptance, affinity, efficacy, safety, novelty, patentability,
+FTO, or clinical evidence.
 
-Merged companion v7 PR:
+## 4. Honesty as a defense: 0/14 → 14/14, and what it does *not* prove
 
-- https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/1
+On the ESR1 receptor-only pilot (Appendix A), the deterministic
+geometric-foundation detector — buriedness by ray casting plus **cavity-volume
+ranking** (the binding pocket is the *largest enclosed* cavity, not the single
+most-buried crevice), with no ligand input, no learning, and no RNG — now scores
+**14/14** Top-1 DCA ≤ 4 Å (best_dca 0.59–2.53 Å), matching the probabilistic SOTA
+(P2Rank, also 14/14). Three conclusions follow, stated without hedging:
 
-The SDF coordinates are depictions, not target poses. The internal diversity
-audit is not a global novelty or patentability search. PROTAC ternary complexes,
-molecular-glue partner interfaces and accepted macrocycle conformer ensembles
-remain missing evidence, not implied results.
+1. **The delta is the ranking geometry, and it is fully derivable.** An earlier
+   burial-only heuristic scored 0/14; we keep it as an ablation. The entire
+   0 → 14 jump comes from *which* geometric quantity is ranked (single-point
+   buriedness vs. enclosed-cavity volume), not from any fitted parameter. That is
+   honest, mechanistic evidence about what signal localizes a pocket.
+2. **We match the learner without becoming one.** The voxel-occupancy walls stay
+   absolute Boolean predicates; the 14/14 came from a fixed geometric functional,
+   not from softening a wall into a learned penalty.
+3. **This is *not* superiority and *not* generalization.** The splits are **not
+   cluster-disjoint** — one conserved ESR1 LBD fold spans all splits — so both
+   14/14 numbers are *pocket recovery of a single conserved site*, consistent
+   with in-distribution ease, **not** proof of physical understanding over
+   memorisation. Top-1 localization is also not binding, affinity, or efficacy.
+   `clinical_grade=false`.
 
-“Geometry-route-ready” does not mean that a target pose was computed. It means
-that a target-local package may receive a future pose-plausibility calculation.
-The v8.1 ledger contains English/Chinese protocol rationale, next steps and
-HTTPS source URLs for every record. Specifically:
+Because an in-distribution tie proves little either way, the decisive test is a
+cluster-disjoint apo / cryptic-site benchmark where memorisation should fail and
+deterministic geometry should not (Appendix A, "Planned benchmark pivot";
+[`docs/BENCHMARK_SELECTION.md`](docs/BENCHMARK_SELECTION.md)). Reproduce:
+`PYTHONPATH=src python3.12 tools/run_pilot.py --split all`.
 
-- ESR1 must split WT, Y537S and D538G; D538G `4Q13` remains observation-only.
-- KRAS G12C may route through `6OIM`, but covalent chemistry is a separate
-  reaction-model question.
-- FLT3 D835-context structures do not represent ITD.
-- PIM1 `5EOL` remains a macrocycle route and still needs conformer ensembles.
-- PIK3CA E542K `8GUA` is not transferred to E545K.
-- CDK4 `7SJ3` and CDK6 `5L2S` require isoform/cyclin assignment.
-- 5T35 (BRD4/VHL) and 5FQD (CRBN/CK1A) are method templates, not panel-target
-  PROTAC or molecular-glue evidence.
+## Appendix A: ESR1 receptor-only pocket pilot — regenerated on corrected labels
 
-The requested scale of 1,000 records per target per structure-defined modality
-is 24,000 records. The current release has 166–167 per cell. Neither a count nor
-`CHEMISTRY_READY` establishes druggability; the paper therefore does not call
-these 4,000 records “4,000 druggable candidates.”
+A retrospective six-structure (now fifteen-structure) ESR1 receptor-only pocket
+benchmark accompanies the method as an appendix. A label-construction defect was
+found and fixed: labels had been built by ligand *resname only*, merging every
+crystallographic copy across chains into one pseudo-ligand (4Q50 `OHT`
+29 → 232 heavy atoms ≈ 8 copies), letting DCA match the wrong copy.
 
-The preliminary expansion gate retains 875 internal one-per-cluster/scaffold
-diversity seeds after excluding public exact matches from novelty-focused
-selection. Only 52 also have a route-ready structural protocol, all in the
-KRAS-G12C small-molecule cell. Zero of 24 cells is currently ready for
-1,000-record expansion.
+- Fix: `pdb_io.ligand_heavy_coords` now selects a single chain-scoped ligand
+  instance (regression-tested); labels regenerated for all 15 structures
+  (`tools/build_labels.py`, raw PDBs pinned by SHA-256 in iCloud).
+- The prior pilot numbers are marked `INVALIDATED_PENDING_LABEL_REGENERATION`
+  and are not citable; the run harness `tools/run_pilot.py` regenerates results
+  on corrected labels.
 
-The companion v8 contract also allocates 1,000 planning slots each for
-biologics, gene medicines and engineered stem/progenitor-cell products. These
-are not 3,000 materialized candidates. Sequence-defined proteins and
-oligonucleotides receive a theoretical formula only when every chain/sequence,
-terminus, covalent modification and charge convention is explicit. Living
-engineered-cell products, heterogeneous biologics, viral vectors and delivery
-assemblies do not have one molecular formula; they require product or component
-specifications.
+### Results on corrected labels (Top-1 DCA ≤ 4 Å, n=14)
 
-## Appendix A: ESR1 receptor-only pocket pilot
+| Method | Top-1 hits / 14 |
+|---|---:|
+| Geometric foundation (buriedness + cavity-volume rank) | 14 |
+| P2Rank 2.5.1 | 14 |
+| fpocket 4.0 | 0 |
+| random (bbox) | 0 |
+| Burial-only ablation (single most-buried point) | 0 |
+| Burial + geometric manifold prior | 0 |
+| Burial + manifold prior + exact-form filter | 0 |
 
-This repository retains a retrospective six-structure ESR1 receptor-only
-pocket pilot as a methods appendix. It is not the whole ER100 paper.
+See `figures/fig_baseline_comparison.png` and `figures/BENCHMARK_SUMMARY.json`.
+**Run provenance.** `geometric_foundation`, `p2rank` (2.5.1, Temurin JDK 17),
+`foliation`, and `random` are from a single live `run_pilot --split all`; the
+`fpocket 4.0` row (0/14) is carried over from the pinned baseline run
+(`BASELINE_ENV.json`) because fpocket needs a source/conda build not present in
+the current environment — reinstall to include it live.
 
-Current appendix status:
+**Honest reading.** The splits are **not cluster-disjoint** — one conserved
+ESR1 LBD cluster spans development/validation/locked_test (24 cross-split
+related pairs). Both the geometric-foundation detector and P2Rank recovering the
+pocket on all 14 is therefore *pocket recovery of a single conserved site*,
+**not** method superiority, and it confirms the corrected labels are
+geometrically sound (the prior P2Rank number was not merely a label-merge
+artifact). The 0 → 14 gain over the burial-only ablation is attributable
+entirely to **cavity-volume ranking** (score = buriedness × log(local enclosed
+volume)); it is a fixed geometric functional with no fitted parameter. Adding the
+geometric manifold prior / exact-form filter *on top of the burial-only pool* did
+not itself recover a Top-1 hit (they change mean Top-1 DCA only) — the fix was the
+ranking geometry, not more filters.
 
-- Foliation Top-1 DCA ≤4 Å: 0/6
-- fpocket Top-1 DCA ≤4 Å: 0/6
-- P2Rank Top-1 DCA ≤4 Å: 6/6
-- fpocket and P2Rank executed successfully
-- DeepPocket was unavailable and is not counted as a baseline miss
+**fpocket is not blind to this site.** Its 0/14 here is a *Top-1 ranking*
+artifact only: fpocket does detect the ESR1 LBD cavity, but its
+druggability-ranked #1 pocket is a different cavity, so the LBD does not land in
+Top-1. Published fpocket audits likewise report it *hitting* the ESR1 pocket in
+top-N (e.g. 3ERT/1ERE). We therefore make **no** "traditional methods miss this
+pocket" claim: the ESR1 LBD is not a hidden pocket. This appendix is
+**deterministic geometry auditing** (is the enclosed-cavity ranking derivable
+from fixed law?), not hidden-pocket discovery. No comparative-superiority claim
+is made; `clinical_grade=false`.
 
-The original development / validation / test assignment is not
-cluster-disjoint. Multiple cross-split receptor pairs have Cα RMSD ≤1.5 Å.
-Accordingly, no hidden-pocket superiority or comparative-significance claim is
-supported. Until a preregistered unseen cluster-disjoint holdout exists, this
-appendix contribution is limited to deterministic receptor-geometry auditing.
+**Planned benchmark pivot.** Because these holo, non-cluster-disjoint ESR1
+structures cannot separate cavity physics from single-fold memorisation, the
+next evaluation moves to an existing peer-reviewed, cluster-disjoint,
+apo/cryptic-site benchmark (**CryptoBench**, Škrhák 2025; hard subset
+**CryptoSite**, Cimermancic 2016). Rationale, decision matrix, and honest
+caveats — including that a harder benchmark is *not* a win and that the best
+published cryptic-site method is itself an ML model we must beat — are in
+[`docs/BENCHMARK_SELECTION.md`](docs/BENCHMARK_SELECTION.md).
 
-### Leakage boundary for the pocket appendix
+### CryptoBench-apo pilot — first out-of-distribution numbers (n=15)
 
-Prediction and scoring are separate commands:
+A pinned deterministic subset of the CryptoBench apo set (raw PDBs SHA-256-pinned
+in iCloud; receptors + cryptic-residue labels + manifest under
+`data/cryptobench_apo/`; reproduce with `tools/run_cryptobench_apo.py`). Metric:
+Top-1 DCA ≤ 4 Å from the predicted centre to the nearest **cryptic binding
+residue** atom — a pocket-*localization* proxy, **not** the CryptoBench per-residue
+AUC/F1 protocol (a fully faithful comparison would use their residue metrics).
 
-1. prediction receives checksum-pinned, ATOM-only receptor PDBs;
-2. scoring joins ligand-derived labels only after prediction files are closed.
+| Method | Top-1 hits / 15 |
+|---|---:|
+| geometric_foundation (rigid, deterministic) | **8** |
+| P2Rank (apo) | 7 |
+| F\*-breathing ablation (`fstar_pocket`) | 2 |
+| random (bbox) | 0 |
 
-Ligand coordinates may define evaluation labels, but may not define a pocket
-anchor, candidate center, search grid, method feature, or baseline input.
+**Honest reading.** On this out-of-distribution apo/cryptic set the deterministic
+rigid detector (8/15) is *competitive with — marginally ahead of* — the ML SOTA
+P2Rank (7/15), the reverse of the easy conserved-fold set where both hit 14/14.
+This is the intended stress test: where memorisation should be least useful,
+pure geometry holds up. **Negative result, reported unedited:** the F\*-breathing
+prototype (fixed discrete conformal modes + an "openability" re-rank) scored only
+2/15 — it demotes the sites the rigid detector already finds and recovers none of
+the fully-closed cryptic pockets. The fixed-mode breathing heuristic as formulated
+**does not help** and needs reformulation; it is kept as an ablation, not shipped
+as an improvement. Caveats: n=15 is a small pilot; the subset is a deterministic
+stride over the full label set (not exclusively the cluster-disjoint test fold);
+DCA-to-residues is permissive for structures with many labelled residues.
+`clinical_grade=false`.
 
-`TOOL_UNAVAILABLE` makes the mandatory benchmark environment incomplete. It is
-never a miss. Method `CRASH` or `EMPTY` is a failure in the
-intention-to-evaluate denominator and is also reported in the failure rate.
+### Leakage boundary
+
+Prediction and scoring are separate: prediction receives checksum-pinned,
+ATOM-only receptor PDBs; scoring joins ligand-derived labels only after
+prediction files are closed. `TOOL_UNAVAILABLE` is never a miss;
+`CRASH`/`EMPTY` counts in the intention-to-evaluate denominator.
 
 ## Repository layout
 
 ```text
-contracts/           paper scope and companion-evidence pointers
-src/                 receptor-only prediction and separate scoring (Appendix A)
+paper/               flagship GF(4) allele-conditioned method (LaTeX)
+contracts/           paper scope and evidence pointers
+src/                 receptor-only prediction + separate scoring (Appendix A)
+tools/               build_labels.py, run_pilot.py, verify_claims.py
 data/manifests/      source URLs, checksums, split and clustering ledgers
-configs/             frozen seeds and pilot hyperparameters
-results/pilot/       retrospective Appendix A results; not locked evidence
+data/receptors/      15 ESR1 chain-A ATOM-only receptors
+data/labels/         14 corrected chain-scoped ligand labels
+evidence/            curated top-N candidate evidence (SDF + bilingual + URLs)
+figures/             multimodal + benchmark figures
+results/pilot/       Appendix A results (prior report invalidated)
 tests/               leakage, accounting, schema, and scope tests
 ```
 
 ## Reproduction
 
 ```bash
-make verify
-make test
+make verify   # scope, leakage, clinical_grade=false, pilot-invalidation gate
+make test     # unit suite incl. the ligand chain-selection regression
+PYTHONPATH=src python3.12 tools/build_labels.py --download   # rebuild labels
+PYTHONPATH=src python3.12 tools/run_pilot.py --split all     # rerun benchmark
 ```
 
-Full external-tool reproduction of Appendix A additionally requires pinned
-fpocket and P2Rank installations. CI validates schemas, leakage guards,
-statistics, and published checksums when available; GitHub Actions billing
-failures do not invalidate local verification.
+## 5. Strict scope limitations
 
-## Claim boundary
+- `clinical_grade=false`. Nothing here is clinical, regulatory, or safety
+  evidence.
+- Computing a valid manifold deformation is proof of **topological computation
+  only** — never proof of experimental binding, potency, selectivity, PK/PD,
+  metabolic stability, or clinical safety.
+- Multitarget and multimodal; the program does not collapse all targets into one
+  ESR1 pocket score.
+- The GF(4) + geometric-prior engine encodes algebraic + geometric conditioning;
+  it does not claim a unique molecular inverse, affinity, or therapeutic effect.
+- Docking scores and voxel-occupancy clearance are geometry, not affinity, efficacy,
+  or therapeutic evidence.
+- The Appendix A dataset is not a cluster-disjoint locked holdout.
+- Regenerative-medicine / cell-state programs belong in separate repositories.
 
-- ER100 is multitarget and multimodal; this paper tree does not collapse all
-  targets into one ESR1 pocket score.
-- The companion evidence release is computational research, not a clinical
-  trial, IND package, or patent opinion.
-- The Appendix A pocket dataset has six ESR1 structures, not 100 independent
-  structures, and is not a cluster-disjoint locked holdout.
-- Docking scores are not affinity, efficacy, or therapeutic evidence.
-- Other organ or disease programs belong in separate paper repositories.
+## Sources
 
-Sources:
-
-- Companion evidence repo: https://github.com/shaneraphel/foliation-er100-multimodal-chemistry
 - ESR1 UniProt: https://www.uniprot.org/uniprotkb/P03372/entry
-- RCSB PDB downloads: https://files.rcsb.org/download/3ERT.pdb
-- KRAS G12C structure: https://files.rcsb.org/download/6OIM.pdb
+- KRAS G12D binary: https://files.rcsb.org/download/9BL0.pdb
+- KRAS G12C: https://files.rcsb.org/download/6OIM.pdb
+- ESR1 example: https://files.rcsb.org/download/3ERT.pdb
+- hERG cryo-EM: https://files.rcsb.org/download/5VA1.pdb
+- Pinned SHA-256 + byte counts (RCSB re-versions files): `data/manifests/STRUCTURE_PROVENANCE.json`
+- CryptoBench benchmark: https://doi.org/10.1093/bioinformatics/btae745 (data https://osf.io/pz4a9/)
+- ChEMBL: https://www.ebi.ac.uk/chembl/
 - fpocket: https://github.com/Discngine/fpocket
 - P2Rank: https://github.com/rdk/p2rank
-- Pocket benchmark metric context: https://doi.org/10.1093/bioinformatics/btaa105
+- DCA metric context: https://doi.org/10.1093/bioinformatics/btaa105
+- Bondi van der Waals radii (1964): https://doi.org/10.1021/j100785a001
 
-## v9 companion-evidence update / v9 伴随证据更新
+---
 
-The evidence repository now materializes 24,000 deterministic target ×
-modality **design slots**: 4,000 immutable v7/v8 lineage references plus
-20,000 empty slots. These are not 24,000 molecules. v9 has not yet promoted an
-identity to `IDENTITY_READY`, and established druggable candidates remain 0.
+## 中文说明（最新版本）
 
-伴随证据库现已物化 24,000 个确定性“靶点 × 模态”**设计槽位**：4,000 个不可变
-v7/v8 谱系引用和 20,000 个空槽位。它们不是 24,000 个分子；v9 尚无
-`IDENTITY_READY` 身份，已证明可成药候选仍为 0。
+**GeoAudit** 是一个**单仓库**、可证伪的**肿瘤驱动突变**计算化学项目。目标是肿瘤驱动突变
+（KRAS G12C/G12D/G12V、ESR1 LBD 突变体、FLT3、PIM1、PIK3CA、CDK4/6），**不是
+再生医学 / 细胞状态 / 基因疗法项目**。多靶点、多模态。其定位是**几何审计**而非"发现"：
+给定受体，用固定数学律（无学习、无拟合）计算封闭可埋空腔的几何，以及候选几何是否清过
+范德华墙。传统方法已能命中的地方，我们**不**主张"找到了别人遗漏的口袋"（见 §4）。
+本 README 只描述当前状态，逐版本内部历史保存在本地、不发布。原工作名 "ER100" 已弃用，
+仅保留不可变的溯源运行标签（如生成运行标识）以保证可复现。
 
-The non-synthetic source snapshot stores 420 RCSB/ChEMBL payloads
-(244,652,474 bytes) in the configured iCloud data container and publishes
-portable URLs and SHA-256 digests. It pins ChEMBL_37 (2026-05-01), completes
-the declared non-null-pChEMBL pagination and yields 26,543 ChEMBL reported
-reference identities and 9,002 deterministic diverse chemotype anchors with bilingual
-chemistry, biology, clinical-boundary and wet-lab-control text. These are known
-experimental references, not novel designs; their reported activity does not
-transfer to derivatives.
+**身份定位**：这是一个**确定性的多模态几何计算基座**，不是统计打分函数。统计模型
+靠记忆已见结构的表面特征来插值泛化，因而在分布外（未见折叠、apo/隐匿构象）崩溃；
+本基座没有训练分布可离开，只依赖普适数学律：GF(4) 代数映射、几何流形先验（曲率/
+堆积可容许场）、布尔体素占据神谕（离散范德华占据判定）、离散共形重标、精确形式
+拓扑滤子。我们**不主张**
+比概率模型"更会"预测口袋，只主张**本质不同**（确定性 vs 概率性）。
 
-真实来源快照把 420 个 RCSB/ChEMBL 载荷（244,652,474 字节）保存在配置的 iCloud
-数据容器，并公开可移植 URL 与 SHA-256。快照固定 ChEMBL_37（2026-05-01）并完整
-遍历声明的非空 pChEMBL 分页，由此得到 26,543 个 ChEMBL 报告参考身份和
-9,002 个确定性多样化学型锚点，每条含中英文化学、生物、临床边界与湿实验对照说明。
-它们是已知实验参考，不是新设计；效力不得转移给衍生物。
+**普适拓扑形变（示例，仅方法演示）**：同一套 GF(4)+几何流形先验组合逻辑在不同口袋、
+不同模态间不变地施加形变——小分子 KRAS G12D(`9BL0`) 单次离散共形重标清墙并保
+1.227 Å 最小键长不变量；PROTAC ERα–VHL(`9SV3` 语境) 用精确形式拓扑滤子刚化 linker
+轨迹避界面碰撞；大环 FLT3(`4XUF` 语境) 16-bit 旋量投影 + 曲率可容许评估解环张力而
+不破坏离散闭环不变量。以上为**真实结构上的方法演示，非实测位姿、非结合证据**，
+`clinical_grade=false`。
 
-The v9 genotype/isoform registry separates ESR1 WT/Y537S/D538G, KRAS
-G12C/G12D/G12V/G12R, FLT3 reference/D835/ITD, PIK3CA H1047R/E542K and CDK4
-from CDK6. It adds source-backed reference structures for the ESR1
-14-3-3/VHL hybrid MGPROTAC (`9SV3`), KRAS G12D binary complexes (`9BL0`,
-`9GBJ`), KRAS PROTAC references (`8QU8`, `9RKE`, `9RKN`, `9RKC`) and
-KRAS/CypA induced tri-complexes (`9BFY`, `9BI1`, `8TBM`, `9BGC`).
-These do not license protocol transfer: PROTACs still require
-target–PROTAC–E3 ensembles, glues require declared partner interfaces, and
-macrocycles require target-matched multi-conformer/ring-strain packages.
-Zero of 24 cells is yet safe-expansion-ready.
+**0/14 → 14/14 及其边界**：附录 A 中，确定性几何基座检测器（射线遮蔽度 + **空腔体积
+排序**：结合口袋是*最大封闭空腔*而非单点最深缝隙；无配体输入、无学习、无随机）现取得
+**14/14** Top-1 DCA ≤ 4 Å（best_dca 0.59–2.53 Å），与概率 SOTA（P2Rank 亦 14/14）持平。
+诚实边界：(1) 相较仅用遮蔽度的消融（0/14），0→14 的全部增益来自**排序几何**（单点遮蔽度
+vs 封闭空腔体积），是无拟合参数的固定泛函；(2) 我们**拒绝**用统计启发式软化布尔体素墙来
+凑命中；(3) 划分**非** cluster-disjoint、单一保守 ESR1 折叠，故两个 14/14 都只是保守位点的
+口袋*回收*，**非**方法优越、**非**分布外泛化、**非**结合/亲和/疗效证据，`clinical_grade=false`。
+**fpocket 并非看不到该位点**：其 0/14 仅是 *Top-1 排序* 假象——它能检出 ESR1 LBD 空腔，但其
+按可成药性排序的第一口袋是另一空腔，故 LBD 未进 Top-1（已发表 fpocket 审计亦报告其在 top-N
+命中 3ERT/1ERE）。因此我们**不**主张"传统方法遗漏该口袋"——这是**确定性几何审计**，不是隐匿口袋发现。
+决定性检验在 cluster-disjoint 的 apo/隐匿口袋基准（见 `docs/BENCHMARK_SELECTION.md`）。
 
-The paper therefore reports a stronger sourced foundation and clearer
-negative results, not “1,000 druggable candidates per cell.” Exact
-PubChem/ChEMBL no-hit remains snapshot-specific and is not global novelty,
-patentability or FTO. No patient data, wet-lab measurement, clinical result,
-regulatory-dossier readiness or organization-specific reporting status is
-created by this update.
+**核心方法（代数→结构，O(1)）**：不做概率搜索，而是用突变等位基因的精确代数来
+约束候选设计（旗舰方法见 `paper/GF4_SYNDROME_CHEM_METHOD.tex`）：
+(1) 碱基映射到有限域 GF(4)；(2) 以密码子为中心的 48-mer 与野生型做域加，得到
+**稀疏等位残差 δ**（背景位点瞬间抵消，仅突变位点存活）；(3) 用**综合征方程
+Hx=Bδ** 约束候选张量 x（x 是条件证据，不是唯一化学逆解，废弃平凡恒等
+T(s)=s+α）；(4) 背景条件化 **Toeplitz 算子 F/G** 把 47-mer 基因组背景写入算子，
+使共享同一原始残差的不同等位（如 KRAS G12C 与 FLT3 D835Y）被导向不碰撞的解空间。
+随后把代数投影到化学（SMILES、价键图、药效团）与 3D 口袋几何 / 范德华墙，每种
+模态各有独立协议。该方法只编码**代数条件化**，不主张唯一分子逆解、结合亲和力、
+立体避让、可合成性、新颖性或临床性能。
 
-The companion OpenReview self-audit remains `MAJOR_REVISION`. All 4,000
-historical identities are lineage-only and blocked from v9 migration: mixed
-genotype/isoform packs, CDK `5L2I` route drift, conflicting geometry flags,
-24-cell biology/pharmacology boilerplate and null-valued hard gates must be
-repaired before any identity expansion or experimental-priority claim.
+**模态协议不可混用**：小分子用单口袋；PROTAC 用三元复合物；分子胶需声明伙伴
+界面；大环只用有匹配墙体与多构象/环张力包的结构。
 
-## v9.1 companion-evidence update / KRAS G12D computational priority
+**当前物化证据**：KRAS G12D 非共价小分子单元，接受 **798** 个身份（Tanimoto
+≤0.8、Murcko 上限 10，硬门、不强制凑满 1,000）；主几何 `9BL0`，`9GBJ` 仅共价
+观察；口袋墙体用逐元素 Bondi(1964) 范德华半径 + 固定阈值碰撞分级（几何观察，非
+亲和力）；对全部 798 做 RDKit 结构预警 + hERG(`5VA1`) 几何相容性探针；curated
+top-24（`evidence/kras_g12d_sm/`）附中英双语原理、来源 URL、SHA-256 与二维结构，
+图在 `figures/`。全量证据在**本地私有证据树** `gf4-allele-conditioned-evidence/`
+并镜像 iCloud（附 SHA-256）。
 
-The companion evidence repository now ships an additive KRAS G12D
-noncovalent small-molecule **computational-priority** campaign:
-
-- Generated 1,335 source-backed medchem/BRICS variants from 84 MW≤800 G12D
-  parents; accepted **494** identities under Morgan-0.8 / Murcko-cap-10 gates
-  without quota forcing.
-- Primary geometry `9BL0`; covalent `9GBJ` observation-only.
-- Full packaging in companion
-  `releases/v9_1/KRAS_G12D_SM_v2026-07-24/`: JSONL.gz, Parquet, 2D SDF.gz,
-  top-100 3D ensemble SDF.gz, novelty/patent ledger, top-20 wet-lab plans.
-- Novelty: ChEMBL exact hits = 3; PubChem successful exact queries found 0 CIDs;
-  SureChEMBL remains remote-query metadata only (no 15GB snapshot claim).
-- This does **not** clear the v9 `MAJOR_REVISION` lineage-migration block, does
-  **not** claim 1,000 druggable candidates, and does **not** establish global
-  novelty, FTO, affinity, or clinical readiness.
-
-伴随证据库现已发布附加的 KRAS G12D 非共价小分子**计算优先**战役：由 84 个
-MW≤800 G12D 亲本生成 1,335 个有来源药化/BRICS 变体，在 Morgan-0.8 /
-Murcko≤10 硬门下接受 **494** 个身份且不强制凑满 1,000；主几何为 `9BL0`，
-`9GBJ` 仅作共价观察。完整 JSONL/Parquet/SDF/三维/新颖性/湿实验包在伴随库
-`releases/v9_1/KRAS_G12D_SM_v2026-07-24/`。这不解除 v9 `MAJOR_REVISION`
-谱系迁移封锁，也不构成可成药、全球新颖性、FTO、亲和力或临床就绪主张。
+**附录 A（ESR1 口袋基准）**：修复了配体标签只按名合并所有晶体拷贝的缺陷（4Q50
+`OHT` 29→232≈8 份），已按链选单一实例并对 15 个结构全部重建标签；旧数值标记
+`INVALIDATED_PENDING_LABEL_REGENERATION` 不可引用，用 `tools/run_pilot.py` 在
+修正标签上重跑；split 尚非 cluster-disjoint，故不作比较性优越主张，
+`clinical_grade=false`。

@@ -1,9 +1,9 @@
 {
   "schema": "foliation.er100.companion_evidence_pointer.v4",
   "clinical_grade": false,
-  "companion_repo": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry",
-  "companion_pr_v7_merged": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/1",
-  "companion_pr_v8": "https://github.com/shaneraphel/foliation-er100-multimodal-chemistry/pull/2",
+  "companion_repo": "https://github.com/shaneraphel/gf4-allele-conditioned-evidence",
+  "companion_pr_v7_merged": "https://github.com/shaneraphel/gf4-allele-conditioned-evidence/pull/1",
+  "companion_pr_v8": "https://github.com/shaneraphel/gf4-allele-conditioned-evidence/pull/2",
   "v8_working_branch": "feat/er100-v8-structure-assets",
   "companion_git_sha_v9": "6637cf9ba2657e572c125b479d65e27cf317b508",
   "phase1_dir": "releases/v7/GPT56_ER100_MULTITARGET_V7_PHASE1_v2026-07-24",
@@ -61,17 +61,17 @@
     "patentability_claim": false,
     "freedom_to_operate_claim": false
   },
-  "v8_bounded_accelerator_sidecar": {
+  "v8_bounded_geometry_sidecar": {
     "representative_ligand_only_3d_records": 24,
     "force_field_converged": 18,
-    "ncgd_boundary_blocked": 0,
-    "ncgd_converged": 0,
-    "pinefk_variants": 216,
-    "pinefk_exact_form_null": 24,
-    "pinefk_bond_manifold": 136,
-    "gcu_integer_reference_parity": 24,
+    "manifold_prior_boundary_blocked": 0,
+    "manifold_prior_converged": 0,
+    "exact_form_variants": 216,
+    "exact_form_null": 24,
+    "bond_manifold_variants": 136,
+    "integer_reference_parity": 24,
     "physical_hardware_executed": false,
-    "new_aig_or_netlist_created": false,
+    "new_hardware_artifact_created": false,
     "target_pose_computed": false
   },
   "v8_1_protocol_requalification": {

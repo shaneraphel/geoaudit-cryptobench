@@ -12,8 +12,47 @@ from pocket_bench.dataset.clustering import (
 )
 from pocket_bench.methods import prediction
 from pocket_bench.methods.foliation_pocket import predict as fol_predict
-from pocket_bench.pdb_io import assert_no_hetatm, write_receptor_only_pdb, parse_pdb_atoms
+from pocket_bench.pdb_io import (
+    assert_no_hetatm,
+    ligand_heavy_coords,
+    write_receptor_only_pdb,
+    parse_pdb_atoms,
+)
 from pocket_bench.stats import aggregate_primary
+
+
+class TestLigandInstanceSelection(unittest.TestCase):
+    """Regression: labels must be one ligand instance, not merged copies."""
+
+    def _atom(self, chain, resseq, name, xyz):
+        return {
+            "record": "HETATM",
+            "resname": "OHT",
+            "chain": chain,
+            "resseq": resseq,
+            "name": name,
+            "element": "C",
+            "x": xyz[0],
+            "y": xyz[1],
+            "z": xyz[2],
+        }
+
+    def test_does_not_merge_multiple_ligand_copies(self):
+        atoms = []
+        # Chain A copy: 4 heavy atoms near origin.
+        for i in range(4):
+            atoms.append(self._atom("A", 700, f"C{i}", (i * 0.1, 0.0, 0.0)))
+        # Chain B copy of the SAME resname 30 A away: must be excluded.
+        for i in range(4):
+            atoms.append(self._atom("B", 700, f"C{i}", (30.0 + i * 0.1, 0.0, 0.0)))
+
+        merged_if_buggy = ligand_heavy_coords(atoms, "OHT")
+        # With the fix, a single instance (4 atoms) is returned, never 8.
+        self.assertEqual(len(merged_if_buggy), 4)
+
+        chain_a = ligand_heavy_coords(atoms, "OHT", chain="A")
+        self.assertEqual(len(chain_a), 4)
+        self.assertTrue(all(c[0] < 1.0 for c in chain_a))
 
 
 class TestLeakGuard(unittest.TestCase):

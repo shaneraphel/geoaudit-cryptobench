@@ -1,0 +1,579 @@
+{
+  "schema": "foliation.pocket_bench.regenerated_report.v1",
+  "generated_at": "2026-07-25T12:07:52+0800",
+  "clinical_grade": false,
+  "not_a_locked_test": true,
+  "split": "all",
+  "labels": "chain_scoped_single_instance_corrected",
+  "primary_metric": "top1_dca_le_4A",
+  "dca_threshold_a": 4.0,
+  "unit_of_analysis": "one_pdb_structure",
+  "n_structures": 14,
+  "summaries": {
+    "foliation_pocket_ro": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    },
+    "geometric_foundation": {
+      "top1_dca_le_4A_hits": 14,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    },
+    "fpocket": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    },
+    "p2rank": {
+      "top1_dca_le_4A_hits": 14,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    },
+    "random_bbox": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 14,
+      "tool_unavailable": 0,
+      "crash_or_empty": 0
+    }
+  },
+  "per_method": {
+    "foliation_pocket_ro": {
+      "ok": 14,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.224807150347537,
+          "dcc_top1": 10.757408622093143
+        },
+        {
+          "pdb": "1GWR",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.6244372376334,
+          "dcc_top1": 10.97725961630406
+        },
+        {
+          "pdb": "1X7R",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.554854561914636,
+          "dcc_top1": 10.479837007558674
+        },
+        {
+          "pdb": "3UUD",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.517653519411278,
+          "dcc_top1": 10.747925842159983
+        },
+        {
+          "pdb": "2IOK",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.315770379820522,
+          "dcc_top1": 12.41645443902346
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.408435178075154,
+          "dcc_top1": 12.610920412523738
+        },
+        {
+          "pdb": "5DXB",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.488709439561013,
+          "dcc_top1": 11.7145951928151
+        },
+        {
+          "pdb": "4PXM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.184352471805562,
+          "dcc_top1": 11.496860626313321
+        },
+        {
+          "pdb": "3ERT",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.19664259213211,
+          "dcc_top1": 13.799648442332593
+        },
+        {
+          "pdb": "3OS8",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 7.9377727544443495,
+          "dcc_top1": 10.649180382829444
+        },
+        {
+          "pdb": "1UOM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.198463720254999,
+          "dcc_top1": 12.912017060685026
+        },
+        {
+          "pdb": "5U2B",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 23.099859399146368,
+          "dcc_top1": 25.280726461464074
+        },
+        {
+          "pdb": "6CHW",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 10.28812886080525,
+          "dcc_top1": 15.842184241637275
+        },
+        {
+          "pdb": "4Q50",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.796161043014104,
+          "dcc_top1": 12.743192451173767
+        }
+      ]
+    },
+    "geometric_foundation": {
+      "ok": 14,
+      "top1_hits": 14,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8286543308279933,
+          "dcc_top1": 3.5082152748940603
+        },
+        {
+          "pdb": "1GWR",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.5859598962386418,
+          "dcc_top1": 3.1401348573747603
+        },
+        {
+          "pdb": "1X7R",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.6952422896652544,
+          "dcc_top1": 3.0190813292291416
+        },
+        {
+          "pdb": "3UUD",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.8452614990835297,
+          "dcc_top1": 3.37060341111202
+        },
+        {
+          "pdb": "2IOK",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.529903950745956,
+          "dcc_top1": 4.1205693882439745
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8264998487598172,
+          "dcc_top1": 0.883296675223507
+        },
+        {
+          "pdb": "5DXB",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.9803065846968514,
+          "dcc_top1": 2.552398016571866
+        },
+        {
+          "pdb": "4PXM",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8629449576884975,
+          "dcc_top1": 2.5061692161544125
+        },
+        {
+          "pdb": "3ERT",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.9138571002036702,
+          "dcc_top1": 2.0519247294003877
+        },
+        {
+          "pdb": "3OS8",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.4694958319097058,
+          "dcc_top1": 3.2289338294156624
+        },
+        {
+          "pdb": "1UOM",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8717115348554243,
+          "dcc_top1": 1.0506219400609806
+        },
+        {
+          "pdb": "5U2B",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.3885985741026834,
+          "dcc_top1": 2.2416229506013567
+        },
+        {
+          "pdb": "6CHW",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.5624576794268683,
+          "dcc_top1": 2.603065290900799
+        },
+        {
+          "pdb": "4Q50",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.9204929054802522,
+          "dcc_top1": 3.3156396715609815
+        }
+      ]
+    },
+    "fpocket": {
+      "ok": 14,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.667322185402877,
+          "dcc_top1": 14.802715010422926
+        },
+        {
+          "pdb": "1GWR",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 14.869297544031195,
+          "dcc_top1": 17.03840246653257
+        },
+        {
+          "pdb": "1X7R",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 13.12502324406048,
+          "dcc_top1": 15.052441041366727
+        },
+        {
+          "pdb": "3UUD",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 14.398749503698934,
+          "dcc_top1": 16.587260501568423
+        },
+        {
+          "pdb": "2IOK",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 27.396463472600903,
+          "dcc_top1": 30.589738448568863
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 26.709546713871685,
+          "dcc_top1": 31.078536539122624
+        },
+        {
+          "pdb": "5DXB",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 15.57626254042975,
+          "dcc_top1": 17.89016383463443
+        },
+        {
+          "pdb": "4PXM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 7.130719886366535,
+          "dcc_top1": 12.332534658777744
+        },
+        {
+          "pdb": "3ERT",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 14.137696571883835,
+          "dcc_top1": 18.287412574729775
+        },
+        {
+          "pdb": "3OS8",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 13.97636105820781,
+          "dcc_top1": 16.07444071569832
+        },
+        {
+          "pdb": "1UOM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 6.043513929917535,
+          "dcc_top1": 11.81483507301871
+        },
+        {
+          "pdb": "5U2B",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.652793351848905,
+          "dcc_top1": 15.52868844205239
+        },
+        {
+          "pdb": "6CHW",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 16.10920871571289,
+          "dcc_top1": 20.922556415491314
+        },
+        {
+          "pdb": "4Q50",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.798511179603842,
+          "dcc_top1": 16.60329715275328
+        }
+      ],
+      "_provenance": "carried_over_from_pinned_baseline_run (fpocket 4.0, BASELINE_ENV.json); fpocket requires a source/conda build not available in the current run env"
+    },
+    "p2rank": {
+      "ok": 14,
+      "top1_hits": 14,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.7602218426222715,
+          "dcc_top1": 0.23765406581836523
+        },
+        {
+          "pdb": "1GWR",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.5847673896516463,
+          "dcc_top1": 0.7203356596059922
+        },
+        {
+          "pdb": "1X7R",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.7223122178116612,
+          "dcc_top1": 0.5262382754038308
+        },
+        {
+          "pdb": "3UUD",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8352856936402057,
+          "dcc_top1": 0.596098469214609
+        },
+        {
+          "pdb": "2IOK",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.4874906487101036,
+          "dcc_top1": 0.8414172646988767
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8413394439820334,
+          "dcc_top1": 0.11067420731411834
+        },
+        {
+          "pdb": "5DXB",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.9842421805633024,
+          "dcc_top1": 0.6537888688254032
+        },
+        {
+          "pdb": "4PXM",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.8439785186839798,
+          "dcc_top1": 0.7227584105356379
+        },
+        {
+          "pdb": "3ERT",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.9999920699685572,
+          "dcc_top1": 0.8067203937830882
+        },
+        {
+          "pdb": "3OS8",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.1344994931686814,
+          "dcc_top1": 1.0811273199247888
+        },
+        {
+          "pdb": "1UOM",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.7764900063748386,
+          "dcc_top1": 3.135521043772073
+        },
+        {
+          "pdb": "5U2B",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 0.9876203015329328,
+          "dcc_top1": 0.6536794771266478
+        },
+        {
+          "pdb": "6CHW",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.2488397215015228,
+          "dcc_top1": 1.756483151469199
+        },
+        {
+          "pdb": "4Q50",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 1.0596760873021536,
+          "dcc_top1": 1.9718345650621474
+        }
+      ]
+    },
+    "random_bbox": {
+      "ok": 14,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1ERE",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 22.595273692989757,
+          "dcc_top1": 25.950800138146356
+        },
+        {
+          "pdb": "1GWR",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 23.93652262635857,
+          "dcc_top1": 25.990932277855457
+        },
+        {
+          "pdb": "1X7R",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 31.931336031302994,
+          "dcc_top1": 35.40320955729629
+        },
+        {
+          "pdb": "3UUD",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 28.53941114362505,
+          "dcc_top1": 30.895376592008088
+        },
+        {
+          "pdb": "2IOK",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 41.66533779666923,
+          "dcc_top1": 44.46420899146594
+        },
+        {
+          "pdb": "3HQ5",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 22.824518073381668,
+          "dcc_top1": 25.286030974145252
+        },
+        {
+          "pdb": "5DXB",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 19.33969774142796,
+          "dcc_top1": 20.378569827348624
+        },
+        {
+          "pdb": "4PXM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 19.295510442178145,
+          "dcc_top1": 20.384210258649798
+        },
+        {
+          "pdb": "3ERT",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 20.135369597484736,
+          "dcc_top1": 26.701562995904176
+        },
+        {
+          "pdb": "3OS8",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 20.56378537386833,
+          "dcc_top1": 22.764393599097627
+        },
+        {
+          "pdb": "1UOM",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 38.1771488654994,
+          "dcc_top1": 40.09995194380679
+        },
+        {
+          "pdb": "5U2B",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 21.071572899877996,
+          "dcc_top1": 27.482656806034324
+        },
+        {
+          "pdb": "6CHW",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 23.38802333497833,
+          "dcc_top1": 28.10744140592595
+        },
+        {
+          "pdb": "4Q50",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 37.225544836358175,
+          "dcc_top1": 39.619085546294336
+        }
+      ]
+    }
+  },
+  "truth_boundary": "Regenerated on CORRECTED chain-scoped labels. Splits are NOT cluster-disjoint, so NO comparative-superiority claim is made. TOOL_UNAVAILABLE is excluded from the denominator, never counted as a miss. clinical_grade=false.",
+  "baseline_provenance_note": "Single live run (this report): foliation, geometric_foundation, p2rank (2.5.1, JDK17 Temurin), random_bbox. fpocket row carried over from the pinned baseline run (0/14) \u2014 fpocket needs a source/conda build unavailable here; reinstall to include it live."
+}

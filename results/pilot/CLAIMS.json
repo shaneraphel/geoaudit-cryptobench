@@ -1,11 +1,14 @@
 {
   "schema": "foliation.pocket_bench.claims.v1",
   "clinical_grade": false,
-  "primary_claim": "Retrospective pilot Top-1 DCA<=4A on six receptor-only ESR1 structures",
+  "status": "INVALIDATED_PENDING_LABEL_REGENERATION",
+  "invalidated_on": "2026-07-24",
+  "invalidation_reason": "The label builder (pdb_io.ligand_heavy_coords) selected ligands by resname only, merging every crystallographic copy across all chains into one pseudo-ligand (e.g. 4Q50 OHT 29->232 heavy atoms). DCA could then match the wrong ligand copy. The bug is fixed (chain + single-instance selection, with regression test); this report must be regenerated from corrected chain-scoped labels before ANY result (including the prior P2Rank 6/6) is cited.",
+  "primary_claim": "INVALIDATED: prior retrospective pilot Top-1 DCA<=4A numbers are not citable until regeneration",
   "evidence_level": "retrospective_pilot_only",
   "docking_demoted": true,
   "legacy_ligand_anchored_not_evidence": true,
   "comparative_claim_allowed": false,
   "report": "results/pilot/RETROSPECTIVE_PILOT_REPORT.json",
-  "truth_boundary": "Pilot only. Cluster overlap forbids locked-test interpretation. clinical_grade=false."
+  "truth_boundary": "Report INVALIDATED due to a fixed label-merge defect. No pilot number (Foliation/fpocket/P2Rank/random) is citable until labels are regenerated per chain. clinical_grade=false."
 }

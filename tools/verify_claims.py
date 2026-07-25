@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed if the ER100 paper tree exceeds its declared scope."""
+"""Fail closed if the GeoAudit paper tree exceeds its declared scope."""
 from __future__ import annotations
 
 import argparse
@@ -14,12 +14,20 @@ FORBIDDEN_PRIMARY = re.compile(
 )
 OUT_OF_SCOPE = re.compile(
     r"(?i)\b(silicon|EDA|IND\s+readiness|retina|kidney|"
-    r"uremia|leukemia|FDA\s+comparison)\b"
+    r"uremia|leukemia|FDA\s+comparison|systems\s+biology|"
+    r"cross[- ]disease)\b"
 )
 # Campaign/generator names may appear only as companion release directory
 # pointers, never as primary scientific claims in this paper tree.
 CAMPAIGN_CLAIM = re.compile(
     r"(?i)\b(GPT[- ]?5\.6\s+campaign|free[- ]reasoning\s+campaign)\b"
+)
+# Proprietary engine names must stay LOCAL only; public docs use abstract
+# descriptors ("geometric manifold prior", "exact-form topological filter",
+# "discrete conformal rescaling"). This gate hard-fails if a brand leaks back in.
+PROPRIETARY_ENGINE = re.compile(
+    r"(?i)\b(NCGD|PINEKF|PINEFK|Non[- ]Commutative\s+Geometric|"
+    r"Conformal\s+Squeeze|Kähler|Kahler)\b"
 )
 ABSOLUTE_PATH = re.compile(r"(?<![A-Za-z])/(?:Users|home|private)/")
 CREDENTIAL = re.compile(
@@ -42,7 +50,7 @@ def main() -> int:
     clusters = json.loads(
         (root / "data/manifests/STRUCTURE_CLUSTER_LEDGER.json").read_text()
     )
-    scope = json.loads((root / "contracts/ER100_PAPER_SCOPE.json").read_text())
+    scope = json.loads((root / "contracts/GEOAUDIT_PAPER_SCOPE.json").read_text())
     companion = json.loads(
         (root / "data/manifests/COMPANION_EVIDENCE.json").read_text()
     )
@@ -56,6 +64,16 @@ def main() -> int:
         and (scope.get("appendices") or {}).get("A", {}).get("evidence_level")
         == "retrospective_pilot_only"
     )
+    # Science-honesty gate: the retrospective pilot numbers were produced with a
+    # now-fixed label-merge defect (ligand selected by resname only). Until the
+    # labels are regenerated per chain, every pilot number is non-citable and
+    # MUST be marked invalidated in both the claims file and the report.
+    checks["pilot_marked_invalidated_pending_regeneration"] = (
+        claims.get("status") == "INVALIDATED_PENDING_LABEL_REGENERATION"
+        and bool(claims.get("invalidation_reason"))
+        and pilot.get("invalidated") is True
+        and bool(pilot.get("invalidation_reason"))
+    )
     checks["clinical_grade_false"] = (
         claims.get("clinical_grade") is False
         and pilot.get("clinical_grade") is False
@@ -63,12 +81,12 @@ def main() -> int:
         and companion.get("clinical_grade") is False
     )
     checks["multitarget_paper_scope"] = (
-        scope.get("paper_id") == "er100-multitarget-multimodal"
+        scope.get("paper_id") == "geoaudit-multitarget-multimodal"
         and set(scope.get("target_panel") or []) == TARGET_PANEL
         and len(scope.get("structure_defined_modalities") or []) == 4
     )
     checks["companion_pointer_present"] = (
-        "foliation-er100-multimodal-chemistry"
+        "gf4-allele-conditioned-evidence"
         in str(companion.get("companion_repo") or "")
         and companion.get("counts", {}).get("chemistry_ready") == 4000
         and set((companion.get("counts") or {}).get("targets") or {}) == TARGET_PANEL
@@ -163,6 +181,66 @@ def main() -> int:
         )
     )
 
+    # --- Science-invariant gate -------------------------------------------
+    # Reviewer #3: CI previously only checked scope wording, never a scientific
+    # invariant, so a 232-heavy-atom merged label passed. These checks re-read
+    # the actual artifacts and fail closed on the specific defect classes.
+    label_dir = root / "data/labels"
+    label_files = sorted(label_dir.glob("*_labels.json")) if label_dir.exists() else []
+    label_ok = len(label_files) >= 14
+    for lf in label_files:
+        lab = json.loads(lf.read_text())
+        n_heavy = len(lab.get("ligand_heavy_coords") or [])
+        # A single small-molecule ligand instance is ~10-70 heavy atoms; the
+        # merge bug inflated OHT to 232 (~8 copies). Reject anything >80 or <3.
+        if not (3 <= n_heavy <= 80) or len(lab.get("ligand_centroid") or []) != 3:
+            label_ok = False
+    checks["labels_single_instance_physical"] = label_ok
+
+    regen_path = root / "results/pilot/REGENERATED_PILOT_REPORT.json"
+    if regen_path.exists():
+        regen = json.loads(regen_path.read_text())
+        per = regen.get("per_method") or {}
+        methods_present = {"foliation_pocket_ro", "fpocket", "p2rank", "random_bbox"} <= set(per)
+        denom_ok = all(
+            (m.get("ok", 0) + m.get("unavailable", 0) + m.get("crash_empty", 0))
+            == regen.get("n_structures")
+            for m in per.values()
+        )
+        checks["regenerated_report_honest"] = (
+            regen.get("n_structures") == 14
+            and regen.get("labels") == "chain_scoped_single_instance_corrected"
+            and regen.get("clinical_grade") is False
+            and methods_present
+            and denom_ok
+        )
+    else:
+        checks["regenerated_report_honest"] = False
+
+    prov_path = root / "data/manifests/STRUCTURE_PROVENANCE.json"
+    if prov_path.exists():
+        prov = json.loads(prov_path.read_text()).get("entries") or {}
+        checks["structure_provenance_pinned"] = all(
+            re.fullmatch(r"[0-9a-f]{64}", str((prov.get(p) or {}).get("sha256") or ""))
+            and int((prov.get(p) or {}).get("bytes") or 0) > 5000
+            for p in ("9BL0", "5VA1")
+        )
+    else:
+        checks["structure_provenance_pinned"] = False
+
+    # Every receptor path referenced by the input/smoke manifests must exist and
+    # must not use the retired data/pocket_bench/esr1/receptors/ location.
+    pim = json.loads((root / "data/manifests/PREDICTION_INPUT_MANIFEST.json").read_text())
+    smoke = json.loads((root / "results/pilot/SMOKE_BASELINES.json").read_text())
+    referenced = [e.get("receptor_pdb") for e in pim.get("entries") or []]
+    referenced.append(smoke.get("receptor_pdb"))
+    checks["manifest_receptor_paths_resolve"] = bool(referenced) and all(
+        rp
+        and "data/pocket_bench/esr1/receptors" not in rp
+        and (root / rp).exists()
+        for rp in referenced
+    )
+
     primary_text = "\n".join(
         [
             json.dumps(claims),
@@ -188,15 +266,24 @@ def main() -> int:
         and "clinical_grade=false" in readme.lower()
         and "ESR1" in readme
         and "multitarget" in readme.lower()
-        and "foliation-er100-multimodal-chemistry" in readme
+        and "gf4-allele-conditioned-evidence" in readme
         and "Appendix A" in readme
     )
+
+    def _is_local_only(path: Path) -> bool:
+        # Never-published local-only material (internal changelog, hardware/
+        # accelerator notes, proprietary engine source, peer-review transcripts).
+        # Gitignored via
+        # *.local.* and _local/ ; excluded here so it cannot trip scope gates.
+        parts = set(path.parts)
+        return "_local" in parts or ".local" in "".join(path.suffixes)
 
     primary_files = [
         path
         for path in root.rglob("*")
         if path.is_file()
         and ".git" not in path.parts
+        and not _is_local_only(path)
         and path.suffix.lower() in {".md", ".json", ".py", ".yml", ".yaml"}
     ]
     tree_text = "\n".join(path.read_text(errors="ignore") for path in primary_files)
@@ -207,6 +294,9 @@ def main() -> int:
     )
     checks["no_out_of_scope_paper_material"] = OUT_OF_SCOPE.search(scope_text) is None
     checks["no_campaign_claim_language"] = CAMPAIGN_CLAIM.search(scope_text) is None
+    checks["no_proprietary_engine_names_public"] = (
+        PROPRIETARY_ENGINE.search(scope_text) is None
+    )
     checks["no_local_absolute_paths_in_primary_docs"] = (
         ABSOLUTE_PATH.search(tree_text) is None
     )

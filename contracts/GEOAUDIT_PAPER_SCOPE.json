@@ -1,9 +1,10 @@
 {
-  "schema": "foliation.er100.paper_scope.v1",
+  "schema": "geoaudit.paper_scope.v1",
   "clinical_grade": false,
-  "paper_id": "er100-multitarget-multimodal",
-  "title_en": "ER100 multitarget multimodal computational chemistry",
-  "title_zh": "ER100 多靶点多模态计算化学",
+  "paper_id": "geoaudit-multitarget-multimodal",
+  "program_name": "GeoAudit",
+  "title_en": "GeoAudit: deterministic geometry auditing of binding pockets across oncology targets and modalities",
+  "title_zh": "GeoAudit：面向肿瘤靶点与多模态的确定性结合口袋几何审计",
   "scientific_question_en": "Can a shared fail-closed Foliation chemistry methodology produce target-specialized, modality-protocoled computational candidates without transferring pocket, binding, or clinical claims across targets or disease programs?",
   "target_panel": ["ESR1", "KRAS", "FLT3", "PIM1", "PIK3CA", "CDK4/6"],
   "structure_defined_modalities": [
@@ -14,7 +15,7 @@
   ],
   "repository_roles": {
     "this_repo": "paper_scope_and_appendix",
-    "companion_evidence_repo": "shaneraphel/foliation-er100-multimodal-chemistry"
+    "companion_evidence_repo": "shaneraphel/gf4-allele-conditioned-evidence"
   },
   "appendices": {
     "A": {

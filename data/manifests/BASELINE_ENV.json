@@ -1,0 +1,25 @@
+{
+  "schema": "gf4cc.baseline_env.v1",
+  "clinical_grade": false,
+  "python": "3.12",
+  "tools": {
+    "fpocket": {
+      "version": "4.0 (git tag 4.2.3)",
+      "build": "from source, Discngine/fpocket"
+    },
+    "p2rank": {
+      "version": "2.5.1",
+      "java": "OpenJDK 17"
+    },
+    "deeppocket": {
+      "version": null,
+      "status": "TOOL_UNAVAILABLE"
+    }
+  },
+  "commands": {
+    "labels": "PYTHONPATH=src python3.12 tools/build_labels.py --download",
+    "benchmark": "PYTHONPATH=src python3.12 tools/run_pilot.py --split all"
+  },
+  "report": "results/pilot/REGENERATED_PILOT_REPORT.json",
+  "note": "Prior P2Rank 6/6 was on merged (buggy) labels and is invalidated. Current numbers are on corrected chain-scoped labels; splits are NOT cluster-disjoint, so no comparative-superiority claim is made."
+}

@@ -109,16 +109,54 @@ def detect_primary_ligand(atoms: list[dict[str, Any]], preferred: str | None = N
     return max(counts, key=counts.get)
 
 
-def ligand_heavy_coords(atoms: list[dict[str, Any]], resname: str) -> list[list[float]]:
-    coords = []
+def ligand_heavy_coords(
+    atoms: list[dict[str, Any]],
+    resname: str,
+    *,
+    chain: str | None = None,
+    resseq: int | None = None,
+) -> list[list[float]]:
+    """Heavy-atom coordinates of a SINGLE ligand residue instance.
+
+    Fixes a label-construction defect: selecting solely by ``resname`` merged
+    every crystallographic copy of the ligand (across all chains and residue
+    numbers) into one pseudo-ligand, inflating heavy-atom counts (e.g. 4Q50
+    OHT 29->232 = ~8 copies) and letting DCA match the wrong copy. We now
+    restrict to the receptor chain (when supplied) and collapse to a single
+    residue instance so the label is exactly one bound ligand.
+
+    Selection when ``resseq`` is not pinned: among instances on the requested
+    chain, pick the one with the most heavy atoms (the complete copy),
+    tie-broken deterministically by ``(chain, resseq)``.
+    """
+    instances: dict[tuple[str, int], list[list[float]]] = {}
     for a in atoms:
         if a["record"] != "HETATM" or a["resname"] != resname:
             continue
         if a["element"] == "H":
             continue
-        coords.append([a["x"], a["y"], a["z"]])
+        if chain is not None and a["chain"] != chain:
+            continue
+        if resseq is not None and a["resseq"] != resseq:
+            continue
+        key = (a["chain"], a["resseq"])
+        instances.setdefault(key, []).append([a["x"], a["y"], a["z"]])
+    if not instances:
+        scope = f"{resname}"
+        if chain is not None:
+            scope += f" chain {chain}"
+        if resseq is not None:
+            scope += f" resseq {resseq}"
+        raise ValueError(f"no HETATM instance for ligand {scope}")
+    best_key = max(
+        instances,
+        key=lambda k: (len(instances[k]), -ord(k[0][:1] or "Z"), -k[1]),
+    )
+    coords = instances[best_key]
     if len(coords) < 3:
-        raise ValueError(f"ligand {resname} has <3 heavy atoms")
+        raise ValueError(
+            f"ligand {resname} instance {best_key} has <3 heavy atoms"
+        )
     return coords
 
 

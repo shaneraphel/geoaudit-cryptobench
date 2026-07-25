@@ -1,0 +1,426 @@
+{
+  "schema": "gf4cc.cryptobench_apo.report.v1",
+  "generated_at": "2026-07-25T12:48:48+0800",
+  "clinical_grade": false,
+  "benchmark": "CryptoBench apo (Skrhak 2025) \u2014 pinned deterministic subset",
+  "n_structures": 15,
+  "primary_metric": "top1_dca_le_4A_to_cryptic_residue_atoms",
+  "metric_caveat": "Pocket-localization proxy (DCA to cryptic-residue atoms); NOT the CryptoBench per-residue AUC/F1 protocol. DCA is more permissive for structures with many labelled residues.",
+  "splits_note": "CryptoBench test splits are cluster-disjoint at 10% sequence identity; this pinned subset is a deterministic stride sample of the full label set (train+test), not exclusively the test fold. clinical_grade=false.",
+  "summaries": {
+    "geometric_foundation": {
+      "top1_dca_le_4A_hits": 8,
+      "intention_to_evaluate_denominator": 15,
+      "tool_unavailable": 0
+    },
+    "fstar_pocket": {
+      "top1_dca_le_4A_hits": 2,
+      "intention_to_evaluate_denominator": 15,
+      "tool_unavailable": 0
+    },
+    "p2rank": {
+      "top1_dca_le_4A_hits": 7,
+      "intention_to_evaluate_denominator": 15,
+      "tool_unavailable": 0
+    },
+    "random_bbox": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 15,
+      "tool_unavailable": 0
+    }
+  },
+  "per_method": {
+    "geometric_foundation": {
+      "ok": 15,
+      "top1_hits": 8,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1a4u",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.7776985077578216
+        },
+        {
+          "pdb": "1ffh",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 17.204909560936382
+        },
+        {
+          "pdb": "1pfz",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.010662551665332
+        },
+        {
+          "pdb": "1uiu",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.860167477613855
+        },
+        {
+          "pdb": "2aka",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 7.47125424543965
+        },
+        {
+          "pdb": "2fhz",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.1338259364553114
+        },
+        {
+          "pdb": "2jkl",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 5.833224322790954
+        },
+        {
+          "pdb": "3a7g",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.7924949418038363
+        },
+        {
+          "pdb": "3flg",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.1947010814785166
+        },
+        {
+          "pdb": "3mo7",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 16.97988886889428
+        },
+        {
+          "pdb": "3wmg",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 6.016602446564008
+        },
+        {
+          "pdb": "4faf",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.2809414807338464
+        },
+        {
+          "pdb": "4l6w",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 9.901495947582871
+        },
+        {
+          "pdb": "4pvr",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.6604281170376782
+        },
+        {
+          "pdb": "5cxy",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 7.4072681198941375
+        }
+      ]
+    },
+    "fstar_pocket": {
+      "ok": 15,
+      "top1_hits": 2,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1a4u",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 4.127889170023828
+        },
+        {
+          "pdb": "1ffh",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 24.681635561688374
+        },
+        {
+          "pdb": "1pfz",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.430588947398629
+        },
+        {
+          "pdb": "1uiu",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 10.091751730992984
+        },
+        {
+          "pdb": "2aka",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 6.872673424512472
+        },
+        {
+          "pdb": "2fhz",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 8.488968959773617
+        },
+        {
+          "pdb": "2jkl",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 5.442650549135043
+        },
+        {
+          "pdb": "3a7g",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 2.94176613618418
+        },
+        {
+          "pdb": "3flg",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 13.00990338165507
+        },
+        {
+          "pdb": "3mo7",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 17.820483719585166
+        },
+        {
+          "pdb": "3wmg",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.926423248524703
+        },
+        {
+          "pdb": "4faf",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 4.047377669553461
+        },
+        {
+          "pdb": "4l6w",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 24.92606310671623
+        },
+        {
+          "pdb": "4pvr",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.1616998592529284
+        },
+        {
+          "pdb": "5cxy",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 11.3219972178057
+        }
+      ]
+    },
+    "p2rank": {
+      "ok": 15,
+      "top1_hits": 7,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1a4u",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.4680330967278827
+        },
+        {
+          "pdb": "1ffh",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.787286672540119
+        },
+        {
+          "pdb": "1pfz",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 5.804040439211285
+        },
+        {
+          "pdb": "1uiu",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.6236971810569383
+        },
+        {
+          "pdb": "2aka",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 11.453143094364968
+        },
+        {
+          "pdb": "2fhz",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.0625568582476954
+        },
+        {
+          "pdb": "2jkl",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 4.3570449366514445
+        },
+        {
+          "pdb": "3a7g",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 4.0274383458968055
+        },
+        {
+          "pdb": "3flg",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.503441733495791
+        },
+        {
+          "pdb": "3mo7",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.211144829621832
+        },
+        {
+          "pdb": "3wmg",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.525102093557005
+        },
+        {
+          "pdb": "4faf",
+          "status": "OK",
+          "top1_success": true,
+          "best_dca": 3.709030857245597
+        },
+        {
+          "pdb": "4l6w",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 26.591516599284066
+        },
+        {
+          "pdb": "4pvr",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 14.00769626633873
+        },
+        {
+          "pdb": "5cxy",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 11.826299272807196
+        }
+      ]
+    },
+    "random_bbox": {
+      "ok": 15,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1a4u",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 11.414863342102697
+        },
+        {
+          "pdb": "1ffh",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 26.990942857802125
+        },
+        {
+          "pdb": "1pfz",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 18.987286199013635
+        },
+        {
+          "pdb": "1uiu",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 22.480083890874887
+        },
+        {
+          "pdb": "2aka",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 32.11076105043775
+        },
+        {
+          "pdb": "2fhz",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 12.444817017831909
+        },
+        {
+          "pdb": "2jkl",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 16.285040843029634
+        },
+        {
+          "pdb": "3a7g",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 30.051590943193812
+        },
+        {
+          "pdb": "3flg",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 26.150101297345127
+        },
+        {
+          "pdb": "3mo7",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 30.539747881578446
+        },
+        {
+          "pdb": "3wmg",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 28.18063164638267
+        },
+        {
+          "pdb": "4faf",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 21.768040057063985
+        },
+        {
+          "pdb": "4l6w",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 20.005792219292488
+        },
+        {
+          "pdb": "4pvr",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 23.44488438685201
+        },
+        {
+          "pdb": "5cxy",
+          "status": "OK",
+          "top1_success": false,
+          "best_dca": 13.275773707459265
+        }
+      ]
+    }
+  }
+}

@@ -1,4 +1,4 @@
-"""Paper-scope tests for the ER100 multitarget multimodal repository."""
+"""Paper-scope tests for the GeoAudit multitarget multimodal repository."""
 from __future__ import annotations
 
 import json
@@ -10,11 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class TestPaperScope(unittest.TestCase):
     def test_scope_contract_and_companion_pointer(self) -> None:
-        scope = json.loads((ROOT / "contracts/ER100_PAPER_SCOPE.json").read_text())
+        scope = json.loads((ROOT / "contracts/GEOAUDIT_PAPER_SCOPE.json").read_text())
         companion = json.loads(
             (ROOT / "data/manifests/COMPANION_EVIDENCE.json").read_text()
         )
-        self.assertEqual(scope["paper_id"], "er100-multitarget-multimodal")
+        self.assertEqual(scope["paper_id"], "geoaudit-multitarget-multimodal")
         self.assertEqual(
             set(scope["target_panel"]),
             {"ESR1", "KRAS", "FLT3", "PIM1", "PIK3CA", "CDK4/6"},
@@ -40,12 +40,12 @@ class TestPaperScope(unittest.TestCase):
         self.assertIs(public_exact["global_novelty_claim"], False)
         self.assertIs(public_exact["patentability_claim"], False)
         self.assertIs(public_exact["freedom_to_operate_claim"], False)
-        accelerator = companion["v8_bounded_accelerator_sidecar"]
-        self.assertEqual(accelerator["representative_ligand_only_3d_records"], 24)
-        self.assertEqual(accelerator["gcu_integer_reference_parity"], 24)
-        self.assertEqual(accelerator["ncgd_converged"], 0)
-        self.assertIs(accelerator["physical_hardware_executed"], False)
-        self.assertIs(accelerator["new_aig_or_netlist_created"], False)
+        sidecar = companion["v8_bounded_geometry_sidecar"]
+        self.assertEqual(sidecar["representative_ligand_only_3d_records"], 24)
+        self.assertEqual(sidecar["integer_reference_parity"], 24)
+        self.assertEqual(sidecar["manifold_prior_converged"], 0)
+        self.assertIs(sidecar["physical_hardware_executed"], False)
+        self.assertIs(sidecar["new_hardware_artifact_created"], False)
         protocol = companion["v8_1_protocol_requalification"]
         self.assertEqual(protocol["records_requalified"], 4000)
         self.assertEqual(protocol["candidate_geometry_route_ready"], 167)
@@ -136,7 +136,7 @@ class TestPaperScope(unittest.TestCase):
         self.assertEqual(len(v91["companion_git_sha_v9_1"]), 40)
         int(v91["companion_git_sha_v9_1"], 16)
         self.assertIn(
-            "foliation-er100-multimodal-chemistry", companion["companion_repo"]
+            "gf4-allele-conditioned-evidence", companion["companion_repo"]
         )
         self.assertEqual(len(companion["companion_git_sha_v9"]), 40)
         int(companion["companion_git_sha_v9"], 16)
