@@ -1,0 +1,1182 @@
+{
+  "schema": "geoaudit.cryptobench.report.v1",
+  "generated_at": "2026-07-27T02:45:45+0800",
+  "clinical_grade": false,
+  "dataset": "official",
+  "is_official_mmseqs2_10pct_test_fold": true,
+  "benchmark": "CryptoBench official MMseqs2 10% cluster-disjoint TEST fold (Skrhak 2025)",
+  "n_structures": 192,
+  "primary_metric": "residue_auc/residue_pr_auc/residue_mcc/residue_f1",
+  "metric_caveat": "Official apo labels carry cryptic residues but no holo ligand coordinates; DCA is undefined and reported null. Residue-level metrics are the primary readout.",
+  "splits_note": "Official CryptoBench TEST fold: MMseqs2 clustering at 10% sequence identity, loaded fail-closed with per-file SHA-256 verification. clinical_grade=false.",
+  "summaries": {
+    "algebraic_field_linear": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    }
+  },
+  "per_method": {
+    "algebraic_field_linear": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": [
+        {
+          "pdb": "1arl",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1bk2",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1bzj",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1cwq",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1dq2",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1e6k",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1evy",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1g1m",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1g59",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1h13",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1i7n",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1k47",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1ksg",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1kx9",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1kxr",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1lbe",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1m5w",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1nd7",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1p4o",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1p4v",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1p9o",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1pu5",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1q4k",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1rjb",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1rtc",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1se8",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1uka",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1ute",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1vsn",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1x2g",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1xgd",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1xjf",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1xqv",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1xtc",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "1zm0",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2aka",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2d05",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2dfp",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2fem",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2fhz",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2h7s",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2i3a",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2i3r",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2iyt",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2nt1",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2phz",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2pkf",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2pwz",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2qbv",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2rfj",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2v6m",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2vl2",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2vqz",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2vyr",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2w8n",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2x47",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2xsa",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2zcg",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "2zj7",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3a0x",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3bjp",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3f4k",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3flg",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3fzo",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3gdg",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3h8a",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3i8s",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3idh",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3jzg",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3k01",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3lnz",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3lnz",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3ly8",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3mwg",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3n4u",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3nx1",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3pbf",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3pfp",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3pfp",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3rwv",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3st6",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3t8b",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3tpo",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3ugk",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3uyi",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3v55",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3vgm",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3w90",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "3wb9",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4aem",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4amv",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4bg8",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4cmw",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4dnc",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4e1y",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4fkm",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4gpi",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4gv9",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4hye",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4ikv",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4ilg",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4j4e",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4jax",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4jfr",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4kmy",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4mwi",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4nzv",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4oqo",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4p2f",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4qvk",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4r0x",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4rvt",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4ttp",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4uc8",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4uum",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4zm7",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "4zoe",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5acv",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5b0e",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5caz",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5e0v",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5ey7",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5hij",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5hto",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5i3t",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5igh",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5kcg",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5loc",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5o8b",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5sc2",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5tc0",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5tvi",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5uxa",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5wbm",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5yhb",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5yj2",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5yqp",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5ysb",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5z18",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "5zj4",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6a98",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6bty",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6cqe",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6du4",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6eqj",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6f52",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6fc2",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6fgj",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6g6y",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6hei",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6isu",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6jq9",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6ksc",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6n5j",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6nei",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6o4f",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6tx0",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6vle",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "6w10",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7c48",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7c63",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7de1",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7e5q",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7f2m",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7f4y",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7kay",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7nc8",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7ndl",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7nlx",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7o1i",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7qoq",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7qzr",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7v8k",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7w19",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7x0f",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7x0g",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7x0i",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7xgf",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "7yjc",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8aeq",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8aqi",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8b9p",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8bre",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8gxj",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8h27",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8i84",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8ias",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8j11",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8onn",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8u3n",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "8vxu",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        },
+        {
+          "pdb": "9atc",
+          "status": "OK",
+          "top1_success": null,
+          "best_dca": null
+        }
+      ]
+    }
+  },
+  "telemetry_ref": "TELEMETRY.json"
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "geoaudit.counterattack_selection.v1",
+  "clinical_grade": false,
+  "wires": 172,
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725,
+    "n_clusters": 766,
+    "n_fit_units": 386,
+    "n_pick_units": 384
+  },
+  "strongest_wires": [
+    "void",
+    "concavity@14",
+    "grad_radial@14",
+    "grad_radial@20",
+    "depth_rank",
+    "depth",
+    "concavity@20",
+    "depth_rank@6",
+    "depth@6",
+    "void@6",
+    "angle_deficit",
+    "void@14",
+    "angle_deficit@6",
+    "angle_deficit@14",
+    "normal_div",
+    "depth@14",
+    "concavity@6",
+    "depth_rank@14",
+    "normal_div@6",
+    "bur@14"
+  ],
+  "candidates": [
+    {
+      "architecture": "[ceiling] Fisher over 35 wires",
+      "pick_half_roc_auc": 0.7578857324783148
+    },
+    {
+      "architecture": "[ceiling] Fisher over 43 wires",
+      "pick_half_roc_auc": 0.7606518833524918
+    },
+    {
+      "architecture": "[ceiling] Fisher over 172 wires",
+      "pick_half_roc_auc": 0.7809331573982202
+    },
+    {
+      "architecture": "bank top-36 wires, uniform fusion",
+      "pick_half_roc_auc": 0.7339501602713933
+    },
+    {
+      "architecture": "bank top-36 wires, integer-multiplicity fusion",
+      "pick_half_roc_auc": 0.7349771777534674
+    },
+    {
+      "architecture": "bank top-36 wires, integer-multiplicity + multi-scale gate",
+      "pick_half_roc_auc": 0.7419934818525418,
+      "n_tables": 6,
+      "n_wires": 36
+    },
+    {
+      "architecture": "bank top-60 wires, uniform fusion",
+      "pick_half_roc_auc": 0.7315982241128896
+    },
+    {
+      "architecture": "bank top-60 wires, integer-multiplicity fusion",
+      "pick_half_roc_auc": 0.7377832949213504
+    },
+    {
+      "architecture": "bank top-60 wires, integer-multiplicity + multi-scale gate",
+      "pick_half_roc_auc": 0.7432361509652816,
+      "n_tables": 10,
+      "n_wires": 60
+    },
+    {
+      "architecture": "bank top-90 wires, uniform fusion",
+      "pick_half_roc_auc": 0.7386471203723161
+    },
+    {
+      "architecture": "bank top-90 wires, integer-multiplicity fusion",
+      "pick_half_roc_auc": 0.7491842587977441
+    },
+    {
+      "architecture": "bank top-90 wires, integer-multiplicity + multi-scale gate",
+      "pick_half_roc_auc": 0.75510416022814,
+      "n_tables": 15,
+      "n_wires": 90
+    },
+    {
+      "architecture": "bank top-120 wires, uniform fusion",
+      "pick_half_roc_auc": 0.7366182978213244
+    },
+    {
+      "architecture": "bank top-120 wires, integer-multiplicity fusion",
+      "pick_half_roc_auc": 0.7444148151273368
+    },
+    {
+      "architecture": "bank top-120 wires, integer-multiplicity + multi-scale gate",
+      "pick_half_roc_auc": 0.7466601993465654,
+      "n_tables": 20,
+      "n_wires": 120
+    },
+    {
+      "architecture": "bank top-172 wires, uniform fusion",
+      "pick_half_roc_auc": 0.7343284052917237
+    },
+    {
+      "architecture": "bank top-172 wires, integer-multiplicity fusion",
+      "pick_half_roc_auc": 0.7398147553545401
+    },
+    {
+      "architecture": "bank top-172 wires, integer-multiplicity + multi-scale gate",
+      "pick_half_roc_auc": 0.741281255576491,
+      "n_tables": 29,
+      "n_wires": 172
+    }
+  ],
+  "selected": {
+    "architecture": "bank top-90 wires, integer-multiplicity + multi-scale gate",
+    "pick_half_roc_auc": 0.75510416022814,
+    "n_tables": 15,
+    "n_wires": 90
+  },
+  "continuous_ceiling_same_split": 0.7809331573982202
+}

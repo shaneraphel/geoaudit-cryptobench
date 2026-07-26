@@ -1,0 +1,18 @@
+{
+  "schema": "geoaudit.raw_predictions_index.v1",
+  "clinical_grade": false,
+  "methods": {
+    "geometric_foundation": {
+      "file": "geometric_foundation.json",
+      "n_units": 15,
+      "rescored_in_last_run": true,
+      "sha256": "778ffe2b8ed5f1b94e5b0a7833309f3710a55bf4b8f4f5af795451412228c24c"
+    },
+    "random_bbox": {
+      "file": "random_bbox.json",
+      "n_units": 15,
+      "rescored_in_last_run": true,
+      "sha256": "b9cab82f78159fd02bb1d1580b99e8bbbad0665136f11d242a1e3385d6fa2b57"
+    }
+  }
+}

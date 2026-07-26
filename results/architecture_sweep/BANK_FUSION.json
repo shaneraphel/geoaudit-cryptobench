@@ -1,0 +1,103 @@
+{
+  "schema": "geoaudit.bank_fusion.v1",
+  "clinical_grade": false,
+  "fusion": "unweighted sum of table cell fractions; all coefficients are exactly 1; no fitted weight, no discriminant",
+  "n_test_units": 192,
+  "banks": [
+    {
+      "name": "thematic 6x6",
+      "n_tables": 6,
+      "widths": [
+        5,
+        6
+      ],
+      "min_occupancy_per_cell": 57.33349609375,
+      "roc_auc": 0.7537641078981011,
+      "roc_auc_with_patch": 0.7614704151413679,
+      "pr_auc": 0.30851945793218544,
+      "pr_auc_with_patch": 0.3290813917901318
+    },
+    {
+      "name": "strength 6x6",
+      "n_tables": 6,
+      "widths": [
+        5,
+        6
+      ],
+      "min_occupancy_per_cell": 57.33349609375,
+      "roc_auc": 0.7275120155425382,
+      "roc_auc_with_patch": 0.7423824096055035,
+      "pr_auc": 0.27676032437280695,
+      "pr_auc_with_patch": 0.3012363098507924
+    },
+    {
+      "name": "strength 7x5",
+      "n_tables": 7,
+      "widths": [
+        5
+      ],
+      "min_occupancy_per_cell": 229.333984375,
+      "roc_auc": 0.7315574431656785,
+      "roc_auc_with_patch": 0.7399499123691013,
+      "pr_auc": 0.2825493455004709,
+      "pr_auc_with_patch": 0.30128593895855144
+    },
+    {
+      "name": "strength 12x3",
+      "n_tables": 12,
+      "widths": [
+        2,
+        3
+      ],
+      "min_occupancy_per_cell": 3669.34375,
+      "roc_auc": 0.718813081306337,
+      "roc_auc_with_patch": 0.7249732692774623,
+      "pr_auc": 0.27816889832430425,
+      "pr_auc_with_patch": 0.295862699427246
+    },
+    {
+      "name": "strength 18x2",
+      "n_tables": 17,
+      "widths": [
+        2
+      ],
+      "min_occupancy_per_cell": 14677.375,
+      "roc_auc": 0.7113737253178681,
+      "roc_auc_with_patch": 0.7153121874101447,
+      "pr_auc": 0.27390943470006396,
+      "pr_auc_with_patch": 0.2889187330156712
+    },
+    {
+      "name": "interleaved 6",
+      "n_tables": 6,
+      "widths": [
+        5,
+        6
+      ],
+      "min_occupancy_per_cell": 57.33349609375,
+      "roc_auc": 0.7455401627013862,
+      "roc_auc_with_patch": 0.7462559077793003,
+      "pr_auc": 0.2931725242077104,
+      "pr_auc_with_patch": 0.306698829016859
+    },
+    {
+      "name": "interleaved 9",
+      "n_tables": 9,
+      "widths": [
+        3,
+        4
+      ],
+      "min_occupancy_per_cell": 917.3359375,
+      "roc_auc": 0.7484345535082388,
+      "roc_auc_with_patch": 0.7515629885383798,
+      "pr_auc": 0.3021073665462303,
+      "pr_auc_with_patch": 0.3152489437333557
+    }
+  ],
+  "reference": {
+    "flat_lut_7": 0.7444,
+    "best_cascade": 0.7388,
+    "fisher_35": 0.783,
+    "p2rank": 0.793
+  }
+}

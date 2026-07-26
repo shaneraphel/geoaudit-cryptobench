@@ -1,0 +1,863 @@
+{
+  "schema": "geoaudit.raw_predictions.v1",
+  "clinical_grade": false,
+  "method": "geometric_foundation",
+  "n_units": 15,
+  "units": {
+    "1a4u_B": {
+      "status": "OK",
+      "runtime_s": 0.18703583400019852,
+      "input_receptor_sha256": "25062de9c2f85b354189012a02e939634daeb72661ce81a5587933af543af71b",
+      "tool_version": null,
+      "n_universe": 254,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            18.937,
+            9.859000000000002,
+            30.941
+          ],
+          "score": 4.0044288117384985
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            17.437,
+            3.8590000000000018,
+            27.941
+          ],
+          "score": 3.890151520434521
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            23.437,
+            5.359000000000002,
+            23.441
+          ],
+          "score": 3.658049979454319
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            12.937000000000001,
+            3.8590000000000018,
+            32.441
+          ],
+          "score": 3.5753828676236594
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            18.937,
+            11.359000000000002,
+            24.941
+          ],
+          "score": 3.443252074563336
+        }
+      ],
+      "error": null
+    },
+    "1ffh_A": {
+      "status": "OK",
+      "runtime_s": 0.1362894169997162,
+      "input_receptor_sha256": "5d1e04bf02e169f513e63fead2925aa36d809055f35adc27813ce7a41dff128e",
+      "tool_version": null,
+      "n_universe": 287,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            36.7,
+            30.174,
+            39.829
+          ],
+          "score": 2.8849729564677618
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            11.2,
+            28.674,
+            38.329
+          ],
+          "score": 2.7819382080224844
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            36.7,
+            42.174,
+            48.829
+          ],
+          "score": 2.748143047222011
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            30.7,
+            48.174,
+            36.829
+          ],
+          "score": 2.748143047222011
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            36.7,
+            37.674,
+            39.829
+          ],
+          "score": 2.7387728992543425
+        }
+      ],
+      "error": null
+    },
+    "1pfz_C": {
+      "status": "OK",
+      "runtime_s": 0.20180016600170347,
+      "input_receptor_sha256": "68e744bb3137629ce3cb10b887d39ba30bf216d09886cd306412765d285b3262",
+      "tool_version": null,
+      "n_universe": 319,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            0.28699999999999903,
+            6.088000000000001,
+            94.344
+          ],
+          "score": 3.2878241356067504
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            15.286999999999999,
+            0.08800000000000097,
+            109.344
+          ],
+          "score": 3.1911872372514196
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            19.787,
+            -1.411999999999999,
+            113.844
+          ],
+          "score": 3.1744508895513452
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            7.786999999999999,
+            -1.411999999999999,
+            107.844
+          ],
+          "score": 3.0629131171912762
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            -2.713000000000001,
+            7.588000000000001,
+            100.344
+          ],
+          "score": 3.06107764349594
+        }
+      ],
+      "error": null
+    },
+    "1uiu_A": {
+      "status": "OK",
+      "runtime_s": 0.554359415998988,
+      "input_receptor_sha256": "54b46d0bbaec29b69932c479f1e3e363e6561879de984927a921255d330220a7",
+      "tool_version": null,
+      "n_universe": 496,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            35.673,
+            29.761,
+            1.6469999999999985
+          ],
+          "score": 3.1343334297446352
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            29.673000000000002,
+            31.261,
+            3.1469999999999985
+          ],
+          "score": 3.1100575428301904
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            38.673,
+            41.760999999999996,
+            6.1469999999999985
+          ],
+          "score": 3.040890102153383
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            41.673,
+            29.761,
+            6.1469999999999985
+          ],
+          "score": 2.938633770513468
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            29.673000000000002,
+            17.761,
+            3.1469999999999985
+          ],
+          "score": 2.8969882423813806
+        }
+      ],
+      "error": null
+    },
+    "2aka_A": {
+      "status": "OK",
+      "runtime_s": 1.0834347500003787,
+      "input_receptor_sha256": "07248120c1746ac02ed8379ec126882391ae14ad941151518977f780cda9d29b",
+      "tool_version": null,
+      "n_universe": 764,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            36.218,
+            45.563,
+            30.708
+          ],
+          "score": 3.1780538303479458
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            28.718,
+            47.063,
+            29.208
+          ],
+          "score": 3.1525746717628675
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            22.718,
+            51.563,
+            29.208
+          ],
+          "score": 2.913756301222067
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            46.718,
+            29.063,
+            26.208
+          ],
+          "score": 2.8602484473131513
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            39.218,
+            33.563,
+            14.208
+          ],
+          "score": 2.8415542752085283
+        }
+      ],
+      "error": null
+    },
+    "2fhz_B": {
+      "status": "OK",
+      "runtime_s": 0.0496520420001616,
+      "input_receptor_sha256": "796337b68cf3bc39da7085edd28992db566e9949dddc4de0e8b7c11847582c39",
+      "tool_version": null,
+      "n_universe": 93,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            13.973,
+            29.589,
+            19.413
+          ],
+          "score": 4.033432303469853
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            10.973,
+            34.089,
+            13.413
+          ],
+          "score": 3.943823971206493
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            19.973,
+            29.589,
+            17.913
+          ],
+          "score": 3.6512214717329363
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            13.973,
+            31.089,
+            25.413
+          ],
+          "score": 3.5727264949236672
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            21.473,
+            34.089,
+            13.413
+          ],
+          "score": 3.1115799640392607
+        }
+      ],
+      "error": null
+    },
+    "2jkl_A": {
+      "status": "OK",
+      "runtime_s": 0.10613858299984713,
+      "input_receptor_sha256": "9a39f88c0dbccd4676f6c13bf1c7c30d0f134e94ba0ab06f03bbc5af03361be1",
+      "tool_version": null,
+      "n_universe": 139,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            42.952,
+            20.43,
+            -2.8530000000000015
+          ],
+          "score": 3.3199915087025427
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            42.952,
+            27.93,
+            -4.3530000000000015
+          ],
+          "score": 3.3183248573901194
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            50.452,
+            42.93,
+            -2.8530000000000015
+          ],
+          "score": 2.7972060491731843
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            35.452,
+            32.43,
+            6.1469999999999985
+          ],
+          "score": 2.7896923815524404
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            39.952,
+            14.43,
+            -2.8530000000000015
+          ],
+          "score": 2.7465307216702746
+        }
+      ],
+      "error": null
+    },
+    "3a7g_A": {
+      "status": "OK",
+      "runtime_s": 0.12073391700141656,
+      "input_receptor_sha256": "6c8922b41cbd0c47ba464574bc7f43d582fd9f5bb032c4e8e905b3095f5b30b2",
+      "tool_version": null,
+      "n_universe": 289,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            9.384,
+            24.803,
+            38.839
+          ],
+          "score": 3.4651328415390528
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            7.884,
+            29.303,
+            43.339
+          ],
+          "score": 3.452612271992944
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            9.384,
+            23.303,
+            46.339
+          ],
+          "score": 3.3837025087886827
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            10.884,
+            26.303,
+            53.839
+          ],
+          "score": 3.3195209643356414
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            13.884,
+            29.303,
+            46.339
+          ],
+          "score": 2.9989840591576833
+        }
+      ],
+      "error": null
+    },
+    "3flg_A": {
+      "status": "OK",
+      "runtime_s": 0.03613841700098419,
+      "input_receptor_sha256": "49849f086e99e4c07c28611ba39cd216147982964840a2faaeddcbe825f17685",
+      "tool_version": null,
+      "n_universe": 135,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            9.758,
+            12.366,
+            18.666
+          ],
+          "score": 3.0905884840366316
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            14.258,
+            10.866,
+            5.166
+          ],
+          "score": 3.030566246987827
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            17.258,
+            7.866,
+            21.666
+          ],
+          "score": 2.794026032632959
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            3.758,
+            -1.1340000000000003,
+            11.166
+          ],
+          "score": 2.7543133196348863
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            12.758,
+            15.366,
+            23.166
+          ],
+          "score": 2.680655797124302
+        }
+      ],
+      "error": null
+    },
+    "3mo7_A": {
+      "status": "OK",
+      "runtime_s": 0.09276916599992546,
+      "input_receptor_sha256": "80d29708edfd9e8519577ccda07130c8e6c5ab99dc8594e4cdd9d4d726814e17",
+      "tool_version": null,
+      "n_universe": 258,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            21.964,
+            9.639,
+            -3.652000000000001
+          ],
+          "score": 3.531910324990377
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            26.464,
+            12.639,
+            -6.652000000000001
+          ],
+          "score": 3.3085765946267682
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            26.464,
+            15.639,
+            -12.652000000000001
+          ],
+          "score": 3.273827543753747
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            17.464,
+            14.139,
+            -6.652000000000001
+          ],
+          "score": 3.0561791213340066
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            21.964,
+            8.139,
+            -9.652000000000001
+          ],
+          "score": 2.96490426307867
+        }
+      ],
+      "error": null
+    },
+    "3wmg_A": {
+      "status": "OK",
+      "runtime_s": 0.6298394169989479,
+      "input_receptor_sha256": "a3cdb3170dd5ddbd00979ec4d8f2de76718e3ba7593258636956fe31decd0b0c",
+      "tool_version": null,
+      "n_universe": 589,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            57.603,
+            26.359,
+            32.973
+          ],
+          "score": 3.3183248573901194
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            57.603,
+            17.359,
+            34.473
+          ],
+          "score": 2.8849729564677618
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            53.103,
+            18.859,
+            38.973
+          ],
+          "score": 2.8415542752085283
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            57.603,
+            24.859,
+            38.973
+          ],
+          "score": 2.7725887222397816
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            -2.3969999999999985,
+            62.359,
+            35.973
+          ],
+          "score": 2.7465307216702746
+        }
+      ],
+      "error": null
+    },
+    "4faf_A": {
+      "status": "OK",
+      "runtime_s": 0.03320208399964031,
+      "input_receptor_sha256": "c695749f8aa51cde26f5fcc05c803f65ed5ba136c0bad70713fe41c8acc809a0",
+      "tool_version": null,
+      "n_universe": 99,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            -10.759,
+            -4.911999999999999,
+            -13.097000000000001
+          ],
+          "score": 3.452612271992944
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            -10.759,
+            13.088000000000001,
+            -16.097
+          ],
+          "score": 3.395080415744627
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            -10.759,
+            -3.411999999999999,
+            -19.097
+          ],
+          "score": 3.040890102153383
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            -7.759,
+            -9.411999999999999,
+            -16.097
+          ],
+          "score": 2.962790051241178
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            -10.759,
+            8.588000000000001,
+            -11.597000000000001
+          ],
+          "score": 2.7750723982067247
+        }
+      ],
+      "error": null
+    },
+    "4l6w_A": {
+      "status": "OK",
+      "runtime_s": 0.22517312499985565,
+      "input_receptor_sha256": "9206e659379b236d7475d722da521d3e326180d89cad1526e0c0bb3b2a544f88",
+      "tool_version": null,
+      "n_universe": 412,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            4.010000000000002,
+            5.541,
+            16.162
+          ],
+          "score": 3.279631016062493
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            10.010000000000002,
+            5.541,
+            16.162
+          ],
+          "score": 3.1115799640392607
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            8.510000000000002,
+            -13.959,
+            16.162
+          ],
+          "score": 3.1115799640392607
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            22.01,
+            10.041,
+            25.162
+          ],
+          "score": 2.8415542752085283
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            4.010000000000002,
+            8.541,
+            10.161999999999999
+          ],
+          "score": 2.8210884196929293
+        }
+      ],
+      "error": null
+    },
+    "4pvr_A": {
+      "status": "OK",
+      "runtime_s": 0.19142966599974898,
+      "input_receptor_sha256": "90f254521ef91a458fba5681edbbb9875c577a4bd9d743309fe884521bc0f285",
+      "tool_version": null,
+      "n_universe": 298,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            -4.861999999999998,
+            -5.856999999999999,
+            7.9510000000000005
+          ],
+          "score": 3.1354942159291497
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            -7.861999999999998,
+            -13.357,
+            10.951
+          ],
+          "score": 2.7387728992543425
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            -15.361999999999998,
+            -13.357,
+            -8.549
+          ],
+          "score": 2.6801690981651216
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            -16.862,
+            -10.357,
+            9.451
+          ],
+          "score": 2.6390573296152584
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            -1.8619999999999983,
+            -11.857,
+            12.451
+          ],
+          "score": 2.549892009650595
+        }
+      ],
+      "error": null
+    },
+    "5cxy_B": {
+      "status": "OK",
+      "runtime_s": 0.14106629100024293,
+      "input_receptor_sha256": "7a6a9b0900067a7be3b3e5335b88a9e21b2fa729a27999854fc2c910ec77802f",
+      "tool_version": null,
+      "n_universe": 292,
+      "residue_scores": null,
+      "residue_positive": null,
+      "pockets": [
+        {
+          "rank": 1,
+          "center_xyz": [
+            9.527999999999999,
+            10.076,
+            7.077000000000002
+          ],
+          "score": 3.6043653389117156
+        },
+        {
+          "rank": 2,
+          "center_xyz": [
+            12.527999999999999,
+            13.076,
+            11.577000000000002
+          ],
+          "score": 3.5104534413139916
+        },
+        {
+          "rank": 3,
+          "center_xyz": [
+            0.5279999999999987,
+            10.076,
+            11.577000000000002
+          ],
+          "score": 3.4657359027997265
+        },
+        {
+          "rank": 4,
+          "center_xyz": [
+            0.5279999999999987,
+            10.076,
+            5.577000000000002
+          ],
+          "score": 3.3639026564550316
+        },
+        {
+          "rank": 5,
+          "center_xyz": [
+            5.027999999999999,
+            14.576,
+            7.077000000000002
+          ],
+          "score": 3.330250823421158
+        }
+      ],
+      "error": null
+    }
+  }
+}

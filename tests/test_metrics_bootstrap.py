@@ -1,16 +1,106 @@
 """Paired bootstrap CI + MCC/F1 gates."""
 from __future__ import annotations
 
+import json
+import math
 import unittest
 
 from pocket_bench.metrics_bootstrap import (
     f1,
     f1_from_counts,
+    json_safe,
     mcc,
     mcc_from_counts,
     paired_bootstrap,
     per_structure_values,
 )
+
+
+class TestJsonStrictness(unittest.TestCase):
+    """Non-finite floats must serialize as JSON null, never as a bare NaN token."""
+
+    def test_non_finite_becomes_none(self) -> None:
+        self.assertIsNone(json_safe(float("nan")))
+        self.assertIsNone(json_safe(float("inf")))
+        self.assertIsNone(json_safe(float("-inf")))
+        self.assertEqual(json_safe(0.25), 0.25)
+
+    def test_nested_structures_sanitized(self) -> None:
+        raw = {"per_method": {"m": {"ci_low": float("nan"), "point": 0.5}},
+               "xs": [1.0, float("inf"), {"y": float("nan")}]}
+        safe = json_safe(raw)
+        self.assertIsNone(safe["per_method"]["m"]["ci_low"])
+        self.assertEqual(safe["per_method"]["m"]["point"], 0.5)
+        self.assertEqual(safe["xs"], [1.0, None, {"y": None}])
+
+    def test_emits_strict_json(self) -> None:
+        raw = {"ci_low": float("nan")}
+        # allow_nan=False is what a strict consumer effectively enforces.
+        with self.assertRaises(ValueError):
+            json.dumps(raw, allow_nan=False)
+        text = json.dumps(json_safe(raw), allow_nan=False)
+        self.assertIn("null", text)
+        self.assertNotIn("NaN", text)
+        self.assertIsNone(json.loads(text)["ci_low"])
+
+    def test_bootstrap_output_is_strict_without_json_safe(self) -> None:
+        """The producer, not only the sanitizer, must be strict.
+
+        Relying on every caller to remember ``json_safe`` is how a bare NaN
+        reached a frozen report: a method that scored on no structure has an
+        empty bootstrap distribution, and an empty percentile used to be NaN.
+        """
+        vals = {
+            "scored": [0.7, 0.6, 0.8],
+            "never_scored": [None, None, None],
+        }
+        out = paired_bootstrap(vals, baseline="scored", n_boot=64, seed=1)
+        text = json.dumps(out, allow_nan=False)   # raises if any NaN survives
+        self.assertNotIn("NaN", text)
+        empty = out["per_method"]["never_scored"]
+        self.assertIsNone(empty["point"])
+        self.assertIsNone(empty["ci_low"])
+        self.assertIsNone(empty["ci_high"])
+        self.assertEqual(empty["n_structures_scored"], 0)
+        delta = out["paired_vs_baseline"]["never_scored"]
+        self.assertIsNone(delta["delta_point"])
+        self.assertIsNone(delta["crosses_zero"],
+                          "an unestimated difference must not read as a verdict")
+
+    def test_bootstrap_report_is_strict_json_without_sanitizing(self) -> None:
+        """A method scored on nothing has no CI, and "no CI" is null, not NaN.
+
+        json_safe exists as a belt, but a report that is only strict because
+        every caller remembered to route it through a helper is one forgotten
+        call away from emitting a bare NaN token. paired_bootstrap must not be
+        able to produce one in the first place.
+        """
+        res = paired_bootstrap(
+            {"base": [0.5, 0.6], "empty": [None, None]},
+            baseline="base", n_boot=32,
+        )
+        empty = res["per_method"]["empty"]
+        self.assertIsNone(empty["ci_low"])
+        self.assertIsNone(empty["ci_high"])
+        self.assertEqual(empty["n_structures_scored"], 0)
+
+        text = json.dumps(res, allow_nan=False)   # no json_safe on this path
+        self.assertNotIn("NaN", text)
+        self.assertIsNone(json.loads(text)["per_method"]["empty"]["ci_low"])
+
+    def test_undefined_delta_is_not_reported_as_significant(self) -> None:
+        res = paired_bootstrap(
+            {"base": [0.5, 0.6], "empty": [None, None]},
+            baseline="base", n_boot=32,
+        )
+        d = res["paired_vs_baseline"]["empty"]
+        self.assertIsNone(d["delta_point"])
+        self.assertIsNone(d["crosses_zero"])
+        self.assertIsNone(d["p_two_sided_bootstrap"])
+
+    def test_json_safe_still_available_for_upstream_nans(self) -> None:
+        self.assertIsNone(json_safe(float("nan")))
+        self.assertTrue(math.isnan(float("nan")))
 
 
 class TestMccF1(unittest.TestCase):

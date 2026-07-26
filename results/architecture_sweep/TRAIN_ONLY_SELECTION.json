@@ -1,0 +1,66 @@
+{
+  "schema": "geoaudit.train_only_architecture_selection.v1",
+  "clinical_grade": false,
+  "why": "the architecture is chosen without reading the official test fold, so the reported test score is not the maximum of several test-fold estimates",
+  "split": {
+    "source": "data/cryptobench_apo/train_manifest.json",
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725,
+    "n_clusters": 766,
+    "n_fit_units": 386,
+    "n_pick_units": 384,
+    "n_fit_residues": 118716,
+    "n_pick_residues": 116122,
+    "fit_base_rate": 0.05576333434414906
+  },
+  "candidates": [
+    {
+      "architecture": "flat single table, 6 wires",
+      "pick_half_roc_auc": 0.7205274618452423
+    },
+    {
+      "architecture": "flat single table, 7 wires",
+      "pick_half_roc_auc": 0.6944058872190625
+    },
+    {
+      "architecture": "parallel bank (thematic 6x6), uniform fusion",
+      "pick_half_roc_auc": 0.7268253455626251
+    },
+    {
+      "architecture": "parallel bank, integer-multiplicity fusion",
+      "pick_half_roc_auc": 0.7309889893408222,
+      "multiplicity": [
+        6,
+        1,
+        3,
+        2,
+        5,
+        4
+      ]
+    },
+    {
+      "architecture": "parallel bank, uniform fusion + multi-scale gate",
+      "pick_half_roc_auc": 0.73992448136083
+    },
+    {
+      "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+      "pick_half_roc_auc": 0.7445820795880739
+    },
+    {
+      "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+      "pick_half_roc_auc": 0.7310320879825696
+    },
+    {
+      "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+      "pick_half_roc_auc": 0.7206836869776675
+    },
+    {
+      "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+      "pick_half_roc_auc": 0.7064716319309627
+    }
+  ],
+  "selected": {
+    "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+    "pick_half_roc_auc": 0.7445820795880739
+  }
+}

@@ -48,7 +48,22 @@ from pocket_bench.paths import ROOT
 from pocket_bench.pdb_io import parse_pdb_atoms
 
 OUT = ROOT / "results/official_fold"
+_TELEMETRY = ROOT / "results/cryptobench_official/TELEMETRY.json"
 _POS_EPS = 1e-9  # geometric_foundation: any nonzero pocket membership == predicted
+
+
+def _telemetry_units_scored(method: str) -> int:
+    """How many official units a method actually produced a residue AUC for.
+
+    Availability is a fact about the filesystem, so it is counted rather than
+    declared. If the telemetry is absent the answer is zero, which is the
+    honest reading of "no evidence on disk".
+    """
+    if not _TELEMETRY.exists():
+        return 0
+    rows = json.loads(_TELEMETRY.read_text()).get("rows") or []
+    return sum(1 for r in rows
+               if r.get("method") == method and r.get("residue_auc") is not None)
 
 
 def _chain_universe(receptor: Path, chain: str) -> list[int]:
@@ -125,10 +140,15 @@ def main() -> int:
             n_boot=10000, seed=20260725, ci=0.95,
         )
 
-    # real ML baselines: present only if per-residue prediction files exist
+    # Real ML baselines: status is READ OFF THE EVIDENCE, never asserted. A
+    # hardcoded "p2rank: DATA_UNAVAILABLE" survived past the run that actually
+    # scored P2Rank on all 192 units, so this report contradicted
+    # OFFICIAL_MULTI_METHOD_BOOTSTRAP.json in the same directory.
+    p2rank_scored = _telemetry_units_scored("p2rank")
     baseline_status = {
         "pocketminer": "AVAILABLE" if pocketminer_available() else "DATA_UNAVAILABLE",
-        "p2rank": "DATA_UNAVAILABLE",  # no per-residue prediction files in repo
+        "p2rank": "AVAILABLE" if p2rank_scored else "DATA_UNAVAILABLE",
+        "p2rank_structures_with_scores": p2rank_scored,
     }
     pm_join = 0
     if pocketminer_available():
@@ -157,10 +177,25 @@ def main() -> int:
             "random_residue": "score >= 0.5",
         },
         "real_ml_baseline_status": baseline_status,
-        "real_ml_baseline_note": "P2Rank/PocketMiner per-residue predictions are not "
-        "published on OSF (only a trained pLM-NN model binary); a paired CI against "
-        "them is not computed from fabricated numbers. The paired baseline here is a "
-        "residue-level uniform-random null.",
+        "real_ml_baseline_note": (
+            "This report is the two-method chance-control freeze: its own paired "
+            "baseline is a residue-level uniform-random null, which is the only "
+            "comparison it computes. P2Rank is executed locally from the receptor "
+            "PDB and its per-residue probabilities are scored on the identical "
+            "residue universe; PocketMiner per-residue predictions are not "
+            "published on OSF (only a trained pLM-NN model binary) and no number "
+            "is fabricated in its place."
+        ),
+        "authoritative_multi_method_report":
+            "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json",
+        "authoritative_vs_p2rank_report":
+            "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json",
+        "scope_note": (
+            "Methods other than geometric_foundation and random_residue are out "
+            "of scope for THIS file by construction; read the two reports above "
+            "for the full method set. Any apparent disagreement is a scope "
+            "difference, not a numerical one."
+        ),
         "bootstrap": boot,
     }
     OUT.mkdir(parents=True, exist_ok=True)

@@ -7,14 +7,32 @@ __pycache__/
 *.pyc
 .DS_Store
 
-# Materialized CryptoBench official fold (35 MB of RCSB receptors): reproducible
-# via tools/fetch_official_data.py against OSF-pinned hashes; not bulk-committed.
+# What is deliberately NOT ignored, and why
+# ----------------------------------------
+# An earlier revision of this file excluded the official manifest and the whole
+# of results/cryptobench_official/. That made the headline comparison
+# unauditable from a clone: a reader could see the frozen bootstrap but not the
+# per-structure telemetry it was computed from, and could not recompute either.
+# The manifests, labels, telemetry, per-structure predictions and raw P2Rank
+# output are all small (about 18 MB together) and are committed for that reason.
+# Only inputs that are reproducible byte-for-byte from a pinned hash, and
+# derived caches that are reproducible from those inputs, are excluded below.
+
+# Structure coordinates: 185 MB, materialized from RCSB and OSF and verified
+# against the SHA-256 pins already committed in the manifests.
+#   tools/fetch_official_data.py
 data/cryptobench_apo/_osf/
 data/cryptobench_apo/official_receptors/
-data/cryptobench_apo/official_labels/
-data/cryptobench_apo/official_manifest.json
-# Superseded earlier partial run
-results/cryptobench_official/
+data/cryptobench_apo/train_receptors/
+
+# Derived feature caches: ~700 MB, rebuilt from the receptors above.
+#   tools/build_cascade_cache.py, tools/build_expanded_cache.py
+data/cryptobench_apo/_*.npz
+data/cryptobench_apo/_*.npy
+data/cryptobench_apo/_scratch/
+
+# Resumable-run scratch, meaningful only to an interrupted process.
+results/**/_scoring_checkpoint.jsonl
 
 # Rust build artefacts for the optional native kernels
 native/geoaudit_kernels/target/
@@ -24,3 +42,4 @@ paper/*.pdf
 paper/*.aux
 paper/*.log
 paper/*.out
+paper/*.xdv

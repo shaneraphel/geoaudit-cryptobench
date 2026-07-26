@@ -1,0 +1,48 @@
+{
+  "schema": "geoaudit.threshold_gate.v1",
+  "clinical_grade": false,
+  "multiplicity": "integer rank of each table's compiled train Gini; fan-out replication, not a real coefficient",
+  "table_gini": [
+    0.5709939345975681,
+    0.32461225572838104,
+    0.4024586927322098,
+    0.4385818910209005,
+    0.4477485447977081,
+    0.4299644842348229
+  ],
+  "multiplicity_values": [
+    6,
+    1,
+    2,
+    4,
+    5,
+    3
+  ],
+  "n_test_units": 192,
+  "results": [
+    {
+      "config": "uniform (m=1)",
+      "roc_auc": 0.7536437643064676,
+      "pr_auc": 0.3082464805836129
+    },
+    {
+      "config": "threshold (m=rank)",
+      "roc_auc": 0.756510419999492,
+      "pr_auc": 0.3071882916172667
+    },
+    {
+      "config": "uniform + multiscale gate",
+      "roc_auc": 0.7620369035086979,
+      "pr_auc": 0.33386178525885657
+    },
+    {
+      "config": "threshold + multiscale gate",
+      "roc_auc": 0.7669002451015944,
+      "pr_auc": 0.3365796280801492
+    }
+  ],
+  "reference": {
+    "fisher_35": 0.783,
+    "p2rank": 0.793
+  }
+}

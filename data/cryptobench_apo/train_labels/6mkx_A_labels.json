@@ -1,0 +1,43 @@
+{
+  "schema": "cryptobench.train_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "6mkx",
+  "chain": "A",
+  "cryptic_residues": [
+    11,
+    13,
+    14,
+    18,
+    52,
+    69,
+    70,
+    71,
+    72,
+    77,
+    117,
+    119,
+    120,
+    121,
+    122,
+    161
+  ],
+  "binding_residues": [
+    11,
+    13,
+    14,
+    18,
+    52,
+    69,
+    70,
+    71,
+    72,
+    77,
+    117,
+    119,
+    120,
+    121,
+    122,
+    161
+  ],
+  "labels_source_sha256": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+}

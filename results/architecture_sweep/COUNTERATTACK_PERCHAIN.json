@@ -1,0 +1,16 @@
+{
+  "schema": "geoaudit.counterattack_perchain.v1",
+  "clinical_grade": false,
+  "question": "what does making the fusion self-contained per chain cost",
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725
+  },
+  "pick_half_roc_auc": {
+    "accumulator only (no spatial term)": 0.780813435051294,
+    "global unit (sweep convention, not deployable)": 0.7811049077020913,
+    "per-chain unit": 0.7810840635734655,
+    "per-chain rank": 0.779659175497776
+  },
+  "selected": "per-chain unit"
+}

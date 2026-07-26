@@ -1,0 +1,37 @@
+{
+  "schema": "cryptobench.train_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "4m23",
+  "chain": "B",
+  "cryptic_residues": [
+    132,
+    151,
+    154,
+    156,
+    167,
+    169,
+    180,
+    303,
+    304,
+    305,
+    317,
+    319,
+    321
+  ],
+  "binding_residues": [
+    132,
+    151,
+    154,
+    156,
+    167,
+    169,
+    180,
+    303,
+    304,
+    305,
+    317,
+    319,
+    321
+  ],
+  "labels_source_sha256": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+}

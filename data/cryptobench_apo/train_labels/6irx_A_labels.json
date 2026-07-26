@@ -1,0 +1,35 @@
+{
+  "schema": "cryptobench.train_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "6irx",
+  "chain": "A",
+  "cryptic_residues": [
+    239,
+    269,
+    270,
+    273,
+    563,
+    593,
+    594,
+    595,
+    596,
+    597,
+    598,
+    642
+  ],
+  "binding_residues": [
+    239,
+    269,
+    270,
+    273,
+    563,
+    593,
+    594,
+    595,
+    596,
+    597,
+    598,
+    642
+  ],
+  "labels_source_sha256": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+}

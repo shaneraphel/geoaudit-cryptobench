@@ -1,0 +1,64 @@
+{
+  "schema": "geoaudit.multiscale_gate.v1",
+  "clinical_grade": false,
+  "radii": [
+    6.0,
+    8.0,
+    10.0,
+    14.0,
+    18.0
+  ],
+  "n_test_units": 192,
+  "results": [
+    {
+      "config": "no gate",
+      "roc_auc": 0.7536437643064676,
+      "pr_auc": 0.3082464805836129
+    },
+    {
+      "config": "post gate r=6",
+      "roc_auc": 0.7583223744591528,
+      "pr_auc": 0.3224236832936757
+    },
+    {
+      "config": "post gate r=8",
+      "roc_auc": 0.761136532919419,
+      "pr_auc": 0.33242348740198485
+    },
+    {
+      "config": "post gate r=10",
+      "roc_auc": 0.7620227470425839,
+      "pr_auc": 0.3339912000499942
+    },
+    {
+      "config": "post gate r=14",
+      "roc_auc": 0.7616956090753559,
+      "pr_auc": 0.3322335068460815
+    },
+    {
+      "config": "post gate r=18",
+      "roc_auc": 0.7569566266443122,
+      "pr_auc": 0.322487246216727
+    },
+    {
+      "config": "post multiscale (5 radii)",
+      "roc_auc": 0.7620369035086979,
+      "pr_auc": 0.33386178525885657
+    },
+    {
+      "config": "gate only",
+      "roc_auc": 0.7524732821098592,
+      "pr_auc": 0.3175100804329271
+    },
+    {
+      "config": "pre-fusion multiscale",
+      "roc_auc": 0.7489536903559557,
+      "pr_auc": 0.31914966486826685
+    }
+  ],
+  "reference": {
+    "bank4": 0.7615,
+    "fisher_35": 0.783,
+    "p2rank": 0.793
+  }
+}

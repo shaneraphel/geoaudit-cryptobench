@@ -1,0 +1,39 @@
+{
+  "schema": "cryptobench.official_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "2fhz",
+  "chain": "B",
+  "cryptic_residues": [
+    17,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    52,
+    75,
+    84,
+    85,
+    97,
+    99,
+    100
+  ],
+  "binding_residues": [
+    17,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    52,
+    75,
+    84,
+    85,
+    97,
+    99,
+    100
+  ],
+  "labels_source_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838"
+}

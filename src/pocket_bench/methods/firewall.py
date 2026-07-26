@@ -101,12 +101,16 @@ def receptor_provenance(path: Path, text: str) -> dict[str, Any]:
     }
 
 
-def ligand_leak_guard(method: str) -> Callable:
+def ligand_leak_guard(method: str | Callable[..., str]) -> Callable:
     """Decorator: refuse to run a predictor on a receptor that carries ligand atoms.
 
     Wraps ``predict(receptor_pdb, *, pdb_id, ...)``. On any leak the predictor is
     never executed; a fail-closed ``CRASH`` record is returned with the reason.
     On success the returned prediction is stamped with firewall provenance.
+
+    ``method`` may be a callable over the call kwargs for a predictor that serves
+    several registered method names, so a fail-closed record is attributed to the
+    variant that was actually invoked rather than to a fixed label.
     """
     from pocket_bench.methods import prediction  # local import: avoids cycle
 
@@ -114,18 +118,19 @@ def ligand_leak_guard(method: str) -> Callable:
         @wraps(func)
         def wrapper(receptor_pdb, *args, **kwargs):
             pdb_id = kwargs.get("pdb_id", "")
+            name = method(**kwargs) if callable(method) else method
             path = Path(receptor_pdb)
             try:
                 text = path.read_text(errors="ignore")
             except Exception as exc:  # noqa: BLE001
                 return prediction(
-                    method=method, pdb_id=pdb_id, status=STATUS_CRASH,
+                    method=name, pdb_id=pdb_id, status=STATUS_CRASH,
                     error=f"ligand_leak_guard:receptor_unreadable:{exc}",
                 )
             reasons = leak_reasons(text)
             if reasons:
                 return prediction(
-                    method=method, pdb_id=pdb_id, status=STATUS_CRASH,
+                    method=name, pdb_id=pdb_id, status=STATUS_CRASH,
                     error="ligand_leak_guard:" + ";".join(reasons),
                     extra=receptor_provenance(path, text),
                 )

@@ -1,0 +1,27 @@
+{
+  "schema": "cryptobench.official_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "3tpo",
+  "chain": "A",
+  "cryptic_residues": [
+    357,
+    360,
+    361,
+    364,
+    396,
+    399,
+    403,
+    406
+  ],
+  "binding_residues": [
+    357,
+    360,
+    361,
+    364,
+    396,
+    399,
+    403,
+    406
+  ],
+  "labels_source_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838"
+}

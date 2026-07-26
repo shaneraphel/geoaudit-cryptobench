@@ -62,9 +62,16 @@ def telemetry_row(
     # 'binding_residues' while the CryptoBench labels only carry
     # 'cryptic_residues', so residue_f1 was structurally always null.
     true_res = (label or {}).get("cryptic_residues") or (label or {}).get("binding_residues")
-    pred_res = pockets[0].get("residues") if pockets else None
+    # A natively residue-level predictor (P2Rank) states its own positive set;
+    # using its rank-1 pocket instead would score a different prediction than the
+    # one it made.
+    native_pos = (prediction or {}).get("residue_positive")
+    if native_pos is not None:
+        pred_res = native_pos
+    else:
+        pred_res = pockets[0].get("residues") if pockets else None
     res_f1 = residue_f1(pred_res, true_res)
-    res_auc = residue_auc_pr(pockets, true_res, universe_residues)
+    res_auc = residue_auc_pr(pockets, true_res, universe_residues, prediction)
     return {
         "schema": SCHEMA,
         "clinical_grade": False,

@@ -1,0 +1,262 @@
+{
+  "schema": "pairwise_readout_selection/v1",
+  "split": "training fold, cluster-disjoint fit/pick halves",
+  "seed": 20260725,
+  "ridge": 0.0001,
+  "table_width": 2,
+  "n_levels": 4,
+  "reference": {
+    "width_six_bank": 0.7631,
+    "first_order_linear": 0.7873
+  },
+  "candidates": [
+    {
+      "readout": "pair_30+lin",
+      "ridge": 0.1,
+      "n_parameters": 607,
+      "pick_half_roc_auc_raw": 0.7786,
+      "pick_half_roc_auc": 0.7846,
+      "gate": "r=18,w=0.5"
+    },
+    {
+      "readout": "pair_30+lin",
+      "ridge": 0.01,
+      "n_parameters": 607,
+      "pick_half_roc_auc_raw": 0.7749,
+      "pick_half_roc_auc": 0.7841,
+      "gate": "r=18,w=1"
+    },
+    {
+      "readout": "pair_45+lin",
+      "ridge": 0.1,
+      "n_parameters": 1162,
+      "pick_half_roc_auc_raw": 0.7764,
+      "pick_half_roc_auc": 0.7838,
+      "gate": "r=18,w=0.5"
+    },
+    {
+      "readout": "pair_45+lin",
+      "ridge": 0.01,
+      "n_parameters": 1162,
+      "pick_half_roc_auc_raw": 0.7728,
+      "pick_half_roc_auc": 0.7836,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_30+lin",
+      "ridge": 0.0001,
+      "n_parameters": 607,
+      "pick_half_roc_auc_raw": 0.7693,
+      "pick_half_roc_auc": 0.7822,
+      "gate": "r=18,w=1"
+    },
+    {
+      "readout": "pair_60+lin",
+      "ridge": 0.1,
+      "n_parameters": 1942,
+      "pick_half_roc_auc_raw": 0.7741,
+      "pick_half_roc_auc": 0.7822,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_45+lin",
+      "ridge": 1.0,
+      "n_parameters": 1162,
+      "pick_half_roc_auc_raw": 0.778,
+      "pick_half_roc_auc": 0.7821,
+      "gate": "r=18,w=0.5"
+    },
+    {
+      "readout": "pair_30+lin",
+      "ridge": 1e-06,
+      "n_parameters": 607,
+      "pick_half_roc_auc_raw": 0.7687,
+      "pick_half_roc_auc": 0.7819,
+      "gate": "r=18,w=1"
+    },
+    {
+      "readout": "pair_60+lin",
+      "ridge": 0.01,
+      "n_parameters": 1942,
+      "pick_half_roc_auc_raw": 0.7687,
+      "pick_half_roc_auc": 0.7815,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_60+lin",
+      "ridge": 1.0,
+      "n_parameters": 1942,
+      "pick_half_roc_auc_raw": 0.7764,
+      "pick_half_roc_auc": 0.7813,
+      "gate": "r=18,w=0.5"
+    },
+    {
+      "readout": "pair_30+lin",
+      "ridge": 1.0,
+      "n_parameters": 607,
+      "pick_half_roc_auc_raw": 0.7779,
+      "pick_half_roc_auc": 0.7812,
+      "gate": "r=18,w=0.25"
+    },
+    {
+      "readout": "pair_45+lin",
+      "ridge": 0.0001,
+      "n_parameters": 1162,
+      "pick_half_roc_auc_raw": 0.7644,
+      "pick_half_roc_auc": 0.7808,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_45+lin",
+      "ridge": 1e-06,
+      "n_parameters": 1162,
+      "pick_half_roc_auc_raw": 0.7632,
+      "pick_half_roc_auc": 0.7805,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_60+lin",
+      "ridge": 0.0001,
+      "n_parameters": 1942,
+      "pick_half_roc_auc_raw": 0.7569,
+      "pick_half_roc_auc": 0.7775,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_60+lin",
+      "ridge": 1e-06,
+      "n_parameters": 1942,
+      "pick_half_roc_auc_raw": 0.7558,
+      "pick_half_roc_auc": 0.7769,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_60",
+      "ridge": 1.0,
+      "n_parameters": 1770,
+      "pick_half_roc_auc_raw": 0.7656,
+      "pick_half_roc_auc": 0.7691,
+      "gate": "r=14,w=0.5"
+    },
+    {
+      "readout": "pair_45",
+      "ridge": 0.1,
+      "n_parameters": 990,
+      "pick_half_roc_auc_raw": 0.7641,
+      "pick_half_roc_auc": 0.769,
+      "gate": "r=14,w=0.5"
+    },
+    {
+      "readout": "pair_45",
+      "ridge": 1.0,
+      "n_parameters": 990,
+      "pick_half_roc_auc_raw": 0.7654,
+      "pick_half_roc_auc": 0.7687,
+      "gate": "r=14,w=0.5"
+    },
+    {
+      "readout": "pair_45",
+      "ridge": 0.01,
+      "n_parameters": 990,
+      "pick_half_roc_auc_raw": 0.7601,
+      "pick_half_roc_auc": 0.7685,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_60",
+      "ridge": 0.1,
+      "n_parameters": 1770,
+      "pick_half_roc_auc_raw": 0.7621,
+      "pick_half_roc_auc": 0.7683,
+      "gate": "r=14,w=0.5"
+    },
+    {
+      "readout": "pair_60",
+      "ridge": 0.01,
+      "n_parameters": 1770,
+      "pick_half_roc_auc_raw": 0.7551,
+      "pick_half_roc_auc": 0.7673,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_45",
+      "ridge": 0.0001,
+      "n_parameters": 990,
+      "pick_half_roc_auc_raw": 0.7502,
+      "pick_half_roc_auc": 0.766,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_45",
+      "ridge": 1e-06,
+      "n_parameters": 990,
+      "pick_half_roc_auc_raw": 0.7492,
+      "pick_half_roc_auc": 0.7656,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_30",
+      "ridge": 0.1,
+      "n_parameters": 435,
+      "pick_half_roc_auc_raw": 0.7626,
+      "pick_half_roc_auc": 0.7655,
+      "gate": "r=14,w=0.5"
+    },
+    {
+      "readout": "pair_30",
+      "ridge": 1.0,
+      "n_parameters": 435,
+      "pick_half_roc_auc_raw": 0.7624,
+      "pick_half_roc_auc": 0.765,
+      "gate": "r=18,w=0.25"
+    },
+    {
+      "readout": "pair_30",
+      "ridge": 0.01,
+      "n_parameters": 435,
+      "pick_half_roc_auc_raw": 0.7593,
+      "pick_half_roc_auc": 0.7649,
+      "gate": "r=14,w=0.5"
+    },
+    {
+      "readout": "pair_30",
+      "ridge": 0.0001,
+      "n_parameters": 435,
+      "pick_half_roc_auc_raw": 0.7533,
+      "pick_half_roc_auc": 0.7635,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_30",
+      "ridge": 1e-06,
+      "n_parameters": 435,
+      "pick_half_roc_auc_raw": 0.7526,
+      "pick_half_roc_auc": 0.7634,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_60",
+      "ridge": 0.0001,
+      "n_parameters": 1770,
+      "pick_half_roc_auc_raw": 0.7426,
+      "pick_half_roc_auc": 0.7633,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "pair_60",
+      "ridge": 1e-06,
+      "n_parameters": 1770,
+      "pick_half_roc_auc_raw": 0.7416,
+      "pick_half_roc_auc": 0.7628,
+      "gate": "r=14,w=1"
+    }
+  ],
+  "selected": {
+    "readout": "pair_30+lin",
+    "ridge": 0.1,
+    "n_parameters": 607,
+    "pick_half_roc_auc_raw": 0.7786,
+    "pick_half_roc_auc": 0.7846,
+    "gate": "r=18,w=0.5"
+  }
+}

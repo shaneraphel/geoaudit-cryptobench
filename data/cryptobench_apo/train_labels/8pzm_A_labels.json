@@ -1,0 +1,43 @@
+{
+  "schema": "cryptobench.train_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "8pzm",
+  "chain": "A",
+  "cryptic_residues": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    68,
+    73,
+    74,
+    75,
+    99,
+    135,
+    136
+  ],
+  "binding_residues": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    68,
+    73,
+    74,
+    75,
+    99,
+    135,
+    136
+  ],
+  "labels_source_sha256": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+}

@@ -164,32 +164,12 @@ def main() -> int:
         and openreview.get("pharmacology_exact_unique_values") == 24
         and openreview.get("expansion_authorized") is False
     )
-    v91 = companion.get(
-        "v9_1_kras_g12d_targeted_small_molecule_computational_priority"
-    ) or {}
-    checks["v9_1_computational_priority_truth_boundary"] = (
-        v91.get("clinical_grade") is False
-        and v91.get("campaign_scope") == "KRAS_G12D_targeted_small_molecule_only"
-        and v91.get("paper_scope_preserved") is True
-        and v91.get("priority_label") == "computational_priority"
-        and v91.get("primary_geometry_pdb") == "9BL0"
-        and v91.get("covalent_observation_only_pdb") == "9GBJ"
-        and v91.get("accepted_count") == 494
-        and int(v91.get("representative_count") or 0)
-        < int(v91.get("accepted_count") or 0)
-        and v91.get("druggability_claim") is False
-        and v91.get("global_novelty_claim") is False
-        and v91.get("clinical_readiness_claim") is False
-        and v91.get("target_pose_is_affinity_claim") is False
-        and v91.get("surechembl_full_15gb_snapshot_claimed") is False
-        and str(v91.get("records_jsonl") or "").endswith(
-            "ACCEPTED_CANDIDATES.jsonl.gz"
-        )
-        and str(v91.get("records_parquet") or "").endswith(".parquet")
-        and str(v91.get("structures_sdf") or "").endswith(".sdf.gz")
-        and bool(
-            re.fullmatch(r"[0-9a-f]{40}", str(v91.get("companion_git_sha_v9_1") or ""))
-        )
+    # The KRAS G12D candidate-generation campaign is out of scope for this
+    # repository's CryptoBench claim, so its counts are no longer carried here or
+    # gated. The gate is replaced by its negation: the manifest must NOT
+    # reintroduce a candidate-generation claim into the paper repo.
+    checks["no_out_of_scope_candidate_campaign_claim"] = not any(
+        k.startswith("v9_1_kras") for k in companion
     )
 
     # --- Science-invariant gate -------------------------------------------

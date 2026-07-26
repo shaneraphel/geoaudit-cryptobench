@@ -1,0 +1,39 @@
+{
+  "schema": "cryptobench.train_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "2heu",
+  "chain": "C",
+  "cryptic_residues": [
+    26,
+    27,
+    28,
+    29,
+    57,
+    58,
+    59,
+    60,
+    78,
+    127,
+    175,
+    259,
+    293,
+    369
+  ],
+  "binding_residues": [
+    26,
+    27,
+    28,
+    29,
+    57,
+    58,
+    59,
+    60,
+    78,
+    127,
+    175,
+    259,
+    293,
+    369
+  ],
+  "labels_source_sha256": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+}

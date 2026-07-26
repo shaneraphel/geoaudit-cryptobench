@@ -1,0 +1,25 @@
+{
+  "schema": "cryptobench.official_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "4zm7",
+  "chain": "A",
+  "cryptic_residues": [
+    16,
+    17,
+    18,
+    87,
+    92,
+    95,
+    114
+  ],
+  "binding_residues": [
+    16,
+    17,
+    18,
+    87,
+    92,
+    95,
+    114
+  ],
+  "labels_source_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838"
+}

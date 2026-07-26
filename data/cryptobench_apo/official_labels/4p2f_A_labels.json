@@ -1,0 +1,31 @@
+{
+  "schema": "cryptobench.official_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "4p2f",
+  "chain": "A",
+  "cryptic_residues": [
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    264,
+    265,
+    300,
+    344
+  ],
+  "binding_residues": [
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    264,
+    265,
+    300,
+    344
+  ],
+  "labels_source_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838"
+}

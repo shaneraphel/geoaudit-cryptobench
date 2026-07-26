@@ -68,14 +68,42 @@ def f1(scores: Sequence[float], labels: Sequence[int], thr: float = 0.5) -> floa
     return f1_from_counts(tp, fp, fn)
 
 
+def json_safe(obj: Any) -> Any:
+    """Recursively replace non-finite floats with None.
+
+    ``json.dumps`` emits bare ``NaN`` / ``Infinity`` tokens, which are valid
+    Python but NOT valid JSON (RFC 8259 has no such literals). Any strict parser
+    — ``jq``, Go, Rust, most JSON-Schema validators, ``json.loads(...,
+    parse_constant=...)`` under a strict config — rejects the artifact, so a
+    reviewer could not machine-read the frozen metrics at all. A metric that
+    could not be estimated is genuinely absent, and ``null`` is how absence is
+    spelled in JSON. Applied at the single write choke point so no future field
+    can leak a bare NaN.
+    """
+    if isinstance(obj, float):
+        return obj if math.isfinite(obj) else None
+    if isinstance(obj, dict):
+        return {k: json_safe(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [json_safe(v) for v in obj]
+    # numpy scalars expose .item(); convert then re-check finiteness
+    item = getattr(obj, "item", None)
+    if callable(item) and hasattr(obj, "dtype"):
+        return json_safe(item())
+    return obj
+
+
 def _mean(vals: Sequence[float | None]) -> float | None:
     xs = [v for v in vals if v is not None]
     return sum(xs) / len(xs) if xs else None
 
 
-def _percentile(sorted_xs: list[float], q: float) -> float:
+def _percentile(sorted_xs: list[float], q: float) -> float | None:
+    # A method that scored on no structure has no percentile. Returning NaN
+    # here leaked a bare NaN token into every frozen report that did not route
+    # its output through json_safe, which is not valid JSON; None is.
     if not sorted_xs:
-        return float("nan")
+        return None
     if len(sorted_xs) == 1:
         return sorted_xs[0]
     pos = q * (len(sorted_xs) - 1)
@@ -269,7 +297,7 @@ def main(argv: list[str] | None = None) -> int:
     report["baseline"] = baseline
     out = root / sub / "BOOTSTRAP_CI.json"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(report, indent=2) + "\n")
+    out.write_text(json.dumps(json_safe(report), indent=2, allow_nan=False) + "\n")
     def _f(v: float | None, spec: str = "+.3f") -> str:
         return "n/a" if v is None else format(v, spec)
 

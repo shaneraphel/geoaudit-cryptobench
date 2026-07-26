@@ -1,0 +1,303 @@
+% GENERATED FILE -- do not edit.
+% Regenerate with: PYTHONPATH=src python3.12 tools/emit_frozen_numbers.py
+% Source: results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json
+%         data/cryptobench_apo/ALGEBRAIC_FIELD.json
+
+\newcommand{\NUnits}{192}
+\newcommand{\NBoot}{10000}
+\newcommand{\BootSeed}{20260725}
+\newcommand{\NRows}{1920}
+\newcommand{\NMethods}{10}
+\newcommand{\FisherSix}{0.760}
+\newcommand{\FisherAll}{0.783}
+\newcommand{\NCandidates}{9}
+\newcommand{\NSelectFitUnits}{386}
+\newcommand{\NSelectPickUnits}{384}
+\newcommand{\SelectedArch}{parallel bank, integer-multiplicity fusion + multi-scale gate}
+\newcommand{\SelectedArchAuc}{0.7446}
+\newcommand{\NLinWires}{172}
+\newcommand{\LinRidge}{1e-06}
+\newcommand{\LinGateRadius}{18}
+\newcommand{\LinGateWeight}{0.5}
+\newcommand{\LinOperatingQ}{0.10}
+\newcommand{\PickCount}{0.7631}
+\newcommand{\PickLinDigits}{0.7873}
+\newcommand{\PickLinOnehot}{0.7844}
+\newcommand{\PickLinTables}{0.7633}
+\newcommand{\PickPairBest}{0.7846}
+\newcommand{\PickPairBestName}{\texttt{pair\_30+lin}}
+\newcommand{\NTrainUnits}{770}
+\newcommand{\NTrainResidues}{234838}
+\newcommand{\TrainRate}{0.0576}
+\newcommand{\NAlgFeatures}{35}
+\newcommand{\NAlgTables}{6}
+\newcommand{\AlgOperatingQ}{0.09}
+\newcommand{\LedgerTestClusters}{190}
+\newcommand{\LedgerTestUnits}{192}
+\newcommand{\LedgerTrainClusters}{766}
+\newcommand{\LedgerTrainUnits}{770}
+
+\newcommand{\AlgAuc}{0.767}
+\newcommand{\AlgAucCI}{[0.736, 0.796]}
+\newcommand{\AlgLinAuc}{0.795}
+\newcommand{\AlgLinAucCI}{[0.765, 0.824]}
+\newcommand{\PtwoRAuc}{0.793}
+\newcommand{\PtwoRAucCI}{[0.772, 0.814]}
+\newcommand{\GeoAuc}{0.665}
+\newcommand{\GeoAucCI}{[0.644, 0.685]}
+\newcommand{\QlutAuc}{0.760}
+\newcommand{\QlutAucCI}{[0.733, 0.785]}
+\newcommand{\QlutSeqAuc}{0.767}
+\newcommand{\QlutSeqAucCI}{[0.740, 0.792]}
+\newcommand{\SstarAuc}{0.655}
+\newcommand{\SstarAucCI}{[0.634, 0.676]}
+\newcommand{\FstarAuc}{0.599}
+\newcommand{\FstarAucCI}{[0.579, 0.618]}
+\newcommand{\UltraAuc}{0.653}
+\newcommand{\UltraAucCI}{[0.632, 0.673]}
+\newcommand{\RandAuc}{0.500}
+\newcommand{\RandAucCI}{[0.500, 0.500]}
+\newcommand{\AlgAucD}{-0.027}
+\newcommand{\AlgAucDCI}{[-0.049, -0.006]}
+\newcommand{\AlgAucP}{0.012}
+\newcommand{\AlgAucVerdict}{separated}
+\newcommand{\AlgAucNS}{~\textbf{sig}}
+\newcommand{\AlgLinAucD}{+0.002}
+\newcommand{\AlgLinAucDCI}{[-0.019, +0.022]}
+\newcommand{\AlgLinAucP}{0.857}
+\newcommand{\AlgLinAucVerdict}{indistinguishable}
+\newcommand{\AlgLinAucNS}{~ns}
+\newcommand{\GeoAucD}{-0.129}
+\newcommand{\GeoAucDCI}{[-0.146, -0.111]}
+\newcommand{\GeoAucP}{<0.001}
+\newcommand{\GeoAucVerdict}{separated}
+\newcommand{\GeoAucNS}{~\textbf{sig}}
+\newcommand{\QlutAucD}{-0.033}
+\newcommand{\QlutAucDCI}{[-0.052, -0.016]}
+\newcommand{\QlutAucP}{<0.001}
+\newcommand{\QlutAucVerdict}{separated}
+\newcommand{\QlutAucNS}{~\textbf{sig}}
+\newcommand{\QlutSeqAucD}{-0.027}
+\newcommand{\QlutSeqAucDCI}{[-0.044, -0.010]}
+\newcommand{\QlutSeqAucP}{0.002}
+\newcommand{\QlutSeqAucVerdict}{separated}
+\newcommand{\QlutSeqAucNS}{~\textbf{sig}}
+\newcommand{\SstarAucD}{-0.138}
+\newcommand{\SstarAucDCI}{[-0.157, -0.120]}
+\newcommand{\SstarAucP}{<0.001}
+\newcommand{\SstarAucVerdict}{separated}
+\newcommand{\SstarAucNS}{~\textbf{sig}}
+\newcommand{\FstarAucD}{-0.195}
+\newcommand{\FstarAucDCI}{[-0.216, -0.172]}
+\newcommand{\FstarAucP}{<0.001}
+\newcommand{\FstarAucVerdict}{separated}
+\newcommand{\FstarAucNS}{~\textbf{sig}}
+\newcommand{\UltraAucD}{-0.141}
+\newcommand{\UltraAucDCI}{[-0.159, -0.123]}
+\newcommand{\UltraAucP}{<0.001}
+\newcommand{\UltraAucVerdict}{separated}
+\newcommand{\UltraAucNS}{~\textbf{sig}}
+\newcommand{\RandAucD}{-0.293}
+\newcommand{\RandAucDCI}{[-0.314, -0.272]}
+\newcommand{\RandAucP}{<0.001}
+\newcommand{\RandAucVerdict}{separated}
+\newcommand{\RandAucNS}{~\textbf{sig}}
+
+\newcommand{\AlgPr}{0.333}
+\newcommand{\AlgPrCI}{[0.301, 0.366]}
+\newcommand{\AlgLinPr}{0.359}
+\newcommand{\AlgLinPrCI}{[0.324, 0.393]}
+\newcommand{\PtwoRPr}{0.358}
+\newcommand{\PtwoRPrCI}{[0.322, 0.394]}
+\newcommand{\GeoPr}{0.276}
+\newcommand{\GeoPrCI}{[0.246, 0.306]}
+\newcommand{\QlutPr}{0.312}
+\newcommand{\QlutPrCI}{[0.282, 0.341]}
+\newcommand{\QlutSeqPr}{0.323}
+\newcommand{\QlutSeqPrCI}{[0.293, 0.353]}
+\newcommand{\SstarPr}{0.255}
+\newcommand{\SstarPrCI}{[0.226, 0.285]}
+\newcommand{\FstarPr}{0.205}
+\newcommand{\FstarPrCI}{[0.177, 0.232]}
+\newcommand{\UltraPr}{0.257}
+\newcommand{\UltraPrCI}{[0.227, 0.287]}
+\newcommand{\RandPr}{0.093}
+\newcommand{\RandPrCI}{[0.084, 0.103]}
+\newcommand{\AlgPrD}{-0.025}
+\newcommand{\AlgPrDCI}{[-0.052, +0.003]}
+\newcommand{\AlgPrP}{0.079}
+\newcommand{\AlgPrVerdict}{indistinguishable}
+\newcommand{\AlgPrNS}{~ns}
+\newcommand{\AlgLinPrD}{+0.001}
+\newcommand{\AlgLinPrDCI}{[-0.027, +0.030]}
+\newcommand{\AlgLinPrP}{0.927}
+\newcommand{\AlgLinPrVerdict}{indistinguishable}
+\newcommand{\AlgLinPrNS}{~ns}
+\newcommand{\GeoPrD}{-0.082}
+\newcommand{\GeoPrDCI}{[-0.109, -0.055]}
+\newcommand{\GeoPrP}{<0.001}
+\newcommand{\GeoPrVerdict}{separated}
+\newcommand{\GeoPrNS}{~\textbf{sig}}
+\newcommand{\QlutPrD}{-0.046}
+\newcommand{\QlutPrDCI}{[-0.074, -0.019]}
+\newcommand{\QlutPrP}{0.002}
+\newcommand{\QlutPrVerdict}{separated}
+\newcommand{\QlutPrNS}{~\textbf{sig}}
+\newcommand{\QlutSeqPrD}{-0.035}
+\newcommand{\QlutSeqPrDCI}{[-0.062, -0.008]}
+\newcommand{\QlutSeqPrP}{0.011}
+\newcommand{\QlutSeqPrVerdict}{separated}
+\newcommand{\QlutSeqPrNS}{~\textbf{sig}}
+\newcommand{\SstarPrD}{-0.103}
+\newcommand{\SstarPrDCI}{[-0.131, -0.074]}
+\newcommand{\SstarPrP}{<0.001}
+\newcommand{\SstarPrVerdict}{separated}
+\newcommand{\SstarPrNS}{~\textbf{sig}}
+\newcommand{\FstarPrD}{-0.153}
+\newcommand{\FstarPrDCI}{[-0.184, -0.122]}
+\newcommand{\FstarPrP}{<0.001}
+\newcommand{\FstarPrVerdict}{separated}
+\newcommand{\FstarPrNS}{~\textbf{sig}}
+\newcommand{\UltraPrD}{-0.101}
+\newcommand{\UltraPrDCI}{[-0.129, -0.074]}
+\newcommand{\UltraPrP}{<0.001}
+\newcommand{\UltraPrVerdict}{separated}
+\newcommand{\UltraPrNS}{~\textbf{sig}}
+\newcommand{\RandPrD}{-0.265}
+\newcommand{\RandPrDCI}{[-0.298, -0.231]}
+\newcommand{\RandPrP}{<0.001}
+\newcommand{\RandPrVerdict}{separated}
+\newcommand{\RandPrNS}{~\textbf{sig}}
+
+\newcommand{\AlgMcc}{0.273}
+\newcommand{\AlgMccCI}{[0.241, 0.304]}
+\newcommand{\AlgLinMcc}{0.290}
+\newcommand{\AlgLinMccCI}{[0.257, 0.321]}
+\newcommand{\PtwoRMcc}{0.285}
+\newcommand{\PtwoRMccCI}{[0.252, 0.316]}
+\newcommand{\GeoMcc}{0.239}
+\newcommand{\GeoMccCI}{[0.209, 0.268]}
+\newcommand{\QlutMcc}{0.242}
+\newcommand{\QlutMccCI}{[0.215, 0.270]}
+\newcommand{\QlutSeqMcc}{0.245}
+\newcommand{\QlutSeqMccCI}{[0.216, 0.274]}
+\newcommand{\SstarMcc}{0.218}
+\newcommand{\SstarMccCI}{[0.190, 0.246]}
+\newcommand{\FstarMcc}{0.137}
+\newcommand{\FstarMccCI}{[0.112, 0.161]}
+\newcommand{\UltraMcc}{0.215}
+\newcommand{\UltraMccCI}{[0.187, 0.242]}
+\newcommand{\RandMcc}{n/a}
+\newcommand{\RandMccCI}{[n/a, n/a]}
+\newcommand{\AlgMccD}{-0.012}
+\newcommand{\AlgMccDCI}{[-0.038, +0.013]}
+\newcommand{\AlgMccP}{0.341}
+\newcommand{\AlgMccVerdict}{indistinguishable}
+\newcommand{\AlgMccNS}{~ns}
+\newcommand{\AlgLinMccD}{+0.005}
+\newcommand{\AlgLinMccDCI}{[-0.023, +0.033]}
+\newcommand{\AlgLinMccP}{0.746}
+\newcommand{\AlgLinMccVerdict}{indistinguishable}
+\newcommand{\AlgLinMccNS}{~ns}
+\newcommand{\GeoMccD}{-0.046}
+\newcommand{\GeoMccDCI}{[-0.070, -0.022]}
+\newcommand{\GeoMccP}{<0.001}
+\newcommand{\GeoMccVerdict}{separated}
+\newcommand{\GeoMccNS}{~\textbf{sig}}
+\newcommand{\QlutMccD}{-0.042}
+\newcommand{\QlutMccDCI}{[-0.067, -0.018]}
+\newcommand{\QlutMccP}{0.001}
+\newcommand{\QlutMccVerdict}{separated}
+\newcommand{\QlutMccNS}{~\textbf{sig}}
+\newcommand{\QlutSeqMccD}{-0.039}
+\newcommand{\QlutSeqMccDCI}{[-0.065, -0.014]}
+\newcommand{\QlutSeqMccP}{0.002}
+\newcommand{\QlutSeqMccVerdict}{separated}
+\newcommand{\QlutSeqMccNS}{~\textbf{sig}}
+\newcommand{\SstarMccD}{-0.067}
+\newcommand{\SstarMccDCI}{[-0.093, -0.039]}
+\newcommand{\SstarMccP}{<0.001}
+\newcommand{\SstarMccVerdict}{separated}
+\newcommand{\SstarMccNS}{~\textbf{sig}}
+\newcommand{\FstarMccD}{-0.148}
+\newcommand{\FstarMccDCI}{[-0.178, -0.117]}
+\newcommand{\FstarMccP}{<0.001}
+\newcommand{\FstarMccVerdict}{separated}
+\newcommand{\FstarMccNS}{~\textbf{sig}}
+\newcommand{\UltraMccD}{-0.070}
+\newcommand{\UltraMccDCI}{[-0.096, -0.043]}
+\newcommand{\UltraMccP}{<0.001}
+\newcommand{\UltraMccVerdict}{separated}
+\newcommand{\UltraMccNS}{~\textbf{sig}}
+\newcommand{\RandMccD}{n/a}
+\newcommand{\RandMccDCI}{[n/a, n/a]}
+\newcommand{\RandMccP}{n/a}
+\newcommand{\RandMccVerdict}{n/a}
+\newcommand{\RandMccNS}{}
+
+\newcommand{\AlgFOne}{0.307}
+\newcommand{\AlgFOneCI}{[0.277, 0.337]}
+\newcommand{\AlgLinFOne}{0.321}
+\newcommand{\AlgLinFOneCI}{[0.290, 0.350]}
+\newcommand{\PtwoRFOne}{0.302}
+\newcommand{\PtwoRFOneCI}{[0.271, 0.332]}
+\newcommand{\GeoFOne}{0.287}
+\newcommand{\GeoFOneCI}{[0.258, 0.314]}
+\newcommand{\QlutFOne}{0.272}
+\newcommand{\QlutFOneCI}{[0.247, 0.298]}
+\newcommand{\QlutSeqFOne}{0.275}
+\newcommand{\QlutSeqFOneCI}{[0.248, 0.301]}
+\newcommand{\SstarFOne}{0.267}
+\newcommand{\SstarFOneCI}{[0.239, 0.293]}
+\newcommand{\FstarFOne}{0.203}
+\newcommand{\FstarFOneCI}{[0.179, 0.226]}
+\newcommand{\UltraFOne}{0.264}
+\newcommand{\UltraFOneCI}{[0.237, 0.290]}
+\newcommand{\RandFOne}{0.000}
+\newcommand{\RandFOneCI}{[0.000, 0.000]}
+\newcommand{\AlgFOneD}{+0.005}
+\newcommand{\AlgFOneDCI}{[-0.018, +0.027]}
+\newcommand{\AlgFOneP}{0.692}
+\newcommand{\AlgFOneVerdict}{indistinguishable}
+\newcommand{\AlgFOneNS}{~ns}
+\newcommand{\AlgLinFOneD}{+0.019}
+\newcommand{\AlgLinFOneDCI}{[-0.007, +0.043]}
+\newcommand{\AlgLinFOneP}{0.149}
+\newcommand{\AlgLinFOneVerdict}{indistinguishable}
+\newcommand{\AlgLinFOneNS}{~ns}
+\newcommand{\GeoFOneD}{-0.015}
+\newcommand{\GeoFOneDCI}{[-0.038, +0.007]}
+\newcommand{\GeoFOneP}{0.183}
+\newcommand{\GeoFOneVerdict}{indistinguishable}
+\newcommand{\GeoFOneNS}{~ns}
+\newcommand{\QlutFOneD}{-0.030}
+\newcommand{\QlutFOneDCI}{[-0.052, -0.007]}
+\newcommand{\QlutFOneP}{0.011}
+\newcommand{\QlutFOneVerdict}{separated}
+\newcommand{\QlutFOneNS}{~\textbf{sig}}
+\newcommand{\QlutSeqFOneD}{-0.027}
+\newcommand{\QlutSeqFOneDCI}{[-0.051, -0.003]}
+\newcommand{\QlutSeqFOneP}{0.023}
+\newcommand{\QlutSeqFOneVerdict}{separated}
+\newcommand{\QlutSeqFOneNS}{~\textbf{sig}}
+\newcommand{\SstarFOneD}{-0.035}
+\newcommand{\SstarFOneDCI}{[-0.060, -0.010]}
+\newcommand{\SstarFOneP}{0.006}
+\newcommand{\SstarFOneVerdict}{separated}
+\newcommand{\SstarFOneNS}{~\textbf{sig}}
+\newcommand{\FstarFOneD}{-0.099}
+\newcommand{\FstarFOneDCI}{[-0.127, -0.071]}
+\newcommand{\FstarFOneP}{<0.001}
+\newcommand{\FstarFOneVerdict}{separated}
+\newcommand{\FstarFOneNS}{~\textbf{sig}}
+\newcommand{\UltraFOneD}{-0.038}
+\newcommand{\UltraFOneDCI}{[-0.062, -0.013]}
+\newcommand{\UltraFOneP}{0.002}
+\newcommand{\UltraFOneVerdict}{separated}
+\newcommand{\UltraFOneNS}{~\textbf{sig}}
+\newcommand{\RandFOneD}{-0.302}
+\newcommand{\RandFOneDCI}{[-0.332, -0.271]}
+\newcommand{\RandFOneP}{<0.001}
+\newcommand{\RandFOneVerdict}{separated}
+\newcommand{\RandFOneNS}{~\textbf{sig}}
+

@@ -1,0 +1,43 @@
+{
+  "schema": "cryptobench.train_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "5zic",
+  "chain": "B",
+  "cryptic_residues": [
+    290,
+    291,
+    295,
+    452,
+    453,
+    454,
+    478,
+    480,
+    497,
+    498,
+    502,
+    506,
+    512,
+    523,
+    526,
+    527
+  ],
+  "binding_residues": [
+    290,
+    291,
+    295,
+    452,
+    453,
+    454,
+    478,
+    480,
+    497,
+    498,
+    502,
+    506,
+    512,
+    523,
+    526,
+    527
+  ],
+  "labels_source_sha256": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+}

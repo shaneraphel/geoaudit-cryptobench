@@ -1,0 +1,74 @@
+{
+  "schema": "geoaudit.feature_ceiling.v1",
+  "clinical_grade": false,
+  "note": "diagnostic only; (b) uses a continuous discriminant and is excluded from the combinational claim",
+  "n_test_units": 192,
+  "single_invariant_auc": {
+    "bur": 0.6148272746988536,
+    "void": 0.7219306370880648,
+    "probe_max": 0.5776342908956211,
+    "protrusion": 0.4486336827895259,
+    "exposure": 0.5057900731997819,
+    "concavity": 0.6593543305281474,
+    "fiedler": 0.40343208666168345,
+    "lap_max": 0.5485345289771909,
+    "spec_gap": 0.3819539693422251,
+    "mean_degree": 0.5155984505021846,
+    "betti0": 0.52889499799903,
+    "betti1": 0.5170437296844906,
+    "rho": 0.5088003428074099,
+    "grad_rho": 0.47446180378297026,
+    "grad_radial": 0.6174275799979431,
+    "lap_rho": 0.5295765900808275,
+    "var_rho": 0.42576417247059933,
+    "rho_rank_ball": 0.4798758048821603,
+    "loose": 0.5199534008428267,
+    "ball_size": 0.5227724137607689,
+    "ball_radius": 0.4763505293413137,
+    "ball_interface": 0.42410820538897015,
+    "valuation": 0.45835801450417596,
+    "rotor_gain": 0.648267859074885,
+    "anisotropy": 0.5131983813284061,
+    "planarity": 0.5214279866758984,
+    "sphericity": 0.4855043408657658,
+    "normal_div": 0.6692284427582781,
+    "angle_deficit": 0.32679849989059256,
+    "hess_bur": 0.445868850940837,
+    "depth": 0.31777949619219287,
+    "coordination": 0.5486514610160477,
+    "contact_order": 0.5762787131154382,
+    "ball_offset": 0.41529771745589983,
+    "depth_rank": 0.31777949619219287
+  },
+  "fisher": [
+    {
+      "features": "original 6 geometric",
+      "d": 6,
+      "roc_auc": 0.7596590278492794,
+      "n_units": 192
+    },
+    {
+      "features": "all 35 algebraic",
+      "d": 35,
+      "roc_auc": 0.7830219627565089,
+      "n_units": 192
+    },
+    {
+      "features": "top 20 by |2A-1|",
+      "d": 20,
+      "roc_auc": 0.7772065545854727,
+      "n_units": 192
+    },
+    {
+      "features": "top 12 by |2A-1|",
+      "d": 12,
+      "roc_auc": 0.7716125682726807,
+      "n_units": 192
+    }
+  ],
+  "reference": {
+    "flat_lut_7": 0.7444,
+    "track_a_resolved": 0.7583,
+    "p2rank": 0.793
+  }
+}

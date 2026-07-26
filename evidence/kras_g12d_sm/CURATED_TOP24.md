@@ -1,9 +1,9 @@
 # Curated Top-24 KRAS G12D Small-Molecule Candidates
 # 策展的 KRAS G12D 小分子候选 Top-24
 
-**EN:** Curated subset (N=24) of 798 accepted KRAS G12D noncovalent computational-priority candidates, ranked by QED (ties by acceptance order). This is not bulk dump material.
+**EN:** Curated subset (N=24) of the accepted KRAS G12D noncovalent computational-priority candidates, ranked by QED (ties by acceptance order). This is not bulk dump material. Out of scope for this repository's CryptoBench result; retained only as a companion-tree pointer.
 
-**中文：** 从 798 个已接受的 KRAS G12D 非共价计算优先候选中按 QED 策展的子集（N=24；并列按接受顺序）。不是批量转储材料。
+**中文：** 从已接受的 KRAS G12D 非共价计算优先候选中按 QED 策展的子集（N=24；并列按接受顺序）。不是批量转储材料。不属于本仓库 CryptoBench 结果的范围。
 
 **Truth boundary / 真相边界：** Computational priority only. Not binding, affinity, efficacy, novelty, FTO, or developability. / 仅为计算优先。不构成结合、亲和力、疗效、新颖性、自由实施或可开发性主张。
 

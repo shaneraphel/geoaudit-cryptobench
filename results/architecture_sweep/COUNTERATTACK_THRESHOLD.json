@@ -1,0 +1,160 @@
+{
+  "schema": "geoaudit.counterattack_threshold.v1",
+  "clinical_grade": false,
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725,
+    "n_fit_units": 386,
+    "n_pick_units": 384
+  },
+  "candidates": [
+    {
+      "architecture": "bank top-90, 7-digit tables, rank^2 + gate",
+      "claim": "counting-only",
+      "pick_half_roc_auc": 0.7398775553432163,
+      "n_tables": 13,
+      "table_width": 7
+    },
+    {
+      "architecture": "bank top-90, 7-digit tables, rank^3 + gate",
+      "claim": "counting-only",
+      "pick_half_roc_auc": 0.7377120564457263,
+      "n_tables": 13,
+      "table_width": 7
+    },
+    {
+      "architecture": "bank top-120, 7-digit tables, rank^2 + gate",
+      "claim": "counting-only",
+      "pick_half_roc_auc": 0.7486502489963806,
+      "n_tables": 17,
+      "table_width": 7
+    },
+    {
+      "architecture": "bank top-120, 7-digit tables, rank^3 + gate",
+      "claim": "counting-only",
+      "pick_half_roc_auc": 0.748516231697796,
+      "n_tables": 17,
+      "table_width": 7
+    },
+    {
+      "architecture": "bank top-172, 7-digit tables, rank^2 + gate",
+      "claim": "counting-only",
+      "pick_half_roc_auc": 0.7401581144890151,
+      "n_tables": 25,
+      "table_width": 7
+    },
+    {
+      "architecture": "bank top-172, 7-digit tables, rank^3 + gate",
+      "claim": "counting-only",
+      "pick_half_roc_auc": 0.7372132944997528,
+      "n_tables": 25,
+      "table_width": 7
+    },
+    {
+      "architecture": "integer threshold gate, 90 wires, weights in [-8,8]",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.781136071013017,
+      "n_wires": 90,
+      "weight_range": 8,
+      "n_nonzero_weights": 75
+    },
+    {
+      "architecture": "integer threshold gate, 90 wires, [-8,8] + gate",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7855417323122542,
+      "n_wires": 90,
+      "weight_range": 8
+    },
+    {
+      "architecture": "integer threshold gate, 90 wires, weights in [-32,32]",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7805813645139432,
+      "n_wires": 90,
+      "weight_range": 32,
+      "n_nonzero_weights": 85
+    },
+    {
+      "architecture": "integer threshold gate, 90 wires, [-32,32] + gate",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7842628062469839,
+      "n_wires": 90,
+      "weight_range": 32
+    },
+    {
+      "architecture": "integer threshold gate, 90 wires, weights in [-128,128]",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7799068067897229,
+      "n_wires": 90,
+      "weight_range": 128,
+      "n_nonzero_weights": 90
+    },
+    {
+      "architecture": "integer threshold gate, 90 wires, [-128,128] + gate",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7832932381670942,
+      "n_wires": 90,
+      "weight_range": 128
+    },
+    {
+      "architecture": "integer threshold gate, 172 wires, weights in [-8,8]",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7824141005819257,
+      "n_wires": 172,
+      "weight_range": 8,
+      "n_nonzero_weights": 120
+    },
+    {
+      "architecture": "integer threshold gate, 172 wires, [-8,8] + gate",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7856498433693617,
+      "n_wires": 172,
+      "weight_range": 8
+    },
+    {
+      "architecture": "integer threshold gate, 172 wires, weights in [-32,32]",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7798001931270006,
+      "n_wires": 172,
+      "weight_range": 32,
+      "n_nonzero_weights": 161
+    },
+    {
+      "architecture": "integer threshold gate, 172 wires, [-32,32] + gate",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.785783003985184,
+      "n_wires": 172,
+      "weight_range": 32
+    },
+    {
+      "architecture": "integer threshold gate, 172 wires, weights in [-128,128]",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.780813435051294,
+      "n_wires": 172,
+      "weight_range": 128,
+      "n_nonzero_weights": 170
+    },
+    {
+      "architecture": "integer threshold gate, 172 wires, [-128,128] + gate",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7862580954775774,
+      "n_wires": 172,
+      "weight_range": 128
+    }
+  ],
+  "best_per_claim": {
+    "counting-only": {
+      "architecture": "bank top-120, 7-digit tables, rank^2 + gate",
+      "claim": "counting-only",
+      "pick_half_roc_auc": 0.7486502489963806,
+      "n_tables": 17,
+      "table_width": 7
+    },
+    "integer-weight": {
+      "architecture": "integer threshold gate, 172 wires, [-128,128] + gate",
+      "claim": "integer-weight",
+      "pick_half_roc_auc": 0.7862580954775774,
+      "n_wires": 172,
+      "weight_range": 128
+    }
+  }
+}

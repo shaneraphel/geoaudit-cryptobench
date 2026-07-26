@@ -1,0 +1,65 @@
+{
+  "schema": "geoaudit.wide_bus_bank.v1",
+  "clinical_grade": false,
+  "invariant": "levels**wires_per_table is held near 4096 so every configuration has the same cell occupancy",
+  "n_test_units": 192,
+  "base_rate": 0.057588635570052546,
+  "results": [
+    {
+      "levels": 4,
+      "wires_per_table": 6,
+      "n_tables": 6,
+      "occupancy_per_cell": 57.33349609375,
+      "roc_auc": 0.7524174831868801,
+      "roc_auc_with_patch": 0.7605334250029129,
+      "pr_auc": 0.30746956352268945,
+      "pr_auc_with_patch": 0.33231137610960454
+    },
+    {
+      "levels": 8,
+      "wires_per_table": 4,
+      "n_tables": 9,
+      "occupancy_per_cell": 57.33349609375,
+      "roc_auc": 0.7506554881698762,
+      "roc_auc_with_patch": 0.7574799626305028,
+      "pr_auc": 0.318164000937263,
+      "pr_auc_with_patch": 0.33189242740032104
+    },
+    {
+      "levels": 16,
+      "wires_per_table": 3,
+      "n_tables": 12,
+      "occupancy_per_cell": 57.33349609375,
+      "roc_auc": 0.7408091816947627,
+      "roc_auc_with_patch": 0.7512661277096399,
+      "pr_auc": 0.31552989111865354,
+      "pr_auc_with_patch": 0.3268789830148905
+    },
+    {
+      "levels": 64,
+      "wires_per_table": 2,
+      "n_tables": 18,
+      "occupancy_per_cell": 57.33349609375,
+      "roc_auc": 0.7316703591780316,
+      "roc_auc_with_patch": 0.7409004905363656,
+      "pr_auc": 0.3016318176785558,
+      "pr_auc_with_patch": 0.30704660849109694
+    },
+    {
+      "levels": 256,
+      "wires_per_table": 1,
+      "n_tables": 35,
+      "occupancy_per_cell": 917.3359375,
+      "roc_auc": 0.7069013650049575,
+      "roc_auc_with_patch": 0.7105447815057909,
+      "pr_auc": 0.2764928305234131,
+      "pr_auc_with_patch": 0.2701552521566226
+    }
+  ],
+  "reference": {
+    "flat_lut_7": 0.7444,
+    "bank4": 0.7615,
+    "fisher_35": 0.783,
+    "p2rank": 0.793
+  }
+}

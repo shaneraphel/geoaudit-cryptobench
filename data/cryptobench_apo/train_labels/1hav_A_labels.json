@@ -1,0 +1,43 @@
+{
+  "schema": "cryptobench.train_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "1hav",
+  "chain": "A",
+  "cryptic_residues": [
+    15,
+    27,
+    28,
+    29,
+    30,
+    122,
+    123,
+    124,
+    145,
+    147,
+    148,
+    169,
+    170,
+    171,
+    172,
+    191
+  ],
+  "binding_residues": [
+    15,
+    27,
+    28,
+    29,
+    30,
+    122,
+    123,
+    124,
+    145,
+    147,
+    148,
+    169,
+    170,
+    171,
+    172,
+    191
+  ],
+  "labels_source_sha256": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+}

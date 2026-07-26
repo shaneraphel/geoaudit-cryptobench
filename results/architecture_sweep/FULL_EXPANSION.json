@@ -1,0 +1,76 @@
+{
+  "schema": "geoaudit.full_expansion.v1",
+  "clinical_grade": false,
+  "fusion": "unweighted sum over the complete family of wire subsets; every coefficient is exactly 1; no selection, no weight",
+  "n_test_units": 192,
+  "base_rate": 0.057588635570052546,
+  "results": [
+    {
+      "family": "all pairs",
+      "rule": "sum",
+      "n_tables": 595,
+      "occupancy_per_cell": 14677.375,
+      "roc_auc": 0.7263889937613056,
+      "roc_auc_with_patch": 0.7266241728630529,
+      "pr_auc": 0.2888142187564956,
+      "pr_auc_with_patch": 0.3004366006436279
+    },
+    {
+      "family": "all pairs",
+      "rule": "rank",
+      "n_tables": 595,
+      "occupancy_per_cell": 14677.375,
+      "roc_auc": 0.7014176070954643,
+      "roc_auc_with_patch": 0.7049104708198689,
+      "pr_auc": 0.25765963174384837,
+      "pr_auc_with_patch": 0.271665743274962
+    },
+    {
+      "family": "all pairs",
+      "rule": "excess",
+      "n_tables": 595,
+      "occupancy_per_cell": 14677.375,
+      "roc_auc": 0.7263889937613056,
+      "roc_auc_with_patch": 0.7262580023708517,
+      "pr_auc": 0.2888142187564956,
+      "pr_auc_with_patch": 0.29978624649146357
+    },
+    {
+      "family": "all triples",
+      "rule": "sum",
+      "n_tables": 6545,
+      "occupancy_per_cell": 3669.34375,
+      "roc_auc": 0.7413378888876974,
+      "roc_auc_with_patch": 0.7409007409870506,
+      "pr_auc": 0.29979995724258085,
+      "pr_auc_with_patch": 0.31188234468567794
+    },
+    {
+      "family": "all triples",
+      "rule": "rank",
+      "n_tables": 6545,
+      "occupancy_per_cell": 3669.34375,
+      "roc_auc": 0.726624999320613,
+      "roc_auc_with_patch": 0.7265743842979013,
+      "pr_auc": 0.2776999419549828,
+      "pr_auc_with_patch": 0.2899419531671276
+    },
+    {
+      "family": "all triples",
+      "rule": "excess",
+      "n_tables": 6545,
+      "occupancy_per_cell": 3669.34375,
+      "roc_auc": 0.7413378888876974,
+      "roc_auc_with_patch": 0.7405584199161866,
+      "pr_auc": 0.29979995724258085,
+      "pr_auc_with_patch": 0.3122876500033558
+    }
+  ],
+  "reference": {
+    "flat_lut_7": 0.7444,
+    "best_cascade": 0.7388,
+    "bank": 0.7615,
+    "fisher_35": 0.783,
+    "p2rank": 0.793
+  }
+}

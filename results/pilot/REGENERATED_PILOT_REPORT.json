@@ -575,5 +575,5 @@
     }
   },
   "truth_boundary": "Regenerated on CORRECTED chain-scoped labels. Splits are NOT cluster-disjoint, so NO comparative-superiority claim is made. TOOL_UNAVAILABLE is excluded from the denominator, never counted as a miss. clinical_grade=false.",
-  "baseline_provenance_note": "Single live run (this report): foliation, geometric_foundation, p2rank (2.5.1, JDK17 Temurin), random_bbox. fpocket row carried over from the pinned baseline run (0/14) \u2014 fpocket needs a source/conda build unavailable here; reinstall to include it live."
+  "baseline_provenance_note": "Single live run (this report): foliation, geometric_foundation, p2rank (2.5.1, JDK17 Temurin), random_bbox. fpocket row carried over from the pinned baseline run \u2014 fpocket needs a source/conda build unavailable here; reinstall to include it live."
 }

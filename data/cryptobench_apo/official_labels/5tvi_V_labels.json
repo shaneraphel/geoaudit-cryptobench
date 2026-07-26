@@ -1,0 +1,43 @@
+{
+  "schema": "cryptobench.official_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "5tvi",
+  "chain": "V",
+  "cryptic_residues": [
+    18,
+    49,
+    52,
+    53,
+    56,
+    62,
+    63,
+    64,
+    67,
+    78,
+    80,
+    81,
+    82,
+    83,
+    84,
+    86
+  ],
+  "binding_residues": [
+    18,
+    49,
+    52,
+    53,
+    56,
+    62,
+    63,
+    64,
+    67,
+    78,
+    80,
+    81,
+    82,
+    83,
+    84,
+    86
+  ],
+  "labels_source_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838"
+}

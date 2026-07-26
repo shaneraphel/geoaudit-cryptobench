@@ -1,0 +1,66 @@
+{
+  "schema": "geoaudit.raw_predictions_index.v1",
+  "clinical_grade": false,
+  "methods": {
+    "algebraic_field": {
+      "file": "algebraic_field.json",
+      "n_units": 192,
+      "rescored_in_last_run": false,
+      "sha256": "a8d25ef11fe4fe0da981b9adafd83b43e165f215704852bd19fdec2c7ae65786"
+    },
+    "algebraic_field_linear": {
+      "file": "algebraic_field_linear.json",
+      "n_units": 192,
+      "rescored_in_last_run": true,
+      "sha256": "fc75203f312c85631083929d9075ce7c1c2d68857763747fc4bac91e310ed977"
+    },
+    "fstar_pocket": {
+      "file": "fstar_pocket.json",
+      "n_units": 192,
+      "rescored_in_last_run": false,
+      "sha256": "f999967999318999ba2b805086993fb695849ed4761eb65db4def80c6d374012"
+    },
+    "geometric_foundation": {
+      "file": "geometric_foundation.json",
+      "n_units": 192,
+      "rescored_in_last_run": false,
+      "sha256": "74a52592c4d304285f5d162be0b615e430c00421fe5a00b6ea0df5d9c43e03ad"
+    },
+    "p2rank": {
+      "file": "p2rank.json",
+      "n_units": 192,
+      "rescored_in_last_run": false,
+      "sha256": "b77cf57c186989f96fac4b43eac333b63b6f2533577f0d0d7fb6ee3f424ad85a"
+    },
+    "quaternary_lut": {
+      "file": "quaternary_lut.json",
+      "n_units": 192,
+      "rescored_in_last_run": false,
+      "sha256": "750777319c46e829e807d92559a338881c3802328ad041e0b81dc4bb7c5d0ca6"
+    },
+    "quaternary_lut_seq": {
+      "file": "quaternary_lut_seq.json",
+      "n_units": 192,
+      "rescored_in_last_run": false,
+      "sha256": "db5f52662097be2b53cafd810a9788a7c40762118e1ab3877963c78bfbdee3bd"
+    },
+    "random_bbox": {
+      "file": "random_bbox.json",
+      "n_units": 192,
+      "rescored_in_last_run": false,
+      "sha256": "18b69b7de4ea5be4a974706c70c0250e6db28a939ac64df4fbc653705ee200fd"
+    },
+    "sstar_pocket": {
+      "file": "sstar_pocket.json",
+      "n_units": 192,
+      "rescored_in_last_run": false,
+      "sha256": "ef548c579a0b5333d8a04231401f2bfa5956183782f5039f4cea1a2d632cc021"
+    },
+    "ultrametric_shear_oracle": {
+      "file": "ultrametric_shear_oracle.json",
+      "n_units": 192,
+      "rescored_in_last_run": false,
+      "sha256": "3468c44ecffe64bcfb2b5ffa3c738f501a6d8a3132c8125714c40f698fa6d192"
+    }
+  }
+}

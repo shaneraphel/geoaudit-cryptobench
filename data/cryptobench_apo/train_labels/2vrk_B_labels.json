@@ -1,0 +1,43 @@
+{
+  "schema": "cryptobench.train_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "2vrk",
+  "chain": "B",
+  "cryptic_residues": [
+    26,
+    28,
+    30,
+    73,
+    74,
+    99,
+    175,
+    176,
+    240,
+    242,
+    298,
+    302,
+    314,
+    346,
+    347,
+    352
+  ],
+  "binding_residues": [
+    26,
+    28,
+    30,
+    73,
+    74,
+    99,
+    175,
+    176,
+    240,
+    242,
+    298,
+    302,
+    314,
+    346,
+    347,
+    352
+  ],
+  "labels_source_sha256": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+}

@@ -125,29 +125,9 @@ class TestPaperScope(unittest.TestCase):
         self.assertEqual(openreview["dual_geometry_truth_conflict_records"], 1002)
         self.assertEqual(openreview["biology_exact_unique_values"], 24)
         self.assertIs(openreview["expansion_authorized"], False)
-        v91 = companion["v9_1_kras_g12d_targeted_small_molecule_computational_priority"]
-        self.assertIs(v91["clinical_grade"], False)
-        self.assertEqual(
-            v91["campaign_scope"], "KRAS_G12D_targeted_small_molecule_only"
-        )
-        self.assertIs(v91["paper_scope_preserved"], True)
-        self.assertEqual(v91["priority_label"], "computational_priority")
-        self.assertEqual(v91["primary_geometry_pdb"], "9BL0")
-        self.assertEqual(v91["covalent_observation_only_pdb"], "9GBJ")
-        self.assertEqual(v91["accepted_count"], 494)
-        self.assertLess(v91["representative_count"], v91["accepted_count"])
-        self.assertIs(v91["druggability_claim"], False)
-        self.assertIs(v91["global_novelty_claim"], False)
-        self.assertIs(v91["clinical_readiness_claim"], False)
-        self.assertIs(v91["target_pose_is_affinity_claim"], False)
-        self.assertIs(v91["surechembl_full_15gb_snapshot_claimed"], False)
-        self.assertTrue(
-            str(v91["records_jsonl"]).endswith("ACCEPTED_CANDIDATES.jsonl.gz")
-        )
-        self.assertTrue(str(v91["records_parquet"]).endswith(".parquet"))
-        self.assertTrue(str(v91["structures_sdf"]).endswith(".sdf.gz"))
-        self.assertEqual(len(v91["companion_git_sha_v9_1"]), 40)
-        int(v91["companion_git_sha_v9_1"], 16)
+        # The KRAS G12D candidate-generation campaign is out of scope for the
+        # CryptoBench claim; the manifest must not reintroduce it.
+        self.assertFalse([k for k in companion if k.startswith("v9_1_kras")])
         self.assertIn(
             "gf4-allele-conditioned-evidence", companion["companion_repo"]
         )

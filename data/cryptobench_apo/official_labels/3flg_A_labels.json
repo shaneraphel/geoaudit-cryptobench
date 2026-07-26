@@ -1,0 +1,29 @@
+{
+  "schema": "cryptobench.official_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "3flg",
+  "chain": "A",
+  "cryptic_residues": [
+    29,
+    32,
+    35,
+    59,
+    62,
+    64,
+    66,
+    91,
+    93
+  ],
+  "binding_residues": [
+    29,
+    32,
+    35,
+    59,
+    62,
+    64,
+    66,
+    91,
+    93
+  ],
+  "labels_source_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838"
+}

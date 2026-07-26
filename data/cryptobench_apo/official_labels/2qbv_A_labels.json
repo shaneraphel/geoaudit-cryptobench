@@ -1,0 +1,39 @@
+{
+  "schema": "cryptobench.official_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "2qbv",
+  "chain": "A",
+  "cryptic_residues": [
+    50,
+    54,
+    57,
+    61,
+    68,
+    69,
+    70,
+    73,
+    74,
+    77,
+    95,
+    96,
+    99,
+    100
+  ],
+  "binding_residues": [
+    50,
+    54,
+    57,
+    61,
+    68,
+    69,
+    70,
+    73,
+    74,
+    77,
+    95,
+    96,
+    99,
+    100
+  ],
+  "labels_source_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838"
+}

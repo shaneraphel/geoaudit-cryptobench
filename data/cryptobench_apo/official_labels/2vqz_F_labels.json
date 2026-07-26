@@ -1,0 +1,25 @@
+{
+  "schema": "cryptobench.official_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "2vqz",
+  "chain": "F",
+  "cryptic_residues": [
+    350,
+    351,
+    352,
+    353,
+    420,
+    421,
+    430
+  ],
+  "binding_residues": [
+    350,
+    351,
+    352,
+    353,
+    420,
+    421,
+    430
+  ],
+  "labels_source_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838"
+}

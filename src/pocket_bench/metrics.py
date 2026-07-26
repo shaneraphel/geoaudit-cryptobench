@@ -140,26 +140,65 @@ def residue_scores_from_pockets(
     return scores
 
 
+def native_residue_scores(
+    prediction: dict[str, Any] | None, universe: Sequence[Any]
+) -> tuple[dict[int, float], set[int]] | None:
+    """A predictor's OWN per-residue output, if it emits one.
+
+    P2Rank is residue-level natively, so deriving its residue signal from pocket
+    centres would discard the prediction it actually makes. Detectors that only
+    return pockets have no such table and fall back to the pocket-derived score.
+    """
+    if not prediction:
+        return None
+    raw = prediction.get("residue_scores")
+    if not raw:
+        return None
+    keys = {rs for rs in (_resseq(u) for u in universe) if rs is not None}
+    scores = {k: 0.0 for k in keys}
+    for rid, val in raw.items():
+        rs = _resseq(rid)
+        if rs is not None and rs in scores:
+            scores[rs] = float(val)
+    positive = {
+        rs for rs in (_resseq(r) for r in (prediction.get("residue_positive") or []))
+        if rs is not None and rs in scores
+    }
+    return scores, positive
+
+
 def residue_auc_pr(
     pockets: list[dict[str, Any]],
     true_residues: Sequence[Any] | None,
     universe: Sequence[Any] | None,
+    prediction: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """CryptoBench-faithful per-residue ROC-AUC / PR-AUC over the receptor universe."""
     if not true_residues or not universe:
         return {"residue_auc": None, "residue_pr_auc": None, "available": False}
-    scores_by_res = residue_scores_from_pockets(pockets, universe)
+    native = native_residue_scores(prediction, universe)
+    if native is not None:
+        scores_by_res, native_positive = native
+        operating_point = "predictor_native_binary_call"
+    else:
+        scores_by_res, native_positive = residue_scores_from_pockets(pockets, universe), None
+        operating_point = "residue_in_any_predicted_pocket"
     truth = {rs for rs in (_resseq(t) for t in true_residues) if rs is not None}
     if not scores_by_res or not (truth & set(scores_by_res)):
         return {"residue_auc": None, "residue_pr_auc": None, "available": False}
     keys = sorted(scores_by_res)
     s = [scores_by_res[k] for k in keys]
     y = [1 if k in truth else 0 for k in keys]
-    # Threshold-dependent metrics at the detector's natural operating point:
-    # predicted-positive == residue lies in ANY returned pocket (score > 0).
+    # Threshold-dependent metrics at the detector's natural operating point. For a
+    # pocket-only detector that is "residue lies in ANY returned pocket"; for a
+    # natively residue-level one it is that predictor's own positive call, never a
+    # threshold this harness invented for it.
     tp = fp = tn = fn = 0
-    for si, yi in zip(s, y):
-        pred = 1 if si > 0.0 else 0
+    for k, si, yi in zip(keys, s, y):
+        if native_positive is not None:
+            pred = 1 if k in native_positive else 0
+        else:
+            pred = 1 if si > 0.0 else 0
         if pred and yi:
             tp += 1
         elif pred and not yi:
@@ -180,7 +219,7 @@ def residue_auc_pr(
         "available": True,
         "n_universe": len(keys),
         "n_true": sum(y),
-        "operating_point": "residue_in_any_predicted_pocket",
+        "operating_point": operating_point,
     }
 
 

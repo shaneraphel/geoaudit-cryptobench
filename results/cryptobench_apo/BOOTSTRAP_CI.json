@@ -16,9 +16,9 @@
       "ci_level": 0.95,
       "per_method": {
         "fstar_pocket": {
-          "point": 0.5690115447491397,
-          "ci_low": 0.5116847271594321,
-          "ci_high": 0.6288169550903042,
+          "point": 0.5550317939703235,
+          "ci_low": 0.5019243992906952,
+          "ci_high": 0.6139083024193969,
           "n_structures_scored": 15
         },
         "geometric_foundation": {
@@ -48,10 +48,10 @@
       },
       "paired_vs_baseline": {
         "fstar_pocket": {
-          "delta_point": -0.016212724655127242,
-          "delta_ci_low": -0.07142550217230695,
-          "delta_ci_high": 0.04689541519510686,
-          "p_two_sided_bootstrap": 0.5732,
+          "delta_point": -0.030192475433943433,
+          "delta_ci_low": -0.08440885950819105,
+          "delta_ci_high": 0.03336256024274486,
+          "p_two_sided_bootstrap": 0.3206,
           "crosses_zero": true
         },
         "geometric_foundation": {
@@ -88,9 +88,9 @@
       "ci_level": 0.95,
       "per_method": {
         "fstar_pocket": {
-          "point": 0.1816284785995692,
-          "ci_low": 0.10168336128080463,
-          "ci_high": 0.27074809950974327,
+          "point": 0.15881555143837991,
+          "ci_low": 0.09226334564712378,
+          "ci_high": 0.23316364454649252,
           "n_structures_scored": 15
         },
         "geometric_foundation": {
@@ -120,10 +120,10 @@
       },
       "paired_vs_baseline": {
         "fstar_pocket": {
-          "delta_point": -0.040434320823767356,
-          "delta_ci_low": -0.12461161289471341,
-          "delta_ci_high": 0.0385116998673518,
-          "p_two_sided_bootstrap": 0.334,
+          "delta_point": -0.06324724798495665,
+          "delta_ci_low": -0.14737119597171097,
+          "delta_ci_high": 0.017320516259349023,
+          "p_two_sided_bootstrap": 0.132,
           "crosses_zero": true
         },
         "geometric_foundation": {
@@ -160,10 +160,10 @@
       "ci_level": 0.95,
       "per_method": {
         "fstar_pocket": {
-          "point": 0.08870081541055747,
-          "ci_low": 0.021827075360890517,
-          "ci_high": 0.1662560496892666,
-          "n_structures_scored": 15
+          "point": 0.06853057718252283,
+          "ci_low": 0.007397025470204997,
+          "ci_high": 0.13950092911089568,
+          "n_structures_scored": 14
         },
         "geometric_foundation": {
           "point": 0.16767238657486142,
@@ -179,8 +179,8 @@
         },
         "random_bbox": {
           "point": null,
-          "ci_low": NaN,
-          "ci_high": NaN,
+          "ci_low": null,
+          "ci_high": null,
           "n_structures_scored": 0
         },
         "sstar_pocket": {
@@ -192,10 +192,10 @@
       },
       "paired_vs_baseline": {
         "fstar_pocket": {
-          "delta_point": -0.033835575315802474,
-          "delta_ci_low": -0.10113084787453751,
-          "delta_ci_high": 0.050540804267481365,
-          "p_two_sided_bootstrap": 0.3882,
+          "delta_point": -0.054005813543837114,
+          "delta_ci_low": -0.13072922061282344,
+          "delta_ci_high": 0.03701762725844811,
+          "p_two_sided_bootstrap": 0.2258,
           "crosses_zero": true
         },
         "geometric_foundation": {
@@ -207,10 +207,10 @@
         },
         "random_bbox": {
           "delta_point": null,
-          "delta_ci_low": NaN,
-          "delta_ci_high": NaN,
-          "p_two_sided_bootstrap": NaN,
-          "crosses_zero": false
+          "delta_ci_low": null,
+          "delta_ci_high": null,
+          "p_two_sided_bootstrap": null,
+          "crosses_zero": null
         },
         "sstar_pocket": {
           "delta_point": -0.08405051238887537,
@@ -232,9 +232,9 @@
       "ci_level": 0.95,
       "per_method": {
         "fstar_pocket": {
-          "point": 0.15662429787371607,
-          "ci_low": 0.08647269494087766,
-          "ci_high": 0.23908433112288677,
+          "point": 0.12480611605553422,
+          "ci_low": 0.06589090047719179,
+          "ci_high": 0.1931684250426837,
           "n_structures_scored": 15
         },
         "geometric_foundation": {
@@ -264,10 +264,10 @@
       },
       "paired_vs_baseline": {
         "fstar_pocket": {
-          "delta_point": -0.017890187210828024,
-          "delta_ci_low": -0.0754623831240248,
-          "delta_ci_high": 0.054176205286596585,
-          "p_two_sided_bootstrap": 0.5646,
+          "delta_point": -0.049708369029009866,
+          "delta_ci_low": -0.12340744487185484,
+          "delta_ci_high": 0.030387230601551095,
+          "p_two_sided_bootstrap": 0.2172,
           "crosses_zero": true
         },
         "geometric_foundation": {

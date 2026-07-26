@@ -20,10 +20,14 @@
   },
   "real_ml_baseline_status": {
     "pocketminer": "DATA_UNAVAILABLE",
-    "p2rank": "DATA_UNAVAILABLE",
+    "p2rank": "AVAILABLE",
+    "p2rank_structures_with_scores": 192,
     "pocketminer_structures_with_scores": 0
   },
-  "real_ml_baseline_note": "P2Rank/PocketMiner per-residue predictions are not published on OSF (only a trained pLM-NN model binary); a paired CI against them is not computed from fabricated numbers. The paired baseline here is a residue-level uniform-random null.",
+  "real_ml_baseline_note": "This report is the two-method chance-control freeze: its own paired baseline is a residue-level uniform-random null, which is the only comparison it computes. P2Rank is executed locally from the receptor PDB and its per-residue probabilities are scored on the identical residue universe; PocketMiner per-residue predictions are not published on OSF (only a trained pLM-NN model binary) and no number is fabricated in its place.",
+  "authoritative_multi_method_report": "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json",
+  "authoritative_vs_p2rank_report": "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json",
+  "scope_note": "Methods other than geometric_foundation and random_residue are out of scope for THIS file by construction; read the two reports above for the full method set. Any apparent disagreement is a scope difference, not a numerical one.",
   "bootstrap": {
     "roc_auc": {
       "schema": "geoaudit.bootstrap_ci.v1",
@@ -35,9 +39,9 @@
       "ci_level": 0.95,
       "per_method": {
         "geometric_foundation": {
-          "point": 0.6640323983289599,
-          "ci_low": 0.6430225941587137,
-          "ci_high": 0.6841999252007334,
+          "point": 0.6646179345259292,
+          "ci_low": 0.6438441451946675,
+          "ci_high": 0.6848230733354574,
           "n_structures_scored": 192
         },
         "random_residue": {
@@ -49,9 +53,9 @@
       },
       "paired_vs_baseline": {
         "geometric_foundation": {
-          "delta_point": 0.17326837121141497,
-          "delta_ci_low": 0.14830120849385117,
-          "delta_ci_high": 0.19698578302291375,
+          "delta_point": 0.1738539074083843,
+          "delta_ci_low": 0.1494395441147606,
+          "delta_ci_high": 0.19703940862029376,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false
         }
@@ -67,9 +71,9 @@
       "ci_level": 0.95,
       "per_method": {
         "geometric_foundation": {
-          "point": 0.27639793091376225,
-          "ci_low": 0.24630023376698656,
-          "ci_high": 0.3058955599118645,
+          "point": 0.2763835813619629,
+          "ci_low": 0.24620254049018198,
+          "ci_high": 0.30604177169801855,
           "n_structures_scored": 192
         },
         "random_residue": {
@@ -81,9 +85,9 @@
       },
       "paired_vs_baseline": {
         "geometric_foundation": {
-          "delta_point": 0.18957851840329581,
-          "delta_ci_low": 0.16303223668893377,
-          "delta_ci_high": 0.21621667900720143,
+          "delta_point": 0.18956416885149646,
+          "delta_ci_low": 0.16288345504084337,
+          "delta_ci_high": 0.2162183023870717,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false
         }
@@ -99,9 +103,9 @@
       "ci_level": 0.95,
       "per_method": {
         "geometric_foundation": {
-          "point": 0.23725999623823102,
-          "ci_low": 0.2078440100500479,
-          "ci_high": 0.2660939762686729,
+          "point": 0.23883665580464877,
+          "ci_low": 0.20875305885920628,
+          "ci_high": 0.2680147471926995,
           "n_structures_scored": 192
         },
         "random_residue": {
@@ -113,9 +117,9 @@
       },
       "paired_vs_baseline": {
         "geometric_foundation": {
-          "delta_point": 0.24408648164004149,
-          "delta_ci_low": 0.21261294544093953,
-          "delta_ci_high": 0.2750074292501003,
+          "delta_point": 0.24566314120645924,
+          "delta_ci_low": 0.21381578295237222,
+          "delta_ci_high": 0.276472998577988,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false
         }
@@ -131,9 +135,9 @@
       "ci_level": 0.95,
       "per_method": {
         "geometric_foundation": {
-          "point": 0.2851220457374224,
-          "ci_low": 0.25728062404459157,
-          "ci_high": 0.31292924810138345,
+          "point": 0.2865059665979385,
+          "ci_low": 0.25805052840127907,
+          "ci_high": 0.31420980066237975,
           "n_structures_scored": 192
         },
         "random_residue": {
@@ -145,9 +149,9 @@
       },
       "paired_vs_baseline": {
         "geometric_foundation": {
-          "delta_point": 0.17171014904861143,
-          "delta_ci_low": 0.14780989489007798,
-          "delta_ci_high": 0.19608580228529926,
+          "delta_point": 0.1730940699091275,
+          "delta_ci_low": 0.14864697349415207,
+          "delta_ci_high": 0.1972551361328486,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false
         }

@@ -1,0 +1,1490 @@
+{
+  "schema": "geoaudit.threshold_field_test.v1",
+  "clinical_grade": false,
+  "method": "threshold_field",
+  "selected_on": "cluster-disjoint halves of the training fold; this is the first and only evaluation of this architecture on the official test fold",
+  "selection_record": "results/architecture_sweep/COUNTERATTACK_THRESHOLD.json",
+  "n_units_scored": 192,
+  "means": {
+    "residue_auc": 0.7981988887890487,
+    "residue_pr_auc": 0.36338852403807737,
+    "residue_mcc": 0.27816645663477474,
+    "residue_f1": 0.303113265182635
+  },
+  "per_unit": [
+    {
+      "unit_id": "1arl_A",
+      "residue_auc": 0.9614604462474645,
+      "residue_pr_auc": 0.7006996230007556,
+      "residue_mcc": 0.6670386697199387,
+      "residue_f1": 0.6857142857142857
+    },
+    {
+      "unit_id": "1bk2_A",
+      "residue_auc": 0.7846153846153846,
+      "residue_pr_auc": 0.4810983981693364,
+      "residue_mcc": 0.20464687117164015,
+      "residue_f1": 0.25
+    },
+    {
+      "unit_id": "1bzj_A",
+      "residue_auc": 0.4299792531120332,
+      "residue_pr_auc": 0.17716976506940174,
+      "residue_mcc": -0.04466599525910275,
+      "residue_f1": 0.0547945205479452
+    },
+    {
+      "unit_id": "1cwq_A",
+      "residue_auc": 0.125,
+      "residue_pr_auc": 0.01628387815635053,
+      "residue_mcc": -0.04020422005641731,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "1dq2_A",
+      "residue_auc": 0.6606914212548015,
+      "residue_pr_auc": 0.07944199305015522,
+      "residue_mcc": -0.05640751783226453,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "1e6k_A",
+      "residue_auc": 0.5904499540863177,
+      "residue_pr_auc": 0.08827340351645112,
+      "residue_mcc": -0.06506164412914062,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "1evy_A",
+      "residue_auc": 0.9314551263433053,
+      "residue_pr_auc": 0.6542777178630885,
+      "residue_mcc": 0.5941700549113234,
+      "residue_f1": 0.6037735849056604
+    },
+    {
+      "unit_id": "1g1m_B",
+      "residue_auc": 0.8220272904483431,
+      "residue_pr_auc": 0.33793185233746037,
+      "residue_mcc": 0.3490449235764129,
+      "residue_f1": 0.3888888888888889
+    },
+    {
+      "unit_id": "1g59_A",
+      "residue_auc": 0.8301692420897719,
+      "residue_pr_auc": 0.25275967597953813,
+      "residue_mcc": 0.26715165160564636,
+      "residue_f1": 0.2857142857142857
+    },
+    {
+      "unit_id": "1h13_A",
+      "residue_auc": 0.9959899749373433,
+      "residue_pr_auc": 0.7226190476190477,
+      "residue_mcc": 0.4556140667669229,
+      "residue_f1": 0.35714285714285715
+    },
+    {
+      "unit_id": "1i7n_A",
+      "residue_auc": 0.8637455830388693,
+      "residue_pr_auc": 0.50525791783786,
+      "residue_mcc": 0.432770126979677,
+      "residue_f1": 0.46511627906976744
+    },
+    {
+      "unit_id": "1k47_D",
+      "residue_auc": 0.9026190476190477,
+      "residue_pr_auc": 0.22042250780367345,
+      "residue_mcc": 0.1458620582116543,
+      "residue_f1": 0.1875
+    },
+    {
+      "unit_id": "1ksg_B",
+      "residue_auc": 0.8214166943797805,
+      "residue_pr_auc": 0.5105411054526856,
+      "residue_mcc": 0.024437466973862926,
+      "residue_f1": 0.10526315789473684
+    },
+    {
+      "unit_id": "1kx9_A",
+      "residue_auc": 0.7734767025089606,
+      "residue_pr_auc": 0.3128838132427756,
+      "residue_mcc": 0.13636651138364203,
+      "residue_f1": 0.19047619047619047
+    },
+    {
+      "unit_id": "1kxr_A",
+      "residue_auc": 0.8903654485049833,
+      "residue_pr_auc": 0.45786108435242,
+      "residue_mcc": 0.39779724360537594,
+      "residue_f1": 0.43243243243243246
+    },
+    {
+      "unit_id": "1lbe_B",
+      "residue_auc": 0.9381578947368421,
+      "residue_pr_auc": 0.7630345873020333,
+      "residue_mcc": 0.6975342226852742,
+      "residue_f1": 0.7058823529411765
+    },
+    {
+      "unit_id": "1m5w_D",
+      "residue_auc": 0.9569058392587805,
+      "residue_pr_auc": 0.8336385397394243,
+      "residue_mcc": 0.6781148917166554,
+      "residue_f1": 0.6857142857142857
+    },
+    {
+      "unit_id": "1nd7_A",
+      "residue_auc": 0.43445945945945946,
+      "residue_pr_auc": 0.011272325168896199,
+      "residue_mcc": -0.025993762245501817,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "1p4o_B",
+      "residue_auc": 0.9376873126873126,
+      "residue_pr_auc": 0.6132368350092273,
+      "residue_mcc": 0.45162489713815346,
+      "residue_f1": 0.4782608695652174
+    },
+    {
+      "unit_id": "1p4v_A",
+      "residue_auc": 0.9744623655913979,
+      "residue_pr_auc": 0.6562149879369353,
+      "residue_mcc": 0.5830443901314846,
+      "residue_f1": 0.6060606060606061
+    },
+    {
+      "unit_id": "1p9o_A",
+      "residue_auc": 0.841897233201581,
+      "residue_pr_auc": 0.2464944514977014,
+      "residue_mcc": 0.2128744494080315,
+      "residue_f1": 0.25806451612903225
+    },
+    {
+      "unit_id": "1pu5_C",
+      "residue_auc": 0.7315151515151516,
+      "residue_pr_auc": 0.22044051947015986,
+      "residue_mcc": 0.255591380425879,
+      "residue_f1": 0.3
+    },
+    {
+      "unit_id": "1q4k_A",
+      "residue_auc": 0.46006624953993375,
+      "residue_pr_auc": 0.05352739981392038,
+      "residue_mcc": -0.06220095693779904,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "1rjb_A",
+      "residue_auc": 0.848404255319149,
+      "residue_pr_auc": 0.1998048890996168,
+      "residue_mcc": 0.06978833611886136,
+      "residue_f1": 0.12121212121212122
+    },
+    {
+      "unit_id": "1rtc_A",
+      "residue_auc": 0.6806615776081425,
+      "residue_pr_auc": 0.041737693148287236,
+      "residue_mcc": -0.03684769691998447,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "1se8_A",
+      "residue_auc": 0.9570957095709571,
+      "residue_pr_auc": 0.22539682539682537,
+      "residue_mcc": 0.3156937708116333,
+      "residue_f1": 0.26666666666666666
+    },
+    {
+      "unit_id": "1uka_A",
+      "residue_auc": 0.9528301886792453,
+      "residue_pr_auc": 0.3100444525636341,
+      "residue_mcc": 0.38790761105197247,
+      "residue_f1": 0.36363636363636365
+    },
+    {
+      "unit_id": "1ute_A",
+      "residue_auc": 0.3159013605442177,
+      "residue_pr_auc": 0.021094417530209828,
+      "residue_mcc": -0.040287782049945105,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "1vsn_A",
+      "residue_auc": 0.26095238095238094,
+      "residue_pr_auc": 0.018424657049259344,
+      "residue_mcc": -0.03751612367420644,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "1x2g_C",
+      "residue_auc": 0.8973711882229233,
+      "residue_pr_auc": 0.300873619514695,
+      "residue_mcc": 0.32100314783886413,
+      "residue_f1": 0.35294117647058826
+    },
+    {
+      "unit_id": "1xgd_A",
+      "residue_auc": 0.9099821746880571,
+      "residue_pr_auc": 0.6865327238717462,
+      "residue_mcc": 0.4858547564279003,
+      "residue_f1": 0.463768115942029
+    },
+    {
+      "unit_id": "1xjf_A",
+      "residue_auc": 0.9862030905077263,
+      "residue_pr_auc": 0.6387994375564838,
+      "residue_mcc": 0.5443983362377568,
+      "residue_f1": 0.5098039215686274
+    },
+    {
+      "unit_id": "1xqv_A",
+      "residue_auc": 0.9211329715061058,
+      "residue_pr_auc": 0.5697726560707564,
+      "residue_mcc": 0.5383294372763456,
+      "residue_f1": 0.5641025641025641
+    },
+    {
+      "unit_id": "1xtc_A",
+      "residue_auc": 0.7758620689655172,
+      "residue_pr_auc": 0.20616941333896355,
+      "residue_mcc": -0.002402728742728089,
+      "residue_f1": 0.06896551724137931
+    },
+    {
+      "unit_id": "1zm0_A",
+      "residue_auc": 0.7764705882352941,
+      "residue_pr_auc": 0.43147231304683437,
+      "residue_mcc": 0.31242824488135434,
+      "residue_f1": 0.35294117647058826
+    },
+    {
+      "unit_id": "2aka_A",
+      "residue_auc": 0.8349556010928961,
+      "residue_pr_auc": 0.3194419992601926,
+      "residue_mcc": 0.3970485025601007,
+      "residue_f1": 0.42105263157894735
+    },
+    {
+      "unit_id": "2d05_A",
+      "residue_auc": 0.9650939777522056,
+      "residue_pr_auc": 0.8009753532480804,
+      "residue_mcc": 0.6952143627247208,
+      "residue_f1": 0.7027027027027027
+    },
+    {
+      "unit_id": "2dfp_A",
+      "residue_auc": 0.9469305794606999,
+      "residue_pr_auc": 0.6397801769647726,
+      "residue_mcc": 0.5813763802680086,
+      "residue_f1": 0.6060606060606061
+    },
+    {
+      "unit_id": "2fem_A",
+      "residue_auc": 0.8324742268041238,
+      "residue_pr_auc": 0.5377236729683148,
+      "residue_mcc": 0.4380024251930467,
+      "residue_f1": 0.4666666666666667
+    },
+    {
+      "unit_id": "2fhz_B",
+      "residue_auc": 0.9104882459312839,
+      "residue_pr_auc": 0.6806499702508108,
+      "residue_mcc": 0.4329154060646882,
+      "residue_f1": 0.42105263157894735
+    },
+    {
+      "unit_id": "2h7s_A",
+      "residue_auc": 0.9282418089524689,
+      "residue_pr_auc": 0.16984139146136357,
+      "residue_mcc": 0.15589601684768095,
+      "residue_f1": 0.17647058823529413
+    },
+    {
+      "unit_id": "2i3a_D",
+      "residue_auc": 0.9407467532467533,
+      "residue_pr_auc": 0.2979800454639023,
+      "residue_mcc": 0.237568025058739,
+      "residue_f1": 0.25806451612903225
+    },
+    {
+      "unit_id": "2i3r_A",
+      "residue_auc": 0.822141873278237,
+      "residue_pr_auc": 0.26259645816393895,
+      "residue_mcc": 0.27230724295894376,
+      "residue_f1": 0.3157894736842105
+    },
+    {
+      "unit_id": "2iyt_A",
+      "residue_auc": 0.7817139001349528,
+      "residue_pr_auc": 0.47475024487927675,
+      "residue_mcc": 0.30974870527242665,
+      "residue_f1": 0.3448275862068966
+    },
+    {
+      "unit_id": "2nt1_B",
+      "residue_auc": 0.8855249480249481,
+      "residue_pr_auc": 0.1460357742993026,
+      "residue_mcc": 0.14911815169390052,
+      "residue_f1": 0.17777777777777778
+    },
+    {
+      "unit_id": "2phz_A",
+      "residue_auc": 0.8070866141732284,
+      "residue_pr_auc": 0.22050685237642872,
+      "residue_mcc": 0.2691929133858268,
+      "residue_f1": 0.3125
+    },
+    {
+      "unit_id": "2pkf_A",
+      "residue_auc": 0.978414720452937,
+      "residue_pr_auc": 0.7152592898958146,
+      "residue_mcc": 0.6854532137100307,
+      "residue_f1": 0.7027027027027027
+    },
+    {
+      "unit_id": "2pwz_G",
+      "residue_auc": 0.9354838709677419,
+      "residue_pr_auc": 0.7471665287879445,
+      "residue_mcc": 0.6530580153288892,
+      "residue_f1": 0.6530612244897959
+    },
+    {
+      "unit_id": "2qbv_A",
+      "residue_auc": 0.9055690072639225,
+      "residue_pr_auc": 0.73026855888698,
+      "residue_mcc": 0.49427362687024046,
+      "residue_f1": 0.4444444444444444
+    },
+    {
+      "unit_id": "2rfj_B",
+      "residue_auc": 0.7582070707070707,
+      "residue_pr_auc": 0.3414150304748525,
+      "residue_mcc": 0.21541010921383227,
+      "residue_f1": 0.25
+    },
+    {
+      "unit_id": "2v6m_D",
+      "residue_auc": 0.8852495543672014,
+      "residue_pr_auc": 0.5261274642268113,
+      "residue_mcc": 0.41232979828038296,
+      "residue_f1": 0.43137254901960786
+    },
+    {
+      "unit_id": "2vl2_C",
+      "residue_auc": 0.9225165562913907,
+      "residue_pr_auc": 0.6036313686313686,
+      "residue_mcc": 0.6094984195694446,
+      "residue_f1": 0.631578947368421
+    },
+    {
+      "unit_id": "2vqz_F",
+      "residue_auc": 0.1968031968031968,
+      "residue_pr_auc": 0.031493666960948616,
+      "residue_mcc": -0.05589754054901393,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "2vyr_A",
+      "residue_auc": 0.7091575091575092,
+      "residue_pr_auc": 0.5775607858237607,
+      "residue_mcc": 0.32144306735076394,
+      "residue_f1": 0.3076923076923077
+    },
+    {
+      "unit_id": "2w8n_A",
+      "residue_auc": 0.8869936034115139,
+      "residue_pr_auc": 0.1434497242186463,
+      "residue_mcc": 0.25889918492800945,
+      "residue_f1": 0.2564102564102564
+    },
+    {
+      "unit_id": "2x47_A",
+      "residue_auc": 0.9441076165214096,
+      "residue_pr_auc": 0.7633455335202088,
+      "residue_mcc": 0.62601364273083,
+      "residue_f1": 0.6153846153846154
+    },
+    {
+      "unit_id": "2xsa_A",
+      "residue_auc": 0.9177570093457944,
+      "residue_pr_auc": 0.20375401882231522,
+      "residue_mcc": 0.2187462684868902,
+      "residue_f1": 0.24390243902439024
+    },
+    {
+      "unit_id": "2zcg_A",
+      "residue_auc": 0.9191729323308271,
+      "residue_pr_auc": 0.32308842384986314,
+      "residue_mcc": 0.27909909218438056,
+      "residue_f1": 0.3125
+    },
+    {
+      "unit_id": "2zj7_A",
+      "residue_auc": 0.8155838815789473,
+      "residue_pr_auc": 0.04200539879997957,
+      "residue_mcc": -0.02815393864551723,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "3a0x_A",
+      "residue_auc": 0.9482886904761905,
+      "residue_pr_auc": 0.7281114800336769,
+      "residue_mcc": 0.4640427223307657,
+      "residue_f1": 0.4666666666666667
+    },
+    {
+      "unit_id": "3bjp_A",
+      "residue_auc": 0.7241379310344828,
+      "residue_pr_auc": 0.03423916616046997,
+      "residue_mcc": -0.032470431944040985,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "3f4k_A",
+      "residue_auc": 0.9381858902575588,
+      "residue_pr_auc": 0.5451800321415001,
+      "residue_mcc": 0.4366541512880892,
+      "residue_f1": 0.47058823529411764
+    },
+    {
+      "unit_id": "3flg_A",
+      "residue_auc": 0.7292768959435626,
+      "residue_pr_auc": 0.19049809687554592,
+      "residue_mcc": 0.18446407949902285,
+      "residue_f1": 0.23529411764705882
+    },
+    {
+      "unit_id": "3fzo_A",
+      "residue_auc": 0.9227296181630547,
+      "residue_pr_auc": 0.5415319829107452,
+      "residue_mcc": 0.29593899512327454,
+      "residue_f1": 0.32653061224489793
+    },
+    {
+      "unit_id": "3gdg_B",
+      "residue_auc": 0.9296542553191489,
+      "residue_pr_auc": 0.6615218121154213,
+      "residue_mcc": 0.5109192700482001,
+      "residue_f1": 0.5106382978723404
+    },
+    {
+      "unit_id": "3h8a_B",
+      "residue_auc": 0.9838187702265372,
+      "residue_pr_auc": 0.6919354063035394,
+      "residue_mcc": 0.6924188364997287,
+      "residue_f1": 0.6976744186046512
+    },
+    {
+      "unit_id": "3i8s_B",
+      "residue_auc": 0.702295918367347,
+      "residue_pr_auc": 0.09598790715398516,
+      "residue_mcc": -0.0631037291856266,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "3idh_A",
+      "residue_auc": 0.6882514237502636,
+      "residue_pr_auc": 0.07494686201048031,
+      "residue_mcc": -0.05575007318115644,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "3jzg_A",
+      "residue_auc": 0.6107108549471661,
+      "residue_pr_auc": 0.043700874370095046,
+      "residue_mcc": -0.04635292908860995,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "3k01_A",
+      "residue_auc": 0.9421487603305785,
+      "residue_pr_auc": 0.6402197318362758,
+      "residue_mcc": 0.5629029668587531,
+      "residue_f1": 0.5882352941176471
+    },
+    {
+      "unit_id": "3lnz_C",
+      "residue_auc": 0.8304597701149425,
+      "residue_pr_auc": 0.6680788060970663,
+      "residue_mcc": 0.28412755398828093,
+      "residue_f1": 0.27586206896551724
+    },
+    {
+      "unit_id": "3lnz_O",
+      "residue_auc": 0.855225988700565,
+      "residue_pr_auc": 0.7518507343793573,
+      "residue_mcc": 0.3969703642407958,
+      "residue_f1": 0.3448275862068966
+    },
+    {
+      "unit_id": "3ly8_A",
+      "residue_auc": 0.14393939393939395,
+      "residue_pr_auc": 0.020779694453754702,
+      "residue_mcc": -0.04694172601242567,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "3mwg_B",
+      "residue_auc": 0.939208984375,
+      "residue_pr_auc": 0.4662786341390297,
+      "residue_mcc": 0.40234375,
+      "residue_f1": 0.4375
+    },
+    {
+      "unit_id": "3n4u_A",
+      "residue_auc": 0.9274021352313168,
+      "residue_pr_auc": 0.45417109987323195,
+      "residue_mcc": 0.33922258632679186,
+      "residue_f1": 0.3783783783783784
+    },
+    {
+      "unit_id": "3nx1_B",
+      "residue_auc": 0.7870967741935484,
+      "residue_pr_auc": 0.16357004909895934,
+      "residue_mcc": 0.041935483870967745,
+      "residue_f1": 0.1
+    },
+    {
+      "unit_id": "3pbf_A",
+      "residue_auc": 0.5848861283643892,
+      "residue_pr_auc": 0.0633775414927876,
+      "residue_mcc": -0.05442446727636274,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "3pfp_A",
+      "residue_auc": 0.9307521746546137,
+      "residue_pr_auc": 0.23756471261531995,
+      "residue_mcc": 0.2925226918782037,
+      "residue_f1": 0.3
+    },
+    {
+      "unit_id": "3pfp_B",
+      "residue_auc": 0.9437148217636022,
+      "residue_pr_auc": 0.29687378476943704,
+      "residue_mcc": 0.4598846265656099,
+      "residue_f1": 0.45
+    },
+    {
+      "unit_id": "3rwv_A",
+      "residue_auc": 0.815805109922757,
+      "residue_pr_auc": 0.3379853020954734,
+      "residue_mcc": 0.2897491617831329,
+      "residue_f1": 0.3333333333333333
+    },
+    {
+      "unit_id": "3st6_C",
+      "residue_auc": 0.677834179357022,
+      "residue_pr_auc": 0.18597097744827568,
+      "residue_mcc": 0.13142672347563877,
+      "residue_f1": 0.18518518518518517
+    },
+    {
+      "unit_id": "3t8b_A",
+      "residue_auc": 0.7972972972972973,
+      "residue_pr_auc": 0.18596578139841727,
+      "residue_mcc": 0.1553814463645373,
+      "residue_f1": 0.20689655172413793
+    },
+    {
+      "unit_id": "3tpo_A",
+      "residue_auc": 0.9511627906976744,
+      "residue_pr_auc": 0.21733891838642894,
+      "residue_mcc": 0.4074031953609253,
+      "residue_f1": 0.36363636363636365
+    },
+    {
+      "unit_id": "3ugk_A",
+      "residue_auc": 0.9614717932555941,
+      "residue_pr_auc": 0.7736097074234303,
+      "residue_mcc": 0.5713242303688185,
+      "residue_f1": 0.576271186440678
+    },
+    {
+      "unit_id": "3uyi_A",
+      "residue_auc": 0.9457671957671958,
+      "residue_pr_auc": 0.6466304917357012,
+      "residue_mcc": 0.46938775510204084,
+      "residue_f1": 0.5
+    },
+    {
+      "unit_id": "3v55_A",
+      "residue_auc": 0.41257247482453463,
+      "residue_pr_auc": 0.06349425309151259,
+      "residue_mcc": -0.07195219708723666,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "3vgm_A",
+      "residue_auc": 0.8959942518412071,
+      "residue_pr_auc": 0.39515793058466,
+      "residue_mcc": 0.28188430947093257,
+      "residue_f1": 0.32432432432432434
+    },
+    {
+      "unit_id": "3w90_A",
+      "residue_auc": 0.9494266392237577,
+      "residue_pr_auc": 0.62387298428872,
+      "residue_mcc": 0.444995891220982,
+      "residue_f1": 0.4666666666666667
+    },
+    {
+      "unit_id": "3wb9_C",
+      "residue_auc": 0.9202071163037706,
+      "residue_pr_auc": 0.5643871682328376,
+      "residue_mcc": 0.41652187728451573,
+      "residue_f1": 0.4444444444444444
+    },
+    {
+      "unit_id": "4aem_A",
+      "residue_auc": 0.8180555555555555,
+      "residue_pr_auc": 0.2524031155015197,
+      "residue_mcc": 0.2711630722733202,
+      "residue_f1": 0.3076923076923077
+    },
+    {
+      "unit_id": "4amv_B",
+      "residue_auc": 0.9752670039347948,
+      "residue_pr_auc": 0.45493347214087065,
+      "residue_mcc": 0.5069539420165252,
+      "residue_f1": 0.48
+    },
+    {
+      "unit_id": "4bg8_A",
+      "residue_auc": 0.8575680272108843,
+      "residue_pr_auc": 0.27844719936587614,
+      "residue_mcc": 0.2538037415298069,
+      "residue_f1": 0.29411764705882354
+    },
+    {
+      "unit_id": "4cmw_B",
+      "residue_auc": 0.892962743938498,
+      "residue_pr_auc": 0.4896168648563598,
+      "residue_mcc": 0.4238062560081576,
+      "residue_f1": 0.45714285714285713
+    },
+    {
+      "unit_id": "4dnc_B",
+      "residue_auc": 0.953080114905841,
+      "residue_pr_auc": 0.7371227206987192,
+      "residue_mcc": 0.5782065377509182,
+      "residue_f1": 0.5853658536585366
+    },
+    {
+      "unit_id": "4e1y_A",
+      "residue_auc": 0.9603448275862069,
+      "residue_pr_auc": 0.21867672197083965,
+      "residue_mcc": 0.28171298698253305,
+      "residue_f1": 0.24
+    },
+    {
+      "unit_id": "4fkm_B",
+      "residue_auc": 0.8597797927461139,
+      "residue_pr_auc": 0.508335125981544,
+      "residue_mcc": 0.39306297310798627,
+      "residue_f1": 0.42857142857142855
+    },
+    {
+      "unit_id": "4gpi_C",
+      "residue_auc": 0.7766587677725119,
+      "residue_pr_auc": 0.32362563125387267,
+      "residue_mcc": 0.21196051089761112,
+      "residue_f1": 0.2631578947368421
+    },
+    {
+      "unit_id": "4gv9_A",
+      "residue_auc": 0.5689119170984456,
+      "residue_pr_auc": 0.03302197938928062,
+      "residue_mcc": -0.0390374900887485,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "4hye_A",
+      "residue_auc": 0.9030612244897959,
+      "residue_pr_auc": 0.27139355742296917,
+      "residue_mcc": 0.2646763180494774,
+      "residue_f1": 0.25
+    },
+    {
+      "unit_id": "4ikv_A",
+      "residue_auc": 0.9259336099585063,
+      "residue_pr_auc": 0.14032072528140055,
+      "residue_mcc": 0.21330985339448938,
+      "residue_f1": 0.21052631578947367
+    },
+    {
+      "unit_id": "4ilg_A",
+      "residue_auc": 0.5331967912613074,
+      "residue_pr_auc": 0.24573160038304007,
+      "residue_mcc": 0.14635297267396138,
+      "residue_f1": 0.2
+    },
+    {
+      "unit_id": "4j4e_F",
+      "residue_auc": 0.21428571428571427,
+      "residue_pr_auc": 0.06675674715656099,
+      "residue_mcc": -0.08330923113952962,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "4jax_F",
+      "residue_auc": 0.9753753753753753,
+      "residue_pr_auc": 0.6494988808920698,
+      "residue_mcc": 0.591061327420012,
+      "residue_f1": 0.5853658536585366
+    },
+    {
+      "unit_id": "4jfr_C",
+      "residue_auc": 0.9955357142857143,
+      "residue_pr_auc": 0.893162078351154,
+      "residue_mcc": 0.7871601339630812,
+      "residue_f1": 0.7878787878787878
+    },
+    {
+      "unit_id": "4kmy_A",
+      "residue_auc": 0.948663101604278,
+      "residue_pr_auc": 0.7339314914063642,
+      "residue_mcc": 0.618596359665063,
+      "residue_f1": 0.625
+    },
+    {
+      "unit_id": "4mwi_A",
+      "residue_auc": 0.8659973810563073,
+      "residue_pr_auc": 0.44978686449653604,
+      "residue_mcc": 0.2282320113054663,
+      "residue_f1": 0.2727272727272727
+    },
+    {
+      "unit_id": "4nzv_B",
+      "residue_auc": 0.9286492374727668,
+      "residue_pr_auc": 0.31237490642911064,
+      "residue_mcc": 0.28355598986964764,
+      "residue_f1": 0.32432432432432434
+    },
+    {
+      "unit_id": "4oqo_B",
+      "residue_auc": 0.7211646136618141,
+      "residue_pr_auc": 0.14058833003195498,
+      "residue_mcc": 0.10369108293918422,
+      "residue_f1": 0.15384615384615385
+    },
+    {
+      "unit_id": "4p2f_A",
+      "residue_auc": 0.9379888268156424,
+      "residue_pr_auc": 0.3931546423637385,
+      "residue_mcc": 0.3450640050823496,
+      "residue_f1": 0.38095238095238093
+    },
+    {
+      "unit_id": "4qvk_B",
+      "residue_auc": 0.6939047619047619,
+      "residue_pr_auc": 0.2618500767627669,
+      "residue_mcc": 0.08808227977629127,
+      "residue_f1": 0.15384615384615385
+    },
+    {
+      "unit_id": "4r0x_A",
+      "residue_auc": 0.8498331479421579,
+      "residue_pr_auc": 0.6835083120373648,
+      "residue_mcc": 0.441817155394174,
+      "residue_f1": 0.3888888888888889
+    },
+    {
+      "unit_id": "4rvt_B",
+      "residue_auc": 0.8695124909046811,
+      "residue_pr_auc": 0.34233330982915805,
+      "residue_mcc": 0.20031735827541033,
+      "residue_f1": 0.25
+    },
+    {
+      "unit_id": "4ttp_A",
+      "residue_auc": 0.6854729729729729,
+      "residue_pr_auc": 0.1658420285774734,
+      "residue_mcc": 0.15862602493669123,
+      "residue_f1": 0.21428571428571427
+    },
+    {
+      "unit_id": "4uc8_A",
+      "residue_auc": 0.726027397260274,
+      "residue_pr_auc": 0.06963059823471722,
+      "residue_mcc": 0.13696941022507092,
+      "residue_f1": 0.125
+    },
+    {
+      "unit_id": "4uum_A",
+      "residue_auc": 0.9257843137254902,
+      "residue_pr_auc": 0.6348699079075497,
+      "residue_mcc": 0.47304210578903994,
+      "residue_f1": 0.49056603773584906
+    },
+    {
+      "unit_id": "4zm7_A",
+      "residue_auc": 0.805945499587118,
+      "residue_pr_auc": 0.1222618507800256,
+      "residue_mcc": 0.07666482574736128,
+      "residue_f1": 0.11764705882352941
+    },
+    {
+      "unit_id": "4zoe_B",
+      "residue_auc": 0.9055007052186178,
+      "residue_pr_auc": 0.20527106092553402,
+      "residue_mcc": 0.2127925013892614,
+      "residue_f1": 0.21052631578947367
+    },
+    {
+      "unit_id": "5acv_B",
+      "residue_auc": 0.9682017543859649,
+      "residue_pr_auc": 0.24821428571428572,
+      "residue_mcc": 0.39966370916461974,
+      "residue_f1": 0.35294117647058826
+    },
+    {
+      "unit_id": "5b0e_B",
+      "residue_auc": 0.8250143430866322,
+      "residue_pr_auc": 0.4683817144294909,
+      "residue_mcc": 0.08099841037963314,
+      "residue_f1": 0.14814814814814814
+    },
+    {
+      "unit_id": "5caz_A",
+      "residue_auc": 0.6286919831223629,
+      "residue_pr_auc": 0.03172932330827068,
+      "residue_mcc": -0.03352984490967545,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "5e0v_A",
+      "residue_auc": 0.6495726495726496,
+      "residue_pr_auc": 0.08457236186367273,
+      "residue_mcc": -0.061797056234918595,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "5ey7_B",
+      "residue_auc": 0.9111756168359942,
+      "residue_pr_auc": 0.5410092238807566,
+      "residue_mcc": 0.33291421192704945,
+      "residue_f1": 0.37209302325581395
+    },
+    {
+      "unit_id": "5hij_A",
+      "residue_auc": 0.9447706023048489,
+      "residue_pr_auc": 0.7193238307901565,
+      "residue_mcc": 0.6150041772019992,
+      "residue_f1": 0.6285714285714286
+    },
+    {
+      "unit_id": "5hto_E",
+      "residue_auc": 0.9117647058823529,
+      "residue_pr_auc": 0.6435258642969452,
+      "residue_mcc": 0.4502497990303717,
+      "residue_f1": 0.47058823529411764
+    },
+    {
+      "unit_id": "5i3t_E",
+      "residue_auc": 0.19498607242339833,
+      "residue_pr_auc": 0.008313694239667472,
+      "residue_mcc": -0.026156484045566197,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "5igh_A",
+      "residue_auc": 0.8619590741361959,
+      "residue_pr_auc": 0.41259737545681924,
+      "residue_mcc": 0.4278677628806086,
+      "residue_f1": 0.46153846153846156
+    },
+    {
+      "unit_id": "5kcg_B",
+      "residue_auc": 0.9382352941176471,
+      "residue_pr_auc": 0.3590377232414027,
+      "residue_mcc": 0.4268587587801247,
+      "residue_f1": 0.45
+    },
+    {
+      "unit_id": "5loc_A",
+      "residue_auc": 0.9346635367762128,
+      "residue_pr_auc": 0.7115215913808908,
+      "residue_mcc": 0.5140144830142442,
+      "residue_f1": 0.5185185185185185
+    },
+    {
+      "unit_id": "5o8b_A",
+      "residue_auc": 0.20188284518828453,
+      "residue_pr_auc": 0.012506914528244754,
+      "residue_mcc": -0.03198728073030726,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "5sc2_A",
+      "residue_auc": 0.8082758620689655,
+      "residue_pr_auc": 0.20490533562822716,
+      "residue_mcc": 0.2658522658241319,
+      "residue_f1": 0.2857142857142857
+    },
+    {
+      "unit_id": "5tc0_B",
+      "residue_auc": 0.9148970398970399,
+      "residue_pr_auc": 0.6469442757353154,
+      "residue_mcc": 0.465152205320751,
+      "residue_f1": 0.47619047619047616
+    },
+    {
+      "unit_id": "5tvi_V",
+      "residue_auc": 0.7618243243243243,
+      "residue_pr_auc": 0.37165757483905104,
+      "residue_mcc": 0.26784484035643547,
+      "residue_f1": 0.2857142857142857
+    },
+    {
+      "unit_id": "5uxa_A",
+      "residue_auc": 0.9118840579710145,
+      "residue_pr_auc": 0.4206334424215689,
+      "residue_mcc": 0.2914189676546195,
+      "residue_f1": 0.3333333333333333
+    },
+    {
+      "unit_id": "5wbm_B",
+      "residue_auc": 0.9568804897524621,
+      "residue_pr_auc": 0.4423428382271444,
+      "residue_mcc": 0.4436935605652583,
+      "residue_f1": 0.4666666666666667
+    },
+    {
+      "unit_id": "5yhb_A",
+      "residue_auc": 0.6416184971098265,
+      "residue_pr_auc": 0.1416111111111111,
+      "residue_mcc": 0.10618111341798589,
+      "residue_f1": 0.13333333333333333
+    },
+    {
+      "unit_id": "5yj2_C",
+      "residue_auc": 0.6662414965986394,
+      "residue_pr_auc": 0.04616827011164357,
+      "residue_mcc": 0.04917479279625652,
+      "residue_f1": 0.08
+    },
+    {
+      "unit_id": "5yqp_A",
+      "residue_auc": 0.8915,
+      "residue_pr_auc": 0.6304869524872517,
+      "residue_mcc": 0.3686372430017072,
+      "residue_f1": 0.3888888888888889
+    },
+    {
+      "unit_id": "5ysb_B",
+      "residue_auc": 0.9961494031574895,
+      "residue_pr_auc": 0.9283980569694856,
+      "residue_mcc": 0.7292978522846858,
+      "residue_f1": 0.7222222222222222
+    },
+    {
+      "unit_id": "5z18_C",
+      "residue_auc": 0.9371577899452463,
+      "residue_pr_auc": 0.25410499026772765,
+      "residue_mcc": 0.20027484236065185,
+      "residue_f1": 0.20833333333333334
+    },
+    {
+      "unit_id": "5zj4_D",
+      "residue_auc": 0.8413666870042709,
+      "residue_pr_auc": 0.26659287268730403,
+      "residue_mcc": 0.14807886212613466,
+      "residue_f1": 0.2
+    },
+    {
+      "unit_id": "6a98_C",
+      "residue_auc": 0.9214402618657938,
+      "residue_pr_auc": 0.3984427415852796,
+      "residue_mcc": 0.3606081719934623,
+      "residue_f1": 0.4
+    },
+    {
+      "unit_id": "6bty_B",
+      "residue_auc": 0.5107376283846872,
+      "residue_pr_auc": 0.13280807765780034,
+      "residue_mcc": 0.06824595509680365,
+      "residue_f1": 0.125
+    },
+    {
+      "unit_id": "6cqe_B",
+      "residue_auc": 0.9068670792808724,
+      "residue_pr_auc": 0.4983019951265213,
+      "residue_mcc": 0.3321975761877357,
+      "residue_f1": 0.37209302325581395
+    },
+    {
+      "unit_id": "6du4_A",
+      "residue_auc": 0.7684939581491306,
+      "residue_pr_auc": 0.18671079389725798,
+      "residue_mcc": 0.07507593550305354,
+      "residue_f1": 0.13953488372093023
+    },
+    {
+      "unit_id": "6eqj_A",
+      "residue_auc": 0.9782608695652174,
+      "residue_pr_auc": 0.7309181612099233,
+      "residue_mcc": 0.6706075876927269,
+      "residue_f1": 0.6896551724137931
+    },
+    {
+      "unit_id": "6f52_A",
+      "residue_auc": 0.8718654434250764,
+      "residue_pr_auc": 0.4164851947436691,
+      "residue_mcc": 0.3933767921102981,
+      "residue_f1": 0.42857142857142855
+    },
+    {
+      "unit_id": "6fc2_C",
+      "residue_auc": 0.8469696969696969,
+      "residue_pr_auc": 0.4001644574035754,
+      "residue_mcc": 0.3233601483174285,
+      "residue_f1": 0.36363636363636365
+    },
+    {
+      "unit_id": "6fgj_B",
+      "residue_auc": 0.8578431372549019,
+      "residue_pr_auc": 0.47279541416796433,
+      "residue_mcc": 0.3976578433293651,
+      "residue_f1": 0.42857142857142855
+    },
+    {
+      "unit_id": "6g6y_A",
+      "residue_auc": 0.46755433119069484,
+      "residue_pr_auc": 0.06462014759291015,
+      "residue_mcc": -0.06655583256397218,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "6hei_A",
+      "residue_auc": 0.8516826923076923,
+      "residue_pr_auc": 0.4154143164253348,
+      "residue_mcc": 0.25824091485243494,
+      "residue_f1": 0.30434782608695654
+    },
+    {
+      "unit_id": "6isu_A",
+      "residue_auc": 0.6120772946859904,
+      "residue_pr_auc": 0.11470976352943973,
+      "residue_mcc": -0.07661161448217495,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "6jq9_B",
+      "residue_auc": 0.9714885954381752,
+      "residue_pr_auc": 0.3836666336666337,
+      "residue_mcc": 0.34058074556784146,
+      "residue_f1": 0.2857142857142857
+    },
+    {
+      "unit_id": "6ksc_A",
+      "residue_auc": 0.47138263665594854,
+      "residue_pr_auc": 0.02996344366794784,
+      "residue_mcc": -0.04370536421934175,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "6n5j_B",
+      "residue_auc": 0.9702380952380952,
+      "residue_pr_auc": 0.8203282789123917,
+      "residue_mcc": 0.6674050040128455,
+      "residue_f1": 0.6842105263157895
+    },
+    {
+      "unit_id": "6nei_B",
+      "residue_auc": 0.7319757842597688,
+      "residue_pr_auc": 0.2146093687122822,
+      "residue_mcc": 0.18136319539502604,
+      "residue_f1": 0.23255813953488372
+    },
+    {
+      "unit_id": "6o4f_H",
+      "residue_auc": 0.9496166484118291,
+      "residue_pr_auc": 0.2687017385340227,
+      "residue_mcc": 0.3132035666998938,
+      "residue_f1": 0.3
+    },
+    {
+      "unit_id": "6tx0_B",
+      "residue_auc": 0.20421052631578948,
+      "residue_pr_auc": 0.006355811587784163,
+      "residue_mcc": -0.02286514372414846,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "6vle_A",
+      "residue_auc": 0.8538011695906432,
+      "residue_pr_auc": 0.1371413327748484,
+      "residue_mcc": 0.13842592234410125,
+      "residue_f1": 0.17777777777777778
+    },
+    {
+      "unit_id": "6w10_A",
+      "residue_auc": 0.9073260073260073,
+      "residue_pr_auc": 0.35837038369413415,
+      "residue_mcc": 0.26483516483516484,
+      "residue_f1": 0.3076923076923077
+    },
+    {
+      "unit_id": "7c48_A",
+      "residue_auc": 0.9196855775803144,
+      "residue_pr_auc": 0.4756300522775271,
+      "residue_mcc": 0.4271695398926516,
+      "residue_f1": 0.46153846153846156
+    },
+    {
+      "unit_id": "7c63_A",
+      "residue_auc": 0.8795309168443497,
+      "residue_pr_auc": 0.14076384666915467,
+      "residue_mcc": 0.18250399529898875,
+      "residue_f1": 0.21052631578947367
+    },
+    {
+      "unit_id": "7de1_A",
+      "residue_auc": 0.43625,
+      "residue_pr_auc": 0.06867359288350713,
+      "residue_mcc": -0.06859943405700353,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "7e5q_B",
+      "residue_auc": 0.32129094412331405,
+      "residue_pr_auc": 0.013761699425582585,
+      "residue_mcc": -0.03232090641848577,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "7f2m_B",
+      "residue_auc": 0.039330922242314645,
+      "residue_pr_auc": 0.012850692119565051,
+      "residue_mcc": -0.0372087848617242,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "7f4y_B",
+      "residue_auc": 0.9332579185520362,
+      "residue_pr_auc": 0.1335941977172397,
+      "residue_mcc": 0.24551936440029215,
+      "residue_f1": 0.2318840579710145
+    },
+    {
+      "unit_id": "7kay_A",
+      "residue_auc": 0.8768027625431647,
+      "residue_pr_auc": 0.5209210422660007,
+      "residue_mcc": 0.4226967299361348,
+      "residue_f1": 0.45714285714285713
+    },
+    {
+      "unit_id": "7nc8_D",
+      "residue_auc": 0.8547868061142397,
+      "residue_pr_auc": 0.17986497572900897,
+      "residue_mcc": 0.19993470381897216,
+      "residue_f1": 0.24
+    },
+    {
+      "unit_id": "7ndl_B",
+      "residue_auc": 0.9352863290301224,
+      "residue_pr_auc": 0.20084679256019153,
+      "residue_mcc": 0.22950120466671195,
+      "residue_f1": 0.24561403508771928
+    },
+    {
+      "unit_id": "7nlx_A",
+      "residue_auc": 0.9629090909090909,
+      "residue_pr_auc": 0.5757381450603956,
+      "residue_mcc": 0.6045161610488182,
+      "residue_f1": 0.625
+    },
+    {
+      "unit_id": "7o1i_A",
+      "residue_auc": 0.7599069905506357,
+      "residue_pr_auc": 0.33482770423987623,
+      "residue_mcc": 0.2507336580919245,
+      "residue_f1": 0.28169014084507044
+    },
+    {
+      "unit_id": "7qoq_A",
+      "residue_auc": 0.888013698630137,
+      "residue_pr_auc": 0.1436048720374402,
+      "residue_mcc": 0.11538554696455064,
+      "residue_f1": 0.14814814814814814
+    },
+    {
+      "unit_id": "7qzr_D",
+      "residue_auc": 0.5659420289855073,
+      "residue_pr_auc": 0.009659535465987079,
+      "residue_mcc": -0.02009649636962284,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "7v8k_B",
+      "residue_auc": 0.9884861407249467,
+      "residue_pr_auc": 0.677816091954023,
+      "residue_mcc": 0.33101851710548996,
+      "residue_f1": 0.25
+    },
+    {
+      "unit_id": "7w19_A",
+      "residue_auc": 0.9098228663446055,
+      "residue_pr_auc": 0.5035747987261766,
+      "residue_mcc": 0.4160877693118826,
+      "residue_f1": 0.45
+    },
+    {
+      "unit_id": "7x0f_A",
+      "residue_auc": 0.3460650204299165,
+      "residue_pr_auc": 0.022480903704699292,
+      "residue_mcc": -0.04311116477571079,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "7x0g_B",
+      "residue_auc": 0.9196612969847171,
+      "residue_pr_auc": 0.5034383490244694,
+      "residue_mcc": 0.4221184561502059,
+      "residue_f1": 0.45714285714285713
+    },
+    {
+      "unit_id": "7x0i_B",
+      "residue_auc": 0.9631517379679144,
+      "residue_pr_auc": 0.8364939903070041,
+      "residue_mcc": 0.6796054764217132,
+      "residue_f1": 0.6909090909090909
+    },
+    {
+      "unit_id": "7xgf_E",
+      "residue_auc": 0.8606625258799172,
+      "residue_pr_auc": 0.7256630032692633,
+      "residue_mcc": 0.2588045936892573,
+      "residue_f1": 0.2545454545454545
+    },
+    {
+      "unit_id": "7yjc_A",
+      "residue_auc": 0.30533333333333335,
+      "residue_pr_auc": 0.01241068772401663,
+      "residue_mcc": -0.03131295886302762,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "8aeq_A",
+      "residue_auc": 0.9375,
+      "residue_pr_auc": 0.16289428504502038,
+      "residue_mcc": 0.2161841283439241,
+      "residue_f1": 0.18181818181818182
+    },
+    {
+      "unit_id": "8aqi_B",
+      "residue_auc": 0.8150994575045208,
+      "residue_pr_auc": 0.35971980958258937,
+      "residue_mcc": 0.2894879493740779,
+      "residue_f1": 0.3333333333333333
+    },
+    {
+      "unit_id": "8b9p_A",
+      "residue_auc": 0.8111675126903554,
+      "residue_pr_auc": 0.04809206004956881,
+      "residue_mcc": 0.056692190812657306,
+      "residue_f1": 0.05128205128205128
+    },
+    {
+      "unit_id": "8bre_B",
+      "residue_auc": 0.9616061993659739,
+      "residue_pr_auc": 0.5182554720534794,
+      "residue_mcc": 0.5170500368348988,
+      "residue_f1": 0.5405405405405406
+    },
+    {
+      "unit_id": "8gxj_C",
+      "residue_auc": 0.9246951219512195,
+      "residue_pr_auc": 0.5656958298689858,
+      "residue_mcc": 0.42747914953298183,
+      "residue_f1": 0.45161290322580644
+    },
+    {
+      "unit_id": "8h27_A",
+      "residue_auc": 0.8732563732563733,
+      "residue_pr_auc": 0.47261999616494615,
+      "residue_mcc": 0.2381405912772226,
+      "residue_f1": 0.2702702702702703
+    },
+    {
+      "unit_id": "8i84_B",
+      "residue_auc": 0.9271863870201821,
+      "residue_pr_auc": 0.6354283819622004,
+      "residue_mcc": 0.48478236407737246,
+      "residue_f1": 0.5142857142857142
+    },
+    {
+      "unit_id": "8ias_B",
+      "residue_auc": 0.739245456636761,
+      "residue_pr_auc": 0.07927993648355325,
+      "residue_mcc": 0.08992681069456268,
+      "residue_f1": 0.1276595744680851
+    },
+    {
+      "unit_id": "8j11_X",
+      "residue_auc": 0.8,
+      "residue_pr_auc": 0.3099009900990099,
+      "residue_mcc": 0.34658374675708536,
+      "residue_f1": 0.3076923076923077
+    },
+    {
+      "unit_id": "8onn_E",
+      "residue_auc": 0.9262749445676275,
+      "residue_pr_auc": 0.5492893729650907,
+      "residue_mcc": 0.45940523642808867,
+      "residue_f1": 0.4864864864864865
+    },
+    {
+      "unit_id": "8u3n_A",
+      "residue_auc": 0.4993224932249323,
+      "residue_pr_auc": 0.022209358272066146,
+      "residue_mcc": -0.03665464133506099,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "8vxu_B",
+      "residue_auc": 0.59375,
+      "residue_pr_auc": 0.10978150229779692,
+      "residue_mcc": -0.07142857142857142,
+      "residue_f1": 0.0
+    },
+    {
+      "unit_id": "9atc_A",
+      "residue_auc": 0.9902784643269072,
+      "residue_pr_auc": 0.8920929850422702,
+      "residue_mcc": 0.7563886388345709,
+      "residue_f1": 0.7692307692307693
+    }
+  ],
+  "paired_vs_p2rank": {
+    "residue_auc": {
+      "schema": "geoaudit.bootstrap_ci.v1",
+      "clinical_grade": false,
+      "baseline": "p2rank",
+      "n_structures": 192,
+      "n_boot": 10000,
+      "seed": 20260725,
+      "ci_level": 0.95,
+      "per_method": {
+        "threshold_field": {
+          "point": 0.7981988887890487,
+          "ci_low": 0.7681111666304847,
+          "ci_high": 0.8265573654553423,
+          "n_structures_scored": 192
+        },
+        "p2rank": {
+          "point": 0.7934860413336979,
+          "ci_low": 0.772210927247215,
+          "ci_high": 0.8136746008084725,
+          "n_structures_scored": 192
+        }
+      },
+      "paired_vs_baseline": {
+        "threshold_field": {
+          "delta_point": 0.004712847455350722,
+          "delta_ci_low": -0.01575993228507724,
+          "delta_ci_high": 0.024347998701002717,
+          "p_two_sided_bootstrap": 0.6454,
+          "crosses_zero": true
+        }
+      }
+    },
+    "residue_pr_auc": {
+      "schema": "geoaudit.bootstrap_ci.v1",
+      "clinical_grade": false,
+      "baseline": "p2rank",
+      "n_structures": 192,
+      "n_boot": 10000,
+      "seed": 20260725,
+      "ci_level": 0.95,
+      "per_method": {
+        "threshold_field": {
+          "point": 0.36338852403807737,
+          "ci_low": 0.3272068013872445,
+          "ci_high": 0.3978982420656887,
+          "n_structures_scored": 192
+        },
+        "p2rank": {
+          "point": 0.3580249808622129,
+          "ci_low": 0.32202224988538325,
+          "ci_high": 0.39385102633989905,
+          "n_structures_scored": 192
+        }
+      },
+      "paired_vs_baseline": {
+        "threshold_field": {
+          "delta_point": 0.00536354317586446,
+          "delta_ci_low": -0.023624740486550954,
+          "delta_ci_high": 0.03419609588101149,
+          "p_two_sided_bootstrap": 0.7285999999999999,
+          "crosses_zero": true
+        }
+      }
+    },
+    "residue_mcc": {
+      "schema": "geoaudit.bootstrap_ci.v1",
+      "clinical_grade": false,
+      "baseline": "p2rank",
+      "n_structures": 192,
+      "n_boot": 10000,
+      "seed": 20260725,
+      "ci_level": 0.95,
+      "per_method": {
+        "threshold_field": {
+          "point": 0.27816645663477474,
+          "ci_low": 0.24543990724339185,
+          "ci_high": 0.3088618443679926,
+          "n_structures_scored": 192
+        },
+        "p2rank": {
+          "point": 0.2847504977012497,
+          "ci_low": 0.2524778879108036,
+          "ci_high": 0.31636532497552367,
+          "n_structures_scored": 186
+        }
+      },
+      "paired_vs_baseline": {
+        "threshold_field": {
+          "delta_point": -0.006584041066474977,
+          "delta_ci_low": -0.034865598245094845,
+          "delta_ci_high": 0.02155071071557795,
+          "p_two_sided_bootstrap": 0.6284,
+          "crosses_zero": true
+        }
+      }
+    },
+    "residue_f1": {
+      "schema": "geoaudit.bootstrap_ci.v1",
+      "clinical_grade": false,
+      "baseline": "p2rank",
+      "n_structures": 192,
+      "n_boot": 10000,
+      "seed": 20260725,
+      "ci_level": 0.95,
+      "per_method": {
+        "threshold_field": {
+          "point": 0.303113265182635,
+          "ci_low": 0.2723488426365449,
+          "ci_high": 0.33216555241141293,
+          "n_structures_scored": 192
+        },
+        "p2rank": {
+          "point": 0.30189552994172814,
+          "ci_low": 0.27133747137395736,
+          "ci_high": 0.33183776249927044,
+          "n_structures_scored": 192
+        }
+      },
+      "paired_vs_baseline": {
+        "threshold_field": {
+          "delta_point": 0.0012177352409068476,
+          "delta_ci_low": -0.025262937411246137,
+          "delta_ci_high": 0.026955246423835604,
+          "p_two_sided_bootstrap": 0.9396,
+          "crosses_zero": true
+        }
+      }
+    }
+  }
+}

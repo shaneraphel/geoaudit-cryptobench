@@ -38,14 +38,18 @@ for _v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS",
 
 from pocket_bench.adapters import load_official_test_fold
 from pocket_bench.methods import (
+    algebraic_field,
+    algebraic_field_linear,
     fstar_pocket,
     geometric_foundation,
     p2rank_wrap,
     prediction,
+    quaternary_lut,
     sstar_pocket,
+    ultrametric_shear_oracle,
 )
 from pocket_bench.metrics import score_prediction
-from pocket_bench.pdb_io import parse_pdb_atoms
+from pocket_bench.pdb_io import parse_pdb_atoms, sha256_file
 from pocket_bench.telemetry import (
     aggregate,
     assert_denominator_discipline,
@@ -57,6 +61,8 @@ ROOT = Path(__file__).resolve().parents[1]
 REC = ROOT / "data/cryptobench_apo/receptors"
 LAB = ROOT / "data/cryptobench_apo/labels"
 BASELINE_ENV = ROOT / "data/manifests/BASELINE_ENV.json"
+# P2Rank's own CSVs, kept so the strongest baseline stays auditable without a JVM.
+P2RANK_RAW = ROOT / "results/cryptobench_official/p2rank_raw"
 
 
 def _receptor_residue_universe(rec: Path, chain: str | None) -> list[int]:
@@ -68,6 +74,68 @@ def _receptor_residue_universe(rec: Path, chain: str | None) -> list[int]:
             continue
         resseqs.add(int(a["resseq"]))
     return sorted(resseqs)
+
+
+def _archivable(pred: dict, universe: list[int]) -> dict:
+    """The part of a prediction a third party needs to recompute our metrics.
+
+    A frozen metric that cannot be recomputed from a stored prediction is an
+    assertion, not a measurement: the reader has to trust the number. Keeping
+    the per-residue score vector (or, for a pocket-only detector, the pocket
+    centres it is derived from) makes every table in the paper checkable
+    without re-running the detector -- which matters most for the one detector
+    a reader may be unable to run at all, since P2Rank needs a JVM.
+    """
+    raw = pred.get("residue_scores") or {}
+    scores = {str(r): float(raw[str(r)]) for r in universe if str(r) in raw}
+    return {
+        "status": pred.get("status"),
+        "runtime_s": pred.get("runtime_s"),
+        "input_receptor_sha256": pred.get("input_receptor_sha256"),
+        "tool_version": (pred.get("tool_version")
+                         or (pred.get("extra") or {}).get("tool_version")),
+        "n_universe": len(universe),
+        "residue_scores": scores or None,
+        "residue_positive": pred.get("residue_positive"),
+        "pockets": [{"rank": p.get("rank"), "center_xyz": p.get("center_xyz"),
+                     "score": p.get("score")}
+                    for p in (pred.get("pockets") or [])],
+        "error": pred.get("error"),
+    }
+
+
+def _write_predictions(dest: Path, raw: dict[str, dict[str, dict]]) -> None:
+    """One file per method, plus a SHA-256 index over the whole directory.
+
+    Only methods scored in THIS run are rewritten; a file belonging to a method
+    carried over by ``--merge`` is left untouched and still indexed, so the
+    archive matches the telemetry rather than shrinking to the last run.
+    """
+    dest.mkdir(parents=True, exist_ok=True)
+    for method, by_unit in sorted(raw.items()):
+        payload = {"schema": "geoaudit.raw_predictions.v1",
+                   "clinical_grade": False,
+                   "method": method,
+                   "n_units": len(by_unit),
+                   "units": dict(sorted(by_unit.items()))}
+        (dest / f"{method}.json").write_text(
+            json.dumps(payload, indent=2, allow_nan=False) + "\n")
+    index = {}
+    for path in sorted(dest.glob("*.json")):
+        if path.name == "INDEX.json":
+            continue
+        doc = json.loads(path.read_text())
+        index[doc.get("method", path.stem)] = {
+            "file": path.name,
+            "n_units": doc.get("n_units"),
+            "rescored_in_last_run": doc.get("method") in raw,
+            "sha256": sha256_file(path),
+        }
+    (dest / "INDEX.json").write_text(
+        json.dumps({"schema": "geoaudit.raw_predictions_index.v1",
+                    "clinical_grade": False, "methods": index},
+                   indent=2) + "\n")
+    print(f"raw per-residue predictions -> {dest.name}/ ({len(index)} methods)")
 
 
 def _random_baseline(rec: Path, *, pdb_id: str, seed: int = 42, top_k: int = 5) -> dict:
@@ -110,22 +178,35 @@ def _official_items() -> list[tuple[dict, Path]]:
     return items
 
 
-def _predict(method: str, rec: Path, pdb: str) -> dict:
+def _predict(method: str, rec: Path, pdb: str, chain: str | None = None) -> dict:
     if method == "geometric_foundation":
         return geometric_foundation.predict(rec, pdb_id=pdb)
     if method == "fstar_pocket":
         return fstar_pocket.predict(rec, pdb_id=pdb)
     if method == "sstar_pocket":
         return sstar_pocket.predict(rec, pdb_id=pdb)
+    if method == "ultrametric_shear_oracle":
+        return ultrametric_shear_oracle.predict(rec, pdb_id=pdb)
+    if method == "algebraic_field":
+        return algebraic_field.predict(rec, pdb_id=pdb, chain=chain)
+    if method == "algebraic_field_linear":
+        return algebraic_field_linear.predict(rec, pdb_id=pdb, chain=chain)
+    if method == "quaternary_lut":
+        return quaternary_lut.predict(rec, pdb_id=pdb, chain=chain, track="A")
+    if method == "quaternary_lut_seq":
+        return quaternary_lut.predict(rec, pdb_id=pdb, chain=chain, track="B")
     if method == "p2rank":
-        return p2rank_wrap.predict(rec, pdb_id=pdb, top_k=5)
+        return p2rank_wrap.predict(rec, pdb_id=pdb, chain=chain,
+                                   archive_dir=P2RANK_RAW)
     if method == "random_bbox":
         return _random_baseline(rec, pdb_id=pdb)
     raise KeyError(method)
 
 
 METHOD_NAMES = ("geometric_foundation", "fstar_pocket", "sstar_pocket",
-                "p2rank", "random_bbox")
+                "ultrametric_shear_oracle", "quaternary_lut",
+                "quaternary_lut_seq", "algebraic_field",
+                "algebraic_field_linear", "p2rank", "random_bbox")
 
 
 def _run_one(item: tuple[dict, Path],
@@ -142,7 +223,7 @@ def _run_one(item: tuple[dict, Path],
     universe = _receptor_residue_universe(rec, ch)
     res: dict[str, tuple[dict, dict]] = {}
     for m in method_names:
-        pred = _predict(m, rec, pdb)
+        pred = _predict(m, rec, pdb, ch)
         if "ligand_heavy_coords" in lab:
             sc = score_prediction(pred, lab)
         else:
@@ -158,6 +239,97 @@ def _run_one(item: tuple[dict, Path],
     return universe, res
 
 
+class _Checkpoint:
+    """Per-structure scoring cache so an interrupted run resumes where it stopped.
+
+    A full official run is hours of work whose unit of progress is one structure,
+    and losing all of it to a terminated shell is a reproducibility problem, not
+    only an inconvenience: it pushes an operator towards partial or hand-patched
+    freezes. Each structure is appended as one JSON line the moment it is scored.
+
+    Correctness rests on _run_one being a pure function of (label, receptor) for
+    a fixed method list. The header therefore pins the method list and the
+    dataset, and a checkpoint written under a different method list is discarded
+    rather than reused, so a resume can never silently mix two method sets. A
+    truncated final line -- the normal result of a kill mid-write -- is dropped.
+    """
+
+    def __init__(self, path: Path, items: list[tuple[dict, Path]],
+                 mnames: tuple[str, ...], *, enabled: bool) -> None:
+        self.path = path
+        self.enabled = enabled
+        self.methods = list(mnames)
+        self._cache: dict[str, tuple[list[int], dict]] = {}
+        self._fh = None
+        if not enabled:
+            return
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.exists():
+            self._load()
+        if not self._cache:
+            path.write_text(json.dumps({"header": {"methods": self.methods}}) + "\n")
+        self._fh = path.open("a")
+
+    @staticmethod
+    def _key(item: tuple[dict, Path]) -> str:
+        lab, _ = item
+        return f"{lab['pdb_id']}_{lab['chain']}"
+
+    def _load(self) -> None:
+        lines = self.path.read_text().splitlines()
+        if not lines:
+            return
+        try:
+            header = json.loads(lines[0]).get("header") or {}
+        except json.JSONDecodeError:
+            return
+        if header.get("methods") != self.methods:
+            print(f"  checkpoint {self.path.name} was written for "
+                  f"{header.get('methods')}, not {self.methods}; ignoring it",
+                  flush=True)
+            self.path.unlink()
+            return
+        for line in lines[1:]:
+            try:
+                rec = json.loads(line)
+            except json.JSONDecodeError:
+                break        # a partial line is the tail of an interrupted write
+            self._cache[rec["unit"]] = (
+                rec["universe"],
+                {m: (v["pred"], v["score"]) for m, v in rec["results"].items()},
+            )
+
+    @property
+    def n_done(self) -> int:
+        return len(self._cache)
+
+    def get(self, item: tuple[dict, Path]):
+        if not self.enabled:
+            return None
+        return self._cache.get(self._key(item))
+
+    def put(self, item: tuple[dict, Path],
+            result: tuple[list[int], dict]) -> None:
+        if not self.enabled or self._fh is None:
+            return
+        universe, res = result
+        self._fh.write(json.dumps({
+            "unit": self._key(item),
+            "universe": list(universe),
+            "results": {m: {"pred": pred, "score": score}
+                        for m, (pred, score) in res.items()},
+        }, allow_nan=False) + "\n")
+        self._fh.flush()
+        os.fsync(self._fh.fileno())
+
+    def clear(self) -> None:
+        if self._fh is not None:
+            self._fh.close()
+            self._fh = None
+        if self.enabled and self.path.exists():
+            self.path.unlink()
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dataset", choices=("pilot", "official"), default="pilot",
@@ -168,6 +340,17 @@ def main(argv: list[str] | None = None) -> int:
                          "(results are order-preserving and identical to --jobs 1)")
     ap.add_argument("--methods", default=",".join(METHOD_NAMES),
                     help="comma-separated subset of: " + ",".join(METHOD_NAMES))
+    ap.add_argument("--merge", action="store_true",
+                    help="merge these methods' rows into an existing TELEMETRY.json "
+                         "instead of replacing it. Rows for methods NOT in --methods "
+                         "are carried over verbatim, so re-scoring one detector "
+                         "never silently drops a frozen baseline (e.g. P2Rank, "
+                         "whose binary may be unavailable on this host).")
+    ap.add_argument("--resume", action="store_true",
+                    help="checkpoint each structure as it is scored and skip the "
+                         "ones already present, so an interrupted run continues "
+                         "instead of restarting. The checkpoint is keyed on the "
+                         "method set, so it can never mix two method lists.")
     args = ap.parse_args(argv)
     mnames = tuple(m.strip() for m in args.methods.split(",") if m.strip())
     unknown = set(mnames) - set(METHOD_NAMES)
@@ -192,26 +375,62 @@ def main(argv: list[str] | None = None) -> int:
     telem_rows: list[dict] = []
     n_attempted = {m: 0 for m in methods}
     t_start = time.perf_counter()
-    if args.jobs > 1:
-        ctx = multiprocessing.get_context("spawn")
-        with ProcessPoolExecutor(max_workers=args.jobs, mp_context=ctx) as ex:
-            results = []
-            stream = ex.map(_run_one, items, itertools.repeat(mnames), chunksize=1)
-            for done, r in enumerate(stream, 1):
-                results.append(r)
-                if done % 10 == 0 or done == len(items):
-                    el = time.perf_counter() - t_start
-                    print(f"  [{done}/{len(items)}] {el:.0f}s elapsed, "
-                          f"~{el / done * (len(items) - done):.0f}s left", flush=True)
-    else:
-        results = [_run_one(it, mnames) for it in items]
+    ckpt = _Checkpoint(out / "_scoring_checkpoint.jsonl", items, mnames,
+                       enabled=args.resume)
+    if ckpt.enabled and ckpt.n_done:
+        print(f"  resuming: {ckpt.n_done}/{len(items)} structures already "
+              f"scored in {ckpt.path.name}", flush=True)
+
+    results = None
+    if args.jobs > 1 and not ckpt.enabled:
+        try:
+            ctx = multiprocessing.get_context("spawn")
+            with ProcessPoolExecutor(max_workers=args.jobs, mp_context=ctx) as ex:
+                results = []
+                stream = ex.map(_run_one, items, itertools.repeat(mnames),
+                                chunksize=1)
+                for done, r in enumerate(stream, 1):
+                    results.append(r)
+                    if done % 10 == 0 or done == len(items):
+                        el = time.perf_counter() - t_start
+                        print(f"  [{done}/{len(items)}] {el:.0f}s elapsed, "
+                              f"~{el / done * (len(items) - done):.0f}s left",
+                              flush=True)
+        except (PermissionError, OSError, NotImplementedError) as exc:
+            # Hardened runtimes deny the POSIX semaphore probe that
+            # ProcessPoolExecutor performs at construction. _run_one is a pure
+            # function of (label, receptor), so the sequential result is
+            # identical; refusing to run at all would make the documented
+            # command unreproducible on such a host for no scientific reason.
+            print(f"  process pool unavailable ({type(exc).__name__}: {exc}); "
+                  f"falling back to --jobs 1 (identical results)", flush=True)
+            results = None
+    if results is None:
+        results = []
+        n_fresh = 0
+        for done, it in enumerate(items, 1):
+            cached = ckpt.get(it)
+            if cached is not None:
+                results.append(cached)
+                continue
+            r = _run_one(it, mnames)
+            ckpt.put(it, r)
+            results.append(r)
+            n_fresh += 1
+            if n_fresh % 5 == 0 or done == len(items):
+                el = time.perf_counter() - t_start
+                left = len(items) - done
+                print(f"  [{done}/{len(items)}] {el:.0f}s elapsed, "
+                      f"~{el / max(n_fresh, 1) * left:.0f}s left", flush=True)
     print(f"  predictions done in {time.perf_counter() - t_start:.0f}s "
           f"(jobs={args.jobs})", flush=True)
 
+    raw_preds: dict[str, dict[str, dict]] = {m: {} for m in methods}
     for idx, ((lab, rec), (universe, res)) in enumerate(zip(items, results), 1):
         pdb, ch = lab["pdb_id"], lab["chain"]
         for m in methods:
             pred, sc = res[m]
+            raw_preds[m][f"{pdb}_{ch}"] = _archivable(pred, universe)
             agg = per[m]; st = sc["status"]; top1 = sc.get("top1") or {}
             n_attempted[m] += 1
             if st == "TOOL_UNAVAILABLE":
@@ -272,6 +491,24 @@ def main(argv: list[str] | None = None) -> int:
         "summaries": summaries,
         "per_method": per,
     }
+    if args.merge:
+        prior_path = out / "TELEMETRY.json"
+        if not prior_path.exists():
+            raise SystemExit(f"--merge requires an existing {prior_path}")
+        prior = json.loads(prior_path.read_text())["rows"]
+        rescored = set(mnames)
+        carried = [r for r in prior if r.get("method") not in rescored]
+        dropped = {r.get("method") for r in prior} & rescored
+        telem_rows = carried + telem_rows
+        # The denominator is per method: a carried method keeps the number of
+        # structures it was originally attempted on, so the fail-closed
+        # denominator discipline still holds across the merge.
+        for r in carried:
+            n_attempted[r["method"]] = n_attempted.get(r["method"], 0) + 1
+        print(f"merge: carried {len(carried)} frozen rows for "
+              f"{sorted({r['method'] for r in carried})}; "
+              f"replaced {sorted(dropped)}")
+
     # 0-masking telemetry: faithful per-residue metrics + fail-closed denominators.
     telemetry = aggregate(telem_rows, n_attempted)
     assert_denominator_discipline(telemetry, declared_available_tools(env))
@@ -280,6 +517,11 @@ def main(argv: list[str] | None = None) -> int:
     out.mkdir(parents=True, exist_ok=True)
     (out / "APO_BENCHMARK.json").write_text(json.dumps(report, indent=2) + "\n")
     (out / "TELEMETRY.json").write_text(json.dumps(telemetry, indent=2) + "\n")
+    _write_predictions(out / "predictions", raw_preds)
+    # The freeze is on disk, so the scratch checkpoint has no further claim to
+    # being evidence; leaving it would let a later run resume from a method set
+    # that has already been superseded.
+    ckpt.clear()
     print(json.dumps({m: s["top1_dca_le_4A_hits"] for m, s in summaries.items()}, indent=2))
     # faithful metric availability (honest: null where universe/labels cannot join)
     avail = sum(1 for r in telem_rows if r["residue_metrics_available"])

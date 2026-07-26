@@ -1,0 +1,69 @@
+{
+  "schema": "final_readout_selection/v1",
+  "split": "training fold, cluster-disjoint fit/pick halves",
+  "seed": 20260725,
+  "top_k_wires": 90,
+  "table_width": 6,
+  "table_stride": 6,
+  "n_tables": 15,
+  "ridge": 1e-06,
+  "strongest_wires": [
+    "void",
+    "concavity@14",
+    "grad_radial@14",
+    "grad_radial@20",
+    "depth_rank",
+    "depth",
+    "concavity@20",
+    "depth_rank@6",
+    "depth@6",
+    "void@6",
+    "angle_deficit",
+    "void@14"
+  ],
+  "candidates": [
+    {
+      "readout": "lin_digits",
+      "n_parameters": 172,
+      "pick_half_roc_auc_raw": 0.7809,
+      "pick_half_roc_auc": 0.7873,
+      "gate": "r=18,w=0.5"
+    },
+    {
+      "readout": "lin_onehot",
+      "n_parameters": 688,
+      "pick_half_roc_auc_raw": 0.7747,
+      "pick_half_roc_auc": 0.7844,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "lin_tables",
+      "n_parameters": 15,
+      "pick_half_roc_auc_raw": 0.7486,
+      "pick_half_roc_auc": 0.7633,
+      "gate": "r=14,w=1"
+    },
+    {
+      "readout": "count_square",
+      "n_parameters": 0,
+      "pick_half_roc_auc_raw": 0.7523,
+      "pick_half_roc_auc": 0.7631,
+      "gate": "r=18,w=1"
+    },
+    {
+      "readout": "lin_tables_gated",
+      "n_parameters": 90,
+      "pick_half_roc_auc_raw": 0.7419,
+      "pick_half_roc_auc": 0.7585,
+      "gate": "r=14,w=1"
+    }
+  ],
+  "selected": {
+    "readout": "lin_digits",
+    "n_parameters": 172,
+    "pick_half_roc_auc_raw": 0.7809,
+    "pick_half_roc_auc": 0.7873,
+    "gate": "r=18,w=0.5"
+  },
+  "note": "Linear readouts are one regularised symmetric solve fitted on the fit half; they are not training-free and the manuscript reports them as fitted on the official training fold."
+}

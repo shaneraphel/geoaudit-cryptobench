@@ -190,6 +190,71 @@ def dynamic_shear_amplitudes(eigenvalues: np.ndarray, grid_resolution: float) ->
     return c
 
 
+def anchor_modes_to_site(coords: np.ndarray, modes: np.ndarray,
+                         center: np.ndarray, radius: float) -> np.ndarray:
+    """Project the local rigid-body motion out of each mode at one site.
+
+    The openability probe centre is fixed in space while atoms move, so for a
+    rigid motion X -> RX + t the measured free volume obeys
+
+        V(c; RX + t) = V(R^-1 (c - t); X),
+
+    i.e. a rigid displacement opens nothing — it resamples the *undeformed* wall
+    at a shifted probe centre. In any local neighbourhood a global low-frequency
+    ANM mode is dominated by exactly that component (a hinge sliding a whole
+    domain past c), which is the spurious volume that dragged the predicted
+    centre outward.
+
+    For the neighbourhood N = {i : |x_i - c| <= radius} we solve, in closed form,
+
+        (t, w) = argmin  sum_{i in N} | u_i - t - w x r_i |^2,   r_i = x_i - xbar
+        t = mean(u_N),   w = A^-1 sum_i r_i x (u_i - t),
+        A = sum_i [ (r_i . r_i) I - r_i r_i^T ]
+
+    (translations and rotations are orthogonal once centred, since sum_i r_i = 0,
+    so the normal equations decouple into a mean and one 3x3 solve), then return
+
+        u~_i = u_i - t - w x (x_i - xbar)   for EVERY atom i.
+
+    Subtracting a rigid motion from every atom is an exact infinitesimal rigid
+    re-framing of the whole structure: no interatomic distance changes, so no
+    deformation content is destroyed — only the site's frame is pinned. A hard
+    spatial gate would instead tear the structure at the gate boundary, and that
+    boundary lies inside the enclosure radius, manufacturing the very artifact
+    being removed.
+
+    ``radius`` is not a free parameter: callers pass the exact atom support the
+    openability measurement can see (``enclose_cut + r_local``).
+
+    The map u -> u~ is a linear projector (I - P_rigid), so it commutes with mode
+    superposition: anchoring the K modes once per site anchors every sign
+    combination of them. One pass, closed form, no iteration and no sampling.
+    """
+    coords = np.asarray(coords, dtype=np.float64)
+    modes = np.asarray(modes, dtype=np.float64)
+    rel = coords - np.asarray(center, dtype=np.float64)
+    sel = np.einsum("ij,ij->i", rel, rel) <= radius * radius
+    if int(sel.sum()) < 3:
+        return modes
+    r = coords[sel] - coords[sel].mean(axis=0)
+    # Gram matrix of the rotation basis {e_a x r_i}: (r.r) I - sum r r^T.
+    A = np.eye(3) * float(np.einsum("ij,ij->", r, r)) - r.T @ r
+    xbar = coords[sel].mean(axis=0)
+    out = np.empty_like(modes)
+    for k in range(modes.shape[0]):
+        d = modes[k][sel]
+        t = d.mean(axis=0)
+        b = np.cross(r, d - t).sum(axis=0)
+        try:
+            w = np.linalg.solve(A, b)
+        except np.linalg.LinAlgError:
+            # Degenerate (collinear) neighbourhood: no well-posed rotation to
+            # remove. Strip the translation only; never guess a rotation.
+            w = np.zeros(3, dtype=np.float64)
+        out[k] = modes[k] - t - np.cross(w, coords - xbar)
+    return out
+
+
 # --------------------------------------------------------------------------- #
 # 3-4. Discrete anisotropic mode set + vdW voxel carving + Boolean OR
 # --------------------------------------------------------------------------- #

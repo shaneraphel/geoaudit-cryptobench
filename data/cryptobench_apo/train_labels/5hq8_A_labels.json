@@ -1,0 +1,29 @@
+{
+  "schema": "cryptobench.train_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "5hq8",
+  "chain": "A",
+  "cryptic_residues": [
+    81,
+    82,
+    84,
+    85,
+    107,
+    110,
+    111,
+    114,
+    115
+  ],
+  "binding_residues": [
+    81,
+    82,
+    84,
+    85,
+    107,
+    110,
+    111,
+    114,
+    115
+  ],
+  "labels_source_sha256": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+}

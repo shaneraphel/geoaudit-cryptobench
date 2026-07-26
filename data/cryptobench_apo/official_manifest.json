@@ -1,0 +1,1986 @@
+{
+  "schema": "cryptobench.official_test_fold.v1",
+  "clinical_grade": false,
+  "fold": "test",
+  "clustering": {
+    "method": "mmseqs2",
+    "sequence_identity_threshold": 0.1,
+    "coverage": 0.8,
+    "cluster_id_semantics": "uniprot_id sequence-cluster surrogate; test/train disjointness is defined by folds.json"
+  },
+  "source_url": "https://osf.io/pz4a9/",
+  "fold_file_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838",
+  "labels_source_sha256": "28f5630ec0ece51a5bc1c466473bba78d6edb8e3851c25f0e52c2709a7560838",
+  "cryptobench_test_apo_pdbs": 222,
+  "n_fold_units": 193,
+  "n_excluded_multichain": 38,
+  "excluded_multichain": [
+    {
+      "pdb": "1fd4",
+      "apo_chain": "G-H",
+      "cluster_id": "O15263",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "1fe6",
+      "apo_chain": "A-D",
+      "cluster_id": "Q54436",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "1g1m",
+      "apo_chain": "A-B",
+      "cluster_id": "P00459",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "1r3m",
+      "apo_chain": "A-B",
+      "cluster_id": "P00669",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "1tmi",
+      "apo_chain": "A-B",
+      "cluster_id": "Q9WZC3",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "1xxo",
+      "apo_chain": "A-B",
+      "cluster_id": "O06553",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "2czd",
+      "apo_chain": "A-B",
+      "cluster_id": "O58462",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "2huw",
+      "apo_chain": "A-B",
+      "cluster_id": "P62993",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "2idj",
+      "apo_chain": "A-B",
+      "cluster_id": "P13255",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "2nt1",
+      "apo_chain": "A-B",
+      "cluster_id": "P04062",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "2xdo",
+      "apo_chain": "A-C",
+      "cluster_id": "Q93L51",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "2zcg",
+      "apo_chain": "A-B",
+      "cluster_id": "Q8T6J6",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "3b1o",
+      "apo_chain": "A-B",
+      "cluster_id": "Q2SZE4",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "3bk9",
+      "apo_chain": "E-H",
+      "cluster_id": "Q8PDA8",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "3hrm",
+      "apo_chain": "A-B",
+      "cluster_id": "A0A0H3KA72",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "3kjr",
+      "apo_chain": "A-B",
+      "cluster_id": "A7ASX7",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "3la7",
+      "apo_chain": "A-B",
+      "cluster_id": "P0A4U6",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "3lnz",
+      "apo_chain": "C-O",
+      "cluster_id": "Q00987",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "3pfp",
+      "apo_chain": "A-B",
+      "cluster_id": "O53512",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "3ve9",
+      "apo_chain": "A-B",
+      "cluster_id": "A4YI54",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "3x0x",
+      "apo_chain": "E-G",
+      "cluster_id": "A0A0C6DRW4",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "4p32",
+      "apo_chain": "A-B",
+      "cluster_id": "P0A9V1",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "4x19",
+      "apo_chain": "M-O-P",
+      "cluster_id": "Q01468",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "4z0y",
+      "apo_chain": "B-D-F-H",
+      "cluster_id": "A0A075DN54",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "5aon",
+      "apo_chain": "A-B",
+      "cluster_id": "Q8IEW2",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "5dy9",
+      "apo_chain": "H-I",
+      "cluster_id": "Q58830",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "5gmc",
+      "apo_chain": "A-B",
+      "cluster_id": "A0A072ZPM2",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "5h8k",
+      "apo_chain": "I-J",
+      "cluster_id": "G7ITU5",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "5m7r",
+      "apo_chain": "A-B",
+      "cluster_id": "O60502",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "5n49",
+      "apo_chain": "A-B",
+      "cluster_id": "O95696",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "5ujp",
+      "apo_chain": "A-B",
+      "cluster_id": "A0A125SA29",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "5wm9",
+      "apo_chain": "B-C",
+      "cluster_id": "O53623",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "6syh",
+      "apo_chain": "A-B",
+      "cluster_id": "P50286",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "7nbc",
+      "apo_chain": "AAA-CCC",
+      "cluster_id": "Q9GZT4",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "7np0",
+      "apo_chain": "A-B",
+      "cluster_id": "P9WIT9",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "8gxj",
+      "apo_chain": "B-C",
+      "cluster_id": "Q9HYX1",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "8h49",
+      "apo_chain": "A-B",
+      "cluster_id": "A0A6I7U6Y2",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    },
+    {
+      "pdb": "8hc1",
+      "apo_chain": "d-h",
+      "cluster_id": "P69996",
+      "reason": "multi_chain_assembly_apo_chain_chain_agnostic_resseq_ambiguous"
+    }
+  ],
+  "n_entries": 192,
+  "n_skipped": 1,
+  "skipped": [
+    {
+      "pdb": "7nbc",
+      "chain": "CCC",
+      "reason": "GET failed after 4 tries: https://files.rcsb.org/download/7NBC.pdb (HTTP Error 404: Not Found)"
+    }
+  ],
+  "entries": [
+    {
+      "pdb": "1arl",
+      "chain": "A",
+      "cluster_id": "P00730",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1arl_A_receptor.pdb",
+      "receptor_sha256": "0f28b677e5ccb41742b46bf225343143405164c7d9bc0c96f1708d495a32f03c",
+      "label_path": "data/cryptobench_apo/official_labels/1arl_A_labels.json",
+      "label_sha256": "f0b8ccd73d944de660c8f39bba77c00f8ca46f5a6d0f4d0588985b97f7c4d2de"
+    },
+    {
+      "pdb": "1bk2",
+      "chain": "A",
+      "cluster_id": "P07751",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1bk2_A_receptor.pdb",
+      "receptor_sha256": "b9d1a4c9c1b051239ab31830c17902cddfaf1978601c04d834a551f20b3b2a04",
+      "label_path": "data/cryptobench_apo/official_labels/1bk2_A_labels.json",
+      "label_sha256": "02202f31c0ece9b45701999a1e300f655b23782eb57e06245cd5dc70bb541d6b"
+    },
+    {
+      "pdb": "1bzj",
+      "chain": "A",
+      "cluster_id": "P18031",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1bzj_A_receptor.pdb",
+      "receptor_sha256": "c5ebf574b29d80a31f72db15f3a0f3dcdfe268997b6b3e56f7f722bddbb9f2ce",
+      "label_path": "data/cryptobench_apo/official_labels/1bzj_A_labels.json",
+      "label_sha256": "86c32b98111f27c0a69172b1c3b41d0cacab4fe88fb395dda254a3362ed2e11d"
+    },
+    {
+      "pdb": "1cwq",
+      "chain": "A",
+      "cluster_id": "P02945",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1cwq_A_receptor.pdb",
+      "receptor_sha256": "49e14aabb07cdadbe5fb9c4f6f9dc4dc3ae774b3078dea707051a267c294de5a",
+      "label_path": "data/cryptobench_apo/official_labels/1cwq_A_labels.json",
+      "label_sha256": "fe4f978c99cdf57715d6250102e7cc61df324283dd6f2385c804611846f5ffce"
+    },
+    {
+      "pdb": "1dq2",
+      "chain": "A",
+      "cluster_id": "P55915",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1dq2_A_receptor.pdb",
+      "receptor_sha256": "53fde934c75d8250b198d09ad709b2c9c960ba06739a8f0e90b3ebeb03c90020",
+      "label_path": "data/cryptobench_apo/official_labels/1dq2_A_labels.json",
+      "label_sha256": "f840624d789824ec2b8d99242eef631b4559d0b7fdfc15bfa17fc4e195de35ea"
+    },
+    {
+      "pdb": "1e6k",
+      "chain": "A",
+      "cluster_id": "P0AE67",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1e6k_A_receptor.pdb",
+      "receptor_sha256": "c2b47012126c6f40167e242a7c2d6c0cc23c60454c78f413c0b94125d68b6ade",
+      "label_path": "data/cryptobench_apo/official_labels/1e6k_A_labels.json",
+      "label_sha256": "8b581506e3f043d4fcd8bf890c9fdef19e3a1f79ac3785d781dc31ec708f25c8"
+    },
+    {
+      "pdb": "1evy",
+      "chain": "A",
+      "cluster_id": "P90551",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1evy_A_receptor.pdb",
+      "receptor_sha256": "f05f576b3bd53055419b3c2d9a1f9249b5199686526e14e7365d4e926ce1bdb2",
+      "label_path": "data/cryptobench_apo/official_labels/1evy_A_labels.json",
+      "label_sha256": "2d28e30cc077dac5700e5f0d34350d9e9ebad92fb8a2d1a768a053d59306aab3"
+    },
+    {
+      "pdb": "1g1m",
+      "chain": "B",
+      "cluster_id": "P00459",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1g1m_B_receptor.pdb",
+      "receptor_sha256": "88f2ddf8a6e9a92ac75b86895b558addf16836b771f4e58ebecb31c4b00e03f0",
+      "label_path": "data/cryptobench_apo/official_labels/1g1m_B_labels.json",
+      "label_sha256": "89344f33a9c002948b0f4c00c7eb3f21fe0152a8e0689cab8217241522be0c63"
+    },
+    {
+      "pdb": "1g59",
+      "chain": "A",
+      "cluster_id": "P27000",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1g59_A_receptor.pdb",
+      "receptor_sha256": "4fcd0533549821023df2916705e53d00c01d266b35b82d11b7b909501e50cdce",
+      "label_path": "data/cryptobench_apo/official_labels/1g59_A_labels.json",
+      "label_sha256": "ae7b4c4a8cfb8f3fbe2f65e33d8b6fe8eefd51bdd6dee3621582e442916b4cc6"
+    },
+    {
+      "pdb": "1h13",
+      "chain": "A",
+      "cluster_id": "Q8RJN8",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1h13_A_receptor.pdb",
+      "receptor_sha256": "5980a84226da88a1a3fb9f475bc9ff5c69809766256eb743dc560b5ea242f168",
+      "label_path": "data/cryptobench_apo/official_labels/1h13_A_labels.json",
+      "label_sha256": "9a7ccf5d6ca3360fa413310d8309b132f4d216443c9049b968c61e0b932f3a7b"
+    },
+    {
+      "pdb": "1i7n",
+      "chain": "A",
+      "cluster_id": "Q63537",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1i7n_A_receptor.pdb",
+      "receptor_sha256": "a1f65beb8bc31107166a8ccbfebb01ca8f9bfa85c437d4224d9588fdfd0a3a65",
+      "label_path": "data/cryptobench_apo/official_labels/1i7n_A_labels.json",
+      "label_sha256": "531dfcb4fa109451a898f3c1205e09c9458f325b74a424a9f2ad55e5befe8c8d"
+    },
+    {
+      "pdb": "1k47",
+      "chain": "D",
+      "cluster_id": "Q8DR49",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1k47_D_receptor.pdb",
+      "receptor_sha256": "e3fff66a0860816592278d72697c1d7c61669d0fa3bf0bab02ccb0471f5e397d",
+      "label_path": "data/cryptobench_apo/official_labels/1k47_D_labels.json",
+      "label_sha256": "d0a69ea9a80eb5e46a99514a79ddcf37a65887ba4c64e4fe2670ff0d91ff9b97"
+    },
+    {
+      "pdb": "1ksg",
+      "chain": "B",
+      "cluster_id": "O43924",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1ksg_B_receptor.pdb",
+      "receptor_sha256": "08368c1da55b5cf72fe97afbfb3fd0f5d0792068ce636de75632f151fa2f2383",
+      "label_path": "data/cryptobench_apo/official_labels/1ksg_B_labels.json",
+      "label_sha256": "edb3c89574258a67c0ee380c2de4132fa1a80a24308f18722f7064445ff604ed"
+    },
+    {
+      "pdb": "1kx9",
+      "chain": "A",
+      "cluster_id": "Q9NG96",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1kx9_A_receptor.pdb",
+      "receptor_sha256": "c73ed20402a31e405b542dc2df7a2d4f4b3e5c34a6e29a43513c28e3a95da9cd",
+      "label_path": "data/cryptobench_apo/official_labels/1kx9_A_labels.json",
+      "label_sha256": "833a144a56bca527f532aea8cc2a7bc52afa0ef34d6d8f954f99fcb1dd86d97f"
+    },
+    {
+      "pdb": "1kxr",
+      "chain": "A",
+      "cluster_id": "P97571",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1kxr_A_receptor.pdb",
+      "receptor_sha256": "bd24c772ce12b4af7408de79ad3d7d85403034052a5918ef0bb1608bd1a8e29b",
+      "label_path": "data/cryptobench_apo/official_labels/1kxr_A_labels.json",
+      "label_sha256": "24b0a63762a4b542650836158b4bce1aa254960a44e6c5515866293bf6419df1"
+    },
+    {
+      "pdb": "1lbe",
+      "chain": "B",
+      "cluster_id": "P29241",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1lbe_B_receptor.pdb",
+      "receptor_sha256": "790835f7bc0dbc847590fb7547f3335213602a08aed117fb58448879d0374af4",
+      "label_path": "data/cryptobench_apo/official_labels/1lbe_B_labels.json",
+      "label_sha256": "ee77fa423efc9c75df1ecf840bcff027a6228d8f49e7692147ed26cd23a95388"
+    },
+    {
+      "pdb": "1m5w",
+      "chain": "D",
+      "cluster_id": "P0A794",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1m5w_D_receptor.pdb",
+      "receptor_sha256": "63d41835155c8b08c400be537593de3a56ba22095656bbaa8aa9645e37794b8c",
+      "label_path": "data/cryptobench_apo/official_labels/1m5w_D_labels.json",
+      "label_sha256": "ad6de681341c1b1d19aa7f41236ce11bb2716ada1c0d4ce45bb41117766b7484"
+    },
+    {
+      "pdb": "1nd7",
+      "chain": "A",
+      "cluster_id": "Q9H0M0",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1nd7_A_receptor.pdb",
+      "receptor_sha256": "7be30d5b65d1d1370f6cb33dd287f0b195a299a45f527a26bc248150f9ea6d9e",
+      "label_path": "data/cryptobench_apo/official_labels/1nd7_A_labels.json",
+      "label_sha256": "d2dcee9b142426ab553cce033c1e17e391f68fc360930b6dc15cc11ed8b2bb7d"
+    },
+    {
+      "pdb": "1p4o",
+      "chain": "B",
+      "cluster_id": "P08069",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1p4o_B_receptor.pdb",
+      "receptor_sha256": "46b163e6bf431f77d18d7a5e760b95426f6bf2266959b2959efc7b2512838922",
+      "label_path": "data/cryptobench_apo/official_labels/1p4o_B_labels.json",
+      "label_sha256": "5a69cf7561cf93d8ada0c91e90662fd4280815c7503018a4e27c235ddba47d13"
+    },
+    {
+      "pdb": "1p4v",
+      "chain": "A",
+      "cluster_id": "Q47898",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1p4v_A_receptor.pdb",
+      "receptor_sha256": "e750e960ecd8db7d76e1ea5ade1cae9f5458c0b21d796880974a1e0203d41f15",
+      "label_path": "data/cryptobench_apo/official_labels/1p4v_A_labels.json",
+      "label_sha256": "6e43ff270948d083a780b708a0e140b3106c316a4df839e254ebae79474e3b42"
+    },
+    {
+      "pdb": "1p9o",
+      "chain": "A",
+      "cluster_id": "Q9HAB8",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1p9o_A_receptor.pdb",
+      "receptor_sha256": "260eeb1cfc980f4c671efff224f7d3a28eb28f011b056c6b198d2a31d1b82da3",
+      "label_path": "data/cryptobench_apo/official_labels/1p9o_A_labels.json",
+      "label_sha256": "8e8c2d944da93da19f631cf983ee722f0c14706cc500a0d249962092eaec1ad0"
+    },
+    {
+      "pdb": "1pu5",
+      "chain": "C",
+      "cluster_id": "P17900",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1pu5_C_receptor.pdb",
+      "receptor_sha256": "56f8eee9201fb651ea0e6524e8eded2c00b8712d4f2b64a8ac0f568a3bbfc0b7",
+      "label_path": "data/cryptobench_apo/official_labels/1pu5_C_labels.json",
+      "label_sha256": "b400559dcaa5bbe4ca119cbc0070a827c76f1c5415580757fd49b7234f5dbcbe"
+    },
+    {
+      "pdb": "1q4k",
+      "chain": "A",
+      "cluster_id": "P53350",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1q4k_A_receptor.pdb",
+      "receptor_sha256": "6da4207e0152c4923f2e688f3e6c885a240af611ffd9c1ab7980a2676524e38e",
+      "label_path": "data/cryptobench_apo/official_labels/1q4k_A_labels.json",
+      "label_sha256": "4b1be1772ffa2d06b4b009143cf4d812ed84e8161e4ae510d21276365a45a4a9"
+    },
+    {
+      "pdb": "1rjb",
+      "chain": "A",
+      "cluster_id": "P36888",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1rjb_A_receptor.pdb",
+      "receptor_sha256": "c7868b6013be75e9c1465cf8cdee906e8796541e1c93baa252afa42f37a65773",
+      "label_path": "data/cryptobench_apo/official_labels/1rjb_A_labels.json",
+      "label_sha256": "0ae2360323159211fc5fda9ab9a0756df096177915b0c6debf30451be891b689"
+    },
+    {
+      "pdb": "1rtc",
+      "chain": "A",
+      "cluster_id": "P02879",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1rtc_A_receptor.pdb",
+      "receptor_sha256": "df60721945ba7499a2d24459ddb2eef12dfe905a92aa088e58c8d3a4ee31d3cc",
+      "label_path": "data/cryptobench_apo/official_labels/1rtc_A_labels.json",
+      "label_sha256": "18f4a9fc40fd68397f65e46157d3bdbcd21d0d4eedf404debc81713778d15b5e"
+    },
+    {
+      "pdb": "1se8",
+      "chain": "A",
+      "cluster_id": "Q9RY51",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1se8_A_receptor.pdb",
+      "receptor_sha256": "04e5c69595281957db83b0b92f34633fd38331c692e5355e16b5d9021727d668",
+      "label_path": "data/cryptobench_apo/official_labels/1se8_A_labels.json",
+      "label_sha256": "0f805ca87f1649f48f80ce2d99e66743ae8a1066edb84dcb3fdc05db084677b0"
+    },
+    {
+      "pdb": "1uka",
+      "chain": "A",
+      "cluster_id": "P96965",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1uka_A_receptor.pdb",
+      "receptor_sha256": "961e85225119f1e677d90c151e0ad0189ea23eec2953e3beb7bc9e4b8ba3637d",
+      "label_path": "data/cryptobench_apo/official_labels/1uka_A_labels.json",
+      "label_sha256": "fe70f5eee9f0dff220e994df32c2cae006b37d0e8872ed4c94423811328cbd20"
+    },
+    {
+      "pdb": "1ute",
+      "chain": "A",
+      "cluster_id": "P09889",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1ute_A_receptor.pdb",
+      "receptor_sha256": "c0d2c5751847b1591a97726bb2dd9cc57e452d67addd0699eb95c31c37b23c59",
+      "label_path": "data/cryptobench_apo/official_labels/1ute_A_labels.json",
+      "label_sha256": "9e6e1494df40ec665210be92bb0c4b79ee843f80ed753c4de140010c96390c10"
+    },
+    {
+      "pdb": "1vsn",
+      "chain": "A",
+      "cluster_id": "P43235",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1vsn_A_receptor.pdb",
+      "receptor_sha256": "162d11d13850202b9240b8bdb75b2f56e4a47c57921879da9897cae71b811a50",
+      "label_path": "data/cryptobench_apo/official_labels/1vsn_A_labels.json",
+      "label_sha256": "103d20183ab090f50053cccc0ebc76f690441e03f5611d9f1ac7c8decc6925a2"
+    },
+    {
+      "pdb": "1x2g",
+      "chain": "C",
+      "cluster_id": "P32099",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1x2g_C_receptor.pdb",
+      "receptor_sha256": "338771dcfad68ad1f1165a2eec365602a6aab8f580e32bddd5f3090cb0cd7004",
+      "label_path": "data/cryptobench_apo/official_labels/1x2g_C_labels.json",
+      "label_sha256": "4cfae7b9f968753469dc0fed744e8c907f1756534e0176f15e1b8213bd066d28"
+    },
+    {
+      "pdb": "1xgd",
+      "chain": "A",
+      "cluster_id": "P15121",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1xgd_A_receptor.pdb",
+      "receptor_sha256": "b6c8f8911c6f80f993b9adf695497551ecf5e8971e01a4ca6a77514e68702e85",
+      "label_path": "data/cryptobench_apo/official_labels/1xgd_A_labels.json",
+      "label_sha256": "fd4eee6efc30170f8f16a80b1be243d3beeadaaf6ced608573c7a4e2315708bf"
+    },
+    {
+      "pdb": "1xjf",
+      "chain": "A",
+      "cluster_id": "O33839",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1xjf_A_receptor.pdb",
+      "receptor_sha256": "3432ab41f55beb2bd0b435ef9ccdfab0a66ff30975e4cafcc05ab7127feffd44",
+      "label_path": "data/cryptobench_apo/official_labels/1xjf_A_labels.json",
+      "label_sha256": "c20b2dc81c3209d45d2c28d63af640a9aaef0a5acdd85432755aebd5b8721a95"
+    },
+    {
+      "pdb": "1xqv",
+      "chain": "A",
+      "cluster_id": "P96084",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1xqv_A_receptor.pdb",
+      "receptor_sha256": "f9879819dca4407687f9676447477b65e3ddda541453214a6097322a6b6f08ba",
+      "label_path": "data/cryptobench_apo/official_labels/1xqv_A_labels.json",
+      "label_sha256": "aa00437f411e7ac514eddeebbf82936dd3249b11def08e0ff1551e1b6c5958fa"
+    },
+    {
+      "pdb": "1xtc",
+      "chain": "A",
+      "cluster_id": "P01555",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1xtc_A_receptor.pdb",
+      "receptor_sha256": "3d539d703b803f6844ec9e83ec5280db55927f29ebb537caa056f4e9dd63d7ce",
+      "label_path": "data/cryptobench_apo/official_labels/1xtc_A_labels.json",
+      "label_sha256": "5e72684dcc25d837d18c498adc21eb1b4b920cc9aef7ae6ce3c0f8fa99c7d7e3"
+    },
+    {
+      "pdb": "1zm0",
+      "chain": "A",
+      "cluster_id": "P08567",
+      "receptor_path": "data/cryptobench_apo/official_receptors/1zm0_A_receptor.pdb",
+      "receptor_sha256": "6da0a10242d20f42d57ea436494510cc00d589387d34faedbcc0166b25dcfc6f",
+      "label_path": "data/cryptobench_apo/official_labels/1zm0_A_labels.json",
+      "label_sha256": "d2cf7f17c4144d72085cece47beadc7154db5bcebb3a36066d04eb13074b00fa"
+    },
+    {
+      "pdb": "2aka",
+      "chain": "A",
+      "cluster_id": "P08799",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2aka_A_receptor.pdb",
+      "receptor_sha256": "bf13b4142eba45e3765a85cba0568a8ad233369d99e47841c204ae83171d5b9a",
+      "label_path": "data/cryptobench_apo/official_labels/2aka_A_labels.json",
+      "label_sha256": "105a123ffb819f269a553d5c41adeab25007d2834b567fdf6348e632eef96378"
+    },
+    {
+      "pdb": "2d05",
+      "chain": "A",
+      "cluster_id": "P33673",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2d05_A_receptor.pdb",
+      "receptor_sha256": "20b7849a988e5417190e0f416e103a4172571143eb94761591217b577a0bb4ab",
+      "label_path": "data/cryptobench_apo/official_labels/2d05_A_labels.json",
+      "label_sha256": "cd63084deb3876360169f7ffdbb356171ab8a9285ae4812fbda4c86585a539a5"
+    },
+    {
+      "pdb": "2dfp",
+      "chain": "A",
+      "cluster_id": "P04058",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2dfp_A_receptor.pdb",
+      "receptor_sha256": "3c2d63067aa0682491431d657fb3db67e3ee4c42c5ef5bd3e2fa69a3906f6067",
+      "label_path": "data/cryptobench_apo/official_labels/2dfp_A_labels.json",
+      "label_sha256": "903fca5338ac718bde73aa2ee3cae9548aeff5a0fe1d20492b860ad65964957c"
+    },
+    {
+      "pdb": "2fem",
+      "chain": "A",
+      "cluster_id": "P0A6I0",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2fem_A_receptor.pdb",
+      "receptor_sha256": "61671537f985361d3542cb9c6332828bc4a6fb76e89b3dfc03549e3c4041e663",
+      "label_path": "data/cryptobench_apo/official_labels/2fem_A_labels.json",
+      "label_sha256": "d3044d3dc172ea239091c29d6abcf3dfa35ab9efce1add830f835dd61737e15d"
+    },
+    {
+      "pdb": "2fhz",
+      "chain": "B",
+      "cluster_id": "P18000",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2fhz_B_receptor.pdb",
+      "receptor_sha256": "63425ed3a58f282f18383bff1a110de8ce9f0517d2a109a5245f84d61681494d",
+      "label_path": "data/cryptobench_apo/official_labels/2fhz_B_labels.json",
+      "label_sha256": "f0a02eaf2a6524dc41f9ae0d5fe686194a3c4eac3a835846e0c2aeb1287091d4"
+    },
+    {
+      "pdb": "2h7s",
+      "chain": "A",
+      "cluster_id": "P00183",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2h7s_A_receptor.pdb",
+      "receptor_sha256": "9d3dd0cb4696557c51314aa3390603e2ea193b61a7d4097144fdf9139993d8c4",
+      "label_path": "data/cryptobench_apo/official_labels/2h7s_A_labels.json",
+      "label_sha256": "e68f8c59457efec13242ab7d536c1f602eb8463218870da7a1600da965fd9793"
+    },
+    {
+      "pdb": "2i3a",
+      "chain": "D",
+      "cluster_id": "P9WPZ9",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2i3a_D_receptor.pdb",
+      "receptor_sha256": "3be38981f2f4876d6a5fbf6654b2bd1f1219c30ddaf422313b573f6b89484174",
+      "label_path": "data/cryptobench_apo/official_labels/2i3a_D_labels.json",
+      "label_sha256": "259cc58292ddd0f8671c465167d0f9df81eeb3dd2dcf78a85c538548be8ae2ff"
+    },
+    {
+      "pdb": "2i3r",
+      "chain": "A",
+      "cluster_id": "P23467",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2i3r_A_receptor.pdb",
+      "receptor_sha256": "2e98ff33de6534ec9712f571c23060cc67017b9c78ba14f7e91cd7f2a4687642",
+      "label_path": "data/cryptobench_apo/official_labels/2i3r_A_labels.json",
+      "label_sha256": "6c4af56019333a326957740ed46d9dd0938dda58b0ea328393830a2c6cdf8516"
+    },
+    {
+      "pdb": "2iyt",
+      "chain": "A",
+      "cluster_id": "P9WPY3",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2iyt_A_receptor.pdb",
+      "receptor_sha256": "e4f287e3d0cb1465d998326215cb0c155cdb9b4c8909dcd31ee89460dabfaf7e",
+      "label_path": "data/cryptobench_apo/official_labels/2iyt_A_labels.json",
+      "label_sha256": "630b4aa8fbbd3145380038b7e96c22f3640e31295a674cc67eeb926f81e22065"
+    },
+    {
+      "pdb": "2nt1",
+      "chain": "B",
+      "cluster_id": "P04062",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2nt1_B_receptor.pdb",
+      "receptor_sha256": "765bb6180b1d96bcd72cd217c36326c77c7b52c053a0699a84c6022e41c67de1",
+      "label_path": "data/cryptobench_apo/official_labels/2nt1_B_labels.json",
+      "label_sha256": "421e721e9ac5f9fa0ac67848fb967c978524a7370b45f9fbecc39fc80ff55afa"
+    },
+    {
+      "pdb": "2phz",
+      "chain": "A",
+      "cluster_id": "P40409",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2phz_A_receptor.pdb",
+      "receptor_sha256": "8a73f30007e3a9f0c29150a628a716e5a4d46946bafd3d1faf5a0bd9f32d62d6",
+      "label_path": "data/cryptobench_apo/official_labels/2phz_A_labels.json",
+      "label_sha256": "ac8e41ad09d04ae4ee30ae9745a53a02df5e66503949803e84e46f0273ab12a7"
+    },
+    {
+      "pdb": "2pkf",
+      "chain": "A",
+      "cluster_id": "P9WID5",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2pkf_A_receptor.pdb",
+      "receptor_sha256": "24acd4045a0f02b55fcf469af22afe7050fa650ab3b0a463c0e61262819b9201",
+      "label_path": "data/cryptobench_apo/official_labels/2pkf_A_labels.json",
+      "label_sha256": "b833c1ec393565212407e54a777d7d8a0e7f9bdbb9db346b5b0971ec372b12d6"
+    },
+    {
+      "pdb": "2pwz",
+      "chain": "G",
+      "cluster_id": "P61889",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2pwz_G_receptor.pdb",
+      "receptor_sha256": "0979de61220677d30ba1225276af50eab0895defec75161901f467eba4aab570",
+      "label_path": "data/cryptobench_apo/official_labels/2pwz_G_labels.json",
+      "label_sha256": "67510a45053eba5d7f96f056e89bb91e116c11d6549ba78b278b11722b6d1818"
+    },
+    {
+      "pdb": "2qbv",
+      "chain": "A",
+      "cluster_id": "P9WIC1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2qbv_A_receptor.pdb",
+      "receptor_sha256": "66fa6040e8a97e0d038d846d378f23dc6003455dfc66c9dee56a71a834bc3d33",
+      "label_path": "data/cryptobench_apo/official_labels/2qbv_A_labels.json",
+      "label_sha256": "17415e38cb3da86a32507188e7c1e70da1d09eb59f0b98300b400281a0435ebe"
+    },
+    {
+      "pdb": "2rfj",
+      "chain": "B",
+      "cluster_id": "Q58F21",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2rfj_B_receptor.pdb",
+      "receptor_sha256": "d50dfad122b75b5aacddfc77d0fd134a741eb1ae5ce5f0d71bc2d42423b3fb09",
+      "label_path": "data/cryptobench_apo/official_labels/2rfj_B_labels.json",
+      "label_sha256": "7f7667022836b52e758db0f1601255fa7416d3944af6370ffc5c9574ccea1aa0"
+    },
+    {
+      "pdb": "2v6m",
+      "chain": "D",
+      "cluster_id": "Q5SJA1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2v6m_D_receptor.pdb",
+      "receptor_sha256": "a59f76b78b0426155f0fd2fbb9fccb166ea0843a0aa8231a29bb4d9eff4f81e4",
+      "label_path": "data/cryptobench_apo/official_labels/2v6m_D_labels.json",
+      "label_sha256": "005bc90c173065b2b5c70adfb8fda3fd7800096150a444d6bba36521cfb68c9f"
+    },
+    {
+      "pdb": "2vl2",
+      "chain": "C",
+      "cluster_id": "P30044",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2vl2_C_receptor.pdb",
+      "receptor_sha256": "6f7491eb8c1353af5adbd21bd364fb30dad1de3cf55fdb65e233fa74cf60e4eb",
+      "label_path": "data/cryptobench_apo/official_labels/2vl2_C_labels.json",
+      "label_sha256": "2646ad7b2d23b31479a174816816ff19fe57fa07726aedc2d0f2d1f1462a83a0"
+    },
+    {
+      "pdb": "2vqz",
+      "chain": "F",
+      "cluster_id": "P31345",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2vqz_F_receptor.pdb",
+      "receptor_sha256": "443e0c4393a6ce4fa7c3454f07b6a1fc0442c564015cdc020be64738b33da949",
+      "label_path": "data/cryptobench_apo/official_labels/2vqz_F_labels.json",
+      "label_sha256": "6bbfba301f11bb39bfcd5f3ade74d6c49554ae9187d4dcbe594cd316a9161265"
+    },
+    {
+      "pdb": "2vyr",
+      "chain": "A",
+      "cluster_id": "O15151",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2vyr_A_receptor.pdb",
+      "receptor_sha256": "04c82f3d0d32a77429a2fc5cf8a384f121272541b1b7ed10116db1a26746284e",
+      "label_path": "data/cryptobench_apo/official_labels/2vyr_A_labels.json",
+      "label_sha256": "1ac7fa6f2ba430488cf8794549c0d358b1312327f8a75c9da9bde9fa9cf8483d"
+    },
+    {
+      "pdb": "2w8n",
+      "chain": "A",
+      "cluster_id": "P51649",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2w8n_A_receptor.pdb",
+      "receptor_sha256": "f6c1644718339a37d56010d6bf4a7264959b92ea67e469e34ff8d6bddde5c0de",
+      "label_path": "data/cryptobench_apo/official_labels/2w8n_A_labels.json",
+      "label_sha256": "aef045886f7fc89a5e370f2fe24e64d52707e96477d016975a3d28ccc89c8502"
+    },
+    {
+      "pdb": "2x47",
+      "chain": "A",
+      "cluster_id": "Q9BQ69",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2x47_A_receptor.pdb",
+      "receptor_sha256": "0da8a43e6b8032f3c41c20cf2e3627ed992270f9c70b7124e257882c03f0c9ed",
+      "label_path": "data/cryptobench_apo/official_labels/2x47_A_labels.json",
+      "label_sha256": "68d87a454e5b6054dd381c9c0aad1b726c63b247513d160cd9dc91037c0694fd"
+    },
+    {
+      "pdb": "2xsa",
+      "chain": "A",
+      "cluster_id": "Q2CEE3",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2xsa_A_receptor.pdb",
+      "receptor_sha256": "ed83fd559862374c5a2b8d691dec35e4358e47d93b6ee3cf2914e97dcbdf1e99",
+      "label_path": "data/cryptobench_apo/official_labels/2xsa_A_labels.json",
+      "label_sha256": "59ef3228321bb5ea94ff92a6e1f4768c35b4d5019a0b9c256966e918a1db395c"
+    },
+    {
+      "pdb": "2zcg",
+      "chain": "A",
+      "cluster_id": "Q8T6J6",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2zcg_A_receptor.pdb",
+      "receptor_sha256": "53e87ac8f09190224e45896ffd1406dc9711788feae9ea693fcd8d0f89eaa9d1",
+      "label_path": "data/cryptobench_apo/official_labels/2zcg_A_labels.json",
+      "label_sha256": "4b23c97a4e1682ae6160261eed94c5277063a53fd3b63bce6aa708150bf1c444"
+    },
+    {
+      "pdb": "2zj7",
+      "chain": "A",
+      "cluster_id": "Q9RBY1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/2zj7_A_receptor.pdb",
+      "receptor_sha256": "4a994bbfbaa6e7943a3f1d19e702d0fb60c70d8e651629614c13d9abc433f293",
+      "label_path": "data/cryptobench_apo/official_labels/2zj7_A_labels.json",
+      "label_sha256": "5d25f8bdf6ced4f803f951a1c437c358a4a8c73e474bb2d040f0cb006d0b155e"
+    },
+    {
+      "pdb": "3a0x",
+      "chain": "A",
+      "cluster_id": "Q9X180",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3a0x_A_receptor.pdb",
+      "receptor_sha256": "c6806783b1dd9175d5410ccf6e4eee021ab322dd61ed08c9747b4ded091e7144",
+      "label_path": "data/cryptobench_apo/official_labels/3a0x_A_labels.json",
+      "label_sha256": "58e4eba7c6f82d5a4a9ab9b0059abadea751f8609b60c5970fb2b05e78d0dbf0"
+    },
+    {
+      "pdb": "3bjp",
+      "chain": "A",
+      "cluster_id": "Q00511",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3bjp_A_receptor.pdb",
+      "receptor_sha256": "51416b1a96d5f4e716dc89296b369fdd0f37d4cfc820faf44c0e9dbbbbf2bedc",
+      "label_path": "data/cryptobench_apo/official_labels/3bjp_A_labels.json",
+      "label_sha256": "387f33d53c4a48752e4f19ba095cdfcb60935d3a81f8fe7f61645a29fabcfe44"
+    },
+    {
+      "pdb": "3f4k",
+      "chain": "A",
+      "cluster_id": "Q8A3I2",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3f4k_A_receptor.pdb",
+      "receptor_sha256": "a5f98f0812a84c98253c37c3b302451789141027ae7bc7e05df859b4c09c4951",
+      "label_path": "data/cryptobench_apo/official_labels/3f4k_A_labels.json",
+      "label_sha256": "41f64b5335d8dd0a44ae912eee7ad8fe4f30c280c1b59e7ffa9b498719350764"
+    },
+    {
+      "pdb": "3flg",
+      "chain": "A",
+      "cluster_id": "Q9UBC3",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3flg_A_receptor.pdb",
+      "receptor_sha256": "7447ea5a5fa4dd57ff65e3ad0a3bdf66d440f36ebd31e298fae4429b2d758546",
+      "label_path": "data/cryptobench_apo/official_labels/3flg_A_labels.json",
+      "label_sha256": "16ef04601e168c56619f8ec88ceee82c8cab618899b571ba4a6ff4066af39962"
+    },
+    {
+      "pdb": "3fzo",
+      "chain": "A",
+      "cluster_id": "Q14289",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3fzo_A_receptor.pdb",
+      "receptor_sha256": "3f96047b82d5850a354a3b48c9177c95b25b7d85908c917f56b9ba3c53d24a73",
+      "label_path": "data/cryptobench_apo/official_labels/3fzo_A_labels.json",
+      "label_sha256": "7dd029b15cbe90ca4b337eb7f976f1477272020459827956dc71e5ff9379afea"
+    },
+    {
+      "pdb": "3gdg",
+      "chain": "B",
+      "cluster_id": "P0C0Y5",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3gdg_B_receptor.pdb",
+      "receptor_sha256": "edd082aecfbbf9199c743bd2d7a7bb09bdb86a973327d6f68b137e6c007976ba",
+      "label_path": "data/cryptobench_apo/official_labels/3gdg_B_labels.json",
+      "label_sha256": "25b399ed0d3e79fe1e577563a8ee345538668b7005c35cf2735ed9b6d1ffa443"
+    },
+    {
+      "pdb": "3h8a",
+      "chain": "B",
+      "cluster_id": "P0A6P9",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3h8a_B_receptor.pdb",
+      "receptor_sha256": "17905c4c7576abc2b16f7bbe450a5df7cc9c700ecf10dfc3ee116c642cec3c7e",
+      "label_path": "data/cryptobench_apo/official_labels/3h8a_B_labels.json",
+      "label_sha256": "53ec53718fade0ec8539d0c89cc82bee02d73aaf7f1227c2ab05923cf8691af8"
+    },
+    {
+      "pdb": "3i8s",
+      "chain": "B",
+      "cluster_id": "P33650",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3i8s_B_receptor.pdb",
+      "receptor_sha256": "0980742a705576cd1f93f8d2552c83f8663ddc71b78d6026a3a8db7a17fe58aa",
+      "label_path": "data/cryptobench_apo/official_labels/3i8s_B_labels.json",
+      "label_sha256": "1e2eed610c74b4466829704704c6eed1a9a9c19a0bd4a96e2019a43ee5aabd19"
+    },
+    {
+      "pdb": "3idh",
+      "chain": "A",
+      "cluster_id": "P35557",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3idh_A_receptor.pdb",
+      "receptor_sha256": "9d9dee8a4bfb95d8e8135b686a5acc594a460fbf64fe440b3880bb2d9331368f",
+      "label_path": "data/cryptobench_apo/official_labels/3idh_A_labels.json",
+      "label_sha256": "e759df45661d53859fa45d3f10e6a84e5276e4ac88dea007a5405a7c47f09d6f"
+    },
+    {
+      "pdb": "3jzg",
+      "chain": "A",
+      "cluster_id": "O75530",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3jzg_A_receptor.pdb",
+      "receptor_sha256": "0d6215995aa5d6bbba3d238158abd2712b44c8caa00480417771b5928cf09cf4",
+      "label_path": "data/cryptobench_apo/official_labels/3jzg_A_labels.json",
+      "label_sha256": "21f568c1366334ec098dda593e2be31a1aee0d1cd633d765bab3214ece3d077f"
+    },
+    {
+      "pdb": "3k01",
+      "chain": "A",
+      "cluster_id": "B0B0V1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3k01_A_receptor.pdb",
+      "receptor_sha256": "414bbb541e10858a853d4f049597b87abd2b3fd29b6c74852973217e3f4c9802",
+      "label_path": "data/cryptobench_apo/official_labels/3k01_A_labels.json",
+      "label_sha256": "4b297c2bb17e4a2c88f73bf37e5bd06b206c30a12366f9feb35b8ddd0b42a665"
+    },
+    {
+      "pdb": "3lnz",
+      "chain": "C",
+      "cluster_id": "Q00987",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3lnz_C_receptor.pdb",
+      "receptor_sha256": "804e3797644e3c772849451c1e333b3989dbe0431b0196c1d3157a30b1b44427",
+      "label_path": "data/cryptobench_apo/official_labels/3lnz_C_labels.json",
+      "label_sha256": "cceb659232608d62f924c83d5602765df71c1e3a5c93dbb8be4a6030840951cc"
+    },
+    {
+      "pdb": "3lnz",
+      "chain": "O",
+      "cluster_id": "Q00987",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3lnz_O_receptor.pdb",
+      "receptor_sha256": "0a30052be8189837db9788d9a7cef9d5affb7af1975df2f9fc1f4d5dfaef076e",
+      "label_path": "data/cryptobench_apo/official_labels/3lnz_O_labels.json",
+      "label_sha256": "221b192376d3cc9763996a4134551f35bc8d7737dc8a988d121421f04887bb6c"
+    },
+    {
+      "pdb": "3ly8",
+      "chain": "A",
+      "cluster_id": "P23890",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3ly8_A_receptor.pdb",
+      "receptor_sha256": "ab45a28bced3d3ebd58e5fa707ce025c9a3724c1afc503b258453ef8ee47b0ea",
+      "label_path": "data/cryptobench_apo/official_labels/3ly8_A_labels.json",
+      "label_sha256": "be337601ffc1419d7f41af08577ff8bc371c28ebbb0f7d15cd031b6fcb4ec5ec"
+    },
+    {
+      "pdb": "3mwg",
+      "chain": "B",
+      "cluster_id": "A0A0H3JJC6",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3mwg_B_receptor.pdb",
+      "receptor_sha256": "efa9750d0a4c1393b88a1c429bb828a586f47131653ba16b7a96987bc2b450e3",
+      "label_path": "data/cryptobench_apo/official_labels/3mwg_B_labels.json",
+      "label_sha256": "ef43e39c877516abc083c3cdc1cb3641fedbe6fa8dd5e2e0e12e5c8245abefb6"
+    },
+    {
+      "pdb": "3n4u",
+      "chain": "A",
+      "cluster_id": "O68183",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3n4u_A_receptor.pdb",
+      "receptor_sha256": "8cfcb5fd3fa1206c65f86db37433ddd2b959744eeed8ed812d1f0e7e69201c5f",
+      "label_path": "data/cryptobench_apo/official_labels/3n4u_A_labels.json",
+      "label_sha256": "c01fd26a588fd557dff726258f2d59bc66243db15c1a99b254bee37ad176c734"
+    },
+    {
+      "pdb": "3nx1",
+      "chain": "B",
+      "cluster_id": "C6F3U5",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3nx1_B_receptor.pdb",
+      "receptor_sha256": "8b68142303abd1f0c25320eac8a6c7d7fed1ff09c832eb5c3d8ef232aa724f27",
+      "label_path": "data/cryptobench_apo/official_labels/3nx1_B_labels.json",
+      "label_sha256": "ae05e5dd8d3e21dfe090f60e0919fe8ecf3e2d52cfd01bbb0fb9e4787515b12a"
+    },
+    {
+      "pdb": "3pbf",
+      "chain": "A",
+      "cluster_id": "P08427",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3pbf_A_receptor.pdb",
+      "receptor_sha256": "65b921f9c89ad016d3ea26966404be23901919101504e99c790124ad08d866c0",
+      "label_path": "data/cryptobench_apo/official_labels/3pbf_A_labels.json",
+      "label_sha256": "30bec4c22d06901ce577680af5151902bc56e4d1678ba74dd3bfedcf8f323f7c"
+    },
+    {
+      "pdb": "3pfp",
+      "chain": "A",
+      "cluster_id": "O53512",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3pfp_A_receptor.pdb",
+      "receptor_sha256": "5cf1a79a13e95cf3392f92b499a63440713bfa1a74652aa285b890e28115dbac",
+      "label_path": "data/cryptobench_apo/official_labels/3pfp_A_labels.json",
+      "label_sha256": "12d5e81b96f43dadbabe9126affb74788a89ccb41d689ccd75944e0fa1215af0"
+    },
+    {
+      "pdb": "3pfp",
+      "chain": "B",
+      "cluster_id": "O53512",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3pfp_B_receptor.pdb",
+      "receptor_sha256": "b447514f2d8faade7371ee71292e2b9f3ac27b8cefbf8a0af6399b98d6bba04c",
+      "label_path": "data/cryptobench_apo/official_labels/3pfp_B_labels.json",
+      "label_sha256": "0f921c35b874d5760581f0146f42f8aa2e06eac04063c656c2ddfb7d1196e3f3"
+    },
+    {
+      "pdb": "3rwv",
+      "chain": "A",
+      "cluster_id": "Q9NZD2",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3rwv_A_receptor.pdb",
+      "receptor_sha256": "b84b998efd51c466744a049fd719f67a5767ff3032f8cc815e2926a52f677873",
+      "label_path": "data/cryptobench_apo/official_labels/3rwv_A_labels.json",
+      "label_sha256": "eecc0a38313ecfa5dea1274f393a78f9dd6afc3bd9cb574f95b9879e9eba144f"
+    },
+    {
+      "pdb": "3st6",
+      "chain": "C",
+      "cluster_id": "P9WFX1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3st6_C_receptor.pdb",
+      "receptor_sha256": "ebb0404834266e33c5588fa3cf3f6922a34f1458ebee0833d90021db0bd6711f",
+      "label_path": "data/cryptobench_apo/official_labels/3st6_C_labels.json",
+      "label_sha256": "be718ea837f2a6d2a19e0c456fb6bb0f73c5df973335f602c9713bc4a8c7f38c"
+    },
+    {
+      "pdb": "3t8b",
+      "chain": "A",
+      "cluster_id": "P9WNP5",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3t8b_A_receptor.pdb",
+      "receptor_sha256": "3269d7db28e76a76047f23582cce3eea5470c11033074d8e9ef44021e3ad244f",
+      "label_path": "data/cryptobench_apo/official_labels/3t8b_A_labels.json",
+      "label_sha256": "a9be6d0408a8b97c20c4899810d38f4ede41fc481cfb539b6d3a69dd44e863d7"
+    },
+    {
+      "pdb": "3tpo",
+      "chain": "A",
+      "cluster_id": "P52293",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3tpo_A_receptor.pdb",
+      "receptor_sha256": "dac7fc937c51925475f126917646c624b1a1ab27307493ffa2da9f4dbd10392d",
+      "label_path": "data/cryptobench_apo/official_labels/3tpo_A_labels.json",
+      "label_sha256": "c55c94a69a3ca60baf67585b4240e0ecb836eb13e0bff8829572a59d0e183aa9"
+    },
+    {
+      "pdb": "3ugk",
+      "chain": "A",
+      "cluster_id": "P38998",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3ugk_A_receptor.pdb",
+      "receptor_sha256": "2ac2bcbaee327fb4ee0e76adf65fa78c1da1db280a32793ff27f1d24da88e27e",
+      "label_path": "data/cryptobench_apo/official_labels/3ugk_A_labels.json",
+      "label_sha256": "e0c2aacf06870676a1aba56c45c76208fe5f8e0fb3cd96b77b3a60317bf65d2a"
+    },
+    {
+      "pdb": "3uyi",
+      "chain": "A",
+      "cluster_id": "Q3L181",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3uyi_A_receptor.pdb",
+      "receptor_sha256": "278dd90ef4d8cb636d652f108a915d70462ebc4e5eba8481aacac42a925c8691",
+      "label_path": "data/cryptobench_apo/official_labels/3uyi_A_labels.json",
+      "label_sha256": "98fb17daf408db3cf68d82ea1f591137c8617844a6dbfc9f225594e9aedcf861"
+    },
+    {
+      "pdb": "3v55",
+      "chain": "A",
+      "cluster_id": "Q9UDY8",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3v55_A_receptor.pdb",
+      "receptor_sha256": "33c142f6c485d0d4d848f58a47a5380805aae2744bcb234bab3e09c1c79ef244",
+      "label_path": "data/cryptobench_apo/official_labels/3v55_A_labels.json",
+      "label_sha256": "69c981d3aeb38663e4181d10fe821e24f98c474553419201bd2f5a41ec6cbc6f"
+    },
+    {
+      "pdb": "3vgm",
+      "chain": "A",
+      "cluster_id": "B1VZT1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3vgm_A_receptor.pdb",
+      "receptor_sha256": "88e487bfafc64182afbad9f1d0b3ea17989d9d37be0bcdc651f5ec08b2764020",
+      "label_path": "data/cryptobench_apo/official_labels/3vgm_A_labels.json",
+      "label_sha256": "99b9e478476a3282f77cccc12df5aa2ed3024cef658539113dba97cc6b7e4de0"
+    },
+    {
+      "pdb": "3w90",
+      "chain": "A",
+      "cluster_id": "Q5SL35",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3w90_A_receptor.pdb",
+      "receptor_sha256": "c50b2560f1a152b02615227c2c3f91bf393342c356bb072dc36d6d8e48a125ea",
+      "label_path": "data/cryptobench_apo/official_labels/3w90_A_labels.json",
+      "label_sha256": "110b52dc67297f45197f68529df11feb4485dda42f173faa9eb8f62404ccc513"
+    },
+    {
+      "pdb": "3wb9",
+      "chain": "C",
+      "cluster_id": "Q67PI3",
+      "receptor_path": "data/cryptobench_apo/official_receptors/3wb9_C_receptor.pdb",
+      "receptor_sha256": "c4824dedfef056f20e18fd4b1d0b83da593afbe2df5b0e84e08b2d63a68b9544",
+      "label_path": "data/cryptobench_apo/official_labels/3wb9_C_labels.json",
+      "label_sha256": "d4692869653d0b120431c8ff9dc1fc4da57104f4b84396fd726d3efe6ffe2b71"
+    },
+    {
+      "pdb": "4aem",
+      "chain": "A",
+      "cluster_id": "Q3LHN3",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4aem_A_receptor.pdb",
+      "receptor_sha256": "316b0e601fc928ba4ff0a55161567922dfd50d263add721f18c27bfacc11bd07",
+      "label_path": "data/cryptobench_apo/official_labels/4aem_A_labels.json",
+      "label_sha256": "cea6f7f93bc01840847540e43a5da7a2bb0ca2b727c1db44b1074b094cc5ce1d"
+    },
+    {
+      "pdb": "4amv",
+      "chain": "B",
+      "cluster_id": "P17169",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4amv_B_receptor.pdb",
+      "receptor_sha256": "2f1d5146601bf1d46651d5123d0d4d07caf4074d39809262bab6f9fc6f0e8fb3",
+      "label_path": "data/cryptobench_apo/official_labels/4amv_B_labels.json",
+      "label_sha256": "376d0cc1cc1e0ee4542dbb4c805c60b93d18c2c8fc7da377843eb83ed54d9da5"
+    },
+    {
+      "pdb": "4bg8",
+      "chain": "A",
+      "cluster_id": "Q8TX37",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4bg8_A_receptor.pdb",
+      "receptor_sha256": "0f6ebee3a406d105a3e9ee49ac2f35d4cf69dcfde6e8453e2beb53ca674127f7",
+      "label_path": "data/cryptobench_apo/official_labels/4bg8_A_labels.json",
+      "label_sha256": "11c18acb40012f7aa01c0962748426b8cab7d08a3d43a91b3cc9c5702dae8048"
+    },
+    {
+      "pdb": "4cmw",
+      "chain": "B",
+      "cluster_id": "P9WJ61",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4cmw_B_receptor.pdb",
+      "receptor_sha256": "910312b4f2fa0152bc9b3662474511382abacd2bf249145e615be7bab5364dd1",
+      "label_path": "data/cryptobench_apo/official_labels/4cmw_B_labels.json",
+      "label_sha256": "3d357d6a705aa0bcf33717f7348ae06c38b1888e28fd48a83d30a967fd6d71b1"
+    },
+    {
+      "pdb": "4dnc",
+      "chain": "B",
+      "cluster_id": "Q9H7Z6",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4dnc_B_receptor.pdb",
+      "receptor_sha256": "273d7d26911bb0610ea57b5ec976ac334e32cfd50cbf7912adf170d7c63ed58c",
+      "label_path": "data/cryptobench_apo/official_labels/4dnc_B_labels.json",
+      "label_sha256": "7fb8154b82392c079cbce9a0184198f39516603d4f4ec11beb5cfbcac3ea4e3c"
+    },
+    {
+      "pdb": "4e1y",
+      "chain": "A",
+      "cluster_id": "Q9KWU1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4e1y_A_receptor.pdb",
+      "receptor_sha256": "60fdc46e1dd035895d6cb823796ab5638a9a20050cb2daa92122594669550a4e",
+      "label_path": "data/cryptobench_apo/official_labels/4e1y_A_labels.json",
+      "label_sha256": "d828ee98da9e48ad6f4bb0c32fc3f16677c37d1d71740dcc493d3fc327252e22"
+    },
+    {
+      "pdb": "4fkm",
+      "chain": "B",
+      "cluster_id": "A0A0H3JWU6",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4fkm_B_receptor.pdb",
+      "receptor_sha256": "16a4549995b68fb709359030e1377f3349e38e7a6fe75a5067708f6ab1eabb0f",
+      "label_path": "data/cryptobench_apo/official_labels/4fkm_B_labels.json",
+      "label_sha256": "f2ece7d7ef8210dbeb9a83d2645dd228bff00c228b06f655bea24bd27c4d0adb"
+    },
+    {
+      "pdb": "4gpi",
+      "chain": "C",
+      "cluster_id": "P18669",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4gpi_C_receptor.pdb",
+      "receptor_sha256": "c75605593b775abfdb35307573bcef4642d72fba5d9d662388b2094bae437ef0",
+      "label_path": "data/cryptobench_apo/official_labels/4gpi_C_labels.json",
+      "label_sha256": "260d632c0814fe8d25c46db849d4c7b9108e07e19c6dc57f5f576d59acf1049b"
+    },
+    {
+      "pdb": "4gv9",
+      "chain": "A",
+      "cluster_id": "P13699",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4gv9_A_receptor.pdb",
+      "receptor_sha256": "9132f3bf2439ebb922a50577096294878daa63d4fc24eca5234dec7c9a0fc405",
+      "label_path": "data/cryptobench_apo/official_labels/4gv9_A_labels.json",
+      "label_sha256": "88a63c7f25814dd76cd50f6b0317c3f74eb545e857fb1eed53617a6edecb6f49"
+    },
+    {
+      "pdb": "4hye",
+      "chain": "A",
+      "cluster_id": "Q8DNC2",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4hye_A_receptor.pdb",
+      "receptor_sha256": "3bee8f499fca6be26f4bee05d4ae3985eccce1c53582769d453720f378cf7d6b",
+      "label_path": "data/cryptobench_apo/official_labels/4hye_A_labels.json",
+      "label_sha256": "de3949efd61ff63681c05fc649b3b492379bd39e360fe93e70e9f618575beb32"
+    },
+    {
+      "pdb": "4ikv",
+      "chain": "A",
+      "cluster_id": "Q5KYD1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4ikv_A_receptor.pdb",
+      "receptor_sha256": "1baad2849ee5410f11f8ec5328c0aa1ee5c8a856c7841b876ae6b60fb2520928",
+      "label_path": "data/cryptobench_apo/official_labels/4ikv_A_labels.json",
+      "label_sha256": "abf0ffb441a5db5905b2ae238c199f88f9ab6eb7becde1c048bae26d22237849"
+    },
+    {
+      "pdb": "4ilg",
+      "chain": "A",
+      "cluster_id": "P32357",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4ilg_A_receptor.pdb",
+      "receptor_sha256": "9e4ef15add96c3481bef8ae5c7931131f43ff4257aeb3a35c311d4b3dc3673dd",
+      "label_path": "data/cryptobench_apo/official_labels/4ilg_A_labels.json",
+      "label_sha256": "0c4aaf228d7457905a7b17177d0e0b9bfb2236ad19df2b2eb0a43f880dd80af1"
+    },
+    {
+      "pdb": "4j4e",
+      "chain": "F",
+      "cluster_id": "P81180",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4j4e_F_receptor.pdb",
+      "receptor_sha256": "a28231ff84b1db015886290c2efc1d4c7e95c1f6b3637c6466ab7698032db8ae",
+      "label_path": "data/cryptobench_apo/official_labels/4j4e_F_labels.json",
+      "label_sha256": "f1f49e9afc4e15f5078b498ed7c3074018777c704a784f1fe9fca9a04f732b84"
+    },
+    {
+      "pdb": "4jax",
+      "chain": "F",
+      "cluster_id": "P33284",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4jax_F_receptor.pdb",
+      "receptor_sha256": "f921f4b2e1f64278fba8f7b6d50f44f6f22d868664832374a4cfed19976d9b4a",
+      "label_path": "data/cryptobench_apo/official_labels/4jax_F_labels.json",
+      "label_sha256": "657f300f0491959f65799a11d3621556cd497282093e401d6d67721289defb92"
+    },
+    {
+      "pdb": "4jfr",
+      "chain": "C",
+      "cluster_id": "Q8DCF5",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4jfr_C_receptor.pdb",
+      "receptor_sha256": "6e9d1f0f8c52bc51d604b91e57c92565ef91d3805c4a97a32eea42d372dd1df5",
+      "label_path": "data/cryptobench_apo/official_labels/4jfr_C_labels.json",
+      "label_sha256": "210f9cb55a70bd57ddbb601ba4c4438600e7d0ea99a460db57b3bd028b7f94be"
+    },
+    {
+      "pdb": "4kmy",
+      "chain": "A",
+      "cluster_id": "P14207",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4kmy_A_receptor.pdb",
+      "receptor_sha256": "1ae28c6d1b464774fd512fb009af3291aa830490c2a2868d760942c8abdfb305",
+      "label_path": "data/cryptobench_apo/official_labels/4kmy_A_labels.json",
+      "label_sha256": "873f3e0ebd73ad6c7b3976db0774c4249b71a892152849f246843a2f856d07a6"
+    },
+    {
+      "pdb": "4mwi",
+      "chain": "A",
+      "cluster_id": "Q8NB16",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4mwi_A_receptor.pdb",
+      "receptor_sha256": "776ba81ab3521328d0e42e8b8fc724c47e93ab03e532be550ce047fa517972c4",
+      "label_path": "data/cryptobench_apo/official_labels/4mwi_A_labels.json",
+      "label_sha256": "f099e7b5af31355a68da37002b2a37924ef08b81bb76340cc1ec49f661f50e2a"
+    },
+    {
+      "pdb": "4nzv",
+      "chain": "B",
+      "cluster_id": "Q9X1X0",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4nzv_B_receptor.pdb",
+      "receptor_sha256": "b964396e9e45428edcdf4ebfa50790370ab873dba4a27a5d91bb9114f960680e",
+      "label_path": "data/cryptobench_apo/official_labels/4nzv_B_labels.json",
+      "label_sha256": "3e0d4475e859c27534a6b3acee1bc2ca7c52311bd31e7577a7ac2609dab285a0"
+    },
+    {
+      "pdb": "4oqo",
+      "chain": "B",
+      "cluster_id": "P24627",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4oqo_B_receptor.pdb",
+      "receptor_sha256": "424234832a70330c5169069acb1a0fbb7cef74752557fbe02e7a384117808d62",
+      "label_path": "data/cryptobench_apo/official_labels/4oqo_B_labels.json",
+      "label_sha256": "99313af60cf649ab299956c241b67c9faa4e1961fab89f3c57b6cf00fb781f5b"
+    },
+    {
+      "pdb": "4p2f",
+      "chain": "A",
+      "cluster_id": "P9WQ35",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4p2f_A_receptor.pdb",
+      "receptor_sha256": "bb673f9431cb2505e04d0c41cb917f3b34500c9c29021178e37e11ac7c69ef08",
+      "label_path": "data/cryptobench_apo/official_labels/4p2f_A_labels.json",
+      "label_sha256": "f9362cde1bbbee62dd5fcdc87efa4a88e014e1145eda2bd8ff78aef030284c41"
+    },
+    {
+      "pdb": "4qvk",
+      "chain": "B",
+      "cluster_id": "Q9HGR1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4qvk_B_receptor.pdb",
+      "receptor_sha256": "2b0dabbaf6844001224f498ec636c3f5aa0ace1950d914d649d349e5f3cace2e",
+      "label_path": "data/cryptobench_apo/official_labels/4qvk_B_labels.json",
+      "label_sha256": "c078b076fc49a1c3238bd713ab1cd51e8fd87565e69eea8678ad209f386fa43f"
+    },
+    {
+      "pdb": "4r0x",
+      "chain": "A",
+      "cluster_id": "Q13451",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4r0x_A_receptor.pdb",
+      "receptor_sha256": "3053bd3f1a317fb25cb0cbc894176f52394435b1dbd7942bcfc60a7d28771859",
+      "label_path": "data/cryptobench_apo/official_labels/4r0x_A_labels.json",
+      "label_sha256": "19aed931675f5b70def23787a2e6621f6fcdb13596cfb58137d60985e1e5dc9c"
+    },
+    {
+      "pdb": "4rvt",
+      "chain": "B",
+      "cluster_id": "O95819",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4rvt_B_receptor.pdb",
+      "receptor_sha256": "5a275904e5fddbc064d33f4cba09ea6a0a624a4fff996200d7161311da219923",
+      "label_path": "data/cryptobench_apo/official_labels/4rvt_B_labels.json",
+      "label_sha256": "4b0144ec8dd25bcb62a18212f3d9934bdeb8f3e6a49299579836d70d326e7664"
+    },
+    {
+      "pdb": "4ttp",
+      "chain": "A",
+      "cluster_id": "Q5ZVH3",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4ttp_A_receptor.pdb",
+      "receptor_sha256": "569337e94338efa8fc428a9a62ff3c5d83d4be5e14bcb5d901c556225a70c85c",
+      "label_path": "data/cryptobench_apo/official_labels/4ttp_A_labels.json",
+      "label_sha256": "9955f21bec12987ad721c5dc9bc639fb56923620bd8acf3faf0018e501f6764b"
+    },
+    {
+      "pdb": "4uc8",
+      "chain": "A",
+      "cluster_id": "P03418",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4uc8_A_receptor.pdb",
+      "receptor_sha256": "37a1794c5ea9cb06c49dc6e7d748c8d57fabfff6ebdcf7f5adea75110c5e894f",
+      "label_path": "data/cryptobench_apo/official_labels/4uc8_A_labels.json",
+      "label_sha256": "a80f42b4f0bfb4493689eab0f892799742633525359090615ce49ba8450fb93f"
+    },
+    {
+      "pdb": "4uum",
+      "chain": "A",
+      "cluster_id": "O96445",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4uum_A_receptor.pdb",
+      "receptor_sha256": "f8a9d5d57290b3b3b84084d6ad9d684583f23a610e52083bd7e9b92bc206da65",
+      "label_path": "data/cryptobench_apo/official_labels/4uum_A_labels.json",
+      "label_sha256": "f727e736b07374b440b1b0dddafbe0a15804de51471d78bf58f995cdba670e5a"
+    },
+    {
+      "pdb": "4zm7",
+      "chain": "A",
+      "cluster_id": "B3Y002",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4zm7_A_receptor.pdb",
+      "receptor_sha256": "e8b79865fdb9f0b1417925e0a343b45053307b0d5565484a63f4e8c29a549031",
+      "label_path": "data/cryptobench_apo/official_labels/4zm7_A_labels.json",
+      "label_sha256": "4bf9c5590c41f5c2dc3199d369ffdef59e7f50cc34c2bd6bf7a950df23f7e102"
+    },
+    {
+      "pdb": "4zoe",
+      "chain": "B",
+      "cluster_id": "Q92AS9",
+      "receptor_path": "data/cryptobench_apo/official_receptors/4zoe_B_receptor.pdb",
+      "receptor_sha256": "1caccfaf6cebab737703afe6000d76ca9c36dcab614227e741bac1353c0e937a",
+      "label_path": "data/cryptobench_apo/official_labels/4zoe_B_labels.json",
+      "label_sha256": "ad7039d63f67ab3b52b05e88a69134957a82e3044c7f0c2971a45fb0808973c0"
+    },
+    {
+      "pdb": "5acv",
+      "chain": "B",
+      "cluster_id": "Q9K2N0",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5acv_B_receptor.pdb",
+      "receptor_sha256": "d6a44accf9f9b6b202a038cf4e1ba8fc43cd5680ab7d74c57740d87a03a29b5d",
+      "label_path": "data/cryptobench_apo/official_labels/5acv_B_labels.json",
+      "label_sha256": "3679e88a95774b7e7041eb54d45af3bc8f97bf4891ed30a3c35459a8a6e48cf7"
+    },
+    {
+      "pdb": "5b0e",
+      "chain": "B",
+      "cluster_id": "I6WU39",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5b0e_B_receptor.pdb",
+      "receptor_sha256": "970b6c623b460c27a7380b33b3785996ebd8343f36e87d58d50c7ddc34c44ef7",
+      "label_path": "data/cryptobench_apo/official_labels/5b0e_B_labels.json",
+      "label_sha256": "5a7cc0328fbcbd68205a52e328d3952391e6c76e7c799945cba96eda666cb9ed"
+    },
+    {
+      "pdb": "5caz",
+      "chain": "A",
+      "cluster_id": "Q01641",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5caz_A_receptor.pdb",
+      "receptor_sha256": "34e32bfa8a57d5b6050299dd100d5f032324b77be831ac275337d7b6dcc8406b",
+      "label_path": "data/cryptobench_apo/official_labels/5caz_A_labels.json",
+      "label_sha256": "a426f5f2817e9d5789c1498ba157861e658e6bb2b4eb2d3698583fc8769752dd"
+    },
+    {
+      "pdb": "5e0v",
+      "chain": "A",
+      "cluster_id": "P12004",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5e0v_A_receptor.pdb",
+      "receptor_sha256": "2ccbaf6dd79b7c2d4783f4f1bacd45c0157a23c6d53c63b9edddb99170ff6c0f",
+      "label_path": "data/cryptobench_apo/official_labels/5e0v_A_labels.json",
+      "label_sha256": "9efed376c9ee6a3dcdc203e09e0ead3785a7a0bcb4a4beb9918dc1ed4e04e2d5"
+    },
+    {
+      "pdb": "5ey7",
+      "chain": "B",
+      "cluster_id": "A0A0H3AER7",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5ey7_B_receptor.pdb",
+      "receptor_sha256": "9b2d5c71e4dd260e9d30623a69340cb03d301e54defe3e19cb22577066fe5fa4",
+      "label_path": "data/cryptobench_apo/official_labels/5ey7_B_labels.json",
+      "label_sha256": "f87a8243dc0cc35ec02e246de1cecda6c9ced1ae1c80ed0af1f0b181ed12433c"
+    },
+    {
+      "pdb": "5hij",
+      "chain": "A",
+      "cluster_id": "F6KV61",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5hij_A_receptor.pdb",
+      "receptor_sha256": "a7ee9a80276a1b053a1c7f3a9b32868d0e7b54fe27a21bc2f97075fdc039b61e",
+      "label_path": "data/cryptobench_apo/official_labels/5hij_A_labels.json",
+      "label_sha256": "ea436b2377ed6edf1b57818f9e0514579b4b3db87dd70eb55437a641baacd64b"
+    },
+    {
+      "pdb": "5hto",
+      "chain": "E",
+      "cluster_id": "Q4PRK9",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5hto_E_receptor.pdb",
+      "receptor_sha256": "05c810294219960f0b235cf1e6a26df098667840d99017bf16c398115acad77a",
+      "label_path": "data/cryptobench_apo/official_labels/5hto_E_labels.json",
+      "label_sha256": "b11e2451dcabcd0d0a27c006ae090dc0d1032c4b26ce7f4990b9b2b4985620f0"
+    },
+    {
+      "pdb": "5i3t",
+      "chain": "E",
+      "cluster_id": "E1XUJ2",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5i3t_E_receptor.pdb",
+      "receptor_sha256": "b9363d7aac1425c198a9e3b7b7ef6a9eb64d8ff478e952a419572e8cda3559be",
+      "label_path": "data/cryptobench_apo/official_labels/5i3t_E_labels.json",
+      "label_sha256": "739269b8be35ebd00293c4dc8b2c5c9b411b59b2fb8b661153b823eaff642ddf"
+    },
+    {
+      "pdb": "5igh",
+      "chain": "A",
+      "cluster_id": "Q47396",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5igh_A_receptor.pdb",
+      "receptor_sha256": "1e1b9519382e1aaaf9e7e0f397aaca2e66d152124394a943c387b6a8bceca375",
+      "label_path": "data/cryptobench_apo/official_labels/5igh_A_labels.json",
+      "label_sha256": "4b64d52827d7ba26b53d4e371b354bd6a4fa9474b4959faa818f684915f18fc3"
+    },
+    {
+      "pdb": "5kcg",
+      "chain": "B",
+      "cluster_id": "A0A1B0UHJ4",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5kcg_B_receptor.pdb",
+      "receptor_sha256": "37ea32c3a5073274382c567f62cd0f90c406ad8a580d04ef922300d49c17d633",
+      "label_path": "data/cryptobench_apo/official_labels/5kcg_B_labels.json",
+      "label_sha256": "48aae6cee5336f54fc7b5c3cf6429b5ce5d788cad8a8e40df7bf85a3680fd1c5"
+    },
+    {
+      "pdb": "5loc",
+      "chain": "A",
+      "cluster_id": "P04964",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5loc_A_receptor.pdb",
+      "receptor_sha256": "b881a12b80bd746c7c03875fec23b0c4b56c8971e7b1b154ad0c68261837d51d",
+      "label_path": "data/cryptobench_apo/official_labels/5loc_A_labels.json",
+      "label_sha256": "7b565398add16b5e8705dbec5e7d9a6fb9c724ae84cd4e31b66383aecd232533"
+    },
+    {
+      "pdb": "5o8b",
+      "chain": "A",
+      "cluster_id": "P42212",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5o8b_A_receptor.pdb",
+      "receptor_sha256": "14ae6e6bd33a1062287aed41ee78d937a615f1d90323bf407a7ea99ebcd54ffa",
+      "label_path": "data/cryptobench_apo/official_labels/5o8b_A_labels.json",
+      "label_sha256": "12f4971b94986dfff6436b03f32fbbf2382ff8cd564b13907e7f2a3e09df62bf"
+    },
+    {
+      "pdb": "5sc2",
+      "chain": "A",
+      "cluster_id": "P15379",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5sc2_A_receptor.pdb",
+      "receptor_sha256": "cc9842abdde4202a143dc9818ba782f2c30d2daece6e78a6870fb4c954565287",
+      "label_path": "data/cryptobench_apo/official_labels/5sc2_A_labels.json",
+      "label_sha256": "fa31ddac9479e11a724c86ff378bfd7831926b72150d1782c8742fa617205d6a"
+    },
+    {
+      "pdb": "5tc0",
+      "chain": "B",
+      "cluster_id": "Q12866",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5tc0_B_receptor.pdb",
+      "receptor_sha256": "f7a2f88f9b3921e3ccdc7155d4dc88a619936d756e98d3b677b067810f9e215d",
+      "label_path": "data/cryptobench_apo/official_labels/5tc0_B_labels.json",
+      "label_sha256": "4211728d075294e080b879c89268053287e49229960361ac3980f179ad8c8e5f"
+    },
+    {
+      "pdb": "5tvi",
+      "chain": "V",
+      "cluster_id": "A0A247D6Y2",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5tvi_V_receptor.pdb",
+      "receptor_sha256": "6d6a07f20ca51c47b3066b6727783d919fcfa592d054a5f08506d758d5a14a38",
+      "label_path": "data/cryptobench_apo/official_labels/5tvi_V_labels.json",
+      "label_sha256": "552299ba72a03db3001f48e6f18b648f0f4a84345e3e2247e96aade58d056f5f"
+    },
+    {
+      "pdb": "5uxa",
+      "chain": "A",
+      "cluster_id": "O32553",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5uxa_A_receptor.pdb",
+      "receptor_sha256": "efae06beca8b79af394dbfb3edd2325662f75da1429839c7e00e7c807b521e87",
+      "label_path": "data/cryptobench_apo/official_labels/5uxa_A_labels.json",
+      "label_sha256": "ebfc0d3b89cb917aa48ea4ffb60d0289ec33d01172385291457341eb91fc59ec"
+    },
+    {
+      "pdb": "5wbm",
+      "chain": "B",
+      "cluster_id": "P50053",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5wbm_B_receptor.pdb",
+      "receptor_sha256": "e648ef732d1e591980afecc5c524beba56351f2040cae9f073ec9b7d64da22ad",
+      "label_path": "data/cryptobench_apo/official_labels/5wbm_B_labels.json",
+      "label_sha256": "2755bbc0492c2e7db314a86a140618a99c0bc0dd39c3b6ffc2b0ccc0cd0130da"
+    },
+    {
+      "pdb": "5yhb",
+      "chain": "A",
+      "cluster_id": "P11041",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5yhb_A_receptor.pdb",
+      "receptor_sha256": "dec0a1d24185f1533ec23652873a349a069e1a694a7fa1a742a3e302da535eb7",
+      "label_path": "data/cryptobench_apo/official_labels/5yhb_A_labels.json",
+      "label_sha256": "ded30705f9e8ec2beebe636d42e4faed6681daaa5f4fe1bee58c938a89888cd2"
+    },
+    {
+      "pdb": "5yj2",
+      "chain": "C",
+      "cluster_id": "Q45697",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5yj2_C_receptor.pdb",
+      "receptor_sha256": "2994783abacde42cc713e58b87053c83d111aac45cfe23d7e47e884a493323cb",
+      "label_path": "data/cryptobench_apo/official_labels/5yj2_C_labels.json",
+      "label_sha256": "7b28f8ba0fea8d87b24ae2d2ee4e021b0f7dd69c0360916900c3a941b596d4b8"
+    },
+    {
+      "pdb": "5yqp",
+      "chain": "A",
+      "cluster_id": "P38800",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5yqp_A_receptor.pdb",
+      "receptor_sha256": "a8c5372b5b0893d807579d01053865444b3fe281392f5200ee0965c495c14c6c",
+      "label_path": "data/cryptobench_apo/official_labels/5yqp_A_labels.json",
+      "label_sha256": "0cf1c598829cf75f1416365ddef48761f7f2562e93256141fcc7e965163f48fd"
+    },
+    {
+      "pdb": "5ysb",
+      "chain": "B",
+      "cluster_id": "Q92AS8",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5ysb_B_receptor.pdb",
+      "receptor_sha256": "b05bc58dd6b3e41c208cddfa513eba790ef4b8de79f73ad0a3d13b33cd4124e3",
+      "label_path": "data/cryptobench_apo/official_labels/5ysb_B_labels.json",
+      "label_sha256": "245123928846c94382a8e3aeec7712e64569ff75a0bfc5291710b01bfc286333"
+    },
+    {
+      "pdb": "5z18",
+      "chain": "C",
+      "cluster_id": "Q6W7J7",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5z18_C_receptor.pdb",
+      "receptor_sha256": "208fac9f9726f7c8066b61b5e8b08f177ff6261f60ba3cc090bc30a7daf113eb",
+      "label_path": "data/cryptobench_apo/official_labels/5z18_C_labels.json",
+      "label_sha256": "cbe2dd6c206168f412967bec5df3042bf89949d893c07f96f3dc4c241acfec64"
+    },
+    {
+      "pdb": "5zj4",
+      "chain": "D",
+      "cluster_id": "Q9L1E4",
+      "receptor_path": "data/cryptobench_apo/official_receptors/5zj4_D_receptor.pdb",
+      "receptor_sha256": "b67b00a91f9c9cda9accd30857fe10d33b23e961d3493ecfb3b11cf1e184e53f",
+      "label_path": "data/cryptobench_apo/official_labels/5zj4_D_labels.json",
+      "label_sha256": "770143f67705e27e25aa0b45e97d13cf47181ab9b14802df3cf1579371cc37e8"
+    },
+    {
+      "pdb": "6a98",
+      "chain": "C",
+      "cluster_id": "A0A1P8VSL7",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6a98_C_receptor.pdb",
+      "receptor_sha256": "1c57b17fcac326a8c0358563d5699ab7c54b9451842ed6d98dec0227d6bfba27",
+      "label_path": "data/cryptobench_apo/official_labels/6a98_C_labels.json",
+      "label_sha256": "bfd0c493459ca87b9ce30fc502080b37523185273a41b01cc64c161b0757db17"
+    },
+    {
+      "pdb": "6bty",
+      "chain": "B",
+      "cluster_id": "O00443",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6bty_B_receptor.pdb",
+      "receptor_sha256": "9b251d2140b6e184f4dcaf9cc161a3f5d5df6727f3e42bdde814c7d34890d215",
+      "label_path": "data/cryptobench_apo/official_labels/6bty_B_labels.json",
+      "label_sha256": "d98bc34da3860737fb75f908e2839084e7cc6aabf49defe5f242c539afe37dfe"
+    },
+    {
+      "pdb": "6cqe",
+      "chain": "B",
+      "cluster_id": "Q92918",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6cqe_B_receptor.pdb",
+      "receptor_sha256": "5966a12a88164bf2c21b7217a5d6d9d9c7bfa0a555481cb9a6fcce3139f7ca90",
+      "label_path": "data/cryptobench_apo/official_labels/6cqe_B_labels.json",
+      "label_sha256": "02ad55edc5d8d373946db4552c6f48711c4af615a0e5762099ea453ea47c008b"
+    },
+    {
+      "pdb": "6du4",
+      "chain": "A",
+      "cluster_id": "Q86W50",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6du4_A_receptor.pdb",
+      "receptor_sha256": "ba3248b901d47e4d9d47b1db58e7727cd95b145269c9e291f09bb88e97f7e9a5",
+      "label_path": "data/cryptobench_apo/official_labels/6du4_A_labels.json",
+      "label_sha256": "a4b690b97e62b141f1e0faf3eaf5239476a2e56a4b7a15bfa2b08f0b02d5c5ca"
+    },
+    {
+      "pdb": "6eqj",
+      "chain": "A",
+      "cluster_id": "P46976",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6eqj_A_receptor.pdb",
+      "receptor_sha256": "f7abe53519e17e8601e70f335a4f03a491fd2e8f17d187c088f981a6fde7f10e",
+      "label_path": "data/cryptobench_apo/official_labels/6eqj_A_labels.json",
+      "label_sha256": "21d3d64202c97520a550318a8a6c28c4dcdf2d95be1e588cbc18c46f8bb4ac26"
+    },
+    {
+      "pdb": "6f52",
+      "chain": "A",
+      "cluster_id": "P56463",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6f52_A_receptor.pdb",
+      "receptor_sha256": "caf2c1db6e05fd6715465b4589f1ab923701837b1fb34f4394cf316aa2f26899",
+      "label_path": "data/cryptobench_apo/official_labels/6f52_A_labels.json",
+      "label_sha256": "91c4f724a425fbb6a24813a56fd13a6a3dd951fce062850bf744e19322804cdc"
+    },
+    {
+      "pdb": "6fc2",
+      "chain": "C",
+      "cluster_id": "P07260",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6fc2_C_receptor.pdb",
+      "receptor_sha256": "4acbc2340cb9b0dd38be984b3515cd25448e22d5d6bcbe12e8a6860e1e496b28",
+      "label_path": "data/cryptobench_apo/official_labels/6fc2_C_labels.json",
+      "label_sha256": "03e034360cac7be97959f5006cb1061bf4c69a54eda75825fcc92975ccb52424"
+    },
+    {
+      "pdb": "6fgj",
+      "chain": "B",
+      "cluster_id": "W8U368",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6fgj_B_receptor.pdb",
+      "receptor_sha256": "477bcdf62d57674464e405a64dedd18bd96eb39023fd9da54e36ccd6f43faa97",
+      "label_path": "data/cryptobench_apo/official_labels/6fgj_B_labels.json",
+      "label_sha256": "f93f96c3292fa50fbdfc81e2263d056742c527a734624283908f80739d7f9015"
+    },
+    {
+      "pdb": "6g6y",
+      "chain": "A",
+      "cluster_id": "P52732",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6g6y_A_receptor.pdb",
+      "receptor_sha256": "814c3248432ac25bf17e64f53af2502f25e6698fb6b85959861f5c793314936e",
+      "label_path": "data/cryptobench_apo/official_labels/6g6y_A_labels.json",
+      "label_sha256": "d7ea4ca14775ef581faa39b8229f1aa1270a173f5a74c9d209bbdfcde2d8d898"
+    },
+    {
+      "pdb": "6hei",
+      "chain": "A",
+      "cluster_id": "Q96RU2",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6hei_A_receptor.pdb",
+      "receptor_sha256": "fe38e429180d3552d5d454a83a79170b73c83dec1915f0f3f759beabff9f5cb9",
+      "label_path": "data/cryptobench_apo/official_labels/6hei_A_labels.json",
+      "label_sha256": "d4dd4cc060182762e5d0c93c0d15c7af9fe02fcc6fcf1024c78c474f5990d411"
+    },
+    {
+      "pdb": "6isu",
+      "chain": "A",
+      "cluster_id": "P15374",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6isu_A_receptor.pdb",
+      "receptor_sha256": "07d8674c733eb9f0503eb255713552631948b0af46f73f7fee657054525814ef",
+      "label_path": "data/cryptobench_apo/official_labels/6isu_A_labels.json",
+      "label_sha256": "6c6f970fef3e8f59ccfc3afdc080d8e2a9c02198637fc9fe801cd26f3e28b36b"
+    },
+    {
+      "pdb": "6jq9",
+      "chain": "B",
+      "cluster_id": "A0A109PTH9",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6jq9_B_receptor.pdb",
+      "receptor_sha256": "bc9ec9fa531d9788ffe7d9a780d1cff278b5c8f6975e6b844d8f5fcbd2997e9a",
+      "label_path": "data/cryptobench_apo/official_labels/6jq9_B_labels.json",
+      "label_sha256": "129c0203c1e195ea37ee80a0ace17ce78df1589edf42c31acf4137bde2a15545"
+    },
+    {
+      "pdb": "6ksc",
+      "chain": "A",
+      "cluster_id": "P9WNV1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6ksc_A_receptor.pdb",
+      "receptor_sha256": "ad8ca037fa9fae737dd87322bbcd8b857845642bc9f32c57b7ea6ea1811a3414",
+      "label_path": "data/cryptobench_apo/official_labels/6ksc_A_labels.json",
+      "label_sha256": "dbfeb98d10bffd82b0e6ce2fee9c620e08560ec44916092cb09927fc7f0748bf"
+    },
+    {
+      "pdb": "6n5j",
+      "chain": "B",
+      "cluster_id": "P10121",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6n5j_B_receptor.pdb",
+      "receptor_sha256": "b88e2477c9a5c7d0571d35b3a0d8d92e29f66415b05a0d00d1e7e47b2fcf66c9",
+      "label_path": "data/cryptobench_apo/official_labels/6n5j_B_labels.json",
+      "label_sha256": "caefb605faeefcd52d730e8da97b27464c33e83fcc62f6c41d6f9d8109deec6b"
+    },
+    {
+      "pdb": "6nei",
+      "chain": "B",
+      "cluster_id": "Q5C9L2",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6nei_B_receptor.pdb",
+      "receptor_sha256": "b011063b986d1315bf00e5ff389e80c6b8d1f1b2bdc774754cf206d70e1f20d4",
+      "label_path": "data/cryptobench_apo/official_labels/6nei_B_labels.json",
+      "label_sha256": "4c609949da797fc83f37d94756f53a5b7e4e6d174d93a623b3c66ce6ac7333f2"
+    },
+    {
+      "pdb": "6o4f",
+      "chain": "H",
+      "cluster_id": "P49419",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6o4f_H_receptor.pdb",
+      "receptor_sha256": "20be80493abbc22b091cca7fdddf5d017a0330cccc72c4f6a67969e8c4d44f54",
+      "label_path": "data/cryptobench_apo/official_labels/6o4f_H_labels.json",
+      "label_sha256": "12088b4754f57821c8db43148be0874cc266efa85dbb49f6d35f1f8d2faac770"
+    },
+    {
+      "pdb": "6tx0",
+      "chain": "B",
+      "cluster_id": "Q9Y3Z3",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6tx0_B_receptor.pdb",
+      "receptor_sha256": "cc92a935d9cf225b703165c0934556e51681471f9bec86ef99fc1893136eb24a",
+      "label_path": "data/cryptobench_apo/official_labels/6tx0_B_labels.json",
+      "label_sha256": "71ba6e61efce4de0a1154c3e554fd7c0dc12a0e06d3e2416f2c08f384c296765"
+    },
+    {
+      "pdb": "6vle",
+      "chain": "A",
+      "cluster_id": "Q9BYC5",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6vle_A_receptor.pdb",
+      "receptor_sha256": "8e7c619664f237c9a0dd29127a95e10d46a41e157c3bb7679d38740d57b2b24e",
+      "label_path": "data/cryptobench_apo/official_labels/6vle_A_labels.json",
+      "label_sha256": "6fa99a149f834f090d43cba96523aae7dfa63fd0d9bd2bc2d3e4ebff44801e46"
+    },
+    {
+      "pdb": "6w10",
+      "chain": "A",
+      "cluster_id": "Q91XB0",
+      "receptor_path": "data/cryptobench_apo/official_receptors/6w10_A_receptor.pdb",
+      "receptor_sha256": "dba226caead87572cc23845f3779ea09a966dc11aeb124dc0f762d13c448fecc",
+      "label_path": "data/cryptobench_apo/official_labels/6w10_A_labels.json",
+      "label_sha256": "cfd1630add9a109b65ac42679a40ab4ee3bbbca20ddded8e175ce2599af64350"
+    },
+    {
+      "pdb": "7c48",
+      "chain": "A",
+      "cluster_id": "P96356",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7c48_A_receptor.pdb",
+      "receptor_sha256": "6d688d3dc0a0a5290ebba6475ee130bc3d713f49c4dd11916ab8e2b3ad6d89d8",
+      "label_path": "data/cryptobench_apo/official_labels/7c48_A_labels.json",
+      "label_sha256": "93268f00eda585e1cf8ec4e14055993fb6004b9706932b0f343c71a9aeb4d42d"
+    },
+    {
+      "pdb": "7c63",
+      "chain": "A",
+      "cluster_id": "Q53W80",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7c63_A_receptor.pdb",
+      "receptor_sha256": "025b302d5936d934a7a6d0a0c0cc841fc80275e28af2355fcb1c1d0b9608063c",
+      "label_path": "data/cryptobench_apo/official_labels/7c63_A_labels.json",
+      "label_sha256": "4471dd2411bbf1c97a1673d1a7e8a7f82f53c22b35db5530b4d8f031ff9c5313"
+    },
+    {
+      "pdb": "7de1",
+      "chain": "A",
+      "cluster_id": "P0DTC9",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7de1_A_receptor.pdb",
+      "receptor_sha256": "4817026686547f556a1ec9380cd879c27cfa2c4537f099b247ba9ed9268c2fa1",
+      "label_path": "data/cryptobench_apo/official_labels/7de1_A_labels.json",
+      "label_sha256": "23dbc54bea1fe12f703cc363f62392cabbf8c8bdf94744da98326303be2b2cd1"
+    },
+    {
+      "pdb": "7e5q",
+      "chain": "B",
+      "cluster_id": "P39597",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7e5q_B_receptor.pdb",
+      "receptor_sha256": "0147cda47271ea2d94f1d5aa956c39035b82c49c967236372574a3c8f22fa9fc",
+      "label_path": "data/cryptobench_apo/official_labels/7e5q_B_labels.json",
+      "label_sha256": "b9b6803a293133095909ec8171d2cd80f400bf262d38645c816acc714edf908b"
+    },
+    {
+      "pdb": "7f2m",
+      "chain": "B",
+      "cluster_id": "Q08499",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7f2m_B_receptor.pdb",
+      "receptor_sha256": "e3b913a415607fb5119ecf005a165baa47ef32c136a13806e9572162ba4241ca",
+      "label_path": "data/cryptobench_apo/official_labels/7f2m_B_labels.json",
+      "label_sha256": "7e5e3ea78211f022907218524434dbe6032b3752eacba536e31dc73dbb009094"
+    },
+    {
+      "pdb": "7f4y",
+      "chain": "B",
+      "cluster_id": "Q38087",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7f4y_B_receptor.pdb",
+      "receptor_sha256": "09c12a4774f59355570d8fd8a8031f06df08650c3b0cfe74959605f3dcd8316e",
+      "label_path": "data/cryptobench_apo/official_labels/7f4y_B_labels.json",
+      "label_sha256": "21b5ecc1d8b988b58bcfd95a02bccaa1dcb67669fe775d66ea63e4f0cf9b0bbb"
+    },
+    {
+      "pdb": "7kay",
+      "chain": "A",
+      "cluster_id": "A0A0D6GJV1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7kay_A_receptor.pdb",
+      "receptor_sha256": "a1e137fdcfdb1e35bc6d2ec83168a2e0016ae2966d631dd5b059f0829d3ebca7",
+      "label_path": "data/cryptobench_apo/official_labels/7kay_A_labels.json",
+      "label_sha256": "71bcad04a3eb244f81a494cc9016ccc7ae8e0590095a02d12b2775a1c08c9c18"
+    },
+    {
+      "pdb": "7nc8",
+      "chain": "D",
+      "cluster_id": "B0Y813",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7nc8_D_receptor.pdb",
+      "receptor_sha256": "8f74d45f097f94a6b0738c6bd9d28dadd6fdc1885f66561c867fb01a06336c30",
+      "label_path": "data/cryptobench_apo/official_labels/7nc8_D_labels.json",
+      "label_sha256": "d0efbca156c523dd92878cf4d2c7e5f4f4bfc3a440d3acb808725cb4058b61a1"
+    },
+    {
+      "pdb": "7ndl",
+      "chain": "B",
+      "cluster_id": "Q06210",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7ndl_B_receptor.pdb",
+      "receptor_sha256": "f781bf7f7c66f10c4404a0b234c7b9078ad38029c679dadcfe72c09bfa07eb01",
+      "label_path": "data/cryptobench_apo/official_labels/7ndl_B_labels.json",
+      "label_sha256": "e59145c7446a368f26a606a7c3efd62b430c9741e76ded01b845f5cf757fe245"
+    },
+    {
+      "pdb": "7nlx",
+      "chain": "A",
+      "cluster_id": "P9WQ01",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7nlx_A_receptor.pdb",
+      "receptor_sha256": "20d80f6c3a7724eb28d0c0fe30df12a54aa224a787b4e53eaa6c44445387c69a",
+      "label_path": "data/cryptobench_apo/official_labels/7nlx_A_labels.json",
+      "label_sha256": "8fd660a76f499cc492b84cd59295b2864e1e1a29c4bb57e5d77c7689820939b0"
+    },
+    {
+      "pdb": "7o1i",
+      "chain": "A",
+      "cluster_id": "O53872",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7o1i_A_receptor.pdb",
+      "receptor_sha256": "60b106e0bc5591cedb665bd3d3bd985b049b55dcb502ace1f245f458c168582b",
+      "label_path": "data/cryptobench_apo/official_labels/7o1i_A_labels.json",
+      "label_sha256": "ed7779278faf33080406f29c280dd6a88b09cff3c7b26c3ce40c0b67aab38764"
+    },
+    {
+      "pdb": "7qoq",
+      "chain": "A",
+      "cluster_id": "K5B7Z4",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7qoq_A_receptor.pdb",
+      "receptor_sha256": "7efd5bd90139c9b2e43dc280fb1a59e897adebd11adfa6226ba762a6da1f3cce",
+      "label_path": "data/cryptobench_apo/official_labels/7qoq_A_labels.json",
+      "label_sha256": "8648b219517576db8d602d8e216f912884205f61f2af8ed52edb2fec485d5539"
+    },
+    {
+      "pdb": "7qzr",
+      "chain": "D",
+      "cluster_id": "P05164",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7qzr_D_receptor.pdb",
+      "receptor_sha256": "47dbcec1eba7b3dd178746d5bf647a83b06260703af0227bf2b7a6f2dc98de80",
+      "label_path": "data/cryptobench_apo/official_labels/7qzr_D_labels.json",
+      "label_sha256": "ad51726b85f9b9a30441f7bb062a4081b90ec4f7e6658d94bfd4cf8d288fa2aa"
+    },
+    {
+      "pdb": "7v8k",
+      "chain": "B",
+      "cluster_id": "A0A7J6JUK2",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7v8k_B_receptor.pdb",
+      "receptor_sha256": "e7a84b9d67daf911387b965d8f8ef3e1bd303cfe15fc7c1e6596117505eb8be2",
+      "label_path": "data/cryptobench_apo/official_labels/7v8k_B_labels.json",
+      "label_sha256": "6c760ef178918a2450560529693240d820ff481a0190a4bd0e5958bb06a02d4a"
+    },
+    {
+      "pdb": "7w19",
+      "chain": "A",
+      "cluster_id": "A5Y459",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7w19_A_receptor.pdb",
+      "receptor_sha256": "e5458912e33b98d820dce3a545ab58d98e744aedeaae015bbd4f2674cdbe3f4e",
+      "label_path": "data/cryptobench_apo/official_labels/7w19_A_labels.json",
+      "label_sha256": "5cceecc2f7baddd6047a304f25a2b803edf81a23b35b276e49744353cfd5064f"
+    },
+    {
+      "pdb": "7x0f",
+      "chain": "A",
+      "cluster_id": "Q9I1H0",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7x0f_A_receptor.pdb",
+      "receptor_sha256": "1d82547b845c3dca14f036763a477ae23d6ef7f8da8cda77866427e44a97179a",
+      "label_path": "data/cryptobench_apo/official_labels/7x0f_A_labels.json",
+      "label_sha256": "9e7c76ef06ac219785d3acb2adf157190b79fe0831e2fea9655251b18ecbcb26"
+    },
+    {
+      "pdb": "7x0g",
+      "chain": "B",
+      "cluster_id": "A3DCF2",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7x0g_B_receptor.pdb",
+      "receptor_sha256": "65db1ba8088fe016192a1a205205bee4bf07fb01aafd86045fa9a3123c5efed9",
+      "label_path": "data/cryptobench_apo/official_labels/7x0g_B_labels.json",
+      "label_sha256": "ddaecd7917c05858b6f4df8d31178840b6fd41de42921ed8e810e8ac78dae7fe"
+    },
+    {
+      "pdb": "7x0i",
+      "chain": "B",
+      "cluster_id": "A3DE73",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7x0i_B_receptor.pdb",
+      "receptor_sha256": "69845230da1c09a1b8a1e00726fd5d23122f524ccba3274c7676497c57aced82",
+      "label_path": "data/cryptobench_apo/official_labels/7x0i_B_labels.json",
+      "label_sha256": "0c200e9dedea86b81f6cb1cfac4dc785f78adb761ef28baaba2bab7055d05d4b"
+    },
+    {
+      "pdb": "7xgf",
+      "chain": "E",
+      "cluster_id": "Q07817",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7xgf_E_receptor.pdb",
+      "receptor_sha256": "27023b4524e775c540fbd592a83c630e5458fd21e715fecf535bfa66ab7ca75e",
+      "label_path": "data/cryptobench_apo/official_labels/7xgf_E_labels.json",
+      "label_sha256": "227b7257a8ad86b45d97ff8f5121ce38c4cae6963b9ff2a9924b92a5050293f7"
+    },
+    {
+      "pdb": "7yjc",
+      "chain": "A",
+      "cluster_id": "Q9Y251",
+      "receptor_path": "data/cryptobench_apo/official_receptors/7yjc_A_receptor.pdb",
+      "receptor_sha256": "fa05b601f4f9d1b7afb075934278570805ae6cc21a9bcd8d0f0ad765105f3333",
+      "label_path": "data/cryptobench_apo/official_labels/7yjc_A_labels.json",
+      "label_sha256": "256513acb3174bab2d98625437bf48dcfae96ab6e5bcbbd4668235f9d345d177"
+    },
+    {
+      "pdb": "8aeq",
+      "chain": "A",
+      "cluster_id": "A9WIU3",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8aeq_A_receptor.pdb",
+      "receptor_sha256": "520fd97333a9cc14596a4c95627181cb249f9b880d568cc9e1f4521b2b2f20a2",
+      "label_path": "data/cryptobench_apo/official_labels/8aeq_A_labels.json",
+      "label_sha256": "e425505a213e3252856931ba474850b9c57592b5c00a7273d0380fd66e3dee3f"
+    },
+    {
+      "pdb": "8aqi",
+      "chain": "B",
+      "cluster_id": "Q9GV45",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8aqi_B_receptor.pdb",
+      "receptor_sha256": "935386fe28a8bf2cc1a4dd157b48c42db556db597902c28888da594fa709489b",
+      "label_path": "data/cryptobench_apo/official_labels/8aqi_B_labels.json",
+      "label_sha256": "46d267a37bf45f36f77af8aead9658f9e6d449cfc2cfd35815cb125e8bd57a30"
+    },
+    {
+      "pdb": "8b9p",
+      "chain": "A",
+      "cluster_id": "Q9BYF1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8b9p_A_receptor.pdb",
+      "receptor_sha256": "a6e97331c73933eb60c2aaf255bbe363523608754e42cb61db75b7a93e5a4276",
+      "label_path": "data/cryptobench_apo/official_labels/8b9p_A_labels.json",
+      "label_sha256": "77b96837e1b5c7a685f9b3e5a0768d9b088af15e101db5e30ca418e3c1974114"
+    },
+    {
+      "pdb": "8bre",
+      "chain": "B",
+      "cluster_id": "Q9I5Q5",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8bre_B_receptor.pdb",
+      "receptor_sha256": "0df0a33886aeddd0a4d361c7c9ad43ae048627a8d273518ef44b425f29de21bc",
+      "label_path": "data/cryptobench_apo/official_labels/8bre_B_labels.json",
+      "label_sha256": "b49b3305d25f25e40009f7fe6c885bbe58066e2d675156753e8468e0fd220eb1"
+    },
+    {
+      "pdb": "8gxj",
+      "chain": "C",
+      "cluster_id": "Q9HYX1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8gxj_C_receptor.pdb",
+      "receptor_sha256": "f972498501f9ac7557f5d8f3e160d6a61c6e7cae5dec9e0bf6909dc2b80e79dc",
+      "label_path": "data/cryptobench_apo/official_labels/8gxj_C_labels.json",
+      "label_sha256": "6275167d74364a498768beff274c9e8e115482f6af6c7aef8dcc0406991d3ef5"
+    },
+    {
+      "pdb": "8h27",
+      "chain": "A",
+      "cluster_id": "Q2FXG9",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8h27_A_receptor.pdb",
+      "receptor_sha256": "35fef8c65c9dcd8ef83b35dfd71c0a52ad0913e02a95836ab55580f7e42e6376",
+      "label_path": "data/cryptobench_apo/official_labels/8h27_A_labels.json",
+      "label_sha256": "19817a9a7456a54a15fcbc60a5e225964f0bbff48eecfdbc551b990a35101497"
+    },
+    {
+      "pdb": "8i84",
+      "chain": "B",
+      "cluster_id": "D2B3F1",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8i84_B_receptor.pdb",
+      "receptor_sha256": "9c19736d1a22de2e06c6f4550417f7f983daf44e1c29cbbee777a56161c7842b",
+      "label_path": "data/cryptobench_apo/official_labels/8i84_B_labels.json",
+      "label_sha256": "e7a9488ecd1c99482a9c3f1e647b473ab04dfd764d2b3e2a5cfafa337d6cd41a"
+    },
+    {
+      "pdb": "8ias",
+      "chain": "B",
+      "cluster_id": "Q8DQ84",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8ias_B_receptor.pdb",
+      "receptor_sha256": "e446affc94cd1b76ffc0063882c6164d49e8dcb2bf16f92d0f573295d3f44472",
+      "label_path": "data/cryptobench_apo/official_labels/8ias_B_labels.json",
+      "label_sha256": "4e989822703fb34cf2583de52d1394b6f8e311bfbc67f59174c9972560f67e0c"
+    },
+    {
+      "pdb": "8j11",
+      "chain": "X",
+      "cluster_id": "P02791",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8j11_X_receptor.pdb",
+      "receptor_sha256": "25ab5505c28eeb8ffebf877ceb80515ca70477b3fb91eece91828b437181a0e5",
+      "label_path": "data/cryptobench_apo/official_labels/8j11_X_labels.json",
+      "label_sha256": "4445d35cb61b47d0c348e3b806784e48e96f9913853b486ec1f41adccd09f284"
+    },
+    {
+      "pdb": "8onn",
+      "chain": "E",
+      "cluster_id": "D5EHC5",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8onn_E_receptor.pdb",
+      "receptor_sha256": "607cc98155c637dd5590295f134f7f973796d48625aa6d160d94eff03d4f9d9d",
+      "label_path": "data/cryptobench_apo/official_labels/8onn_E_labels.json",
+      "label_sha256": "232911b191d03601a6b68fc1397f2818206722718ffb6302811f138ffe8eba2b"
+    },
+    {
+      "pdb": "8u3n",
+      "chain": "A",
+      "cluster_id": "A0A3E2YLT4",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8u3n_A_receptor.pdb",
+      "receptor_sha256": "d45cdcd493ffd4e18a210ffacfa2741b8764082e51a8bd8823b835b5d37f1dc9",
+      "label_path": "data/cryptobench_apo/official_labels/8u3n_A_labels.json",
+      "label_sha256": "8ae43a9bd06f2d3c9b9ac09060aae9630f26960f7d5466f0e84b64d41bc936e3"
+    },
+    {
+      "pdb": "8vxu",
+      "chain": "B",
+      "cluster_id": "U2EQ00",
+      "receptor_path": "data/cryptobench_apo/official_receptors/8vxu_B_receptor.pdb",
+      "receptor_sha256": "fe62701766e9cb9c98d5ccf2649f24fbdebeb31259fb8d57fe56c3819823cc2b",
+      "label_path": "data/cryptobench_apo/official_labels/8vxu_B_labels.json",
+      "label_sha256": "d77acd663b133f60ac36d59cbb0d86d604fdfd44c01091ba28518690b5dab69c"
+    },
+    {
+      "pdb": "9atc",
+      "chain": "A",
+      "cluster_id": "P0A786",
+      "receptor_path": "data/cryptobench_apo/official_receptors/9atc_A_receptor.pdb",
+      "receptor_sha256": "c6b43cbd30ee3e300c6b6e84cc5f970731eec72e32787dcaf59c8b5e7929f741",
+      "label_path": "data/cryptobench_apo/official_labels/9atc_A_labels.json",
+      "label_sha256": "1f367e42ca502d16589a3422467c9c7242bb3e6db4529ad77a6b9f910375e43c"
+    }
+  ]
+}
