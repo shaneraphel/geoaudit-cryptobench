@@ -227,7 +227,7 @@ def main(argv: list[str] | None = None) -> int:
                                 "best_dca": top1.get("best_dca")})
             telem_rows.append(
                 telemetry_row(
-                    method=m, pdb=pdb, split="test", status=st,
+                    method=m, pdb=pdb, chain=ch, split="test", status=st,
                     scored=sc, label=lab, prediction=pred,
                     universe_residues=universe,
                     tool_version=p2rank_version if m == "p2rank" else None,

@@ -144,15 +144,23 @@ def paired_bootstrap(
         n_ge0 = sum(1 for d in deltas if d >= 0)
         frac = n_ge0 / len(deltas) if deltas else float("nan")
         p_two = 2 * min(frac, 1 - frac) if deltas else float("nan")
+        d_lo, d_hi = _percentile(s, lo_q), _percentile(s, hi_q)
+        # A method with no computable values on any structure has no Δ. Comparing
+        # NaN bounds to 0 is False, which previously rendered as the affirmative
+        # "CI excludes 0" for a difference that was never estimated.
+        undefined = (
+            d_lo is None or d_hi is None
+            or math.isnan(d_lo) or math.isnan(d_hi)
+        )
         paired[m] = {
             "delta_point": (per_method[m]["point"] - per_method[baseline]["point"])
             if per_method[m]["point"] is not None
             and per_method[baseline]["point"] is not None
             else None,
-            "delta_ci_low": _percentile(s, lo_q),
-            "delta_ci_high": _percentile(s, hi_q),
-            "p_two_sided_bootstrap": p_two,
-            "crosses_zero": (_percentile(s, lo_q) <= 0 <= _percentile(s, hi_q)),
+            "delta_ci_low": None if undefined else d_lo,
+            "delta_ci_high": None if undefined else d_hi,
+            "p_two_sided_bootstrap": None if undefined else p_two,
+            "crosses_zero": None if undefined else (d_lo <= 0 <= d_hi),
         }
     return {
         "schema": "geoaudit.bootstrap_ci.v1",
@@ -167,16 +175,36 @@ def paired_bootstrap(
     }
 
 
+def _unit_key(row: dict[str, Any]) -> str:
+    """The evaluation unit: (pdb, chain), falling back to pdb for legacy rows."""
+    return row.get("unit_id") or (
+        f"{row['pdb']}_{row['chain']}" if row.get("chain") else row["pdb"]
+    )
+
+
 def per_structure_values(
     rows: list[dict[str, Any]], metric_key: str
 ) -> dict[str, list[float | None]]:
-    """Align a telemetry metric into {method: [value per structure]} by pdb order."""
-    pdbs = sorted({r["pdb"] for r in rows})
+    """Align a telemetry metric into {method: [value per unit]} by unit order.
+
+    Keyed on (pdb, chain). Keying on `pdb` alone let two chains of the same entry
+    overwrite each other, dropping them from the resample without any diagnostic.
+    A collision is now an error rather than a silent loss.
+    """
+    units = sorted({_unit_key(r) for r in rows})
     methods = sorted({r["method"] for r in rows})
-    index = {p: i for i, p in enumerate(pdbs)}
-    out = {m: [None] * len(pdbs) for m in methods}
+    index = {u: i for i, u in enumerate(units)}
+    out = {m: [None] * len(units) for m in methods}
+    seen: set[tuple[str, str]] = set()
     for r in rows:
-        out[r["method"]][index[r["pdb"]]] = r.get(metric_key)
+        key = (r["method"], _unit_key(r))
+        if key in seen:
+            raise ValueError(
+                f"duplicate telemetry row for method={key[0]} unit={key[1]}: "
+                "the unit key does not separate these rows, so one would be dropped"
+            )
+        seen.add(key)
+        out[r["method"]][index[_unit_key(r)]] = r.get(metric_key)
     return out
 
 
@@ -257,10 +285,12 @@ def main(argv: list[str] | None = None) -> int:
                   f"[{_f(s['ci_low'], '.3f')}, {_f(s['ci_high'], '.3f')}]"
                   f"  n={s['n_structures_scored']}")
         for m, d in res["paired_vs_baseline"].items():
+            cz = d["crosses_zero"]
+            verdict = ("(Δ UNDEFINED: no scored structures)" if cz is None
+                       else "(CI crosses 0)" if cz else "(CI excludes 0)")
             print(f"    Δ({m} - {base}) = {_f(d['delta_point'])} "
                   f"[{_f(d['delta_ci_low'])}, {_f(d['delta_ci_high'])}]  "
-                  f"p≈{_f(d['p_two_sided_bootstrap'], '.3f')} "
-                  f"{'(CI crosses 0)' if d['crosses_zero'] else '(CI excludes 0)'}")
+                  f"p≈{_f(d['p_two_sided_bootstrap'], '.3f')} {verdict}")
     print(f"-> {out.relative_to(root)}")
     return 0
 

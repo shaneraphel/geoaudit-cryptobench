@@ -66,6 +66,29 @@ class TestPairedBootstrap(unittest.TestCase):
         out = per_structure_values(rows, "residue_auc")
         self.assertEqual(out["m"], [0.6, 0.7])  # sorted by pdb (a,b)
 
+    def test_two_chains_of_one_entry_are_separate_units(self) -> None:
+        """The official fold has entries contributing two chains (3lnz C/O).
+
+        Keyed on pdb alone these overwrote each other and vanished from the
+        resample; both must survive as independent units.
+        """
+        rows = [
+            {"pdb": "3lnz", "chain": "C", "unit_id": "3lnz_C",
+             "method": "m", "residue_auc": 0.6},
+            {"pdb": "3lnz", "chain": "O", "unit_id": "3lnz_O",
+             "method": "m", "residue_auc": 0.8},
+        ]
+        out = per_structure_values(rows, "residue_auc")
+        self.assertEqual(out["m"], [0.6, 0.8])
+
+    def test_colliding_unit_keys_raise_instead_of_dropping(self) -> None:
+        rows = [
+            {"pdb": "3lnz", "method": "m", "residue_auc": 0.6},
+            {"pdb": "3lnz", "method": "m", "residue_auc": 0.8},
+        ]
+        with self.assertRaises(ValueError):
+            per_structure_values(rows, "residue_auc")
+
 
 if __name__ == "__main__":
     unittest.main()

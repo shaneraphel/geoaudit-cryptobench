@@ -45,6 +45,7 @@ def telemetry_row(
     pdb: str,
     split: str,
     status: str,
+    chain: str | None = None,
     scored: dict[str, Any] | None,
     label: dict[str, Any] | None,
     prediction: dict[str, Any] | None = None,
@@ -69,6 +70,11 @@ def telemetry_row(
         "clinical_grade": False,
         "method": method,
         "pdb": pdb,
+        "chain": chain,
+        # The evaluation unit is a (pdb, chain) pair, not a PDB entry: the official
+        # fold contains entries that contribute two chains (3lnz C/O, 3pfp A/B).
+        # Keying anything downstream on `pdb` alone silently collapses them.
+        "unit_id": f"{pdb}_{chain}" if chain else pdb,
         "split": split,
         "status": status,
         "tool": METHOD_TOOL.get(method, ""),

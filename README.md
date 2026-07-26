@@ -166,51 +166,86 @@ UniProt `P03372`; RCSB `3ERT, 3OS8, 1UOM, 5U2B, 6CHW, 4Q50, 4Q13`. Baseline tool
 | `n_pockets` | int | pockets returned |
 | `residue_auc` | float\|null | CryptoBench-faithful per-residue ROC-AUC |
 | `residue_pr_auc` | float\|null | per-residue average precision |
+| `residue_mcc` | float\|null | per-residue MCC (null when the confusion matrix is degenerate) |
 | `residue_f1` | float\|null | per-residue F1 (null when threshold not defined) |
 | `residue_metrics_available` | bool | whether label∩universe join produced metrics |
+| `chain`,`unit_id` | str | evaluation unit `(pdb, chain)`; the bootstrap key |
 
 ### 3.2 Aggregate — same file, `per_method`
 
 `intention_to_evaluate_denominator` (every structure attempted),
 `ok`/`crash`/`empty`/`tool_unavailable`, `available_denominator = intention −
 tool_unavailable`, `top1_hits`, `hits_over_intention`, `hits_over_available`.
-Primary metric `top1_dca_le_4A`; faithful metrics `[residue_auc, residue_pr_auc, residue_f1]`.
+Primary metric `top1_dca_le_4A`; faithful metrics
+`[residue_auc, residue_pr_auc, residue_mcc, residue_f1]`.
 
 ### 3.3 Bootstrap — `results/cryptobench_apo/BOOTSTRAP_CI.json` (`geoaudit.bootstrap_report.v1`)
 
-Per metric (`residue_auc`,`residue_pr_auc`): `per_method{point, ci_low, ci_high,
-n_structures_scored}` and `paired_vs_baseline{delta_point, delta_ci_low,
-delta_ci_high, p_two_sided_bootstrap, crosses_zero}`. Params `{n_boot=10000, seed,
-ci_level, baseline}`. Paired resampling over structures.
+Per metric (`residue_auc`, `residue_pr_auc`, `residue_mcc`, `residue_f1`):
+`per_method{point, ci_low, ci_high, n_structures_scored}` and
+`paired_vs_baseline{delta_point, delta_ci_low, delta_ci_high,
+p_two_sided_bootstrap, crosses_zero}`. Params `{n_boot=10000, seed, ci_level,
+baseline}`. Paired resampling over units keyed on `unit_id`. Where a method has no
+scored unit for a metric, every Δ field is `null` (an unestimated difference is never
+rendered as an excluded-zero result).
 
-### 3.4 Official test-fold report — `results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json`
+### 3.4 Official test-fold freeze — `results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json`
 
-Primary freeze: residue-classification metrics from
-`tools/run_cryptobench_apo.py --dataset official` +
-`python -m pocket_bench.metrics_bootstrap --dataset official`
-(`n_boot=10000`, seed `20260725`, 95% CI). Fold size n=192 single-chain evaluable
-units; residue metrics scored on n=190 (two structures lack a joinable cryptic-
-residue universe). Method status on the freeze run: `geometric_foundation` /
-`fstar_pocket` / `sstar_pocket` / `random_bbox` = 192/192 `OK`; `p2rank` =
-186/192 `OK` + 6 `EMPTY`. Runtime on Apple M4: ~11 min with `--jobs 6` and the
-optional Rust kernels (`tools/build_native.sh`).
+Produced by `tools/run_cryptobench_apo.py --dataset official --jobs 6` followed by
+`python -m pocket_bench.metrics_bootstrap --dataset official --baseline p2rank`
+(`n_boot=10000`, seed `20260725`, 95 % CI, paired resampling over units).
 
-Point estimates [95% CI], baseline = `p2rank` (REQUESTED):
+**Execution guarantee.** The official evaluation emits exactly **960/960** telemetry
+rows = **192 evaluation units × 5 methods**, with `residue_metrics_available=true` on
+960/960 and **zero silent drops**. The evaluation unit is a `(pdb, chain)` pair
+(`unit_id`), not a PDB entry: the 192 units span 190 distinct entries because `3lnz`
+(chains C, O) and `3pfp` (chains A, B) each contribute two chains. All four metrics
+resample over n=192; `per_structure_values` raises on a colliding `unit_id` rather
+than overwriting a row. A further 38 fold units are multi-chain assemblies, excluded
+at manifest build time and recorded in `official_manifest.json`
+(`n_excluded_multichain=38`) — excluded before evaluation, never dropped during it.
+
+Per-method status: `geometric_foundation`, `fstar_pocket`, `sstar_pocket`,
+`random_bbox` = 192/192 `OK`; `p2rank` = 186/192 `OK` + 6 `EMPTY`. Cost recorded in
+telemetry: 6769 s summed over the 960 `runtime_s` fields; the prediction phase
+completes in ~11 min wall on an Apple M4 (10 cores) at `--jobs 6` with the optional
+Rust kernels built. `--jobs` changes only scheduling: results are order-preserving
+and identical to `--jobs 1`.
+
+Point estimates [95 % CI], baseline `p2rank`:
 
 | method | ROC-AUC | PR-AUC | MCC | F1 |
 |---|---|---|---|---|
-| `geometric_foundation` | 0.662 [0.641, 0.682] | 0.274 [0.246, 0.304] | 0.234 [0.205, 0.263] | 0.282 [0.255, 0.310] |
-| `p2rank` | 0.620 [0.604, 0.637] | 0.264 [0.237, 0.293] | 0.219 [0.191, 0.248] | 0.250 [0.224, 0.278] |
-| `fstar_pocket` | 0.595 [0.576, 0.615] | 0.202 [0.175, 0.230] | 0.129 [0.105, 0.154] | 0.195 [0.172, 0.219] |
-| `sstar_pocket` | 0.559 [0.542, 0.577] | 0.132 [0.115, 0.151] | 0.083 [0.062, 0.104] | 0.155 [0.135, 0.176] |
-| `random_bbox` | 0.500 [0.500, 0.500] | 0.093 [0.083, 0.103] | n/a | 0.000 [0.000, 0.000] |
+| `geometric_foundation` | 0.664 [0.643, 0.684] | 0.276 [0.246, 0.306] | 0.237 [0.208, 0.266] | 0.285 [0.257, 0.313] |
+| `p2rank` | 0.621 [0.605, 0.637] | 0.264 [0.237, 0.291] | 0.220 [0.192, 0.249] | 0.251 [0.225, 0.278] |
+| `fstar_pocket` | 0.595 [0.575, 0.614] | 0.203 [0.176, 0.231] | 0.129 [0.105, 0.153] | 0.196 [0.173, 0.219] |
+| `sstar_pocket` | 0.559 [0.542, 0.575] | 0.133 [0.115, 0.151] | 0.082 [0.061, 0.103] | 0.155 [0.135, 0.176] |
+| `random_bbox` | 0.500 [0.500, 0.500] | 0.093 [0.084, 0.103] | null | 0.000 [0.000, 0.000] |
 
-Paired Δ (`geometric_foundation` − `p2rank`): ROC-AUC +0.042 [0.023, 0.061]
-(`crosses_zero=false`, bootstrap p=0); F1 +0.031 [0.006, 0.057]
-(`crosses_zero=false`, p=0.015); PR-AUC and MCC CIs include 0. `pocketminer`
-remains `DATA_UNAVAILABLE` (no per-residue OSF scores). A legacy null-only freeze
-(`OFFICIAL_FOLD_METRICS.json`, vs `random_residue`) is retained for appendix
-comparison and is not the primary readout.
+`residue_mcc` is scored on n=186 for `p2rank` (6 `EMPTY` predictions give an
+undefined confusion matrix) and on n=0 for `random_bbox` (no positive predictions at
+the operating point); its point estimate, Δ, and `crosses_zero` are all `null`, never
+0.
+
+Paired Δ (`geometric_foundation` − `p2rank`), same resample indices:
+
+| metric | Δ [95 % CI] | bootstrap p | `crosses_zero` |
+|---|---|---|---|
+| ROC-AUC | +0.043 [+0.025, +0.062] | ≈0.000 | false |
+| F1 | +0.034 [+0.008, +0.059] | 0.007 | false |
+| PR-AUC | +0.012 [−0.013, +0.037] | 0.368 | true |
+| MCC | +0.017 [−0.011, +0.045] | 0.244 | true |
+
+Two of four Δ CIs exclude 0; PR-AUC and MCC are statistically indistinguishable from
+`p2rank` on this fold.
+
+**Baseline status.** `p2rank 2.5.1` is executed locally (JVM, version pinned in
+`BASELINE_ENV.json`) and is a real scored baseline here — it is **not**
+`DATA_UNAVAILABLE`. `pocketminer` **is** `DATA_UNAVAILABLE`: OSF publishes only a
+trained model binary, no per-residue predictions, so no paired CI against it is
+computed and no value is imputed. `deeppocket` is declared `TOOL_UNAVAILABLE`.
+A legacy null-only freeze (`OFFICIAL_FOLD_METRICS.json`, vs `random_residue`, keyed
+on pdb) is retained for appendix comparison and is not the primary readout.
 
 ### 3.5 Appendix B artifact — allele-conditioning ablation (`results/gf4_ablation/GF4_ALLELE_ABLATION.json`, `geoaudit.gf4_allele_ablation.v1`)
 
