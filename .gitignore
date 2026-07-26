@@ -18,3 +18,9 @@ results/cryptobench_official/
 
 # Rust build artefacts for the optional native kernels
 native/geoaudit_kernels/target/
+
+# LaTeX build artefacts
+paper/*.pdf
+paper/*.aux
+paper/*.log
+paper/*.out

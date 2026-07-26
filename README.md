@@ -305,7 +305,8 @@ sole source of truth.
 ## Repository layout
 
 ```text
-paper/        method (LaTeX): GF4_SYNDROME_CHEM_METHOD.tex
+paper/        MAIN_CRYPTOBENCH_GEOAUDIT.tex (primary manuscript),
+              appendix_b_gf4_ablation.tex (\input appendix, not standalone)
 contracts/    GEOAUDIT_PAPER_SCOPE.json (scope contract)
 src/pocket_bench/
   methods/    receptor-only detectors (firewalled) + anisotropic_shear_oracle

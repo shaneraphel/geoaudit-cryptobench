@@ -227,5 +227,11 @@ def score_prediction(
         "top1": top1,
         "top3": top3,
         "dcc_top1": dcc_v,
-        "residue_f1": residue_f1(pred_res, label.get("binding_residues")),
+        # Same ground-truth key resolution as telemetry.telemetry_row: CryptoBench
+        # labels carry 'cryptic_residues' and only some sources add a
+        # 'binding_residues' alias, so keying on the alias alone silently nulls F1.
+        "residue_f1": residue_f1(
+            pred_res,
+            label.get("cryptic_residues") or label.get("binding_residues"),
+        ),
     }
