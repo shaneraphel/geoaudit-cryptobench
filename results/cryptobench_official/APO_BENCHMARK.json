@@ -1,6 +1,6 @@
 {
   "schema": "geoaudit.cryptobench.report.v1",
-  "generated_at": "2026-07-27T17:45:52+0800",
+  "generated_at": "2026-07-27T17:56:08+0800",
   "clinical_grade": false,
   "dataset": "official",
   "is_official_mmseqs2_10pct_test_fold": true,
@@ -10,6 +10,56 @@
   "metric_caveat": "Official apo labels carry cryptic residues but no holo ligand coordinates; DCA is undefined and reported null. Residue-level metrics are the primary readout.",
   "splits_note": "Official CryptoBench TEST fold: MMseqs2 clustering at 10% sequence identity, loaded fail-closed with per-file SHA-256 verification. clinical_grade=false.",
   "summaries": {
+    "random_bbox": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
+    "geometric_foundation": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
+    "fstar_pocket": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
+    "sstar_pocket": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
+    "ultrametric_shear_oracle": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
+    "quaternary_lut": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
+    "quaternary_lut_seq": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
+    "algebraic_field": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
+    "algebraic_field_linear": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
+    "table_field": {
+      "top1_dca_le_4A_hits": 0,
+      "intention_to_evaluate_denominator": 192,
+      "tool_unavailable": 0
+    },
     "p2rank": {
       "top1_dca_le_4A_hits": 0,
       "intention_to_evaluate_denominator": 192,
@@ -17,7 +67,7 @@
     }
   },
   "per_method": {
-    "p2rank": {
+    "random_bbox": {
       "ok": 192,
       "top1_hits": 0,
       "unavailable": 0,
@@ -1176,6 +1226,76 @@
           "best_dca": null
         }
       ]
+    },
+    "geometric_foundation": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
+    },
+    "fstar_pocket": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
+    },
+    "sstar_pocket": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
+    },
+    "ultrametric_shear_oracle": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
+    },
+    "quaternary_lut": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
+    },
+    "quaternary_lut_seq": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
+    },
+    "algebraic_field": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
+    },
+    "algebraic_field_linear": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
+    },
+    "table_field": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
+    },
+    "p2rank": {
+      "ok": 192,
+      "top1_hits": 0,
+      "unavailable": 0,
+      "crash_empty": 0,
+      "rows": []
     }
   },
   "telemetry_ref": "TELEMETRY.json"

@@ -179,6 +179,37 @@ def _official_items() -> list[tuple[dict, Path]]:
     return items
 
 
+def _summaries_from_rows(rows: list[dict]) -> dict[str, dict]:
+    """Per-method counts derived from telemetry rows alone.
+
+    Used when merging, so the benchmark summary describes every method present
+    in the telemetry rather than only the ones the current invocation re-scored.
+    """
+    from pocket_bench.paths import STATUS_OK, STATUS_TOOL_UNAVAILABLE
+
+    out: dict[str, dict] = {}
+    for r in rows:
+        m = r["method"]
+        a = out.setdefault(m, {"ok": 0, "top1_hits": 0, "unavailable": 0,
+                               "crash_empty": 0, "rows": []})
+        st = r.get("status")
+        if st == STATUS_OK:
+            a["ok"] += 1
+        elif st == STATUS_TOOL_UNAVAILABLE:
+            a["unavailable"] += 1
+        else:
+            a["crash_empty"] += 1
+        if r.get("top1_success"):
+            a["top1_hits"] += 1
+    return {m: {"per_method": a,
+                "summary": {
+                    "top1_dca_le_4A_hits": a["top1_hits"],
+                    "intention_to_evaluate_denominator": (a["ok"]
+                                                          + a["crash_empty"]),
+                    "tool_unavailable": a["unavailable"]}}
+            for m, a in out.items()}
+
+
 def _environment_sha() -> str | None:
     """The digest of the measured stack, from the committed environment lock."""
     p = ROOT / "ENVIRONMENT.json"
@@ -520,6 +551,19 @@ def main(argv: list[str] | None = None) -> int:
         carried = [r for r in prior if r.get("method") not in rescored]
         dropped = {r.get("method") for r in prior} & rescored
         telem_rows = carried + telem_rows
+
+        # The benchmark summary must be merged too, and for a while it was not:
+        # re-scoring one detector carried every telemetry row but overwrote
+        # APO_BENCHMARK.json with only that detector, so the file declared 192
+        # structures beside a single method and looked like an interrupted run.
+        # Rebuilt from the merged rows rather than carried from the previous
+        # report, because a carried report is only as complete as whatever the
+        # run before it happened to score, and one truncated run would poison
+        # every later merge.
+        for m, v in _summaries_from_rows(telem_rows).items():
+            if m not in rescored:
+                report["per_method"].setdefault(m, v["per_method"])
+                report["summaries"].setdefault(m, v["summary"])
         # The denominator is per method: a carried method keeps the number of
         # structures it was originally attempted on, so the fail-closed
         # denominator discipline still holds across the merge.

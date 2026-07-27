@@ -31,6 +31,8 @@ SELECTION = ROOT / "results/architecture_sweep/TRAIN_ONLY_SELECTION.json"
 CEILING = ROOT / "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json"
 READOUT = ROOT / "results/architecture_sweep/FINAL_READOUT_SELECTION.json"
 PAIRWISE = ROOT / "results/architecture_sweep/PAIRWISE_READOUT_SELECTION.json"
+SEEDPROBE = ROOT / "results/official_fold/SEED_SENSITIVITY.json"
+SEEDPROBE = ROOT / "results/official_fold/SEED_SENSITIVITY.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 
 # macro stem -> (method key in the artifact)
@@ -166,6 +168,20 @@ def build() -> str:
         L.append(f"\\newcommand{{\\NTestReads}}"
                  f"{{{pr['test_fold_read_index']}}}")
 
+    if SEEDPROBE.exists():
+        # How often each verdict survives a change of resampling seed. The MCC
+        # interval excludes zero at the pre-registered seed by four
+        # ten-thousandths, so without these counts the manuscript would be
+        # quoting one pseudo-random sequence as a result.
+        sp = json.loads(SEEDPROBE.read_text())
+        L.append(f"\\newcommand{{\\NSeedProbes}}{{{sp['n_seeds']}}}")
+        for stem, key in (("TabAuc", "residue_auc"), ("TabPr", "residue_pr_auc"),
+                          ("TabMcc", "residue_mcc"), ("TabFOne", "residue_f1")):
+            blk = sp["metrics"].get(key)
+            if blk:
+                L.append(f"\\newcommand{{\\{stem}SeedSig}}"
+                         f"{{{blk['n_seeds_excluding_zero']}}}")
+
     if READOUT.exists():
         # Readout comparison on the training split. These are the numbers that
         # justify choosing a first-order functional over the table bank, and
@@ -212,14 +228,28 @@ def build() -> str:
             d = (blk.get("paired_vs_baseline") or {}).get(name)
             if d is None:
                 continue
+            # Four decimals for the differences and their bounds, not
+            # three: the MCC interval's lower bound is +0.0004, and rounding
+            # that to +0.000 prints a bound touching zero in a row the same
+            # table marks as resolved.
             L.append(f"\\newcommand{{\\{stem}{msuf}D}}"
-                     f"{{{_signed(d['delta_point'])}}}")
+                     f"{{{_signed(d['delta_point'], 4)}}}")
             L.append(f"\\newcommand{{\\{stem}{msuf}DCI}}"
-                     f"{{[{_signed(d['delta_ci_low'])}, "
-                     f"{_signed(d['delta_ci_high'])}]}}")
+                     f"{{[{_signed(d['delta_ci_low'], 4)}, "
+                     f"{_signed(d['delta_ci_high'], 4)}]}}")
             p = d["p_two_sided_bootstrap"]
             L.append(f"\\newcommand{{\\{stem}{msuf}P}}"
                      f"{{{'n/a' if p is None else (f'{p:.3f}' if p >= 0.001 else '<0.001')}}}")
+            # The structures the difference is actually defined on, and the two
+            # matched means. Where this is below the fold size, the per-method
+            # points above are over different sets and subtracting them would
+            # be wrong; the manuscript quotes these instead.
+            L.append(f"\\newcommand{{\\{stem}{msuf}NPaired}}"
+                     f"{{{d.get('n_paired_structures', '')}}}")
+            L.append(f"\\newcommand{{\\{stem}{msuf}Matched}}"
+                     f"{{{_fmt(d.get('matched_point_method'))}}}")
+            L.append(f"\\newcommand{{\\{stem}{msuf}MatchedBase}}"
+                     f"{{{_fmt(d.get('matched_point_baseline'))}}}")
             cz = d.get("crosses_zero")
             L.append(f"\\newcommand{{\\{stem}{msuf}Verdict}}"
                      f"{{{'n/a' if cz is None else ('indistinguishable' if cz else 'separated')}}}")

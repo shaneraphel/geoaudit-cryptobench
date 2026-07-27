@@ -60,7 +60,9 @@ def _cell(entry: dict | None) -> str:
 
 
 def _signed(x: float | None) -> str:
-    return "null" if x is None else f"{x:+.3f}"
+    # Four decimals: a paired bound of +0.0004 must not print as +0.000
+    # in a row this table marks significant.
+    return "null" if x is None else f"{x:+.4f}"
 
 
 def render() -> str:

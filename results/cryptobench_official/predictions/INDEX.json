@@ -29,7 +29,7 @@
     "p2rank": {
       "file": "p2rank.json",
       "n_units": 192,
-      "rescored_in_last_run": true,
+      "rescored_in_last_run": false,
       "sha256": "c5f4f339a4260a2def8b36d61e987eb8dc072a5f106c463bc289a533d7d832a8"
     },
     "quaternary_lut": {
@@ -47,8 +47,8 @@
     "random_bbox": {
       "file": "random_bbox.json",
       "n_units": 192,
-      "rescored_in_last_run": false,
-      "sha256": "896477de4bff04859e0fd8fedd78549942e18d3c7eb1170d2ae65bbb3833b8eb"
+      "rescored_in_last_run": true,
+      "sha256": "26f9e81f79b007fece5487fb72ea290fbab3c2f62f638a7ebae322adc2eedbcd"
     },
     "sstar_pocket": {
       "file": "sstar_pocket.json",

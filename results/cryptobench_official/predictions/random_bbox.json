@@ -6,7 +6,7 @@
   "units": {
     "1arl_A": {
       "status": "OK",
-      "runtime_s": 0.00452075000066543,
+      "runtime_s": 0.0030174999992595986,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 307,
@@ -63,7 +63,7 @@
     },
     "1bk2_A": {
       "status": "OK",
-      "runtime_s": 0.001043042000674177,
+      "runtime_s": 0.0005317920004017651,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 57,
@@ -120,7 +120,7 @@
     },
     "1bzj_A": {
       "status": "OK",
-      "runtime_s": 0.005481209002027754,
+      "runtime_s": 0.0026544170032138936,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 297,
@@ -177,7 +177,7 @@
     },
     "1cwq_A": {
       "status": "OK",
-      "runtime_s": 0.005161208006029483,
+      "runtime_s": 0.002562125002441462,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 238,
@@ -234,7 +234,7 @@
     },
     "1dq2_A": {
       "status": "OK",
-      "runtime_s": 0.003697999993164558,
+      "runtime_s": 0.0018557090006652288,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 224,
@@ -291,7 +291,7 @@
     },
     "1e6k_A": {
       "status": "OK",
-      "runtime_s": 0.00252958299824968,
+      "runtime_s": 0.0011111669955425896,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 130,
@@ -348,7 +348,7 @@
     },
     "1evy_A": {
       "status": "OK",
-      "runtime_s": 0.005942874995525926,
+      "runtime_s": 0.002887041999201756,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 346,
@@ -405,7 +405,7 @@
     },
     "1g1m_B": {
       "status": "OK",
-      "runtime_s": 0.006287415999395307,
+      "runtime_s": 0.0026290829991921782,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 289,
@@ -462,7 +462,7 @@
     },
     "1g59_A": {
       "status": "OK",
-      "runtime_s": 0.008011500001884997,
+      "runtime_s": 0.0041018330011866055,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 468,
@@ -519,7 +519,7 @@
     },
     "1h13_A": {
       "status": "OK",
-      "runtime_s": 0.008109166999929585,
+      "runtime_s": 0.0036446660014917143,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 404,
@@ -576,7 +576,7 @@
     },
     "1i7n_A": {
       "status": "OK",
-      "runtime_s": 0.006825083000876475,
+      "runtime_s": 0.002720292002777569,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 308,
@@ -633,7 +633,7 @@
     },
     "1k47_D": {
       "status": "OK",
-      "runtime_s": 0.0063959170001908205,
+      "runtime_s": 0.002632374998938758,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 314,
@@ -690,7 +690,7 @@
     },
     "1ksg_B": {
       "status": "OK",
-      "runtime_s": 0.002481791998434346,
+      "runtime_s": 0.0011747080061468296,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 128,
@@ -747,7 +747,7 @@
     },
     "1kx9_A": {
       "status": "OK",
-      "runtime_s": 0.0018356250002398156,
+      "runtime_s": 0.000995958995190449,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 108,
@@ -804,7 +804,7 @@
     },
     "1kxr_A": {
       "status": "OK",
-      "runtime_s": 0.0059661249979399145,
+      "runtime_s": 0.0030785420021857135,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 320,
@@ -861,7 +861,7 @@
     },
     "1lbe_B": {
       "status": "OK",
-      "runtime_s": 0.004139457996643614,
+      "runtime_s": 0.0021641249986714683,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 248,
@@ -918,7 +918,7 @@
     },
     "1m5w_D": {
       "status": "OK",
-      "runtime_s": 0.004822750001039822,
+      "runtime_s": 0.0019942910003010184,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 242,
@@ -975,7 +975,7 @@
     },
     "1nd7_A": {
       "status": "OK",
-      "runtime_s": 0.0070944580002105795,
+      "runtime_s": 0.003433707999647595,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 374,
@@ -1032,7 +1032,7 @@
     },
     "1p4o_B": {
       "status": "OK",
-      "runtime_s": 0.005671124999935273,
+      "runtime_s": 0.0026916670030914247,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 314,
@@ -1089,7 +1089,7 @@
     },
     "1p4v_A": {
       "status": "OK",
-      "runtime_s": 0.005231166993326042,
+      "runtime_s": 0.002420832999632694,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 295,
@@ -1146,7 +1146,7 @@
     },
     "1p9o_A": {
       "status": "OK",
-      "runtime_s": 0.004985207997378893,
+      "runtime_s": 0.0023993340000743046,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 269,
@@ -1203,7 +1203,7 @@
     },
     "1pu5_C": {
       "status": "OK",
-      "runtime_s": 0.0030175409992807545,
+      "runtime_s": 0.0013178750014049,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 161,
@@ -1260,7 +1260,7 @@
     },
     "1q4k_A": {
       "status": "OK",
-      "runtime_s": 0.005989750003209338,
+      "runtime_s": 0.001962082998943515,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 222,
@@ -1317,7 +1317,7 @@
     },
     "1rjb_A": {
       "status": "OK",
-      "runtime_s": 0.005769916999270208,
+      "runtime_s": 0.0026158330001635477,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 298,
@@ -1374,7 +1374,7 @@
     },
     "1rtc_A": {
       "status": "OK",
-      "runtime_s": 0.00541749999683816,
+      "runtime_s": 0.002581916000053752,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 268,
@@ -1431,7 +1431,7 @@
     },
     "1se8_A": {
       "status": "OK",
-      "runtime_s": 0.004342583000834566,
+      "runtime_s": 0.0017594999953871593,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 205,
@@ -1488,7 +1488,7 @@
     },
     "1uka_A": {
       "status": "OK",
-      "runtime_s": 0.005656583001837134,
+      "runtime_s": 0.0023194169989437796,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 271,
@@ -1545,7 +1545,7 @@
     },
     "1ute_A": {
       "status": "OK",
-      "runtime_s": 0.006665333996352274,
+      "runtime_s": 0.0026537919984548353,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 302,
@@ -1602,7 +1602,7 @@
     },
     "1vsn_A": {
       "status": "OK",
-      "runtime_s": 0.004506792000029236,
+      "runtime_s": 0.0019170000014128163,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 215,
@@ -1659,7 +1659,7 @@
     },
     "1x2g_C": {
       "status": "OK",
-      "runtime_s": 0.005415540996182244,
+      "runtime_s": 0.002812166996591259,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 332,
@@ -1716,7 +1716,7 @@
     },
     "1xgd_A": {
       "status": "OK",
-      "runtime_s": 0.0077342079966911115,
+      "runtime_s": 0.002799333000439219,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 315,
@@ -1773,7 +1773,7 @@
     },
     "1xjf_A": {
       "status": "OK",
-      "runtime_s": 0.012116249999962747,
+      "runtime_s": 0.005421791000117082,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 619,
@@ -1830,7 +1830,7 @@
     },
     "1xqv_A": {
       "status": "OK",
-      "runtime_s": 0.005691874997864943,
+      "runtime_s": 0.002534041996113956,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 290,
@@ -1887,7 +1887,7 @@
     },
     "1xtc_A": {
       "status": "OK",
-      "runtime_s": 0.003679582994664088,
+      "runtime_s": 0.0016564170000492595,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 192,
@@ -1944,7 +1944,7 @@
     },
     "1zm0_A": {
       "status": "OK",
-      "runtime_s": 0.0019345409964444116,
+      "runtime_s": 0.0008585830000811256,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 96,
@@ -2001,7 +2001,7 @@
     },
     "2aka_A": {
       "status": "OK",
-      "runtime_s": 0.016370624995033722,
+      "runtime_s": 0.0070148330050869845,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 764,
@@ -2058,7 +2058,7 @@
     },
     "2d05_A": {
       "status": "OK",
-      "runtime_s": 0.006365499997627921,
+      "runtime_s": 0.0024672910003573634,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 259,
@@ -2115,7 +2115,7 @@
     },
     "2dfp_A": {
       "status": "OK",
-      "runtime_s": 0.00671929099917179,
+      "runtime_s": 0.00455737500305986,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 533,
@@ -2172,7 +2172,7 @@
     },
     "2fem_A": {
       "status": "OK",
-      "runtime_s": 0.0027879999979631975,
+      "runtime_s": 0.001743708002322819,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 212,
@@ -2229,7 +2229,7 @@
     },
     "2fhz_B": {
       "status": "OK",
-      "runtime_s": 0.001207916997373104,
+      "runtime_s": 0.000818957996671088,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 93,
@@ -2286,7 +2286,7 @@
     },
     "2h7s_A": {
       "status": "OK",
-      "runtime_s": 0.006112084003689233,
+      "runtime_s": 0.0035340419999556616,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 405,
@@ -2343,7 +2343,7 @@
     },
     "2i3a_D": {
       "status": "OK",
-      "runtime_s": 0.005279708006128203,
+      "runtime_s": 0.002686291998543311,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 347,
@@ -2400,7 +2400,7 @@
     },
     "2i3r_A": {
       "status": "OK",
-      "runtime_s": 0.0037929169993731193,
+      "runtime_s": 0.0026443749957252294,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 286,
@@ -2457,7 +2457,7 @@
     },
     "2iyt_A": {
       "status": "OK",
-      "runtime_s": 0.002374999996391125,
+      "runtime_s": 0.0017134999943664297,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 175,
@@ -2514,7 +2514,7 @@
     },
     "2nt1_B": {
       "status": "OK",
-      "runtime_s": 0.01191333300084807,
+      "runtime_s": 0.004229915997711942,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 497,
@@ -2571,7 +2571,7 @@
     },
     "2phz_A": {
       "status": "OK",
-      "runtime_s": 0.003790750000916887,
+      "runtime_s": 0.002268500000354834,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 270,
@@ -2628,7 +2628,7 @@
     },
     "2pkf_A": {
       "status": "OK",
-      "runtime_s": 0.005127166994498111,
+      "runtime_s": 0.002869124997232575,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 332,
@@ -2685,7 +2685,7 @@
     },
     "2pwz_G": {
       "status": "OK",
-      "runtime_s": 0.004268915996362921,
+      "runtime_s": 0.0024923750024754554,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 312,
@@ -2742,7 +2742,7 @@
     },
     "2qbv_A": {
       "status": "OK",
-      "runtime_s": 0.001358541994704865,
+      "runtime_s": 0.0007091250008670613,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 73,
@@ -2799,7 +2799,7 @@
     },
     "2rfj_B": {
       "status": "OK",
-      "runtime_s": 0.0016529589993297122,
+      "runtime_s": 0.0009654579989728518,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 106,
@@ -2856,7 +2856,7 @@
     },
     "2v6m_D": {
       "status": "OK",
-      "runtime_s": 0.003936958994017914,
+      "runtime_s": 0.0024667920006322674,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 298,
@@ -2913,7 +2913,7 @@
     },
     "2vl2_C": {
       "status": "OK",
-      "runtime_s": 0.0018278330026078038,
+      "runtime_s": 0.001330999999481719,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 161,
@@ -2970,7 +2970,7 @@
     },
     "2vqz_F": {
       "status": "OK",
-      "runtime_s": 0.0024518749996786937,
+      "runtime_s": 0.0013597080032923259,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 150,
@@ -3027,7 +3027,7 @@
     },
     "2vyr_A": {
       "status": "OK",
-      "runtime_s": 0.001651584003411699,
+      "runtime_s": 0.000800041998445522,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 86,
@@ -3084,7 +3084,7 @@
     },
     "2w8n_A": {
       "status": "OK",
-      "runtime_s": 0.006891584002005402,
+      "runtime_s": 0.0038922079984331504,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 480,
@@ -3141,7 +3141,7 @@
     },
     "2x47_A": {
       "status": "OK",
-      "runtime_s": 0.0034394159956718795,
+      "runtime_s": 0.0021640420018229634,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 229,
@@ -3198,7 +3198,7 @@
     },
     "2xsa_A": {
       "status": "OK",
-      "runtime_s": 0.007402000002912246,
+      "runtime_s": 0.0038878329942235723,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 443,
@@ -3255,7 +3255,7 @@
     },
     "2zcg_A": {
       "status": "OK",
-      "runtime_s": 0.007498541002860293,
+      "runtime_s": 0.002850000004400499,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 318,
@@ -3312,7 +3312,7 @@
     },
     "2zj7_A": {
       "status": "OK",
-      "runtime_s": 0.010229082996374927,
+      "runtime_s": 0.004929500006255694,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 616,
@@ -3369,7 +3369,7 @@
     },
     "3a0x_A": {
       "status": "OK",
-      "runtime_s": 0.0027812499974970706,
+      "runtime_s": 0.0014221249948604964,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 149,
@@ -3426,7 +3426,7 @@
     },
     "3bjp_A": {
       "status": "OK",
-      "runtime_s": 0.004979500001354609,
+      "runtime_s": 0.002621166000608355,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 295,
@@ -3483,7 +3483,7 @@
     },
     "3f4k_A": {
       "status": "OK",
-      "runtime_s": 0.005231499999354128,
+      "runtime_s": 0.002272500001708977,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 254,
@@ -3540,7 +3540,7 @@
     },
     "3flg_A": {
       "status": "OK",
-      "runtime_s": 0.0026580000048852526,
+      "runtime_s": 0.0011860419981530868,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 135,
@@ -3597,7 +3597,7 @@
     },
     "3fzo_A": {
       "status": "OK",
-      "runtime_s": 0.004921833002299536,
+      "runtime_s": 0.002286791001097299,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 262,
@@ -3654,7 +3654,7 @@
     },
     "3gdg_B": {
       "status": "OK",
-      "runtime_s": 0.0048327080003218725,
+      "runtime_s": 0.0021721249941037968,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 267,
@@ -3711,7 +3711,7 @@
     },
     "3h8a_B": {
       "status": "OK",
-      "runtime_s": 0.008376917001442052,
+      "runtime_s": 0.003430917000514455,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 430,
@@ -3768,7 +3768,7 @@
     },
     "3i8s_B": {
       "status": "OK",
-      "runtime_s": 0.006510334002086893,
+      "runtime_s": 0.002301250002346933,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 261,
@@ -3825,7 +3825,7 @@
     },
     "3idh_A": {
       "status": "OK",
-      "runtime_s": 0.01035704099922441,
+      "runtime_s": 0.0041728750002221204,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 453,
@@ -3882,7 +3882,7 @@
     },
     "3jzg_A": {
       "status": "OK",
-      "runtime_s": 0.006770833002519794,
+      "runtime_s": 0.003149708005366847,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 359,
@@ -3939,7 +3939,7 @@
     },
     "3k01_A": {
       "status": "OK",
-      "runtime_s": 0.007373958993412089,
+      "runtime_s": 0.0033512500012875535,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 391,
@@ -3996,7 +3996,7 @@
     },
     "3lnz_C": {
       "status": "OK",
-      "runtime_s": 0.0016807499996502884,
+      "runtime_s": 0.0007580830060760491,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 82,
@@ -4053,7 +4053,7 @@
     },
     "3lnz_O": {
       "status": "OK",
-      "runtime_s": 0.0019014580029761419,
+      "runtime_s": 0.0008027500007301569,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 83,
@@ -4110,7 +4110,7 @@
     },
     "3ly8_A": {
       "status": "OK",
-      "runtime_s": 0.006223042000783607,
+      "runtime_s": 0.0027775419948739,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 323,
@@ -4167,7 +4167,7 @@
     },
     "3mwg_B": {
       "status": "OK",
-      "runtime_s": 0.0058936670029652305,
+      "runtime_s": 0.0023171659995568916,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 272,
@@ -4224,7 +4224,7 @@
     },
     "3n4u_A": {
       "status": "OK",
-      "runtime_s": 0.006156167000881396,
+      "runtime_s": 0.0028252089978195727,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 301,
@@ -4281,7 +4281,7 @@
     },
     "3nx1_B": {
       "status": "OK",
-      "runtime_s": 0.0032984159988700412,
+      "runtime_s": 0.0014786669999011792,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 165,
@@ -4338,7 +4338,7 @@
     },
     "3pbf_A": {
       "status": "OK",
-      "runtime_s": 0.002497833003872074,
+      "runtime_s": 0.001259124997886829,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 145,
@@ -4395,7 +4395,7 @@
     },
     "3pfp_A": {
       "status": "OK",
-      "runtime_s": 0.01077808399713831,
+      "runtime_s": 0.003958958004659507,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 464,
@@ -4452,7 +4452,7 @@
     },
     "3pfp_B": {
       "status": "OK",
-      "runtime_s": 0.008786124999460299,
+      "runtime_s": 0.004185582998616155,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 464,
@@ -4509,7 +4509,7 @@
     },
     "3rwv_A": {
       "status": "OK",
-      "runtime_s": 0.003937667002901435,
+      "runtime_s": 0.0019467079982860014,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 205,
@@ -4566,7 +4566,7 @@
     },
     "3st6_C": {
       "status": "OK",
-      "runtime_s": 0.007452541998645756,
+      "runtime_s": 0.003491584000585135,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 424,
@@ -4623,7 +4623,7 @@
     },
     "3t8b_A": {
       "status": "OK",
-      "runtime_s": 0.006109249996370636,
+      "runtime_s": 0.0021402089987532236,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 237,
@@ -4680,7 +4680,7 @@
     },
     "3tpo_A": {
       "status": "OK",
-      "runtime_s": 0.008674749995407183,
+      "runtime_s": 0.003617499998654239,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 438,
@@ -4737,7 +4737,7 @@
     },
     "3ugk_A": {
       "status": "OK",
-      "runtime_s": 0.008692499999597203,
+      "runtime_s": 0.003156999999191612,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 372,
@@ -4794,7 +4794,7 @@
     },
     "3uyi_A": {
       "status": "OK",
-      "runtime_s": 0.00718770799721824,
+      "runtime_s": 0.0027425000007497147,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 312,
@@ -4851,7 +4851,7 @@
     },
     "3v55_A": {
       "status": "OK",
-      "runtime_s": 0.007972125000378583,
+      "runtime_s": 0.0032655830000294372,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 368,
@@ -4908,7 +4908,7 @@
     },
     "3vgm_A": {
       "status": "OK",
-      "runtime_s": 0.005986916999972891,
+      "runtime_s": 0.0024583330014138483,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 312,
@@ -4965,7 +4965,7 @@
     },
     "3w90_A": {
       "status": "OK",
-      "runtime_s": 0.003706958996190224,
+      "runtime_s": 0.0016842499971971847,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 198,
@@ -5022,7 +5022,7 @@
     },
     "3wb9_C": {
       "status": "OK",
-      "runtime_s": 0.006822250004915986,
+      "runtime_s": 0.002435165995848365,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 297,
@@ -5079,7 +5079,7 @@
     },
     "4aem_A": {
       "status": "OK",
-      "runtime_s": 0.0027971670060651377,
+      "runtime_s": 0.0011477920052129775,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 126,
@@ -5136,7 +5136,7 @@
     },
     "4amv_B": {
       "status": "OK",
-      "runtime_s": 0.012204208003822714,
+      "runtime_s": 0.004729000000224914,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 608,
@@ -5193,7 +5193,7 @@
     },
     "4bg8_A": {
       "status": "OK",
-      "runtime_s": 0.005483583998284303,
+      "runtime_s": 0.0026286249994882382,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 310,
@@ -5250,7 +5250,7 @@
     },
     "4cmw_B": {
       "status": "OK",
-      "runtime_s": 0.006706125001073815,
+      "runtime_s": 0.002620083003421314,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 286,
@@ -5307,7 +5307,7 @@
     },
     "4dnc_B": {
       "status": "OK",
-      "runtime_s": 0.0050222080026287585,
+      "runtime_s": 0.00268845800019335,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 267,
@@ -5364,7 +5364,7 @@
     },
     "4e1y_A": {
       "status": "OK",
-      "runtime_s": 0.008059749998210464,
+      "runtime_s": 0.0032126670048455708,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 353,
@@ -5421,7 +5421,7 @@
     },
     "4fkm_B": {
       "status": "OK",
-      "runtime_s": 0.003887416998622939,
+      "runtime_s": 0.0017682919933577068,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 209,
@@ -5478,7 +5478,7 @@
     },
     "4gpi_C": {
       "status": "OK",
-      "runtime_s": 0.005432167003164068,
+      "runtime_s": 0.0021726669947383925,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 235,
@@ -5535,7 +5535,7 @@
     },
     "4gv9_A": {
       "status": "OK",
-      "runtime_s": 0.004275582999980543,
+      "runtime_s": 0.00172404100158019,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 198,
@@ -5592,7 +5592,7 @@
     },
     "4hye_A": {
       "status": "OK",
-      "runtime_s": 0.004380250000394881,
+      "runtime_s": 0.0017286660004174337,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 200,
@@ -5649,7 +5649,7 @@
     },
     "4ikv_A": {
       "status": "OK",
-      "runtime_s": 0.009167833995888941,
+      "runtime_s": 0.004079541999089997,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 492,
@@ -5706,7 +5706,7 @@
     },
     "4ilg_A": {
       "status": "OK",
-      "runtime_s": 0.007934999994176906,
+      "runtime_s": 0.003235083000618033,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 321,
@@ -5763,7 +5763,7 @@
     },
     "4j4e_F": {
       "status": "OK",
-      "runtime_s": 0.002315207995707169,
+      "runtime_s": 0.0008676669967826456,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 101,
@@ -5820,7 +5820,7 @@
     },
     "4jax_F": {
       "status": "OK",
-      "runtime_s": 0.009399542002938688,
+      "runtime_s": 0.0038065419939812273,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 459,
@@ -5877,7 +5877,7 @@
     },
     "4jfr_C": {
       "status": "OK",
-      "runtime_s": 0.007016292001935653,
+      "runtime_s": 0.002772459003608674,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 334,
@@ -5934,7 +5934,7 @@
     },
     "4kmy_A": {
       "status": "OK",
-      "runtime_s": 0.00381362500047544,
+      "runtime_s": 0.0018560419994173571,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 207,
@@ -5991,7 +5991,7 @@
     },
     "4mwi_A": {
       "status": "OK",
-      "runtime_s": 0.006288207994657569,
+      "runtime_s": 0.0024507080015609972,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 266,
@@ -6048,7 +6048,7 @@
     },
     "4nzv_B": {
       "status": "OK",
-      "runtime_s": 0.006030333002854604,
+      "runtime_s": 0.002802041999530047,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 324,
@@ -6105,7 +6105,7 @@
     },
     "4oqo_B": {
       "status": "OK",
-      "runtime_s": 0.005880625001736917,
+      "runtime_s": 0.0031536250025965273,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 348,
@@ -6162,7 +6162,7 @@
     },
     "4p2f_A": {
       "status": "OK",
-      "runtime_s": 0.027592625003308058,
+      "runtime_s": 0.0016770410002209246,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 189,
@@ -6219,7 +6219,7 @@
     },
     "4qvk_B": {
       "status": "OK",
-      "runtime_s": 0.004640915998606943,
+      "runtime_s": 0.0020216249977238476,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 235,
@@ -6276,7 +6276,7 @@
     },
     "4r0x_A": {
       "status": "OK",
-      "runtime_s": 0.0024290420042234473,
+      "runtime_s": 0.0011150840000482276,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 122,
@@ -6333,7 +6333,7 @@
     },
     "4rvt_B": {
       "status": "OK",
-      "runtime_s": 0.006038291998265777,
+      "runtime_s": 0.0026639580028131604,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 297,
@@ -6390,7 +6390,7 @@
     },
     "4ttp_A": {
       "status": "OK",
-      "runtime_s": 0.004105833999346942,
+      "runtime_s": 0.0018544580016168766,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 201,
@@ -6447,7 +6447,7 @@
     },
     "4uc8_A": {
       "status": "OK",
-      "runtime_s": 0.0059565830015344545,
+      "runtime_s": 0.0019952919974457473,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 222,
@@ -6504,7 +6504,7 @@
     },
     "4uum_A": {
       "status": "OK",
-      "runtime_s": 0.007459542001015507,
+      "runtime_s": 0.003024333003850188,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 334,
@@ -6561,7 +6561,7 @@
     },
     "4zm7_A": {
       "status": "OK",
-      "runtime_s": 0.0036295409954618663,
+      "runtime_s": 0.0015922919992590323,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 180,
@@ -6618,7 +6618,7 @@
     },
     "4zoe_B": {
       "status": "OK",
-      "runtime_s": 0.014281833995482884,
+      "runtime_s": 0.006157000003440771,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 724,
@@ -6675,7 +6675,7 @@
     },
     "5acv_B": {
       "status": "OK",
-      "runtime_s": 0.004783875003340654,
+      "runtime_s": 0.001998124993406236,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 232,
@@ -6732,7 +6732,7 @@
     },
     "5b0e_B": {
       "status": "OK",
-      "runtime_s": 0.0021203750002314337,
+      "runtime_s": 0.0010437079981784336,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 104,
@@ -6789,7 +6789,7 @@
     },
     "5caz_A": {
       "status": "OK",
-      "runtime_s": 0.003187875001458451,
+      "runtime_s": 0.0014788750049774535,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 161,
@@ -6846,7 +6846,7 @@
     },
     "5e0v_A": {
       "status": "OK",
-      "runtime_s": 0.0052240419972804375,
+      "runtime_s": 0.002086000000417698,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 249,
@@ -6903,7 +6903,7 @@
     },
     "5ey7_B": {
       "status": "OK",
-      "runtime_s": 0.005920166993746534,
+      "runtime_s": 0.0023813330044504255,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 291,
@@ -6960,7 +6960,7 @@
     },
     "5hij_A": {
       "status": "OK",
-      "runtime_s": 0.004719791002571583,
+      "runtime_s": 0.002338042002520524,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 240,
@@ -7017,7 +7017,7 @@
     },
     "5hto_E": {
       "status": "OK",
-      "runtime_s": 0.006010249999235384,
+      "runtime_s": 0.002561332999903243,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 305,
@@ -7074,7 +7074,7 @@
     },
     "5i3t_E": {
       "status": "OK",
-      "runtime_s": 0.0065809590014396235,
+      "runtime_s": 0.0030929999993531965,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 363,
@@ -7131,7 +7131,7 @@
     },
     "5igh_A": {
       "status": "OK",
-      "runtime_s": 0.006703333005134482,
+      "runtime_s": 0.003028292005183175,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 293,
@@ -7188,7 +7188,7 @@
     },
     "5kcg_B": {
       "status": "OK",
-      "runtime_s": 0.02558416699321242,
+      "runtime_s": 0.0034122080032830127,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 397,
@@ -7245,7 +7245,7 @@
     },
     "5loc_A": {
       "status": "OK",
-      "runtime_s": 0.005961916998785455,
+      "runtime_s": 0.0026667089987313375,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 320,
@@ -7302,7 +7302,7 @@
     },
     "5o8b_A": {
       "status": "OK",
-      "runtime_s": 0.0055015830002957955,
+      "runtime_s": 0.0024542089959140867,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 243,
@@ -7359,7 +7359,7 @@
     },
     "5sc2_A": {
       "status": "OK",
-      "runtime_s": 0.0034970830020029098,
+      "runtime_s": 0.0014349170014611445,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 150,
@@ -7416,7 +7416,7 @@
     },
     "5tc0_B": {
       "status": "OK",
-      "runtime_s": 0.0058026249971590005,
+      "runtime_s": 0.0022072499996284023,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 250,
@@ -7473,7 +7473,7 @@
     },
     "5tvi_V": {
       "status": "OK",
-      "runtime_s": 0.0017531249977764674,
+      "runtime_s": 0.0006991249974817038,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 90,
@@ -7530,7 +7530,7 @@
     },
     "5uxa_A": {
       "status": "OK",
-      "runtime_s": 0.005929457998718135,
+      "runtime_s": 0.0027079999999841675,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 301,
@@ -7587,7 +7587,7 @@
     },
     "5wbm_B": {
       "status": "OK",
-      "runtime_s": 0.006367041998601053,
+      "runtime_s": 0.002650583002832718,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 302,
@@ -7644,7 +7644,7 @@
     },
     "5yhb_A": {
       "status": "OK",
-      "runtime_s": 0.0035176249948563054,
+      "runtime_s": 0.0016752919982536696,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 178,
@@ -7701,7 +7701,7 @@
     },
     "5yj2_C": {
       "status": "OK",
-      "runtime_s": 0.007057750000967644,
+      "runtime_s": 0.0026982080016750842,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 302,
@@ -7758,7 +7758,7 @@
     },
     "5yqp_A": {
       "status": "OK",
-      "runtime_s": 0.004487124999286607,
+      "runtime_s": 0.001615749999473337,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 185,
@@ -7815,7 +7815,7 @@
     },
     "5ysb_B": {
       "status": "OK",
-      "runtime_s": 0.008357916005479638,
+      "runtime_s": 0.003343958996993024,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 385,
@@ -7872,7 +7872,7 @@
     },
     "5z18_C": {
       "status": "OK",
-      "runtime_s": 0.012242917000548914,
+      "runtime_s": 0.005237417004536837,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 588,
@@ -7929,7 +7929,7 @@
     },
     "5zj4_D": {
       "status": "OK",
-      "runtime_s": 0.004468250001082197,
+      "runtime_s": 0.0019004579953616485,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 160,
@@ -7986,7 +7986,7 @@
     },
     "6a98_C": {
       "status": "OK",
-      "runtime_s": 0.004322583001339808,
+      "runtime_s": 0.0016787499989732169,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 201,
@@ -8043,7 +8043,7 @@
     },
     "6bty_B": {
       "status": "OK",
-      "runtime_s": 0.0025794579996727407,
+      "runtime_s": 0.0011765829985961318,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 128,
@@ -8100,7 +8100,7 @@
     },
     "6cqe_B": {
       "status": "OK",
-      "runtime_s": 0.00583766600175295,
+      "runtime_s": 0.002512416998797562,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 287,
@@ -8157,7 +8157,7 @@
     },
     "6du4_A": {
       "status": "OK",
-      "runtime_s": 0.0068649169988930225,
+      "runtime_s": 0.0029227080012788065,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 287,
@@ -8214,7 +8214,7 @@
     },
     "6eqj_A": {
       "status": "OK",
-      "runtime_s": 0.00607891700201435,
+      "runtime_s": 0.002044291999482084,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 245,
@@ -8271,7 +8271,7 @@
     },
     "6f52_A": {
       "status": "OK",
-      "runtime_s": 0.004872666999290232,
+      "runtime_s": 0.001961624999239575,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 233,
@@ -8328,7 +8328,7 @@
     },
     "6fc2_C": {
       "status": "OK",
-      "runtime_s": 0.004042959000798874,
+      "runtime_s": 0.001633291998587083,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 177,
@@ -8385,7 +8385,7 @@
     },
     "6fgj_B": {
       "status": "OK",
-      "runtime_s": 0.00560087499616202,
+      "runtime_s": 0.0017683339974610135,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 197,
@@ -8442,7 +8442,7 @@
     },
     "6g6y_A": {
       "status": "OK",
-      "runtime_s": 0.0067480840007192455,
+      "runtime_s": 0.0028654579946305603,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 319,
@@ -8499,7 +8499,7 @@
     },
     "6hei_A": {
       "status": "OK",
-      "runtime_s": 0.009123042000283021,
+      "runtime_s": 0.0031016249995445833,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 346,
@@ -8556,7 +8556,7 @@
     },
     "6isu_A": {
       "status": "OK",
-      "runtime_s": 0.0047257090045604855,
+      "runtime_s": 0.0019813749968307093,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 227,
@@ -8613,7 +8613,7 @@
     },
     "6jq9_B": {
       "status": "OK",
-      "runtime_s": 0.010471667003002949,
+      "runtime_s": 0.0042204999990644865,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 483,
@@ -8670,7 +8670,7 @@
     },
     "6ksc_A": {
       "status": "OK",
-      "runtime_s": 0.006679291996988468,
+      "runtime_s": 0.0026497919971006922,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 321,
@@ -8727,7 +8727,7 @@
     },
     "6n5j_B": {
       "status": "OK",
-      "runtime_s": 0.006768832994566765,
+      "runtime_s": 0.00260800000251038,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 301,
@@ -8784,7 +8784,7 @@
     },
     "6nei_B": {
       "status": "OK",
-      "runtime_s": 0.006550916004925966,
+      "runtime_s": 0.002954458999738563,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 339,
@@ -8841,7 +8841,7 @@
     },
     "6o4f_H": {
       "status": "OK",
-      "runtime_s": 0.01061854200088419,
+      "runtime_s": 0.004282832996977959,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 509,
@@ -8898,7 +8898,7 @@
     },
     "6tx0_B": {
       "status": "OK",
-      "runtime_s": 0.011262167005043011,
+      "runtime_s": 0.00419737499760231,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 479,
@@ -8955,7 +8955,7 @@
     },
     "6vle_A": {
       "status": "OK",
-      "runtime_s": 0.01185895799426362,
+      "runtime_s": 0.00402662499982398,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 460,
@@ -9012,7 +9012,7 @@
     },
     "6w10_A": {
       "status": "OK",
-      "runtime_s": 0.004703999999037478,
+      "runtime_s": 0.0021598750026896596,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 223,
@@ -9069,7 +9069,7 @@
     },
     "7c48_A": {
       "status": "OK",
-      "runtime_s": 0.00676950000342913,
+      "runtime_s": 0.002380249999987427,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 288,
@@ -9126,7 +9126,7 @@
     },
     "7c63_A": {
       "status": "OK",
-      "runtime_s": 0.020406542003911454,
+      "runtime_s": 0.00358099999721162,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 416,
@@ -9183,7 +9183,7 @@
     },
     "7de1_A": {
       "status": "OK",
-      "runtime_s": 0.002590042000520043,
+      "runtime_s": 0.000985582999419421,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 108,
@@ -9240,7 +9240,7 @@
     },
     "7e5q_B": {
       "status": "OK",
-      "runtime_s": 0.006863792004878633,
+      "runtime_s": 0.003038792005099822,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 352,
@@ -9297,7 +9297,7 @@
     },
     "7f2m_B": {
       "status": "OK",
-      "runtime_s": 0.0076325830013956875,
+      "runtime_s": 0.002811999998812098,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 323,
@@ -9354,7 +9354,7 @@
     },
     "7f4y_B": {
       "status": "OK",
-      "runtime_s": 0.02404999999998836,
+      "runtime_s": 0.00836354099737946,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 901,
@@ -9411,7 +9411,7 @@
     },
     "7kay_A": {
       "status": "OK",
-      "runtime_s": 0.01071024999691872,
+      "runtime_s": 0.0053743750031571835,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 583,
@@ -9468,7 +9468,7 @@
     },
     "7nc8_D": {
       "status": "OK",
-      "runtime_s": 0.004252207996614743,
+      "runtime_s": 0.002185833000112325,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 237,
@@ -9525,7 +9525,7 @@
     },
     "7ndl_B": {
       "status": "OK",
-      "runtime_s": 0.012650332995690405,
+      "runtime_s": 0.006079334001697134,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 655,
@@ -9582,7 +9582,7 @@
     },
     "7nlx_A": {
       "status": "OK",
-      "runtime_s": 0.005442834000859875,
+      "runtime_s": 0.002305750000232365,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 290,
@@ -9639,7 +9639,7 @@
     },
     "7o1i_A": {
       "status": "OK",
-      "runtime_s": 0.011902583995833993,
+      "runtime_s": 0.005806375003885478,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 726,
@@ -9696,7 +9696,7 @@
     },
     "7qoq_A": {
       "status": "OK",
-      "runtime_s": 0.005412667000200599,
+      "runtime_s": 0.0025162500023725443,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 302,
@@ -9753,7 +9753,7 @@
     },
     "7qzr_D": {
       "status": "OK",
-      "runtime_s": 0.010422874998766929,
+      "runtime_s": 0.003991582998423837,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 463,
@@ -9810,7 +9810,7 @@
     },
     "7v8k_B": {
       "status": "OK",
-      "runtime_s": 0.00884020800003782,
+      "runtime_s": 0.004263832997821737,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 474,
@@ -9867,7 +9867,7 @@
     },
     "7w19_A": {
       "status": "OK",
-      "runtime_s": 0.008550749997084495,
+      "runtime_s": 0.0026037499992526136,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 293,
@@ -9924,7 +9924,7 @@
     },
     "7x0f_A": {
       "status": "OK",
-      "runtime_s": 0.007637292001163587,
+      "runtime_s": 0.003987749994848855,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 446,
@@ -9981,7 +9981,7 @@
     },
     "7x0g_B": {
       "status": "OK",
-      "runtime_s": 0.003997332998551428,
+      "runtime_s": 0.002264041999296751,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 287,
@@ -10038,7 +10038,7 @@
     },
     "7x0i_B": {
       "status": "OK",
-      "runtime_s": 0.009722624999994878,
+      "runtime_s": 0.003499542006466072,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 406,
@@ -10095,7 +10095,7 @@
     },
     "7xgf_E": {
       "status": "OK",
-      "runtime_s": 0.0024469999989378266,
+      "runtime_s": 0.0013456250017043203,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 151,
@@ -10152,7 +10152,7 @@
     },
     "7yjc_A": {
       "status": "OK",
-      "runtime_s": 0.006094292002671864,
+      "runtime_s": 0.0033427090020268224,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 381,
@@ -10209,7 +10209,7 @@
     },
     "8aeq_A": {
       "status": "OK",
-      "runtime_s": 0.007333292000112124,
+      "runtime_s": 0.005291292000038084,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 624,
@@ -10266,7 +10266,7 @@
     },
     "8aqi_B": {
       "status": "OK",
-      "runtime_s": 0.0026591659989207983,
+      "runtime_s": 0.0015574999997625127,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 172,
@@ -10323,7 +10323,7 @@
     },
     "8b9p_A": {
       "status": "OK",
-      "runtime_s": 0.009025500003190245,
+      "runtime_s": 0.005223790998570621,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 596,
@@ -10380,7 +10380,7 @@
     },
     "8bre_B": {
       "status": "OK",
-      "runtime_s": 0.005234333002590574,
+      "runtime_s": 0.0032554999997955747,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 351,
@@ -10437,7 +10437,7 @@
     },
     "8gxj_C": {
       "status": "OK",
-      "runtime_s": 0.002441958997223992,
+      "runtime_s": 0.0016207920052693225,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 184,
@@ -10494,7 +10494,7 @@
     },
     "8h27_A": {
       "status": "OK",
-      "runtime_s": 0.0026926659993478097,
+      "runtime_s": 0.001551583998661954,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 181,
@@ -10551,7 +10551,7 @@
     },
     "8i84_B": {
       "status": "OK",
-      "runtime_s": 0.0027839999966090545,
+      "runtime_s": 0.002307000002474524,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 285,
@@ -10608,7 +10608,7 @@
     },
     "8ias_B": {
       "status": "OK",
-      "runtime_s": 0.004897667000477668,
+      "runtime_s": 0.004309749994718004,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 501,
@@ -10665,7 +10665,7 @@
     },
     "8j11_X": {
       "status": "OK",
-      "runtime_s": 0.002074791998893488,
+      "runtime_s": 0.0016659579996485263,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 173,
@@ -10722,7 +10722,7 @@
     },
     "8onn_E": {
       "status": "OK",
-      "runtime_s": 0.0031869999947957695,
+      "runtime_s": 0.0022764169989386573,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 268,
@@ -10779,7 +10779,7 @@
     },
     "8u3n_A": {
       "status": "OK",
-      "runtime_s": 0.003899000003002584,
+      "runtime_s": 0.003476292004052084,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 377,
@@ -10836,7 +10836,7 @@
     },
     "8vxu_B": {
       "status": "OK",
-      "runtime_s": 0.00103629200020805,
+      "runtime_s": 0.000875624995387625,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 104,
@@ -10893,7 +10893,7 @@
     },
     "9atc_A": {
       "status": "OK",
-      "runtime_s": 0.003446042006544303,
+      "runtime_s": 0.0025773749948712066,
       "input_receptor_sha256": null,
       "tool_version": null,
       "n_universe": 310,

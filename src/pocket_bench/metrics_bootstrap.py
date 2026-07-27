@@ -140,19 +140,47 @@ def paired_bootstrap(
 
     rng = random.Random(seed)
     boot_means: dict[str, list[float]] = {m: [] for m in methods}
-    boot_delta: dict[str, list[float]] = {m: [] for m in methods if m != baseline}
     for _ in range(n_boot):
         idx = [rng.randrange(n) for _ in range(n)]
-        means = {}
         for m in methods:
             mv = _mean([values_by_method[m][i] for i in idx])
-            means[m] = mv
-        base = means[baseline]
-        for m in methods:
-            if means[m] is not None:
-                boot_means[m].append(means[m])
-            if m != baseline and means[m] is not None and base is not None:
-                boot_delta[m].append(means[m] - base)
+            if mv is not None:
+                boot_means[m].append(mv)
+
+    # The paired difference is taken on the structures where BOTH methods have a
+    # value, which is not always all of them: MCC is undefined wherever a
+    # detector's confusion matrix is degenerate, and P2Rank has six such
+    # structures on this fold while the table field has none. Differencing each
+    # method's mean over its own coverage would fold "which structures were
+    # scorable" into a quantity read as "which method is better", and the two
+    # subsets differ by exactly the structures a detector found hardest.
+    boot_delta: dict[str, list[float]] = {}
+    matched_n: dict[str, int] = {}
+    matched_point: dict[str, tuple[float, float] | None] = {}
+    base_vals = values_by_method[baseline]
+    for m in methods:
+        if m == baseline:
+            continue
+        mv = values_by_method[m]
+        shared = [i for i in range(n)
+                  if mv[i] is not None and base_vals[i] is not None]
+        matched_n[m] = len(shared)
+        if not shared:
+            boot_delta[m] = []
+            matched_point[m] = None
+            continue
+        matched_point[m] = (
+            sum(mv[i] for i in shared) / len(shared),
+            sum(base_vals[i] for i in shared) / len(shared),
+        )
+        mrng = random.Random(seed)
+        deltas = []
+        for _ in range(n_boot):
+            pick = [shared[mrng.randrange(len(shared))] for _ in shared]
+            a = sum(mv[i] for i in pick) / len(pick)
+            b = sum(base_vals[i] for i in pick) / len(pick)
+            deltas.append(a - b)
+        boot_delta[m] = deltas
 
     lo_q, hi_q = (1 - ci) / 2, 1 - (1 - ci) / 2
     per_method = {}
@@ -180,15 +208,20 @@ def paired_bootstrap(
             d_lo is None or d_hi is None
             or math.isnan(d_lo) or math.isnan(d_hi)
         )
+        mp = matched_point[m]
         paired[m] = {
-            "delta_point": (per_method[m]["point"] - per_method[baseline]["point"])
-            if per_method[m]["point"] is not None
-            and per_method[baseline]["point"] is not None
-            else None,
+            "delta_point": (mp[0] - mp[1]) if mp is not None else None,
             "delta_ci_low": None if undefined else d_lo,
             "delta_ci_high": None if undefined else d_hi,
             "p_two_sided_bootstrap": None if undefined else p_two,
             "crosses_zero": None if undefined else (d_lo <= 0 <= d_hi),
+            # The structures both methods could be scored on. Where this is
+            # below n_structures the two point estimates in per_method are over
+            # different sets and must not be subtracted; the difference here is
+            # the one that is defined.
+            "n_paired_structures": matched_n[m],
+            "matched_point_method": None if mp is None else mp[0],
+            "matched_point_baseline": None if mp is None else mp[1],
         }
     return {
         "schema": "geoaudit.bootstrap_ci.v1",

@@ -1,0 +1,100 @@
+{
+  "schema": "geoaudit.seed_sensitivity.v1",
+  "clinical_grade": false,
+  "question": "does the paired verdict against P2Rank survive the resampling seed?",
+  "method": "table_field",
+  "baseline": "p2rank",
+  "n_boot": 10000,
+  "n_seeds": 25,
+  "seeds": [
+    20260725,
+    20261725,
+    20262725,
+    20263725,
+    20264725,
+    20265725,
+    20266725,
+    20267725,
+    20268725,
+    20269725,
+    20270725,
+    20271725,
+    20272725,
+    20273725,
+    20274725,
+    20275725,
+    20276725,
+    20277725,
+    20278725,
+    20279725,
+    20280725,
+    20281725,
+    20282725,
+    20283725,
+    20284725
+  ],
+  "ci_level": 0.95,
+  "pairing": "structures where both methods have a value",
+  "metrics": {
+    "residue_auc": {
+      "n_paired_structures": 192,
+      "paired_difference": 0.005803152940251531,
+      "n_seeds_excluding_zero": 0,
+      "fraction_of_seeds": 0.0,
+      "ci_low_range": [
+        -0.017060713511289873,
+        -0.01587797127715252
+      ],
+      "ci_high_range": [
+        0.02647390329666881,
+        0.027674476774483543
+      ],
+      "verdict": "unresolved"
+    },
+    "residue_pr_auc": {
+      "n_paired_structures": 192,
+      "paired_difference": 0.017655519087941142,
+      "n_seeds_excluding_zero": 0,
+      "fraction_of_seeds": 0.0,
+      "ci_low_range": [
+        -0.010181558747135961,
+        -0.008577462117040848
+      ],
+      "ci_high_range": [
+        0.043962426409519535,
+        0.045732124359993624
+      ],
+      "verdict": "unresolved"
+    },
+    "residue_mcc": {
+      "n_paired_structures": 186,
+      "paired_difference": 0.024738320363494336,
+      "n_seeds_excluding_zero": 6,
+      "fraction_of_seeds": 0.24,
+      "ci_low_range": [
+        -0.0010312590571903714,
+        0.000286935689802015
+      ],
+      "ci_high_range": [
+        0.04911198315649235,
+        0.05044584465550921
+      ],
+      "verdict": "seed-dependent"
+    },
+    "residue_f1": {
+      "n_paired_structures": 192,
+      "paired_difference": 0.03151604407052629,
+      "n_seeds_excluding_zero": 25,
+      "fraction_of_seeds": 1.0,
+      "ci_low_range": [
+        0.008903418860112183,
+        0.010034134668361009
+      ],
+      "ci_high_range": [
+        0.05318407570264996,
+        0.05450088273314415
+      ],
+      "verdict": "robust"
+    }
+  }
+}

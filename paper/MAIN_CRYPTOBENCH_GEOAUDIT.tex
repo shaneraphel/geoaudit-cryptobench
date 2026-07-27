@@ -42,11 +42,27 @@ landed in the cell and how many of those were cryptic. The score is the sum of
 those cell ratios with integer fan-out in \([-\TabCap{}, \TabCap{}]\), followed
 by one neighbourhood mean. This field attains ROC-AUC \TabAuc{} \TabAucCI{},
 PR-AUC \TabPr{} \TabPrCI{}, MCC \TabMcc{} \TabMccCI{} and F1 \TabFOne{}
-\TabFOneCI{}, ahead of P2Rank on all four. Only the F1 difference is resolved by
-this fold (\TabFOneD{} \TabFOneDCI{}, \(p=\TabFOneP{}\)); the paired differences
-on ROC-AUC (\TabAucD{} \TabAucDCI{}), PR-AUC (\TabPrD{} \TabPrDCI{}) and MCC
-(\TabMccD{} \TabMccDCI{}) all contain zero. We therefore claim a resolved
+\TabFOneCI{}, ahead of P2Rank on all four. One difference is resolved by this
+fold: F1, by \TabFOneD{} \TabFOneDCI{} at \(p=\TabFOneP{}\). The differences on
+ROC-AUC (\TabAucD{} \TabAucDCI{}) and PR-AUC (\TabPrD{} \TabPrDCI{}) contain
+zero. MCC is ahead by \TabMccD{} \TabMccDCI{}, an interval that excludes zero at
+our pre-registered resampling seed and does not do so under most others, and we
+report it as unresolved for the reason given below. We claim a resolved
 advantage on F1 and parity on the other three, and nothing stronger.
+
+MCC is the one that needs saying out loud, because two defensible choices decide
+it and only one of them is honest. Each paired difference is taken on the
+structures where both methods have a value, which for MCC is \TabMccNPaired{} of
+\NUnits{}, since MCC is undefined wherever a confusion matrix is degenerate and
+P2Rank has six such structures here while the table field has none; differencing
+each method's mean over its own coverage instead would fold ``which structures
+were scorable'' into a number read as ``which method is better''. On the shared
+set the two MCCs are \TabMccMatched{} and \TabMccMatchedBase{}, and at our
+pre-registered resampling seed that difference excludes zero. It does not
+survive the seed: across \NSeedProbes{} seeds the MCC interval excludes zero in
+\TabMccSeedSig{} of them, so the exclusion is a property of the draw and not of
+the fold. F1 excludes zero in \TabFOneSeedSig{} of \NSeedProbes{}, and ROC-AUC
+and PR-AUC in none. MCC is therefore reported as unresolved.
 
 Two design facts carry that result and both are quantitative. First, cell
 occupancy: a width-six quaternary table has \(4^{6}\) cells and holds about fifty
@@ -409,9 +425,14 @@ Rigid geometric          & \GeoMccD{} \GeoMccDCI{}\GeoMccNS{}
 same resample indices, so the within-unit correlation between two detectors
 looking at the same pocket is removed from the difference rather than inflating
 its variance. ``\(\text{ns}\)'' means the 95\% interval of the paired difference
-contains zero. The table field's point estimate is positive on all four metrics
-and the fold resolves one of them: F1 by \TabFOneD{} \TabFOneDCI{} at
-\(p=\)~\TabFOneP{}, against \TabAucD{} on ROC-AUC at \(p=\)~\TabAucP{}. A
+contains zero. Each difference is taken on the structures where both methods
+have a value; for MCC that is \TabMccNPaired{} of \NUnits{}, because P2Rank's
+confusion matrix is degenerate on six of them. The table field's point estimate
+is positive on all four metrics and the fold resolves one of them: F1, by
+\TabFOneD{} \TabFOneDCI{} at \(p=\)~\TabFOneP{}, against \TabAucD{} on ROC-AUC
+at \(p=\)~\TabAucP{}. The ``\(\text{sig}\)'' shown for MCC is at the
+pre-registered seed only and survives \TabMccSeedSig{} of \NSeedProbes{} seeds,
+so we do not count it; F1 survives \TabFOneSeedSig{} of \NSeedProbes{}. A
 positive point estimate inside an interval that contains zero is not evidence of
 superiority, and we do not read it as such --- which is also why the ROC-AUC
 column here is reported as parity even though the field leads it.}
@@ -540,16 +561,25 @@ excluded multi-chain units mean the reported fold is a strict subset of the
 official test fold, and the result does not transfer to multi-chain assemblies
 without a chain-aware residue index.
 
-Three of the four paired intervals between the table field and P2Rank contain
+Two of the four paired intervals between the table field and P2Rank contain
 zero, which licenses ``we cannot separate these on this fold'' and not ``these
-are equal''. All four point estimates favour the field, and on three of them
-that is not evidence of superiority: with \NUnits{} units the ROC-AUC interval is
+are equal''. All four point estimates favour the field, and on those two that is
+not evidence of superiority: with \NUnits{} units the ROC-AUC interval is
 roughly \(\pm0.02\) wide, so a margin of \TabAucD{} is exactly the size of
-difference this fold cannot resolve. A reader who wants an ordering on ROC-AUC,
-PR-AUC or MCC will not get one here and should not infer one from the sign. The
-F1 difference is resolved (\TabFOneD{} \TabFOneDCI{}), and even that is one
-metric, at one operating point, against one trained baseline executed locally, on
-one receptor-only task.
+difference this fold cannot resolve. A reader who wants an ordering on ROC-AUC
+or PR-AUC will not get one here and should not infer one from the sign.
+
+Of the two intervals that do exclude zero, only one does so reliably. The F1
+difference is \TabFOneD{} \TabFOneDCI{} and its interval clears zero under
+\TabFOneSeedSig{} of \NSeedProbes{} independent resampling seeds. The MCC
+difference is \TabMccD{} \TabMccDCI{} on \TabMccNPaired{} shared structures --- a
+lower bound four ten-thousandths clear of zero, which survives \TabMccSeedSig{}
+of \NSeedProbes{} seeds. A verdict that changes with the seed is a property of
+the draw, so we report MCC as unresolved despite the frozen seed licensing the
+opposite, and the counts are in
+\texttt{results/official\_fold/SEED\_SENSITIVITY.json}. Even the surviving F1
+result is a threshold metric at one operating point, against one trained
+baseline executed locally, on one receptor-only task.
 
 The test fold was read \NTestReads{} times over the development of this method,
 which is the most serious threat to the figures above and we state it rather than

@@ -94,70 +94,100 @@
           "delta_ci_low": -0.048770717454054625,
           "delta_ci_high": -0.005620452897468501,
           "p_two_sided_bootstrap": 0.0118,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.7668089153970956,
+          "matched_point_baseline": 0.7934860413336979
         },
         "algebraic_field_linear": {
           "delta_point": 0.0018347993955996067,
           "delta_ci_low": -0.019190755047336864,
           "delta_ci_high": 0.02195078830742632,
           "p_two_sided_bootstrap": 0.8568,
-          "crosses_zero": true
+          "crosses_zero": true,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.7953208407292975,
+          "matched_point_baseline": 0.7934860413336979
         },
         "fstar_pocket": {
           "delta_point": -0.19470739922052893,
           "delta_ci_low": -0.2164476852531675,
           "delta_ci_high": -0.17234180590057727,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.598778642113169,
+          "matched_point_baseline": 0.7934860413336979
         },
         "geometric_foundation": {
           "delta_point": -0.12886810680776872,
           "delta_ci_low": -0.14625273239613598,
           "delta_ci_high": -0.11129342179394854,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.6646179345259292,
+          "matched_point_baseline": 0.7934860413336979
         },
         "quaternary_lut": {
           "delta_point": -0.03340202267043102,
           "delta_ci_low": -0.05171473027032313,
           "delta_ci_high": -0.016055895306437088,
           "p_two_sided_bootstrap": 0.0004,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.7600840186632669,
+          "matched_point_baseline": 0.7934860413336979
         },
         "quaternary_lut_seq": {
           "delta_point": -0.02680777305350024,
           "delta_ci_low": -0.04423278586732812,
           "delta_ci_high": -0.009901027349603483,
           "p_two_sided_bootstrap": 0.002,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.7666782682801977,
+          "matched_point_baseline": 0.7934860413336979
         },
         "random_bbox": {
           "delta_point": -0.29348604133369793,
           "delta_ci_low": -0.31367460080847254,
           "delta_ci_high": -0.27221092724721496,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.5,
+          "matched_point_baseline": 0.7934860413336979
         },
         "sstar_pocket": {
           "delta_point": -0.13844784602843496,
           "delta_ci_low": -0.15713042580176723,
           "delta_ci_high": -0.1195138664857345,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.655038195305263,
+          "matched_point_baseline": 0.7934860413336979
         },
         "table_field": {
           "delta_point": 0.005803152940251466,
           "delta_ci_low": -0.016850265627443194,
           "delta_ci_high": 0.02762690572594876,
           "p_two_sided_bootstrap": 0.6004,
-          "crosses_zero": true
+          "crosses_zero": true,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.7992891942739494,
+          "matched_point_baseline": 0.7934860413336979
         },
         "ultrametric_shear_oracle": {
           "delta_point": -0.14093274755608898,
           "delta_ci_low": -0.1592690597310512,
           "delta_ci_high": -0.12254180558752399,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.652553293777609,
+          "matched_point_baseline": 0.7934860413336979
         }
       }
     },
@@ -243,70 +273,100 @@
           "delta_ci_low": -0.052058393494033184,
           "delta_ci_high": 0.0027612713863396105,
           "p_two_sided_bootstrap": 0.0788,
-          "crosses_zero": true
+          "crosses_zero": true,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.3333534043366461,
+          "matched_point_baseline": 0.3580249808622129
         },
         "algebraic_field_linear": {
           "delta_point": 0.0014233031852952105,
           "delta_ci_low": -0.02732514506257365,
           "delta_ci_high": 0.030034070988943205,
           "p_two_sided_bootstrap": 0.927,
-          "crosses_zero": true
+          "crosses_zero": true,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.3594482840475081,
+          "matched_point_baseline": 0.3580249808622129
         },
         "fstar_pocket": {
           "delta_point": -0.1533970680172646,
           "delta_ci_low": -0.18414577543722319,
           "delta_ci_high": -0.12206813740887279,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.2046279128449483,
+          "matched_point_baseline": 0.3580249808622129
         },
         "geometric_foundation": {
           "delta_point": -0.08164139950025001,
           "delta_ci_low": -0.10866784998473737,
           "delta_ci_high": -0.05491969930433385,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.2763835813619629,
+          "matched_point_baseline": 0.3580249808622129
         },
         "quaternary_lut": {
           "delta_point": -0.046064317119103027,
           "delta_ci_low": -0.07396734529697617,
           "delta_ci_high": -0.018704395756159644,
           "p_two_sided_bootstrap": 0.0018,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.3119606637431099,
+          "matched_point_baseline": 0.3580249808622129
         },
         "quaternary_lut_seq": {
           "delta_point": -0.03484350390922153,
           "delta_ci_low": -0.062233186124189745,
           "delta_ci_high": -0.007896748576132071,
           "p_two_sided_bootstrap": 0.0106,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.3231814769529914,
+          "matched_point_baseline": 0.3580249808622129
         },
         "random_bbox": {
           "delta_point": -0.26467705634774097,
           "delta_ci_low": -0.2980550958144084,
           "delta_ci_high": -0.23073826305527775,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.09334792451447192,
+          "matched_point_baseline": 0.3580249808622129
         },
         "sstar_pocket": {
           "delta_point": -0.10285232543015471,
           "delta_ci_low": -0.13094802559546004,
           "delta_ci_high": -0.07424897214110744,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.2551726554320582,
+          "matched_point_baseline": 0.3580249808622129
         },
         "table_field": {
           "delta_point": 0.017655519087941107,
           "delta_ci_low": -0.009445698067550641,
           "delta_ci_high": 0.04499816181713022,
           "p_two_sided_bootstrap": 0.2025999999999999,
-          "crosses_zero": true
+          "crosses_zero": true,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.375680499950154,
+          "matched_point_baseline": 0.3580249808622129
         },
         "ultrametric_shear_oracle": {
           "delta_point": -0.1011264290698613,
           "delta_ci_low": -0.1290397607244296,
           "delta_ci_high": -0.07377470401799693,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.2568985517923516,
+          "matched_point_baseline": 0.3580249808622129
         }
       }
     },
@@ -388,74 +448,104 @@
       },
       "paired_vs_baseline": {
         "algebraic_field": {
-          "delta_point": -0.012186403500120624,
-          "delta_ci_low": -0.037736911202285804,
-          "delta_ci_high": 0.012864974246861106,
-          "p_two_sided_bootstrap": 0.3412,
-          "crosses_zero": true
+          "delta_point": -0.00784450993913588,
+          "delta_ci_low": -0.03309349876011291,
+          "delta_ci_high": 0.017144254954571687,
+          "p_two_sided_bootstrap": 0.5334,
+          "crosses_zero": true,
+          "n_paired_structures": 186,
+          "matched_point_method": 0.27690598776211384,
+          "matched_point_baseline": 0.2847504977012497
         },
         "algebraic_field_linear": {
-          "delta_point": 0.004887419209383681,
-          "delta_ci_low": -0.02306318482044776,
-          "delta_ci_high": 0.032705368347507556,
-          "p_two_sided_bootstrap": 0.7456,
-          "crosses_zero": true
+          "delta_point": 0.0070983950364336135,
+          "delta_ci_low": -0.0199601918250139,
+          "delta_ci_high": 0.03403450150030096,
+          "p_two_sided_bootstrap": 0.6032,
+          "crosses_zero": true,
+          "n_paired_structures": 186,
+          "matched_point_method": 0.29184889273768333,
+          "matched_point_baseline": 0.2847504977012497
         },
         "fstar_pocket": {
-          "delta_point": -0.1480191364713502,
-          "delta_ci_low": -0.17826734655441825,
-          "delta_ci_high": -0.11731430656654042,
+          "delta_point": -0.1528402209082462,
+          "delta_ci_low": -0.18288226768676824,
+          "delta_ci_high": -0.12305245495555821,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 186,
+          "matched_point_method": 0.13191027679300352,
+          "matched_point_baseline": 0.2847504977012497
         },
         "geometric_foundation": {
-          "delta_point": -0.04591384189660094,
-          "delta_ci_low": -0.0703883581776243,
-          "delta_ci_high": -0.02155145302297488,
+          "delta_point": -0.0450223030297604,
+          "delta_ci_low": -0.06953185316031388,
+          "delta_ci_high": -0.021280256321570976,
           "p_two_sided_bootstrap": 0.0002,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 186,
+          "matched_point_method": 0.23972819467148931,
+          "matched_point_baseline": 0.2847504977012497
         },
         "quaternary_lut": {
-          "delta_point": -0.04230336696675552,
-          "delta_ci_low": -0.06655314875207456,
-          "delta_ci_high": -0.018470525223707773,
-          "p_two_sided_bootstrap": 0.001,
-          "crosses_zero": false
+          "delta_point": -0.04264423805458187,
+          "delta_ci_low": -0.0662308250173292,
+          "delta_ci_high": -0.0186571252695692,
+          "p_two_sided_bootstrap": 0.0004,
+          "crosses_zero": false,
+          "n_paired_structures": 186,
+          "matched_point_method": 0.24210625964666785,
+          "matched_point_baseline": 0.2847504977012497
         },
         "quaternary_lut_seq": {
-          "delta_point": -0.039327626758525386,
-          "delta_ci_low": -0.06478667376154568,
-          "delta_ci_high": -0.013872869151981368,
-          "p_two_sided_bootstrap": 0.0022,
-          "crosses_zero": false
+          "delta_point": -0.039892682984812494,
+          "delta_ci_low": -0.0646589788489493,
+          "delta_ci_high": -0.01473176896498816,
+          "p_two_sided_bootstrap": 0.0026,
+          "crosses_zero": false,
+          "n_paired_structures": 186,
+          "matched_point_method": 0.24485781471643722,
+          "matched_point_baseline": 0.2847504977012497
         },
         "random_bbox": {
           "delta_point": null,
           "delta_ci_low": null,
           "delta_ci_high": null,
           "p_two_sided_bootstrap": null,
-          "crosses_zero": null
+          "crosses_zero": null,
+          "n_paired_structures": 0,
+          "matched_point_method": null,
+          "matched_point_baseline": null
         },
         "sstar_pocket": {
-          "delta_point": -0.06668063009223854,
-          "delta_ci_low": -0.09303682165840467,
-          "delta_ci_high": -0.03928856248317376,
+          "delta_point": -0.06812794717339912,
+          "delta_ci_low": -0.09440306766692848,
+          "delta_ci_high": -0.041654467045004695,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 186,
+          "matched_point_method": 0.2166225505278506,
+          "matched_point_baseline": 0.2847504977012497
         },
         "table_field": {
-          "delta_point": 0.019218911281105033,
-          "delta_ci_low": -0.006656936014957441,
-          "delta_ci_high": 0.04476603798231835,
-          "p_two_sided_bootstrap": 0.13880000000000003,
-          "crosses_zero": true
+          "delta_point": 0.024738320363494326,
+          "delta_ci_low": 0.0003834669745540163,
+          "delta_ci_high": 0.049358596665016616,
+          "p_two_sided_bootstrap": 0.04620000000000002,
+          "crosses_zero": false,
+          "n_paired_structures": 186,
+          "matched_point_method": 0.30948881806474404,
+          "matched_point_baseline": 0.2847504977012497
         },
         "ultrametric_shear_oracle": {
-          "delta_point": -0.0700152352496943,
-          "delta_ci_low": -0.09575173398715217,
-          "delta_ci_high": -0.04297720969312631,
+          "delta_point": -0.0708772814128974,
+          "delta_ci_low": -0.09607396032529447,
+          "delta_ci_high": -0.04507848460419545,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 186,
+          "matched_point_method": 0.21387321628835232,
+          "matched_point_baseline": 0.2847504977012497
         }
       }
     },
@@ -541,70 +631,100 @@
           "delta_ci_low": -0.01790941772284945,
           "delta_ci_high": 0.026915649640494803,
           "p_two_sided_bootstrap": 0.692,
-          "crosses_zero": true
+          "crosses_zero": true,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.3066697551718522,
+          "matched_point_baseline": 0.30189552994172814
         },
         "algebraic_field_linear": {
           "delta_point": 0.01860491419399113,
           "delta_ci_low": -0.006634625892669975,
           "delta_ci_high": 0.043020219572929355,
           "p_two_sided_bootstrap": 0.1492,
-          "crosses_zero": true
+          "crosses_zero": true,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.32050044413571926,
+          "matched_point_baseline": 0.30189552994172814
         },
         "fstar_pocket": {
           "delta_point": -0.09931170926436308,
           "delta_ci_low": -0.12705968317135552,
           "delta_ci_high": -0.07143660877854437,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.20258382067736505,
+          "matched_point_baseline": 0.30189552994172814
         },
         "geometric_foundation": {
           "delta_point": -0.015389563343789658,
           "delta_ci_low": -0.03807238293748269,
           "delta_ci_high": 0.007252684482792222,
           "p_two_sided_bootstrap": 0.1826,
-          "crosses_zero": true
+          "crosses_zero": true,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.2865059665979385,
+          "matched_point_baseline": 0.30189552994172814
         },
         "quaternary_lut": {
           "delta_point": -0.029531275811011115,
           "delta_ci_low": -0.05211471669614223,
           "delta_ci_high": -0.007326315511281134,
           "p_two_sided_bootstrap": 0.011,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.272364254130717,
+          "matched_point_baseline": 0.30189552994172814
         },
         "quaternary_lut_seq": {
           "delta_point": -0.026970334676073238,
           "delta_ci_low": -0.05074425637441721,
           "delta_ci_high": -0.0032929873342433086,
           "p_two_sided_bootstrap": 0.0234,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.2749251952656549,
+          "matched_point_baseline": 0.30189552994172814
         },
         "random_bbox": {
           "delta_point": -0.30189552994172814,
           "delta_ci_low": -0.33183776249927044,
           "delta_ci_high": -0.2713374713739573,
           "p_two_sided_bootstrap": 0.0,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.0,
+          "matched_point_baseline": 0.30189552994172814
         },
         "sstar_pocket": {
           "delta_point": -0.035264685373402105,
           "delta_ci_low": -0.059704462317821415,
           "delta_ci_high": -0.010048604606512537,
           "p_two_sided_bootstrap": 0.0064,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.26663084456832603,
+          "matched_point_baseline": 0.30189552994172814
         },
         "table_field": {
           "delta_point": 0.03151604407052633,
           "delta_ci_low": 0.008892610256103307,
           "delta_ci_high": 0.05361254067043794,
           "p_two_sided_bootstrap": 0.005600000000000049,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.33341157401225446,
+          "matched_point_baseline": 0.30189552994172814
         },
         "ultrametric_shear_oracle": {
           "delta_point": -0.03779673715939125,
           "delta_ci_low": -0.06216589291923982,
           "delta_ci_high": -0.012842199817716522,
           "p_two_sided_bootstrap": 0.0022,
-          "crosses_zero": false
+          "crosses_zero": false,
+          "n_paired_structures": 192,
+          "matched_point_method": 0.2640987927823369,
+          "matched_point_baseline": 0.30189552994172814
         }
       }
     }
