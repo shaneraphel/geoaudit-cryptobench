@@ -1,0 +1,22 @@
+{
+  "schema": "geoaudit.figure_provenance.v1",
+  "clinical_grade": false,
+  "purpose": "tie every committed image to the exact bytes it was drawn from, so a figure cannot outlive the numbers it shows",
+  "generator": "tools/make_official_figures.py",
+  "sources": {
+    "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "0b711e60b6c21797a9df03fc61ab75003fe7bcc333218b82fe4c5b29668bdcdf",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "9ee7363738dbfe2331f4d704af68d99347b30b4d1c07cf3caa9dbc26b8a8a600",
+    "results/cryptobench_official/TELEMETRY.json": "05c29afb1639c9979906925b25f75c390b5153435cbece44c86706b61c1121eb",
+    "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3"
+  },
+  "figures": {
+    "fig_official_fold_metrics.png": {
+      "sha256": "6bdc4c4cbb74dd9142389c80c3d5705cce2c0a089e14130d5f4ea091cef1aeb6",
+      "bytes": 179489
+    },
+    "fig_paired_vs_p2rank.png": {
+      "sha256": "7fcd89a92892fc5c887ac436e62f753a025316ac47ecbb045bb7b8480e40dd79",
+      "bytes": 107114
+    }
+  }
+}

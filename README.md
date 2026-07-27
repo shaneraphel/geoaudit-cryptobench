@@ -6,18 +6,51 @@ Repository specification. This document defines scope, execution, data provenanc
 telemetry schema, and CI gates. It is not a paper and makes no comparative or
 clinical claim.
 
-**Scope (single claim).** Evaluating zero-shot geometric cryptic-pocket detectors on
-the official CryptoBench receptor-only benchmark.
+**Scope (single claim).** Evaluating counting-only cryptic-pocket detectors on the
+official CryptoBench receptor-only benchmark.
 
-- Task: recover cryptic binding-site residues from **apo receptors only**, using
-  deterministic geometry with no training, no fitted parameters, and no exposure to
-  any CryptoBench partition.
+- Task: recover cryptic binding-site residues from **apo receptors only**.
+- What is compiled on the training fold, stated exactly, because the detectors are
+  not all training-free and an earlier version of this paragraph said they were:
+  `geometric_foundation`, `fstar_pocket`, `sstar_pocket` and
+  `ultrametric_shear_oracle` have no fitted quantity at all; `quaternary_lut`,
+  `quaternary_lut_seq`, `algebraic_field` and `table_field` compile integer cell
+  counts and integer fan-out weights from the cluster-disjoint training fold;
+  `algebraic_field_linear` additionally fits a real-valued readout by one
+  closed-form solve. None of them sees a test residue, and the quantisation is
+  per-chain rank order, so no threshold crosses the fold boundary. `make verify`
+  fails if any detector holding a compiled artifact is missing from this list.
 - Benchmark: the official CryptoBench test fold (MMseqs2 clustering at 10 % sequence
   identity, cluster-disjoint), loaded fail-closed with per-file SHA-256 verification.
 - Primary metrics: per-residue `residue_auc`, `residue_pr_auc`, `residue_mcc`,
-  `residue_f1`, each with a 95 % paired-bootstrap CI over structures.
-- Not claimed: parity with trained baselines, binding affinity, candidate efficacy,
-  or global novelty. See `contracts/GEOAUDIT_PAPER_SCOPE.json`.
+  `residue_f1`, each with a 95 % paired-bootstrap CI over the structures where both
+  compared methods are defined.
+- Claimed: on F1, the table field is separable from P2Rank 2.5.1 (+0.032,
+  95 % CI [+0.009, +0.054], clearing zero under all 25 resampling seeds). On the
+  other three metrics, parity — the point estimates favour the field and the
+  intervals contain zero, and the ROC-AUC margin is 0.36 of one standard error of
+  a fold mean and is the maximum over 11 of our architectures scored on this fold,
+  so it carries no ordering.
+- Not claimed: superiority on ROC-AUC, PR-AUC or MCC; binding affinity; candidate
+  efficacy; global novelty. See `contracts/GEOAUDIT_PAPER_SCOPE.json`.
+
+![Four metrics on the official fold](figures/fig_official_fold_metrics.png)
+
+![Paired differences against P2Rank](figures/fig_paired_vs_p2rank.png)
+
+Both figures are regenerated from the frozen artifacts by `make figures`.
+`make artifacts` rejects any image in `figures/` that the generator does not
+produce, and `results/official_fold/FIGURE_PROVENANCE.json` records the SHA-256
+of each image together with the digests of the four artifacts it was drawn from,
+so a plot whose inputs have moved fails CI instead of quietly showing last
+week's numbers. Checking that needs no plotting library, which is why CI
+verifies the images without redrawing them. They are the first images this
+README has ever carried. The
+six that `figures/` held before them are gone from the tree and kept in
+`_local/figures_superseded`: one plotted the 14-structure ESR1 pilot on a split
+its own summary records as not cluster-disjoint, and the other five plotted
+candidate counts, diversity, clash severity, toxicity alerts and a cryo-EM
+pocket — campaign material that the scope contract no longer admits.
 
 Appendices are excluded from the primary claim and from every generalization
 statement: **Appendix A** is a retrospective ESR1 receptor-only pilot (invalidated

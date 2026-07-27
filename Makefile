@@ -1,7 +1,7 @@
 PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
-.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts freeze
+.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures freeze
 verify: consistency strict-json readme macros environment archive icloud ledger artifacts
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
@@ -42,8 +42,16 @@ ledger:
 
 # Every frozen artifact declares what it is for. Two dozen architecture
 # sweeps beside a headline number must be a stated fact, not an inference.
+# This also holds the committed images to their sources: `artifacts` fails if
+# a figure's input changed underneath it, which needs no plotting library.
 artifacts:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/classify_artifacts.py --check
+
+# Redraw the README's images from the frozen artifacts. Needs matplotlib, which
+# is why it is a separate target: CI checks the images, it does not redraw them.
+figures:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/make_official_figures.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/classify_artifacts.py
 
 # Two frozen reports may never disagree about the same quantity.
 consistency:
