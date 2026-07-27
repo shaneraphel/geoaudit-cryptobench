@@ -34,7 +34,7 @@ spectral = ["scipy>=1.11"]
 test = ["pytest>=8", "jsonschema>=4.20"]
 
 [project.urls]
-Homepage = "https://github.com/shaneraphel/gf4-allele-conditioned-chemistry"
+Homepage = "https://github.com/shaneraphel/geoaudit-cryptobench"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
