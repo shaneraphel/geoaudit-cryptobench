@@ -6,67 +6,67 @@
       "file": "algebraic_field.json",
       "n_units": 192,
       "rescored_in_last_run": false,
-      "sha256": "e418b7822b477156b848703aec3da3dd75e0e73776ba5bd1e381e9076b259bbf"
+      "sha256": "2544510cd74eb9883abf689b11822e4ba378f18232e8cc0c5b2925d348347f15"
     },
     "algebraic_field_linear": {
       "file": "algebraic_field_linear.json",
       "n_units": 192,
       "rescored_in_last_run": false,
-      "sha256": "0772ae72660b03482accd17650d22e03eed7586caf4e9050e9a830fccc2e72c7"
+      "sha256": "699eee4adee5c59d0dbebbdff0ac4689652d6faebb8b284b03e69f3389d98a32"
     },
     "fstar_pocket": {
       "file": "fstar_pocket.json",
       "n_units": 192,
       "rescored_in_last_run": false,
-      "sha256": "888fe7e6898e661c62639cdbb267dd79ebe6ab02e2339977281fe927f3a6c310"
+      "sha256": "48893f7f960302b5d54e31169e662dabc781238dd1271bdd341053f134bf2349"
     },
     "geometric_foundation": {
       "file": "geometric_foundation.json",
       "n_units": 192,
       "rescored_in_last_run": false,
-      "sha256": "af2d840545a78d851459faf014b424762b90506aa378cc1a6e4d8fb047ffb9ef"
+      "sha256": "c29c06b296696b8c03a1f6cb64d9043ed160e26e3e0b577905c541ca6b18ff04"
     },
     "p2rank": {
       "file": "p2rank.json",
       "n_units": 192,
-      "rescored_in_last_run": false,
-      "sha256": "c5f4f339a4260a2def8b36d61e987eb8dc072a5f106c463bc289a533d7d832a8"
+      "rescored_in_last_run": true,
+      "sha256": "7c0551744fc368fe706729fba5f54540da85f7c18992ff3a2b8f189083962fda"
     },
     "quaternary_lut": {
       "file": "quaternary_lut.json",
       "n_units": 192,
       "rescored_in_last_run": false,
-      "sha256": "f60bc583be699b746dd17330d3de053620c0c0aeddaf7cac861c637bc1eb6228"
+      "sha256": "81afe04cc1282fc0145eedd6cef1030041c684b6502cf80bcd091ad686ff2b3e"
     },
     "quaternary_lut_seq": {
       "file": "quaternary_lut_seq.json",
       "n_units": 192,
       "rescored_in_last_run": false,
-      "sha256": "d1fe98c922afcff1c9008eaf6b0b73e931841f47356941e641fdb1620aa6ed45"
+      "sha256": "9785e282bba5347d78936dfbc1f3c903aeac9f64604c67e2478e32ad7f4acca4"
     },
     "random_bbox": {
       "file": "random_bbox.json",
       "n_units": 192,
-      "rescored_in_last_run": true,
-      "sha256": "26f9e81f79b007fece5487fb72ea290fbab3c2f62f638a7ebae322adc2eedbcd"
+      "rescored_in_last_run": false,
+      "sha256": "f261fb7e45c42c26abea52238fa1fc273319edc5242ad57acf7901764743b9e0"
     },
     "sstar_pocket": {
       "file": "sstar_pocket.json",
       "n_units": 192,
       "rescored_in_last_run": false,
-      "sha256": "ac840b61d8af1d536c2495849f835333c297a624058c9003289dc61296401601"
+      "sha256": "b28bc38c8ef3519c3bce77d78f71e2ddb4772e41ae1978e69482802417ded3db"
     },
     "table_field": {
       "file": "table_field.json",
       "n_units": 192,
       "rescored_in_last_run": false,
-      "sha256": "e53f931fbd8326d04280b22e154c29f81f6cb4fef898e4e7b15e7757ad0ee418"
+      "sha256": "c8add9b498c51883e819207175ff36255ec73b38512154f6ca3d1a5b3802fc94"
     },
     "ultrametric_shear_oracle": {
       "file": "ultrametric_shear_oracle.json",
       "n_units": 192,
       "rescored_in_last_run": false,
-      "sha256": "e1b728bb43b668e318306a09ef079e9f57fa18ea2b6579c5cbe4bb1421407397"
+      "sha256": "28abb808ca1f28c0b2ad82c343d998b7419f3ba49dd201ff6aef11afb305168e"
     }
   }
 }

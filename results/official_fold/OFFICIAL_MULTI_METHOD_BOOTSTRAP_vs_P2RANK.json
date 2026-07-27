@@ -22,21 +22,21 @@
       "ci_level": 0.95,
       "per_method": {
         "algebraic_field": {
-          "point": 0.7668089153970956,
-          "ci_low": 0.7357063647779105,
-          "ci_high": 0.795566200043309,
+          "point": 0.7666942911109147,
+          "ci_low": 0.7355018365156725,
+          "ci_high": 0.795533948325469,
           "n_structures_scored": 192
         },
         "algebraic_field_linear": {
-          "point": 0.7953208407292975,
-          "ci_low": 0.76496661749063,
-          "ci_high": 0.8240910812622201,
+          "point": 0.7953622049415263,
+          "ci_low": 0.7649947084489302,
+          "ci_high": 0.8241301975758284,
           "n_structures_scored": 192
         },
         "fstar_pocket": {
-          "point": 0.598778642113169,
-          "ci_low": 0.5793656364842512,
-          "ci_high": 0.6178719288130123,
+          "point": 0.5987694630943393,
+          "ci_low": 0.5793558902297307,
+          "ci_high": 0.6178718408883624,
           "n_structures_scored": 192
         },
         "geometric_foundation": {
@@ -46,21 +46,21 @@
           "n_structures_scored": 192
         },
         "p2rank": {
-          "point": 0.7934860413336979,
-          "ci_low": 0.772210927247215,
-          "ci_high": 0.8136746008084725,
+          "point": 0.7933231313106249,
+          "ci_low": 0.7719886709068592,
+          "ci_high": 0.813515817783675,
           "n_structures_scored": 192
         },
         "quaternary_lut": {
-          "point": 0.7600840186632669,
-          "ci_low": 0.7330575197396795,
-          "ci_high": 0.7854668816144212,
+          "point": 0.7599557284780597,
+          "ci_low": 0.7327923607970084,
+          "ci_high": 0.7853708342058441,
           "n_structures_scored": 192
         },
         "quaternary_lut_seq": {
-          "point": 0.7666782682801977,
-          "ci_low": 0.740027403645106,
-          "ci_high": 0.791865631320215,
+          "point": 0.7665241052398503,
+          "ci_low": 0.7397409789858099,
+          "ci_high": 0.7917082177760436,
           "n_structures_scored": 192
         },
         "random_bbox": {
@@ -70,124 +70,124 @@
           "n_structures_scored": 192
         },
         "sstar_pocket": {
-          "point": 0.655038195305263,
-          "ci_low": 0.6344857320037784,
-          "ci_high": 0.6761246253153731,
+          "point": 0.6550333119861946,
+          "ci_low": 0.6344819464691799,
+          "ci_high": 0.6761232247960013,
           "n_structures_scored": 192
         },
         "table_field": {
-          "point": 0.7992891942739494,
-          "ci_low": 0.7666414781837919,
-          "ci_high": 0.8300153612441478,
+          "point": 0.7991511872349851,
+          "ci_low": 0.766455845830667,
+          "ci_high": 0.8298874655719523,
           "n_structures_scored": 192
         },
         "ultrametric_shear_oracle": {
-          "point": 0.652553293777609,
-          "ci_low": 0.6323952410154972,
-          "ci_high": 0.6729064186968865,
+          "point": 0.6525479241529072,
+          "ci_low": 0.6323897371501781,
+          "ci_high": 0.6728958136881007,
           "n_structures_scored": 192
         }
       },
       "paired_vs_baseline": {
         "algebraic_field": {
-          "delta_point": -0.02667712593660232,
-          "delta_ci_low": -0.048770717454054625,
-          "delta_ci_high": -0.005620452897468501,
-          "p_two_sided_bootstrap": 0.0118,
+          "delta_point": -0.026628840199710235,
+          "delta_ci_low": -0.048725952027647075,
+          "delta_ci_high": -0.005548952543121549,
+          "p_two_sided_bootstrap": 0.012,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.7668089153970956,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_method": 0.7666942911109147,
+          "matched_point_baseline": 0.7933231313106249
         },
         "algebraic_field_linear": {
-          "delta_point": 0.0018347993955996067,
-          "delta_ci_low": -0.019190755047336864,
-          "delta_ci_high": 0.02195078830742632,
-          "p_two_sided_bootstrap": 0.8568,
+          "delta_point": 0.002039073630901389,
+          "delta_ci_low": -0.019043342235336932,
+          "delta_ci_high": 0.022108014540143165,
+          "p_two_sided_bootstrap": 0.8412,
           "crosses_zero": true,
           "n_paired_structures": 192,
-          "matched_point_method": 0.7953208407292975,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_method": 0.7953622049415263,
+          "matched_point_baseline": 0.7933231313106249
         },
         "fstar_pocket": {
-          "delta_point": -0.19470739922052893,
-          "delta_ci_low": -0.2164476852531675,
-          "delta_ci_high": -0.17234180590057727,
+          "delta_point": -0.1945536682162856,
+          "delta_ci_low": -0.2162931928402457,
+          "delta_ci_high": -0.17222072358076854,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.598778642113169,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_method": 0.5987694630943393,
+          "matched_point_baseline": 0.7933231313106249
         },
         "geometric_foundation": {
-          "delta_point": -0.12886810680776872,
-          "delta_ci_low": -0.14625273239613598,
-          "delta_ci_high": -0.11129342179394854,
+          "delta_point": -0.12870519678469572,
+          "delta_ci_low": -0.14610115289327646,
+          "delta_ci_high": -0.11110990440496939,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
           "matched_point_method": 0.6646179345259292,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_baseline": 0.7933231313106249
         },
         "quaternary_lut": {
-          "delta_point": -0.03340202267043102,
-          "delta_ci_low": -0.05171473027032313,
-          "delta_ci_high": -0.016055895306437088,
+          "delta_point": -0.03336740283256523,
+          "delta_ci_low": -0.05168545045109258,
+          "delta_ci_high": -0.0160317800425517,
           "p_two_sided_bootstrap": 0.0004,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.7600840186632669,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_method": 0.7599557284780597,
+          "matched_point_baseline": 0.7933231313106249
         },
         "quaternary_lut_seq": {
-          "delta_point": -0.02680777305350024,
-          "delta_ci_low": -0.04423278586732812,
-          "delta_ci_high": -0.009901027349603483,
+          "delta_point": -0.026799026070774667,
+          "delta_ci_low": -0.044226555653842974,
+          "delta_ci_high": -0.009896739452295104,
           "p_two_sided_bootstrap": 0.002,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.7666782682801977,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_method": 0.7665241052398503,
+          "matched_point_baseline": 0.7933231313106249
         },
         "random_bbox": {
-          "delta_point": -0.29348604133369793,
-          "delta_ci_low": -0.31367460080847254,
-          "delta_ci_high": -0.27221092724721496,
+          "delta_point": -0.29332313131062493,
+          "delta_ci_low": -0.313515817783675,
+          "delta_ci_high": -0.2719886709068592,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
           "matched_point_method": 0.5,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_baseline": 0.7933231313106249
         },
         "sstar_pocket": {
-          "delta_point": -0.13844784602843496,
-          "delta_ci_low": -0.15713042580176723,
-          "delta_ci_high": -0.1195138664857345,
+          "delta_point": -0.1382898193244303,
+          "delta_ci_low": -0.15701276339733697,
+          "delta_ci_high": -0.11937672099052128,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.655038195305263,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_method": 0.6550333119861946,
+          "matched_point_baseline": 0.7933231313106249
         },
         "table_field": {
-          "delta_point": 0.005803152940251466,
-          "delta_ci_low": -0.016850265627443194,
-          "delta_ci_high": 0.02762690572594876,
-          "p_two_sided_bootstrap": 0.6004,
+          "delta_point": 0.005828055924360198,
+          "delta_ci_low": -0.01681677670130681,
+          "delta_ci_high": 0.027639907467514078,
+          "p_two_sided_bootstrap": 0.5984,
           "crosses_zero": true,
           "n_paired_structures": 192,
-          "matched_point_method": 0.7992891942739494,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_method": 0.7991511872349851,
+          "matched_point_baseline": 0.7933231313106249
         },
         "ultrametric_shear_oracle": {
-          "delta_point": -0.14093274755608898,
-          "delta_ci_low": -0.1592690597310512,
-          "delta_ci_high": -0.12254180558752399,
+          "delta_point": -0.14077520715771774,
+          "delta_ci_low": -0.15911749841598896,
+          "delta_ci_high": -0.12238042270920006,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.652553293777609,
-          "matched_point_baseline": 0.7934860413336979
+          "matched_point_method": 0.6525479241529072,
+          "matched_point_baseline": 0.7933231313106249
         }
       }
     },
@@ -201,21 +201,21 @@
       "ci_level": 0.95,
       "per_method": {
         "algebraic_field": {
-          "point": 0.3333534043366461,
-          "ci_low": 0.3006703951537595,
-          "ci_high": 0.3662176483392749,
+          "point": 0.33335122335582,
+          "ci_low": 0.3006673719816014,
+          "ci_high": 0.3662158216561644,
           "n_structures_scored": 192
         },
         "algebraic_field_linear": {
-          "point": 0.3594482840475081,
-          "ci_low": 0.3243473801577944,
-          "ci_high": 0.3934462302893234,
+          "point": 0.35944979526660653,
+          "ci_low": 0.324351680189396,
+          "ci_high": 0.39344921608103095,
           "n_structures_scored": 192
         },
         "fstar_pocket": {
-          "point": 0.2046279128449483,
-          "ci_low": 0.17720536513516716,
-          "ci_high": 0.23244384753197847,
+          "point": 0.20463098270055644,
+          "ci_low": 0.177211351353603,
+          "ci_high": 0.23244400102475887,
           "n_structures_scored": 192
         },
         "geometric_foundation": {
@@ -225,21 +225,21 @@
           "n_structures_scored": 192
         },
         "p2rank": {
-          "point": 0.3580249808622129,
-          "ci_low": 0.32202224988538325,
-          "ci_high": 0.39385102633989905,
+          "point": 0.35801249557587544,
+          "ci_low": 0.3220080266201589,
+          "ci_high": 0.39383699996962,
           "n_structures_scored": 192
         },
         "quaternary_lut": {
-          "point": 0.3119606637431099,
-          "ci_low": 0.2822986536624343,
-          "ci_high": 0.34116495237844663,
+          "point": 0.31195742471615273,
+          "ci_low": 0.2822981092993259,
+          "ci_high": 0.3411621434795959,
           "n_structures_scored": 192
         },
         "quaternary_lut_seq": {
-          "point": 0.3231814769529914,
-          "ci_low": 0.2926282485719338,
-          "ci_high": 0.35314953536270366,
+          "point": 0.32317658240032343,
+          "ci_low": 0.292620233213511,
+          "ci_high": 0.3531467860313053,
           "n_structures_scored": 192
         },
         "random_bbox": {
@@ -249,124 +249,124 @@
           "n_structures_scored": 192
         },
         "sstar_pocket": {
-          "point": 0.2551726554320582,
-          "ci_low": 0.22593252429032207,
-          "ci_high": 0.28489489943442153,
+          "point": 0.2551759445691751,
+          "ci_low": 0.22593589565586691,
+          "ci_high": 0.2848981063431106,
           "n_structures_scored": 192
         },
         "table_field": {
-          "point": 0.375680499950154,
-          "ci_low": 0.3394059997116072,
-          "ci_high": 0.41082922702545177,
+          "point": 0.37567504045345795,
+          "ci_low": 0.3394019154654614,
+          "ci_high": 0.4108231843667797,
           "n_structures_scored": 192
         },
         "ultrametric_shear_oracle": {
-          "point": 0.2568985517923516,
+          "point": 0.25690184092946855,
           "ci_low": 0.22738072068587864,
-          "ci_high": 0.28740086828159644,
+          "ci_high": 0.2874073643274025,
           "n_structures_scored": 192
         }
       },
       "paired_vs_baseline": {
         "algebraic_field": {
-          "delta_point": -0.024671576525566785,
-          "delta_ci_low": -0.052058393494033184,
-          "delta_ci_high": 0.0027612713863396105,
-          "p_two_sided_bootstrap": 0.0788,
+          "delta_point": -0.02466127222005543,
+          "delta_ci_low": -0.05204658487051886,
+          "delta_ci_high": 0.002771311039933058,
+          "p_two_sided_bootstrap": 0.079,
           "crosses_zero": true,
           "n_paired_structures": 192,
-          "matched_point_method": 0.3333534043366461,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_method": 0.33335122335582,
+          "matched_point_baseline": 0.35801249557587544
         },
         "algebraic_field_linear": {
-          "delta_point": 0.0014233031852952105,
-          "delta_ci_low": -0.02732514506257365,
-          "delta_ci_high": 0.030034070988943205,
-          "p_two_sided_bootstrap": 0.927,
+          "delta_point": 0.0014372996907310864,
+          "delta_ci_low": -0.027307678109040473,
+          "delta_ci_high": 0.030047116620179396,
+          "p_two_sided_bootstrap": 0.9258,
           "crosses_zero": true,
           "n_paired_structures": 192,
-          "matched_point_method": 0.3594482840475081,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_method": 0.35944979526660653,
+          "matched_point_baseline": 0.35801249557587544
         },
         "fstar_pocket": {
-          "delta_point": -0.1533970680172646,
-          "delta_ci_low": -0.18414577543722319,
-          "delta_ci_high": -0.12206813740887279,
+          "delta_point": -0.153381512875319,
+          "delta_ci_low": -0.18413211188180423,
+          "delta_ci_high": -0.12205618826538804,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.2046279128449483,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_method": 0.20463098270055644,
+          "matched_point_baseline": 0.35801249557587544
         },
         "geometric_foundation": {
-          "delta_point": -0.08164139950025001,
-          "delta_ci_low": -0.10866784998473737,
-          "delta_ci_high": -0.05491969930433385,
+          "delta_point": -0.08162891421391255,
+          "delta_ci_low": -0.1086503401020882,
+          "delta_ci_high": -0.054908380896784126,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
           "matched_point_method": 0.2763835813619629,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_baseline": 0.35801249557587544
         },
         "quaternary_lut": {
-          "delta_point": -0.046064317119103027,
-          "delta_ci_low": -0.07396734529697617,
-          "delta_ci_high": -0.018704395756159644,
+          "delta_point": -0.04605507085972271,
+          "delta_ci_low": -0.07395447380654255,
+          "delta_ci_high": -0.018700293517097694,
           "p_two_sided_bootstrap": 0.0018,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.3119606637431099,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_method": 0.31195742471615273,
+          "matched_point_baseline": 0.35801249557587544
         },
         "quaternary_lut_seq": {
-          "delta_point": -0.03484350390922153,
-          "delta_ci_low": -0.062233186124189745,
-          "delta_ci_high": -0.007896748576132071,
+          "delta_point": -0.034835913175552013,
+          "delta_ci_low": -0.06222604472187579,
+          "delta_ci_high": -0.007888851622223985,
           "p_two_sided_bootstrap": 0.0106,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.3231814769529914,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_method": 0.32317658240032343,
+          "matched_point_baseline": 0.35801249557587544
         },
         "random_bbox": {
-          "delta_point": -0.26467705634774097,
-          "delta_ci_low": -0.2980550958144084,
-          "delta_ci_high": -0.23073826305527775,
+          "delta_point": -0.2646645710614035,
+          "delta_ci_low": -0.29804892359943563,
+          "delta_ci_high": -0.2307272566139278,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
           "matched_point_method": 0.09334792451447192,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_baseline": 0.35801249557587544
         },
         "sstar_pocket": {
-          "delta_point": -0.10285232543015471,
-          "delta_ci_low": -0.13094802559546004,
-          "delta_ci_high": -0.07424897214110744,
+          "delta_point": -0.10283655100670036,
+          "delta_ci_low": -0.13093816090810959,
+          "delta_ci_high": -0.07423191759722565,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.2551726554320582,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_method": 0.2551759445691751,
+          "matched_point_baseline": 0.35801249557587544
         },
         "table_field": {
-          "delta_point": 0.017655519087941107,
-          "delta_ci_low": -0.009445698067550641,
-          "delta_ci_high": 0.04499816181713022,
-          "p_two_sided_bootstrap": 0.2025999999999999,
+          "delta_point": 0.01766254487758251,
+          "delta_ci_low": -0.009442505809315412,
+          "delta_ci_high": 0.04500480835833433,
+          "p_two_sided_bootstrap": 0.20219999999999994,
           "crosses_zero": true,
           "n_paired_structures": 192,
-          "matched_point_method": 0.375680499950154,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_method": 0.37567504045345795,
+          "matched_point_baseline": 0.35801249557587544
         },
         "ultrametric_shear_oracle": {
-          "delta_point": -0.1011264290698613,
-          "delta_ci_low": -0.1290397607244296,
-          "delta_ci_high": -0.07377470401799693,
+          "delta_point": -0.1011106546464069,
+          "delta_ci_low": -0.12902416108992565,
+          "delta_ci_high": -0.07376492162415785,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 192,
-          "matched_point_method": 0.2568985517923516,
-          "matched_point_baseline": 0.3580249808622129
+          "matched_point_method": 0.25690184092946855,
+          "matched_point_baseline": 0.35801249557587544
         }
       }
     },
@@ -392,9 +392,9 @@
           "n_structures_scored": 192
         },
         "fstar_pocket": {
-          "point": 0.1367313612298995,
+          "point": 0.136722669857282,
           "ci_low": 0.11246242986322348,
-          "ci_high": 0.16115852145774215,
+          "ci_high": 0.16114961280080925,
           "n_structures_scored": 192
         },
         "geometric_foundation": {
@@ -428,8 +428,8 @@
           "n_structures_scored": 0
         },
         "sstar_pocket": {
-          "point": 0.21806986760901118,
-          "ci_low": 0.18984193089943024,
+          "point": 0.21806373882314264,
+          "ci_low": 0.18983580211356166,
           "ci_high": 0.24602718299084456,
           "n_structures_scored": 192
         },
@@ -440,9 +440,9 @@
           "n_structures_scored": 192
         },
         "ultrametric_shear_oracle": {
-          "point": 0.21473526245155541,
-          "ci_low": 0.1871317762286389,
-          "ci_high": 0.24192815803612677,
+          "point": 0.21472913366568683,
+          "ci_low": 0.18712523153972221,
+          "ci_high": 0.24192806622753107,
           "n_structures_scored": 192
         }
       },
@@ -468,13 +468,13 @@
           "matched_point_baseline": 0.2847504977012497
         },
         "fstar_pocket": {
-          "delta_point": -0.1528402209082462,
-          "delta_ci_low": -0.18288226768676824,
-          "delta_ci_high": -0.12305245495555821,
+          "delta_point": -0.15284919264772234,
+          "delta_ci_low": -0.18290017616734663,
+          "delta_ci_high": -0.12307869729352597,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 186,
-          "matched_point_method": 0.13191027679300352,
+          "matched_point_method": 0.13190130505352737,
           "matched_point_baseline": 0.2847504977012497
         },
         "geometric_foundation": {
@@ -518,13 +518,13 @@
           "matched_point_baseline": null
         },
         "sstar_pocket": {
-          "delta_point": -0.06812794717339912,
-          "delta_ci_low": -0.09440306766692848,
-          "delta_ci_high": -0.041654467045004695,
+          "delta_point": -0.06813427366203767,
+          "delta_ci_low": -0.09440955231778296,
+          "delta_ci_high": -0.04166079353364319,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 186,
-          "matched_point_method": 0.2166225505278506,
+          "matched_point_method": 0.21661622403921205,
           "matched_point_baseline": 0.2847504977012497
         },
         "table_field": {
@@ -538,13 +538,13 @@
           "matched_point_baseline": 0.2847504977012497
         },
         "ultrametric_shear_oracle": {
-          "delta_point": -0.0708772814128974,
-          "delta_ci_low": -0.09607396032529447,
-          "delta_ci_high": -0.04507848460419545,
+          "delta_point": -0.07088360790153594,
+          "delta_ci_low": -0.0960866133025715,
+          "delta_ci_high": -0.045078642766411416,
           "p_two_sided_bootstrap": 0.0,
           "crosses_zero": false,
           "n_paired_structures": 186,
-          "matched_point_method": 0.21387321628835232,
+          "matched_point_method": 0.21386688979971377,
           "matched_point_baseline": 0.2847504977012497
         }
       }

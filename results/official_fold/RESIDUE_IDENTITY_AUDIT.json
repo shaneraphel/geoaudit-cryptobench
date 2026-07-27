@@ -1,0 +1,2167 @@
+{
+  "schema": "geoaudit.residue_identity_audit.v1",
+  "clinical_grade": false,
+  "purpose": "the residue-identity rule and what it costs, measured",
+  "rule": "a residue is (chain, resseq); the insertion code and the alternate-location indicator are not part of its identity",
+  "why": "CryptoBench labels are bare integers, so a finer key would create residues no label can mark positive",
+  "n_units": 192,
+  "n_tag_residues_zero_or_below": 47,
+  "units_with_tag_residues": [
+    "1e6k_A",
+    "1rtc_A",
+    "2pkf_A",
+    "3pfp_A",
+    "3pfp_B",
+    "3uyi_A",
+    "4hye_A",
+    "4nzv_B",
+    "5b0e_B",
+    "5o8b_A",
+    "5wbm_B",
+    "6bty_B",
+    "7kay_A",
+    "7o1i_A",
+    "8aqi_B"
+  ],
+  "n_residues_merged_by_insertion_code": 5,
+  "units_with_insertion_codes": [
+    "2v6m_D"
+  ],
+  "units_with_altlocs": [
+    "1cwq_A",
+    "1evy_A",
+    "1h13_A",
+    "1rtc_A",
+    "1ute_A",
+    "1xgd_A",
+    "2aka_A",
+    "2i3r_A",
+    "2iyt_A",
+    "2pkf_A",
+    "2qbv_A",
+    "2vqz_F",
+    "2vyr_A",
+    "2x47_A",
+    "2xsa_A",
+    "3a0x_A",
+    "3bjp_A",
+    "3flg_A",
+    "3i8s_B",
+    "3idh_A",
+    "3k01_A",
+    "3lnz_O",
+    "3n4u_A",
+    "3pfp_A",
+    "3pfp_B",
+    "3rwv_A",
+    "3st6_C",
+    "3t8b_A",
+    "3v55_A",
+    "4aem_A",
+    "4bg8_A",
+    "4cmw_B",
+    "4e1y_A",
+    "4gpi_C",
+    "4ikv_A",
+    "4ilg_A",
+    "4mwi_A",
+    "4p2f_A",
+    "4r0x_A",
+    "4rvt_B",
+    "4ttp_A",
+    "4uc8_A",
+    "4uum_A",
+    "4zm7_A",
+    "4zoe_B",
+    "5acv_B",
+    "5caz_A",
+    "5hto_E",
+    "5igh_A",
+    "5o8b_A",
+    "5sc2_A",
+    "5uxa_A",
+    "5wbm_B",
+    "5yhb_A",
+    "5yj2_C",
+    "5zj4_D",
+    "6bty_B",
+    "6cqe_B",
+    "6du4_A",
+    "6fc2_C",
+    "6g6y_A",
+    "6hei_A",
+    "6n5j_B",
+    "6nei_B",
+    "6o4f_H",
+    "7c63_A",
+    "7e5q_B",
+    "7f4y_B",
+    "7nc8_D",
+    "7qoq_A",
+    "7v8k_B",
+    "7w19_A",
+    "7x0i_B",
+    "8aeq_A",
+    "8j11_X",
+    "8onn_E",
+    "8u3n_A"
+  ],
+  "n_labelled_residues": 3301,
+  "n_labelled_unresolved_in_apo": 5,
+  "recall_denominator": "labelled residues present in the apo structure; a residue with no coordinates is outside every method's universe and is neither a hit nor a miss",
+  "labelled_residues_unresolved_in_apo": {
+    "2dfp_A": [
+      200
+    ],
+    "2phz_A": [
+      85
+    ],
+    "5igh_A": [
+      103,
+      237
+    ],
+    "7c48_A": [
+      78
+    ]
+  },
+  "per_unit": {
+    "1arl_A": {
+      "n_slots": 307,
+      "n_residues_if_insertion_codes_were_distinct": 307,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 17,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1bk2_A": {
+      "n_slots": 57,
+      "n_residues_if_insertion_codes_were_distinct": 57,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1bzj_A": {
+      "n_slots": 297,
+      "n_residues_if_insertion_codes_were_distinct": 297,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 56,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1cwq_A": {
+      "n_slots": 238,
+      "n_residues_if_insertion_codes_were_distinct": 238,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A"
+      ],
+      "n_labelled": 6,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1dq2_A": {
+      "n_slots": 224,
+      "n_residues_if_insertion_codes_were_distinct": 224,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1e6k_A": {
+      "n_slots": 130,
+      "n_residues_if_insertion_codes_were_distinct": 130,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -1
+      ],
+      "altloc_indicators_present": [],
+      "n_labelled": 9,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1evy_A": {
+      "n_slots": 346,
+      "n_residues_if_insertion_codes_were_distinct": 346,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 33,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1g1m_B": {
+      "n_slots": 289,
+      "n_residues_if_insertion_codes_were_distinct": 289,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1g59_A": {
+      "n_slots": 468,
+      "n_residues_if_insertion_codes_were_distinct": 468,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1h13_A": {
+      "n_slots": 404,
+      "n_residues_if_insertion_codes_were_distinct": 404,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1i7n_A": {
+      "n_slots": 308,
+      "n_residues_if_insertion_codes_were_distinct": 308,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 25,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1k47_D": {
+      "n_slots": 314,
+      "n_residues_if_insertion_codes_were_distinct": 314,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 14,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1ksg_B": {
+      "n_slots": 128,
+      "n_residues_if_insertion_codes_were_distinct": 128,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 31,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1kx9_A": {
+      "n_slots": 108,
+      "n_residues_if_insertion_codes_were_distinct": 108,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1kxr_A": {
+      "n_slots": 320,
+      "n_residues_if_insertion_codes_were_distinct": 320,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1lbe_B": {
+      "n_slots": 248,
+      "n_residues_if_insertion_codes_were_distinct": 248,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 20,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1m5w_D": {
+      "n_slots": 242,
+      "n_residues_if_insertion_codes_were_distinct": 242,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 21,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1nd7_A": {
+      "n_slots": 374,
+      "n_residues_if_insertion_codes_were_distinct": 374,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 4,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1p4o_B": {
+      "n_slots": 314,
+      "n_residues_if_insertion_codes_were_distinct": 314,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 28,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1p4v_A": {
+      "n_slots": 295,
+      "n_residues_if_insertion_codes_were_distinct": 295,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1p9o_A": {
+      "n_slots": 269,
+      "n_residues_if_insertion_codes_were_distinct": 269,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1pu5_C": {
+      "n_slots": 161,
+      "n_residues_if_insertion_codes_were_distinct": 161,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1q4k_A": {
+      "n_slots": 222,
+      "n_residues_if_insertion_codes_were_distinct": 222,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 13,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1rjb_A": {
+      "n_slots": 298,
+      "n_residues_if_insertion_codes_were_distinct": 298,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1rtc_A": {
+      "n_slots": 268,
+      "n_residues_if_insertion_codes_were_distinct": 268,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        0
+      ],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 6,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1se8_A": {
+      "n_slots": 205,
+      "n_residues_if_insertion_codes_were_distinct": 205,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 3,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1uka_A": {
+      "n_slots": 271,
+      "n_residues_if_insertion_codes_were_distinct": 271,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 6,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1ute_A": {
+      "n_slots": 302,
+      "n_residues_if_insertion_codes_were_distinct": 302,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 8,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1vsn_A": {
+      "n_slots": 215,
+      "n_residues_if_insertion_codes_were_distinct": 215,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1x2g_C": {
+      "n_slots": 332,
+      "n_residues_if_insertion_codes_were_distinct": 332,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1xgd_A": {
+      "n_slots": 315,
+      "n_residues_if_insertion_codes_were_distinct": 315,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 51,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1xjf_A": {
+      "n_slots": 619,
+      "n_residues_if_insertion_codes_were_distinct": 619,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1xqv_A": {
+      "n_slots": 290,
+      "n_residues_if_insertion_codes_were_distinct": 290,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 22,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1xtc_A": {
+      "n_slots": 192,
+      "n_residues_if_insertion_codes_were_distinct": 192,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "1zm0_A": {
+      "n_slots": 96,
+      "n_residues_if_insertion_codes_were_distinct": 96,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2aka_A": {
+      "n_slots": 764,
+      "n_residues_if_insertion_codes_were_distinct": 764,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 32,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2d05_A": {
+      "n_slots": 259,
+      "n_residues_if_insertion_codes_were_distinct": 259,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 22,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2dfp_A": {
+      "n_slots": 533,
+      "n_residues_if_insertion_codes_were_distinct": 533,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 36,
+      "n_labelled_absent_from_universe": 1
+    },
+    "2fem_A": {
+      "n_slots": 212,
+      "n_residues_if_insertion_codes_were_distinct": 212,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2fhz_B": {
+      "n_slots": 93,
+      "n_residues_if_insertion_codes_were_distinct": 93,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 14,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2h7s_A": {
+      "n_slots": 405,
+      "n_residues_if_insertion_codes_were_distinct": 405,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2i3a_D": {
+      "n_slots": 347,
+      "n_residues_if_insertion_codes_were_distinct": 347,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2i3r_A": {
+      "n_slots": 286,
+      "n_residues_if_insertion_codes_were_distinct": 286,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 22,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2iyt_A": {
+      "n_slots": 175,
+      "n_residues_if_insertion_codes_were_distinct": 175,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B",
+        "C"
+      ],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2nt1_B": {
+      "n_slots": 497,
+      "n_residues_if_insertion_codes_were_distinct": 497,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2phz_A": {
+      "n_slots": 270,
+      "n_residues_if_insertion_codes_were_distinct": 270,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 17,
+      "n_labelled_absent_from_universe": 1
+    },
+    "2pkf_A": {
+      "n_slots": 332,
+      "n_residues_if_insertion_codes_were_distinct": 332,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2pwz_G": {
+      "n_slots": 312,
+      "n_residues_if_insertion_codes_were_distinct": 312,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 31,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2qbv_A": {
+      "n_slots": 73,
+      "n_residues_if_insertion_codes_were_distinct": 73,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 14,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2rfj_B": {
+      "n_slots": 106,
+      "n_residues_if_insertion_codes_were_distinct": 106,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2v6m_D": {
+      "n_slots": 298,
+      "n_residues_if_insertion_codes_were_distinct": 303,
+      "slots_holding_more_than_one_residue": {
+        "132": [
+          "A",
+          "B"
+        ],
+        "209": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "210": [
+          "A",
+          "B"
+        ]
+      },
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 34,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2vl2_C": {
+      "n_slots": 161,
+      "n_residues_if_insertion_codes_were_distinct": 161,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 10,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2vqz_F": {
+      "n_slots": 150,
+      "n_residues_if_insertion_codes_were_distinct": 150,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 7,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2vyr_A": {
+      "n_slots": 86,
+      "n_residues_if_insertion_codes_were_distinct": 86,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 21,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2w8n_A": {
+      "n_slots": 480,
+      "n_residues_if_insertion_codes_were_distinct": 480,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2x47_A": {
+      "n_slots": 229,
+      "n_residues_if_insertion_codes_were_distinct": 229,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 26,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2xsa_A": {
+      "n_slots": 443,
+      "n_residues_if_insertion_codes_were_distinct": 443,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2zcg_A": {
+      "n_slots": 318,
+      "n_residues_if_insertion_codes_were_distinct": 318,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 14,
+      "n_labelled_absent_from_universe": 0
+    },
+    "2zj7_A": {
+      "n_slots": 616,
+      "n_residues_if_insertion_codes_were_distinct": 616,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 8,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3a0x_A": {
+      "n_slots": 149,
+      "n_residues_if_insertion_codes_were_distinct": 149,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 21,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3bjp_A": {
+      "n_slots": 295,
+      "n_residues_if_insertion_codes_were_distinct": 295,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3f4k_A": {
+      "n_slots": 254,
+      "n_residues_if_insertion_codes_were_distinct": 254,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3flg_A": {
+      "n_slots": 135,
+      "n_residues_if_insertion_codes_were_distinct": 135,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 9,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3fzo_A": {
+      "n_slots": 262,
+      "n_residues_if_insertion_codes_were_distinct": 262,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 34,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3gdg_B": {
+      "n_slots": 267,
+      "n_residues_if_insertion_codes_were_distinct": 267,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 32,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3h8a_B": {
+      "n_slots": 430,
+      "n_residues_if_insertion_codes_were_distinct": 430,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3i8s_B": {
+      "n_slots": 261,
+      "n_residues_if_insertion_codes_were_distinct": 261,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B",
+        "C"
+      ],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3idh_A": {
+      "n_slots": 453,
+      "n_residues_if_insertion_codes_were_distinct": 453,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 22,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3jzg_A": {
+      "n_slots": 359,
+      "n_residues_if_insertion_codes_were_distinct": 359,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 12,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3k01_A": {
+      "n_slots": 391,
+      "n_residues_if_insertion_codes_were_distinct": 391,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 28,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3lnz_C": {
+      "n_slots": 82,
+      "n_residues_if_insertion_codes_were_distinct": 82,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 24,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3lnz_O": {
+      "n_slots": 83,
+      "n_residues_if_insertion_codes_were_distinct": 83,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 24,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3ly8_A": {
+      "n_slots": 323,
+      "n_residues_if_insertion_codes_were_distinct": 323,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3mwg_B": {
+      "n_slots": 272,
+      "n_residues_if_insertion_codes_were_distinct": 272,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3n4u_A": {
+      "n_slots": 301,
+      "n_residues_if_insertion_codes_were_distinct": 301,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 20,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3nx1_B": {
+      "n_slots": 165,
+      "n_residues_if_insertion_codes_were_distinct": 165,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 10,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3pbf_A": {
+      "n_slots": 145,
+      "n_residues_if_insertion_codes_were_distinct": 145,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 7,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3pfp_A": {
+      "n_slots": 464,
+      "n_residues_if_insertion_codes_were_distinct": 464,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 13,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3pfp_B": {
+      "n_slots": 464,
+      "n_residues_if_insertion_codes_were_distinct": 464,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 13,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3rwv_A": {
+      "n_slots": 205,
+      "n_residues_if_insertion_codes_were_distinct": 205,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3st6_C": {
+      "n_slots": 424,
+      "n_residues_if_insertion_codes_were_distinct": 424,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 30,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3t8b_A": {
+      "n_slots": 237,
+      "n_residues_if_insertion_codes_were_distinct": 237,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3tpo_A": {
+      "n_slots": 438,
+      "n_residues_if_insertion_codes_were_distinct": 438,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 8,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3ugk_A": {
+      "n_slots": 372,
+      "n_residues_if_insertion_codes_were_distinct": 372,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 38,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3uyi_A": {
+      "n_slots": 312,
+      "n_residues_if_insertion_codes_were_distinct": 312,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        0
+      ],
+      "altloc_indicators_present": [],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3v55_A": {
+      "n_slots": 368,
+      "n_residues_if_insertion_codes_were_distinct": 368,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 29,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3vgm_A": {
+      "n_slots": 312,
+      "n_residues_if_insertion_codes_were_distinct": 312,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3w90_A": {
+      "n_slots": 198,
+      "n_residues_if_insertion_codes_were_distinct": 198,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "3wb9_C": {
+      "n_slots": 297,
+      "n_residues_if_insertion_codes_were_distinct": 297,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 28,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4aem_A": {
+      "n_slots": 126,
+      "n_residues_if_insertion_codes_were_distinct": 126,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 6,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4amv_B": {
+      "n_slots": 608,
+      "n_residues_if_insertion_codes_were_distinct": 608,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4bg8_A": {
+      "n_slots": 310,
+      "n_residues_if_insertion_codes_were_distinct": 310,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4cmw_B": {
+      "n_slots": 286,
+      "n_residues_if_insertion_codes_were_distinct": 286,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4dnc_B": {
+      "n_slots": 267,
+      "n_residues_if_insertion_codes_were_distinct": 267,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 26,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4e1y_A": {
+      "n_slots": 353,
+      "n_residues_if_insertion_codes_were_distinct": 353,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4fkm_B": {
+      "n_slots": 209,
+      "n_residues_if_insertion_codes_were_distinct": 209,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4gpi_C": {
+      "n_slots": 235,
+      "n_residues_if_insertion_codes_were_distinct": 235,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 24,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4gv9_A": {
+      "n_slots": 198,
+      "n_residues_if_insertion_codes_were_distinct": 198,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4hye_A": {
+      "n_slots": 200,
+      "n_residues_if_insertion_codes_were_distinct": 200,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        0
+      ],
+      "altloc_indicators_present": [],
+      "n_labelled": 4,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4ikv_A": {
+      "n_slots": 492,
+      "n_residues_if_insertion_codes_were_distinct": 492,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 10,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4ilg_A": {
+      "n_slots": 321,
+      "n_residues_if_insertion_codes_were_distinct": 321,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 42,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4j4e_F": {
+      "n_slots": 101,
+      "n_residues_if_insertion_codes_were_distinct": 101,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 10,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4jax_F": {
+      "n_slots": 459,
+      "n_residues_if_insertion_codes_were_distinct": 459,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4jfr_C": {
+      "n_slots": 334,
+      "n_residues_if_insertion_codes_were_distinct": 334,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 14,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4kmy_A": {
+      "n_slots": 207,
+      "n_residues_if_insertion_codes_were_distinct": 207,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 20,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4mwi_A": {
+      "n_slots": 266,
+      "n_residues_if_insertion_codes_were_distinct": 266,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 29,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4nzv_B": {
+      "n_slots": 324,
+      "n_residues_if_insertion_codes_were_distinct": 324,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -2,
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4oqo_B": {
+      "n_slots": 348,
+      "n_residues_if_insertion_codes_were_distinct": 348,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4p2f_A": {
+      "n_slots": 189,
+      "n_residues_if_insertion_codes_were_distinct": 189,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 10,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4qvk_B": {
+      "n_slots": 235,
+      "n_residues_if_insertion_codes_were_distinct": 235,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 25,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4r0x_A": {
+      "n_slots": 122,
+      "n_residues_if_insertion_codes_were_distinct": 122,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 29,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4rvt_B": {
+      "n_slots": 297,
+      "n_residues_if_insertion_codes_were_distinct": 297,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 31,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4ttp_A": {
+      "n_slots": 201,
+      "n_residues_if_insertion_codes_were_distinct": 201,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4uc8_A": {
+      "n_slots": 222,
+      "n_residues_if_insertion_codes_were_distinct": 222,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 3,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4uum_A": {
+      "n_slots": 334,
+      "n_residues_if_insertion_codes_were_distinct": 334,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 34,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4zm7_A": {
+      "n_slots": 180,
+      "n_residues_if_insertion_codes_were_distinct": 180,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 7,
+      "n_labelled_absent_from_universe": 0
+    },
+    "4zoe_B": {
+      "n_slots": 724,
+      "n_residues_if_insertion_codes_were_distinct": 724,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5acv_B": {
+      "n_slots": 232,
+      "n_residues_if_insertion_codes_were_distinct": 232,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 4,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5b0e_B": {
+      "n_slots": 104,
+      "n_residues_if_insertion_codes_were_distinct": 104,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -2,
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [],
+      "n_labelled": 21,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5caz_A": {
+      "n_slots": 161,
+      "n_residues_if_insertion_codes_were_distinct": 161,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 3,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5e0v_A": {
+      "n_slots": 249,
+      "n_residues_if_insertion_codes_were_distinct": 249,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5ey7_B": {
+      "n_slots": 291,
+      "n_residues_if_insertion_codes_were_distinct": 291,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 26,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5hij_A": {
+      "n_slots": 240,
+      "n_residues_if_insertion_codes_were_distinct": 240,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 21,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5hto_E": {
+      "n_slots": 305,
+      "n_residues_if_insertion_codes_were_distinct": 305,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 33,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5i3t_E": {
+      "n_slots": 363,
+      "n_residues_if_insertion_codes_were_distinct": 363,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 4,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5igh_A": {
+      "n_slots": 293,
+      "n_residues_if_insertion_codes_were_distinct": 293,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 24,
+      "n_labelled_absent_from_universe": 2
+    },
+    "5kcg_B": {
+      "n_slots": 397,
+      "n_residues_if_insertion_codes_were_distinct": 397,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 17,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5loc_A": {
+      "n_slots": 320,
+      "n_residues_if_insertion_codes_were_distinct": 320,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 36,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5o8b_A": {
+      "n_slots": 243,
+      "n_residues_if_insertion_codes_were_distinct": 243,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [
+        "B",
+        "D"
+      ],
+      "n_labelled": 4,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5sc2_A": {
+      "n_slots": 150,
+      "n_residues_if_insertion_codes_were_distinct": 150,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5tc0_B": {
+      "n_slots": 250,
+      "n_residues_if_insertion_codes_were_distinct": 250,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 28,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5tvi_V": {
+      "n_slots": 90,
+      "n_residues_if_insertion_codes_were_distinct": 90,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 16,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5uxa_A": {
+      "n_slots": 301,
+      "n_residues_if_insertion_codes_were_distinct": 301,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 25,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5wbm_B": {
+      "n_slots": 302,
+      "n_residues_if_insertion_codes_were_distinct": 302,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -3,
+        -2,
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 13,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5yhb_A": {
+      "n_slots": 178,
+      "n_residues_if_insertion_codes_were_distinct": 178,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5yj2_C": {
+      "n_slots": 302,
+      "n_residues_if_insertion_codes_were_distinct": 302,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 8,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5yqp_A": {
+      "n_slots": 185,
+      "n_residues_if_insertion_codes_were_distinct": 185,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 25,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5ysb_B": {
+      "n_slots": 385,
+      "n_residues_if_insertion_codes_were_distinct": 385,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 14,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5z18_C": {
+      "n_slots": 588,
+      "n_residues_if_insertion_codes_were_distinct": 588,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 14,
+      "n_labelled_absent_from_universe": 0
+    },
+    "5zj4_D": {
+      "n_slots": 160,
+      "n_residues_if_insertion_codes_were_distinct": 160,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6a98_C": {
+      "n_slots": 201,
+      "n_residues_if_insertion_codes_were_distinct": 201,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 13,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6bty_B": {
+      "n_slots": 128,
+      "n_residues_if_insertion_codes_were_distinct": 128,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -2,
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 9,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6cqe_B": {
+      "n_slots": 287,
+      "n_residues_if_insertion_codes_were_distinct": 287,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 26,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6du4_A": {
+      "n_slots": 287,
+      "n_residues_if_insertion_codes_were_distinct": 287,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B",
+        "C"
+      ],
+      "n_labelled": 26,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6eqj_A": {
+      "n_slots": 245,
+      "n_residues_if_insertion_codes_were_distinct": 245,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6f52_A": {
+      "n_slots": 233,
+      "n_residues_if_insertion_codes_were_distinct": 233,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6fc2_C": {
+      "n_slots": 177,
+      "n_residues_if_insertion_codes_were_distinct": 177,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 12,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6fgj_B": {
+      "n_slots": 197,
+      "n_residues_if_insertion_codes_were_distinct": 197,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 17,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6g6y_A": {
+      "n_slots": 319,
+      "n_residues_if_insertion_codes_were_distinct": 319,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 22,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6hei_A": {
+      "n_slots": 346,
+      "n_residues_if_insertion_codes_were_distinct": 346,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 26,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6isu_A": {
+      "n_slots": 227,
+      "n_residues_if_insertion_codes_were_distinct": 227,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 20,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6jq9_B": {
+      "n_slots": 483,
+      "n_residues_if_insertion_codes_were_distinct": 483,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 7,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6ksc_A": {
+      "n_slots": 321,
+      "n_residues_if_insertion_codes_were_distinct": 321,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 10,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6n5j_B": {
+      "n_slots": 301,
+      "n_residues_if_insertion_codes_were_distinct": 301,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 21,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6nei_B": {
+      "n_slots": 339,
+      "n_residues_if_insertion_codes_were_distinct": 339,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 23,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6o4f_H": {
+      "n_slots": 509,
+      "n_residues_if_insertion_codes_were_distinct": 509,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6tx0_B": {
+      "n_slots": 479,
+      "n_residues_if_insertion_codes_were_distinct": 479,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 4,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6vle_A": {
+      "n_slots": 460,
+      "n_residues_if_insertion_codes_were_distinct": 460,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "6w10_A": {
+      "n_slots": 223,
+      "n_residues_if_insertion_codes_were_distinct": 223,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 13,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7c48_A": {
+      "n_slots": 288,
+      "n_residues_if_insertion_codes_were_distinct": 288,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 23,
+      "n_labelled_absent_from_universe": 1
+    },
+    "7c63_A": {
+      "n_slots": 416,
+      "n_residues_if_insertion_codes_were_distinct": 416,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 14,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7de1_A": {
+      "n_slots": 108,
+      "n_residues_if_insertion_codes_were_distinct": 108,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 8,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7e5q_B": {
+      "n_slots": 352,
+      "n_residues_if_insertion_codes_were_distinct": 352,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 6,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7f2m_B": {
+      "n_slots": 323,
+      "n_residues_if_insertion_codes_were_distinct": 323,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 7,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7f4y_B": {
+      "n_slots": 901,
+      "n_residues_if_insertion_codes_were_distinct": 901,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 17,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7kay_A": {
+      "n_slots": 583,
+      "n_residues_if_insertion_codes_were_distinct": 583,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [],
+      "n_labelled": 36,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7nc8_D": {
+      "n_slots": 237,
+      "n_residues_if_insertion_codes_were_distinct": 237,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 11,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7ndl_B": {
+      "n_slots": 655,
+      "n_residues_if_insertion_codes_were_distinct": 655,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7nlx_A": {
+      "n_slots": 290,
+      "n_residues_if_insertion_codes_were_distinct": 290,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 15,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7o1i_A": {
+      "n_slots": 726,
+      "n_residues_if_insertion_codes_were_distinct": 726,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -10,
+        -9,
+        -8,
+        -7,
+        -6,
+        -5
+      ],
+      "altloc_indicators_present": [],
+      "n_labelled": 29,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7qoq_A": {
+      "n_slots": 302,
+      "n_residues_if_insertion_codes_were_distinct": 302,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 10,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7qzr_D": {
+      "n_slots": 463,
+      "n_residues_if_insertion_codes_were_distinct": 463,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 3,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7v8k_B": {
+      "n_slots": 474,
+      "n_residues_if_insertion_codes_were_distinct": 474,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7w19_A": {
+      "n_slots": 293,
+      "n_residues_if_insertion_codes_were_distinct": 293,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 23,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7x0f_A": {
+      "n_slots": 446,
+      "n_residues_if_insertion_codes_were_distinct": 446,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 13,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7x0g_B": {
+      "n_slots": 287,
+      "n_residues_if_insertion_codes_were_distinct": 287,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7x0i_B": {
+      "n_slots": 406,
+      "n_residues_if_insertion_codes_were_distinct": 406,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 32,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7xgf_E": {
+      "n_slots": 151,
+      "n_residues_if_insertion_codes_were_distinct": 151,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 46,
+      "n_labelled_absent_from_universe": 0
+    },
+    "7yjc_A": {
+      "n_slots": 381,
+      "n_residues_if_insertion_codes_were_distinct": 381,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 6,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8aeq_A": {
+      "n_slots": 624,
+      "n_residues_if_insertion_codes_were_distinct": 624,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 8,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8aqi_B": {
+      "n_slots": 172,
+      "n_residues_if_insertion_codes_were_distinct": 172,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [
+        -2,
+        -1,
+        0
+      ],
+      "altloc_indicators_present": [],
+      "n_labelled": 14,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8b9p_A": {
+      "n_slots": 596,
+      "n_residues_if_insertion_codes_were_distinct": 596,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 5,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8bre_B": {
+      "n_slots": 351,
+      "n_residues_if_insertion_codes_were_distinct": 351,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 17,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8gxj_C": {
+      "n_slots": 184,
+      "n_residues_if_insertion_codes_were_distinct": 184,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 20,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8h27_A": {
+      "n_slots": 181,
+      "n_residues_if_insertion_codes_were_distinct": 181,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 27,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8i84_B": {
+      "n_slots": 285,
+      "n_residues_if_insertion_codes_were_distinct": 285,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 19,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8ias_B": {
+      "n_slots": 501,
+      "n_residues_if_insertion_codes_were_distinct": 501,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 18,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8j11_X": {
+      "n_slots": 173,
+      "n_residues_if_insertion_codes_were_distinct": 173,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 3,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8onn_E": {
+      "n_slots": 268,
+      "n_residues_if_insertion_codes_were_distinct": 268,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 22,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8u3n_A": {
+      "n_slots": 377,
+      "n_residues_if_insertion_codes_were_distinct": 377,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [
+        "A",
+        "B"
+      ],
+      "n_labelled": 8,
+      "n_labelled_absent_from_universe": 0
+    },
+    "8vxu_B": {
+      "n_slots": 104,
+      "n_residues_if_insertion_codes_were_distinct": 104,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 8,
+      "n_labelled_absent_from_universe": 0
+    },
+    "9atc_A": {
+      "n_slots": 310,
+      "n_residues_if_insertion_codes_were_distinct": 310,
+      "slots_holding_more_than_one_residue": {},
+      "negative_or_zero_numbered_residues": [],
+      "altloc_indicators_present": [],
+      "n_labelled": 21,
+      "n_labelled_absent_from_universe": 0
+    }
+  }
+}

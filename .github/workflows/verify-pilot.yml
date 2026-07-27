@@ -29,6 +29,10 @@ jobs:
         run: make ledger
       - name: Every frozen artifact must declare its role
         run: make artifacts
+      - name: The headline must follow from the raw predictions, recomputed independently
+        run: make recompute
+      - name: The residue-identity rule and the recall denominator must not drift
+        run: make residues
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

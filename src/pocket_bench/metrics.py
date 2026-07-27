@@ -4,6 +4,7 @@ from __future__ import annotations
 import math
 from typing import Any, Sequence
 
+from pocket_bench import residue_id
 from pocket_bench.paths import DCA_THRESHOLD_A
 
 
@@ -107,18 +108,10 @@ def average_precision(scores: Sequence[float], labels: Sequence[int]) -> float |
     return ap
 
 
-def _resseq(rid: Any) -> int | None:
-    """Extract an integer residue number from an int or a 'A:ALA123' style id."""
-    if isinstance(rid, int):
-        return rid
-    s = str(rid)
-    digits = ""
-    for ch in reversed(s):
-        if ch.isdigit():
-            digits = ch + digits
-        elif digits:
-            break
-    return int(digits) if digits else None
+# Residue identity is defined once, in pocket_bench.residue_id, because the
+# scorer and the P2Rank adapter each used to define it and the two disagreed.
+# See tests/test_residue_numbering.py for what that cost.
+_resseq = residue_id.resseq
 
 
 def residue_scores_from_pockets(

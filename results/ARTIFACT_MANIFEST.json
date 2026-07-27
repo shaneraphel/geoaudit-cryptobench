@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 20,
-    "cited": 19,
+    "cited": 21,
     "superseded": 4,
     "fold_access": 4
   },
-  "n_artifacts": 47,
+  "n_artifacts": 49,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -231,7 +231,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.telemetry.v1",
-      "bytes": 1806164
+      "bytes": 1806506
     },
     {
       "artifact": "results/gf4_ablation/GF4_ALLELE_ABLATION.json",
@@ -269,6 +269,13 @@
       "bytes": 1097
     },
     {
+      "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.independent_recomputation.v1",
+      "bytes": 3225
+    },
+    {
       "artifact": "results/official_fold/OFFICIAL_FOLD_METRICS.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -287,7 +294,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.bootstrap_report.v1",
-      "bytes": 26490
+      "bytes": 26503
     },
     {
       "artifact": "results/official_fold/PER_STRUCTURE.json",
@@ -295,6 +302,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": null,
       "bytes": 86105
+    },
+    {
+      "artifact": "results/official_fold/RESIDUE_IDENTITY_AUDIT.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.residue_identity_audit.v1",
+      "bytes": 64377
     },
     {
       "artifact": "results/official_fold/SEED_SENSITIVITY.json",

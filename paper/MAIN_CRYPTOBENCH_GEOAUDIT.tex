@@ -663,7 +663,56 @@ P2Rank's own \texttt{*\_residues.csv} and \texttt{*\_predictions.csv} are
 archived beside a \texttt{run.json} carrying the command, the P2Rank version,
 the JVM banner and a SHA-256 of each file, all captured at run time. Every
 number reported for P2Rank is a transformation of those two files, so a reader
-can recompute the strongest competitor in the table from the archive alone.
+can recompute the strongest competitor in the table from the archive alone. A
+gate checks that it is the identity transformation where it should be: the
+scores we evaluate must be P2Rank's own \texttt{probability} column and our
+positive calls must be its own pocket assignment, unit by unit and value by
+value. That gate exists because an earlier harness scored P2Rank from its top
+five pocket centres with an invented distance cutoff and a reciprocal-rank
+score, measured it at \(0.62\) against a published \(0.81\), and drew a
+conclusion from the gap.
+
+\subsection{An independent recomputation, and what it found}
+Consistency gates compare artifacts to other artifacts. A mistake made before
+the artifacts are written survives all of them, so the repository also carries a
+recomputation that shares no code with the harness: it reads the committed
+labels and per-residue scores, re-derives the four metrics and the paired
+bootstrap from their definitions, and requires agreement to \(10^{-9}\) on 4608
+per-unit values across the six residue-level detectors.
+
+Writing it exposed a defect in residue identity. Identifiers were parsed by
+taking their trailing digits and discarding the minus sign, so an
+expression-tag residue numbered \(-1\) addressed the same slot as residue 1 and
+the two exchanged scores: the tag residue inherited a real residue's ranking,
+and the real residue -- which may be a labelled cryptic-site residue -- inherited
+the tag's. Eleven of the \NUnits{} structures carry such a tag, one of them with
+seven colliding pairs. A second copy of the rule, in the P2Rank adapter, failed
+oppositely, dropping any row whose label carried an insertion code. Neither
+raised; both moved published numbers.
+
+Every detector was rescored on the official fold after the fix. The conclusions
+are unchanged: 80 per-unit values moved, the largest by \(0.025\) ROC-AUC on a
+single structure on which every method already scores below chance, and no fold
+mean moved by more than \(1.6\times10^{-4}\). We report this rather than
+silently re-freezing, because the informative part is not that the result
+survived. It is that a genuine data-handling error was invisible to every check
+that compared artifacts to artifacts and immediate to the one that compared them
+to the data, which is an argument about what a reproducibility package should
+contain, not about this paper.
+
+Residue identity is now stated rather than implied. A residue is
+\((\text{chain}, \text{resseq})\); the insertion code and the alternate-location
+indicator are not part of it. That is forced by the label vocabulary --
+CryptoBench marks a site with bare integers, so no label can separate 132 from
+132A, and a finer key would populate the universe with residues no label could
+ever mark positive. An audit records what follows: 47 tag residues across 15
+units, five residues sharing a slot in the one structure with insertion codes,
+77 units carrying alternate locations, and five labelled residues in four
+structures, \(0.15\,\%\) of 3301, for which the apo crystal has no coordinates.
+Those five lie outside every method's universe and are therefore neither hits
+nor misses, so the recall reported here is over labelled residues \emph{present
+in the apo structure}. The count is pinned in the audit, so a data refresh that
+begins deleting positives fails rather than shrinking the denominator quietly.
 
 \input{appendix_b_gf4_ablation.tex}
 

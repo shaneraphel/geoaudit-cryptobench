@@ -37,6 +37,7 @@ import time
 from pathlib import Path
 from typing import Any
 
+from pocket_bench import residue_id
 from pocket_bench.methods import prediction
 from pocket_bench.paths import (
     STATUS_CRASH,
@@ -112,17 +113,22 @@ def parse_residues_csv(
             label = row.get("residue_label")
             if not label:
                 continue
-            try:
-                resseq = int(label)
-            except ValueError:
+            # P2Rank labels a residue with its insertion code where it has one,
+            # so '132A' arrives here. int() raised on those and the row was
+            # skipped, which threw away P2Rank's answer for the residue instead
+            # of merging it into the slot the universe gives it.
+            resseq = residue_id.resseq(label)
+            if resseq is None:
                 continue
             val = row.get("probability") or row.get("score")
             try:
                 score = float(val)
             except (TypeError, ValueError):
                 continue
-            # A residue can only appear once per chain; keep the strongest call
-            # if a file ever repeats one rather than letting order decide.
+            # Several labels can map to one slot -- '132', '132A', '132B' -- and
+            # the slot is as ligandable as its most ligandable occupant. Taking
+            # the maximum also settles a file that simply repeats a residue,
+            # rather than letting row order decide it.
             scores[resseq] = max(scores.get(resseq, float("-inf")), score)
             try:
                 if int(float(row.get("pocket") or 0)) > 0:
@@ -193,18 +199,24 @@ def _version() -> str:
 
 
 _HOME_RE = re.compile(r"(?<![A-Za-z])/(?:Users|home|private/var|var)/[^\s\]\"']*")
+_DURATION_RE = re.compile(r"\d+ hours \d+ minutes \d+\.\d+ seconds")
 
 
 def _redact_paths(text: str) -> str:
-    """Replace machine-specific absolute paths with placeholders.
+    """Remove from P2Rank's own output what is about this machine, not this run.
 
-    P2Rank prints the absolute location of its own install and of the scratch
-    directory on every run. Kept verbatim, all 192 archived records would
-    publish a home directory and would differ from run to run on nothing that
-    matters. The substitution is mechanical, so a reader who re-runs on their own
-    machine gets the same archived text.
+    Two kinds of noise. P2Rank prints the absolute location of its install and
+    of the scratch directory, which would publish a home directory 192 times
+    over. It also prints how long it took, which differs on every run and on
+    every machine and tells a reader nothing they can check.
+
+    Removing both makes the archive byte-stable: re-running P2Rank on the same
+    receptors leaves the whole of ``p2rank_raw/`` unchanged, so the question
+    "did the baseline move?" is answered by a diff rather than by comparing
+    numbers. Confirmed by re-running the fold -- all 192 CSV pairs came back
+    bit-identical, and only these durations differed.
     """
-    return _HOME_RE.sub("<path>", text)
+    return _DURATION_RE.sub("<duration>", _HOME_RE.sub("<path>", text))
 
 
 def _jvm_version() -> str:

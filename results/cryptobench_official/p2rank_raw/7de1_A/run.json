@@ -19,5 +19,5 @@
     "rec.pdb_residues.csv": "dca074786c1e22e2cee2832043330a7ad4ec6aeafd9bc7e8b92962e92f4d2819",
     "rec.pdb_predictions.csv": "2ae7f22e3908e29731dea225e459d613e3f9fd7be6361e4ed1acdcac9e3a1773"
   },
-  "stdout_tail": "P2Rank 2.5.1\n\nDIR: <path>\nDIR2: <path>\nDIR: <path>\nDIR2: <path>\npredicting pockets for proteins from dataset [rec.pdb]\nprocessing [rec.pdb] (1/1)\npredicting pockets finished in 0 hours 0 minutes 2.641 seconds\nresults saved to directory [<path>]\n\nFinished successfully in 0 hours 0 minutes 3.629 seconds.\n"
+  "stdout_tail": "P2Rank 2.5.1\n\nDIR: <path>\nDIR2: <path>\nDIR: <path>\nDIR2: <path>\npredicting pockets for proteins from dataset [rec.pdb]\nprocessing [rec.pdb] (1/1)\npredicting pockets finished in <duration>\nresults saved to directory [<path>]\n\nFinished successfully in <duration>.\n"
 }

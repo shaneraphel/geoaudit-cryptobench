@@ -27,6 +27,6 @@
       "jvm": "openjdk version \"17.0.20\" 2026-07-21"
     }
   },
-  "git_commit": "68194da5ff90710d842e965896afe388c0225e45",
+  "git_commit": "2eeaeaa110b7f5755aec8aaba6e23b68ac1b4e60",
   "environment_sha256": "d3219f8aab89712083d19c087d267d517735c29f7a134cb164bddf736e04c1fe"
 }

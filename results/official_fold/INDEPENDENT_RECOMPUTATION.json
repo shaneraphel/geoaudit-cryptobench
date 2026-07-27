@@ -1,0 +1,100 @@
+{
+  "schema": "geoaudit.independent_recomputation.v1",
+  "clinical_grade": false,
+  "purpose": "the frozen headline, rederived from raw predictions and labels by code that shares nothing with the harness",
+  "recomputed_from": [
+    "data/cryptobench_apo/official_labels/*.json",
+    "results/cryptobench_official/predictions/*.json"
+  ],
+  "checked_against": [
+    "results/cryptobench_official/TELEMETRY.json",
+    "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json"
+  ],
+  "tolerance": 1e-09,
+  "n_per_unit_values_checked": 4608,
+  "detectors_recomputed": [
+    "algebraic_field",
+    "algebraic_field_linear",
+    "p2rank",
+    "quaternary_lut",
+    "quaternary_lut_seq",
+    "table_field"
+  ],
+  "detectors_not_recomputable_from_the_clone": [
+    "fstar_pocket",
+    "geometric_foundation",
+    "random_bbox",
+    "sstar_pocket",
+    "ultrametric_shear_oracle"
+  ],
+  "why_not_recomputable": "pocket-only detectors score a residue by whether it falls in a returned pocket, which needs the receptor residue universe; receptors are fetched from RCSB and OSF against committed SHA-256 pins, not committed",
+  "means": {
+    "algebraic_field": {
+      "residue_auc": 0.7666942911109147,
+      "residue_pr_auc": 0.33335122335582,
+      "residue_mcc": 0.2725640942011291,
+      "residue_f1": 0.3066697551718522
+    },
+    "algebraic_field_linear": {
+      "residue_auc": 0.7953622049415263,
+      "residue_pr_auc": 0.35944979526660653,
+      "residue_mcc": 0.2896379169106334,
+      "residue_f1": 0.32050044413571926
+    },
+    "p2rank": {
+      "residue_auc": 0.7933231313106249,
+      "residue_pr_auc": 0.35801249557587544,
+      "residue_mcc": 0.2847504977012497,
+      "residue_f1": 0.30189552994172814
+    },
+    "quaternary_lut": {
+      "residue_auc": 0.7599557284780597,
+      "residue_pr_auc": 0.31195742471615273,
+      "residue_mcc": 0.2424471307344942,
+      "residue_f1": 0.272364254130717
+    },
+    "quaternary_lut_seq": {
+      "residue_auc": 0.7665241052398503,
+      "residue_pr_auc": 0.32317658240032343,
+      "residue_mcc": 0.24542287094272433,
+      "residue_f1": 0.2749251952656549
+    },
+    "table_field": {
+      "residue_auc": 0.7991511872349851,
+      "residue_pr_auc": 0.37567504045345795,
+      "residue_mcc": 0.30396940898235475,
+      "residue_f1": 0.33341157401225446
+    }
+  },
+  "headline_paired_vs_p2rank": {
+    "residue_auc": {
+      "n_paired_structures": 192,
+      "difference": 0.005828055924360198,
+      "ci_low": -0.016816426491247927,
+      "ci_high": 0.027643782297311126,
+      "excludes_zero": false
+    },
+    "residue_pr_auc": {
+      "n_paired_structures": 192,
+      "difference": 0.01766254487758251,
+      "ci_low": -0.00944240757479009,
+      "ci_high": 0.045006122823926964,
+      "excludes_zero": false
+    },
+    "residue_mcc": {
+      "n_paired_structures": 186,
+      "difference": 0.024738320363494326,
+      "ci_low": 0.0003835451016998559,
+      "ci_high": 0.04936258510290109,
+      "excludes_zero": true
+    },
+    "residue_f1": {
+      "n_paired_structures": 192,
+      "difference": 0.03151604407052633,
+      "ci_low": 0.008893041050646089,
+      "ci_high": 0.053663644240885156,
+      "excludes_zero": true
+    }
+  },
+  "agrees": true
+}

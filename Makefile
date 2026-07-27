@@ -1,9 +1,23 @@
 PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
-.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures freeze
-verify: consistency strict-json readme macros environment archive icloud ledger artifacts
+.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues freeze
+verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
+
+# The headline, rederived from the committed labels and raw per-residue scores by
+# code that imports nothing from the harness. The other gates check that the
+# artifacts agree with each other; this one checks that they agree with the data.
+# It is what caught the residue-numbering collision, which every self-consistent
+# artifact in the repository had faithfully propagated.
+recompute:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/recompute_from_raw.py
+
+# What counts as one residue, and what that rule costs. Needs the receptors, so
+# on a machine that has not fetched them this reports and passes rather than
+# blocking; where they are present it pins the recall denominator.
+residues:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/audit_residue_identity.py
 
 # The declared environment and the real one drifted once, in the worst possible
 # direction: pyproject demanded a numpy that segfaults here. The lock is
