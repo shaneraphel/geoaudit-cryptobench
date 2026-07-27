@@ -1,0 +1,357 @@
+{
+  "schema": "geoaudit.counterattack_ridge2.v1",
+  "clinical_grade": false,
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725,
+    "n_wires": 172
+  },
+  "candidates": [
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 0.03,
+      "cap": 32,
+      "total_fan_out": 9321,
+      "n_nonzero": 1623,
+      "pick_half_roc_auc_raw": 0.7775588351174306,
+      "pick_half_roc_auc": 0.7885640799289667,
+      "gate": "r14 w1.0"
+    },
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 0.03,
+      "cap": 64,
+      "total_fan_out": 18642,
+      "n_nonzero": 1667,
+      "pick_half_roc_auc_raw": 0.7768173454965351,
+      "pick_half_roc_auc": 0.7899609552069148,
+      "gate": "r18 w1.0"
+    },
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 0.1,
+      "cap": 32,
+      "total_fan_out": 5596,
+      "n_nonzero": 1546,
+      "pick_half_roc_auc_raw": 0.7812387897273846,
+      "pick_half_roc_auc": 0.7904877892386555,
+      "gate": "r14 w1.0"
+    },
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 0.1,
+      "cap": 64,
+      "total_fan_out": 11240,
+      "n_nonzero": 1632,
+      "pick_half_roc_auc_raw": 0.7814513428236478,
+      "pick_half_roc_auc": 0.7906038727855366,
+      "gate": "r18 w1.0"
+    },
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 0.3,
+      "cap": 32,
+      "total_fan_out": 3837,
+      "n_nonzero": 1440,
+      "pick_half_roc_auc_raw": 0.7803405362343977,
+      "pick_half_roc_auc": 0.7879430680444681,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 0.3,
+      "cap": 64,
+      "total_fan_out": 7709,
+      "n_nonzero": 1575,
+      "pick_half_roc_auc_raw": 0.7816942218268679,
+      "pick_half_roc_auc": 0.7887502664999836,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 1.0,
+      "cap": 32,
+      "total_fan_out": 3383,
+      "n_nonzero": 1417,
+      "pick_half_roc_auc_raw": 0.7808058281258168,
+      "pick_half_roc_auc": 0.7866468068114577,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 1.0,
+      "cap": 64,
+      "total_fan_out": 6753,
+      "n_nonzero": 1570,
+      "pick_half_roc_auc_raw": 0.7813576050942724,
+      "pick_half_roc_auc": 0.7870038111390102,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 3.0,
+      "cap": 32,
+      "total_fan_out": 3690,
+      "n_nonzero": 1448,
+      "pick_half_roc_auc_raw": 0.7799966346132449,
+      "pick_half_roc_auc": 0.7834818263608883,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20",
+      "n_tables": 1720,
+      "ridge": 3.0,
+      "cap": 64,
+      "total_fan_out": 7375,
+      "n_nonzero": 1581,
+      "pick_half_roc_auc_raw": 0.7788996258939965,
+      "pick_half_roc_auc": 0.7829758907480459,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 0.03,
+      "cap": 32,
+      "total_fan_out": 15898,
+      "n_nonzero": 3164,
+      "pick_half_roc_auc_raw": 0.7750318277956613,
+      "pick_half_roc_auc": 0.7912941836711065,
+      "gate": "r14 w1.0"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 0.03,
+      "cap": 64,
+      "total_fan_out": 31861,
+      "n_nonzero": 3315,
+      "pick_half_roc_auc_raw": 0.7749193770090012,
+      "pick_half_roc_auc": 0.7902111530442317,
+      "gate": "r14 w1.0"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 0.1,
+      "cap": 32,
+      "total_fan_out": 9421,
+      "n_nonzero": 3031,
+      "pick_half_roc_auc_raw": 0.7827553656861205,
+      "pick_half_roc_auc": 0.7915776474340964,
+      "gate": "r14 w1.0"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 0.1,
+      "cap": 64,
+      "total_fan_out": 18836,
+      "n_nonzero": 3236,
+      "pick_half_roc_auc_raw": 0.7798967669942108,
+      "pick_half_roc_auc": 0.791180598861593,
+      "gate": "r14 w1.0"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 0.3,
+      "cap": 32,
+      "total_fan_out": 6407,
+      "n_nonzero": 2790,
+      "pick_half_roc_auc_raw": 0.784117743141261,
+      "pick_half_roc_auc": 0.7914168507762162,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 0.3,
+      "cap": 64,
+      "total_fan_out": 12897,
+      "n_nonzero": 3132,
+      "pick_half_roc_auc_raw": 0.7827658543606885,
+      "pick_half_roc_auc": 0.7902176872018817,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 1.0,
+      "cap": 32,
+      "total_fan_out": 5332,
+      "n_nonzero": 2656,
+      "pick_half_roc_auc_raw": 0.7846171388844266,
+      "pick_half_roc_auc": 0.791030717563924,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 1.0,
+      "cap": 64,
+      "total_fan_out": 10820,
+      "n_nonzero": 3051,
+      "pick_half_roc_auc_raw": 0.7820546954288287,
+      "pick_half_roc_auc": 0.7879256160703593,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 3.0,
+      "cap": 32,
+      "total_fan_out": 5758,
+      "n_nonzero": 2749,
+      "pick_half_roc_auc_raw": 0.780526744251874,
+      "pick_half_roc_auc": 0.7853754374523275,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x40",
+      "n_tables": 3440,
+      "ridge": 3.0,
+      "cap": 64,
+      "total_fan_out": 11637,
+      "n_nonzero": 3103,
+      "pick_half_roc_auc_raw": 0.7810066768890813,
+      "pick_half_roc_auc": 0.7855634078877433,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 0.03,
+      "cap": 32,
+      "total_fan_out": 18944,
+      "n_nonzero": 2300,
+      "pick_half_roc_auc_raw": 0.766585891616923,
+      "pick_half_roc_auc": 0.7884147333078128,
+      "gate": "r8+r14+r20 w0.5"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 0.03,
+      "cap": 64,
+      "total_fan_out": 37919,
+      "n_nonzero": 2352,
+      "pick_half_roc_auc_raw": 0.7665055834519859,
+      "pick_half_roc_auc": 0.7883318542697433,
+      "gate": "r8+r14+r20 w0.5"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 0.1,
+      "cap": 32,
+      "total_fan_out": 15400,
+      "n_nonzero": 2308,
+      "pick_half_roc_auc_raw": 0.7763935767996202,
+      "pick_half_roc_auc": 0.7904128545594515,
+      "gate": "r14 w1.0"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 0.1,
+      "cap": 64,
+      "total_fan_out": 30822,
+      "n_nonzero": 2347,
+      "pick_half_roc_auc_raw": 0.7754879726170087,
+      "pick_half_roc_auc": 0.7905587271098887,
+      "gate": "r14 w1.0"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 0.3,
+      "cap": 32,
+      "total_fan_out": 9427,
+      "n_nonzero": 2222,
+      "pick_half_roc_auc_raw": 0.7829399555790179,
+      "pick_half_roc_auc": 0.793156160456594,
+      "gate": "r14 w1.0"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 0.3,
+      "cap": 64,
+      "total_fan_out": 18900,
+      "n_nonzero": 2301,
+      "pick_half_roc_auc_raw": 0.7821239818487848,
+      "pick_half_roc_auc": 0.7912556509783194,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 1.0,
+      "cap": 32,
+      "total_fan_out": 6505,
+      "n_nonzero": 2108,
+      "pick_half_roc_auc_raw": 0.7831329548785639,
+      "pick_half_roc_auc": 0.7886885208849828,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 1.0,
+      "cap": 64,
+      "total_fan_out": 12994,
+      "n_nonzero": 2254,
+      "pick_half_roc_auc_raw": 0.7838288766516538,
+      "pick_half_roc_auc": 0.7896746001655637,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 3.0,
+      "cap": 32,
+      "total_fan_out": 5701,
+      "n_nonzero": 2041,
+      "pick_half_roc_auc_raw": 0.7817587820188386,
+      "pick_half_roc_auc": 0.7861752354975526,
+      "gate": "r18 w0.5"
+    },
+    {
+      "basis": "pairs x20 + triples x12",
+      "n_tables": 2404,
+      "ridge": 3.0,
+      "cap": 64,
+      "total_fan_out": 11463,
+      "n_nonzero": 2215,
+      "pick_half_roc_auc_raw": 0.7828708509886518,
+      "pick_half_roc_auc": 0.7872034371474896,
+      "gate": "r18 w0.5"
+    }
+  ],
+  "selected": {
+    "basis": "pairs x20 + triples x12",
+    "n_tables": 2404,
+    "ridge": 0.3,
+    "cap": 32,
+    "total_fan_out": 9427,
+    "n_nonzero": 2222,
+    "pick_half_roc_auc_raw": 0.7829399555790179,
+    "pick_half_roc_auc": 0.793156160456594,
+    "gate": "r14 w1.0"
+  },
+  "reference_same_split": {
+    "first_ridge_sweep": 0.7906,
+    "signed_stagewise": 0.7812,
+    "fitted_linear_over_digits": 0.7873
+  }
+}

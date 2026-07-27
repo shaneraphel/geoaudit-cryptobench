@@ -17,13 +17,18 @@ keywords = [
   "deterministic-geometry",
   "cryptobench",
 ]
-# Core pilot (prediction + scoring + verifier + unit suite) is numpy-only.
-dependencies = ["numpy==1.26.4"]
+# A floor, not the lock. The exact versions that produced every frozen number
+# are measured and recorded in ENVIRONMENT.json and pinned in requirements.txt;
+# install from those to reproduce the tables bit for bit. An earlier revision
+# pinned numpy==1.26.4 here, which segfaults on import under this interpreter
+# and had to be removed from the machine -- so the declared environment was one
+# a reader could not even start, let alone reproduce.
+dependencies = ["numpy>=2.0"]
 
 [project.optional-dependencies]
 # Cheminformatics for the curated evidence dictionary (not needed for the pilot).
 chem = ["rdkit>=2023.9"]
-# Spectral F* oracle formulation A.
+# Spectral oracles (anisotropic and ultrametric shear) need ARPACK.
 spectral = ["scipy>=1.11"]
 # Test/dev tooling.
 test = ["pytest>=8", "jsonschema>=4.20"]

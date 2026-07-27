@@ -1,0 +1,111 @@
+{
+  "schema": "geoaudit.counterattack_wide.v1",
+  "clinical_grade": false,
+  "n_wires": 516,
+  "wire_families": [
+    "local",
+    "mean@6/10/14/20/26",
+    "sd@6/14/20",
+    "centred@6/14/20"
+  ],
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725
+  },
+  "reference_172_wires": {
+    "linear_over_digits": 0.7873,
+    "table_field": 0.7932
+  },
+  "candidates": [
+    {
+      "kind": "ceiling",
+      "architecture": "linear over 516 digits, ridge 1e-06",
+      "pick_half_roc_auc_raw": 0.782009995703063,
+      "pick_half_roc_auc": 0.7927304191420839
+    },
+    {
+      "kind": "ceiling",
+      "architecture": "linear over 516 digits, ridge 0.001",
+      "pick_half_roc_auc_raw": 0.7821553908946445,
+      "pick_half_roc_auc": 0.7927330121964955
+    },
+    {
+      "kind": "ceiling",
+      "architecture": "linear over 516 digits, ridge 0.1",
+      "pick_half_roc_auc_raw": 0.7858920016510234,
+      "pick_half_roc_auc": 0.7936081730101048
+    },
+    {
+      "kind": "bank",
+      "basis": "pairs x8",
+      "n_tables": 2064,
+      "ridge": 0.1,
+      "cap": 32,
+      "gate": "r18 w1.0",
+      "pick_half_roc_auc_raw": 0.790645957647925,
+      "pick_half_roc_auc": 0.8009723892063848
+    },
+    {
+      "kind": "bank",
+      "basis": "pairs x8",
+      "n_tables": 2064,
+      "ridge": 0.3,
+      "cap": 32,
+      "gate": "r18 w1.0",
+      "pick_half_roc_auc_raw": 0.7905968651562768,
+      "pick_half_roc_auc": 0.7988616642026849
+    },
+    {
+      "kind": "bank",
+      "basis": "pairs x8",
+      "n_tables": 2064,
+      "ridge": 1.0,
+      "cap": 32,
+      "gate": "r18 w0.5",
+      "pick_half_roc_auc_raw": 0.7897362754147202,
+      "pick_half_roc_auc": 0.7961003301087474
+    },
+    {
+      "kind": "bank",
+      "basis": "pairs x8 + triples x5",
+      "n_tables": 2924,
+      "ridge": 0.1,
+      "cap": 32,
+      "gate": "r18 w1.0",
+      "pick_half_roc_auc_raw": 0.7790621060199511,
+      "pick_half_roc_auc": 0.7966189151094835
+    },
+    {
+      "kind": "bank",
+      "basis": "pairs x8 + triples x5",
+      "n_tables": 2924,
+      "ridge": 0.3,
+      "cap": 32,
+      "gate": "r18 w1.0",
+      "pick_half_roc_auc_raw": 0.7883308879388146,
+      "pick_half_roc_auc": 0.8003354306433431
+    },
+    {
+      "kind": "bank",
+      "basis": "pairs x8 + triples x5",
+      "n_tables": 2924,
+      "ridge": 1.0,
+      "cap": 32,
+      "gate": "r18 w1.0",
+      "pick_half_roc_auc_raw": 0.7920608809057551,
+      "pick_half_roc_auc": 0.7994283494582041
+    }
+  ],
+  "ceiling": 0.7936081730101048,
+  "ceiling_gain_over_172": 0.006308173010104778,
+  "selected": {
+    "kind": "bank",
+    "basis": "pairs x8",
+    "n_tables": 2064,
+    "ridge": 0.1,
+    "cap": 32,
+    "gate": "r18 w1.0",
+    "pick_half_roc_auc_raw": 0.790645957647925,
+    "pick_half_roc_auc": 0.8009723892063848
+  }
+}

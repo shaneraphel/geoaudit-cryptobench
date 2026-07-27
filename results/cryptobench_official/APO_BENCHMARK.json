@@ -1,6 +1,6 @@
 {
   "schema": "geoaudit.cryptobench.report.v1",
-  "generated_at": "2026-07-27T02:45:45+0800",
+  "generated_at": "2026-07-27T17:45:52+0800",
   "clinical_grade": false,
   "dataset": "official",
   "is_official_mmseqs2_10pct_test_fold": true,
@@ -10,14 +10,14 @@
   "metric_caveat": "Official apo labels carry cryptic residues but no holo ligand coordinates; DCA is undefined and reported null. Residue-level metrics are the primary readout.",
   "splits_note": "Official CryptoBench TEST fold: MMseqs2 clustering at 10% sequence identity, loaded fail-closed with per-file SHA-256 verification. clinical_grade=false.",
   "summaries": {
-    "algebraic_field_linear": {
+    "p2rank": {
       "top1_dca_le_4A_hits": 0,
       "intention_to_evaluate_denominator": 192,
       "tool_unavailable": 0
     }
   },
   "per_method": {
-    "algebraic_field_linear": {
+    "p2rank": {
       "ok": 192,
       "top1_hits": 0,
       "unavailable": 0,

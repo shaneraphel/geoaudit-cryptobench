@@ -1,0 +1,25 @@
+{
+  "schema": "geoaudit.counterattack_stability_large.v1",
+  "clinical_grade": false,
+  "note": "signed stagewise only; the solved fusion neither fits in memory nor holds its value at these pool sizes",
+  "candidates": [
+    {
+      "pool_rounds": 20,
+      "n_pool_tables": 1720,
+      "signed stagewise": 0.7798829958133844,
+      "accepted": 136,
+      "distinct_tables": 101,
+      "total_fan_out": 130,
+      "mean_residues_per_occupied_cell": 7590.726485578376
+    },
+    {
+      "pool_rounds": 30,
+      "n_pool_tables": 2580,
+      "signed stagewise": 0.7785903455116866,
+      "accepted": 176,
+      "distinct_tables": 131,
+      "total_fan_out": 174,
+      "mean_residues_per_occupied_cell": 7586.355408990235
+    }
+  ]
+}

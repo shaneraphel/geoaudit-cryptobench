@@ -16,13 +16,15 @@ jobs:
       - name: Install test dependencies
         # scipy is required by the spectral (anisotropic shear) modes; without it
         # those tests silently degrade instead of running.
-        run: pip install numpy==1.26.4 "scipy>=1.11"
+        run: pip install -r requirements.txt "scipy>=1.11"
       - name: Frozen artifacts must not contradict each other
         run: make consistency
       - name: Every published JSON must parse under a strict reader
         run: make strict-json
       - name: README results block must match the frozen JSON
         run: make readme
+      - name: P2Rank raw archive must cover every scored unit and match its checksums
+        run: make archive
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

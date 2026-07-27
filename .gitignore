@@ -3,6 +3,7 @@
 *.local.md
 *.local.json
 _local/
+logs/
 __pycache__/
 *.pyc
 .DS_Store

@@ -1,0 +1,81 @@
+{
+  "schema": "geoaudit.counterattack_refine.v1",
+  "clinical_grade": false,
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725,
+    "n_wires": 172
+  },
+  "candidates": [
+    {
+      "width": 2,
+      "rounds": 12,
+      "n_tables": 1032,
+      "cells_per_table": 16,
+      "mean_residues_per_occupied_cell": 7575.881699260042,
+      "gini-rank": 0.6994497459489816,
+      "gini-ratio cap=32": 0.6965960916847024,
+      "quantized direction cap=32": 0.7844150462761043
+    },
+    {
+      "width": 2,
+      "rounds": 20,
+      "n_tables": 1720,
+      "cells_per_table": 16,
+      "mean_residues_per_occupied_cell": 7590.726485578376,
+      "gini-rank": 0.6998195138207822,
+      "gini-ratio cap=32": 0.6969591281848171,
+      "quantized direction cap=32": 0.6846172878787566
+    },
+    {
+      "width": 2,
+      "rounds": 30,
+      "n_tables": 2580,
+      "cells_per_table": 16,
+      "mean_residues_per_occupied_cell": 7586.355408990235,
+      "gini-rank": 0.6995109701898351,
+      "gini-ratio cap=32": 0.6967180440218047,
+      "quantized direction cap=32": 0.7646671516039513
+    },
+    {
+      "width": 3,
+      "rounds": 20,
+      "n_tables": 1140,
+      "cells_per_table": 64,
+      "mean_residues_per_occupied_cell": 1928.0559741977493,
+      "gini-rank": 0.714000213215353,
+      "gini-ratio cap=32": 0.7093234704956034,
+      "quantized direction cap=32": 0.7708255601315258
+    },
+    {
+      "width": 2,
+      "rounds": 40,
+      "n_tables": 3440,
+      "cells_per_table": 16,
+      "mean_residues_per_occupied_cell": 7584.852495280883,
+      "gini-rank": 0.6993199103121562,
+      "gini-ratio cap=32": 0.69655396605867,
+      "quantized direction cap=32": 0.7293637893095491
+    }
+  ],
+  "selected_solved": {
+    "width": 2,
+    "rounds": 12,
+    "n_tables": 1032,
+    "cells_per_table": 16,
+    "mean_residues_per_occupied_cell": 7575.881699260042,
+    "gini-rank": 0.6994497459489816,
+    "gini-ratio cap=32": 0.6965960916847024,
+    "quantized direction cap=32": 0.7844150462761043
+  },
+  "selected_counting_only": {
+    "width": 3,
+    "rounds": 20,
+    "n_tables": 1140,
+    "cells_per_table": 64,
+    "mean_residues_per_occupied_cell": 1928.0559741977493,
+    "gini-rank": 0.714000213215353,
+    "gini-ratio cap=32": 0.7093234704956034,
+    "quantized direction cap=32": 0.7708255601315258
+  }
+}

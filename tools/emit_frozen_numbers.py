@@ -23,6 +23,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BOOT = ROOT / "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json"
 FIELD = ROOT / "data/cryptobench_apo/ALGEBRAIC_FIELD.json"
 LINFIELD = ROOT / "data/cryptobench_apo/ALGEBRAIC_FIELD_LINEAR.json"
+TABFIELD = ROOT / "data/cryptobench_apo/TABLE_FIELD.json"
+WIDESEL = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE2.json"
+WIDEPROBE = ROOT / "results/official_fold/COUNTERATTACK_WIDE_PROBE.json"
 TELEMETRY = ROOT / "results/cryptobench_official/TELEMETRY.json"
 SELECTION = ROOT / "results/architecture_sweep/TRAIN_ONLY_SELECTION.json"
 CEILING = ROOT / "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json"
@@ -32,6 +35,7 @@ OUT = ROOT / "paper/frozen_numbers.tex"
 
 # macro stem -> (method key in the artifact)
 METHODS = {
+    "Tab": "table_field",
     "Alg": "algebraic_field",
     "AlgLin": "algebraic_field_linear",
     "PtwoR": "p2rank",
@@ -110,6 +114,57 @@ def build() -> str:
                  f"{{{lin['gate']['weight']:g}}}")
         L.append(f"\\newcommand{{\\LinOperatingQ}}"
                  f"{{{lin['operating_point']['q']:.2f}}}")
+
+    if TABFIELD.exists():
+        # The table field's shape has to come from the artifact, because every
+        # one of these numbers is a claim about the circuit's size: how many
+        # tables, how many cells, how full the cells are, and how much of the
+        # fan-out is actually used. A hand-typed cell occupancy is exactly the
+        # kind of figure that survives three architecture changes unnoticed.
+        tf = json.loads(TABFIELD.read_text())
+        tot = tf["cell_total"]
+        occupied = [v for v in tot if v > 0]
+        L.append(f"\\newcommand{{\\NTabWires}}{{{tf['n_wires']}}}")
+        L.append(f"\\newcommand{{\\NTabTables}}{{{len(tf['tables'])}}}")
+        L.append(f"\\newcommand{{\\TabWidth}}{{{tf['table_width']}}}")
+        L.append(f"\\newcommand{{\\TabRounds}}{{{tf['partition_rounds']}}}")
+        L.append(f"\\newcommand{{\\NTabCells}}{{{tf['n_cells']}}}")
+        L.append(f"\\newcommand{{\\NTabCellsEmpty}}"
+                 f"{{{tf['n_cells_never_addressed']}}}")
+        L.append(f"\\newcommand{{\\TabCellsEmptyPct}}"
+                 f"{{{100.0 * tf['n_cells_never_addressed'] / tf['n_cells']:.2f}}}")
+        L.append(f"\\newcommand{{\\TabCellOccupancy}}"
+                 f"{{{sum(occupied) / max(len(occupied), 1):.0f}}}")
+        L.append(f"\\newcommand{{\\TabRidge}}{{{tf['ridge']:g}}}")
+        L.append(f"\\newcommand{{\\TabCap}}{{{tf['fan_out_cap']}}}")
+        L.append(f"\\newcommand{{\\NTabUsed}}"
+                 f"{{{tf['n_tables_with_nonzero_fanout']}}}")
+        L.append(f"\\newcommand{{\\TabFanOut}}{{{tf['total_fan_out']}}}")
+        L.append(f"\\newcommand{{\\TabGateRadius}}"
+                 f"{{{tf['gate']['radius_angstrom']:g}}}")
+        L.append(f"\\newcommand{{\\TabGateWeight}}{{{tf['gate']['weight']:g}}}")
+        L.append(f"\\newcommand{{\\TabOperatingQ}}"
+                 f"{{{tf['operating_point']['q']:.2f}}}")
+
+    if WIDESEL.exists():
+        sel = json.loads(WIDESEL.read_text())
+        L.append(f"\\newcommand{{\\TabPickAuc}}"
+                 f"{{{sel['selected']['pick_half_roc_auc']:.4f}}}")
+        L.append(f"\\newcommand{{\\NTabCandidates}}"
+                 f"{{{len(sel['candidates'])}}}")
+
+    if WIDEPROBE.exists():
+        # Three readings of the test fold, and the manuscript reports all
+        # three. Their values are macros so that the disclosure cannot drift
+        # apart from the artifacts that recorded them.
+        pr = json.loads(WIDEPROBE.read_text())
+        for e in pr["earlier_reads"]:
+            L.append(f"\\newcommand{{\\ReadAuc{'I' * e['index']}}}"
+                     f"{{{e['residue_auc_mean']:.4f}}}")
+            L.append(f"\\newcommand{{\\ReadDelta{'I' * e['index']}}}"
+                     f"{{{e['paired_vs_p2rank']:+.4f}}}")
+        L.append(f"\\newcommand{{\\NTestReads}}"
+                 f"{{{pr['test_fold_read_index']}}}")
 
     if READOUT.exists():
         # Readout comparison on the training split. These are the numbers that

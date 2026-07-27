@@ -1,0 +1,7 @@
+# GENERATED FILE -- regenerate with tools/emit_environment.py
+# Pinned to the versions that produced the frozen artifacts, which is
+# not the same thing as the oldest versions that would work. numpy
+# 1.26.4, which an earlier pyproject demanded, segfaults on import in
+# this interpreter and is not usable here.
+numpy==2.5.1
+scipy==1.17.1

@@ -27,7 +27,9 @@ they no longer feed the residue metrics.
 from __future__ import annotations
 
 import csv
+import json
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -162,14 +164,75 @@ def _parse_predictions_csv(path: Path) -> list[dict[str, Any]]:
     return sorted(pockets, key=lambda p: p["rank"])
 
 
-def _archive_raw(out: Path, archive_dir: Path | None, pdb_id: str,
-                 chain: str | None) -> dict[str, str]:
-    """Copy P2Rank's own CSVs out of the scratch directory before it is deleted.
+def _version() -> str:
+    """P2Rank's own version string, read from the install rather than declared.
 
-    Every number this wrapper reports is a transformation of those two files. If
+    The distribution ships ``build.txt`` next to the launcher; the directory
+    name carries the version when it does not. A hand-maintained constant would
+    keep reporting 2.5.1 after someone upgraded the install, which is precisely
+    the provenance error this archive exists to prevent.
+    """
+    exe = _find_p2rank()
+    if not exe:
+        return ""
+    try:
+        # Run with no command: the launcher prints "P2Rank <version>" and then
+        # exits non-zero complaining. Asking the binary beats reading the path,
+        # because the install directory here carries no version at all and a
+        # hand-maintained constant would keep reporting the old number after an
+        # upgrade -- exactly the provenance error this archive exists to catch.
+        p = subprocess.run([exe], capture_output=True, text=True, timeout=120,
+                           env=_java_env(), cwd=Path(exe).resolve().parent)
+        m = re.search(r"P2Rank\s+(\d+\.\d+(?:\.\d+)?)",
+                      (p.stdout or "") + (p.stderr or ""))
+        if m:
+            return m.group(1)
+    except Exception:  # noqa: BLE001
+        pass
+    return ""
+
+
+_HOME_RE = re.compile(r"(?<![A-Za-z])/(?:Users|home|private/var|var)/[^\s\]\"']*")
+
+
+def _redact_paths(text: str) -> str:
+    """Replace machine-specific absolute paths with placeholders.
+
+    P2Rank prints the absolute location of its own install and of the scratch
+    directory on every run. Kept verbatim, all 192 archived records would
+    publish a home directory and would differ from run to run on nothing that
+    matters. The substitution is mechanical, so a reader who re-runs on their own
+    machine gets the same archived text.
+    """
+    return _HOME_RE.sub("<path>", text)
+
+
+def _jvm_version() -> str:
+    """The JVM that actually ran, since P2Rank's output depends on it."""
+    try:
+        p = subprocess.run(["java", "-version"], capture_output=True,
+                           text=True, timeout=30, env=_java_env())
+        return (p.stderr or p.stdout or "").strip().splitlines()[0]
+    except Exception:  # noqa: BLE001
+        return "unknown"
+
+
+def _archive_raw(out: Path, archive_dir: Path | None, pdb_id: str,
+                 chain: str | None, *, command: list[str] | None = None,
+                 stdout: str = "", tool_version: str = "") -> dict[str, str]:
+    """Copy P2Rank's own output out of the scratch directory before it is deleted.
+
+    Every number this wrapper reports is a transformation of those two CSVs. If
     they are discarded with the temporary directory, the baseline can only be
     re-audited by re-running P2Rank, which needs a JVM the reader may not have.
     Keeping them makes the strongest competitor in the table checkable offline.
+
+    The CSVs alone are not enough to audit, though, and an earlier revision of
+    this function kept only those: a reader could see the numbers but not what
+    produced them. The command line, the P2Rank version and the JVM banner go
+    in beside them, because P2Rank's output is a function of all three, together
+    with a SHA-256 of each file so the archive can be checked against the
+    telemetry without re-running anything.
     """
     if archive_dir is None:
         return {}
@@ -182,6 +245,36 @@ def _archive_raw(out: Path, archive_dir: Path | None, pdb_id: str,
             tgt = dest / src.name
             tgt.write_bytes(src.read_bytes())
             kept[src.name] = sha256_file(tgt)
+    # The argv that ran carries a scratch directory drawn fresh each time and
+    # the absolute path of whoever's install was used. Recorded verbatim, all
+    # 192 archived files would differ from run to run and from machine to
+    # machine on nothing but noise, and would publish a home directory. The
+    # placeholders below name what each argument was; the receptor is a byte
+    # copy of the committed one and the output directory is discarded, so
+    # nothing auditable is lost.
+    redacted = ["prank" if i == 0 else a
+                for i, a in enumerate(command or [])]
+    for i, a in enumerate(redacted):
+        if a.endswith("rec.pdb"):
+            redacted[i] = "<scratch>/rec.pdb"
+        elif a.endswith("/out"):
+            redacted[i] = "<scratch>/out"
+    stdout = _redact_paths(stdout)
+    (dest / "run.json").write_text(json.dumps({
+        "schema": "geoaudit.p2rank_raw_run.v1",
+        "unit_id": unit,
+        "command": redacted,
+        "command_note": "<scratch> is a per-run temporary directory holding a "
+                        "byte copy of the committed receptor; the launcher is "
+                        "resolved via P2RANK_HOME or PATH",
+        "tool": "p2rank",
+        "tool_version": tool_version,
+        "jvm": _jvm_version(),
+        "config": "default_experimental_structure",
+        "protocol": "native_residue_level",
+        "file_sha256": kept,
+        "stdout_tail": stdout[-2000:],
+    }, indent=2, allow_nan=False) + "\n")
     return kept
 
 
@@ -237,8 +330,9 @@ def predict(
                 )
             pred_csvs = sorted(out.rglob("*_predictions.csv"))
             pockets = _parse_predictions_csv(pred_csvs[0]) if pred_csvs else []
-            meta["raw_output_sha256"] = _archive_raw(out, archive_dir,
-                                                     pdb_id, chain)
+            meta["raw_output_sha256"] = _archive_raw(
+                out, archive_dir, pdb_id, chain, command=command,
+                stdout=proc.stdout or "", tool_version=_version() or "")
             meta["n_residues_scored"] = len(residue_scores)
             meta["n_residues_positive"] = len(residue_positive)
             meta["n_pockets"] = len(pockets)

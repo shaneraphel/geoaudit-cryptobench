@@ -1,0 +1,62 @@
+{
+  "schema": "geoaudit.counterattack_stability.v1",
+  "clinical_grade": false,
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725,
+    "n_wires": 172
+  },
+  "candidates": [
+    {
+      "pool_rounds": 6,
+      "n_pool_tables": 516,
+      "mean_residues_per_occupied_cell": 7582.02560782241,
+      "signed stagewise": 0.7774202965374813,
+      "signed stagewise accepted": 64,
+      "signed stagewise distinct tables": 53,
+      "signed stagewise total fan-out": 64,
+      "additive stagewise": 0.7717250132890995,
+      "additive stagewise accepted": 80,
+      "additive stagewise distinct tables": 39,
+      "additive stagewise total fan-out": 80,
+      "solved direction cap=32": 0.7858054118179565
+    },
+    {
+      "pool_rounds": 12,
+      "n_pool_tables": 1032,
+      "mean_residues_per_occupied_cell": 7575.881699260042,
+      "signed stagewise": 0.7811687945157234,
+      "signed stagewise accepted": 87,
+      "signed stagewise distinct tables": 72,
+      "signed stagewise total fan-out": 81,
+      "additive stagewise": 0.7687426660390363,
+      "additive stagewise accepted": 52,
+      "additive stagewise distinct tables": 37,
+      "additive stagewise total fan-out": 52,
+      "solved direction cap=32": 0.7844150462761043
+    },
+    {
+      "pool_rounds": 20,
+      "n_pool_tables": 1720,
+      "mean_residues_per_occupied_cell": 7590.726485578376,
+      "signed stagewise": 0.7798829958133844,
+      "signed stagewise accepted": 136,
+      "signed stagewise distinct tables": 101,
+      "signed stagewise total fan-out": 130,
+      "additive stagewise": 0.7724432621711484,
+      "additive stagewise accepted": 98,
+      "additive stagewise distinct tables": 57,
+      "additive stagewise total fan-out": 98,
+      "solved direction cap=32": 0.6846172878787566
+    }
+  ],
+  "signed_spread_across_pool_sizes": 0.00374849797824206,
+  "solved_spread_across_pool_sizes": 0.10118812393919985,
+  "frozen": {
+    "fusion": "signed stagewise integer multiplicities",
+    "table_width": 2,
+    "pool_rounds": 12,
+    "n_pool_tables": 1032,
+    "pick_half_roc_auc": 0.7811687945157234
+  }
+}

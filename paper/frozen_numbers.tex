@@ -6,8 +6,8 @@
 \newcommand{\NUnits}{192}
 \newcommand{\NBoot}{10000}
 \newcommand{\BootSeed}{20260725}
-\newcommand{\NRows}{1920}
-\newcommand{\NMethods}{10}
+\newcommand{\NRows}{2112}
+\newcommand{\NMethods}{11}
 \newcommand{\FisherSix}{0.760}
 \newcommand{\FisherAll}{0.783}
 \newcommand{\NCandidates}{9}
@@ -20,6 +20,28 @@
 \newcommand{\LinGateRadius}{18}
 \newcommand{\LinGateWeight}{0.5}
 \newcommand{\LinOperatingQ}{0.10}
+\newcommand{\NTabWires}{645}
+\newcommand{\NTabTables}{5152}
+\newcommand{\TabWidth}{2}
+\newcommand{\TabRounds}{16}
+\newcommand{\NTabCells}{82432}
+\newcommand{\NTabCellsEmpty}{825}
+\newcommand{\TabCellsEmptyPct}{1.00}
+\newcommand{\TabCellOccupancy}{14826}
+\newcommand{\TabRidge}{0.03}
+\newcommand{\TabCap}{32}
+\newcommand{\NTabUsed}{4797}
+\newcommand{\TabFanOut}{25682}
+\newcommand{\TabGateRadius}{18}
+\newcommand{\TabGateWeight}{1}
+\newcommand{\TabOperatingQ}{0.09}
+\newcommand{\TabPickAuc}{0.8045}
+\newcommand{\NTabCandidates}{9}
+\newcommand{\ReadAucI}{0.7804}
+\newcommand{\ReadDeltaI}{-0.0131}
+\newcommand{\ReadAucII}{0.7952}
+\newcommand{\ReadDeltaII}{+0.0017}
+\newcommand{\NTestReads}{3}
 \newcommand{\PickCount}{0.7631}
 \newcommand{\PickLinDigits}{0.7873}
 \newcommand{\PickLinOnehot}{0.7844}
@@ -37,6 +59,8 @@
 \newcommand{\LedgerTrainClusters}{766}
 \newcommand{\LedgerTrainUnits}{770}
 
+\newcommand{\TabAuc}{0.799}
+\newcommand{\TabAucCI}{[0.767, 0.830]}
 \newcommand{\AlgAuc}{0.767}
 \newcommand{\AlgAucCI}{[0.736, 0.796]}
 \newcommand{\AlgLinAuc}{0.795}
@@ -57,6 +81,11 @@
 \newcommand{\UltraAucCI}{[0.632, 0.673]}
 \newcommand{\RandAuc}{0.500}
 \newcommand{\RandAucCI}{[0.500, 0.500]}
+\newcommand{\TabAucD}{+0.006}
+\newcommand{\TabAucDCI}{[-0.017, +0.028]}
+\newcommand{\TabAucP}{0.600}
+\newcommand{\TabAucVerdict}{indistinguishable}
+\newcommand{\TabAucNS}{~ns}
 \newcommand{\AlgAucD}{-0.027}
 \newcommand{\AlgAucDCI}{[-0.049, -0.006]}
 \newcommand{\AlgAucP}{0.012}
@@ -103,6 +132,8 @@
 \newcommand{\RandAucVerdict}{separated}
 \newcommand{\RandAucNS}{~\textbf{sig}}
 
+\newcommand{\TabPr}{0.376}
+\newcommand{\TabPrCI}{[0.339, 0.411]}
 \newcommand{\AlgPr}{0.333}
 \newcommand{\AlgPrCI}{[0.301, 0.366]}
 \newcommand{\AlgLinPr}{0.359}
@@ -123,6 +154,11 @@
 \newcommand{\UltraPrCI}{[0.227, 0.287]}
 \newcommand{\RandPr}{0.093}
 \newcommand{\RandPrCI}{[0.084, 0.103]}
+\newcommand{\TabPrD}{+0.018}
+\newcommand{\TabPrDCI}{[-0.009, +0.045]}
+\newcommand{\TabPrP}{0.203}
+\newcommand{\TabPrVerdict}{indistinguishable}
+\newcommand{\TabPrNS}{~ns}
 \newcommand{\AlgPrD}{-0.025}
 \newcommand{\AlgPrDCI}{[-0.052, +0.003]}
 \newcommand{\AlgPrP}{0.079}
@@ -169,6 +205,8 @@
 \newcommand{\RandPrVerdict}{separated}
 \newcommand{\RandPrNS}{~\textbf{sig}}
 
+\newcommand{\TabMcc}{0.304}
+\newcommand{\TabMccCI}{[0.270, 0.338]}
 \newcommand{\AlgMcc}{0.273}
 \newcommand{\AlgMccCI}{[0.241, 0.304]}
 \newcommand{\AlgLinMcc}{0.290}
@@ -189,6 +227,11 @@
 \newcommand{\UltraMccCI}{[0.187, 0.242]}
 \newcommand{\RandMcc}{n/a}
 \newcommand{\RandMccCI}{[n/a, n/a]}
+\newcommand{\TabMccD}{+0.019}
+\newcommand{\TabMccDCI}{[-0.007, +0.045]}
+\newcommand{\TabMccP}{0.139}
+\newcommand{\TabMccVerdict}{indistinguishable}
+\newcommand{\TabMccNS}{~ns}
 \newcommand{\AlgMccD}{-0.012}
 \newcommand{\AlgMccDCI}{[-0.038, +0.013]}
 \newcommand{\AlgMccP}{0.341}
@@ -235,6 +278,8 @@
 \newcommand{\RandMccVerdict}{n/a}
 \newcommand{\RandMccNS}{}
 
+\newcommand{\TabFOne}{0.333}
+\newcommand{\TabFOneCI}{[0.301, 0.365]}
 \newcommand{\AlgFOne}{0.307}
 \newcommand{\AlgFOneCI}{[0.277, 0.337]}
 \newcommand{\AlgLinFOne}{0.321}
@@ -255,6 +300,11 @@
 \newcommand{\UltraFOneCI}{[0.237, 0.290]}
 \newcommand{\RandFOne}{0.000}
 \newcommand{\RandFOneCI}{[0.000, 0.000]}
+\newcommand{\TabFOneD}{+0.032}
+\newcommand{\TabFOneDCI}{[+0.009, +0.054]}
+\newcommand{\TabFOneP}{0.006}
+\newcommand{\TabFOneVerdict}{separated}
+\newcommand{\TabFOneNS}{~\textbf{sig}}
 \newcommand{\AlgFOneD}{+0.005}
 \newcommand{\AlgFOneDCI}{[-0.018, +0.027]}
 \newcommand{\AlgFOneP}{0.692}

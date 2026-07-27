@@ -46,6 +46,7 @@ from pocket_bench.methods import (
     prediction,
     quaternary_lut,
     sstar_pocket,
+    table_field,
     ultrametric_shear_oracle,
 )
 from pocket_bench.metrics import score_prediction
@@ -178,6 +179,17 @@ def _official_items() -> list[tuple[dict, Path]]:
     return items
 
 
+def _environment_sha() -> str | None:
+    """The digest of the measured stack, from the committed environment lock."""
+    p = ROOT / "ENVIRONMENT.json"
+    if not p.exists():
+        return None
+    try:
+        return json.loads(p.read_text()).get("environment_sha256")
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def _predict(method: str, rec: Path, pdb: str, chain: str | None = None) -> dict:
     if method == "geometric_foundation":
         return geometric_foundation.predict(rec, pdb_id=pdb)
@@ -191,6 +203,8 @@ def _predict(method: str, rec: Path, pdb: str, chain: str | None = None) -> dict
         return algebraic_field.predict(rec, pdb_id=pdb, chain=chain)
     if method == "algebraic_field_linear":
         return algebraic_field_linear.predict(rec, pdb_id=pdb, chain=chain)
+    if method == "table_field":
+        return table_field.predict(rec, pdb_id=pdb, chain=chain)
     if method == "quaternary_lut":
         return quaternary_lut.predict(rec, pdb_id=pdb, chain=chain, track="A")
     if method == "quaternary_lut_seq":
@@ -206,7 +220,8 @@ def _predict(method: str, rec: Path, pdb: str, chain: str | None = None) -> dict
 METHOD_NAMES = ("geometric_foundation", "fstar_pocket", "sstar_pocket",
                 "ultrametric_shear_oracle", "quaternary_lut",
                 "quaternary_lut_seq", "algebraic_field",
-                "algebraic_field_linear", "p2rank", "random_bbox")
+                "algebraic_field_linear", "table_field", "p2rank",
+                "random_bbox")
 
 
 def _run_one(item: tuple[dict, Path],
@@ -371,6 +386,11 @@ def main(argv: list[str] | None = None) -> int:
     methods = {m: None for m in mnames}
     env = json.loads(BASELINE_ENV.read_text())
     p2rank_version = ((env.get("tools") or {}).get("p2rank") or {}).get("version")
+    # Every row records the stack that produced it. This used to be hardcoded
+    # None, which meant the telemetry carried a field named env_sha and no
+    # environment, and a run under a different BLAS was indistinguishable from
+    # one under the same BLAS.
+    env_sha = _environment_sha()
     per = {m: {"ok": 0, "top1_hits": 0, "unavailable": 0, "crash_empty": 0, "rows": []} for m in methods}
     telem_rows: list[dict] = []
     n_attempted = {m: 0 for m in methods}
@@ -450,7 +470,7 @@ def main(argv: list[str] | None = None) -> int:
                     scored=sc, label=lab, prediction=pred,
                     universe_residues=universe,
                     tool_version=p2rank_version if m == "p2rank" else None,
-                    env_sha=None, seed=42 if m == "random_bbox" else 0,
+                    env_sha=env_sha, seed=42 if m == "random_bbox" else 0,
                     runtime_s=pred.get("runtime_s"),
                 )
             )

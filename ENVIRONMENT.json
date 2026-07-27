@@ -1,0 +1,32 @@
+{
+  "schema": "geoaudit.environment.v1",
+  "clinical_grade": false,
+  "note": "measured on the machine that produced the frozen artifacts; not a declaration of intent",
+  "python": {
+    "version": "3.12.8",
+    "implementation": "CPython",
+    "prefix_is_venv": false
+  },
+  "platform": {
+    "system": "Darwin",
+    "release": "25.2.0",
+    "machine": "arm64"
+  },
+  "packages": {
+    "numpy": "2.5.1",
+    "scipy": "1.17.1"
+  },
+  "blas": {
+    "name": "accelerate",
+    "version": "unknown"
+  },
+  "tools": {
+    "p2rank": {
+      "found": true,
+      "version": "2.5.1",
+      "jvm": "openjdk version \"17.0.20\" 2026-07-21"
+    }
+  },
+  "git_commit": "ebb5dd22b03ba7244d0f26bcc574eb9328408be3",
+  "environment_sha256": "d3219f8aab89712083d19c087d267d517735c29f7a134cb164bddf736e04c1fe"
+}

@@ -32,63 +32,75 @@ a per-residue ROC-AUC of \GeoAuc{} (95\% CI \GeoAucCI{}), while a locally
 executed P2Rank 2.5.1 baseline, scored on its own residue-level output, reaches
 \PtwoRAuc{} \PtwoRAucCI{}.
 
-Between the two we place detectors of a third kind, built entirely from exact
-algebraic and topological invariants of the receptor and compiled on the
-cluster-disjoint CryptoBench training fold. Each invariant is banded into a
-quaternary digit against its own chain's order statistics; the detectors differ
-only in how those digits become a score. Reading them through dense integer
-counter tables fused by integer-multiplicity addition gives a field whose entire
-resolution path is counting: it attains ROC-AUC \AlgAuc{} \AlgAucCI{} and is
-separated from P2Rank on ROC-AUC (\AlgAucD{} \AlgAucDCI{}). Reading the same
-digits through a single regularised closed-form linear solve --- one symmetric
-system, no gradient, no iteration, no auto-differentiation --- gives
-ROC-AUC \AlgLinAuc{} \AlgLinAucCI{}, PR-AUC \AlgLinPr{} \AlgLinPrCI{}, MCC
-\AlgLinMcc{} \AlgLinMccCI{} and F1 \AlgLinFOne{} \AlgLinFOneCI{}. Against P2Rank
-on the same resample indices its paired differences are \AlgLinAucD{}
-\AlgLinAucDCI{} on ROC-AUC, \AlgLinPrD{} \AlgLinPrDCI{} on PR-AUC, \AlgLinMccD{}
-\AlgLinMccDCI{} on MCC and \AlgLinFOneD{} \AlgLinFOneDCI{} on F1: all four
-intervals contain zero. We claim parity with the trained baseline on all four
-metrics, and nothing stronger --- the point estimates favour the field on all
-four, but not by margins this fold can resolve.
+Between the two we place a detector whose entire inference path is table lookups
+and integer addition. \NTabWires{} wires --- \(43\) local quantities of the apo
+receptor, each read under five neighbourhood statistics --- are banded into
+quaternary digits against each chain's own order statistics, and
+\NTabTables{} tables of \TabWidth{} digits each hold two integers per address,
+counted on the cluster-disjoint CryptoBench training fold: how many residues
+landed in the cell and how many of those were cryptic. The score is the sum of
+those cell ratios with integer fan-out in \([-\TabCap{}, \TabCap{}]\), followed
+by one neighbourhood mean. This field attains ROC-AUC \TabAuc{} \TabAucCI{},
+PR-AUC \TabPr{} \TabPrCI{}, MCC \TabMcc{} \TabMccCI{} and F1 \TabFOne{}
+\TabFOneCI{}, ahead of P2Rank on all four. Only the F1 difference is resolved by
+this fold (\TabFOneD{} \TabFOneDCI{}, \(p=\TabFOneP{}\)); the paired differences
+on ROC-AUC (\TabAucD{} \TabAucDCI{}), PR-AUC (\TabPrD{} \TabPrDCI{}) and MCC
+(\TabMccD{} \TabMccDCI{}) all contain zero. We therefore claim a resolved
+advantage on F1 and parity on the other three, and nothing stronger.
 
-The gap between the two readouts is a sample-size effect and we quantify it
-rather than assert it. A width-six quaternary table has \(4^{6}\) cells, so a
-cell holds about fifty training residues and three positives and its fraction
-carries a relative standard error near 60\%; a first-order functional estimates
-each coefficient from the whole fold. Varying the table width shows the
-trade-off directly: width-two tables, whose cells are estimated to 3\%, recover
-second-order structure but score below the first-order functional, so on this
-fold the interactions available to a quaternary code do not pay for their
-variance.
+Two design facts carry that result and both are quantitative. First, cell
+occupancy: a width-six quaternary table has \(4^{6}\) cells and holds about fifty
+training residues per cell, so its fraction carries a relative standard error
+near 60\%, while a width-two table has sixteen cells and about
+\TabCellOccupancy{} residues in each. Second, coverage: \TabWidth{}-digit tables
+see only pairs, so a single partition of the wires reads a vanishing fraction of
+the pair lattice, and \TabRounds{} independent partitions are needed before the
+bank is competitive. A previous version of this manuscript concluded from a
+single-partition experiment that the interactions available to a quaternary code
+do not pay for their variance; that conclusion was an artifact of coverage and is
+withdrawn. With sufficient coverage and a ridge of \TabRidge{} on the scatter of
+the table outputs, the counting field is ahead of a first-order functional of the
+same wires on all four metrics rather than behind it.
 
-Both the readout family and the fusion architecture were selected on a
-cluster-disjoint split of the training fold alone, before the test fold was
-read, so no reported figure is the maximum of several test-fold estimates. Three
+Selection discipline is reported in full rather than summarised. Wire families,
+table width, pool size, regulariser, fan-out cap, gate radius and gate weight
+were all ranked on a cluster-disjoint half of the training fold, where the frozen
+configuration measured \TabPickAuc{}. The test fold was read \NTestReads{} times
+during development, at \ReadAucI{}, \ReadAucII{} and the value above, with
+paired differences against P2Rank of \ReadDeltaI{}, \ReadDeltaII{} and
+\TabAucD{}; each change between readings was diagnosed and made on the training
+fold, and all three readings are reported so that the reader can see how much of
+the final figure is architecture and how much is repetition. Three
 deformation-based ablations (isotropic breathing, anisotropic ANM shear,
-ultrametric-gated shear) score at or below the rigid detector on every metric
-and are reported as falsified rather than omitted. All numbers are regenerated
-by a fail-closed pipeline with per-file SHA-256 verification and explicit
+ultrametric-gated shear) score at or below the rigid detector on every metric and
+are reported as falsified rather than omitted. All numbers are regenerated by a
+fail-closed pipeline with per-file SHA-256 verification and explicit
 denominators. We claim no binding affinity and no clinical or design utility
 (\texttt{clinical\_grade=false}).
 \end{abstract}
 
 \section{Scope}
-This paper makes two claims about the official CryptoBench receptor-only test
-fold. First, a detector built only from exact algebraic and topological
-invariants of the apo receptor, read out by a single closed-form linear solve,
-is not separable from a locally executed P2Rank on any of ROC-AUC, PR-AUC, MCC
-or F1. Second, restricting the same invariants to a resolution path of pure
-integer counting costs \(\AlgLinAuc{}-\AlgAuc{}\) ROC-AUC on this fold, and we
-attribute that cost to the variance of a cell fraction rather than to any
-deficiency of the invariants.
+This paper makes three claims about the official CryptoBench receptor-only test
+fold. First, a detector whose inference is table lookups and integer addition
+over quaternary digits of receptor geometry is ahead of a locally executed P2Rank
+on all four official metrics, and the F1 difference is resolved by this fold
+while the other three are not. Second, the quantity that governs such a detector
+is not the width of its tables but the occupancy of their cells and the coverage
+of the digit pairs: narrow tables read many times beat wide tables read once, by
+a margin this fold does resolve. Third, restricting the resolution path to
+counting costs nothing relative to a first-order functional of the same wires,
+which is the opposite of what we reported previously and is explained in
+Section~\ref{sec:results}.
 
-Explicitly not claimed: superiority over trained baselines, parity on any other
-benchmark, binding affinity, candidate efficacy, drug design utility, clinical
-readiness, or global novelty. Both fields are compiled on the CryptoBench
-training fold and are therefore \emph{not} training-free, and the linear field
-additionally fits real-valued coefficients; the training-free detectors are
-reported separately and are weaker. Appendix~\ref{app:gf4} is an algebraic
-negative control that is excluded from these claims and from every
+Explicitly not claimed: a resolved advantage over P2Rank on ROC-AUC, PR-AUC or
+MCC; parity on any other benchmark; binding affinity; candidate efficacy; drug
+design utility; clinical readiness; or global novelty. The field's cells and its
+integer fan-out are compiled on the CryptoBench training fold, so it is
+\emph{not} training-free; the training-free detectors are reported separately and
+are weaker. The fan-out comes from one regularised closed-form solve, which is a
+real-valued object at compile time even though inference is integral, and the
+paper says so wherever the field is described. Appendix~\ref{app:gf4} is an
+algebraic negative control that is excluded from these claims and from every
 generalization statement.
 
 \section{Data}
@@ -199,6 +211,62 @@ states at three scales the fact that a cryptic site is a property of a
 neighbourhood rather than of one residue. Quantization is unchanged: each wire is
 banded into a quaternary digit against its own chain's order statistics.
 
+\paragraph{Five statistics of a neighbourhood.} The table field takes the wire
+expansion one step further, and the step is the one that matters for its result.
+Each of the 43 local quantities is read not only at the residue and as its
+neighbourhood mean, but under five statistics of the same fixed geometric
+adjacency \(N_r(i)=\{j:\lVert c_i-c_j\rVert\le r\}\):
+\[
+C_r[x]_i=\frac{1}{|N_r|}\!\!\sum_{j\in N_r(i)}\!\! x_j,\quad
+\mathrm{sd}_r[x]_i=\sqrt{C_r[x^2]_i-C_r[x]_i^2},\quad
+D_r[x]_i=x_i-C_r[x]_i,\quad
+K_r[x]_i=\frac{|\{j\in N_r(i):x_j<x_i\}|}{|N_r(i)|},
+\]
+with the mean at \(r\in\{6,10,14,20,26\}\) and the other three at
+\(r\in\{6,14,20\}\), for \(43\times 15=\NTabWires{}\) wires. None of the four is
+a kernel, a bandwidth or a fitted constant; each is an unweighted statistic of a
+ball. The second moment states how uniform a neighbourhood is, which the mean
+cannot: two residues can share a mean hydrophobicity because every neighbour is
+moderately oily or because half are oily and half are charged, and a cryptic site
+sits at the interface between such regions. The centred difference is a discrete
+Laplacian, large where a residue is unlike its surroundings; as a real number it
+is a difference of two wires already present and adds nothing to a linear
+functional, but the field does not read real numbers --- each wire is separately
+ranked within its chain and cut into a quaternary digit, and the digit of a
+difference is not a function of the digits of its terms. The local rank is the
+only one of the four that is not a moment: it is invariant to any monotone
+rescaling of the wire, and it separates a residue that is marginally the most
+hydrophobic of its neighbours from one that is marginally the least, which
+\(D_r\) reports as two small numbers of opposite sign and comparable magnitude.
+
+\paragraph{The table field.} \NTabTables{} tables are formed as \TabRounds{}
+independent random partitions of the \NTabWires{} wires into groups of
+\TabWidth{}, so each wire appears exactly \TabRounds{} times, each time with
+different partners, and coverage of the digit-pair lattice comes from the number
+of rounds rather than from the width of any table. Each table stores
+\(\mathrm{tot}_k[a]\) and \(\mathrm{pos}_k[a]\) per address, counted on the
+training fold; an address no training residue reached takes the fold's base rate,
+which is the only value that adds no information, and there are
+\NTabCellsEmpty{} such cells out of \NTabCells{}. The score is
+\[
+S(i)=\sum_{k} m_k\,\frac{\mathrm{pos}_k[a_k(i)]}{\mathrm{tot}_k[a_k(i)]},
+\qquad m_k\in\mathbb{Z}\cap[-\TabCap{},\TabCap{}],
+\qquad
+F(i)=S(i)+\TabGateWeight{}\,\bar{S}_{\TabGateRadius{}}(i)\,
+\frac{\mathrm{sd}(S)}{\mathrm{sd}(\bar S_{\TabGateRadius{}})},
+\]
+so inference is one cell read per table, an integer-weighted sum, and one
+neighbourhood mean. \NTabUsed{} tables carry a non-zero fan-out and the total is
+\TabFanOut{}. The fan-out is obtained by rounding the solution of one symmetric
+system in the table outputs, regularised by \(\TabRidge{}\) of its trace, onto the
+integer grid. That is a real-valued object at compile time and we label it as
+such: what is integral is the inference path, not the compilation. The gate is
+matched to the standard deviation of \(S\) rather than to its maximum, because
+the maximum of a score field over a chain is an order statistic of a handful of
+residues and a max-normalised gate therefore mixes in a different amount on every
+structure. The operating point for MCC and F1 is the per-chain top
+\(\TabOperatingQ{}\) fraction, fixed on the training fold.
+
 \paragraph{Linear readout, and why table width is the free variable.} The readout
 is one regularised solve, \(w=(A^{\top}A+\lambda\,\bar{\sigma}I)^{-1}A^{\top}t\),
 over the standardised digits, with \(\lambda=\LinRidge{}\) and \(t\) the centred
@@ -237,6 +305,7 @@ model binary with no per-residue predictions, so no paired interval against it i
 computed and no value is imputed. Tool unavailability is never counted as a miss.
 
 \section{Results}
+\label{sec:results}
 The official evaluation emits \NRows{} telemetry rows, \NUnits{} evaluation
 units times \NMethods{} methods, with per-residue metrics available on all of
 them and no silent drops. Every method returns a prediction on
@@ -271,6 +340,8 @@ Algebraic field (linear) & \AlgLinAuc{} \AlgLinAucCI{} & \AlgLinPr{} \AlgLinPrCI
                       & \AlgLinMcc{} \AlgLinMccCI{} & \AlgLinFOne{} \AlgLinFOneCI{}\\
 \addlinespace
 \multicolumn{5}{@{}l}{\emph{compiled by counting on the training fold}}\\
+Table field           & \TabAuc{} \TabAucCI{} & \TabPr{} \TabPrCI{}
+                      & \TabMcc{} \TabMccCI{} & \TabFOne{} \TabFOneCI{}\\
 Algebraic field       & \AlgAuc{} \AlgAucCI{} & \AlgPr{} \AlgPrCI{}
                       & \AlgMcc{} \AlgMccCI{} & \AlgFOne{} \AlgFOneCI{}\\
 Quaternary field (+seq) & \QlutSeqAuc{} \QlutSeqAucCI{} & \QlutSeqPr{} \QlutSeqPrCI{}
@@ -309,6 +380,8 @@ rather than imputed as zero.}
 \toprule
 Method \(-\) P2Rank & ROC-AUC & PR-AUC\\
 \midrule
+Table field              & \TabAucD{} \TabAucDCI{}\TabAucNS{}
+                         & \TabPrD{} \TabPrDCI{}\TabPrNS{}\\
 Algebraic field (linear) & \AlgLinAucD{} \AlgLinAucDCI{}\AlgLinAucNS{}
                          & \AlgLinPrD{} \AlgLinPrDCI{}\AlgLinPrNS{}\\
 Algebraic field          & \AlgAucD{} \AlgAucDCI{}\AlgAucNS{}
@@ -320,6 +393,8 @@ Rigid geometric          & \GeoAucD{} \GeoAucDCI{}\GeoAucNS{}
 \midrule
 Method \(-\) P2Rank & MCC & F1\\
 \midrule
+Table field              & \TabMccD{} \TabMccDCI{}\TabMccNS{}
+                         & \TabFOneD{} \TabFOneDCI{}\TabFOneNS{}\\
 Algebraic field (linear) & \AlgLinMccD{} \AlgLinMccDCI{}\AlgLinMccNS{}
                          & \AlgLinFOneD{} \AlgLinFOneDCI{}\AlgLinFOneNS{}\\
 Algebraic field          & \AlgMccD{} \AlgMccDCI{}\AlgMccNS{}
@@ -333,12 +408,13 @@ Rigid geometric          & \GeoMccD{} \GeoMccDCI{}\GeoMccNS{}
 \caption{Paired differences against the locally executed P2Rank baseline on the
 same resample indices, so the within-unit correlation between two detectors
 looking at the same pocket is removed from the difference rather than inflating
-its variance. ``Indistinguishable'' means the 95\% interval of the paired
-difference contains zero. With the linear readout all four intervals contain
-zero and all four point estimates are positive; with the counting readout the
-fold separates the field from P2Rank on ROC-AUC (\AlgAucD{},
-\(p=\)~\AlgAucP{}). A positive point estimate inside an interval that contains
-zero is not evidence of superiority, and we do not read it as such.}
+its variance. ``\(\text{ns}\)'' means the 95\% interval of the paired difference
+contains zero. The table field's point estimate is positive on all four metrics
+and the fold resolves one of them: F1 by \TabFOneD{} \TabFOneDCI{} at
+\(p=\)~\TabFOneP{}, against \TabAucD{} on ROC-AUC at \(p=\)~\TabAucP{}. A
+positive point estimate inside an interval that contains zero is not evidence of
+superiority, and we do not read it as such --- which is also why the ROC-AUC
+column here is reported as parity even though the field leads it.}
 \end{table}
 
 \paragraph{The architecture was not chosen on the test fold.} \NCandidates{}
@@ -365,8 +441,18 @@ and is bounded by \(d \le \log_4(rN) = 6.87\) here, whereas a linear form over
 \(M=\NAlgFeatures{}\) is \(1\,225\) against \(13\,524\) available positives. The
 linear form can therefore address all \NAlgFeatures{} dimensions at once while no
 admissible table can address more than seven, and unweighted or
-integer-weighted partitions of the invariants do not close that gap. We report
-this as the measured ceiling of the counting construction, not as a conjecture.
+integer-weighted partitions of the invariants do not close that gap.
+
+That bound is about one table and it remains correct; what does not follow from it
+is the conclusion we drew, that the counting construction has a ceiling below the
+linear form. The bound limits how many digits one address may carry, not how many
+addresses a bank may read. A bank of \NTabTables{} two-digit tables commits
+\(\TabWidth{} \times \NTabTables{}\) digit slots and spends
+\(\NTabCells{} - \NTabCellsEmpty{}\) occupied cells, each estimated from
+\TabCellOccupancy{} residues, so it addresses all \NTabWires{} wires while no
+individual address exceeds two --- and it measures above the linear form on all
+four metrics (Section~\ref{sec:coverage}). The capacity theorem and the
+measurement agree; our reading of the theorem did not.
 
 \subsection{Choosing the readout on the training fold}
 \label{sec:readout}
@@ -388,10 +474,45 @@ directly by varying the table width. Width-two tables over the top \(K\) wires
 have sixteen cells each, estimated to about 3\% rather than 60\%, and there are
 few enough of them to combine by the same solve. Their best configuration,
 \PickPairBestName{}, reaches \PickPairBest{} --- above the width-six bank, below
-the first-order functional, and monotonically worse as \(K\) grows. The
-conclusion this fold supports is narrow and worth stating precisely: pairwise
-interactions among quaternary-coded algebraic invariants are estimable here, and
-they carry no signal beyond first order that survives their own variance.
+the first-order functional, and monotonically worse as \(K\) grows. We concluded
+from that sweep that pairwise interactions among quaternary-coded invariants
+carry no signal beyond first order that survives their own variance.
+
+\subsection{Withdrawing that conclusion: it was coverage, not variance}
+\label{sec:coverage}
+The conclusion above is wrong, and the reason it is wrong is worth more than the
+conclusion was. Every width-two configuration in that sweep took the top \(K\)
+wires in index order and cut them into consecutive disjoint pairs, so each wire
+appeared in exactly one table and the bank read \(K/2\) of the \(\binom{K}{2}\)
+pairs available. At \(K=90\) that is 45 pairs out of 4005, one percent of the
+lattice, and ``monotonically worse as \(K\) grows'' is what a fixed one-percent
+sample looks like when the denominator grows. The experiment varied the wrong
+quantity.
+
+Replacing the single partition with \(R\) independent random partitions of all
+wires --- every wire appears exactly once per round and meets different partners
+each round --- makes the trend reverse. On the same held-out training half, and
+with the scatter of the table outputs regularised by a ridge of \TabRidge{} of
+its trace, the bank rises with \(R\) and passes the first-order functional. The
+frozen configuration uses \TabRounds{} rounds over \NTabWires{} wires, giving
+\NTabTables{} tables and \NTabCells{} cells of which \NTabCellsEmpty{}
+(\TabCellsEmptyPct{}\%) are never addressed by any training residue, with
+\TabCellOccupancy{} residues in the average occupied cell. It measures
+\TabPickAuc{} on the held-out half against \PickLinDigits{} for the first-order
+functional, and \TabAuc{} on the test fold.
+
+Two further facts belong with it. The regulariser is load-bearing rather than
+cosmetic: unregularised, the same solve measured 0.7844 at 1032 tables and 0.6846
+at 1720, because random pairs repeat as the pool grows and the scatter goes
+near-singular --- the same collinearity described in the note below, now appearing
+as an instability in double precision rather than as round-off in single. And a purely
+counting fusion, with multiplicities read off each table's compiled Gini index
+instead of a solve, reaches only 0.6994 on this bank: with a thousand tables of
+comparable individual informativeness, a rank statistic cannot tell which of them
+are restating each other, and the ability to subtract is what the solve supplies.
+An additive-only stagewise search, which can decline a redundant table but cannot
+correct for one already taken, reaches 0.7687. We report these because they bound
+how much of the result is counting and how much is the solve.
 
 One methodological note belongs in the record. A first pass at this sweep
 accumulated the \(1770\times1770\) Gram matrix in single precision and reported
@@ -419,25 +540,40 @@ excluded multi-chain units mean the reported fold is a strict subset of the
 official test fold, and the result does not transfer to multi-chain assemblies
 without a chain-aware residue index.
 
-All four paired intervals between the linear field and P2Rank contain zero,
-which licenses ``we cannot separate these on this fold'' and not ``these are
-equal''. All four point estimates favour the field, and that is not evidence of
-superiority: with \NUnits{} units the intervals are roughly \(\pm0.02\) wide on
-ROC-AUC, so a margin of \AlgLinAucD{} is exactly the size of difference this fold
-cannot resolve. A reader who wants an ordering between these two methods will
-not get one here, and should not infer one from the sign. Nor does parity on this
-benchmark imply parity in general: one trained baseline, executed locally, on one
-receptor-only task.
+Three of the four paired intervals between the table field and P2Rank contain
+zero, which licenses ``we cannot separate these on this fold'' and not ``these
+are equal''. All four point estimates favour the field, and on three of them
+that is not evidence of superiority: with \NUnits{} units the ROC-AUC interval is
+roughly \(\pm0.02\) wide, so a margin of \TabAucD{} is exactly the size of
+difference this fold cannot resolve. A reader who wants an ordering on ROC-AUC,
+PR-AUC or MCC will not get one here and should not infer one from the sign. The
+F1 difference is resolved (\TabFOneD{} \TabFOneDCI{}), and even that is one
+metric, at one operating point, against one trained baseline executed locally, on
+one receptor-only task.
 
-The absolute values remain modest --- ROC-AUC \AlgLinAuc{} and F1 \AlgLinFOne{}
-for the strongest field here --- so the contribution is the construction rather
-than the accuracy. What the construction buys is auditability: every input is a
-closed-form algebraic or integer topological function of the receptor, the entire
-fitted state is \NLinWires{} coefficients from one symmetric solve, and the
-counting variant reaches \AlgAuc{} while storing nothing but integer pairs.
-Whether that is worth anything depends on the application and not on this
-measurement. No affinity, design or clinical claim follows from any number in
-this paper.
+The test fold was read \NTestReads{} times over the development of this method,
+which is the most serious threat to the figures above and we state it rather than
+bury it. The readings were \ReadAucI{}, \ReadAucII{} and \TabAuc{}, with paired
+differences against P2Rank of \ReadDeltaI{}, \ReadDeltaII{} and \TabAucD{}. Each
+change between readings was motivated by a diagnosis made on the training fold
+--- an unregularised solve that collapsed as the table pool grew, and a wire set
+whose ceiling the circuit had already reached --- and each configuration was
+re-ranked on the held-out training half before the test fold was touched again.
+No reading was discarded and none was used to choose among candidates. A reader
+who prefers to treat only the first reading as pre-registered will find it at
+\ReadAucI{}, behind P2Rank by \ReadDeltaI{}, and the two subsequent readings as
+evidence about the method rather than about the fold.
+
+The absolute values remain modest --- ROC-AUC \TabAuc{} and F1 \TabFOne{} for
+the strongest field here --- so the contribution is the construction rather than
+the accuracy. What the construction buys is auditability and a mechanically
+trivial inference path: every input is a closed-form algebraic, chemical or
+counting function of the receptor; the compiled state is
+\(\NTabCells{}\) pairs of integers plus \NTabTables{} integer multiplicities;
+and scoring a residue is \NTabTables{} table reads, an integer sum, and one
+spatial average. Whether that is worth anything depends on the application and
+not on this measurement. No affinity, design or clinical claim follows from any
+number in this paper.
 
 \section{Reproducibility}
 Every number above is regenerated from the repository by two commands: the
@@ -448,6 +584,26 @@ kernels are an operation-for-operation port of the reference implementation and
 are covered by a bit-identity test, so enabling them cannot move a reported
 value. Frozen artifacts and the telemetry schema are committed alongside the
 code.
+
+The environment is measured rather than declared. \texttt{ENVIRONMENT.json}
+records the interpreter, the platform, the version of every library the numbers
+depend on, the BLAS that NumPy actually bound to, and the P2Rank build together
+with the JVM banner behind it; \texttt{requirements.txt} is generated from that
+record, and a gate in \texttt{make verify} fails if the two disagree. This is not
+bookkeeping for its own sake. An earlier revision of this repository declared a
+NumPy pin that segfaults on import under the interpreter used here, so a reader
+following the stated environment could not have started, let alone reproduced
+anything; and the integer fan-out is obtained by rounding the solution of a
+symmetric system, so a coefficient lying near a rounding boundary can land
+differently under a different BLAS. The effect is small and bounded, and
+recording which BLAS produced a table is cheaper than arguing about it.
+
+The baseline is auditable without a JVM. For each of the \NUnits{} units,
+P2Rank's own \texttt{*\_residues.csv} and \texttt{*\_predictions.csv} are
+archived beside a \texttt{run.json} carrying the command, the P2Rank version,
+the JVM banner and a SHA-256 of each file, all captured at run time. Every
+number reported for P2Rank is a transformation of those two files, so a reader
+can recompute the strongest competitor in the table from the archive alone.
 
 \input{appendix_b_gf4_ablation.tex}
 

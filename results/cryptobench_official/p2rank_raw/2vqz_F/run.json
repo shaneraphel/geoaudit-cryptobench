@@ -1,0 +1,23 @@
+{
+  "schema": "geoaudit.p2rank_raw_run.v1",
+  "unit_id": "2vqz_F",
+  "command": [
+    "prank",
+    "predict",
+    "-f",
+    "<scratch>/rec.pdb",
+    "-o",
+    "<scratch>/out"
+  ],
+  "command_note": "<scratch> is a per-run temporary directory holding a byte copy of the committed receptor; the launcher is resolved via P2RANK_HOME or PATH",
+  "tool": "p2rank",
+  "tool_version": "2.5.1",
+  "jvm": "openjdk version \"17.0.20\" 2026-07-21",
+  "config": "default_experimental_structure",
+  "protocol": "native_residue_level",
+  "file_sha256": {
+    "rec.pdb_residues.csv": "07015e3d1a060d441203498bd2daa6475b79234fb27147e8849986157e763cf2",
+    "rec.pdb_predictions.csv": "99fb18039d83dea9ceb91277ffc93eb18fcd8af920fba316c9a6ec2198ed6bee"
+  },
+  "stdout_tail": "P2Rank 2.5.1\n\nDIR: <path>\nDIR2: <path>\nDIR: <path>\nDIR2: <path>\npredicting pockets for proteins from dataset [rec.pdb]\nprocessing [rec.pdb] (1/1)\npredicting pockets finished in 0 hours 0 minutes 1.647 seconds\nresults saved to directory [<path>]\n\nFinished successfully in 0 hours 0 minutes 2.133 seconds.\n"
+}

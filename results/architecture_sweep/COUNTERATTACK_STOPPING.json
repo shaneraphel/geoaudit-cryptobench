@@ -1,0 +1,179 @@
+{
+  "schema": "geoaudit.counterattack_stopping.v1",
+  "clinical_grade": false,
+  "motivation": "the halt-on-first-non-improving rule stopped at the sampling-noise floor of the subsampled criterion, and kept fewer tables on more data",
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725,
+    "n_fit_rows": 118716,
+    "n_pick_rows": 116122
+  },
+  "pool": {
+    "table_width": 2,
+    "pool_rounds": 12,
+    "n_pool_tables": 1032,
+    "mean_residues_per_occupied_cell": 7575.881699260042
+  },
+  "candidates": [
+    {
+      "criterion_rows": 24000,
+      "rounds": 40,
+      "n_distinct_tables": 40,
+      "total_fan_out": 40,
+      "pick_half_roc_auc": 0.7812394002119399
+    },
+    {
+      "criterion_rows": 24000,
+      "rounds": 60,
+      "n_distinct_tables": 55,
+      "total_fan_out": 60,
+      "pick_half_roc_auc": 0.7805261912969573
+    },
+    {
+      "criterion_rows": 24000,
+      "rounds": 87,
+      "n_distinct_tables": 72,
+      "total_fan_out": 81,
+      "pick_half_roc_auc": 0.7811687945157234
+    },
+    {
+      "criterion_rows": 24000,
+      "rounds": 110,
+      "n_distinct_tables": 80,
+      "total_fan_out": 94,
+      "pick_half_roc_auc": 0.7800516489284982
+    },
+    {
+      "criterion_rows": 24000,
+      "rounds": 140,
+      "n_distinct_tables": 80,
+      "total_fan_out": 94,
+      "pick_half_roc_auc": 0.7800516489284982
+    },
+    {
+      "criterion_rows": 24000,
+      "rounds": 170,
+      "n_distinct_tables": 80,
+      "total_fan_out": 94,
+      "pick_half_roc_auc": 0.7800516489284982
+    },
+    {
+      "criterion_rows": 24000,
+      "rounds": 200,
+      "n_distinct_tables": 80,
+      "total_fan_out": 94,
+      "pick_half_roc_auc": 0.7800516489284982
+    },
+    {
+      "criterion_rows": 60000,
+      "rounds": 40,
+      "n_distinct_tables": 39,
+      "total_fan_out": 40,
+      "pick_half_roc_auc": 0.7785754529255495
+    },
+    {
+      "criterion_rows": 60000,
+      "rounds": 60,
+      "n_distinct_tables": 57,
+      "total_fan_out": 60,
+      "pick_half_roc_auc": 0.7819483836453488
+    },
+    {
+      "criterion_rows": 60000,
+      "rounds": 87,
+      "n_distinct_tables": 79,
+      "total_fan_out": 85,
+      "pick_half_roc_auc": 0.7802264677003835
+    },
+    {
+      "criterion_rows": 60000,
+      "rounds": 110,
+      "n_distinct_tables": 80,
+      "total_fan_out": 88,
+      "pick_half_roc_auc": 0.7794742642225962
+    },
+    {
+      "criterion_rows": 60000,
+      "rounds": 140,
+      "n_distinct_tables": 80,
+      "total_fan_out": 88,
+      "pick_half_roc_auc": 0.7794742642225962
+    },
+    {
+      "criterion_rows": 60000,
+      "rounds": 170,
+      "n_distinct_tables": 80,
+      "total_fan_out": 88,
+      "pick_half_roc_auc": 0.7794742642225962
+    },
+    {
+      "criterion_rows": 60000,
+      "rounds": 200,
+      "n_distinct_tables": 80,
+      "total_fan_out": 88,
+      "pick_half_roc_auc": 0.7794742642225962
+    },
+    {
+      "criterion_rows": 118716,
+      "rounds": 40,
+      "n_distinct_tables": 38,
+      "total_fan_out": 40,
+      "pick_half_roc_auc": 0.781277007964451
+    },
+    {
+      "criterion_rows": 118716,
+      "rounds": 60,
+      "n_distinct_tables": 57,
+      "total_fan_out": 60,
+      "pick_half_roc_auc": 0.7823978029162745
+    },
+    {
+      "criterion_rows": 118716,
+      "rounds": 87,
+      "n_distinct_tables": 83,
+      "total_fan_out": 87,
+      "pick_half_roc_auc": 0.7860710507390097
+    },
+    {
+      "criterion_rows": 118716,
+      "rounds": 110,
+      "n_distinct_tables": 89,
+      "total_fan_out": 94,
+      "pick_half_roc_auc": 0.785959104627835
+    },
+    {
+      "criterion_rows": 118716,
+      "rounds": 140,
+      "n_distinct_tables": 89,
+      "total_fan_out": 94,
+      "pick_half_roc_auc": 0.785959104627835
+    },
+    {
+      "criterion_rows": 118716,
+      "rounds": 170,
+      "n_distinct_tables": 89,
+      "total_fan_out": 94,
+      "pick_half_roc_auc": 0.785959104627835
+    },
+    {
+      "criterion_rows": 118716,
+      "rounds": 200,
+      "n_distinct_tables": 89,
+      "total_fan_out": 94,
+      "pick_half_roc_auc": 0.785959104627835
+    }
+  ],
+  "selected": {
+    "criterion_rows": 118716,
+    "rounds": 87,
+    "n_distinct_tables": 83,
+    "total_fan_out": 87,
+    "pick_half_roc_auc": 0.7860710507390097
+  },
+  "previous_rule": {
+    "criterion_rows": 24000,
+    "stop": "first non-improving round",
+    "pick_half_roc_auc": 0.7812,
+    "test_fold_roc_auc": 0.7804
+  }
+}
