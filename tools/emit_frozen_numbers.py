@@ -26,6 +26,7 @@ LINFIELD = ROOT / "data/cryptobench_apo/ALGEBRAIC_FIELD_LINEAR.json"
 TABFIELD = ROOT / "data/cryptobench_apo/TABLE_FIELD.json"
 WIDESEL = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE2.json"
 WIDEPROBE = ROOT / "results/official_fold/COUNTERATTACK_WIDE_PROBE.json"
+LEDGER = ROOT / "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json"
 TELEMETRY = ROOT / "results/cryptobench_official/TELEMETRY.json"
 SELECTION = ROOT / "results/architecture_sweep/TRAIN_ONLY_SELECTION.json"
 CEILING = ROOT / "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json"
@@ -154,6 +155,33 @@ def build() -> str:
                  f"{{{sel['selected']['pick_half_roc_auc']:.4f}}}")
         L.append(f"\\newcommand{{\\NTabCandidates}}"
                  f"{{{len(sel['candidates'])}}}")
+
+    if LEDGER.exists():
+        # How often the held-out fold has been scored, and by how many
+        # architectures. Hand-counting this is how the manuscript came to say
+        # three when the artifacts say eleven, so it is read from the ledger.
+        led = json.loads(LEDGER.read_text())
+        L.append(f"\\newcommand{{\\NArchOnFold}}"
+                 f"{{{led['n_distinct_architectures_evaluated']}}}")
+        L.append(f"\\newcommand{{\\NOurDetectors}}{{{led['n_our_detectors']}}}")
+        L.append(f"\\newcommand{{\\NStandaloneProbes}}"
+                 f"{{{led['n_standalone_probes']}}}")
+
+        # The selection arithmetic a hostile reviewer performs first, done here
+        # instead. The standard error of a mean over the fold sets the scale
+        # that any margin has to be read against.
+        rows = json.loads(TELEMETRY.read_text())["rows"]
+        per = [r["residue_auc"] for r in rows
+               if r["method"] == "table_field" and r.get("residue_auc") is not None]
+        if len(per) > 1:
+            mu = sum(per) / len(per)
+            var = sum((x - mu) ** 2 for x in per) / (len(per) - 1)
+            se = (var / len(per)) ** 0.5
+            L.append(f"\\newcommand{{\\FoldSE}}{{{se:.4f}}}")
+            d = boot["metrics"]["residue_auc"]["paired_vs_baseline"]
+            tab = (d.get("table_field") or {}).get("delta_point")
+            if tab:
+                L.append(f"\\newcommand{{\\LeadInSE}}{{{tab / se:.2f}}}")
 
     if WIDEPROBE.exists():
         # Three readings of the test fold, and the manuscript reports all

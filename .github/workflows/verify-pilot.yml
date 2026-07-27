@@ -25,6 +25,8 @@ jobs:
         run: make readme
       - name: P2Rank raw archive must cover every scored unit and match its checksums
         run: make archive
+      - name: Test-fold access ledger must match the artifacts on disk
+        run: make ledger
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

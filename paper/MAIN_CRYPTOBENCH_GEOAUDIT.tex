@@ -50,6 +50,15 @@ our pre-registered resampling seed and does not do so under most others, and we
 report it as unresolved for the reason given below. We claim a resolved
 advantage on F1 and parity on the other three, and nothing stronger.
 
+The ROC-AUC margin deserves less than that. Over this fold the standard error of
+a mean ROC-AUC is \FoldSE{}, so \TabAucD{} is \LeadInSE{} of one standard error,
+and it is the largest of \NArchOnFold{} architectures of ours that have been
+scored on these same units --- a count taken from an artifact ledger rather than
+from memory, after a hand-written version of this disclosure proved wrong. A
+maximum over that many correlated estimates is biased upward by about the size
+of the margin, so we treat the ROC-AUC ordering as carrying no information and
+ask the reader to do the same.
+
 MCC is the one that needs saying out loud, because two defensible choices decide
 it and only one of them is honest. Each paired difference is taken on the
 structures where both methods have a value, which for MCC is \TabMccNPaired{} of
@@ -581,18 +590,39 @@ opposite, and the counts are in
 result is a threshold metric at one operating point, against one trained
 baseline executed locally, on one receptor-only task.
 
-The test fold was read \NTestReads{} times over the development of this method,
-which is the most serious threat to the figures above and we state it rather than
-bury it. The readings were \ReadAucI{}, \ReadAucII{} and \TabAuc{}, with paired
-differences against P2Rank of \ReadDeltaI{}, \ReadDeltaII{} and \TabAucD{}. Each
-change between readings was motivated by a diagnosis made on the training fold
---- an unregularised solve that collapsed as the table pool grew, and a wire set
-whose ceiling the circuit had already reached --- and each configuration was
-re-ranked on the held-out training half before the test fold was touched again.
-No reading was discarded and none was used to choose among candidates. A reader
-who prefers to treat only the first reading as pre-registered will find it at
-\ReadAucI{}, behind P2Rank by \ReadDeltaI{}, and the two subsequent readings as
-evidence about the method rather than about the fold.
+The test fold was read \NTestReads{} times over the development of the table
+field itself, and that is not the whole story. The readings were \ReadAucI{},
+\ReadAucII{} and \TabAuc{}, with paired differences against P2Rank of
+\ReadDeltaI{}, \ReadDeltaII{} and \TabAucD{}. Each change between them was
+motivated by a diagnosis made on the training fold --- an unregularised solve
+that collapsed as the table pool grew, and a wire set whose ceiling the circuit
+had already reached --- and each configuration was re-ranked on the held-out
+training half before the fold was touched again. No reading was discarded.
+
+The whole story is larger, and it is the most serious threat to everything
+above. Counted from the artifacts rather than from memory,
+\texttt{results/official\_fold/TEST\_FOLD\_ACCESS\_LEDGER.json} records
+\NArchOnFold{} distinct architectures of ours scored on these same \NUnits{}
+units: \NOurDetectors{} that reached the frozen telemetry and
+\NStandaloneProbes{} standalone probes, one of which (\texttt{threshold\_field})
+lands within four thousandths of the field reported here and appears in no table
+in this paper. An earlier revision of this section said the fold had been read
+three times, a figure typed from memory of the three probes that produced the
+main result. The ledger is generated precisely because that is the sentence in
+any paper least worth taking on trust, and it was wrong.
+
+The arithmetic this forces should be done by us rather than left to the reader.
+The standard error of a mean ROC-AUC over \NUnits{} units on this fold is
+\FoldSE{}. The margin over P2Rank is \TabAucD{}, or \LeadInSE{} of one standard
+error, and it is the maximum over \NArchOnFold{} architectures. The upward bias
+of a maximum over that many correlated estimates is of the same order as the
+margin itself, so the ROC-AUC ordering in Table~2 carries no weight and we ask
+for none. That is why this paper claims parity: not modesty, but that the
+number is the wrong size to claim with. The F1 difference is several times
+larger and survives every resampling seed, which is what makes it the one
+difference we report --- though seed robustness speaks to the bootstrap and not
+to architecture selection, and a reader is entitled to discount it on exactly
+the same grounds.
 
 The absolute values remain modest --- ROC-AUC \TabAuc{} and F1 \TabFOne{} for
 the strongest field here --- so the contribution is the construction rather than

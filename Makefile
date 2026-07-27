@@ -1,8 +1,8 @@
 PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
-.PHONY: verify test consistency readme strict-json macros environment archive icloud freeze
-verify: consistency strict-json readme macros environment archive icloud
+.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger freeze
+verify: consistency strict-json readme macros environment archive icloud ledger
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The declared environment and the real one drifted once, in the worst possible
@@ -19,6 +19,7 @@ macros:
 # reader is asked to trust has a generator in the repository; this is it.
 freeze:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/emit_environment.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/build_test_fold_ledger.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/freeze_bootstrap.py --all --quiet
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/emit_frozen_numbers.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/render_results_section.py --write
@@ -32,6 +33,11 @@ archive:
 # in iCloud, and this checks that they are and that they are unaltered.
 icloud:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_icloud_cache.py
+
+# How often the held-out fold has been scored, counted from the artifacts.
+# A hand-written version of this disclosure was wrong by a factor of three.
+ledger:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/build_test_fold_ledger.py --check
 
 # Two frozen reports may never disagree about the same quantity.
 consistency:
