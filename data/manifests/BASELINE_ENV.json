@@ -1,7 +1,6 @@
 {
-  "schema": "gf4cc.baseline_env.v1",
+  "schema": "geoaudit.baseline_env.v1",
   "clinical_grade": false,
-  "python": "3.12",
   "tools": {
     "fpocket": {
       "version": "4.0 (git tag 4.2.3)",
@@ -17,9 +16,10 @@
     }
   },
   "commands": {
-    "labels": "PYTHONPATH=src python3.12 tools/build_labels.py --download",
-    "benchmark": "PYTHONPATH=src python3.12 tools/run_pilot.py --split all"
+    "official_fold": "PYTHONPATH=src python3.12 tools/run_cryptobench_apo.py --dataset official --jobs 6",
+    "labels": "PYTHONPATH=src python3.12 tools/build_labels.py --download"
   },
-  "report": "results/pilot/REGENERATED_PILOT_REPORT.json",
-  "note": "Prior P2Rank 6/6 was on merged (buggy) labels and is invalidated. Current numbers are on corrected chain-scoped labels; splits are NOT cluster-disjoint, so no comparative-superiority claim is made."
+  "report": "results/cryptobench_official/TELEMETRY.json",
+  "note": "Prior P2Rank 6/6 was on merged (buggy) labels and is invalidated. Current numbers are on corrected chain-scoped labels from the official cluster-disjoint fold. P2Rank's raw per-structure output, its version and the JVM behind it are archived per unit under results/cryptobench_official/p2rank_raw/ and checked by make archive.",
+  "scope": "External baselines used by the official CryptoBench fold. Python and library versions are NOT declared here: they are measured into ENVIRONMENT.json, which is the authoritative environment record and is checked by make verify."
 }

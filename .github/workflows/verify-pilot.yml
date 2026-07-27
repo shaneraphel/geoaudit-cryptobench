@@ -27,6 +27,8 @@ jobs:
         run: make archive
       - name: Test-fold access ledger must match the artifacts on disk
         run: make ledger
+      - name: Every frozen artifact must declare its role
+        run: make artifacts
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

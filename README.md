@@ -358,7 +358,21 @@ all fail-closed.
 | Provenance pinned | `verify_claims` | `9BL0`/`5VA1` SHA-256 or byte size unset |
 | Scope hygiene | `verify_claims` regexes | out-of-scope terms, proprietary engine names, absolute local paths, or credential patterns in primary docs |
 
-Current state: `verify_claims` all checks pass; test suite green.
+Current state: `verify_claims` all checks pass; 141 tests pass under both
+`unittest discover` and `pytest`, which now collect the same set. They did not:
+`tests/test_spatial.py` was written against `pytest` while CI runs `unittest`,
+so the five checks guarding the neighbour-search kernel — the one every gate,
+context transform and topology descriptor calls — were never executed by CI.
+
+Every frozen artifact under `results/` declares its role in
+`results/ARTIFACT_MANIFEST.json`, and `make artifacts` fails on any file that
+does not: 18 cited by the paper or this README, 20 training-fold sweeps, 4
+evaluations on the official test fold, 4 superseded. The gate additionally
+rejects any artifact filed as a sweep that in fact carries per-unit metrics over
+the official units, which is the mechanical form of "no quiet test-set
+evaluation filed under exploration". How often the held-out fold has been scored
+is counted from the artifacts in
+`results/official_fold/TEST_FOLD_ACCESS_LEDGER.json`, not asserted in prose.
 
 ---
 

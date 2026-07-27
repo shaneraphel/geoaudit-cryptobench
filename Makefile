@@ -1,8 +1,8 @@
 PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
-.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger freeze
-verify: consistency strict-json readme macros environment archive icloud ledger
+.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts freeze
+verify: consistency strict-json readme macros environment archive icloud ledger artifacts
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The declared environment and the real one drifted once, in the worst possible
@@ -20,6 +20,7 @@ macros:
 freeze:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/emit_environment.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/build_test_fold_ledger.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/classify_artifacts.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/freeze_bootstrap.py --all --quiet
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/emit_frozen_numbers.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/render_results_section.py --write
@@ -38,6 +39,11 @@ icloud:
 # A hand-written version of this disclosure was wrong by a factor of three.
 ledger:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/build_test_fold_ledger.py --check
+
+# Every frozen artifact declares what it is for. Two dozen architecture
+# sweeps beside a headline number must be a stated fact, not an inference.
+artifacts:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/classify_artifacts.py --check
 
 # Two frozen reports may never disagree about the same quantity.
 consistency:
