@@ -1,7 +1,10 @@
 {
   "schema": "foliation.pocket_bench.raw_pdb_icloud.v1",
-  "note": "Raw PDBs are bulk data cached in iCloud, not committed. Receptor-only ATOM PDBs and labels ARE committed.",
+  "note": "Raw PDBs are bulk data cached in iCloud, not committed. Receptor-only ATOM PDBs and labels ARE committed. The cache location is recorded in icloud_root so the claim is checkable: tools/verify_icloud_cache.py resolves each entry there and compares SHA-256 against this manifest. An earlier revision named iCloud in the schema and the note but recorded no path, which made the cache unverifiable from the artifact.",
   "source": "RCSB",
+  "icloud_root": "~/Library/Mobile Documents/com~apple~CloudDocs/foliation-er100/raw_pdb",
+  "filename_pattern": "{pdb_id}.pdb",
+  "verifier": "tools/verify_icloud_cache.py",
   "entries": {
     "1ERE": {
       "pdb_id": "1ERE",

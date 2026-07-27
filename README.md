@@ -140,12 +140,17 @@ later fetch that mismatches means RCSB re-released the entry.
 - Required: `data/baselines/pocketminer/<pdb>_<chain>.json`
   (`{residue_scores:{resseq:prob}}`) or `.csv` (`resseq,score`); probabilities in [0,1].
 
-### 2.4 KRAS / probe structures (`data/manifests/STRUCTURE_PROVENANCE.json`)
+### 2.4 Probe structures — Appendix only (`data/manifests/STRUCTURE_PROVENANCE.json`)
+
+Neither structure enters the CryptoBench evaluation, the training fold or any
+number in the paper. They are retained solely so the appendix material is
+reproducible, and are listed here rather than deleted because their SHA-256 is
+what makes that material checkable.
 
 | PDB | Role | SHA-256 (prefix) | bytes |
 |---|---|---|---|
-| `9BL0` | KRAS G12D noncovalent primary docking geometry | `719c4a6c…b508fe0` | 289737 |
-| `5VA1` | hERG cryo-EM geometric-compatibility probe | `946f89bb…3fc7f472` | 402732 |
+| `9BL0` | KRAS G12D docking geometry — Appendix B ablation only | `719c4a6c…b508fe0` | 289737 |
+| `5VA1` | hERG cryo-EM compatibility probe — Appendix B only | `946f89bb…3fc7f472` | 402732 |
 
 ### 2.5 ESR1 pilot structures (Appendix A) — `data/manifests/SOURCE_URLS.json`
 

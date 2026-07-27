@@ -299,15 +299,30 @@ def main() -> int:
     checks["no_credential_patterns_in_primary_docs"] = (
         CREDENTIAL.search(tree_text) is None
     )
-    checks["no_bulk_candidate_dump_in_paper_tree"] = not any(
-        name in path.as_posix()
-        for path in primary_files
-        for name in (
-            "PHASE2_CHEMISTRY_READY_RECORDS.json",
-            "PHASE1_SLOT_RECORDS.json",
-            "BILINGUAL_CANDIDATE_EVIDENCE.json",
-        )
+    # Candidate evidence belongs to the companion repository, and the scope
+    # contract says so. This used to be a denylist of three filenames, which is
+    # the wrong shape for the rule it is meant to enforce: it passed for months
+    # while evidence/kras_g12d_sm/ sat in the tree with curated candidates, a
+    # DFT metrics table and a toxicology report, none of which happened to be
+    # named one of the three. A structural rule instead -- no candidate-evidence
+    # directory, and no file that declares itself a candidate record.
+    candidate_dirs = {"evidence", "candidates"}
+    candidate_markers = (
+        '"schema": "foliation.er100.candidate',
+        '"chemistry_ready_records"',
+        '"slot_records"',
+        "CURATED_TOP",
     )
+    offenders = [
+        path.relative_to(root).as_posix()
+        for path in primary_files
+        if candidate_dirs & set(path.relative_to(root).parts[:-1])
+        or any(mark in path.read_text(errors="ignore")[:4000]
+               for mark in candidate_markers)
+    ]
+    checks["no_bulk_candidate_dump_in_paper_tree"] = not offenders
+    if offenders:
+        checks["_candidate_evidence_offenders"] = offenders[:10]
 
     # Fail-closed cluster-disjoint split ledger: groups that require disjointness
     # must be disjoint; groups that are not disjoint must declare it (no hiding).

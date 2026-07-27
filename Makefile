@@ -1,8 +1,8 @@
 PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
-.PHONY: verify test consistency readme strict-json macros environment archive freeze
-verify: consistency strict-json readme macros environment archive
+.PHONY: verify test consistency readme strict-json macros environment archive icloud freeze
+verify: consistency strict-json readme macros environment archive icloud
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The declared environment and the real one drifted once, in the worst possible
@@ -27,6 +27,11 @@ freeze:
 # alone, without a JVM. This checks coverage, provenance and checksums.
 archive:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/check_p2rank_archive.py
+
+# The bulk raw PDBs are not committed; the manifest says they are cached
+# in iCloud, and this checks that they are and that they are unaltered.
+icloud:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_icloud_cache.py
 
 # Two frozen reports may never disagree about the same quantity.
 consistency:
