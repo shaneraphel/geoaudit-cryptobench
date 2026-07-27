@@ -33,6 +33,8 @@ jobs:
         run: make recompute
       - name: The residue-identity rule and the recall denominator must not drift
         run: make residues
+      - name: The published CryptoBench P2Rank row must reproduce under its own convention
+        run: make published
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

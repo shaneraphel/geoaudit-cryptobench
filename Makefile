@@ -1,8 +1,8 @@
 PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
-.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues freeze
-verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues
+.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published freeze
+verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The headline, rederived from the committed labels and raw per-residue scores by
@@ -18,6 +18,11 @@ recompute:
 # blocking; where they are present it pins the recall denominator.
 residues:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/audit_residue_identity.py
+
+# Our P2Rank must land on the published CryptoBench row once the aggregation
+# convention is matched. Saying "the harness was fixed" is not evidence; this is.
+published:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/reproduce_published_p2rank.py
 
 # The declared environment and the real one drifted once, in the worst possible
 # direction: pyproject demanded a numpy that segfaults here. The lock is

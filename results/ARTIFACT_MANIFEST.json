@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 20,
-    "cited": 21,
+    "cited": 22,
     "superseded": 4,
     "fold_access": 4
   },
-  "n_artifacts": 49,
+  "n_artifacts": 50,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -302,6 +302,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": null,
       "bytes": 86105
+    },
+    {
+      "artifact": "results/official_fold/PUBLISHED_P2RANK_REPRODUCTION.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.published_baseline_reproduction.v1",
+      "bytes": 1664
     },
     {
       "artifact": "results/official_fold/RESIDUE_IDENTITY_AUDIT.json",

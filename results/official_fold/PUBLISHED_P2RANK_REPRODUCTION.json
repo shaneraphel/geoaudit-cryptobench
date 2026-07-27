@@ -1,0 +1,38 @@
+{
+  "schema": "geoaudit.published_baseline_reproduction.v1",
+  "clinical_grade": false,
+  "purpose": "how far the published CryptoBench P2Rank row is reproduced here, and which part of it is not",
+  "published_source": "Skrhak et al., Bioinformatics 41(1) btae745, row CB-P2RANK-apo",
+  "published": {
+    "auc": 0.81,
+    "auprc": 0.21,
+    "acc": 0.85,
+    "fpr": 0.14,
+    "tpr": 0.62,
+    "mcc": 0.27,
+    "f1": 0.81
+  },
+  "aggregation_here": "pooled over every residue of every unit, which is the published convention; the paper's own tables use the mean over structures, because a paired test needs one value per structure",
+  "subset_here": "the 192 single-chain units of the 222 apo structures in the official test fold; 38 multi-chain assemblies are excluded for ambiguous residue numbering, and that is the most likely source of the TPR gap",
+  "operating_point": "P2Rank's own pocket assignment, not a threshold chosen here",
+  "tolerance": 0.03,
+  "tpr_tolerance": 0.1,
+  "n_residues": 57836,
+  "n_positive": 3296,
+  "positive_rate": 0.056988726744588145,
+  "measured": {
+    "auc": 0.8000830700990811,
+    "auprc": 0.23638888933436442,
+    "acc": 0.8570440556055052,
+    "fpr": 0.12409240924092409,
+    "tpr": 0.5449029126213593,
+    "mcc": 0.27466246582366144
+  },
+  "f1_under_every_convention": {
+    "positive_class": 0.30286677908937604,
+    "class_weighted_average": 0.8851661021192702,
+    "macro_average": 0.6116114036471039
+  },
+  "f1_not_compared_because": "the published 0.81 matches no convention we can compute: positive-class F1 is 0.303, class-weighted 0.885, macro 0.611. This paper reports positive-class F1.",
+  "reproduced": true
+}

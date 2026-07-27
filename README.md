@@ -392,6 +392,7 @@ all fail-closed.
 | Scope hygiene | `verify_claims` regexes | out-of-scope terms, proprietary engine names, absolute local paths, or credential patterns in primary docs |
 | Baseline faithfulness | `check_p2rank_archive` | any evaluated P2Rank score is not its own `probability` column, or any positive call is not its own pocket assignment |
 | Independent recomputation | `make recompute` | a frozen per-unit metric, per-method mean or paired interval does not follow from the committed labels and raw scores |
+| Published baseline | `make published` | recomputed under CryptoBench's pooled convention, P2Rank misses the published AUC/AUPRC/ACC/FPR/MCC by more than 0.03, or TPR by more than 0.10 |
 | Residue identity | `make residues` | the number of labelled residues with no coordinates in their apo structure moves off its pin |
 
 Current state: `verify_claims` all checks pass; 141 tests pass under both
@@ -400,7 +401,30 @@ Current state: `verify_claims` all checks pass; 141 tests pass under both
 so the five checks guarding the neighbour-search kernel — the one every gate,
 context transform and topology descriptor calls — were never executed by CI.
 
-### 4.1 What a reader can recompute, and what the last three gates found
+### 4.1 Reproducing the published P2Rank row
+
+The first objection this project received was that its P2Rank baseline was not
+CryptoBench's. It now is, and `results/official_fold/PUBLISHED_P2RANK_REPRODUCTION.json`
+is the evidence rather than the claim. Recomputed under the published
+convention — pooled over all 57 836 residues rather than averaged over
+structures, scored on P2Rank's own probability column, using its own pocket
+assignment as the operating point — five of the seven published quantities come
+back within 0.03: AUC 0.800 against 0.81, AUPRC 0.236 against 0.21, accuracy
+0.857 against 0.85, FPR 0.124 against 0.14, MCC 0.275 against 0.27. TPR is 0.545
+against 0.62, and the subsets are not identical: the published row is
+CB-P2RANK-apo and this evaluates the 192 single-chain units of the fold's 222
+apo structures, having excluded 38 multi-chain assemblies whose chain-agnostic
+numbering is ambiguous. Recall is where that shows first.
+
+The published F1 of 0.81 is reproduced by nothing: positive-class F1 is 0.303,
+class-weighted 0.885, macro 0.612. With a 5.7 % positive rate a class-weighted
+F1 is a statement about the negatives, so we neither match that column nor
+compare to it. **Every F1 in this repository is positive-class F1.** The tables
+here use per-structure means throughout, because the paired bootstrap needs one
+value per structure; the pooled numbers exist only to line up with the
+publication.
+
+### 4.2 What a reader can recompute, and what the last three gates found
 
 The gates above check that the artifacts agree with each other. That is not the
 same as checking that they agree with the data, and the difference is not

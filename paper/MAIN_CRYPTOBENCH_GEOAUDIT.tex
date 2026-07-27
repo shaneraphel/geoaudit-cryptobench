@@ -345,8 +345,29 @@ every residue within 6\,\AA{} of a centre by \(1/\text{rank}\). That is not
 P2Rank's prediction and it is lossy: \(1/\text{rank}\) is a five-valued staircase
 that cannot resolve the residue ordering P2Rank emits, and truncation ties every
 remaining residue at zero. Under that harness P2Rank measured ROC-AUC 0.621;
-scored on its own output it reaches \PtwoRAuc{}, consistent with the published
-CryptoBench baseline. We report the corrected figure.
+scored on its own output it reaches \PtwoRAuc{}. We report the corrected figure.
+
+Whether that constitutes reproducing the published baseline is a question about
+aggregation, and it is answered by measurement rather than assertion.
+CryptoBench pools over every residue in the subset; this paper takes the mean
+over structures, because a paired test needs one value per structure and because
+pooling lets a single 900-residue protein outvote forty small ones. Recomputed
+under the published convention -- pooled, P2Rank's own probability column, its
+own pocket assignment as the operating point -- five of the seven published
+quantities return within 0.03: AUC \(0.800\) against \(0.81\), AUPRC \(0.236\)
+against \(0.21\), accuracy \(0.857\) against \(0.85\), FPR \(0.124\) against
+\(0.14\), MCC \(0.275\) against \(0.27\). TPR is \(0.545\) against \(0.62\); the
+subsets are not identical, since the published row is CB-P2RANK-apo and we
+evaluate the \NUnits{} single-chain units of the 222 apo structures after
+excluding 38 multi-chain assemblies with ambiguous residue numbering, and recall
+is where a subset difference shows first.
+
+The published F1 of \(0.81\) is not reproduced under any convention we can
+compute: positive-class F1 is \(0.303\), the class-weighted average \(0.885\),
+the macro average \(0.612\). On a task with a \(5.7\,\%\) positive rate a
+class-weighted F1 is dominated by the negatives and a value near \(0.81\) is
+attainable by predicting almost nothing, so we neither reproduce that column nor
+compare against it. Every F1 in this paper is the positive-class F1.
 
 \begin{table}[h]
 \centering
