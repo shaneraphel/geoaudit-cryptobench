@@ -116,9 +116,24 @@ class TestTheComparisonIsFair(unittest.TestCase):
                         "so the grid may be the binding constraint")
 
     def test_the_recorded_delta_is_the_difference_of_the_two_arms(self):
+        """Measured against the control artifact rather than a rounded
+        constant. The margin is small enough that four decimal places of the
+        constant sit on a rounding tie, so a reader recomputing the difference
+        from the two files has to land on the number the file records."""
+        self.assertEqual(self.t["delta_measured_against"],
+                         "results/architecture_sweep/"
+                         "COUNTERATTACK_WIDE3_CONTROL.json")
+        self.assertAlmostEqual(self.t["delta_reference_value"],
+                               self.c["selected"]["pick_half_roc_auc"],
+                               places=12)
         d = (self.t["selected"]["pick_half_roc_auc"]
              - self.c["selected"]["pick_half_roc_auc"])
-        self.assertAlmostEqual(d, self.t["delta_vs_645_wires"], places=4)
+        # The artifact stores the margin to six places, which is the tolerance
+        # this has to hold to; anything tighter would be testing the rounding.
+        self.assertAlmostEqual(d, self.t["delta_vs_645_wires"], places=6)
+        self.assertLess(self.t["delta_vs_645_wires"], 0.0,
+                        "the section reports the generated wires as a small "
+                        "loss to the counting field")
 
     def test_the_wider_arm_addresses_fewer_of_its_cells(self):
         """The stated mechanism for the negative result. If the wider bank had

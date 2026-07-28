@@ -140,14 +140,14 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.counterattack_wide3.v1",
-      "bytes": 4326
+      "bytes": 4465
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_WIDE3_CONTROL.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.counterattack_wide3.v1",
-      "bytes": 4300
+      "bytes": 4389
     },
     {
       "artifact": "results/architecture_sweep/DUAL_TRACK_AB.json",

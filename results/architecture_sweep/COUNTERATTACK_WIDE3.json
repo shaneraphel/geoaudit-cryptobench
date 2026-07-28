@@ -175,6 +175,8 @@
     "pick_half_roc_auc_raw": 0.7935813971973813,
     "pick_half_roc_auc": 0.8035497965613727
   },
-  "delta_vs_645_wires": -0.00095,
-  "test_fold_read": false
+  "delta_vs_645_wires": -0.000986,
+  "test_fold_read": false,
+  "delta_measured_against": "results/architecture_sweep/COUNTERATTACK_WIDE3_CONTROL.json",
+  "delta_reference_value": 0.8045356538898498
 }

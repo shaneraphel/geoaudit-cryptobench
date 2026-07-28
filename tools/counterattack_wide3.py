@@ -120,6 +120,51 @@ def _digits_of_generated(n_res, ctr, workers: int) -> tuple[np.ndarray, int]:
     return np.concatenate(blocks, axis=1), n_desc
 
 
+def _reference_for(arm: str, bases, ridges):
+    """The value the treatment arm's margin is measured against.
+
+    The control artifact when it exists and was run on the same bases and grid,
+    because the margin is small enough that four decimal places of the published
+    constant land on a rounding tie and a reader recomputing from the two files
+    would not reproduce a delta taken against the constant.
+    """
+    control = OUT_BY_ARM["existing"]
+    if arm == "both" and control.exists():
+        c = json.loads(control.read_text())
+        if c.get("bases") == list(bases) and c.get("ridge_grid") == list(ridges):
+            return (c["selected"]["pick_half_roc_auc"],
+                    str(control.relative_to(ROOT)))
+    return (REFERENCE["645_wire_table_field_same_split"],
+            "the published constant")
+
+
+def resummarise() -> int:
+    """Re-derive the summary of an existing artifact from its own candidates.
+
+    The fit is what costs twenty minutes and it is deterministic -- two
+    independent runs of this tool produced identical candidate values to every
+    printed digit. Nothing here re-scores anything: the winner and the margin
+    are recomputed from the numbers already recorded, so the correction can be
+    made without pretending to a measurement that was not repeated.
+    """
+    for arm, path in OUT_BY_ARM.items():
+        if not path.exists():
+            continue
+        d = json.loads(path.read_text())
+        winner = max(d["candidates"], key=lambda r: r["pick_half_roc_auc"])
+        ref, src = _reference_for(arm, d["bases"], d["ridge_grid"])
+        d["selected"] = winner
+        d["delta_measured_against"] = src
+        d["delta_reference_value"] = ref
+        d["delta_vs_645_wires"] = round(
+            winner["pick_half_roc_auc"] - ref, 6)
+        path.write_text(json.dumps(d, indent=2, allow_nan=False) + "\n")
+        print(f"{path.relative_to(ROOT)}: best {winner['pick_half_roc_auc']:.4f} "
+              f"at ridge {winner['ridge']:g}, margin "
+              f"{d['delta_vs_645_wires']:+.6f} against {src}")
+    return 0
+
+
 def main(workers: int = 8, wires: str = "both",
          ridges: tuple[float, ...] = (0.03, 0.1, 0.3),
          bases: tuple[str, ...] = ("pairs8", "pairs16", "triples")) -> int:
@@ -212,11 +257,16 @@ def main(workers: int = 8, wires: str = "both",
 
     winner = max(results, key=lambda r: r["pick_half_roc_auc"])
     OUT = OUT_BY_ARM[wires]
-    delta = winner["pick_half_roc_auc"] - REFERENCE[
-        "645_wire_table_field_same_split"]
+    # Against the control arm's own value when it has been run, not against the
+    # rounded constant: the difference here is small enough that four decimal
+    # places of the reference land on a rounding tie, and a reader recomputing
+    # from the two artifacts should get the number the artifact records.
+    reference, reference_source = _reference_for(wires, bases, ridges)
+    delta = winner["pick_half_roc_auc"] - reference
     print(f"\nbest: {winner['basis']}, ridge {winner['ridge']:g}, gate "
           f"{winner['gate']} -> pick-half {winner['pick_half_roc_auc']:.4f}")
-    print(f"the same harness on 645 wires    {REFERENCE['645_wire_table_field_same_split']:.4f}")
+    print(f"the same harness on 645 wires    {reference:.4f} "
+          f"({reference_source})")
     print(f"generated wires are worth        {delta:+.4f} to the counting field")
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -240,6 +290,8 @@ def main(workers: int = 8, wires: str = "both",
         "split": {"criterion": "cluster_id, seeded shuffle, disjoint halves",
                   "seed": SEED},
         "reference_same_split": REFERENCE,
+        "delta_measured_against": reference_source,
+        "delta_reference_value": reference,
         "candidates": results,
         "selected": winner,
         "delta_vs_645_wires": round(float(delta), 6),
@@ -254,6 +306,9 @@ if __name__ == "__main__":
 
     p = argparse.ArgumentParser()
     p.add_argument("--workers", type=int, default=8)
+    p.add_argument("--resummarise", action="store_true",
+                   help="re-derive both artifacts' summaries from the "
+                        "candidates they already record, without re-fitting")
     p.add_argument("--wires", choices=("both", "existing"), default="both",
                    help="'existing' is the control arm: the 645 wires alone, "
                         "through this same harness and ridge grid")
@@ -263,5 +318,7 @@ if __name__ == "__main__":
                    choices=("pairs8", "pairs16", "triples"),
                    default=["pairs8", "pairs16", "triples"])
     a = p.parse_args()
+    if a.resummarise:
+        raise SystemExit(resummarise())
     raise SystemExit(main(a.workers, a.wires, tuple(a.ridges),
                           tuple(a.bases)))

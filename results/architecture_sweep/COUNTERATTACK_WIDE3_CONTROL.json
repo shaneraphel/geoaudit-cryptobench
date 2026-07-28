@@ -176,5 +176,7 @@
     "pick_half_roc_auc": 0.8045356538898498
   },
   "delta_vs_645_wires": 3.6e-05,
-  "test_fold_read": false
+  "test_fold_read": false,
+  "delta_measured_against": "the published constant",
+  "delta_reference_value": 0.8045
 }
