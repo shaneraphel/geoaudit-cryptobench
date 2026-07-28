@@ -649,6 +649,94 @@ now resolves that, and when the field fails it fails harder than P2Rank does,
 which is what the mean speaks to and why the mean stays in the paper unresolved
 beside the trimmed one.
 
+### 4.6 267 generated invariants lift the linear ceiling and buy the counting field nothing
+
+The invariant bank had been growing by hand a few descriptors at a time, and the
+last such round bought +0.0026 on the Fisher ceiling. Two generators replace
+that.
+
+`src/pocket_bench/methods/operator_descriptors.py` enumerates **190** descriptors
+along three axes — operator family, scale, functional — over the
+Gaussian-weighted adjacency and the combinatorial and normalised Laplacians of
+the residue contact graph at 6, 8, 10, 13 and 16 Å: spectral moments, heat-kernel
+and resolvent diagnostics, eigenvector localisation at the centre,
+gyration-tensor invariants, and the differences and ratios between the smallest
+and largest scale.
+
+`src/pocket_bench/methods/chain_operator_descriptors.py` adds **77** more, and
+exists because of what the first cannot express. A graph Laplacian and a second
+moment are both invariant under permuting residues, so neither can recover the
+chain order, and a positive-definite second moment cannot tell a saddle from a
+flat patch of the same spread. The four families it adds are the local Toeplitz
+symbol of the sequence lags, the shape operator of a quadric fitted in the frame
+of the local normal, the non-Archimedean valuation profile of the single-linkage
+ultrametric, and the participation and local shear of the ANM soft modes. Every
+descriptor in both modules is a closed-form function of residue centroids and
+chain order: no fitted parameter, no gradient, no random seed, no ligand.
+
+`make banks` checks the artifact. On 12 cluster-disjoint halvings of the training
+partition:
+
+| bank | Fisher ceiling, pick half |
+| --- | --- |
+| algebraic 35 | 0.7595 |
+| + operator 190 | 0.7664 |
+| + chain 77 | 0.7633 |
+| combined 302 | **0.7676** (+0.0081, positive on 12/12, worst +0.0039) |
+
+The per-family breakdown inverts the reasoning the generators were built on.
+Each was designed around one family expected to carry it — for the first, the
+eigenvector diagonals at the centre, which the hand-built bank had discarded
+entirely; for the second, the participation-and-shear pair that separates a
+hinge from a lid. Those two are the **weakest** families in the bank:
+
+| family | n | Δ vs algebraic 35 |
+| --- | --- | --- |
+| soft-mode hinge | 12 | +0.0008 |
+| diagonal functional at the centre | 35 | +0.0008 |
+| chain lag spectrum | 33 | +0.0021 |
+| deformation across scale | 20 | +0.0022 |
+| neighbourhood geometry | 30 | +0.0023 |
+| valuation profile | 11 | +0.0023 |
+| shape operator | 21 | +0.0027 |
+| gyration tensor | 30 | +0.0036 |
+| spectral trace functional | 75 | +0.0043 |
+
+What carries it are refinements of quantities the hand-built bank already had.
+And the second generator as a whole, built specifically to hold information the
+first provably cannot, adds only +0.0012 on top of it: structural independence
+and predictive independence are not the same property.
+
+**The lift is on the wrong quantity.** A Fisher ceiling bounds *linear* readouts
+of a bank; a table is an arbitrary function of the cell its digits address. The
+645-wire counting field scores 0.7992 on the held-out fold, already above the
+0.783 Fisher ceiling of the 35 invariants it is built from. So
+`tools/counterattack_wide3.py` measures what the generated descriptors are worth
+to the counting field, under the harness that produced the published wire count —
+same seeded cluster-disjoint halving, same partition bases, same integer fan-out,
+same gates. Each generated descriptor is carried raw and as its mean, centred
+difference and local rank over a 20 Å neighbourhood, outside every radius used to
+build it: 1713 wires against 645.
+
+Both arms are searched over an identical six-point ridge grid, widened from three
+until each arm's optimum was interior — the wider arm needs more shrinkage and the
+original grid left it pinned at the top, which would have biased the comparison
+against it. The control arm reproduces the published 0.8045 exactly, which is
+what licenses reading the difference as the wires.
+
+| arm | wires | best ridge | pick-half ROC-AUC | cells never addressed |
+| --- | --- | --- | --- | --- |
+| control | 645 | 0.03 | 0.8045 | 1.25% |
+| treatment | 1713 | 0.3 | 0.8035 | 4.17% |
+
+**−0.0010.** The mechanism is in the last column: the generated descriptors buy
+expressive power and pay for it in cell coverage. More wires means more tables at
+fixed rounds, and more tables spread the same 118,716 fitting rows over more
+cells, so a table addressed too rarely to estimate contributes noise rather than
+resolution. The counting field's binding constraint on
+this benchmark is not the expressive content of its invariant bank, and the
+held-out fold was not read to establish that.
+
 ---
 
 ## 5. Appendices and future work

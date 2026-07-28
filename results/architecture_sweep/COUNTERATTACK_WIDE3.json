@@ -1,0 +1,180 @@
+{
+  "schema": "geoaudit.counterattack_wide3.v1",
+  "arm": "both",
+  "ridge_grid": [
+    0.03,
+    0.1,
+    0.3,
+    1.0,
+    3.0,
+    10.0
+  ],
+  "bases": [
+    "pairs16"
+  ],
+  "clinical_grade": false,
+  "question": "the generated banks lift the Fisher ceiling by +0.0081, but a table is not a linear form over its digits. This asks what they are worth to the counting field itself, under the harness that produced the 645-wire number.",
+  "n_wires": 1713,
+  "n_wires_existing": 645,
+  "n_wires_generated": 1068,
+  "n_generated_descriptors": 267,
+  "generated_wire_statistics": [
+    "raw",
+    "mean@20",
+    "centred@20",
+    "localrank@20"
+  ],
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725
+  },
+  "reference_same_split": {
+    "645_wire_table_field_same_split": 0.8045,
+    "516_wire_table_field": 0.801,
+    "172_wire_table_field": 0.7932
+  },
+  "candidates": [
+    {
+      "basis": "pairs x16",
+      "spec": [
+        [
+          2,
+          16
+        ]
+      ],
+      "n_tables": 13696,
+      "n_cells": 219136,
+      "n_cells_never_addressed": 9138,
+      "mean_residues_per_occupied_cell": 7742.618196363775,
+      "ridge": 0.03,
+      "cap": 32,
+      "gate": "r14 w1.0",
+      "total_fan_out": 65466,
+      "n_tables_used": 12824,
+      "pick_half_roc_auc_raw": 0.7716101212082865,
+      "pick_half_roc_auc": 0.7930690782505962
+    },
+    {
+      "basis": "pairs x16",
+      "spec": [
+        [
+          2,
+          16
+        ]
+      ],
+      "n_tables": 13696,
+      "n_cells": 219136,
+      "n_cells_never_addressed": 9138,
+      "mean_residues_per_occupied_cell": 7742.618196363775,
+      "ridge": 0.1,
+      "cap": 32,
+      "gate": "r18 w1.0",
+      "total_fan_out": 58472,
+      "n_tables_used": 12605,
+      "pick_half_roc_auc_raw": 0.7863840705717076,
+      "pick_half_roc_auc": 0.7996654933430126
+    },
+    {
+      "basis": "pairs x16",
+      "spec": [
+        [
+          2,
+          16
+        ]
+      ],
+      "n_tables": 13696,
+      "n_cells": 219136,
+      "n_cells_never_addressed": 9138,
+      "mean_residues_per_occupied_cell": 7742.618196363775,
+      "ridge": 0.3,
+      "cap": 32,
+      "gate": "r18 w0.5",
+      "total_fan_out": 50940,
+      "n_tables_used": 12429,
+      "pick_half_roc_auc_raw": 0.7935813971973813,
+      "pick_half_roc_auc": 0.8035497965613727
+    },
+    {
+      "basis": "pairs x16",
+      "spec": [
+        [
+          2,
+          16
+        ]
+      ],
+      "n_tables": 13696,
+      "n_cells": 219136,
+      "n_cells_never_addressed": 9138,
+      "mean_residues_per_occupied_cell": 7742.618196363775,
+      "ridge": 1.0,
+      "cap": 32,
+      "gate": "r18 w0.5",
+      "total_fan_out": 30738,
+      "n_tables_used": 11506,
+      "pick_half_roc_auc_raw": 0.7950345686787759,
+      "pick_half_roc_auc": 0.8023633282984557
+    },
+    {
+      "basis": "pairs x16",
+      "spec": [
+        [
+          2,
+          16
+        ]
+      ],
+      "n_tables": 13696,
+      "n_cells": 219136,
+      "n_cells_never_addressed": 9138,
+      "mean_residues_per_occupied_cell": 7742.618196363775,
+      "ridge": 3.0,
+      "cap": 32,
+      "gate": "r18 w0.5",
+      "total_fan_out": 21201,
+      "n_tables_used": 10466,
+      "pick_half_roc_auc_raw": 0.793929999047121,
+      "pick_half_roc_auc": 0.8010264639797423
+    },
+    {
+      "basis": "pairs x16",
+      "spec": [
+        [
+          2,
+          16
+        ]
+      ],
+      "n_tables": 13696,
+      "n_cells": 219136,
+      "n_cells_never_addressed": 9138,
+      "mean_residues_per_occupied_cell": 7742.618196363775,
+      "ridge": 10.0,
+      "cap": 32,
+      "gate": "r18 w0.5",
+      "total_fan_out": 19744,
+      "n_tables_used": 10149,
+      "pick_half_roc_auc_raw": 0.7930315044816165,
+      "pick_half_roc_auc": 0.7983831287361071
+    }
+  ],
+  "selected": {
+    "basis": "pairs x16",
+    "spec": [
+      [
+        2,
+        16
+      ]
+    ],
+    "n_tables": 13696,
+    "n_cells": 219136,
+    "n_cells_never_addressed": 9138,
+    "mean_residues_per_occupied_cell": 7742.618196363775,
+    "ridge": 0.3,
+    "cap": 32,
+    "gate": "r18 w0.5",
+    "total_fan_out": 50940,
+    "n_tables_used": 12429,
+    "pick_half_roc_auc_raw": 0.7935813971973813,
+    "pick_half_roc_auc": 0.8035497965613727
+  },
+  "delta_vs_645_wires": -0.00095,
+  "test_fold_read": false
+}

@@ -69,6 +69,9 @@ READOUT = ROOT / "results/architecture_sweep/FINAL_READOUT_SELECTION.json"
 PAIRWISE = ROOT / "results/architecture_sweep/PAIRWISE_READOUT_SELECTION.json"
 SEEDPROBE = ROOT / "results/official_fold/SEED_SENSITIVITY.json"
 SEEDPROBE = ROOT / "results/official_fold/SEED_SENSITIVITY.json"
+BANKS_CEILING = ROOT / "results/architecture_sweep/OPERATOR_BANK_CEILING.json"
+WIDE3 = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE3.json"
+WIDE3_CONTROL = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE3_CONTROL.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
 
@@ -330,6 +333,78 @@ def build() -> str:
         L.append(f"\\newcommand{{\\PTwoTrainAuc}}"
                  f"{{{p2t['residue_auc_mean']:.4f}}}")
         L.append(f"\\newcommand{{\\PTwoTrainUnits}}{{{p2t['n_ok']}}}")
+
+    if BANKS_CEILING.exists() and WIDE3.exists() and WIDE3_CONTROL.exists():
+        # The generated banks: a lift on the linear ceiling that the counting
+        # field did not collect. The treatment and the control are emitted from
+        # separate artifacts produced by the same tool on the same ridge grid,
+        # so the chapter cannot quote a margin that came from searching one arm
+        # harder than the other.
+        bc = json.loads(BANKS_CEILING.read_text())
+        gen, lift = bc["generator"], bc["lift"]
+        base_key, top_key = bc["keys"]["baseline"], bc["keys"]["full"]
+        L.append(f"\\newcommand{{\\GenOperator}}"
+                 f"{{{gen['n_operator_descriptors']}}}")
+        L.append(f"\\newcommand{{\\GenChain}}{{{gen['n_chain_descriptors']}}}")
+        L.append(f"\\newcommand{{\\GenTotal}}"
+                 f"{{{gen['n_operator_descriptors'] + gen['n_chain_descriptors']}}}")
+        L.append(f"\\newcommand{{\\GenCeilBase}}"
+                 f"{{{bc['ceilings'][base_key]['mean']:.4f}}}")
+        L.append(f"\\newcommand{{\\GenCeilFull}}"
+                 f"{{{bc['ceilings'][top_key]['mean']:.4f}}}")
+        L.append(f"\\newcommand{{\\GenCeilLift}}{{{lift['mean']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GenCeilWorst}}{{{lift['min']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GenNSplits}}{{{lift['n_splits']}}}")
+        L.append(f"\\newcommand{{\\GenNPositive}}"
+                 f"{{{lift['n_splits_positive']}}}")
+        fam = {f["family"]: f for f in bc["by_family"]}
+        # Keyed by name, not by rank: the chapter names these four families and
+        # says which were expected to matter, so a macro that silently followed
+        # the ordering would let the text and the number drift apart.
+        for stem, name in (("Trace", "spectral trace functional"),
+                           ("Gyration", "gyration tensor"),
+                           ("Diagonal", "diagonal functional at the centre"),
+                           ("Hinge", "soft-mode hinge"),
+                           ("Shape", "shape operator"),
+                           ("Lag", "chain lag spectrum"),
+                           ("Valuation", "valuation profile")):
+            if name not in fam:
+                raise SystemExit(f"the ceiling artifact has no family {name!r}; "
+                                 f"the chapter names it")
+            L.append(f"\\newcommand{{\\GenFam{stem}}}"
+                     f"{{{fam[name]['delta_vs_algebraic_35']:+.4f}}}")
+        ranked = sorted(fam.values(), key=lambda f: f["delta_vs_algebraic_35"])
+        L.append(f"\\newcommand{{\\GenBestFamily}}"
+                 f"{{{_tex(ranked[-1]['family'])}}}")
+        L.append(f"\\newcommand{{\\GenWorstFamily}}"
+                 f"{{{_tex(ranked[0]['family'])}}}")
+        L.append(f"\\newcommand{{\\GenSecondWorstFamily}}"
+                 f"{{{_tex(ranked[1]['family'])}}}")
+
+        w3 = json.loads(WIDE3.read_text())
+        w3c = json.loads(WIDE3_CONTROL.read_text())
+        if w3["ridge_grid"] != w3c["ridge_grid"]:
+            raise SystemExit("the two arms of the wide-wire comparison were "
+                             "searched over different ridge grids, so their "
+                             "difference is not attributable to the wires")
+        L.append(f"\\newcommand{{\\GenWires}}{{{w3['n_wires']}}}")
+        L.append(f"\\newcommand{{\\GenWiresBase}}{{{w3['n_wires_existing']}}}")
+        L.append(f"\\newcommand{{\\GenWireAuc}}"
+                 f"{{{w3['selected']['pick_half_roc_auc']:.4f}}}")
+        L.append(f"\\newcommand{{\\GenWireControlAuc}}"
+                 f"{{{w3c['selected']['pick_half_roc_auc']:.4f}}}")
+        L.append(f"\\newcommand{{\\GenWireDelta}}"
+                 f"{{{w3['selected']['pick_half_roc_auc'] - w3c['selected']['pick_half_roc_auc']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GenWireRidge}}"
+                 f"{{{w3['selected']['ridge']:g}}}")
+        L.append(f"\\newcommand{{\\GenWireControlRidge}}"
+                 f"{{{w3c['selected']['ridge']:g}}}")
+        pct = 100.0 * w3["selected"]["n_cells_never_addressed"] \
+            / w3["selected"]["n_cells"]
+        pctc = 100.0 * w3c["selected"]["n_cells_never_addressed"] \
+            / w3c["selected"]["n_cells"]
+        L.append(f"\\newcommand{{\\GenWireEmpty}}{{{pct:.2f}}}")
+        L.append(f"\\newcommand{{\\GenWireControlEmpty}}{{{pctc:.2f}}}")
 
     if QUOTIENT_SEL.exists() and QUOTIENT_PROBE.exists():
         # The quotient counterattack: a construction that beat the dense bank on

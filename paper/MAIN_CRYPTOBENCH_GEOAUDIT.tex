@@ -695,11 +695,13 @@ anchoring. We report this as a falsified hypothesis rather than removing the
 ablations from the paper.
 
 \section{AI experiments: a quotient bound, a gain that did not transfer, a wrong
-diagnosis corrected, and a functional fixed in advance}
+diagnosis corrected, a functional fixed in advance, and a bank widened to no
+effect}
 \label{sec:ai}
 Everything in this section --- the bound, the construction that follows from it,
 the fourteen-split validation, the fourth and fifth readings of the held-out
-fold, the preregistration that licensed the fifth, and the five negative results
+fold, the preregistration that licensed the fifth, the two descriptor
+generators of Section~\ref{sec:banks}, and the six negative results
 --- was produced by an AI agent working inside this repository under the access
 discipline the rest of the paper describes. It is separated out because the
 provenance is different, not because the standard is: the artifacts are the same
@@ -950,6 +952,75 @@ in the favourable direction: it modelled a smaller held-out margin by shifting
 the whole distribution down, and what the fold actually shows is a bulk leading
 by more than the mean does with a tail dragging the mean back, which a location
 shift cannot represent.
+
+\subsection{\GenTotal{} invariants from two generators, and a ceiling the
+counting field declined to collect}
+\label{sec:banks}
+The invariant bank had been growing by hand, a few descriptors per round, and
+the last such round moved the Fisher ceiling by \(+0.0026\). Two generators
+replace that habit. The first enumerates \GenOperator{} descriptors along three
+axes --- operator family, scale, functional --- over the Gaussian-weighted
+adjacency and the combinatorial and normalised Laplacians of the residue
+contact graph at five radii, keeping spectral moments, heat-kernel and
+resolvent diagnostics, eigenvector localisation at the centre, gyration-tensor
+invariants, and the ratios and differences between the smallest and largest
+scale. The second adds \GenChain{} more, and exists because of what the first
+cannot represent. Both of the first generator's objects --- a graph Laplacian
+and a second moment --- are invariant under permuting residues, so no function
+of them recovers the chain order, and a positive-definite second moment cannot
+distinguish a saddle from a flat patch of the same spread. The second generator
+supplies the local Toeplitz symbol of the sequence lags, the shape operator of a
+quadric fitted in the frame of the local normal, the non-Archimedean valuation
+profile of the single-linkage ultrametric, and the participation and local
+shear of the low-frequency modes of the anisotropic network model. Every one is
+a closed-form function of residue centroids and chain order: no fitted
+parameter, no gradient, no random seed, no ligand.
+
+On \GenNSplits{} cluster-disjoint halvings of the training partition the
+combined bank moves the Fisher ceiling from \GenCeilBase{} to \GenCeilFull{},
+a lift of \GenCeilLift{}, positive on \GenNPositive{} of \GenNSplits{} splits
+with a worst case of \GenCeilWorst{}. The per-family breakdown is worth
+recording because it inverts the reasoning the generators were built on. Each
+was designed around one family expected to carry it: for the first, the
+eigenvector diagonals at the centre, which the hand-built bank had discarded
+entirely; for the second, the participation-and-shear pair that separates a
+hinge from a lid. Those two are the weakest families in the bank, at
+\GenFamDiagonal{} and \GenFamHinge{}. What carries it instead are the trace
+functionals at \GenFamTrace{} and the gyration-tensor invariants at
+\GenFamGyration{}, both of which are refinements of quantities the hand-built
+bank already had. The second generator as a whole, written specifically to hold
+information the first provably cannot, adds \(+0.0012\) on top of it: structural
+independence and predictive independence are not the same property, and only the
+first was established in advance.
+
+The lift is real and it is on the wrong quantity. A Fisher ceiling bounds
+\emph{linear} readouts of a bank, and a table is an arbitrary function of the
+cell its digits address; the evidence that the distinction bites is already in
+Section~\ref{sec:results}, where the \GenWiresBase{}-wire counting field scores
+\TabAuc{} on the held-out fold, above the \FisherAll{} Fisher ceiling of the
+\NAlgFeatures{} invariants it is built from. So the deciding measurement is what
+the generated descriptors are worth to the counting field, and it was made under
+the harness that produced the published wire count, on the same seeded
+cluster-disjoint halving, the same partition bases, the same integer fan-out and
+the same gates, with one thing changed. Carrying each generated descriptor raw
+and as its mean, centred difference and local rank over a \(20\)~\AA{}
+neighbourhood --- outside every radius used to build it --- gives \GenWires{}
+wires against \GenWiresBase{}. Both arms were searched over an identical
+six-point ridge grid, widened until each arm's optimum was interior, because the
+wider arm needs more shrinkage and the original three-point grid had left it
+pinned at the top; the control arm reproduces the published \GenWireControlAuc{}
+exactly. The wider bank reaches \GenWireAuc{}, which is \GenWireDelta{}.
+
+The mechanism is legible in the cells. At \GenWiresBase{} wires
+\GenWireControlEmpty{}\% of cells are never addressed on the fitting half; at
+\GenWires{} wires that is \GenWireEmpty{}\%. The generated descriptors buy
+expressive power and pay for it in coverage, and on this fold the exchange is a
+small loss. That is the same lesson as
+Section~\ref{sec:coverage}, arrived at from the opposite
+direction, and it says something the ceiling alone would have hidden: the
+counting field's binding constraint on this benchmark is not the expressive
+content of its invariant bank. Widening the bank is not the way to a larger
+margin, and the held-out fold was not read to establish that.
 
 \section{Limitations}
 The comparison covers one trained baseline, executed locally; PocketMiner could
