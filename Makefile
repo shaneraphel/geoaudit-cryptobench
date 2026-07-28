@@ -1,9 +1,17 @@
 PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
-.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published freeze
-verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published
+.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval freeze
+verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
+
+# The architecture was chosen on one half-split of the training fold. This holds
+# the cross-validation that says the choice survives 28 other splits to its own
+# tables: CI has neither the descriptor cache nor the OSF folds, so it cannot
+# rerun the selections, but it can check that the headline follows from the
+# per-split rankings recorded beneath it and still names the frozen winner.
+crossval:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/crossvalidate_architecture.py --check
 
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the
@@ -41,6 +49,7 @@ freeze:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/build_test_fold_ledger.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/classify_artifacts.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/freeze_bootstrap.py --all --quiet
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/crossvalidate_architecture.py --quiet
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/emit_frozen_numbers.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/render_results_section.py --write
 

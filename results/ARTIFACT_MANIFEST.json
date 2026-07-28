@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 20,
-    "cited": 22,
+    "cited": 23,
     "superseded": 4,
     "fold_access": 4
   },
-  "n_artifacts": 50,
+  "n_artifacts": 51,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -171,6 +171,13 @@
       "bytes": 6225
     },
     {
+      "artifact": "results/architecture_sweep/REPEATED_TRAIN_SELECTION.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.repeated_architecture_selection.v1",
+      "bytes": 56556
+    },
+    {
       "artifact": "results/architecture_sweep/THRESHOLD_GATE.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
@@ -182,7 +189,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.train_only_architecture_selection.v1",
-      "bytes": 1982
+      "bytes": 2035
     },
     {
       "artifact": "results/architecture_sweep/WIDE_BUS_BANK.json",

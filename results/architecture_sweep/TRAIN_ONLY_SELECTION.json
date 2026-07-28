@@ -4,7 +4,7 @@
   "why": "the architecture is chosen without reading the official test fold, so the reported test score is not the maximum of several test-fold estimates",
   "split": {
     "source": "data/cryptobench_apo/train_manifest.json",
-    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "criterion": "cluster_id (the UniProt accession, not the MMseqs2 10% cluster), seeded shuffle, disjoint halves",
     "seed": 20260725,
     "n_clusters": 766,
     "n_fit_units": 386,

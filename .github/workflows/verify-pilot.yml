@@ -35,6 +35,8 @@ jobs:
         run: make residues
       - name: The published CryptoBench P2Rank row must reproduce under its own convention
         run: make published
+      - name: The architecture choice must survive splits other than the one that chose it
+        run: make crossval
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

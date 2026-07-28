@@ -27,6 +27,7 @@ TABFIELD = ROOT / "data/cryptobench_apo/TABLE_FIELD.json"
 WIDESEL = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE2.json"
 WIDEPROBE = ROOT / "results/official_fold/COUNTERATTACK_WIDE_PROBE.json"
 LEDGER = ROOT / "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json"
+CROSSVAL = ROOT / "results/architecture_sweep/REPEATED_TRAIN_SELECTION.json"
 FIGPROV = ROOT / "results/official_fold/FIGURE_PROVENANCE.json"
 
 # Characters that are prose in a JSON caption and syntax in TeX. The captions
@@ -188,6 +189,33 @@ def build() -> str:
             if rec.get("caption"):
                 L.append(f"\\newcommand{{\\FigCaption{_roman(i)}}}"
                          f"{{{_tex(rec['caption'])}}}")
+
+    if CROSSVAL.exists():
+        # Whether the frozen architecture survives splits other than the one
+        # that chose it. Two blocks, reported separately because they do not
+        # guarantee the same thing: the four folds are CryptoBench's own, under
+        # its MMseqs2 10% clustering; the 25 halves are disjoint by accession,
+        # which is finer, so they resolve the ranking better and say less about
+        # homology. The margin goes in beside the count on purpose -- the
+        # ordering is stable, and it is stable by a few thousandths.
+        xv = json.loads(CROSSVAL.read_text())
+        for block, tag in (("cluster_level_cv", "Cv"), ("repeated_halves", "Rh")):
+            b, v = xv[block], xv[block]["frozen_choice"]
+            n = b.get("n_folds") or b.get("n_repeats")
+            L.append(f"\\newcommand{{\\NSplits{tag}}}{{{n}}}")
+            L.append(f"\\newcommand{{\\NFirst{tag}}}{{{v['n_first']}}}")
+            L.append(f"\\newcommand{{\\WorstRank{tag}}}{{{v['worst_rank']}}}")
+            L.append(f"\\newcommand{{\\MeanAuc{tag}}}"
+                     f"{{{v['mean_roc_auc']:.4f}}}")
+            L.append(f"\\newcommand{{\\SdAuc{tag}}}{{{v['sd_roc_auc']:.4f}}}")
+            L.append(f"\\newcommand{{\\MeanMargin{tag}}}"
+                     f"{{{v['mean_margin_over_runner_up']:+.4f}}}")
+            L.append(f"\\newcommand{{\\WorstMargin{tag}}}"
+                     f"{{{v['worst_margin_over_runner_up']:+.4f}}}")
+        runner = next(r["architecture"]
+                      for r in xv["cluster_level_cv"]["per_architecture"]
+                      if r["architecture"] != xv["frozen_choice"]["architecture"])
+        L.append(f"\\newcommand{{\\RunnerUpArch}}{{{runner}}}")
 
     if LEDGER.exists():
         # How often the held-out fold has been scored, and by how many

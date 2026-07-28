@@ -91,8 +91,15 @@ same wires on all four metrics rather than behind it.
 
 Selection discipline is reported in full rather than summarised. Wire families,
 table width, pool size, regulariser, fan-out cap, gate radius and gate weight
-were all ranked on a cluster-disjoint half of the training fold, where the frozen
-configuration measured \TabPickAuc{}. The test fold was read \NTestReads{} times
+were all ranked on a held-out half of the training fold sharing no UniProt
+accession, where the frozen configuration measured \TabPickAuc{}. That the
+choice does not depend on which half was drawn is checked two ways, neither of
+them on the test fold: the architecture ranks first on all \NSplitsCv{} of
+CryptoBench's own training folds, which are cluster-disjoint under the
+benchmark's MMseqs2 clustering, and on all \NSplitsRh{} redraws of the
+accession-disjoint half-split. The margin it leads by is a few thousandths
+(\MeanMarginCv{} over the folds), so we report the ordering as stable and not
+the lead as large. The test fold was read \NTestReads{} times
 during development, at \ReadAucI{}, \ReadAucII{} and the value above, with
 paired differences against P2Rank of \ReadDeltaI{}, \ReadDeltaII{} and
 \TabAucD{}; each change between readings was diagnosed and made on the training
@@ -488,14 +495,49 @@ column here is reported as parity even though the field leads it.}
 fusion architectures were compared during development. Selecting among them by
 test-fold score and then reporting the winner's test score would make the
 reported figure the maximum of \NCandidates{} noisy estimates. The choice was
-therefore made on the training fold alone, split into two halves with disjoint
-MMseqs2 clusters (\NSelectFitUnits{} units to compile on, \NSelectPickUnits{} to
+therefore made on the training fold alone, split into two halves that share no
+UniProt accession (\NSelectFitUnits{} units to compile on, \NSelectPickUnits{} to
 rank on), and the official test fold is read once, for the single architecture
 that procedure names. It names ``\SelectedArch{}'' at ROC-AUC
 \SelectedArchAuc{} on the held-out training half, which is the architecture
 reported here; the training-only ranking of all \NCandidates{} candidates agrees
 with the test-fold ranking, so the test figure can be read as an out-of-sample
 estimate rather than a selected maximum.
+
+We are deliberate about what that half-split guarantees. It is disjoint by
+accession, which is finer than the MMseqs2 10\% clustering the benchmark is
+defined by: a 10\% cluster can span several accessions, so two homologues can
+sit on opposite sides of it. The clustering separates train from test, because
+CryptoBench's folds were built under it, but the cluster assignment is not
+distributed with the data and cannot be reconstructed from it. An earlier
+revision of this paragraph called the half-split cluster-disjoint, which
+overstated it.
+
+\paragraph{The architecture was not chosen by one split either.} A single
+half-split leaves the winner carrying the maximum of \NCandidates{} estimates
+whose top few are close, so the selection is repeated, and neither repetition
+reads the test fold. The coarser test uses CryptoBench's own partition:
+its training data ships as \NSplitsCv{} folds built by its authors under the
+10\% clustering and pairwise disjoint in both PDB id and accession, and holding
+each out in turn is a cluster-level cross-validation under the benchmark's
+clustering rather than a proxy for it. The frozen architecture ranks first on
+\NFirstCv{} of \NSplitsCv{}, worst rank \WorstRankCv{}, at mean ROC-AUC
+\MeanAucCv{} (sd \SdAucCv{}). The finer test redraws the accession-disjoint
+half-split under \NSplitsRh{} further seeds; it ranks first on \NFirstRh{} of
+\NSplitsRh{}, worst rank \WorstRankRh{}, at \MeanAucRh{} (sd \SdAucRh{}).
+
+The ordering is therefore stable, and the margin it is stable by is small. The
+runner-up is ``\RunnerUpArch{}'' --- the same bank under the other fusion rule
+--- at a mean \MeanMarginCv{} behind over the folds and \MeanMarginRh{} over the
+seeds, never further behind than \WorstMarginCv{} and \WorstMarginRh{}
+respectively. What separates the top two from the rest is the multi-scale
+spatial gate, not the fusion rule: both gated variants outrank every ungated
+candidate in all \NSplitsCv{} folds. We read this as evidence that the frozen
+configuration is not an artefact of one draw, and not as evidence that it is
+meaningfully better than its nearest alternative. Every per-split ranking behind
+these counts is in
+\texttt{results/architecture\_sweep/REPEATED\_TRAIN\_SELECTION.json}, and
+\texttt{make crossval} rejects a summary that does not follow from them.
 
 \paragraph{What limits the counting field.} Holding the estimator fixed and
 widening the invariant word from six to \NAlgFeatures{} moves a closed-form
@@ -658,8 +700,11 @@ for none. That is why this paper claims parity: not modesty, but that the
 number is the wrong size to claim with. The F1 difference is several times
 larger and survives every resampling seed, which is what makes it the one
 difference we report --- though seed robustness speaks to the bootstrap and not
-to architecture selection, and a reader is entitled to discount it on exactly
-the same grounds.
+to architecture selection. The selection is addressed separately, by
+cross-validating the choice on CryptoBench's own \NSplitsCv{} training folds and
+on \NSplitsRh{} redrawn half-splits, where it ranks first every time; that
+answers whether the architecture was drawn rather than selected, and it does not
+answer whether the F1 margin would survive a different benchmark.
 
 The absolute values remain modest --- ROC-AUC \TabAuc{} and F1 \TabFOne{} for
 the strongest field here --- so the contribution is the construction rather than

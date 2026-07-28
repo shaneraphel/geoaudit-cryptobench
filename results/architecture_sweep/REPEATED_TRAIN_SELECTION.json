@@ -1,0 +1,1779 @@
+{
+  "schema": "geoaudit.repeated_architecture_selection.v1",
+  "clinical_grade": false,
+  "why": "the frozen architecture was chosen on one half-split of the training fold; this reports whether that choice survives the benchmark's own cluster-level folds and repeated redraws of the same split design, so the choice is not read as an artefact of one draw",
+  "reads_test_fold": false,
+  "frozen_choice": {
+    "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+    "source": "results/architecture_sweep/TRAIN_ONLY_SELECTION.json"
+  },
+  "cluster_level_cv": {
+    "design": "hold out each CryptoBench training fold in turn; the folds are the benchmark authors' own, built under MMseqs2 10% clustering, and are pairwise disjoint in PDB id and UniProt accession",
+    "source": "data/cryptobench_apo/_osf/folds.json",
+    "n_folds": 4,
+    "folds": [
+      {
+        "held_out_fold": "train-0",
+        "n_fit_units": 586,
+        "n_pick_units": 184,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7347567084276581,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.730905673363292,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7226410325621144,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7205941352252508,
+            "rank": 4
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7172638784834967,
+            "rank": 5
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.71283424499326,
+            "rank": 6
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7088108376546903,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7012970417840557,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6861776897522646,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "held_out_fold": "train-1",
+        "n_fit_units": 574,
+        "n_pick_units": 196,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7576427027293444,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7517958908925061,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7463947015755867,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7453474933695575,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7411849963636782,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7407369975295934,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7344049625823169,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7183923688557491,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.7143936941655574,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "held_out_fold": "train-2",
+        "n_fit_units": 578,
+        "n_pick_units": 192,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7248600298466711,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7215629741756455,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7173947375835922,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7169041332914223,
+            "rank": 4
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7161021396183141,
+            "rank": 5
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7142026701410277,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7042944738444401,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.6941980289905828,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6934689527807546,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "held_out_fold": "train-3",
+        "n_fit_units": 572,
+        "n_pick_units": 198,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7394176569208775,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7353397770691659,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7329772946162053,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7306550512137557,
+            "rank": 4
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7304907023477338,
+            "rank": 5
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7277100063375392,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7273904135142035,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7132613555592384,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.7023271269827874,
+            "rank": 9
+          }
+        ]
+      }
+    ],
+    "per_architecture": [
+      {
+        "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "n_splits": 4,
+        "mean_roc_auc": 0.7391692744811378,
+        "sd_roc_auc": 0.013730191383266121,
+        "min_roc_auc": 0.7248600298466711,
+        "max_roc_auc": 0.7576427027293444,
+        "mean_rank": 1.0,
+        "best_rank": 1,
+        "worst_rank": 1,
+        "n_first": 4
+      },
+      {
+        "architecture": "parallel bank, uniform fusion + multi-scale gate",
+        "n_splits": 4,
+        "mean_roc_auc": 0.7349010788751524,
+        "sd_roc_auc": 0.012642460617384589,
+        "min_roc_auc": 0.7215629741756455,
+        "max_roc_auc": 0.7517958908925061,
+        "mean_rank": 2.0,
+        "best_rank": 2,
+        "worst_rank": 2,
+        "n_first": 0
+      },
+      {
+        "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+        "n_splits": 4,
+        "mean_roc_auc": 0.7285076530647202,
+        "sd_roc_auc": 0.014021929935555916,
+        "min_roc_auc": 0.7172638784834967,
+        "max_roc_auc": 0.7463947015755867,
+        "mean_rank": 3.5,
+        "best_rank": 3,
+        "worst_rank": 5,
+        "n_first": 0
+      },
+      {
+        "architecture": "parallel bank, integer-multiplicity fusion",
+        "n_splits": 4,
+        "mean_roc_auc": 0.7288869276092125,
+        "sd_roc_auc": 0.012337950273220894,
+        "min_roc_auc": 0.7169041332914223,
+        "max_roc_auc": 0.7453474933695575,
+        "mean_rank": 3.75,
+        "best_rank": 3,
+        "worst_rank": 4,
+        "n_first": 0
+      },
+      {
+        "architecture": "parallel bank (thematic 6x6), uniform fusion",
+        "n_splits": 4,
+        "mean_roc_auc": 0.725922952016874,
+        "sd_roc_auc": 0.011574178969251666,
+        "min_roc_auc": 0.7142026701410277,
+        "max_roc_auc": 0.7411849963636782,
+        "mean_rank": 5.25,
+        "best_rank": 4,
+        "worst_rank": 6,
+        "n_first": 0
+      },
+      {
+        "architecture": "flat single table, 6 wires",
+        "n_splits": 4,
+        "mean_roc_auc": 0.7240351692875829,
+        "sd_roc_auc": 0.014321757423795376,
+        "min_roc_auc": 0.7088108376546903,
+        "max_roc_auc": 0.7407369975295934,
+        "mean_rank": 5.75,
+        "best_rank": 5,
+        "worst_rank": 7,
+        "n_first": 0
+      },
+      {
+        "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+        "n_splits": 4,
+        "mean_roc_auc": 0.7197310237335551,
+        "sd_roc_auc": 0.013660690107272834,
+        "min_roc_auc": 0.7042944738444401,
+        "max_roc_auc": 0.7344049625823169,
+        "mean_rank": 6.75,
+        "best_rank": 6,
+        "worst_rank": 7,
+        "n_first": 0
+      },
+      {
+        "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+        "n_splits": 4,
+        "mean_roc_auc": 0.7067871987974065,
+        "sd_roc_auc": 0.011033640957183495,
+        "min_roc_auc": 0.6941980289905828,
+        "max_roc_auc": 0.7183923688557491,
+        "mean_rank": 8.0,
+        "best_rank": 8,
+        "worst_rank": 8,
+        "n_first": 0
+      },
+      {
+        "architecture": "flat single table, 7 wires",
+        "n_splits": 4,
+        "mean_roc_auc": 0.699091865920341,
+        "sd_roc_auc": 0.012151899166573813,
+        "min_roc_auc": 0.6861776897522646,
+        "max_roc_auc": 0.7143936941655574,
+        "mean_rank": 9.0,
+        "best_rank": 9,
+        "worst_rank": 9,
+        "n_first": 0
+      }
+    ],
+    "frozen_choice": {
+      "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+      "n_splits": 4,
+      "n_first": 4,
+      "worst_rank": 1,
+      "mean_rank": 1.0,
+      "mean_margin_over_runner_up": 0.004268195605985375,
+      "worst_margin_over_runner_up": 0.0032970556710255616,
+      "mean_roc_auc": 0.7391692744811378,
+      "sd_roc_auc": 0.013730191383266121
+    }
+  },
+  "repeated_halves": {
+    "design": "the frozen split's own design re-drawn under other seeds: cluster_id here is the UniProt accession, which is finer than a 10% cluster, so this resolves the ranking more finely than the four folds but guarantees less about homology",
+    "n_repeats": 25,
+    "seeds": [
+      20260726,
+      20260727,
+      20260728,
+      20260729,
+      20260730,
+      20260731,
+      20260732,
+      20260733,
+      20260734,
+      20260735,
+      20260736,
+      20260737,
+      20260738,
+      20260739,
+      20260740,
+      20260741,
+      20260742,
+      20260743,
+      20260744,
+      20260745,
+      20260746,
+      20260747,
+      20260748,
+      20260749,
+      20260750
+    ],
+    "splits": [
+      {
+        "seed": 20260726,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7373473167475888,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7310648348507347,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7242050228276619,
+            "rank": 3
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7215656596525888,
+            "rank": 4
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7203542994167079,
+            "rank": 5
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7196662282745402,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.709241496879505,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7003188655491337,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6915555446626691,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260727,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7315367650527753,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7268531476951812,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7212056780748133,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7208134025397757,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7177873761028049,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7142939774469235,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7104774439540845,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7023421886061642,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6944988542022565,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260728,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7356914052542918,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7319346421506469,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7264173377774135,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7226884367515817,
+            "rank": 4
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7224088822823895,
+            "rank": 5
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7223789634495809,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7116799709421456,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7013954145140756,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6954651375654184,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260729,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7328908562961203,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7291097444657096,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7216211129535259,
+            "rank": 3
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7212492787394512,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7201081260342637,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7144884143245102,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7101703165606654,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.700864421398091,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6887792585177769,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260730,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7274213622421493,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7214254640614624,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7169878016601154,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7158386180632053,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7132753153904863,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7109283007857722,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7055052579723311,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.6987025782836114,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6852703029514224,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260731,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7421752060566533,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7356111528222312,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7285464483859074,
+            "rank": 3
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7274577207217665,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7257956874011243,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7215237182124532,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.716195827438881,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.707788733612011,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.693669486727273,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260732,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7370889352136497,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7338857860695971,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7282357549727043,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7267464714006,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7258483954264207,
+            "rank": 5
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7191951926542814,
+            "rank": 6
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.717721842589604,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7049665148639384,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.69117149105964,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260733,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7367282485270323,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7323871990340469,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7269566668495699,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7242317670192627,
+            "rank": 4
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7234589943344668,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7188497340974832,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7156998487035191,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7024829306870214,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6910093031975505,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260734,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7328296048766157,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7272082601790916,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7235533495724266,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7203601250190825,
+            "rank": 4
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7161585844274545,
+            "rank": 5
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7156049952086828,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7103238790171734,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.6967778381563586,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6872741979499128,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260735,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.753216322491951,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7451674641505535,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7368803309959199,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7335134194143103,
+            "rank": 4
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7317427787955856,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7279982076939526,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7254438911493098,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7106643029386929,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.7003476711466815,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260736,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7117661212348635,
+            "rank": 1
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7068732853288798,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7065838063346526,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7037071215239434,
+            "rank": 4
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7018126960096946,
+            "rank": 5
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.700274897805316,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.6918604303585739,
+            "rank": 7
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6811284063901016,
+            "rank": 8
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.6777954255346236,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260737,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7458654508462029,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7389820390112543,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7326571447359792,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7320625834800011,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7301424598909093,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7261365399140415,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7179965295845953,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7092175411991719,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.701836260734871,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260738,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7380432869740892,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7330014854288521,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7288790478537105,
+            "rank": 3
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7281182663446585,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7252857248217227,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7206836468566952,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7172869048942547,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.705097735166218,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6911232223284486,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260739,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.747311495390563,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7411821125478733,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7323645691166174,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7297199840581418,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.727414078724413,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7205091115845285,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.718699691477526,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7080144942709874,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6936573485465553,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260740,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7533004111841564,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7470420684168303,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7352100689616959,
+            "rank": 3
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7348959528447955,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7329623702437659,
+            "rank": 5
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7283319164401791,
+            "rank": 6
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7279523253082806,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.713249931729036,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.7024878110315228,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260741,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7507699559405675,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7470299256153878,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7366968246691019,
+            "rank": 3
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7343299820610668,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7340970732181008,
+            "rank": 5
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7268100899327017,
+            "rank": 6
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7259329189227943,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7114821643955392,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.69794520206403,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260742,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7411806152912147,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7344954546626739,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7267381863687442,
+            "rank": 3
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7249875809261718,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7241006667420683,
+            "rank": 5
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7180643017435354,
+            "rank": 6
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7164279837160058,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7049921165973952,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6898349609118949,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260743,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7247726003063953,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7202041071335954,
+            "rank": 2
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7172423999573195,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.715124004733845,
+            "rank": 4
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7124464413351502,
+            "rank": 5
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.711656140821795,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7006241892042673,
+            "rank": 7
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6921829432259525,
+            "rank": 8
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.691492347943031,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260744,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7409841123162483,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7343409113460339,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7254225620404879,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7233004988054762,
+            "rank": 4
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7229453438558089,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.715470202542107,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7133318329387802,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7024300889005138,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.691761143733145,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260745,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7469486086733083,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7410538734553153,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7347660725912571,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7302672078756361,
+            "rank": 4
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7270735103261937,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7232528097642528,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7225024493665039,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7065235677066405,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.699706574771066,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260746,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7513166052498912,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7456589380614629,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7373961117102068,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7368414761652637,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7347023561689118,
+            "rank": 5
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7279220354181649,
+            "rank": 6
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7246658992821162,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7142786617246086,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6946602544726762,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260747,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7334344947127579,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7265296159347376,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7200935171780581,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7190376057694086,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7161563185756922,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7109886847470955,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7099189315375021,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.6984394818073092,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6841529754337642,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260748,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7440694161680407,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7378934643601166,
+            "rank": 2
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7285006745239083,
+            "rank": 3
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7282901773166718,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7257234283093524,
+            "rank": 5
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7210728267337784,
+            "rank": 6
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7196227729832253,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.7103833098971287,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6918771145465568,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260749,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7304140158162404,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7262001603417907,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7171584379119138,
+            "rank": 3
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7168658892286704,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.7150330906389663,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7135737421178271,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7073866323773632,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.697898475318812,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6883782970879716,
+            "rank": 9
+          }
+        ]
+      },
+      {
+        "seed": 20260750,
+        "winner": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "ranking": [
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+            "roc_auc": 0.7282868947800537,
+            "rank": 1
+          },
+          {
+            "architecture": "parallel bank, uniform fusion + multi-scale gate",
+            "roc_auc": 0.7229498622501701,
+            "rank": 2
+          },
+          {
+            "architecture": "parallel bank, integer-multiplicity fusion",
+            "roc_auc": 0.7192755230481264,
+            "rank": 3
+          },
+          {
+            "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+            "roc_auc": 0.7159406138335259,
+            "rank": 4
+          },
+          {
+            "architecture": "parallel bank (thematic 6x6), uniform fusion",
+            "roc_auc": 0.715437252998162,
+            "rank": 5
+          },
+          {
+            "architecture": "flat single table, 6 wires",
+            "roc_auc": 0.7123512847727164,
+            "rank": 6
+          },
+          {
+            "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+            "roc_auc": 0.7106618059038395,
+            "rank": 7
+          },
+          {
+            "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+            "roc_auc": 0.6955780971057369,
+            "rank": 8
+          },
+          {
+            "architecture": "flat single table, 7 wires",
+            "roc_auc": 0.6866238672465425,
+            "rank": 9
+          }
+        ]
+      }
+    ],
+    "per_architecture": [
+      {
+        "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+        "n_splits": 25,
+        "mean_roc_auc": 0.7382156043057368,
+        "sd_roc_auc": 0.009910972505300535,
+        "min_roc_auc": 0.7117661212348635,
+        "max_roc_auc": 0.7533004111841564,
+        "mean_rank": 1.0,
+        "best_rank": 1,
+        "worst_rank": 1,
+        "n_first": 25
+      },
+      {
+        "architecture": "parallel bank, uniform fusion + multi-scale gate",
+        "n_splits": 25,
+        "mean_roc_auc": 0.7327118208152001,
+        "sd_roc_auc": 0.009530137542481476,
+        "min_roc_auc": 0.7065838063346526,
+        "max_roc_auc": 0.7470420684168303,
+        "mean_rank": 2.04,
+        "best_rank": 2,
+        "worst_rank": 3,
+        "n_first": 0
+      },
+      {
+        "architecture": "parallel bank, integer-multiplicity fusion",
+        "n_splits": 25,
+        "mean_roc_auc": 0.7254926085321991,
+        "sd_roc_auc": 0.008036885290712436,
+        "min_roc_auc": 0.7037071215239434,
+        "max_roc_auc": 0.7368803309959199,
+        "mean_rank": 3.44,
+        "best_rank": 3,
+        "worst_rank": 4,
+        "n_first": 0
+      },
+      {
+        "architecture": "wide-bus bank, 8 levels x 4 wires/table",
+        "n_splits": 25,
+        "mean_roc_auc": 0.7243305709601603,
+        "sd_roc_auc": 0.007948079762899006,
+        "min_roc_auc": 0.7018126960096946,
+        "max_roc_auc": 0.7373961117102068,
+        "mean_rank": 3.96,
+        "best_rank": 3,
+        "worst_rank": 6,
+        "n_first": 0
+      },
+      {
+        "architecture": "parallel bank (thematic 6x6), uniform fusion",
+        "n_splits": 25,
+        "mean_roc_auc": 0.7226029325065507,
+        "sd_roc_auc": 0.008239254723863216,
+        "min_roc_auc": 0.700274897805316,
+        "max_roc_auc": 0.7347023561689118,
+        "mean_rank": 4.96,
+        "best_rank": 4,
+        "worst_rank": 6,
+        "n_first": 0
+      },
+      {
+        "architecture": "flat single table, 6 wires",
+        "n_splits": 25,
+        "mean_roc_auc": 0.7186563827630055,
+        "sd_roc_auc": 0.0056165802455795735,
+        "min_roc_auc": 0.7068732853288798,
+        "max_roc_auc": 0.7279982076939526,
+        "mean_rank": 5.84,
+        "best_rank": 2,
+        "worst_rank": 7,
+        "n_first": 0
+      },
+      {
+        "architecture": "wide-bus bank, 16 levels x 3 wires/table",
+        "n_splits": 25,
+        "mean_roc_auc": 0.7146561477273384,
+        "sd_roc_auc": 0.008630744231693908,
+        "min_roc_auc": 0.6918604303585739,
+        "max_roc_auc": 0.7283319164401791,
+        "mean_rank": 6.76,
+        "best_rank": 6,
+        "worst_rank": 7,
+        "n_first": 0
+      },
+      {
+        "architecture": "wide-bus bank, 64 levels x 2 wires/table",
+        "n_splits": 25,
+        "mean_roc_auc": 0.702927089116234,
+        "sd_roc_auc": 0.007828532302845194,
+        "min_roc_auc": 0.6777954255346236,
+        "max_roc_auc": 0.7142786617246086,
+        "mean_rank": 8.08,
+        "best_rank": 8,
+        "worst_rank": 9,
+        "n_first": 0
+      },
+      {
+        "architecture": "flat single table, 7 wires",
+        "n_splits": 25,
+        "mean_roc_auc": 0.692255905220228,
+        "sd_roc_auc": 0.005429859697554919,
+        "min_roc_auc": 0.6811284063901016,
+        "max_roc_auc": 0.7024878110315228,
+        "mean_rank": 8.92,
+        "best_rank": 8,
+        "worst_rank": 9,
+        "n_first": 0
+      }
+    ],
+    "frozen_choice": {
+      "architecture": "parallel bank, integer-multiplicity fusion + multi-scale gate",
+      "n_splits": 25,
+      "n_first": 25,
+      "worst_rank": 1,
+      "mean_rank": 1.0,
+      "mean_margin_over_runner_up": 0.005492204330767665,
+      "worst_margin_over_runner_up": 0.0032031491440526194,
+      "mean_roc_auc": 0.7382156043057368,
+      "sd_roc_auc": 0.009910972505300535
+    }
+  }
+}

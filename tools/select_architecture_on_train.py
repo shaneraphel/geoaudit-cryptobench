@@ -16,10 +16,27 @@ cluster-disjoint halves:
                per-unit mean ROC-AUC on units whose clusters the fit half
                never saw
 
-The split is on ``cluster_id`` from ``train_manifest.json``, the same MMseqs2
-10 % clustering that separates train from test, so a candidate cannot win by
-memorising a homologue. The test fold is then read exactly once, for the single
-architecture named here.
+The split is on ``cluster_id`` from ``train_manifest.json``. Be precise about
+what that field is, because an earlier version of this docstring was not: it is
+the UniProt accession, written by ``tools/build_training_fold.py``, and it is
+NOT the MMseqs2 10 % cluster. The 10 % clustering is real, but it lives upstream
+in CryptoBench's own fold construction, and the cluster assignment is not
+distributed with the data -- ``folds.json`` ships fold membership, not cluster
+labels. Splitting on the accession is therefore finer than splitting on a 10 %
+cluster: two accessions that MMseqs2 would have grouped can land on opposite
+sides here. What this split does guarantee is that no single protein is both fit
+on and picked on.
+
+The coarser guarantee is available, and ``tools/crossvalidate_architecture.py``
+uses it: CryptoBench ships four training folds, train-0 to train-3, built by its
+authors under that 10 % clustering and pairwise disjoint in both PDB id and
+accession. Holding each out in turn is a cluster-level cross-validation of this
+selection under the benchmark's own clustering rather than a proxy for it. This
+file stays as it is, on the accession halves, because it is what the frozen
+result was selected with; the cross-validation reports whether that choice
+survives the coarser and the repeated splits.
+
+The test fold is then read exactly once, for the single architecture named here.
 
 Usage: PYTHONPATH=src python3.12 tools/select_architecture_on_train.py
 """
@@ -131,7 +148,8 @@ def bank_fracs(Dfit, yfit, Dpick, tables, levels, rate):
     return fr_pick, np.asarray(gini)
 
 
-def main() -> int:
+def load_train_fold():
+    """The cached training-fold descriptors, and each unit's cluster label."""
     z = np.load(CACHE, allow_pickle=False)
     F, y, n_res, ctr = z["F"], z["y"], z["n_res_per"], z["ctr"]
     units = [str(u) for u in z["units"]]
@@ -141,37 +159,57 @@ def main() -> int:
     if missing:
         raise SystemExit(f"{len(missing)} cached units absent from the manifest, "
                          f"e.g. {missing[:3]}")
+    return F, y, n_res, ctr, units, cluster_of
 
-    # Cluster-disjoint halves. Clusters are assigned by a seeded shuffle, so the
-    # split is reproducible and no cluster can straddle the two halves.
+
+def build_level_cache(F, n_res, levels=(4, 8, 16, 64)) -> dict[int, np.ndarray]:
+    """Banding depends only on the descriptors, never on the split.
+
+    Hoisted out of the candidate loop because it is the expensive part and it is
+    identical for every split, which is what makes repeating the selection over
+    many splits affordable.
+    """
+    return {n: chain_levels(F, n_res, n) for n in levels}
+
+
+def cluster_half_split(units, cluster_of, seed):
+    """Halve the units so that no cluster label straddles the two halves.
+
+    Reproducible from the seed alone. Note what the guarantee is worth: see the
+    note on ``cluster_id`` in this module's docstring. Whole clusters move
+    together, which is all this function promises.
+    """
     clusters = sorted({cluster_of[u] for u in units})
-    rng = np.random.default_rng(SEED)
+    rng = np.random.default_rng(seed)
     rng.shuffle(clusters)
     fit_clusters = set(clusters[:len(clusters) // 2])
     is_fit_unit = np.array([cluster_of[u] in fit_clusters for u in units])
+    straddling = {c for c in clusters
+                  if len({bool(f) for u, f in zip(units, is_fit_unit)
+                          if cluster_of[u] == c}) > 1}
+    if straddling:
+        raise SystemExit(f"{len(straddling)} clusters span both halves: "
+                         f"{sorted(straddling)[:5]}")
+    return is_fit_unit, clusters
 
-    row_unit = np.repeat(np.arange(len(units)), n_res)
+
+def evaluate_candidates(F, y, n_res, ctr, level_cache, is_fit_unit,
+                        verbose=True) -> list[dict]:
+    """Score every candidate architecture on one fit/pick split.
+
+    Split in, ranking out, and nothing else: the architectures are defined once,
+    here, so that repeating the selection over other splits cannot silently
+    compare a different set of candidates than the frozen run did.
+    """
+    row_unit = np.repeat(np.arange(len(n_res)), n_res)
     fit_mask = is_fit_unit[row_unit]
     pick_mask = ~fit_mask
-    n_fit_units = int(is_fit_unit.sum())
-    n_pick_units = len(units) - n_fit_units
-    n_fit_res = int(fit_mask.sum())
-    print(f"train fold {len(units)} units / {len(clusters)} clusters -> "
-          f"fit {n_fit_units} units ({n_fit_res} residues), "
-          f"pick {n_pick_units} units", flush=True)
-    assert not (fit_clusters & {cluster_of[u] for u in units
-                                if not cluster_of[u] in fit_clusters
-                                and is_fit_unit[units.index(u)]})
 
-    n_fit_per = np.array([n for n, f in zip(n_res, is_fit_unit) if f])
     n_pick_per = np.array([n for n, f in zip(n_res, is_fit_unit) if not f])
     rate = float(y[fit_mask].mean())
     M = F.shape[1]
 
     results = []
-    level_cache: dict[int, np.ndarray] = {}
-    for levels in (4, 8, 16, 64):
-        level_cache[levels] = chain_levels(F, n_res, levels)
     D4 = level_cache[4]
     Dfit4, Dpick4 = D4[fit_mask], D4[pick_mask]
     yfit, ypick = y[fit_mask], y[pick_mask]
@@ -183,7 +221,8 @@ def main() -> int:
         a = per_unit_auc(score, ypick, n_pick_per)
         results.append({"architecture": name, "pick_half_roc_auc": a,
                         **(extra or {})})
-        print(f"  {name:44s} pick-half ROC-AUC = {a:.4f}", flush=True)
+        if verbose:
+            print(f"  {name:44s} pick-half ROC-AUC = {a:.4f}", flush=True)
         return a
 
     # 1-2. flat single table, the control
@@ -223,6 +262,27 @@ def main() -> int:
         record(f"wide-bus bank, {levels} levels x {w} wires/table",
                np.sum(fr, axis=0))
 
+    return results
+
+
+def main() -> int:
+    F, y, n_res, ctr, units, cluster_of = load_train_fold()
+    is_fit_unit, clusters = cluster_half_split(units, cluster_of, SEED)
+
+    row_unit = np.repeat(np.arange(len(units)), n_res)
+    fit_mask = is_fit_unit[row_unit]
+    pick_mask = ~fit_mask
+    n_fit_units = int(is_fit_unit.sum())
+    n_pick_units = len(units) - n_fit_units
+    n_fit_res = int(fit_mask.sum())
+    rate = float(y[fit_mask].mean())
+    print(f"train fold {len(units)} units / {len(clusters)} clusters -> "
+          f"fit {n_fit_units} units ({n_fit_res} residues), "
+          f"pick {n_pick_units} units", flush=True)
+
+    level_cache = build_level_cache(F, n_res)
+    results = evaluate_candidates(F, y, n_res, ctr, level_cache, is_fit_unit)
+
     winner = max(results, key=lambda r: r["pick_half_roc_auc"])
     print(f"\nselected on the training fold alone: {winner['architecture']} "
           f"({winner['pick_half_roc_auc']:.4f})")
@@ -236,7 +296,8 @@ def main() -> int:
                "test-fold estimates",
         "split": {
             "source": "data/cryptobench_apo/train_manifest.json",
-            "criterion": "cluster_id, seeded shuffle, disjoint halves",
+            "criterion": "cluster_id (the UniProt accession, not the MMseqs2 "
+                         "10% cluster), seeded shuffle, disjoint halves",
             "seed": SEED,
             "n_clusters": len(clusters),
             "n_fit_units": n_fit_units,
