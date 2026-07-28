@@ -796,9 +796,25 @@ if those two ever disagree. Had a different row come out on top it would have
 been reported and not adopted.
 
 Cost is the one place the construction is unambiguously ahead. Compilation is a
-single counting pass over the fitting half plus one *K*×*K* solve, 130 s once;
-the compiled artifact is 1.88 MB of JSON, of which 4797 of 5152 tables carry a
-non-zero multiplicity. Inference is 5152 table look-ups and an integer dot
+single counting pass plus one *K*×*K* solve, 130 s once; the compiled artifact
+is 1.88 MB of JSON, of which 4797 of 5152 tables carry a non-zero multiplicity.
+
+That count is a property of the fit set, not of the configuration, and this
+repository reported two of them without saying so. The shipped field is
+compiled over all 770 training units (234,838 residues) and has **4797**
+non-zero multiplicities, total fan-out 25,682, and 825 never-addressed cells.
+The *selection* fit — the same 5152 tables, the same alphabet, the same ridge,
+but counted on one cluster-disjoint half of the training fold — has **4853**,
+total fan-out 29,075, and 1028 never-addressed cells. Both numbers are
+reproducible, and the direction is what more data should do: fewer cells go
+unaddressed, and the solve spends less total fan-out. They were nonetheless
+printed in adjacent files under the same name, which is a defect and not a
+contradiction. The two are now separate macros (`\NTabUsedFullFold`,
+`\NTabUsedFitHalf`), `make consistency` recounts the shipped vector against its
+own header, and `make numbers` refuses to emit either if the two tools that
+measured the selection half stop agreeing.
+
+Inference is 5152 table look-ups and an integer dot
 product per residue, with no floating-point model evaluated at all: a median
 **0.342 s per chain against P2Rank's 4.722 s**, a factor of 13.8. The ridge is
 not delicate either — 0.03, 0.1 and 0.3

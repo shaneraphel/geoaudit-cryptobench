@@ -204,9 +204,17 @@ def build() -> str:
                  f"{{{sum(occupied) / max(len(occupied), 1):.0f}}}")
         L.append(f"\\newcommand{{\\TabRidge}}{{{tf['ridge']:g}}}")
         L.append(f"\\newcommand{{\\TabCap}}{{{tf['fan_out_cap']}}}")
-        L.append(f"\\newcommand{{\\NTabUsed}}"
+        # Two different fits of the same configuration produce two different
+        # non-zero table counts, and this repository reported both without
+        # saying so: 4797 for the shipped compile over all 770 training units,
+        # 4853 for the selection fit that used one cluster-disjoint half. A
+        # reviewer reading both files sees a contradiction, so the fit set is
+        # now part of the macro name and neither can be quoted by accident.
+        L.append(f"\\newcommand{{\\NTabUsedFullFold}}"
                  f"{{{tf['n_tables_with_nonzero_fanout']}}}")
         L.append(f"\\newcommand{{\\TabFanOut}}{{{tf['total_fan_out']}}}")
+        L.append(f"\\newcommand{{\\NTabTrainRes}}"
+                 f"{{{tf['train']['n_residues']:,}}}".replace(",", "{,}"))
         L.append(f"\\newcommand{{\\TabGateRadius}}"
                  f"{{{tf['gate']['radius_angstrom']:g}}}")
         L.append(f"\\newcommand{{\\TabGateWeight}}{{{tf['gate']['weight']:g}}}")
@@ -584,6 +592,24 @@ def build() -> str:
                     f"it a loss and must be rewritten")
             L.append(f"\\newcommand{{\\SensLevels{_roman(lv)}Delta}}"
                      f"{{{abs(d):.4f}}}")
+        # The published configuration fitted on the selection half, which is a
+        # different object from the shipped compile over the whole training
+        # fold and carries a different non-zero table count. Both are emitted,
+        # each named for its fit set, and the two tools that measured the
+        # selection half have to agree before either is quotable.
+        pub = _row(4, "within-chain", 32)
+        if WIDESEL.exists():
+            wsel = json.loads(WIDESEL.read_text())["selected"]
+            if wsel["n_tables_used"] != pub["n_tables_used"]:
+                raise SystemExit(
+                    f"the selection fit's non-zero table count disagrees "
+                    f"between COUNTERATTACK_WIDE2 ({wsel['n_tables_used']}) "
+                    f"and SENSITIVITY_SWEEP ({pub['n_tables_used']}); these "
+                    f"are the same fit measured twice and must match")
+        L.append(f"\\newcommand{{\\NTabUsedFitHalf}}{{{pub['n_tables_used']}}}")
+        L.append(f"\\newcommand{{\\TabFanOutFitHalf}}{{{pub['total_fan_out']}}}")
+        L.append(f"\\newcommand{{\\NTabCellsEmptyFitHalf}}"
+                 f"{{{pub['n_cells_never_addressed']}}}")
         L.append(f"\\newcommand{{\\SensRange}}{{{sw['range_over_all_settings']:.4f}}}")
         L.append(f"\\newcommand{{\\SensSettings}}{{{len(sw['rows'])}}}")
         L.append(f"\\newcommand{{\\SensWorst}}"

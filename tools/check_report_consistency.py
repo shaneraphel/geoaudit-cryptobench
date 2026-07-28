@@ -19,7 +19,9 @@ is an equality between two things that are definitionally the same quantity:
      was computed from;
   2. a method's point estimate in one report == its point estimate in another;
   3. a declared baseline availability == whether that method actually has rows;
-  4. the unit set is identical across every method and every report.
+  4. the unit set is identical across every method and every report;
+  5. the compiled field's header counts == a recount of the vector it ships,
+     and the selection-half fit is still distinguishable from it.
 
 Exit 0 if all hold, 1 otherwise. Intended for `make verify` and CI.
 
@@ -37,6 +39,8 @@ MULTI = ROOT / "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json"
 VS_P2RANK = ROOT / "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json"
 FOLD = ROOT / "results/official_fold/OFFICIAL_FOLD_METRICS.json"
 PER_STRUCTURE = ROOT / "results/official_fold/PER_STRUCTURE.json"
+TABFIELD = ROOT / "data/cryptobench_apo/TABLE_FIELD.json"
+SENS = ROOT / "results/architecture_sweep/SENSITIVITY_SWEEP.json"
 
 TOL = 5e-4          # reports round; a real disagreement is orders of magnitude larger
 METRICS = ("residue_auc", "residue_pr_auc", "residue_mcc", "residue_f1")
@@ -145,6 +149,39 @@ def main() -> int:
 
         rep.same("OFFICIAL_FOLD_METRICS n_structures_scored",
                  fold.get("n_structures_scored"), len(units))
+
+    # 5. the compiled field against itself, and against the selection fit it is
+    #    routinely confused with. The same configuration fitted on the whole
+    #    training fold and on one cluster-disjoint half of it gives two
+    #    different non-zero table counts (4797 and 4853), and the repository
+    #    reported both without saying which was which. Recounting from the
+    #    multiplicity vector is the only way to know the header fields describe
+    #    the vector actually shipped.
+    if TABFIELD.exists():
+        tf = json.loads(TABFIELD.read_text())
+        mult = tf["multiplicity"]
+        rep.same("TABLE_FIELD multiplicity length vs table count",
+                 len(mult), len(tf["tables"]))
+        rep.same("TABLE_FIELD n_tables_with_nonzero_fanout vs recount",
+                 tf["n_tables_with_nonzero_fanout"],
+                 sum(1 for m in mult if m != 0))
+        rep.same("TABLE_FIELD total_fan_out vs recount",
+                 tf["total_fan_out"], sum(abs(m) for m in mult))
+        # The shipped compile is over all 770 units; a fit-half count must not
+        # be able to migrate into the field that the paper quotes.
+        if SENS.exists():
+            sw = json.loads(SENS.read_text())
+            pub = [r for r in sw["rows"] if r.get("is_published_configuration")]
+            rep.same("SENSITIVITY_SWEEP has exactly one published row",
+                     len(pub), 1)
+            if pub:
+                rep.checks += 1
+                if pub[0]["n_tables_used"] == tf["n_tables_with_nonzero_fanout"]:
+                    rep.failures.append(
+                        "the selection-half fit and the shipped full-fold "
+                        "compile report the same non-zero table count; they "
+                        "are different fits and the distinction the prose now "
+                        "draws between them would be vacuous")
 
     if PER_STRUCTURE.exists() and FOLD.exists():
         ps = json.loads(PER_STRUCTURE.read_text())

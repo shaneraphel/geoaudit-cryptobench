@@ -307,8 +307,17 @@ F(i)=S(i)+\TabGateWeight{}\,\bar{S}_{\TabGateRadius{}}(i)\,
 \frac{\mathrm{sd}(S)}{\mathrm{sd}(\bar S_{\TabGateRadius{}})},
 \]
 so inference is one cell read per table, an integer-weighted sum, and one
-neighbourhood mean. \NTabUsed{} tables carry a non-zero fan-out and the total is
-\TabFanOut{}. The fan-out is obtained by rounding the solution of one symmetric
+neighbourhood mean. In the shipped field, compiled over all \NTrainUnits{}
+training units (\NTabTrainRes{} residues), \NTabUsedFullFold{} tables carry a
+non-zero fan-out and the total is \TabFanOut{}. The count is a property of the
+fit set and not of the configuration: the same specification counted on the
+cluster-disjoint selection half used for architecture choice yields
+\NTabUsedFitHalf{} non-zero tables and a total of \TabFanOutFitHalf{}, with
+\NTabCellsEmptyFitHalf{} never-addressed cells against \NTabCellsEmpty{} for the
+full fold. Fewer cells go unaddressed and less total fan-out is spent as the fit
+set grows, which is the expected direction; the two numbers are reported
+separately here because a single name for both is what made them look like a
+contradiction. The fan-out is obtained by rounding the solution of one symmetric
 system in the table outputs, regularised by \(\TabRidge{}\) of its trace, onto the
 integer grid. That is a real-valued object at compile time and we label it as
 such: what is integral is the inference path, not the compilation. The gate is
@@ -1188,9 +1197,9 @@ on top it would have been reported and not adopted.
 
 Cost is the other question a table-based method invites, and it is the one place
 the construction is unambiguously ahead. Compilation is a single pass of
-counting over the fitting half followed by one \(K \times K\) solve, taking
+counting over the training fold followed by one \(K \times K\) solve, taking
 \TabCompileSeconds{}~s once; the compiled artifact is \TabArtifactMB{}~MB of
-JSON, of which \NTabUsed{} of \NTabTables{} tables carry a non-zero
+JSON, of which \NTabUsedFullFold{} of \NTabTables{} tables carry a non-zero
 multiplicity. At inference a residue costs \NTabTables{} table look-ups and an
 integer dot product, and no floating-point model is evaluated at all: the median
 is \TabRuntime{}~s per chain against P2Rank's \PTwoRuntime{}~s, a factor of
