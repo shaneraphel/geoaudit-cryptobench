@@ -57,7 +57,7 @@ official CryptoBench receptor-only benchmark.
 
 ![Figure 2](figures/fig_paired_vs_p2rank.png)
 
-**Figure 2.** Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is ±1 standard error of a fold mean (0.0161); 11 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not.
+**Figure 2.** Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is ±1 standard error of a fold mean (0.0161); 12 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not.
 
 ![Figure 3](figures/fig_case_studies.png)
 
@@ -429,6 +429,7 @@ all fail-closed.
 | Environment pins | `make environment` | any committed dependency declaration names a version the measured stack contradicts |
 | Case studies | `make cases` | the selected cases or the burial statistics stop following from the committed labels and raw predictions |
 | Architecture selection | `make crossval` | the cross-validation summary does not follow from its own per-split rankings, or no longer names the architecture the frozen selection chose |
+| Quotient counterattack | `make quotient` | the capacity arithmetic stops recomputing, the fourteen splits stop ranking one candidate pool, or the selection artifact starts claiming a test-fold read |
 
 Current state: `verify_claims` all checks pass; 141 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:
@@ -511,13 +512,48 @@ quietly shrinking the denominator.
 
 Every frozen artifact under `results/` declares its role in
 `results/ARTIFACT_MANIFEST.json`, and `make artifacts` fails on any file that
-does not: 18 cited by the paper or this README, 20 training-fold sweeps, 4
+does not: 25 cited by the paper or this README, 20 training-fold sweeps, 5
 evaluations on the official test fold, 4 superseded. The gate additionally
 rejects any artifact filed as a sweep that in fact carries per-unit metrics over
 the official units, which is the mechanical form of "no quiet test-set
 evaluation filed under exploration". How often the held-out fold has been scored
 is counted from the artifacts in
 `results/official_fold/TEST_FOLD_ACCESS_LEDGER.json`, not asserted in prose.
+
+### 4.3 A cross-validated gain that did not survive the held-out fold
+
+The manuscript explains the counting field's deficit as capacity: a dense
+quaternary table over `d` digits has `L**d` cells and is admissible only while
+`L**d <= rN`, which at four levels confines it to `d <= 6.86`. That bound counts
+cells the table is free to set independently, and a table required to be
+invariant under a group has as many as the group has orbits. Under `S_d` an
+orbit is a multiset, so the count is `C(d+L-1, d)` — polynomial where `L**d` is
+exponential — and the admissible width at four levels moves from 6 to 41. Held
+at `d = 6` the same exchange buys resolution instead: a dense table stops at
+four levels, a quotient table reaches twelve.
+
+`tools/counterattack_quotient_tables.py` compares 10 candidates on 14 splits —
+CryptoBench's own four training folds held out in turn, plus ten
+accession-disjoint half-splits — and none of them reads the test fold. A bank of
+18 quotient tables at eight, six and four levels beats the dense bank it
+replaces on **14 of 14 splits**, mean +0.0087, worst +0.0024.
+
+`tools/counterattack_quotient_probe.py` then reads the official fold once, logged
+as read 4. The construction scores 0.7647 against the dense counting field's
+0.7667: a paired difference of **-0.0020, CI [-0.0103, +0.0065], p = 0.63**. The
+gain is not reduced on the held-out fold, it is absent. The same code path
+recompiles and rescores the frozen dense bank and returns 0.7667 against its
+telemetry 0.7668, so the negative result is a property of the construction and
+not of the harness; rescoring a frozen detector is recorded in the ledger and is
+not a read.
+
+Four negatives are recorded beside it rather than dropped: one `S_35` table over
+the whole invariant word is the worst candidate tried (-0.1390), twelve-wide
+blocks cost -0.0488, an anisotropic gate aligned with the local principal axes
+moves the training pick half by +0.0005, and regrouping the invariants by
+measured correlation rather than by what they measure costs 0.046. The
+construction was also found on a single split, where it measured +0.0132 against
+the +0.0087 it holds over fourteen; both numbers are in the selection artifact.
 
 ---
 

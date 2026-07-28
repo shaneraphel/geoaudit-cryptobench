@@ -687,6 +687,111 @@ indicated by this failure is spatially gated, localized shear with rigid-hit
 anchoring. We report this as a falsified hypothesis rather than removing the
 ablations from the paper.
 
+\section{AI experiments: a quotient bound, and a gain that did not transfer}
+\label{sec:ai}
+Everything in this section --- the bound, the construction that follows from it,
+the fourteen-split validation, the fourth reading of the held-out fold, and the
+four negative results --- was produced by an AI agent working inside this
+repository under the access discipline the rest of the paper describes. It is
+separated out because the provenance is different, not because the standard is:
+the artifacts are the same artifacts, the gates are the same gates, and the
+reading of the test fold is logged in the same ledger as the other three.
+
+\paragraph{The bound counts cells, and cells are a function of the symmetry.}
+Section~\ref{sec:results} attributes the counting field's deficit to capacity: a
+dense quaternary table over \(d\) digits has \(L^{d}\) cells, admissible only
+while \(L^{d} \le rN\), so at \(L=4\) it is confined to \(d \le
+\QuoDenseBound{}\). That argument counts cells that the table is free to set
+independently. A table required to be invariant under a group \(G\) acting on
+its digit positions has no such freedom: its free cells are the orbits of \(G\),
+and it is the orbit count that \(rN\) must populate. For the symmetric group
+\(S_d\) --- the table may depend on which levels occur and how often, but not on
+which position carries them --- an orbit is a multiset, so
+\begin{equation}
+  \bigl|\Omega_{S_d}(d, L)\bigr| = \binom{d + L - 1}{d},
+\end{equation}
+polynomial in \(d\) where \(L^{d}\) is exponential. The admissible width at
+\(L=4\) moves from \QuoDenseWidth{} to \QuoSymWidth{}: all \NAlgFeatures{}
+invariants fit inside one symmetric table, at \QuoSymCellsAll{} orbits against
+the \NTrainPositives{} positives available to drive them. The exchange runs the
+other way as well, and that is the direction that mattered. Holding \(d = 6\), a
+dense table is stuck at four levels (\QuoDenseCells{} cells) while a symmetric
+one reaches twelve; at eight levels it costs \QuoSymCellsEight{} orbits against
+\QuoSymCells{} at four. The quotient buys resolution per digit, which is
+precisely what the tables were losing to the continuous linear readout.
+
+\paragraph{What the symmetry costs, and which one to impose.} A symmetric table
+cannot say which invariant is extreme, only how many sit at each level. Whether
+that trade is worth taking is not settled by the bound, and on this fold the
+widest version of it is a failure: one \(S_{35}\) table over the whole word
+scores \QuoWorstArchDelta{} against the dense bank, the largest deficit of any
+candidate tried. What survives is the Young subgroup \(S_6 \times \cdots \times
+S_6 \times S_5\) --- exchangeable inside each thematic group of invariants,
+rigid across groups --- which quotients only the ordering among quantities that
+measure the same kind of thing. Widening the blocks to twelve, which the bound
+permits and exchangeability does not, loses a further four hundredths.
+
+\paragraph{On the training fold the construction wins everywhere.}
+\QuoNCandidates{} candidates were compared on \QuoNSplits{} splits, none of them
+the test fold: CryptoBench's own four training folds held out in turn, which are
+disjoint under the benchmark's MMseqs2 10\% clustering, and ten redraws of the
+accession-disjoint half-split. The winner is a bank of \QuoNTables{} quotient
+tables at eight, six and four levels, fused by the same integer fan-out and read
+through the same multi-scale gate as the frozen detector, and it beats the dense
+bank it replaces on \QuoNBeating{} of \QuoNSplits{} splits, by a mean of
+\QuoTrainGain{} with a worst case of \QuoTrainWorst{}. Nothing about the
+detector was changed except the address.
+
+\paragraph{On the held-out fold it wins nothing.} Reading
+\QuoReadIndex{} of the official fold scores the frozen construction at
+\QuoTestAuc{}, against the dense counting field's \AlgAuc{}: a paired difference
+of \QuoDAf{}, 95\% CI \QuoDAfCI{}, \(p = \QuoDAfP{}\). The gain did not transfer
+--- not reduced, absent. Against P2Rank the field remains separably behind at
+\QuoDPTwo{}, CI \QuoDPTwoCI{}. Because the claim being made is a negative one,
+the same code path was used to recompile and rescore the frozen dense bank,
+which returns \QuoControlRepro{} against its telemetry value of \AlgAuc{};
+rescoring a frozen detector is recorded in the ledger and is not a reading. So
+the pipeline reproduces the number it is measured against, and the failure to
+transfer is a property of the construction rather than of the harness.
+
+\paragraph{What a fourteen-split validation was and was not worth.} The
+construction was found by trying roughly thirty variants on a single
+accession-disjoint half-split, where it measured \QuoOneSplitGain{}. Over the
+fourteen splits it measures \QuoTrainGain{}, and the difference between those
+two numbers is what selecting on one split is worth; both are recorded in the
+selection artifact rather than the smaller one quietly replacing the larger.
+What the cross-validation did not do is predict the test fold. A gain that holds
+on four cluster-disjoint folds and ten accession-disjoint halves, without a
+single exception, still vanished on the held-out fold, and no amount of
+resampling inside the training partition would have revealed that. This is the
+strongest argument in the paper for reading the held-out fold at all, and for
+counting the readings.
+
+\paragraph{Three further negatives, reported because they were run.} An
+anisotropic gate --- ellipsoidal neighbourhoods aligned with the local principal
+axes, compressing the surface normal so that score spreads along a patch instead
+of into the core, which is the failure mode Section~\ref{sec:results} identifies
+as shared with P2Rank --- moves the training pick half by \(+0.0005\) at its
+best setting and is not distinguishable from the isotropic gate. Regrouping the
+invariants by their measured correlation rather than by what they measure costs
+\(0.046\); grouping them to be deliberately uncorrelated costs \(0.059\). The
+thematic grouping, chosen for meaning before any of this was measured, is the
+better subgroup. Enlarging the bank beyond the six thematic tables per level
+degrades monotonically, because the integer fan-out is a rank and a long tail of
+mediocre tables collectively outvotes the informative ones.
+
+\paragraph{One implementation note that changed a conclusion.} The first
+encoding of the orbit address used a combinatorial number system and was not
+injective; distinct orbits collided, the construction measured \(0.6701\) where
+it should have measured \(0.7475\), and the idea looked refuted. The two
+prototypes disagreed on a quantity that cannot depend on the encoding --- the
+partition of residues into cells, and therefore the AUC --- which is what
+exposed it. The address in the committed module is the digit word sorted, whose
+correctness is a property one can test by exhaustion, and
+\texttt{tests/test\_quotient\_tables.py} does exactly that on every case small
+enough to enumerate. A wrong encoder here would not have raised; it would have
+returned a plausible number.
+
 \section{Limitations}
 The comparison covers one trained baseline, executed locally; PocketMiner could
 not be included because per-residue predictions are not published. The 38

@@ -39,6 +39,8 @@ LEDGER = ROOT / "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json"
 CROSSVAL = ROOT / "results/architecture_sweep/REPEATED_TRAIN_SELECTION.json"
 FIGPROV = ROOT / "results/official_fold/FIGURE_PROVENANCE.json"
 CASES = ROOT / "results/official_fold/CASE_STUDIES.json"
+QUOTIENT_SEL = ROOT / "results/architecture_sweep/COUNTERATTACK_QUOTIENT.json"
+QUOTIENT_PROBE = ROOT / "results/official_fold/COUNTERATTACK_QUOTIENT_PROBE.json"
 
 # Characters that are prose in a JSON caption and syntax in TeX. The captions
 # are generated from the artifacts, so they are not free to avoid them.
@@ -270,6 +272,57 @@ def build() -> str:
                       for r in xv["cluster_level_cv"]["per_architecture"]
                       if r["architecture"] != xv["frozen_choice"]["architecture"])
         L.append(f"\\newcommand{{\\RunnerUpArch}}{{{runner}}}")
+
+    if QUOTIENT_SEL.exists() and QUOTIENT_PROBE.exists():
+        # The quotient counterattack: a construction that beat the dense bank on
+        # every training split and then did not beat it here. Both halves are
+        # emitted from their own artifacts so the chapter cannot state a
+        # training gain the selection did not measure or a test result the probe
+        # did not produce.
+        qs = json.loads(QUOTIENT_SEL.read_text())
+        qp = json.loads(QUOTIENT_PROBE.read_text())
+        cap, sel = qs["capacity"], qs["selected"]
+        L.append(f"\\newcommand{{\\NTrainPositives}}"
+                 f"{{{cap['n_train_positives']:,}}}")
+        L.append(f"\\newcommand{{\\QuoDenseBound}}"
+                 f"{{{cap['dense_width_bound_L4']:.2f}}}")
+        L.append(f"\\newcommand{{\\QuoDenseWidth}}"
+                 f"{{{cap['dense_widest_admissible_L4']}}}")
+        L.append(f"\\newcommand{{\\QuoSymWidth}}"
+                 f"{{{cap['quotient_widest_admissible_L4']}}}")
+        L.append(f"\\newcommand{{\\QuoDenseCells}}{{{cap['dense_cells_d6_L4']:,}}}")
+        L.append(f"\\newcommand{{\\QuoSymCells}}{{{cap['quotient_cells_d6_L4']}}}")
+        L.append(f"\\newcommand{{\\QuoSymCellsEight}}"
+                 f"{{{cap['quotient_cells_d6_L8']:,}}}")
+        L.append(f"\\newcommand{{\\QuoSymCellsAll}}"
+                 f"{{{cap['quotient_cells_d35_L4']:,}}}")
+        L.append(f"\\newcommand{{\\QuoNSplits}}{{{qs['n_splits']}}}")
+        L.append(f"\\newcommand{{\\QuoNCandidates}}{{{qs['n_candidates']}}}")
+        L.append(f"\\newcommand{{\\QuoTrainGain}}"
+                 f"{{{sel['mean_delta_vs_control']:+.4f}}}")
+        L.append(f"\\newcommand{{\\QuoTrainWorst}}"
+                 f"{{{sel['worst_delta_vs_control']:+.4f}}}")
+        L.append(f"\\newcommand{{\\QuoNBeating}}"
+                 f"{{{sel['n_splits_beating_control']}}}")
+        L.append(f"\\newcommand{{\\QuoOneSplitGain}}"
+                 f"{{{qs['selection_honesty']['delta_on_the_split_it_was_found_on']:+.4f}}}")
+        worst = min(qs["summary"], key=lambda r: r["mean_delta_vs_control"])
+        L.append(f"\\newcommand{{\\QuoWorstArchDelta}}"
+                 f"{{{worst['mean_delta_vs_control']:+.4f}}}")
+        L.append(f"\\newcommand{{\\QuoReadIndex}}"
+                 f"{{{qp['test_fold_read_index']}}}")
+        L.append(f"\\newcommand{{\\QuoTestAuc}}{{{qp['residue_auc_mean']:.4f}}}")
+        L.append(f"\\newcommand{{\\QuoNTables}}"
+                 f"{{{qp['architecture']['n_tables']}}}")
+        L.append(f"\\newcommand{{\\QuoControlRepro}}"
+                 f"{{{qp['reproduction_check']['residue_auc_mean']:.4f}}}")
+        for method, tag in (("algebraic_field", "Af"), ("p2rank", "PTwo")):
+            d = qp["paired_vs"][method]["residue_auc"]
+            L.append(f"\\newcommand{{\\QuoD{tag}}}"
+                     f"{{{d['paired_difference']:+.4f}}}")
+            L.append(f"\\newcommand{{\\QuoD{tag}CI}}"
+                     f"{{[{d['ci_low']:+.4f}, {d['ci_high']:+.4f}]}}")
+            L.append(f"\\newcommand{{\\QuoD{tag}P}}{{{d['p_two_sided']:.4f}}}")
 
     if LEDGER.exists():
         # How often the held-out fold has been scored, and by how many
