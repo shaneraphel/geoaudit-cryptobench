@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The fifth fold read claims that the statistic it reports was
+          # committed before the read. That claim is checked against git, not
+          # believed from the artifact, so the commit it cites has to be in the
+          # clone. A depth-1 checkout does not contain it.
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"

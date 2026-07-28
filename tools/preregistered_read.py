@@ -66,6 +66,11 @@ def _git(*args: str) -> str:
 def preregistration_precedes_this_read() -> dict:
     """Refuse to read the fold unless the choice is already in the history."""
     rel = str(PREREG_PATH.relative_to(ROOT))
+    if _git("rev-parse", "--is-shallow-repository") == "true":
+        raise SystemExit(
+            "this is a shallow clone, so the commit that fixed the statistic "
+            "may not be present and the ordering cannot be checked. Fetch the "
+            "full history (actions/checkout with fetch-depth: 0) and retry.")
     if _git("status", "--porcelain", "--", rel):
         raise SystemExit(
             f"{rel} is modified or untracked. A preregistration that can still "
@@ -104,12 +109,34 @@ def paired_values() -> tuple[np.ndarray, np.ndarray, list[str]]:
     return a, b, shared
 
 
+def chain_lengths(units: list[str]) -> dict[str, int]:
+    """Scored chain lengths, taken from the feature cache when it is present
+    and from the artifact's own copy when it is not.
+
+    Lengths are not labels or scores, so reading them is not a look at the
+    fold's answers, but the cache they live in is too large to commit. Freezing
+    them into the artifact is what lets the read recompute from committed data
+    alone, which is the difference between a result and a claim about one.
+    """
+    if WIDE_TEST.exists():
+        z = np.load(WIDE_TEST, allow_pickle=False)
+        by = {str(u): int(n) for u, n in zip(z["units"], z["n_res_per"])}
+        if all(u in by for u in units):
+            return {u: by[u] for u in units}
+    if OUT.exists():
+        frozen = json.loads(OUT.read_text()).get("chain_lengths") or {}
+        if all(u in frozen for u in units):
+            return {u: int(frozen[u]) for u in units}
+    raise SystemExit(
+        "chain lengths are available from neither the feature cache nor a "
+        "previous artifact, so the length-stratified candidate cannot be "
+        "recomputed")
+
+
 def strata_for(units: list[str]) -> np.ndarray:
-    """Chain length quartiles. Lengths, not labels or scores, so reading them
-    is not a look at the fold's answers."""
-    z = np.load(WIDE_TEST, allow_pickle=False)
-    length = {str(u): int(n) for u, n in zip(z["units"], z["n_res_per"])}
-    L = np.array([length.get(u, 0) for u in units], dtype=np.float64)
+    """Chain length quartiles."""
+    by = chain_lengths(units)
+    L = np.array([by[u] for u in units], dtype=np.float64)
     return np.digitize(L, np.quantile(L, [0.25, 0.5, 0.75]))
 
 
@@ -210,6 +237,7 @@ def build() -> dict:
         "method": METHOD,
         "baseline": BASELINE,
         "n_paired_units": len(units),
+        "chain_lengths": chain_lengths(units),
         "mean_method": round(float(a.mean()), 6),
         "mean_baseline": round(float(b.mean()), 6),
         "n_boot": N_BOOT,

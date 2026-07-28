@@ -357,7 +357,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.preregistered_read.v1",
-      "bytes": 5387
+      "bytes": 9052
     },
     {
       "artifact": "results/official_fold/PUBLISHED_P2RANK_REPRODUCTION.json",
