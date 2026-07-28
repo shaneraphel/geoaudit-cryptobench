@@ -11,12 +11,14 @@
   },
   "figures": {
     "fig_official_fold_metrics.png": {
-      "sha256": "e58df6150711e27f5a62d388b0b6168a9062b489e8e832ef7baa06da0a00e411",
-      "bytes": 179486
+      "sha256": "1359b66af42341e881bb4b8f0586c79836d271cc9312fa13072b3f3eba93f67e",
+      "bytes": 136126,
+      "caption": "Per-residue detection on the official CryptoBench apo test fold (192 single-chain units, MMseqs2 10% cluster-disjoint). Bars are means over structures, ordered by ROC-AUC; whiskers are 95% bootstrap intervals (10,000 resamples, seed 20260725). The table field is drawn in orange and P2Rank 2.5.1, the baseline, in blue. MCC is undefined for a detector that calls nothing positive; those entries are marked rather than left blank."
     },
     "fig_paired_vs_p2rank.png": {
-      "sha256": "03ae46723ff3205983e99f7a59b249b1106a2852c6650b6fb287127033684296",
-      "bytes": 107064
+      "sha256": "90058491d14770166a7f5e0af4ee38d779adf3f31bce57fd9a840e6baf1ed005",
+      "bytes": 74390,
+      "caption": "Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is \u00b11 standard error of a fold mean (0.0161); 11 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not."
     }
   }
 }

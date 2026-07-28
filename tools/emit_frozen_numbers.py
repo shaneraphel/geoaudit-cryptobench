@@ -27,6 +27,24 @@ TABFIELD = ROOT / "data/cryptobench_apo/TABLE_FIELD.json"
 WIDESEL = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE2.json"
 WIDEPROBE = ROOT / "results/official_fold/COUNTERATTACK_WIDE_PROBE.json"
 LEDGER = ROOT / "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json"
+FIGPROV = ROOT / "results/official_fold/FIGURE_PROVENANCE.json"
+
+# Characters that are prose in a JSON caption and syntax in TeX. The captions
+# are generated from the artifacts, so they are not free to avoid them.
+_TEX_ESCAPES = {
+    "\\": r"\textbackslash{}", "&": r"\&", "%": r"\%", "$": r"\$",
+    "#": r"\#", "_": r"\_", "{": r"\{", "}": r"\}", "~": r"\textasciitilde{}",
+    "^": r"\textasciicircum{}", "\u00b1": r"$\pm$", "\u00c5": r"\AA{}",
+    "\u2014": "---", "\u2013": "--",
+}
+
+
+def _tex(text: str) -> str:
+    return "".join(_TEX_ESCAPES.get(ch, ch) for ch in text)
+
+
+def _roman(i: int) -> str:
+    return ("One", "Two", "Three", "Four", "Five", "Six")[i - 1]
 TELEMETRY = ROOT / "results/cryptobench_official/TELEMETRY.json"
 SELECTION = ROOT / "results/architecture_sweep/TRAIN_ONLY_SELECTION.json"
 CEILING = ROOT / "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json"
@@ -155,6 +173,21 @@ def build() -> str:
                  f"{{{sel['selected']['pick_half_roc_auc']:.4f}}}")
         L.append(f"\\newcommand{{\\NTabCandidates}}"
                  f"{{{len(sel['candidates'])}}}")
+
+    if FIGPROV.exists():
+        # The captions, so that the figure under a paragraph in the manuscript
+        # and the figure under the same paragraph in the README say the same
+        # sentence. They state structure counts, a seed and a standard error;
+        # typed twice they would disagree within a revision, and the reader
+        # would have no way to tell which copy was current.
+        # Insertion order, not sorted: the generator draws them in the order
+        # the README numbers them, and a caption macro numbered differently
+        # from the image above it is worse than no macro.
+        prov = json.loads(FIGPROV.read_text())
+        for i, rec in enumerate((prov.get("figures") or {}).values(), 1):
+            if rec.get("caption"):
+                L.append(f"\\newcommand{{\\FigCaption{_roman(i)}}}"
+                         f"{{{_tex(rec['caption'])}}}")
 
     if LEDGER.exists():
         # How often the held-out fold has been scored, and by how many

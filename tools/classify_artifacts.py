@@ -152,6 +152,7 @@ def build() -> dict:
 FIGURES = ROOT / "figures"
 FIGURE_GENERATOR = "tools/make_official_figures.py"
 FIGURE_PROVENANCE = RESULTS / "official_fold/FIGURE_PROVENANCE.json"
+README = ROOT / "README.md"
 
 
 def _sha(p: Path) -> str:
@@ -210,6 +211,35 @@ def _figure_problems() -> list[str]:
             problems.append(
                 f"figures/{p.name}: figures/ holds images only; data and "
                 f"generators live in results/ and tools/")
+
+    problems.extend(_caption_problems(recorded))
+    return problems
+
+
+def _caption_problems(recorded: dict) -> list[str]:
+    """The caption under an image must be the one the generator emitted.
+
+    Neither figure carries a title any more: the descriptive text is a caption,
+    it sits under the image, and it states a structure count, a resample count,
+    a seed and a standard error. That makes it as perishable as any other number
+    here, so it is generated with the plot and checked like the plot. Checking
+    it needs no plotting library, which is why it lives in this gate and not in
+    ``make figures``.
+    """
+    problems: list[str] = []
+    if not recorded or not README.exists():
+        return problems
+    text = README.read_text()
+    for name, rec in sorted(recorded.items()):
+        caption = (rec or {}).get("caption")
+        if not caption:
+            problems.append(
+                f"figures/{name}: {FIGURE_PROVENANCE.name} records no caption, "
+                f"so the text under the image is not tied to the artifacts")
+        elif caption not in text:
+            problems.append(
+                f"figures/{name}: the caption in README.md is not the one "
+                f"{FIGURE_PROVENANCE.name} recorded; run make figures")
     return problems
 
 

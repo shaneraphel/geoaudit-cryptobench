@@ -3,6 +3,8 @@
 \usepackage{amssymb}
 \usepackage{geometry}
 \usepackage{booktabs}
+\usepackage{graphicx}
+\graphicspath{{../figures/}}
 \usepackage[hidelinks]{hyperref}
 \geometry{a4paper, margin=1in}
 
@@ -467,6 +469,20 @@ positive point estimate inside an interval that contains zero is not evidence of
 superiority, and we do not read it as such --- which is also why the ROC-AUC
 column here is reported as parity even though the field leads it.}
 \end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_official_fold_metrics.png}
+\caption{\FigCaptionOne{}}
+\label{fig:metrics}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_paired_vs_p2rank.png}
+\caption{\FigCaptionTwo{}}
+\label{fig:paired}
+\end{figure}
 
 \paragraph{The architecture was not chosen on the test fold.} \NCandidates{}
 fusion architectures were compared during development. Selecting among them by
