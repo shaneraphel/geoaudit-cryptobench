@@ -1135,6 +1135,103 @@ changes no interval in this read by more than a factor of
 absent here, and it is absent because the benchmark's own construction makes it
 so rather than because we checked and hoped.
 
+\subsection{Taking a score apart, and what the errors turn out to be}
+\label{sec:audit}
+Auditability has so far been an architectural claim: every table is a look-up, so
+in principle any score can be taken apart. In principle is not evidence, and a
+reviewer is entitled to ask what taking one apart actually yields. So we took
+apart the \AudCases{} case studies of Figure~\ref{fig:cases}, which a committed
+rule had already selected and which between them cover a chain both methods
+locate, one only we locate, one only P2Rank locates, and one neither locates.
+
+The decomposition is arithmetic rather than attribution. A residue's pre-gate
+score is $\sum_k m_k \, \hat p_k[a_k(i)]$ over all \NTabTables{} tables, so the
+per-table terms are the score and not a model of it; the gate's neighbourhood
+mean is carried as its own term, because spatial smoothing is part of what the
+detector does and folding it into geometry would overstate how local the evidence
+is. Each table addresses two wires, each wire derives from one of the \(43\)
+local quantities, and each quantity belongs to one of the descriptor families of
+Appendix~\ref{app:wires}, so the exact terms group into families with nothing
+interpolated in between. \AudTablesMixed{} of the \NTabTables{} tables pair quantities
+from two different families and have their contribution split evenly, which is a
+stated convention and not a measurement: there is no fact about which half of a
+pairwise cell belongs to which wire. What is decomposed is each residue's
+deviation from its own chain's mean, because tables with large multiplicities
+contribute the same amount to every residue in a chain and only the deviation
+orders them. The reconstruction agrees with the published per-residue scores to a
+relative \AudReproErr{}, which is the warrant for the previous sentences: a
+decomposition that did not add up to the scores the fold was scored with would be
+a decomposition of something else.
+
+One residue makes the shape of the output concrete. The highest-scoring residue
+of \AudEgUnit{} is \AudEgRes{}, ranked \AudEgRank{} of \AudEgOf{}, and the single
+largest term in its score is a table reading \AudEgQA{} against \AudEgQB{}: the
+residue sits in quartile \AudEgLevA{} of the first and quartile \AudEgLevB{} of
+the second, a cell in which \AudEgRate{} of training residues were cryptic
+binding residues, or \AudEgTimesBase{} times the fold's base rate, and
+\AudEgMult{} of the \NTabTables{} tables happen to be that same pair. That is a
+complete statement of one contribution in units a curator can check against a
+structure, and there is no step in it that requires trusting the model.
+
+Aggregating over every residue of the four chains rather than the handful worth
+displaying gives two findings, and the second is the one we did not expect.
+Table~\ref{tab:audit} reports the mean contribution of each coarse family by
+residue class, pooled with equal weight per chain because the chains run 96 to 297
+residues and residue-weighting would let the largest decide the pattern. The
+first finding is that what separates a call from a miss is local geometry, by
+\AudGeomMargin{}, while the smoothing term separates them by only
+\AudGateMargin{}; and on the labelled residues we miss, the smoothing term
+(\AudMissGate{}) supplies more of the score than geometry does (\AudMissGeom{}).
+The misses are therefore not residues the field scored wrongly. They are residues
+where it had almost no local evidence of its own and scored them only because
+their neighbours scored, which locates where the construction runs out.
+
+The second finding concerns the false positives. Residues we call that the labels
+do not confirm decompose almost identically to the ones the labels do confirm: no
+family separates them by more than \AudGapToFP{}, against \AudGapToMiss{} between
+a call and a miss, a factor of \AudGapRatio{}. Whatever those residues are, they
+are not the field reading something different. By every family it measures they
+are pocket-like, which is what one would expect if an apo structure's labelled
+cryptic residues are the subset some holo partner happened to reveal rather than
+every residue capable of forming the site. This audit cannot settle that
+question, and four chains selected for how the two methods compared on them are
+not a fold-level estimate of anything. What it can do is say that the errors are
+not arbitrary and point at the residues a curator would have to look at, which is
+the practical content of the auditability claim and is not available from a score
+alone.
+
+\begin{table}[t]
+\centering
+\caption{Mean contribution to a residue's score above its own chain's mean, by
+descriptor family and residue class, over every residue of the \AudCases{} case
+studies of Figure~\ref{fig:cases} and pooled with equal weight per chain. The
+terms are exact: they are the per-table contributions themselves, grouped by
+family, and they sum to the residue's deviation. Two things are visible. Local
+geometry separates a call from a miss by \AudGeomMargin{} while the smoothing term
+separates them by \AudGateMargin{}, and on the residues we miss the smoothing term
+supplies more of the score than geometry does, so the misses are residues the
+field had little local evidence about rather than residues it read wrongly. And
+the residues we call that the labels do not confirm decompose almost identically
+to the ones they do: no family separates those two classes by more than
+\AudGapToFP{}, against \AudGapToMiss{} between a call and a miss.}
+\label{tab:audit}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Residue class & $n$ & Geometric & Topological & Density & Chemical & Smoothing \\
+\midrule
+Called, labelled     & \AudHitN{}  & \AudHitGeom{}  & \AudHitTopo{}
+                     & \AudHitDens{} & \AudHitChem{} & \AudHitGate{} \\
+Called, not labelled & \AudFPN{}   & \AudFPGeom{}   & \AudFPTopo{}
+                     & \AudFPDens{}  & \AudFPChem{}  & \AudFPGate{} \\
+Labelled, missed     & \AudMissN{} & \AudMissGeom{} & \AudMissTopo{}
+                     & \AudMissDens{} & \AudMissChem{} & \AudMissGate{} \\
+Neither              & \AudRestN{} & \AudRestGeom{} & \AudRestTopo{}
+                     & \AudRestDens{} & \AudRestChem{} & \AudRestGate{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{\GenTotal{} invariants from two generators, and a ceiling the
 counting field declined to collect}
 \label{sec:banks}
@@ -1206,64 +1303,84 @@ margin, and the held-out fold was not read to establish that.
 
 \subsection{What the constants are worth, and what the method costs}
 \label{sec:sensitivity}
-Three constants in the counting field were fixed early and carried through every
+Four constants in the counting field were fixed early and carried through every
 experiment above: four quantisation levels, ranking within a chain rather than
-across the corpus, and a fan-out cap of \TabCap{}. A reader is entitled to ask
-whether the quaternary choice is load-bearing or decorative, and the honest way
-to answer is to vary each on the training partition alone, under the same seeded
-cluster-disjoint halving that selected the published configuration, and to
-report the result whichever way it falls. Table~\ref{tab:sensitivity} does that
-over \SensSettings{} settings. The sweep re-implements the digitiser and the
-integer fusion so that the level can be a parameter rather than the module
-constant the shipped field is compiled against, and it re-derives the halving
-from the manifest; the row that holds every constant at the published setting
-lands on \SensLevelsFour{} --- not to four places but to every digit of the
-selection artifact --- which is what licenses reading the other seven rows as
-the effect of the constant that moved.
+across the corpus, a fan-out cap of \TabCap{}, and a ridge of \TabRidge{}. A
+reader is entitled to ask whether any of them is load-bearing or all of them are
+decorative, and the honest way to answer is to vary each on the training
+partition alone, under the same seeded cluster-disjoint halving that selected the
+published configuration, and to report the result whichever way it falls.
+Table~\ref{tab:sensitivity} does that over \SensSettings{} settings. The sweep
+re-implements the digitiser and the integer fusion so that the level can be a
+parameter rather than the module constant the shipped field is compiled against,
+and it re-derives the halving from the manifest; the row that holds every
+constant at the published setting lands on \SensLevelsFour{} --- not to four
+places but to every digit of the selection artifact --- which is what licenses
+reading the other nine rows as the effect of the constant that moved. Every row
+differs from the published configuration in exactly one constant, so no spread in
+the table is shared between two of them.
 
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{@{}llll@{}}
+\begin{tabular}{@{}lllll@{}}
 \toprule
-Levels & Ranking & Fan-out cap & Selection-half ROC-AUC\\
+Levels & Ranking & Fan-out cap & Ridge & Selection-half ROC-AUC\\
 \midrule
-3 & within-chain & \TabCap{} & \SensLevelsThree{}\\
-4 & within-chain & \TabCap{} & \SensLevelsFour{} (published)\\
-5 & within-chain & \TabCap{} & \SensLevelsFive{}\\
+3 & within-chain & \TabCap{} & \TabRidge{} & \SensLevelsThree{}\\
+4 & within-chain & \TabCap{} & \TabRidge{} & \SensLevelsFour{} (published)\\
+5 & within-chain & \TabCap{} & \TabRidge{} & \SensLevelsFive{}\\
 \addlinespace
-3 & pooled & \TabCap{} & \SensLevelsThreePooled{}\\
-4 & pooled & \TabCap{} & \SensLevelsFourPooled{}\\
-5 & pooled & \TabCap{} & \SensLevelsFivePooled{}\\
+3 & pooled & \TabCap{} & \TabRidge{} & \SensLevelsThreePooled{}\\
+4 & pooled & \TabCap{} & \TabRidge{} & \SensLevelsFourPooled{}\\
+5 & pooled & \TabCap{} & \TabRidge{} & \SensLevelsFivePooled{}\\
 \addlinespace
-4 & within-chain & 16 & \SensCapSixteen{}\\
-4 & within-chain & 64 & \SensCapSixtyFour{}\\
+4 & within-chain & 16 & \TabRidge{} & \SensCapSixteen{}\\
+4 & within-chain & 64 & \TabRidge{} & \SensCapSixtyFour{}\\
+\addlinespace
+4 & within-chain & \TabCap{} & \TabRidgeMidValue{} & \TabRidgeMid{}\\
+4 & within-chain & \TabCap{} & \TabRidgeHighValue{} & \TabRidgeHigh{}\\
 \bottomrule
 \end{tabular}
-\caption{Quantisation and fan-out sensitivity, measured on the selection half of
-the training partition. The published configuration was frozen before this sweep
-and is not revised by it. Every row recompiles the cell array from scratch; the
-level-aware code is asserted against the shipped module at four levels before
-the sweep begins.}
+\caption{Quantisation, fan-out and ridge sensitivity, measured on the selection
+half of the training partition. The published configuration was frozen before
+this sweep and is not revised by it. Every row varies exactly one constant from
+that configuration, and every row recompiles the cell array from scratch; the
+level-aware code is asserted against the shipped module at four levels before the
+sweep begins.}
 \label{tab:sensitivity}
 \end{table}
 
 The spread over all \SensSettings{} settings is \SensRange{} ROC-AUC, from
 \SensWorst{} to \SensBest{}, so nothing here is fragile: the worst setting still
-scores above the \FisherAll{} linear ceiling of the invariants it reads. Two
-things are nevertheless legible. Ranking within a chain beats ranking against
-the pooled corpus at every level, which is what the construction predicts, since
-a digit is meant to say where a residue sits on its own protein rather than how
-large that protein's values happen to be. And four levels is not an aesthetic
+scores above the \FisherAll{} linear ceiling of the invariants it reads. Taken one
+constant at a time, three of the four turn out to be nearly decorative --- the
+level count is worth \SensLevelsSpread{}, the fan-out cap \SensCapSpread{}, and
+the ridge \SensRidgeSpread{} across a tenfold range, so no result in this paper
+rests on having tuned them.
+
+The fourth is the one the construction actually argues for. Ranking within a chain
+rather than against the pooled corpus is worth \SensRankingSpread{}, the largest
+effect in the table by a factor of \SensRankingOverNext{}, and it wins at every
+level. The cells say why: pooled quantisation leaves
+\SensLevelsFourPooledEmpty{}\% of cells never addressed against
+\SensLevelsFourEmpty{}\% within-chain, because a wire pooled over chains of 57 and
+307 residues spends its levels distinguishing chain sizes rather than residues. A
+digit is meant to say where a residue sits on its own protein, and the sweep
+prices what that decision is worth. Four levels is likewise not an aesthetic
 preference: three levels lose \SensLevelsThreeDelta{} and five lose
-\SensLevelsFiveDelta{}, the latter while raising the never-addressed cell fraction from \SensLevelsFourEmpty{}\% to
-\SensLevelsFiveEmpty{}\%. The quaternary alphabet sits at the turn where a finer
-digit stops buying resolution and starts buying empty cells --- the same
-coverage-against-expressiveness exchange that Section~\ref{sec:banks} found by
-widening the bank instead of the alphabet. The published configuration happens
-to be the best of the eight, which is a fact about the sweep and not a claim
-about it: it was chosen before the sweep ran, and had a different row come out
-on top it would have been reported and not adopted.
+\SensLevelsFiveDelta{}, the latter while raising the never-addressed cell fraction
+from \SensLevelsFourEmpty{}\% to \SensLevelsFiveEmpty{}\%. The quaternary alphabet
+sits at the turn where a finer digit stops buying resolution and starts buying
+empty cells --- the same coverage-against-expressiveness exchange that
+Section~\ref{sec:banks} found by widening the bank instead of the alphabet. The
+ridge is the one place the pre-gate and post-gate readings disagree: raising it
+from \TabRidgeLowValue{} to \TabRidgeHighValue{} improves the raw score and
+degrades the gated one, so a sweep that reported only the ungated field would have
+recommended the opposite constant. The published configuration happens to be the
+best of the \SensSettings{}, which is a fact about the sweep and not a claim about
+it: it was chosen before the sweep ran, and had a different row come out on top it
+would have been reported and not adopted.
 
 Cost is the other question a table-based method invites, and it is the one place
 the construction is unambiguously ahead. Compilation is a single pass of
@@ -1273,9 +1390,12 @@ JSON, of which \NTabUsedFullFold{} of \NTabTables{} tables carry a non-zero
 multiplicity. At inference a residue costs \NTabTables{} table look-ups and an
 integer dot product, and no floating-point model is evaluated at all: the median
 is \TabRuntime{}~s per chain against P2Rank's \PTwoRuntime{}~s, a factor of
-\TabSpeedup{}. The ridge is not delicate either --- \TabRidgeLowValue{},
-\TabRidgeMidValue{} and \TabRidgeHighValue{} give \TabRidgeLow{},
-\TabRidgeMid{} and \TabRidgeHigh{} on the same selection half.
+\TabSpeedup{}. That factor is not a controlled measurement and should not be read
+as one: the two methods were timed on the same machine but not under a pinned
+thread count or a common timing boundary, and P2Rank's figure includes JVM startup
+that a served deployment would amortise. The direction is not in doubt --- one side
+evaluates no floating-point model --- but the magnitude is an observation about how
+we happened to invoke them.
 
 \section{Limitations}
 The comparison covers one trained baseline, executed locally; PocketMiner could

@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 21,
-    "cited": 36,
+    "cited": 37,
     "superseded": 4,
     "fold_access": 7
   },
-  "n_artifacts": 68,
+  "n_artifacts": 69,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -252,7 +252,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.sensitivity_sweep.v1",
-      "bytes": 4895
+      "bytes": 6060
     },
     {
       "artifact": "results/architecture_sweep/THRESHOLD_GATE.json",
@@ -330,6 +330,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.gf4_allele_ablation.v1",
       "bytes": 3675
+    },
+    {
+      "artifact": "results/official_fold/AUDIT_DECOMPOSITION.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.audit_decomposition.v1",
+      "bytes": 147692
     },
     {
       "artifact": "results/official_fold/CASE_STUDIES.json",

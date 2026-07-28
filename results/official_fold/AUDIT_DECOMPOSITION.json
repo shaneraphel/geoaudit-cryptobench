@@ -1,0 +1,4564 @@
+{
+  "schema": "geoaudit.audit_decomposition.v1",
+  "clinical_grade": false,
+  "what_separates_a_hit_from_a_miss": {
+    "mean_contribution_by_residue_class": {
+      "called and labelled": {
+        "n_chains": 4,
+        "n_residues": 31,
+        "chemical": 1.238,
+        "density field": 2.216,
+        "geometric": 18.278,
+        "spatial smoothing": 10.074,
+        "topological": -5.987
+      },
+      "called and not labelled": {
+        "n_chains": 4,
+        "n_residues": 40,
+        "chemical": 1.333,
+        "density field": 1.95,
+        "geometric": 17.46,
+        "spatial smoothing": 8.809,
+        "topological": -5.533
+      },
+      "labelled and missed": {
+        "n_chains": 4,
+        "n_residues": 67,
+        "chemical": 0.043,
+        "density field": -0.36,
+        "geometric": 3.047,
+        "spatial smoothing": 5.679,
+        "topological": 0.0
+      },
+      "neither": {
+        "n_chains": 4,
+        "n_residues": 642,
+        "chemical": -0.167,
+        "density field": -0.148,
+        "geometric": -1.689,
+        "spatial smoothing": -1.256,
+        "topological": 0.36
+      }
+    },
+    "pooling": "equal weight per chain. The four chains run 96 to 297 residues, so residue-weighting would let the largest one decide what the pattern is",
+    "geometric_margin_of_hits_over_misses": 15.231,
+    "spatial_smoothing_margin_of_hits_over_misses": 4.395,
+    "on_missed_positives_the_gate_outweighs_local_geometry": true,
+    "reading": "labelled residues the field calls are carried by local geometry, and labelled residues it misses are carried by the neighbourhood mean instead: on the misses the smoothing term supplies more of the score than the geometry does. The misses are not residues the field scored wrongly, they are residues where it had little evidence of its own and scored them because their neighbours scored. That is a statement about where the construction runs out, and it is the kind of statement a per-residue score alone cannot make"
+  },
+  "what_the_false_positives_are_made_of": {
+    "true_positive_minus_false_positive_by_family": {
+      "chemical": -0.095,
+      "density field": 0.266,
+      "geometric": 0.818,
+      "spatial smoothing": 1.265,
+      "topological": -0.454
+    },
+    "true_positive_minus_missed_by_family": {
+      "chemical": 1.195,
+      "density field": 2.576,
+      "geometric": 15.231,
+      "spatial smoothing": 4.395,
+      "topological": -5.987
+    },
+    "largest_family_gap_to_false_positives": 1.265,
+    "largest_family_gap_to_missed_positives": 15.231,
+    "ratio": 12.0,
+    "reading": "the residues the field calls and the labels do not confirm decompose almost identically to the ones the labels do confirm: no family separates them by more than 1.3, against 15.2 between a call and a miss. Whatever the false positives are, they are not the field reading something different. They are pocket-like residues by every family it measures, which is what would be expected if an apo structure's labelled cryptic residues are the subset a holo partner happened to reveal rather than every residue capable of forming the site. The audit cannot decide that question, but it can say the errors are not arbitrary, and it localises where a curator would have to look",
+    "caveat": "four chains, chosen for how the two methods compared on them and not for label quality. This is the pattern in the committed cases, not a fold-level estimate"
+  },
+  "generated_at": "2026-07-29T05:04:41+0800",
+  "question": "on residues this detector got right and wrong, which descriptor families supplied the score, and by how much",
+  "what_is_decomposed": "the residue's deviation from its own chain's mean score. The absolute score is dominated by tables with large multiplicities that contribute the same amount to every residue in the chain; only the deviation determines the ranking, and the ranking is what the detector is",
+  "exactness": "the per-table contributions are the score by construction, not an attribution of it: S(i) is the sum of m_k times the addressed cell's positive rate over all tables. The family totals are therefore the deviation exactly, and the read fails if they are not",
+  "cases_are_not_chosen_here": {
+    "source": "results/official_fold/CASE_STUDIES.json",
+    "n_cases": 4,
+    "case_ids": [
+      "1zm0_A",
+      "2d05_A",
+      "6bty_B",
+      "1bzj_A"
+    ],
+    "why": "selecting which residues to explain after seeing which explanations read well would make this a demonstration rather than an audit"
+  },
+  "residues_are_chosen_by_rule": [
+    "the highest-scoring residue we called that is labelled",
+    "the highest-scoring residue we called that is not labelled",
+    "the labelled residue we scored lowest",
+    "the highest-scoring residue we called and P2Rank did not",
+    "the highest-scoring residue P2Rank called and we did not"
+  ],
+  "family_assignment": {
+    "source": "pocket_bench.methods.algebraic_descriptors.GROUPS, the same grouping Appendix A documents",
+    "families": [
+      "G1 surface exposure",
+      "G2 local spectral geometry",
+      "G3 density field calculus",
+      "G4 ultrametric structure",
+      "G5 curvature and anisotropy",
+      "G6 global position",
+      "physicochemical constants",
+      "training-fold residue propensity",
+      "gate (neighbourhood mean)"
+    ],
+    "coarse_rollup": {
+      "G1 surface exposure": "geometric",
+      "G5 curvature and anisotropy": "geometric",
+      "G6 global position": "geometric",
+      "G2 local spectral geometry": "topological",
+      "G4 ultrametric structure": "topological",
+      "G3 density field calculus": "density field",
+      "physicochemical constants": "chemical",
+      "training-fold residue propensity": "chemical",
+      "gate (neighbourhood mean)": "spatial smoothing"
+    },
+    "n_tables": 5152,
+    "n_tables_spanning_two_families": 4435,
+    "mixed_table_convention": "a table whose two wires come from different families has its contribution split evenly between them. There is no fact about which half of a pairwise cell belongs to which wire, so the split is a stated convention rather than a measurement"
+  },
+  "reconstruction": {
+    "checked_against": "results/cryptobench_official/predictions/table_field.json",
+    "worst_relative_error": 5.366689798564568e-16,
+    "tolerance": 1e-06,
+    "agrees": true,
+    "why_it_matters": "a decomposition that does not add up to the score the fold was scored with is a decomposition of something else"
+  },
+  "test_fold_read_index": null,
+  "why_this_is_not_an_indexed_read": "it produces no statistic about the fold and no quantity that could be compared between two methods. It explains calls that earlier reads already froze, on units a committed tool had already selected, and it cannot be used to choose anything",
+  "cases": [
+    {
+      "unit_id": "1zm0_A",
+      "case": "both_locate",
+      "mean_contribution_by_residue_class": {
+        "called and labelled": {
+          "n": 8,
+          "topological": -1.827,
+          "geometric": 13.345,
+          "chemical": 1.831,
+          "density field": -1.001,
+          "spatial smoothing": 8.984
+        },
+        "called and not labelled": {
+          "n": 1,
+          "topological": -6.557,
+          "geometric": 20.925,
+          "chemical": 3.728,
+          "density field": -0.964,
+          "spatial smoothing": 7.977
+        },
+        "labelled and missed": {
+          "n": 3,
+          "topological": 0.492,
+          "geometric": 0.577,
+          "chemical": 2.744,
+          "density field": -1.766,
+          "spatial smoothing": 11.537
+        },
+        "neither": {
+          "n": 84,
+          "topological": 0.234,
+          "geometric": -1.541,
+          "chemical": -0.317,
+          "density field": 0.17,
+          "spatial smoothing": -1.363
+        }
+      },
+      "why_this_case": "both methods locate the site",
+      "n_residues": 96,
+      "n_labelled_cryptic": 11,
+      "n_called_by_us": 9,
+      "n_called_by_p2rank": 9,
+      "reconstruction_relative_error": 5.366689798564568e-16,
+      "residues": [
+        {
+          "resnum": 277,
+          "role": "true positive",
+          "why_this_residue": "the highest-scoring residue we called that is a labelled cryptic binding residue",
+          "is_labelled_cryptic": true,
+          "we_called_it": true,
+          "p2rank_called_it": true,
+          "score": 316.9969,
+          "chain_mean_score": 292.6476,
+          "score_rank_in_chain": 2,
+          "of_residues": 96,
+          "deviation_from_chain_mean": 24.3493,
+          "by_family": {
+            "G1 surface exposure": 11.7219,
+            "G6 global position": 6.7831,
+            "G5 curvature and anisotropy": 5.3257,
+            "G2 local spectral geometry": -3.8404,
+            "training-fold residue propensity": 3.4583,
+            "G4 ultrametric structure": -3.2973,
+            "gate (neighbourhood mean)": 2.0583,
+            "G3 density field calculus": 1.2736,
+            "physicochemical constants": 0.8662
+          },
+          "by_coarse_family": {
+            "geometric": 23.8307,
+            "topological": -7.1377,
+            "chemical": 4.3244,
+            "spatial smoothing": 2.0583,
+            "density field": 1.2736
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~d14",
+                "concavity~d20"
+              ],
+              "quantities": [
+                "void",
+                "concavity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2172,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.77,
+              "multiplicity": 22,
+              "contribution_above_chain_mean": 3.3972
+            },
+            {
+              "wires": [
+                "void~k14",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "void",
+                "depth_rank"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2505,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.35,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 3.0725
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1269,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.2,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.1925
+            },
+            {
+              "wires": [
+                "volume~sd14",
+                "concavity@10"
+              ],
+              "quantities": [
+                "volume",
+                "concavity"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1655,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.87,
+              "multiplicity": 20,
+              "contribution_above_chain_mean": 2.1623
+            },
+            {
+              "wires": [
+                "propensity@6",
+                "depth_rank~d20"
+              ],
+              "quantities": [
+                "propensity",
+                "depth_rank"
+              ],
+              "families": [
+                "training-fold residue propensity",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1511,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.62,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 2.1137
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1861,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.23,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": 1.9994
+            }
+          ]
+        },
+        {
+          "resnum": 254,
+          "role": "false positive",
+          "why_this_residue": "the highest-scoring residue we called that is not labelled",
+          "is_labelled_cryptic": false,
+          "we_called_it": true,
+          "p2rank_called_it": true,
+          "score": 317.7569,
+          "chain_mean_score": 292.6476,
+          "score_rank_in_chain": 1,
+          "of_residues": 96,
+          "deviation_from_chain_mean": 25.1092,
+          "by_family": {
+            "G1 surface exposure": 13.9806,
+            "gate (neighbourhood mean)": 7.9772,
+            "G5 curvature and anisotropy": 5.2071,
+            "G4 ultrametric structure": -3.4662,
+            "G2 local spectral geometry": -3.0907,
+            "physicochemical constants": 2.151,
+            "G6 global position": 1.7372,
+            "training-fold residue propensity": 1.5772,
+            "G3 density field calculus": -0.9642
+          },
+          "by_coarse_family": {
+            "geometric": 20.9249,
+            "spatial smoothing": 7.9772,
+            "topological": -6.5569,
+            "chemical": 3.7282,
+            "density field": -0.9642
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~d14",
+                "concavity~d20"
+              ],
+              "quantities": [
+                "void",
+                "concavity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2172,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.77,
+              "multiplicity": 22,
+              "contribution_above_chain_mean": 3.3972
+            },
+            {
+              "wires": [
+                "concavity~k20",
+                "void@14"
+              ],
+              "quantities": [
+                "concavity",
+                "void"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2024,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.51,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 3.3608
+            },
+            {
+              "wires": [
+                "ball_radius~k14",
+                "void~d14"
+              ],
+              "quantities": [
+                "ball_radius",
+                "void"
+              ],
+              "families": [
+                "G4 ultrametric structure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2088,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.63,
+              "multiplicity": -23,
+              "contribution_above_chain_mean": -2.805
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1404,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.44,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.6223
+            },
+            {
+              "wires": [
+                "hess_bur@14",
+                "void@6"
+              ],
+              "quantities": [
+                "hess_bur",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2019,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.51,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 2.0128
+            },
+            {
+              "wires": [
+                "rho_rank_ball~d14",
+                "concavity"
+              ],
+              "quantities": [
+                "rho_rank_ball",
+                "concavity"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2414,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.19,
+              "multiplicity": 11,
+              "contribution_above_chain_mean": 1.9659
+            }
+          ]
+        },
+        {
+          "resnum": 287,
+          "role": "near miss",
+          "why_this_residue": "the labelled residue we scored highest without calling: the one the top-9% budget cut off",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": true,
+          "score": 309.5373,
+          "chain_mean_score": 292.6476,
+          "score_rank_in_chain": 10,
+          "of_residues": 96,
+          "deviation_from_chain_mean": 16.8896,
+          "by_family": {
+            "gate (neighbourhood mean)": 10.6137,
+            "physicochemical constants": 6.521,
+            "G2 local spectral geometry": -2.557,
+            "G3 density field calculus": 1.7902,
+            "G1 surface exposure": 1.0925,
+            "G5 curvature and anisotropy": -0.7498,
+            "G4 ultrametric structure": 0.214,
+            "G6 global position": -0.0641,
+            "training-fold residue propensity": 0.0291
+          },
+          "by_coarse_family": {
+            "spatial smoothing": 10.6137,
+            "chemical": 6.5501,
+            "topological": -2.3429,
+            "density field": 1.7902,
+            "geometric": 0.2786
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "normal_div~sd6",
+                "planarity@20"
+              ],
+              "quantities": [
+                "normal_div",
+                "planarity"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1326,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.3,
+              "multiplicity": 27,
+              "contribution_above_chain_mean": 2.0286
+            },
+            {
+              "wires": [
+                "concavity~sd14",
+                "volume@14"
+              ],
+              "quantities": [
+                "concavity",
+                "volume"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "physicochemical constants"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1513,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.63,
+              "multiplicity": 18,
+              "contribution_above_chain_mean": 1.6377
+            },
+            {
+              "wires": [
+                "angle_deficit~sd14",
+                "contact_order~sd14"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "contact_order"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1371,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.38,
+              "multiplicity": 19,
+              "contribution_above_chain_mean": 1.5124
+            },
+            {
+              "wires": [
+                "exposure",
+                "grad_radial@20"
+              ],
+              "quantities": [
+                "exposure",
+                "grad_radial"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.143,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.48,
+              "multiplicity": 17,
+              "contribution_above_chain_mean": 1.4229
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.0363,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 0.63,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": -1.1466
+            },
+            {
+              "wires": [
+                "hba",
+                "grad_radial@20"
+              ],
+              "quantities": [
+                "hba",
+                "grad_radial"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1198,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.08,
+              "multiplicity": 18,
+              "contribution_above_chain_mean": 1.1235
+            }
+          ]
+        },
+        {
+          "resnum": 262,
+          "role": "deepest miss",
+          "why_this_residue": "the labelled residue we scored lowest, where the field saw nothing",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": true,
+          "score": 301.2568,
+          "chain_mean_score": 292.6476,
+          "score_rank_in_chain": 22,
+          "of_residues": 96,
+          "deviation_from_chain_mean": 8.6092,
+          "by_family": {
+            "gate (neighbourhood mean)": 10.1686,
+            "G3 density field calculus": -5.3834,
+            "G6 global position": 2.2665,
+            "G5 curvature and anisotropy": 1.8333,
+            "training-fold residue propensity": 0.9673,
+            "G2 local spectral geometry": -0.8922,
+            "G1 surface exposure": -0.5703,
+            "G4 ultrametric structure": 0.4558,
+            "physicochemical constants": -0.2364
+          },
+          "by_coarse_family": {
+            "spatial smoothing": 10.1686,
+            "density field": -5.3834,
+            "geometric": 3.5295,
+            "chemical": 0.7309,
+            "topological": -0.4364
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.135,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.34,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.4505
+            },
+            {
+              "wires": [
+                "normal_div~sd6",
+                "planarity@20"
+              ],
+              "quantities": [
+                "normal_div",
+                "planarity"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1169,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.03,
+              "multiplicity": 27,
+              "contribution_above_chain_mean": 1.6048
+            },
+            {
+              "wires": [
+                "fiedler~sd20",
+                "void~k20"
+              ],
+              "quantities": [
+                "fiedler",
+                "void"
+              ],
+              "families": [
+                "G2 local spectral geometry",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1526,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.65,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 1.552
+            },
+            {
+              "wires": [
+                "void@14",
+                "normal_div@26"
+              ],
+              "quantities": [
+                "void",
+                "normal_div"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1276,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.22,
+              "multiplicity": 20,
+              "contribution_above_chain_mean": 1.3877
+            },
+            {
+              "wires": [
+                "void~k20",
+                "sphericity@26"
+              ],
+              "quantities": [
+                "void",
+                "sphericity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                2
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1626,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.82,
+              "multiplicity": 11,
+              "contribution_above_chain_mean": 1.1669
+            },
+            {
+              "wires": [
+                "kd@10",
+                "void~d20"
+              ],
+              "quantities": [
+                "kd",
+                "void"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1137,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 1.97,
+              "multiplicity": -19,
+              "contribution_above_chain_mean": -1.0667
+            }
+          ]
+        },
+        {
+          "resnum": 325,
+          "role": "we called it, P2Rank did not",
+          "why_this_residue": "the highest-scoring residue on which the two methods disagree in our favour",
+          "is_labelled_cryptic": true,
+          "we_called_it": true,
+          "p2rank_called_it": false,
+          "score": 316.2903,
+          "chain_mean_score": 292.6476,
+          "score_rank_in_chain": 4,
+          "of_residues": 96,
+          "deviation_from_chain_mean": 23.6427,
+          "by_family": {
+            "G1 surface exposure": 14.3163,
+            "G6 global position": 7.568,
+            "G5 curvature and anisotropy": 4.0245,
+            "training-fold residue propensity": 4.0025,
+            "G2 local spectral geometry": -3.2835,
+            "G4 ultrametric structure": -3.0396,
+            "gate (neighbourhood mean)": 0.3696,
+            "physicochemical constants": -0.2901,
+            "G3 density field calculus": -0.0251
+          },
+          "by_coarse_family": {
+            "geometric": 25.9088,
+            "topological": -6.3231,
+            "chemical": 3.7125,
+            "spatial smoothing": 0.3696,
+            "density field": -0.0251
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~d14",
+                "concavity~d20"
+              ],
+              "quantities": [
+                "void",
+                "concavity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2172,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.77,
+              "multiplicity": 22,
+              "contribution_above_chain_mean": 3.3972
+            },
+            {
+              "wires": [
+                "concavity~k20",
+                "void@14"
+              ],
+              "quantities": [
+                "concavity",
+                "void"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2024,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.51,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 3.3608
+            },
+            {
+              "wires": [
+                "void~k14",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "void",
+                "depth_rank"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2505,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.35,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 3.0725
+            },
+            {
+              "wires": [
+                "ball_radius~k14",
+                "void~d14"
+              ],
+              "quantities": [
+                "ball_radius",
+                "void"
+              ],
+              "families": [
+                "G4 ultrametric structure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2088,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.63,
+              "multiplicity": -23,
+              "contribution_above_chain_mean": -2.805
+            },
+            {
+              "wires": [
+                "depth_rank~k14",
+                "void@10"
+              ],
+              "quantities": [
+                "depth_rank",
+                "void"
+              ],
+              "families": [
+                "G6 global position",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2244,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.9,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 2.3346
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1269,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.2,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.1925
+            }
+          ]
+        },
+        {
+          "resnum": 287,
+          "role": "P2Rank called it, we did not",
+          "why_this_residue": "the highest-scoring residue P2Rank called and we did not",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": true,
+          "score": 309.5373,
+          "chain_mean_score": 292.6476,
+          "score_rank_in_chain": 10,
+          "of_residues": 96,
+          "deviation_from_chain_mean": 16.8896,
+          "by_family": {
+            "gate (neighbourhood mean)": 10.6137,
+            "physicochemical constants": 6.521,
+            "G2 local spectral geometry": -2.557,
+            "G3 density field calculus": 1.7902,
+            "G1 surface exposure": 1.0925,
+            "G5 curvature and anisotropy": -0.7498,
+            "G4 ultrametric structure": 0.214,
+            "G6 global position": -0.0641,
+            "training-fold residue propensity": 0.0291
+          },
+          "by_coarse_family": {
+            "spatial smoothing": 10.6137,
+            "chemical": 6.5501,
+            "topological": -2.3429,
+            "density field": 1.7902,
+            "geometric": 0.2786
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "normal_div~sd6",
+                "planarity@20"
+              ],
+              "quantities": [
+                "normal_div",
+                "planarity"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1326,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.3,
+              "multiplicity": 27,
+              "contribution_above_chain_mean": 2.0286
+            },
+            {
+              "wires": [
+                "concavity~sd14",
+                "volume@14"
+              ],
+              "quantities": [
+                "concavity",
+                "volume"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "physicochemical constants"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1513,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.63,
+              "multiplicity": 18,
+              "contribution_above_chain_mean": 1.6377
+            },
+            {
+              "wires": [
+                "angle_deficit~sd14",
+                "contact_order~sd14"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "contact_order"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1371,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.38,
+              "multiplicity": 19,
+              "contribution_above_chain_mean": 1.5124
+            },
+            {
+              "wires": [
+                "exposure",
+                "grad_radial@20"
+              ],
+              "quantities": [
+                "exposure",
+                "grad_radial"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.143,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.48,
+              "multiplicity": 17,
+              "contribution_above_chain_mean": 1.4229
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.0363,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 0.63,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": -1.1466
+            },
+            {
+              "wires": [
+                "hba",
+                "grad_radial@20"
+              ],
+              "quantities": [
+                "hba",
+                "grad_radial"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1198,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.08,
+              "multiplicity": 18,
+              "contribution_above_chain_mean": 1.1235
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "2d05_A",
+      "case": "table_field_only",
+      "mean_contribution_by_residue_class": {
+        "called and labelled": {
+          "n": 20,
+          "topological": -3.713,
+          "geometric": 24.865,
+          "chemical": 1.309,
+          "density field": 1.644,
+          "spatial smoothing": 15.857
+        },
+        "called and not labelled": {
+          "n": 3,
+          "topological": -6.856,
+          "geometric": 24.994,
+          "chemical": -1.711,
+          "density field": 3.738,
+          "spatial smoothing": 12.289
+        },
+        "labelled and missed": {
+          "n": 2,
+          "topological": -1.612,
+          "geometric": 10.037,
+          "chemical": -1.627,
+          "density field": 0.461,
+          "spatial smoothing": 7.831
+        },
+        "neither": {
+          "n": 234,
+          "topological": 0.419,
+          "geometric": -2.531,
+          "chemical": -0.076,
+          "density field": -0.192,
+          "spatial smoothing": -1.58
+        }
+      },
+      "why_this_case": "the table field locates the site and P2Rank does not",
+      "n_residues": 259,
+      "n_labelled_cryptic": 22,
+      "n_called_by_us": 23,
+      "n_called_by_p2rank": 19,
+      "reconstruction_relative_error": 4.728189133050206e-16,
+      "residues": [
+        {
+          "resnum": 65,
+          "role": "true positive",
+          "why_this_residue": "the highest-scoring residue we called that is a labelled cryptic binding residue",
+          "is_labelled_cryptic": true,
+          "we_called_it": true,
+          "p2rank_called_it": true,
+          "score": 240.4448,
+          "chain_mean_score": 182.4916,
+          "score_rank_in_chain": 1,
+          "of_residues": 259,
+          "deviation_from_chain_mean": 57.9532,
+          "by_family": {
+            "G1 surface exposure": 24.5232,
+            "G6 global position": 14.4501,
+            "gate (neighbourhood mean)": 13.098,
+            "G5 curvature and anisotropy": 10.0999,
+            "G2 local spectral geometry": -7.0445,
+            "G4 ultrametric structure": -5.5796,
+            "training-fold residue propensity": 4.7592,
+            "G3 density field calculus": 4.6222,
+            "physicochemical constants": -0.9753
+          },
+          "by_coarse_family": {
+            "geometric": 49.0731,
+            "spatial smoothing": 13.098,
+            "topological": -12.624,
+            "density field": 4.6222,
+            "chemical": 3.7839
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~d14",
+                "concavity~d20"
+              ],
+              "quantities": [
+                "void",
+                "concavity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2172,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.77,
+              "multiplicity": 22,
+              "contribution_above_chain_mean": 3.5078
+            },
+            {
+              "wires": [
+                "concavity~k20",
+                "void@14"
+              ],
+              "quantities": [
+                "concavity",
+                "void"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2024,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.51,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 3.3641
+            },
+            {
+              "wires": [
+                "void~k14",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "void",
+                "depth_rank"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2505,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.35,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 3.1002
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1861,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.23,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": 2.6257
+            },
+            {
+              "wires": [
+                "depth_rank~k14",
+                "void@10"
+              ],
+              "quantities": [
+                "depth_rank",
+                "void"
+              ],
+              "families": [
+                "G6 global position",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2244,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.9,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 2.3355
+            },
+            {
+              "wires": [
+                "rho_rank_ball@6",
+                "bur@10"
+              ],
+              "quantities": [
+                "rho_rank_ball",
+                "bur"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2512,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.36,
+              "multiplicity": 12,
+              "contribution_above_chain_mean": 2.2891
+            }
+          ]
+        },
+        {
+          "resnum": 147,
+          "role": "false positive",
+          "why_this_residue": "the highest-scoring residue we called that is not labelled",
+          "is_labelled_cryptic": false,
+          "we_called_it": true,
+          "p2rank_called_it": false,
+          "score": 217.5512,
+          "chain_mean_score": 182.4916,
+          "score_rank_in_chain": 15,
+          "of_residues": 259,
+          "deviation_from_chain_mean": 35.0597,
+          "by_family": {
+            "gate (neighbourhood mean)": 13.9449,
+            "G6 global position": 9.35,
+            "G1 surface exposure": 9.2868,
+            "G5 curvature and anisotropy": 8.6354,
+            "G4 ultrametric structure": -4.6178,
+            "physicochemical constants": -4.5106,
+            "G2 local spectral geometry": -4.3148,
+            "training-fold residue propensity": 3.8404,
+            "G3 density field calculus": 3.4455
+          },
+          "by_coarse_family": {
+            "geometric": 27.2722,
+            "spatial smoothing": 13.9449,
+            "topological": -8.9327,
+            "density field": 3.4455,
+            "chemical": -0.6702
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~k14",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "void",
+                "depth_rank"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2505,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.35,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 3.1002
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1861,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.23,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": 2.6257
+            },
+            {
+              "wires": [
+                "depth_rank~k14",
+                "void@10"
+              ],
+              "quantities": [
+                "depth_rank",
+                "void"
+              ],
+              "families": [
+                "G6 global position",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2244,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.9,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 2.3355
+            },
+            {
+              "wires": [
+                "rho_rank_ball@6",
+                "bur@10"
+              ],
+              "quantities": [
+                "rho_rank_ball",
+                "bur"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2512,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.36,
+              "multiplicity": 12,
+              "contribution_above_chain_mean": 2.2891
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1269,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.2,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.2201
+            },
+            {
+              "wires": [
+                "propensity@6",
+                "depth_rank~d20"
+              ],
+              "quantities": [
+                "propensity",
+                "depth_rank"
+              ],
+              "families": [
+                "training-fold residue propensity",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1511,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.62,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 2.1328
+            }
+          ]
+        },
+        {
+          "resnum": 218,
+          "role": "near miss",
+          "why_this_residue": "the labelled residue we scored highest without calling: the one the top-9% budget cut off",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": false,
+          "score": 207.51,
+          "chain_mean_score": 182.4916,
+          "score_rank_in_chain": 28,
+          "of_residues": 259,
+          "deviation_from_chain_mean": 25.0184,
+          "by_family": {
+            "gate (neighbourhood mean)": 15.9435,
+            "G1 surface exposure": 4.3326,
+            "G4 ultrametric structure": -4.3101,
+            "G2 local spectral geometry": 3.8503,
+            "G6 global position": 3.3759,
+            "physicochemical constants": -3.1054,
+            "G3 density field calculus": 2.8085,
+            "G5 curvature and anisotropy": 1.4181,
+            "training-fold residue propensity": 0.7051
+          },
+          "by_coarse_family": {
+            "spatial smoothing": 15.9435,
+            "geometric": 9.1266,
+            "density field": 2.8085,
+            "chemical": -2.4004,
+            "topological": -0.4598
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "grad_radial@14",
+                "betti1~d20"
+              ],
+              "quantities": [
+                "grad_radial",
+                "betti1"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G2 local spectral geometry"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1747,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.03,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 1.6317
+            },
+            {
+              "wires": [
+                "ball_offset~d6",
+                "void"
+              ],
+              "quantities": [
+                "ball_offset",
+                "void"
+              ],
+              "families": [
+                "G6 global position",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1881,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.27,
+              "multiplicity": 12,
+              "contribution_above_chain_mean": 1.57
+            },
+            {
+              "wires": [
+                "fiedler~sd20",
+                "void~k20"
+              ],
+              "quantities": [
+                "fiedler",
+                "void"
+              ],
+              "families": [
+                "G2 local spectral geometry",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1526,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.65,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 1.5212
+            },
+            {
+              "wires": [
+                "void@14",
+                "ball_radius~d6"
+              ],
+              "quantities": [
+                "void",
+                "ball_radius"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G4 ultrametric structure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1405,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.44,
+              "multiplicity": -17,
+              "contribution_above_chain_mean": -1.4319
+            },
+            {
+              "wires": [
+                "concavity~k20",
+                "void@14"
+              ],
+              "quantities": [
+                "concavity",
+                "void"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1181,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.05,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 1.4257
+            },
+            {
+              "wires": [
+                "ball_radius~k20",
+                "normal_div~k20"
+              ],
+              "quantities": [
+                "ball_radius",
+                "normal_div"
+              ],
+              "families": [
+                "G4 ultrametric structure",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1541,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.68,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 1.2874
+            }
+          ]
+        },
+        {
+          "resnum": 228,
+          "role": "deepest miss",
+          "why_this_residue": "the labelled residue we scored lowest, where the field saw nothing",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": false,
+          "score": 187.6533,
+          "chain_mean_score": 182.4916,
+          "score_rank_in_chain": 72,
+          "of_residues": 259,
+          "deviation_from_chain_mean": 5.1618,
+          "by_family": {
+            "G1 surface exposure": 8.8255,
+            "G2 local spectral geometry": -3.4942,
+            "physicochemical constants": -1.9404,
+            "G6 global position": 1.8911,
+            "G3 density field calculus": -1.8865,
+            "training-fold residue propensity": 1.0863,
+            "G4 ultrametric structure": 0.7303,
+            "gate (neighbourhood mean)": -0.281,
+            "G5 curvature and anisotropy": 0.2307
+          },
+          "by_coarse_family": {
+            "geometric": 10.9473,
+            "topological": -2.7639,
+            "density field": -1.8865,
+            "chemical": -0.8541,
+            "spatial smoothing": -0.281
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "angle_deficit@6",
+                "volume@6"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "volume"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "physicochemical constants"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.159,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.76,
+              "multiplicity": 19,
+              "contribution_above_chain_mean": 1.9687
+            },
+            {
+              "wires": [
+                "concavity~d6",
+                "normal_div~k14"
+              ],
+              "quantities": [
+                "concavity",
+                "normal_div"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1404,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.44,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 1.8941
+            },
+            {
+              "wires": [
+                "angle_deficit~d14",
+                "depth_rank~k20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "depth_rank"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1346,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.34,
+              "multiplicity": -24,
+              "contribution_above_chain_mean": -1.8318
+            },
+            {
+              "wires": [
+                "angle_deficit@10",
+                "exposure@26"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "exposure"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1409,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.45,
+              "multiplicity": -22,
+              "contribution_above_chain_mean": -1.7986
+            },
+            {
+              "wires": [
+                "depth_rank~d14",
+                "hbd~k6"
+              ],
+              "quantities": [
+                "depth_rank",
+                "hbd"
+              ],
+              "families": [
+                "G6 global position",
+                "physicochemical constants"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1509,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.62,
+              "multiplicity": -18,
+              "contribution_above_chain_mean": -1.6552
+            },
+            {
+              "wires": [
+                "depth~k14",
+                "betti1~sd20"
+              ],
+              "quantities": [
+                "depth",
+                "betti1"
+              ],
+              "families": [
+                "G6 global position",
+                "G2 local spectral geometry"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1268,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.2,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 1.6057
+            }
+          ]
+        },
+        {
+          "resnum": 77,
+          "role": "we called it, P2Rank did not",
+          "why_this_residue": "the highest-scoring residue on which the two methods disagree in our favour",
+          "is_labelled_cryptic": true,
+          "we_called_it": true,
+          "p2rank_called_it": false,
+          "score": 231.1988,
+          "chain_mean_score": 182.4916,
+          "score_rank_in_chain": 3,
+          "of_residues": 259,
+          "deviation_from_chain_mean": 48.7073,
+          "by_family": {
+            "G1 surface exposure": 16.2386,
+            "gate (neighbourhood mean)": 15.4066,
+            "G6 global position": 11.1277,
+            "G5 curvature and anisotropy": 7.9923,
+            "G4 ultrametric structure": -4.2623,
+            "physicochemical constants": -3.9532,
+            "training-fold residue propensity": 3.3468,
+            "G3 density field calculus": 3.3334,
+            "G2 local spectral geometry": -0.5226
+          },
+          "by_coarse_family": {
+            "geometric": 35.3586,
+            "spatial smoothing": 15.4066,
+            "topological": -4.7849,
+            "density field": 3.3334,
+            "chemical": -0.6064
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~d14",
+                "concavity~d20"
+              ],
+              "quantities": [
+                "void",
+                "concavity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2172,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.77,
+              "multiplicity": 22,
+              "contribution_above_chain_mean": 3.5078
+            },
+            {
+              "wires": [
+                "concavity~k20",
+                "void@14"
+              ],
+              "quantities": [
+                "concavity",
+                "void"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2024,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.51,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 3.3641
+            },
+            {
+              "wires": [
+                "void~k14",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "void",
+                "depth_rank"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2505,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.35,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 3.1002
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1404,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.44,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.6499
+            },
+            {
+              "wires": [
+                "depth_rank~k14",
+                "void@10"
+              ],
+              "quantities": [
+                "depth_rank",
+                "void"
+              ],
+              "families": [
+                "G6 global position",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2244,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.9,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 2.3355
+            },
+            {
+              "wires": [
+                "rho_rank_ball@6",
+                "bur@10"
+              ],
+              "quantities": [
+                "rho_rank_ball",
+                "bur"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2512,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.36,
+              "multiplicity": 12,
+              "contribution_above_chain_mean": 2.2891
+            }
+          ]
+        },
+        {
+          "resnum": 62,
+          "role": "P2Rank called it, we did not",
+          "why_this_residue": "the highest-scoring residue P2Rank called and we did not",
+          "is_labelled_cryptic": false,
+          "we_called_it": false,
+          "p2rank_called_it": true,
+          "score": 205.9479,
+          "chain_mean_score": 182.4916,
+          "score_rank_in_chain": 29,
+          "of_residues": 259,
+          "deviation_from_chain_mean": 23.4563,
+          "by_family": {
+            "gate (neighbourhood mean)": 8.2678,
+            "G6 global position": 7.9834,
+            "G1 surface exposure": 5.4966,
+            "training-fold residue propensity": 4.0707,
+            "G2 local spectral geometry": -3.4251,
+            "G5 curvature and anisotropy": 2.9095,
+            "physicochemical constants": -1.6754,
+            "G3 density field calculus": -0.7178,
+            "G4 ultrametric structure": 0.5466
+          },
+          "by_coarse_family": {
+            "geometric": 16.3896,
+            "spatial smoothing": 8.2678,
+            "topological": -2.8785,
+            "chemical": 2.3952,
+            "density field": -0.7178
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "concavity~k20",
+                "void@14"
+              ],
+              "quantities": [
+                "concavity",
+                "void"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2024,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.51,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 3.3641
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1861,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.23,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": 2.6257
+            },
+            {
+              "wires": [
+                "depth_rank~k14",
+                "void@10"
+              ],
+              "quantities": [
+                "depth_rank",
+                "void"
+              ],
+              "families": [
+                "G6 global position",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2244,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.9,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 2.3355
+            },
+            {
+              "wires": [
+                "propensity@6",
+                "depth_rank~d20"
+              ],
+              "quantities": [
+                "propensity",
+                "depth_rank"
+              ],
+              "families": [
+                "training-fold residue propensity",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1511,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.62,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 2.1328
+            },
+            {
+              "wires": [
+                "volume~sd14",
+                "concavity@10"
+              ],
+              "quantities": [
+                "volume",
+                "concavity"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1655,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.87,
+              "multiplicity": 20,
+              "contribution_above_chain_mean": 2.1217
+            },
+            {
+              "wires": [
+                "hess_bur@14",
+                "void@6"
+              ],
+              "quantities": [
+                "hess_bur",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2019,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.51,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 2.0411
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "6bty_B",
+      "case": "p2rank_only",
+      "mean_contribution_by_residue_class": {
+        "called and labelled": {
+          "n": 1,
+          "topological": -13.077,
+          "geometric": 21.79,
+          "chemical": -0.684,
+          "density field": 2.252,
+          "spatial smoothing": 11.276
+        },
+        "called and not labelled": {
+          "n": 11,
+          "topological": -4.764,
+          "geometric": 12.272,
+          "chemical": 1.654,
+          "density field": 2.682,
+          "spatial smoothing": 8.787
+        },
+        "labelled and missed": {
+          "n": 8,
+          "topological": -0.251,
+          "geometric": 3.595,
+          "chemical": -0.755,
+          "density field": 0.089,
+          "spatial smoothing": 2.887
+        },
+        "neither": {
+          "n": 108,
+          "topological": 0.625,
+          "geometric": -1.718,
+          "chemical": -0.106,
+          "density field": -0.301,
+          "spatial smoothing": -1.213
+        }
+      },
+      "why_this_case": "P2Rank locates the site and the table field does not",
+      "n_residues": 128,
+      "n_labelled_cryptic": 9,
+      "n_called_by_us": 12,
+      "n_called_by_p2rank": 5,
+      "reconstruction_relative_error": 4.3670216116087566e-16,
+      "residues": [
+        {
+          "resnum": 1599,
+          "role": "true positive",
+          "why_this_residue": "the highest-scoring residue we called that is a labelled cryptic binding residue",
+          "is_labelled_cryptic": true,
+          "we_called_it": true,
+          "p2rank_called_it": false,
+          "score": 257.5962,
+          "chain_mean_score": 236.0392,
+          "score_rank_in_chain": 5,
+          "of_residues": 128,
+          "deviation_from_chain_mean": 21.5571,
+          "by_family": {
+            "gate (neighbourhood mean)": 11.2758,
+            "G1 surface exposure": 9.8113,
+            "G2 local spectral geometry": -8.1206,
+            "G6 global position": 7.7599,
+            "G4 ultrametric structure": -4.9559,
+            "G5 curvature and anisotropy": 4.2191,
+            "physicochemical constants": -2.8874,
+            "G3 density field calculus": 2.2516,
+            "training-fold residue propensity": 2.2032
+          },
+          "by_coarse_family": {
+            "geometric": 21.7903,
+            "topological": -13.0765,
+            "spatial smoothing": 11.2758,
+            "density field": 2.2516,
+            "chemical": -0.6841
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~k14",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "void",
+                "depth_rank"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2505,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.35,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 3.1117
+            },
+            {
+              "wires": [
+                "depth_rank~k14",
+                "void@10"
+              ],
+              "quantities": [
+                "depth_rank",
+                "void"
+              ],
+              "families": [
+                "G6 global position",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2244,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.9,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 2.4039
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1269,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.2,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.2382
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1861,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.23,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": 2.0459
+            },
+            {
+              "wires": [
+                "hess_bur@14",
+                "void@6"
+              ],
+              "quantities": [
+                "hess_bur",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2019,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.51,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 2.0258
+            },
+            {
+              "wires": [
+                "normal_div~sd6",
+                "planarity@20"
+              ],
+              "quantities": [
+                "normal_div",
+                "planarity"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1326,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.3,
+              "multiplicity": 27,
+              "contribution_above_chain_mean": 2.0047
+            }
+          ]
+        },
+        {
+          "resnum": 1661,
+          "role": "false positive",
+          "why_this_residue": "the highest-scoring residue we called that is not labelled",
+          "is_labelled_cryptic": false,
+          "we_called_it": true,
+          "p2rank_called_it": false,
+          "score": 260.3304,
+          "chain_mean_score": 236.0392,
+          "score_rank_in_chain": 1,
+          "of_residues": 128,
+          "deviation_from_chain_mean": 24.2912,
+          "by_family": {
+            "G1 surface exposure": 10.7712,
+            "G6 global position": 8.6691,
+            "gate (neighbourhood mean)": 5.3506,
+            "G4 ultrametric structure": -4.335,
+            "G3 density field calculus": 4.325,
+            "G2 local spectral geometry": -3.2398,
+            "training-fold residue propensity": 1.7841,
+            "physicochemical constants": 1.2449,
+            "G5 curvature and anisotropy": -0.2789
+          },
+          "by_coarse_family": {
+            "geometric": 19.1614,
+            "topological": -7.5748,
+            "spatial smoothing": 5.3506,
+            "density field": 4.325,
+            "chemical": 3.029
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~k14",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "void",
+                "depth_rank"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2505,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.35,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 3.1117
+            },
+            {
+              "wires": [
+                "ball_radius~k14",
+                "void~d14"
+              ],
+              "quantities": [
+                "ball_radius",
+                "void"
+              ],
+              "families": [
+                "G4 ultrametric structure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2088,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.63,
+              "multiplicity": -23,
+              "contribution_above_chain_mean": -2.8871
+            },
+            {
+              "wires": [
+                "rho_rank_ball@6",
+                "bur@10"
+              ],
+              "quantities": [
+                "rho_rank_ball",
+                "bur"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2512,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.36,
+              "multiplicity": 12,
+              "contribution_above_chain_mean": 2.2886
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1269,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.2,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.2382
+            },
+            {
+              "wires": [
+                "volume~sd14",
+                "concavity@10"
+              ],
+              "quantities": [
+                "volume",
+                "concavity"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1655,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.87,
+              "multiplicity": 20,
+              "contribution_above_chain_mean": 2.2137
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1861,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.23,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": 2.0459
+            }
+          ]
+        },
+        {
+          "resnum": 1609,
+          "role": "near miss",
+          "why_this_residue": "the labelled residue we scored highest without calling: the one the top-9% budget cut off",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": true,
+          "score": 252.753,
+          "chain_mean_score": 236.0392,
+          "score_rank_in_chain": 16,
+          "of_residues": 128,
+          "deviation_from_chain_mean": 16.7139,
+          "by_family": {
+            "gate (neighbourhood mean)": 11.0687,
+            "G4 ultrametric structure": -2.4826,
+            "G5 curvature and anisotropy": 2.3755,
+            "G1 surface exposure": 2.1892,
+            "training-fold residue propensity": 2.1886,
+            "G2 local spectral geometry": -1.8613,
+            "G3 density field calculus": 1.5194,
+            "G6 global position": 1.0275,
+            "physicochemical constants": 0.6888
+          },
+          "by_coarse_family": {
+            "spatial smoothing": 11.0687,
+            "geometric": 5.5922,
+            "topological": -4.3439,
+            "chemical": 2.8774,
+            "density field": 1.5194
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                2
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1803,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.13,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": 1.9241
+            },
+            {
+              "wires": [
+                "grad_radial@14",
+                "betti1~d20"
+              ],
+              "quantities": [
+                "grad_radial",
+                "betti1"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G2 local spectral geometry"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1747,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.03,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 1.6447
+            },
+            {
+              "wires": [
+                "angle_deficit~sd14",
+                "contact_order~sd14"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "contact_order"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1371,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.38,
+              "multiplicity": 19,
+              "contribution_above_chain_mean": 1.474
+            },
+            {
+              "wires": [
+                "exposure",
+                "grad_radial@20"
+              ],
+              "quantities": [
+                "exposure",
+                "grad_radial"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.143,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.48,
+              "multiplicity": 17,
+              "contribution_above_chain_mean": 1.4252
+            },
+            {
+              "wires": [
+                "contact_order@20",
+                "depth@6"
+              ],
+              "quantities": [
+                "contact_order",
+                "depth"
+              ],
+              "families": [
+                "G6 global position",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1525,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.65,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 1.4005
+            },
+            {
+              "wires": [
+                "concavity@14",
+                "sphericity~k6"
+              ],
+              "quantities": [
+                "concavity",
+                "sphericity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.145,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.52,
+              "multiplicity": -14,
+              "contribution_above_chain_mean": -1.227
+            }
+          ]
+        },
+        {
+          "resnum": 1653,
+          "role": "deepest miss",
+          "why_this_residue": "the labelled residue we scored lowest, where the field saw nothing",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": false,
+          "score": 223.631,
+          "chain_mean_score": 236.0392,
+          "score_rank_in_chain": 109,
+          "of_residues": 128,
+          "deviation_from_chain_mean": -12.4082,
+          "by_family": {
+            "gate (neighbourhood mean)": -8.3762,
+            "G6 global position": -3.1274,
+            "G5 curvature and anisotropy": 1.9425,
+            "G3 density field calculus": -1.9101,
+            "G1 surface exposure": -1.7359,
+            "G2 local spectral geometry": 1.6725,
+            "physicochemical constants": -1.2234,
+            "G4 ultrametric structure": 1.1283,
+            "training-fold residue propensity": -0.7785
+          },
+          "by_coarse_family": {
+            "spatial smoothing": -8.3762,
+            "geometric": -2.9208,
+            "topological": 2.8008,
+            "chemical": -2.0019,
+            "density field": -1.9101
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.135,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.34,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.4962
+            },
+            {
+              "wires": [
+                "concavity@20",
+                "ball_radius"
+              ],
+              "quantities": [
+                "concavity",
+                "ball_radius"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G4 ultrametric structure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.0317,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 0.55,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": -1.4763
+            },
+            {
+              "wires": [
+                "void~k20",
+                "contact_order@6"
+              ],
+              "quantities": [
+                "void",
+                "contact_order"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1445,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.51,
+              "multiplicity": -15,
+              "contribution_above_chain_mean": -1.3116
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.0336,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 0.58,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": -1.1563
+            },
+            {
+              "wires": [
+                "concavity@10",
+                "ball_radius~k20"
+              ],
+              "quantities": [
+                "concavity",
+                "ball_radius"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G4 ultrametric structure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.0381,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 0.66,
+              "multiplicity": -21,
+              "contribution_above_chain_mean": 1.0856
+            },
+            {
+              "wires": [
+                "kd@10",
+                "void~d20"
+              ],
+              "quantities": [
+                "kd",
+                "void"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1137,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 1.97,
+              "multiplicity": -19,
+              "contribution_above_chain_mean": -1.0673
+            }
+          ]
+        },
+        {
+          "resnum": 1661,
+          "role": "we called it, P2Rank did not",
+          "why_this_residue": "the highest-scoring residue on which the two methods disagree in our favour",
+          "is_labelled_cryptic": false,
+          "we_called_it": true,
+          "p2rank_called_it": false,
+          "score": 260.3304,
+          "chain_mean_score": 236.0392,
+          "score_rank_in_chain": 1,
+          "of_residues": 128,
+          "deviation_from_chain_mean": 24.2912,
+          "by_family": {
+            "G1 surface exposure": 10.7712,
+            "G6 global position": 8.6691,
+            "gate (neighbourhood mean)": 5.3506,
+            "G4 ultrametric structure": -4.335,
+            "G3 density field calculus": 4.325,
+            "G2 local spectral geometry": -3.2398,
+            "training-fold residue propensity": 1.7841,
+            "physicochemical constants": 1.2449,
+            "G5 curvature and anisotropy": -0.2789
+          },
+          "by_coarse_family": {
+            "geometric": 19.1614,
+            "topological": -7.5748,
+            "spatial smoothing": 5.3506,
+            "density field": 4.325,
+            "chemical": 3.029
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~k14",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "void",
+                "depth_rank"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2505,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.35,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 3.1117
+            },
+            {
+              "wires": [
+                "ball_radius~k14",
+                "void~d14"
+              ],
+              "quantities": [
+                "ball_radius",
+                "void"
+              ],
+              "families": [
+                "G4 ultrametric structure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2088,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.63,
+              "multiplicity": -23,
+              "contribution_above_chain_mean": -2.8871
+            },
+            {
+              "wires": [
+                "rho_rank_ball@6",
+                "bur@10"
+              ],
+              "quantities": [
+                "rho_rank_ball",
+                "bur"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2512,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.36,
+              "multiplicity": 12,
+              "contribution_above_chain_mean": 2.2886
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1269,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.2,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.2382
+            },
+            {
+              "wires": [
+                "volume~sd14",
+                "concavity@10"
+              ],
+              "quantities": [
+                "volume",
+                "concavity"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1655,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.87,
+              "multiplicity": 20,
+              "contribution_above_chain_mean": 2.2137
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1861,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.23,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": 2.0459
+            }
+          ]
+        },
+        {
+          "resnum": 1609,
+          "role": "P2Rank called it, we did not",
+          "why_this_residue": "the highest-scoring residue P2Rank called and we did not",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": true,
+          "score": 252.753,
+          "chain_mean_score": 236.0392,
+          "score_rank_in_chain": 16,
+          "of_residues": 128,
+          "deviation_from_chain_mean": 16.7139,
+          "by_family": {
+            "gate (neighbourhood mean)": 11.0687,
+            "G4 ultrametric structure": -2.4826,
+            "G5 curvature and anisotropy": 2.3755,
+            "G1 surface exposure": 2.1892,
+            "training-fold residue propensity": 2.1886,
+            "G2 local spectral geometry": -1.8613,
+            "G3 density field calculus": 1.5194,
+            "G6 global position": 1.0275,
+            "physicochemical constants": 0.6888
+          },
+          "by_coarse_family": {
+            "spatial smoothing": 11.0687,
+            "geometric": 5.5922,
+            "topological": -4.3439,
+            "chemical": 2.8774,
+            "density field": 1.5194
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                2
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1803,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.13,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": 1.9241
+            },
+            {
+              "wires": [
+                "grad_radial@14",
+                "betti1~d20"
+              ],
+              "quantities": [
+                "grad_radial",
+                "betti1"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G2 local spectral geometry"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1747,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.03,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 1.6447
+            },
+            {
+              "wires": [
+                "angle_deficit~sd14",
+                "contact_order~sd14"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "contact_order"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1371,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.38,
+              "multiplicity": 19,
+              "contribution_above_chain_mean": 1.474
+            },
+            {
+              "wires": [
+                "exposure",
+                "grad_radial@20"
+              ],
+              "quantities": [
+                "exposure",
+                "grad_radial"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.143,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.48,
+              "multiplicity": 17,
+              "contribution_above_chain_mean": 1.4252
+            },
+            {
+              "wires": [
+                "contact_order@20",
+                "depth@6"
+              ],
+              "quantities": [
+                "contact_order",
+                "depth"
+              ],
+              "families": [
+                "G6 global position",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1525,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.65,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 1.4005
+            },
+            {
+              "wires": [
+                "concavity@14",
+                "sphericity~k6"
+              ],
+              "quantities": [
+                "concavity",
+                "sphericity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.145,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.52,
+              "multiplicity": -14,
+              "contribution_above_chain_mean": -1.227
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "1bzj_A",
+      "case": "neither_locates",
+      "mean_contribution_by_residue_class": {
+        "called and labelled": {
+          "n": 2,
+          "topological": -5.331,
+          "geometric": 13.113,
+          "chemical": 2.497,
+          "density field": 5.97,
+          "spatial smoothing": 4.178
+        },
+        "called and not labelled": {
+          "n": 25,
+          "topological": -3.955,
+          "geometric": 11.651,
+          "chemical": 1.66,
+          "density field": 2.346,
+          "spatial smoothing": 6.183
+        },
+        "labelled and missed": {
+          "n": 54,
+          "topological": 1.371,
+          "geometric": -2.02,
+          "chemical": -0.19,
+          "density field": -0.224,
+          "spatial smoothing": 0.459
+        },
+        "neither": {
+          "n": 216,
+          "topological": 0.164,
+          "geometric": -0.965,
+          "chemical": -0.168,
+          "density field": -0.271,
+          "spatial smoothing": -0.869
+        }
+      },
+      "why_this_case": "neither method locates the site, which is the commonest outcome on this fold",
+      "n_residues": 297,
+      "n_labelled_cryptic": 56,
+      "n_called_by_us": 27,
+      "n_called_by_p2rank": 36,
+      "reconstruction_relative_error": 5.015966767506362e-16,
+      "residues": [
+        {
+          "resnum": 196,
+          "role": "true positive",
+          "why_this_residue": "the highest-scoring residue we called that is a labelled cryptic binding residue",
+          "is_labelled_cryptic": true,
+          "we_called_it": true,
+          "p2rank_called_it": false,
+          "score": 222.9005,
+          "chain_mean_score": 200.4933,
+          "score_rank_in_chain": 5,
+          "of_residues": 297,
+          "deviation_from_chain_mean": 22.4072,
+          "by_family": {
+            "G1 surface exposure": 6.0043,
+            "G6 global position": 5.9212,
+            "G3 density field calculus": 5.4277,
+            "gate (neighbourhood mean)": 3.5799,
+            "G5 curvature and anisotropy": 3.3302,
+            "physicochemical constants": -3.2949,
+            "training-fold residue propensity": 1.9016,
+            "G2 local spectral geometry": -0.4606,
+            "G4 ultrametric structure": -0.0023
+          },
+          "by_coarse_family": {
+            "geometric": 15.2557,
+            "density field": 5.4277,
+            "spatial smoothing": 3.5799,
+            "chemical": -1.3933,
+            "topological": -0.4628
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~d14",
+                "concavity~d20"
+              ],
+              "quantities": [
+                "void",
+                "concavity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2172,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.77,
+              "multiplicity": 22,
+              "contribution_above_chain_mean": 3.6304
+            },
+            {
+              "wires": [
+                "void~k14",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "void",
+                "depth_rank"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2505,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.35,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 3.1689
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.135,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.34,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.5158
+            },
+            {
+              "wires": [
+                "volume~sd14",
+                "concavity@10"
+              ],
+              "quantities": [
+                "volume",
+                "concavity"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1655,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.87,
+              "multiplicity": 20,
+              "contribution_above_chain_mean": 2.1215
+            },
+            {
+              "wires": [
+                "rho_rank_ball~d6",
+                "depth_rank~d14"
+              ],
+              "quantities": [
+                "rho_rank_ball",
+                "depth_rank"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2499,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.34,
+              "multiplicity": 8,
+              "contribution_above_chain_mean": 1.5468
+            },
+            {
+              "wires": [
+                "depth~k14",
+                "betti1~sd20"
+              ],
+              "quantities": [
+                "depth",
+                "betti1"
+              ],
+              "families": [
+                "G6 global position",
+                "G2 local spectral geometry"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                2
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1255,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.18,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 1.5244
+            }
+          ]
+        },
+        {
+          "resnum": 205,
+          "role": "false positive",
+          "why_this_residue": "the highest-scoring residue we called that is not labelled",
+          "is_labelled_cryptic": false,
+          "we_called_it": true,
+          "p2rank_called_it": false,
+          "score": 226.6499,
+          "chain_mean_score": 200.4933,
+          "score_rank_in_chain": 1,
+          "of_residues": 297,
+          "deviation_from_chain_mean": 26.1566,
+          "by_family": {
+            "gate (neighbourhood mean)": 9.3723,
+            "G1 surface exposure": 6.2578,
+            "G5 curvature and anisotropy": 5.1656,
+            "G3 density field calculus": 4.6888,
+            "G4 ultrametric structure": -1.546,
+            "G6 global position": 1.3285,
+            "training-fold residue propensity": 1.2294,
+            "physicochemical constants": -0.6919,
+            "G2 local spectral geometry": 0.3522
+          },
+          "by_coarse_family": {
+            "geometric": 12.7519,
+            "spatial smoothing": 9.3723,
+            "density field": 4.6888,
+            "topological": -1.1939,
+            "chemical": 0.5375
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.135,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.34,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.5158
+            },
+            {
+              "wires": [
+                "void",
+                "angle_deficit@14"
+              ],
+              "quantities": [
+                "void",
+                "angle_deficit"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.208,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.61,
+              "multiplicity": 13,
+              "contribution_above_chain_mean": 2.0054
+            },
+            {
+              "wires": [
+                "fiedler~sd20",
+                "void~k20"
+              ],
+              "quantities": [
+                "fiedler",
+                "void"
+              ],
+              "families": [
+                "G2 local spectral geometry",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1587,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.75,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 1.6076
+            },
+            {
+              "wires": [
+                "normal_div~d6",
+                "void~k14"
+              ],
+              "quantities": [
+                "normal_div",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1625,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.82,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 1.482
+            },
+            {
+              "wires": [
+                "concavity@20",
+                "ball_radius"
+              ],
+              "quantities": [
+                "concavity",
+                "ball_radius"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G4 ultrametric structure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                2
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1224,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.13,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 1.4727
+            },
+            {
+              "wires": [
+                "exposure",
+                "grad_radial@20"
+              ],
+              "quantities": [
+                "exposure",
+                "grad_radial"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.143,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.48,
+              "multiplicity": 17,
+              "contribution_above_chain_mean": 1.4715
+            }
+          ]
+        },
+        {
+          "resnum": 280,
+          "role": "near miss",
+          "why_this_residue": "the labelled residue we scored highest without calling: the one the top-9% budget cut off",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": false,
+          "score": 210.5082,
+          "chain_mean_score": 200.4933,
+          "score_rank_in_chain": 46,
+          "of_residues": 297,
+          "deviation_from_chain_mean": 10.0149,
+          "by_family": {
+            "G1 surface exposure": 4.4796,
+            "gate (neighbourhood mean)": 3.3244,
+            "G2 local spectral geometry": 1.8935,
+            "G5 curvature and anisotropy": 1.5058,
+            "G6 global position": -1.1254,
+            "physicochemical constants": -0.5958,
+            "G3 density field calculus": 0.4631,
+            "training-fold residue propensity": 0.3389,
+            "G4 ultrametric structure": -0.2692
+          },
+          "by_coarse_family": {
+            "geometric": 4.86,
+            "spatial smoothing": 3.3244,
+            "topological": 1.6243,
+            "density field": 0.4631,
+            "chemical": -0.2569
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "void~d14",
+                "concavity~d20"
+              ],
+              "quantities": [
+                "void",
+                "concavity"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2172,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.77,
+              "multiplicity": 22,
+              "contribution_above_chain_mean": 3.6304
+            },
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.135,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.34,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.5158
+            },
+            {
+              "wires": [
+                "rho_rank_ball~d14",
+                "concavity"
+              ],
+              "quantities": [
+                "rho_rank_ball",
+                "concavity"
+              ],
+              "families": [
+                "G3 density field calculus",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.2414,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 4.19,
+              "multiplicity": 11,
+              "contribution_above_chain_mean": 2.0129
+            },
+            {
+              "wires": [
+                "concavity~k20",
+                "void~k6"
+              ],
+              "quantities": [
+                "concavity",
+                "void"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1894,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.29,
+              "multiplicity": 12,
+              "contribution_above_chain_mean": 1.6082
+            },
+            {
+              "wires": [
+                "void~d20",
+                "rho~d20"
+              ],
+              "quantities": [
+                "void",
+                "rho"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                3
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.131,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.27,
+              "multiplicity": -19,
+              "contribution_above_chain_mean": -1.4072
+            },
+            {
+              "wires": [
+                "concavity~d20",
+                "betti0@10"
+              ],
+              "quantities": [
+                "concavity",
+                "betti0"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G2 local spectral geometry"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1581,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.75,
+              "multiplicity": -14,
+              "contribution_above_chain_mean": -1.3879
+            }
+          ]
+        },
+        {
+          "resnum": 8,
+          "role": "deepest miss",
+          "why_this_residue": "the labelled residue we scored lowest, where the field saw nothing",
+          "is_labelled_cryptic": true,
+          "we_called_it": false,
+          "p2rank_called_it": false,
+          "score": 188.9836,
+          "chain_mean_score": 200.4933,
+          "score_rank_in_chain": 261,
+          "of_residues": 297,
+          "deviation_from_chain_mean": -11.5097,
+          "by_family": {
+            "gate (neighbourhood mean)": -6.6582,
+            "G1 surface exposure": -4.2605,
+            "G3 density field calculus": -2.8069,
+            "physicochemical constants": 2.7859,
+            "training-fold residue propensity": -1.2361,
+            "G2 local spectral geometry": 1.1126,
+            "G4 ultrametric structure": 0.9414,
+            "G5 curvature and anisotropy": -0.7628,
+            "G6 global position": -0.6253
+          },
+          "by_coarse_family": {
+            "spatial smoothing": -6.6582,
+            "geometric": -5.6486,
+            "density field": -2.8069,
+            "topological": 2.0541,
+            "chemical": 1.5498
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1269,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.2,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.2578
+            },
+            {
+              "wires": [
+                "depth_rank~sd20",
+                "void~d20"
+              ],
+              "quantities": [
+                "depth_rank",
+                "void"
+              ],
+              "families": [
+                "G6 global position",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1706,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.96,
+              "multiplicity": 11,
+              "contribution_above_chain_mean": 1.2447
+            },
+            {
+              "wires": [
+                "void~d20",
+                "rho~d20"
+              ],
+              "quantities": [
+                "void",
+                "rho"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                2
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1141,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 1.98,
+              "multiplicity": -19,
+              "contribution_above_chain_mean": -1.0864
+            },
+            {
+              "wires": [
+                "kd@10",
+                "void~d20"
+              ],
+              "quantities": [
+                "kd",
+                "void"
+              ],
+              "families": [
+                "physicochemical constants",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1137,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 1.97,
+              "multiplicity": -19,
+              "contribution_above_chain_mean": -1.0675
+            },
+            {
+              "wires": [
+                "normal_div@26",
+                "angle_deficit@10"
+              ],
+              "quantities": [
+                "normal_div",
+                "angle_deficit"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.0136,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 0.24,
+              "multiplicity": 21,
+              "contribution_above_chain_mean": -1.0638
+            },
+            {
+              "wires": [
+                "angle_deficit~d14",
+                "depth_rank~k20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "depth_rank"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.0183,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 0.32,
+              "multiplicity": -24,
+              "contribution_above_chain_mean": 0.9604
+            }
+          ]
+        },
+        {
+          "resnum": 205,
+          "role": "we called it, P2Rank did not",
+          "why_this_residue": "the highest-scoring residue on which the two methods disagree in our favour",
+          "is_labelled_cryptic": false,
+          "we_called_it": true,
+          "p2rank_called_it": false,
+          "score": 226.6499,
+          "chain_mean_score": 200.4933,
+          "score_rank_in_chain": 1,
+          "of_residues": 297,
+          "deviation_from_chain_mean": 26.1566,
+          "by_family": {
+            "gate (neighbourhood mean)": 9.3723,
+            "G1 surface exposure": 6.2578,
+            "G5 curvature and anisotropy": 5.1656,
+            "G3 density field calculus": 4.6888,
+            "G4 ultrametric structure": -1.546,
+            "G6 global position": 1.3285,
+            "training-fold residue propensity": 1.2294,
+            "physicochemical constants": -0.6919,
+            "G2 local spectral geometry": 0.3522
+          },
+          "by_coarse_family": {
+            "geometric": 12.7519,
+            "spatial smoothing": 9.3723,
+            "density field": 4.6888,
+            "topological": -1.1939,
+            "chemical": 0.5375
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "angle_deficit@26",
+                "void~d20"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                2,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.135,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.34,
+              "multiplicity": 32,
+              "contribution_above_chain_mean": 2.5158
+            },
+            {
+              "wires": [
+                "void",
+                "angle_deficit@14"
+              ],
+              "quantities": [
+                "void",
+                "angle_deficit"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.208,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 3.61,
+              "multiplicity": 13,
+              "contribution_above_chain_mean": 2.0054
+            },
+            {
+              "wires": [
+                "fiedler~sd20",
+                "void~k20"
+              ],
+              "quantities": [
+                "fiedler",
+                "void"
+              ],
+              "families": [
+                "G2 local spectral geometry",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1587,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.75,
+              "multiplicity": 16,
+              "contribution_above_chain_mean": 1.6076
+            },
+            {
+              "wires": [
+                "normal_div~d6",
+                "void~k14"
+              ],
+              "quantities": [
+                "normal_div",
+                "void"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G1 surface exposure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1625,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.82,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 1.482
+            },
+            {
+              "wires": [
+                "concavity@20",
+                "ball_radius"
+              ],
+              "quantities": [
+                "concavity",
+                "ball_radius"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G4 ultrametric structure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                2
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1224,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.13,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 1.4727
+            },
+            {
+              "wires": [
+                "exposure",
+                "grad_radial@20"
+              ],
+              "quantities": [
+                "exposure",
+                "grad_radial"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G3 density field calculus"
+              ],
+              "quartile_of_this_residue": [
+                3,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.143,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.48,
+              "multiplicity": 17,
+              "contribution_above_chain_mean": 1.4715
+            }
+          ]
+        },
+        {
+          "resnum": 120,
+          "role": "P2Rank called it, we did not",
+          "why_this_residue": "the highest-scoring residue P2Rank called and we did not",
+          "is_labelled_cryptic": false,
+          "we_called_it": false,
+          "p2rank_called_it": true,
+          "score": 211.6283,
+          "chain_mean_score": 200.4933,
+          "score_rank_in_chain": 40,
+          "of_residues": 297,
+          "deviation_from_chain_mean": 11.1349,
+          "by_family": {
+            "gate (neighbourhood mean)": 7.7944,
+            "G1 surface exposure": 3.7125,
+            "G3 density field calculus": 2.772,
+            "G4 ultrametric structure": -1.8363,
+            "G2 local spectral geometry": -1.6471,
+            "physicochemical constants": 1.4349,
+            "G6 global position": -1.3807,
+            "G5 curvature and anisotropy": 0.1552,
+            "training-fold residue propensity": 0.1301
+          },
+          "by_coarse_family": {
+            "spatial smoothing": 7.7944,
+            "topological": -3.4834,
+            "density field": 2.772,
+            "geometric": 2.487,
+            "chemical": 1.565
+          },
+          "largest_single_tables": [
+            {
+              "wires": [
+                "concavity@20",
+                "ball_radius"
+              ],
+              "quantities": [
+                "concavity",
+                "ball_radius"
+              ],
+              "families": [
+                "G1 surface exposure",
+                "G4 ultrametric structure"
+              ],
+              "quartile_of_this_residue": [
+                4,
+                2
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1224,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.13,
+              "multiplicity": 23,
+              "contribution_above_chain_mean": 1.4727
+            },
+            {
+              "wires": [
+                "angle_deficit@14",
+                "depth~d6"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "depth"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1471,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.55,
+              "multiplicity": 14,
+              "contribution_above_chain_mean": 1.2447
+            },
+            {
+              "wires": [
+                "angle_deficit@14",
+                "chi~k6"
+              ],
+              "quantities": [
+                "angle_deficit",
+                "chi"
+              ],
+              "families": [
+                "G5 curvature and anisotropy",
+                "physicochemical constants"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1268,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.2,
+              "multiplicity": -14,
+              "contribution_above_chain_mean": -0.9682
+            },
+            {
+              "wires": [
+                "spec_gap@20",
+                "hess_bur~sd6"
+              ],
+              "quantities": [
+                "spec_gap",
+                "hess_bur"
+              ],
+              "families": [
+                "G2 local spectral geometry",
+                "G5 curvature and anisotropy"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                2
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1228,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.13,
+              "multiplicity": -14,
+              "contribution_above_chain_mean": -0.924
+            },
+            {
+              "wires": [
+                "ball_radius~sd14",
+                "ball_offset@14"
+              ],
+              "quantities": [
+                "ball_radius",
+                "ball_offset"
+              ],
+              "families": [
+                "G4 ultrametric structure",
+                "G6 global position"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                1
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.1271,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 2.21,
+              "multiplicity": -13,
+              "contribution_above_chain_mean": -0.9056
+            },
+            {
+              "wires": [
+                "ball_offset@14",
+                "ball_interface~k20"
+              ],
+              "quantities": [
+                "ball_offset",
+                "ball_interface"
+              ],
+              "families": [
+                "G6 global position",
+                "G4 ultrametric structure"
+              ],
+              "quartile_of_this_residue": [
+                1,
+                4
+              ],
+              "of_levels": 4,
+              "cell_binding_rate_in_training": 0.0931,
+              "fold_base_rate": 0.0576,
+              "cell_is_this_many_times_the_base_rate": 1.62,
+              "multiplicity": -25,
+              "contribution_above_chain_mean": -0.8947
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "wall_clock_s": 1.1
+}

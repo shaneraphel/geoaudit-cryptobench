@@ -69,6 +69,11 @@ FROZEN = {"levels": 4, "ranking": "within-chain", "cap": 32, "ridge": 0.03,
 LEVELS = (3, 4, 5)
 RANKINGS = ("within-chain", "pooled")
 CAPS = (16, 32, 64)
+# The ridge, like the cap, enters only at the fusion step, so it rides along on
+# the published cell compilation instead of repeating it. It was previously
+# reported from a different tool's artifact, which meant the one table a reader
+# was asked to read the sensitivity from did not contain all of it.
+RIDGES = (0.03, 0.1, 0.3)
 GATES = ((14.0, 1.0), (18.0, 0.5), (18.0, 1.0))
 
 
@@ -267,7 +272,11 @@ def _summarise(rows: list[dict]) -> dict:
                     "with the published configuration frozen and not revised",
         "frozen_configuration": FROZEN,
         "swept": {"levels": list(LEVELS), "ranking": list(RANKINGS),
-                  "cap": list(CAPS)},
+                  "cap": list(CAPS), "ridge": list(RIDGES)},
+        "one_constant_at_a_time": (
+            "every row differs from the frozen configuration in exactly one of "
+            "levels, ranking, cap or ridge. No row varies two at once, so a "
+            "spread over the table is attributable to the constant it names"),
         "split": {"criterion": "cluster_id, seeded shuffle, disjoint halves",
                   "seed": SEED},
         "rows": rows,
@@ -277,7 +286,8 @@ def _summarise(rows: list[dict]) -> dict:
         else None,
         "best_pick_half_roc_auc": best["pick_half_roc_auc"] if best else None,
         "best_configuration": {k: best[k] for k in
-                               ("levels", "ranking", "cap")} if best else None,
+                               ("levels", "ranking", "cap", "ridge")}
+        if best else None,
         "range_over_all_settings": round(float(spread), 6),
         "published_is_best": bool(best and best["is_published_configuration"]),
         "selection_note": "the published configuration was frozen before this "
@@ -306,6 +316,16 @@ def _resume() -> list[dict]:
         return []
     d = json.loads(OUT.read_text())
     if d.get("schema") != SCHEMA or d.get("frozen_configuration") != FROZEN:
+        return []
+    # The checkpoint is keyed on the cell compilation, which is what is
+    # expensive. Widening the fusion sweep adds rows to a compilation that is
+    # already "done", so resuming on the compilation key alone would silently
+    # keep the narrower table. The declared sweep has to match too.
+    want = {"levels": list(LEVELS), "ranking": list(RANKINGS),
+            "cap": list(CAPS), "ridge": list(RIDGES)}
+    if (d.get("swept") or {}) != want:
+        print(f"the checkpoint swept {d.get('swept')}, this run sweeps {want}; "
+              f"starting over so the table is one sweep and not two", flush=True)
         return []
     rows = d.get("rows") or []
     if rows:
@@ -338,11 +358,17 @@ def build() -> dict:
         for ranking in RANKINGS:
             if (levels, ranking) in already:
                 continue
-            # The cap sweep varies only the fusion, so it rides along on the
-            # published cell compilation rather than repeating it.
-            caps = CAPS if (levels == FROZEN["levels"]
-                            and ranking == FROZEN["ranking"]) \
-                else (FROZEN["cap"],)
+            # The cap and ridge sweeps vary only the fusion, so they ride along
+            # on the published cell compilation rather than repeating it. Each
+            # varies one constant at a time from the frozen configuration; the
+            # published setting appears once, not once per sweep.
+            if (levels == FROZEN["levels"]
+                    and ranking == FROZEN["ranking"]):
+                fusions = [(c, FROZEN["ridge"]) for c in CAPS]
+                fusions += [(FROZEN["cap"], r) for r in RIDGES
+                            if r != FROZEN["ridge"]]
+            else:
+                fusions = [(FROZEN["cap"], FROZEN["ridge"])]
             t0 = time.perf_counter()
             # The wire matrix is 1.2 GB of float64 and is needed only to
             # produce the digits. Holding it through the K x K solve as well is
@@ -359,18 +385,19 @@ def build() -> dict:
             offsets = cell_offsets(tables, levels)
             frac, tot = compile_cells(Dfit, yfit, tables, offsets, levels)
             empty = int((tot == 0).sum())
-            for cap in caps:
+            for cap, ridge in fusions:
                 m = integer_fanout(Dfit, yfit, tables, offsets, frac,
-                                   FROZEN["ridge"], cap, levels)
+                                   ridge, cap, levels)
                 S = score(Dpick, tables, offsets, frac, m, levels)
                 raw = per_unit_auc(S, ypick, n_pick)
                 gated, gname = _gated_auc(S, ctr_pick, n_pick, ypick)
                 is_frozen = (levels == FROZEN["levels"]
                              and ranking == FROZEN["ranking"]
-                             and cap == FROZEN["cap"])
+                             and cap == FROZEN["cap"]
+                             and ridge == FROZEN["ridge"])
                 rows.append({
                     "levels": levels, "ranking": ranking, "cap": cap,
-                    "ridge": FROZEN["ridge"], "n_cells": int(len(frac)),
+                    "ridge": ridge, "n_cells": int(len(frac)),
                     "n_cells_never_addressed": empty,
                     "fraction_never_addressed": round(empty / len(frac), 6),
                     "total_fan_out": int(np.abs(m).sum()),
@@ -382,7 +409,7 @@ def build() -> dict:
                 })
                 mark = "  <- published" if is_frozen else ""
                 print(f"  levels {levels}  {ranking:<12s} cap {cap:<3d} "
-                      f"raw {raw:.4f}  gated {gated:.4f}  "
+                      f"ridge {ridge:<5g} raw {raw:.4f}  gated {gated:.4f}  "
                       f"empty {100 * empty / len(frac):5.2f}%{mark}",
                       flush=True)
             del Dfit, Dpick, frac, tot

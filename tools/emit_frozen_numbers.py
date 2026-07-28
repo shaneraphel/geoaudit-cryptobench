@@ -98,6 +98,7 @@ P2TRAIN_OP = ROOT / "results/architecture_sweep/P2RANK_TRAIN_OPERATING_POINT.jso
 MATCH_PREREG = ROOT / "results/architecture_sweep/PREREGISTERED_MATCHED_OPERATING_POINT.json"
 MATCH_READ = ROOT / "results/official_fold/MATCHED_OPERATING_POINT_READ.json"
 FULL_READ = ROOT / "results/official_fold/MATCHED_FULL_READ.json"
+AUDIT = ROOT / "results/official_fold/AUDIT_DECOMPOSITION.json"
 TRAIN_OP = ROOT / "results/architecture_sweep/TRAIN_OPERATING_POINTS.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
@@ -258,14 +259,38 @@ def build() -> str:
         # The ridge curve of the shipped basis alone. The candidate list also
         # holds two bases that were not shipped, and averaging over them would
         # describe a model the paper does not contain.
+        #
+        # These are emitted from the sensitivity sweep rather than from here, so
+        # that the one table a reader reads the sensitivity from contains all of
+        # it. This artifact is kept as the cross-check: it measured the same
+        # curve on the same half through a different digitiser, and if the two
+        # ever disagree the sweep's re-implementation has drifted.
         chosen = sel["selected"]["basis"]
         curve = {c["ridge"]: c["pick_half_roc_auc"]
                  for c in sel["candidates"] if c["basis"] == chosen}
         ridge_words = {0.03: "Low", 0.1: "Mid", 0.3: "High"}
+        sweep_curve = {}
+        if SENS.exists():
+            sw_rows = json.loads(SENS.read_text())["rows"]
+            fz = json.loads(SENS.read_text())["frozen_configuration"]
+            sweep_curve = {
+                r["ridge"]: r["pick_half_roc_auc"] for r in sw_rows
+                if (r["levels"], r["ranking"], r["cap"])
+                == (fz["levels"], fz["ranking"], fz["cap"])}
         for r, word in ridge_words.items():
-            if r in curve:
-                L.append(f"\\newcommand{{\\TabRidge{word}}}{{{curve[r]:.4f}}}")
-                L.append(f"\\newcommand{{\\TabRidge{word}Value}}{{{r:g}}}")
+            value = sweep_curve.get(r, curve.get(r))
+            if value is None:
+                continue
+            if r in curve and r in sweep_curve and abs(curve[r] - sweep_curve[r]) > 5e-5:
+                raise SystemExit(
+                    f"at ridge {r} the selection artifact reports "
+                    f"{curve[r]:.6f} and the sensitivity sweep reports "
+                    f"{sweep_curve[r]:.6f}. They measure the same fit on the "
+                    f"same half through two digitisers and must agree")
+            L.append(f"\\newcommand{{\\TabRidge{word}}}{{{value:.4f}}}")
+            L.append(f"\\newcommand{{\\TabRidge{word}Value}}{{{r:g}}}")
+        L.append(f"\\newcommand{{\\TabRidgeFromSweep}}"
+                 f"{{{'yes' if len(sweep_curve) == len(ridge_words) else 'no'}}}")
 
     if CASES.exists():
         cs = json.loads(CASES.read_text())
@@ -562,6 +587,75 @@ def build() -> str:
         L.append(f"\\newcommand{{\\FullForecastMCC}}"
                  f"{{{fc['mcc']['forecast']:+.4f}}}")
 
+    if AUDIT.exists():
+        # The audit decomposition. The chapter's claim is that taking a score
+        # apart says something a score alone does not, so the numbers that carry
+        # the claim are the class means and the two gaps between them, not the
+        # individual residues, which the chapter shows rather than quotes.
+        ad = json.loads(AUDIT.read_text())
+        sep = ad["what_separates_a_hit_from_a_miss"]
+        cls = sep["mean_contribution_by_residue_class"]
+        for name, stem in (("called and labelled", "Hit"),
+                           ("called and not labelled", "FP"),
+                           ("labelled and missed", "Miss"),
+                           ("neither", "Rest")):
+            row = cls[name]
+            L.append(f"\\newcommand{{\\Aud{stem}N}}{{{row['n_residues']}}}")
+            for fam, fstem in (("geometric", "Geom"), ("chemical", "Chem"),
+                               ("topological", "Topo"),
+                               ("density field", "Dens"),
+                               ("spatial smoothing", "Gate")):
+                L.append(f"\\newcommand{{\\Aud{stem}{fstem}}}"
+                         f"{{{row[fam]:+.1f}}}")
+        L.append(f"\\newcommand{{\\AudGeomMargin}}"
+                 f"{{{sep['geometric_margin_of_hits_over_misses']:+.1f}}}")
+        L.append(f"\\newcommand{{\\AudGateMargin}}"
+                 f"{{{sep['spatial_smoothing_margin_of_hits_over_misses']:+.1f}}}")
+        fpm = ad["what_the_false_positives_are_made_of"]
+        L.append(f"\\newcommand{{\\AudGapToFP}}"
+                 f"{{{fpm['largest_family_gap_to_false_positives']:.1f}}}")
+        L.append(f"\\newcommand{{\\AudGapToMiss}}"
+                 f"{{{fpm['largest_family_gap_to_missed_positives']:.1f}}}")
+        L.append(f"\\newcommand{{\\AudGapRatio}}{{{fpm['ratio']:.0f}}}")
+        fa = ad["family_assignment"]
+        L.append(f"\\newcommand{{\\AudTablesMixed}}"
+                 f"{{{fa['n_tables_spanning_two_families']:,}}}"
+                 .replace(",", "{,}"))
+        L.append(f"\\newcommand{{\\AudCases}}"
+                 f"{{{ad['cases_are_not_chosen_here']['n_cases']}}}")
+        # The exactness is the whole warrant for calling this a decomposition
+        # rather than an attribution, so the manuscript states the residual.
+        L.append(f"\\newcommand{{\\AudReproErr}}"
+                 f"{{{ad['reconstruction']['worst_relative_error']:.0e}}}")
+        # One worked residue, cited in the text. Named, so that editing the
+        # artifact cannot leave a stale hand-typed quartile in the prose.
+        worked = None
+        for c in ad["cases"]:
+            for r in c["residues"]:
+                if c["unit_id"] == "2d05_A" and r["role"] == "true positive":
+                    worked = (c, r)
+        if worked is None:
+            raise SystemExit(
+                "the worked example the chapter cites (the true positive of "
+                "2d05_A) is no longer in the audit artifact; the paragraph "
+                "quoting its quartiles has to be rewritten around whatever the "
+                "committed cases now contain")
+        c, r = worked
+        t = r["largest_single_tables"][0]
+        L.append(f"\\newcommand{{\\AudEgUnit}}{{{c['unit_id'].replace('_', '\\_')}}}")
+        L.append(f"\\newcommand{{\\AudEgRes}}{{{r['resnum']}}}")
+        L.append(f"\\newcommand{{\\AudEgRank}}{{{r['score_rank_in_chain']}}}")
+        L.append(f"\\newcommand{{\\AudEgOf}}{{{r['of_residues']}}}")
+        L.append(f"\\newcommand{{\\AudEgQA}}{{{t['quantities'][0].replace('_', '\\_')}}}")
+        L.append(f"\\newcommand{{\\AudEgQB}}{{{t['quantities'][1].replace('_', '\\_')}}}")
+        L.append(f"\\newcommand{{\\AudEgLevA}}{{{t['quartile_of_this_residue'][0]}}}")
+        L.append(f"\\newcommand{{\\AudEgLevB}}{{{t['quartile_of_this_residue'][1]}}}")
+        L.append(f"\\newcommand{{\\AudEgRate}}"
+                 f"{{{t['cell_binding_rate_in_training']:.3f}}}")
+        L.append(f"\\newcommand{{\\AudEgTimesBase}}"
+                 f"{{{t['cell_is_this_many_times_the_base_rate']:.1f}}}")
+        L.append(f"\\newcommand{{\\AudEgMult}}{{{t['multiplicity']}}}")
+
     if BANKS_CEILING.exists() and WIDE3.exists() and WIDE3_CONTROL.exists():
         # The generated banks: a lift on the linear ceiling that the counting
         # field did not collect. The treatment and the control are emitted from
@@ -644,12 +738,24 @@ def build() -> str:
             raise SystemExit("the sensitivity sweep claims to have read the "
                              "test fold, which the chapter says it did not")
 
-        def _row(levels: int, ranking: str, cap: int) -> dict:
-            for r in sw["rows"]:
-                if (r["levels"], r["ranking"], r["cap"]) == (levels, ranking, cap):
-                    return r
-            raise SystemExit(f"the sweep has no row for {levels} levels, "
-                             f"{ranking} ranking, cap {cap}")
+        frozen_ridge = sw["frozen_configuration"]["ridge"]
+
+        def _row(levels: int, ranking: str, cap: int,
+                 ridge: float | None = None) -> dict:
+            # The ridge has to be part of the key. Once the sweep varied it, a
+            # lookup on levels, ranking and cap alone matched several rows and
+            # returned whichever came first, which is a wrong number that looks
+            # entirely plausible.
+            want = frozen_ridge if ridge is None else ridge
+            hits = [r for r in sw["rows"]
+                    if (r["levels"], r["ranking"], r["cap"]) == (levels, ranking, cap)
+                    and abs(r["ridge"] - want) < 1e-12]
+            if len(hits) != 1:
+                raise SystemExit(
+                    f"the sweep has {len(hits)} rows for {levels} levels, "
+                    f"{ranking} ranking, cap {cap}, ridge {want}; a macro "
+                    f"cannot be emitted from an ambiguous or absent row")
+            return hits[0]
 
         for lv in sw["swept"]["levels"]:
             stem = _roman(lv)
@@ -705,6 +811,54 @@ def build() -> str:
                  f"{{{min(r['pick_half_roc_auc'] for r in sw['rows']):.4f}}}")
         L.append(f"\\newcommand{{\\SensBest}}"
                  f"{{{sw['best_pick_half_roc_auc']:.4f}}}")
+        # The spread each constant is individually worth. The chapter's claim is
+        # that three of the four are decorative and the fourth is the one the
+        # method argues for, which is a claim about the relative sizes of these
+        # four numbers, so they are computed here rather than being read off the
+        # table by a reader who might read it wrong.
+        def _spread(rows: list[dict]) -> float:
+            vals = [r["pick_half_roc_auc"] for r in rows]
+            return max(vals) - min(vals)
+
+        spread = {
+            "Levels": _spread([_row(lv, "within-chain", 32)
+                               for lv in sw["swept"]["levels"]]),
+            "Cap": _spread([_row(4, "within-chain", cap)
+                            for cap in sw["swept"]["cap"]]),
+            "Ridge": _spread([_row(4, "within-chain", 32, ridge=rg)
+                              for rg in sw["swept"]["ridge"]]),
+            "Ranking": _spread([_row(4, rk, 32)
+                                for rk in sw["swept"]["ranking"]]),
+        }
+        for name, value in spread.items():
+            L.append(f"\\newcommand{{\\Sens{name}Spread}}{{{value:.4f}}}")
+        others = max(v for k, v in spread.items() if k != "Ranking")
+        if spread["Ranking"] <= others:
+            raise SystemExit(
+                f"the ranking choice is now worth {spread['Ranking']:.4f}, no "
+                f"more than the largest of the other constants ({others:.4f}); "
+                f"the chapter says within-chain ranking is the one load-bearing "
+                f"constant and must be rewritten")
+        L.append(f"\\newcommand{{\\SensRankingOverNext}}"
+                 f"{{{spread['Ranking'] / others:.1f}}}")
+        # The chapter observes that the ridge sweep points one way before the
+        # gate and the other way after it, which is the reason the sweep is
+        # scored on the gated field. It is a sign comparison and would silently
+        # invert if either curve flattened.
+        lo_r, hi_r = min(sw["swept"]["ridge"]), max(sw["swept"]["ridge"])
+        lo = _row(4, "within-chain", 32, ridge=lo_r)
+        hi = _row(4, "within-chain", 32, ridge=hi_r)
+        if not (hi["pick_half_roc_auc_raw"] > lo["pick_half_roc_auc_raw"]
+                and hi["pick_half_roc_auc"] < lo["pick_half_roc_auc"]):
+            raise SystemExit(
+                f"the ridge no longer moves the raw and gated scores in "
+                f"opposite directions (raw {lo['pick_half_roc_auc_raw']:.4f} to "
+                f"{hi['pick_half_roc_auc_raw']:.4f}, gated "
+                f"{lo['pick_half_roc_auc']:.4f} to {hi['pick_half_roc_auc']:.4f}"
+                f"); the sentence saying an ungated sweep would have chosen the "
+                f"opposite constant has to go")
+        L.append(f"\\newcommand{{\\SensLevelsFourPooledEmpty}}"
+                 f"{{{100.0 * _row(4, 'pooled', 32)['fraction_never_addressed']:.2f}}}")
 
     if QUOTIENT_SEL.exists() and QUOTIENT_PROBE.exists():
         # The quotient counterattack: a construction that beat the dense bank on

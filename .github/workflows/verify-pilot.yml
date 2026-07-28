@@ -71,6 +71,8 @@ jobs:
         run: make match2
       - name: The seventh fold read must reproduce the frozen bootstrap and not move read six
         run: make read7
+      - name: The audit decomposition must still add up to the score it decomposes
+        run: make audit
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

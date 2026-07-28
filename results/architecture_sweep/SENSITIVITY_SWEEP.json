@@ -25,8 +25,14 @@
       16,
       32,
       64
+    ],
+    "ridge": [
+      0.03,
+      0.1,
+      0.3
     ]
   },
+  "one_constant_at_a_time": "every row differs from the frozen configuration in exactly one of levels, ranking, cap or ridge. No row varies two at once, so a spread over the table is attributable to the constant it names",
   "split": {
     "criterion": "cluster_id, seeded shuffle, disjoint halves",
     "seed": 20260725
@@ -109,6 +115,36 @@
     },
     {
       "levels": 4,
+      "ranking": "within-chain",
+      "cap": 32,
+      "ridge": 0.1,
+      "n_cells": 82432,
+      "n_cells_never_addressed": 1028,
+      "fraction_never_addressed": 0.012471,
+      "total_fan_out": 23376,
+      "n_tables_used": 4776,
+      "pick_half_roc_auc_raw": 0.7894446407523747,
+      "pick_half_roc_auc": 0.8042295326758868,
+      "gate": "r18 w1.0",
+      "is_published_configuration": false
+    },
+    {
+      "levels": 4,
+      "ranking": "within-chain",
+      "cap": 32,
+      "ridge": 0.3,
+      "n_cells": 82432,
+      "n_cells_never_addressed": 1028,
+      "fraction_never_addressed": 0.012471,
+      "total_fan_out": 14674,
+      "n_tables_used": 4531,
+      "pick_half_roc_auc_raw": 0.7932557102687007,
+      "pick_half_roc_auc": 0.8023122906523102,
+      "gate": "r18 w1.0",
+      "is_published_configuration": false
+    },
+    {
+      "levels": 4,
       "ranking": "pooled",
       "cap": 32,
       "ridge": 0.03,
@@ -185,7 +221,8 @@
   "best_configuration": {
     "levels": 4,
     "ranking": "within-chain",
-    "cap": 32
+    "cap": 32,
+    "ridge": 0.03
   },
   "range_over_all_settings": 0.014029,
   "published_is_best": true,

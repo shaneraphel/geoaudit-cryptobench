@@ -462,6 +462,7 @@ all fail-closed.
 | Training-fold thresholds | `make trainop` | a selected q stops being the argmax of its own committed curve, stops reproducing the shipped q, or the artifact starts claiming it touched the held-out fold |
 | Seventh read's plan | `make match2` | the committed plan stops describing the thresholds it was written for, stops naming a sentence for an outcome the read can reach, or stops recording the code that wrote it |
 | Seventh fold read | `make read7` | the deployment rules stop reproducing the frozen bootstrap, the matched F1 delta moves away from what reading 6 published, precision and recall deltas disagree in sign at a matched budget, or a verdict stops following from its own interval |
+| Audit decomposition | `make audit` | the per-table terms stop summing to the score they claim to decompose, the cases drift from the committed selection, a residue's stated role disagrees with the committed calls, or the artifact starts declaring a test-fold read |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
 Current state: `verify_claims` all checks pass; 297 tests pass under both
@@ -763,40 +764,57 @@ resolution. The counting field's binding constraint on
 this benchmark is not the expressive content of its invariant bank, and the
 held-out fold was not read to establish that.
 
-### 4.7 The quaternary alphabet is load-bearing, and inference is 13.8× cheaper than the baseline
+### 4.7 Within-chain ranking is the one load-bearing constant, and inference is 13.8× cheaper
 
-Three constants were fixed early and carried through everything above: four
-quantisation levels, ranking within a chain rather than across the corpus, and a
-fan-out cap of 32. `tools/sensitivity_sweep.py` varies each on the training
-partition alone, under the same seeded cluster-disjoint halving that selected the
-published configuration. `make sens` checks the artifact and refuses a checkpoint
-of an unfinished run, which would let the table quote a range over settings that
-were never all measured.
+Four constants were fixed early and carried through everything above: four
+quantisation levels, ranking within a chain rather than across the corpus, a
+fan-out cap of 32, and a ridge of 0.03. `tools/sensitivity_sweep.py` varies each
+on the training partition alone, under the same seeded cluster-disjoint halving
+that selected the published configuration. Every row differs from the published
+setting in exactly one constant, so no spread below is shared between two of them.
+`make sens` checks the artifact and refuses a checkpoint of an unfinished run,
+which would let the table quote a range over settings that were never all
+measured.
 
-| levels | ranking | cap | selection-half ROC-AUC |
-| --- | --- | --- | --- |
-| 3 | within-chain | 32 | 0.7995 |
-| 4 | within-chain | 32 | **0.8045** (published) |
-| 5 | within-chain | 32 | 0.7996 |
-| 3 | pooled | 32 | 0.7950 |
-| 4 | pooled | 32 | 0.7905 |
-| 5 | pooled | 32 | 0.7961 |
-| 4 | within-chain | 16 | 0.8018 |
-| 4 | within-chain | 64 | 0.8010 |
+| levels | ranking | cap | ridge | selection-half ROC-AUC |
+| --- | --- | --- | --- | --- |
+| 3 | within-chain | 32 | 0.03 | 0.7995 |
+| 4 | within-chain | 32 | 0.03 | **0.8045** (published) |
+| 5 | within-chain | 32 | 0.03 | 0.7996 |
+| 3 | pooled | 32 | 0.03 | 0.7950 |
+| 4 | pooled | 32 | 0.03 | 0.7905 |
+| 5 | pooled | 32 | 0.03 | 0.7961 |
+| 4 | within-chain | 16 | 0.03 | 0.8018 |
+| 4 | within-chain | 64 | 0.03 | 0.8010 |
+| 4 | within-chain | 32 | 0.1 | 0.8042 |
+| 4 | within-chain | 32 | 0.3 | 0.8023 |
 
-The spread over all eight is **0.0140**, from 0.7905 to 0.8045, so nothing here
-is fragile — the worst setting still clears the 0.783 linear ceiling of the
-invariants it reads. Two things are legible anyway. Ranking within a chain beats
-pooled ranking at every level, which is what the construction predicts: a digit
-is meant to say where a residue sits on its own protein, not how large that
-protein's values happen to be. And four levels is not an aesthetic preference —
-three lose 0.0050 and five lose 0.0049, the latter while raising the
-never-addressed cell fraction from 1.25% to 2.28%. The quaternary alphabet sits
-at the turn where a finer digit stops buying resolution and starts buying empty
-cells, which is the coverage-against-expressiveness exchange of §4.6 reached by
-widening the alphabet instead of the bank.
+The spread over all ten is **0.0140**, from 0.7905 to 0.8045, so nothing here is
+fragile — the worst setting still clears the 0.783 linear ceiling of the
+invariants it reads. Taken one constant at a time, three of the four are nearly
+decorative: the level count is worth 0.0050, the fan-out cap 0.0035, and the ridge
+0.0022 across a tenfold range. No result in this repository rests on having tuned
+them.
 
-The published configuration is the best of the eight. That is a fact about the
+The fourth is the one the construction argues for. **Ranking within a chain rather
+than against the pooled corpus is worth 0.0140** — the largest effect in the table
+by a factor of 2.8 — and it wins at every level. The cells say why: pooled
+quantisation leaves 3.42% of cells never addressed against 1.25% within-chain,
+because a wire pooled over chains of 57 and 307 residues spends its levels
+distinguishing chain sizes rather than residues. Four levels is likewise not an
+aesthetic preference — three lose 0.0050 and five lose 0.0049, the latter while
+raising the never-addressed fraction from 1.25% to 2.28%. The quaternary alphabet
+sits at the turn where a finer digit stops buying resolution and starts buying
+empty cells, which is the coverage-against-expressiveness exchange of §4.6 reached
+by widening the alphabet instead of the bank.
+
+The ridge is the one place the pre-gate and post-gate readings disagree: raising it
+from 0.03 to 0.3 *improves* the raw score (0.7873 → 0.7933) and degrades the gated
+one (0.8045 → 0.8023). A sweep that reported only the ungated field would have
+recommended the opposite constant, which is why the sweep is scored on the field
+that ships.
+
+The published configuration is the best of the ten. That is a fact about the
 sweep and not a claim about it: it was frozen before the sweep ran, the artifact
 records the frozen constants rather than the winning ones, and `make sens` fails
 if those two ever disagree. Had a different row come out on top it would have
@@ -823,9 +841,12 @@ measured the selection half stop agreeing.
 
 Inference is 5152 table look-ups and an integer dot
 product per residue, with no floating-point model evaluated at all: a median
-**0.342 s per chain against P2Rank's 4.722 s**, a factor of 13.8. The ridge is
-not delicate either — 0.03, 0.1 and 0.3
-give 0.8045, 0.8042 and 0.8023 on the same selection half.
+**0.342 s per chain against P2Rank's 4.722 s**, a factor of 13.8. That factor is
+not a controlled measurement and should not be read as one: the two were timed on
+the same machine but not under a pinned thread count or a common timing boundary,
+and P2Rank's figure includes JVM startup a served deployment would amortise. The
+direction is not in doubt — one side evaluates no floating-point model — but the
+magnitude is an observation about how we happened to invoke them.
 
 ### 4.8 The F1 advantage was a threshold, and the retraction was written first
 
@@ -957,6 +978,71 @@ refuses a read that does not reproduce the frozen bootstrap under the deployment
 rules, that moves the matched F1 delta reading 6 published, whose precision and
 recall deltas disagree in sign at a matched budget, or whose verdict does not
 follow from its own interval.
+
+### 4.10 Taking a score apart: the misses are evidence-poor, the false positives are not arbitrary
+
+Auditability had been an architectural claim — every table is a look-up, so in
+principle any score can be taken apart. In principle is not evidence, so we took
+apart the four case studies of §4.2, which a committed rule had already selected
+and which cover a chain both methods locate, one only we locate, one only P2Rank
+locates, and one neither locates.
+
+The decomposition is arithmetic, not attribution. A residue's pre-gate score is
+`sum_k m_k * p_k[a_k(i)]` over all 5152 tables, so the per-table terms **are** the
+score; the gate's neighbourhood mean is carried as its own term rather than folded
+into geometry. Each table addresses two wires, each wire derives from one of the
+43 local quantities, and each quantity belongs to one of the descriptor families
+Appendix A defines. 4,435 of the 5152 tables pair quantities from two different
+families and have their contribution split evenly — a stated convention, not a
+measurement. What is decomposed is each residue's deviation from its own chain's
+mean, because tables with large multiplicities contribute equally to every residue
+in a chain and only the deviation orders them. The reconstruction agrees with the
+published per-residue scores to a relative **5e-16**, which is what licenses
+calling it a decomposition: it re-extracts features from the coordinates rather
+than reading the cached wire matrix, whose float32 storage flips digits on
+near-ties and moves scores in the third significant figure.
+
+One residue shows the shape of the output. The top-ranked residue of `2d05_A` is
+65, and the largest single term in its score is a table reading `void` against
+`concavity`: it sits in quartile 4 of both, a cell where 0.217 of training
+residues were cryptic binding residues — 3.8× the fold base rate — and 22 of the
+5152 tables are that same pair. That is one contribution stated in units a curator
+can check against a structure.
+
+Aggregating over every residue of the four chains, pooled with equal weight per
+chain (they run 96–297 residues):
+
+| Residue class | n | Geometric | Topological | Density | Chemical | Smoothing |
+|---|---:|---:|---:|---:|---:|---:|
+| Called, labelled | 31 | +18.3 | −6.0 | +2.2 | +1.2 | +10.1 |
+| Called, not labelled | 40 | +17.5 | −5.5 | +1.9 | +1.3 | +8.8 |
+| Labelled, missed | 67 | +3.0 | +0.0 | −0.4 | +0.0 | +5.7 |
+| Neither | 642 | −1.7 | +0.4 | −0.1 | −0.2 | −1.3 |
+
+Two findings. **What separates a call from a miss is local geometry** (+15.2),
+while smoothing separates them by only +4.4 — and on the labelled residues we
+miss, smoothing (+5.7) supplies more of the score than geometry does (+3.0). Those
+misses are not residues the field scored wrongly; they are residues where it had
+almost no local evidence and scored them because their neighbours scored. That
+locates where the construction runs out.
+
+**The false positives decompose almost identically to the true positives**: no
+family separates them by more than 1.3, against 15.2 between a call and a miss — a
+factor of 12. Whatever those residues are, the field is not reading something
+different on them. By every family it measures they are pocket-like, which is what
+one would expect if an apo structure's labelled cryptic residues are the subset
+some holo partner happened to reveal rather than every residue capable of forming
+the site. Four chains selected for how the two methods compared on them are not a
+fold-level estimate of anything, and this cannot settle the labelling question.
+What it can say is that the errors are not arbitrary, and it names the residues a
+curator would have to look at.
+
+Regenerating this needs the uncommitted receptors; checking it does not. `make
+audit` re-adds the family terms and refuses an artifact whose decomposition no
+longer sums to the score, whose cases have drifted from the committed selection,
+whose residue roles disagree with the committed calls, or that has started
+declaring a test-fold read — it declares none, because it produces no statistic
+about the fold and cannot be used to choose anything.
 
 ---
 
