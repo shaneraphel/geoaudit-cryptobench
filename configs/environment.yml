@@ -1,7 +1,0 @@
-name: foliation-esr1-pilot
-channels:
-  - conda-forge
-dependencies:
-  - python=3.12
-  - numpy=1.26.4
-  # fpocket and P2Rank must be installed separately and return OK.

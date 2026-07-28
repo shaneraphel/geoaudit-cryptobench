@@ -1,2 +1,0 @@
-# Schema/unit verification only. External fpocket/P2Rank are mandatory for full suite.
-numpy==1.26.4

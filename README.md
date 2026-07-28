@@ -394,6 +394,7 @@ all fail-closed.
 | Independent recomputation | `make recompute` | a frozen per-unit metric, per-method mean or paired interval does not follow from the committed labels and raw scores |
 | Published baseline | `make published` | recomputed under CryptoBench's pooled convention, P2Rank misses the published AUC/AUPRC/ACC/FPR/MCC by more than 0.03, or TPR by more than 0.10 |
 | Residue identity | `make residues` | the number of labelled residues with no coordinates in their apo structure moves off its pin |
+| Environment pins | `make environment` | any committed dependency declaration names a version the measured stack contradicts |
 
 Current state: `verify_claims` all checks pass; 141 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:
