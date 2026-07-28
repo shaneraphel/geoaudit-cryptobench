@@ -70,7 +70,8 @@
 \newcommand{\BurialCallsNeitherPTwo}{+1.37}
 \newcommand{\FigCaptionOne}{Per-residue detection on the official CryptoBench apo test fold (192 single-chain units, MMseqs2 10\% cluster-disjoint). Bars are means over structures, ordered by ROC-AUC; whiskers are 95\% bootstrap intervals (10,000 resamples, seed 20260725). The table field is drawn in orange and P2Rank 2.5.1, the baseline, in blue. MCC is undefined for a detector that calls nothing positive; those entries are marked rather than left blank.}
 \newcommand{\FigCaptionTwo}{Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95\% bootstrap interval and the number of shared structures. The shaded band is $\pm$1 standard error of a fold mean (0.0161); 12 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not.}
-\newcommand{\FigCaptionThree}{Four evaluation units, projected onto each chain's two longest principal axes: grey is the chain, black rings are the labelled cryptic residues, filled points are the residues each method called positive. The cases are chosen by rule and not by eye -- the clearest joint success, the largest margin each way, and the largest labelled pocket among the units neither method locates -- where locating means per-residue F1 at least 0.5. That last case is the commonest outcome: of 192 units, 25 are located by both methods, 24 by the table field only, 13 by P2Rank only, and 130 by neither.}
+\newcommand{\FigCaptionThree}{One set of 192 paired differences, and what follows from how it is summarised. Left, the differences themselves: the field is ahead on 115 structures and behind on 77, a win rate +0.0990 above one half (p=0.004), and the shaded tails are what a 20\% trim discards --- losses averaging -0.2319 against wins of +0.1757. That asymmetry is why the mean sits at +0.0058 while the middle 60\% sits at +0.0281. Right, five location summaries of those same numbers with 95\% bootstrap intervals. The 20\% trimmed mean was chosen on the training partition and committed in 39e70d4 before this fold was read for it; the others are shown because reporting only the chosen one would hide whether the choice landed on the flattering summary. The mean is unresolved and stays in the paper: it is the functional that speaks to the discarded tail, where the field's failures are worse than P2Rank's.}
+\newcommand{\FigCaptionFour}{Four evaluation units, projected onto each chain's two longest principal axes: grey is the chain, black rings are the labelled cryptic residues, filled points are the residues each method called positive. The cases are chosen by rule and not by eye -- the clearest joint success, the largest margin each way, and the largest labelled pocket among the units neither method locates -- where locating means per-residue F1 at least 0.5. That last case is the commonest outcome: of 192 units, 25 are located by both methods, 24 by the table field only, 13 by P2Rank only, and 130 by neither.}
 \newcommand{\NSplitsCv}{4}
 \newcommand{\NFirstCv}{4}
 \newcommand{\WorstRankCv}{1}
@@ -86,6 +87,30 @@
 \newcommand{\MeanMarginRh}{+0.0055}
 \newcommand{\WorstMarginRh}{+0.0032}
 \newcommand{\RunnerUpArch}{parallel bank, uniform fusion + multi-scale gate}
+\newcommand{\PreRegNPick}{384}
+\newcommand{\PreRegFieldPick}{0.8045}
+\newcommand{\PreRegPTwoPick}{0.7700}
+\newcommand{\PreRegMeanPowerQuarter}{0.03}
+\newcommand{\PreRegTrimPowerQuarter}{0.56}
+\newcommand{\PreRegStratPowerQuarter}{0.03}
+\newcommand{\PreRegChosen}{trimmed20}
+\newcommand{\PreRegForecast}{39}
+\newcommand{\PreRegCommit}{\texttt{39e70d43547a}}
+\newcommand{\PreRegReadIndex}{5}
+\newcommand{\PreRegTestDelta}{+0.0281}
+\newcommand{\PreRegTestCI}{[+0.0117, +0.0427]}
+\newcommand{\PreRegTestP}{0.002}
+\newcommand{\PreRegTestMedian}{+0.0412}
+\newcommand{\PreRegTestMedianP}{0.006}
+\newcommand{\PreRegTestWinRate}{+0.0990}
+\newcommand{\PreRegTestWinRateP}{0.004}
+\newcommand{\PreRegNAhead}{115}
+\newcommand{\PreRegNBehind}{77}
+\newcommand{\PreRegNTrimmed}{38}
+\newcommand{\PreRegTailLoss}{-0.2319}
+\newcommand{\PreRegTailWin}{+0.1757}
+\newcommand{\PTwoTrainAuc}{0.7714}
+\newcommand{\PTwoTrainUnits}{770}
 \newcommand{\NTrainPositives}{13,524}
 \newcommand{\QuoDenseBound}{6.86}
 \newcommand{\QuoDenseWidth}{6}
@@ -145,7 +170,7 @@
 \newcommand{\GapPickUnits}{384}
 \newcommand{\NArchOnFold}{12}
 \newcommand{\NOurDetectors}{9}
-\newcommand{\NStandaloneProbes}{5}
+\newcommand{\NStandaloneProbes}{6}
 \newcommand{\FoldSE}{0.0161}
 \newcommand{\LeadInSE}{0.36}
 \newcommand{\ReadAucI}{0.7804}

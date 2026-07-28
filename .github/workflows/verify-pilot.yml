@@ -45,6 +45,8 @@ jobs:
         run: make gap
       - name: The reported functional must still be the one chosen in advance
         run: make prereg
+      - name: The fifth fold read must still cite the commit that fixed it
+        run: make read5
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

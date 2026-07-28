@@ -4,7 +4,7 @@
   "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
   "n_units": 192,
   "question": "how many times has this project scored the held-out fold, and with what",
-  "counting_rule": "Every artifact carrying per-unit metrics over the official units is an access. Detectors in the frozen telemetry count once each. Baselines we did not design (p2rank, random_bbox) are not counted as looks at the test set on our behalf. Re-scoring a frozen detector is recorded separately and is not a fold read, provided its numbers do not move; tools/run_cryptobench_apo.py --merge has reproduced all of them to four decimals.",
+  "counting_rule": "Every artifact carrying per-unit metrics over the official units is an access, and so is every artifact that draws a new inference from per-unit numbers an earlier read froze, even though the second kind scores nothing again: a fresh summary of the same numbers is a fresh use of the fold and is indexed as one. Detectors in the frozen telemetry count once each. Baselines we did not design (p2rank, random_bbox) are not counted as looks at the test set on our behalf. Re-scoring a frozen detector is recorded separately and is not a fold read, provided its numbers do not move; tools/run_cryptobench_apo.py --merge has reproduced all of them to four decimals.",
   "detectors_in_frozen_telemetry": [
     "algebraic_field",
     "algebraic_field_linear",
@@ -36,6 +36,7 @@
       "n_units": 192,
       "method": "table field variant",
       "read_index": 2,
+      "kind": "scored the fold",
       "mean_residue_auc": 0.7951676172712135,
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; see results/architecture_sweep/COUNTERATTACK_RIDGE2.json"
     },
@@ -44,6 +45,7 @@
       "n_units": 192,
       "method": "algebraic field, S_6 quotient bank",
       "read_index": 4,
+      "kind": "scored the fold",
       "mean_residue_auc": 0.7646782134332718,
       "selection_provenance": {
         "artifact": "results/architecture_sweep/COUNTERATTACK_QUOTIENT.json",
@@ -60,6 +62,7 @@
       "n_units": 192,
       "method": "table field variant",
       "read_index": 1,
+      "kind": "scored the fold",
       "mean_residue_auc": 0.7804160159029193,
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; see results/architecture_sweep/"
     },
@@ -68,19 +71,30 @@
       "n_units": 192,
       "method": "table field variant",
       "read_index": 3,
+      "kind": "scored the fold",
       "mean_residue_auc": 0.8009908985545277,
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; results/architecture_sweep/COUNTERATTACK_WIDE2.json"
+    },
+    {
+      "artifact": "results/official_fold/PREREGISTERED_READ.json",
+      "n_units": 192,
+      "method": "table_field",
+      "read_index": 5,
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "mean_residue_auc": 0.799151,
+      "selection_provenance": "39e70d43547af48dc920646f8bf8fa759278ec83"
     },
     {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",
       "n_units": 192,
       "method": "threshold_field",
       "read_index": null,
+      "kind": "scored the fold",
       "mean_residue_auc": 0.7981988887890487,
       "selection_provenance": "cluster-disjoint halves of the training fold; this is the first and only evaluation of this architecture on the official test fold"
     }
   ],
-  "n_standalone_probes": 5,
+  "n_standalone_probes": 6,
   "n_distinct_architectures_evaluated": 12,
   "indexed_read_sequence": [
     {
@@ -88,6 +102,7 @@
       "n_units": 192,
       "method": "table field variant",
       "read_index": 1,
+      "kind": "scored the fold",
       "mean_residue_auc": 0.7804160159029193,
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; see results/architecture_sweep/"
     },
@@ -96,6 +111,7 @@
       "n_units": 192,
       "method": "table field variant",
       "read_index": 2,
+      "kind": "scored the fold",
       "mean_residue_auc": 0.7951676172712135,
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; see results/architecture_sweep/COUNTERATTACK_RIDGE2.json"
     },
@@ -104,6 +120,7 @@
       "n_units": 192,
       "method": "table field variant",
       "read_index": 3,
+      "kind": "scored the fold",
       "mean_residue_auc": 0.8009908985545277,
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; results/architecture_sweep/COUNTERATTACK_WIDE2.json"
     },
@@ -112,6 +129,7 @@
       "n_units": 192,
       "method": "algebraic field, S_6 quotient bank",
       "read_index": 4,
+      "kind": "scored the fold",
       "mean_residue_auc": 0.7646782134332718,
       "selection_provenance": {
         "artifact": "results/architecture_sweep/COUNTERATTACK_QUOTIENT.json",
@@ -122,8 +140,19 @@
         "worst_delta_vs_dense_bank_on_train": 0.002428,
         "n_train_splits_beating_dense_bank": 14
       }
+    },
+    {
+      "artifact": "results/official_fold/PREREGISTERED_READ.json",
+      "n_units": 192,
+      "method": "table_field",
+      "read_index": 5,
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "mean_residue_auc": 0.799151,
+      "selection_provenance": "39e70d43547af48dc920646f8bf8fa759278ec83"
     }
   ],
-  "n_indexed_reads": 4,
-  "honest_summary": "9 of our detectors appear in the frozen telemetry, and 5 standalone probe artifacts each carry a further 192-unit evaluation. 4 of those probes carry a read index, 3 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
+  "n_indexed_reads": 5,
+  "n_probes_that_scored_the_fold": 5,
+  "n_probes_that_only_resummarised": 1,
+  "honest_summary": "9 of our detectors appear in the frozen telemetry. 6 standalone artifacts are further accesses: 5 of them scored the 192 units again, and 1 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 5 carry a read index, 4 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
 }

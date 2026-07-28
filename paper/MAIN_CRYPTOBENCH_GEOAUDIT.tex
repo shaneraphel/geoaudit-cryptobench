@@ -694,16 +694,17 @@ indicated by this failure is spatially gated, localized shear with rigid-hit
 anchoring. We report this as a falsified hypothesis rather than removing the
 ablations from the paper.
 
-\section{AI experiments: a quotient bound, a gain that did not transfer, and a
-wrong diagnosis corrected}
+\section{AI experiments: a quotient bound, a gain that did not transfer, a wrong
+diagnosis corrected, and a functional fixed in advance}
 \label{sec:ai}
 Everything in this section --- the bound, the construction that follows from it,
-the fourteen-split validation, the fourth reading of the held-out fold, and the
-four negative results --- was produced by an AI agent working inside this
-repository under the access discipline the rest of the paper describes. It is
-separated out because the provenance is different, not because the standard is:
-the artifacts are the same artifacts, the gates are the same gates, and the
-reading of the test fold is logged in the same ledger as the other three.
+the fourteen-split validation, the fourth and fifth readings of the held-out
+fold, the preregistration that licensed the fifth, and the five negative results
+--- was produced by an AI agent working inside this repository under the access
+discipline the rest of the paper describes. It is separated out because the
+provenance is different, not because the standard is: the artifacts are the same
+artifacts, the gates are the same gates, and the readings of the test fold are
+logged in the same ledger as the other three.
 
 \paragraph{The bound counts cells, and cells are a function of the symmetry.}
 Section~\ref{sec:results} attributes the counting field's deficit to capacity: a
@@ -878,6 +879,78 @@ already in hand. On fourteen training splits the solved fan-out itself is a real
 and stable gain --- mean $+0.0126$, worst $+0.0093$, positive on every split ---
 but it is a gain toward a ceiling that is still too low.
 
+\subsection{The mean was the wrong functional, and that was decided before the
+fold was read}
+\label{sec:prereg}
+Table~\ref{tab:metrics} reports the table field ahead of P2Rank by \TabAucD{}
+with an interval that contains zero, and Section~\ref{sec:results} draws the
+conservative conclusion. A reader is entitled to ask why the mean of the paired
+per-unit differences is the functional being summarised at all. It is a poor one
+here, and the case studies say why before any statistics do: the two methods
+succeed on different proteins, so the differences are heavy-tailed and their
+mean is the least stable summary available.
+
+Changing functional after seeing the fold is not available --- the choice would
+carry the maximum over however many were considered. So the choice was made on
+the training partition. That required something that had never been done:
+P2Rank had only ever been scored on the held-out fold, so the one place both
+methods had per-unit numbers was the fold whose reading is budgeted. Scoring it
+on the \PTwoTrainUnits{} training receptors costs nothing from that budget and
+puts it at \PTwoTrainAuc{} there, against \AlgAucMatchedBase{} on the fold; the
+held-out receptors are the easier of the two for it.
+
+Both arms have to be out of sample or the exercise is worthless, and the table
+field's cells are counted on the training fold. The comparison is therefore on
+the pick half of a cluster-disjoint split, with the field compiled on the fit
+half alone: \PreRegFieldPick{} against \PreRegPTwoPick{} over \PreRegNPick{}
+structures, neither arm having seen one of them. Six candidate functionals were
+then subsampled down to the \NUnits{} units the fold presents, at the
+pick-half effect and at a half, a quarter and an eighth of it, with calibration
+checked by re-running each on sign-flipped differences. The separation is not
+subtle. At a quarter effect the mean clears zero \PreRegMeanPowerQuarter{} of
+the time and a \(20\%\) trimmed mean \PreRegTrimPowerQuarter{}. Stratifying on
+chain length, the obvious label-free covariate, buys exactly nothing:
+\PreRegStratPowerQuarter{}, indistinguishable from the mean it was meant to
+stabilise.
+
+The \(20\%\) trimmed mean was preregistered and committed in \PreRegCommit{}
+before the reading tool was written; \texttt{tools/preregistered\_read.py}
+refuses to run unless that artifact is clean in the working tree and its commit
+is an ancestor of \texttt{HEAD}, so the ordering is checked rather than
+asserted. The forecast was committed with it: at the margin already published
+for this comparison the chosen statistic was expected to clear zero
+\PreRegForecast{}\% of the time, which is to say the read was predicted to fail.
+
+It did not. On reading \PreRegReadIndex{} of the held-out fold the trimmed mean
+gives \PreRegTestDelta{} with interval \PreRegTestCI{} and
+\(p = \PreRegTestP{}\). Every robust candidate agrees --- the median at
+\PreRegTestMedian{} (\(p = \PreRegTestMedianP{}\)), the win rate at
+\PreRegTestWinRate{} above one half (\(p = \PreRegTestWinRateP{}\)) --- and only
+the mean and the length-stratified mean fail to resolve. Nothing was re-scored:
+the per-unit numbers were frozen by earlier readings and this is a different
+summary of them. That is not a new scoring of the fold but it is a new
+inferential use of it, so the ledger indexes it as a read.
+
+\paragraph{What the trimmed statistic does not say.} A trimmed mean that clears
+zero while the mean does not invites one objection, and the numbers behind it
+are reported rather than left to be asked for. The field is ahead on
+\PreRegNAhead{} of the \NUnits{} structures and behind on
+\PreRegNBehind{}. The \PreRegNTrimmed{} discarded losses average
+\PreRegTailLoss{} and the \PreRegNTrimmed{} discarded wins \PreRegTailWin{}: the
+tails are asymmetric, and that asymmetry is the whole reason the mean stays at
+\TabAucD{} while the bulk sits at \PreRegTestDelta{}. So the honest reading is
+two sentences, not one. On the typical structure the field is better than
+P2Rank, and the fold now resolves that. When the field fails it fails harder
+than P2Rank does, and the mean, which is the functional that speaks to those
+failures, remains unresolved and is reported unresolved beside the trimmed one.
+Dropping it once a better-powered statistic had cleared zero would be precisely
+the selection this construction exists to prevent. The forecast, which put the
+chance of resolving at \PreRegForecast{}\%, is recorded unedited and was wrong
+in the favourable direction: it modelled a smaller held-out margin by shifting
+the whole distribution down, and what the fold actually shows is a bulk leading
+by more than the mean does with a tail dragging the mean back, which a location
+shift cannot represent.
+
 \section{Limitations}
 The comparison covers one trained baseline, executed locally; PocketMiner could
 not be included because per-residue predictions are not published. The 38
@@ -888,10 +961,17 @@ without a chain-aware residue index.
 Two of the four paired intervals between the table field and P2Rank contain
 zero, which licenses ``we cannot separate these on this fold'' and not ``these
 are equal''. All four point estimates favour the field, and on those two that is
-not evidence of superiority: with \NUnits{} units the ROC-AUC interval is
-roughly \(\pm0.02\) wide, so a margin of \TabAucD{} is exactly the size of
-difference this fold cannot resolve. A reader who wants an ordering on ROC-AUC
-or PR-AUC will not get one here and should not infer one from the sign.
+not evidence of superiority: with \NUnits{} units the interval on a mean
+difference is roughly \(\pm0.02\) wide, so a margin of \TabAucD{} is the size of
+difference this fold cannot resolve \emph{in the mean}. Section~\ref{sec:prereg}
+shows that the qualifier is doing real work on ROC-AUC. Under a \(20\%\) trimmed
+mean, chosen on the training partition and committed before the fold was read
+for it, the same paired differences give \PreRegTestDelta{} \PreRegTestCI{}.
+That resolves an ordering on the bulk of the fold and deliberately says nothing
+about its tails, where the field's failures are worse than P2Rank's and where
+the mean --- reported unresolved, and kept --- is the functional that speaks.
+Neither statement is the whole comparison and the paper reports both. On PR-AUC
+no such ordering is available and none should be inferred from the sign.
 
 Of the two intervals that do exclude zero, only one does so reliably. The F1
 difference is \TabFOneD{} \TabFOneDCI{} and its interval clears zero under
@@ -912,7 +992,12 @@ field itself, and that is not the whole story. The readings were \ReadAucI{},
 motivated by a diagnosis made on the training fold --- an unregularised solve
 that collapsed as the table pool grew, and a wire set whose ceiling the circuit
 had already reached --- and each configuration was re-ranked on the held-out
-training half before the fold was touched again. No reading was discarded.
+training half before the fold was touched again. No reading was discarded. Two
+further readings followed and are indexed with these three: a counting-field
+probe of a different lineage, and the preregistered re-summary of
+Section~\ref{sec:prereg}, which changed no detector and scored no receptor
+again but is counted because taking a new summary of frozen per-unit numbers is
+a new use of the fold.
 
 The whole story is larger, and it is the most serious threat to everything
 above. Counted from the artifacts rather than from memory,

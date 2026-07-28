@@ -41,6 +41,9 @@ FIGPROV = ROOT / "results/official_fold/FIGURE_PROVENANCE.json"
 CASES = ROOT / "results/official_fold/CASE_STUDIES.json"
 QUOTIENT_SEL = ROOT / "results/architecture_sweep/COUNTERATTACK_QUOTIENT.json"
 QUOTIENT_PROBE = ROOT / "results/official_fold/COUNTERATTACK_QUOTIENT_PROBE.json"
+PREREG = ROOT / "results/architecture_sweep/PREREGISTERED_STATISTIC.json"
+PREREG_READ = ROOT / "results/official_fold/PREREGISTERED_READ.json"
+P2TRAIN = ROOT / "results/architecture_sweep/P2RANK_TRAIN_FOLD.json"
 
 # Characters that are prose in a JSON caption and syntax in TeX. The captions
 # are generated from the artifacts, so they are not free to avoid them.
@@ -273,6 +276,60 @@ def build() -> str:
                       for r in xv["cluster_level_cv"]["per_architecture"]
                       if r["architecture"] != xv["frozen_choice"]["architecture"])
         L.append(f"\\newcommand{{\\RunnerUpArch}}{{{runner}}}")
+
+    if PREREG.exists() and PREREG_READ.exists():
+        # The functional was chosen on the training partition and the fold read
+        # under it afterwards. Both halves are emitted from their own artifacts,
+        # and the commit that fixed the choice is a macro too, because the
+        # ordering is the claim and a reader has to be able to check it.
+        pg = json.loads(PREREG.read_text())
+        rd = json.loads(PREREG_READ.read_text())
+        cmp_ = pg["comparison"]
+        cand = {c["statistic"]: c for c in pg["candidates"]}
+        L.append(f"\\newcommand{{\\PreRegNPick}}{{{cmp_['n_paired_units']}}}")
+        L.append(f"\\newcommand{{\\PreRegFieldPick}}"
+                 f"{{{cmp_['mean_field']:.4f}}}")
+        L.append(f"\\newcommand{{\\PreRegPTwoPick}}"
+                 f"{{{cmp_['mean_p2rank']:.4f}}}")
+        L.append(f"\\newcommand{{\\PreRegMeanPowerQuarter}}"
+                 f"{{{cand['mean']['power_by_effect_shrink']['0.25']:.2f}}}")
+        L.append(f"\\newcommand{{\\PreRegTrimPowerQuarter}}"
+                 f"{{{cand['trimmed20']['power_by_effect_shrink']['0.25']:.2f}}}")
+        L.append(f"\\newcommand{{\\PreRegStratPowerQuarter}}"
+                 f"{{{cand['stratified_by_length']['power_by_effect_shrink']['0.25']:.2f}}}")
+        L.append(f"\\newcommand{{\\PreRegChosen}}"
+                 f"{{{pg['preregistered']['statistic'].replace('_', ' ')}}}")
+        L.append(f"\\newcommand{{\\PreRegForecast}}"
+                 f"{{{pg['forecast']['expected_power'] * 100:.0f}}}")
+        L.append(f"\\newcommand{{\\PreRegCommit}}"
+                 f"{{\\texttt{{{rd['provenance_of_the_choice']['committed_in'][:12]}}}}}")
+        L.append(f"\\newcommand{{\\PreRegReadIndex}}"
+                 f"{{{rd['test_fold_read_index']}}}")
+        res = rd["preregistered_result"]
+        L.append(f"\\newcommand{{\\PreRegTestDelta}}{{{res['point']:+.4f}}}")
+        L.append(f"\\newcommand{{\\PreRegTestCI}}"
+                 f"{{[{res['ci_low']:+.4f}, {res['ci_high']:+.4f}]}}")
+        L.append(f"\\newcommand{{\\PreRegTestP}}"
+                 f"{{{res['p_two_sided_bootstrap']:.3f}}}")
+        for stem, key in (("Median", "median"), ("WinRate", "win_rate")):
+            c = next(x for x in rd["candidates"] if x["statistic"] == key)
+            L.append(f"\\newcommand{{\\PreRegTest{stem}}}{{{c['point']:+.4f}}}")
+            L.append(f"\\newcommand{{\\PreRegTest{stem}P}}"
+                     f"{{{c['p_two_sided_bootstrap']:.3f}}}")
+        sh = rd["shape_of_the_differences"]
+        L.append(f"\\newcommand{{\\PreRegNAhead}}{{{sh['n_field_ahead']}}}")
+        L.append(f"\\newcommand{{\\PreRegNBehind}}{{{sh['n_baseline_ahead']}}}")
+        L.append(f"\\newcommand{{\\PreRegNTrimmed}}"
+                 f"{{{sh['n_trimmed_each_side']}}}")
+        L.append(f"\\newcommand{{\\PreRegTailLoss}}"
+                 f"{{{sh['worst_losses_mean']:+.4f}}}")
+        L.append(f"\\newcommand{{\\PreRegTailWin}}"
+                 f"{{{sh['best_wins_mean']:+.4f}}}")
+    if P2TRAIN.exists():
+        p2t = json.loads(P2TRAIN.read_text())
+        L.append(f"\\newcommand{{\\PTwoTrainAuc}}"
+                 f"{{{p2t['residue_auc_mean']:.4f}}}")
+        L.append(f"\\newcommand{{\\PTwoTrainUnits}}{{{p2t['n_ok']}}}")
 
     if QUOTIENT_SEL.exists() and QUOTIENT_PROBE.exists():
         # The quotient counterattack: a construction that beat the dense bank on

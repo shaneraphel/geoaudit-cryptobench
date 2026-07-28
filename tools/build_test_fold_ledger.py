@@ -49,7 +49,15 @@ EXTERNAL = {"p2rank", "random_bbox"}
 
 
 def _per_unit_artifacts() -> list[dict]:
-    """Artifacts under results/ that hold per-unit metrics on the official fold."""
+    """Artifacts under results/ that are an access to the official fold.
+
+    Two things qualify. One is carrying per-unit metrics over the official
+    units, which is what scoring the fold produces. The other is declaring a
+    read index, which catches an artifact that draws a fresh inference from
+    per-unit numbers an earlier read already froze. The second kind re-scores
+    nothing, and leaving it out would let the fold be used again for free every
+    time a new summary of the same numbers is wanted.
+    """
     found = []
     for p in sorted(RESULTS.rglob("*.json")):
         if p.resolve() == TELEMETRY.resolve():
@@ -60,22 +68,31 @@ def _per_unit_artifacts() -> list[dict]:
             continue
         if not isinstance(d, dict):
             continue
+        rows = None
         for key in ("per_structure", "per_unit"):
             v = d.get(key)
             if (isinstance(v, list) and len(v) >= 150
                     and isinstance(v[0], dict) and "unit_id" in v[0]
                     and any("auc" in k for k in v[0])):
-                found.append({
-                    "artifact": str(p.relative_to(ROOT)),
-                    "n_units": len(v),
-                    "method": d.get("method") or "table field variant",
-                    "read_index": d.get("test_fold_read_index"),
-                    "mean_residue_auc": d.get("residue_auc_mean")
-                    or (d.get("means") or {}).get("residue_auc"),
-                    "selection_provenance": (
-                        d.get("selection_provenance") or d.get("selected_on")),
-                })
+                rows = v
                 break
+        declares = d.get("test_fold_read_index") is not None
+        if rows is None and not declares:
+            continue
+        found.append({
+            "artifact": str(p.relative_to(ROOT)),
+            "n_units": len(rows) if rows is not None else d.get("n_paired_units"),
+            "method": d.get("method") or "table field variant",
+            "read_index": d.get("test_fold_read_index"),
+            "kind": "scored the fold" if rows is not None
+            else "new inference over per-unit numbers an earlier read froze",
+            "mean_residue_auc": d.get("residue_auc_mean")
+            or (d.get("means") or {}).get("residue_auc")
+            or d.get("mean_method"),
+            "selection_provenance": (
+                d.get("selection_provenance") or d.get("selected_on")
+                or (d.get("provenance_of_the_choice") or {}).get("committed_in")),
+        })
     return found
 
 
@@ -96,7 +113,13 @@ def build() -> dict:
     # sentence true as further lineages are read.
     indexed = sorted((p for p in probes if p.get("read_index") is not None),
                      key=lambda p: p["read_index"])
-    n_table = sum(1 for p in indexed if "table field" in p["method"])
+    # The lineage is written "table field" in some artifacts and "table_field"
+    # in others, and matching only the spaced form silently undercounted the
+    # main architecture's readings.
+    n_table = sum(1 for p in indexed
+                  if "table field" in p["method"].replace("_", " "))
+    n_scored = sum(1 for p in probes if p["kind"] == "scored the fold")
+    n_resummary = len(probes) - n_scored
 
     return {
         "schema": "geoaudit.test_fold_access_ledger.v1",
@@ -107,7 +130,11 @@ def build() -> dict:
                     "and with what",
         "counting_rule": (
             "Every artifact carrying per-unit metrics over the official units "
-            "is an access. Detectors in the frozen telemetry count once each. "
+            "is an access, and so is every artifact that draws a new inference "
+            "from per-unit numbers an earlier read froze, even though the "
+            "second kind scores nothing again: a fresh summary of the same "
+            "numbers is a fresh use of the fold and is indexed as one. "
+            "Detectors in the frozen telemetry count once each. "
             "Baselines we did not design (p2rank, random_bbox) are not counted "
             "as looks at the test set on our behalf. Re-scoring a frozen "
             "detector is recorded separately and is not a fold read, provided "
@@ -121,15 +148,20 @@ def build() -> dict:
         "n_distinct_architectures_evaluated": len(set(ours) | probe_methods),
         "indexed_read_sequence": indexed,
         "n_indexed_reads": len(indexed),
+        "n_probes_that_scored_the_fold": n_scored,
+        "n_probes_that_only_resummarised": n_resummary,
         "honest_summary": (
-            f"{len(ours)} of our detectors appear in the frozen telemetry, and "
-            f"{len(probes)} standalone probe artifacts each carry a further "
-            f"192-unit evaluation. {len(indexed)} of those probes carry a read "
-            f"index, {n_table} of them readings of the architecture reported as "
-            f"the main result and {len(indexed) - n_table} of a different "
-            f"lineage, and every one is reported with the reason it was taken. "
-            f"The wider programme has looked at this fold more often than that, "
-            f"which is what this ledger is for."),
+            f"{len(ours)} of our detectors appear in the frozen telemetry. "
+            f"{len(probes)} standalone artifacts are further accesses: "
+            f"{n_scored} of them scored the 192 units again, and "
+            f"{n_resummary} drew a new inference from per-unit numbers an "
+            f"earlier read had already frozen, which scores nothing but uses "
+            f"the fold again and is indexed as such. {len(indexed)} carry a "
+            f"read index, {n_table} of them readings of the architecture "
+            f"reported as the main result and {len(indexed) - n_table} of a "
+            f"different lineage, and every one is reported with the reason it "
+            f"was taken. The wider programme has looked at this fold more "
+            f"often than that, which is what this ledger is for."),
     }
 
 

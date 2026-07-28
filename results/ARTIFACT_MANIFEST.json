@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 22,
-    "cited": 26,
+    "exploration": 20,
+    "cited": 29,
     "superseded": 4,
     "fold_access": 5
   },
-  "n_artifacts": 57,
+  "n_artifacts": 58,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -179,8 +179,8 @@
     },
     {
       "artifact": "results/architecture_sweep/P2RANK_TRAIN_FOLD.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.p2rank_train_fold.v1",
       "bytes": 610250
     },
@@ -193,8 +193,8 @@
     },
     {
       "artifact": "results/architecture_sweep/PREREGISTERED_STATISTIC.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.preregistered_statistic.v1",
       "bytes": 5756
     },
@@ -315,7 +315,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 2940
+      "bytes": 4112
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
@@ -353,6 +353,13 @@
       "bytes": 86105
     },
     {
+      "artifact": "results/official_fold/PREREGISTERED_READ.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.preregistered_read.v1",
+      "bytes": 5387
+    },
+    {
       "artifact": "results/official_fold/PUBLISHED_P2RANK_REPRODUCTION.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -378,7 +385,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 5554
+      "bytes": 6988
     },
     {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",

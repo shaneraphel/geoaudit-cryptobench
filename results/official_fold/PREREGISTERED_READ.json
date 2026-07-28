@@ -1,0 +1,143 @@
+{
+  "schema": "geoaudit.preregistered_read.v1",
+  "clinical_grade": false,
+  "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
+  "is_official_mmseqs2_10pct_test_fold": true,
+  "test_fold_read_index": 5,
+  "question": "under the functional fixed on the training partition, is the table field separable from P2Rank on the held-out fold",
+  "provenance_of_the_choice": {
+    "artifact": "results/architecture_sweep/PREREGISTERED_STATISTIC.json",
+    "committed_in": "39e70d43547af48dc920646f8bf8fa759278ec83",
+    "committed_at": "2026-07-28T18:49:23+08:00",
+    "subject": "Fix the functional before the fold is read, not after",
+    "clean_in_working_tree": true,
+    "is_ancestor_of_head": true,
+    "checked_not_asserted": "this tool exits non-zero if the artifact is dirty, uncommitted, or not an ancestor of HEAD"
+  },
+  "rescored_anything": false,
+  "why_it_is_indexed_anyway": "the per-unit numbers were already frozen by earlier reads, so no receptor was scored again, but taking a new summary of them is a new inferential use of the fold and the ledger over-counts by design",
+  "telemetry_source": "results/cryptobench_official/TELEMETRY.json",
+  "method": "table_field",
+  "baseline": "p2rank",
+  "n_paired_units": 192,
+  "mean_method": 0.799151,
+  "mean_baseline": 0.793323,
+  "n_boot": 10000,
+  "seed": 20260725,
+  "candidates": [
+    {
+      "statistic": "mean",
+      "claim": "the field leads P2Rank on average by",
+      "preregistered": false,
+      "point": 0.005828,
+      "ci_low": -0.016342,
+      "ci_high": 0.0271,
+      "p_two_sided_bootstrap": 0.6002,
+      "crosses_zero": true
+    },
+    {
+      "statistic": "median",
+      "claim": "on a typical structure the field leads P2Rank by",
+      "preregistered": false,
+      "point": 0.041163,
+      "ci_low": 0.009149,
+      "ci_high": 0.05102,
+      "p_two_sided_bootstrap": 0.0064,
+      "crosses_zero": false
+    },
+    {
+      "statistic": "trimmed10",
+      "claim": "discounting the 10% tails, the field leads P2Rank by",
+      "preregistered": false,
+      "point": 0.022346,
+      "ci_low": 0.003497,
+      "ci_high": 0.039753,
+      "p_two_sided_bootstrap": 0.0204,
+      "crosses_zero": false
+    },
+    {
+      "statistic": "trimmed20",
+      "claim": "discounting the 20% tails, the field leads P2Rank by",
+      "preregistered": true,
+      "point": 0.028052,
+      "ci_low": 0.011724,
+      "ci_high": 0.042652,
+      "p_two_sided_bootstrap": 0.002,
+      "crosses_zero": false
+    },
+    {
+      "statistic": "win_rate",
+      "claim": "the field beats P2Rank on a fraction of structures exceeding one half by",
+      "preregistered": false,
+      "point": 0.098958,
+      "ci_low": 0.03125,
+      "ci_high": 0.166667,
+      "p_two_sided_bootstrap": 0.0042,
+      "crosses_zero": false
+    },
+    {
+      "statistic": "stratified_by_length",
+      "claim": "holding chain length fixed, the field leads P2Rank on average by",
+      "preregistered": false,
+      "point": 0.005888,
+      "ci_low": -0.016417,
+      "ci_high": 0.02715,
+      "p_two_sided_bootstrap": 0.602,
+      "crosses_zero": true
+    }
+  ],
+  "shape_of_the_differences": {
+    "n": 192,
+    "n_trimmed_each_side": 38,
+    "quantiles": {
+      "0.05": -0.319957,
+      "0.1": -0.17129,
+      "0.25": -0.040428,
+      "0.5": 0.041163,
+      "0.75": 0.089456,
+      "0.9": 0.153318,
+      "0.95": 0.206602
+    },
+    "n_field_ahead": 115,
+    "n_baseline_ahead": 77,
+    "worst_losses_mean": -0.231888,
+    "best_wins_mean": 0.175704,
+    "mean_of_the_middle_60_percent": 0.028052,
+    "how_to_read_it": "the trimmed statistic says the field leads on the bulk of the fold and says nothing about the tails, which is why the mean, which does speak to them, is reported unresolved beside it. Neither number alone is the whole comparison"
+  },
+  "preregistered_result": {
+    "statistic": "trimmed20",
+    "claim": "discounting the 20% tails, the field leads P2Rank by",
+    "preregistered": true,
+    "point": 0.028052,
+    "ci_low": 0.011724,
+    "ci_high": 0.042652,
+    "p_two_sided_bootstrap": 0.002,
+    "crosses_zero": false
+  },
+  "mean_reported_beside_it": {
+    "statistic": "mean",
+    "claim": "the field leads P2Rank on average by",
+    "preregistered": false,
+    "point": 0.005828,
+    "ci_low": -0.016342,
+    "ci_high": 0.0271,
+    "p_two_sided_bootstrap": 0.6002,
+    "crosses_zero": true
+  },
+  "forecast_made_before_the_read": {
+    "published_mean_margin_on_test_fold": 0.005828,
+    "implied_shrink": 0.1689,
+    "expected_power": 0.39,
+    "conditions_on_a_held_out_number": true,
+    "used_for_selection": false,
+    "reading": "the read is more likely than not to leave the interval across zero, and that outcome is predicted here rather than explained afterwards"
+  },
+  "forecast_vs_outcome": {
+    "expected_power": 0.39,
+    "resolved": true,
+    "forecast_direction_held": false,
+    "why_it_missed": "the forecast shifted every difference by one constant, so it modelled a held-out margin smaller than the pick half's by moving the whole distribution down. What the fold actually shows is a bulk that leads by more than the mean does and a tail that drags the mean back, which a location shift cannot represent. The forecast was pessimistic for the trimmed statistic and is recorded unedited"
+  },
+  "outcome": "the preregistered statistic gives +0.0281 [+0.0117, +0.0427], which excludes zero"
+}

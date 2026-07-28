@@ -5,10 +5,11 @@
   "generator": "tools/make_official_figures.py",
   "sources": {
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
-    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "dd759adc5321b3588bca81f2692203fa7a7387d64a440f1e6da88f9ae83f4724",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "668dd526f24b5ee4e0ef3bc78d008d9c704a37d92bdbff70256194044ab12e48",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
-    "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80"
+    "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",
+    "results/official_fold/PREREGISTERED_READ.json": "f1429c683f7c4fceaa42f823d3c8ac592035002f0ae45a450ee0d70d7fdc6d60"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -20,6 +21,11 @@
       "sha256": "90058491d14770166a7f5e0af4ee38d779adf3f31bce57fd9a840e6baf1ed005",
       "bytes": 74390,
       "caption": "Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is \u00b11 standard error of a fold mean (0.0161); 12 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not."
+    },
+    "fig_functional_choice.png": {
+      "sha256": "86e28ffef98345a50ef7bc55b62bee4ca1fff391c8b51ed347a988a58837ac19",
+      "bytes": 116499,
+      "caption": "One set of 192 paired differences, and what follows from how it is summarised. Left, the differences themselves: the field is ahead on 115 structures and behind on 77, a win rate +0.0990 above one half (p=0.004), and the shaded tails are what a 20% trim discards \u2014 losses averaging -0.2319 against wins of +0.1757. That asymmetry is why the mean sits at +0.0058 while the middle 60% sits at +0.0281. Right, five location summaries of those same numbers with 95% bootstrap intervals. The 20% trimmed mean was chosen on the training partition and committed in 39e70d4 before this fold was read for it; the others are shown because reporting only the chosen one would hide whether the choice landed on the flattering summary. The mean is unresolved and stays in the paper: it is the functional that speaks to the discarded tail, where the field's failures are worse than P2Rank's."
     },
     "fig_case_studies.png": {
       "sha256": "1098a22f87a65e4812d0bc7bb2bdad8619a653b6cdae0e683e502b42495a2c3a",
