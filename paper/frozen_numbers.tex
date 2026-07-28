@@ -84,6 +84,7 @@
 \newcommand{\FigCapPairedVsPTwoRank}{Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95\% bootstrap interval and the number of shared structures. The shaded band is $\pm$1 standard error of a fold mean (0.0161); 12 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not.}
 \newcommand{\FigCapFunctionalChoice}{One set of 192 paired differences, and what follows from how it is summarised. Left, the differences themselves: the field is ahead on 115 structures and behind on 77, a win rate +0.0990 above one half (p=0.004), and the shaded tails are what a 20\% trim discards --- losses averaging -0.2319 against wins of +0.1757. That asymmetry is why the mean sits at +0.0058 while the middle 60\% sits at +0.0281. Right, five location summaries of those same numbers with 95\% bootstrap intervals. The 20\% trimmed mean was chosen on the training partition and committed in 39e70d4 before this fold was read for it; the others are shown because reporting only the chosen one would hide whether the choice landed on the flattering summary. The mean is unresolved and stays in the paper: it is the functional that speaks to the discarded tail, where the field's failures are worse than P2Rank's.}
 \newcommand{\FigCapMatchedOperatingPoint}{The F1 margin over P2Rank, before and after holding the operating point in common, on all 192 held-out structures. Left, mean per-structure F1 as a function of the fraction q of each chain called positive, for both methods. The dashed level is P2Rank's own pocket assignment, which is not a point on the curve because it is not a fraction of the chain; the published comparison is that level against our curve at q=0.09. Running the grid search that chose our q on P2Rank's training scores returns the same q=0.09, so the two matched rules a reader might ask for coincide. Right, the paired difference under each convention with 95\% bootstrap intervals: +0.0315 at the shipped operating points, +0.0140 [-0.0085, +0.0364] once both are binarised the same way, and +0.0108 against P2Rank at the best q this fold admits --- an upper bound it could not have known. Our own F1 is identical in the first two columns: our shipped call already is the matched rule at this q. The rules and the sentence to be written under each outcome were committed in c5911a3 before the fold was read for them.}
+\newcommand{\FigCapMatchedFullMetrics}{Where the reported margin came from, on all 192 held-out structures. Left, the two detectors in the precision--recall plane under three conventions, each pair joined by a line. Run as delivered, P2Rank calls 1.65 times as many residues as our rule does (8564 against 5202), which buys recall and costs precision: our precision is higher by +0.0590 and our recall lower by -0.0662, both intervals excluding zero. At a common budget both call 5202 residues and the trade is gone. Right, every paired difference with a 95\% bootstrap interval over structures. The F1 and MCC differences remain positive and contain zero under every matched convention. The matched recall difference, +0.0332 [+0.0027, +0.0646], excludes zero at p=0.033, which does not survive a Bonferroni threshold of 0.0125 over the four metrics of one convention and carried no preregistered decision rule; it is an observation about this fold and is drawn as one. Resampling PDB entries or MMseqs2 clusters instead of chains changes no interval here by more than a factor of 1.006.}
 \newcommand{\FigCapCaseStudies}{Four evaluation units, projected onto each chain's two longest principal axes: grey is the chain, black rings are the labelled cryptic residues, filled points are the residues each method called positive. The cases are chosen by rule and not by eye -- the clearest joint success, the largest margin each way, and the largest labelled pocket among the units neither method locates -- where locating means per-residue F1 at least 0.5. That last case is the commonest outcome: of 192 units, 25 are located by both methods, 24 by the table field only, 13 by P2Rank only, and 130 by neither.}
 \newcommand{\NSplitsCv}{4}
 \newcommand{\NFirstCv}{4}
@@ -156,6 +157,131 @@
 \newcommand{\MatchOracleCI}{[-0.0113, +0.0326]}
 \newcommand{\MatchOurOracleQ}{0.11}
 \newcommand{\MatchOurOracleGap}{0.0022}
+\newcommand{\FullDeployedCalledOurs}{5202}
+\newcommand{\FullDeployedCalledPTwo}{8564}
+\newcommand{\FullDeployedPrecOurs}{0.3177}
+\newcommand{\FullDeployedPrecPTwo}{0.2591}
+\newcommand{\FullDeployedPrecDelta}{+0.0590}
+\newcommand{\FullDeployedPrecCI}{[+0.0363, +0.0813]}
+\newcommand{\FullDeployedPrecP}{0.000}
+\newcommand{\FullDeployedPrecN}{186}
+\newcommand{\FullDeployedRecOurs}{0.4343}
+\newcommand{\FullDeployedRecPTwo}{0.5005}
+\newcommand{\FullDeployedRecDelta}{-0.0662}
+\newcommand{\FullDeployedRecCI}{[-0.0999, -0.0318]}
+\newcommand{\FullDeployedRecP}{0.000}
+\newcommand{\FullDeployedRecN}{192}
+\newcommand{\FullDeployedFOneOurs}{0.3334}
+\newcommand{\FullDeployedFOnePTwo}{0.3019}
+\newcommand{\FullDeployedFOneDelta}{+0.0315}
+\newcommand{\FullDeployedFOneCI}{[+0.0089, +0.0537]}
+\newcommand{\FullDeployedFOneP}{0.006}
+\newcommand{\FullDeployedFOneN}{192}
+\newcommand{\FullDeployedMCCOurs}{0.3040}
+\newcommand{\FullDeployedMCCPTwo}{0.2848}
+\newcommand{\FullDeployedMCCDelta}{+0.0247}
+\newcommand{\FullDeployedMCCCI}{[+0.0004, +0.0494]}
+\newcommand{\FullDeployedMCCP}{0.046}
+\newcommand{\FullDeployedMCCN}{186}
+\newcommand{\FullBudgetQOurs}{0.09}
+\newcommand{\FullBudgetQPTwo}{0.09}
+\newcommand{\FullBudgetCalledOurs}{5202}
+\newcommand{\FullBudgetCalledPTwo}{5202}
+\newcommand{\FullBudgetPrecOurs}{0.3177}
+\newcommand{\FullBudgetPrecPTwo}{0.3114}
+\newcommand{\FullBudgetPrecDelta}{+0.0063}
+\newcommand{\FullBudgetPrecCI}{[-0.0162, +0.0280]}
+\newcommand{\FullBudgetPrecP}{0.568}
+\newcommand{\FullBudgetPrecN}{192}
+\newcommand{\FullBudgetRecOurs}{0.4343}
+\newcommand{\FullBudgetRecPTwo}{0.4010}
+\newcommand{\FullBudgetRecDelta}{+0.0332}
+\newcommand{\FullBudgetRecCI}{[+0.0027, +0.0646]}
+\newcommand{\FullBudgetRecP}{0.033}
+\newcommand{\FullBudgetRecN}{192}
+\newcommand{\FullBudgetFOneOurs}{0.3334}
+\newcommand{\FullBudgetFOnePTwo}{0.3194}
+\newcommand{\FullBudgetFOneDelta}{+0.0140}
+\newcommand{\FullBudgetFOneCI}{[-0.0085, +0.0364]}
+\newcommand{\FullBudgetFOneP}{0.224}
+\newcommand{\FullBudgetFOneN}{192}
+\newcommand{\FullBudgetMCCOurs}{0.3040}
+\newcommand{\FullBudgetMCCPTwo}{0.2871}
+\newcommand{\FullBudgetMCCDelta}{+0.0169}
+\newcommand{\FullBudgetMCCCI}{[-0.0092, +0.0424]}
+\newcommand{\FullBudgetMCCP}{0.203}
+\newcommand{\FullBudgetMCCN}{192}
+\newcommand{\FullTunedFQOurs}{0.09}
+\newcommand{\FullTunedFQPTwo}{0.09}
+\newcommand{\FullTunedFCalledOurs}{5202}
+\newcommand{\FullTunedFCalledPTwo}{5202}
+\newcommand{\FullTunedFPrecOurs}{0.3177}
+\newcommand{\FullTunedFPrecPTwo}{0.3114}
+\newcommand{\FullTunedFPrecDelta}{+0.0063}
+\newcommand{\FullTunedFPrecCI}{[-0.0162, +0.0280]}
+\newcommand{\FullTunedFPrecP}{0.568}
+\newcommand{\FullTunedFPrecN}{192}
+\newcommand{\FullTunedFRecOurs}{0.4343}
+\newcommand{\FullTunedFRecPTwo}{0.4010}
+\newcommand{\FullTunedFRecDelta}{+0.0332}
+\newcommand{\FullTunedFRecCI}{[+0.0027, +0.0646]}
+\newcommand{\FullTunedFRecP}{0.033}
+\newcommand{\FullTunedFRecN}{192}
+\newcommand{\FullTunedFFOneOurs}{0.3334}
+\newcommand{\FullTunedFFOnePTwo}{0.3194}
+\newcommand{\FullTunedFFOneDelta}{+0.0140}
+\newcommand{\FullTunedFFOneCI}{[-0.0085, +0.0364]}
+\newcommand{\FullTunedFFOneP}{0.224}
+\newcommand{\FullTunedFFOneN}{192}
+\newcommand{\FullTunedFMCCOurs}{0.3040}
+\newcommand{\FullTunedFMCCPTwo}{0.2871}
+\newcommand{\FullTunedFMCCDelta}{+0.0169}
+\newcommand{\FullTunedFMCCCI}{[-0.0092, +0.0424]}
+\newcommand{\FullTunedFMCCP}{0.203}
+\newcommand{\FullTunedFMCCN}{192}
+\newcommand{\FullTunedMQOurs}{0.11}
+\newcommand{\FullTunedMQPTwo}{0.09}
+\newcommand{\FullTunedMCalledOurs}{6365}
+\newcommand{\FullTunedMCalledPTwo}{5202}
+\newcommand{\FullTunedMPrecOurs}{0.2955}
+\newcommand{\FullTunedMPrecPTwo}{0.3114}
+\newcommand{\FullTunedMPrecDelta}{-0.0159}
+\newcommand{\FullTunedMPrecCI}{[-0.0380, +0.0054]}
+\newcommand{\FullTunedMPrecP}{0.140}
+\newcommand{\FullTunedMPrecN}{192}
+\newcommand{\FullTunedMRecOurs}{0.4878}
+\newcommand{\FullTunedMRecPTwo}{0.4010}
+\newcommand{\FullTunedMRecDelta}{+0.0867}
+\newcommand{\FullTunedMRecCI}{[+0.0528, +0.1212]}
+\newcommand{\FullTunedMRecP}{0.000}
+\newcommand{\FullTunedMRecN}{192}
+\newcommand{\FullTunedMFOneOurs}{0.3356}
+\newcommand{\FullTunedMFOnePTwo}{0.3194}
+\newcommand{\FullTunedMFOneDelta}{+0.0162}
+\newcommand{\FullTunedMFOneCI}{[-0.0069, +0.0391]}
+\newcommand{\FullTunedMFOneP}{0.172}
+\newcommand{\FullTunedMFOneN}{192}
+\newcommand{\FullTunedMMCCOurs}{0.3075}
+\newcommand{\FullTunedMMCCPTwo}{0.2871}
+\newcommand{\FullTunedMMCCDelta}{+0.0204}
+\newcommand{\FullTunedMMCCCI}{[-0.0065, +0.0472]}
+\newcommand{\FullTunedMMCCP}{0.136}
+\newcommand{\FullTunedMMCCN}{192}
+\newcommand{\FullCallRatio}{1.65}
+\newcommand{\FullGroupsChain}{192}
+\newcommand{\FullGroupsPdb}{190}
+\newcommand{\FullGroupsClu}{190}
+\newcommand{\FullWidestClusterRatio}{1.006}
+\newcommand{\FullIntervals}{48}
+\newcommand{\FullBonfAlpha}{0.0125}
+\newcommand{\FullReadIndex}{7}
+\newcommand{\TrainGainF}{+0.0248}
+\newcommand{\TrainGainM}{+0.0120}
+\newcommand{\TrainQOurMCC}{0.11}
+\newcommand{\TrainQPTwoMCC}{0.09}
+\newcommand{\TrainQUnchangedOutOfSample}{yes}
+\newcommand{\FullForecastFOne}{+0.0068}
+\newcommand{\FullForecastMCC}{+0.0127}
 \newcommand{\GenOperator}{190}
 \newcommand{\GenChain}{77}
 \newcommand{\GenTotal}{267}
@@ -264,7 +390,7 @@
 \newcommand{\GapPickUnits}{384}
 \newcommand{\NArchOnFold}{12}
 \newcommand{\NOurDetectors}{9}
-\newcommand{\NStandaloneProbes}{7}
+\newcommand{\NStandaloneProbes}{8}
 \newcommand{\FoldSE}{0.0161}
 \newcommand{\LeadInSE}{0.36}
 \newcommand{\ReadAucI}{0.7804}

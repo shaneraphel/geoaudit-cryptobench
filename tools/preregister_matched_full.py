@@ -309,7 +309,75 @@ def build() -> dict:
     }
 
 
+def _check() -> int:
+    """Audit the committed plan, without rewriting it.
+
+    Regenerating would silently absorb any drift in the inputs, which is the
+    one thing a preregistration must not do: a plan that rewrites itself to
+    match whatever the thresholds became is not a plan. So this rebuilds in
+    memory and compares against what is committed, field by field, and reports
+    the fields that moved.
+    """
+    if not OUT.is_file():
+        print(f"MISSING {OUT.relative_to(ROOT)}")
+        return 1
+    have = json.loads(OUT.read_text())
+    if have.get("schema") != SCHEMA:
+        print(f"FAILED: schema {have.get('schema')}")
+        return 1
+    if have.get("reads_test_fold"):
+        print("FAILED: the plan claims to have read the held-out fold")
+        return 1
+    want = build()
+    # ``code_sha256`` records which version of this file wrote the plan. It is
+    # a fact about the past and comparing it against the file as it stands now
+    # would fail every time the checker itself was edited. What must hold is
+    # that it is the hash of this file as of the commit that froze the plan.
+    rel = str(Path(__file__).relative_to(ROOT))
+    plan_commit = _git("log", "-1", "--format=%H", "--",
+                       str(OUT.relative_to(ROOT)))
+    if plan_commit:
+        import hashlib
+        blob = subprocess.run(["git", "show", f"{plan_commit}:{rel}"],
+                              cwd=ROOT, capture_output=True)
+        if blob.returncode == 0:
+            at_commit = hashlib.sha256(blob.stdout).hexdigest()
+            if have.get("code_sha256") != at_commit:
+                print(f"FAILED: the plan records code_sha256 "
+                      f"{have.get('code_sha256', '')[:12]} but {rel} at the "
+                      f"commit that froze the plan hashes to {at_commit[:12]}; "
+                      f"the plan does not name the code that wrote it")
+                return 1
+    volatile = {"generated_at", "head_when_written", "code_sha256"}
+    moved = [k for k in want
+             if k not in volatile and want[k] != have.get(k)]
+    if moved:
+        print("FAILED: the committed plan no longer describes its inputs; "
+              f"these fields would change: {moved}")
+        for k in moved:
+            print(f"  - {k}\n      committed: {json.dumps(have.get(k))[:200]}"
+                  f"\n      would be:  {json.dumps(want[k])[:200]}")
+        return 1
+    # The decision rules have to name an outcome for every branch the read can
+    # take, or a read could land on an outcome with no preregistered sentence.
+    said = set(have["what_will_be_written_under_each_outcome"])
+    need = {"f1_and_mcc_both_unresolved", "f1_unresolved_mcc_survives",
+            "both_survive", "either_reverses"}
+    if said != need:
+        print(f"FAILED: the outcome sentences are {sorted(said)}, expected "
+              f"{sorted(need)}")
+        return 1
+    print(f"plan current: {len(have['conventions_to_be_read'])} conventions, "
+          f"{len(have['metrics_to_be_reported_for_every_convention'])} metrics, "
+          f"{len(have['resampling_units'])} resampling units, forecast MCC "
+          f"{have['forecast']['mcc']['predicted_matched_delta']:+.4f}")
+    return 0
+
+
 def main() -> int:
+    import sys
+    if "--check" in sys.argv[1:]:
+        return _check()
     d = build()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(d, indent=2, allow_nan=False) + "\n")

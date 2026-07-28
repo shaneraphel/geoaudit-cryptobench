@@ -1042,9 +1042,12 @@ so the convention is not quietly favouring us either.
 
 We therefore withdraw the resolved-advantage claim on F1. What remains true, and
 is what Table~\ref{tab:metrics} reports, is that the table field is ahead of
-P2Rank on all four metrics when each detector is scored at the operating point
-it ships with, and that no one of those four differences resolves once the
-threshold is held in common. This is not a technicality about statistics: a
+P2Rank on each of ROC-AUC, PR-AUC, MCC and F1 when both detectors are scored at
+the operating point each one ships with, and that neither binary difference
+resolves once the threshold is held in common. Recall is the exception and
+Section~\ref{sec:full} is where it is dealt with: under the deployment rules our
+recall is \emph{lower}, and that turns out to be most of the story. This is not
+a technicality about statistics: a
 practitioner running P2Rank gets pocket assignments, not a top-\(q\) knob, so the
 native-call comparison is the one that describes the two systems as they are
 delivered, and it stays primary for that reason. It simply cannot be quoted as
@@ -1064,6 +1067,73 @@ the more useful lesson of the two.
 \caption{\FigCapMatchedOperatingPoint{}}
 \label{fig:matched}
 \end{figure}
+
+\subsection{What the margin was made of: a calling budget, not a better verdict}
+\label{sec:full}
+An F1 difference is a summary of a confusion matrix and it does not say which
+part of the matrix moved. Two detectors can reach the same F1 by opposite
+routes, one calling few residues and being right about them, the other calling
+many and catching more of the positives. Reporting F1 alone leaves that
+indistinguishable, and at a matched calling budget it cannot happen at all ---
+which is why the budget-matched precision and recall are the numbers that say
+whether a ranking is better or merely differently thresholded.
+
+So reading \FullReadIndex{} reports precision, recall, F1 and MCC on four
+conventions: each detector as deployed; one common budget; each at the \(q\)
+that maximised pooled training F1; and each at the \(q\) that maximised pooled
+training MCC. The last of these is not the same convention as the others,
+because the two objectives do not agree: on the training fold ours peaks at
+\TrainQOurMCC{} under MCC against \FullBudgetQOurs{} under F1, while P2Rank's
+stays at \TrainQPTwoMCC{} under both. Every threshold was also re-selected on a
+cluster-disjoint half whose residues the scored field had never counted, because
+our \(q\) was chosen on the fold that filled our cells while P2Rank's was chosen
+on a fold it had never trained on, and an advantage of unknown size is not
+something to leave in a comparison the paper leans on. The selection is
+unchanged by that move for all four threshold--objective pairs, so here the
+asymmetry is worth nothing rather than worth an unknown amount.
+
+Under the deployment rules the two detectors are not doing the same amount of
+work. P2Rank calls \FullCallRatio{} times as many residues as our rule does ---
+\FullDeployedCalledPTwo{} against \FullDeployedCalledOurs{} over the fold --- and
+that buys it recall at the cost of precision. Our precision is higher by
+\FullDeployedPrecDelta{} \FullDeployedPrecCI{} and our recall lower by
+\FullDeployedRecDelta{} \FullDeployedRecCI{}; both intervals exclude zero and
+they point in opposite directions. The published F1 and MCC margins were
+summarising that trade. Holding the budget in common removes it: precision
+becomes \FullBudgetPrecDelta{} \FullBudgetPrecCI{} and recall
+\FullBudgetRecDelta{} \FullBudgetRecCI{}, so at equal cost the same ranking
+recovers somewhat more of the cryptic residues at no measurable loss of
+precision. That recall interval excludes zero at \(p=\FullBudgetRecP{}\), and it
+is reported as an observation rather than a result: recall carried no decision
+rule in the plan, the metric was singled out for emphasis only after the numbers
+existed, and \(p=\FullBudgetRecP{}\) does not survive a Bonferroni threshold of
+\FullBonfAlpha{} over the four metrics of one convention, let alone the
+\FullIntervals{} intervals the read computes in total.
+
+Giving each method the threshold its own MCC objective preferred does not change
+the verdict either. At \FullTunedMQOurs{} against \FullTunedMQPTwo{} we call
+\FullTunedMCalledOurs{} residues to P2Rank's \FullTunedMCalledPTwo{}, recall
+rises to a difference of \FullTunedMRecDelta{} \FullTunedMRecCI{}, precision
+falls to \FullTunedMPrecDelta{} \FullTunedMPrecCI{}, and F1 and MCC land at
+\FullTunedMFOneDelta{} \FullTunedMFOneCI{} and \FullTunedMMCCDelta{}
+\FullTunedMMCCCI{} --- both still positive, both still containing zero. The
+forecasts written before the read were \FullForecastFOne{} for F1 and
+\FullForecastMCC{} for MCC, each obtained by subtracting the training-fold
+tuning gain (\TrainGainF{} under F1, \TrainGainM{} under MCC) from the published
+margin. Both under-predicted the outcome by roughly half a point of F1, and the
+MCC interval was predicted in advance to contain zero, which it does.
+
+The last objection this read answers is about the resampling unit. Every interval
+in this paper resamples chains, and chains of homologous proteins are not
+independent, so a bootstrap over them can be narrower than the data warrant. The
+size of that effect is bounded by the clustering the benchmark already applies:
+the fold's \FullGroupsChain{} chains fall into \FullGroupsPdb{} PDB entries and
+\FullGroupsClu{} MMseqs2 clusters at ten per cent identity, with no group holding
+more than two chains. Resampling entries or clusters instead of chains therefore
+changes no interval in this read by more than a factor of
+\FullWidestClusterRatio{}. The concern is real in general and quantitatively
+absent here, and it is absent because the benchmark's own construction makes it
+so rather than because we checked and hoped.
 
 \subsection{\GenTotal{} invariants from two generators, and a ceiling the
 counting field declined to collect}

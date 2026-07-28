@@ -65,6 +65,12 @@ jobs:
         run: make match
       - name: The sixth fold read must reproduce the published F1 before reporting new numbers
         run: make read6
+      - name: Every threshold either method is held to must be the argmax of its own training curve
+        run: make trainop
+      - name: The seventh read's plan must still describe the thresholds it was written for
+        run: make match2
+      - name: The seventh fold read must reproduce the frozen bootstrap and not move read six
+        run: make read7
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

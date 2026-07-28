@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 20,
-    "cited": 35,
+    "exploration": 21,
+    "cited": 36,
     "superseded": 4,
-    "fold_access": 6
+    "fold_access": 7
   },
-  "n_artifacts": 65,
+  "n_artifacts": 68,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -220,6 +220,13 @@
       "bytes": 6225
     },
     {
+      "artifact": "results/architecture_sweep/PREREGISTERED_MATCHED_FULL.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.preregistered_matched_full.v1",
+      "bytes": 8745
+    },
+    {
       "artifact": "results/architecture_sweep/PREREGISTERED_MATCHED_OPERATING_POINT.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -260,6 +267,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.train_only_architecture_selection.v1",
       "bytes": 2035
+    },
+    {
+      "artifact": "results/architecture_sweep/TRAIN_OPERATING_POINTS.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.train_operating_points.v1",
+      "bytes": 25686
     },
     {
       "artifact": "results/architecture_sweep/WIDE_BUS_BANK.json",
@@ -357,7 +371,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 5509
+      "bytes": 6849
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
@@ -365,6 +379,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.independent_recomputation.v1",
       "bytes": 3225
+    },
+    {
+      "artifact": "results/official_fold/MATCHED_FULL_READ.json",
+      "class": "fold_access",
+      "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
+      "schema": "geoaudit.matched_full_read.v1",
+      "bytes": 35997
     },
     {
       "artifact": "results/official_fold/MATCHED_OPERATING_POINT_READ.json",
@@ -434,7 +455,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 7740
+      "bytes": 8444
     },
     {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",

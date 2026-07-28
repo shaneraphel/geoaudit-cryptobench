@@ -97,6 +97,8 @@ SENS = ROOT / "results/architecture_sweep/SENSITIVITY_SWEEP.json"
 P2TRAIN_OP = ROOT / "results/architecture_sweep/P2RANK_TRAIN_OPERATING_POINT.json"
 MATCH_PREREG = ROOT / "results/architecture_sweep/PREREGISTERED_MATCHED_OPERATING_POINT.json"
 MATCH_READ = ROOT / "results/official_fold/MATCHED_OPERATING_POINT_READ.json"
+FULL_READ = ROOT / "results/official_fold/MATCHED_FULL_READ.json"
+TRAIN_OP = ROOT / "results/architecture_sweep/TRAIN_OPERATING_POINTS.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
 
@@ -472,6 +474,93 @@ def build() -> str:
                  f"{{{o['table_field_best_q_on_the_held_out_fold']:.2f}}}")
         L.append(f"\\newcommand{{\\MatchOurOracleGap}}"
                  f"{{{o['our_shipped_q_is_within_of_our_oracle']:.4f}}}")
+
+    if FULL_READ.exists() and TRAIN_OP.exists():
+        # The seventh read. Four metrics on four conventions under three
+        # resampling units is 48 intervals, and a chapter that quoted them by
+        # hand would eventually quote one from the wrong cell. Every number the
+        # chapter uses is named for its convention, its metric and its
+        # resampling unit, so a mispaired citation is a missing macro rather
+        # than a plausible wrong figure.
+        fr = json.loads(FULL_READ.read_text())
+        top = json.loads(TRAIN_OP.read_text())
+        metric_stem = {"precision": "Prec", "recall": "Rec",
+                       "positive_class_f1": "FOne", "mcc": "MCC"}
+        conv_stem = {"D1_as_deployed": "Deployed",
+                     "D2_common_budget": "Budget",
+                     "D3_each_tuned_for_f1": "TunedF",
+                     "D4_each_tuned_for_mcc": "TunedM"}
+        for cid, cstem in conv_stem.items():
+            e = fr["conventions"][cid]
+            if e["q_ours"] is not None:
+                L.append(f"\\newcommand{{\\Full{cstem}QOurs}}{{{e['q_ours']:.2f}}}")
+                L.append(f"\\newcommand{{\\Full{cstem}QPTwo}}"
+                         f"{{{e['q_p2rank']:.2f}}}")
+            L.append(f"\\newcommand{{\\Full{cstem}CalledOurs}}"
+                     f"{{{e['n_residues_called']['table_field']}}}")
+            L.append(f"\\newcommand{{\\Full{cstem}CalledPTwo}}"
+                     f"{{{e['n_residues_called']['p2rank']}}}")
+            for met, mstem in metric_stem.items():
+                p = e["paired"][met]["chain"]
+                L.append(f"\\newcommand{{\\Full{cstem}{mstem}Ours}}"
+                         f"{{{e['table_field'][met]:.4f}}}")
+                L.append(f"\\newcommand{{\\Full{cstem}{mstem}PTwo}}"
+                         f"{{{e['p2rank'][met]:.4f}}}")
+                if p["delta_point"] is None:
+                    continue
+                L.append(f"\\newcommand{{\\Full{cstem}{mstem}Delta}}"
+                         f"{{{p['delta_point']:+.4f}}}")
+                L.append(f"\\newcommand{{\\Full{cstem}{mstem}CI}}"
+                         f"{{[{p['delta_ci_low']:+.4f}, "
+                         f"{p['delta_ci_high']:+.4f}]}}")
+                L.append(f"\\newcommand{{\\Full{cstem}{mstem}P}}"
+                         f"{{{p['p_two_sided_bootstrap']:.3f}}}")
+                L.append(f"\\newcommand{{\\Full{cstem}{mstem}N}}"
+                         f"{{{p['n_paired_units']}}}")
+        w = fr["where_the_deployment_rule_margin_came_from"]
+        L.append(f"\\newcommand{{\\FullCallRatio}}"
+                 f"{{{w['p2rank_calls_this_many_times_as_many']:.2f}}}")
+        for unit, stem in (("chain", "Chain"), ("pdb_entry", "Pdb"),
+                           ("uniprot_cluster", "Clu")):
+            L.append(f"\\newcommand{{\\FullGroups{stem}}}"
+                     f"{{{fr['resampling_units'][unit]}}}")
+        # The widest any interval gets when the resampling unit is coarsened.
+        # One number, because the claim is that none of them move, and a claim
+        # about all of them is best supported by its own extreme.
+        worst = max(
+            (v[u]["ratio_to_chain"]
+             for v in fr["ci_width_by_resampling_unit"].values()
+             for u in ("pdb_entry", "uniprot_cluster")
+             if v[u]["ratio_to_chain"] is not None), default=1.0)
+        L.append(f"\\newcommand{{\\FullWidestClusterRatio}}{{{worst:.3f}}}")
+        L.append(f"\\newcommand{{\\FullIntervals}}"
+                 f"{{{fr['multiplicity']['intervals_examined']}}}")
+        L.append(f"\\newcommand{{\\FullBonfAlpha}}"
+                 f"{{{fr['multiplicity']['bonferroni_alpha_over_the_four_metrics_of_one_convention']:.4f}}}")
+        L.append(f"\\newcommand{{\\FullReadIndex}}"
+                 f"{{{fr['test_fold_read_index']}}}")
+        for objective, stem in (("pooled_f1", "F"), ("pooled_mcc", "M")):
+            g = top["what_tuning_p2rank_is_worth_on_the_training_fold"][objective]
+            L.append(f"\\newcommand{{\\TrainGain{stem}}}"
+                     f"{{{g['the_tuning_is_worth']:+.4f}}}")
+        L.append(f"\\newcommand{{\\TrainQOurMCC}}"
+                 f"{{{top['selected']['table_field/pooled_mcc/full_fold']['q']:.2f}}}")
+        L.append(f"\\newcommand{{\\TrainQPTwoMCC}}"
+                 f"{{{top['selected']['p2rank/pooled_mcc/full_fold']['q']:.2f}}}")
+        # Whether choosing our threshold on a half our cells never counted
+        # moves it. If it ever does, the sentence saying it does not has to go.
+        shifts = [k for k, v in top["in_sample_optimism"].items() if not v["same"]]
+        if shifts:
+            raise SystemExit(
+                f"the out-of-sample threshold now differs from the in-sample "
+                f"one for {shifts}; the chapter says the choice is unaffected "
+                f"by which half selected it and must be rewritten")
+        L.append("\\newcommand{\\TrainQUnchangedOutOfSample}{yes}")
+        fc = fr["forecast_vs_outcome"]
+        L.append(f"\\newcommand{{\\FullForecastFOne}}"
+                 f"{{{fc['f1']['forecast']:+.4f}}}")
+        L.append(f"\\newcommand{{\\FullForecastMCC}}"
+                 f"{{{fc['mcc']['forecast']:+.4f}}}")
 
     if BANKS_CEILING.exists() and WIDE3.exists() and WIDE3_CONTROL.exists():
         # The generated banks: a lift on the linear ceiling that the counting

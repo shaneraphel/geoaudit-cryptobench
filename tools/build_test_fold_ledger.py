@@ -81,7 +81,11 @@ def _per_unit_artifacts() -> list[dict]:
             continue
         found.append({
             "artifact": str(p.relative_to(ROOT)),
-            "n_units": len(rows) if rows is not None else d.get("n_paired_units"),
+            # A re-summarising read reports its own unit count, and the two
+            # spellings both occur. Missing one left the ledger printing a
+            # blank where the size of the read belonged.
+            "n_units": (len(rows) if rows is not None
+                        else d.get("n_paired_units") or d.get("n_units")),
             "method": d.get("method") or "table field variant",
             "read_index": d.get("test_fold_read_index"),
             "kind": "scored the fold" if rows is not None

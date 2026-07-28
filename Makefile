@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6
+verify: consistency strict-json readme wires macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -77,6 +77,27 @@ match:
 # conclusion is not the sentence preregistered for the outcome it got.
 read6:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/matched_operating_point_read.py --check
+
+# Every threshold either method is held to, chosen on the training fold under
+# both objectives and again on a half the scored field never counted. Refuses an
+# artifact whose selected q is not the argmax of its own curve, that no longer
+# reproduces the shipped q, or that claims to have touched the held-out fold.
+trainop:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/train_operating_points.py --check
+
+# The plan for the seventh read. Rebuilt in memory and compared field by field
+# against what is committed, so a plan that has quietly drifted to match its
+# inputs fails instead of passing.
+match2:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/preregister_matched_full.py --check
+
+# The seventh reading: four conventions, four metrics, three resampling units.
+# Refuses a read that does not reproduce the frozen bootstrap under the
+# deployment rules, that moves the matched F1 delta read six published, whose
+# precision and recall deltas disagree in sign at a matched budget, or whose
+# verdict does not follow from its own interval.
+read7:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/matched_full_read.py --check
 
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the

@@ -1,0 +1,1103 @@
+{
+  "schema": "geoaudit.matched_full_read.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T04:29:30+0800",
+  "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
+  "is_official_mmseqs2_10pct_test_fold": true,
+  "test_fold_read_index": 7,
+  "method": "table_field",
+  "baseline": "p2rank",
+  "question": "at a matched calling budget, does the advantage show up in precision, in recall, in F1 and in MCC; does it survive when each method is tuned for MCC rather than F1; and does it survive when the resampling unit is a sequence cluster rather than a chain",
+  "rescored_anything": false,
+  "why_it_is_indexed_anyway": "re-binarising a frozen score at a new threshold, or summarising it with a metric nobody had computed, is a new statement about the held-out fold",
+  "selection_provenance": "results/architecture_sweep/PREREGISTERED_MATCHED_FULL.json",
+  "ordering": {
+    "artifact": "results/architecture_sweep/PREREGISTERED_MATCHED_FULL.json",
+    "plan_commit": "06596ba09f06637ddd4c53dd21f065232608f2a6",
+    "committed_at": "2026-07-29T04:25:20+08:00",
+    "subject": "Preregister the seventh read: four conventions, four metrics, three resampling units",
+    "head_at_read": "06596ba09f06637ddd4c53dd21f065232608f2a6",
+    "plan_is_an_ancestor_of_the_read": true,
+    "checked_with": "git log -1 -- <plan>, then merge-base --is-ancestor against HEAD"
+  },
+  "n_units": 192,
+  "resampling_units": {
+    "chain": 192,
+    "pdb_entry": 190,
+    "uniprot_cluster": 190
+  },
+  "reproduces_the_frozen_bootstrap": {
+    "residue_f1/table_field": {
+      "recomputed": 0.333412,
+      "committed": 0.333412,
+      "agrees": true
+    },
+    "residue_f1/p2rank": {
+      "recomputed": 0.301896,
+      "committed": 0.301896,
+      "agrees": true
+    },
+    "residue_mcc/table_field": {
+      "recomputed": 0.303969,
+      "committed": 0.303969,
+      "agrees": true
+    },
+    "residue_mcc/p2rank": {
+      "recomputed": 0.28475,
+      "committed": 0.28475,
+      "agrees": true
+    }
+  },
+  "reproduces_read_six_matched_f1": {
+    "recomputed": 0.014048,
+    "read_six": 0.014048,
+    "agrees": true,
+    "status": "a calibration, not a finding; the plan says so and the paper does not cite it as a result"
+  },
+  "precision_recall_sign_agreement": {
+    "D2_common_budget": {
+      "precision_delta": 0.006307,
+      "recall_delta": 0.033223,
+      "same_sign": true
+    },
+    "D3_each_tuned_for_f1": {
+      "precision_delta": 0.006307,
+      "recall_delta": 0.033223,
+      "same_sign": true
+    }
+  },
+  "conventions": {
+    "D1_as_deployed": {
+      "q_ours": null,
+      "q_p2rank": null,
+      "table_field": {
+        "precision": 0.317709,
+        "recall": 0.434252,
+        "positive_class_f1": 0.333412,
+        "mcc": 0.303969
+      },
+      "p2rank": {
+        "precision": 0.259144,
+        "recall": 0.500482,
+        "positive_class_f1": 0.301896,
+        "mcc": 0.28475
+      },
+      "n_units_scored": {
+        "precision": {
+          "table_field": 192,
+          "p2rank": 186
+        },
+        "recall": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "positive_class_f1": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "mcc": {
+          "table_field": 192,
+          "p2rank": 186
+        }
+      },
+      "n_residues_called": {
+        "table_field": 5202,
+        "p2rank": 8564
+      },
+      "paired": {
+        "precision": {
+          "chain": {
+            "delta_point": 0.058954,
+            "delta_ci_low": 0.03627,
+            "delta_ci_high": 0.081267,
+            "ci_width": 0.044998,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 186,
+            "n_paired_groups": 186,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.058954,
+            "delta_ci_low": 0.036581,
+            "delta_ci_high": 0.081485,
+            "ci_width": 0.044903,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 186,
+            "n_paired_groups": 184,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.058954,
+            "delta_ci_low": 0.036259,
+            "delta_ci_high": 0.08202,
+            "ci_width": 0.045761,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 186,
+            "n_paired_groups": 184,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.066774,
+            "delta_ci_low": 0.040052,
+            "delta_ci_high": 0.091363,
+            "ci_width": 0.051311,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 186,
+            "n_paired_groups": 186,
+            "of_groups_available": 192
+          }
+        },
+        "recall": {
+          "chain": {
+            "delta_point": -0.066229,
+            "delta_ci_low": -0.099851,
+            "delta_ci_high": -0.031793,
+            "ci_width": 0.068058,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": -0.066229,
+            "delta_ci_low": -0.100234,
+            "delta_ci_high": -0.032032,
+            "ci_width": 0.068202,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": -0.066229,
+            "delta_ci_low": -0.100081,
+            "delta_ci_high": -0.031644,
+            "ci_width": 0.068437,
+            "p_two_sided_bootstrap": 0.0004,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": -0.092869,
+            "delta_ci_low": -0.138092,
+            "delta_ci_high": -0.046756,
+            "ci_width": 0.091336,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "positive_class_f1": {
+          "chain": {
+            "delta_point": 0.031516,
+            "delta_ci_low": 0.008893,
+            "delta_ci_high": 0.053664,
+            "ci_width": 0.044771,
+            "p_two_sided_bootstrap": 0.0056,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.031516,
+            "delta_ci_low": 0.008494,
+            "delta_ci_high": 0.054282,
+            "ci_width": 0.045788,
+            "p_two_sided_bootstrap": 0.0058,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.031516,
+            "delta_ci_low": 0.009094,
+            "delta_ci_high": 0.054343,
+            "ci_width": 0.045249,
+            "p_two_sided_bootstrap": 0.0072,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.037697,
+            "delta_ci_low": 0.007864,
+            "delta_ci_high": 0.065263,
+            "ci_width": 0.057399,
+            "p_two_sided_bootstrap": 0.0138,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "mcc": {
+          "chain": {
+            "delta_point": 0.024738,
+            "delta_ci_low": 0.000384,
+            "delta_ci_high": 0.049363,
+            "ci_width": 0.048979,
+            "p_two_sided_bootstrap": 0.0462,
+            "crosses_zero": false,
+            "n_paired_units": 186,
+            "n_paired_groups": 186,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.024738,
+            "delta_ci_low": 0.000279,
+            "delta_ci_high": 0.050133,
+            "ci_width": 0.049854,
+            "p_two_sided_bootstrap": 0.0474,
+            "crosses_zero": false,
+            "n_paired_units": 186,
+            "n_paired_groups": 184,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.024738,
+            "delta_ci_low": -0.000721,
+            "delta_ci_high": 0.050261,
+            "ci_width": 0.050983,
+            "p_two_sided_bootstrap": 0.0554,
+            "crosses_zero": true,
+            "n_paired_units": 186,
+            "n_paired_groups": 184,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.025984,
+            "delta_ci_low": -0.005993,
+            "delta_ci_high": 0.056771,
+            "ci_width": 0.062764,
+            "p_two_sided_bootstrap": 0.1098,
+            "crosses_zero": true,
+            "n_paired_units": 186,
+            "n_paired_groups": 186,
+            "of_groups_available": 192
+          }
+        }
+      }
+    },
+    "D2_common_budget": {
+      "q_ours": 0.09,
+      "q_p2rank": 0.09,
+      "table_field": {
+        "precision": 0.317709,
+        "recall": 0.434252,
+        "positive_class_f1": 0.333412,
+        "mcc": 0.303969
+      },
+      "p2rank": {
+        "precision": 0.311403,
+        "recall": 0.40103,
+        "positive_class_f1": 0.319364,
+        "mcc": 0.28708
+      },
+      "n_units_scored": {
+        "precision": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "recall": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "positive_class_f1": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "mcc": {
+          "table_field": 192,
+          "p2rank": 192
+        }
+      },
+      "n_residues_called": {
+        "table_field": 5202,
+        "p2rank": 5202
+      },
+      "paired": {
+        "precision": {
+          "chain": {
+            "delta_point": 0.006307,
+            "delta_ci_low": -0.016248,
+            "delta_ci_high": 0.028035,
+            "ci_width": 0.044283,
+            "p_two_sided_bootstrap": 0.5684,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.006307,
+            "delta_ci_low": -0.016247,
+            "delta_ci_high": 0.027863,
+            "ci_width": 0.04411,
+            "p_two_sided_bootstrap": 0.5632,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.006307,
+            "delta_ci_low": -0.015419,
+            "delta_ci_high": 0.028561,
+            "ci_width": 0.04398,
+            "p_two_sided_bootstrap": 0.5608,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.016345,
+            "delta_ci_low": -0.010463,
+            "delta_ci_high": 0.041604,
+            "ci_width": 0.052067,
+            "p_two_sided_bootstrap": 0.2532,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "recall": {
+          "chain": {
+            "delta_point": 0.033223,
+            "delta_ci_low": 0.002718,
+            "delta_ci_high": 0.064626,
+            "ci_width": 0.061908,
+            "p_two_sided_bootstrap": 0.0332,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.033223,
+            "delta_ci_low": 0.001824,
+            "delta_ci_high": 0.064119,
+            "ci_width": 0.062294,
+            "p_two_sided_bootstrap": 0.04,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.033223,
+            "delta_ci_low": 0.002626,
+            "delta_ci_high": 0.063926,
+            "ci_width": 0.061299,
+            "p_two_sided_bootstrap": 0.0334,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.04193,
+            "delta_ci_low": 0.000491,
+            "delta_ci_high": 0.081415,
+            "ci_width": 0.080924,
+            "p_two_sided_bootstrap": 0.0484,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "positive_class_f1": {
+          "chain": {
+            "delta_point": 0.014048,
+            "delta_ci_low": -0.008465,
+            "delta_ci_high": 0.036423,
+            "ci_width": 0.044887,
+            "p_two_sided_bootstrap": 0.224,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.014048,
+            "delta_ci_low": -0.008458,
+            "delta_ci_high": 0.036295,
+            "ci_width": 0.044752,
+            "p_two_sided_bootstrap": 0.2264,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.014048,
+            "delta_ci_low": -0.008305,
+            "delta_ci_high": 0.036702,
+            "ci_width": 0.045007,
+            "p_two_sided_bootstrap": 0.211,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.019176,
+            "delta_ci_low": -0.010821,
+            "delta_ci_high": 0.047078,
+            "ci_width": 0.057898,
+            "p_two_sided_bootstrap": 0.2218,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "mcc": {
+          "chain": {
+            "delta_point": 0.016889,
+            "delta_ci_low": -0.009229,
+            "delta_ci_high": 0.042429,
+            "ci_width": 0.051658,
+            "p_two_sided_bootstrap": 0.2034,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.016889,
+            "delta_ci_low": -0.009028,
+            "delta_ci_high": 0.042543,
+            "ci_width": 0.051571,
+            "p_two_sided_bootstrap": 0.204,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.016889,
+            "delta_ci_low": -0.008839,
+            "delta_ci_high": 0.043076,
+            "ci_width": 0.051915,
+            "p_two_sided_bootstrap": 0.1944,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.024371,
+            "delta_ci_low": -0.009793,
+            "delta_ci_high": 0.056489,
+            "ci_width": 0.066282,
+            "p_two_sided_bootstrap": 0.1682,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        }
+      }
+    },
+    "D3_each_tuned_for_f1": {
+      "q_ours": 0.09,
+      "q_p2rank": 0.09,
+      "table_field": {
+        "precision": 0.317709,
+        "recall": 0.434252,
+        "positive_class_f1": 0.333412,
+        "mcc": 0.303969
+      },
+      "p2rank": {
+        "precision": 0.311403,
+        "recall": 0.40103,
+        "positive_class_f1": 0.319364,
+        "mcc": 0.28708
+      },
+      "n_units_scored": {
+        "precision": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "recall": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "positive_class_f1": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "mcc": {
+          "table_field": 192,
+          "p2rank": 192
+        }
+      },
+      "n_residues_called": {
+        "table_field": 5202,
+        "p2rank": 5202
+      },
+      "paired": {
+        "precision": {
+          "chain": {
+            "delta_point": 0.006307,
+            "delta_ci_low": -0.016248,
+            "delta_ci_high": 0.028035,
+            "ci_width": 0.044283,
+            "p_two_sided_bootstrap": 0.5684,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.006307,
+            "delta_ci_low": -0.016247,
+            "delta_ci_high": 0.027863,
+            "ci_width": 0.04411,
+            "p_two_sided_bootstrap": 0.5632,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.006307,
+            "delta_ci_low": -0.015419,
+            "delta_ci_high": 0.028561,
+            "ci_width": 0.04398,
+            "p_two_sided_bootstrap": 0.5608,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.016345,
+            "delta_ci_low": -0.010463,
+            "delta_ci_high": 0.041604,
+            "ci_width": 0.052067,
+            "p_two_sided_bootstrap": 0.2532,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "recall": {
+          "chain": {
+            "delta_point": 0.033223,
+            "delta_ci_low": 0.002718,
+            "delta_ci_high": 0.064626,
+            "ci_width": 0.061908,
+            "p_two_sided_bootstrap": 0.0332,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.033223,
+            "delta_ci_low": 0.001824,
+            "delta_ci_high": 0.064119,
+            "ci_width": 0.062294,
+            "p_two_sided_bootstrap": 0.04,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.033223,
+            "delta_ci_low": 0.002626,
+            "delta_ci_high": 0.063926,
+            "ci_width": 0.061299,
+            "p_two_sided_bootstrap": 0.0334,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.04193,
+            "delta_ci_low": 0.000491,
+            "delta_ci_high": 0.081415,
+            "ci_width": 0.080924,
+            "p_two_sided_bootstrap": 0.0484,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "positive_class_f1": {
+          "chain": {
+            "delta_point": 0.014048,
+            "delta_ci_low": -0.008465,
+            "delta_ci_high": 0.036423,
+            "ci_width": 0.044887,
+            "p_two_sided_bootstrap": 0.224,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.014048,
+            "delta_ci_low": -0.008458,
+            "delta_ci_high": 0.036295,
+            "ci_width": 0.044752,
+            "p_two_sided_bootstrap": 0.2264,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.014048,
+            "delta_ci_low": -0.008305,
+            "delta_ci_high": 0.036702,
+            "ci_width": 0.045007,
+            "p_two_sided_bootstrap": 0.211,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.019176,
+            "delta_ci_low": -0.010821,
+            "delta_ci_high": 0.047078,
+            "ci_width": 0.057898,
+            "p_two_sided_bootstrap": 0.2218,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "mcc": {
+          "chain": {
+            "delta_point": 0.016889,
+            "delta_ci_low": -0.009229,
+            "delta_ci_high": 0.042429,
+            "ci_width": 0.051658,
+            "p_two_sided_bootstrap": 0.2034,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.016889,
+            "delta_ci_low": -0.009028,
+            "delta_ci_high": 0.042543,
+            "ci_width": 0.051571,
+            "p_two_sided_bootstrap": 0.204,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.016889,
+            "delta_ci_low": -0.008839,
+            "delta_ci_high": 0.043076,
+            "ci_width": 0.051915,
+            "p_two_sided_bootstrap": 0.1944,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.024371,
+            "delta_ci_low": -0.009793,
+            "delta_ci_high": 0.056489,
+            "ci_width": 0.066282,
+            "p_two_sided_bootstrap": 0.1682,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        }
+      }
+    },
+    "D4_each_tuned_for_mcc": {
+      "q_ours": 0.11,
+      "q_p2rank": 0.09,
+      "table_field": {
+        "precision": 0.295476,
+        "recall": 0.487759,
+        "positive_class_f1": 0.335595,
+        "mcc": 0.307528
+      },
+      "p2rank": {
+        "precision": 0.311403,
+        "recall": 0.40103,
+        "positive_class_f1": 0.319364,
+        "mcc": 0.28708
+      },
+      "n_units_scored": {
+        "precision": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "recall": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "positive_class_f1": {
+          "table_field": 192,
+          "p2rank": 192
+        },
+        "mcc": {
+          "table_field": 192,
+          "p2rank": 192
+        }
+      },
+      "n_residues_called": {
+        "table_field": 6365,
+        "p2rank": 5202
+      },
+      "paired": {
+        "precision": {
+          "chain": {
+            "delta_point": -0.015926,
+            "delta_ci_low": -0.037989,
+            "delta_ci_high": 0.005366,
+            "ci_width": 0.043354,
+            "p_two_sided_bootstrap": 0.1402,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": -0.015926,
+            "delta_ci_low": -0.038151,
+            "delta_ci_high": 0.005395,
+            "ci_width": 0.043547,
+            "p_two_sided_bootstrap": 0.145,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": -0.015926,
+            "delta_ci_low": -0.037367,
+            "delta_ci_high": 0.006097,
+            "ci_width": 0.043464,
+            "p_two_sided_bootstrap": 0.1528,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": -0.004903,
+            "delta_ci_low": -0.031662,
+            "delta_ci_high": 0.020905,
+            "ci_width": 0.052566,
+            "p_two_sided_bootstrap": 0.6778,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "recall": {
+          "chain": {
+            "delta_point": 0.086729,
+            "delta_ci_low": 0.052817,
+            "delta_ci_high": 0.121156,
+            "ci_width": 0.068339,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.086729,
+            "delta_ci_low": 0.052289,
+            "delta_ci_high": 0.12115,
+            "ci_width": 0.068861,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.086729,
+            "delta_ci_low": 0.0524,
+            "delta_ci_high": 0.121042,
+            "ci_width": 0.068642,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.114379,
+            "delta_ci_low": 0.066445,
+            "delta_ci_high": 0.159124,
+            "ci_width": 0.092679,
+            "p_two_sided_bootstrap": 0.0,
+            "crosses_zero": false,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "positive_class_f1": {
+          "chain": {
+            "delta_point": 0.016231,
+            "delta_ci_low": -0.006867,
+            "delta_ci_high": 0.039071,
+            "ci_width": 0.045938,
+            "p_two_sided_bootstrap": 0.1724,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.016231,
+            "delta_ci_low": -0.006943,
+            "delta_ci_high": 0.039475,
+            "ci_width": 0.046418,
+            "p_two_sided_bootstrap": 0.1662,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.016231,
+            "delta_ci_low": -0.006735,
+            "delta_ci_high": 0.039196,
+            "ci_width": 0.045931,
+            "p_two_sided_bootstrap": 0.161,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.024757,
+            "delta_ci_low": -0.006145,
+            "delta_ci_high": 0.053153,
+            "ci_width": 0.059298,
+            "p_two_sided_bootstrap": 0.1248,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        },
+        "mcc": {
+          "chain": {
+            "delta_point": 0.020447,
+            "delta_ci_low": -0.006538,
+            "delta_ci_high": 0.04722,
+            "ci_width": 0.053759,
+            "p_two_sided_bootstrap": 0.1358,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          },
+          "pdb_entry": {
+            "delta_point": 0.020447,
+            "delta_ci_low": -0.006664,
+            "delta_ci_high": 0.047593,
+            "ci_width": 0.054258,
+            "p_two_sided_bootstrap": 0.1372,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "uniprot_cluster": {
+            "delta_point": 0.020447,
+            "delta_ci_low": -0.006411,
+            "delta_ci_high": 0.047597,
+            "ci_width": 0.054008,
+            "p_two_sided_bootstrap": 0.1314,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 190,
+            "of_groups_available": 190
+          },
+          "chain_trimmed_mean": {
+            "delta_point": 0.034843,
+            "delta_ci_low": -0.001218,
+            "delta_ci_high": 0.068281,
+            "ci_width": 0.069499,
+            "p_two_sided_bootstrap": 0.0562,
+            "crosses_zero": true,
+            "n_paired_units": 192,
+            "n_paired_groups": 192,
+            "of_groups_available": 192
+          }
+        }
+      }
+    }
+  },
+  "governing_convention": "D2_common_budget",
+  "governing_resampling_unit": "chain",
+  "verdicts": {
+    "positive_class_f1": "positive_but_unresolved",
+    "mcc": "positive_but_unresolved"
+  },
+  "multiplicity": {
+    "intervals_examined": 48,
+    "intervals_a_decision_rule_governs": 2,
+    "governed": [
+      "positive_class_f1",
+      "mcc"
+    ],
+    "bonferroni_alpha_over_the_four_metrics_of_one_convention": 0.0125,
+    "under_the_governing_convention": {
+      "precision": {
+        "p_nominal": 0.5684,
+        "excludes_zero_nominally": false,
+        "survives_bonferroni_over_the_four_metrics": false,
+        "a_decision_rule_governs_it": false
+      },
+      "recall": {
+        "p_nominal": 0.0332,
+        "excludes_zero_nominally": true,
+        "survives_bonferroni_over_the_four_metrics": false,
+        "a_decision_rule_governs_it": false
+      },
+      "positive_class_f1": {
+        "p_nominal": 0.224,
+        "excludes_zero_nominally": false,
+        "survives_bonferroni_over_the_four_metrics": false,
+        "a_decision_rule_governs_it": true
+      },
+      "mcc": {
+        "p_nominal": 0.2034,
+        "excludes_zero_nominally": false,
+        "survives_bonferroni_over_the_four_metrics": false,
+        "a_decision_rule_governs_it": true
+      }
+    },
+    "what_this_means_for_the_ungoverned_intervals": "an ungoverned interval that excludes zero is reported as an observation about this fold. It is not evidence at the strength a preregistered test would carry, because the metric that excluded zero was chosen for emphasis after the numbers existed, and because it is one of several intervals computed on the same confusion counts"
+  },
+  "where_the_deployment_rule_margin_came_from": {
+    "residues_called_under_the_deployment_rules": {
+      "table_field": 5202,
+      "p2rank": 8564
+    },
+    "p2rank_calls_this_many_times_as_many": 1.646,
+    "precision_delta_as_deployed": 0.058954,
+    "recall_delta_as_deployed": -0.066229,
+    "reading": "under its own pocket assignment P2Rank calls far more residues than our rule does, which buys it recall and costs it precision. Both of those differences have intervals excluding zero and they point opposite ways, so the published F1 and MCC margins were summarising a trade between two calling budgets rather than a uniformly better detector"
+  },
+  "ci_width_by_resampling_unit": {
+    "precision": {
+      "chain": {
+        "width": 0.044283,
+        "ratio_to_chain": 1.0
+      },
+      "pdb_entry": {
+        "width": 0.04411,
+        "ratio_to_chain": 0.9961
+      },
+      "uniprot_cluster": {
+        "width": 0.04398,
+        "ratio_to_chain": 0.9932
+      }
+    },
+    "recall": {
+      "chain": {
+        "width": 0.061908,
+        "ratio_to_chain": 1.0
+      },
+      "pdb_entry": {
+        "width": 0.062294,
+        "ratio_to_chain": 1.0062
+      },
+      "uniprot_cluster": {
+        "width": 0.061299,
+        "ratio_to_chain": 0.9902
+      }
+    },
+    "positive_class_f1": {
+      "chain": {
+        "width": 0.044887,
+        "ratio_to_chain": 1.0
+      },
+      "pdb_entry": {
+        "width": 0.044752,
+        "ratio_to_chain": 0.997
+      },
+      "uniprot_cluster": {
+        "width": 0.045007,
+        "ratio_to_chain": 1.0027
+      }
+    },
+    "mcc": {
+      "chain": {
+        "width": 0.051658,
+        "ratio_to_chain": 1.0
+      },
+      "pdb_entry": {
+        "width": 0.051571,
+        "ratio_to_chain": 0.9983
+      },
+      "uniprot_cluster": {
+        "width": 0.051915,
+        "ratio_to_chain": 1.005
+      }
+    }
+  },
+  "clustering_changes_nothing_materially": true,
+  "forecast_vs_outcome": {
+    "f1": {
+      "forecast": 0.006758,
+      "outcome": 0.014048
+    },
+    "mcc": {
+      "forecast": 0.012721,
+      "outcome": 0.016889,
+      "predicted_to_cross_zero": true,
+      "does_cross_zero": true
+    }
+  },
+  "outcome_key": "f1_and_mcc_both_unresolved",
+  "conclusion": "At a matched calling budget neither the F1 nor the MCC margin is resolved at this sample size. Both point estimates remain positive and both intervals contain zero, so what the fold supports is a ranking advantage in ROC-AUC and a threshold convention that accounts for most of the reported gap in the binary summaries.",
+  "decision_rules": {
+    "applies_to": [
+      "positive_class_f1",
+      "mcc"
+    ],
+    "evaluated_on": "convention D2, the common calling budget, under chain resampling, primary statistic",
+    "if_the_interval_excludes_zero": "the improvement stands as an improvement and is stated as one",
+    "if_the_point_is_positive_and_the_interval_crosses_zero": "it is stated as numerically higher but unresolved at this sample size, and no sentence in the paper may call it an improvement",
+    "if_the_point_is_zero_or_negative": "the advantage under that metric is stated to depend on the operating-point convention, and the deployment-rule number is reported only as what the deployment rules give",
+    "cluster_resampling_is_a_robustness_check": "it cannot promote a conclusion. If a chain-resampled interval crosses zero and a cluster-resampled one does not, the crossing one governs, because a narrower interval from a coarser resampling would be an artefact"
+  }
+}
