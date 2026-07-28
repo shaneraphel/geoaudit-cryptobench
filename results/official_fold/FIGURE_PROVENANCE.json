@@ -7,7 +7,8 @@
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
     "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "9ee7363738dbfe2331f4d704af68d99347b30b4d1c07cf3caa9dbc26b8a8a600",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
-    "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3"
+    "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
+    "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -19,6 +20,11 @@
       "sha256": "90058491d14770166a7f5e0af4ee38d779adf3f31bce57fd9a840e6baf1ed005",
       "bytes": 74390,
       "caption": "Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is \u00b11 standard error of a fold mean (0.0161); 11 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not."
+    },
+    "fig_case_studies.png": {
+      "sha256": "1098a22f87a65e4812d0bc7bb2bdad8619a653b6cdae0e683e502b42495a2c3a",
+      "bytes": 236281,
+      "caption": "Four evaluation units, projected onto each chain's two longest principal axes: grey is the chain, black rings are the labelled cryptic residues, filled points are the residues each method called positive. The cases are chosen by rule and not by eye -- the clearest joint success, the largest margin each way, and the largest labelled pocket among the units neither method locates -- where locating means per-residue F1 at least 0.5. That last case is the commonest outcome: of 192 units, 25 are located by both methods, 24 by the table field only, 13 by P2Rank only, and 130 by neither."
     }
   }
 }

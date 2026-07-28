@@ -1,0 +1,499 @@
+{
+  "schema": "geoaudit.case_studies.v1",
+  "clinical_grade": false,
+  "why": "a fold mean cannot say whether one method is slightly better everywhere or very different somewhere; these cases are chosen by a stated rule so that they illustrate the method rather than the author",
+  "locate_threshold_f1": 0.5,
+  "metric_source": "recomputed from data/cryptobench_apo/official_labels and results/cryptobench_official/predictions, not read from the frozen telemetry",
+  "population": {
+    "n_units": 192,
+    "n_located_by_table_field": 49,
+    "n_located_by_p2rank": 38,
+    "n_located_by_both": 25,
+    "n_located_by_neither": 130
+  },
+  "receptors_available": true,
+  "burial": {
+    "definition": "C-alpha neighbours within 10 A, excluding self",
+    "by_outcome": [
+      {
+        "outcome": "both_locate",
+        "n_units": 25,
+        "pocket_burial_mean": 19.23756273245673,
+        "chain_burial_mean": 17.930091872784008,
+        "pocket_excess_over_chain": 1.307470859672722
+      },
+      {
+        "outcome": "table_field_only",
+        "n_units": 24,
+        "pocket_burial_mean": 19.47039368583486,
+        "chain_burial_mean": 17.973322723805897,
+        "pocket_excess_over_chain": 1.497070962028966
+      },
+      {
+        "outcome": "p2rank_only",
+        "n_units": 13,
+        "pocket_burial_mean": 17.817042841919,
+        "chain_burial_mean": 17.084511134934154,
+        "pocket_excess_over_chain": 0.7325317069848505
+      },
+      {
+        "outcome": "neither_locates",
+        "n_units": 130,
+        "pocket_burial_mean": 17.805007002682444,
+        "chain_burial_mean": 17.45699770096083,
+        "pocket_excess_over_chain": 0.3480093017216185
+      }
+    ],
+    "calls_by_method": [
+      {
+        "outcome": "both_locate",
+        "method": "table_field",
+        "n_units": 25,
+        "called_excess_over_chain": 0.9701885525012507
+      },
+      {
+        "outcome": "both_locate",
+        "method": "p2rank",
+        "n_units": 25,
+        "called_excess_over_chain": 1.244921571867146
+      },
+      {
+        "outcome": "table_field_only",
+        "method": "table_field",
+        "n_units": 24,
+        "called_excess_over_chain": 0.8968787943291461
+      },
+      {
+        "outcome": "table_field_only",
+        "method": "p2rank",
+        "n_units": 24,
+        "called_excess_over_chain": 1.2934474176304174
+      },
+      {
+        "outcome": "p2rank_only",
+        "method": "table_field",
+        "n_units": 13,
+        "called_excess_over_chain": 0.4942105913078167
+      },
+      {
+        "outcome": "p2rank_only",
+        "method": "p2rank",
+        "n_units": 13,
+        "called_excess_over_chain": 1.5341280711876593
+      },
+      {
+        "outcome": "neither_locates",
+        "method": "table_field",
+        "n_units": 130,
+        "called_excess_over_chain": 0.8637935992082736
+      },
+      {
+        "outcome": "neither_locates",
+        "method": "p2rank",
+        "n_units": 124,
+        "called_excess_over_chain": 1.3654918248721148
+      }
+    ],
+    "reading": "the labelled sites both methods find are well above their chain's mean coordination and the sites neither finds are barely above it, while both methods call buried residues whatever the outcome; the shared failure mode is a burial prior that the benchmark's less buried cryptic sites do not follow"
+  },
+  "cases": [
+    {
+      "unit_id": "1zm0_A",
+      "pdb_id": "1zm0",
+      "chain": "A",
+      "n_universe": 96,
+      "n_cryptic": 11,
+      "f1": {
+        "table_field": 0.7999999999999999,
+        "p2rank": 0.7999999999999999
+      },
+      "case": "both_locate",
+      "why_this_one": "both methods locate the site",
+      "geometry": {
+        "n_residues_with_ca": 96,
+        "pocket_burial_mean": 14.363636363636363,
+        "chain_burial_mean": 15.770833333333334,
+        "methods": {
+          "table_field": {
+            "n_called": 9,
+            "centroid_offset_angstrom": 1.016265738686188,
+            "fraction_within_8a_of_pocket": 1.0,
+            "called_burial_mean": 15.444444444444445
+          },
+          "p2rank": {
+            "n_called": 9,
+            "centroid_offset_angstrom": 1.5649379641537973,
+            "fraction_within_8a_of_pocket": 1.0,
+            "called_burial_mean": 15.777777777777779
+          }
+        }
+      },
+      "called_residues": {
+        "table_field": [
+          253,
+          254,
+          255,
+          256,
+          257,
+          258,
+          264,
+          277,
+          325
+        ],
+        "p2rank": [
+          253,
+          254,
+          255,
+          256,
+          257,
+          262,
+          264,
+          277,
+          287
+        ]
+      },
+      "cryptic_residues": [
+        253,
+        255,
+        256,
+        257,
+        258,
+        259,
+        262,
+        264,
+        277,
+        287,
+        325
+      ]
+    },
+    {
+      "unit_id": "2d05_A",
+      "pdb_id": "2d05",
+      "chain": "A",
+      "n_universe": 259,
+      "n_cryptic": 22,
+      "f1": {
+        "table_field": 0.888888888888889,
+        "p2rank": 0.2926829268292683
+      },
+      "case": "table_field_only",
+      "why_this_one": "the table field locates the site and P2Rank does not",
+      "geometry": {
+        "n_residues_with_ca": 259,
+        "pocket_burial_mean": 19.227272727272727,
+        "chain_burial_mean": 18.06949806949807,
+        "methods": {
+          "table_field": {
+            "n_called": 23,
+            "centroid_offset_angstrom": 2.060886659801583,
+            "fraction_within_8a_of_pocket": 1.0,
+            "called_burial_mean": 19.52173913043478
+          },
+          "p2rank": {
+            "n_called": 19,
+            "centroid_offset_angstrom": 6.888394521600829,
+            "fraction_within_8a_of_pocket": 0.8947368421052632,
+            "called_burial_mean": 20.57894736842105
+          }
+        }
+      },
+      "called_residues": {
+        "table_field": [
+          37,
+          49,
+          53,
+          55,
+          57,
+          60,
+          64,
+          65,
+          66,
+          67,
+          72,
+          73,
+          75,
+          76,
+          77,
+          80,
+          147,
+          148,
+          175,
+          176,
+          177,
+          178,
+          219
+        ],
+        "p2rank": [
+          37,
+          38,
+          49,
+          52,
+          53,
+          56,
+          58,
+          59,
+          60,
+          62,
+          63,
+          64,
+          65,
+          68,
+          69,
+          70,
+          114,
+          116,
+          175
+        ]
+      },
+      "cryptic_residues": [
+        37,
+        53,
+        55,
+        57,
+        60,
+        64,
+        65,
+        66,
+        67,
+        72,
+        73,
+        75,
+        76,
+        77,
+        148,
+        175,
+        176,
+        177,
+        178,
+        218,
+        219,
+        228
+      ]
+    },
+    {
+      "unit_id": "6bty_B",
+      "pdb_id": "6bty",
+      "chain": "B",
+      "n_universe": 128,
+      "n_cryptic": 9,
+      "f1": {
+        "table_field": 0.09523809523809525,
+        "p2rank": 0.5714285714285714
+      },
+      "case": "p2rank_only",
+      "why_this_one": "P2Rank locates the site and the table field does not",
+      "geometry": {
+        "n_residues_with_ca": 128,
+        "pocket_burial_mean": 14.777777777777779,
+        "chain_burial_mean": 16.109375,
+        "methods": {
+          "table_field": {
+            "n_called": 12,
+            "centroid_offset_angstrom": 10.810274166280625,
+            "fraction_within_8a_of_pocket": 0.6666666666666666,
+            "called_burial_mean": 15.833333333333334
+          },
+          "p2rank": {
+            "n_called": 5,
+            "centroid_offset_angstrom": 2.1090973985435584,
+            "fraction_within_8a_of_pocket": 1.0,
+            "called_burial_mean": 16.8
+          }
+        }
+      },
+      "called_residues": {
+        "table_field": [
+          1599,
+          1601,
+          1603,
+          1607,
+          1608,
+          1610,
+          1643,
+          1644,
+          1661,
+          1662,
+          1668,
+          1683
+        ],
+        "p2rank": [
+          1597,
+          1609,
+          1611,
+          1647,
+          1655
+        ]
+      },
+      "cryptic_residues": [
+        1595,
+        1597,
+        1599,
+        1606,
+        1609,
+        1611,
+        1653,
+        1654,
+        1655
+      ]
+    },
+    {
+      "unit_id": "1bzj_A",
+      "pdb_id": "1bzj",
+      "chain": "A",
+      "n_universe": 297,
+      "n_cryptic": 56,
+      "f1": {
+        "table_field": 0.04819277108433735,
+        "p2rank": 0.13043478260869565
+      },
+      "case": "neither_locates",
+      "why_this_one": "neither method locates the site, which is the commonest outcome on this fold",
+      "geometry": {
+        "n_residues_with_ca": 297,
+        "pocket_burial_mean": 16.321428571428573,
+        "chain_burial_mean": 18.188552188552187,
+        "methods": {
+          "table_field": {
+            "n_called": 27,
+            "centroid_offset_angstrom": 12.245533641492077,
+            "fraction_within_8a_of_pocket": 0.5185185185185185,
+            "called_burial_mean": 20.40740740740741
+          },
+          "p2rank": {
+            "n_called": 36,
+            "centroid_offset_angstrom": 13.525613350470152,
+            "fraction_within_8a_of_pocket": 0.4444444444444444,
+            "called_burial_mean": 19.47222222222222
+          }
+        }
+      },
+      "called_residues": {
+        "table_field": [
+          46,
+          80,
+          81,
+          181,
+          182,
+          196,
+          198,
+          199,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          210,
+          215,
+          216,
+          217,
+          219,
+          221,
+          222,
+          225,
+          229,
+          258,
+          259,
+          262
+        ],
+        "p2rank": [
+          24,
+          27,
+          28,
+          46,
+          49,
+          112,
+          113,
+          120,
+          123,
+          125,
+          127,
+          147,
+          149,
+          154,
+          156,
+          175,
+          177,
+          181,
+          182,
+          187,
+          188,
+          189,
+          215,
+          216,
+          217,
+          219,
+          220,
+          221,
+          254,
+          258,
+          259,
+          262,
+          276,
+          279,
+          290,
+          294
+        ]
+      },
+      "cryptic_residues": [
+        4,
+        7,
+        8,
+        11,
+        16,
+        29,
+        30,
+        31,
+        32,
+        33,
+        36,
+        75,
+        76,
+        152,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        192,
+        193,
+        195,
+        196,
+        197,
+        199,
+        200,
+        232,
+        235,
+        236,
+        238,
+        239,
+        240,
+        241,
+        243,
+        264,
+        265,
+        268,
+        272,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        287,
+        289,
+        290,
+        291,
+        292
+      ]
+    }
+  ]
+}

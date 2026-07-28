@@ -1,9 +1,17 @@
 PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
-.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval freeze
-verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval
+.PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
+verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
+
+# The four case studies are chosen by a stated rule from the labels and the raw
+# per-residue output, both of which are committed, so which structures they are
+# and what they scored re-derive anywhere. The spatial blocks need the receptor
+# PDBs, which are not committed; where they are absent this checks what it can
+# and says so rather than blocking.
+cases:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/select_case_studies.py --check
 
 # The architecture was chosen on one half-split of the training fold. This holds
 # the cross-validation that says the choice survives 28 other splits to its own
@@ -50,6 +58,7 @@ freeze:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/classify_artifacts.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/freeze_bootstrap.py --all --quiet
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/crossvalidate_architecture.py --quiet
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/select_case_studies.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/emit_frozen_numbers.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/render_results_section.py --write
 

@@ -37,6 +37,8 @@ jobs:
         run: make published
       - name: The architecture choice must survive splits other than the one that chose it
         run: make crossval
+      - name: The case studies must follow from the labels and the raw predictions
+        run: make cases
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

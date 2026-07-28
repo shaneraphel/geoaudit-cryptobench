@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 20,
-    "cited": 23,
+    "cited": 24,
     "superseded": 4,
     "fold_access": 4
   },
-  "n_artifacts": 51,
+  "n_artifacts": 52,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -248,6 +248,13 @@
       "bytes": 3675
     },
     {
+      "artifact": "results/official_fold/CASE_STUDIES.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.case_studies.v1",
+      "bytes": 11218
+    },
+    {
       "artifact": "results/official_fold/COUNTERATTACK_FINAL_PROBE.json",
       "class": "fold_access",
       "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
@@ -273,7 +280,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 2075
+      "bytes": 2940
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",

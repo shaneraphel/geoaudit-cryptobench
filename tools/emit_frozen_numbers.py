@@ -29,6 +29,7 @@ WIDEPROBE = ROOT / "results/official_fold/COUNTERATTACK_WIDE_PROBE.json"
 LEDGER = ROOT / "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json"
 CROSSVAL = ROOT / "results/architecture_sweep/REPEATED_TRAIN_SELECTION.json"
 FIGPROV = ROOT / "results/official_fold/FIGURE_PROVENANCE.json"
+CASES = ROOT / "results/official_fold/CASE_STUDIES.json"
 
 # Characters that are prose in a JSON caption and syntax in TeX. The captions
 # are generated from the artifacts, so they are not free to avoid them.
@@ -174,6 +175,49 @@ def build() -> str:
                  f"{{{sel['selected']['pick_half_roc_auc']:.4f}}}")
         L.append(f"\\newcommand{{\\NTabCandidates}}"
                  f"{{{len(sel['candidates'])}}}")
+
+    if CASES.exists():
+        cs = json.loads(CASES.read_text())
+        pop = cs["population"]
+        both = pop["n_located_by_both"]
+        L.append(f"\\newcommand{{\\CaseLocateF}}"
+                 f"{{{cs['locate_threshold_f1']:g}}}")
+        L.append(f"\\newcommand{{\\NLocBoth}}{{{both}}}")
+        L.append(f"\\newcommand{{\\NLocOurs}}"
+                 f"{{{pop['n_located_by_table_field'] - both}}}")
+        # No digits in a command name: \NLocP2 is not a control sequence and
+        # the manuscript would fail to compile on it.
+        L.append(f"\\newcommand{{\\NLocPTwo}}"
+                 f"{{{pop['n_located_by_p2rank'] - both}}}")
+        L.append(f"\\newcommand{{\\NLocNeither}}"
+                 f"{{{pop['n_located_by_neither']}}}")
+        for case in cs["cases"]:
+            tag = {"both_locate": "Both", "table_field_only": "Ours",
+                   "p2rank_only": "Theirs",
+                   "neither_locates": "Neither"}[case["case"]]
+            L.append(f"\\newcommand{{\\Case{tag}}}"
+                     f"{{{_tex(case['unit_id'])}}}")
+            L.append(f"\\newcommand{{\\Case{tag}FOurs}}"
+                     f"{{{case['f1']['table_field']:.2f}}}")
+            L.append(f"\\newcommand{{\\Case{tag}FPTwo}}"
+                     f"{{{case['f1']['p2rank']:.2f}}}")
+            for method, mtag in (("table_field", "Ours"), ("p2rank", "PTwo")):
+                g = (case.get("geometry", {}).get("methods", {})
+                     .get(method) or {})
+                if g.get("centroid_offset_angstrom") is not None:
+                    L.append(f"\\newcommand{{\\Case{tag}Off{mtag}}}"
+                             f"{{{g['centroid_offset_angstrom']:.0f}}}")
+        for o in ((cs.get("burial") or {}).get("by_outcome") or []):
+            tag = {"both_locate": "Both", "table_field_only": "Ours",
+                   "p2rank_only": "Theirs",
+                   "neither_locates": "Neither"}[o["outcome"]]
+            L.append(f"\\newcommand{{\\Burial{tag}}}"
+                     f"{{{o['pocket_excess_over_chain']:+.2f}}}")
+        for m in ((cs.get("burial") or {}).get("calls_by_method") or []):
+            if m["outcome"] == "neither_locates":
+                tag = "Ours" if m["method"] == "table_field" else "PTwo"
+                L.append(f"\\newcommand{{\\BurialCallsNeither{tag}}}"
+                         f"{{{m['called_excess_over_chain']:+.2f}}}")
 
     if FIGPROV.exists():
         # The captions, so that the figure under a paragraph in the manuscript

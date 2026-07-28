@@ -37,8 +37,40 @@
 \newcommand{\TabOperatingQ}{0.09}
 \newcommand{\TabPickAuc}{0.8045}
 \newcommand{\NTabCandidates}{9}
+\newcommand{\CaseLocateF}{0.5}
+\newcommand{\NLocBoth}{25}
+\newcommand{\NLocOurs}{24}
+\newcommand{\NLocPTwo}{13}
+\newcommand{\NLocNeither}{130}
+\newcommand{\CaseBoth}{1zm0\_A}
+\newcommand{\CaseBothFOurs}{0.80}
+\newcommand{\CaseBothFPTwo}{0.80}
+\newcommand{\CaseBothOffOurs}{1}
+\newcommand{\CaseBothOffPTwo}{2}
+\newcommand{\CaseOurs}{2d05\_A}
+\newcommand{\CaseOursFOurs}{0.89}
+\newcommand{\CaseOursFPTwo}{0.29}
+\newcommand{\CaseOursOffOurs}{2}
+\newcommand{\CaseOursOffPTwo}{7}
+\newcommand{\CaseTheirs}{6bty\_B}
+\newcommand{\CaseTheirsFOurs}{0.10}
+\newcommand{\CaseTheirsFPTwo}{0.57}
+\newcommand{\CaseTheirsOffOurs}{11}
+\newcommand{\CaseTheirsOffPTwo}{2}
+\newcommand{\CaseNeither}{1bzj\_A}
+\newcommand{\CaseNeitherFOurs}{0.05}
+\newcommand{\CaseNeitherFPTwo}{0.13}
+\newcommand{\CaseNeitherOffOurs}{12}
+\newcommand{\CaseNeitherOffPTwo}{14}
+\newcommand{\BurialBoth}{+1.31}
+\newcommand{\BurialOurs}{+1.50}
+\newcommand{\BurialTheirs}{+0.73}
+\newcommand{\BurialNeither}{+0.35}
+\newcommand{\BurialCallsNeitherOurs}{+0.86}
+\newcommand{\BurialCallsNeitherPTwo}{+1.37}
 \newcommand{\FigCaptionOne}{Per-residue detection on the official CryptoBench apo test fold (192 single-chain units, MMseqs2 10\% cluster-disjoint). Bars are means over structures, ordered by ROC-AUC; whiskers are 95\% bootstrap intervals (10,000 resamples, seed 20260725). The table field is drawn in orange and P2Rank 2.5.1, the baseline, in blue. MCC is undefined for a detector that calls nothing positive; those entries are marked rather than left blank.}
 \newcommand{\FigCaptionTwo}{Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95\% bootstrap interval and the number of shared structures. The shaded band is $\pm$1 standard error of a fold mean (0.0161); 11 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not.}
+\newcommand{\FigCaptionThree}{Four evaluation units, projected onto each chain's two longest principal axes: grey is the chain, black rings are the labelled cryptic residues, filled points are the residues each method called positive. The cases are chosen by rule and not by eye -- the clearest joint success, the largest margin each way, and the largest labelled pocket among the units neither method locates -- where locating means per-residue F1 at least 0.5. That last case is the commonest outcome: of 192 units, 25 are located by both methods, 24 by the table field only, 13 by P2Rank only, and 130 by neither.}
 \newcommand{\NSplitsCv}{4}
 \newcommand{\NFirstCv}{4}
 \newcommand{\WorstRankCv}{1}

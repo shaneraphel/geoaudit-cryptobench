@@ -539,6 +539,51 @@ these counts is in
 \texttt{results/architecture\_sweep/REPEATED\_TRAIN\_SELECTION.json}, and
 \texttt{make crossval} rejects a summary that does not follow from them.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_case_studies.png}
+\caption{\FigCaptionThree{}}
+\label{fig:cases}
+\end{figure}
+
+\paragraph{What the fold mean is made of.} A difference in a fold mean does not
+say whether one method is slightly better on the same structures or very
+different on different ones, and here it is the second. Taking per-residue F1
+\(\ge \CaseLocateF{}\) as locating the site --- a low bar, stated rather than
+tuned --- \NLocBoth{} of the \NUnits{} units are located by both methods,
+\NLocOurs{} by the table field alone, \NLocPTwo{} by P2Rank alone, and
+\NLocNeither{} by neither. The disagreement is therefore not a margin on shared
+successes: the two methods succeed on substantially different structures, and
+the modal outcome, by a factor of three over everything else, is that both fail.
+
+Figure~\ref{fig:cases} shows one unit from each outcome, chosen by rule rather
+than by eye --- the clearest joint success, the largest F1 margin each way, and
+the largest labelled pocket among the units neither locates. On \CaseBoth{} both
+methods place their calls on the site (F1 \CaseBothFOurs{} and \CaseBothFPTwo{},
+call centroids \CaseBothOffOurs{} and \CaseBothOffPTwo{}\,\AA{} from the pocket
+centre). On \CaseOurs{} the field is on the site and P2Rank is beside it
+(\CaseOursFOurs{} against \CaseOursFPTwo{}, centroids \CaseOursOffOurs{} and
+\CaseOursOffPTwo{}\,\AA{} out); on \CaseTheirs{} the positions are reversed
+(\CaseTheirsFOurs{} against \CaseTheirsFPTwo{}, \CaseTheirsOffOurs{} and
+\CaseTheirsOffPTwo{}\,\AA{}). Neither failure is a diffuse one: in both, the
+losing method commits to a compact region that is simply the wrong region.
+
+\paragraph{Both methods share the failure, and it is a burial prior.} Grouping
+the fold by outcome and measuring how buried each labelled site is --- C-alpha
+neighbours within 10\,\AA{}, against the same chain's mean --- the sites both
+methods find sit \BurialBoth{} above their chain's mean coordination, and the
+sites neither finds sit \BurialNeither{} above it. Both methods call buried
+residues regardless: on the units neither locates, the table field's calls are
+\BurialCallsNeitherOurs{} above the chain mean and P2Rank's
+\BurialCallsNeitherPTwo{}. So this is one shared prior rather than two methods
+disagreeing. It pays where the cryptic site happens to be buried and both fail
+together where it is not, which is most of the fold. That is a limitation of the
+class of method, not of one implementation, and no reordering of the table in
+this paper addresses it. Every count here is recomputed from the committed
+labels and raw per-residue output by
+\texttt{tools/select\_case\_studies.py}, and \texttt{make cases} rejects a
+figure or a sentence that stops following from them.
+
 \paragraph{What limits the counting field.} Holding the estimator fixed and
 widening the invariant word from six to \NAlgFeatures{} moves a closed-form
 linear functional of the same invariants from ROC-AUC \FisherSix{} to \FisherAll{} on this
