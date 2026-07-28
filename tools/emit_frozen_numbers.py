@@ -7,9 +7,17 @@ the second copy does.
 
 This tool emits ``paper/frozen_numbers.tex``, a file of ``\\newcommand`` macros
 read straight out of ``results/cryptobench_official/BOOTSTRAP_CI.json``. The
-manuscript cites ``\\AlgAuc`` and never a literal. ``tests/test_frozen_numbers``
-regenerates the file and fails if it differs from the committed one, so a
-manuscript number can only change when the artifact changes.
+manuscript cites ``\\AlgAuc`` and never a literal. ``make macros`` regenerates
+the file and fails if it differs from the committed one, so a manuscript number
+can only change when the artifact changes.
+
+Regenerating and comparing is not sufficient on its own, which one refactor here
+demonstrated: an edit that cut the emitter down to 36 of its 475 macros passed
+the comparison, because the committed file had been rewritten by the same broken
+code. The check that catches it reads the other end. Every macro the manuscript
+cites must be defined here, so dropping a macro fails, and so does a macro name
+LaTeX cannot accept -- an earlier revision emitted ``\\NLocP2``, and a control
+sequence cannot contain a digit.
 
 Usage: PYTHONPATH=src python3.12 tools/emit_frozen_numbers.py [--check]
 """
@@ -17,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,6 +64,7 @@ PAIRWISE = ROOT / "results/architecture_sweep/PAIRWISE_READOUT_SELECTION.json"
 SEEDPROBE = ROOT / "results/official_fold/SEED_SENSITIVITY.json"
 SEEDPROBE = ROOT / "results/official_fold/SEED_SENSITIVITY.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
+SRC = ROOT / "paper"
 
 # macro stem -> (method key in the artifact)
 METHODS = {
@@ -394,12 +404,35 @@ def build() -> str:
     return "\n".join(L) + "\n"
 
 
+# \AA is TeX's own; every other \Name{} in the manuscript is ours to define.
+_BUILTIN = {"AA"}
+
+
+def _undefined(text: str) -> list[str]:
+    """Macros the manuscript cites that this file does not define."""
+    defined = set(re.findall(r"\\newcommand\{\\([A-Za-z]+)\}", text))
+    out = []
+    for tex in sorted(SRC.glob("*.tex")):
+        if tex.name == OUT.name:
+            continue
+        cited = set(re.findall(r"\\([A-Z][A-Za-z]*)\{\}", tex.read_text()))
+        for name in sorted(cited - defined - _BUILTIN):
+            out.append(f"{tex.name} cites \\{name}{{}}, which is never defined")
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true",
                     help="exit non-zero if the committed file is stale")
     args = ap.parse_args(argv)
     text = build()
+    missing = _undefined(text)
+    if missing:
+        print(f"INCOMPLETE {OUT.relative_to(ROOT)}:")
+        for line in missing:
+            print(f"  - {line}")
+        return 1
     if args.check:
         if not OUT.exists():
             print(f"MISSING {OUT.relative_to(ROOT)}")

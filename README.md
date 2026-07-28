@@ -425,6 +425,7 @@ all fail-closed.
 | Independent recomputation | `make recompute` | a frozen per-unit metric, per-method mean or paired interval does not follow from the committed labels and raw scores |
 | Published baseline | `make published` | recomputed under CryptoBench's pooled convention, P2Rank misses the published AUC/AUPRC/ACC/FPR/MCC by more than 0.03, or TPR by more than 0.10 |
 | Residue identity | `make residues` | the number of labelled residues with no coordinates in their apo structure moves off its pin |
+| Manuscript macros | `make macros` | a frozen number no longer matches its artifact, or the manuscript cites a macro the generator does not define |
 | Environment pins | `make environment` | any committed dependency declaration names a version the measured stack contradicts |
 | Case studies | `make cases` | the selected cases or the burial statistics stop following from the committed labels and raw predictions |
 | Architecture selection | `make crossval` | the cross-validation summary does not follow from its own per-split rankings, or no longer names the architecture the frozen selection chose |
