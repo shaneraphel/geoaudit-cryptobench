@@ -41,6 +41,8 @@ jobs:
         run: make cases
       - name: The quotient counterattack must recompute its own capacity arithmetic
         run: make quotient
+      - name: The gap diagnosis must still say capacity is not what binds
+        run: make gap
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

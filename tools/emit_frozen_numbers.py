@@ -61,6 +61,7 @@ def _roman(i: int) -> str:
 TELEMETRY = ROOT / "results/cryptobench_official/TELEMETRY.json"
 SELECTION = ROOT / "results/architecture_sweep/TRAIN_ONLY_SELECTION.json"
 CEILING = ROOT / "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json"
+GAP = ROOT / "results/architecture_sweep/GAP_DECOMPOSITION.json"
 READOUT = ROOT / "results/architecture_sweep/FINAL_READOUT_SELECTION.json"
 PAIRWISE = ROOT / "results/architecture_sweep/PAIRWISE_READOUT_SELECTION.json"
 SEEDPROBE = ROOT / "results/official_fold/SEED_SENSITIVITY.json"
@@ -323,6 +324,69 @@ def build() -> str:
             L.append(f"\\newcommand{{\\QuoD{tag}CI}}"
                      f"{{[{d['ci_low']:+.4f}, {d['ci_high']:+.4f}]}}")
             L.append(f"\\newcommand{{\\QuoD{tag}P}}{{{d['p_two_sided']:.4f}}}")
+
+    if GAP.exists():
+        # The manuscript attributes the counting field's deficit to capacity.
+        # This artifact is what checked that attribution, and it is the reason
+        # the attribution changed, so every number in that argument is read
+        # from it rather than typed.
+        gp = json.loads(GAP.read_text())
+        dec, cells = gp["decomposition"], gp["decomposition"]["cells"]
+        L.append(f"\\newcommand{{\\GapTablesSmall}}"
+                 f"{{{cells['tables_35']['roc_auc']:.4f}}}")
+        L.append(f"\\newcommand{{\\GapLinearSmall}}"
+                 f"{{{cells['linear_35']['roc_auc']:.4f}}}")
+        L.append(f"\\newcommand{{\\GapLinearWide}}"
+                 f"{{{cells['linear_172']['roc_auc']:.4f}}}")
+        L.append(f"\\newcommand{{\\GapTablesWide}}"
+                 f"{{{cells['tables_172']['roc_auc']:.4f}}}")
+        L.append(f"\\newcommand{{\\GapWideWires}}"
+                 f"{{{cells['linear_172']['n_wires']}}}")
+        L.append(f"\\newcommand{{\\GapExtraWires}}"
+                 f"{{{cells['linear_172']['n_wires'] - cells['tables_35']['n_wires']}}}")
+        L.append(f"\\newcommand{{\\GapWideTables}}"
+                 f"{{{cells['tables_172']['n_tables']}}}")
+        L.append(f"\\newcommand{{\\GapReadout}}{{{dec['readout_effect']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GapInput}}{{{dec['input_effect']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GapTotal}}{{{dec['total']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GapReadoutShare}}"
+                 f"{{{100 * dec['readout_share']:.0f}}}")
+        L.append(f"\\newcommand{{\\GapInputShare}}"
+                 f"{{{100 * dec['input_share']:.0f}}}")
+        fan = gp["fanout_price"]["banks"]
+        L.append(f"\\newcommand{{\\GapFanoutPrice}}"
+                 f"{{{fan['dense_L4']['price']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GapFanoutSolved}}"
+                 f"{{{fan['dense_L4']['solved_integer_fanout']:.4f}}}")
+        L.append(f"\\newcommand{{\\GapFanoutQuo}}"
+                 f"{{{fan['quotient_L864']['price']:+.4f}}}")
+        cap = gp["capacity_probes"]
+        sc = cap["compile_scaling"]["rows"]
+        L.append(f"\\newcommand{{\\GapScaleSmallPos}}{{{sc[0]['n_fit_positives']}}}")
+        L.append(f"\\newcommand{{\\GapScaleSmallGain}}{{{sc[0]['gain']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GapScaleBigPos}}{{{sc[-1]['n_fit_positives']}}}")
+        L.append(f"\\newcommand{{\\GapScaleBigGain}}{{{sc[-1]['gain']:+.4f}}}")
+        mg = max(cap["marginal_tables"]["rows"], key=lambda r: r["roc_auc"])
+        L.append(f"\\newcommand{{\\GapMarginalLevels}}{{{mg['n_levels']}}}")
+        L.append(f"\\newcommand{{\\GapMarginalAuc}}{{{mg['roc_auc']:.4f}}}")
+        L.append(f"\\newcommand{{\\GapMarginalTables}}{{{mg['n_tables']}}}")
+        L.append(f"\\newcommand{{\\GapUnseenPct}}"
+                 f"{{{100 * cap['unseen_cells']['dense_L4_fraction']:.2f}}}")
+        dif = gp["difficulty"]
+        hard_tr = dif["train_pick_half"]["bins"][0]
+        hard_te = dif["test_fold"]["bins"][0]
+        L.append(f"\\newcommand{{\\GapHardCut}}{{{hard_tr['hi']:.2f}}}")
+        L.append(f"\\newcommand{{\\GapHardTrainN}}{{{hard_tr['n']}}}")
+        L.append(f"\\newcommand{{\\GapHardTrainGain}}{{{hard_tr['mean_gain']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GapHardTestN}}{{{hard_te['n']}}}")
+        L.append(f"\\newcommand{{\\GapHardTestGain}}{{{hard_te['mean_gain']:+.4f}}}")
+        easy_tr = dif["train_pick_half"]["bins"][-2]
+        easy_te = dif["test_fold"]["bins"][-2]
+        L.append(f"\\newcommand{{\\GapEasyTrainGain}}{{{easy_tr['mean_gain']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GapEasyTestGain}}{{{easy_te['mean_gain']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GapReweighted}}"
+                 f"{{{dif['reweighted_test_gain']:+.4f}}}")
+        L.append(f"\\newcommand{{\\GapPickUnits}}{{{gp['split']['n_pick_units']}}}")
 
     if LEDGER.exists():
         # How often the held-out fold has been scored, and by how many

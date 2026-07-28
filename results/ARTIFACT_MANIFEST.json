@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 20,
-    "cited": 25,
+    "cited": 26,
     "superseded": 4,
     "fold_access": 5
   },
-  "n_artifacts": 54,
+  "n_artifacts": 55,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -162,6 +162,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.full_expansion.v1",
       "bytes": 2193
+    },
+    {
+      "artifact": "results/architecture_sweep/GAP_DECOMPOSITION.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.gap_decomposition.v1",
+      "bytes": 7606
     },
     {
       "artifact": "results/architecture_sweep/MULTISCALE_GATE.json",

@@ -430,6 +430,7 @@ all fail-closed.
 | Case studies | `make cases` | the selected cases or the burial statistics stop following from the committed labels and raw predictions |
 | Architecture selection | `make crossval` | the cross-validation summary does not follow from its own per-split rankings, or no longer names the architecture the frozen selection chose |
 | Quotient counterattack | `make quotient` | the capacity arithmetic stops recomputing, the fourteen splits stop ranking one candidate pool, or the selection artifact starts claiming a test-fold read |
+| Gap diagnosis | `make gap` | the 2×2 decomposition stops adding up, the fan-out price flips sign, or the diagnostic claims a test-fold read |
 
 Current state: `verify_claims` all checks pass; 141 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:
@@ -554,6 +555,42 @@ moves the training pick half by +0.0005, and regrouping the invariants by
 measured correlation rather than by what they measure costs 0.046. The
 construction was also found on a single split, where it measured +0.0132 against
 the +0.0087 it holds over fourteen; both numbers are in the selection artifact.
+
+### 4.4 The capacity attribution does not survive being tested
+
+`tools/gap_decomposition.py` asks whether the capacity bound is what binds, on
+the same accession-disjoint pick half and with no test-fold read. Four
+measurements say it is not. Raising the admissible width from 6 to 41 gains on
+every training split and nothing on the fold. Removing the bound entirely with
+35 one-digit tables at 64 levels scores 0.7001 against the interaction bank's
+0.7446. Only 0.15 % of held-out residues address an empty cell.
+
+What does bind is the fan-out. Replacing the integer Gini rank with the solved
+integer fan-out `table_field` uses moves the dense bank from 0.7446 to 0.7598
+(+0.0152) on that half — most of the same-invariant readout gap, bought by
+changing six numbers. The quotient bank gets −0.0015 from the same substitution,
+so the two devices buy the same statistical good and do not compose. Separately,
+41 % of the published distance to the fitted linear readout is not a readout
+difference at all: that readout is handed 172 wires, of which the counting field
+sees 35.
+
+The quotient's non-transfer also has a measured shape. Its gain lives on
+structures the dense bank already fails (+0.0546 below 0.55 on the pick half,
++0.0277 on the fold) and is negative where the bank already succeeds. Reweighting
+the fold to the training difficulty mix recovers 0.0000 of the shortfall:
+composition is not the story. A structure held out under the benchmark's own
+clustering is hard because it is unfamiliar, and pooling counts does not help
+with unfamiliar. Any device whose benefit is statistical efficiency will be
+over-credited by cross-validation here.
+
+A harder bound sits above the fan-out. The Fisher discriminant of the same 35
+invariants scores 0.783 on the official fold
+(`results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json`), below P2Rank at
+0.793. So no linear readout of these invariants can overtake P2Rank here, and a
+595-pair counting bank with solved fan-out reaches only 0.7725 on the training
+pick half — matching the continuous linear form of the same ranks, not beating
+it. Beating P2Rank with a counting field therefore requires new invariants, not
+a better address or a better fan-out of the ones already in hand.
 
 ---
 

@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient
+verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -26,6 +26,12 @@ crossval:
 # artifact still says it never read the test fold.
 quotient:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/counterattack_quotient_tables.py --check
+
+# The gap diagnosis: capacity is not what binds, the fan-out is, and the fitted
+# linear readout is handed wires the counting field never sees. Refuses an
+# artifact that claims a test-fold read or whose arithmetic no longer adds up.
+gap:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/gap_decomposition.py --audit
 
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the

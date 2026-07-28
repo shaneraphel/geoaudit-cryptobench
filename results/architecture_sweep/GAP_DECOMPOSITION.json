@@ -1,0 +1,233 @@
+{
+  "schema": "geoaudit.gap_decomposition.v1",
+  "clinical_grade": false,
+  "question": "whether the capacity bound is what limits the counting field, and what does",
+  "test_fold_reads": 0,
+  "split": {
+    "seed": 20260725,
+    "n_fit_units": 386,
+    "n_pick_units": 384,
+    "n_fit_residues": 118716,
+    "n_pick_residues": 116122,
+    "note": "accession-disjoint; the same split the architecture selection used"
+  },
+  "decomposition": {
+    "question": "how much of the counting field's deficit is the estimator and how much is that the linear readout is handed more wires",
+    "population": "cluster-disjoint pick half of the training fold",
+    "cells": {
+      "tables_35": {
+        "roc_auc": 0.7446,
+        "n_wires": 35,
+        "n_tables": 6,
+        "readout": "Gini-rank fan-out"
+      },
+      "linear_35": {
+        "roc_auc": 0.7702,
+        "n_wires": 35,
+        "readout": "regularised linear functional"
+      },
+      "linear_172": {
+        "roc_auc": 0.788,
+        "n_wires": 172,
+        "readout": "regularised linear functional"
+      },
+      "tables_172": {
+        "roc_auc": 0.7413,
+        "n_wires": 172,
+        "n_tables": 29,
+        "readout": "Gini-rank fan-out"
+      }
+    },
+    "readout_effect": 0.0257,
+    "input_effect": 0.0177,
+    "total": 0.0434,
+    "readout_share": 0.592,
+    "input_share": 0.408,
+    "finding": "the 172-wire expansion is not the same invariants: it adds 7 published residue constants, a training propensity counter, and the 6/14/20 A neighbourhood mean of each, and those inputs carry a measurable part of the reported gap"
+  },
+  "fanout_price": {
+    "question": "what the algebraic field's defining property --- no real-valued coefficient anywhere on the datapath --- costs",
+    "solved_fanout": {
+      "ridge": 0.03,
+      "cap": 32,
+      "note": "the fan-out table_field solves for"
+    },
+    "banks": {
+      "dense_L4": {
+        "n_tables": 6,
+        "gini_rank": 0.7446,
+        "solved_integer_fanout": 0.7598,
+        "price": 0.0152
+      },
+      "quotient_L864": {
+        "n_tables": 18,
+        "gini_rank": 0.7578,
+        "solved_integer_fanout": 0.7563,
+        "price": -0.0015
+      }
+    },
+    "finding": "the dense bank recovers most of the same-invariant readout gap from the fan-out alone, while the quotient bank recovers almost nothing: the two devices buy the same thing and do not add"
+  },
+  "capacity_probes": {
+    "question": "is the capacity bound what binds",
+    "compile_scaling": {
+      "note": "if the quotient's advantage were a small-sample effect it would shrink as the compile set grows",
+      "rows": [
+        {
+          "fraction": 0.125,
+          "n_fit_positives": 878,
+          "dense": 0.7393,
+          "quotient": 0.7487,
+          "gain": 0.0094
+        },
+        {
+          "fraction": 0.25,
+          "n_fit_positives": 1645,
+          "dense": 0.7426,
+          "quotient": 0.7549,
+          "gain": 0.0123
+        },
+        {
+          "fraction": 0.5,
+          "n_fit_positives": 3343,
+          "dense": 0.7426,
+          "quotient": 0.7567,
+          "gain": 0.0141
+        },
+        {
+          "fraction": 1.0,
+          "n_fit_positives": 6620,
+          "dense": 0.7446,
+          "quotient": 0.7578,
+          "gain": 0.0132
+        }
+      ],
+      "gain_slope_per_e_fold_positives": 0.00193
+    },
+    "marginal_tables": {
+      "note": "a one-dimensional table has L cells against rN positives, so its capacity bound is not reachable at any resolution used here; if capacity were the constraint these would not trail the six interaction tables",
+      "rows": [
+        {
+          "n_levels": 4,
+          "n_tables": 35,
+          "cells_per_table": 4,
+          "roc_auc": 0.689,
+          "unseen_cell_fraction": 0.0
+        },
+        {
+          "n_levels": 16,
+          "n_tables": 35,
+          "cells_per_table": 16,
+          "roc_auc": 0.6983,
+          "unseen_cell_fraction": 1e-05
+        },
+        {
+          "n_levels": 64,
+          "n_tables": 35,
+          "cells_per_table": 64,
+          "roc_auc": 0.7001,
+          "unseen_cell_fraction": 9e-05
+        }
+      ],
+      "dense_reference": 0.7446
+    },
+    "unseen_cells": {
+      "dense_L4_fraction": 0.00154,
+      "note": "the fraction of held-out residues addressing a cell the fit half never occupied, where a table has nothing to say and falls back to the base rate"
+    },
+    "finding": "the quotient's advantage grows with the compile set rather than shrinking, unlimited-capacity marginal tables are far worse than six interaction tables, and the tables almost never fall back: none of the three is what a capacity limit predicts"
+  },
+  "difficulty": {
+    "question": "why a gain that held on every training split vanished on the test fold",
+    "binned_by": "the dense bank's own ROC-AUC on that structure",
+    "train_pick_half": {
+      "n_units": 384,
+      "mean_gain": 0.0132,
+      "bins": [
+        {
+          "lo": 0.0,
+          "hi": 0.55,
+          "n": 70,
+          "mean_gain": 0.0546
+        },
+        {
+          "lo": 0.55,
+          "hi": 0.65,
+          "n": 30,
+          "mean_gain": 0.0343
+        },
+        {
+          "lo": 0.65,
+          "hi": 0.75,
+          "n": 44,
+          "mean_gain": 0.0201
+        },
+        {
+          "lo": 0.75,
+          "hi": 0.85,
+          "n": 73,
+          "mean_gain": -0.0012
+        },
+        {
+          "lo": 0.85,
+          "hi": 0.95,
+          "n": 129,
+          "mean_gain": -0.0023
+        },
+        {
+          "lo": 0.95,
+          "hi": 1.01,
+          "n": 38,
+          "mean_gain": -0.007
+        }
+      ]
+    },
+    "test_fold": {
+      "n_units": 192,
+      "mean_gain": -0.002,
+      "bins": [
+        {
+          "lo": 0.0,
+          "hi": 0.55,
+          "n": 28,
+          "mean_gain": 0.0277
+        },
+        {
+          "lo": 0.55,
+          "hi": 0.65,
+          "n": 16,
+          "mean_gain": 0.0016
+        },
+        {
+          "lo": 0.65,
+          "hi": 0.75,
+          "n": 14,
+          "mean_gain": 0.0064
+        },
+        {
+          "lo": 0.75,
+          "hi": 0.85,
+          "n": 43,
+          "mean_gain": -0.009
+        },
+        {
+          "lo": 0.85,
+          "hi": 0.95,
+          "n": 74,
+          "mean_gain": -0.0108
+        },
+        {
+          "lo": 0.95,
+          "hi": 1.01,
+          "n": 17,
+          "mean_gain": -0.0054
+        }
+      ],
+      "source": "values already recorded in COUNTERATTACK_QUOTIENT_PROBE.json and TELEMETRY.json; no new read of the test fold"
+    },
+    "reweighted_test_gain": 0.0,
+    "finding": "the gain is concentrated on structures the dense bank already fails and is negative where it already succeeds; reweighting the test fold to the training fold's difficulty mix recovers only part of the shortfall, and the rest is that the per-bin gain is itself smaller there --- a structure held out under the benchmark's own clustering is hard because it is unfamiliar, not because its cells are noisy, and pooling counts does not help with unfamiliar"
+  },
+  "conclusion": "the capacity bound is correct arithmetic and is not what binds. Raising capacity by a factor of 2^68 through the symmetric quotient buys a training gain that does not transfer; removing the capacity constraint entirely with marginal tables is far worse; the tables almost never fall back to the base rate. What binds is the resolution of the integer Gini-rank fan-out, and the remaining reported gap to the fitted linear readout is in part not a readout difference at all but 137 extra wires.",
+  "elapsed_seconds": 151.4
+}

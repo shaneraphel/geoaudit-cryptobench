@@ -2,11 +2,24 @@
 
 Relationship to ``algebraic_field``
 -----------------------------------
-Same receptor, same invariants, same quaternary quantization. The two methods
-differ in exactly one place: how the digits become a score.
+Same receptor, same quaternary quantization, same per-chain rank. The two
+methods differ in two places, not one, and an earlier version of this docstring
+claimed otherwise:
 
-``algebraic_field``          integer-multiplicity sum of dense table fractions
-``algebraic_field_linear``   one regularised linear functional of the digits
+``algebraic_field``          35 invariants, integer-multiplicity sum of dense
+                             table fractions
+``algebraic_field_linear``   172 wires, one regularised linear functional of
+                             the digits
+
+The wire counts are the second difference. The 172 below are 43 quantities ---
+the 35 invariants plus 7 published residue constants plus a training propensity
+counter --- at four spatial scales, and the counting field sees none of the
+extra 137. Measured on a cluster-disjoint half of the training fold, the
+readout accounts for 59 percent of the distance between the two and the extra
+wires for 41 percent (``results/architecture_sweep/GAP_DECOMPOSITION.json``).
+The same-invariant comparison, and the one the manuscript reasons from, is
+against the 35-feature Fisher discriminant in
+``results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json``.
 
 The second is a strictly stronger model class and it is reported as such. It is
 NOT training-free: the coefficient vector is fitted, by a single closed-form
@@ -16,20 +29,23 @@ is a deterministic function of the training bytes.
 
 Why a linear readout beats the table bank here
 ----------------------------------------------
-The bank models the joint distribution inside each six-wire window exactly, and
-that is the problem. A width-six quaternary table has 4096 cells; the training
-fold has 234838 residues at a 5.8 percent base rate, so a typical cell holds
-around fifty residues and three positives, and its fraction carries a relative
-standard error near 60 percent. Reading such a cell is an exact statement about
-a noisy quantity. The linear functional gives up all interaction structure above
-first order and buys, in exchange, an estimate whose variance falls as the whole
-fold rather than as one cell. On this fold the trade is worth 0.024 ROC-AUC,
-measured on a cluster-disjoint half of the training fold before the test fold was
-touched (``results/architecture_sweep/FINAL_READOUT_SELECTION.json``).
+The obvious answer is cell noise: a width-six quaternary table has 4096 cells,
+the training fold has 234838 residues at a 5.8 percent base rate, so a typical
+cell holds around fifty residues and three positives and its fraction carries a
+relative standard error near 60 percent. On this fold the readout trade is worth
+0.024 ROC-AUC (``results/architecture_sweep/FINAL_READOUT_SELECTION.json``).
 
-That is a statement about sample size, not about combinational logic being wrong.
-The bank's disadvantage would shrink with a larger training fold, and the
-manuscript says so rather than claiming the tables were a mistake.
+The obvious answer is not the operative one, and ``tools/gap_decomposition.py``
+says why. Raising the tables' capacity by quotienting out a symmetry, which
+moves the admissible width from 7 digits to 41, gains on every training split
+and nothing on the test fold. Removing the capacity constraint altogether with
+one-dimensional tables at 64 levels is far worse than six interaction tables.
+Only 0.15 percent of held-out residues address a cell the fit half never
+occupied, so the bank is not falling back to the base rate either. What does
+account for the readout gap is the fan-out: replacing the algebraic field's
+integer Gini rank with the solved integer fan-out ``table_field`` uses recovers
+0.015 of it on the same half. The tables are not too small; the six numbers
+that add them together are too coarse.
 
 The wires
 ---------

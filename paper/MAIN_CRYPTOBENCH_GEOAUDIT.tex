@@ -588,14 +588,21 @@ figure or a sentence that stops following from them.
 widening the invariant word from six to \NAlgFeatures{} moves a closed-form
 linear functional of the same invariants from ROC-AUC \FisherSix{} to \FisherAll{} on this
 fold, so the descriptors carry the signal. Pushed through counter tables the
-same invariants reach \AlgAuc{}. The gap is a capacity limit rather than a
-descriptive one: a table over \(d\) quaternary digits has \(4^{d}\) free cells
-and is bounded by \(d \le \log_4(rN) = 6.87\) here, whereas a linear form over
-\(M\) rank features is determined by \(\Theta(M^{2})\) quantities, which for
-\(M=\NAlgFeatures{}\) is \(1\,225\) against \(13\,524\) available positives. The
-linear form can therefore address all \NAlgFeatures{} dimensions at once while no
-admissible table can address more than seven, and unweighted or
-integer-weighted partitions of the invariants do not close that gap.
+same invariants reach \AlgAuc{}. The gap is not descriptive, then, but a
+property of the estimator. A capacity argument is available and the arithmetic
+is sound: a table over \(d\) quaternary digits has \(4^{d}\) free cells and is
+bounded by \(d \le \log_4(rN) = 6.87\) here, whereas a linear form over \(M\)
+rank features is determined by \(\Theta(M^{2})\) quantities, which for
+\(M=\NAlgFeatures{}\) is \(1\,225\) against \(13\,524\) available positives, so
+the linear form can address all \NAlgFeatures{} dimensions at once while no
+admissible table can address more than seven. An earlier version of this paper
+stopped there and attributed the deficit to that bound. It does not survive
+being tested: Section~\ref{sec:ai} raises the bound from seven digits to
+forty-one, removes it entirely, and removes it in the other direction, and none
+of the three moves the test fold. What does account for the deficit, on the
+same cluster-disjoint half, is the fan-out --- the \NAlgTables{} integers that
+add the block tables together --- and \GapExtraWires{} wires that the fitted
+readout is handed and the counting field never sees.
 
 That bound is about one table and it remains correct; what does not follow from it
 is the conclusion we drew, that the counting construction has a ceiling below the
@@ -687,7 +694,8 @@ indicated by this failure is spatially gated, localized shear with rigid-hit
 anchoring. We report this as a falsified hypothesis rather than removing the
 ablations from the paper.
 
-\section{AI experiments: a quotient bound, and a gain that did not transfer}
+\section{AI experiments: a quotient bound, a gain that did not transfer, and a
+wrong diagnosis corrected}
 \label{sec:ai}
 Everything in this section --- the bound, the construction that follows from it,
 the fourteen-split validation, the fourth reading of the held-out fold, and the
@@ -791,6 +799,84 @@ correctness is a property one can test by exhaustion, and
 \texttt{tests/test\_quotient\_tables.py} does exactly that on every case small
 enough to enumerate. A wrong encoder here would not have raised; it would have
 returned a plausible number.
+
+\paragraph{The capacity attribution does not survive being tested.} A negative
+result is only worth the diagnosis it forces. The construction above was built
+from this paper's own explanation of why the counting field trails --- that a
+dense table cannot address enough digits at once --- and the explanation
+predicts that widening the addressable word closes the gap. Four measurements,
+all on the \GapPickUnits{}-unit accession-disjoint pick half and none of them a
+reading of the held-out fold, say the prediction fails in every direction it can
+be pushed. Raising the admissible width from \QuoDenseWidth{} to \QuoSymWidth{}
+gains \QuoTrainGain{} on training splits and \QuoDAf{} on the fold. Lowering it
+to one digit --- \GapMarginalTables{} marginal tables at \GapMarginalLevels{}
+levels, whose \(L \le rN\) bound is unreachable at any resolution used here, and
+which can never fall back because no cell is empty --- scores \GapMarginalAuc{}
+against the interaction bank's \GapTablesSmall{}. And the bank almost never
+falls back in the first place: \GapUnseenPct{}\% of held-out residues address a
+cell the fit half never occupied. Capacity is not what binds.
+
+\paragraph{What binds is the fan-out, and \GapExtraWires{} wires.} Holding the
+tables fixed and replacing the integer Gini rank with the solved integer fan-out
+that the table field uses moves the dense bank from \GapTablesSmall{} to
+\GapFanoutSolved{}, worth \GapFanoutPrice{}: most of the same-invariant readout
+gap, bought by changing \NAlgTables{} numbers and nothing else. That is the
+price of the property this method exists to demonstrate --- no real-valued
+coefficient anywhere on the datapath --- and it is now measured rather than
+assumed. The quotient bank gets \GapFanoutQuo{} from the same substitution, so
+the two devices buy the same statistical good and do not compose; the field
+appears to sit against a ceiling near \GapFanoutSolved{} that neither reaches
+past. Separately, the fitted linear readout reported in
+Table~\ref{tab:metrics} is not the same-invariant comparison and should not be
+read as one. It consumes \GapWideWires{} wires --- \NAlgFeatures{} invariants,
+seven published residue constants and a training propensity counter, each at
+four spatial scales --- against the counting field's \NAlgFeatures{}. On the
+pick half the readout is worth \GapReadout{} and the extra wires
+\GapInput{}, so \GapInputShare{}\% of the distance between the two published
+methods is an input difference wearing a readout's name. The same-invariant
+statement, which stands, is the \NAlgFeatures{}-feature Fisher discriminant at
+\FisherAll{} against the field's \AlgAuc{}.
+
+\paragraph{Why the training folds could not have predicted the fold.} The
+diagnosis also explains the non-transfer, and the explanation is not specific to
+this construction. Binning structures by how well the dense bank does on each,
+the quotient's gain lives entirely at the bottom: on structures where the dense
+bank scores below \GapHardCut{} it gains \GapHardTrainGain{} on the pick half
+and \GapHardTestGain{} on the fold, and on structures where the dense bank
+already scores above \(0.85\) it loses \GapEasyTrainGain{} and
+\GapEasyTestGain{}. The held-out fold holds more of the second kind, but
+reweighting it to the training fold's difficulty mix recovers only
+\GapReweighted{} of the \QuoTrainGain{} --- composition is the smaller half of
+the story. The larger half is that the per-bin gain is itself smaller there. A
+structure is hard on the pick half mostly because its cells are thinly counted,
+and pooling counts is exactly the remedy; a structure is hard on a fold held out
+under the benchmark's own MMseqs2 clustering because it is unfamiliar, and no
+amount of pooling training counts makes an unfamiliar fold familiar. Resampling
+inside the training partition can manufacture scarcity. It cannot manufacture
+novelty. Any device whose benefit is statistical efficiency will therefore be
+over-credited by cross-validation on this benchmark, by about
+\(\QuoTrainGain{}\) in this instance, and that is a statement about the
+evaluation protocol rather than about quotient tables. It is generated by
+\texttt{tools/gap\_decomposition.py} into
+\texttt{results/architecture\_sweep/GAP\_DECOMPOSITION.json}, and \texttt{make
+gap} fails if the manuscript's version of it stops following.
+
+\paragraph{A harder bound sits above the fan-out.} Even the right fan-out cannot
+overtake P2Rank on these invariants alone. The Fisher discriminant of the same
+\NAlgFeatures{} invariants scores \FisherAll{} on the official fold
+(\texttt{results/architecture\_sweep/FEATURE\_CEILING\_DIAGNOSIS.json}), below
+P2Rank at the matched point \AlgAucMatchedBase{}. So no linear readout of these
+invariants can close the gap that Section~\ref{sec:results} attributes to the
+counting field, and a bank of all $\binom{35}{2}=595$ two-digit tables over the
+same ranks, fused by the solved integer fan-out, reaches only $0.7725$ on the
+training pick half --- matching the continuous linear form of those ranks
+($0.7742$), not beating it. The counting field's ceiling under the present
+invariant bank is therefore the Fisher discriminant of that bank, and that
+ceiling is below P2Rank. Beating P2Rank with a counting construction requires
+new invariants, not a better address or a better fan-out of the thirty-five
+already in hand. On fourteen training splits the solved fan-out itself is a real
+and stable gain --- mean $+0.0126$, worst $+0.0093$, positive on every split ---
+but it is a gain toward a ceiling that is still too low.
 
 \section{Limitations}
 The comparison covers one trained baseline, executed locally; PocketMiner could

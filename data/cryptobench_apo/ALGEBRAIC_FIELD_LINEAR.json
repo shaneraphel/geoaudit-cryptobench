@@ -776,7 +776,7 @@
     "base_rate": 0.057588635570052546,
     "manifest_sha256": "c1f01970f7b7bf596785b8364c425827b2af36f05cedb6b76f9a23393c6bd9d0"
   },
-  "code_sha256": "78f295b870aa30dd8a89873cb41d6c6fdc69ace7c91c1368d7d964df89b089be",
+  "code_sha256": "23281d0a03ce3fb0610496f309b825b260179724d182d592590dc4807610a48d",
   "fitting": "one regularised closed-form solve of a 172x172 symmetric system on the training fold; no gradient, no iteration, no auto-differentiation, no test-fold selection",
   "cluster_ledger": {
     "train_units": 770,
@@ -785,5 +785,5 @@
     "test_clusters": 190
   },
   "test_manifest_sha256": "963f52f7cbee779fc1d56be88be0ada72b5438d95a5dc05c99d7fb924525f38f",
-  "compile_seconds": 16.96
+  "compile_seconds": 17.73
 }
