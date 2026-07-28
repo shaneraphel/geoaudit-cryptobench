@@ -3,6 +3,7 @@
   "clinical_grade": false,
   "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
   "is_official_mmseqs2_10pct_test_fold": true,
+  "test_fold_read_index": 1,
   "architecture": {
     "wires": 172,
     "digitisation": "per-chain rank, quartile cut, 4 levels",
@@ -32,20 +33,20 @@
       "residue_auc": {
         "n_paired_structures": 192,
         "mean_a": 0.7804160159029193,
-        "mean_b": 0.7934860413336978,
-        "paired_difference": -0.013070025430778509,
-        "ci_low": -0.03417517592800032,
-        "ci_high": 0.007167187517278562,
-        "p_two_sided": 0.2114,
+        "mean_b": 0.7933231313106249,
+        "paired_difference": -0.012907115407705616,
+        "ci_low": -0.03394698834252981,
+        "ci_high": 0.007246283268619674,
+        "p_two_sided": 0.2176,
         "excludes_zero": false
       },
       "residue_pr_auc": {
         "n_paired_structures": 192,
         "mean_a": 0.3365330542767606,
-        "mean_b": 0.3580249808622129,
-        "paired_difference": -0.021491926585452292,
-        "ci_low": -0.049299229230591865,
-        "ci_high": 0.006961649772316365,
+        "mean_b": 0.35801249557587544,
+        "paired_difference": -0.021479441299114832,
+        "ci_low": -0.04928836464153261,
+        "ci_high": 0.006973239960118429,
         "p_two_sided": 0.1502,
         "excludes_zero": false
       }
@@ -54,21 +55,21 @@
       "residue_auc": {
         "n_paired_structures": 192,
         "mean_a": 0.7804160159029193,
-        "mean_b": 0.7668089153970957,
-        "paired_difference": 0.013607100505823588,
-        "ci_low": -0.00061544152201006,
-        "ci_high": 0.027405755631887456,
-        "p_two_sided": 0.0606,
+        "mean_b": 0.7666942911109148,
+        "paired_difference": 0.013721724792004508,
+        "ci_low": -0.0005388000155503472,
+        "ci_high": 0.027580929255422302,
+        "p_two_sided": 0.06,
         "excludes_zero": false
       },
       "residue_pr_auc": {
         "n_paired_structures": 192,
         "mean_a": 0.3365330542767606,
-        "mean_b": 0.3333534043366462,
-        "paired_difference": 0.0031796499401144374,
+        "mean_b": 0.33335122335582,
+        "paired_difference": 0.003181830920940598,
         "ci_low": -0.014181667580074298,
-        "ci_high": 0.021134446667439247,
-        "p_two_sided": 0.7258,
+        "ci_high": 0.02113853528035485,
+        "p_two_sided": 0.7256,
         "excludes_zero": false
       }
     },
@@ -76,20 +77,20 @@
       "residue_auc": {
         "n_paired_structures": 192,
         "mean_a": 0.7804160159029193,
-        "mean_b": 0.7953208407292977,
-        "paired_difference": -0.014904824826378338,
-        "ci_low": -0.023352342950324893,
-        "ci_high": -0.006547886386170323,
+        "mean_b": 0.7953622049415263,
+        "paired_difference": -0.014946189038607005,
+        "ci_low": -0.023421869520921623,
+        "ci_high": -0.00659195768222167,
         "p_two_sided": 0.0008,
         "excludes_zero": true
       },
       "residue_pr_auc": {
         "n_paired_structures": 192,
         "mean_a": 0.3365330542767606,
-        "mean_b": 0.359448284047508,
-        "paired_difference": -0.022915229770747392,
-        "ci_low": -0.035667305816125726,
-        "ci_high": -0.010643442675895743,
+        "mean_b": 0.35944979526660653,
+        "paired_difference": -0.02291674098984592,
+        "ci_low": -0.035661719730789826,
+        "ci_high": -0.010638164569756565,
         "p_two_sided": 0.0002,
         "excludes_zero": true
       }

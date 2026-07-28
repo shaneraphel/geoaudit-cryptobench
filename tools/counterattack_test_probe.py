@@ -191,6 +191,11 @@ def main() -> int:
         "clinical_grade": False,
         "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
         "is_official_mmseqs2_10pct_test_fold": True,
+        # This is read one. The field was missing until the fourth read went in
+        # and the ledger, which counts indexed reads rather than trusting prose,
+        # could only substantiate two readings of an architecture the manuscript
+        # says was read three times.
+        "test_fold_read_index": 1,
         "architecture": {
             "wires": Dtr.shape[1],
             "digitisation": "per-chain rank, quartile cut, 4 levels",

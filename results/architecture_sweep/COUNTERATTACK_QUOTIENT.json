@@ -1,0 +1,1108 @@
+{
+  "schema": "geoaudit.counterattack_quotient.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "question": "does an S_6-invariant quotient table beat the dense table it replaces, on splits other than the one it was found on",
+  "capacity": {
+    "n_train_residues": 234838,
+    "n_train_positives": 13524,
+    "base_rate": 0.057589,
+    "dense_width_bound_L4": 6.8616,
+    "dense_widest_admissible_L4": 6,
+    "quotient_widest_admissible_L4": 41,
+    "dense_cells_d6_L4": 4096,
+    "quotient_cells_d6_L4": 84,
+    "quotient_cells_d6_L8": 1716,
+    "quotient_cells_d35_L4": 8436,
+    "note": "a dense table over d digits has L**d cells; a table invariant under S_d has as many as S_d has orbits, C(d+L-1, d), and it is the orbit count the base rate has to populate"
+  },
+  "n_splits": 14,
+  "n_candidates": 10,
+  "control": "dense bank (frozen), L=4",
+  "splits": [
+    {
+      "split": "cv:train-0",
+      "disjoint_by": "MMseqs2 10% cluster-disjoint (CryptoBench's own fold)",
+      "n_fit_units": 586,
+      "n_pick_units": 184,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.744866,
+          "delta_vs_control": 0.01011
+        },
+        {
+          "rank": 2,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.743442,
+          "delta_vs_control": 0.008686
+        },
+        {
+          "rank": 3,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.741938,
+          "delta_vs_control": 0.007181
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.741542,
+          "delta_vs_control": 0.006785
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.739506,
+          "delta_vs_control": 0.00475
+        },
+        {
+          "rank": 6,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.739155,
+          "delta_vs_control": 0.004398
+        },
+        {
+          "rank": 7,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.734757,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.720127,
+          "delta_vs_control": -0.01463
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.68832,
+          "delta_vs_control": -0.046436
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.598689,
+          "delta_vs_control": -0.136068
+        }
+      ]
+    },
+    {
+      "split": "cv:train-1",
+      "disjoint_by": "MMseqs2 10% cluster-disjoint (CryptoBench's own fold)",
+      "n_fit_units": 574,
+      "n_pick_units": 196,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.76411,
+          "delta_vs_control": 0.006468
+        },
+        {
+          "rank": 2,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.763739,
+          "delta_vs_control": 0.006097
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.762781,
+          "delta_vs_control": 0.005138
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.758483,
+          "delta_vs_control": 0.00084
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.758464,
+          "delta_vs_control": 0.000821
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.757643,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.753906,
+          "delta_vs_control": -0.003736
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.740969,
+          "delta_vs_control": -0.016674
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.708758,
+          "delta_vs_control": -0.048884
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.61707,
+          "delta_vs_control": -0.140573
+        }
+      ]
+    },
+    {
+      "split": "cv:train-2",
+      "disjoint_by": "MMseqs2 10% cluster-disjoint (CryptoBench's own fold)",
+      "n_fit_units": 578,
+      "n_pick_units": 192,
+      "winner": "S_6 quotient bank, L=6",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.73422,
+          "delta_vs_control": 0.009359
+        },
+        {
+          "rank": 2,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.734041,
+          "delta_vs_control": 0.009181
+        },
+        {
+          "rank": 3,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.731352,
+          "delta_vs_control": 0.006492
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.728536,
+          "delta_vs_control": 0.003676
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.728516,
+          "delta_vs_control": 0.003656
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.72486,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.723801,
+          "delta_vs_control": -0.001059
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.72091,
+          "delta_vs_control": -0.00395
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.674754,
+          "delta_vs_control": -0.050106
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.603924,
+          "delta_vs_control": -0.120936
+        }
+      ]
+    },
+    {
+      "split": "cv:train-3",
+      "disjoint_by": "MMseqs2 10% cluster-disjoint (CryptoBench's own fold)",
+      "n_fit_units": 572,
+      "n_pick_units": 198,
+      "winner": "S_6 quotient bank, L=8",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.753465,
+          "delta_vs_control": 0.014047
+        },
+        {
+          "rank": 2,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.75317,
+          "delta_vs_control": 0.013752
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.750113,
+          "delta_vs_control": 0.010695
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.749792,
+          "delta_vs_control": 0.010374
+        },
+        {
+          "rank": 5,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.749505,
+          "delta_vs_control": 0.010087
+        },
+        {
+          "rank": 6,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.747593,
+          "delta_vs_control": 0.008176
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.739712,
+          "delta_vs_control": 0.000295
+        },
+        {
+          "rank": 8,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.739418,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.693881,
+          "delta_vs_control": -0.045537
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.604654,
+          "delta_vs_control": -0.134764
+        }
+      ]
+    },
+    {
+      "split": "half:20261725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 385,
+      "n_pick_units": 385,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.748982,
+          "delta_vs_control": 0.006049
+        },
+        {
+          "rank": 2,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.74897,
+          "delta_vs_control": 0.006038
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.746647,
+          "delta_vs_control": 0.003714
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.74485,
+          "delta_vs_control": 0.001917
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.74398,
+          "delta_vs_control": 0.001048
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.742932,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.737655,
+          "delta_vs_control": -0.005277
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.733488,
+          "delta_vs_control": -0.009445
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.692568,
+          "delta_vs_control": -0.050364
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.611319,
+          "delta_vs_control": -0.131614
+        }
+      ]
+    },
+    {
+      "split": "half:20262725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 386,
+      "n_pick_units": 384,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.749434,
+          "delta_vs_control": 0.010515
+        },
+        {
+          "rank": 2,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.746614,
+          "delta_vs_control": 0.007696
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.745763,
+          "delta_vs_control": 0.006844
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.744732,
+          "delta_vs_control": 0.005814
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.744435,
+          "delta_vs_control": 0.005516
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.738919,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.738723,
+          "delta_vs_control": -0.000196
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.727168,
+          "delta_vs_control": -0.01175
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.689666,
+          "delta_vs_control": -0.049253
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.592604,
+          "delta_vs_control": -0.146315
+        }
+      ]
+    },
+    {
+      "split": "half:20263725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 384,
+      "n_pick_units": 386,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.755469,
+          "delta_vs_control": 0.010639
+        },
+        {
+          "rank": 2,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.753251,
+          "delta_vs_control": 0.00842
+        },
+        {
+          "rank": 3,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.752112,
+          "delta_vs_control": 0.007282
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.751891,
+          "delta_vs_control": 0.00706
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.749947,
+          "delta_vs_control": 0.005117
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.744831,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.742191,
+          "delta_vs_control": -0.00264
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.736651,
+          "delta_vs_control": -0.008179
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.696908,
+          "delta_vs_control": -0.047923
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.595452,
+          "delta_vs_control": -0.149378
+        }
+      ]
+    },
+    {
+      "split": "half:20264725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 383,
+      "n_pick_units": 387,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.745894,
+          "delta_vs_control": 0.013115
+        },
+        {
+          "rank": 2,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.742345,
+          "delta_vs_control": 0.009566
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.74198,
+          "delta_vs_control": 0.009201
+        },
+        {
+          "rank": 4,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.74108,
+          "delta_vs_control": 0.0083
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.740912,
+          "delta_vs_control": 0.008133
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.732779,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.729737,
+          "delta_vs_control": -0.003042
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.7216,
+          "delta_vs_control": -0.011179
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.686305,
+          "delta_vs_control": -0.046474
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.594071,
+          "delta_vs_control": -0.138708
+        }
+      ]
+    },
+    {
+      "split": "half:20265725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 386,
+      "n_pick_units": 384,
+      "winner": "dense L=4 + S_6 quotient L=8",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.750492,
+          "delta_vs_control": 0.00411
+        },
+        {
+          "rank": 2,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.74881,
+          "delta_vs_control": 0.002428
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.746817,
+          "delta_vs_control": 0.000435
+        },
+        {
+          "rank": 4,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.746382,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.744806,
+          "delta_vs_control": -0.001576
+        },
+        {
+          "rank": 6,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.743821,
+          "delta_vs_control": -0.002561
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.739139,
+          "delta_vs_control": -0.007242
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.720511,
+          "delta_vs_control": -0.025871
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.695007,
+          "delta_vs_control": -0.051374
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.591023,
+          "delta_vs_control": -0.155358
+        }
+      ]
+    },
+    {
+      "split": "half:20266725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 385,
+      "n_pick_units": 385,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.743754,
+          "delta_vs_control": 0.009009
+        },
+        {
+          "rank": 2,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.740879,
+          "delta_vs_control": 0.006134
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.74083,
+          "delta_vs_control": 0.006086
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.73959,
+          "delta_vs_control": 0.004846
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.739014,
+          "delta_vs_control": 0.004269
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.734745,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.729884,
+          "delta_vs_control": -0.00486
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.723604,
+          "delta_vs_control": -0.011141
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.682973,
+          "delta_vs_control": -0.051772
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.600227,
+          "delta_vs_control": -0.134518
+        }
+      ]
+    },
+    {
+      "split": "half:20267725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 385,
+      "n_pick_units": 385,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.750212,
+          "delta_vs_control": 0.006968
+        },
+        {
+          "rank": 2,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.748819,
+          "delta_vs_control": 0.005575
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.747702,
+          "delta_vs_control": 0.004458
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.745242,
+          "delta_vs_control": 0.001997
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.743817,
+          "delta_vs_control": 0.000572
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.743244,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.739296,
+          "delta_vs_control": -0.003949
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.723872,
+          "delta_vs_control": -0.019373
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.689535,
+          "delta_vs_control": -0.05371
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.604175,
+          "delta_vs_control": -0.139069
+        }
+      ]
+    },
+    {
+      "split": "half:20268725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 384,
+      "n_pick_units": 386,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.747625,
+          "delta_vs_control": 0.00826
+        },
+        {
+          "rank": 2,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.74571,
+          "delta_vs_control": 0.006345
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.745098,
+          "delta_vs_control": 0.005733
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.74499,
+          "delta_vs_control": 0.005625
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.743422,
+          "delta_vs_control": 0.004057
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.739365,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.738554,
+          "delta_vs_control": -0.000811
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.718721,
+          "delta_vs_control": -0.020644
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.695235,
+          "delta_vs_control": -0.04413
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.603406,
+          "delta_vs_control": -0.135959
+        }
+      ]
+    },
+    {
+      "split": "half:20269725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 386,
+      "n_pick_units": 384,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.745643,
+          "delta_vs_control": 0.008766
+        },
+        {
+          "rank": 2,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.744169,
+          "delta_vs_control": 0.007292
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.743518,
+          "delta_vs_control": 0.006641
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.742935,
+          "delta_vs_control": 0.006058
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.741854,
+          "delta_vs_control": 0.004977
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.736877,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.731716,
+          "delta_vs_control": -0.005161
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.717571,
+          "delta_vs_control": -0.019306
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.689282,
+          "delta_vs_control": -0.047595
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.608409,
+          "delta_vs_control": -0.128468
+        }
+      ]
+    },
+    {
+      "split": "half:20270725",
+      "disjoint_by": "UniProt accession-disjoint",
+      "n_fit_units": 384,
+      "n_pick_units": 386,
+      "winner": "S_6 quotient bank, L=8+6+4 stacked",
+      "ranking": [
+        {
+          "rank": 1,
+          "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+          "roc_auc": 0.745989,
+          "delta_vs_control": 0.006838
+        },
+        {
+          "rank": 2,
+          "architecture": "dense L=4 + S_6 quotient L=8",
+          "roc_auc": 0.744348,
+          "delta_vs_control": 0.005197
+        },
+        {
+          "rank": 3,
+          "architecture": "S_6 quotient bank, L=6",
+          "roc_auc": 0.742824,
+          "delta_vs_control": 0.003673
+        },
+        {
+          "rank": 4,
+          "architecture": "S_6 quotient bank, L=8",
+          "roc_auc": 0.742199,
+          "delta_vs_control": 0.003047
+        },
+        {
+          "rank": 5,
+          "architecture": "S_6 quotient bank, L=4",
+          "roc_auc": 0.741286,
+          "delta_vs_control": 0.002135
+        },
+        {
+          "rank": 6,
+          "architecture": "dense bank (frozen), L=4",
+          "roc_auc": 0.739151,
+          "delta_vs_control": 0.0
+        },
+        {
+          "rank": 7,
+          "architecture": "S_6 quotient bank, L=10",
+          "roc_auc": 0.734929,
+          "delta_vs_control": -0.004222
+        },
+        {
+          "rank": 8,
+          "architecture": "S_6 quotient bank, L=12",
+          "roc_auc": 0.721689,
+          "delta_vs_control": -0.017462
+        },
+        {
+          "rank": 9,
+          "architecture": "S_12 quotient bank, L=4",
+          "roc_auc": 0.689346,
+          "delta_vs_control": -0.049805
+        },
+        {
+          "rank": 10,
+          "architecture": "single S_35 quotient table, L=4",
+          "roc_auc": 0.584805,
+          "delta_vs_control": -0.154346
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+      "mean_roc_auc": 0.748428,
+      "sd_roc_auc": 0.006708,
+      "mean_delta_vs_control": 0.008721,
+      "worst_delta_vs_control": 0.002428,
+      "n_splits_beating_control": 14,
+      "n_first": 11,
+      "worst_rank": 2
+    },
+    {
+      "architecture": "dense L=4 + S_6 quotient L=8",
+      "mean_roc_auc": 0.746409,
+      "sd_roc_auc": 0.007269,
+      "mean_delta_vs_control": 0.006702,
+      "worst_delta_vs_control": 0.00411,
+      "n_splits_beating_control": 14,
+      "n_first": 1,
+      "worst_rank": 5
+    },
+    {
+      "architecture": "S_6 quotient bank, L=8",
+      "mean_roc_auc": 0.745149,
+      "sd_roc_auc": 0.007568,
+      "mean_delta_vs_control": 0.005442,
+      "worst_delta_vs_control": -0.001576,
+      "n_splits_beating_control": 13,
+      "n_first": 1,
+      "worst_rank": 5
+    },
+    {
+      "architecture": "S_6 quotient bank, L=6",
+      "mean_roc_auc": 0.744965,
+      "sd_roc_auc": 0.005936,
+      "mean_delta_vs_control": 0.005258,
+      "worst_delta_vs_control": 0.000435,
+      "n_splits_beating_control": 14,
+      "n_first": 1,
+      "worst_rank": 5
+    },
+    {
+      "architecture": "S_6 quotient bank, L=4",
+      "mean_roc_auc": 0.743945,
+      "sd_roc_auc": 0.006706,
+      "mean_delta_vs_control": 0.004238,
+      "worst_delta_vs_control": -0.002561,
+      "n_splits_beating_control": 13,
+      "n_first": 0,
+      "worst_rank": 6
+    },
+    {
+      "architecture": "dense bank (frozen), L=4",
+      "mean_roc_auc": 0.739707,
+      "sd_roc_auc": 0.007556,
+      "mean_delta_vs_control": 0.0,
+      "worst_delta_vs_control": 0.0,
+      "n_splits_beating_control": 0,
+      "n_first": 0,
+      "worst_rank": 8
+    },
+    {
+      "architecture": "S_6 quotient bank, L=10",
+      "mean_roc_auc": 0.737771,
+      "sd_roc_auc": 0.007876,
+      "mean_delta_vs_control": -0.001936,
+      "worst_delta_vs_control": -0.007242,
+      "n_splits_beating_control": 2,
+      "n_first": 0,
+      "worst_rank": 7
+    },
+    {
+      "architecture": "S_6 quotient bank, L=12",
+      "mean_roc_auc": 0.726185,
+      "sd_roc_auc": 0.008064,
+      "mean_delta_vs_control": -0.013522,
+      "worst_delta_vs_control": -0.025871,
+      "n_splits_beating_control": 1,
+      "n_first": 0,
+      "worst_rank": 8
+    },
+    {
+      "architecture": "S_12 quotient bank, L=4",
+      "mean_roc_auc": 0.690896,
+      "sd_roc_auc": 0.007656,
+      "mean_delta_vs_control": -0.048812,
+      "worst_delta_vs_control": -0.05371,
+      "n_splits_beating_control": 0,
+      "n_first": 0,
+      "worst_rank": 9
+    },
+    {
+      "architecture": "single S_35 quotient table, L=4",
+      "mean_roc_auc": 0.600702,
+      "sd_roc_auc": 0.008652,
+      "mean_delta_vs_control": -0.139005,
+      "worst_delta_vs_control": -0.155358,
+      "n_splits_beating_control": 0,
+      "n_first": 0,
+      "worst_rank": 10
+    }
+  ],
+  "selected": {
+    "architecture": "S_6 quotient bank, L=8+6+4 stacked",
+    "mean_roc_auc": 0.748428,
+    "sd_roc_auc": 0.006708,
+    "mean_delta_vs_control": 0.008721,
+    "worst_delta_vs_control": 0.002428,
+    "n_splits_beating_control": 14,
+    "n_first": 11,
+    "worst_rank": 2
+  },
+  "selection_honesty": {
+    "found_on_split": "half:20260725",
+    "delta_on_the_split_it_was_found_on": 0.0132,
+    "delta_over_all_splits": 0.008721,
+    "note": "about thirty variants were tried on the seed-20260725 half-split before this file existed, so the delta measured there is the maximum of thirty noisy estimates. The difference between the two numbers is the cost of selecting on one split and is reported rather than dropped."
+  }
+}

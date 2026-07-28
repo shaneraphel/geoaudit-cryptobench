@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 20,
-    "cited": 24,
+    "cited": 25,
     "superseded": 4,
-    "fold_access": 4
+    "fold_access": 5
   },
-  "n_artifacts": 52,
+  "n_artifacts": 54,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -57,6 +57,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_quantized.v1",
       "bytes": 10367
+    },
+    {
+      "artifact": "results/architecture_sweep/COUNTERATTACK_QUOTIENT.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.counterattack_quotient.v1",
+      "bytes": 31172
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_REFINE.json",
@@ -262,11 +269,18 @@
       "bytes": 37815
     },
     {
+      "artifact": "results/official_fold/COUNTERATTACK_QUOTIENT_PROBE.json",
+      "class": "fold_access",
+      "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
+      "schema": "geoaudit.counterattack_quotient_probe.v1",
+      "bytes": 38826
+    },
+    {
       "artifact": "results/official_fold/COUNTERATTACK_TEST_PROBE.json",
       "class": "fold_access",
       "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
       "schema": "geoaudit.counterattack_test_probe.v1",
-      "bytes": 36450
+      "bytes": 36475
     },
     {
       "artifact": "results/official_fold/COUNTERATTACK_WIDE_PROBE.json",
@@ -343,7 +357,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 3958
+      "bytes": 5554
     },
     {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",

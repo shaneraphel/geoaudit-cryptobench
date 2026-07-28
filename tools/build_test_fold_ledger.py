@@ -90,6 +90,14 @@ def build() -> dict:
     # two: the probe is what produced the number the frozen run reproduces.
     probe_methods = {p["method"] for p in probes}
 
+    # Reads are indexed across the whole counterattack programme, not per
+    # lineage, so the fourth read is a counting-field probe while the first
+    # three were table-field ones. Counting them by lineage keeps the summary
+    # sentence true as further lineages are read.
+    indexed = sorted((p for p in probes if p.get("read_index") is not None),
+                     key=lambda p: p["read_index"])
+    n_table = sum(1 for p in indexed if "table field" in p["method"])
+
     return {
         "schema": "geoaudit.test_fold_access_ledger.v1",
         "clinical_grade": False,
@@ -111,16 +119,17 @@ def build() -> dict:
         "standalone_probe_artifacts": probes,
         "n_standalone_probes": len(probes),
         "n_distinct_architectures_evaluated": len(set(ours) | probe_methods),
-        "table_field_read_sequence": [
-            p for p in probes if p.get("read_index") is not None],
+        "indexed_read_sequence": indexed,
+        "n_indexed_reads": len(indexed),
         "honest_summary": (
             f"{len(ours)} of our detectors appear in the frozen telemetry, and "
             f"{len(probes)} standalone probe artifacts each carry a further "
-            f"192-unit evaluation. The architecture reported as the main result "
-            f"was read three times, and those three readings are all reported "
-            f"with the reason for each change. The wider programme has looked "
-            f"at this fold more often than that, which is what this ledger is "
-            f"for."),
+            f"192-unit evaluation. {len(indexed)} of those probes carry a read "
+            f"index, {n_table} of them readings of the architecture reported as "
+            f"the main result and {len(indexed) - n_table} of a different "
+            f"lineage, and every one is reported with the reason it was taken. "
+            f"The wider programme has looked at this fold more often than that, "
+            f"which is what this ledger is for."),
     }
 
 

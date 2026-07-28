@@ -40,10 +40,26 @@
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; see results/architecture_sweep/COUNTERATTACK_RIDGE2.json"
     },
     {
+      "artifact": "results/official_fold/COUNTERATTACK_QUOTIENT_PROBE.json",
+      "n_units": 192,
+      "method": "algebraic field, S_6 quotient bank",
+      "read_index": 4,
+      "mean_residue_auc": 0.7646782134332718,
+      "selection_provenance": {
+        "artifact": "results/architecture_sweep/COUNTERATTACK_QUOTIENT.json",
+        "n_splits": 14,
+        "n_candidates": 10,
+        "reads_test_fold": false,
+        "mean_delta_vs_dense_bank_on_train": 0.008721,
+        "worst_delta_vs_dense_bank_on_train": 0.002428,
+        "n_train_splits_beating_dense_bank": 14
+      }
+    },
+    {
       "artifact": "results/official_fold/COUNTERATTACK_TEST_PROBE.json",
       "n_units": 192,
       "method": "table field variant",
-      "read_index": null,
+      "read_index": 1,
       "mean_residue_auc": 0.7804160159029193,
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; see results/architecture_sweep/"
     },
@@ -64,9 +80,17 @@
       "selection_provenance": "cluster-disjoint halves of the training fold; this is the first and only evaluation of this architecture on the official test fold"
     }
   ],
-  "n_standalone_probes": 4,
-  "n_distinct_architectures_evaluated": 11,
-  "table_field_read_sequence": [
+  "n_standalone_probes": 5,
+  "n_distinct_architectures_evaluated": 12,
+  "indexed_read_sequence": [
+    {
+      "artifact": "results/official_fold/COUNTERATTACK_TEST_PROBE.json",
+      "n_units": 192,
+      "method": "table field variant",
+      "read_index": 1,
+      "mean_residue_auc": 0.7804160159029193,
+      "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; see results/architecture_sweep/"
+    },
     {
       "artifact": "results/official_fold/COUNTERATTACK_FINAL_PROBE.json",
       "n_units": 192,
@@ -82,7 +106,24 @@
       "read_index": 3,
       "mean_residue_auc": 0.8009908985545277,
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; results/architecture_sweep/COUNTERATTACK_WIDE2.json"
+    },
+    {
+      "artifact": "results/official_fold/COUNTERATTACK_QUOTIENT_PROBE.json",
+      "n_units": 192,
+      "method": "algebraic field, S_6 quotient bank",
+      "read_index": 4,
+      "mean_residue_auc": 0.7646782134332718,
+      "selection_provenance": {
+        "artifact": "results/architecture_sweep/COUNTERATTACK_QUOTIENT.json",
+        "n_splits": 14,
+        "n_candidates": 10,
+        "reads_test_fold": false,
+        "mean_delta_vs_dense_bank_on_train": 0.008721,
+        "worst_delta_vs_dense_bank_on_train": 0.002428,
+        "n_train_splits_beating_dense_bank": 14
+      }
     }
   ],
-  "honest_summary": "9 of our detectors appear in the frozen telemetry, and 4 standalone probe artifacts each carry a further 192-unit evaluation. The architecture reported as the main result was read three times, and those three readings are all reported with the reason for each change. The wider programme has looked at this fold more often than that, which is what this ledger is for."
+  "n_indexed_reads": 4,
+  "honest_summary": "9 of our detectors appear in the frozen telemetry, and 5 standalone probe artifacts each carry a further 192-unit evaluation. 4 of those probes carry a read index, 3 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
 }

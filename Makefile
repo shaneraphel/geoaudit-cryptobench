@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases
+verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -20,6 +20,12 @@ cases:
 # per-split rankings recorded beneath it and still names the frozen winner.
 crossval:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/crossvalidate_architecture.py --check
+
+# The quotient counterattack: that the capacity arithmetic recomputes, that the
+# summary follows from the fourteen per-split rankings, and that the selection
+# artifact still says it never read the test fold.
+quotient:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/counterattack_quotient_tables.py --check
 
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the
