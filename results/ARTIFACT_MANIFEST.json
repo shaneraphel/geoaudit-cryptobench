@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 20,
+    "exploration": 22,
     "cited": 26,
     "superseded": 4,
     "fold_access": 5
   },
-  "n_artifacts": 55,
+  "n_artifacts": 57,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -178,11 +178,25 @@
       "bytes": 1342
     },
     {
+      "artifact": "results/architecture_sweep/P2RANK_TRAIN_FOLD.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.p2rank_train_fold.v1",
+      "bytes": 610250
+    },
+    {
       "artifact": "results/architecture_sweep/PAIRWISE_READOUT_SELECTION.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "pairwise_readout_selection/v1",
       "bytes": 6225
+    },
+    {
+      "artifact": "results/architecture_sweep/PREREGISTERED_STATISTIC.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.preregistered_statistic.v1",
+      "bytes": 5756
     },
     {
       "artifact": "results/architecture_sweep/REPEATED_TRAIN_SELECTION.json",

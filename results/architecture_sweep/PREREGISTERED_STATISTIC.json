@@ -1,0 +1,158 @@
+{
+  "schema": "geoaudit.preregistered_statistic.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "question": "which functional of the paired differences should the manuscript report, decided before the fold is read",
+  "comparison": {
+    "arm_a": "table field, compiled on the fit half only",
+    "arm_b": "p2rank 2.5.1, fits nothing",
+    "population": "pick half of a cluster-disjoint split of the training fold",
+    "both_arms_out_of_sample": true,
+    "n_train_units": 770,
+    "n_fit_units": 386,
+    "n_paired_units": 384,
+    "mean_field": 0.804536,
+    "mean_p2rank": 0.770036
+  },
+  "procedure": {
+    "n_test_units_simulated": 192,
+    "n_subsamples": 200,
+    "n_bootstrap": 2000,
+    "seed": 20260725,
+    "power": "fraction of subsamples whose 95% bootstrap interval excludes zero",
+    "effect_shrinks": [
+      1.0,
+      0.5,
+      0.25,
+      0.125
+    ],
+    "shrink_model": "the differences are shifted so the effect is a fraction of the pick-half one, spread unchanged; a range is swept rather than the published held-out margin plugged in, so that the choice is not conditioned on the number it will test",
+    "calibration": "the same fraction after flipping the sign of each unit's difference at random, which must not exceed 0.08",
+    "stratification_covariate": "chain length, known before either method is run",
+    "selection_rule": "highest mean power over the shrink curve among calibrated candidates; ties within 0.02 go to the statistic whose claim asserts more. Point estimates are not compared across candidates because they are not on a common scale"
+  },
+  "candidates": [
+    {
+      "statistic": "mean",
+      "claim": "the field leads P2Rank on average by",
+      "claim_strength": 5,
+      "point_on_pick_half": 0.0345,
+      "power_by_effect_shrink": {
+        "1": 0.85,
+        "0.5": 0.21,
+        "0.25": 0.03,
+        "0.125": 0.01
+      },
+      "power_at_n": 0.85,
+      "mean_power_over_curve": 0.275,
+      "false_positive_rate_under_sign_flip": 0.05,
+      "calibrated": true
+    },
+    {
+      "statistic": "median",
+      "claim": "on a typical structure the field leads P2Rank by",
+      "claim_strength": 3,
+      "point_on_pick_half": 0.041602,
+      "power_by_effect_shrink": {
+        "1": 1.0,
+        "0.5": 0.915,
+        "0.25": 0.49,
+        "0.125": 0.26
+      },
+      "power_at_n": 1.0,
+      "mean_power_over_curve": 0.666,
+      "false_positive_rate_under_sign_flip": 0.04,
+      "calibrated": true
+    },
+    {
+      "statistic": "trimmed10",
+      "claim": "discounting the 10% tails, the field leads P2Rank by",
+      "claim_strength": 2,
+      "point_on_pick_half": 0.041592,
+      "power_by_effect_shrink": {
+        "1": 1.0,
+        "0.5": 0.755,
+        "0.25": 0.32,
+        "0.125": 0.12
+      },
+      "power_at_n": 1.0,
+      "mean_power_over_curve": 0.549,
+      "false_positive_rate_under_sign_flip": 0.06,
+      "calibrated": true
+    },
+    {
+      "statistic": "trimmed20",
+      "claim": "discounting the 20% tails, the field leads P2Rank by",
+      "claim_strength": 1,
+      "point_on_pick_half": 0.04376,
+      "power_by_effect_shrink": {
+        "1": 1.0,
+        "0.5": 0.945,
+        "0.25": 0.565,
+        "0.125": 0.255
+      },
+      "power_at_n": 1.0,
+      "mean_power_over_curve": 0.691,
+      "false_positive_rate_under_sign_flip": 0.05,
+      "calibrated": true
+    },
+    {
+      "statistic": "win_rate",
+      "claim": "the field beats P2Rank on a fraction of structures exceeding one half by",
+      "claim_strength": 0,
+      "point_on_pick_half": 0.177083,
+      "power_by_effect_shrink": {
+        "1": 1.0,
+        "0.5": 0.91,
+        "0.25": 0.43,
+        "0.125": 0.245
+      },
+      "power_at_n": 1.0,
+      "mean_power_over_curve": 0.646,
+      "false_positive_rate_under_sign_flip": 0.035,
+      "calibrated": true
+    },
+    {
+      "statistic": "stratified_by_length",
+      "claim": "holding chain length fixed, the field leads P2Rank on average by",
+      "claim_strength": 4,
+      "point_on_pick_half": 0.03449,
+      "power_by_effect_shrink": {
+        "1": 0.85,
+        "0.5": 0.215,
+        "0.25": 0.03,
+        "0.125": 0.005
+      },
+      "power_at_n": 0.85,
+      "mean_power_over_curve": 0.275,
+      "false_positive_rate_under_sign_flip": 0.05,
+      "calibrated": true
+    }
+  ],
+  "preregistered": {
+    "statistic": "trimmed20",
+    "claim": "discounting the 20% tails, the field leads P2Rank by",
+    "claim_strength": 1,
+    "point_on_pick_half": 0.04376,
+    "power_by_effect_shrink": {
+      "1": 1.0,
+      "0.5": 0.945,
+      "0.25": 0.565,
+      "0.125": 0.255
+    },
+    "power_at_n": 1.0,
+    "mean_power_over_curve": 0.691,
+    "false_positive_rate_under_sign_flip": 0.05,
+    "calibrated": true
+  },
+  "forecast": {
+    "published_mean_margin_on_test_fold": 0.005828,
+    "implied_shrink": 0.1689,
+    "expected_power": 0.39,
+    "conditions_on_a_held_out_number": true,
+    "used_for_selection": false,
+    "reading": "the read is more likely than not to leave the interval across zero, and that outcome is predicted here rather than explained afterwards"
+  },
+  "commitment": "the manuscript will report trimmed20 of the paired per-unit differences on the held-out fold, and the sentence it licenses is: discounting the 20% tails, the field leads P2Rank by ... . This was fixed before the fold was read for it.",
+  "the_mean_is_still_reported": "the preregistered statistic is the one inference is drawn from, not a replacement for the mean. The mean of the paired differences stays in the manuscript beside it, because it is what the literature reports and because dropping the underpowered functional once a better-powered one is in hand is the same selection this file exists to prevent."
+}

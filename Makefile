@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap
+verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -32,6 +32,13 @@ quotient:
 # artifact that claims a test-fold read or whose arithmetic no longer adds up.
 gap:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/gap_decomposition.py --audit
+
+# The functional the paired comparison is summarised with was fixed on the
+# training partition, and this refuses an artifact whose named statistic is no
+# longer the one its own selection rule returns from its own recorded numbers,
+# or that has quietly lost the forecast it committed to.
+prereg:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/preregister_statistic.py --check
 
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the
