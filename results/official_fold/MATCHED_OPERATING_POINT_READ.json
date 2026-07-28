@@ -1,0 +1,336 @@
+{
+  "schema": "geoaudit.matched_operating_point_read.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T03:43:48+0800",
+  "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
+  "is_official_mmseqs2_10pct_test_fold": true,
+  "test_fold_read_index": 6,
+  "method": "table_field",
+  "baseline": "p2rank",
+  "question": "whether the F1 margin over P2Rank is a property of the scores or of the operating point, decided by re-binarising both methods under a common rule rather than by each method's own convention",
+  "rescored_anything": false,
+  "why_it_is_indexed_anyway": "re-binarising a frozen score at a new threshold is a new statement about the held-out fold. Counting only re-runs would make an unlimited number of such statements free",
+  "selection_provenance": "results/architecture_sweep/PREREGISTERED_MATCHED_OPERATING_POINT.json",
+  "ordering": {
+    "artifact": "results/architecture_sweep/PREREGISTERED_MATCHED_OPERATING_POINT.json",
+    "preregistration_commit": "c5911a3bea5f3a4f2817d8ab9a2ef5b789dc2c6e",
+    "committed_at": "2026-07-29T03:43:39+08:00",
+    "subject": "Give P2Rank the threshold we gave ourselves, before reading the fold",
+    "clean_in_working_tree": true,
+    "head_at_read": "c5911a3bea5f3a4f2817d8ab9a2ef5b789dc2c6e",
+    "preregistration_is_an_ancestor_of_the_read": true,
+    "checked_with": "git log -1 -- <plan>, then merge-base --is-ancestor against HEAD"
+  },
+  "n_units": 192,
+  "reproduces_the_published_numbers": {
+    "table_field": {
+      "recomputed": 0.333412,
+      "committed": 0.333412,
+      "agrees_to_places": 4,
+      "agrees": true
+    },
+    "p2rank": {
+      "recomputed": 0.301896,
+      "committed": 0.301896,
+      "agrees_to_places": 4,
+      "agrees": true
+    }
+  },
+  "our_rule_recovers_our_own_call": {
+    "units_where_the_recomputed_call_is_identical": 192,
+    "of": 192,
+    "identical_everywhere": true,
+    "f1_drift_from_recomputing_it": 0.0,
+    "why_this_must_hold": "our shipped positive call is the per-chain top-q at this same q, so a recomputation that disagreed would be ordering tied scores differently from the harness",
+    "tie_break": "stable sort of the negated score over residue numbers ascending, applied identically to both methods"
+  },
+  "native_call_reference": {
+    "table_field_f1": 0.333412,
+    "p2rank_f1": 0.301896,
+    "published_delta": 0.03151604407052633,
+    "published_ci": [
+      0.008892610256103307,
+      0.05361254067043794
+    ]
+  },
+  "matched": {
+    "A_common_q": {
+      "q_ours": 0.09,
+      "q_p2rank": 0.09,
+      "table_field_f1": 0.333412,
+      "p2rank_f1": 0.319364,
+      "primary": {
+        "delta_point": 0.014048,
+        "delta_ci_low": -0.008465,
+        "delta_ci_high": 0.036423,
+        "p_two_sided_bootstrap": 0.224,
+        "crosses_zero": true,
+        "n_paired_units": 192
+      },
+      "secondary_trimmed_mean": {
+        "delta_point": 0.019176,
+        "delta_ci_low": -0.010821,
+        "delta_ci_high": 0.047078,
+        "p_two_sided_bootstrap": 0.2218,
+        "crosses_zero": true,
+        "n_paired_units": 192
+      }
+    },
+    "B_each_tuned_on_train": {
+      "q_ours": 0.09,
+      "q_p2rank": 0.09,
+      "table_field_f1": 0.333412,
+      "p2rank_f1": 0.319364,
+      "primary": {
+        "delta_point": 0.014048,
+        "delta_ci_low": -0.008465,
+        "delta_ci_high": 0.036423,
+        "p_two_sided_bootstrap": 0.224,
+        "crosses_zero": true,
+        "n_paired_units": 192
+      },
+      "secondary_trimmed_mean": {
+        "delta_point": 0.019176,
+        "delta_ci_low": -0.010821,
+        "delta_ci_high": 0.047078,
+        "p_two_sided_bootstrap": 0.2218,
+        "crosses_zero": true,
+        "n_paired_units": 192
+      }
+    }
+  },
+  "f1_against_q": [
+    {
+      "q": 0.02,
+      "table_field_f1": 0.194153,
+      "p2rank_f1": 0.189026
+    },
+    {
+      "q": 0.03,
+      "table_field_f1": 0.242579,
+      "p2rank_f1": 0.231454
+    },
+    {
+      "q": 0.04,
+      "table_field_f1": 0.276111,
+      "p2rank_f1": 0.261248
+    },
+    {
+      "q": 0.05,
+      "table_field_f1": 0.299607,
+      "p2rank_f1": 0.279332
+    },
+    {
+      "q": 0.06,
+      "table_field_f1": 0.317962,
+      "p2rank_f1": 0.295895
+    },
+    {
+      "q": 0.07,
+      "table_field_f1": 0.324957,
+      "p2rank_f1": 0.306333
+    },
+    {
+      "q": 0.08,
+      "table_field_f1": 0.328304,
+      "p2rank_f1": 0.316823
+    },
+    {
+      "q": 0.09,
+      "table_field_f1": 0.333412,
+      "p2rank_f1": 0.319364
+    },
+    {
+      "q": 0.1,
+      "table_field_f1": 0.333951,
+      "p2rank_f1": 0.322573
+    },
+    {
+      "q": 0.11,
+      "table_field_f1": 0.335595,
+      "p2rank_f1": 0.322095
+    },
+    {
+      "q": 0.12,
+      "table_field_f1": 0.331143,
+      "p2rank_f1": 0.321138
+    },
+    {
+      "q": 0.13,
+      "table_field_f1": 0.329145,
+      "p2rank_f1": 0.321437
+    },
+    {
+      "q": 0.14,
+      "table_field_f1": 0.326298,
+      "p2rank_f1": 0.317204
+    },
+    {
+      "q": 0.15,
+      "table_field_f1": 0.321604,
+      "p2rank_f1": 0.312554
+    },
+    {
+      "q": 0.16,
+      "table_field_f1": 0.31909,
+      "p2rank_f1": 0.309829
+    },
+    {
+      "q": 0.17,
+      "table_field_f1": 0.315127,
+      "p2rank_f1": 0.305848
+    },
+    {
+      "q": 0.18,
+      "table_field_f1": 0.311335,
+      "p2rank_f1": 0.301687
+    },
+    {
+      "q": 0.19,
+      "table_field_f1": 0.306419,
+      "p2rank_f1": 0.296449
+    },
+    {
+      "q": 0.2,
+      "table_field_f1": 0.301255,
+      "p2rank_f1": 0.290243
+    },
+    {
+      "q": 0.21,
+      "table_field_f1": 0.296772,
+      "p2rank_f1": 0.286682
+    },
+    {
+      "q": 0.22,
+      "table_field_f1": 0.292893,
+      "p2rank_f1": 0.282264
+    },
+    {
+      "q": 0.23,
+      "table_field_f1": 0.290054,
+      "p2rank_f1": 0.27776
+    },
+    {
+      "q": 0.24,
+      "table_field_f1": 0.284895,
+      "p2rank_f1": 0.272454
+    },
+    {
+      "q": 0.25,
+      "table_field_f1": 0.279782,
+      "p2rank_f1": 0.270074
+    },
+    {
+      "q": 0.26,
+      "table_field_f1": 0.276413,
+      "p2rank_f1": 0.26615
+    },
+    {
+      "q": 0.27,
+      "table_field_f1": 0.272307,
+      "p2rank_f1": 0.26206
+    },
+    {
+      "q": 0.28,
+      "table_field_f1": 0.269369,
+      "p2rank_f1": 0.258075
+    },
+    {
+      "q": 0.29,
+      "table_field_f1": 0.266317,
+      "p2rank_f1": 0.255345
+    },
+    {
+      "q": 0.3,
+      "table_field_f1": 0.262603,
+      "p2rank_f1": 0.252298
+    },
+    {
+      "q": 0.31,
+      "table_field_f1": 0.259038,
+      "p2rank_f1": 0.24931
+    },
+    {
+      "q": 0.32,
+      "table_field_f1": 0.256668,
+      "p2rank_f1": 0.245602
+    },
+    {
+      "q": 0.33,
+      "table_field_f1": 0.253065,
+      "p2rank_f1": 0.242099
+    },
+    {
+      "q": 0.34,
+      "table_field_f1": 0.249047,
+      "p2rank_f1": 0.238631
+    },
+    {
+      "q": 0.35,
+      "table_field_f1": 0.245144,
+      "p2rank_f1": 0.235483
+    },
+    {
+      "q": 0.36,
+      "table_field_f1": 0.241596,
+      "p2rank_f1": 0.23224
+    },
+    {
+      "q": 0.37,
+      "table_field_f1": 0.238481,
+      "p2rank_f1": 0.229675
+    },
+    {
+      "q": 0.38,
+      "table_field_f1": 0.235371,
+      "p2rank_f1": 0.227056
+    },
+    {
+      "q": 0.39,
+      "table_field_f1": 0.231866,
+      "p2rank_f1": 0.224615
+    },
+    {
+      "q": 0.4,
+      "table_field_f1": 0.228639,
+      "p2rank_f1": 0.222662
+    }
+  ],
+  "oracle": {
+    "p2rank_best_q_on_the_held_out_fold": 0.1,
+    "p2rank_f1_at_its_oracle_q": 0.322573,
+    "table_field_best_q_on_the_held_out_fold": 0.11,
+    "table_field_f1_at_its_oracle_q": 0.335595,
+    "our_shipped_q_vs_p2rank_oracle_q": {
+      "delta_point": 0.010839,
+      "delta_ci_low": -0.01127,
+      "delta_ci_high": 0.032587,
+      "p_two_sided_bootstrap": 0.338,
+      "crosses_zero": true,
+      "n_paired_units": 192
+    },
+    "what_this_is": "our method at the q it shipped, against P2Rank at the best q the held-out fold admits. P2Rank could not have known that q; the comparison is an upper bound on what any per-chain threshold could give it, not a score P2Rank achieved",
+    "our_shipped_q_is_within_of_our_oracle": 0.002183
+  },
+  "forecast_vs_outcome": {
+    "forecast": 0.006758,
+    "outcome_under_the_governing_rule": 0.014048,
+    "forecast_error": 0.00729
+  },
+  "survives_under": {
+    "A_common_q": false,
+    "B_each_tuned_on_train": false
+  },
+  "governing_rule": "B_each_tuned_on_train",
+  "conclusion": "the F1 conclusion is rewritten to say that our F1 advantage depends on the operating-point convention, and the sentence claiming an F1 advantage over P2Rank is removed from the abstract and the results. The ROC-AUC and PR-AUC comparisons are unaffected, because they are threshold-free, and the paper will say that too",
+  "rules_disagree": false,
+  "statistic": {
+    "primary": "mean over units of per-unit F1, the difference bootstrapped paired over units",
+    "why": "it is the statistic the published F1 headline already uses, so the matched number is comparable to +0.0315 digit for digit. A different functional here would confound the change of threshold with a change of summary",
+    "secondary": "20% trimmed mean, the functional the ROC-AUC preregistration selected. Declared now so that it cannot be adopted later on the strength of its answer",
+    "n_boot": 10000,
+    "seed": 20260725,
+    "ci_level": 0.95,
+    "resampling": "over units, both arms taking the same draw"
+  }
+}

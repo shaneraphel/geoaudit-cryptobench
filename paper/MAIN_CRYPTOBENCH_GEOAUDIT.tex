@@ -44,15 +44,24 @@ landed in the cell and how many of those were cryptic. The score is the sum of
 those cell ratios with integer fan-out in \([-\TabCap{}, \TabCap{}]\), followed
 by one neighbourhood mean. This field attains ROC-AUC \TabAuc{} \TabAucCI{},
 PR-AUC \TabPr{} \TabPrCI{}, MCC \TabMcc{} \TabMccCI{} and F1 \TabFOne{}
-\TabFOneCI{}, ahead of P2Rank on all four. One difference is resolved by this
-fold: F1, by \TabFOneD{} \TabFOneDCI{} at \(p=\TabFOneP{}\). The differences on
-ROC-AUC (\TabAucD{} \TabAucDCI{}) and PR-AUC (\TabPrD{} \TabPrDCI{}) contain
-zero. MCC is ahead by \TabMccD{} \TabMccDCI{}, an interval that excludes zero at
-our pre-registered resampling seed and does not do so under most others, and we
-report it as unresolved for the reason given below. We claim a resolved
-advantage on F1 and parity on the other three, and nothing stronger.
+\TabFOneCI{}, ahead of P2Rank on all four when each detector is scored at the
+operating point it ships with. None of the four differences survives holding the
+threshold in common. F1 is the one this fold resolves under the shipped
+conventions, by \TabFOneD{} \TabFOneDCI{} at \(p=\TabFOneP{}\), but our call is
+the top \MatchOurQ{} of each chain while P2Rank's is its own pocket assignment;
+giving P2Rank the same rule, at the \(q\) an identical grid search selects for it
+on the training fold, leaves \MatchBDelta{} \MatchBCI{} and we withdraw the
+claim. The differences on ROC-AUC (\TabAucD{} \TabAucDCI{}) and PR-AUC
+(\TabPrD{} \TabPrDCI{}) contain zero in the mean, and MCC's exclusion is a
+property of the resampling seed rather than of the fold. One resolved result
+remains, and it is the one that was fixed in advance and admits no threshold:
+under a \(20\%\) trimmed mean preregistered on the training partition, the
+paired ROC-AUC difference is \PreRegTestDelta{} \PreRegTestCI{} at
+\(p=\PreRegTestP{}\). We claim that, parity elsewhere, and nothing stronger.
 
-The ROC-AUC margin deserves less than that. Over this fold the standard error of
+The ROC-AUC margin \emph{in the mean} deserves less than that, and the
+distinction matters because the trimmed statistic above is a different summary of
+the same differences. Over this fold the standard error of
 a mean ROC-AUC is \FoldSE{}, so \TabAucD{} is \LeadInSE{} of one standard error,
 and it is the largest of \NArchOnFold{} architectures of ours that have been
 scored on these same units --- a count taken from an artifact ledger rather than
@@ -73,7 +82,9 @@ pre-registered resampling seed that difference excludes zero. It does not
 survive the seed: across \NSeedProbes{} seeds the MCC interval excludes zero in
 \TabMccSeedSig{} of them, so the exclusion is a property of the draw and not of
 the fold. F1 excludes zero in \TabFOneSeedSig{} of \NSeedProbes{}, and ROC-AUC
-and PR-AUC in none. MCC is therefore reported as unresolved.
+and PR-AUC in none. MCC is therefore reported as unresolved. F1's robustness to
+the seed did not save it from a different objection: it is robust as a statistic
+and fragile as a convention, which is what Section~\ref{sec:matched} measures.
 
 Two design facts carry that result and both are quantitative. First, cell
 occupancy: a width-six quaternary table has \(4^{6}\) cells and holds about fifty
@@ -117,8 +128,12 @@ denominators. We claim no binding affinity and no clinical or design utility
 This paper makes three claims about the official CryptoBench receptor-only test
 fold. First, a detector whose inference is table lookups and integer addition
 over quaternary digits of receptor geometry is ahead of a locally executed P2Rank
-on all four official metrics, and the F1 difference is resolved by this fold
-while the other three are not. Second, the quantity that governs such a detector
+on all four official metrics at each detector's shipped operating point, and one
+paired difference is resolved: the ROC-AUC difference under a summary statistic
+fixed on the training partition before the fold was read. The F1 difference,
+which resolves under the shipped conventions, does not survive binarising both
+methods by a common rule, and is reported as convention-dependent rather than as
+an advantage (Section~\ref{sec:matched}). Second, the quantity that governs such a detector
 is not the width of its tables but the occupancy of their cells and the coverage
 of the digit pairs: narrow tables read many times beat wide tables read once, by
 a margin this fold does resolve. Third, restricting the resolution path to
@@ -126,8 +141,9 @@ counting costs nothing relative to a first-order functional of the same wires,
 which is the opposite of what we reported previously and is explained in
 Section~\ref{sec:results}.
 
-Explicitly not claimed: a resolved advantage over P2Rank on ROC-AUC, PR-AUC or
-MCC; parity on any other benchmark; binding affinity; candidate efficacy; drug
+Explicitly not claimed: a resolved advantage over P2Rank on PR-AUC or MCC, on
+ROC-AUC in the mean, or on F1 under any matched threshold; parity on any other
+benchmark; binding affinity; candidate efficacy; drug
 design utility; clinical readiness; or global novelty. The field's cells and its
 integer fan-out are compiled on the CryptoBench training fold, so it is
 \emph{not} training-free; the training-free detectors are reported separately and
@@ -155,6 +171,7 @@ chain-agnostic and cannot address such assemblies unambiguously. The exclusion i
 recorded rather than silent.
 
 \section{Methods}
+\label{sec:methods}
 \paragraph{Input contract.} Every detector receives receptor coordinates only.
 A decorator asserts, at call time, that the file carries no non-solvent HETATM
 record and no non-polymer ATOM record; a violation is recorded as a crash, not
@@ -299,7 +316,11 @@ matched to the standard deviation of \(S\) rather than to its maximum, because
 the maximum of a score field over a chain is an order statistic of a handful of
 residues and a max-normalised gate therefore mixes in a different amount on every
 structure. The operating point for MCC and F1 is the per-chain top
-\(\TabOperatingQ{}\) fraction, fixed on the training fold.
+\(\TabOperatingQ{}\) fraction, fixed on the training fold by maximising pooled
+training F1 over a grid from \(0.02\) to \(0.40\). P2Rank has no such knob and is
+scored at its own pocket assignment; Section~\ref{sec:matched} runs the identical
+grid on P2Rank's training scores so that the two can be compared at one threshold
+as well as at two.
 
 \paragraph{Linear readout, and why table width is the free variable.} The readout
 is one regularised solve, \(w=(A^{\top}A+\lambda\,\bar{\sigma}I)^{-1}A^{\top}t\),
@@ -425,6 +446,7 @@ tables misleading. A metric that is undefined on a unit is null and leaves that
 unit out of its own denominator; the chance baseline's MCC is undefined on every
 unit because no residue crosses the operating point, and is reported as such
 rather than imputed as zero.}
+\label{tab:metrics}
 \end{table}
 
 \begin{table}[h]
@@ -467,9 +489,15 @@ its variance. ``\(\text{ns}\)'' means the 95\% interval of the paired difference
 contains zero. Each difference is taken on the structures where both methods
 have a value; for MCC that is \TabMccNPaired{} of \NUnits{}, because P2Rank's
 confusion matrix is degenerate on six of them. The table field's point estimate
-is positive on all four metrics and the fold resolves one of them: F1, by
-\TabFOneD{} \TabFOneDCI{} at \(p=\)~\TabFOneP{}, against \TabAucD{} on ROC-AUC
-at \(p=\)~\TabAucP{}. The ``\(\text{sig}\)'' shown for MCC is at the
+is positive on all four metrics and the fold resolves one of them at these
+operating points: F1, by \TabFOneD{} \TabFOneDCI{} at \(p=\)~\TabFOneP{}, against
+\TabAucD{} on ROC-AUC at \(p=\)~\TabAucP{}. Both threshold-dependent columns are
+measured at each detector's shipped operating point, which for the fields is the
+top \MatchOurQ{} of each chain and for P2Rank is its own pocket assignment.
+Section~\ref{sec:matched} holds that convention in common and the F1 resolution
+does not survive it (\MatchBDelta{} \MatchBCI{}), so the F1 column is read here
+as describing the systems as delivered and not as evidence about their scores.
+The ``\(\text{sig}\)'' shown for MCC is at the
 pre-registered seed only and survives \TabMccSeedSig{} of \NSeedProbes{} seeds,
 so we do not count it; F1 survives \TabFOneSeedSig{} of \NSeedProbes{}. A
 positive point estimate inside an interval that contains zero is not evidence of
@@ -480,14 +508,14 @@ column here is reported as parity even though the field leads it.}
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig_official_fold_metrics.png}
-\caption{\FigCaptionOne{}}
+\caption{\FigCapOfficialFoldMetrics{}}
 \label{fig:metrics}
 \end{figure}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig_paired_vs_p2rank.png}
-\caption{\FigCaptionTwo{}}
+\caption{\FigCapPairedVsPTwoRank{}}
 \label{fig:paired}
 \end{figure}
 
@@ -542,7 +570,7 @@ these counts is in
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig_case_studies.png}
-\caption{\FigCaptionThree{}}
+\caption{\FigCapCaseStudies{}}
 \label{fig:cases}
 \end{figure}
 
@@ -953,6 +981,81 @@ the whole distribution down, and what the fold actually shows is a bulk leading
 by more than the mean does with a tail dragging the mean back, which a location
 shift cannot represent.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_functional_choice.png}
+\caption{\FigCapFunctionalChoice{}}
+\label{fig:functionals}
+\end{figure}
+
+\subsection{The F1 margin was a threshold, and we said so before we knew}
+\label{sec:matched}
+F1 was the one difference this fold resolved, and it compared two different
+kinds of object. Our positive call is the top \MatchOurQ{} of residues in each
+chain, at a fraction chosen on the training fold. P2Rank's is its own pocket
+assignment, a rule its authors fixed and nobody tuned on CryptoBench. A margin
+measured that way may be a property of the scores or a property of the
+threshold, and the two are not distinguishable from the published number.
+
+Distinguishing them means giving P2Rank what we gave ourselves: the same
+per-chain top-\(q\) rule, the same grid from \(0.02\) to \(0.40\), the same
+pooled-F1 objective, the same \PTwoTrainUnits{} training receptors, and the
+choice made before the fold is consulted. The grid returns \MatchPTwoQ{} --- the
+identical fraction ours selected. That coincidence is a fact about the labels
+rather than about either method: about nine per cent of a chain's residues bind,
+so nine per cent is the calling fraction that maximises F1 for any ranking of
+them, and the two matched rules a reviewer might ask for collapse into one.
+Tuning is worth \MatchTrainGain{} to P2Rank on those receptors, moving it from
+\MatchPTwoTrainNative{} to \MatchPTwoTrainTuned{}.
+
+Set against a published margin of \MatchNativeDelta{}, that gain forecasts
+\MatchForecast{} on the held-out fold, which is to say it forecasts a margin
+this fold cannot resolve. So the sentence to be written in each case was
+committed in \MatchCommit{} before reading: if the matched interval excluded
+zero the advantage would be reported as robust to the convention, and if it did
+not, the F1 claim would be rewritten as convention-dependent and struck from the
+abstract. \texttt{tools/matched\_operating\_point\_read.py} refuses to run
+unless that plan is clean in the working tree and its commit is an ancestor of
+\texttt{HEAD}.
+
+It did not survive. On reading \MatchReadIndex{} the matched difference is
+\MatchBDelta{} with interval \MatchBCI{} at \(p=\MatchBP{}\), P2Rank rising from
+\MatchNativePTwo{} to \MatchBPTwo{} while our own F1 does not move at all ---
+our published call already \emph{is} the matched rule at this \(q\), and
+recomputing it reproduces the committed call on all \MatchNUnits{} structures.
+The trimmed mean, declared in advance as the secondary, agrees at \MatchBTrim{}
+\MatchBTrimCI{}. Granting P2Rank the best \(q\) the fold itself admits ---
+\MatchOracleQ{}, worth \MatchOraclePTwo{} to it, a threshold it could not have
+known and an upper bound rather than a score --- leaves us ahead by
+\MatchOracleDelta{} \MatchOracleCI{}, which also contains zero. Our own shipped
+\(q\) is within \MatchOurOracleGap{} of the best this fold would have given us,
+so the convention is not quietly favouring us either.
+
+We therefore withdraw the resolved-advantage claim on F1. What remains true, and
+is what Table~\ref{tab:metrics} reports, is that the table field is ahead of
+P2Rank on all four metrics when each detector is scored at the operating point
+it ships with, and that no one of those four differences resolves once the
+threshold is held in common. This is not a technicality about statistics: a
+practitioner running P2Rank gets pocket assignments, not a top-\(q\) knob, so the
+native-call comparison is the one that describes the two systems as they are
+delivered, and it stays primary for that reason. It simply cannot be quoted as
+evidence about the scores.
+
+One claim in this paper is untouched by the objection, and it is the
+preregistered one. The ROC-AUC comparison of Section~\ref{sec:prereg} admits no
+threshold at all: it ranks residues and integrates, so there is no operating
+point to match, and \PreRegTestDelta{} \PreRegTestCI{} stands as it did. That
+the surviving result is the threshold-free one that was fixed in advance, while
+the one that fell was the threshold-dependent one nobody had preregistered, is
+the more useful lesson of the two.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_matched_operating_point.png}
+\caption{\FigCapMatchedOperatingPoint{}}
+\label{fig:matched}
+\end{figure}
+
 \subsection{\GenTotal{} invariants from two generators, and a ceiling the
 counting field declined to collect}
 \label{sec:banks}
@@ -1117,17 +1220,22 @@ the mean --- reported unresolved, and kept --- is the functional that speaks.
 Neither statement is the whole comparison and the paper reports both. On PR-AUC
 no such ordering is available and none should be inferred from the sign.
 
-Of the two intervals that do exclude zero, only one does so reliably. The F1
-difference is \TabFOneD{} \TabFOneDCI{} and its interval clears zero under
-\TabFOneSeedSig{} of \NSeedProbes{} independent resampling seeds. The MCC
+Of the two intervals that do exclude zero, neither survives everything we could
+think of to do to it. The F1 difference is \TabFOneD{} \TabFOneDCI{} and its
+interval clears zero under \TabFOneSeedSig{} of \NSeedProbes{} independent
+resampling seeds --- robust to the bootstrap, and not robust to the operating
+point: Section~\ref{sec:matched} rebinarises both methods by one rule and the
+difference falls to \MatchBDelta{} \MatchBCI{}. Seed robustness and convention
+robustness are different properties and only the first had been checked. The MCC
 difference is \TabMccD{} \TabMccDCI{} on \TabMccNPaired{} shared structures --- a
 lower bound four ten-thousandths clear of zero, which survives \TabMccSeedSig{}
 of \NSeedProbes{} seeds. A verdict that changes with the seed is a property of
 the draw, so we report MCC as unresolved despite the frozen seed licensing the
 opposite, and the counts are in
-\texttt{results/official\_fold/SEED\_SENSITIVITY.json}. Even the surviving F1
-result is a threshold metric at one operating point, against one trained
-baseline executed locally, on one receptor-only task.
+\texttt{results/official\_fold/SEED\_SENSITIVITY.json}. MCC is a threshold metric
+too, and the matched-threshold reading applies to it in principle; we did not
+preregister it there and do not report it, rather than adding an analysis the
+plan did not name.
 
 The test fold was read \NTestReads{} times over the development of the table
 field itself, and that is not the whole story. The readings were \ReadAucI{},
@@ -1136,12 +1244,16 @@ field itself, and that is not the whole story. The readings were \ReadAucI{},
 motivated by a diagnosis made on the training fold --- an unregularised solve
 that collapsed as the table pool grew, and a wire set whose ceiling the circuit
 had already reached --- and each configuration was re-ranked on the held-out
-training half before the fold was touched again. No reading was discarded. Two
+training half before the fold was touched again. No reading was discarded. Three
 further readings followed and are indexed with these three: a counting-field
-probe of a different lineage, and the preregistered re-summary of
-Section~\ref{sec:prereg}, which changed no detector and scored no receptor
-again but is counted because taking a new summary of frozen per-unit numbers is
-a new use of the fold.
+probe of a different lineage, the preregistered re-summary of
+Section~\ref{sec:prereg}, and the matched-threshold rebinarisation of
+Section~\ref{sec:matched}. Neither of the last two changed a detector or scored a
+receptor again; both are counted because a new summary, or a new threshold, on
+frozen per-unit numbers is a new use of the fold. A ledger that counted only
+re-runs would make an unlimited supply of such uses free, which is the loophole
+it exists to close --- and the one that cost us the F1 claim was of exactly that
+kind.
 
 The whole story is larger, and it is the most serious threat to everything
 above. Counted from the artifacts rather than from memory,
@@ -1161,15 +1273,16 @@ The standard error of a mean ROC-AUC over \NUnits{} units on this fold is
 error, and it is the maximum over \NArchOnFold{} architectures. The upward bias
 of a maximum over that many correlated estimates is of the same order as the
 margin itself, so the ROC-AUC ordering in Table~2 carries no weight and we ask
-for none. That is why this paper claims parity: not modesty, but that the
-number is the wrong size to claim with. The F1 difference is several times
-larger and survives every resampling seed, which is what makes it the one
-difference we report --- though seed robustness speaks to the bootstrap and not
-to architecture selection. The selection is addressed separately, by
-cross-validating the choice on CryptoBench's own \NSplitsCv{} training folds and
-on \NSplitsRh{} redrawn half-splits, where it ranks first every time; that
-answers whether the architecture was drawn rather than selected, and it does not
-answer whether the F1 margin would survive a different benchmark.
+for none. That is why this paper claims parity in the mean: not modesty, but that
+the number is the wrong size to claim with. The one difference we do report is
+the trimmed-mean ROC-AUC result, and the reason it withstands the arithmetic
+above is that its statistic was fixed before the fold was read rather than
+chosen from among the summaries the fold makes available. Architecture selection
+is a separate exposure and is addressed separately, by cross-validating the
+choice on CryptoBench's own \NSplitsCv{} training folds and on \NSplitsRh{}
+redrawn half-splits, where it ranks first every time; that answers whether the
+architecture was drawn rather than selected, and it does not answer whether any
+of these margins would survive a different benchmark.
 
 The absolute values remain modest --- ROC-AUC \TabAuc{} and F1 \TabFOne{} for
 the strongest field here --- so the contribution is the construction rather than

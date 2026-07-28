@@ -25,14 +25,22 @@ official CryptoBench receptor-only benchmark.
 - Primary metrics: per-residue `residue_auc`, `residue_pr_auc`, `residue_mcc`,
   `residue_f1`, each with a 95 % paired-bootstrap CI over the structures where both
   compared methods are defined.
-- Claimed: on F1, the table field is separable from P2Rank 2.5.1 (+0.032,
-  95 % CI [+0.009, +0.054], clearing zero under all 25 resampling seeds). On the
-  other three metrics, parity — the point estimates favour the field and the
-  intervals contain zero, and the ROC-AUC margin is 0.36 of one standard error of
-  a fold mean and is the maximum over 11 of our architectures scored on this fold,
-  so it carries no ordering.
-- Not claimed: superiority on ROC-AUC, PR-AUC or MCC; binding affinity; candidate
-  efficacy; global novelty. See `contracts/GEOAUDIT_PAPER_SCOPE.json`.
+- Claimed: on ROC-AUC, under a 20 % trimmed mean fixed on the training partition
+  and committed before the fold was read for it, the table field is separable from
+  P2Rank 2.5.1 (+0.0281, 95 % CI [+0.0117, +0.0427], p=0.002). This is the one
+  resolved result, and it is threshold-free. See §4.5.
+- Withdrawn: the F1 advantage. It is +0.032 [+0.009, +0.054] with each detector at
+  its own operating point, and +0.014 [−0.009, +0.036] once both are binarised by
+  one rule at the *q* an identical grid search selects for each on the training
+  fold. The F1 ordering is reported as depending on the operating-point
+  convention. See §4.8, whose retraction branch was written before the read.
+- Parity elsewhere: on PR-AUC, on MCC, and on ROC-AUC *in the mean*, the point
+  estimates favour the field and the intervals contain zero. The mean ROC-AUC
+  margin is 0.36 of one standard error of a fold mean and is the maximum over 12
+  of our architectures scored on this fold, so it carries no ordering.
+- Not claimed: superiority on PR-AUC or MCC, on ROC-AUC in the mean, or on F1
+  under any matched threshold; binding affinity; candidate efficacy; global
+  novelty. See `contracts/GEOAUDIT_PAPER_SCOPE.json`.
 - The architecture was chosen on one half of the training fold, and that choice is
   cross-validated on 29 other splits, none of which reads the test fold:
   CryptoBench's own four training folds, which are cluster-disjoint under its
@@ -63,9 +71,13 @@ official CryptoBench receptor-only benchmark.
 
 **Figure 3.** One set of 192 paired differences, and what follows from how it is summarised. Left, the differences themselves: the field is ahead on 115 structures and behind on 77, a win rate +0.0990 above one half (p=0.004), and the shaded tails are what a 20% trim discards — losses averaging -0.2319 against wins of +0.1757. That asymmetry is why the mean sits at +0.0058 while the middle 60% sits at +0.0281. Right, five location summaries of those same numbers with 95% bootstrap intervals. The 20% trimmed mean was chosen on the training partition and committed in 39e70d4 before this fold was read for it; the others are shown because reporting only the chosen one would hide whether the choice landed on the flattering summary. The mean is unresolved and stays in the paper: it is the functional that speaks to the discarded tail, where the field's failures are worse than P2Rank's.
 
-![Figure 4](figures/fig_case_studies.png)
+![Figure 4](figures/fig_matched_operating_point.png)
 
-**Figure 4.** Four evaluation units, projected onto each chain's two longest principal axes: grey is the chain, black rings are the labelled cryptic residues, filled points are the residues each method called positive. The cases are chosen by rule and not by eye -- the clearest joint success, the largest margin each way, and the largest labelled pocket among the units neither method locates -- where locating means per-residue F1 at least 0.5. That last case is the commonest outcome: of 192 units, 25 are located by both methods, 24 by the table field only, 13 by P2Rank only, and 130 by neither.
+**Figure 4.** The F1 margin over P2Rank, before and after holding the operating point in common, on all 192 held-out structures. Left, mean per-structure F1 as a function of the fraction q of each chain called positive, for both methods. The dashed level is P2Rank's own pocket assignment, which is not a point on the curve because it is not a fraction of the chain; the published comparison is that level against our curve at q=0.09. Running the grid search that chose our q on P2Rank's training scores returns the same q=0.09, so the two matched rules a reader might ask for coincide. Right, the paired difference under each convention with 95% bootstrap intervals: +0.0315 at the shipped operating points, +0.0140 [-0.0085, +0.0364] once both are binarised the same way, and +0.0108 against P2Rank at the best q this fold admits — an upper bound it could not have known. Our own F1 is identical in the first two columns: our shipped call already is the matched rule at this q. The rules and the sentence to be written under each outcome were committed in c5911a3 before the fold was read for them.
+
+![Figure 5](figures/fig_case_studies.png)
+
+**Figure 5.** Four evaluation units, projected onto each chain's two longest principal axes: grey is the chain, black rings are the labelled cryptic residues, filled points are the residues each method called positive. The cases are chosen by rule and not by eye -- the clearest joint success, the largest margin each way, and the largest labelled pocket among the units neither method locates -- where locating means per-residue F1 at least 0.5. That last case is the commonest outcome: of 192 units, 25 are located by both methods, 24 by the table field only, 13 by P2Rank only, and 130 by neither.
 
 <!-- END AUTOGENERATED: figures -->
 
@@ -443,6 +455,7 @@ all fail-closed.
 | Baseline's own threshold | `make p2op` | the q recorded for P2Rank stops being the argmax of its own committed training curve, or the re-run that produced it disagreed with the training-fold summary the paper quotes |
 | Matched-threshold plan | `make match` | a rule is added, removed or renamed, the forecast stops being the subtraction it claims, or the branch committing to weaken the F1 claim is deleted |
 | Sixth fold read | `make read6` | the read stops reproducing the published per-method F1, its plan stops being a git ancestor of it, its stated conclusion stops being the sentence preregistered for the outcome it got, or the oracle q stops being its own curve's argmax |
+| Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
 Current state: `verify_claims` all checks pass; 297 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:
@@ -790,6 +803,66 @@ product per residue, with no floating-point model evaluated at all: a median
 **0.342 s per chain against P2Rank's 4.722 s**, a factor of 13.8. The ridge is
 not delicate either — 0.03, 0.1 and 0.3
 give 0.8045, 0.8042 and 0.8023 on the same selection half.
+
+### 4.8 The F1 advantage was a threshold, and the retraction was written first
+
+F1 was the one metric whose paired difference this fold resolved: **+0.0315
+[+0.0089, +0.0536]**, p=0.0056. It compared two different kinds of object. Our
+positive call is the top 9% of residues in each chain, at a fraction tuned on the
+training fold. P2Rank's is its own pocket assignment, a rule its authors fixed
+and nobody tuned on CryptoBench. A margin measured that way may be a property of
+the scores or of the threshold, and the published number cannot tell them apart.
+
+`tools/p2rank_train_operating_point.py` gives P2Rank what we gave ourselves: the
+same per-chain top-*q* rule, the same 0.02–0.40 grid, the same pooled-F1
+objective, the same 770 training receptors, run before the fold is consulted. It
+returns **q = 0.09 — the identical fraction ours selected**. That collapses the
+two matched rules a reviewer might ask for into one, and it says something about
+the labels rather than about either method: about nine per cent of a chain's
+residues bind, so nine per cent is the calling fraction that maximises F1 for any
+ranking of them. Tuning is worth **+0.0248** to P2Rank on those receptors
+(0.2956 → 0.3203).
+
+Against a published margin of +0.0315, that forecasts **+0.0068** on the fold —
+which is to say it forecasts a margin the fold cannot resolve. So the sentence to
+be written in either case went into
+`results/architecture_sweep/PREREGISTERED_MATCHED_OPERATING_POINT.json` and was
+committed before the reading tool would run. `make match` refuses an artifact that
+has since dropped the branch committing to weaken the claim.
+
+| convention | table field | P2Rank | paired difference |
+| --- | --- | --- | --- |
+| each method's own operating point (published) | 0.3334 | 0.3019 | **+0.0315** [+0.0089, +0.0536] |
+| both at q=0.09, the matched rule | 0.3334 | 0.3194 | +0.0140 [−0.0085, +0.0364], p=0.224 |
+| P2Rank at the best q this fold admits (0.10) | 0.3334 | 0.3226 | +0.0108 [−0.0113, +0.0326] |
+
+It did not survive, and **the F1 advantage is withdrawn**. The 20% trimmed mean,
+declared in advance as the secondary, agrees at +0.0192 [−0.0108, +0.0471]. Our
+own F1 does not move between the first two rows: our shipped call already *is*
+the matched rule at this *q*, and recomputing it reproduces the committed call on
+all 192 structures with zero drift — which is what licenses reading the change as
+being about the threshold rather than about us. Our shipped *q* is within 0.0022
+of the best this fold would have given us, so the convention was not quietly
+favouring us either.
+
+What remains true is that the table field is ahead of P2Rank on all four metrics
+at each detector's shipped operating point, and that no one of those four
+differences resolves once the threshold is held in common. That is not a
+technicality: a practitioner running P2Rank gets pocket assignments, not a
+top-*q* knob, so the native-call comparison describes the two systems as they are
+delivered and stays primary. It simply is not evidence about the scores.
+
+One claim is untouched. The ROC-AUC result of §4.5 admits no threshold at all —
+it ranks residues and integrates — so +0.0281 [+0.0117, +0.0427] at p=0.002
+stands. That the surviving result is the threshold-free one that was fixed in
+advance, while the one that fell was the threshold-dependent one nobody had
+preregistered, is the more useful of the two lessons.
+
+`make read6` refuses a read that did not first reproduce the published per-method
+F1 to four decimals, whose plan is not a git ancestor of it, whose stated
+conclusion is not the sentence preregistered for the outcome it got, or whose
+oracle *q* is not the argmax of its own published curve. Figure 4 above plots the
+whole F1-against-*q* curve for both methods beside the three intervals.
 
 ---
 

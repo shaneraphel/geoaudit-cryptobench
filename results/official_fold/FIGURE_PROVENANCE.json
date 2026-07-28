@@ -5,11 +5,12 @@
   "generator": "tools/make_official_figures.py",
   "sources": {
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
-    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "668dd526f24b5ee4e0ef3bc78d008d9c704a37d92bdbff70256194044ab12e48",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "04d2a65df62056313d2996799acce729dbb6ca456277ac5b2d0acc579a9fb450",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
     "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",
-    "results/official_fold/PREREGISTERED_READ.json": "e57d9063ae20ca45259f114b9885a156ba09e422cb222d07b9797febc6d02b17"
+    "results/official_fold/PREREGISTERED_READ.json": "e57d9063ae20ca45259f114b9885a156ba09e422cb222d07b9797febc6d02b17",
+    "results/official_fold/MATCHED_OPERATING_POINT_READ.json": "ba0f9f6b2c2e24ed8b9f9a7f0d69350afeea66c7c33642b57dd08e802764ea84"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -26,6 +27,11 @@
       "sha256": "86e28ffef98345a50ef7bc55b62bee4ca1fff391c8b51ed347a988a58837ac19",
       "bytes": 116499,
       "caption": "One set of 192 paired differences, and what follows from how it is summarised. Left, the differences themselves: the field is ahead on 115 structures and behind on 77, a win rate +0.0990 above one half (p=0.004), and the shaded tails are what a 20% trim discards \u2014 losses averaging -0.2319 against wins of +0.1757. That asymmetry is why the mean sits at +0.0058 while the middle 60% sits at +0.0281. Right, five location summaries of those same numbers with 95% bootstrap intervals. The 20% trimmed mean was chosen on the training partition and committed in 39e70d4 before this fold was read for it; the others are shown because reporting only the chosen one would hide whether the choice landed on the flattering summary. The mean is unresolved and stays in the paper: it is the functional that speaks to the discarded tail, where the field's failures are worse than P2Rank's."
+    },
+    "fig_matched_operating_point.png": {
+      "sha256": "190503cf991e5bf7f365237c49444e10e0cef36da3f66f1c9a9d5c9bb95eac33",
+      "bytes": 169360,
+      "caption": "The F1 margin over P2Rank, before and after holding the operating point in common, on all 192 held-out structures. Left, mean per-structure F1 as a function of the fraction q of each chain called positive, for both methods. The dashed level is P2Rank's own pocket assignment, which is not a point on the curve because it is not a fraction of the chain; the published comparison is that level against our curve at q=0.09. Running the grid search that chose our q on P2Rank's training scores returns the same q=0.09, so the two matched rules a reader might ask for coincide. Right, the paired difference under each convention with 95% bootstrap intervals: +0.0315 at the shipped operating points, +0.0140 [-0.0085, +0.0364] once both are binarised the same way, and +0.0108 against P2Rank at the best q this fold admits \u2014 an upper bound it could not have known. Our own F1 is identical in the first two columns: our shipped call already is the matched rule at this q. The rules and the sentence to be written under each outcome were committed in c5911a3 before the fold was read for them."
     },
     "fig_case_studies.png": {
       "sha256": "1098a22f87a65e4812d0bc7bb2bdad8619a653b6cdae0e683e502b42495a2c3a",

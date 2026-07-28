@@ -61,6 +61,28 @@ def _tex(text: str) -> str:
 
 def _roman(i: int) -> str:
     return ("One", "Two", "Three", "Four", "Five", "Six")[i - 1]
+
+
+_DIGIT_WORD = ("Zero", "One", "Two", "Three", "Four",
+               "Five", "Six", "Seven", "Eight", "Nine")
+
+
+def _caption_macro(filename: str) -> str:
+    """``fig_case_studies.png`` -> ``FigCapCaseStudies``.
+
+    Digits become words because a TeX macro name is letters only, and the word
+    is the one the rest of this file already uses: ``p2rank`` reads ``PTwoRank``,
+    matching \\PTwoRuntime and friends.
+    """
+    stem = filename.rsplit(".", 1)[0]
+    if stem.startswith("fig_"):
+        stem = stem[4:]
+    out = []
+    for part in stem.split("_"):
+        for tok in re.findall(r"\d|[A-Za-z]+", part):
+            out.append(_DIGIT_WORD[int(tok)] if tok.isdigit()
+                       else tok.capitalize())
+    return "FigCap" + "".join(out)
 TELEMETRY = ROOT / "results/cryptobench_official/TELEMETRY.json"
 SELECTION = ROOT / "results/architecture_sweep/TRAIN_ONLY_SELECTION.json"
 CEILING = ROOT / "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json"
@@ -284,13 +306,16 @@ def build() -> str:
         # sentence. They state structure counts, a seed and a standard error;
         # typed twice they would disagree within a revision, and the reader
         # would have no way to tell which copy was current.
-        # Insertion order, not sorted: the generator draws them in the order
-        # the README numbers them, and a caption macro numbered differently
-        # from the image above it is worse than no macro.
+        # Named after the image, not numbered by draw order. They used to be
+        # numbered, and inserting a figure ahead of the case studies silently
+        # moved that caption onto a different plot: the manuscript still said
+        # FigCaptionThree while position three had become another figure. A name
+        # derived from the filename cannot slide, and _figure_captions_match
+        # below refuses a manuscript that pairs one with the wrong image.
         prov = json.loads(FIGPROV.read_text())
-        for i, rec in enumerate((prov.get("figures") or {}).values(), 1):
+        for name, rec in (prov.get("figures") or {}).items():
             if rec.get("caption"):
-                L.append(f"\\newcommand{{\\FigCaption{_roman(i)}}}"
+                L.append(f"\\newcommand{{\\{_caption_macro(name)}}}"
                          f"{{{_tex(rec['caption'])}}}")
 
     if CROSSVAL.exists():
@@ -830,12 +855,74 @@ def _undefined(text: str) -> list[str]:
     return out
 
 
+_FIGURE_ENV = re.compile(r"\\begin\{figure\*?\}(.*?)\\end\{figure\*?\}", re.S)
+
+
+def _figure_captions_match() -> list[str]:
+    """Every figure must carry the caption written for the image it shows.
+
+    The captions are generated from an artifact and the manuscript cites them
+    by macro, which removes the risk of a caption drifting from its numbers but
+    not the risk of it sitting under the wrong picture. That happened: the
+    macros were numbered by draw order, a figure was inserted ahead of the case
+    studies, and the case-study plot kept a caption written about a histogram of
+    paired differences. Nothing in the pipeline noticed, because both halves
+    were individually up to date.
+    """
+    bad = []
+    for tex in sorted(SRC.glob("*.tex")):
+        if tex.name == OUT.name:
+            continue
+        for body in _FIGURE_ENV.findall(tex.read_text()):
+            imgs = re.findall(r"\\includegraphics\[[^\]]*\]\{([^}]+)\}", body)
+            caps = re.findall(r"\\caption\{\\([A-Za-z]+)\{\}\}", body)
+            if len(imgs) != 1 or len(caps) != 1:
+                continue
+            want = _caption_macro(imgs[0])
+            if caps[0] != want:
+                bad.append(f"{tex.name}: {imgs[0]} carries \\{caps[0]}{{}}, "
+                           f"but its caption is \\{want}{{}}")
+    return bad
+
+
+def _dangling_refs() -> list[str]:
+    """Cross-references with no label anywhere in the manuscript.
+
+    TeX renders these as ``??`` and exits zero, so a broken reference survives
+    every check that only asks whether the document compiled. Three did: two
+    sections pointed at a metrics table that had never been labelled, and the
+    generated appendix pointed at an unlabelled Methods section. The labels are
+    collected across all the .tex files because the appendices are separate
+    files included into one document.
+    """
+    labels, refs = set(), {}
+    for tex in sorted(SRC.glob("*.tex")):
+        body = tex.read_text()
+        labels |= set(re.findall(r"\\label\{([^}]+)\}", body))
+        for name in re.findall(r"\\(?:ref|autoref|eqref)\{([^}]+)\}", body):
+            refs.setdefault(name, tex.name)
+    return [f"{where} cites \\ref{{{name}}}, which is never labelled"
+            for name, where in sorted(refs.items()) if name not in labels]
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true",
                     help="exit non-zero if the committed file is stale")
     args = ap.parse_args(argv)
     text = build()
+    dangling = _dangling_refs()
+    if dangling:
+        print("DANGLING cross-references:")
+        for line in dangling:
+            print(f"  - {line}")
+        return 1
+    mispaired = _figure_captions_match()
+    if mispaired:
+        print("MISPAIRED figure captions:")
+        for line in mispaired:
+            print(f"  - {line}")
+        return 1
     missing = _undefined(text)
     if missing:
         print(f"INCOMPLETE {OUT.relative_to(ROOT)}:")

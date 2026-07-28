@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 20,
-    "cited": 33,
+    "cited": 35,
     "superseded": 4,
-    "fold_access": 5
+    "fold_access": 6
   },
-  "n_artifacts": 62,
+  "n_artifacts": 65,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -206,11 +206,25 @@
       "bytes": 610250
     },
     {
+      "artifact": "results/architecture_sweep/P2RANK_TRAIN_OPERATING_POINT.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.p2rank_train_operating_point.v1",
+      "bytes": 5468
+    },
+    {
       "artifact": "results/architecture_sweep/PAIRWISE_READOUT_SELECTION.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "pairwise_readout_selection/v1",
       "bytes": 6225
+    },
+    {
+      "artifact": "results/architecture_sweep/PREREGISTERED_MATCHED_OPERATING_POINT.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.prereg_matched_operating_point.v1",
+      "bytes": 6774
     },
     {
       "artifact": "results/architecture_sweep/PREREGISTERED_STATISTIC.json",
@@ -343,7 +357,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 4112
+      "bytes": 5509
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
@@ -351,6 +365,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.independent_recomputation.v1",
       "bytes": 3225
+    },
+    {
+      "artifact": "results/official_fold/MATCHED_OPERATING_POINT_READ.json",
+      "class": "fold_access",
+      "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
+      "schema": "geoaudit.matched_operating_point_read.v1",
+      "bytes": 9363
     },
     {
       "artifact": "results/official_fold/OFFICIAL_FOLD_METRICS.json",
@@ -413,7 +434,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 6988
+      "bytes": 7740
     },
     {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",
