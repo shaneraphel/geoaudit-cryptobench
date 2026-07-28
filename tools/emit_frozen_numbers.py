@@ -68,10 +68,10 @@ GAP = ROOT / "results/architecture_sweep/GAP_DECOMPOSITION.json"
 READOUT = ROOT / "results/architecture_sweep/FINAL_READOUT_SELECTION.json"
 PAIRWISE = ROOT / "results/architecture_sweep/PAIRWISE_READOUT_SELECTION.json"
 SEEDPROBE = ROOT / "results/official_fold/SEED_SENSITIVITY.json"
-SEEDPROBE = ROOT / "results/official_fold/SEED_SENSITIVITY.json"
 BANKS_CEILING = ROOT / "results/architecture_sweep/OPERATOR_BANK_CEILING.json"
 WIDE3 = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE3.json"
 WIDE3_CONTROL = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE3_CONTROL.json"
+SENS = ROOT / "results/architecture_sweep/SENSITIVITY_SWEEP.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
 
@@ -187,6 +187,32 @@ def build() -> str:
         L.append(f"\\newcommand{{\\TabGateWeight}}{{{tf['gate']['weight']:g}}}")
         L.append(f"\\newcommand{{\\TabOperatingQ}}"
                  f"{{{tf['operating_point']['q']:.2f}}}")
+        # What the method costs to compile, to ship and to run. The median
+        # rather than the mean, because one 900-residue chain would otherwise
+        # decide the number.
+        L.append(f"\\newcommand{{\\TabCompileSeconds}}"
+                 f"{{{tf['compile_seconds']:.0f}}}")
+        L.append(f"\\newcommand{{\\TabArtifactMB}}"
+                 f"{{{TABFIELD.stat().st_size / 1e6:.2f}}}")
+        if TELEMETRY.exists():
+            trows = json.loads(TELEMETRY.read_text())["rows"]
+
+            def _median_runtime(method: str) -> float | None:
+                v = sorted(r["runtime_s"] for r in trows
+                           if r["method"] == method
+                           and r.get("runtime_s") is not None)
+                if not v:
+                    return None
+                m = len(v) // 2
+                return v[m] if len(v) % 2 else 0.5 * (v[m - 1] + v[m])
+
+            ours, theirs = _median_runtime("table_field"), _median_runtime("p2rank")
+            if ours:
+                L.append(f"\\newcommand{{\\TabRuntime}}{{{ours:.3f}}}")
+            if theirs:
+                L.append(f"\\newcommand{{\\PTwoRuntime}}{{{theirs:.3f}}}")
+            if ours and theirs:
+                L.append(f"\\newcommand{{\\TabSpeedup}}{{{theirs / ours:.1f}}}")
 
     if WIDESEL.exists():
         sel = json.loads(WIDESEL.read_text())
@@ -194,6 +220,17 @@ def build() -> str:
                  f"{{{sel['selected']['pick_half_roc_auc']:.4f}}}")
         L.append(f"\\newcommand{{\\NTabCandidates}}"
                  f"{{{len(sel['candidates'])}}}")
+        # The ridge curve of the shipped basis alone. The candidate list also
+        # holds two bases that were not shipped, and averaging over them would
+        # describe a model the paper does not contain.
+        chosen = sel["selected"]["basis"]
+        curve = {c["ridge"]: c["pick_half_roc_auc"]
+                 for c in sel["candidates"] if c["basis"] == chosen}
+        ridge_words = {0.03: "Low", 0.1: "Mid", 0.3: "High"}
+        for r, word in ridge_words.items():
+            if r in curve:
+                L.append(f"\\newcommand{{\\TabRidge{word}}}{{{curve[r]:.4f}}}")
+                L.append(f"\\newcommand{{\\TabRidge{word}Value}}{{{r:g}}}")
 
     if CASES.exists():
         cs = json.loads(CASES.read_text())
@@ -405,6 +442,60 @@ def build() -> str:
             / w3c["selected"]["n_cells"]
         L.append(f"\\newcommand{{\\GenWireEmpty}}{{{pct:.2f}}}")
         L.append(f"\\newcommand{{\\GenWireControlEmpty}}{{{pctc:.2f}}}")
+
+    if SENS.exists():
+        sw = json.loads(SENS.read_text())
+        if not sw["complete"]:
+            raise SystemExit("the sensitivity sweep artifact is a checkpoint of "
+                             "an unfinished run; the paper would quote a range "
+                             "over settings that were never all measured")
+        if sw["reads_test_fold"]:
+            raise SystemExit("the sensitivity sweep claims to have read the "
+                             "test fold, which the chapter says it did not")
+
+        def _row(levels: int, ranking: str, cap: int) -> dict:
+            for r in sw["rows"]:
+                if (r["levels"], r["ranking"], r["cap"]) == (levels, ranking, cap):
+                    return r
+            raise SystemExit(f"the sweep has no row for {levels} levels, "
+                             f"{ranking} ranking, cap {cap}")
+
+        for lv in sw["swept"]["levels"]:
+            stem = _roman(lv)
+            L.append(f"\\newcommand{{\\SensLevels{stem}}}"
+                     f"{{{_row(lv, 'within-chain', 32)['pick_half_roc_auc']:.4f}}}")
+            L.append(f"\\newcommand{{\\SensLevels{stem}Pooled}}"
+                     f"{{{_row(lv, 'pooled', 32)['pick_half_roc_auc']:.4f}}}")
+            L.append(f"\\newcommand{{\\SensLevels{stem}Empty}}"
+                     f"{{{100.0 * _row(lv, 'within-chain', 32)['fraction_never_addressed']:.2f}}}")
+        # A control sequence is letters only, so the cap has to be spelled.
+        cap_words = {16: "Sixteen", 32: "ThirtyTwo", 64: "SixtyFour"}
+        for cap in sw["swept"]["cap"]:
+            if cap not in cap_words:
+                raise SystemExit(f"no macro spelling for fan-out cap {cap}")
+            L.append(f"\\newcommand{{\\SensCap{cap_words[cap]}}}"
+                     f"{{{_row(4, 'within-chain', cap)['pick_half_roc_auc']:.4f}}}")
+        four = _row(4, "within-chain", 32)["pick_half_roc_auc"]
+        for lv in sw["swept"]["levels"]:
+            if lv == 4:
+                continue
+            d = _row(lv, "within-chain", 32)["pick_half_roc_auc"] - four
+            # The chapter reads these as losses against four levels. Emitting
+            # the magnitude only is safe while that holds and a lie if it ever
+            # stops, so it has to stop the build instead.
+            if d >= 0:
+                raise SystemExit(
+                    f"{lv} levels now scores at or above four levels "
+                    f"({d:+.4f}); Section 'What the constants are worth' calls "
+                    f"it a loss and must be rewritten")
+            L.append(f"\\newcommand{{\\SensLevels{_roman(lv)}Delta}}"
+                     f"{{{abs(d):.4f}}}")
+        L.append(f"\\newcommand{{\\SensRange}}{{{sw['range_over_all_settings']:.4f}}}")
+        L.append(f"\\newcommand{{\\SensSettings}}{{{len(sw['rows'])}}}")
+        L.append(f"\\newcommand{{\\SensWorst}}"
+                 f"{{{min(r['pick_half_roc_auc'] for r in sw['rows']):.4f}}}")
+        L.append(f"\\newcommand{{\\SensBest}}"
+                 f"{{{sw['best_pick_half_roc_auc']:.4f}}}")
 
     if QUOTIENT_SEL.exists() and QUOTIENT_PROBE.exists():
         # The quotient counterattack: a construction that beat the dense bank on

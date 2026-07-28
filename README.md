@@ -437,8 +437,11 @@ all fail-closed.
 | Gap diagnosis | `make gap` | the 2×2 decomposition stops adding up, the fan-out price flips sign, or the diagnostic claims a test-fold read |
 | Preregistered functional | `make prereg` | the named statistic stops being the one the recorded selection rule returns, a candidate's claim text drifts from what it licenses, or the forecast is dropped |
 | Fifth fold read | `make read5` | the read stops citing a committed ancestor of `HEAD`, the statistic it calls preregistered drifts from the artifact, or the mean stops being reported beside it |
+| Input contract | `make wires` | Appendix A stops describing the modules it was generated from: a quantity, its neighbourhood, its boundary value or the 43→645 expansion rule drifts from the code |
+| Generated banks | `make banks` | the recorded descriptor counts stop matching the two generator modules, or the reported ceiling lift does not follow from the artifact's own per-split numbers |
+| Constant sensitivity | `make sens` | the sweep artifact is a checkpoint of an unfinished run, its row marked published disagrees with the shipped levels/cap/ridge, or it starts claiming a test-fold read |
 
-Current state: `verify_claims` all checks pass; 141 tests pass under both
+Current state: `verify_claims` all checks pass; 297 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:
 `tests/test_spatial.py` was written against `pytest` while CI runs `unittest`,
 so the five checks guarding the neighbour-search kernel — the one every gate,
@@ -736,6 +739,54 @@ cells, so a table addressed too rarely to estimate contributes noise rather than
 resolution. The counting field's binding constraint on
 this benchmark is not the expressive content of its invariant bank, and the
 held-out fold was not read to establish that.
+
+### 4.7 The quaternary alphabet is load-bearing, and inference is 13.8× cheaper than the baseline
+
+Three constants were fixed early and carried through everything above: four
+quantisation levels, ranking within a chain rather than across the corpus, and a
+fan-out cap of 32. `tools/sensitivity_sweep.py` varies each on the training
+partition alone, under the same seeded cluster-disjoint halving that selected the
+published configuration. `make sens` checks the artifact and refuses a checkpoint
+of an unfinished run, which would let the table quote a range over settings that
+were never all measured.
+
+| levels | ranking | cap | selection-half ROC-AUC |
+| --- | --- | --- | --- |
+| 3 | within-chain | 32 | 0.7995 |
+| 4 | within-chain | 32 | **0.8045** (published) |
+| 5 | within-chain | 32 | 0.7996 |
+| 3 | pooled | 32 | 0.7950 |
+| 4 | pooled | 32 | 0.7905 |
+| 5 | pooled | 32 | 0.7961 |
+| 4 | within-chain | 16 | 0.8018 |
+| 4 | within-chain | 64 | 0.8010 |
+
+The spread over all eight is **0.0140**, from 0.7905 to 0.8045, so nothing here
+is fragile — the worst setting still clears the 0.783 linear ceiling of the
+invariants it reads. Two things are legible anyway. Ranking within a chain beats
+pooled ranking at every level, which is what the construction predicts: a digit
+is meant to say where a residue sits on its own protein, not how large that
+protein's values happen to be. And four levels is not an aesthetic preference —
+three lose 0.0050 and five lose 0.0049, the latter while raising the
+never-addressed cell fraction from 1.25% to 2.28%. The quaternary alphabet sits
+at the turn where a finer digit stops buying resolution and starts buying empty
+cells, which is the coverage-against-expressiveness exchange of §4.6 reached by
+widening the alphabet instead of the bank.
+
+The published configuration is the best of the eight. That is a fact about the
+sweep and not a claim about it: it was frozen before the sweep ran, the artifact
+records the frozen constants rather than the winning ones, and `make sens` fails
+if those two ever disagree. Had a different row come out on top it would have
+been reported and not adopted.
+
+Cost is the one place the construction is unambiguously ahead. Compilation is a
+single counting pass over the fitting half plus one *K*×*K* solve, 130 s once;
+the compiled artifact is 1.88 MB of JSON, of which 4797 of 5152 tables carry a
+non-zero multiplicity. Inference is 5152 table look-ups and an integer dot
+product per residue, with no floating-point model evaluated at all: a median
+**0.342 s per chain against P2Rank's 4.722 s**, a factor of 13.8. The ridge is
+not delicate either — 0.03, 0.1 and 0.3
+give 0.8045, 0.8042 and 0.8023 on the same selection half.
 
 ---
 

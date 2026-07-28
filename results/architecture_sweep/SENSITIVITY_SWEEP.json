@@ -1,0 +1,194 @@
+{
+  "schema": "geoaudit.sensitivity_sweep.v1",
+  "clinical_grade": false,
+  "question": "whether the published quantisation and fan-out constants are load-bearing, measured on the training partition with the published configuration frozen and not revised",
+  "frozen_configuration": {
+    "levels": 4,
+    "ranking": "within-chain",
+    "cap": 32,
+    "ridge": 0.03,
+    "basis": "pairs x16",
+    "rounds": 16,
+    "width": 2
+  },
+  "swept": {
+    "levels": [
+      3,
+      4,
+      5
+    ],
+    "ranking": [
+      "within-chain",
+      "pooled"
+    ],
+    "cap": [
+      16,
+      32,
+      64
+    ]
+  },
+  "split": {
+    "criterion": "cluster_id, seeded shuffle, disjoint halves",
+    "seed": 20260725
+  },
+  "rows": [
+    {
+      "levels": 3,
+      "ranking": "within-chain",
+      "cap": 32,
+      "ridge": 0.03,
+      "n_cells": 46368,
+      "n_cells_never_addressed": 404,
+      "fraction_never_addressed": 0.008713,
+      "total_fan_out": 26726,
+      "n_tables_used": 4822,
+      "pick_half_roc_auc_raw": 0.7814614931610931,
+      "pick_half_roc_auc": 0.7994974228133357,
+      "gate": "r18 w1.0",
+      "is_published_configuration": false
+    },
+    {
+      "levels": 3,
+      "ranking": "pooled",
+      "cap": 32,
+      "ridge": 0.03,
+      "n_cells": 46368,
+      "n_cells_never_addressed": 797,
+      "fraction_never_addressed": 0.017189,
+      "total_fan_out": 27598,
+      "n_tables_used": 4813,
+      "pick_half_roc_auc_raw": 0.7804963517313176,
+      "pick_half_roc_auc": 0.7950315214946145,
+      "gate": "r14 w1.0",
+      "is_published_configuration": false
+    },
+    {
+      "levels": 4,
+      "ranking": "within-chain",
+      "cap": 16,
+      "ridge": 0.03,
+      "n_cells": 82432,
+      "n_cells_never_addressed": 1028,
+      "fraction_never_addressed": 0.012471,
+      "total_fan_out": 14506,
+      "n_tables_used": 4562,
+      "pick_half_roc_auc_raw": 0.7824756948264183,
+      "pick_half_roc_auc": 0.8018036603508673,
+      "gate": "r18 w1.0",
+      "is_published_configuration": false
+    },
+    {
+      "levels": 4,
+      "ranking": "within-chain",
+      "cap": 32,
+      "ridge": 0.03,
+      "n_cells": 82432,
+      "n_cells_never_addressed": 1028,
+      "fraction_never_addressed": 0.012471,
+      "total_fan_out": 29075,
+      "n_tables_used": 4853,
+      "pick_half_roc_auc_raw": 0.7872717595597555,
+      "pick_half_roc_auc": 0.8045356538898498,
+      "gate": "r18 w1.0",
+      "is_published_configuration": true
+    },
+    {
+      "levels": 4,
+      "ranking": "within-chain",
+      "cap": 64,
+      "ridge": 0.03,
+      "n_cells": 82432,
+      "n_cells_never_addressed": 1028,
+      "fraction_never_addressed": 0.012471,
+      "total_fan_out": 58212,
+      "n_tables_used": 4993,
+      "pick_half_roc_auc_raw": 0.7825382476357094,
+      "pick_half_roc_auc": 0.8010224517834246,
+      "gate": "r18 w1.0",
+      "is_published_configuration": false
+    },
+    {
+      "levels": 4,
+      "ranking": "pooled",
+      "cap": 32,
+      "ridge": 0.03,
+      "n_cells": 82432,
+      "n_cells_never_addressed": 2819,
+      "fraction_never_addressed": 0.034198,
+      "total_fan_out": 30502,
+      "n_tables_used": 4857,
+      "pick_half_roc_auc_raw": 0.7741394525204205,
+      "pick_half_roc_auc": 0.7905070851244718,
+      "gate": "r14 w1.0",
+      "is_published_configuration": false
+    },
+    {
+      "levels": 5,
+      "ranking": "within-chain",
+      "cap": 32,
+      "ridge": 0.03,
+      "n_cells": 128800,
+      "n_cells_never_addressed": 2933,
+      "fraction_never_addressed": 0.022772,
+      "total_fan_out": 32873,
+      "n_tables_used": 4897,
+      "pick_half_roc_auc_raw": 0.7801402772421531,
+      "pick_half_roc_auc": 0.7996128300484359,
+      "gate": "r14 w1.0",
+      "is_published_configuration": false
+    },
+    {
+      "levels": 5,
+      "ranking": "pooled",
+      "cap": 32,
+      "ridge": 0.03,
+      "n_cells": 128800,
+      "n_cells_never_addressed": 5518,
+      "fraction_never_addressed": 0.042842,
+      "total_fan_out": 31336,
+      "n_tables_used": 4888,
+      "pick_half_roc_auc_raw": 0.7773819392715247,
+      "pick_half_roc_auc": 0.7960765396803556,
+      "gate": "r14 w1.0",
+      "is_published_configuration": false
+    }
+  ],
+  "cells_compiled": [
+    [
+      3,
+      "pooled"
+    ],
+    [
+      3,
+      "within-chain"
+    ],
+    [
+      4,
+      "pooled"
+    ],
+    [
+      4,
+      "within-chain"
+    ],
+    [
+      5,
+      "pooled"
+    ],
+    [
+      5,
+      "within-chain"
+    ]
+  ],
+  "complete": true,
+  "published_pick_half_roc_auc": 0.8045356538898498,
+  "best_pick_half_roc_auc": 0.8045356538898498,
+  "best_configuration": {
+    "levels": 4,
+    "ranking": "within-chain",
+    "cap": 32
+  },
+  "range_over_all_settings": 0.014029,
+  "published_is_best": true,
+  "selection_note": "the published configuration was frozen before this sweep and is not revised by it, whichever row is highest",
+  "reads_test_fold": false
+}

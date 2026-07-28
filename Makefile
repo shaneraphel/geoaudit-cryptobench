@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks
+verify: consistency strict-json readme wires macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -52,6 +52,13 @@ read5:
 banks:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/expand_invariant_bank.py --check
 
+# The quantisation and fan-out sweep. Refuses a checkpoint of an unfinished run,
+# which would let the paper quote a range over settings that were never all
+# measured, and refuses one whose published row disagrees with the shipped
+# configuration.
+sens:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/sensitivity_sweep.py --check
+
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the
 # artifacts agree with each other; this one checks that they agree with the data.
@@ -76,6 +83,15 @@ published:
 # measured, and this fails if the machine no longer matches it.
 environment:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/emit_environment.py --audit
+
+# Appendix A states the input contract: the 43 local quantities, the
+# neighbourhood each is read over, its value at the boundary, and the rule that
+# expands them into the wires. It is generated from the modules, and the
+# appendix says so in its own header, so it has to be checked -- an unguarded
+# generated file is a file that describes a version of the code that no longer
+# exists.
+wires:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/emit_wire_appendix.py --check
 
 # The manuscript cites macros only, so a stale macro file is a stale paper.
 macros:

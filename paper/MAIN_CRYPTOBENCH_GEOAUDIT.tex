@@ -1022,6 +1022,79 @@ counting field's binding constraint on this benchmark is not the expressive
 content of its invariant bank. Widening the bank is not the way to a larger
 margin, and the held-out fold was not read to establish that.
 
+\subsection{What the constants are worth, and what the method costs}
+\label{sec:sensitivity}
+Three constants in the counting field were fixed early and carried through every
+experiment above: four quantisation levels, ranking within a chain rather than
+across the corpus, and a fan-out cap of \TabCap{}. A reader is entitled to ask
+whether the quaternary choice is load-bearing or decorative, and the honest way
+to answer is to vary each on the training partition alone, under the same seeded
+cluster-disjoint halving that selected the published configuration, and to
+report the result whichever way it falls. Table~\ref{tab:sensitivity} does that
+over \SensSettings{} settings. The sweep re-implements the digitiser and the
+integer fusion so that the level can be a parameter rather than the module
+constant the shipped field is compiled against, and it re-derives the halving
+from the manifest; the row that holds every constant at the published setting
+lands on \SensLevelsFour{} --- not to four places but to every digit of the
+selection artifact --- which is what licenses reading the other seven rows as
+the effect of the constant that moved.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+Levels & Ranking & Fan-out cap & Selection-half ROC-AUC\\
+\midrule
+3 & within-chain & \TabCap{} & \SensLevelsThree{}\\
+4 & within-chain & \TabCap{} & \SensLevelsFour{} (published)\\
+5 & within-chain & \TabCap{} & \SensLevelsFive{}\\
+\addlinespace
+3 & pooled & \TabCap{} & \SensLevelsThreePooled{}\\
+4 & pooled & \TabCap{} & \SensLevelsFourPooled{}\\
+5 & pooled & \TabCap{} & \SensLevelsFivePooled{}\\
+\addlinespace
+4 & within-chain & 16 & \SensCapSixteen{}\\
+4 & within-chain & 64 & \SensCapSixtyFour{}\\
+\bottomrule
+\end{tabular}
+\caption{Quantisation and fan-out sensitivity, measured on the selection half of
+the training partition. The published configuration was frozen before this sweep
+and is not revised by it. Every row recompiles the cell array from scratch; the
+level-aware code is asserted against the shipped module at four levels before
+the sweep begins.}
+\label{tab:sensitivity}
+\end{table}
+
+The spread over all \SensSettings{} settings is \SensRange{} ROC-AUC, from
+\SensWorst{} to \SensBest{}, so nothing here is fragile: the worst setting still
+scores above the \FisherAll{} linear ceiling of the invariants it reads. Two
+things are nevertheless legible. Ranking within a chain beats ranking against
+the pooled corpus at every level, which is what the construction predicts, since
+a digit is meant to say where a residue sits on its own protein rather than how
+large that protein's values happen to be. And four levels is not an aesthetic
+preference: three levels lose \SensLevelsThreeDelta{} and five lose
+\SensLevelsFiveDelta{}, the latter while raising the never-addressed cell fraction from \SensLevelsFourEmpty{}\% to
+\SensLevelsFiveEmpty{}\%. The quaternary alphabet sits at the turn where a finer
+digit stops buying resolution and starts buying empty cells --- the same
+coverage-against-expressiveness exchange that Section~\ref{sec:banks} found by
+widening the bank instead of the alphabet. The published configuration happens
+to be the best of the eight, which is a fact about the sweep and not a claim
+about it: it was chosen before the sweep ran, and had a different row come out
+on top it would have been reported and not adopted.
+
+Cost is the other question a table-based method invites, and it is the one place
+the construction is unambiguously ahead. Compilation is a single pass of
+counting over the fitting half followed by one \(K \times K\) solve, taking
+\TabCompileSeconds{}~s once; the compiled artifact is \TabArtifactMB{}~MB of
+JSON, of which \NTabUsed{} of \NTabTables{} tables carry a non-zero
+multiplicity. At inference a residue costs \NTabTables{} table look-ups and an
+integer dot product, and no floating-point model is evaluated at all: the median
+is \TabRuntime{}~s per chain against P2Rank's \PTwoRuntime{}~s, a factor of
+\TabSpeedup{}. The ridge is not delicate either --- \TabRidgeLowValue{},
+\TabRidgeMidValue{} and \TabRidgeHighValue{} give \TabRidgeLow{},
+\TabRidgeMid{} and \TabRidgeHigh{} on the same selection half.
+
 \section{Limitations}
 The comparison covers one trained baseline, executed locally; PocketMiner could
 not be included because per-residue predictions are not published. The 38
@@ -1187,6 +1260,8 @@ Those five lie outside every method's universe and are therefore neither hits
 nor misses, so the recall reported here is over labelled residues \emph{present
 in the apo structure}. The count is pinned in the audit, so a data refresh that
 begins deleting positives fails rather than shrinking the denominator quietly.
+
+\input{appendix_a_wire_definitions.tex}
 
 \input{appendix_b_gf4_ablation.tex}
 

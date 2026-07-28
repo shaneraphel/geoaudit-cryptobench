@@ -53,8 +53,12 @@ jobs:
         run: make prereg
       - name: The fifth fold read must still cite the commit that fixed it
         run: make read5
+      - name: Appendix A must still describe the modules it was generated from
+        run: make wires
       - name: The generated invariant banks must match the modules that define them
         run: make banks
+      - name: The quantisation sweep must be finished and must still be about the shipped constants
+        run: make sens
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools
