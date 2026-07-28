@@ -72,6 +72,9 @@ BANKS_CEILING = ROOT / "results/architecture_sweep/OPERATOR_BANK_CEILING.json"
 WIDE3 = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE3.json"
 WIDE3_CONTROL = ROOT / "results/architecture_sweep/COUNTERATTACK_WIDE3_CONTROL.json"
 SENS = ROOT / "results/architecture_sweep/SENSITIVITY_SWEEP.json"
+P2TRAIN_OP = ROOT / "results/architecture_sweep/P2RANK_TRAIN_OPERATING_POINT.json"
+MATCH_PREREG = ROOT / "results/architecture_sweep/PREREGISTERED_MATCHED_OPERATING_POINT.json"
+MATCH_READ = ROOT / "results/official_fold/MATCHED_OPERATING_POINT_READ.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
 
@@ -370,6 +373,72 @@ def build() -> str:
         L.append(f"\\newcommand{{\\PTwoTrainAuc}}"
                  f"{{{p2t['residue_auc_mean']:.4f}}}")
         L.append(f"\\newcommand{{\\PTwoTrainUnits}}{{{p2t['n_ok']}}}")
+
+    if P2TRAIN_OP.exists():
+        # What P2Rank's threshold would have been, had it been tuned the way
+        # ours was. Emitted separately from the read so that the plan's numbers
+        # and the fold's numbers cannot be conflated in the manuscript.
+        op = json.loads(P2TRAIN_OP.read_text())
+        L.append(f"\\newcommand{{\\MatchPTwoQ}}{{{op['p2rank_selected_q']:.2f}}}")
+        L.append(f"\\newcommand{{\\MatchPTwoTrainNative}}"
+                 f"{{{op['p2rank_pooled_train_f1_at_native_call']:.4f}}}")
+        L.append(f"\\newcommand{{\\MatchPTwoTrainTuned}}"
+                 f"{{{op['p2rank_pooled_train_f1_at_selected_q']:.4f}}}")
+        L.append(f"\\newcommand{{\\MatchTrainGain}}"
+                 f"{{{op['tuning_is_worth_to_p2rank']:+.4f}}}")
+
+    if MATCH_PREREG.exists() and MATCH_READ.exists():
+        pg = json.loads(MATCH_PREREG.read_text())
+        rd = json.loads(MATCH_READ.read_text())
+        L.append(f"\\newcommand{{\\MatchForecast}}"
+                 f"{{{pg['forecast']['expected_matched_delta_if_the_gain_transfers']:+.4f}}}")
+        L.append(f"\\newcommand{{\\MatchCommit}}"
+                 f"{{\\texttt{{{rd['ordering']['preregistration_commit'][:12]}}}}}")
+        L.append(f"\\newcommand{{\\MatchReadIndex}}"
+                 f"{{{rd['test_fold_read_index']}}}")
+        L.append(f"\\newcommand{{\\MatchNUnits}}{{{rd['n_units']}}}")
+        L.append(f"\\newcommand{{\\MatchOurQ}}"
+                 f"{{{rd['matched']['A_common_q']['q_ours']:.2f}}}")
+        nat = rd["native_call_reference"]
+        L.append(f"\\newcommand{{\\MatchNativeOurs}}"
+                 f"{{{nat['table_field_f1']:.4f}}}")
+        L.append(f"\\newcommand{{\\MatchNativePTwo}}"
+                 f"{{{nat['p2rank_f1']:.4f}}}")
+        L.append(f"\\newcommand{{\\MatchNativeDelta}}"
+                 f"{{{nat['published_delta']:+.4f}}}")
+        for stem, rule in (("A", "A_common_q"), ("B", "B_each_tuned_on_train")):
+            r = rd["matched"][rule]
+            p = r["primary"]
+            L.append(f"\\newcommand{{\\Match{stem}Ours}}"
+                     f"{{{r['table_field_f1']:.4f}}}")
+            L.append(f"\\newcommand{{\\Match{stem}PTwo}}"
+                     f"{{{r['p2rank_f1']:.4f}}}")
+            L.append(f"\\newcommand{{\\Match{stem}Delta}}"
+                     f"{{{p['delta_point']:+.4f}}}")
+            L.append(f"\\newcommand{{\\Match{stem}CI}}"
+                     f"{{[{p['delta_ci_low']:+.4f}, {p['delta_ci_high']:+.4f}]}}")
+            L.append(f"\\newcommand{{\\Match{stem}P}}"
+                     f"{{{p['p_two_sided_bootstrap']:.3f}}}")
+            t = r["secondary_trimmed_mean"]
+            L.append(f"\\newcommand{{\\Match{stem}Trim}}"
+                     f"{{{t['delta_point']:+.4f}}}")
+            L.append(f"\\newcommand{{\\Match{stem}TrimCI}}"
+                     f"{{[{t['delta_ci_low']:+.4f}, "
+                     f"{t['delta_ci_high']:+.4f}]}}")
+        o = rd["oracle"]
+        g = o["our_shipped_q_vs_p2rank_oracle_q"]
+        L.append(f"\\newcommand{{\\MatchOracleQ}}"
+                 f"{{{o['p2rank_best_q_on_the_held_out_fold']:.2f}}}")
+        L.append(f"\\newcommand{{\\MatchOraclePTwo}}"
+                 f"{{{o['p2rank_f1_at_its_oracle_q']:.4f}}}")
+        L.append(f"\\newcommand{{\\MatchOracleDelta}}"
+                 f"{{{g['delta_point']:+.4f}}}")
+        L.append(f"\\newcommand{{\\MatchOracleCI}}"
+                 f"{{[{g['delta_ci_low']:+.4f}, {g['delta_ci_high']:+.4f}]}}")
+        L.append(f"\\newcommand{{\\MatchOurOracleQ}}"
+                 f"{{{o['table_field_best_q_on_the_held_out_fold']:.2f}}}")
+        L.append(f"\\newcommand{{\\MatchOurOracleGap}}"
+                 f"{{{o['our_shipped_q_is_within_of_our_oracle']:.4f}}}")
 
     if BANKS_CEILING.exists() and WIDE3.exists() and WIDE3_CONTROL.exists():
         # The generated banks: a lift on the linear ceiling that the counting

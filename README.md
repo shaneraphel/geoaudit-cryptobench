@@ -440,6 +440,9 @@ all fail-closed.
 | Input contract | `make wires` | Appendix A stops describing the modules it was generated from: a quantity, its neighbourhood, its boundary value or the 43→645 expansion rule drifts from the code |
 | Generated banks | `make banks` | the recorded descriptor counts stop matching the two generator modules, or the reported ceiling lift does not follow from the artifact's own per-split numbers |
 | Constant sensitivity | `make sens` | the sweep artifact is a checkpoint of an unfinished run, its row marked published disagrees with the shipped levels/cap/ridge, or it starts claiming a test-fold read |
+| Baseline's own threshold | `make p2op` | the q recorded for P2Rank stops being the argmax of its own committed training curve, or the re-run that produced it disagreed with the training-fold summary the paper quotes |
+| Matched-threshold plan | `make match` | a rule is added, removed or renamed, the forecast stops being the subtraction it claims, or the branch committing to weaken the F1 claim is deleted |
+| Sixth fold read | `make read6` | the read stops reproducing the published per-method F1, its plan stops being a git ancestor of it, its stated conclusion stops being the sentence preregistered for the outcome it got, or the oracle q stops being its own curve's argmax |
 
 Current state: `verify_claims` all checks pass; 297 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:

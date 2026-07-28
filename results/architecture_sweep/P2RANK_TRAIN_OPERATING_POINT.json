@@ -1,0 +1,244 @@
+{
+  "schema": "geoaudit.p2rank_train_operating_point.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T03:41:31+0800",
+  "question": "what operating point P2Rank would have been given if it had been tuned the way our method was: same per-chain top-q rule, same grid, same pooled-F1 objective, same training receptors",
+  "test_fold_touched": false,
+  "reads_test_fold": false,
+  "rule": {
+    "binarisation": "per-chain top-q by score",
+    "tie_break": "stable sort of the negated score, so equal scores are called in ascending residue number",
+    "objective": "pooled F1 over all training units, the TP/FP/FN summed across chains rather than F1 averaged over them, which is what table_field._best_operating_point maximises",
+    "grid": [
+      0.02,
+      0.4,
+      0.01
+    ],
+    "transcribed_from": "pocket_bench.methods.table_field._best_operating_point"
+  },
+  "receptor_dir": "data/cryptobench_apo/train_receptors",
+  "label_dir": "data/cryptobench_apo/train_labels",
+  "p2rank_version": "2.5.1",
+  "n_units": 770,
+  "n_residues": 234838,
+  "n_positives": 13524,
+  "residue_cache": {
+    "path": "results/architecture_sweep/_p2rank_train_residues.npz",
+    "tracked": false,
+    "sha256": "0eb6b7a519e18940e594f9facfdf5f339666e5f24cd72ee28087b5ad9e7a3a74",
+    "why_untracked": "231k per-residue scores are an intermediate; the curve below is the decision they support, and regenerating them needs the JVM exactly as the committed P2Rank summaries do"
+  },
+  "f1_against_q": [
+    {
+      "q": 0.02,
+      "pooled_train_f1": 0.200362,
+      "n_called": 4693
+    },
+    {
+      "q": 0.03,
+      "pooled_train_f1": 0.248152,
+      "n_called": 7036
+    },
+    {
+      "q": 0.04,
+      "pooled_train_f1": 0.277249,
+      "n_called": 9394
+    },
+    {
+      "q": 0.05,
+      "pooled_train_f1": 0.297027,
+      "n_called": 11733
+    },
+    {
+      "q": 0.06,
+      "pooled_train_f1": 0.308845,
+      "n_called": 14108
+    },
+    {
+      "q": 0.07,
+      "pooled_train_f1": 0.316036,
+      "n_called": 16422
+    },
+    {
+      "q": 0.08,
+      "pooled_train_f1": 0.319911,
+      "n_called": 18785
+    },
+    {
+      "q": 0.09,
+      "pooled_train_f1": 0.320346,
+      "n_called": 21126
+    },
+    {
+      "q": 0.1,
+      "pooled_train_f1": 0.317184,
+      "n_called": 23464
+    },
+    {
+      "q": 0.11,
+      "pooled_train_f1": 0.315321,
+      "n_called": 25820
+    },
+    {
+      "q": 0.12,
+      "pooled_train_f1": 0.312728,
+      "n_called": 28180
+    },
+    {
+      "q": 0.13,
+      "pooled_train_f1": 0.308995,
+      "n_called": 30522
+    },
+    {
+      "q": 0.14,
+      "pooled_train_f1": 0.304828,
+      "n_called": 32876
+    },
+    {
+      "q": 0.15,
+      "pooled_train_f1": 0.300062,
+      "n_called": 35206
+    },
+    {
+      "q": 0.16,
+      "pooled_train_f1": 0.294995,
+      "n_called": 37582
+    },
+    {
+      "q": 0.17,
+      "pooled_train_f1": 0.290274,
+      "n_called": 39922
+    },
+    {
+      "q": 0.18,
+      "pooled_train_f1": 0.284854,
+      "n_called": 42273
+    },
+    {
+      "q": 0.19,
+      "pooled_train_f1": 0.279607,
+      "n_called": 44622
+    },
+    {
+      "q": 0.2,
+      "pooled_train_f1": 0.274529,
+      "n_called": 46965
+    },
+    {
+      "q": 0.21,
+      "pooled_train_f1": 0.269237,
+      "n_called": 49298
+    },
+    {
+      "q": 0.22,
+      "pooled_train_f1": 0.264176,
+      "n_called": 51675
+    },
+    {
+      "q": 0.23,
+      "pooled_train_f1": 0.259451,
+      "n_called": 54011
+    },
+    {
+      "q": 0.24,
+      "pooled_train_f1": 0.255091,
+      "n_called": 56357
+    },
+    {
+      "q": 0.25,
+      "pooled_train_f1": 0.250856,
+      "n_called": 58621
+    },
+    {
+      "q": 0.26,
+      "pooled_train_f1": 0.246677,
+      "n_called": 61043
+    },
+    {
+      "q": 0.27,
+      "pooled_train_f1": 0.242106,
+      "n_called": 63401
+    },
+    {
+      "q": 0.28,
+      "pooled_train_f1": 0.238409,
+      "n_called": 65743
+    },
+    {
+      "q": 0.29,
+      "pooled_train_f1": 0.234242,
+      "n_called": 68118
+    },
+    {
+      "q": 0.3,
+      "pooled_train_f1": 0.230487,
+      "n_called": 70420
+    },
+    {
+      "q": 0.31,
+      "pooled_train_f1": 0.226496,
+      "n_called": 72800
+    },
+    {
+      "q": 0.32,
+      "pooled_train_f1": 0.223082,
+      "n_called": 75143
+    },
+    {
+      "q": 0.33,
+      "pooled_train_f1": 0.2198,
+      "n_called": 77486
+    },
+    {
+      "q": 0.34,
+      "pooled_train_f1": 0.216857,
+      "n_called": 79828
+    },
+    {
+      "q": 0.35,
+      "pooled_train_f1": 0.213794,
+      "n_called": 82185
+    },
+    {
+      "q": 0.36,
+      "pooled_train_f1": 0.210749,
+      "n_called": 84536
+    },
+    {
+      "q": 0.37,
+      "pooled_train_f1": 0.207743,
+      "n_called": 86879
+    },
+    {
+      "q": 0.38,
+      "pooled_train_f1": 0.204969,
+      "n_called": 89223
+    },
+    {
+      "q": 0.39,
+      "pooled_train_f1": 0.201815,
+      "n_called": 91582
+    },
+    {
+      "q": 0.4,
+      "pooled_train_f1": 0.199263,
+      "n_called": 93942
+    }
+  ],
+  "p2rank_selected_q": 0.09,
+  "p2rank_pooled_train_f1_at_selected_q": 0.320346,
+  "p2rank_pooled_train_f1_at_native_call": 0.295588,
+  "our_q": 0.09,
+  "p2rank_pooled_train_f1_at_our_q": 0.320346,
+  "tuning_is_worth_to_p2rank": 0.024758,
+  "grid_verified_against_table_field": true,
+  "audit_against_committed_summary": {
+    "checked": true,
+    "n_units_compared": 770,
+    "largest_disagreement": 0.0,
+    "at_unit": null,
+    "tolerance": 1e-09,
+    "agrees": true
+  },
+  "wall_clock_s": 1197.3
+}

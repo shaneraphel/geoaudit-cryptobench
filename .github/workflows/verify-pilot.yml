@@ -59,6 +59,12 @@ jobs:
         run: make banks
       - name: The quantisation sweep must be finished and must still be about the shipped constants
         run: make sens
+      - name: P2Rank's tuned threshold must be the argmax of its own committed curve
+        run: make p2op
+      - name: The matched-threshold plan must still commit to what it will conclude
+        run: make match
+      - name: The sixth fold read must reproduce the published F1 before reporting new numbers
+        run: make read6
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

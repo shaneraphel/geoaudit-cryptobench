@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens
+verify: consistency strict-json readme wires macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -58,6 +58,25 @@ banks:
 # configuration.
 sens:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/sensitivity_sweep.py --check
+
+# P2Rank's operating point, chosen on the training receptors by the same grid
+# search that chose ours. Refuses an artifact whose recorded q is not the argmax
+# of its own committed curve, or whose re-run disagreed with the training-fold
+# summary the paper already quotes. Needs no JVM.
+p2op:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/p2rank_train_operating_point.py --check
+
+# The matched-threshold plan, including the sentence the paper must carry if the
+# F1 margin does not survive. Refuses an artifact whose rules or committed
+# outcomes have changed, or whose forecast is no longer the subtraction it says.
+match:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/preregister_matched_operating_point.py --check
+
+# The sixth reading. Refuses a read that did not first reproduce the published
+# per-method F1, whose plan is not an ancestor of it in git, or whose stated
+# conclusion is not the sentence preregistered for the outcome it got.
+read6:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/matched_operating_point_read.py --check
 
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the
