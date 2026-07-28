@@ -1,0 +1,145 @@
+{
+  "schema": "geoaudit.preregistered_matched_full.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T04:23:57+0800",
+  "for_test_fold_read_index": 7,
+  "question": "at a matched calling budget, does the advantage show up in precision, in recall, in F1 and in MCC; does it survive when each method is tuned for MCC rather than F1; and does it survive when the resampling unit is a sequence cluster rather than a chain",
+  "written_before_the_read": true,
+  "code_sha256": "0d7d79d38ede40dccbdbddd7e6e0a4b4ebf68c3af44c4e7f4b40589331936b08",
+  "head_when_written": "c887d1706e4c3a4ba4f891d6800c68557168181b",
+  "what_is_already_known_and_is_therefore_not_a_finding": {
+    "the_matched_f1_delta": {
+      "published_in": "results/official_fold/MATCHED_OPERATING_POINT_READ.json",
+      "read_index": 6,
+      "delta": 0.014048,
+      "ci": [
+        -0.008465,
+        0.036423
+      ],
+      "status": "read seven will recompute this and must reproduce it to six decimals. Reproducing a published number is a calibration of the arithmetic, not a result, and it is not counted as one anywhere in this plan or the paper"
+    },
+    "why_this_is_stated_here": "a plan that listed the matched F1 delta among its outcomes would be claiming to be blind to something already in the repository. The genuinely unread quantities are enumerated separately below and are the only ones the decision rules are allowed to govern"
+  },
+  "genuinely_unread_before_this_plan": [
+    "precision at a matched calling budget, either method",
+    "recall at a matched calling budget, either method",
+    "MCC at a matched calling budget, either method",
+    "any quantity under the MCC-tuned convention",
+    "any confidence interval from resampling PDB entries or sequence clusters rather than chains"
+  ],
+  "conventions_to_be_read": [
+    {
+      "id": "D1_as_deployed",
+      "what": "each method as it is actually run",
+      "table_field": "per-chain top-0.09",
+      "p2rank": "P2Rank's own pocket assignment",
+      "is_new": false,
+      "note": "the published headline. Recomputed as a calibration; F1 and MCC here must match the frozen bootstrap"
+    },
+    {
+      "id": "D2_common_budget",
+      "what": "one calling fraction, both methods",
+      "table_field": "per-chain top-0.09",
+      "p2rank": "per-chain top-0.09",
+      "is_new": "only precision, recall and MCC",
+      "q": 0.09
+    },
+    {
+      "id": "D3_each_tuned_for_f1",
+      "what": "each method at the q that maximised pooled F1 on the training fold",
+      "q_table_field": 0.09,
+      "q_p2rank": 0.09,
+      "is_new": "only precision, recall and MCC",
+      "coincides_with_D2": true
+    },
+    {
+      "id": "D4_each_tuned_for_mcc",
+      "what": "each method at the q that maximised pooled MCC on the training fold",
+      "q_table_field": 0.11,
+      "q_p2rank": 0.09,
+      "is_new": true,
+      "thresholds_differ_between_methods": true,
+      "why_it_is_a_separate_convention": "the two objectives select different calling fractions for our method (0.11 against 0.09) and the same one for P2Rank, so D4 is the only convention in which the two methods are held to different budgets by a rule neither chose on the held-out fold"
+    }
+  ],
+  "metrics_to_be_reported_for_every_convention": [
+    "precision",
+    "recall",
+    "positive_class_f1",
+    "mcc"
+  ],
+  "statistic": {
+    "per_unit": "each metric computed on one chain's residues",
+    "summary": "unweighted mean over the units both methods could be scored on",
+    "paired": "the same resampled units enter both arms, so the correlation between two detectors looking at the same pocket cancels out of the difference",
+    "n_boot": 10000,
+    "seed": 20260725,
+    "ci": 0.95,
+    "secondary": "20% trimmed mean, reported alongside every primary so a margin carried by a few chains is visible"
+  },
+  "resampling_units": [
+    {
+      "id": "chain",
+      "n": 192,
+      "what": "the evaluation unit; the scheme every published CI used"
+    },
+    {
+      "id": "pdb_entry",
+      "n": 190,
+      "what": "all chains of a drawn PDB entry enter together"
+    },
+    {
+      "id": "uniprot_cluster",
+      "n": 190,
+      "what": "all chains of a drawn MMseqs2 10%-identity cluster enter together; cluster_id in the official manifest is the UniProt accession"
+    }
+  ],
+  "what_the_clustering_can_change": "the fold has 192 chains in 190 PDB entries and 190 sequence clusters, so the largest possible reduction in effective sample size is 2 units. An interval that widened materially under cluster resampling would mean the clustering is not what bounds it, and would have to be investigated rather than reported",
+  "forecast": {
+    "method": "the tuning gain measured on the training fold is subtracted from the published held-out margin. This underestimated the matched F1 delta by 0.0073 at read six, so it is a biased predictor with a known sign, and it is recorded before the read rather than fitted after it",
+    "f1": {
+      "published_delta": 0.03151604407052633,
+      "training_tuning_gain_to_p2rank": 0.024758,
+      "predicted_matched_delta": 0.006758,
+      "actually_observed_at_read_six": 0.014048
+    },
+    "mcc": {
+      "published_delta": 0.024738320363494326,
+      "published_ci": [
+        0.0003834669745540163,
+        0.049358596665016616
+      ],
+      "training_tuning_gain_to_p2rank": 0.012017,
+      "predicted_matched_delta": 0.012721,
+      "predicted_to_cross_zero": true,
+      "why": "the published MCC interval already reaches to +0.0004, so it excludes zero by a margin smaller than the tuning gain being removed from it. Any positive shift of the lower bound puts zero inside"
+    },
+    "precision_and_recall": "at a matched calling budget the two methods call the same number of residues per chain up to rounding, so precision and recall must move together and their deltas must have the same sign. A convention in which they do not is an arithmetic bug and the read is to fail rather than report it"
+  },
+  "decision_rules": {
+    "applies_to": [
+      "positive_class_f1",
+      "mcc"
+    ],
+    "evaluated_on": "convention D2, the common calling budget, under chain resampling, primary statistic",
+    "if_the_interval_excludes_zero": "the improvement stands as an improvement and is stated as one",
+    "if_the_point_is_positive_and_the_interval_crosses_zero": "it is stated as numerically higher but unresolved at this sample size, and no sentence in the paper may call it an improvement",
+    "if_the_point_is_zero_or_negative": "the advantage under that metric is stated to depend on the operating-point convention, and the deployment-rule number is reported only as what the deployment rules give",
+    "cluster_resampling_is_a_robustness_check": "it cannot promote a conclusion. If a chain-resampled interval crosses zero and a cluster-resampled one does not, the crossing one governs, because a narrower interval from a coarser resampling would be an artefact"
+  },
+  "what_will_be_written_under_each_outcome": {
+    "f1_and_mcc_both_unresolved": "At a matched calling budget neither the F1 nor the MCC margin is resolved at this sample size. Both point estimates remain positive and both intervals contain zero, so what the fold supports is a ranking advantage in ROC-AUC and a threshold convention that accounts for most of the reported gap in the binary summaries.",
+    "f1_unresolved_mcc_survives": "At a matched calling budget the F1 margin is unresolved while the MCC margin excludes zero. MCC weights the negatives that F1 ignores, so the surviving quantity is the one that counts the residues correctly left uncalled, and that is what is claimed.",
+    "both_survive": "At a matched calling budget both the F1 and the MCC margins exclude zero, so the advantage reported under the deployment rules is not an artefact of those rules.",
+    "either_reverses": "At a matched calling budget the margin reverses under at least one binary summary. The advantage under the deployment rules is therefore a property of the operating-point convention and is withdrawn as a claim about the scores."
+  },
+  "guards_the_read_must_pass": [
+    "this plan's commit is an ancestor of HEAD, checked with git",
+    "the deployment-rule F1 and MCC reproduce the frozen bootstrap to four decimals",
+    "the matched F1 delta reproduces read six to six decimals",
+    "precision and recall deltas share a sign under every matched convention",
+    "no per-unit metric is silently dropped: the number of units entering each paired difference is reported for every metric and every convention"
+  ],
+  "reads_test_fold": false,
+  "note": "this file is the plan. Reading the fold under it is tools/matched_full_read.py, which refuses to run until this is committed."
+}
