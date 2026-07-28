@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5
+verify: consistency strict-json readme macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -45,6 +45,12 @@ prereg:
 # has stopped reporting the mean beside it.
 read5:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/preregistered_read.py --check
+
+# The generated invariant banks. Refuses an artifact whose recorded descriptor
+# counts no longer match the modules, or whose lift does not follow from its own
+# per-split ceilings.
+banks:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/expand_invariant_bank.py --check
 
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the

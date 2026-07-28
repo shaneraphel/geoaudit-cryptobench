@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 20,
+    "exploration": 21,
     "cited": 29,
     "superseded": 4,
     "fold_access": 5
   },
-  "n_artifacts": 58,
+  "n_artifacts": 59,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -176,6 +176,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.multiscale_gate.v1",
       "bytes": 1342
+    },
+    {
+      "artifact": "results/architecture_sweep/OPERATOR_BANK_CEILING.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.operator_bank_ceiling.v2",
+      "bytes": 6212
     },
     {
       "artifact": "results/architecture_sweep/P2RANK_TRAIN_FOLD.json",

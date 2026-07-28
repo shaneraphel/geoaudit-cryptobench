@@ -53,6 +53,8 @@ jobs:
         run: make prereg
       - name: The fifth fold read must still cite the commit that fixed it
         run: make read5
+      - name: The generated invariant banks must match the modules that define them
+        run: make banks
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

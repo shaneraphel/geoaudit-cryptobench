@@ -1,0 +1,252 @@
+{
+  "schema": "geoaudit.operator_bank_ceiling.v2",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "question": "does a systematically generated operator bank move the Fisher ceiling that bounds every counting readout",
+  "generator": {
+    "modules": [
+      "src/pocket_bench/methods/operator_descriptors.py",
+      "src/pocket_bench/methods/chain_operator_descriptors.py"
+    ],
+    "axes": "operator family x scale x functional",
+    "scales_angstrom": [
+      6.0,
+      8.0,
+      10.0,
+      13.0,
+      16.0
+    ],
+    "n_operator_descriptors": 190,
+    "n_chain_descriptors": 77,
+    "n_algebraic_descriptors": 35,
+    "second_wave_rationale": "the first module is built from the contact-graph Laplacian and the neighbourhood's second moment, both invariant under permuting residues, so neither can see the chain order and neither can distinguish a saddle from a flat patch. The second module supplies the local Toeplitz symbol of the sequence lags, the shape operator of a fitted quadric, the non-Archimedean valuation profile, and the participation and shear of the soft modes",
+    "inputs": "residue centroids and chain order only; no atoms, no fitted parameter, no RNG, no ligand"
+  },
+  "keys": {
+    "baseline": "algebraic 35",
+    "full": "combined 302"
+  },
+  "protocol": {
+    "n_splits": 12,
+    "split": "cluster-disjoint halves, seeds 20260725..20260736",
+    "readout": "ridge Fisher discriminant fitted on the fit half, columns standardised there, evaluated on the pick half",
+    "ridge": 0.001,
+    "gate": "multi-scale spatial gate at [6.0, 8.0, 10.0, 14.0, 18.0] A, as the detectors use",
+    "metric": "mean per-unit ROC-AUC on the pick half",
+    "why_a_ceiling": "the Fisher discriminant solves for arbitrary real coefficients over unquantised inputs, which no counting field can do, so this bounds them from above and does not predict them"
+  },
+  "ceilings": {
+    "algebraic 35": {
+      "mean": 0.759484,
+      "min": 0.731487,
+      "max": 0.773225
+    },
+    "operator 190": {
+      "mean": 0.744712,
+      "min": 0.702156,
+      "max": 0.764679
+    },
+    "chain 77": {
+      "mean": 0.70602,
+      "min": 0.680799,
+      "max": 0.715293
+    },
+    "algebraic+operator 225": {
+      "mean": 0.766391,
+      "min": 0.739304,
+      "max": 0.777573
+    },
+    "algebraic+chain 112": {
+      "mean": 0.763301,
+      "min": 0.735932,
+      "max": 0.776532
+    },
+    "combined 302": {
+      "mean": 0.767577,
+      "min": 0.739104,
+      "max": 0.779198
+    }
+  },
+  "lift": {
+    "mean": 0.008092,
+    "min": 0.003856,
+    "max": 0.014591,
+    "n_splits_positive": 12,
+    "n_splits": 12
+  },
+  "per_split": {
+    "algebraic 35": [
+      0.767041,
+      0.761313,
+      0.760764,
+      0.760404,
+      0.754466,
+      0.750279,
+      0.771507,
+      0.760528,
+      0.760219,
+      0.762576,
+      0.773225,
+      0.731487
+    ],
+    "operator 190": [
+      0.702156,
+      0.744461,
+      0.745161,
+      0.748702,
+      0.741401,
+      0.754301,
+      0.761401,
+      0.758303,
+      0.764679,
+      0.734352,
+      0.755391,
+      0.726233
+    ],
+    "chain 77": [
+      0.714568,
+      0.70354,
+      0.702462,
+      0.705332,
+      0.70523,
+      0.705083,
+      0.715293,
+      0.713481,
+      0.712223,
+      0.700647,
+      0.71358,
+      0.680799
+    ],
+    "algebraic+operator 225": [
+      0.774359,
+      0.767023,
+      0.769463,
+      0.767287,
+      0.760566,
+      0.760949,
+      0.7772,
+      0.765344,
+      0.772239,
+      0.765388,
+      0.777573,
+      0.739304
+    ],
+    "algebraic+chain 112": [
+      0.772843,
+      0.763942,
+      0.764862,
+      0.765224,
+      0.756815,
+      0.755646,
+      0.772439,
+      0.762993,
+      0.766403,
+      0.765976,
+      0.776532,
+      0.735932
+    ],
+    "combined 302": [
+      0.77414,
+      0.765169,
+      0.771595,
+      0.769576,
+      0.760961,
+      0.76449,
+      0.777105,
+      0.767673,
+      0.774811,
+      0.767096,
+      0.779198,
+      0.739104
+    ]
+  },
+  "single_split_baseline": 0.767041,
+  "by_family": [
+    {
+      "family": "chain lag spectrum",
+      "n_descriptors": 33,
+      "pick_half_roc_auc": 0.769138,
+      "delta_vs_algebraic_35": 0.002097
+    },
+    {
+      "family": "deformation across scale",
+      "n_descriptors": 20,
+      "pick_half_roc_auc": 0.76922,
+      "delta_vs_algebraic_35": 0.002179
+    },
+    {
+      "family": "diagonal functional at the centre",
+      "n_descriptors": 35,
+      "pick_half_roc_auc": 0.76789,
+      "delta_vs_algebraic_35": 0.000849
+    },
+    {
+      "family": "gyration tensor",
+      "n_descriptors": 30,
+      "pick_half_roc_auc": 0.770673,
+      "delta_vs_algebraic_35": 0.003633
+    },
+    {
+      "family": "neighbourhood geometry",
+      "n_descriptors": 30,
+      "pick_half_roc_auc": 0.769323,
+      "delta_vs_algebraic_35": 0.002282
+    },
+    {
+      "family": "shape operator",
+      "n_descriptors": 21,
+      "pick_half_roc_auc": 0.769786,
+      "delta_vs_algebraic_35": 0.002745
+    },
+    {
+      "family": "soft-mode hinge",
+      "n_descriptors": 12,
+      "pick_half_roc_auc": 0.767808,
+      "delta_vs_algebraic_35": 0.000767
+    },
+    {
+      "family": "spectral trace functional",
+      "n_descriptors": 75,
+      "pick_half_roc_auc": 0.771339,
+      "delta_vs_algebraic_35": 0.004298
+    },
+    {
+      "family": "valuation profile",
+      "n_descriptors": 11,
+      "pick_half_roc_auc": 0.769361,
+      "delta_vs_algebraic_35": 0.00232
+    }
+  ],
+  "by_scale": [
+    {
+      "radius_angstrom": 6.0,
+      "n_descriptors": 35,
+      "pick_half_roc_auc": 0.769443,
+      "delta_vs_algebraic_35": 0.002402
+    },
+    {
+      "radius_angstrom": 8.0,
+      "n_descriptors": 53,
+      "pick_half_roc_auc": 0.772704,
+      "delta_vs_algebraic_35": 0.005663
+    },
+    {
+      "radius_angstrom": 10.0,
+      "n_descriptors": 35,
+      "pick_half_roc_auc": 0.770919,
+      "delta_vs_algebraic_35": 0.003878
+    },
+    {
+      "radius_angstrom": 13.0,
+      "n_descriptors": 34,
+      "pick_half_roc_auc": 0.771478,
+      "delta_vs_algebraic_35": 0.004437
+    },
+    {
+      "radius_angstrom": 16.0,
+      "n_descriptors": 52,
+      "pick_half_roc_auc": 0.770005,
+      "delta_vs_algebraic_35": 0.002964
+    }
+  ]
+}
