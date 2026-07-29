@@ -81,6 +81,12 @@ jobs:
         run: make interp
       - name: The commit graph must still demote the preregistered statistic
         run: make endpoint
+      - name: Subgroup covariates must follow from the deposit without reading a score
+        run: make cov
+      - name: The subgroup plan must still call itself exploratory
+        run: make subplan
+      - name: The subgroup read must reproduce read five and qualify every surviving band
+        run: make read8
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

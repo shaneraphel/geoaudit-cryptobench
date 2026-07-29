@@ -103,6 +103,15 @@
       "selection_provenance": "39e70d43547af48dc920646f8bf8fa759278ec83"
     },
     {
+      "artifact": "results/official_fold/SUBGROUP_READ.json",
+      "n_units": 192,
+      "method": "table_field",
+      "read_index": 8,
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",
       "n_units": 192,
       "method": "threshold_field",
@@ -112,7 +121,7 @@
       "selection_provenance": "cluster-disjoint halves of the training fold; this is the first and only evaluation of this architecture on the official test fold"
     }
   ],
-  "n_standalone_probes": 8,
+  "n_standalone_probes": 9,
   "n_distinct_architectures_evaluated": 12,
   "indexed_read_sequence": [
     {
@@ -185,10 +194,19 @@
       "kind": "new inference over per-unit numbers an earlier read froze",
       "mean_residue_auc": null,
       "selection_provenance": "results/architecture_sweep/PREREGISTERED_MATCHED_FULL.json"
+    },
+    {
+      "artifact": "results/official_fold/SUBGROUP_READ.json",
+      "n_units": 192,
+      "method": "table_field",
+      "read_index": 8,
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "mean_residue_auc": null,
+      "selection_provenance": null
     }
   ],
-  "n_indexed_reads": 7,
+  "n_indexed_reads": 8,
   "n_probes_that_scored_the_fold": 5,
-  "n_probes_that_only_resummarised": 3,
-  "honest_summary": "9 of our detectors appear in the frozen telemetry. 8 standalone artifacts are further accesses: 5 of them scored the 192 units again, and 3 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 7 carry a read index, 6 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
+  "n_probes_that_only_resummarised": 4,
+  "honest_summary": "9 of our detectors appear in the frozen telemetry. 9 standalone artifacts are further accesses: 5 of them scored the 192 units again, and 4 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 8 carry a read index, 7 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
 }

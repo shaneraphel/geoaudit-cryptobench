@@ -1060,6 +1060,63 @@ about the typical protein should read the median; one who cares about the worst
 case should read the mean; the paper's claim is pitched at the mean because that
 is the harder of the two on this evidence.
 
+\paragraph{Where the difference lives, and the answer is nowhere in particular.}
+\label{sec:subgroups}
+The next question a reader asks is which proteins. A summary over \NUnits{}
+chains does not say whether the field wins on the shallow pockets or the deep
+ones, on the structures that barely move between apo and holo or the ones that
+rearrange. Answering it means cutting the fold up, and cutting the fold up after
+the overall comparison came back unresolved is the standard way to manufacture a
+result: at \SgNBandTests{} partitions, roughly one exclusion of zero is expected
+from noise alone, and every partition here has a story available for it.
+
+Three commitments, all made before the read, are what let the question be asked
+anyway. The \SgNCovariates{} covariates are computed by a tool that opens no
+prediction, no score and no metric --- apo/holo pocket RMSD taken from
+CryptoBench's own pair records, pocket size, positive rate, chain length and mean
+B-factor over the labelled residues --- so the groups are definable without
+knowing what is inside them, and a test in the suite fails if that tool ever
+learns to read a score. The cuts are tertiles by order statistic, so the group
+sizes were fixed and recorded before any difference was looked at. And the status
+was declared exploratory in the plan, with a rule that no subgroup result may
+become a claim, because that is a decision worth making before the numbers rather
+than after them.
+
+Nothing survives that a reader should act on. Of \SgNCovariates{} covariates,
+\SgNTrends{} show a monotone trend in the paired difference: the Spearman
+correlations sit in a narrow band around zero and none has a permutation \(p\)
+below \SgBonf{}. \SgNSurviving{} of \SgNBandTests{} bands clears the Bonferroni
+level --- \SgBandName{}, \(n=\SgBandN{}\), at \SgBandDelta{} \SgBandCI{} --- and
+it clears it by sixteen ten-thousandths while sitting between two thirds that do
+not order around it, with its own covariate's trend at \(\rho=\SgBandRho{}\),
+\(p=\SgBandRhoP{}\). A band with no dose-response behind it is what a false
+positive looks like at this many tests, and \SgNSurvivingWithTrend{} surviving
+bands are supported by a trend. We report it and claim nothing from it.
+
+That is a more useful outcome than it sounds. If the difference between the two
+detectors were concentrated in the highly cryptic structures, or in the small
+pockets, or in the poorly ordered ones, there would be a mechanism to name and a
+subpopulation to recommend the method for. There is not. Whatever separates the
+two detectors is spread across the kinds of protein this benchmark records, which
+rules out the explanations that would have been easiest to offer.
+
+The per-chain distribution behind all of it is Figure~\ref{fig:subgroups}. There
+are \SgTied{} ties: on no chain of the fold do the two detectors reach the same
+per-residue ROC-AUC. The spread is wide relative to the location --- standard
+deviation \SgSd{} against a mean of \TabAucD{} --- with a fifth percentile at
+\SgQOhFive{} and a ninety-fifth at \SgQNineFive{}. \SgBigLosses{} chains lose by
+more than five ROC-AUC points and \SgBigWins{} win by more. Those counts are the
+whole disagreement between the mean and every robust summary of the same vector,
+stated as counts so that a reader can pick the summary their application calls
+for instead of being handed ours.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_subgroups.png}
+\caption{\FigCapSubgroups{}}
+\label{fig:subgroups}
+\end{figure}
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig_functional_choice.png}

@@ -102,6 +102,7 @@ AUDIT = ROOT / "results/official_fold/AUDIT_DECOMPOSITION.json"
 COST = ROOT / "results/architecture_sweep/RUNTIME_COST.json"
 INTERP = ROOT / "results/architecture_sweep/INTERPRETABLE_BASELINES.json"
 ENDPOINT = ROOT / "results/official_fold/ENDPOINT_STATUS.json"
+SUBGROUP = ROOT / "results/official_fold/SUBGROUP_READ.json"
 TRAIN_OP = ROOT / "results/architecture_sweep/TRAIN_OPERATING_POINTS.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
@@ -798,6 +799,63 @@ def build() -> str:
                 f"{'resolves' if prim['resolves'] else 'does not resolve'}; the "
                 f"abstract is written around an unresolved mean and has to be "
                 f"rewritten before the macros are regenerated")
+
+    if SUBGROUP.exists():
+        # The subgroup read is exploratory by construction and the macros are
+        # written so the manuscript cannot quote a band without also quoting the
+        # number of bands examined and the trend that fails to support it.
+        sg = json.loads(SUBGROUP.read_text())
+        p = sg["per_chain_distribution"]
+        L.append(f"\\newcommand{{\\SgTied}}{{{p['n_tied']}}}")
+        L.append(f"\\newcommand{{\\SgSd}}{{{p['sd']:.4f}}}")
+        L.append(f"\\newcommand{{\\SgBigLosses}}"
+                 f"{{{p['n_losses_worse_than_5pct']}}}")
+        L.append(f"\\newcommand{{\\SgBigWins}}"
+                 f"{{{p['n_wins_better_than_5pct']}}}")
+        L.append(f"\\newcommand{{\\SgQOhFive}}{{{p['quantiles']['0.05']:+.4f}}}")
+        L.append(f"\\newcommand{{\\SgQNineFive}}{{{p['quantiles']['0.95']:+.4f}}}")
+        L.append(f"\\newcommand{{\\SgNBandTests}}{{{sg['n_band_tests']}}}")
+        L.append(f"\\newcommand{{\\SgNCovariates}}"
+                 f"{{{len(sg['by_covariate'])}}}")
+        L.append(f"\\newcommand{{\\SgBonf}}{{{sg['bonferroni_level']:.5f}}}")
+        surv = sg["bands_excluding_zero_after_correction"]
+        L.append(f"\\newcommand{{\\SgNSurviving}}{{{len(surv)}}}")
+        L.append(f"\\newcommand{{\\SgNTrends}}"
+                 f"{{{len(sg['trends_surviving_correction'])}}}")
+        L.append(f"\\newcommand{{\\SgNSurvivingWithTrend}}"
+                 f"{{{sg['n_surviving_bands_supported_by_a_trend']}}}")
+        if len(surv) == 1:
+            b = surv[0]
+            # The artifact's covariate ids are field names; the manuscript needs
+            # the thing they measure.
+            names = {"prmsd": "apo/holo pocket RMSD",
+                     "n_true": "pocket size",
+                     "positive_rate": "positive rate",
+                     "chain_length": "chain length",
+                     "mean_bfactor": "mean pocket B-factor"}
+            L.append(f"\\newcommand{{\\SgBandName}}"
+                     f"{{{names[b['covariate']]}, {b['band']} third}}")
+            L.append(f"\\newcommand{{\\SgBandDelta}}{{{b['mean']:+.4f}}}")
+            L.append(f"\\newcommand{{\\SgBandCI}}"
+                     f"{{[{b['ci'][0]:+.4f}, {b['ci'][1]:+.4f}]}}")
+            L.append(f"\\newcommand{{\\SgBandN}}{{{b['n']}}}")
+            L.append(f"\\newcommand{{\\SgBandRho}}"
+                     f"{{{b['covariate_spearman_rho']:+.3f}}}")
+            L.append(f"\\newcommand{{\\SgBandRhoP}}"
+                     f"{{{b['covariate_spearman_p']:.2f}}}")
+        # The manuscript describes the surviving band as unexplained by a trend.
+        # If one ever acquires trend support that sentence becomes false, and it
+        # should be rewritten deliberately rather than by regenerating macros.
+        if sg["n_surviving_bands_supported_by_a_trend"]:
+            raise SystemExit(
+                f"{sg['n_surviving_bands_supported_by_a_trend']} surviving "
+                f"band(s) are now supported by a monotone trend, but "
+                f"Section 'Where the difference lives' is written around a band "
+                f"that nothing explains; rewrite it before regenerating")
+        if sg["status"] != "exploratory":
+            raise SystemExit(
+                f"the subgroup read now reports itself as {sg['status']}; the "
+                f"manuscript presents it as exploratory throughout")
 
     if INTERP.exists():
         # The readout ladder. The chapter's claim here is a negative one -- the

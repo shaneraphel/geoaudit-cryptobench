@@ -1,0 +1,415 @@
+{
+  "schema": "geoaudit.subgroup_read.v1",
+  "clinical_grade": false,
+  "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
+  "is_official_mmseqs2_10pct_test_fold": true,
+  "test_fold_read_index": 8,
+  "status": "exploratory",
+  "question": "on which kinds of protein does the counting field beat P2Rank and on which does it lose, partitioned by five covariates fixed before the read; and what is the full per-chain win, loss and tie distribution behind the summary statistics",
+  "rescored_anything": false,
+  "why_it_is_indexed_anyway": "the per-unit numbers were frozen by read one, but partitioning them by a covariate and testing inside the parts draws new inferences from the fold, which is what the ledger counts",
+  "provenance_of_the_plan": {
+    "artifact": "results/architecture_sweep/PREREGISTERED_SUBGROUPS.json",
+    "committed_in": "f06c08eabae8a7fd3b0f9471968909ac2cb3c356",
+    "committed_at": "2026-07-29T15:31:09+08:00",
+    "subject": "Plan the subgroup read before running it: five covariates, tertiles, no claim available",
+    "is_ancestor_of_head": true
+  },
+  "covariate_artifact_sha256": "874ff494666781ee9da4a842a04e730aa7e17055cccf207538da3b7996dcd08d",
+  "telemetry_source": "results/cryptobench_official/TELEMETRY.json",
+  "method": "table_field",
+  "baseline": "p2rank",
+  "n_paired_units": 192,
+  "calibration_against_read_five": {
+    "mean": 0.005828,
+    "mean_published_at_read_five": 0.005828,
+    "n_field_ahead": 115,
+    "n_field_ahead_published": 115,
+    "n_baseline_ahead": 77,
+    "n_baseline_ahead_published": 77,
+    "reproduces": true,
+    "what_this_is": "a check that the arithmetic matches the published read, not a finding"
+  },
+  "per_chain_distribution": {
+    "n": 192,
+    "n_field_ahead": 115,
+    "n_baseline_ahead": 77,
+    "n_tied": 0,
+    "tie_definition": "|difference| <= 1e-12 in per-residue ROC-AUC",
+    "quantiles": {
+      "0.0": -0.634401,
+      "0.05": -0.319957,
+      "0.1": -0.17129,
+      "0.25": -0.040428,
+      "0.5": 0.041163,
+      "0.75": 0.089456,
+      "0.9": 0.153318,
+      "0.95": 0.206602,
+      "1.0": 0.374144
+    },
+    "mean": 0.005828,
+    "sd": 0.154254,
+    "n_losses_worse_than_5pct": 41,
+    "n_wins_better_than_5pct": 84,
+    "how_to_read_it": "the field is ahead on more chains than it is behind, and its losses reach further than its wins. Those two facts are the whole reason the mean and every robust summary of the same vector disagree, and reporting the vector's shape is what lets a reader pick the summary their application calls for"
+  },
+  "by_covariate": {
+    "prmsd": {
+      "bands": [
+        {
+          "band": "low",
+          "n": 64,
+          "mean": 0.020049,
+          "median": 0.041609,
+          "n_field_ahead": 40,
+          "n_baseline_ahead": 24,
+          "ci95": [
+            -0.020501,
+            0.057478
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.03781,
+            0.072551
+          ],
+          "excludes_zero_corrected": false
+        },
+        {
+          "band": "mid",
+          "n": 64,
+          "mean": 0.010489,
+          "median": 0.031865,
+          "n_field_ahead": 38,
+          "n_baseline_ahead": 26,
+          "ci95": [
+            -0.024484,
+            0.043739
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.04211,
+            0.058867
+          ],
+          "excludes_zero_corrected": false
+        },
+        {
+          "band": "high",
+          "n": 64,
+          "mean": -0.013054,
+          "median": 0.045295,
+          "n_field_ahead": 37,
+          "n_baseline_ahead": 27,
+          "ci95": [
+            -0.055512,
+            0.024539
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.080019,
+            0.039786
+          ],
+          "excludes_zero_corrected": false
+        }
+      ],
+      "monotone_in_the_mean": true,
+      "spearman_rho": -0.0037,
+      "spearman_p_permutation": 0.9635,
+      "n_permutations": 2000,
+      "trend_survives_correction": false,
+      "spread_between_bands": 0.033103
+    },
+    "n_true": {
+      "bands": [
+        {
+          "band": "low",
+          "n": 62,
+          "mean": -0.046243,
+          "median": 0.011064,
+          "n_field_ahead": 33,
+          "n_baseline_ahead": 29,
+          "ci95": [
+            -0.102209,
+            0.0072
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.132998,
+            0.033051
+          ],
+          "excludes_zero_corrected": false
+        },
+        {
+          "band": "mid",
+          "n": 66,
+          "mean": 0.040152,
+          "median": 0.044883,
+          "n_field_ahead": 42,
+          "n_baseline_ahead": 24,
+          "ci95": [
+            0.014384,
+            0.065833
+          ],
+          "excludes_zero_uncorrected": true,
+          "ci_bonferroni": [
+            0.001599,
+            0.077268
+          ],
+          "excludes_zero_corrected": true
+        },
+        {
+          "band": "high",
+          "n": 64,
+          "mean": 0.020876,
+          "median": 0.043208,
+          "n_field_ahead": 40,
+          "n_baseline_ahead": 24,
+          "ci95": [
+            -0.001296,
+            0.041978
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.013554,
+            0.050971
+          ],
+          "excludes_zero_corrected": false
+        }
+      ],
+      "monotone_in_the_mean": false,
+      "spearman_rho": 0.0685,
+      "spearman_p_permutation": 0.336,
+      "n_permutations": 2000,
+      "trend_survives_correction": false,
+      "spread_between_bands": 0.086395
+    },
+    "positive_rate": {
+      "bands": [
+        {
+          "band": "low",
+          "n": 64,
+          "mean": -0.031845,
+          "median": 0.010628,
+          "n_field_ahead": 36,
+          "n_baseline_ahead": 28,
+          "ci95": [
+            -0.083292,
+            0.016684
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.109712,
+            0.038604
+          ],
+          "excludes_zero_corrected": false
+        },
+        {
+          "band": "mid",
+          "n": 63,
+          "mean": 0.019177,
+          "median": 0.014686,
+          "n_field_ahead": 35,
+          "n_baseline_ahead": 28,
+          "ci95": [
+            -0.011054,
+            0.048357
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.02607,
+            0.062589
+          ],
+          "excludes_zero_corrected": false
+        },
+        {
+          "band": "high",
+          "n": 65,
+          "mean": 0.029983,
+          "median": 0.054367,
+          "n_field_ahead": 44,
+          "n_baseline_ahead": 21,
+          "ci95": [
+            0.002232,
+            0.055398
+          ],
+          "excludes_zero_uncorrected": true,
+          "ci_bonferroni": [
+            -0.01209,
+            0.066881
+          ],
+          "excludes_zero_corrected": false
+        }
+      ],
+      "monotone_in_the_mean": true,
+      "spearman_rho": 0.0769,
+      "spearman_p_permutation": 0.2795,
+      "n_permutations": 2000,
+      "trend_survives_correction": false,
+      "spread_between_bands": 0.061828
+    },
+    "chain_length": {
+      "bands": [
+        {
+          "band": "low",
+          "n": 63,
+          "mean": 0.02153,
+          "median": 0.048323,
+          "n_field_ahead": 39,
+          "n_baseline_ahead": 24,
+          "ci95": [
+            -0.014462,
+            0.056449
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.031803,
+            0.075041
+          ],
+          "excludes_zero_corrected": false
+        },
+        {
+          "band": "mid",
+          "n": 65,
+          "mean": 0.021715,
+          "median": 0.054367,
+          "n_field_ahead": 41,
+          "n_baseline_ahead": 24,
+          "ci95": [
+            -0.013644,
+            0.05423
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.033993,
+            0.069311
+          ],
+          "excludes_zero_corrected": false
+        },
+        {
+          "band": "high",
+          "n": 64,
+          "mean": -0.025763,
+          "median": 0.008391,
+          "n_field_ahead": 35,
+          "n_baseline_ahead": 29,
+          "ci95": [
+            -0.069703,
+            0.014276
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.095589,
+            0.031306
+          ],
+          "excludes_zero_corrected": false
+        }
+      ],
+      "monotone_in_the_mean": false,
+      "spearman_rho": -0.0507,
+      "spearman_p_permutation": 0.5125,
+      "n_permutations": 2000,
+      "trend_survives_correction": false,
+      "spread_between_bands": 0.047478
+    },
+    "mean_bfactor": {
+      "bands": [
+        {
+          "band": "low",
+          "n": 64,
+          "mean": 0.018124,
+          "median": 0.041163,
+          "n_field_ahead": 41,
+          "n_baseline_ahead": 23,
+          "ci95": [
+            -0.017552,
+            0.049875
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.037135,
+            0.062904
+          ],
+          "excludes_zero_corrected": false
+        },
+        {
+          "band": "mid",
+          "n": 64,
+          "mean": 0.007799,
+          "median": 0.008391,
+          "n_field_ahead": 35,
+          "n_baseline_ahead": 29,
+          "ci95": [
+            -0.026026,
+            0.039342
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.041863,
+            0.055017
+          ],
+          "excludes_zero_corrected": false
+        },
+        {
+          "band": "high",
+          "n": 64,
+          "mean": -0.008439,
+          "median": 0.051739,
+          "n_field_ahead": 39,
+          "n_baseline_ahead": 25,
+          "ci95": [
+            -0.05566,
+            0.035179
+          ],
+          "excludes_zero_uncorrected": false,
+          "ci_bonferroni": [
+            -0.07914,
+            0.051642
+          ],
+          "excludes_zero_corrected": false
+        }
+      ],
+      "monotone_in_the_mean": true,
+      "spearman_rho": -0.0073,
+      "spearman_p_permutation": 0.9225,
+      "n_permutations": 2000,
+      "trend_survives_correction": false,
+      "spread_between_bands": 0.026563
+    }
+  },
+  "n_band_tests": 15,
+  "bonferroni_level": 0.003333,
+  "bands_excluding_zero_after_correction": [
+    {
+      "covariate": "n_true",
+      "band": "mid",
+      "mean": 0.040152,
+      "ci": [
+        0.001599,
+        0.077268
+      ],
+      "n": 66,
+      "supported_by_a_trend": false,
+      "covariate_is_monotone": false,
+      "covariate_spearman_rho": 0.0685,
+      "covariate_spearman_p": 0.336
+    }
+  ],
+  "n_surviving_bands_supported_by_a_trend": 0,
+  "how_to_read_a_surviving_band": "a band that clears a corrected threshold while its own covariate shows no monotone trend has no dose-response behind it: the two neighbouring thirds of the fold do not order around it. That is the shape a false positive takes when fifteen partitions are examined, and it is why the trend test is reported beside every band rather than after them",
+  "bands_excluding_zero_only_before_correction": [
+    {
+      "covariate": "positive_rate",
+      "band": "high",
+      "mean": 0.029983,
+      "ci95": [
+        0.002232,
+        0.055398
+      ],
+      "n": 65
+    }
+  ],
+  "trends_surviving_correction": [],
+  "bands_favouring_p2rank": [],
+  "outcome_key": "a_band_survives_correction",
+  "outcome": "One partition of the fold shows a difference that survives correction. It is reported as the strongest signal the fold offers about where the two detectors diverge and as a hypothesis for external evaluation; it is not offered as evidence that the field is better on that kind of protein, because the overall endpoint is unresolved and this is one of 15 partitions examined.",
+  "what_may_not_be_concluded": "whatever the read returns, no sentence in the paper may state that the field is better than P2Rank on any subgroup of proteins. The overall endpoint is unresolved and a subgroup cannot repair that"
+}

@@ -5,13 +5,14 @@
   "generator": "tools/make_official_figures.py",
   "sources": {
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
-    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "d521133c1cdf86237c2f9fc268c5c667084025cf6620944cd461b3d512e58459",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "fb8c3cee7af925d2ba5af079ea93bad6da76737b4810ab4e93358a51245c1a74",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
     "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",
     "results/official_fold/PREREGISTERED_READ.json": "e57d9063ae20ca45259f114b9885a156ba09e422cb222d07b9797febc6d02b17",
     "results/official_fold/MATCHED_OPERATING_POINT_READ.json": "ba0f9f6b2c2e24ed8b9f9a7f0d69350afeea66c7c33642b57dd08e802764ea84",
-    "results/official_fold/MATCHED_FULL_READ.json": "225d792958997bea4ac444bd5751b2196d464eb9e29fbe9ef4673383108c4ff5"
+    "results/official_fold/MATCHED_FULL_READ.json": "225d792958997bea4ac444bd5751b2196d464eb9e29fbe9ef4673383108c4ff5",
+    "results/official_fold/SUBGROUP_READ.json": "8994ec100852f7b25462163f6cf46ce81448f40fec21404c75a5a5363fdaa9c3"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -38,6 +39,11 @@
       "sha256": "e96955232d70f9a69e26f2b34e500be0c9e91b2a0a0073afe5473d7bb192ae20",
       "bytes": 194120,
       "caption": "Where the reported margin came from, on all 192 held-out structures. Left, the two detectors in the precision--recall plane under three conventions, each pair joined by a line. Run as delivered, P2Rank calls 1.65 times as many residues as our rule does (8564 against 5202), which buys recall and costs precision: our precision is higher by +0.0590 and our recall lower by -0.0662, both intervals excluding zero. At a common budget both call 5202 residues and the trade is gone. Right, every paired difference with a 95% bootstrap interval over structures. The F1 and MCC differences remain positive and contain zero under every matched convention. The matched recall difference, +0.0332 [+0.0027, +0.0646], excludes zero at p=0.033, which does not survive a Bonferroni threshold of 0.0125 over the four metrics of one convention and carried no preregistered decision rule; it is an observation about this fold and is drawn as one. Resampling PDB entries or MMseqs2 clusters instead of chains changes no interval here by more than a factor of 1.006."
+    },
+    "fig_subgroups.png": {
+      "sha256": "4921e82d6a02893acc9e29e9005c72649a2f01901ba476973858fa8e06a7ee0e",
+      "bytes": 177522,
+      "caption": "Where the two detectors differ on the 192 chains of the fold, and what survives asking. Left, one bar per chain, sorted: the field is ahead on 115, behind on 77 and ties on 0, but its losses reach further than its wins \u2014 41 chains lose by more than five ROC-AUC points against 84 that win by more \u2014 which is why the mean (+0.0058) sits below the median (+0.0412). Right, the fold cut into thirds by five covariates fixed before the read from the CryptoBench deposit, the labels and the coordinates, with no score opened. Thick bars are 95% intervals, thin bars Bonferroni over the 15 bands, and \u03c1 is the Spearman correlation between the covariate and the per-chain difference, tested by permutation. 1 band clears the corrected level and 0 of five trends do; the surviving band sits between two that do not order around it, so nothing here identifies a kind of protein on which one detector is better. The analysis was preregistered as exploratory and no result from it is claimed."
     },
     "fig_case_studies.png": {
       "sha256": "1098a22f87a65e4812d0bc7bb2bdad8619a653b6cdae0e683e502b42495a2c3a",

@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 21,
-    "cited": 40,
-    "superseded": 4,
+    "exploration": 22,
+    "cited": 41,
+    "superseded": 5,
     "fold_access": 7
   },
-  "n_artifacts": 72,
+  "n_artifacts": 75,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -248,6 +248,13 @@
       "bytes": 5756
     },
     {
+      "artifact": "results/architecture_sweep/PREREGISTERED_SUBGROUPS.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.preregistered_subgroups.v1",
+      "bytes": 9238
+    },
+    {
       "artifact": "results/architecture_sweep/REPEATED_TRAIN_SELECTION.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -399,7 +406,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 6849
+      "bytes": 8122
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
@@ -479,11 +486,25 @@
       "bytes": 2286
     },
     {
+      "artifact": "results/official_fold/SUBGROUP_COVARIATES.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.subgroup_covariates.v1",
+      "bytes": 56376
+    },
+    {
+      "artifact": "results/official_fold/SUBGROUP_READ.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.subgroup_read.v1",
+      "bytes": 12322
+    },
+    {
       "artifact": "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 8444
+      "bytes": 9030
     },
     {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",
