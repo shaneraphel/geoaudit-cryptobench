@@ -59,8 +59,27 @@ def _git(*a: str) -> str:
                           text=True).stdout.strip()
 
 
+def _reads_before_this_plan() -> int:
+    """How many indexed reads the fold carried when this plan was frozen.
+
+    Taken from the ledger as it stood at the commit that froze the plan, not as it
+    stands now. The sentence this number appears in is a historical claim about
+    what had already been read, so recomputing it against the current ledger would
+    make an untouched plan look edited every time a later read lands -- and would
+    quietly invite someone to "fix" the drift by rewriting the plan, which is the
+    one thing a preregistration may not do.
+    """
+    rel = str(LEDGER.relative_to(ROOT))
+    at = _git("log", "-1", "--format=%H", "--", str(OUT.relative_to(ROOT)))
+    if at:
+        blob = subprocess.run(["git", "show", f"{at}:{rel}"], cwd=ROOT,
+                              capture_output=True)
+        if blob.returncode == 0:
+            return int(json.loads(blob.stdout)["n_indexed_reads"])
+    return int(json.loads(LEDGER.read_text())["n_indexed_reads"])
+
 def build() -> dict:
-    n_prior = json.loads(LEDGER.read_text())["n_indexed_reads"]
+    n_prior = _reads_before_this_plan()
     fr = json.loads(FULL_READ.read_text())
     matched = fr["conventions"]["D2_common_budget"]
     return {

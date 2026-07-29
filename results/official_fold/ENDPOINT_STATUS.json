@@ -152,6 +152,30 @@
       "method": "table_field",
       "mean_residue_auc": null,
       "first_committed_in": "c7c00e2a7f3a"
+    },
+    {
+      "read_index": 10,
+      "artifact": "results/official_fold/PLMNN_READ.json",
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "method": "table field variant",
+      "mean_residue_auc": null,
+      "first_committed_in": "2fd21b366cbb"
+    },
+    {
+      "read_index": 11,
+      "artifact": "results/official_fold/POCKETMINER_READ.json",
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "method": "table_field",
+      "mean_residue_auc": null,
+      "first_committed_in": "5c7ff952e8bb"
+    },
+    {
+      "read_index": 12,
+      "artifact": "results/official_fold/THRESHOLD_CURVE.json",
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "method": "table_field",
+      "mean_residue_auc": null,
+      "first_committed_in": "4bf17feaec33"
     }
   ],
   "n_reads_before_the_preregistration": 4,

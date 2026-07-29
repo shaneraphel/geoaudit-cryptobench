@@ -99,6 +99,14 @@ jobs:
         run: make plmplan
       - name: The tenth read must reproduce, including which sentence it may print
         run: make read10
+      - name: The PocketMiner plan must still concede the label mismatch in advance
+        run: make pmplan
+      - name: The eleventh read must reproduce, including its contamination arm
+        run: make read11
+      - name: The threshold-curve plan must still forbid choosing a point on the curve
+        run: make curveplan
+      - name: The twelfth read must reproduce read seven at the deployed threshold
+        run: make read12
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

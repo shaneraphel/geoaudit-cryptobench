@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 from pathlib import Path
 
 
@@ -299,9 +300,26 @@ def main() -> int:
         parts = set(path.parts)
         return "_local" in parts or ".local" in "".join(path.suffixes)
 
+    def _tracked() -> list[Path] | None:
+        # These gates ask what this repository publishes, so the enumeration has
+        # to be what the repository contains rather than what happens to be
+        # sitting in the directory. Walking the filesystem read third-party
+        # site-packages out of a local virtualenv and failed the credential, path
+        # and scope gates on numpy's docstrings and pygments' token types --- a
+        # gate that fires on somebody else's vendored code is telling the reader
+        # nothing about this paper.
+        proc = subprocess.run(["git", "ls-files", "-z"], cwd=root,
+                              capture_output=True)
+        if proc.returncode != 0:
+            return None
+        return [root / p for p in proc.stdout.decode().split("\0") if p]
+
+    candidates = _tracked()
+    if candidates is None:
+        candidates = list(root.rglob("*"))
     primary_files = [
         path
-        for path in root.rglob("*")
+        for path in candidates
         if path.is_file()
         and ".git" not in path.parts
         and not _is_local_only(path)

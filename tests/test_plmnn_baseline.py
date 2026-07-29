@@ -20,6 +20,7 @@ sentence chosen afterwards.
 from __future__ import annotations
 
 import json
+import re
 import unittest
 
 import numpy as np
@@ -113,13 +114,23 @@ class TheEncoderWasReadAtTheRightDepth(unittest.TestCase):
                            v["second_best_mean_cosine"] + 0.01)
 
     def test_the_final_layer_is_not_what_the_authors_used(self):
-        # The obvious reading of "the ESM2-3B embedding" is the last layer, and
-        # taking it would be a baseline scored on the wrong features. This records
-        # that the obvious reading was checked and is wrong.
-        by_layer = _json(SCORES)["validation_against_the_published_example"][
-            "mean_cosine_against_the_published_embedding_by_layer"]
-        self.assertNotEqual(max(by_layer, key=lambda k: by_layer[k]),
-                            str(max(int(k) for k in by_layer)))
+        # The obvious reading of "the ESM2-3B embedding" is the encoder's last
+        # layer, and taking it would be a baseline scored on the wrong features.
+        # The depth comes from the checkpoint's name -- esm2_t36_3B has 36 blocks
+        # -- and not from how many layers we chose to compute, which is 34 because
+        # fair-esm overwrites the deepest one requested. Comparing against the
+        # deepest computed layer instead would compare the recovered layer to
+        # itself and pass or fail for reasons that have nothing to do with the
+        # authors' choice.
+        enc = _json(SCORES)["encoder"]
+        depth = int(re.search(r"_t(\d+)_", enc["name"]).group(1))
+        self.assertGreater(depth, enc["layer"],
+                           "the recovered layer is the encoder's last, so the "
+                           "obvious reading was right and this test's premise "
+                           "is wrong")
+        self.assertLess(enc["layers_computed"], depth,
+                        "the sweep reached the encoder's final layer, so the "
+                        "artifact does not record whether it was rejected")
 
     def test_the_ranking_of_residues_agrees_with_the_authors(self):
         # Per-unit ROC-AUC reads only the order of the scores within a chain, so
