@@ -1,0 +1,162 @@
+{
+  "schema": "geoaudit.preregistered_subgroups.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T15:30:52+0800",
+  "for_test_fold_read_index": 8,
+  "written_before_the_read": true,
+  "code_sha256": "e1766d4bfc152af93b2cb97d5c569c3cac1d44d4f28f1bfeba98b3d439a78c0f",
+  "head_when_written": "5b5beace792042debe2d434e0c7520d5da236fc8",
+  "question": "on which kinds of protein does the counting field beat P2Rank and on which does it lose, partitioned by five covariates fixed before the read; and what is the full per-chain win, loss and tie distribution behind the summary statistics",
+  "status_declared_in_advance": "exploratory",
+  "why_exploratory_and_not_confirmatory": "the primary endpoint of this paper is the mean paired ROC-AUC and it does not resolve. A subgroup analysis run afterwards cannot promote an unresolved overall result, and a subgroup that excludes zero here is at least as likely to be one of the 15 draws as a property of the proteins. This is recorded before the read so that it cannot be decided after it",
+  "covariates": [
+    {
+      "id": "prmsd",
+      "source": "max pRMSD over the unit's holo partners in data/cryptobench_apo/_osf/test.json, the CryptoBench deposit's own apo/holo pocket RMSD",
+      "cuts": [
+        2.39,
+        2.98
+      ],
+      "group_sizes": [
+        64,
+        64,
+        64
+      ],
+      "n_defined": 192
+    },
+    {
+      "id": "n_true",
+      "source": "labelled cryptic residues, from PER_STRUCTURE, which is the count every published metric used",
+      "cuts": [
+        13,
+        20
+      ],
+      "group_sizes": [
+        62,
+        66,
+        64
+      ],
+      "n_defined": 192
+    },
+    {
+      "id": "positive_rate",
+      "source": "n_true divided by the scored universe",
+      "cuts": [
+        0.042821,
+        0.076923
+      ],
+      "group_sizes": [
+        64,
+        63,
+        65
+      ],
+      "n_defined": 192
+    },
+    {
+      "id": "chain_length",
+      "source": "the scored universe; carried as a negative control because the preregistered statistic already stratified on it and it bought nothing",
+      "cuts": [
+        237,
+        321
+      ],
+      "group_sizes": [
+        63,
+        65,
+        64
+      ],
+      "n_defined": 192
+    },
+    {
+      "id": "mean_bfactor",
+      "source": "mean over labelled residues of that residue's mean atomic B-factor in the receptor as scored. The deposit's receptors have stripped headers so resolution is not recoverable; this is the structural-quality proxy that is",
+      "cuts": [
+        27.2828,
+        39.2375
+      ],
+      "group_sizes": [
+        64,
+        64,
+        64
+      ],
+      "n_defined": 192
+    }
+  ],
+  "covariate_artifact": {
+    "path": "results/official_fold/SUBGROUP_COVARIATES.json",
+    "sha256": "874ff494666781ee9da4a842a04e730aa7e17055cccf207538da3b7996dcd08d",
+    "reads_any_score": false
+  },
+  "bands": [
+    "low",
+    "mid",
+    "high"
+  ],
+  "banding_rule": "tertiles by order statistic on the covariate alone: low is below the first cut, mid is between the cuts, high is at or above the second. Chosen because it fixes the group sizes before the read and because no rule that looks at the differences can be defended",
+  "what_is_already_known_and_is_therefore_not_a_finding": {
+    "the_overall_paired_differences": {
+      "published_in": "results/official_fold/PREREGISTERED_READ.json",
+      "read_index": 5,
+      "mean": 0.005828,
+      "mean_ci": [
+        -0.016342,
+        0.0271
+      ],
+      "n_field_ahead": 115,
+      "n_baseline_ahead": 77,
+      "status": "read eight recomputes these as a calibration and must reproduce them to six decimals. Reproducing a published number is not a finding"
+    },
+    "why_this_is_stated_here": "the win and loss counts are already in the repository, so a plan that listed them among its outcomes would be claiming to be blind to something published. What is genuinely unread is the tie count, the shape of the distribution beyond its quantiles, and every quantity computed inside a subgroup"
+  },
+  "genuinely_unread_before_this_plan": [
+    "any paired difference restricted to a subgroup of the fold",
+    "the number of chains on which the two detectors tie exactly",
+    "the correlation between any covariate and the paired difference",
+    "the per-chain difference distribution beyond the quantiles read five published"
+  ],
+  "statistic": {
+    "per_unit": "the paired difference in per-residue ROC-AUC, table field minus P2Rank, as frozen by read one",
+    "summary": "unweighted mean within the band",
+    "n_boot": 10000,
+    "seed": 20260725,
+    "ci": 0.95,
+    "paired": "the same resampled chains enter both arms",
+    "also_reported": "median and win/loss/tie counts per band, because the mean is the statistic that this fold's tails are known to move"
+  },
+  "multiplicity": {
+    "n_subgroup_tests": 15,
+    "correction": "Bonferroni",
+    "corrected_level": 0.003333,
+    "also_reported": "the uncorrected interval, so a reader can see what the correction cost rather than being shown only its result",
+    "expected_false_positives_uncorrected": 0.75,
+    "why_bonferroni_and_not_something_sharper": "the bands within a covariate are disjoint but the five covariates are correlated -- pocket size and positive rate especially -- so the true number of independent tests is below 15 and Bonferroni is conservative. A sharper correction would need an assumption about that correlation which this fold is too small to check"
+  },
+  "trend_test": {
+    "what": "Spearman correlation between each covariate and the per-chain paired difference, over all units where the covariate is defined",
+    "why": "a monotone trend across three bands is a stronger and cheaper statement than any single band excluding zero, and it uses the covariate as the continuous quantity it is rather than throwing away its resolution",
+    "n_tests": 5,
+    "corrected_level": 0.01
+  },
+  "decision_rules": {
+    "no_subgroup_may_become_a_claim": "whatever the read returns, no sentence in the paper may state that the field is better than P2Rank on any subgroup of proteins. The overall endpoint is unresolved and a subgroup cannot repair that",
+    "if_a_band_excludes_zero_after_correction": "it is reported as the strongest signal the fold offers about where the difference lives, described as a hypothesis for the external evaluation, and labelled exploratory in the same sentence",
+    "if_a_band_excludes_zero_only_before_correction": "it is reported with both intervals and explicitly called consistent with noise at this number of tests",
+    "if_nothing_survives": "that is reported as the result. A subgroup analysis that finds nothing is informative: it says the difference is not concentrated in any of the five kinds of protein a reviewer would have asked about",
+    "if_a_trend_and_a_band_disagree": "the trend governs, because it uses the covariate at full resolution and costs one test rather than three"
+  },
+  "what_will_be_written_under_each_outcome": {
+    "nothing_survives_correction": "Partitioned by apo/holo displacement, pocket size, positive rate, chain length and mean B-factor, no third of the fold shows a difference that survives correction for the number of partitions examined. The difference between the two detectors is not concentrated in any kind of protein this benchmark records, which is a constraint on the explanations available for it and is reported as one.",
+    "a_band_survives_correction": "One partition of the fold shows a difference that survives correction. It is reported as the strongest signal the fold offers about where the two detectors diverge and as a hypothesis for external evaluation; it is not offered as evidence that the field is better on that kind of protein, because the overall endpoint is unresolved and this is one of 15 partitions examined.",
+    "a_trend_survives_correction": "The paired difference varies monotonically with one covariate across the fold. A trend costs one test rather than three and uses the covariate at full resolution, so it is the more informative finding, and it is still exploratory: it describes this fold and predicts nothing that has been checked.",
+    "a_band_or_trend_favours_p2rank": "At least one partition favours P2Rank. It is reported with the same prominence as any partition favouring the field, since a plan that reported only the favourable direction would be the selection this analysis was designed to avoid."
+  },
+  "guards_the_read_must_pass": [
+    "this plan's commit is an ancestor of HEAD, checked with git",
+    "the covariate artifact's sha256 matches the one recorded here, so the groups cannot have been redrawn between the plan and the read",
+    "the overall mean and win/loss counts reproduce read five to six decimals",
+    "every band's unit count matches the group size recorded here",
+    "the bands of a covariate partition its defined units exactly: no unit in two bands, none in none",
+    "each covariate's three band means, weighted by band size, reconstruct the overall mean"
+  ],
+  "reads_test_fold": false,
+  "note": "this file is the plan. Reading the fold under it is tools/subgroup_read.py, which refuses to run until this is committed."
+}
