@@ -243,7 +243,8 @@ def _thresholded(q: float, thr: float, seed: int, n_boot: int,
                "differ only in how the baseline is binarised")}
     for arm, sides in arms.items():
         block = {}
-        for k, name in enumerate(("precision", "recall", "f1", "mcc")):
+        for k, name in enumerate(("precision", "recall", "positive_class_f1",
+                                  "mcc")):
             vals = {side: [metric_of(name, c) for c in cs]
                     for side, cs in sides.items()}
             block[name] = {
@@ -365,10 +366,10 @@ def _report(d: dict) -> None:
         print(f"  baseline positive rate at {t['threshold']}: "
               f"{t['mean_positive_rate_of_the_baseline_at_its_own_threshold']:.4f}")
         for arm in ("common_budget", "each_methods_own_rule"):
-            for name in ("f1", "mcc"):
+            for name in ("positive_class_f1", "mcc"):
                 m = t[arm][name]
                 pd = m["paired_difference_ours_minus_plmnn"]
-                print(f"  {arm:22s} {name:3s} {m['ours']:.4f} against "
+                print(f"  {arm:22s} {name:17s} {m['ours']:.4f} against "
                       f"{m['plmnn']:.4f}, delta {pd['mean']:+.4f} "
                       f"CI [{pd['ci'][0]:+.4f}, {pd['ci'][1]:+.4f}]")
     print(f"  outcome: {d['outcome']}")

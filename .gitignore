@@ -65,3 +65,9 @@ paper/*.aux
 paper/*.log
 paper/*.out
 paper/*.xdv
+
+# PocketMiner per-residue scores on the 770 training receptors: the intermediate
+# behind POCKETMINER_TRAIN_OPERATING_POINT.json, which records its sha256 and the
+# threshold it supports. Rebuilt by tools/pocketminer_run.py --predict --train.
+data/baselines/pocketminer_train/
+results/baselines/POCKETMINER_TRAIN_SCORES.json

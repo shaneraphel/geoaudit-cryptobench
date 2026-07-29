@@ -1,8 +1,9 @@
 {
   "schema": "geoaudit.pocketminer_scores.v1",
   "clinical_grade": false,
-  "generated_at": "2026-07-29T20:34:49+0800",
-  "question": "what does the official PocketMiner network predict for each residue of the 192 single-chain units",
+  "generated_at": "2026-07-29T20:52:29+0800",
+  "fold": "official_mmseqs2_10pct_test",
+  "question": "what does the official PocketMiner network predict for each residue of the 192 single-chain test units",
   "reads_a_label": false,
   "why_no_label_is_read": "this file produces predictions; the comparison against ours and P2Rank's is a separate indexed read of the test fold",
   "provenance": {
@@ -47,6 +48,10 @@
     "n_units_asserted_identical_to_the_authors_tensor": 188,
     "n_units_where_it_could_not_be_asserted": 4,
     "n_residues_dropped_for_incomplete_backbone": 7,
+    "n_residues_dropped_as_alternate_conformers": 0,
+    "n_residues_dropped_for_residue_type": 0,
+    "alternate_conformer_ca_cutoff_angstrom": 2.0,
+    "why_conformers_are_dropped_before_featurisation": "a conformer copy is not a residue the protein has twice; left in, it takes nearest-neighbour edges away from the residue's real neighbours. 4m7p_A in the training fold carries twenty copies of all 390 of its residues",
     "n_resseq_collisions_from_insertion_codes": 5,
     "what_a_collision_means": "the frozen pipeline keys residues by resseq, so an insertion code cannot be represented; the first occurrence is kept and the residue number is recorded here"
   },
@@ -2044,5 +2049,5 @@
       "mean_score": 0.509102
     }
   ],
-  "runtime_minutes": 0.67
+  "runtime_minutes": 2.05
 }

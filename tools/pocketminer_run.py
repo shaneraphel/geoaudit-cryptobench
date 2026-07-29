@@ -72,6 +72,11 @@ MANIFEST = ROOT / "data/cryptobench_apo/official_manifest.json"
 SCORE_DIR = ROOT / "data/baselines/pocketminer"
 OUT = ROOT / "results/baselines/POCKETMINER_SCORES.json"
 SELFTEST_OUT = ROOT / "results/baselines/POCKETMINER_SELFTEST.json"
+# The training fold, so this baseline can be given a threshold chosen the same
+# way the other two methods' were: on training data, then frozen.
+TRAIN_RECEPTORS = ROOT / "data/cryptobench_apo/train_receptors"
+TRAIN_SCORE_DIR = ROOT / "data/baselines/pocketminer_train"
+TRAIN_OUT = ROOT / "results/baselines/POCKETMINER_TRAIN_SCORES.json"
 
 SCHEMA = "geoaudit.pocketminer_scores.v1"
 SELFTEST_SCHEMA = "geoaudit.pocketminer_selftest.v1"
@@ -113,6 +118,16 @@ PUBLISHED = {
 }
 SELFTEST_MIN_ROC_AUC = 0.75
 BACKBONE = ("N", "CA", "C", "O")
+# Two residues can share a chain, a residue number and a residue name for two
+# unrelated reasons, and they have to be told apart before the graph is built.
+# An alternate conformer is a second copy of the same residue and its CA sits on
+# top of the first: across the receptors here, within 1 A. An insertion-coded
+# residue is a different residue that PDB numbering cannot distinguish, and its CA
+# is a peptide bond away: 3.8 A in the one test chain that has any. A conformer
+# copy left in the input does real damage -- 4m7p_A carries twenty of them, which
+# would hand the network 7800 residues where the protein has 390, and every
+# nearest-neighbour edge in the graph would be to a copy of the residue itself.
+ALTERNATE_CONFORMER_CA_ANGSTROM = 2.0
 
 
 def _sha256(p: Path) -> str:
@@ -232,9 +247,13 @@ def _backbone(md, traj, abbrev, lookup):
 
     The authors' ``reshape(l, 4, 3)`` is correct exactly when every residue has
     all four backbone atoms; where it is not, this drops the residue rather than
-    shifting the ones after it.
+    shifting the ones after it. Where a residue is a second conformer of one
+    already taken, it is dropped too, for the reason given at
+    ``ALTERNATE_CONFORMER_CA_ANGSTROM``.
     """
+    import numpy as np
     keep, resseq, resname, dropped = [], [], [], []
+    first_ca: dict[tuple, "np.ndarray"] = {}
     for r in traj.top.residues:
         if r.name not in abbrev:
             dropped.append({"resseq": int(r.resSeq), "resname": r.name,
@@ -249,13 +268,24 @@ def _backbone(md, traj, abbrev, lookup):
                             "why": "incomplete backbone, has only "
                                    + "/".join(sorted(idx))})
             continue
+        key = (r.chain.index, int(r.resSeq), r.name)
+        ca = traj.xyz[0, idx["CA"]] * 10.0
+        prior = first_ca.get(key)
+        if prior is not None:
+            d = float(np.linalg.norm(ca - prior))
+            if d < ALTERNATE_CONFORMER_CA_ANGSTROM:
+                dropped.append({"resseq": int(r.resSeq), "resname": r.name,
+                                "why": "alternate conformer of a residue already "
+                                       f"taken, CA {d:.2f} A away"})
+                continue
+        else:
+            first_ca[key] = ca
         keep.extend(idx[n] for n in BACKBONE)
         resseq.append(int(r.resSeq))
         resname.append(r.name)
     if not resseq:
         raise SystemExit("no residue survived backbone selection")
     sub = traj.atom_slice(keep)
-    import numpy as np
     L = len(resseq)
     X = sub.xyz.reshape(1, L, 4, 3).astype(np.float32)
     S = np.asarray([[lookup[abbrev[n]] for n in resname]], dtype=np.int32)
@@ -440,28 +470,36 @@ def selftest() -> int:
     return 0
 
 
-def _units() -> list[tuple[str, str]]:
+def _units(where: Path | None = None) -> list[tuple[str, str]]:
     out = []
-    for f in sorted(RECEPTORS.glob("*_receptor.pdb")):
+    for f in sorted((where or RECEPTORS).glob("*_receptor.pdb")):
         pdb, chain = f.name.replace("_receptor.pdb", "").rsplit("_", 1)
         out.append((pdb, chain))
     return out
 
 
-def predict(limit: int = 0) -> int:
-    """Score the 192 receptors P2Rank and the counting field were given."""
+def predict(limit: int = 0, train: bool = False) -> int:
+    """Score the receptors P2Rank and the counting field were given.
+
+    ``train`` scores the 770 training units instead, which is not a read of
+    anything held out: it exists so this baseline's threshold can be chosen on
+    training data and frozen, the way the other two methods' were.
+    """
+    receptors = TRAIN_RECEPTORS if train else RECEPTORS
+    score_dir = TRAIN_SCORE_DIR if train else SCORE_DIR
+    out_path = TRAIN_OUT if train else OUT
     prov = _verify_checkout()
     md, tf, MQAModel, process_strucs, abbrev, lookup = _import_pocketminer()
     model, status = _load_model(tf, MQAModel)
-    SCORE_DIR.mkdir(parents=True, exist_ok=True)
-    units = _units()
+    score_dir.mkdir(parents=True, exist_ok=True)
+    units = _units(receptors)
     if limit:
         units = units[:limit]
     rows = []
     restore = None
     t0 = time.time()
     for i, (pdb, chain) in enumerate(units, 1):
-        f = RECEPTORS / f"{pdb}_{chain}_receptor.pdb"
+        f = receptors / f"{pdb}_{chain}_receptor.pdb"
         traj = md.load(str(f))
         X, S, mask, resseq, dropped = _backbone(md, traj, abbrev, lookup)
         agrees = None if dropped else _agrees_with_official(
@@ -480,7 +518,7 @@ def predict(limit: int = 0) -> int:
                 collisions.append(r)
                 continue
             scores[k] = round(v, 6)
-        (SCORE_DIR / f"{pdb}_{chain}.json").write_text(json.dumps({
+        (score_dir / f"{pdb}_{chain}.json").write_text(json.dumps({
             "pdb": pdb, "chain": chain, "source": SOURCE,
             "commit": PM_COMMIT,
             "residue_scores": scores}, indent=1) + "\n")
@@ -493,20 +531,27 @@ def predict(limit: int = 0) -> int:
                      "mean_score": round(sum(p) / len(p), 6)})
         print(f"{i}/{len(units)} {pdb}_{chain} {len(scores)} residues "
               f"({(time.time()-t0)/60:.1f} min)", flush=True)
-    n_drop = sum(len(r["dropped"]) for r in rows)
+    n_drop = sum(1 for r in rows for x in r["dropped"]
+                 if x["why"].startswith("incomplete"))
+    n_conf = sum(1 for r in rows for x in r["dropped"]
+                 if x["why"].startswith("alternate"))
+    n_type = sum(1 for r in rows for x in r["dropped"]
+                 if x["why"].startswith("not one"))
     n_coll = sum(len(r["resseq_collisions_from_insertion_codes"]) for r in rows)
     checked = [r for r in rows if r["agrees_with_official_featurisation"] is True]
     d = {
         "schema": SCHEMA, "clinical_grade": False,
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "question": "what does the official PocketMiner network predict for each "
-                    "residue of the 192 single-chain units",
+        "fold": "train" if train else "official_mmseqs2_10pct_test",
+        "question": ("what does the official PocketMiner network predict for each "
+                     f"residue of the {len(rows)} "
+                     f"{'training' if train else 'single-chain test'} units"),
         "reads_a_label": False,
         "why_no_label_is_read": "this file produces predictions; the comparison "
                                 "against ours and P2Rank's is a separate indexed "
                                 "read of the test fold",
         "provenance": prov,
-        "input": {"receptors": str(RECEPTORS.relative_to(ROOT)),
+        "input": {"receptors": str(receptors.relative_to(ROOT)),
                   "identical_to_what_p2rank_and_the_field_were_given": True,
                   "coordinate_units": "nanometres, as mdtraj returns them"},
         "featurisation": {
@@ -518,6 +563,15 @@ def predict(limit: int = 0) -> int:
             "n_units_asserted_identical_to_the_authors_tensor": len(checked),
             "n_units_where_it_could_not_be_asserted": len(rows) - len(checked),
             "n_residues_dropped_for_incomplete_backbone": n_drop,
+            "n_residues_dropped_as_alternate_conformers": n_conf,
+            "n_residues_dropped_for_residue_type": n_type,
+            "alternate_conformer_ca_cutoff_angstrom":
+                ALTERNATE_CONFORMER_CA_ANGSTROM,
+            "why_conformers_are_dropped_before_featurisation":
+                "a conformer copy is not a residue the protein has twice; left "
+                "in, it takes nearest-neighbour edges away from the residue's "
+                "real neighbours. 4m7p_A in the training fold carries twenty "
+                "copies of all 390 of its residues",
             "n_resseq_collisions_from_insertion_codes": n_coll,
             "what_a_collision_means":
                 "the frozen pipeline keys residues by resseq, so an insertion "
@@ -541,12 +595,13 @@ def predict(limit: int = 0) -> int:
         "n_units": len(rows), "units": rows,
         "runtime_minutes": round((time.time() - t0) / 60, 2),
     }
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(d, indent=2, allow_nan=False) + "\n")
-    print(f"\nwrote {OUT.relative_to(ROOT)} and {len(rows)} files in "
-          f"{SCORE_DIR.relative_to(ROOT)}")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(d, indent=2, allow_nan=False) + "\n")
+    print(f"\nwrote {out_path.relative_to(ROOT)} and {len(rows)} files in "
+          f"{score_dir.relative_to(ROOT)}")
     print(f"  identical to the authors' tensor on {len(checked)}/{len(rows)} units; "
-          f"{n_drop} residues dropped; {n_coll} resseq collisions")
+          f"{n_drop} residues dropped for backbone, {n_conf} as conformers; "
+          f"{n_coll} resseq collisions")
     return 0
 
 
@@ -602,6 +657,10 @@ def main() -> int:
                     help="reproduce PocketMiner on its own labelled structures")
     ap.add_argument("--predict", action="store_true",
                     help="score the 192 single-chain units")
+    ap.add_argument("--train", action="store_true",
+                    help="with --predict, score the 770 training units instead, "
+                         "so this baseline's threshold can be chosen off the "
+                         "held-out fold")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     a = ap.parse_args()
@@ -610,7 +669,7 @@ def main() -> int:
     if a.selftest:
         return selftest()
     if a.predict:
-        return predict(a.limit)
+        return predict(a.limit, a.train)
     ap.error("one of --selftest, --predict, --check")
     return 2
 
