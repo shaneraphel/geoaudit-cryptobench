@@ -1,0 +1,379 @@
+{
+  "schema": "geoaudit.external_read.v1",
+  "clinical_grade": false,
+  "reads_the_external_set": true,
+  "reads_cryptobench_test_fold": false,
+  "status": "confirmatory",
+  "plan": {
+    "artifact": "results/external/PREREGISTERED_EXTERNAL.json",
+    "committed_in": "23b4d2d1937cefd89526c88ba77eb7182ae7662a",
+    "committed_at": "2026-07-30T00:24:34+08:00",
+    "subject": "Preregister the external read as confirmatory, with its losing sentences written",
+    "is_ancestor_of_head": true
+  },
+  "plan_sha256": "9fe8e7e6b54c5fbfda965b0fb987116d0fa4fcde54a349c1489fc30adecd1ca5",
+  "set_sha256": "c8656890d3a6f555fe4b9a91f91ace63cdd389c0f0ebf21d4bc83fa04c4c3392",
+  "n_units_in_set": 57,
+  "n_units_compared": 57,
+  "coverage": {
+    "units_skipped": [],
+    "residues_not_shared_by_all_four": [],
+    "n_units_losing_residues": 0,
+    "why": "a paired difference needs one residue universe, so every comparison runs on the residues all four methods scored"
+  },
+  "levels": {
+    "table_field": 0.84114,
+    "p2rank": 0.79683,
+    "plmnn": 0.875126,
+    "pocketminer": 0.773408
+  },
+  "co_primary": {
+    "table_field_minus_p2rank": {
+      "n": 57,
+      "mean": 0.04431,
+      "median": 0.043014,
+      "ci": [
+        0.016179,
+        0.072429
+      ],
+      "ci_bonferroni": [
+        0.010228,
+        0.079237
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 42,
+      "n_second_ahead": 15,
+      "n_tied": 0,
+      "level_first": 0.84114,
+      "level_second": 0.79683,
+      "trimmed_mean_exploratory": 0.044737,
+      "cryptobench_predicted": {
+        "delta": 0.005828,
+        "ci": [
+          -0.016342,
+          0.0271
+        ],
+        "resolved": false,
+        "reading": "level on average; the interval includes zero"
+      },
+      "verdict": "same_direction_but_outside"
+    },
+    "table_field_minus_plmnn": {
+      "n": 57,
+      "mean": -0.033986,
+      "median": -0.015242,
+      "ci": [
+        -0.070085,
+        -0.000635
+      ],
+      "ci_bonferroni": [
+        -0.078373,
+        0.007058
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 27,
+      "n_second_ahead": 30,
+      "n_tied": 0,
+      "level_first": 0.84114,
+      "level_second": 0.875126,
+      "trimmed_mean_exploratory": -0.02384,
+      "cryptobench_predicted": {
+        "delta": -0.024318,
+        "ci": [
+          -0.046468,
+          -0.003341
+        ],
+        "resolved": true,
+        "reading": "behind, and the interval excludes zero",
+        "levels": [
+          0.799151,
+          0.823469
+        ]
+      },
+      "verdict": "replicates"
+    },
+    "table_field_minus_pocketminer": {
+      "n": 57,
+      "mean": 0.067732,
+      "median": 0.081003,
+      "ci": [
+        0.032814,
+        0.101317
+      ],
+      "ci_bonferroni": [
+        0.024472,
+        0.108333
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 44,
+      "n_second_ahead": 13,
+      "n_tied": 0,
+      "level_first": 0.84114,
+      "level_second": 0.773408,
+      "trimmed_mean_exploratory": 0.073452,
+      "cryptobench_predicted": {
+        "delta": 0.046808,
+        "ci": [
+          0.025113,
+          0.068169
+        ],
+        "resolved": true,
+        "reading": "ahead, but P2Rank is ahead of PocketMiner by a similar margin, so this reflects the two label definitions more than a ranking of methods",
+        "p2rank_minus_pocketminer": 0.040994
+      },
+      "verdict": "replicates"
+    },
+    "p2rank_minus_pocketminer_for_context": {
+      "n": 57,
+      "mean": 0.023422,
+      "median": 0.045655,
+      "ci": [
+        -0.014906,
+        0.05775
+      ],
+      "ci_bonferroni": [
+        -0.024034,
+        0.064641
+      ],
+      "excludes_zero": false,
+      "n_first_ahead": 40,
+      "n_second_ahead": 17,
+      "n_tied": 0,
+      "level_first": 0.79683,
+      "level_second": 0.773408,
+      "trimmed_mean_exploratory": 0.034982
+    }
+  },
+  "secondary_thresholded_against_p2rank": {
+    "q": 0.09,
+    "n_units": 57,
+    "p2rank_predicted_no_pocket_at_all": {
+      "units": [
+        {
+          "unit": "8ylg_A",
+          "n_pockets_predicted": 0
+        }
+      ],
+      "n": 1,
+      "consequence": "with no call made, precision is 0/0 and MCC's denominator carries a zero factor, so both are undefined and the unit leaves those two comparisons. Recall and F1 are defined and equal zero, so it stays in those",
+      "which_way_this_cuts": "it removes a unit where P2Rank found nothing from P2Rank's precision and MCC averages, so both figures below flatter P2Rank rather than us. The F1 and recall figures, which keep the unit, do not",
+      "the_asymmetry_itself": "a fixed per-chain budget always answers; native pocket assignment can decline to. That is a difference in deployment behaviour, not in score quality"
+    },
+    "as_deployed": {
+      "precision": {
+        "ours": 0.305173,
+        "theirs": 0.238692,
+        "n_undefined": {
+          "ours": 0,
+          "theirs": 1
+        },
+        "paired_difference_ours_minus_theirs": {
+          "n": 56,
+          "mean": 0.068104,
+          "median": 0.067036,
+          "ci": [
+            0.020516,
+            0.112722
+          ],
+          "ci_bonferroni": [
+            0.00642,
+            0.123648
+          ],
+          "excludes_zero": true
+        }
+      },
+      "recall": {
+        "ours": 0.481589,
+        "theirs": 0.569679,
+        "n_undefined": {
+          "ours": 0,
+          "theirs": 0
+        },
+        "paired_difference_ours_minus_theirs": {
+          "n": 57,
+          "mean": -0.08809,
+          "median": -0.095238,
+          "ci": [
+            -0.15504,
+            -0.020908
+          ],
+          "ci_bonferroni": [
+            -0.171974,
+            1.1e-05
+          ],
+          "excludes_zero": true
+        }
+      },
+      "positive_class_f1": {
+        "ours": 0.348948,
+        "theirs": 0.292325,
+        "n_undefined": {
+          "ours": 0,
+          "theirs": 0
+        },
+        "paired_difference_ours_minus_theirs": {
+          "n": 57,
+          "mean": 0.056623,
+          "median": 0.036252,
+          "ci": [
+            0.01097,
+            0.10256
+          ],
+          "ci_bonferroni": [
+            -0.002095,
+            0.113614
+          ],
+          "excludes_zero": true
+        }
+      },
+      "mcc": {
+        "ours": 0.328179,
+        "theirs": 0.288998,
+        "n_undefined": {
+          "ours": 0,
+          "theirs": 1
+        },
+        "paired_difference_ours_minus_theirs": {
+          "n": 56,
+          "mean": 0.040426,
+          "median": 0.011832,
+          "ci": [
+            -0.01205,
+            0.09235
+          ],
+          "ci_bonferroni": [
+            -0.027058,
+            0.105802
+          ],
+          "excludes_zero": false
+        }
+      }
+    },
+    "common_budget": {
+      "precision": {
+        "ours": 0.305173,
+        "theirs": 0.291573,
+        "n_undefined": {
+          "ours": 0,
+          "theirs": 0
+        },
+        "paired_difference_ours_minus_theirs": {
+          "n": 57,
+          "mean": 0.0136,
+          "median": 0.0,
+          "ci": [
+            -0.027046,
+            0.053003
+          ],
+          "ci_bonferroni": [
+            -0.038118,
+            0.063846
+          ],
+          "excludes_zero": false
+        }
+      },
+      "recall": {
+        "ours": 0.481589,
+        "theirs": 0.439695,
+        "n_undefined": {
+          "ours": 0,
+          "theirs": 0
+        },
+        "paired_difference_ours_minus_theirs": {
+          "n": 57,
+          "mean": 0.041894,
+          "median": 0.0,
+          "ci": [
+            -0.031128,
+            0.117471
+          ],
+          "ci_bonferroni": [
+            -0.048415,
+            0.140059
+          ],
+          "excludes_zero": false
+        }
+      },
+      "positive_class_f1": {
+        "ours": 0.348948,
+        "theirs": 0.324397,
+        "n_undefined": {
+          "ours": 0,
+          "theirs": 0
+        },
+        "paired_difference_ours_minus_theirs": {
+          "n": 57,
+          "mean": 0.024552,
+          "median": 0.0,
+          "ci": [
+            -0.02238,
+            0.070808
+          ],
+          "ci_bonferroni": [
+            -0.034606,
+            0.083474
+          ],
+          "excludes_zero": false
+        }
+      },
+      "mcc": {
+        "ours": 0.328179,
+        "theirs": 0.300398,
+        "n_undefined": {
+          "ours": 0,
+          "theirs": 0
+        },
+        "paired_difference_ours_minus_theirs": {
+          "n": 57,
+          "mean": 0.027781,
+          "median": 0.0,
+          "ci": [
+            -0.024976,
+            0.082505
+          ],
+          "ci_bonferroni": [
+            -0.038625,
+            0.096887
+          ],
+          "excludes_zero": false
+        }
+      }
+    },
+    "q_came_from": {
+      "artifact": "data/cryptobench_apo/TABLE_FIELD.json",
+      "selected_on": "training fold only",
+      "rule": "per-chain top-q by score"
+    }
+  },
+  "what_the_paper_must_now_say": {
+    "headline": "p2rank_advantage_appears",
+    "headline_sentence": "On 57 external units the counting field leads P2Rank by +0.0443 in mean paired per-unit ROC-AUC, 95% interval [+0.0162, +0.0724], on a set whose labels were fixed before any method was run and whose proteins share no UniRef50 cluster with CryptoBench. This is the paper's first confirmatory accuracy result. It is reported together with the three respects in which the external set is easier than CryptoBench.",
+    "plmnn": "plmnn_deficit_replicates",
+    "plmnn_sentence": "The deficit against CryptoBench's own supervised baseline replicates externally: -0.0340 in mean paired per-unit ROC-AUC, 95% interval [-0.0701, -0.0006], against -0.0243 on the official fold. A supervised network over a protein language model remains the more accurate method.",
+    "chosen_by": "the plan's own decision table, applied to the numbers above; the sentences were written before the read"
+  },
+  "the_commitment": "no architecture, threshold, feature, quantisation rule, partition bank or post-processing step changes in response to this read. If the numbers are bad they are published bad. A method retuned against its own external validation set does not have one",
+  "reruns": [
+    {
+      "reason": "the preregistered pLM-NN sentence contains an {old} placeholder that the first run did not substitute, so the artifact carried a literal brace instead of the CryptoBench figure; no input, statistic or seed changed",
+      "at": "2026-07-30T00:24:34+08:00",
+      "numbers_identical_to_the_previous_run": true,
+      "previous_numeric_digest": "aee7293148c0472b71767546b58c7f2806884170efd45c1a59999ee0625d9d2b",
+      "why_this_is_recorded": "a confirmatory read that ran more than once is no longer one read. Keeping the reason and whether any number moved in the artifact is what lets a reader tell a corrected sentence from a second look at the data"
+    },
+    {
+      "reason": "record the one unit where P2Rank predicts no pocket at all, which makes its precision undefined there and silently removed it from the precision average; the count, the affected unit and the direction of the resulting bias are now in the artifact. No input, statistic or seed changed",
+      "at": "2026-07-30T00:24:34+08:00",
+      "numbers_identical_to_the_previous_run": false,
+      "previous_numeric_digest": "aee7293148c0472b71767546b58c7f2806884170efd45c1a59999ee0625d9d2b",
+      "why_this_is_recorded": "a confirmatory read that ran more than once is no longer one read. Keeping the reason and whether any number moved in the artifact is what lets a reader tell a corrected sentence from a second look at the data"
+    },
+    {
+      "reason": "the abstaining unit leaves MCC as well as precision undefined, because MCC's denominator carries a (TP+FP) factor; the artifact said precision only. Wording corrected, no input, statistic or seed changed",
+      "at": "2026-07-30T00:24:34+08:00",
+      "numbers_identical_to_the_previous_run": false,
+      "previous_numeric_digest": "b80b9f507ca22c717b799cdaa8ea5c42265ee189ba84f182b3cf8efcf62e5418",
+      "why_this_is_recorded": "a confirmatory read that ran more than once is no longer one read. Keeping the reason and whether any number moved in the artifact is what lets a reader tell a corrected sentence from a second look at the data"
+    }
+  ]
+}

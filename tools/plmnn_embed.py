@@ -59,6 +59,20 @@ PER_STRUCTURE = ROOT / "results/official_fold/PER_STRUCTURE.json"
 EXAMPLE = ROOT / "data/cryptobench_apo/_osf/cryptobench/scripts/data/7w19A.npy"
 OUT = ROOT / "results/baselines/PLMNN_SCORES.json"
 CKPT = ROOT / "results/baselines/_plmnn_checkpoint.jsonl"
+# The external validation set, through the same encoder, the same restored head
+# and the same universe check, with four paths swapped.
+EXTERNAL = {
+    "seqs": ROOT / "results/baselines/PLMNN_EXTERNAL_SEQUENCES.json",
+    "per_structure": ROOT / "results/external/PER_STRUCTURE.json",
+    "out": ROOT / "results/baselines/PLMNN_EXTERNAL_SCORES.json",
+    "ckpt": ROOT / "results/baselines/_plmnn_external_checkpoint.jsonl",
+}
+
+
+def use_external() -> None:
+    global SEQS, PER_STRUCTURE, OUT, CKPT
+    SEQS, PER_STRUCTURE = EXTERNAL["seqs"], EXTERNAL["per_structure"]
+    OUT, CKPT = EXTERNAL["out"], EXTERNAL["ckpt"]
 SCHEMA = "geoaudit.plmnn_scores.v1"
 
 ESM_NAME = "esm2_t36_3B_UR50D"
@@ -77,6 +91,11 @@ FLOAT32_COSINE_ON_THE_VALIDATION_CHAIN = 0.998745
 LAYER = 33
 N_LAYERS = LAYER + 1
 VALIDATION_UNIT = "7w19_A"
+# The validation chain is the one the authors published an embedding for, so it is
+# how this rebuild is shown to reproduce theirs. It belongs to the official fold,
+# and the external run needs it just as much, so it is always looked up in the
+# official sequence artifact rather than in whichever set is being scored.
+OFFICIAL_SEQS = ROOT / "results/baselines/PLMNN_SEQUENCES.json"
 # The published example is matched to a mean cosine of 0.9987, not to 1.0, and the
 # remaining disagreement is not on this side of it. Five candidate causes were
 # tested and excluded, each by running the alternative and measuring it:
@@ -296,7 +315,8 @@ def run(limit: int = 0) -> dict:
             model, batch = _model()
             validation = _validate(
                 model, batch,
-                head, next(x["sequence"] for x in seqs["rows"]
+                head, next(x["sequence"] for x in
+                           json.loads(OFFICIAL_SEQS.read_text())["rows"]
                            if x["unit_id"] == VALIDATION_UNIT))
             print(f"layer {validation['layer_recovered']} recovered, cosine "
                   f"{validation['mean_cosine_at_that_layer']:.6f}", flush=True)
@@ -477,9 +497,13 @@ def check() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--external", action="store_true",
+                    help="embed and score the external validation set instead")
     ap.add_argument("--limit", type=int, default=0,
                     help="score only the first N units (smoke tests)")
     args = ap.parse_args()
+    if args.external:
+        use_external()
     if args.check:
         return check()
     d = run(args.limit)

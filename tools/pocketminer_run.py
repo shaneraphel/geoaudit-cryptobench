@@ -77,6 +77,13 @@ SELFTEST_OUT = ROOT / "results/baselines/POCKETMINER_SELFTEST.json"
 TRAIN_RECEPTORS = ROOT / "data/cryptobench_apo/train_receptors"
 TRAIN_SCORE_DIR = ROOT / "data/baselines/pocketminer_train"
 TRAIN_OUT = ROOT / "results/baselines/POCKETMINER_TRAIN_SCORES.json"
+# The external validation set: structures released after CryptoBench's newest, no
+# UniRef50 cluster shared with either of its folds. Scored by exactly this code,
+# this checkpoint and this featurisation, so a difference between the two folds
+# cannot be a difference in how the baseline was run.
+EXTERNAL_RECEPTORS = ROOT / "data/external/receptors"
+EXTERNAL_SCORE_DIR = ROOT / "data/baselines/pocketminer_external"
+EXTERNAL_OUT = ROOT / "results/baselines/POCKETMINER_EXTERNAL_SCORES.json"
 
 SCHEMA = "geoaudit.pocketminer_scores.v1"
 SELFTEST_SCHEMA = "geoaudit.pocketminer_selftest.v1"
@@ -478,16 +485,26 @@ def _units(where: Path | None = None) -> list[tuple[str, str]]:
     return out
 
 
-def predict(limit: int = 0, train: bool = False) -> int:
+def predict(limit: int = 0, train: bool = False,
+            external: bool = False) -> int:
     """Score the receptors P2Rank and the counting field were given.
 
     ``train`` scores the 770 training units instead, which is not a read of
     anything held out: it exists so this baseline's threshold can be chosen on
     training data and frozen, the way the other two methods' were.
+
+    ``external`` scores the external validation set. Producing scores is not
+    reading it: no label is touched and no metric is computed here, which is what
+    keeps the single read of that set under its plan.
     """
-    receptors = TRAIN_RECEPTORS if train else RECEPTORS
-    score_dir = TRAIN_SCORE_DIR if train else SCORE_DIR
-    out_path = TRAIN_OUT if train else OUT
+    if external:
+        receptors, score_dir, out_path = (EXTERNAL_RECEPTORS,
+                                          EXTERNAL_SCORE_DIR, EXTERNAL_OUT)
+    elif train:
+        receptors, score_dir, out_path = (TRAIN_RECEPTORS, TRAIN_SCORE_DIR,
+                                          TRAIN_OUT)
+    else:
+        receptors, score_dir, out_path = RECEPTORS, SCORE_DIR, OUT
     prov = _verify_checkout()
     md, tf, MQAModel, process_strucs, abbrev, lookup = _import_pocketminer()
     model, status = _load_model(tf, MQAModel)
@@ -542,7 +559,8 @@ def predict(limit: int = 0, train: bool = False) -> int:
     d = {
         "schema": SCHEMA, "clinical_grade": False,
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "fold": "train" if train else "official_mmseqs2_10pct_test",
+        "fold": ("external" if external else
+                 "train" if train else "official_mmseqs2_10pct_test"),
         "question": ("what does the official PocketMiner network predict for each "
                      f"residue of the {len(rows)} "
                      f"{'training' if train else 'single-chain test'} units"),
@@ -661,6 +679,8 @@ def main() -> int:
                     help="with --predict, score the 770 training units instead, "
                          "so this baseline's threshold can be chosen off the "
                          "held-out fold")
+    ap.add_argument("--external", action="store_true",
+                    help="with --predict, score the external validation set")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     a = ap.parse_args()
@@ -669,7 +689,7 @@ def main() -> int:
     if a.selftest:
         return selftest()
     if a.predict:
-        return predict(a.limit, a.train)
+        return predict(a.limit, a.train, a.external)
     ap.error("one of --selftest, --predict, --check")
     return 2
 

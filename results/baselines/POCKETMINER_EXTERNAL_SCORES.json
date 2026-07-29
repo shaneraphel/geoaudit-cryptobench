@@ -1,0 +1,658 @@
+{
+  "schema": "geoaudit.pocketminer_scores.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-30T00:50:25+0800",
+  "fold": "external",
+  "question": "what does the official PocketMiner network predict for each residue of the 57 single-chain test units",
+  "reads_a_label": false,
+  "why_no_label_is_read": "this file produces predictions; the comparison against ours and P2Rank's is a separate indexed read of the test fold",
+  "provenance": {
+    "source": "https://github.com/Mickdub/gvp/tree/pocket_pred (Meller et al., Nat. Commun. 2023, doi:10.1038/s41467-023-36699-3)",
+    "commit": "187062df3c94127e991669768009141a08fd5d8b",
+    "weight_sha256": {
+      "models/pocketminer.index": "09e36a62a987b14bc49cf7a1fa53fa734f85d85d088777f98c6aca253b47bf46",
+      "models/pocketminer.data-00000-of-00001": "6f5ab62b9fb38b54040053ac321f3362d616bae9b31569249a032dbb50890b70"
+    },
+    "architecture": {
+      "node_features": [
+        8,
+        50
+      ],
+      "edge_features": [
+        1,
+        32
+      ],
+      "hidden_dim": [
+        16,
+        100
+      ],
+      "num_layers": 4,
+      "dropout": 0.1,
+      "k_neighbors": 30,
+      "output": "Dense(1, activation='sigmoid') per residue"
+    }
+  },
+  "input": {
+    "receptors": "data/external/receptors",
+    "identical_to_what_p2rank_and_the_field_were_given": true,
+    "coordinate_units": "nanometres, as mdtraj returns them"
+  },
+  "featurisation": {
+    "gathered_by_atom_name": [
+      "N",
+      "CA",
+      "C",
+      "O"
+    ],
+    "why_not_the_authors_reshape": "reshape(l, 4, 3) assumes four backbone atoms per residue; where that is false it shifts every later residue onto the wrong coordinates instead of failing",
+    "n_units_asserted_identical_to_the_authors_tensor": 57,
+    "n_units_where_it_could_not_be_asserted": 0,
+    "n_residues_dropped_for_incomplete_backbone": 0,
+    "n_residues_dropped_as_alternate_conformers": 0,
+    "n_residues_dropped_for_residue_type": 0,
+    "alternate_conformer_ca_cutoff_angstrom": 2.0,
+    "why_conformers_are_dropped_before_featurisation": "a conformer copy is not a residue the protein has twice; left in, it takes nearest-neighbour edges away from the residue's real neighbours. 4m7p_A in the training fold carries twenty copies of all 390 of its residues",
+    "n_resseq_collisions_from_insertion_codes": 0,
+    "what_a_collision_means": "the frozen pipeline keys residues by resseq, so an insertion code cannot be represented; the first occurrence is kept and the residue number is recorded here"
+  },
+  "restore": {
+    "assert_existing_objects_matched": true,
+    "every_live_tensor_is_byte_identical_to_the_checkpoint": true,
+    "why_both": "the assertion is TensorFlow's own bookkeeping; the byte comparison does not depend on it",
+    "n_model_variables": 177,
+    "n_checkpoint_entries_under_model": 531,
+    "n_scalars": 736155,
+    "mean_abs_weight": 0.09028409
+  },
+  "overlap_with_pocketminers_own_data": {
+    "trained_on": [
+      "1rtc"
+    ],
+    "selected_on": [
+      "3rwv",
+      "5uxa"
+    ],
+    "published_on": [
+      "1kx9",
+      "3nx1",
+      "3ugk"
+    ],
+    "how_it_was_determined": "exact PDB entry match against the 38 simulation systems in data/task2 and the val/test id lists in data/pm-dataset",
+    "caveat": "exact entry match is a floor, not a homology check; PocketMiner's training set was not clustered against CryptoBench's folds",
+    "what_the_read_does": "reports the fold with and without these six entries"
+  },
+  "n_units": 57,
+  "units": [
+    {
+      "unit": "11gx_A",
+      "n_residues_in_file": 620,
+      "n_scored": 620,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.944009,
+      "mean_score": 0.472577
+    },
+    {
+      "unit": "7i7y_A",
+      "n_residues_in_file": 327,
+      "n_scored": 327,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.915111,
+      "mean_score": 0.457231
+    },
+    {
+      "unit": "8hzy_A",
+      "n_residues_in_file": 462,
+      "n_scored": 462,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.935617,
+      "mean_score": 0.386272
+    },
+    {
+      "unit": "8r9a_A",
+      "n_residues_in_file": 285,
+      "n_scored": 285,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.865986,
+      "mean_score": 0.486898
+    },
+    {
+      "unit": "8s38_B",
+      "n_residues_in_file": 414,
+      "n_scored": 414,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.959248,
+      "mean_score": 0.454733
+    },
+    {
+      "unit": "8v35_A",
+      "n_residues_in_file": 431,
+      "n_scored": 431,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.961587,
+      "mean_score": 0.522725
+    },
+    {
+      "unit": "8vir_A",
+      "n_residues_in_file": 211,
+      "n_scored": 211,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.841897,
+      "mean_score": 0.314053
+    },
+    {
+      "unit": "8wdq_A",
+      "n_residues_in_file": 273,
+      "n_scored": 273,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.938025,
+      "mean_score": 0.504061
+    },
+    {
+      "unit": "8weu_A",
+      "n_residues_in_file": 481,
+      "n_scored": 481,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.969237,
+      "mean_score": 0.512197
+    },
+    {
+      "unit": "8x6a_A",
+      "n_residues_in_file": 376,
+      "n_scored": 376,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.966582,
+      "mean_score": 0.52791
+    },
+    {
+      "unit": "8xj9_A",
+      "n_residues_in_file": 204,
+      "n_scored": 204,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.957757,
+      "mean_score": 0.583313
+    },
+    {
+      "unit": "8xxd_B",
+      "n_residues_in_file": 449,
+      "n_scored": 449,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.922169,
+      "mean_score": 0.509915
+    },
+    {
+      "unit": "8ylg_A",
+      "n_residues_in_file": 161,
+      "n_scored": 161,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.928426,
+      "mean_score": 0.449328
+    },
+    {
+      "unit": "8yyr_A",
+      "n_residues_in_file": 496,
+      "n_scored": 496,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.953836,
+      "mean_score": 0.525488
+    },
+    {
+      "unit": "9bb9_A",
+      "n_residues_in_file": 475,
+      "n_scored": 475,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.949012,
+      "mean_score": 0.456447
+    },
+    {
+      "unit": "9bkq_B",
+      "n_residues_in_file": 201,
+      "n_scored": 201,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.931292,
+      "mean_score": 0.510182
+    },
+    {
+      "unit": "9c9c_B",
+      "n_residues_in_file": 189,
+      "n_scored": 189,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.746238,
+      "mean_score": 0.363314
+    },
+    {
+      "unit": "9cir_A",
+      "n_residues_in_file": 385,
+      "n_scored": 385,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.90819,
+      "mean_score": 0.413889
+    },
+    {
+      "unit": "9cx8_A",
+      "n_residues_in_file": 291,
+      "n_scored": 291,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.965181,
+      "mean_score": 0.568629
+    },
+    {
+      "unit": "9d5f_A",
+      "n_residues_in_file": 271,
+      "n_scored": 271,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.941257,
+      "mean_score": 0.548958
+    },
+    {
+      "unit": "9d7l_A",
+      "n_residues_in_file": 380,
+      "n_scored": 380,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.924514,
+      "mean_score": 0.440026
+    },
+    {
+      "unit": "9dih_A",
+      "n_residues_in_file": 370,
+      "n_scored": 370,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.953946,
+      "mean_score": 0.444974
+    },
+    {
+      "unit": "9eb7_A",
+      "n_residues_in_file": 468,
+      "n_scored": 468,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.933173,
+      "mean_score": 0.506414
+    },
+    {
+      "unit": "9fsg_A",
+      "n_residues_in_file": 378,
+      "n_scored": 378,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.937,
+      "mean_score": 0.550318
+    },
+    {
+      "unit": "9gcy_A",
+      "n_residues_in_file": 424,
+      "n_scored": 424,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.949483,
+      "mean_score": 0.483327
+    },
+    {
+      "unit": "9gu8_B",
+      "n_residues_in_file": 162,
+      "n_scored": 162,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.75935,
+      "mean_score": 0.407067
+    },
+    {
+      "unit": "9hib_A",
+      "n_residues_in_file": 504,
+      "n_scored": 504,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.917683,
+      "mean_score": 0.494735
+    },
+    {
+      "unit": "9hkb_B",
+      "n_residues_in_file": 356,
+      "n_scored": 356,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.949326,
+      "mean_score": 0.556852
+    },
+    {
+      "unit": "9hln_A",
+      "n_residues_in_file": 368,
+      "n_scored": 368,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.955047,
+      "mean_score": 0.511809
+    },
+    {
+      "unit": "9i9g_A",
+      "n_residues_in_file": 167,
+      "n_scored": 167,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.935399,
+      "mean_score": 0.452399
+    },
+    {
+      "unit": "9ifk_A",
+      "n_residues_in_file": 169,
+      "n_scored": 169,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.914644,
+      "mean_score": 0.459509
+    },
+    {
+      "unit": "9j2z_A",
+      "n_residues_in_file": 360,
+      "n_scored": 360,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.942636,
+      "mean_score": 0.498609
+    },
+    {
+      "unit": "9jju_A",
+      "n_residues_in_file": 354,
+      "n_scored": 354,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.880125,
+      "mean_score": 0.397236
+    },
+    {
+      "unit": "9jpk_A",
+      "n_residues_in_file": 151,
+      "n_scored": 151,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.918273,
+      "mean_score": 0.470959
+    },
+    {
+      "unit": "9jvd_B",
+      "n_residues_in_file": 104,
+      "n_scored": 104,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.911997,
+      "mean_score": 0.403745
+    },
+    {
+      "unit": "9jzw_A",
+      "n_residues_in_file": 341,
+      "n_scored": 341,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.937983,
+      "mean_score": 0.514702
+    },
+    {
+      "unit": "9k00_A",
+      "n_residues_in_file": 321,
+      "n_scored": 321,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.968621,
+      "mean_score": 0.505715
+    },
+    {
+      "unit": "9kuq_A",
+      "n_residues_in_file": 309,
+      "n_scored": 309,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.892373,
+      "mean_score": 0.44984
+    },
+    {
+      "unit": "9ky9_A",
+      "n_residues_in_file": 326,
+      "n_scored": 326,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.940234,
+      "mean_score": 0.423352
+    },
+    {
+      "unit": "9l92_A",
+      "n_residues_in_file": 206,
+      "n_scored": 206,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.880679,
+      "mean_score": 0.468846
+    },
+    {
+      "unit": "9lio_A",
+      "n_residues_in_file": 344,
+      "n_scored": 344,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.943475,
+      "mean_score": 0.491324
+    },
+    {
+      "unit": "9lmg_A",
+      "n_residues_in_file": 527,
+      "n_scored": 527,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.983983,
+      "mean_score": 0.448183
+    },
+    {
+      "unit": "9m1q_A",
+      "n_residues_in_file": 156,
+      "n_scored": 156,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.913573,
+      "mean_score": 0.519984
+    },
+    {
+      "unit": "9mhb_A",
+      "n_residues_in_file": 336,
+      "n_scored": 336,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.88037,
+      "mean_score": 0.500844
+    },
+    {
+      "unit": "9n4c_A",
+      "n_residues_in_file": 179,
+      "n_scored": 179,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.888004,
+      "mean_score": 0.464863
+    },
+    {
+      "unit": "9o9q_A",
+      "n_residues_in_file": 1289,
+      "n_scored": 1289,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.930374,
+      "mean_score": 0.466691
+    },
+    {
+      "unit": "9ql9_A",
+      "n_residues_in_file": 154,
+      "n_scored": 154,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.886294,
+      "mean_score": 0.418574
+    },
+    {
+      "unit": "9qyz_A",
+      "n_residues_in_file": 398,
+      "n_scored": 398,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.902688,
+      "mean_score": 0.453861
+    },
+    {
+      "unit": "9r7o_B",
+      "n_residues_in_file": 323,
+      "n_scored": 323,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.854796,
+      "mean_score": 0.490794
+    },
+    {
+      "unit": "9tfd_A",
+      "n_residues_in_file": 291,
+      "n_scored": 291,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.931454,
+      "mean_score": 0.579959
+    },
+    {
+      "unit": "9tkv_A",
+      "n_residues_in_file": 674,
+      "n_scored": 674,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.961592,
+      "mean_score": 0.517213
+    },
+    {
+      "unit": "9v67_B",
+      "n_residues_in_file": 508,
+      "n_scored": 508,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.934224,
+      "mean_score": 0.523582
+    },
+    {
+      "unit": "9vis_A",
+      "n_residues_in_file": 185,
+      "n_scored": 185,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.945182,
+      "mean_score": 0.506482
+    },
+    {
+      "unit": "9whf_A",
+      "n_residues_in_file": 180,
+      "n_scored": 180,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.859325,
+      "mean_score": 0.420606
+    },
+    {
+      "unit": "9x6i_A",
+      "n_residues_in_file": 242,
+      "n_scored": 242,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.971932,
+      "mean_score": 0.527857
+    },
+    {
+      "unit": "9xau_A",
+      "n_residues_in_file": 437,
+      "n_scored": 437,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.921897,
+      "mean_score": 0.49944
+    },
+    {
+      "unit": "9yi3_A",
+      "n_residues_in_file": 272,
+      "n_scored": 272,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.930406,
+      "mean_score": 0.480766
+    }
+  ],
+  "runtime_minutes": 0.21
+}

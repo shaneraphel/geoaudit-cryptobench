@@ -41,6 +41,21 @@ from pocket_bench.paths import ROOT
 MANIFEST = ROOT / "data/cryptobench_apo/official_manifest.json"
 PER_STRUCTURE = ROOT / "results/official_fold/PER_STRUCTURE.json"
 OUT = ROOT / "results/baselines/PLMNN_SEQUENCES.json"
+# The external validation set is read by the same code with three paths swapped.
+# Sharing the code rather than copying it is the point: the sequence a chain is
+# turned into, the modified residues mapped to X, and the universe cross-check
+# are then identical on both folds by construction.
+EXTERNAL = {
+    "manifest": ROOT / "data/external/external_manifest.json",
+    "per_structure": ROOT / "results/external/PER_STRUCTURE.json",
+    "out": ROOT / "results/baselines/PLMNN_EXTERNAL_SEQUENCES.json",
+}
+
+
+def use_external() -> None:
+    global MANIFEST, PER_STRUCTURE, OUT
+    MANIFEST, PER_STRUCTURE, OUT = (EXTERNAL["manifest"],
+                                    EXTERNAL["per_structure"], EXTERNAL["out"])
 SCHEMA = "geoaudit.plmnn_sequences.v1"
 
 THREE_TO_ONE = {
@@ -204,7 +219,12 @@ def check() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true")
-    if ap.parse_args().check:
+    ap.add_argument("--external", action="store_true",
+                    help="read the external validation set instead")
+    a = ap.parse_args()
+    if a.external:
+        use_external()
+    if a.check:
         return check()
     d = build()
     OUT.parent.mkdir(parents=True, exist_ok=True)

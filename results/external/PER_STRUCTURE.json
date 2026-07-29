@@ -1,0 +1,287 @@
+[
+ {
+  "pdb": "9eb7",
+  "chain": "A",
+  "n_universe": 468
+ },
+ {
+  "pdb": "9x6i",
+  "chain": "A",
+  "n_universe": 242
+ },
+ {
+  "pdb": "8xxd",
+  "chain": "B",
+  "n_universe": 449
+ },
+ {
+  "pdb": "9bb9",
+  "chain": "A",
+  "n_universe": 475
+ },
+ {
+  "pdb": "9dih",
+  "chain": "A",
+  "n_universe": 370
+ },
+ {
+  "pdb": "8ylg",
+  "chain": "A",
+  "n_universe": 161
+ },
+ {
+  "pdb": "9jpk",
+  "chain": "A",
+  "n_universe": 151
+ },
+ {
+  "pdb": "9r7o",
+  "chain": "B",
+  "n_universe": 323
+ },
+ {
+  "pdb": "9fsg",
+  "chain": "A",
+  "n_universe": 378
+ },
+ {
+  "pdb": "9jvd",
+  "chain": "B",
+  "n_universe": 104
+ },
+ {
+  "pdb": "9tkv",
+  "chain": "A",
+  "n_universe": 674
+ },
+ {
+  "pdb": "9jju",
+  "chain": "A",
+  "n_universe": 354
+ },
+ {
+  "pdb": "9whf",
+  "chain": "A",
+  "n_universe": 180
+ },
+ {
+  "pdb": "9vis",
+  "chain": "A",
+  "n_universe": 185
+ },
+ {
+  "pdb": "8yyr",
+  "chain": "A",
+  "n_universe": 496
+ },
+ {
+  "pdb": "9cir",
+  "chain": "A",
+  "n_universe": 385
+ },
+ {
+  "pdb": "9l92",
+  "chain": "A",
+  "n_universe": 206
+ },
+ {
+  "pdb": "9qyz",
+  "chain": "A",
+  "n_universe": 398
+ },
+ {
+  "pdb": "9kuq",
+  "chain": "A",
+  "n_universe": 309
+ },
+ {
+  "pdb": "9yi3",
+  "chain": "A",
+  "n_universe": 272
+ },
+ {
+  "pdb": "9ky9",
+  "chain": "A",
+  "n_universe": 326
+ },
+ {
+  "pdb": "9jzw",
+  "chain": "A",
+  "n_universe": 341
+ },
+ {
+  "pdb": "9tfd",
+  "chain": "A",
+  "n_universe": 291
+ },
+ {
+  "pdb": "11gx",
+  "chain": "A",
+  "n_universe": 620
+ },
+ {
+  "pdb": "9hib",
+  "chain": "A",
+  "n_universe": 504
+ },
+ {
+  "pdb": "9v67",
+  "chain": "B",
+  "n_universe": 508
+ },
+ {
+  "pdb": "9hkb",
+  "chain": "B",
+  "n_universe": 356
+ },
+ {
+  "pdb": "9o9q",
+  "chain": "A",
+  "n_universe": 1289
+ },
+ {
+  "pdb": "8r9a",
+  "chain": "A",
+  "n_universe": 285
+ },
+ {
+  "pdb": "9i9g",
+  "chain": "A",
+  "n_universe": 167
+ },
+ {
+  "pdb": "9n4c",
+  "chain": "A",
+  "n_universe": 179
+ },
+ {
+  "pdb": "9gu8",
+  "chain": "B",
+  "n_universe": 162
+ },
+ {
+  "pdb": "9ifk",
+  "chain": "A",
+  "n_universe": 169
+ },
+ {
+  "pdb": "7i7y",
+  "chain": "A",
+  "n_universe": 327
+ },
+ {
+  "pdb": "8x6a",
+  "chain": "A",
+  "n_universe": 376
+ },
+ {
+  "pdb": "9lmg",
+  "chain": "A",
+  "n_universe": 527
+ },
+ {
+  "pdb": "9d7l",
+  "chain": "A",
+  "n_universe": 380
+ },
+ {
+  "pdb": "9m1q",
+  "chain": "A",
+  "n_universe": 156
+ },
+ {
+  "pdb": "9d5f",
+  "chain": "A",
+  "n_universe": 271
+ },
+ {
+  "pdb": "9mhb",
+  "chain": "A",
+  "n_universe": 336
+ },
+ {
+  "pdb": "8vir",
+  "chain": "A",
+  "n_universe": 211
+ },
+ {
+  "pdb": "8s38",
+  "chain": "B",
+  "n_universe": 414
+ },
+ {
+  "pdb": "8v35",
+  "chain": "A",
+  "n_universe": 431
+ },
+ {
+  "pdb": "9k00",
+  "chain": "A",
+  "n_universe": 321
+ },
+ {
+  "pdb": "9bkq",
+  "chain": "B",
+  "n_universe": 201
+ },
+ {
+  "pdb": "9gcy",
+  "chain": "A",
+  "n_universe": 424
+ },
+ {
+  "pdb": "9j2z",
+  "chain": "A",
+  "n_universe": 360
+ },
+ {
+  "pdb": "9ql9",
+  "chain": "A",
+  "n_universe": 154
+ },
+ {
+  "pdb": "9c9c",
+  "chain": "B",
+  "n_universe": 189
+ },
+ {
+  "pdb": "9lio",
+  "chain": "A",
+  "n_universe": 344
+ },
+ {
+  "pdb": "9hln",
+  "chain": "A",
+  "n_universe": 368
+ },
+ {
+  "pdb": "8weu",
+  "chain": "A",
+  "n_universe": 481
+ },
+ {
+  "pdb": "9cx8",
+  "chain": "A",
+  "n_universe": 291
+ },
+ {
+  "pdb": "8wdq",
+  "chain": "A",
+  "n_universe": 273
+ },
+ {
+  "pdb": "9xau",
+  "chain": "A",
+  "n_universe": 437
+ },
+ {
+  "pdb": "8hzy",
+  "chain": "A",
+  "n_universe": 462
+ },
+ {
+  "pdb": "8xj9",
+  "chain": "A",
+  "n_universe": 204
+ }
+]

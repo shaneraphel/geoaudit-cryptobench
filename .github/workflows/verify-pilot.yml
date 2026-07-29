@@ -113,6 +113,10 @@ jobs:
         run: make extset
       - name: The external plan must still describe the set it was written for
         run: make extplan
+      - name: Every method must still cover every external unit
+        run: make extscore
+      - name: The one confirmatory comparison must still follow its plan
+        run: make extread
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools
