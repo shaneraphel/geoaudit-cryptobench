@@ -913,10 +913,10 @@ def build() -> str:
                  f"{ch['paired_95']['ci'][1]:+.4f}]}}")
         L.append(f"\\newcommand{{\\PkCorrDist}}"
                  f"{{{corr['arm']['top1_distance_to_labelled_site']['p2rank_median']:.2f}}}")
-        for k in (1, 3, 5):
-            L.append(f"\\newcommand{{\\PkRecallOurs{k}}}"
+        for k, word in ((1, "One"), (3, "Three"), (5, "Five")):
+            L.append(f"\\newcommand{{\\PkRecallOurs{word}}}"
                      f"{{{pr['recall'][f'top{k}']['ours']:.3f}}}")
-            L.append(f"\\newcommand{{\\PkRecallTheirs{k}}}"
+            L.append(f"\\newcommand{{\\PkRecallTheirs{word}}}"
                      f"{{{pr['recall'][f'top{k}']['p2rank']:.3f}}}")
         # The manuscript reports this read as the one favourable result and as
         # exploratory twice over. Both halves have to keep being true.

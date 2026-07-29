@@ -497,6 +497,12 @@ all fail-closed.
 | Subgroup covariates | `make cov` | a covariate stops following from the deposit, the labels and the coordinates, or a tertile cut moves, which would redraw every band of the eighth read |
 | Subgroup plan | `make subplan` | the plan stops calling itself exploratory, stops forbidding a subgroup claim, stops pinning the covariate artifact by hash, or loses the sentence it preregistered for an outcome the read can reach |
 | Eighth fold read | `make read8` | the partition stops reproducing read five's mean and win/loss counts, a band's size stops matching the preregistered one, band means stop reconstructing the overall mean, or a band that clears the corrected level stops carrying the trend test that qualifies it |
+| Ninth fold read | `make read9` | the pocket stage stops following from the plan that fixed it before the fold was opened, the clustering cutoff stops being the descriptors' own pinch radius, or the per-unit hits stop reconstructing the summary rates |
+| pLM-NN network | `make plmw` | the network stops being the one published on OSF, read at the offsets its own checkpoint index states, or the graph acquires an op that would make the forward pass here a different network |
+| pLM-NN sequences | `make plmseq` | a sequence stops following from the receptors, or the resseq map stops reproducing the evaluation universe |
+| pLM-NN scores | `make plmscore` | the scores stop being the pinned ones, the recovered encoder layer stops being the one the authors' worked example identifies, or a unit stops covering the frozen universe |
+| pLM-NN plan | `make plmplan` | the plan stops calling itself exploratory, loses the sentence it preregistered for the baseline winning, or stops pinning the scores it will read |
+| Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
 Current state: `verify_claims` all checks pass; 469 tests pass under both
@@ -809,6 +815,47 @@ the mean and every robust summary of the same vector.
 Gates: `make cov`, `make subplan`, `make read8`; 40 tests in
 `tests/test_subgroups.py`, including a cross-check of the tie-averaged Spearman
 against SciPy and seven that mutate the artifact and assert rejection.
+
+### 4.5b Asked for a pocket instead of a score, the field wins — the one result that survives correction
+
+The detector scored residues and returned no candidate sites: its pocket entries
+in the frozen predictions were placeholders at the origin. Read 9 built a pocket
+stage from the residue scores, under a plan committed before the fold was opened
+(`results/architecture_sweep/PREREGISTERED_POCKETS.json`): top-9% residues,
+single-linkage at 7.0 Å — the pinch radius `algebraic_descriptors` already uses,
+not a cutoff chosen here — clusters ranked by summed score, score-weighted
+centroid. A candidate hits if it lies within a radius of any labelled cryptic
+atom. That target is the same for both methods and is not ligand-based DCA, since
+apo structures have no ligand.
+
+| at 4 Å | ours | P2Rank | Δ | 95% CI | Bonferroni |
+| --- | --- | --- | --- | --- | --- |
+| top-1 | **0.586** | 0.430 | +0.1559 | [+0.0753, +0.2366] | [+0.0591, +0.2527] |
+| top-3 | 0.699 | 0.602 | +0.0968 | [+0.0161, +0.1774] | — |
+| top-1 distance | 3.45 Å | 4.29 Å | −1.47 Å | [−2.25, −0.75] | — |
+
+n=186 chains where both offer a candidate; P2Rank offers none on 6, we on 0.
+
+Two corrections run against us and both are applied. P2Rank's published centre is
+a cavity centre, displaced from every residue heavy atom by about a pocket radius,
+while ours is a residue centroid — against a residue-atom target that flatters us.
+Rescoring P2Rank at the centroid of the residues it assigned raises it to 0.478
+and 4.19 Å, narrowing top-1 to +0.1075 [+0.0323, +0.1828]; still clears
+correction, and the verdict is taken from this less favourable arm. That arm was
+noticed after the read, so it is a correction rather than a plan, and is labelled
+as such. Second, the clustering offers **fewer** candidates than P2Rank — 2.85 per
+chain against 3.80 — so recall at three candidates is behind, 0.213 against 0.225.
+Proposing fewer places to look is easier to be right about first and harder to be
+complete with.
+
+Exploratory twice over: the stage was built for this reading, and nine indexed
+reads precede it. What it establishes is that the residue scores carry spatial
+structure that clustering recovers — which does not follow from a per-residue
+ROC-AUC and cannot be read off one.
+
+Gates: `make read9`; 18 tests in `tests/test_pocket_read.py`, which check that
+per-unit hits reconstruct every summary rate, that hits are monotone in radius and
+in K, and that the advantage is not bought with a larger candidate budget.
 
 ### 4.6 267 generated invariants lift the linear ceiling and buy the counting field nothing
 
