@@ -1,0 +1,424 @@
+{
+  "schema": "geoaudit.pocketminer_read.v1",
+  "clinical_grade": false,
+  "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
+  "is_official_mmseqs2_10pct_test_fold": true,
+  "test_fold_read_index": 11,
+  "method": "table_field",
+  "baseline": "pocketminer",
+  "status": "exploratory",
+  "question": "does the counting field predict CryptoBench's cryptic binding residues as well as PocketMiner, the cryptic-specific network CryptoBench's own paper names as representative of the task, on the same 192 single-chain units and the same residue universe",
+  "rescored_anything": false,
+  "why_it_is_indexed_anyway": "the baseline's probabilities were committed before the plan, but reading labels against them is a new statement about the held-out fold and a ledger that counted only re-runs would make an unlimited number of such statements free",
+  "plan": {
+    "artifact": "results/architecture_sweep/PREREGISTERED_POCKETMINER.json",
+    "committed_in": "9d5700ac9bbc084a2d59a692b5ba964eb7fdc0f4",
+    "committed_at": "2026-07-29T21:16:37+08:00",
+    "subject": "Preregister the PocketMiner comparison, with the contamination arm and a sentence for losing",
+    "is_ancestor_of_head": true
+  },
+  "reproduction_pinned_by_the_plan": {
+    "published_roc_auc": 0.87,
+    "ours_on_their_test_set": 0.86772,
+    "residue_counts_match_exactly": true,
+    "why_it_matters_here": "whatever this read finds, it cannot be explained by a baseline that was rebuilt wrongly, and the evidence for that was frozen before the labels were touched"
+  },
+  "calibration_of_our_own_column": {
+    "n_units_recomputed": 192,
+    "largest_absolute_disagreement": 0.0,
+    "on_unit": null,
+    "why": "the baseline's ROC-AUC is produced by driving residue_auc_pr from a prediction dictionary. Doing the same for the counting field has to reproduce what the harness froze, or the two columns are different quantities"
+  },
+  "residue_universe": {
+    "rule": "the intersection, per unit, of the residues both methods scored",
+    "why": "a paired difference over two different residue sets is not paired",
+    "n_units_where_the_two_sets_differ": 4,
+    "units_where_they_differ": [
+      {
+        "unit": "1h13_A",
+        "n_residues_not_shared": 1,
+        "n_ours": 404,
+        "n_theirs": 403
+      },
+      {
+        "unit": "2vyr_A",
+        "n_residues_not_shared": 1,
+        "n_ours": 86,
+        "n_theirs": 85
+      },
+      {
+        "unit": "3pfp_A",
+        "n_residues_not_shared": 2,
+        "n_ours": 464,
+        "n_theirs": 462
+      },
+      {
+        "unit": "3t8b_A",
+        "n_residues_not_shared": 3,
+        "n_ours": 237,
+        "n_theirs": 234
+      }
+    ],
+    "n_units_compared": 192
+  },
+  "n_units": 192,
+  "levels": {
+    "table_field": 0.799105,
+    "pocketminer": 0.752297,
+    "p2rank": 0.793291
+  },
+  "primary": {
+    "functional": "the unweighted mean over units of the paired difference in per-residue ROC-AUC",
+    "table_field_minus_pocketminer": {
+      "n": 192,
+      "mean": 0.046808,
+      "median": 0.054317,
+      "ci": [
+        0.025113,
+        0.068169
+      ],
+      "ci_bonferroni": [
+        0.017516,
+        0.07459
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 136,
+      "n_second_ahead": 56,
+      "n_tied": 0,
+      "level_first": 0.799105,
+      "level_second": 0.752297
+    },
+    "p2rank_minus_pocketminer": {
+      "n": 192,
+      "mean": 0.040994,
+      "median": 0.035106,
+      "ci": [
+        0.021073,
+        0.061362
+      ],
+      "ci_bonferroni": [
+        0.013747,
+        0.067974
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 120,
+      "n_second_ahead": 72,
+      "n_tied": 0,
+      "level_first": 0.793291,
+      "level_second": 0.752297
+    }
+  },
+  "contamination_arm": {
+    "entries_removed": [
+      "1kx9",
+      "1rtc",
+      "3nx1",
+      "3rwv",
+      "3ugk",
+      "5uxa"
+    ],
+    "units_removed": [
+      "1kx9_A",
+      "1rtc_A",
+      "3nx1_B",
+      "3rwv_A",
+      "3ugk_A",
+      "5uxa_A"
+    ],
+    "n_units_left": 186,
+    "direction": "their presence can only favour PocketMiner",
+    "table_field_minus_pocketminer": {
+      "n": 186,
+      "mean": 0.046343,
+      "median": 0.054317,
+      "ci": [
+        0.023943,
+        0.067977
+      ],
+      "ci_bonferroni": [
+        0.016439,
+        0.07589
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 130,
+      "n_second_ahead": 56,
+      "n_tied": 0,
+      "level_first": 0.79847,
+      "level_second": 0.752127
+    },
+    "p2rank_minus_pocketminer": {
+      "n": 186,
+      "mean": 0.0437,
+      "median": 0.038504,
+      "ci": [
+        0.023782,
+        0.06397
+      ],
+      "ci_bonferroni": [
+        0.017313,
+        0.071196
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 117,
+      "n_second_ahead": 69,
+      "n_tied": 0,
+      "level_first": 0.795827,
+      "level_second": 0.752127
+    }
+  },
+  "thresholded": {
+    "q_ours": 0.09,
+    "their_trained_budget": {
+      "precision": {
+        "ours": 0.317709,
+        "theirs": 0.240517,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.077192,
+          "median": 0.055629,
+          "ci": [
+            0.055867,
+            0.098739
+          ],
+          "ci_bonferroni": [
+            0.048251,
+            0.106559
+          ],
+          "excludes_zero": true
+        }
+      },
+      "recall": {
+        "ours": 0.434252,
+        "theirs": 0.347128,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.087124,
+          "median": 0.054094,
+          "ci": [
+            0.055763,
+            0.11975
+          ],
+          "ci_bonferroni": [
+            0.045829,
+            0.132459
+          ],
+          "excludes_zero": true
+        }
+      },
+      "positive_class_f1": {
+        "ours": 0.333412,
+        "theirs": 0.258086,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.075326,
+          "median": 0.062878,
+          "ci": [
+            0.052738,
+            0.098527
+          ],
+          "ci_bonferroni": [
+            0.045881,
+            0.106675
+          ],
+          "excludes_zero": true
+        }
+      },
+      "mcc": {
+        "ours": 0.303955,
+        "theirs": 0.215819,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.088136,
+          "median": 0.071783,
+          "ci": [
+            0.063041,
+            0.114721
+          ],
+          "ci_bonferroni": [
+            0.055477,
+            0.123672
+          ],
+          "excludes_zero": true
+        }
+      }
+    },
+    "their_trained_cut": {
+      "precision": {
+        "ours": 0.317709,
+        "theirs": 0.234171,
+        "paired_difference_ours_minus_theirs": {
+          "n": 176,
+          "mean": 0.073474,
+          "median": 0.060449,
+          "ci": [
+            0.052054,
+            0.094351
+          ],
+          "ci_bonferroni": [
+            0.045468,
+            0.102499
+          ],
+          "excludes_zero": true
+        }
+      },
+      "recall": {
+        "ours": 0.434252,
+        "theirs": 0.308753,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.125499,
+          "median": 0.088312,
+          "ci": [
+            0.088644,
+            0.163567
+          ],
+          "ci_bonferroni": [
+            0.077634,
+            0.17558
+          ],
+          "excludes_zero": true
+        }
+      },
+      "positive_class_f1": {
+        "ours": 0.333412,
+        "theirs": 0.217748,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.115663,
+          "median": 0.095496,
+          "ci": [
+            0.09171,
+            0.140453
+          ],
+          "ci_bonferroni": [
+            0.083476,
+            0.149464
+          ],
+          "excludes_zero": true
+        }
+      },
+      "mcc": {
+        "ours": 0.303955,
+        "theirs": 0.207532,
+        "paired_difference_ours_minus_theirs": {
+          "n": 176,
+          "mean": 0.100518,
+          "median": 0.08536,
+          "ci": [
+            0.07479,
+            0.125798
+          ],
+          "ci_bonferroni": [
+            0.066216,
+            0.135352
+          ],
+          "excludes_zero": true
+        }
+      }
+    },
+    "their_trained_cut_for_mcc": 0.75,
+    "n_units": 192,
+    "mean_positive_rate_at_their_trained_cut": 0.084313,
+    "note": "the field's own rule is the same top-q budget in all three arms, because that budget was fixed on the training fold and is what it deploys; the arms differ only in how PocketMiner is binarised",
+    "common_budget": {
+      "precision": {
+        "ours": 0.317709,
+        "theirs": 0.24594,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.071769,
+          "median": 0.04939,
+          "ci": [
+            0.050041,
+            0.094182
+          ],
+          "ci_bonferroni": [
+            0.043168,
+            0.101273
+          ],
+          "excludes_zero": true
+        }
+      },
+      "recall": {
+        "ours": 0.434252,
+        "theirs": 0.321749,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.112503,
+          "median": 0.093074,
+          "ci": [
+            0.081296,
+            0.143376
+          ],
+          "ci_bonferroni": [
+            0.070002,
+            0.154631
+          ],
+          "excludes_zero": true
+        }
+      },
+      "positive_class_f1": {
+        "ours": 0.333412,
+        "theirs": 0.252984,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.080428,
+          "median": 0.060662,
+          "ci": [
+            0.057856,
+            0.102698
+          ],
+          "ci_bonferroni": [
+            0.049878,
+            0.111017
+          ],
+          "excludes_zero": true
+        }
+      },
+      "mcc": {
+        "ours": 0.303955,
+        "theirs": 0.211028,
+        "paired_difference_ours_minus_theirs": {
+          "n": 192,
+          "mean": 0.092927,
+          "median": 0.06974,
+          "ci": [
+            0.067297,
+            0.118911
+          ],
+          "ci_bonferroni": [
+            0.058132,
+            0.128139
+          ],
+          "excludes_zero": true
+        }
+      }
+    }
+  },
+  "multiplicity": {
+    "n_paired_tests": 6,
+    "tests": [
+      "mean per-unit ROC-AUC, counting field minus PocketMiner",
+      "mean per-unit ROC-AUC, P2Rank minus PocketMiner",
+      "positive-class F1 at a common top-9% budget, counting field minus PocketMiner",
+      "MCC at a common top-9% budget, counting field minus PocketMiner",
+      "positive-class F1, each at its own trained rule, counting field minus PocketMiner",
+      "MCC, each at its own trained rule, counting field minus PocketMiner"
+    ],
+    "correction": "Bonferroni",
+    "corrected_level": 0.008333,
+    "also_reported": "the uncorrected interval alongside it",
+    "the_contamination_arm_is_not_corrected_separately": "it is a sensitivity on the same six tests, not six more questions, and it is reported as a shift in the same intervals"
+  },
+  "decision_rules": {
+    "if_pocketminer_is_ahead_and_the_interval_excludes_zero": "it is the headline of this read and it goes in the abstract. The paper's accuracy claim is then limited to P2Rank, the phrase comparable average predictive performance is narrowed to name P2Rank only, and the contribution rests on mechanical auditability and model size",
+    "if_the_field_is_ahead_and_the_interval_excludes_zero": "it is reported as the strongest accuracy evidence in the paper, still labelled exploratory, and immediately qualified by the label-definition gap recorded above. It does not license the word state-of-the-art and it does not become a claim that the field beats PocketMiner at the task PocketMiner was built for",
+    "if_the_interval_crosses_zero": "it is reported as comparable average performance against the task's own specialised network, with the interval given",
+    "if_pocketminer_lands_near_chance_on_this_fold": "the self-test pinned above rules out a broken rebuild, so this is reported as the two label definitions disagreeing more than expected, with the self-test number quoted beside it. No sentence claims that PocketMiner does not work",
+    "if_removing_the_contaminated_entries_changes_a_verdict": "the version with them removed is the one reported as primary, because their presence favours the baseline and a comparison should not be won on the baseline's own training data",
+    "if_the_two_baselines_disagree_about_each_other": "if P2Rank beats PocketMiner on this fold, that is reported plainly; it bears on how strong the field's earlier comparison was and suppressing it would be selecting"
+  },
+  "outcome_key": "the_field_is_ahead",
+  "conclusion": "The counting field is ahead of PocketMiner by a mean paired per-unit ROC-AUC difference whose interval excludes zero, on CryptoBench's definition of a cryptic binding residue. It remains exploratory, and it is not a claim about the label PocketMiner was trained for, which is pocket opening in simulation rather than ligand contact in a holo structure.",
+  "outcome_was_named_in_the_plan": true
+}

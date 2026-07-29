@@ -393,9 +393,16 @@ colliding key raises rather than overwriting a row.
 
 \paragraph{Baselines.} P2Rank 2.5.1 is executed locally with a pinned version and
 is a scored baseline. A uniform bounding-box sampler provides a chance floor.
-PocketMiner is reported as data-unavailable: the published artifact is a trained
-model binary with no per-residue predictions, so no paired interval against it is
-computed and no value is imputed. Tool unavailability is never counted as a miss.
+PocketMiner, which the benchmark's own paper treats as the representative
+cryptic-site method, is also executed locally: the published artifact is a trained
+model with no per-residue predictions for this fold, so the checkpoint is restored
+at a pinned commit and run on the same \NUnits{} single-chain units. Before any
+label on the held-out fold was opened, the rebuild was required to reproduce
+PocketMiner's own published test set --- ROC-AUC \PmSelfAuc{} against the
+published \PmSelfPublished{}, with its positive and negative residue counts
+matching exactly --- so that whatever the comparison finds cannot be attributed to
+a baseline assembled wrongly. A metric is never imputed when a tool is
+unavailable, and tool unavailability is never counted as a miss.
 
 \section{Results}
 \label{sec:results}
@@ -1266,6 +1273,96 @@ changes no interval in this read by more than a factor of
 absent here, and it is absent because the benchmark's own construction makes it
 so rather than because we checked and hoped.
 
+\subsection{Three points are not an axis: the whole threshold range}
+\label{sec:curve}
+Sections~\ref{sec:matched} and~\ref{sec:full} answer the fairness objection at
+three operating points, and three points invite the obvious follow-up question of
+whether they were the flattering three. The scores are already frozen, so the
+answer costs nothing but a commitment: reading \CurveReadIndex{} rebinarises them
+at every calling fraction from \CvLowPct{} to \CvHighPct{} per cent --- \CvN{} cut
+points, four metrics, each baseline --- and the plan that fixed it forbids
+anything downstream from reading a value off the result. That prohibition is the
+only thing separating a curve over \CvN{} cut points from \CvN{} opportunities to
+find a favourable one, so it is recorded in the artifact, gated in CI, and the
+deployed \(q\) stays where the training fold put it. At \MatchOurQ{} the curve
+recomputes a number Section~\ref{sec:full} published and has to reproduce it to
+six decimals or the read is void.
+
+Against P2Rank the counting field is ahead at \emph{all} \CvPtwoRFAhead{} of
+\CvN{} cut points on F1, with \CvPtwoRFFlips{} sign changes, and the same holds
+for precision (\CvPtwoRPAhead{}), recall (\CvPtwoRRAhead{}) and MCC
+(\CvPtwoRMAhead{}). The pointwise intervals still contain zero over most of the
+range --- F1 excludes zero at \CvPtwoRFExcl{} of the \CvN{} cut points, all of
+them at calling fractions well above anything one would deploy --- so this is a
+statement about the sign of the difference and not about its significance. It is
+nonetheless the statement the fairness objection asked for. Whatever the margin
+is worth, it is not an artefact of where the two methods were cut: there is no
+threshold in the range at which P2Rank's binary verdicts are better than ours on
+any of the four metrics. Figure~\ref{fig:curve} draws it.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_threshold_curve.png}
+\caption{\FigCapThresholdCurve{}}
+\label{fig:curve}
+\end{figure}
+
+\subsection{The cryptic-specific baseline, and what beating it does not mean}
+\label{sec:pocketminer}
+The comparison so far has one structural weakness that no amount of statistics
+repairs: P2Rank finds pockets in general, and this is a paper about cryptic ones.
+The benchmark's own paper treats PocketMiner as the representative method for
+cryptic-site detection, so a cryptic-pocket paper that compares only against a
+general-purpose pocket finder is answering an easier question than the one it
+poses. We therefore restored PocketMiner's published checkpoint at a pinned commit
+and ran it on the same \PmNUnits{} units.
+
+Two things had to be established before the fold was opened. The first is that
+the rebuild is faithful: on PocketMiner's own test set it returns ROC-AUC
+\PmSelfAuc{} against the published \PmSelfPublished{}, with its positive and
+negative residue counts reproduced exactly, which is what makes the counts rather
+than the AUC the load-bearing check --- an AUC can agree by luck and a label
+alignment cannot. The second is a caveat, committed in the plan rather than
+discovered afterwards. PocketMiner predicts whether a residue participates in a
+pocket that opens during molecular dynamics; CryptoBench labels whether a residue
+contacts a ligand in a holo structure whose apo form lacks the site. These are
+different quantities, and the plan states in advance that a shortfall would be
+reported as transfer between two label definitions rather than as evidence about
+the task PocketMiner was built for.
+
+On reading \PmReadIndex{} the counting field is ahead of PocketMiner by
+\PmAucOurs{} in mean per-unit ROC-AUC, interval \PmAucCIOurs{}, and it survives
+the Bonferroni correction over the read's \PmNTests{} tests at
+\PmAucBonfOurs{}; PocketMiner sits at \PmLevel{} against our \TabAuc{}, and
+the per-chain split is \PmWinOurs{} to \PmLossOurs{} with no ties. The margin is
+larger than anything else in this paper and it is the least interesting number in
+this section, because P2Rank is ahead of PocketMiner too, by \PmAucPtwoR{}
+\PmAucCIPtwoR{}. A gap that both a general-purpose pocket finder and a table of
+counted invariants open on the same baseline is a fact about the label transfer,
+not a ranking of methods, and it is consistent with what the benchmark's own
+authors report. The thresholded picture is the same at every convention: at a
+common top-\MatchOurQ{} budget F1 differs by \PmBudgetFDelta{}
+\PmBudgetFCI{}, at PocketMiner's own training-tuned budget by
+\PmTheirBudgetFDelta{} \PmTheirBudgetFCI{}, and at its trained probability cut by
+\PmTheirCutFDelta{} \PmTheirCutFCI{}.
+
+Six CryptoBench test entries appear in PocketMiner's own training, validation or
+test data, which can only help it. Removing them leaves \PmCleanN{} units and
+moves the difference to \PmCleanAuc{} \PmCleanAucCI{}, so contamination is not
+what produced the gap either.
+
+What this licenses the paper to say is narrow, and narrower than the interval
+suggests. On CryptoBench's definition of a cryptic binding residue, a
+mechanically auditable table of counted invariants ranks residues better than the
+published cryptic-site network --- and so does P2Rank. The honest reading is that
+this benchmark's labels are further from PocketMiner's training objective than
+from either of the other two methods', and that the gap is therefore weak
+evidence about method quality and strong evidence that cryptic-site detection and
+cryptic-\emph{ligand-site} detection are not the same task. It remains
+exploratory on the same ground as everything after
+Section~\ref{sec:endpoints}: the fold had been read many times before this plan
+was written.
+
 \subsection{Taking a score apart, and what the errors turn out to be}
 \label{sec:audit}
 Auditability has so far been an architectural claim: every table is a look-up, so
@@ -1687,8 +1784,7 @@ structure that clustering them recovers a site, which does not follow from a
 per-residue ROC-AUC and could not have been read off one.
 
 \section{Limitations}
-The comparison covers one trained baseline, executed locally; PocketMiner could
-not be included because per-residue predictions are not published. The 38
+The comparison covers two trained baselines, both executed locally. The 38
 excluded multi-chain units mean the reported fold is a strict subset of the
 official test fold, and the result does not transfer to multi-chain assemblies
 without a chain-aware residue index.

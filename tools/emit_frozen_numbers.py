@@ -105,6 +105,9 @@ ENDPOINT = ROOT / "results/official_fold/ENDPOINT_STATUS.json"
 SUBGROUP = ROOT / "results/official_fold/SUBGROUP_READ.json"
 POCKET = ROOT / "results/official_fold/POCKET_READ.json"
 PLMNN = ROOT / "results/official_fold/PLMNN_READ.json"
+PMREAD = ROOT / "results/official_fold/POCKETMINER_READ.json"
+PMSELF = ROOT / "results/baselines/POCKETMINER_SELFTEST.json"
+CURVE = ROOT / "results/official_fold/THRESHOLD_CURVE.json"
 PLMNN_SCORES = ROOT / "results/baselines/PLMNN_SCORES.json"
 TRAIN_OP = ROOT / "results/architecture_sweep/TRAIN_OPERATING_POINTS.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
@@ -934,6 +937,102 @@ def build() -> str:
                 "the pocket stage now offers more candidates per chain than "
                 "P2Rank, so the sentence conceding that it offers fewer is no "
                 "longer true")
+
+    if PMREAD.exists():
+        # The cryptic-specific baseline. Two macros here exist to stop the
+        # headline being quoted alone: the P2Rank-minus-PocketMiner difference,
+        # which shows the gap is not peculiar to this method, and the self-test
+        # ROC-AUC, which shows the baseline was not rebuilt wrongly.
+        pm = json.loads(PMREAD.read_text())
+        L.append(f"\\newcommand{{\\PmReadIndex}}"
+                 f"{{{pm['test_fold_read_index']}}}")
+        L.append(f"\\newcommand{{\\PmLevel}}{{{pm['levels']['pocketminer']:.4f}}}")
+        L.append(f"\\newcommand{{\\PmNUnits}}{{{pm['n_units']}}}")
+        for key, stem in (("table_field_minus_pocketminer", "Ours"),
+                          ("p2rank_minus_pocketminer", "PtwoR")):
+            b = pm["primary"][key]
+            L.append(f"\\newcommand{{\\PmAuc{stem}}}{{{b['mean']:+.4f}}}")
+            L.append(f"\\newcommand{{\\PmAucCI{stem}}}"
+                     f"{{[{b['ci'][0]:+.4f}, {b['ci'][1]:+.4f}]}}")
+            L.append(f"\\newcommand{{\\PmAucBonf{stem}}}"
+                     f"{{[{b['ci_bonferroni'][0]:+.4f}, "
+                     f"{b['ci_bonferroni'][1]:+.4f}]}}")
+            L.append(f"\\newcommand{{\\PmWin{stem}}}{{{b['n_first_ahead']}}}")
+            L.append(f"\\newcommand{{\\PmLoss{stem}}}{{{b['n_second_ahead']}}}")
+        ca = pm["contamination_arm"]
+        L.append(f"\\newcommand{{\\PmDropped}}{{{len(ca['entries_removed'])}}}")
+        L.append(f"\\newcommand{{\\PmCleanN}}{{{ca['n_units_left']}}}")
+        cb = ca["table_field_minus_pocketminer"]
+        L.append(f"\\newcommand{{\\PmCleanAuc}}{{{cb['mean']:+.4f}}}")
+        L.append(f"\\newcommand{{\\PmCleanAucCI}}"
+                 f"{{[{cb['ci'][0]:+.4f}, {cb['ci'][1]:+.4f}]}}")
+        for conv, cstem in (("common_budget", "Budget"),
+                            ("their_trained_budget", "TheirBudget"),
+                            ("their_trained_cut", "TheirCut")):
+            if conv not in pm["thresholded"]:
+                continue
+            for m, mstem in (("positive_class_f1", "F"), ("mcc", "M")):
+                blk = pm["thresholded"][conv][m]
+                dd = blk["paired_difference_ours_minus_theirs"]
+                L.append(f"\\newcommand{{\\Pm{cstem}{mstem}Theirs}}"
+                         f"{{{blk['theirs']:.4f}}}")
+                L.append(f"\\newcommand{{\\Pm{cstem}{mstem}Delta}}"
+                         f"{{{dd['mean']:+.4f}}}")
+                L.append(f"\\newcommand{{\\Pm{cstem}{mstem}CI}}"
+                         f"{{[{dd['ci'][0]:+.4f}, {dd['ci'][1]:+.4f}]}}")
+        rep = pm["reproduction_pinned_by_the_plan"]
+        L.append(f"\\newcommand{{\\PmSelfAuc}}"
+                 f"{{{rep['ours_on_their_test_set']:.4f}}}")
+        L.append(f"\\newcommand{{\\PmSelfPublished}}"
+                 f"{{{rep['published_roc_auc']:.2f}}}")
+        L.append(f"\\newcommand{{\\PmBonfLevel}}"
+                 f"{{{pm['multiplicity']['corrected_level']:.4f}}}")
+        L.append(f"\\newcommand{{\\PmNTests}}"
+                 f"{{{pm['multiplicity']['n_paired_tests']}}}")
+        # The section is written around the field being ahead of a baseline that
+        # was faithfully rebuilt. Both halves have to keep being true, and the
+        # second is the one a reader cannot check by eye.
+        if pm["outcome_key"] != "the_field_is_ahead":
+            raise SystemExit(
+                f"the PocketMiner read now returns {pm['outcome_key']}; the "
+                f"section describing it is written around the field being ahead "
+                f"and has to be rewritten rather than regenerated")
+        if not rep["residue_counts_match_exactly"]:
+            raise SystemExit(
+                "the PocketMiner self-test no longer reproduces the published "
+                "residue counts, so the comparison is against a baseline that "
+                "may have been rebuilt wrongly and cannot be quoted")
+
+    if CURVE.exists():
+        # The threshold axis. The only quantity the plan permits quoting is the
+        # sign span, so that is the only quantity emitted -- no best point of any
+        # curve reaches the manuscript through this file.
+        cv = json.loads(CURVE.read_text())
+        L.append(f"\\newcommand{{\\CurveReadIndex}}"
+                 f"{{{cv['test_fold_read_index']}}}")
+        L.append(f"\\newcommand{{\\CvN}}{{{cv['grid']['n']}}}")
+        L.append(f"\\newcommand{{\\CvLowPct}}"
+                 f"{{{cv['grid']['low'] * 100:.0f}}}")
+        L.append(f"\\newcommand{{\\CvHighPct}}"
+                 f"{{{cv['grid']['high'] * 100:.0f}}}")
+        for arm, astem in (("p2rank", "PtwoR"), ("pocketminer", "Pm"),
+                           ("plmnn", "Plm")):
+            if arm not in cv["arms"]:
+                continue
+            for m, mstem in (("precision", "P"), ("recall", "R"),
+                             ("positive_class_f1", "F"), ("mcc", "M")):
+                sp = cv["arms"][arm]["sign_span"][m]
+                L.append(f"\\newcommand{{\\Cv{astem}{mstem}Ahead}}"
+                         f"{{{sp['n_where_ours_is_higher']}}}")
+                L.append(f"\\newcommand{{\\Cv{astem}{mstem}Flips}}"
+                         f"{{{sp['sign_changes']}}}")
+                excl = [r["q"] for r in cv["arms"][arm]["curve"]
+                        if r[m]["excludes_zero"]]
+                L.append(f"\\newcommand{{\\Cv{astem}{mstem}Excl}}{{{len(excl)}}}")
+        if cv["selects_nothing"]["consumed_by_any_configuration"]:
+            raise SystemExit(
+                "the threshold curve now feeds a configuration, which turns 39 "
+                "cut points into 39 chances to pick one; the plan forbids it")
 
     if INTERP.exists():
         # The readout ladder. The chapter's claim here is a negative one -- the

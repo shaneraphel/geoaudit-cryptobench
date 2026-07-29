@@ -90,6 +90,7 @@
 \newcommand{\FigCapMatchedFullMetrics}{Where the reported margin came from, on all 192 held-out structures. Left, the two detectors in the precision--recall plane under three conventions, each pair joined by a line. Run as delivered, P2Rank calls 1.65 times as many residues as our rule does (8564 against 5202), which buys recall and costs precision: our precision is higher by +0.0590 and our recall lower by -0.0662, both intervals excluding zero. At a common budget both call 5202 residues and the trade is gone. Right, every paired difference with a 95\% bootstrap interval over structures. The F1 and MCC differences remain positive and contain zero under every matched convention. The matched recall difference, +0.0332 [+0.0027, +0.0646], excludes zero at p=0.033, which does not survive a Bonferroni threshold of 0.0125 over the four metrics of one convention and carried no preregistered decision rule; it is an observation about this fold and is drawn as one. Resampling PDB entries or MMseqs2 clusters instead of chains changes no interval here by more than a factor of 1.006.}
 \newcommand{\FigCapSubgroups}{Where the two detectors differ on the 192 chains of the fold, and what survives asking. Left, one bar per chain, sorted: the field is ahead on 115, behind on 77 and ties on 0, but its losses reach further than its wins --- 41 chains lose by more than five ROC-AUC points against 84 that win by more --- which is why the mean (+0.0058) sits below the median (+0.0412). Right, the fold cut into thirds by five covariates fixed before the read from the CryptoBench deposit, the labels and the coordinates, with no score opened. Thick bars are 95\% intervals, thin bars Bonferroni over the 15 bands, and ρ is the Spearman correlation between the covariate and the per-chain difference, tested by permutation. 1 band clears the corrected level and 0 of five trends do; the surviving band sits between two that do not order around it, so nothing here identifies a kind of protein on which one detector is better. The analysis was preregistered as exploratory and no result from it is claimed.}
 \newcommand{\FigCapCaseStudies}{Four evaluation units, projected onto each chain's two longest principal axes: grey is the chain, black rings are the labelled cryptic residues, filled points are the residues each method called positive. The cases are chosen by rule and not by eye -- the clearest joint success, the largest margin each way, and the largest labelled pocket among the units neither method locates -- where locating means per-residue F1 at least 0.5. That last case is the commonest outcome: of 192 units, 25 are located by both methods, 24 by the table field only, 13 by P2Rank only, and 130 by neither.}
+\newcommand{\FigCapStructuralCases}{The two chains on which the methods disagree, 2d05\_A and 6bty\_B, chosen by the rule in CASE\_STUDIES.json rather than by eye. Black rings are the labelled cryptic residues; filled points are what each method called. The camera looks from the chain's centroid towards the labelled pocket, so the view is fixed by the coordinates and not by the author. The right-hand panels decompose our own score on that chain into the five coarse families, separately for the labelled residues we found, the labelled residues we missed, and the residues we called that are not labelled, read from AUDIT\_DECOMPOSITION.json.}
 \newcommand{\NSplitsCv}{4}
 \newcommand{\NFirstCv}{4}
 \newcommand{\WorstRankCv}{1}
@@ -421,6 +422,71 @@
 \newcommand{\PkRecallTheirsThree}{0.211}
 \newcommand{\PkRecallOursFive}{0.224}
 \newcommand{\PkRecallTheirsFive}{0.226}
+\newcommand{\PmLevel}{0.7523}
+\newcommand{\PmNUnits}{192}
+\newcommand{\PmAucOurs}{+0.0468}
+\newcommand{\PmAucCIOurs}{[+0.0251, +0.0682]}
+\newcommand{\PmAucBonfOurs}{[+0.0175, +0.0746]}
+\newcommand{\PmWinOurs}{136}
+\newcommand{\PmLossOurs}{56}
+\newcommand{\PmAucPtwoR}{+0.0410}
+\newcommand{\PmAucCIPtwoR}{[+0.0211, +0.0614]}
+\newcommand{\PmAucBonfPtwoR}{[+0.0137, +0.0680]}
+\newcommand{\PmWinPtwoR}{120}
+\newcommand{\PmLossPtwoR}{72}
+\newcommand{\PmDropped}{6}
+\newcommand{\PmCleanN}{186}
+\newcommand{\PmCleanAuc}{+0.0463}
+\newcommand{\PmCleanAucCI}{[+0.0239, +0.0680]}
+\newcommand{\PmBudgetFTheirs}{0.2530}
+\newcommand{\PmBudgetFDelta}{+0.0804}
+\newcommand{\PmBudgetFCI}{[+0.0579, +0.1027]}
+\newcommand{\PmBudgetMTheirs}{0.2110}
+\newcommand{\PmBudgetMDelta}{+0.0929}
+\newcommand{\PmBudgetMCI}{[+0.0673, +0.1189]}
+\newcommand{\PmTheirBudgetFTheirs}{0.2581}
+\newcommand{\PmTheirBudgetFDelta}{+0.0753}
+\newcommand{\PmTheirBudgetFCI}{[+0.0527, +0.0985]}
+\newcommand{\PmTheirBudgetMTheirs}{0.2158}
+\newcommand{\PmTheirBudgetMDelta}{+0.0881}
+\newcommand{\PmTheirBudgetMCI}{[+0.0630, +0.1147]}
+\newcommand{\PmTheirCutFTheirs}{0.2177}
+\newcommand{\PmTheirCutFDelta}{+0.1157}
+\newcommand{\PmTheirCutFCI}{[+0.0917, +0.1405]}
+\newcommand{\PmTheirCutMTheirs}{0.2075}
+\newcommand{\PmTheirCutMDelta}{+0.1005}
+\newcommand{\PmTheirCutMCI}{[+0.0748, +0.1258]}
+\newcommand{\PmSelfAuc}{0.8677}
+\newcommand{\PmSelfPublished}{0.87}
+\newcommand{\PmBonfLevel}{0.0083}
+\newcommand{\PmNTests}{6}
+\newcommand{\CvN}{39}
+\newcommand{\CvLowPct}{2}
+\newcommand{\CvHighPct}{40}
+\newcommand{\CvPtwoRPAhead}{39}
+\newcommand{\CvPtwoRPFlips}{0}
+\newcommand{\CvPtwoRPExcl}{10}
+\newcommand{\CvPtwoRRAhead}{39}
+\newcommand{\CvPtwoRRFlips}{0}
+\newcommand{\CvPtwoRRExcl}{7}
+\newcommand{\CvPtwoRFAhead}{39}
+\newcommand{\CvPtwoRFFlips}{0}
+\newcommand{\CvPtwoRFExcl}{10}
+\newcommand{\CvPtwoRMAhead}{39}
+\newcommand{\CvPtwoRMFlips}{0}
+\newcommand{\CvPtwoRMExcl}{4}
+\newcommand{\CvPmPAhead}{39}
+\newcommand{\CvPmPFlips}{0}
+\newcommand{\CvPmPExcl}{39}
+\newcommand{\CvPmRAhead}{39}
+\newcommand{\CvPmRFlips}{0}
+\newcommand{\CvPmRExcl}{39}
+\newcommand{\CvPmFAhead}{39}
+\newcommand{\CvPmFFlips}{0}
+\newcommand{\CvPmFExcl}{39}
+\newcommand{\CvPmMAhead}{39}
+\newcommand{\CvPmMFlips}{0}
+\newcommand{\CvPmMExcl}{39}
 \newcommand{\RdRidgeAuc}{0.7562}
 \newcommand{\RdRidgeRaw}{0.7505}
 \newcommand{\RdRidgeGain}{+0.0057}
@@ -568,7 +634,7 @@
 \newcommand{\GapPickUnits}{384}
 \newcommand{\NArchOnFold}{12}
 \newcommand{\NOurDetectors}{9}
-\newcommand{\NStandaloneProbes}{10}
+\newcommand{\NStandaloneProbes}{11}
 \newcommand{\FoldSE}{0.0161}
 \newcommand{\LeadInSE}{0.36}
 \newcommand{\ReadAucI}{0.7804}
