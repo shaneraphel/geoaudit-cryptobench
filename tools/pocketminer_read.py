@@ -94,8 +94,7 @@ def _plan() -> tuple[dict, dict]:
 
 
 def _ours() -> dict[str, dict]:
-    return {u["unit_id"]: u
-            for u in json.loads((PREDS / "table_field.json").read_text())["units"]}
+    return json.loads((PREDS / "table_field.json").read_text())["units"]
 
 
 def _theirs() -> dict[str, dict[int, float]]:
@@ -107,8 +106,7 @@ def _theirs() -> dict[str, dict[int, float]]:
 
 
 def _p2rank() -> dict[str, dict]:
-    return {u["unit_id"]: u
-            for u in json.loads((PREDS / "p2rank.json").read_text())["units"]}
+    return json.loads((PREDS / "p2rank.json").read_text())["units"]
 
 
 def _frozen_aucs() -> dict[str, dict[str, float]]:

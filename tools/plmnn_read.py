@@ -86,8 +86,7 @@ def _plan() -> tuple[dict, dict]:
 
 
 def _ours() -> dict[str, dict]:
-    return {u["unit_id"]: u
-            for u in json.loads((PREDS / "table_field.json").read_text())["units"]}
+    return json.loads((PREDS / "table_field.json").read_text())["units"]
 
 
 def _plmnn_units() -> dict[str, dict[int, float]]:

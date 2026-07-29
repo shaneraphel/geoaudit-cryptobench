@@ -82,8 +82,8 @@ def _from_predictions(name: str) -> dict[str, dict[int, float]]:
     f = PREDS / f"{name}.json"
     if not f.is_file():
         return {}
-    return {u["unit_id"]: _keyed(u.get("residue_scores") or {})
-            for u in json.loads(f.read_text())["units"]}
+    return {uid: _keyed(u.get("residue_scores") or {})
+            for uid, u in json.loads(f.read_text())["units"].items()}
 
 
 def _pocketminer() -> dict[str, dict[int, float]]:
