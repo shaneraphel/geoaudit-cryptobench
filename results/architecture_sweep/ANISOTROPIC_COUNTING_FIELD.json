@@ -1,0 +1,101 @@
+{
+ "schema": "geoaudit.anisotropic_counting_field.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "the anisotropic columns lift the Fisher ceiling by +0.0037 on 12/12 splits; does the counting field, which quantises every wire to four levels and may only add integers, actually collect any of it",
+ "why_the_ceiling_does_not_settle_it": "a Fisher discriminant solves for arbitrary real coefficients over unquantised inputs and the deployed field does neither. A construction that quantises can fail to collect a lift a real-coefficient solve can see, and this repository has a standing example: the quotient construction beat the dense bank on all fourteen training splits and lost to it on the test fold",
+ "held_fixed_across_arms": {
+  "table_width": 2,
+  "partition_rounds": 16,
+  "partition_seed": 20260725,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "why_one_gate_and_not_the_best_of_several": "choosing a gate per arm would let the wider arm win by finding a better gate rather than by carrying more information, and which of those happened is the question",
+  "what_the_shared_seed_does_not_mean": "the wide bank is not the narrow bank plus new tables. Tables are random pairings of wires, so widening the bus regenerates every pairing and some the narrow arm had are gone. Each arm gets the bank the compiler would build at its own width from the same seed, which is what deployment does"
+ },
+ "anisotropic_columns": {
+  "n": 129,
+  "radii_angstrom": [
+   6.0,
+   14.0,
+   20.0
+  ],
+  "statistic": "bulkward half-neighbourhood mean minus outward half",
+  "degenerate_fraction_per_radius": {
+   "6.0": 0.001384,
+   "14.0": 0.000136,
+   "20.0": 9e-06
+  }
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC",
+  "banding": "per chain against that chain's own order statistics, computed over the whole fold before splitting because it cannot see the split"
+ },
+ "arms": {
+  "counting field over 645 wires": {
+   "mean": 0.79012,
+   "min": 0.761546,
+   "max": 0.805021
+  },
+  "counting field over 774 wires": {
+   "mean": 0.78943,
+   "min": 0.766185,
+   "max": 0.809403
+  }
+ },
+ "paired_difference": {
+  "mean": -0.000689,
+  "min": -0.005709,
+  "max": 0.004639,
+  "sd": 0.003321,
+  "n_splits_positive": 5,
+  "n_splits": 12,
+  "positive_on_every_split": false,
+  "why_no_confidence_interval": "twelve halvings of one fold are twelve views of the same 770 units, not twelve independent samples, so an interval over them would understate its own width. The consistency count is what this design supports"
+ },
+ "ceiling_for_comparison": {
+  "source": "results/architecture_sweep/ANISOTROPIC_EXPANSION_CEILING.json",
+  "fisher_lift": 0.003728,
+  "n_splits_positive": 12
+ },
+ "per_split": {
+  "counting field over 645 wires": [
+   0.804622,
+   0.786394,
+   0.787979,
+   0.790364,
+   0.791253,
+   0.7884,
+   0.800117,
+   0.790124,
+   0.791757,
+   0.78386,
+   0.805021,
+   0.761546
+  ],
+  "counting field over 774 wires": [
+   0.798913,
+   0.787687,
+   0.787438,
+   0.787019,
+   0.786434,
+   0.784708,
+   0.80033,
+   0.791421,
+   0.79083,
+   0.782795,
+   0.809403,
+   0.766185
+  ]
+ },
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}

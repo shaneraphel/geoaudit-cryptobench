@@ -1,0 +1,106 @@
+{
+ "schema": "geoaudit.is_fisher_a_ceiling.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "is a Fisher discriminant over the wires a ceiling on the counting field, as several tools here assume when they use it to screen, or does the counting field exceed it",
+ "why_the_assumption_is_not_safe": "a counting field is not linear in the wires. It is linear in the indicator functions of quantised table cells: a pair of banded wires addresses one of sixteen cells and the field reads that cell's training frequency. That basis represents interactions between paired wires which no linear solve over raw wires can express, so nothing forces the counting field below the solve",
+ "what_makes_this_comparable": "the ceiling artifacts gate with a multi-scale sum over five radii and the deployed field gates at 18.0 A with weight 1.0. Measuring across those two tools would mix readout with gate, so the Fisher arms here run under the deployed gate on the same splits and the same wires, leaving the readout as the only difference",
+ "counting_arms_were_not_recomputed": {
+  "source": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
+  "why": "they were produced on these same seeds and are frozen; recomputing would spend forty minutes reproducing them",
+  "checked": "the split count and both wire widths agree before any pairing is done"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "readout_a": "counting field: four levels per chain, width-2 tables, 16 partition rounds, integer fan-out",
+  "readout_b": "ridge Fisher discriminant over the same wires",
+  "gate": "18.0 A at weight 1.0, the deployed one, for both",
+  "metric": "mean per-unit ROC-AUC on the pick half"
+ },
+ "verdict": {
+  "645": {
+   "counting_mean": 0.79012,
+   "fisher_mean": 0.784826,
+   "counting_minus_fisher_mean": 0.005294,
+   "n_splits_counting_higher": 11,
+   "n_splits": 12,
+   "counting_higher_on_every_split": false
+  },
+  "774": {
+   "counting_mean": 0.78943,
+   "fisher_mean": 0.788652,
+   "counting_minus_fisher_mean": 0.000778,
+   "n_splits_counting_higher": 6,
+   "n_splits": 12,
+   "counting_higher_on_every_split": false
+  }
+ },
+ "what_this_does_to_the_earlier_screen": "WIDE_BANK_CEILING.json rejected 267 generated descriptors on a +0.0005 Fisher movement, reasoning that a counting field could not do better. If the counting field is not bounded by the Fisher solve then that reasoning is a correlate and not a bound, and the rejection is weaker than it was stated to be. It is not overturned: ANISOTROPIC_COUNTING_FIELD.json shows the counting field collecting none of a +0.0037 Fisher movement, so the two readouts do track each other in the one case where both were measured. What changes is the confidence, and the fix is to compile rather than to screen",
+ "per_split": {
+  "fisher 645": [
+   0.791024,
+   0.788208,
+   0.784686,
+   0.785801,
+   0.785397,
+   0.777398,
+   0.796734,
+   0.783609,
+   0.786412,
+   0.781351,
+   0.797034,
+   0.760251
+  ],
+  "fisher 774": [
+   0.796982,
+   0.79335,
+   0.788221,
+   0.791379,
+   0.788491,
+   0.781865,
+   0.800551,
+   0.784982,
+   0.789168,
+   0.7851,
+   0.798385,
+   0.76535
+  ],
+  "counting 645": [
+   0.804622,
+   0.786394,
+   0.787979,
+   0.790364,
+   0.791253,
+   0.7884,
+   0.800117,
+   0.790124,
+   0.791757,
+   0.78386,
+   0.805021,
+   0.761546
+  ],
+  "counting 774": [
+   0.798913,
+   0.787687,
+   0.787438,
+   0.787019,
+   0.786434,
+   0.784708,
+   0.80033,
+   0.791421,
+   0.79083,
+   0.782795,
+   0.809403,
+   0.766185
+  ]
+ },
+ "fisher_lift_from_anisotropy_under_the_deployed_gate": {
+  "mean": 0.003826,
+  "n_splits_positive": 12,
+  "n_splits": 12,
+  "under_the_multiscale_gate": 0.003728,
+  "note": "if these two differ much, the anisotropic lift was partly a property of the gate rather than of the columns"
+ }
+}

@@ -9,13 +9,20 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 28,
+    "exploration": 30,
     "cited": 47,
     "superseded": 15,
     "fold_access": 10
   },
-  "n_artifacts": 100,
+  "n_artifacts": 102,
   "artifacts": [
+    {
+      "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.anisotropic_counting_field.v1",
+      "bytes": 3407
+    },
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_EXPANSION_CEILING.json",
       "class": "exploration",
@@ -197,6 +204,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.interpretable_baselines.v1",
       "bytes": 47637
+    },
+    {
+      "artifact": "results/architecture_sweep/IS_FISHER_A_CEILING.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.is_fisher_a_ceiling.v1",
+      "bytes": 3892
     },
     {
       "artifact": "results/architecture_sweep/MULTISCALE_GATE.json",
