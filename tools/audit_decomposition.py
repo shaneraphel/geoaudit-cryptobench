@@ -537,6 +537,11 @@ def build() -> dict:
             "cell's positive rate over all tables. The family totals are "
             "therefore the deviation exactly, and the read fails if they are "
             "not"),
+        # Kept per chain as well as pooled, because the pooled row cannot say
+        # whether the pattern holds on the chain a figure is about. The structural
+        # figure reads these rather than recomputing them, so what it draws and
+        # what the text claims come from one number.
+        "cases": out_cases,
         "cases_are_not_chosen_here": {
             "source": str(CASES.relative_to(ROOT)),
             "n_cases": len(out_cases),

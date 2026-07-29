@@ -9,6 +9,7 @@
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
     "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",
+    "results/official_fold/AUDIT_DECOMPOSITION.json": "d222897a3fd16712d216d5ac2f18ba567eda13d11264ea54acafe7ed9970ebc3",
     "results/official_fold/PREREGISTERED_READ.json": "e57d9063ae20ca45259f114b9885a156ba09e422cb222d07b9797febc6d02b17",
     "results/official_fold/MATCHED_OPERATING_POINT_READ.json": "ba0f9f6b2c2e24ed8b9f9a7f0d69350afeea66c7c33642b57dd08e802764ea84",
     "results/official_fold/MATCHED_FULL_READ.json": "225d792958997bea4ac444bd5751b2196d464eb9e29fbe9ef4673383108c4ff5",
@@ -49,6 +50,11 @@
       "sha256": "1098a22f87a65e4812d0bc7bb2bdad8619a653b6cdae0e683e502b42495a2c3a",
       "bytes": 236281,
       "caption": "Four evaluation units, projected onto each chain's two longest principal axes: grey is the chain, black rings are the labelled cryptic residues, filled points are the residues each method called positive. The cases are chosen by rule and not by eye -- the clearest joint success, the largest margin each way, and the largest labelled pocket among the units neither method locates -- where locating means per-residue F1 at least 0.5. That last case is the commonest outcome: of 192 units, 25 are located by both methods, 24 by the table field only, 13 by P2Rank only, and 130 by neither."
+    },
+    "fig_structural_cases.png": {
+      "sha256": "24b0d360cafa50c5185377a7dc3ece1238735a3e5edf27a73987a96ac0178e9b",
+      "bytes": 267075,
+      "caption": "The two chains on which the methods disagree, 2d05_A and 6bty_B, chosen by the rule in CASE_STUDIES.json rather than by eye. Black rings are the labelled cryptic residues; filled points are what each method called. The camera looks from the chain's centroid towards the labelled pocket, so the view is fixed by the coordinates and not by the author. The right-hand panels decompose our own score on that chain into the five coarse families, separately for the labelled residues we found, the labelled residues we missed, and the residues we called that are not labelled, read from AUDIT_DECOMPOSITION.json."
     }
   }
 }

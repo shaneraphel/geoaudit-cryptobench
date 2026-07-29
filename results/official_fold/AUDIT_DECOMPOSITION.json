@@ -67,65 +67,10 @@
     "reading": "the residues the field calls and the labels do not confirm decompose almost identically to the ones the labels do confirm: no family separates them by more than 1.3, against 15.2 between a call and a miss. Whatever the false positives are, they are not the field reading something different. They are pocket-like residues by every family it measures, which is what would be expected if an apo structure's labelled cryptic residues are the subset a holo partner happened to reveal rather than every residue capable of forming the site. The audit cannot decide that question, but it can say the errors are not arbitrary, and it localises where a curator would have to look",
     "caveat": "four chains, chosen for how the two methods compared on them and not for label quality. This is the pattern in the committed cases, not a fold-level estimate"
   },
-  "generated_at": "2026-07-29T05:04:41+0800",
+  "generated_at": "2026-07-29T21:03:34+0800",
   "question": "on residues this detector got right and wrong, which descriptor families supplied the score, and by how much",
   "what_is_decomposed": "the residue's deviation from its own chain's mean score. The absolute score is dominated by tables with large multiplicities that contribute the same amount to every residue in the chain; only the deviation determines the ranking, and the ranking is what the detector is",
   "exactness": "the per-table contributions are the score by construction, not an attribution of it: S(i) is the sum of m_k times the addressed cell's positive rate over all tables. The family totals are therefore the deviation exactly, and the read fails if they are not",
-  "cases_are_not_chosen_here": {
-    "source": "results/official_fold/CASE_STUDIES.json",
-    "n_cases": 4,
-    "case_ids": [
-      "1zm0_A",
-      "2d05_A",
-      "6bty_B",
-      "1bzj_A"
-    ],
-    "why": "selecting which residues to explain after seeing which explanations read well would make this a demonstration rather than an audit"
-  },
-  "residues_are_chosen_by_rule": [
-    "the highest-scoring residue we called that is labelled",
-    "the highest-scoring residue we called that is not labelled",
-    "the labelled residue we scored lowest",
-    "the highest-scoring residue we called and P2Rank did not",
-    "the highest-scoring residue P2Rank called and we did not"
-  ],
-  "family_assignment": {
-    "source": "pocket_bench.methods.algebraic_descriptors.GROUPS, the same grouping Appendix A documents",
-    "families": [
-      "G1 surface exposure",
-      "G2 local spectral geometry",
-      "G3 density field calculus",
-      "G4 ultrametric structure",
-      "G5 curvature and anisotropy",
-      "G6 global position",
-      "physicochemical constants",
-      "training-fold residue propensity",
-      "gate (neighbourhood mean)"
-    ],
-    "coarse_rollup": {
-      "G1 surface exposure": "geometric",
-      "G5 curvature and anisotropy": "geometric",
-      "G6 global position": "geometric",
-      "G2 local spectral geometry": "topological",
-      "G4 ultrametric structure": "topological",
-      "G3 density field calculus": "density field",
-      "physicochemical constants": "chemical",
-      "training-fold residue propensity": "chemical",
-      "gate (neighbourhood mean)": "spatial smoothing"
-    },
-    "n_tables": 5152,
-    "n_tables_spanning_two_families": 4435,
-    "mixed_table_convention": "a table whose two wires come from different families has its contribution split evenly between them. There is no fact about which half of a pairwise cell belongs to which wire, so the split is a stated convention rather than a measurement"
-  },
-  "reconstruction": {
-    "checked_against": "results/cryptobench_official/predictions/table_field.json",
-    "worst_relative_error": 5.366689798564568e-16,
-    "tolerance": 1e-06,
-    "agrees": true,
-    "why_it_matters": "a decomposition that does not add up to the score the fold was scored with is a decomposition of something else"
-  },
-  "test_fold_read_index": null,
-  "why_this_is_not_an_indexed_read": "it produces no statistic about the fold and no quantity that could be compared between two methods. It explains calls that earlier reads already froze, on units a committed tool had already selected, and it cannot be used to choose anything",
   "cases": [
     {
       "unit_id": "1zm0_A",
@@ -4560,5 +4505,60 @@
       ]
     }
   ],
-  "wall_clock_s": 1.1
+  "cases_are_not_chosen_here": {
+    "source": "results/official_fold/CASE_STUDIES.json",
+    "n_cases": 4,
+    "case_ids": [
+      "1zm0_A",
+      "2d05_A",
+      "6bty_B",
+      "1bzj_A"
+    ],
+    "why": "selecting which residues to explain after seeing which explanations read well would make this a demonstration rather than an audit"
+  },
+  "residues_are_chosen_by_rule": [
+    "the highest-scoring residue we called that is labelled",
+    "the highest-scoring residue we called that is not labelled",
+    "the labelled residue we scored lowest",
+    "the highest-scoring residue we called and P2Rank did not",
+    "the highest-scoring residue P2Rank called and we did not"
+  ],
+  "family_assignment": {
+    "source": "pocket_bench.methods.algebraic_descriptors.GROUPS, the same grouping Appendix A documents",
+    "families": [
+      "G1 surface exposure",
+      "G2 local spectral geometry",
+      "G3 density field calculus",
+      "G4 ultrametric structure",
+      "G5 curvature and anisotropy",
+      "G6 global position",
+      "physicochemical constants",
+      "training-fold residue propensity",
+      "gate (neighbourhood mean)"
+    ],
+    "coarse_rollup": {
+      "G1 surface exposure": "geometric",
+      "G5 curvature and anisotropy": "geometric",
+      "G6 global position": "geometric",
+      "G2 local spectral geometry": "topological",
+      "G4 ultrametric structure": "topological",
+      "G3 density field calculus": "density field",
+      "physicochemical constants": "chemical",
+      "training-fold residue propensity": "chemical",
+      "gate (neighbourhood mean)": "spatial smoothing"
+    },
+    "n_tables": 5152,
+    "n_tables_spanning_two_families": 4435,
+    "mixed_table_convention": "a table whose two wires come from different families has its contribution split evenly between them. There is no fact about which half of a pairwise cell belongs to which wire, so the split is a stated convention rather than a measurement"
+  },
+  "reconstruction": {
+    "checked_against": "results/cryptobench_official/predictions/table_field.json",
+    "worst_relative_error": 5.366689798564568e-16,
+    "tolerance": 1e-06,
+    "agrees": true,
+    "why_it_matters": "a decomposition that does not add up to the score the fold was scored with is a decomposition of something else"
+  },
+  "test_fold_read_index": null,
+  "why_this_is_not_an_indexed_read": "it produces no statistic about the fold and no quantity that could be compared between two methods. It explains calls that earlier reads already froze, on units a committed tool had already selected, and it cannot be used to choose anything",
+  "wall_clock_s": 3.2
 }
