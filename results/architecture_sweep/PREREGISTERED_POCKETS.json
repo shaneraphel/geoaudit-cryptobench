@@ -1,0 +1,107 @@
+{
+  "schema": "geoaudit.preregistered_pockets.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T17:23:39+0800",
+  "for_test_fold_read_index": 9,
+  "written_before_the_read": true,
+  "code_sha256": "e6c87e01969e77bf2892e83af6db4258c47406c4fcfd59e16595f10ac4272c39",
+  "head_when_written": "686451c22c81e79f86360b8c0a4a6458ed3d6250",
+  "question": "when the counting field's per-residue scores are turned into a ranked list of candidate pockets, does its top candidate find a labelled cryptic site as often as P2Rank's, at a matched number of candidates",
+  "status_declared_in_advance": "exploratory",
+  "why_exploratory": "the primary endpoint of this paper is an unresolved per-residue mean, and a pocket-level comparison is a different measurement rather than a second chance at the same one. It also requires machinery this method did not previously have, so a favourable result would be a statement about the machinery as much as about the field",
+  "what_the_field_does_not_currently_have": {
+    "fact": "its committed predictions carry five pocket entries per chain whose centres are all the origin",
+    "consequence": "every DCA column in the frozen telemetry is null for it, and no pocket-level number about this method exists anywhere in the repository",
+    "why_this_is_stated": "a reader should know the pocket stage was built for this read rather than being part of the method as evaluated everywhere else"
+  },
+  "pocket_construction": {
+    "step_1_residue_budget": {
+      "rule": "the top 0.09 of residues per chain by score",
+      "q": 0.09,
+      "why_this_q": "it is the shipped operating point, already used by the deployment rule and already selected on the training fold. No new threshold is chosen"
+    },
+    "step_2_clustering": {
+      "rule": "single linkage on residue centroids",
+      "cutoff_angstrom": 7.0,
+      "why_this_cutoff": "it is the method's own pinch radius, read from pocket_bench.methods.algebraic_descriptors, whose documented meaning is the lining radius at which a cleft actually disconnects. That is the question a pocket boundary asks, so it is the existing constant that fits rather than a new one chosen here",
+      "sensitivity_cutoff_angstrom": 10.0,
+      "why_a_sensitivity": "the descriptors' residue adjacency scale is looser, and single linkage at that distance can chain across a surface and merge distinct sites into one candidate. Reporting both shows whether the verdict depends on the cutoff, and the tighter one is primary because it was chosen for its meaning rather than for its result",
+      "residue_position": "the unweighted centroid of the residue's heavy atoms in the receptor as scored"
+    },
+    "step_3_ranking": {
+      "rule": "clusters ordered by the sum of their members' scores",
+      "why_sum_and_not_mean": "a mean would rank a single very high residue above a genuine pocket, and the quantity a site prediction is about is the size of the signal, not its density. The mean ordering is reported as a sensitivity, not as the primary"
+    },
+    "step_4_centre": {
+      "rule": "the score-weighted mean of the member residue centroids"
+    },
+    "no_free_parameters": "q comes from the shipped field, both cutoffs from the descriptor module, and steps 3 and 4 have no constant at all"
+  },
+  "metrics_to_be_reported": [
+    "hit rate at top 1, top 3 and top 5 candidates",
+    "distance from the top candidate's centre to the nearest labelled cryptic atom",
+    "recall of labelled residues covered by the top K candidates",
+    "number of candidates offered per chain"
+  ],
+  "hit_radii_angstrom": [
+    4.0,
+    6.0,
+    8.0
+  ],
+  "primary_hit_radius_angstrom": 4.0,
+  "top_k": [
+    1,
+    3,
+    5
+  ],
+  "why_the_distance_is_not_called_dca": "DCA is conventionally the distance from a predicted pocket centre to the nearest ligand atom. These are apo structures with no ligand, and the benchmark's answer is a residue set, so the quantity here is a distance to the nearest labelled cryptic atom. It is named distance_to_labelled_site throughout so that it cannot be compared against a holo-based DCA by accident",
+  "the_matched_budget": {
+    "problem": "P2Rank offers a variable number of pockets per chain and a clustering can be made to offer any number, so a hit rate at top 1 compares different things unless the candidate counts are held together",
+    "rule": "every top-K comparison is at the same K for both methods, and the number of candidates each method actually offers is reported beside every rate so that a K larger than a method's list is visible rather than silently favourable",
+    "p2rank_candidates_as_committed": {
+      "n_units": 192,
+      "min": 0,
+      "max": 20,
+      "median": 3,
+      "mean": 3.802,
+      "n_units_with_no_pocket": 6
+    }
+  },
+  "statistic": {
+    "per_unit": "a hit is a chain-level indicator; a distance is one number per chain",
+    "summary": "unweighted mean over the chains both methods offer at least one candidate on",
+    "paired": "the same resampled chains enter both arms",
+    "n_boot": 10000,
+    "seed": 20260725,
+    "ci": 0.95
+  },
+  "multiplicity": {
+    "n_primary_tests": 3,
+    "correction": "Bonferroni over the three top-K hit rates at the primary radius",
+    "corrected_level": 0.016667,
+    "the_other_radii_are_not_tests": "6 and 8 A are reported to show whether a verdict depends on the convention. They are not counted in the correction and no conclusion may rest on them alone"
+  },
+  "guards_the_read_must_pass": [
+    "this plan's commit is an ancestor of HEAD, checked with git",
+    "the clustered residues are exactly the top-q set the deployment rule calls positive, checked against the committed residue_positive list for every chain",
+    "every residue in the budget lands in exactly one cluster",
+    "each cluster's centre lies within the cutoff of at least one of its own members",
+    "P2Rank's pocket centres are its own committed ones, unmodified",
+    "the number of chains entering each paired difference is reported"
+  ],
+  "decision_rules": {
+    "applies_to": "the top-1 hit rate at the primary radius",
+    "if_the_interval_excludes_zero_in_our_favour": "it is reported as the field's ranked list finding a labelled site more often than P2Rank's at a matched budget, and labelled exploratory in the same sentence",
+    "if_the_interval_crosses_zero": "it is reported as unresolved, and the pocket stage is described as making the method usable at the site level without making it better than P2Rank there",
+    "if_the_interval_excludes_zero_in_p2ranks_favour": "it is reported as P2Rank being the better site predictor, with the same prominence, and the paper's pocket-level claim becomes that the field can be given a site stage at all",
+    "a_larger_k_cannot_rescue_a_smaller_one": "if top 1 is unresolved and top 3 is not, the conclusion is about top 3 only and is reported as such. The three are corrected together for exactly this reason"
+  },
+  "what_will_be_written_under_each_outcome": {
+    "top1_favours_the_field": "Given a pocket stage built from its own scores, the counting field's top candidate reaches a labelled cryptic site more often than P2Rank's at a matched number of candidates. The pocket stage was built for this reading and the result is exploratory.",
+    "top1_unresolved": "Given a pocket stage built from its own scores, the counting field offers a ranked candidate list whose top entry reaches a labelled cryptic site about as often as P2Rank's. The two are not separable at the site level either, which is the same conclusion the per-residue endpoint reached.",
+    "top1_favours_p2rank": "At the site level P2Rank's top candidate is the better one. What this read establishes for the counting field is that a usable ranked site list can be derived from it at all, not that the list is competitive.",
+    "the_field_offers_too_few_candidates": "The clustering yields fewer candidates per chain than the top-K comparison requires, so the hit rates at larger K are reported against the candidates that exist and the shortfall is stated rather than being absorbed into the rate."
+  },
+  "reads_test_fold": false,
+  "note": "this file is the plan. Reading the fold under it is tools/pocket_read.py, which refuses to run until this is committed."
+}
