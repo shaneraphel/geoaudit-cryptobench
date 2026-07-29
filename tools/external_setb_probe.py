@@ -177,7 +177,10 @@ def _search_ids(method: str, ceiling: float) -> list[str]:
             "attribute": "rcsb_entry_info.resolution_combined",
             "operator": "less_or_equal", "value": ceiling}}]},
         "return_type": "entry",
-        "request_options": {"paginate": {"start": 0, "rows": 20000},
+        # 10000 is the page size the working inventory query uses. Asking for
+        # 20000 does not error, it hangs, which spent an hour looking like a
+        # bad VPN.
+        "request_options": {"paginate": {"start": 0, "rows": 10000},
                             "results_content_type": ["experimental"]}}
     got = inv._post("https://search.rcsb.org/rcsbsearch/v2/query", q)
     return [r["identifier"] for r in got.get("result_set", [])]
@@ -226,10 +229,24 @@ def main() -> int:
         print(f"  {p['n_with_apo_and_holo']:>6,} accessions carry a ligand-free "
               f"and a ligand-bearing chain")
         print(f"  {p['n_in_cryptobench']:>6,} of those are in CryptoBench itself")
-        print(f"  {p['n_unmapped_to_uniref50']:>6,} have no UniRef50 mapping "
-              f"cached, so their cluster is unknown here")
-        print(f"  {p['n_clusters_new_to_set_a']:>6,} clusters remain that Set A "
-              f"has not spent  <-- the ceiling on Set B")
+        pool = p["n_with_apo_and_holo"] - p["n_in_cryptobench"]
+        print(f"  {pool:>6,} of those are outside CryptoBench  <-- the pool "
+              f"Set B would be drawn from")
+        print(f"  {p['n_unmapped_to_uniref50']:>6,} of the pool have no UniRef50 "
+              f"mapping cached")
+        if p["n_unmapped_to_uniref50"] == pool:
+            # The cached mapping was fetched for Set A's X-ray accessions and
+            # covers none of these, so the cluster count below is not a small
+            # number, it is an absent one. Printing it as though it were a
+            # measurement would read as "this axis is empty" when nothing about
+            # emptiness has been established.
+            print(f"  {'?':>6}  clusters new to Set A: NOT MEASURED. The cached "
+                  f"mapping covers Set A's X-ray accessions and none of these, "
+                  f"so run tools/external_uniref.py over the pool before "
+                  f"reading anything into this")
+        else:
+            print(f"  {p['n_clusters_new_to_set_a']:>6,} clusters remain that "
+                  f"Set A has not spent  <-- the ceiling on Set B")
     return 0
 
 
