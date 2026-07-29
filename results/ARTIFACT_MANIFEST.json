@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 22,
-    "cited": 42,
-    "superseded": 7,
-    "fold_access": 8
+    "exploration": 26,
+    "cited": 45,
+    "superseded": 9,
+    "fold_access": 10
   },
-  "n_artifacts": 79,
+  "n_artifacts": 90,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -227,6 +227,13 @@
       "bytes": 6225
     },
     {
+      "artifact": "results/architecture_sweep/POCKETMINER_TRAIN_OPERATING_POINT.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.pocketminer_train_operating_point.v1",
+      "bytes": 18824
+    },
+    {
       "artifact": "results/architecture_sweep/PREREGISTERED_MATCHED_FULL.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
@@ -239,6 +246,20 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.prereg_matched_operating_point.v1",
       "bytes": 6774
+    },
+    {
+      "artifact": "results/architecture_sweep/PREREGISTERED_PLMNN.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.preregistered_plmnn.v1",
+      "bytes": 9814
+    },
+    {
+      "artifact": "results/architecture_sweep/PREREGISTERED_POCKETMINER.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.preregistered_pocketminer.v1",
+      "bytes": 11813
     },
     {
       "artifact": "results/architecture_sweep/PREREGISTERED_POCKETS.json",
@@ -260,6 +281,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.preregistered_subgroups.v1",
       "bytes": 9238
+    },
+    {
+      "artifact": "results/architecture_sweep/PREREGISTERED_THRESHOLD_CURVE.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.preregistered_threshold_curve.v1",
+      "bytes": 5519
     },
     {
       "artifact": "results/architecture_sweep/REPEATED_TRAIN_SELECTION.json",
@@ -318,11 +346,39 @@
       "bytes": 3552
     },
     {
+      "artifact": "results/baselines/PLMNN_SCORES.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.plmnn_scores.v1",
+      "bytes": 1547313
+    },
+    {
       "artifact": "results/baselines/PLMNN_SEQUENCES.json",
       "class": "superseded",
       "reason": "an earlier frozen state, kept for the record",
       "schema": "geoaudit.plmnn_sequences.v1",
       "bytes": 853771
+    },
+    {
+      "artifact": "results/baselines/POCKETMINER_SCORES.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.pocketminer_scores.v1",
+      "bytes": 57120
+    },
+    {
+      "artifact": "results/baselines/POCKETMINER_SELFTEST.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.pocketminer_selftest.v1",
+      "bytes": 11144
+    },
+    {
+      "artifact": "results/baselines/POCKETMINER_TRAIN_SCORES.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.pocketminer_scores.v1",
+      "bytes": 1301646
     },
     {
       "artifact": "results/cryptobench_apo/APO_BENCHMARK.json",
@@ -427,7 +483,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 8122
+      "bytes": 10355
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
@@ -477,6 +533,20 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": null,
       "bytes": 86105
+    },
+    {
+      "artifact": "results/official_fold/PLMNN_READ.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.plmnn_read.v1",
+      "bytes": 7458
+    },
+    {
+      "artifact": "results/official_fold/POCKETMINER_READ.json",
+      "class": "fold_access",
+      "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
+      "schema": "geoaudit.pocketminer_read.v1",
+      "bytes": 13224
     },
     {
       "artifact": "results/official_fold/POCKET_READ.json",
@@ -532,7 +602,14 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 9614
+      "bytes": 11405
+    },
+    {
+      "artifact": "results/official_fold/THRESHOLD_CURVE.json",
+      "class": "fold_access",
+      "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
+      "schema": "geoaudit.threshold_curve.v1",
+      "bytes": 152741
     },
     {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",

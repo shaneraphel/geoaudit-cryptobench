@@ -938,6 +938,64 @@ def build() -> str:
                 "P2Rank, so the sentence conceding that it offers fewer is no "
                 "longer true")
 
+    if PLMNN.exists() and PLMNN_SCORES.exists():
+        # The baseline that beats us. Every macro here is emitted whichever way
+        # the read came out; the section is written around a deficit, and the
+        # guard below fails if the outcome ever changes, because a section
+        # explaining a loss cannot be regenerated into one explaining a win.
+        pl = json.loads(PLMNN.read_text())
+        sc = json.loads(PLMNN_SCORES.read_text())
+        v = sc["validation_against_the_published_example"]
+        pa = v["predicted_probability_agreement"]
+        L.append(f"\\newcommand{{\\PlmReadIndex}}"
+                 f"{{{pl['test_fold_read_index']}}}")
+        L.append(f"\\newcommand{{\\PlmLayer}}{{{v['layer_recovered']}}}")
+        L.append(f"\\newcommand{{\\PlmFidelity}}"
+                 f"{{{v['mean_cosine_at_that_layer']:.4f}}}")
+        L.append(f"\\newcommand{{\\PlmFidelityNext}}"
+                 f"{{{v['second_best_mean_cosine']:.4f}}}")
+        L.append(f"\\newcommand{{\\PlmRank}}{{{pa['spearman']:.4f}}}")
+        L.append(f"\\newcommand{{\\PlmMaxDp}}"
+                 f"{{{pa['max_absolute_difference']:.3f}}}")
+        pc = pl["primary_comparison"]
+        L.append(f"\\newcommand{{\\PlmLevel}}{{{pc['level_second']:.4f}}}")
+        L.append(f"\\newcommand{{\\PlmAucDelta}}{{{pc['mean']:+.4f}}}")
+        L.append(f"\\newcommand{{\\PlmAucCI}}"
+                 f"{{[{pc['ci'][0]:+.4f}, {pc['ci'][1]:+.4f}]}}")
+        L.append(f"\\newcommand{{\\PlmAucBonf}}"
+                 f"{{[{pc['ci_bonferroni'][0]:+.4f}, "
+                 f"{pc['ci_bonferroni'][1]:+.4f}]}}")
+        L.append(f"\\newcommand{{\\PlmWin}}{{{pc['n_first_ahead']}}}")
+        L.append(f"\\newcommand{{\\PlmLoss}}{{{pc['n_second_ahead']}}}")
+        cc = pl["context_comparison"]
+        L.append(f"\\newcommand{{\\PlmAucCtxDelta}}{{{cc['mean']:+.4f}}}")
+        L.append(f"\\newcommand{{\\PlmAucCtxCI}}"
+                 f"{{[{cc['ci'][0]:+.4f}, {cc['ci'][1]:+.4f}]}}")
+        L.append(f"\\newcommand{{\\PlmNTests}}"
+                 f"{{{pl['multiplicity']['n_paired_tests']}}}")
+        for conv, cstem in (("common_budget", "Budget"),
+                            ("each_methods_own_rule", "OwnRule")):
+            for m, mstem in (("positive_class_f1", "F"), ("mcc", "M")):
+                blk = pl["thresholded_metrics"][conv][m]
+                dd = blk["paired_difference_ours_minus_plmnn"]
+                L.append(f"\\newcommand{{\\Plm{cstem}{mstem}Theirs}}"
+                         f"{{{blk['plmnn']:.4f}}}")
+                L.append(f"\\newcommand{{\\Plm{cstem}{mstem}Delta}}"
+                         f"{{{dd['mean']:+.4f}}}")
+                L.append(f"\\newcommand{{\\Plm{cstem}{mstem}CI}}"
+                         f"{{[{dd['ci'][0]:+.4f}, {dd['ci'][1]:+.4f}]}}")
+        if pl["outcome"] != "the_baseline_is_ahead":
+            raise SystemExit(
+                f"the pLM-NN read now returns {pl['outcome']}; the abstract and "
+                f"Section~\\ref{{sec:plmnn}} are written around the field being "
+                f"behind the benchmark's own supervised baseline, and a different "
+                f"outcome has to be rewritten rather than regenerated")
+        if not pl["reproduction_gate"]["passes"]:
+            raise SystemExit(
+                "the pLM-NN reproduction no longer clears its own floor, so the "
+                "comparison is against a baseline that may be broken and cannot "
+                "be quoted in either direction")
+
     if PMREAD.exists():
         # The cryptic-specific baseline. Two macros here exist to stop the
         # headline being quoted alone: the P2Rank-minus-PocketMiner difference,

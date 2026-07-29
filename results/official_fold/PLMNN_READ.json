@@ -1,0 +1,240 @@
+{
+  "schema": "geoaudit.plmnn_read.v1",
+  "clinical_grade": false,
+  "test_fold_read_index": 10,
+  "status": "exploratory",
+  "question": "does the counting field predict cryptic binding residues as well as pLM-NN, the cryptic-specific supervised baseline CryptoBench's own authors fitted and published, on the same 192 single-chain units and the same residue universe",
+  "plan": {
+    "artifact": "results/architecture_sweep/PREREGISTERED_PLMNN.json",
+    "committed_in": "d02b2f2578a69b7a281cc58fd7f1875b7d87b584",
+    "committed_at": "2026-07-29T21:21:32+08:00",
+    "subject": "Preregister the pLM-NN comparison before the fold is read under it",
+    "is_ancestor_of_head": true
+  },
+  "plan_sha256": "a0a14efc321382e0860b28f6321642005bbd71b0eaeb049013f21ef6b8220020",
+  "baseline_scores_sha256": "786109e3423201b9c84d9fc2f6cd72cb5054f1bf6f1004033034ea32cadb007d",
+  "same_statistic_check": {
+    "n_units_recomputed": 192,
+    "largest_absolute_disagreement": 0.0,
+    "on_unit": null,
+    "why": "the baseline's ROC-AUC is produced by driving residue_auc_pr from a prediction dictionary. Doing the same for the counting field has to reproduce what the harness froze, or the two columns are different quantities"
+  },
+  "reproduction_gate": {
+    "baseline_mean_per_unit_roc_auc": 0.823469,
+    "floor": 0.65,
+    "passes": true,
+    "why_a_floor": "a published supervised model cannot score near chance on the benchmark it was fitted for. Below the floor the reproduction is broken and this read reports nothing rather than reporting a win"
+  },
+  "primary_comparison": {
+    "what": "mean paired per-unit ROC-AUC, counting field minus our reproduction of pLM-NN",
+    "n": 192,
+    "mean": -0.024318,
+    "median": -0.016379,
+    "ci": [
+      -0.046468,
+      -0.003341
+    ],
+    "ci_bonferroni": [
+      -0.055062,
+      0.004548
+    ],
+    "excludes_zero": true,
+    "n_first_ahead": 81,
+    "n_second_ahead": 111,
+    "n_tied": 0,
+    "level_first": 0.799151,
+    "level_second": 0.823469
+  },
+  "context_comparison": {
+    "what": "the same functional, P2Rank minus our reproduction of pLM-NN, which places the two baselines against each other",
+    "n": 192,
+    "mean": -0.030146,
+    "median": -0.0456,
+    "ci": [
+      -0.051658,
+      -0.008324
+    ],
+    "ci_bonferroni": [
+      -0.058439,
+      -9.9e-05
+    ],
+    "excludes_zero": true,
+    "n_first_ahead": 65,
+    "n_second_ahead": 127,
+    "n_tied": 0,
+    "level_first": 0.793323,
+    "level_second": 0.823469
+  },
+  "thresholded_metrics": {
+    "q": 0.09,
+    "threshold": 0.95,
+    "n_units": 192,
+    "mean_positive_rate_of_the_baseline_at_its_own_threshold": 0.073323,
+    "note_on_the_second_arm": "the field's own rule is the same top-q budget, so the two arms differ only in how the baseline is binarised",
+    "common_budget": {
+      "precision": {
+        "ours": 0.317709,
+        "plmnn": 0.368803,
+        "paired_difference_ours_minus_plmnn": {
+          "n": 192,
+          "mean": -0.051094,
+          "median": 0.0,
+          "ci": [
+            -0.074948,
+            -0.02786
+          ],
+          "ci_bonferroni": [
+            -0.08264,
+            -0.019129
+          ],
+          "excludes_zero": true
+        }
+      },
+      "recall": {
+        "ours": 0.434252,
+        "plmnn": 0.481427,
+        "paired_difference_ours_minus_plmnn": {
+          "n": 192,
+          "mean": -0.047175,
+          "median": 0.0,
+          "ci": [
+            -0.083075,
+            -0.011135
+          ],
+          "ci_bonferroni": [
+            -0.095486,
+            0.002323
+          ],
+          "excludes_zero": true
+        }
+      },
+      "positive_class_f1": {
+        "ours": 0.333412,
+        "plmnn": 0.385604,
+        "paired_difference_ours_minus_plmnn": {
+          "n": 192,
+          "mean": -0.052192,
+          "median": 0.0,
+          "ci": [
+            -0.078557,
+            -0.027418
+          ],
+          "ci_bonferroni": [
+            -0.087477,
+            -0.017023
+          ],
+          "excludes_zero": true
+        }
+      },
+      "mcc": {
+        "ours": 0.303969,
+        "plmnn": 0.360076,
+        "paired_difference_ours_minus_plmnn": {
+          "n": 192,
+          "mean": -0.056106,
+          "median": 0.0,
+          "ci": [
+            -0.086274,
+            -0.026892
+          ],
+          "ci_bonferroni": [
+            -0.096967,
+            -0.016992
+          ],
+          "excludes_zero": true
+        }
+      }
+    },
+    "each_methods_own_rule": {
+      "precision": {
+        "ours": 0.317709,
+        "plmnn": 0.406329,
+        "paired_difference_ours_minus_plmnn": {
+          "n": 184,
+          "mean": -0.079166,
+          "median": -0.048108,
+          "ci": [
+            -0.105756,
+            -0.052921
+          ],
+          "ci_bonferroni": [
+            -0.115472,
+            -0.04371
+          ],
+          "excludes_zero": true
+        }
+      },
+      "recall": {
+        "ours": 0.434252,
+        "plmnn": 0.445265,
+        "paired_difference_ours_minus_plmnn": {
+          "n": 192,
+          "mean": -0.011013,
+          "median": 0.0,
+          "ci": [
+            -0.052535,
+            0.030527
+          ],
+          "ci_bonferroni": [
+            -0.06741,
+            0.046943
+          ],
+          "excludes_zero": false
+        }
+      },
+      "positive_class_f1": {
+        "ours": 0.333412,
+        "plmnn": 0.379276,
+        "paired_difference_ours_minus_plmnn": {
+          "n": 192,
+          "mean": -0.045865,
+          "median": -0.012841,
+          "ci": [
+            -0.0743,
+            -0.017456
+          ],
+          "ci_bonferroni": [
+            -0.083228,
+            -0.00682
+          ],
+          "excludes_zero": true
+        }
+      },
+      "mcc": {
+        "ours": 0.303969,
+        "plmnn": 0.376739,
+        "paired_difference_ours_minus_plmnn": {
+          "n": 184,
+          "mean": -0.060986,
+          "median": -0.03156,
+          "ci": [
+            -0.093289,
+            -0.029104
+          ],
+          "ci_bonferroni": [
+            -0.103697,
+            -0.01932
+          ],
+          "excludes_zero": true
+        }
+      }
+    }
+  },
+  "outcome": "the_baseline_is_ahead",
+  "sentence_fixed_in_advance": "Our reproduction of CryptoBench's pLM-NN baseline is ahead of the counting field by a mean paired per-unit ROC-AUC difference whose interval excludes zero. The paper's accuracy claim is therefore limited to P2Rank, and the contribution is auditability and model size rather than predictive performance. This is stated in the abstract.",
+  "multiplicity": {
+    "n_paired_tests": 6,
+    "tests": [
+      "mean per-unit ROC-AUC, counting field minus pLM-NN",
+      "mean per-unit ROC-AUC, P2Rank minus pLM-NN",
+      "positive-class F1 at a common top-9% budget, counting field minus pLM-NN",
+      "MCC at a common top-9% budget, counting field minus pLM-NN",
+      "positive-class F1 at each method's own rule, counting field minus pLM-NN",
+      "MCC at each method's own rule, counting field minus pLM-NN"
+    ],
+    "correction": "Bonferroni",
+    "corrected_level": 0.008333,
+    "also_reported": "the uncorrected interval alongside it"
+  },
+  "what_this_does_not_show": "this is our reproduction of their baseline, agreeing with their one published example to a mean cosine of about 0.9987 rather than exactly, and it is exploratory because nine indexed reads preceded the plan. It is not a comparison against a number they reported"
+}

@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 curveplan read12
+verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -183,6 +183,16 @@ read10:
 # curve over 39 cut points admissible rather than a search: that it reproduces
 # the seventh read where the two overlap, and that nothing downstream reads a
 # value off it.
+# The cryptic-specific baseline the benchmark names. The plan's gate is the
+# one that matters: the rebuild has to keep reproducing PocketMiner's own
+# published residue counts, because a comparison against a wrongly assembled
+# baseline is worth nothing however wide its margin.
+pmplan:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/preregister_pocketminer.py --check
+
+read11:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/pocketminer_read.py --check
+
 curveplan:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/preregister_threshold_curve.py --check
 

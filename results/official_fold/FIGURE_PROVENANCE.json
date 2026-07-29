@@ -5,7 +5,7 @@
   "generator": "tools/make_official_figures.py",
   "sources": {
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
-    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "99f5e72317f7567239a873b378a61aa829b1245678308cbec0d84e071d38942f",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "270700dab5007986c6fcfcbb69dab2a7d98d54351b58076704d11d79cba0b898",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
     "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",
@@ -13,7 +13,8 @@
     "results/official_fold/PREREGISTERED_READ.json": "e57d9063ae20ca45259f114b9885a156ba09e422cb222d07b9797febc6d02b17",
     "results/official_fold/MATCHED_OPERATING_POINT_READ.json": "ba0f9f6b2c2e24ed8b9f9a7f0d69350afeea66c7c33642b57dd08e802764ea84",
     "results/official_fold/MATCHED_FULL_READ.json": "225d792958997bea4ac444bd5751b2196d464eb9e29fbe9ef4673383108c4ff5",
-    "results/official_fold/SUBGROUP_READ.json": "8994ec100852f7b25462163f6cf46ce81448f40fec21404c75a5a5363fdaa9c3"
+    "results/official_fold/SUBGROUP_READ.json": "8994ec100852f7b25462163f6cf46ce81448f40fec21404c75a5a5363fdaa9c3",
+    "results/official_fold/THRESHOLD_CURVE.json": "5c88a83aed0c9ba30d8f71a2406c2720f56e72a58580c16dcf67c0ca0d2707d6"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -45,6 +46,11 @@
       "sha256": "4921e82d6a02893acc9e29e9005c72649a2f01901ba476973858fa8e06a7ee0e",
       "bytes": 177522,
       "caption": "Where the two detectors differ on the 192 chains of the fold, and what survives asking. Left, one bar per chain, sorted: the field is ahead on 115, behind on 77 and ties on 0, but its losses reach further than its wins \u2014 41 chains lose by more than five ROC-AUC points against 84 that win by more \u2014 which is why the mean (+0.0058) sits below the median (+0.0412). Right, the fold cut into thirds by five covariates fixed before the read from the CryptoBench deposit, the labels and the coordinates, with no score opened. Thick bars are 95% intervals, thin bars Bonferroni over the 15 bands, and \u03c1 is the Spearman correlation between the covariate and the per-chain difference, tested by permutation. 1 band clears the corrected level and 0 of five trends do; the surviving band sits between two that do not order around it, so nothing here identifies a kind of protein on which one detector is better. The analysis was preregistered as exploratory and no result from it is claimed."
+    },
+    "fig_threshold_curve.png": {
+      "sha256": "76bf8888be468fc85860e62a0c45b1d9484e1f3ca7f38d981e8c5d3bfaca8d88",
+      "bytes": 251621,
+      "caption": "The same frozen scores binarised at all 39 calling fractions from 2% to 40%, on 192 held-out structures. Left, the level each method reaches. Right, the paired difference against the counting field with a pointwise 95% bootstrap band. Against P2Rank the field is ahead at 39 of 39 cut points with 0 sign changes, so the F1 advantage reported at the deployed rule is not an artefact of where the two methods were cut; the pointwise interval excludes zero at 10 of them, all at calling fractions well above anything one would deploy, so this is a statement about the sign of the difference rather than its significance. pLM-NN (CryptoBench's own) is ahead of the field at every cut point as well, and by margins whose pointwise intervals exclude zero throughout, so that deficit is no more a threshold artefact than the advantage over P2Rank is. No point on any curve was selected: the deployed fraction was fixed on the training fold and this read feeds no configuration, which is what keeps 39 cut points from being 39 chances to find a favourable one."
     },
     "fig_case_studies.png": {
       "sha256": "1098a22f87a65e4812d0bc7bb2bdad8619a653b6cdae0e683e502b42495a2c3a",

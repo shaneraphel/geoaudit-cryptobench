@@ -73,9 +73,31 @@ losses average \EndWorstLosses{} against best wins of \EndBestWins{}. It wins
 more often and loses harder, which is the whole of why a trimmed mean and a mean
 disagree.
 
-So the claim is parity on predictive accuracy, not advantage. What the
-construction offers instead is that its every score decomposes exactly into the
-table terms that produced it, and that the whole detector is
+Comparing against P2Rank alone would answer an easier question than a
+cryptic-pocket paper poses, so both of the benchmark's own baselines were rebuilt
+and run on these units. Against PocketMiner, which CryptoBench treats as the
+representative cryptic-site method, the field is ahead by \PmAucOurs{}
+\PmAucCIOurs{}; that margin is the least informative number here, because P2Rank
+is ahead of PocketMiner too (\PmAucPtwoR{} \PmAucCIPtwoR{}), which makes the gap
+evidence about transfer between two label definitions rather than a ranking of
+methods. Against pLM-NN --- CryptoBench's own supervised baseline, an ESM2-3B
+embedding under a trained network, reproduced here to a mean cosine of
+\PlmFidelity{} against the authors' published example --- the field is
+\emph{behind} by \PlmAucDelta{} \PlmAucCI{}, losing on \PlmLoss{} of \NUnits{}
+chains. That deficit is not a threshold convention either: it holds at every one
+of \CvN{} calling fractions, with intervals excluding zero throughout, and the F1
+and MCC deficits (\PlmBudgetFDelta{} and \PlmBudgetMDelta{} at a common budget)
+survive a Bonferroni correction that the ROC-AUC difference does not. So the
+accuracy claim in this paper is bounded by P2Rank and does not extend to the
+state of the art on this benchmark: a \FairModelOurs{}~MB table of integers is
+within a few points of a general-purpose pocket finder and several points short
+of a 3-billion-parameter language model with a trained head, which is the
+comparison a reader should carry away.
+
+Against P2Rank the claim is therefore parity on predictive accuracy, not
+advantage, and against the benchmark's strongest baseline it is a deficit. What
+the construction offers instead is that its every score decomposes exactly into
+the table terms that produced it, and that the whole detector is
 \FairModelOurs{}~MB of integers with no floating-point model evaluated at
 inference. It is not faster than P2Rank in a served deployment, and
 Section~\ref{sec:cost} withdraws the speed factor an earlier version of this
@@ -1363,6 +1385,51 @@ exploratory on the same ground as everything after
 Section~\ref{sec:endpoints}: the fold had been read many times before this plan
 was written.
 
+\subsection{The benchmark's own supervised baseline, which is better than ours}
+\label{sec:plmnn}
+PocketMiner is the cryptic-site method CryptoBench names; pLM-NN is the baseline
+CryptoBench itself trains, and it is the harder test. It embeds each residue with
+ESM2-3B and passes the embedding through a small trained network, so it is the
+comparison that asks whether a table of counted invariants is competitive with a
+supervised model that has seen the same training fold. We rebuilt it: the
+published weights were read out of the authors' checkpoint without a deep-learning
+runtime, and the encoder layer they use was not documented, so it was recovered by
+matching their one published worked example across layers --- layer
+\PlmLayer{} agrees at cosine \PlmFidelity{}, the next-best layer at
+\PlmFidelityNext{}. Running their network on their own published embedding and on
+ours agrees to a rank correlation of \PlmRank{}, which is the quantity a ROC-AUC
+depends on; the largest absolute probability disagreement is \PlmMaxDp{}, and that
+gap is why this is reported as our reproduction of their baseline rather than as a
+comparison against a number they published.
+
+On reading \PlmReadIndex{} the counting field is behind. Mean per-unit ROC-AUC is
+\PlmLevel{} for pLM-NN against \TabAuc{} for us, a paired difference of
+\PlmAucDelta{} with interval \PlmAucCI{}, and the per-chain split is
+\PlmWin{} to \PlmLoss{} against us with no ties. The interval excludes zero but
+does not survive the Bonferroni correction over the read's \PlmNTests{} tests
+(\PlmAucBonf{}), so on the primary functional alone this is a deficit the fold
+resolves only uncorrected. The thresholded metrics are less equivocal: at a common
+top-\MatchOurQ{} budget F1 differs by \PlmBudgetFDelta{} \PlmBudgetFCI{} and MCC
+by \PlmBudgetMDelta{} \PlmBudgetMCI{}, both surviving the correction, and
+Section~\ref{sec:curve} finds pLM-NN ahead at all \CvN{} cut points with
+pointwise intervals excluding zero at every one of them. There is no operating
+point in the range at which the ordering reverses.
+
+It is worth being exact about what this costs the paper and what it does not. The
+sentence now in the abstract was written into the plan before the fold was read
+under it, precisely so that a losing outcome could not be reworded afterwards, and
+it says that the accuracy claim is limited to P2Rank and that the contribution is
+auditability and model size rather than predictive performance. That is the
+correct reading. pLM-NN is ahead of P2Rank as well, by \PlmAucCtxDelta{}
+\PlmAucCtxCI{}, so the ordering on this fold is pLM-NN, then the counting field
+and P2Rank within a few thousandths of each other, then PocketMiner. A reader
+deciding what to run for accuracy alone should run pLM-NN. What the counting field
+offers over it is a different axis entirely: \FairModelOurs{}~MB of integers
+against a 3-billion-parameter encoder, no floating-point model at inference, and a
+score that decomposes exactly into the terms that produced it. Whether that trade
+is worth making is a question about deployment constraints, and this paper's job
+is to report the trade accurately rather than to argue that it always favours us.
+
 \subsection{Taking a score apart, and what the errors turn out to be}
 \label{sec:audit}
 Auditability has so far been an architectural claim: every table is a look-up, so
@@ -1784,7 +1851,27 @@ structure that clustering them recovers a site, which does not follow from a
 per-residue ROC-AUC and could not have been read off one.
 
 \section{Limitations}
-The comparison covers two trained baselines, both executed locally. The 38
+The clearest limitation is the one Section~\ref{sec:plmnn} measures: the method is
+less accurate than the benchmark's own supervised baseline, by \PlmAucDelta{}
+\PlmAucCI{} in mean per-unit ROC-AUC and by more on the thresholded metrics, at
+every calling fraction we examined. Nothing in this paper should be read as a
+claim that a table of counted invariants predicts cryptic binding residues better
+than a protein language model with a trained head. The claims that survive are
+parity with P2Rank, an exactly decomposable score, and a
+\FairModelOurs{}~MB integer artifact --- and the third of those is a deployment
+property rather than a scientific one.
+
+The three baselines are all reproductions, executed locally, and two of them are
+reproductions of published models rather than of published predictions. P2Rank
+runs from its own release; PocketMiner is restored from the authors' checkpoint and
+validated against their published test set; pLM-NN is rebuilt from the authors'
+weights at an encoder layer they do not document, recovered by matching their one
+worked example to cosine \PlmFidelity{}. The pLM-NN reproduction agrees with that
+example on rank to \PlmRank{} but differs in absolute probability by up to
+\PlmMaxDp{}, so a fixed-threshold reading of it would be less trustworthy than the
+ROC-AUC reading we take. None of these is a comparison against a number the
+original authors reported, and a reader who wants that comparison should ask the
+respective authors for predictions on this fold. The 38
 excluded multi-chain units mean the reported fold is a strict subset of the
 official test fold, and the result does not transfer to multi-chain assemblies
 without a chain-aware residue index.

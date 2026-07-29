@@ -94,6 +94,24 @@
       "selection_provenance": "results/architecture_sweep/PREREGISTERED_MATCHED_OPERATING_POINT.json"
     },
     {
+      "artifact": "results/official_fold/PLMNN_READ.json",
+      "n_units": null,
+      "method": "table field variant",
+      "read_index": 10,
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/POCKETMINER_READ.json",
+      "n_units": 192,
+      "method": "table_field",
+      "read_index": 11,
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
       "artifact": "results/official_fold/POCKET_READ.json",
       "n_units": 186,
       "method": "table_field",
@@ -139,7 +157,7 @@
       "selection_provenance": "cluster-disjoint halves of the training fold; this is the first and only evaluation of this architecture on the official test fold"
     }
   ],
-  "n_standalone_probes": 11,
+  "n_standalone_probes": 13,
   "n_distinct_architectures_evaluated": 12,
   "indexed_read_sequence": [
     {
@@ -232,6 +250,24 @@
       "selection_provenance": null
     },
     {
+      "artifact": "results/official_fold/PLMNN_READ.json",
+      "n_units": null,
+      "method": "table field variant",
+      "read_index": 10,
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/POCKETMINER_READ.json",
+      "n_units": 192,
+      "method": "table_field",
+      "read_index": 11,
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
       "artifact": "results/official_fold/THRESHOLD_CURVE.json",
       "n_units": null,
       "method": "table_field",
@@ -241,8 +277,8 @@
       "selection_provenance": null
     }
   ],
-  "n_indexed_reads": 10,
+  "n_indexed_reads": 12,
   "n_probes_that_scored_the_fold": 5,
-  "n_probes_that_only_resummarised": 6,
-  "honest_summary": "9 of our detectors appear in the frozen telemetry. 11 standalone artifacts are further accesses: 5 of them scored the 192 units again, and 6 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 10 carry a read index, 9 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
+  "n_probes_that_only_resummarised": 8,
+  "honest_summary": "9 of our detectors appear in the frozen telemetry. 13 standalone artifacts are further accesses: 5 of them scored the 192 units again, and 8 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 12 carry a read index, 11 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
 }
