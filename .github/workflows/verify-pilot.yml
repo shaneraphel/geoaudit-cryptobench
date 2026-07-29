@@ -87,6 +87,18 @@ jobs:
         run: make subplan
       - name: The subgroup read must reproduce read five and qualify every surviving band
         run: make read8
+      - name: The pocket stage must still follow from the plan that fixed it
+        run: make read9
+      - name: The pLM-NN network must still be the one published on OSF
+        run: make plmw
+      - name: The baseline's sequences must still follow from the receptors
+        run: make plmseq
+      - name: The baseline's scores must still be the pinned ones at the recovered layer
+        run: make plmscore
+      - name: The pLM-NN plan must still call itself exploratory and keep a sentence for losing
+        run: make plmplan
+      - name: The tenth read must reproduce, including which sentence it may print
+        run: make read10
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

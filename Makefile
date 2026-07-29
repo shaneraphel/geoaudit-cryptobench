@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8
+verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -145,6 +145,37 @@ subplan:
 
 read8:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/subgroup_read.py --check
+
+# Whether the field is any use as a pocket finder rather than a residue scorer.
+# The counting field emits no pockets of its own, so the read builds a stage from
+# its residue scores; the gate exists because the construction is the part a
+# reader should distrust, and it has to keep reproducing from the plan that fixed
+# it before the fold was opened.
+read9:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/pocket_read.py --check
+
+# The benchmark's own cryptic-site baseline. Four gates, in order: the network
+# must still be the one published on OSF, read out of that checkpoint at the
+# offsets its own index states; the baseline's scores must still be the ones the
+# plan pinned, computed at the layer the authors' worked example identifies; the
+# plan must still call itself exploratory and still carry a sentence for losing;
+# and the tenth read must still reproduce, including which of those sentences it
+# is entitled to print. The weight gate needs the OSF checkpoint, and the score
+# gate needs neither it nor the encoder -- it checks the artifact, not the model.
+plmw:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/export_plmnn_weights.py --check
+
+plmseq:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/plmnn_sequences.py --check
+
+plmscore:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/plmnn_embed.py --check
+
+plmplan:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/preregister_plmnn.py --check
+
+read10:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/plmnn_read.py --check
 
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the
