@@ -1,0 +1,113 @@
+{
+  "schema": "geoaudit.plmnn_network.v1",
+  "clinical_grade": false,
+  "what_this_is": "the weights and the forward pass of CryptoBench's own pLM-NN baseline, read out of the SavedModel the authors published",
+  "why_not_tensorflow": "the SavedModel was compiled with a tensorflow_addons metric, so loading it the intended way needs TensorFlow and that package installed to read six arrays. The checkpoint format is specified, so it is parsed instead, and every array is taken at the offset and shape the checkpoint's own index states",
+  "source": "osf.io/pz4a9, /cryptobench/benchmark/best_trained",
+  "source_sha256": {
+    "saved_model.pb": "7e21232169b9a66fd17f7fafdf533dc1d7c5d05a022cacba842e91ae2fb15a6e",
+    "variables/variables.index": "f37c8b7d24ff47ad74a37a9cbf0cee218ace5d03ad66450583017624a4f897cb",
+    "variables/variables.data-00000-of-00001": "a004b4f7fd928caaf0efbadd7f0197a077fd51119115d5dd238481713f47ff02"
+  },
+  "architecture": {
+    "widths": [
+      2560,
+      256,
+      256,
+      2
+    ],
+    "activations": [
+      "Relu",
+      "Relu",
+      "Softmax"
+    ],
+    "n_parameters": 721922,
+    "forward_pass": "p = softmax(relu(relu(x @ W0 + b0) @ W1 + b1) @ W2 + b2), and column 1 is the binding class, which is how the authors' own example reads it"
+  },
+  "ops_found_in_the_graph": {
+    "dense_3": [
+      "BiasAdd",
+      "MatMul",
+      "Relu",
+      "bias",
+      "kernel"
+    ],
+    "dense_4": [
+      "BiasAdd",
+      "MatMul",
+      "Relu",
+      "bias",
+      "kernel"
+    ],
+    "dense_5": [
+      "BiasAdd",
+      "MatMul",
+      "Softmax",
+      "bias",
+      "kernel"
+    ]
+  },
+  "arrays": [
+    {
+      "array": "dense_3_kernel",
+      "checkpoint_key": "layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        2560,
+        256
+      ],
+      "byte_offset": 0,
+      "byte_length": 2621440
+    },
+    {
+      "array": "dense_3_bias",
+      "checkpoint_key": "layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ],
+      "byte_offset": 2621440,
+      "byte_length": 1024
+    },
+    {
+      "array": "dense_4_kernel",
+      "checkpoint_key": "layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        256
+      ],
+      "byte_offset": 2622464,
+      "byte_length": 262144
+    },
+    {
+      "array": "dense_4_bias",
+      "checkpoint_key": "layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ],
+      "byte_offset": 2884608,
+      "byte_length": 1024
+    },
+    {
+      "array": "dense_5_kernel",
+      "checkpoint_key": "layer_with_weights-2/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        2
+      ],
+      "byte_offset": 2885632,
+      "byte_length": 2048
+    },
+    {
+      "array": "dense_5_bias",
+      "checkpoint_key": "layer_with_weights-2/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        2
+      ],
+      "byte_offset": 2887680,
+      "byte_length": 8
+    }
+  ],
+  "adam_moments_in_the_checkpoint_were_not_read": "the checkpoint is 8.67 MB for 2.89 MB of weights because it also stores the optimizer's two moments per parameter. Those keys are not named here, and a network built from a moment tensor would run and predict nothing",
+  "weights_sha256": "0c5b17aa75ececd82ed789e4d3c4a6f01550846bcbaa89f9373d10f4e92c2c69",
+  "test_fold_read_index": null,
+  "why_this_is_not_an_indexed_read": "a published baseline's weights are somebody else's fitted model. No label, prediction or metric of the test fold is opened here"
+}

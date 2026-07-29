@@ -275,7 +275,8 @@ def main() -> int:
     ap.add_argument("--list", action="store_true",
                     help="list OSF pz4a9 files (name, size, sha256)")
     ap.add_argument("--fetch", nargs="+", metavar="NAME",
-                    help="download named OSF files (verified) into _osf/")
+                    help="download OSF files (verified) into _osf/, by file name "
+                         "or by full OSF path when the name is not unique")
     ap.add_argument("--build-manifest", action="store_true",
                     help="assemble official_manifest.json from downloaded fold data")
     ap.add_argument("--fold-file", type=Path,
@@ -298,12 +299,26 @@ def main() -> int:
         print(f"# {len(files)} files on OSF node {OSF_NODE}")
 
     if args.fetch:
-        files = {f["name"]: f for f in osf_walk()}
+        files = osf_walk()
         for name in args.fetch:
-            if name not in files:
+            hits = [f for f in files
+                    if f["name"] == name or (f["path"] or "").lstrip("/") == name
+                    or f["path"] == name]
+            if not hits:
                 raise SystemExit(f"'{name}' not found on OSF (run --list)")
-            dest = OSF_DIR / name
-            got = download_verify(files[name], dest)
+            # The deposit publishes the trained and the untrained network under
+            # the same file names in different folders, so a basename alone can
+            # name two different models. Fetching the wrong one would produce a
+            # baseline that runs and is silently untrained.
+            if len(hits) > 1:
+                paths = "\n  ".join(sorted(str(f["path"]) for f in hits))
+                raise SystemExit(
+                    f"'{name}' names {len(hits)} files on OSF; give the full "
+                    f"path instead:\n  {paths}")
+            # The file lands where it was named: a bare name stays flat in _osf/,
+            # a full OSF path keeps that path underneath it.
+            dest = OSF_DIR / name.lstrip("/")
+            got = download_verify(hits[0], dest)
             print(f"OK  {got}  -> {dest.relative_to(ROOT)}")
 
     if args.build_manifest:

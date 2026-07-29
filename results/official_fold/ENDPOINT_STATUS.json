@@ -144,6 +144,14 @@
       "method": "table_field",
       "mean_residue_auc": null,
       "first_committed_in": "6d947ae24d94"
+    },
+    {
+      "read_index": 9,
+      "artifact": "results/official_fold/POCKET_READ.json",
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "method": "table_field",
+      "mean_residue_auc": null,
+      "first_committed_in": "c7c00e2a7f3a"
     }
   ],
   "n_reads_before_the_preregistration": 4,

@@ -32,6 +32,12 @@ data/cryptobench_apo/_*.npz
 data/cryptobench_apo/_*.npy
 data/cryptobench_apo/_scratch/
 
+# The pLM-NN baseline's weights, read out of the SavedModel published on OSF and
+# reproducible byte-for-byte from the digests recorded beside them.
+#   tools/export_plmnn_weights.py
+results/baselines/PLMNN_WEIGHTS.npz
+results/baselines/_plmnn_checkpoint.jsonl
+
 # P2Rank's per-residue scores on the 770 training receptors: an intermediate
 # behind P2RANK_TRAIN_OPERATING_POINT.json, which records its sha256 and the
 # decision it supports. Rebuilt by tools/p2rank_train_operating_point.py, which
