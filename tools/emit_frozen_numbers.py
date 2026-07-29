@@ -99,6 +99,7 @@ MATCH_PREREG = ROOT / "results/architecture_sweep/PREREGISTERED_MATCHED_OPERATIN
 MATCH_READ = ROOT / "results/official_fold/MATCHED_OPERATING_POINT_READ.json"
 FULL_READ = ROOT / "results/official_fold/MATCHED_FULL_READ.json"
 AUDIT = ROOT / "results/official_fold/AUDIT_DECOMPOSITION.json"
+COST = ROOT / "results/architecture_sweep/RUNTIME_COST.json"
 TRAIN_OP = ROOT / "results/architecture_sweep/TRAIN_OPERATING_POINTS.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
@@ -207,6 +208,27 @@ def build() -> str:
                  f"{{{sum(occupied) / max(len(occupied), 1):.0f}}}")
         L.append(f"\\newcommand{{\\TabRidge}}{{{tf['ridge']:g}}}")
         L.append(f"\\newcommand{{\\TabCap}}{{{tf['fan_out_cap']}}}")
+        # How often a wire is actually in a table. 645 is odd, so a partition
+        # into pairs leaves one wire over per round and the chapter used to say
+        # every wire appeared exactly TabRounds times. It does not, and the
+        # counts are emitted so the corrected sentence is checkable.
+        import collections as _c
+
+        _per_wire = _c.Counter(w for t in tf["tables"] for w in t)
+        _counts = _c.Counter(_per_wire.values())
+        _rounds = tf["partition_rounds"]
+        if len(_per_wire) != tf["n_wires"]:
+            raise SystemExit(
+                f"only {len(_per_wire)} of {tf['n_wires']} wires appear in the "
+                f"bank; a wire in no table is scored by nothing and the "
+                f"appendix's coverage claim would be wrong")
+        if set(_counts) - {_rounds, _rounds - 1}:
+            raise SystemExit(
+                f"wires now appear {sorted(_counts)} times; the chapter says "
+                f"every wire is in {_rounds} tables or one fewer, which is what "
+                f"an odd wire count under a pairing gives, and must be rewritten")
+        L.append(f"\\newcommand{{\\NWireFull}}{{{_counts.get(_rounds, 0)}}}")
+        L.append(f"\\newcommand{{\\NWireShort}}{{{_counts.get(_rounds - 1, 0)}}}")
         # Two different fits of the same configuration produce two different
         # non-zero table counts, and this repository reported both without
         # saying so: 4797 for the shipped compile over all 770 training units,
@@ -655,6 +677,87 @@ def build() -> str:
         L.append(f"\\newcommand{{\\AudEgTimesBase}}"
                  f"{{{t['cell_is_this_many_times_the_base_rate']:.1f}}}")
         L.append(f"\\newcommand{{\\AudEgMult}}{{{t['multiplicity']}}}")
+
+    if COST.exists():
+        # The controlled cost measurement. The earlier \TabSpeedup came from
+        # telemetry taken with no pinned thread count and no common timing
+        # boundary, and it said the wrong thing; these macros exist so the
+        # paragraph that replaces it cannot be typed by hand.
+        ct = json.loads(COST.read_text())
+        warm, cold = ct["warm"], ct["cold"]
+        wo, wp = warm["table_field"], warm["p2rank"]
+        L.append(f"\\newcommand{{\\FairChains}}{{{ct['population']['chains']}}}")
+        L.append(f"\\newcommand{{\\FairMachine}}{{{ct['controls']['processor']}}}")
+        L.append(f"\\newcommand{{\\FairWarmOurs}}{{{wo['median_s']:.3f}}}")
+        L.append(f"\\newcommand{{\\FairWarmOursIQR}}{{{wo['iqr_s']:.3f}}}")
+        L.append(f"\\newcommand{{\\FairWarmPTwo}}"
+                 f"{{{wp['amortised_per_chain_s']:.3f}}}")
+        L.append(f"\\newcommand{{\\FairFeatures}}{{{wo['features_median_s']:.3f}}}")
+        L.append(f"\\newcommand{{\\FairScoring}}{{{wo['scoring_median_s']:.4f}}}")
+        L.append(f"\\newcommand{{\\FairFeatPct}}"
+                 f"{{{100 * wo['fraction_of_the_median_spent_on_features']:.0f}}}")
+        L.append(f"\\newcommand{{\\FairRSS}}{{{wo['peak_rss_mb']:.0f}}}")
+        L.append(f"\\newcommand{{\\FairColdOurs}}"
+                 f"{{{cold['table_field']['median_s']:.3f}}}")
+        L.append(f"\\newcommand{{\\FairColdPTwo}}"
+                 f"{{{cold['p2rank']['median_s']:.3f}}}")
+        L.append(f"\\newcommand{{\\FairColdRatio}}{{{cold['ratio_of_medians']:.2f}}}")
+        L.append(f"\\newcommand{{\\FairJVM}}{{{cold['jvm_start_median_s']:.3f}}}")
+        L.append(f"\\newcommand{{\\FairJVMPct}}"
+                 f"{{{100 * cold['jvm_start_as_fraction_of_p2ranks_cold_median']:.0f}}}")
+        L.append(f"\\newcommand{{\\FairModelOurs}}"
+                 f"{{{ct['model_size']['table_field_json_mb']:.2f}}}")
+        L.append(f"\\newcommand{{\\FairModelOursGz}}"
+                 f"{{{ct['model_size']['table_field_gzip_mb']:.2f}}}")
+        L.append(f"\\newcommand{{\\FairModelPTwo}}"
+                 f"{{{ct['model_size']['p2rank_default_model_mb']:.2f}}}")
+        # Which way each ratio runs, written as a word, so the sentence around
+        # it cannot say "faster" while the artifact says the opposite. The
+        # margin is divided out of the two timings rather than out of the
+        # artifact's rounded ratio, which would print 1.85 beside a verdict
+        # sentence that says 1.84.
+        def _margin(a: float, b: float) -> str:
+            return f"{(b / a if b > a else a / b):.2f}"
+
+        warm_ratio = warm["ratio_p2rank_over_table_field"]
+        L.append(f"\\newcommand{{\\FairWarmRatio}}"
+                 f"{{{_margin(wo['median_s'], wp['amortised_per_chain_s'])}}}")
+        L.append(f"\\newcommand{{\\FairWarmWinner}}"
+                 f"{{{'the counting field' if warm_ratio > 1 else 'P2Rank'}}}")
+        par = ct["did_either_side_get_more_than_one_thread"]
+        L.append(f"\\newcommand{{\\FairParOurs}}{{{par['table_field']:.2f}}}")
+        L.append(f"\\newcommand{{\\FairParPTwo}}{{{par['p2rank_batch']:.2f}}}")
+        if "cpu_seconds_per_chain" in wo:
+            cpu_ratio = warm["ratio_p2rank_over_table_field_cpu"]
+            L.append(f"\\newcommand{{\\FairCpuOurs}}"
+                     f"{{{wo['cpu_seconds_per_chain']:.3f}}}")
+            L.append(f"\\newcommand{{\\FairCpuPTwo}}"
+                     f"{{{wp['cpu_seconds_per_chain']:.3f}}}")
+            L.append(f"\\newcommand{{\\FairCpuRatio}}"
+                     f"{{{_margin(wo['cpu_seconds_per_chain'], wp['cpu_seconds_per_chain'])}}}")
+            L.append(f"\\newcommand{{\\FairCpuWinner}}"
+                     f"{{{'the counting field' if cpu_ratio > 1 else 'P2Rank'}}}")
+            # The two readings agreeing is what lets the chapter state one
+            # conclusion. If they ever part, the paragraph needs rewriting
+            # rather than a silently updated number.
+            if (warm_ratio > 1) != (cpu_ratio > 1):
+                raise SystemExit(
+                    f"the wall-clock and CPU-second readings of the steady "
+                    f"state disagree ({warm_ratio} against {cpu_ratio}); the "
+                    f"cost paragraph asserts they agree and has to be rewritten "
+                    f"to say which one it is reporting and why")
+        # Section~\ref{sec:cost} is a withdrawal: it says in prose that the
+        # steady state does not favour us. Macros alone cannot keep that honest,
+        # because a reversal would leave the sentences intact and merely swap
+        # the numbers inside them into a self-contradiction. Failing on the good
+        # news is the cheaper error -- it costs one paragraph rewrite, where the
+        # alternative costs a chapter that argues against its own figures.
+        if warm_ratio > 1:
+            raise SystemExit(
+                f"the steady-state cost now favours the counting field "
+                f"({warm_ratio}x), but Section 'What the method costs' is "
+                f"written as a withdrawal of exactly that claim; rewrite the "
+                f"paragraph before regenerating the macros")
 
     if BANKS_CEILING.exists() and WIDE3.exists() and WIDE3_CONTROL.exists():
         # The generated banks: a lift on the linear ceiling that the counting

@@ -454,6 +454,7 @@ all fail-closed.
 | Preregistered functional | `make prereg` | the named statistic stops being the one the recorded selection rule returns, a candidate's claim text drifts from what it licenses, or the forecast is dropped |
 | Fifth fold read | `make read5` | the read stops citing a committed ancestor of `HEAD`, the statistic it calls preregistered drifts from the artifact, or the mean stops being reported beside it |
 | Input contract | `make wires` | Appendix A stops describing the modules it was generated from: a quantity, its neighbourhood, its boundary value or the 43→645 expansion rule drifts from the code |
+| Compile contract | `make compileapp` | Appendix C stops describing the compile: the recorded partition seed no longer redraws the shipped table bank pair for pair, the wire-coverage counts move, or a stated boundary case (isolated residue, constant wire, self-inclusion in the neighbourhood) stops being what the transform actually does when it is run |
 | Generated banks | `make banks` | the recorded descriptor counts stop matching the two generator modules, or the reported ceiling lift does not follow from the artifact's own per-split numbers |
 | Constant sensitivity | `make sens` | the sweep artifact is a checkpoint of an unfinished run, its row marked published disagrees with the shipped levels/cap/ridge, or it starts claiming a test-fold read |
 | Baseline's own threshold | `make p2op` | the q recorded for P2Rank stops being the argmax of its own committed training curve, or the re-run that produced it disagreed with the training-fold summary the paper quotes |
@@ -463,9 +464,10 @@ all fail-closed.
 | Seventh read's plan | `make match2` | the committed plan stops describing the thresholds it was written for, stops naming a sentence for an outcome the read can reach, or stops recording the code that wrote it |
 | Seventh fold read | `make read7` | the deployment rules stop reproducing the frozen bootstrap, the matched F1 delta moves away from what reading 6 published, precision and recall deltas disagree in sign at a matched budget, or a verdict stops following from its own interval |
 | Audit decomposition | `make audit` | the per-table terms stop summing to the score they claim to decompose, the cases drift from the committed selection, a residue's stated role disagrees with the committed calls, or the artifact starts declaring a test-fold read |
+| Controlled cost | `make cost` | the recorded verdict stops following from the ratios it was read off, the two ways of reading the steady state disagree without the artifact saying which one settles it, or the wall-clock conclusion favours whichever side was granted more cores than it asked for |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; 297 tests pass under both
+Current state: `verify_claims` all checks pass; 391 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:
 `tests/test_spatial.py` was written against `pytest` while CI runs `unittest`,
 so the five checks guarding the neighbour-search kernel — the one every gate,
@@ -764,7 +766,7 @@ resolution. The counting field's binding constraint on
 this benchmark is not the expressive content of its invariant bank, and the
 held-out fold was not read to establish that.
 
-### 4.7 Within-chain ranking is the one load-bearing constant, and inference is 13.8× cheaper
+### 4.7 Within-chain ranking is the one load-bearing constant
 
 Four constants were fixed early and carried through everything above: four
 quantisation levels, ranking within a chain rather than across the corpus, a
@@ -839,14 +841,48 @@ contradiction. The two are now separate macros (`\NTabUsedFullFold`,
 own header, and `make numbers` refuses to emit either if the two tools that
 measured the selection half stop agreeing.
 
-Inference is 5152 table look-ups and an integer dot
-product per residue, with no floating-point model evaluated at all: a median
-**0.342 s per chain against P2Rank's 4.722 s**, a factor of 13.8. That factor is
-not a controlled measurement and should not be read as one: the two were timed on
-the same machine but not under a pinned thread count or a common timing boundary,
-and P2Rank's figure includes JVM startup a served deployment would amortise. The
-direction is not in doubt — one side evaluates no floating-point model — but the
-magnitude is an observation about how we happened to invoke them.
+### 4.7b The 13.8× speedup was not a measurement, and the controlled version reverses it
+
+This README used to claim inference was **13.8× cheaper** than P2Rank: 0.342 s per
+chain against 4.722 s. That came from telemetry collected while each method was
+invoked however was convenient — no pinned thread count, no common timing
+boundary, and a fresh JVM for every chain on one side while our field stayed
+loaded on the other. `tools/runtime_cost.py` redoes it under controls, and the
+claim does not survive. It is withdrawn rather than defended.
+
+The controlled run fixes the boundary at *a receptor file on disk to a score for
+every residue in it*, asks both sides for one thread, and covers all 770 training
+receptors on one Apple M4. Cost does not depend on a label, so this reads no test
+fold. Two regimes answer two different questions:
+
+| regime | table field | P2Rank | who is cheaper |
+| --- | --- | --- | --- |
+| one process per chain | 0.392 s | 2.344 s | ours, 5.98× |
+| one process for all 770 | 0.298 s | 0.162 s | **P2Rank, 1.84×** |
+
+The cold column is the one the old claim was really measuring, and 33% of what we
+beat there is a JVM reaching its main method — a fact about Java, not about pocket
+detection. The warm column is the steady state a served deployment actually runs
+in, and there the ordering flips.
+
+Before believing the flip, note that asking for one thread is not the same as
+getting one: our process drew **1.64 CPU-seconds per wall-second** and P2Rank's
+drew 1.18, because Accelerate ignores the thread variable for some kernels. The
+uneven grant favours *us*, so it can only have flattered the side that lost.
+Read in CPU seconds per chain instead, which no thread count can tilt, the gap
+widens rather than closing: **0.563 s against 0.191 s, P2Rank cheaper by 2.95×**.
+`make cost` refuses the artifact if the two readings disagree, or if the side
+that got extra cores is also the side the conclusion favours.
+
+What survives is narrower than a speed claim. The compiled detector is **1.79 MB
+of JSON (0.39 MB gzipped)** against P2Rank's 22.01 MB, and it is the whole
+detector — there is no separate feature extractor to ship. Scoring is 5152 table
+look-ups and an integer dot product per residue with no floating-point model
+evaluated anywhere, and that step really is nearly free: **0.0873 s for a whole
+chain**, 29% of our cost. The other 71% is feature extraction. So the
+architecture's own contribution to inference cost is small, and the honest summary
+is that this method is cheap to store, cheap to score, and **no cheaper than
+P2Rank to run**.
 
 ### 4.8 The F1 advantage was a threshold, and the retraction was written first
 
@@ -1072,7 +1108,12 @@ sole source of truth.
 
 ```text
 paper/        MAIN_CRYPTOBENCH_GEOAUDIT.tex (primary manuscript),
-              appendix_b_gf4_ablation.tex (\input appendix, not standalone)
+              appendix_a_wire_definitions.tex (generated: the 43 quantities
+                and the 43x15=645 expansion; `make wires`),
+              appendix_b_gf4_ablation.tex (\input appendix, not standalone),
+              appendix_c_compile.tex (generated: the table bank and its seed,
+                the cell rule, the solve, the gate, the boundary cases and the
+                sample flow from the published folds; `make compileapp`)
 contracts/    GEOAUDIT_PAPER_SCOPE.json (scope contract)
 src/pocket_bench/
   methods/    receptor-only detectors (firewalled) + anisotropic_shear_oracle

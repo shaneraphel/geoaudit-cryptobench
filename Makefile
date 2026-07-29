@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit
+verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -107,6 +107,14 @@ read7:
 audit:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/audit_decomposition.py --check
 
+# The controlled cost measurement, which withdrew a speedup this repository had
+# published. Re-measuring needs the receptors and twenty minutes; the gate only
+# reads the artifact, and it refuses one whose recorded verdict disagrees with
+# its own ratios, or whose wall-clock conclusion favours the side that was
+# granted more cores than it asked for.
+cost:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/runtime_cost.py --check
+
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the
 # artifacts agree with each other; this one checks that they agree with the data.
@@ -140,6 +148,14 @@ environment:
 # exists.
 wires:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/emit_wire_appendix.py --check
+
+# Everything between a wire and a score: the bank and its seed, the cell rule,
+# the solve, the gate, the boundary cases and the sample flow. The gate redraws
+# the table bank from the seed the artifact records and refuses to pass if it
+# does not reproduce the shipped bank pair for pair, so the appendix cannot
+# document a draw nobody can repeat.
+compileapp:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/emit_compile_appendix.py --check
 
 # The manuscript cites macros only, so a stale macro file is a stale paper.
 macros:

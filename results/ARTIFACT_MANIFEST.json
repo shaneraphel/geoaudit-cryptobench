@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 21,
-    "cited": 37,
+    "cited": 38,
     "superseded": 4,
     "fold_access": 7
   },
-  "n_artifacts": 69,
+  "n_artifacts": 70,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -246,6 +246,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.repeated_architecture_selection.v1",
       "bytes": 56556
+    },
+    {
+      "artifact": "results/architecture_sweep/RUNTIME_COST.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.runtime_cost.v1",
+      "bytes": 87298
     },
     {
       "artifact": "results/architecture_sweep/SENSITIVITY_SWEEP.json",

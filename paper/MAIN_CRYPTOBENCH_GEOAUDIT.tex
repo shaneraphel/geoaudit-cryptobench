@@ -292,9 +292,14 @@ hydrophobic of its neighbours from one that is marginally the least, which
 
 \paragraph{The table field.} \NTabTables{} tables are formed as \TabRounds{}
 independent random partitions of the \NTabWires{} wires into groups of
-\TabWidth{}, so each wire appears exactly \TabRounds{} times, each time with
+\TabWidth{}, so each wire appears at most once per round, each time with
 different partners, and coverage of the digit-pair lattice comes from the number
-of rounds rather than from the width of any table. Each table stores
+of rounds rather than from the width of any table. \NTabWires{} is odd, so one
+wire is left over in each round and its singleton group addresses no pair and is
+dropped: \NWireFull{} wires appear in \TabRounds{} tables and \NWireShort{} in
+\TabRounds{} less one. Appendix~\ref{app:compile} gives the seed, and the
+generator of that appendix redraws the bank from it and refuses to emit unless
+the redraw matches the shipped bank pair for pair. Each table stores
 \(\mathrm{tot}_k[a]\) and \(\mathrm{pos}_k[a]\) per address, counted on the
 training fold; an address no training residue reached takes the fold's base rate,
 which is the only value that adds no information, and there are
@@ -688,7 +693,7 @@ sample looks like when the denominator grows. The experiment varied the wrong
 quantity.
 
 Replacing the single partition with \(R\) independent random partitions of all
-wires --- every wire appears exactly once per round and meets different partners
+wires --- every wire appears at most once per round and meets different partners
 each round --- makes the trend reverse. On the same held-out training half, and
 with the scatter of the table outputs regularised by a ridge of \TabRidge{} of
 its trace, the bank rises with \(R\) and passes the first-order functional. The
@@ -1301,7 +1306,7 @@ counting field's binding constraint on this benchmark is not the expressive
 content of its invariant bank. Widening the bank is not the way to a larger
 margin, and the held-out fold was not read to establish that.
 
-\subsection{What the constants are worth, and what the method costs}
+\subsection{What the constants are worth}
 \label{sec:sensitivity}
 Four constants in the counting field were fixed early and carried through every
 experiment above: four quantisation levels, ranking within a chain rather than
@@ -1382,20 +1387,58 @@ best of the \SensSettings{}, which is a fact about the sweep and not a claim abo
 it: it was chosen before the sweep ran, and had a different row come out on top it
 would have been reported and not adopted.
 
-Cost is the other question a table-based method invites, and it is the one place
-the construction is unambiguously ahead. Compilation is a single pass of
-counting over the training fold followed by one \(K \times K\) solve, taking
-\TabCompileSeconds{}~s once; the compiled artifact is \TabArtifactMB{}~MB of
-JSON, of which \NTabUsedFullFold{} of \NTabTables{} tables carry a non-zero
-multiplicity. At inference a residue costs \NTabTables{} table look-ups and an
-integer dot product, and no floating-point model is evaluated at all: the median
-is \TabRuntime{}~s per chain against P2Rank's \PTwoRuntime{}~s, a factor of
-\TabSpeedup{}. That factor is not a controlled measurement and should not be read
-as one: the two methods were timed on the same machine but not under a pinned
-thread count or a common timing boundary, and P2Rank's figure includes JVM startup
-that a served deployment would amortise. The direction is not in doubt --- one side
-evaluates no floating-point model --- but the magnitude is an observation about how
-we happened to invoke them.
+\subsection{What the method costs, measured rather than asserted}
+\label{sec:cost}
+Cost is the other question a table-based method invites, and an earlier version of
+this chapter answered it with a speed factor of \TabSpeedup{} --- \TabRuntime{}~s
+per chain against \PTwoRuntime{}~s --- that was not a measurement. It came from
+telemetry taken while the two methods were invoked in
+whatever way was convenient: no pinned thread count, no common timing boundary,
+and a JVM started afresh for every chain on one side while the other kept its
+field in memory. Re-running it under controls reverses the conclusion, so the
+factor is withdrawn here rather than defended.
+
+The controlled version fixes the boundary at a receptor file on disk to a score
+for every residue in it, asks both sides for one thread, and measures all
+\FairChains{} training receptors on one \FairMachine{} held awake on a constant
+power source --- an earlier attempt was lost to a machine that slept partway
+through, and the tool now refuses to write a file whose repeats did not run under
+the same conditions. Labels play no part in a
+cost, so this stays on the training fold. Two regimes are separated because they
+answer different questions. One process per chain is what a shell loop costs, and
+there the counting field is \FairColdRatio{} times cheaper --- \FairColdOurs{}~s
+against \FairColdPTwo{}~s --- but \FairJVMPct{}\% of what it is cheaper than is a
+JVM reaching its main method, which is a fact about the Java Virtual Machine and
+not about pocket detection. One process for all the chains is the steady state a
+served deployment actually runs in, and there the ordering flips: \FairWarmOurs{}~s
+per chain for the field against \FairWarmPTwo{}~s for P2Rank amortised over the
+same set, making \FairWarmWinner{} cheaper by \FairWarmRatio{}.
+
+That reading deserves one more check before it is believed, because asking for a
+single thread is not the same as getting one. Measured against wall time, our
+process drew \FairParOurs{} CPU seconds per second elapsed and P2Rank's drew
+\FairParPTwo{}: Apple's Accelerate framework does not honour the thread variable
+for every kernel it dispatches. The uneven grant runs in our favour, so it can
+only have flattered the side that already lost. Reading the same comparison in CPU
+seconds per chain, which no thread count can tilt, moves it further the same way:
+\FairCpuOurs{} against \FairCpuPTwo{}, with \FairCpuWinner{} ahead by
+\FairCpuRatio{}. Both readings agree, and the artifact refuses to be emitted if
+they ever stop agreeing.
+
+What survives is narrower than a speed claim and is worth stating on its own
+terms. Compilation is a single pass of counting over the training fold followed by
+one \(K \times K\) solve, taking \TabCompileSeconds{}~s once. The compiled
+artifact is \FairModelOurs{}~MB of JSON, \FairModelOursGz{}~MB compressed, against
+P2Rank's \FairModelPTwo{}~MB of model, and it is the entire detector: there is no
+separate feature extractor to ship, because the quantities are read off
+coordinates. Scoring is \NTabTables{} table look-ups and an integer dot product
+per residue, with no floating-point model evaluated anywhere, and that step is
+indeed nearly free: \FairScoring{}~s for a whole chain. The cost is in reaching
+the digits, and feature extraction is \FairFeatPct{}\% of our
+\FairWarmOurs{}~s. So the
+architecture's own contribution to inference cost is small, and the honest summary
+is that this method is cheap to store, cheap to score, and no cheaper than P2Rank
+to run.
 
 \section{Limitations}
 The comparison covers one trained baseline, executed locally; PocketMiner could
@@ -1576,5 +1619,7 @@ begins deleting positives fails rather than shrinking the denominator quietly.
 \input{appendix_a_wire_definitions.tex}
 
 \input{appendix_b_gf4_ablation.tex}
+
+\input{appendix_c_compile.tex}
 
 \end{document}
