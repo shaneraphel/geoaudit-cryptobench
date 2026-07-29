@@ -1,0 +1,252 @@
+{
+ "schema": "geoaudit.wide_bank_ceiling.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "does the generated operator bank still lift the Fisher ceiling when the baseline is the 645 wires the deployed field actually reads, rather than the 35 local invariants the earlier artifact compared against",
+ "why_the_earlier_number_does_not_answer_it": "results/architecture_sweep/OPERATOR_BANK_CEILING.json measured 0.7595 for 35 local invariants and 0.7676 for 302, a lift of +0.0081 on 12 of 12 splits. No detector in the paper consumes local invariants: table_field consumes 645 wires, being 43 local quantities each expanded fifteen ways by neighbourhood mean, spread, difference and rank at four radii. The chain lag spectrum is itself computed at 8, 12 and 16 angstroms and the shape operator at 8, so multi-scale context may already have arrived by the other route, in which case the lift was against a bank nobody deploys",
+ "baseline": {
+  "name": "wide 645",
+  "n_wires": 645,
+  "n_local_quantities": 43,
+  "n_spatial_transforms": 15
+ },
+ "generated_family_sizes": {
+  "chain lag spectrum": 33,
+  "shape operator": 21,
+  "soft-mode hinge": 12,
+  "valuation profile": 11
+ },
+ "what_each_family_is": {
+  "chain lag spectrum": "the local Toeplitz symbol: how far along the chain a residue's spatial neighbours are, as a distribution over sequence lag. No function of the contact graph's spectrum can recover it, because that graph is the curve with the curve deleted",
+  "shape operator": "curvature with a sign. The second moment of a point cloud is positive definite and cannot tell a saddle from a flat patch; the mouth of a cleft is a saddle",
+  "valuation profile": "the non-Archimedean ball profile: how neighbour count grows with radius, read as a valuation rather than a density",
+  "soft-mode hinge": "the deformation. Shear modes of the elastic network and a thermal average over them, which is the only family here whose subject is the motion that makes a cryptic pocket cryptic"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "readout": "ridge Fisher discriminant fitted on the fit half, columns standardised there, evaluated on the pick half",
+  "ridge": 0.001,
+  "gate": "the multi-scale spatial gate the detectors use",
+  "metric": "mean per-unit ROC-AUC on the pick half",
+  "why_a_ceiling": "a Fisher discriminant solves for arbitrary real coefficients over unquantised inputs. A counting field must band every input into four levels and may only add integers, so it cannot exceed this and generally falls short of it. Every number here is an upper bound, not a prediction"
+ },
+ "ceilings": {
+  "wide 645": {
+   "mean": 0.784378,
+   "min": 0.760131,
+   "max": 0.794122
+  },
+  "wide+chain lag spectrum 678": {
+   "mean": 0.784835,
+   "min": 0.760865,
+   "max": 0.794138
+  },
+  "wide+shape operator 666": {
+   "mean": 0.784216,
+   "min": 0.759996,
+   "max": 0.793949
+  },
+  "wide+soft-mode hinge 657": {
+   "mean": 0.784019,
+   "min": 0.760082,
+   "max": 0.794084
+  },
+  "wide+valuation profile 656": {
+   "mean": 0.784325,
+   "min": 0.76019,
+   "max": 0.79457
+  },
+  "wide+chain 722": {
+   "mean": 0.784353,
+   "min": 0.760465,
+   "max": 0.794365
+  },
+  "wide+operator 835": {
+   "mean": 0.784684,
+   "min": 0.760389,
+   "max": 0.79516
+  },
+  "wide+combined 912": {
+   "mean": 0.78345,
+   "min": 0.757477,
+   "max": 0.79586
+  }
+ },
+ "lift_over_the_wide_bank": {
+  "wide+chain lag spectrum 678": {
+   "mean": 0.000457,
+   "min": -0.000516,
+   "max": 0.00121,
+   "n_splits_positive": 10,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "wide+shape operator 666": {
+   "mean": -0.000162,
+   "min": -0.000839,
+   "max": 0.00029,
+   "n_splits_positive": 4,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "wide+soft-mode hinge 657": {
+   "mean": -0.000359,
+   "min": -0.0019,
+   "max": 0.000489,
+   "n_splits_positive": 2,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "wide+valuation profile 656": {
+   "mean": -5.3e-05,
+   "min": -0.000798,
+   "max": 0.000568,
+   "n_splits_positive": 5,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "wide+chain 722": {
+   "mean": -2.6e-05,
+   "min": -0.001458,
+   "max": 0.001802,
+   "n_splits_positive": 5,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "wide+operator 835": {
+   "mean": 0.000305,
+   "min": -0.005905,
+   "max": 0.00456,
+   "n_splits_positive": 9,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "wide+combined 912": {
+   "mean": -0.000928,
+   "min": -0.00919,
+   "max": 0.003711,
+   "n_splits_positive": 7,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  }
+ },
+ "per_split": {
+  "wide 645": [
+   0.788202,
+   0.787082,
+   0.787263,
+   0.787571,
+   0.785622,
+   0.776476,
+   0.794122,
+   0.783884,
+   0.786944,
+   0.78189,
+   0.793349,
+   0.760131
+  ],
+  "wide+chain lag spectrum 678": [
+   0.788445,
+   0.787182,
+   0.787179,
+   0.788482,
+   0.785107,
+   0.777685,
+   0.794138,
+   0.784667,
+   0.78741,
+   0.782841,
+   0.794019,
+   0.760865
+  ],
+  "wide+shape operator 666": [
+   0.788409,
+   0.786965,
+   0.787327,
+   0.787006,
+   0.785517,
+   0.776752,
+   0.793949,
+   0.783431,
+   0.787234,
+   0.781498,
+   0.792511,
+   0.759996
+  ],
+  "wide+soft-mode hinge 657": [
+   0.787683,
+   0.787073,
+   0.787179,
+   0.78723,
+   0.785719,
+   0.776373,
+   0.794084,
+   0.783772,
+   0.785045,
+   0.78238,
+   0.791606,
+   0.760082
+  ],
+  "wide+valuation profile 656": [
+   0.788771,
+   0.787536,
+   0.786865,
+   0.787503,
+   0.785317,
+   0.776307,
+   0.79457,
+   0.783166,
+   0.786877,
+   0.782244,
+   0.792551,
+   0.76019
+  ],
+  "wide+chain 722": [
+   0.78769,
+   0.786766,
+   0.786894,
+   0.787464,
+   0.785386,
+   0.777651,
+   0.794365,
+   0.784252,
+   0.785712,
+   0.783693,
+   0.791891,
+   0.760465
+  ],
+  "wide+operator 835": [
+   0.790347,
+   0.788966,
+   0.791823,
+   0.787893,
+   0.779717,
+   0.778716,
+   0.79516,
+   0.783957,
+   0.790667,
+   0.777416,
+   0.79115,
+   0.760389
+  ],
+  "wide+combined 912": [
+   0.789361,
+   0.787649,
+   0.790974,
+   0.78708,
+   0.776432,
+   0.778495,
+   0.79586,
+   0.784318,
+   0.788851,
+   0.773305,
+   0.791599,
+   0.757477
+  ]
+ },
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}

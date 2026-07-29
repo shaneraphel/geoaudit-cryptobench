@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 26,
+    "exploration": 27,
     "cited": 47,
     "superseded": 15,
     "fold_access": 10
   },
-  "n_artifacts": 98,
+  "n_artifacts": 99,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -330,6 +330,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.train_operating_points.v1",
       "bytes": 25686
+    },
+    {
+      "artifact": "results/architecture_sweep/WIDE_BANK_CEILING.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.wide_bank_ceiling.v1",
+      "bytes": 6320
     },
     {
       "artifact": "results/architecture_sweep/WIDE_BUS_BANK.json",

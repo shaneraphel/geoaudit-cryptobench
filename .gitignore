@@ -82,3 +82,5 @@ paper/*.xdv
 # threshold it supports. Rebuilt by tools/pocketminer_run.py --predict --train.
 data/baselines/pocketminer_train/
 results/baselines/POCKETMINER_TRAIN_SCORES.json
+
+data/external/_setb_probe_em_*.json
