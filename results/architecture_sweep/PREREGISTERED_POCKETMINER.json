@@ -1,0 +1,151 @@
+{
+  "schema": "geoaudit.preregistered_pocketminer.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T21:16:31+0800",
+  "for_test_fold_read_index": 11,
+  "written_before_the_read": true,
+  "code_sha256": "b54fce0bf63d93d65ec01cb36fb6989adeeeb434e45388b27cf4e7a01d231a0d",
+  "head_when_written": "4bf17feaec3316edb6b9cf8092e37ebb4539a53f",
+  "question": "does the counting field predict CryptoBench's cryptic binding residues as well as PocketMiner, the cryptic-specific network CryptoBench's own paper names as representative of the task, on the same 192 single-chain units and the same residue universe",
+  "why_this_comparison_is_necessary": "P2Rank is a general pocket finder and was never fitted to cryptic sites. Beating it does not establish that a method is competitive at cryptic-site detection, and a reviewer asking why a cryptic-pocket paper compares only against a non-cryptic baseline is asking the right question",
+  "status_declared_in_advance": "exploratory",
+  "why_exploratory_and_not_confirmatory": "the fold carries 10 indexed reads before this plan was written. Nothing read after that is confirmatory, whichever direction it points, and fixing the status here stops a favourable outcome being promoted afterwards",
+  "the_baseline": {
+    "what": "PocketMiner: a geometric-vector-perceptron graph network over backbone geometry, predicting per-residue probability of participating in a pocket that opens in simulation",
+    "whose": "Meller et al., Nat. Commun. 14, 1177 (2023); the weights are theirs, at the commit pinned below",
+    "commit": "187062df3c94127e991669768009141a08fd5d8b",
+    "weight_sha256": {
+      "models/pocketminer.index": "09e36a62a987b14bc49cf7a1fa53fa734f85d85d088777f98c6aca253b47bf46",
+      "models/pocketminer.data-00000-of-00001": "6f5ab62b9fb38b54040053ac321f3362d616bae9b31569249a032dbb50890b70"
+    },
+    "scores_artifact": "results/baselines/POCKETMINER_SCORES.json",
+    "scores_artifact_sha256": "fa96b2691b0f181a98579096863f9bb437c0069fe2d8cf6a04bb6f7ed1ef6e82",
+    "n_units_scored": 192,
+    "restore_was_asserted": true,
+    "every_live_tensor_byte_identical_to_the_checkpoint": true,
+    "reads_no_label": true
+  },
+  "how_faithful_the_reproduction_is": {
+    "selftest_artifact": "results/baselines/POCKETMINER_SELFTEST.json",
+    "selftest_artifact_sha256": "667f59737b0bde97133e4236dca4cab3c32afadad6ef9cebd9d82690bf21084a",
+    "published_roc_auc": 0.87,
+    "our_roc_auc_on_their_test_set": 0.86772,
+    "published_residue_counts": [
+      563,
+      1283
+    ],
+    "our_residue_counts": [
+      563,
+      1283
+    ],
+    "residue_counts_match_exactly": true,
+    "why_this_is_pinned_before_the_read": "so that a poor result on our fold cannot afterwards be attributed to a broken rebuild, and a good one for us cannot be quietly credited to one"
+  },
+  "the_label_it_was_not_trained_for": {
+    "what_pocketminer_predicts": "whether a residue participates in a pocket that opens during molecular dynamics started from this structure",
+    "what_it_is_scored_against_here": "whether a residue contacts a ligand in a holo structure while the apo structure lacks the pocket",
+    "these_are_not_the_same_quantity": true,
+    "committed_in_advance": "if PocketMiner scores below its own published level on this fold, that is reported as a transfer between two label definitions and not as evidence that this method outperforms the state of the art at the task PocketMiner was built for"
+  },
+  "contamination": {
+    "entries_in_pocketminers_own_data": [
+      "1kx9",
+      "1rtc",
+      "3nx1",
+      "3rwv",
+      "3ugk",
+      "5uxa"
+    ],
+    "trained_on": [
+      "1rtc"
+    ],
+    "selected_on": [
+      "3rwv",
+      "5uxa"
+    ],
+    "published_on": [
+      "1kx9",
+      "3nx1",
+      "3ugk"
+    ],
+    "what_is_done": "every comparison is also run with these entries removed",
+    "direction_of_the_bias": "their presence can only favour PocketMiner, so removing them can only favour us, which is why the arm is committed here",
+    "caveat": "exact PDB entry match is a floor. PocketMiner's training systems were never clustered against CryptoBench's folds, so homologues below entry-level identity are not excluded and this repository does not claim they are"
+  },
+  "numeric_parameters": {
+    "top_q": 0.09,
+    "pocketminer_trained_budget_f1": 0.1,
+    "pocketminer_trained_budget_mcc": 0.17,
+    "pocketminer_trained_cut_f1": 0.8,
+    "pocketminer_trained_cut_mcc": 0.75,
+    "train_operating_point_artifact": "results/architecture_sweep/POCKETMINER_TRAIN_OPERATING_POINT.json",
+    "train_operating_point_sha256": "801dbb6d6591ed3917998f53aea487d4add3cbaf90b09bb3656cf568aa866e2d"
+  },
+  "statistic": {
+    "primary_functional": "the unweighted mean over units of the paired difference in per-residue ROC-AUC",
+    "why_the_mean_and_not_a_robust_summary": "it is the endpoint already declared primary in results/official_fold/ENDPOINT_STATUS.json. Choosing a different summary for a new baseline, after the mean failed to resolve against the old one, is the manoeuvre this repository has already had to retract once",
+    "why_roc_auc_is_the_fair_primary_here": "PocketMiner publishes a probability and no operating point, so a thresholded headline would be a comparison of thresholds we chose for it. ROC-AUC asks only about the ranking, which is the thing the network was fitted to produce",
+    "n_boot": 10000,
+    "seed": 20260729,
+    "ci": 0.95,
+    "paired": "the same resampled chains enter both arms",
+    "also_reported": [
+      "the median paired difference and the per-chain win, loss and tie counts",
+      "each method's own mean per-unit ROC-AUC, so the difference can be read against its level",
+      "P2Rank against PocketMiner, which places the two baselines relative to each other",
+      "the same comparison with the six contaminated entries removed"
+    ]
+  },
+  "operating_points": {
+    "common_budget": {
+      "rule": "the top 9% of residues per chain for both methods, ranked by their own score",
+      "why": "a difference in a thresholded metric between methods binarised by different conventions measures the conventions"
+    },
+    "each_methods_own_trained_rule": {
+      "counting_field": "top 9% per chain, fixed on the training fold",
+      "pocketminer": "the budget and the probability cut that maximise pooled F1 and pooled MCC on the training fold, both taken from the artifact pinned above",
+      "why": "PocketMiner has no native binarisation, so the only rule it can be held to is one chosen off this fold"
+    },
+    "what_is_not_done": "no threshold is tuned for either method on the held-out fold"
+  },
+  "multiplicity": {
+    "n_paired_tests": 6,
+    "tests": [
+      "mean per-unit ROC-AUC, counting field minus PocketMiner",
+      "mean per-unit ROC-AUC, P2Rank minus PocketMiner",
+      "positive-class F1 at a common top-9% budget, counting field minus PocketMiner",
+      "MCC at a common top-9% budget, counting field minus PocketMiner",
+      "positive-class F1, each at its own trained rule, counting field minus PocketMiner",
+      "MCC, each at its own trained rule, counting field minus PocketMiner"
+    ],
+    "correction": "Bonferroni",
+    "corrected_level": 0.008333,
+    "also_reported": "the uncorrected interval alongside it",
+    "the_contamination_arm_is_not_corrected_separately": "it is a sensitivity on the same six tests, not six more questions, and it is reported as a shift in the same intervals"
+  },
+  "guards_the_read_must_pass": [
+    "this plan's commit is an ancestor of HEAD, checked with git",
+    "the scores artifact still hashes to what is recorded here, so the baseline cannot have been rerun between the plan and the read",
+    "the self-test artifact still hashes to what is recorded here, so the reproduction evidence cannot have been regenerated after the fold was read",
+    "the training operating point still hashes to what is recorded here",
+    "the baseline is scored on the same universe, unit by unit, as the frozen per-structure telemetry, and the read asserts the residue counts match rather than assuming they do",
+    "the counting field's own mean per-unit ROC-AUC recomputed here reproduces the frozen telemetry to six decimals",
+    "every method's per-unit ROC-AUC is computed by one function, not one per method"
+  ],
+  "decision_rules": {
+    "if_pocketminer_is_ahead_and_the_interval_excludes_zero": "it is the headline of this read and it goes in the abstract. The paper's accuracy claim is then limited to P2Rank, the phrase comparable average predictive performance is narrowed to name P2Rank only, and the contribution rests on mechanical auditability and model size",
+    "if_the_field_is_ahead_and_the_interval_excludes_zero": "it is reported as the strongest accuracy evidence in the paper, still labelled exploratory, and immediately qualified by the label-definition gap recorded above. It does not license the word state-of-the-art and it does not become a claim that the field beats PocketMiner at the task PocketMiner was built for",
+    "if_the_interval_crosses_zero": "it is reported as comparable average performance against the task's own specialised network, with the interval given",
+    "if_pocketminer_lands_near_chance_on_this_fold": "the self-test pinned above rules out a broken rebuild, so this is reported as the two label definitions disagreeing more than expected, with the self-test number quoted beside it. No sentence claims that PocketMiner does not work",
+    "if_removing_the_contaminated_entries_changes_a_verdict": "the version with them removed is the one reported as primary, because their presence favours the baseline and a comparison should not be won on the baseline's own training data",
+    "if_the_two_baselines_disagree_about_each_other": "if P2Rank beats PocketMiner on this fold, that is reported plainly; it bears on how strong the field's earlier comparison was and suppressing it would be selecting"
+  },
+  "what_will_be_written_under_each_outcome": {
+    "the_interval_crosses_zero": "On the 192 single-chain units of the official test fold, the counting field and PocketMiner are separated by a mean paired per-unit ROC-AUC difference whose 95% interval includes zero. A table of integers is therefore not distinguishable on average from the graph network the cryptic-pocket literature treats as representative, on this fold, at this sample size. The comparison is exploratory: the fold had been read ten times before it was planned.",
+    "pocketminer_is_ahead": "PocketMiner is ahead of the counting field by a mean paired per-unit ROC-AUC difference whose interval excludes zero. The paper's claim of comparable average performance is therefore limited to P2Rank, and the contribution is auditability and model size rather than predictive accuracy. This is stated in the abstract.",
+    "the_field_is_ahead": "The counting field is ahead of PocketMiner by a mean paired per-unit ROC-AUC difference whose interval excludes zero, on CryptoBench's definition of a cryptic binding residue. It remains exploratory, and it is not a claim about the label PocketMiner was trained for, which is pocket opening in simulation rather than ligand contact in a holo structure.",
+    "pocketminer_lands_near_chance": "PocketMiner, restored from published weights and reproducing its own published test-set ROC-AUC of 0.87, scores near chance against CryptoBench's cryptic-residue labels on this fold. We report this as a disagreement between two definitions of a cryptic site rather than as a failure of the method."
+  },
+  "reads_test_fold": false,
+  "note": "this file is the plan. Reading the fold under it is tools/pocketminer_read.py, which refuses to run until this is committed. The baseline's scores are not a read: they contain no label and no metric"
+}
