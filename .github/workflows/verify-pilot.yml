@@ -109,6 +109,8 @@ jobs:
         run: make read12
       - name: The recovered labelling rule must still reproduce the benchmark's own records
         run: make rule
+      - name: The external validation set must still be external
+        run: make extset
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

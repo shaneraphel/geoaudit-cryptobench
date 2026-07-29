@@ -1,0 +1,23 @@
+{
+ "schema": "cryptobench.external_label.v1",
+ "clinical_grade": false,
+ "pdb_id": "9jvd",
+ "chain": "B",
+ "cryptic_residues": [
+  246,
+  248,
+  249,
+  250
+ ],
+ "binding_residues": [
+  246,
+  248,
+  249,
+  250
+ ],
+ "uniprot": "A0A3Q8IGU5",
+ "uniref50": "UniRef50_A0A836KD98",
+ "released": "2026-04-22",
+ "n_cryptic_pairs": 1,
+ "rule": "tools/recover_cryptobench_rule.py, recovered from CryptoBench's own training records"
+}

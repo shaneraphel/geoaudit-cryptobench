@@ -1,0 +1,588 @@
+{
+ "schema": "cryptobench.external_validation_set.v1",
+ "clinical_grade": false,
+ "fold": "external",
+ "clustering": {
+  "method": "uniref50",
+  "sequence_identity_threshold": 0.5,
+  "source": "UniProt UniRef50, by accession"
+ },
+ "disjoint_from": "every CryptoBench fold, by accession and by UniRef50 cluster",
+ "released_after": "2024-05-08",
+ "n_entries": 57,
+ "residue_numbers_collapsed_to_integers": true,
+ "n_units_with_a_collapse_collision": 0,
+ "collisions": [],
+ "entries": [
+  {
+   "pdb": "9eb7",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A0A0KYI1",
+   "receptor_path": "data/external/receptors/9eb7_A_receptor.pdb",
+   "receptor_sha256": "561301824493e658166ca40ed82eff688e90203ef55718b4d138f7d82469f5da",
+   "label_path": "data/external/labels/9eb7_A_labels.json",
+   "label_sha256": "81f71f21a0bde468612eec0911df7dd9b2d0681a98143e2cd47e492b75a40373",
+   "split": "external"
+  },
+  {
+   "pdb": "9x6i",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A0H3KM34",
+   "receptor_path": "data/external/receptors/9x6i_A_receptor.pdb",
+   "receptor_sha256": "d017ffd3b83ffb60ba9d448668685fe26df0bc1b021fb56ec5fd3964a8323c62",
+   "label_path": "data/external/labels/9x6i_A_labels.json",
+   "label_sha256": "a306d990a35a1fe3fc5dcfef302817af612d162adb95704119e9c6e5397ecd7a",
+   "split": "external"
+  },
+  {
+   "pdb": "8xxd",
+   "chain": "B",
+   "cluster_id": "UniRef50_A0A0S3QTD0",
+   "receptor_path": "data/external/receptors/8xxd_B_receptor.pdb",
+   "receptor_sha256": "a7189c25015c822cce13427deb8f22b39d69338463d179b8a99ca314ac5223c6",
+   "label_path": "data/external/labels/8xxd_B_labels.json",
+   "label_sha256": "7e71c51935c85f263e246df32cbd428a9a9adcb79fbac68ce4908c0039e24f06",
+   "split": "external"
+  },
+  {
+   "pdb": "9bb9",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A2K4XG66",
+   "receptor_path": "data/external/receptors/9bb9_A_receptor.pdb",
+   "receptor_sha256": "a57b1f3fab5425d9795efaa21dc7f46068928c9307f9f56ed25667dc1adfa3b3",
+   "label_path": "data/external/labels/9bb9_A_labels.json",
+   "label_sha256": "f59877dfd8edead09dc50b7d63db472dcd8ae40fe6ff0ad3b1affb75de342772",
+   "split": "external"
+  },
+  {
+   "pdb": "9dih",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A2P0QGK5",
+   "receptor_path": "data/external/receptors/9dih_A_receptor.pdb",
+   "receptor_sha256": "aa19b054a80eba00e1c218d3f52edfaca81a522cd5380c7ac786fe1db861f0e7",
+   "label_path": "data/external/labels/9dih_A_labels.json",
+   "label_sha256": "61099344cf5f6d360da3563c710bcf9c0a3037a75d7d50d771a8f1e00dca078e",
+   "split": "external"
+  },
+  {
+   "pdb": "8ylg",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A5C0ARG2",
+   "receptor_path": "data/external/receptors/8ylg_A_receptor.pdb",
+   "receptor_sha256": "919a41f5d04007d8a42a064643fa098da27ffa0bd2543ac5430572b36f9acd60",
+   "label_path": "data/external/labels/8ylg_A_labels.json",
+   "label_sha256": "647b6cca0f070caadbf5ffc28bebe7b79ca54d8ab2c2d38cd740070c93fe185a",
+   "split": "external"
+  },
+  {
+   "pdb": "9jpk",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A6N0JVZ6",
+   "receptor_path": "data/external/receptors/9jpk_A_receptor.pdb",
+   "receptor_sha256": "d39d27d3f7def3940e3d5e220e0511991c0993e9f7fe6f148a4490f6ee3f4978",
+   "label_path": "data/external/labels/9jpk_A_labels.json",
+   "label_sha256": "68d001a64795175b225272afeebab445c8c2ed50945c3ead7937f259de7e3a39",
+   "split": "external"
+  },
+  {
+   "pdb": "9r7o",
+   "chain": "B",
+   "cluster_id": "UniRef50_A0A7W9ZAK7",
+   "receptor_path": "data/external/receptors/9r7o_B_receptor.pdb",
+   "receptor_sha256": "387ff2f19537dbf1e3cab5e5e6fda4d65646599fe20afe29a8f9291d44aa0dd9",
+   "label_path": "data/external/labels/9r7o_B_labels.json",
+   "label_sha256": "545537231678a6f3c2805abbf8e1a15063a7f195d5248b88d83de96701c0411d",
+   "split": "external"
+  },
+  {
+   "pdb": "9fsg",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A7Z7HU23",
+   "receptor_path": "data/external/receptors/9fsg_A_receptor.pdb",
+   "receptor_sha256": "aa16a549d5ac3174c39c8ac9c7536326679d2dfe55db006588d7013b5ae0411d",
+   "label_path": "data/external/labels/9fsg_A_labels.json",
+   "label_sha256": "1244f2d9a0dba15b04c859ff99922c0ce6594ac60b1f939cd65b42e64fdd22bb",
+   "split": "external"
+  },
+  {
+   "pdb": "9jvd",
+   "chain": "B",
+   "cluster_id": "UniRef50_A0A836KD98",
+   "receptor_path": "data/external/receptors/9jvd_B_receptor.pdb",
+   "receptor_sha256": "a2dd82eab28362339f821e198f4d0deb9acbcceb726ee11163cacf47dc11f1b5",
+   "label_path": "data/external/labels/9jvd_B_labels.json",
+   "label_sha256": "50428e408267cdc2a8aa83ba19fe74812d40356e21ee24a392535c8fa75ae51f",
+   "split": "external"
+  },
+  {
+   "pdb": "9tkv",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A8C3FQV8",
+   "receptor_path": "data/external/receptors/9tkv_A_receptor.pdb",
+   "receptor_sha256": "4043b64765cdd89502624eb09f970e2525e0dd2d208c646f57239db98990bd44",
+   "label_path": "data/external/labels/9tkv_A_labels.json",
+   "label_sha256": "2bbef55c7c0c145b666a5856c5471a2d216ecb83117bf73f15aa9ed7d24f250b",
+   "split": "external"
+  },
+  {
+   "pdb": "9jju",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A8J0SVJ0",
+   "receptor_path": "data/external/receptors/9jju_A_receptor.pdb",
+   "receptor_sha256": "e24d6e3463af113ea0e61915f6065410da7ef119e972b68328c779f3b88da069",
+   "label_path": "data/external/labels/9jju_A_labels.json",
+   "label_sha256": "a357e2104d3cb1d8156eac57e0b323d8d3ccbb2b53e93b3707fe52abf13a15ed",
+   "split": "external"
+  },
+  {
+   "pdb": "9whf",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0A8K1LQG6",
+   "receptor_path": "data/external/receptors/9whf_A_receptor.pdb",
+   "receptor_sha256": "1a8919b5b49fca8b38203eef3506d52186e498c36e089eb342ebece33bcf298c",
+   "label_path": "data/external/labels/9whf_A_labels.json",
+   "label_sha256": "c0f6736aa3b0d264fdbf88cd2585482eb906b038ef94b479515548893d60e199",
+   "split": "external"
+  },
+  {
+   "pdb": "9vis",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0ABM7ZCS0",
+   "receptor_path": "data/external/receptors/9vis_A_receptor.pdb",
+   "receptor_sha256": "dae41e5188f1bbb07d395d2231388d41cea1c46c2bdbd91b8af4a7db7d58cf96",
+   "label_path": "data/external/labels/9vis_A_labels.json",
+   "label_sha256": "8e8cf7a9cc56e9c4a95ddd02e67f53e7bafba5ba68a72be06e0513d2923f1543",
+   "split": "external"
+  },
+  {
+   "pdb": "8yyr",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0ABQ4HKZ2",
+   "receptor_path": "data/external/receptors/8yyr_A_receptor.pdb",
+   "receptor_sha256": "dc15be906030e34099642e73c83bb3b01cc5a74c5c2fa6d06c3944cb71447388",
+   "label_path": "data/external/labels/8yyr_A_labels.json",
+   "label_sha256": "48f66f1e9011b2e1b9a3a2a7f37cac026349aed33863c8b6f8815cf0f495aaf6",
+   "split": "external"
+  },
+  {
+   "pdb": "9cir",
+   "chain": "A",
+   "cluster_id": "UniRef50_A0ABY6HS17",
+   "receptor_path": "data/external/receptors/9cir_A_receptor.pdb",
+   "receptor_sha256": "747f2fb68ba43928de1d0d1b8790176bbb41caf5dc883acb2090406241c01d4d",
+   "label_path": "data/external/labels/9cir_A_labels.json",
+   "label_sha256": "cb032865f96c7a83e262e39f37f97a0f38734376dba3bdf6d7a2dcd2900a05a2",
+   "split": "external"
+  },
+  {
+   "pdb": "9l92",
+   "chain": "A",
+   "cluster_id": "UniRef50_E9Q401",
+   "receptor_path": "data/external/receptors/9l92_A_receptor.pdb",
+   "receptor_sha256": "fdfb023a18ec4d9de8bffc69ab274f85edb29a00e6121c03134078da1bb3cffb",
+   "label_path": "data/external/labels/9l92_A_labels.json",
+   "label_sha256": "f18b88f31b4e1c5bf326af017d2cdb25044d34c4760615e64173831848c4f81b",
+   "split": "external"
+  },
+  {
+   "pdb": "9qyz",
+   "chain": "A",
+   "cluster_id": "UniRef50_H1DD43",
+   "receptor_path": "data/external/receptors/9qyz_A_receptor.pdb",
+   "receptor_sha256": "61507883989977441ed975b7a8d86f0fbe1b8f92ec6534dbb73eb5fd475cc97f",
+   "label_path": "data/external/labels/9qyz_A_labels.json",
+   "label_sha256": "fb951cb4d72c2b1ab3f7df88cdfffb19b5a88b79adf4f8ac4d4683787f9e1f38",
+   "split": "external"
+  },
+  {
+   "pdb": "9kuq",
+   "chain": "A",
+   "cluster_id": "UniRef50_O06428",
+   "receptor_path": "data/external/receptors/9kuq_A_receptor.pdb",
+   "receptor_sha256": "0b845dfcc203a4e473f757a9c38cd9e7b0021166f8853715add8d8edfe82a562",
+   "label_path": "data/external/labels/9kuq_A_labels.json",
+   "label_sha256": "875cf075292ba64fd342d966a4807d00ce64fb3440e1a016f29d7b99efbb42d9",
+   "split": "external"
+  },
+  {
+   "pdb": "9yi3",
+   "chain": "A",
+   "cluster_id": "UniRef50_O32504",
+   "receptor_path": "data/external/receptors/9yi3_A_receptor.pdb",
+   "receptor_sha256": "4746de5215280eb9baf25a6ef81e8892507e2eb7077c849e8b956da6293435a6",
+   "label_path": "data/external/labels/9yi3_A_labels.json",
+   "label_sha256": "a7dee2eced769879b86e287c0259e0ff76f0f327a8514384101221915e71614a",
+   "split": "external"
+  },
+  {
+   "pdb": "9ky9",
+   "chain": "A",
+   "cluster_id": "UniRef50_P00954",
+   "receptor_path": "data/external/receptors/9ky9_A_receptor.pdb",
+   "receptor_sha256": "e67cedba6554faeaf80078e0dd3d5303634d6015fb2bc1fbd67a253e2b99e514",
+   "label_path": "data/external/labels/9ky9_A_labels.json",
+   "label_sha256": "046d40925bec9b202308044d5b542aeb5a3609fc6b8196e93213b7d513fe450d",
+   "split": "external"
+  },
+  {
+   "pdb": "9jzw",
+   "chain": "A",
+   "cluster_id": "UniRef50_P08178",
+   "receptor_path": "data/external/receptors/9jzw_A_receptor.pdb",
+   "receptor_sha256": "0dc6aae51229e07b8754aadec168a2b69ed4f87d5897ee9ca40081fd716a4afd",
+   "label_path": "data/external/labels/9jzw_A_labels.json",
+   "label_sha256": "dc15a50b593c4e8ab4b0de8d1ebf364367847fd77687674b1347acbe4880a1dd",
+   "split": "external"
+  },
+  {
+   "pdb": "9tfd",
+   "chain": "A",
+   "cluster_id": "UniRef50_P10721",
+   "receptor_path": "data/external/receptors/9tfd_A_receptor.pdb",
+   "receptor_sha256": "a7129106e0bc26c79d67e7838bac1c4d50df740922706d95bc27a26f8b6fd249",
+   "label_path": "data/external/labels/9tfd_A_labels.json",
+   "label_sha256": "ef5cc43dd12a4d12d14efabb970bee53c42d18eba0d85bb9572aac28de6b50c4",
+   "split": "external"
+  },
+  {
+   "pdb": "11gx",
+   "chain": "A",
+   "cluster_id": "UniRef50_P14294",
+   "receptor_path": "data/external/receptors/11gx_A_receptor.pdb",
+   "receptor_sha256": "731ed0b3522d54b0cf5fe63e63a70d79c8ffb47ef11258384db2ce7001680509",
+   "label_path": "data/external/labels/11gx_A_labels.json",
+   "label_sha256": "b7adc197524074faa956d84f80668a98859dbe233f165a89dee02c795404667d",
+   "split": "external"
+  },
+  {
+   "pdb": "9hib",
+   "chain": "A",
+   "cluster_id": "UniRef50_P14618",
+   "receptor_path": "data/external/receptors/9hib_A_receptor.pdb",
+   "receptor_sha256": "c805bec6bd80b65d0b29025acbeb4e4629d4767757d460c460810f09e6fb1149",
+   "label_path": "data/external/labels/9hib_A_labels.json",
+   "label_sha256": "da7cd797163802e6c85150dd514e1bc5d7fabdc4b440d652fd3bde4c7f066d24",
+   "split": "external"
+  },
+  {
+   "pdb": "9v67",
+   "chain": "B",
+   "cluster_id": "UniRef50_P20906",
+   "receptor_path": "data/external/receptors/9v67_B_receptor.pdb",
+   "receptor_sha256": "60ded6128e7c606c56ca824021a339d45c423f560b81675e7eae786c7ab5979b",
+   "label_path": "data/external/labels/9v67_B_labels.json",
+   "label_sha256": "539280ddc268ccc4351385b77f98f5d16f7e47a13bc0213ab7dc0a236e9dbbb3",
+   "split": "external"
+  },
+  {
+   "pdb": "9hkb",
+   "chain": "B",
+   "cluster_id": "UniRef50_P31002",
+   "receptor_path": "data/external/receptors/9hkb_B_receptor.pdb",
+   "receptor_sha256": "4fc5f76b499c6a61f63761b5f9e6edc267099cf5663039155e43645b64b8685a",
+   "label_path": "data/external/labels/9hkb_B_labels.json",
+   "label_sha256": "defa23a74c313745d6d61e9416cc59f894c84a34be5f769cfd2d73f0080bea15",
+   "split": "external"
+  },
+  {
+   "pdb": "9o9q",
+   "chain": "A",
+   "cluster_id": "UniRef50_P49331",
+   "receptor_path": "data/external/receptors/9o9q_A_receptor.pdb",
+   "receptor_sha256": "5f54cbca449faf97b5e0edd75f895c4f393ffb30b2c95e05cc907b07e092e4c0",
+   "label_path": "data/external/labels/9o9q_A_labels.json",
+   "label_sha256": "db6fc941f2d15057413d81e68872054081fb24a92922678a073d489fe801355d",
+   "split": "external"
+  },
+  {
+   "pdb": "8r9a",
+   "chain": "A",
+   "cluster_id": "UniRef50_P50613",
+   "receptor_path": "data/external/receptors/8r9a_A_receptor.pdb",
+   "receptor_sha256": "c4d201fe1da7d91b0bf27df6d809e5af7840c58d3f64404b33389f590bbd35d7",
+   "label_path": "data/external/labels/8r9a_A_labels.json",
+   "label_sha256": "758274a8768129a8da24f52fa560ccb525b153a6aac11069752131168a1abbe1",
+   "split": "external"
+  },
+  {
+   "pdb": "9i9g",
+   "chain": "A",
+   "cluster_id": "UniRef50_P60842",
+   "receptor_path": "data/external/receptors/9i9g_A_receptor.pdb",
+   "receptor_sha256": "9922c031ef20babfb49325d52327d97874ab6b1a4964da26d623cad0ce54c2de",
+   "label_path": "data/external/labels/9i9g_A_labels.json",
+   "label_sha256": "aaec1d53c299b6cc35f3725ebe00a8ff8183c83c736bb9272aa14b442167ce0a",
+   "split": "external"
+  },
+  {
+   "pdb": "9n4c",
+   "chain": "A",
+   "cluster_id": "UniRef50_P61586",
+   "receptor_path": "data/external/receptors/9n4c_A_receptor.pdb",
+   "receptor_sha256": "40a5115c23bd16cd20a77f66f57305074e9afc25504550c7b0ffb412c28aab37",
+   "label_path": "data/external/labels/9n4c_A_labels.json",
+   "label_sha256": "65b23c1249eb9afa61a6355cff04dba255ef8d7b0e66a66c377a498a19b43d38",
+   "split": "external"
+  },
+  {
+   "pdb": "9gu8",
+   "chain": "B",
+   "cluster_id": "UniRef50_P62166",
+   "receptor_path": "data/external/receptors/9gu8_B_receptor.pdb",
+   "receptor_sha256": "e4a6680fd1f5f6cdac8f00aa4cc5118a18120d65756dab2d04902de77e1147a9",
+   "label_path": "data/external/labels/9gu8_B_labels.json",
+   "label_sha256": "d432b0ed3f691104086ee3ba7459c42b001f158c661b4c411a52ee0abcea9eef",
+   "split": "external"
+  },
+  {
+   "pdb": "9ifk",
+   "chain": "A",
+   "cluster_id": "UniRef50_P63000",
+   "receptor_path": "data/external/receptors/9ifk_A_receptor.pdb",
+   "receptor_sha256": "72b866c29884d6b37886179a2d786be77dbfce479a727aa788e8092ab7f4782f",
+   "label_path": "data/external/labels/9ifk_A_labels.json",
+   "label_sha256": "2baf1be4086b7e7be08274202f07a1e45ea233f61e84f6b2fa5410a6a897aaa8",
+   "split": "external"
+  },
+  {
+   "pdb": "7i7y",
+   "chain": "A",
+   "cluster_id": "UniRef50_P68400",
+   "receptor_path": "data/external/receptors/7i7y_A_receptor.pdb",
+   "receptor_sha256": "29cfa50ab0dd8ce986e207104c6605979f98387ca8a25523c7dcd3eefcff8870",
+   "label_path": "data/external/labels/7i7y_A_labels.json",
+   "label_sha256": "ded20bf345d21cda3ee6218f86d1fac814699e5fff7a2aaa5e3c4b0393d5209f",
+   "split": "external"
+  },
+  {
+   "pdb": "8x6a",
+   "chain": "A",
+   "cluster_id": "UniRef50_P93836",
+   "receptor_path": "data/external/receptors/8x6a_A_receptor.pdb",
+   "receptor_sha256": "197c944c4d09358dec88f46e913bef0f8d73250a044465c0cac2b77669833554",
+   "label_path": "data/external/labels/8x6a_A_labels.json",
+   "label_sha256": "012ba6c56981082a45f3b506542a6086b74ccc2e2ebc83f2f75d6679f8fa3bf4",
+   "split": "external"
+  },
+  {
+   "pdb": "9lmg",
+   "chain": "A",
+   "cluster_id": "UniRef50_P95480",
+   "receptor_path": "data/external/receptors/9lmg_A_receptor.pdb",
+   "receptor_sha256": "31d7434ab15ba8fef22e27ce2be153b58fe62af6c3896de540482ba17e5e5966",
+   "label_path": "data/external/labels/9lmg_A_labels.json",
+   "label_sha256": "00481ec037be0670b9b7a247b68ee0ca5bfd05a2a9f485bd4975fef7da863529",
+   "split": "external"
+  },
+  {
+   "pdb": "9d7l",
+   "chain": "A",
+   "cluster_id": "UniRef50_P95629",
+   "receptor_path": "data/external/receptors/9d7l_A_receptor.pdb",
+   "receptor_sha256": "54b983d546f9bf43e42694e841ed9c744cc4ec26afaa39f8fa30e8f548e3ff11",
+   "label_path": "data/external/labels/9d7l_A_labels.json",
+   "label_sha256": "1a7a20a14e66232a0fdfc4746c2461c8c8ac2d71545d9c9a2b2cb5d69b5bca35",
+   "split": "external"
+  },
+  {
+   "pdb": "9m1q",
+   "chain": "A",
+   "cluster_id": "UniRef50_P9WFQ3",
+   "receptor_path": "data/external/receptors/9m1q_A_receptor.pdb",
+   "receptor_sha256": "3dcb060f477aff07e5fac77cc84a941eb8aee9272805b771e0b3dea5a2b34b95",
+   "label_path": "data/external/labels/9m1q_A_labels.json",
+   "label_sha256": "1fcf7be70631edfa2d6ab27a0882df362197e191c5272ed197351b3a7cff3910",
+   "split": "external"
+  },
+  {
+   "pdb": "9d5f",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q13418",
+   "receptor_path": "data/external/receptors/9d5f_A_receptor.pdb",
+   "receptor_sha256": "b8ff925009acde40a9715bc992905422a91a3ddd40a82a3d319ee58efc34a395",
+   "label_path": "data/external/labels/9d5f_A_labels.json",
+   "label_sha256": "de366bdf7120309779283d7157e46bab7e51c3a01c263c5abf57d9af8f7a6390",
+   "split": "external"
+  },
+  {
+   "pdb": "9mhb",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q16539",
+   "receptor_path": "data/external/receptors/9mhb_A_receptor.pdb",
+   "receptor_sha256": "3911de35a488c08c102293b333b05fbf4ca95e5a437d62d969470e213efaa20d",
+   "label_path": "data/external/labels/9mhb_A_labels.json",
+   "label_sha256": "57d47705b4ada2a4a75bf4dfffdcb32e768464e24b634fb78563fc7b64f16885",
+   "split": "external"
+  },
+  {
+   "pdb": "8vir",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q2FZ58",
+   "receptor_path": "data/external/receptors/8vir_A_receptor.pdb",
+   "receptor_sha256": "63c3e51dc5ecc94a782bd3c2bcbc1889313959e93e56874642c24080d126ee26",
+   "label_path": "data/external/labels/8vir_A_labels.json",
+   "label_sha256": "f1812e94534f0acaf0108cb1f4751b2c1e9cb8eedbad41acae64ffc27f21cd28",
+   "split": "external"
+  },
+  {
+   "pdb": "8s38",
+   "chain": "B",
+   "cluster_id": "UniRef50_Q43314",
+   "receptor_path": "data/external/receptors/8s38_B_receptor.pdb",
+   "receptor_sha256": "b15456b54bcb9d04365a627cf6ec5650a6ad154f57a842b4008f57aa0f5c1722",
+   "label_path": "data/external/labels/8s38_B_labels.json",
+   "label_sha256": "1ea0139d416a08a44ed34d0167c779875f3f3d9138907d57180b33383a6afa18",
+   "split": "external"
+  },
+  {
+   "pdb": "8v35",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q46N53",
+   "receptor_path": "data/external/receptors/8v35_A_receptor.pdb",
+   "receptor_sha256": "2e9c427cc682d8f576e7ca9ee96d4daf837e6349090b4c1b95664f47e9542ffb",
+   "label_path": "data/external/labels/8v35_A_labels.json",
+   "label_sha256": "74142275c82d51539f48e07e70ee3ebdd0f7ca45050132077fd1c62c8d9ab34e",
+   "split": "external"
+  },
+  {
+   "pdb": "9k00",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q5JFN7",
+   "receptor_path": "data/external/receptors/9k00_A_receptor.pdb",
+   "receptor_sha256": "5eda3b514f0b1d8c7ff3a6b9c53541734ddc82444120138619ad6b65cb5f8107",
+   "label_path": "data/external/labels/9k00_A_labels.json",
+   "label_sha256": "f0865ad9e191813395bf2f006b3d450290f25e91353eb392c1b809d960cbbec4",
+   "split": "external"
+  },
+  {
+   "pdb": "9bkq",
+   "chain": "B",
+   "cluster_id": "UniRef50_Q6VZV4",
+   "receptor_path": "data/external/receptors/9bkq_B_receptor.pdb",
+   "receptor_sha256": "6228d502dc0a92c77a4542185aaff376cbbb8668af80e7304f34bba14d98966b",
+   "label_path": "data/external/labels/9bkq_B_labels.json",
+   "label_sha256": "a0d6854c2bb5dce94f8efb47064baef57da69853f99e7731762581d3e47c4606",
+   "split": "external"
+  },
+  {
+   "pdb": "9gcy",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q8A622",
+   "receptor_path": "data/external/receptors/9gcy_A_receptor.pdb",
+   "receptor_sha256": "aab6240323a1183a33645da273f46303b0c3e68e7915697cc1216280882f45b6",
+   "label_path": "data/external/labels/9gcy_A_labels.json",
+   "label_sha256": "4abd8a64ac9d3818a9896554d63b44336b94d0f64441c5f1c12e742985a0ecc8",
+   "split": "external"
+  },
+  {
+   "pdb": "9j2z",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q8C6L5",
+   "receptor_path": "data/external/receptors/9j2z_A_receptor.pdb",
+   "receptor_sha256": "20506a89d817ee2e8184f86191b521067a8e38974634f7934a6df04e2e5115d6",
+   "label_path": "data/external/labels/9j2z_A_labels.json",
+   "label_sha256": "dcf4a001b1274cf0cb9c406aa7e3ad92d1eb294ce6deb427c39f8aedefb4a5fe",
+   "split": "external"
+  },
+  {
+   "pdb": "9ql9",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q8F424",
+   "receptor_path": "data/external/receptors/9ql9_A_receptor.pdb",
+   "receptor_sha256": "cb055580f867a17c467b17f328b0349cbfd54584831098a57b8f40e6fa9dd3a0",
+   "label_path": "data/external/labels/9ql9_A_labels.json",
+   "label_sha256": "eda28aaca97a8243de17117a4cd19af1368470fadc8cbff17af263af3d020aba",
+   "split": "external"
+  },
+  {
+   "pdb": "9c9c",
+   "chain": "B",
+   "cluster_id": "UniRef50_Q8N423",
+   "receptor_path": "data/external/receptors/9c9c_B_receptor.pdb",
+   "receptor_sha256": "3ae9698e0b3ae654ae8d77a2b3f5e71b5f114afeeeeddb6eec5614cffdf0049f",
+   "label_path": "data/external/labels/9c9c_B_labels.json",
+   "label_sha256": "88d129fa6debe0da72fa8bcca7f66a149fc3765b03d9d7bb4dd57510dbebaf1e",
+   "split": "external"
+  },
+  {
+   "pdb": "9lio",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q8N884",
+   "receptor_path": "data/external/receptors/9lio_A_receptor.pdb",
+   "receptor_sha256": "2eea6310523603ded54d6744965072fee61bbfc81c28870c02cbdb969807493c",
+   "label_path": "data/external/labels/9lio_A_labels.json",
+   "label_sha256": "caad405e4fccf9817a75576119cabd21bb6e6e484baff0a7a1b2bc730a49dc3e",
+   "split": "external"
+  },
+  {
+   "pdb": "9hln",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q97T38",
+   "receptor_path": "data/external/receptors/9hln_A_receptor.pdb",
+   "receptor_sha256": "c8625d3c6b10d0185e0dab4117ac3ad6dcb8e8b3f5586790d55058074ac62e60",
+   "label_path": "data/external/labels/9hln_A_labels.json",
+   "label_sha256": "1d9ea55dcb1cb0819d88fd9296e973ad50caedae8c770e734871460f1ab183a5",
+   "split": "external"
+  },
+  {
+   "pdb": "8weu",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q9EY88",
+   "receptor_path": "data/external/receptors/8weu_A_receptor.pdb",
+   "receptor_sha256": "d71617bc88f08ac14209e209a84d6c251818323b6ff06f60b950efd4bca06443",
+   "label_path": "data/external/labels/8weu_A_labels.json",
+   "label_sha256": "5e0ac762ecd19830378b4a2e2bb547d69af881d8fad3781ae215a3801b7a5950",
+   "split": "external"
+  },
+  {
+   "pdb": "9cx8",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q9H479",
+   "receptor_path": "data/external/receptors/9cx8_A_receptor.pdb",
+   "receptor_sha256": "5cf26cce2ed10106763908a16f12fd35764e38f29366bc7a36f7cc9eb4de3705",
+   "label_path": "data/external/labels/9cx8_A_labels.json",
+   "label_sha256": "adcadfae92fbba05f5ec8a6a80204feec5a73dbfbd68d3f573f183283812a0f7",
+   "split": "external"
+  },
+  {
+   "pdb": "8wdq",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q9HXI4",
+   "receptor_path": "data/external/receptors/8wdq_A_receptor.pdb",
+   "receptor_sha256": "00f5a1cabe1d8d7956b212afce388204975661045fb39c9894ab7ec9feae6df3",
+   "label_path": "data/external/labels/8wdq_A_labels.json",
+   "label_sha256": "1901a50e0dde37cad9fa458454bd83776fda5ee59e9b27970580439a47527ec3",
+   "split": "external"
+  },
+  {
+   "pdb": "9xau",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q9SJH7",
+   "receptor_path": "data/external/receptors/9xau_A_receptor.pdb",
+   "receptor_sha256": "3bb2aa21eaf2df0cd5579afd27278d1a25cd6c2a9ffdc153d6464b5311edcc30",
+   "label_path": "data/external/labels/9xau_A_labels.json",
+   "label_sha256": "fd07cecfdbe49331fa471548dc6fc0ba4839316d449e1369bb1f5b51d8ed4aa6",
+   "split": "external"
+  },
+  {
+   "pdb": "8hzy",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q9ZGH1",
+   "receptor_path": "data/external/receptors/8hzy_A_receptor.pdb",
+   "receptor_sha256": "3d3b79bf381e86c26123fe5242bde1f4a627e5495c25616197bb2d4e3b6273ea",
+   "label_path": "data/external/labels/8hzy_A_labels.json",
+   "label_sha256": "a6efaf8b4f7e2241d8eeff53f348bc13490c3ba598bb5b970d91fe7a8ba2d1b7",
+   "split": "external"
+  },
+  {
+   "pdb": "8xj9",
+   "chain": "A",
+   "cluster_id": "UniRef50_Q9ZV06",
+   "receptor_path": "data/external/receptors/8xj9_A_receptor.pdb",
+   "receptor_sha256": "777e5d7184b717122d79f508ff29dc3ff90309208a034c49c41e5df1df7ef664",
+   "label_path": "data/external/labels/8xj9_A_labels.json",
+   "label_sha256": "b24d0d3d449cbfcb50b86ddb124935a2872abedb0867d2c6312df4b56ec447ca",
+   "split": "external"
+  }
+ ]
+}

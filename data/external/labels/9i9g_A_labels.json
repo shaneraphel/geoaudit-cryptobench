@@ -1,0 +1,31 @@
+{
+ "schema": "cryptobench.external_label.v1",
+ "clinical_grade": false,
+ "pdb_id": "9i9g",
+ "chain": "A",
+ "cryptic_residues": [
+  335,
+  337,
+  339,
+  358,
+  362,
+  365,
+  366,
+  368
+ ],
+ "binding_residues": [
+  335,
+  337,
+  339,
+  358,
+  362,
+  365,
+  366,
+  368
+ ],
+ "uniprot": "P60842",
+ "uniref50": "UniRef50_P60842",
+ "released": "2026-02-18",
+ "n_cryptic_pairs": 5,
+ "rule": "tools/recover_cryptobench_rule.py, recovered from CryptoBench's own training records"
+}

@@ -1,0 +1,43 @@
+{
+ "schema": "cryptobench.external_label.v1",
+ "clinical_grade": false,
+ "pdb_id": "7i7y",
+ "chain": "A",
+ "cryptic_residues": [
+  45,
+  47,
+  53,
+  66,
+  68,
+  95,
+  113,
+  114,
+  116,
+  118,
+  163,
+  174,
+  175,
+  176
+ ],
+ "binding_residues": [
+  45,
+  47,
+  53,
+  66,
+  68,
+  95,
+  113,
+  114,
+  116,
+  118,
+  163,
+  174,
+  175,
+  176
+ ],
+ "uniprot": "P68400",
+ "uniref50": "UniRef50_P68400",
+ "released": "2026-01-14",
+ "n_cryptic_pairs": 1,
+ "rule": "tools/recover_cryptobench_rule.py, recovered from CryptoBench's own training records"
+}

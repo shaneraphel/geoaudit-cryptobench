@@ -1,0 +1,43 @@
+{
+ "schema": "cryptobench.external_label.v1",
+ "clinical_grade": false,
+ "pdb_id": "9l92",
+ "chain": "A",
+ "cryptic_residues": [
+  876,
+  877,
+  880,
+  884,
+  895,
+  902,
+  904,
+  911,
+  915,
+  919,
+  1009,
+  1018,
+  1033,
+  1036
+ ],
+ "binding_residues": [
+  876,
+  877,
+  880,
+  884,
+  895,
+  902,
+  904,
+  911,
+  915,
+  919,
+  1009,
+  1018,
+  1033,
+  1036
+ ],
+ "uniprot": "Q15413",
+ "uniref50": "UniRef50_E9Q401",
+ "released": "2025-10-22",
+ "n_cryptic_pairs": 2,
+ "rule": "tools/recover_cryptobench_rule.py, recovered from CryptoBench's own training records"
+}

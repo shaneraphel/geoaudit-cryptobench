@@ -11,10 +11,10 @@
   "counts": {
     "exploration": 26,
     "cited": 45,
-    "superseded": 10,
+    "superseded": 11,
     "fold_access": 10
   },
-  "n_artifacts": 91,
+  "n_artifacts": 92,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -428,6 +428,13 @@
       "reason": "an earlier frozen state, kept for the record",
       "schema": "geoaudit.cryptobench_rule.v1",
       "bytes": 6058
+    },
+    {
+      "artifact": "results/external/EXTERNAL_SET.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.external_set.v1",
+      "bytes": 370899
     },
     {
       "artifact": "results/gf4_ablation/GF4_ALLELE_ABLATION.json",
