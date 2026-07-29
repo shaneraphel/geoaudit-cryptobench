@@ -107,6 +107,8 @@ jobs:
         run: make curveplan
       - name: The twelfth read must reproduce read seven at the deployed threshold
         run: make read12
+      - name: The recovered labelling rule must still reproduce the benchmark's own records
+        run: make rule
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

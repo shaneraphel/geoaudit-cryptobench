@@ -1,0 +1,158 @@
+{
+  "schema": "geoaudit.cryptobench_rule.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T22:38:45+0800",
+  "code_sha256": "d463325e16d76c9012bb7267e9c8544b983d902356c48581fd9ebb2cd2d25429",
+  "machine": "macOS-26.2-arm64-arm-64bit",
+  "question": "what rule turns a CryptoBench apo-holo pair into the labels the deposit publishes, and does the recovered rule reproduce them exactly",
+  "why_it_is_asked": "an external validation set is worth building only if its labels mean what the benchmark's mean. The deposit publishes labels and a trained baseline but not the scripts, so the rule has to be recovered and then shown to be the right one",
+  "reads_test_fold": false,
+  "why_no_read_is_spent": "the rule is a property of the benchmark, not of a fold. Training pairs settle it, and settling it on held-out pairs would spend a read on a question that does not need one",
+  "test_fold_read_index": null,
+  "recovered_rule": {
+    "contact_angstrom": 4.5,
+    "hydrogens_count": true,
+    "ligand_copy": "matched on name, chain and residue number together",
+    "cryptic_filter": "pRMSD >= 2.0 angstrom",
+    "prmsd_floor": 2.0,
+    "polymer_includes_seqres_hetatm": true,
+    "polymer": "a residue of the chain is protein when it is an ATOM record or when its name appears in that chain's SEQRES, which is what admits selenomethionine, carboxylysine and the other modified residues the deposit labels and the PDB files record as HETATM",
+    "prmsd": "RMSD over corresponding pocket heavy atoms after Kabsch superposition on those same atoms",
+    "per_unit_label": "the union of apo_pocket_selection over every holo partner of that apo chain",
+    "apo_correspondence": "1:1 but not the identity; numbering differs in 530 of 5493 pair records, so new structures need an alignment. Here the correspondence is read from the deposit, to isolate the rule from the alignment"
+  },
+  "contact_rule": {
+    "exact": 505,
+    "compared": 510,
+    "residues_we_added": 6,
+    "residues_we_missed": 0,
+    "added_absent_from_apo": 5,
+    "disagreeing": [
+      {
+        "apo": "4pvr_A",
+        "holo": "4osx",
+        "ligand": "GLY403",
+        "we_added": [
+          "402"
+        ],
+        "we_missed": []
+      },
+      {
+        "apo": "4qfk_A",
+        "holo": "4qfo",
+        "ligand": "MET601",
+        "we_added": [
+          "602"
+        ],
+        "we_missed": []
+      },
+      {
+        "apo": "5rar_B",
+        "holo": "5rau",
+        "ligand": "HGE1801",
+        "we_added": [
+          "1378",
+          "1379"
+        ],
+        "we_missed": []
+      },
+      {
+        "apo": "6h1o_B",
+        "holo": "8jc3",
+        "ligand": "PHE506",
+        "we_added": [
+          "504"
+        ],
+        "we_missed": []
+      },
+      {
+        "apo": "6h1o_B",
+        "holo": "8jc3",
+        "ligand": "PHE506",
+        "we_added": [
+          "504"
+        ],
+        "we_missed": []
+      }
+    ]
+  },
+  "rejected_variants": {
+    "ignoring_deposited_hydrogens": {
+      "exact": 431,
+      "compared": 510
+    },
+    "pooling_every_copy_of_the_ligand": {
+      "exact": 422,
+      "compared": 510,
+      "residues_we_added": 1172
+    },
+    "why_they_are_reported": "a rule that reproduces the deposit is only convincing beside the near-misses it was chosen over"
+  },
+  "prmsd": {
+    "compared": 510,
+    "within_tolerance": 479,
+    "worst": 1.204402,
+    "worst_pair": "5un3_A->5uu9",
+    "would_change_inclusion": 3,
+    "changed": [
+      {
+        "pair": "4wjx_A->6ze8",
+        "ours": 1.7732,
+        "theirs": 2.18
+      },
+      {
+        "pair": "5un3_A->5uu9",
+        "ours": 1.1556,
+        "theirs": 2.36
+      },
+      {
+        "pair": "6owy_A->5wo1",
+        "ours": 1.7995,
+        "theirs": 2.42
+      }
+    ],
+    "chain_frame_within_tolerance": 0,
+    "chain_frame_changed": 2,
+    "correlation": 0.99475,
+    "mean_absolute_difference": 0.016589,
+    "absolute_difference_percentiles": {
+      "p50": 0.002825,
+      "p90": 0.004808,
+      "p95": 0.02056,
+      "p99": 0.401455,
+      "p99.5": 0.493944
+    },
+    "n_worse_than_a_hundredth": 28,
+    "flips_inside_the_guard_band": 3
+  },
+  "external_build_constraints": {
+    "prmsd_guard_band_angstrom": 0.5,
+    "rule": "a new apo-holo pair is admitted as cryptic only when its pRMSD exceeds 2.51, and rejected only when it falls below 1.5099999999999998; a pair inside the band is dropped rather than guessed",
+    "why": "the pRMSD reproduction has a tail of 28 of 510 pair records worse than a hundredth of an Angstrom, and all 3 pairs it would classify differently from the deposit lie inside this band, so refusing the band removes the label noise instead of carrying it into the external set",
+    "cost": "pairs whose pocket barely moves at the threshold are lost, which shrinks the external set and removes its hardest borderline cases, so the external set is easier than CryptoBench in this one respect and is reported as such"
+  },
+  "cryptic_filter": {
+    "smallest_prmsd_in_the_deposit": 2.01,
+    "floor_we_infer": 2.0,
+    "is_a_hard_spike": false,
+    "why_not_a_spike": "40 of 5493 records sit at the smallest printed value, which is the density a truncated distribution has there rather than the pile-up a clamp would leave. So it is an inclusion threshold"
+  },
+  "aggregation": {
+    "units_compared": 770,
+    "shipped_equals_union_over_holos": 770,
+    "shipped_equals_main_holo_only": 390,
+    "conclusion": "the union"
+  },
+  "sample": {
+    "n_holo_structures_wanted": 400,
+    "seed": 20260729,
+    "of_holo_structures_the_training_pairs_name": 2734,
+    "why_a_sample": "all of them take about three hours to fetch and do not make the recovery more convincing. The sample is seeded rather than a prefix because PDB id order tracks deposition date, which tracks whether hydrogens were deposited -- the one thing this turns on"
+  },
+  "n_train_pair_records": 555,
+  "skipped": {
+    "ligand copy or chain absent from the holo file": 35,
+    "too few shared pocket atoms for a pRMSD": 35,
+    "holo structure not fetched": 10
+  }
+}

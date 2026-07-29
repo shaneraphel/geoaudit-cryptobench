@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12
+verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12 rule
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -192,6 +192,13 @@ pmplan:
 
 read11:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/pocketminer_read.py --check
+
+# The labelling rule, recovered by fitting candidates against the benchmark's own
+# training records rather than assumed from its prose. An external validation set
+# whose labels mean something slightly different is not validation, so this gate
+# runs before anything is built on the rule. It reads the training fold only.
+rule:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/recover_cryptobench_rule.py --check
 
 curveplan:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/preregister_threshold_curve.py --check

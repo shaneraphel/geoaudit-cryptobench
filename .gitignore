@@ -31,6 +31,9 @@ data/cryptobench_apo/train_receptors/
 data/cryptobench_apo/_*.npz
 data/cryptobench_apo/_*.npy
 data/cryptobench_apo/_scratch/
+# Holo depositions fetched to recover the labelling rule. 300 MB of
+# public PDB files, refetchable by name from the committed sample seed.
+data/cryptobench_apo/_holo/
 
 # The pLM-NN baseline's weights, read out of the SavedModel published on OSF and
 # reproducible byte-for-byte from the digests recorded beside them.
