@@ -106,6 +106,8 @@ SUBGROUP = ROOT / "results/official_fold/SUBGROUP_READ.json"
 POCKET = ROOT / "results/official_fold/POCKET_READ.json"
 PLMNN = ROOT / "results/official_fold/PLMNN_READ.json"
 PMREAD = ROOT / "results/official_fold/POCKETMINER_READ.json"
+EXTREAD = ROOT / "results/external/EXTERNAL_READ.json"
+EXTSET = ROOT / "results/external/EXTERNAL_SET.json"
 PMSELF = ROOT / "results/baselines/POCKETMINER_SELFTEST.json"
 CURVE = ROOT / "results/official_fold/THRESHOLD_CURVE.json"
 PLMNN_SCORES = ROOT / "results/baselines/PLMNN_SCORES.json"
@@ -1060,6 +1062,79 @@ def build() -> str:
                 "the PocketMiner self-test no longer reproduces the published "
                 "residue counts, so the comparison is against a baseline that "
                 "may have been rebuilt wrongly and cannot be quoted")
+
+    if EXTREAD.exists():
+        # The only confirmatory comparison in the paper. Every macro here is
+        # emitted in a group with the number that qualifies it, because each of
+        # these figures is quotable alone in a way that would mislead: the P2Rank
+        # advantage without the matched-budget arm that does not resolve, the
+        # PocketMiner margin without P2Rank's own margin, the pLM-NN deficit
+        # without the fact that it replicated rather than appeared.
+        ex = json.loads(EXTREAD.read_text())
+        if ex["status"] != "confirmatory":
+            raise SystemExit(
+                f"the external read now declares itself {ex['status']}; the "
+                f"manuscript calls it the paper's one confirmatory comparison and "
+                f"would have to be rewritten rather than regenerated")
+        xs = json.loads(EXTSET.read_text())
+        L.append(f"\\newcommand{{\\ExtN}}{{{ex['n_units_compared']}}}")
+        L.append(f"\\newcommand{{\\ExtNPositives}}"
+                 f"{{{sum(len(u['residues']) for u in xs['units'])}}}")
+        L.append(f"\\newcommand{{\\ExtNPairs}}{{{xs['n_pairs_examined']}}}")
+        L.append(f"\\newcommand{{\\ExtCutoff}}"
+                 f"{{{xs['selection']['cutoff']}}}")
+        for m, stem in (("table_field", "Ours"), ("p2rank", "PtwoR"),
+                        ("plmnn", "Plm"), ("pocketminer", "Pm")):
+            L.append(f"\\newcommand{{\\ExtLevel{stem}}}"
+                     f"{{{ex['levels'][m]:.4f}}}")
+        for key, stem in (("p2rank", "PtwoR"), ("plmnn", "Plm"),
+                          ("pocketminer", "Pm")):
+            b = ex["co_primary"][f"table_field_minus_{key}"]
+            L.append(f"\\newcommand{{\\ExtAuc{stem}}}{{{b['mean']:+.4f}}}")
+            L.append(f"\\newcommand{{\\ExtAucCI{stem}}}"
+                     f"{{[{b['ci'][0]:+.4f}, {b['ci'][1]:+.4f}]}}")
+            L.append(f"\\newcommand{{\\ExtAucBonf{stem}}}"
+                     f"{{[{b['ci_bonferroni'][0]:+.4f}, "
+                     f"{b['ci_bonferroni'][1]:+.4f}]}}")
+            L.append(f"\\newcommand{{\\ExtWin{stem}}}{{{b['n_first_ahead']}}}")
+            L.append(f"\\newcommand{{\\ExtLoss{stem}}}{{{b['n_second_ahead']}}}")
+            L.append(f"\\newcommand{{\\ExtOld{stem}}}"
+                     f"{{{b['cryptobench_predicted']['delta']:+.4f}}}")
+            L.append(f"\\newcommand{{\\ExtVerdict{stem}}}"
+                     f"{{{b['verdict'].replace('_', ' ')}}}")
+        ctx = ex["co_primary"]["p2rank_minus_pocketminer_for_context"]
+        L.append(f"\\newcommand{{\\ExtPtwoRMinusPm}}{{{ctx['mean']:+.4f}}}")
+        L.append(f"\\newcommand{{\\ExtPtwoRMinusPmCI}}"
+                 f"{{[{ctx['ci'][0]:+.4f}, {ctx['ci'][1]:+.4f}]}}")
+        th = ex["secondary_thresholded_against_p2rank"]
+        L.append(f"\\newcommand{{\\ExtQPct}}{{{th['q'] * 100:.0f}}}")
+        for arm, astem in (("as_deployed", "Deployed"),
+                           ("common_budget", "Budget")):
+            for m, mstem in (("positive_class_f1", "F"), ("mcc", "M")):
+                dd = th[arm][m]["paired_difference_ours_minus_theirs"]
+                L.append(f"\\newcommand{{\\Ext{astem}{mstem}Delta}}"
+                         f"{{{dd['mean']:+.4f}}}")
+                L.append(f"\\newcommand{{\\Ext{astem}{mstem}CI}}"
+                         f"{{[{dd['ci'][0]:+.4f}, {dd['ci'][1]:+.4f}]}}")
+        ab = th["p2rank_predicted_no_pocket_at_all"]
+        L.append(f"\\newcommand{{\\ExtAbstain}}{{{ab['n']}}}")
+        L.append(f"\\newcommand{{\\ExtAbstainUnit}}"
+                 f"{{{_tex(ab['units'][0]['unit']) if ab['units'] else 'none'}}}")
+        # The matched-budget arm is the one that keeps the advantage honest. If it
+        # ever resolved, the sentence conceding it does not would be false, and a
+        # regenerated macro would leave the false sentence in place.
+        budget = th["common_budget"]["positive_class_f1"][
+            "paired_difference_ours_minus_theirs"]
+        if budget["excludes_zero"]:
+            raise SystemExit(
+                "the matched-budget F1 difference now excludes zero on the "
+                "external set; the manuscript concedes that it does not and the "
+                "concession has to be rewritten rather than regenerated")
+        if ex["co_primary"]["table_field_minus_plmnn"]["mean"] > 0:
+            raise SystemExit(
+                "the external read now puts the field ahead of pLM-NN; every "
+                "sentence in the manuscript about that deficit has to be "
+                "rewritten rather than regenerated")
 
     if CURVE.exists():
         # The threshold axis. The only quantity the plan permits quoting is the

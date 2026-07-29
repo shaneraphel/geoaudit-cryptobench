@@ -94,10 +94,48 @@ within a few points of a general-purpose pocket finder and several points short
 of a 3-billion-parameter language model with a trained head, which is the
 comparison a reader should carry away.
 
-Against P2Rank the claim is therefore parity on predictive accuracy, not
-advantage, and against the benchmark's strongest baseline it is a deficit. What
-the construction offers instead is that its every score decomposes exactly into
-the table terms that produced it, and that the whole detector is
+Every number to this point comes from a fold this project read \NTestReads{}
+times while \NArchOnFold{} of its architectures were scored on it, so none of
+them can settle anything, and the remedy is a set that has never been read. From
+depositions released after CryptoBench's newest structure (\ExtCutoff{}) we
+assembled \ExtN{} apo--holo units carrying \ExtNPositives{} cryptic residues,
+one unit per UniRef50 cluster and no cluster shared with either CryptoBench
+fold, labelled by a rule recovered from the benchmark's own training records.
+The set was frozen and hashed; a plan naming three co-primary comparisons, the
+statistic, and the sentence to be written under each outcome was committed; and
+only then was anything scored. What checks that order is the commit graph rather
+than our word for it. Against P2Rank the field leads by \ExtAucPtwoR{}
+\ExtAucCIPtwoR{} in mean paired per-unit ROC-AUC, ahead on \ExtWinPtwoR{} of
+\ExtN{} chains, where the same comparison on the official fold gave
+\ExtOldPtwoR{} and crossed zero. This is the one confirmatory accuracy result in
+the paper, and because it is a ranking statistic it cannot be an artifact of the
+two methods' differing calling conventions, which is the standing objection to
+the F1 margin above. The deficit against pLM-NN replicates rather than
+disappearing --- \ExtAucPlm{} \ExtAucCIPlm{} externally against \ExtOldPlm{}
+internally, the external estimate landing inside the interval the internal read
+predicted --- so external data leaves the ordering that matters most unchanged.
+
+Three features of that result cut against us and were fixed in the plan before
+it could be known which way they would cut. At a matched top-\ExtQPct{}\% budget
+the F1 advantage over P2Rank fails to resolve externally as well
+(\ExtBudgetFDelta{} \ExtBudgetFCI{}), so the thresholded claim is no better
+supported outside the benchmark than inside it. P2Rank predicts no pocket
+whatever on \ExtAbstain{} of the \ExtN{} units, which leaves its precision and
+its MCC undefined there and so removes its own worst case from two of its own
+averages. And the set is easier than CryptoBench in three declared respects, the
+largest being a guard band that leaves pairs whose pocket moves between
+\(1.5\) and \(2.5\)~\AA{} unlabelled --- exactly the borderline cases. At
+\ExtN{} units it is also small: after the Bonferroni correction over the three
+co-primary comparisons the P2Rank advantage survives (\ExtAucBonfPtwoR{}) and
+the pLM-NN deficit does not (\ExtAucBonfPlm{}), which is a statement about power
+and not about parity.
+
+Against P2Rank, then, the fold that shaped this method shows parity and a set
+that could not have shaped it shows an advantage; we let the second carry the
+claim, because it is the only one whose ordering can be checked. Against the
+benchmark's strongest baseline it is a deficit on both. What
+the construction offers beyond that is that its every score decomposes exactly
+into the table terms that produced it, and that the whole detector is
 \FairModelOurs{}~MB of integers with no floating-point model evaluated at
 inference. It is not faster than P2Rank in a served deployment, and
 Section~\ref{sec:cost} withdraws the speed factor an earlier version of this
@@ -1430,6 +1468,161 @@ score that decomposes exactly into the terms that produced it. Whether that trad
 is worth making is a question about deployment constraints, and this paper's job
 is to report the trade accurately rather than to argue that it always favours us.
 
+\subsection{A set that has never been read, and what it decided}
+\label{sec:external}
+Nothing above can settle anything, and the reason is in our own ledger:
+\NTestReads{} indexed readings of the official test fold, \NArchOnFold{}
+architectures of ours scored on those same units, and a \TabAucD{} margin on the
+primary functional that is \LeadInSE{} of one standard error. Disclosing that is
+necessary and not sufficient. The only repair is a set assembled after the fact,
+labelled before any method sees it, and read once.
+
+We built one from the PDB itself. Of \(17{,}332\) X-ray entries released after
+\ExtCutoff{} --- the newest release date anywhere in CryptoBench --- at
+\(2.5\)~\AA{} or better, \(33{,}725\) protein chains map to \(4{,}858\) UniProt
+accessions, of which \(561\) UniRef50 clusters offer an apo chain and a holo
+chain together. Externality here is two conditions rather than one. Temporal:
+every structure postdates the benchmark, so none could have reached it, its
+splits, or a model trained on them. Sequence: no accession and no UniRef50
+cluster at \(50\%\) identity is shared with either CryptoBench fold, which cost
+\(73\) accessions for appearing in CryptoBench and \(25\) more for having a
+relative there. A structure deposited after a cutoff can still be a
+near-identical copy of something in the training fold, and a model that learned
+the fold from the copy is not being tested on anything new.
+
+Labels come from CryptoBench's own rule, recovered by fitting its training
+records rather than reimplemented from its prose: a heavy-atom contact distance,
+a treatment of deposited hydrogens, a definition of which residues count as
+polymer, and a pocket-motion threshold were fixed by requiring that the rule
+reproduce the benchmark's own labelled residues, which it does on \(505\) of
+\(510\) records with \(0\) missed. The five it adds are residues absent from the
+apo chain, which CryptoBench cannot label and we do not. Because the recovered
+pocket-motion figure agrees with the deposited one only to a tolerance, pairs
+within a band around the threshold are left unlabelled in either direction rather
+than assigned by a number we cannot reproduce exactly. Of \ExtNPairs{} apo--holo
+pairs examined, \(161\) are cryptic, \(2{,}264\) are not, and \(247\) fall inside
+that band. The result is \ExtN{} units carrying \ExtNPositives{} cryptic
+residues, one per cluster --- so resampling chains and resampling clusters are
+the same operation here, and the interval below cannot have been narrowed by
+relatives entering the same resample.
+
+The order of operations is the whole point, so it is machine-checkable. The set
+was written and hashed in one commit. A plan was committed in the next, pinning
+that hash, naming the three co-primary comparisons and the Bonferroni level,
+fixing the statistic as the mean paired per-unit ROC-AUC already declared primary
+for the official fold, pinning the number each comparison was predicted to give,
+and writing out the sentence to appear in this paper under each of six outcomes
+--- including the three in which we lose. Only then was anything scored. The read
+verifies with \texttt{git} that the plan's commit is an ancestor of \textsc{head},
+refuses to run if the plan is editable or if the set no longer hashes to what the
+plan pinned, and refuses to overwrite its own result without a recorded reason.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The external read: mean paired per-unit ROC-AUC, counting field minus
+each baseline, on \ExtN{} units released after \ExtCutoff{} and sharing no
+UniRef50 cluster with CryptoBench. \emph{Predicted} is the estimate the official
+fold gave for the same comparison, pinned in the plan before this set was scored;
+against it the P2Rank difference is \ExtVerdictPtwoR{} and the other two
+\ExtVerdictPlm{}, under definitions the plan fixed in advance. \emph{Chains} is
+ahead/behind. Bonferroni is over the three comparisons.}
+\label{tab:external}
+\begin{tabular}{lrrrr}
+\toprule
+Baseline & Difference & 95\% CI & Bonferroni & Chains \\
+\midrule
+P2Rank (\ExtOldPtwoR{} predicted) & \ExtAucPtwoR{} & \ExtAucCIPtwoR{} &
+  \ExtAucBonfPtwoR{} & \ExtWinPtwoR{}/\ExtLossPtwoR{} \\
+pLM-NN (\ExtOldPlm{} predicted) & \ExtAucPlm{} & \ExtAucCIPlm{} &
+  \ExtAucBonfPlm{} & \ExtWinPlm{}/\ExtLossPlm{} \\
+PocketMiner (\ExtOldPm{} predicted) & \ExtAucPm{} & \ExtAucCIPm{} &
+  \ExtAucBonfPm{} & \ExtWinPm{}/\ExtLossPm{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:external} is the result. Mean per-unit ROC-AUC is \ExtLevelPlm{}
+for pLM-NN, \ExtLevelOurs{} for the counting field, \ExtLevelPtwoR{} for P2Rank
+and \ExtLevelPm{} for PocketMiner. Against P2Rank the field leads by
+\ExtAucPtwoR{} \ExtAucCIPtwoR{}, ahead on \ExtWinPtwoR{} chains and behind on
+\ExtLossPtwoR{}. On the official fold the same comparison gave \ExtOldPtwoR{}
+with an interval crossing zero, which is why Section~\ref{sec:endpoints} declined
+to claim an advantage; here the estimate is several times larger and excludes
+zero, and it survives the Bonferroni correction. Two things make this the
+strongest claim in the paper rather than the fourth restatement of a weak one.
+It is a ranking statistic, so no calling convention enters it and the objection
+that closed Section~\ref{sec:matched} cannot be raised against it. And the
+ordering of set, plan and read is checkable from outside, so it does not rest on
+our discipline.
+
+The deficit against pLM-NN replicates. At \ExtAucPlm{} \ExtAucCIPlm{} the
+external estimate lands inside the interval the official fold predicted
+(\ExtOldPlm{}), which is the plan's definition of replication, and the per-chain
+split is \ExtWinPlm{} to \ExtLossPlm{}. It does not survive the Bonferroni
+correction over the three co-primary comparisons (\ExtAucBonfPlm{}), and the
+plan settled in advance how to report that: a smaller set failing to resolve a
+difference that a larger set resolved is evidence about power, not evidence of
+parity, and it is not reported as parity here. A supervised network over a
+protein language model remains the more accurate method, on external data as on
+the benchmark.
+
+The PocketMiner margin loses the excuse it had. On the official fold
+Section~\ref{sec:pocketminer} declined to read \PmAucOurs{} as a ranking of
+methods, because P2Rank was ahead of PocketMiner by \PmAucPtwoR{} --- a similar
+amount --- which made the gap evidence about two label definitions instead.
+Externally our margin is \ExtAucPm{} \ExtAucCIPm{} while P2Rank's is
+\ExtPtwoRMinusPm{} \ExtPtwoRMinusPmCI{}, crossing zero. The two are no longer
+similar, which weakens that reading without establishing the alternative at this
+sample size.
+
+Three findings run against us and none is in a footnote. At a matched
+top-\ExtQPct{}\% budget the F1 advantage over P2Rank does not resolve externally
+either: \ExtBudgetFDelta{} \ExtBudgetFCI{}, with MCC \ExtBudgetMDelta{}
+\ExtBudgetMCI{}. As each method deploys, F1 differs by \ExtDeployedFDelta{}
+\ExtDeployedFCI{} and MCC by \ExtDeployedMDelta{} \ExtDeployedMCI{}, but that arm
+compares two different binarisation rules and Section~\ref{sec:matched} is why we
+do not lean on it. So the honest summary is the same one the official fold gave:
+the ranking is better and the thresholded verdict is not established.
+
+Next, P2Rank predicts no pocket at all on \ExtAbstain{} unit, \ExtAbstainUnit{}.
+With no call made its precision is \(0/0\) and its MCC denominator carries a zero
+factor, so both are undefined and that unit silently left both averages ---
+removing P2Rank's own worst case from two of P2Rank's own numbers, in our favour
+if left unstated. Recall and F1 are defined there and equal zero, so those two
+figures keep it. The underlying asymmetry is real and belongs to deployment
+rather than to score quality: a fixed per-chain budget always answers, and a
+native pocket assignment can decline to.
+
+Last, the ways this set is easier than CryptoBench were written into the plan
+before it was read, so that they could not be produced afterwards to explain a
+result in either direction. The guard band leaves pairs whose pocket moves
+between \(1.5\) and \(2.5\)~\AA{} unlabelled, which removes exactly the
+borderline cases; a component counts as a ligand only if CryptoBench accepted it
+somewhere, so chemistry new to the PDB since the cutoff is absent; and one unit
+per cluster discards a great deal of real data, including a campaign offering
+\(534\) apo chains for a single protein. The set is harder in one respect that
+matters at least as much: no protein in it has a relative within \(50\%\)
+identity anywhere in CryptoBench, so nothing can be carried over from a training
+structure of the same fold.
+
+Fairness of the comparison itself rests on facts rather than intent. All four
+methods were given one receptor per unit from the same writer that produced the
+CryptoBench receptors. P2Rank ran at the version, JVM and configuration recorded
+in the official archive, with all \ExtN{} raw output pairs archived under their
+digests. pLM-NN ran over the same ESM2-3B encoder, still reproducing the authors'
+published example at cosine \PlmFidelity{}; PocketMiner ran from published
+weights, byte-identical to the authors' own featurisation on all \ExtN{} units.
+Every per-unit ROC-AUC came from one shared function, and all four methods scored
+the identical residue universe on every unit: no unit left the intersection and
+no unit lost a residue to it, so each paired difference is paired on the same
+residues rather than approximately so.
+
+One commitment did the real work and it was made before any of these numbers
+existed: no architecture, threshold, feature, quantisation rule or partition bank
+changes in response to this read. A method retuned against its own external
+validation set does not have one. Nothing changed.
+
 \subsection{Taking a score apart, and what the errors turn out to be}
 \label{sec:audit}
 Auditability has so far been an architectural claim: every table is a look-up, so
@@ -1851,15 +2044,35 @@ structure that clustering them recovers a site, which does not follow from a
 per-residue ROC-AUC and could not have been read off one.
 
 \section{Limitations}
-The clearest limitation is the one Section~\ref{sec:plmnn} measures: the method is
-less accurate than the benchmark's own supervised baseline, by \PlmAucDelta{}
-\PlmAucCI{} in mean per-unit ROC-AUC and by more on the thresholded metrics, at
-every calling fraction we examined. Nothing in this paper should be read as a
-claim that a table of counted invariants predicts cryptic binding residues better
-than a protein language model with a trained head. The claims that survive are
-parity with P2Rank, an exactly decomposable score, and a
-\FairModelOurs{}~MB integer artifact --- and the third of those is a deployment
-property rather than a scientific one.
+The clearest limitation is the one Sections~\ref{sec:plmnn}
+and~\ref{sec:external} measure twice: the method is less accurate than the
+benchmark's own supervised baseline. On the official fold the deficit is
+\PlmAucDelta{} \PlmAucCI{} in mean per-unit ROC-AUC, larger on the thresholded
+metrics, and present at every calling fraction we examined; on an external set
+that could not have shaped this method it replicates at \ExtAucPlm{}
+\ExtAucCIPlm{}. Nothing in this paper should be read as a claim that a table of
+counted invariants predicts cryptic binding residues better than a protein
+language model with a trained head. The claims that survive are an advantage over
+P2Rank on external data, an exactly decomposable score, and a \FairModelOurs{}~MB
+integer artifact --- and the third of those is a deployment property rather than a
+scientific one.
+
+The external advantage over P2Rank carries the load that the official fold could
+not, and it has limits of its own that are worth stating in one place.
+\ExtN{} units is a small set, wide enough that the pLM-NN deficit stops resolving
+under the same Bonferroni correction the P2Rank advantage survives; the difference
+between those two outcomes is partly power and should not be read as a difference
+in kind. The set is easier than CryptoBench in three respects declared before it
+was read, of which the guard band is the largest, since it removes precisely the
+pairs whose pocket motion sits near the cryptic threshold. Its labels come from a
+rule we recovered rather than from code the benchmark's authors released, and
+while that rule reproduces their labelled residues with none missed, a systematic
+difference between it and their implementation would appear here as a property of
+our method. And it is one read: a single external evaluation of a method that has
+been developed against one benchmark for the whole of this project is a check that
+can pass by chance, not an independent replication. The right reading of
+\ExtAucPtwoR{} is that the parity claim has been tested where it could fail and
+did not, at this sample size, on this set.
 
 The three baselines are all reproductions, executed locally, and two of them are
 reproductions of published models rather than of published predictions. P2Rank

@@ -10,8 +10,8 @@
   },
   "counts": {
     "exploration": 26,
-    "cited": 45,
-    "superseded": 17,
+    "cited": 47,
+    "superseded": 15,
     "fold_access": 10
   },
   "n_artifacts": 98,
@@ -452,15 +452,15 @@
     },
     {
       "artifact": "results/external/EXTERNAL_READ.json",
-      "class": "superseded",
-      "reason": "an earlier frozen state, kept for the record",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.external_read.v1",
       "bytes": 12312
     },
     {
       "artifact": "results/external/EXTERNAL_SET.json",
-      "class": "superseded",
-      "reason": "an earlier frozen state, kept for the record",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.external_set.v1",
       "bytes": 370899
     },

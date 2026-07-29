@@ -630,7 +630,13 @@ def write_receptors(payload: dict) -> dict:
             # The writer refuses a receptor under 50 heavy atoms. A chain that
             # small cannot carry a pocket, so it is dropped with the reason
             # rather than written and then quietly scored.
-            dropped.append({"unit": dest.stem, "why": str(exc)})
+            #
+            # The writer names the destination in its message, which is an
+            # absolute path on whoever ran it. Reasons are shipped, so the
+            # checkout root is stripped: an artifact should not carry somebody's
+            # home directory, and a reader cannot use it anyway.
+            dropped.append({"unit": dest.stem,
+                            "why": str(exc).replace(f"{ROOT}/", "")})
             continue
         body = dest.read_bytes()
         if body.count(b"\nATOM") < 30:

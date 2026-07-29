@@ -33,12 +33,36 @@ official CryptoBench receptor-only benchmark.
   and pLM-NN is ahead at all 39 calling fractions swept, so the deficit is not a
   threshold convention. The sentence saying so was written into the plan before
   the fold was read under it. See §4.13.
-- Claimed: parity with P2Rank 2.5.1 on predictive accuracy, exact decomposability
-  of every score, and a detector that is 1.79 MB of integers (0.39 MB gzipped)
-  with no floating-point model evaluated at inference. The **primary
-  endpoint is the mean paired per-residue ROC-AUC**, which is the summary this
-  comparison has been reported under since its first reading, and it does not
-  resolve: +0.0058 [−0.0163, +0.0271]. See §4.5b.
+- **Confirmatory: ahead of P2Rank on a set that has never been read.** 57
+  apo–holo units built from depositions released after CryptoBench's newest
+  structure (2024-05-08), one unit per UniRef50 cluster, no cluster shared with
+  either CryptoBench fold, labelled by a rule recovered from the benchmark's own
+  training records. The set was frozen and hashed, the plan naming three
+  co-primary comparisons and the sentence to write under each of six outcomes was
+  committed, and only then was anything scored; `git` checks that order. Mean
+  paired per-unit ROC-AUC against P2Rank is **+0.0443 [+0.0162, +0.0724]**, ahead
+  on 42 of 57 chains, surviving Bonferroni over the three comparisons
+  ([+0.0102, +0.0792]). Being a ranking statistic it cannot be an artefact of the
+  two methods' calling conventions. On the official fold the same comparison gave
+  +0.0058 and crossed zero, after 12 reads of that fold. The pLM-NN deficit
+  replicates (−0.0340 [−0.0701, −0.0006] against −0.0243 internally), and no
+  architecture, threshold or feature changed in response to any of it. See §4.14
+  and `results/external/EXTERNAL_READ.json`.
+- Against us on the same set, reported because the plan fixed these sentences
+  before the read: at a matched top-9 % budget the F1 advantage over P2Rank does
+  not resolve externally either (+0.0246 [−0.0224, +0.0708]); P2Rank predicts no
+  pocket at all on 1 of 57 units, which leaves its precision and MCC undefined
+  there and removes its own worst case from two of its own averages; the pLM-NN
+  deficit does not survive Bonferroni, which is a statement about power at 57
+  units and not about parity; and the set is easier than CryptoBench in three
+  declared respects, the largest a guard band that leaves pairs whose pocket moves
+  between 1.5 and 2.5 Å unlabelled.
+- Claimed on the official fold: parity with P2Rank 2.5.1 on predictive accuracy,
+  exact decomposability of every score, and a detector that is 1.79 MB of integers
+  (0.39 MB gzipped) with no floating-point model evaluated at inference. The
+  **primary endpoint is the mean paired per-residue ROC-AUC**, which is the summary
+  this comparison has been reported under since its first reading, and on that fold
+  it does not resolve: +0.0058 [−0.0163, +0.0271]. See §4.5b.
 - Exploratory, not claimed: under a 20 % trimmed mean fixed on the training
   partition and committed before the fold was read for it, the table field is
   separable from P2Rank (+0.0281, 95 % CI [+0.0117, +0.0427], p=0.002), as are
