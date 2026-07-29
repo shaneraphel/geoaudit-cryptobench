@@ -103,6 +103,9 @@ COST = ROOT / "results/architecture_sweep/RUNTIME_COST.json"
 INTERP = ROOT / "results/architecture_sweep/INTERPRETABLE_BASELINES.json"
 ENDPOINT = ROOT / "results/official_fold/ENDPOINT_STATUS.json"
 SUBGROUP = ROOT / "results/official_fold/SUBGROUP_READ.json"
+POCKET = ROOT / "results/official_fold/POCKET_READ.json"
+PLMNN = ROOT / "results/official_fold/PLMNN_READ.json"
+PLMNN_SCORES = ROOT / "results/baselines/PLMNN_SCORES.json"
 TRAIN_OP = ROOT / "results/architecture_sweep/TRAIN_OPERATING_POINTS.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
@@ -857,6 +860,81 @@ def build() -> str:
                 f"the subgroup read now reports itself as {sg['status']}; the "
                 f"manuscript presents it as exploratory throughout")
 
+    if POCKET.exists():
+        # The pocket stage. The macros are written so that the favourable
+        # headline cannot be quoted without the candidate counts that bound it:
+        # a hit rate at matched K is only meaningful beside how many candidates
+        # each method offered.
+        pk = json.loads(POCKET.read_text())
+        pr, corr = pk["primary"], pk[
+            "fairness_correction_p2rank_scored_at_its_own_residue_centroid"]
+        c = pr["candidates_per_chain"]
+        L.append(f"\\newcommand{{\\PkCut}}"
+                 f"{{{pr['clustering_cutoff_angstrom']:.1f}}}")
+        L.append(f"\\newcommand{{\\PkNPaired}}"
+                 f"{{{pr['n_units_both_offer_a_candidate']}}}")
+        L.append(f"\\newcommand{{\\PkNTheirsNone}}"
+                 f"{{{pr['n_units_p2rank_offers_none']}}}")
+        L.append(f"\\newcommand{{\\PkOursCand}}{{{c['ours_median']:.0f}}}")
+        L.append(f"\\newcommand{{\\PkTheirsCand}}{{{c['p2rank_median']:.0f}}}")
+        L.append(f"\\newcommand{{\\PkOursCandMean}}{{{c['ours_mean']:.3f}}}")
+        L.append(f"\\newcommand{{\\PkTheirsCandMean}}{{{c['p2rank_mean']:.3f}}}")
+        for key, stem in (("4.0A/top1", "OneFour"), ("4.0A/top3", "ThreeFour"),
+                          ("6.0A/top1", "OneSix"), ("8.0A/top1", "OneEight")):
+            h = pr["hit_rates"][key]
+            L.append(f"\\newcommand{{\\PkOurs{stem}}}{{{h['ours']:.3f}}}")
+            L.append(f"\\newcommand{{\\PkTheirs{stem}}}{{{h['p2rank']:.3f}}}")
+            L.append(f"\\newcommand{{\\PkDelta{stem}}}"
+                     f"{{{h['paired_95']['delta']:+.4f}}}")
+            L.append(f"\\newcommand{{\\PkCI{stem}}}"
+                     f"{{[{h['paired_95']['ci'][0]:+.4f}, "
+                     f"{h['paired_95']['ci'][1]:+.4f}]}}")
+            # Only the primary radius carries a corrected interval; the looser
+            # radii are the sensitivity and the plan did not count them among the
+            # tests, so there is no corrected macro to quote for them.
+            if h.get("is_a_corrected_test"):
+                L.append(f"\\newcommand{{\\PkBonf{stem}}}"
+                         f"{{[{h['paired_bonferroni']['ci'][0]:+.4f}, "
+                         f"{h['paired_bonferroni']['ci'][1]:+.4f}]}}")
+        d = pr["top1_distance_to_labelled_site"]
+        L.append(f"\\newcommand{{\\PkOursDist}}{{{d['ours_median']:.2f}}}")
+        L.append(f"\\newcommand{{\\PkTheirsDist}}{{{d['p2rank_median']:.2f}}}")
+        L.append(f"\\newcommand{{\\PkDistDelta}}"
+                 f"{{{d['paired_95']['delta']:+.3f}}}")
+        L.append(f"\\newcommand{{\\PkDistCI}}"
+                 f"{{[{d['paired_95']['ci'][0]:+.3f}, "
+                 f"{d['paired_95']['ci'][1]:+.3f}]}}")
+        ch = corr["arm"]["hit_rates"]["4.0A/top1"]
+        L.append(f"\\newcommand{{\\PkCorrTheirsOneFour}}{{{ch['p2rank']:.3f}}}")
+        L.append(f"\\newcommand{{\\PkCorrDeltaOneFour}}"
+                 f"{{{ch['paired_95']['delta']:+.4f}}}")
+        L.append(f"\\newcommand{{\\PkCorrCIOneFour}}"
+                 f"{{[{ch['paired_95']['ci'][0]:+.4f}, "
+                 f"{ch['paired_95']['ci'][1]:+.4f}]}}")
+        L.append(f"\\newcommand{{\\PkCorrDist}}"
+                 f"{{{corr['arm']['top1_distance_to_labelled_site']['p2rank_median']:.2f}}}")
+        for k in (1, 3, 5):
+            L.append(f"\\newcommand{{\\PkRecallOurs{k}}}"
+                     f"{{{pr['recall'][f'top{k}']['ours']:.3f}}}")
+            L.append(f"\\newcommand{{\\PkRecallTheirs{k}}}"
+                     f"{{{pr['recall'][f'top{k}']['p2rank']:.3f}}}")
+        # The manuscript reports this read as the one favourable result and as
+        # exploratory twice over. Both halves have to keep being true.
+        if pk["outcome_key"] != "top1_favours_the_field":
+            raise SystemExit(
+                f"the pocket read now returns {pk['outcome_key']}; the section "
+                f"describing it is written around the top-1 advantage and has to "
+                f"be rewritten rather than regenerated")
+        if "exploratory" not in pk["status"].lower():
+            raise SystemExit(
+                f"the pocket read now reports itself as {pk['status']}; the "
+                f"manuscript presents it as exploratory")
+        if c["ours_mean"] > c["p2rank_mean"]:
+            raise SystemExit(
+                "the pocket stage now offers more candidates per chain than "
+                "P2Rank, so the sentence conceding that it offers fewer is no "
+                "longer true")
+
     if INTERP.exists():
         # The readout ladder. The chapter's claim here is a negative one -- the
         # architecture cannot be separated from a logistic regression on the
@@ -1305,6 +1383,9 @@ def build() -> str:
     L.append(f"\\newcommand{{\\NAlgTables}}{{{len(field['tables'])}}}")
     L.append(f"\\newcommand{{\\AlgOperatingQ}}"
              f"{{{field['operating_point']['q']:.2f}}}")
+    # The same budget as a percentage, because that is how the prose says it.
+    L.append(f"\\newcommand{{\\AlgOperatingPct}}"
+             f"{{{100 * field['operating_point']['q']:.0f}}}")
     led = field.get("cluster_ledger", {})
     for k, v in sorted(led.items()):
         stem = "".join(p.capitalize() for p in k.split("_"))

@@ -1638,6 +1638,54 @@ architecture's own contribution to inference cost is small, and the honest summa
 is that this method is cheap to store, cheap to score, and no cheaper than P2Rank
 to run.
 
+\subsection{Asked for a pocket instead of a score}
+\label{sec:pockets}
+Everything above scores residues, and a residue score is not what a medicinal
+chemist asks for. The question they ask is where to look, which means candidate
+sites, ranked. Our detector had no answer: its pocket entries in the frozen
+predictions were placeholders at the origin. So the ninth read built a pocket
+stage, and because a construction invented in order to be measured is the easiest
+thing in this paper to tune, the construction was committed before the fold was
+opened. Take the top-\AlgOperatingPct{}\% residues of a chain, single-link them at
+\PkCut{}~\AA{} --- the pinch radius the descriptors already use, not a number
+chosen here --- rank the clusters by summed score, and take the score-weighted
+centroid. A candidate hits if it lies within a given radius of any labelled
+cryptic atom, which is the same target for both methods; it is not the
+ligand-based DCA, because the apo structures have no ligand.
+
+This is the one comparison in the paper where the field is ahead of P2Rank by a
+margin that survives correction. On the \PkNPaired{} chains where both methods
+offer a candidate, the top candidate lands within 4~\AA{} of a labelled site on
+\PkOursOneFour{} of chains against P2Rank's \PkTheirsOneFour{}, a paired
+difference of \PkDeltaOneFour{} with a 95\% interval of \PkCIOneFour{} and
+\PkBonfOneFour{} after correction. The top candidate's distance to the nearest
+labelled atom has median \PkOursDist{}~\AA{} against \PkTheirsDist{}~\AA{},
+paired difference \PkDistDelta{}~\AA{} with interval \PkDistCI{}. The advantage
+is concentrated at the top of the ranking: at three candidates it is
+\PkDeltaThreeFour{} with interval \PkCIThreeFour{}, and at larger radii the two
+methods converge (\PkOursOneSix{} against \PkTheirsOneSix{} at 6~\AA{}).
+
+Two corrections work against us and are applied rather than noted. P2Rank's
+published centre is a cavity centre, sitting in the space a ligand would occupy
+and therefore displaced from every residue heavy atom by roughly a pocket radius,
+while ours is a centroid of residues; against a target made of residue atoms that
+asymmetry flatters us. Scoring P2Rank at the centroid of the residues it assigned
+to each pocket instead raises it to \PkCorrTheirsOneFour{} and \PkCorrDist{}~\AA{},
+and the difference narrows to \PkCorrDeltaOneFour{} with interval
+\PkCorrCIOneFour{}. That arm was noticed after the read rather than planned, so
+the verdict is taken from it as the less favourable of the two. And our clustering
+yields fewer candidates than P2Rank offers --- \PkOursCandMean{} per chain against
+\PkTheirsCandMean{} --- so we are behind on recall as soon as more than one
+candidate is allowed: \PkRecallOurs3{} against \PkRecallTheirs3{} of labelled
+residues covered at three candidates. A method that proposes fewer places to look
+is easier to be right about first and harder to be complete with.
+
+The result is exploratory twice over. The pocket stage was built for this reading,
+and nine indexed reads precede it. What it establishes is narrower than an
+accuracy claim and more useful than none: the residue scores carry enough spatial
+structure that clustering them recovers a site, which does not follow from a
+per-residue ROC-AUC and could not have been read off one.
+
 \section{Limitations}
 The comparison covers one trained baseline, executed locally; PocketMiner could
 not be included because per-residue predictions are not published. The 38
