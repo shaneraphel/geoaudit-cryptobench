@@ -37,6 +37,11 @@ data/cryptobench_apo/_holo/
 # Depositions fetched to label the external set. 1.6 GB of public PDB
 # and mmCIF files, refetchable by name from the committed manifest.
 data/external/_structures/
+# The pinned P2Rank distribution: 292 MB of third-party binaries, one file
+# over GitHub's limit. What makes the baseline auditable is the archived CSVs,
+# the recorded command, version banner and digests, all of which are tracked.
+# Reinstall the exact release with bin/install-p2rank.sh.
+.tools/
 
 # The pLM-NN baseline's weights, read out of the SavedModel published on OSF and
 # reproducible byte-for-byte from the digests recorded beside them.
