@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 21,
-    "cited": 39,
+    "cited": 40,
     "superseded": 4,
     "fold_access": 7
   },
-  "n_artifacts": 71,
+  "n_artifacts": 72,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -386,6 +386,13 @@
       "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
       "schema": "geoaudit.counterattack_wide_probe.v1",
       "bytes": 37748
+    },
+    {
+      "artifact": "results/official_fold/ENDPOINT_STATUS.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.endpoint_status.v1",
+      "bytes": 6486
     },
     {
       "artifact": "results/official_fold/FIGURE_PROVENANCE.json",

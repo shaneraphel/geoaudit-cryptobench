@@ -1,0 +1,155 @@
+{
+  "schema": "geoaudit.endpoint_status.v1",
+  "clinical_grade": false,
+  "question": "which reported comparison against P2Rank is confirmatory and which is exploratory, decided by what the preregistration was preregistered relative to",
+  "primary_endpoint": {
+    "statistic": "mean",
+    "delta": 0.005828,
+    "ci95": [
+      -0.016342,
+      0.0271
+    ],
+    "p_two_sided_bootstrap": 0.6002,
+    "resolves": false,
+    "status": "primary",
+    "why": "the mean per-residue ROC-AUC is the summary this comparison was reported under from the first reading of the fold, before any statistic was chosen for it. Nothing had to be preregistered for it to be the default, which is exactly what makes it the endpoint a reader can hold the paper to"
+  },
+  "exploratory_endpoints": [
+    {
+      "statistic": "trimmed20",
+      "delta": 0.028052,
+      "ci95": [
+        0.011724,
+        0.042652
+      ],
+      "p_two_sided_bootstrap": 0.002,
+      "resolves": true,
+      "status": "exploratory",
+      "why": "chosen on the training partition and committed before the read that used it, but after 4 indexed readings of the held-out fold, 3 of them by this architecture's own lineage. The commit order rules out choosing the functional to fit the answer; it does not rule out the fold having shaped the architecture the functional is applied to"
+    },
+    {
+      "statistic": "median",
+      "delta": 0.041163,
+      "ci95": [
+        0.009149,
+        0.05102
+      ],
+      "p_two_sided_bootstrap": 0.0064,
+      "resolves": true,
+      "status": "exploratory",
+      "why": "reported alongside the preregistered statistic as a robustness companion, not selected in advance"
+    },
+    {
+      "statistic": "trimmed10",
+      "delta": 0.022346,
+      "ci95": [
+        0.003497,
+        0.039753
+      ],
+      "p_two_sided_bootstrap": 0.0204,
+      "resolves": true,
+      "status": "exploratory",
+      "why": "reported alongside the preregistered statistic as a robustness companion, not selected in advance"
+    },
+    {
+      "statistic": "win_rate",
+      "delta": 0.098958,
+      "ci95": [
+        0.03125,
+        0.166667
+      ],
+      "p_two_sided_bootstrap": 0.0042,
+      "resolves": true,
+      "status": "exploratory",
+      "why": "reported alongside the preregistered statistic as a robustness companion, not selected in advance"
+    },
+    {
+      "statistic": "stratified_by_length",
+      "delta": 0.005888,
+      "ci95": [
+        -0.016417,
+        0.02715
+      ],
+      "p_two_sided_bootstrap": 0.602,
+      "resolves": false,
+      "status": "exploratory",
+      "why": "reported alongside the preregistered statistic as a robustness companion, not selected in advance"
+    }
+  ],
+  "what_the_preregistration_licenses": "that the summary functional was fixed before the reading that used it, checked by commit ancestry and not by assertion",
+  "what_it_does_not_license": "that the architecture was fixed before the fold was seen. It was not: 4 indexed reads precede the preregistration commit, and the immediately preceding reading of this lineage is in the ledger. A preregistered statistic over an architecture chosen with the fold in the loop is exploratory evidence",
+  "reads_before_the_preregistration": [
+    {
+      "read_index": 1,
+      "artifact": "results/official_fold/COUNTERATTACK_TEST_PROBE.json",
+      "kind": "scored the fold",
+      "method": "table field variant",
+      "mean_residue_auc": 0.7804160159029193,
+      "first_committed_in": "68194da5ff90"
+    },
+    {
+      "read_index": 2,
+      "artifact": "results/official_fold/COUNTERATTACK_FINAL_PROBE.json",
+      "kind": "scored the fold",
+      "method": "table field variant",
+      "mean_residue_auc": 0.7951676172712135,
+      "first_committed_in": "68194da5ff90"
+    },
+    {
+      "read_index": 3,
+      "artifact": "results/official_fold/COUNTERATTACK_WIDE_PROBE.json",
+      "kind": "scored the fold",
+      "method": "table field variant",
+      "mean_residue_auc": 0.8009908985545277,
+      "first_committed_in": "68194da5ff90"
+    },
+    {
+      "read_index": 4,
+      "artifact": "results/official_fold/COUNTERATTACK_QUOTIENT_PROBE.json",
+      "kind": "scored the fold",
+      "method": "algebraic field, S_6 quotient bank",
+      "mean_residue_auc": 0.7646782134332718,
+      "first_committed_in": "716653171384"
+    }
+  ],
+  "reads_after_the_preregistration": [
+    {
+      "read_index": 5,
+      "artifact": "results/official_fold/PREREGISTERED_READ.json",
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "method": "table_field",
+      "mean_residue_auc": 0.799151,
+      "first_committed_in": "ebc90dc941e5"
+    },
+    {
+      "read_index": 6,
+      "artifact": "results/official_fold/MATCHED_OPERATING_POINT_READ.json",
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "method": "table_field",
+      "mean_residue_auc": null,
+      "first_committed_in": "c887d1706e4c"
+    },
+    {
+      "read_index": 7,
+      "artifact": "results/official_fold/MATCHED_FULL_READ.json",
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "method": "table_field",
+      "mean_residue_auc": null,
+      "first_committed_in": "12a772af5efa"
+    }
+  ],
+  "n_reads_before_the_preregistration": 4,
+  "preregistration_commit": "39e70d43547af48dc920646f8bf8fa759278ec83",
+  "per_chain_outcome": {
+    "n_units": 192,
+    "n_field_ahead": 115,
+    "n_baseline_ahead": 77,
+    "median_difference": 0.041163,
+    "worst_losses_mean": -0.231888,
+    "best_wins_mean": 0.175704,
+    "why_it_is_here": "a summary statistic is a claim about a distribution, so the distribution is reported beside it. The field wins more chains than it loses and loses harder than it wins, and those two facts together are the whole reason a trimmed mean and a mean disagree"
+  },
+  "claim_the_paper_is_entitled_to": "on the primary endpoint the table field and P2Rank are not separable on this fold. Robust summaries of the same paired differences favour the field and are reported as exploratory. The case for the method rests on its being exactly decomposable and a small integer artifact, not on a resolved accuracy advantage",
+  "test_fold_read_index": null,
+  "why_this_is_not_an_indexed_read": "every number here is copied from an artifact an earlier indexed read committed; nothing is rescored and no new inference is drawn from the fold. The only thing computed is which commit is an ancestor of which"
+}

@@ -79,6 +79,8 @@ jobs:
         run: make cost
       - name: The readout comparison must still score the published arm as the sweep does
         run: make interp
+      - name: The commit graph must still demote the preregistered statistic
+        run: make endpoint
       - name: Verify repository scope and benchmark claims
         run: make verify
       - name: Unit tests without external pocket tools

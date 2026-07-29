@@ -51,17 +51,41 @@ conventions, by \TabFOneD{} \TabFOneDCI{} at \(p=\TabFOneP{}\), but our call is
 the top \MatchOurQ{} of each chain while P2Rank's is its own pocket assignment;
 giving P2Rank the same rule, at the \(q\) an identical grid search selects for it
 on the training fold, leaves \MatchBDelta{} \MatchBCI{} and we withdraw the
-claim. The differences on ROC-AUC (\TabAucD{} \TabAucDCI{}) and PR-AUC
-(\TabPrD{} \TabPrDCI{}) contain zero in the mean, and MCC's exclusion is a
-property of the resampling seed rather than of the fold. One resolved result
-remains, and it is the one that was fixed in advance and admits no threshold:
-under a \(20\%\) trimmed mean preregistered on the training partition, the
-paired ROC-AUC difference is \PreRegTestDelta{} \PreRegTestCI{} at
-\(p=\PreRegTestP{}\). We claim that, parity elsewhere, and nothing stronger.
+claim.
 
-The ROC-AUC margin \emph{in the mean} deserves less than that, and the
-distinction matters because the trimmed statistic above is a different summary of
-the same differences. Over this fold the standard error of
+The primary endpoint is the mean paired per-residue ROC-AUC, which is the summary
+this comparison was reported under from its first reading, and it does not
+resolve: \TabAucD{} \TabAucDCI{}. Neither does PR-AUC (\TabPrD{} \TabPrDCI{}),
+and MCC's exclusion of zero is a property of the resampling seed rather than of
+the fold. \EndNExploratoryResolving{} of \EndNExploratory{} robust summaries of
+the same paired differences do exclude zero --- a \(20\%\) trimmed mean at
+\PreRegTestDelta{} \PreRegTestCI{}, chosen on the training partition and
+committed before the read that used it --- and we report them as exploratory
+rather than confirmatory. The reason is in our own ledger: \EndReadsBefore{}
+indexed readings of the held-out fold precede that commit, \EndLineageBefore{} of
+them by this architecture's lineage, the last at \EndPriorBestAuc{}. Fixing the
+statistic in advance rules out choosing a functional to fit the answer; it does
+not rule out the fold having shaped the architecture the functional is applied
+to. The distribution behind the disagreement is reported rather than summarised
+away: the field is ahead on \EndWins{} of \NUnits{} chains and behind on
+\EndLosses{}, with a median difference of \EndMedianDelta{}, while its worst
+losses average \EndWorstLosses{} against best wins of \EndBestWins{}. It wins
+more often and loses harder, which is the whole of why a trimmed mean and a mean
+disagree.
+
+So the claim is parity on predictive accuracy, not advantage. What the
+construction offers instead is that its every score decomposes exactly into the
+table terms that produced it, and that the whole detector is
+\FairModelOurs{}~MB of integers with no floating-point model evaluated at
+inference. It is not faster than P2Rank in a served deployment, and
+Section~\ref{sec:cost} withdraws the speed factor an earlier version of this
+paper claimed. On the same wires it is also not separable from a logistic
+regression (\RdLogitDelta{} \RdLogitCI{}), so the accuracy such as it is belongs
+to the invariants and not to the table machinery.
+
+Even the sign of that unresolved mean deserves less credence than an unresolved
+interval usually implies, and saying why is part of the same accounting. Over
+this fold the standard error of
 a mean ROC-AUC is \FoldSE{}, so \TabAucD{} is \LeadInSE{} of one standard error,
 and it is the largest of \NArchOnFold{} architectures of ours that have been
 scored on these same units --- a count taken from an artifact ledger rather than
@@ -927,16 +951,18 @@ already in hand. On fourteen training splits the solved fan-out itself is a real
 and stable gain --- mean $+0.0126$, worst $+0.0093$, positive on every split ---
 but it is a gain toward a ceiling that is still too low.
 
-\subsection{The mean was the wrong functional, and that was decided before the
-fold was read}
+\subsection{A robust functional was fixed before the fold was read, and it is
+still not confirmatory}
 \label{sec:prereg}
 Table~\ref{tab:metrics} reports the table field ahead of P2Rank by \TabAucD{}
 with an interval that contains zero, and Section~\ref{sec:results} draws the
 conservative conclusion. A reader is entitled to ask why the mean of the paired
-per-unit differences is the functional being summarised at all. It is a poor one
-here, and the case studies say why before any statistics do: the two methods
+per-unit differences is the functional being summarised at all. It is a fragile
+one here, and the case studies say why before any statistics do: the two methods
 succeed on different proteins, so the differences are heavy-tailed and their
-mean is the least stable summary available.
+mean is the least stable summary available. This subsection asks what a better
+summary gives, and then --- because the answer is favourable, which is when the
+question matters most --- what that answer is and is not worth.
 
 Changing functional after seeing the fold is not available --- the choice would
 carry the maximum over however many were considered. So the choice was made on
@@ -987,8 +1013,8 @@ are reported rather than left to be asked for. The field is ahead on
 \PreRegTailLoss{} and the \PreRegNTrimmed{} discarded wins \PreRegTailWin{}: the
 tails are asymmetric, and that asymmetry is the whole reason the mean stays at
 \TabAucD{} while the bulk sits at \PreRegTestDelta{}. So the honest reading is
-two sentences, not one. On the typical structure the field is better than
-P2Rank, and the fold now resolves that. When the field fails it fails harder
+two sentences, not one. On the typical structure the field scores better than
+P2Rank on this fold. When the field fails it fails harder
 than P2Rank does, and the mean, which is the functional that speaks to those
 failures, remains unresolved and is reported unresolved beside the trimmed one.
 Dropping it once a better-powered statistic had cleared zero would be precisely
@@ -998,6 +1024,41 @@ in the favourable direction: it modelled a smaller held-out margin by shifting
 the whole distribution down, and what the fold actually shows is a bulk leading
 by more than the mean does with a tail dragging the mean back, which a location
 shift cannot represent.
+
+\paragraph{And what the preregistration does not license.}
+\label{sec:endpoints}
+Everything above is true and none of it makes this result confirmatory. The
+preregistration fixed a functional before the reading that used it, and the
+ordering is checked by commit ancestry rather than asserted. What it did not fix
+is the object the functional is applied to. By the time the statistic was
+committed the held-out fold had been read \EndReadsBefore{} times,
+\EndLineageBefore{} of those by this architecture's own lineage, the most recent
+at \EndPriorBestAuc{}, and each of those readings informed the diagnosis that
+produced the architecture reported here. That ordering is derived from the commit
+graph in \texttt{results/official\_fold/ENDPOINT\_STATUS.json}, which \texttt{make
+endpoint} recomputes and refuses to pass if the count no longer holds.
+
+A preregistered statistic over an architecture selected with the fold in the loop
+is exploratory evidence, and the correct response is to say so rather than to
+lead with it. This paper therefore names the mean paired ROC-AUC as the primary
+endpoint --- the summary the comparison was reported under from the first
+reading, which needed no preregistration to be the default --- and reports it
+unresolved at \TabAucD{} \TabAucDCI{}. The trimmed mean, the median, the
+\(10\%\) trimmed mean and the win rate are reported as exploratory:
+\EndNExploratoryResolving{} of \EndNExploratory{} of them exclude zero, they
+agree with each other, and they are the reason we think a properly locked
+external evaluation is worth running. They are not the reason to believe one
+already has been.
+
+The distribution they summarise is reported beside them so that a reader need not
+take any single functional's word for it. The field is ahead on \EndWins{} of
+\NUnits{} chains and behind on \EndLosses{}; the median paired difference is
+\EndMedianDelta{}; the worst losses average \EndWorstLosses{} against best wins
+of \EndBestWins{}. Winning more often and losing harder is a shape, not a score,
+and it is the shape that makes location statistics disagree. A reader who cares
+about the typical protein should read the median; one who cares about the worst
+case should read the mean; the paper's claim is pitched at the mean because that
+is the harder of the two on this evidence.
 
 \begin{figure}[t]
 \centering
@@ -1062,13 +1123,17 @@ native-call comparison is the one that describes the two systems as they are
 delivered, and it stays primary for that reason. It simply cannot be quoted as
 evidence about the scores.
 
-One claim in this paper is untouched by the objection, and it is the
-preregistered one. The ROC-AUC comparison of Section~\ref{sec:prereg} admits no
-threshold at all: it ranks residues and integrates, so there is no operating
-point to match, and \PreRegTestDelta{} \PreRegTestCI{} stands as it did. That
-the surviving result is the threshold-free one that was fixed in advance, while
-the one that fell was the threshold-dependent one nobody had preregistered, is
-the more useful lesson of the two.
+One family of results is untouched by \emph{this particular} objection, and it is
+the preregistered one. The ROC-AUC comparison of Section~\ref{sec:prereg} admits
+no threshold at all: it ranks residues and integrates, so there is no operating
+point to match, and \PreRegTestDelta{} \PreRegTestCI{} stands as it did. That the
+result which survived rebinarisation is the threshold-free one fixed in advance,
+while the one that fell was the threshold-dependent one nobody had preregistered,
+is the more useful lesson of the two. It does not make the survivor
+confirmatory --- Section~\ref{sec:endpoints} demotes it on a different ground
+entirely, which is that the fold had been read \EndReadsBefore{} times before the
+statistic was fixed --- but the two objections are independent and it is worth
+being clear which one is being answered here.
 
 \begin{figure}[t]
 \centering
@@ -1544,12 +1609,18 @@ difference is roughly \(\pm0.02\) wide, so a margin of \TabAucD{} is the size of
 difference this fold cannot resolve \emph{in the mean}. Section~\ref{sec:prereg}
 shows that the qualifier is doing real work on ROC-AUC. Under a \(20\%\) trimmed
 mean, chosen on the training partition and committed before the fold was read
-for it, the same paired differences give \PreRegTestDelta{} \PreRegTestCI{}.
-That resolves an ordering on the bulk of the fold and deliberately says nothing
-about its tails, where the field's failures are worse than P2Rank's and where
-the mean --- reported unresolved, and kept --- is the functional that speaks.
-Neither statement is the whole comparison and the paper reports both. On PR-AUC
-no such ordering is available and none should be inferred from the sign.
+for it, the same paired differences give \PreRegTestDelta{} \PreRegTestCI{},
+which orders the bulk of the fold and deliberately says nothing about its tails,
+where the field's failures are worse than P2Rank's and where the mean is the
+functional that speaks. But the same section declines to promote that reading,
+and the reason is worth restating here rather than leaving in a subsection: the
+fold had been read \EndReadsBefore{} times before the statistic was committed,
+\EndLineageBefore{} of those by this architecture's lineage. Fixing a functional
+in advance does not fix the object it is applied to. The mean is therefore the
+primary endpoint and the robust summaries are exploratory, and the limitation
+this leaves the paper with is that it has \emph{no} confirmatory accuracy
+advantage over P2Rank on any metric. On PR-AUC no ordering is available at all
+and none should be inferred from the sign.
 
 Of the two intervals that do exclude zero, neither survives everything we could
 think of to do to it. The F1 difference is \TabFOneD{} \TabFOneDCI{} and its
@@ -1605,15 +1676,21 @@ error, and it is the maximum over \NArchOnFold{} architectures. The upward bias
 of a maximum over that many correlated estimates is of the same order as the
 margin itself, so the ROC-AUC ordering in Table~2 carries no weight and we ask
 for none. That is why this paper claims parity in the mean: not modesty, but that
-the number is the wrong size to claim with. The one difference we do report is
-the trimmed-mean ROC-AUC result, and the reason it withstands the arithmetic
-above is that its statistic was fixed before the fold was read rather than
-chosen from among the summaries the fold makes available. Architecture selection
-is a separate exposure and is addressed separately, by cross-validating the
-choice on CryptoBench's own \NSplitsCv{} training folds and on \NSplitsRh{}
-redrawn half-splits, where it ranks first every time; that answers whether the
-architecture was drawn rather than selected, and it does not answer whether any
-of these margins would survive a different benchmark.
+the number is the wrong size to claim with.
+
+The trimmed-mean result is partly insulated from that particular arithmetic,
+because its statistic was fixed before the fold was read rather than chosen from
+among the summaries the fold makes available. It is not insulated from the
+architecture exposure, and that is the exposure the maximum-over-\NArchOnFold{}
+arithmetic is about. We mitigate it as far as a held-out fold allows, by
+cross-validating the architecture on CryptoBench's own \NSplitsCv{} training
+folds and on \NSplitsRh{} redrawn half-splits, where it ranks first every time.
+Mitigation is not elimination: \EndReadsBefore{} readings of the held-out fold
+precede the preregistration and \EndLineageBefore{} of them are this lineage's,
+so the fold was in the loop even though the selection was not run on it. We
+therefore report the robust summaries as exploratory and hold the paper to the
+mean. None of this speaks to whether any of these margins would survive a
+different benchmark, which only a different benchmark can answer.
 
 The absolute values remain modest --- ROC-AUC \TabAuc{} and F1 \TabFOne{} for
 the strongest field here --- so the contribution is the construction rather than

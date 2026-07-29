@@ -101,6 +101,7 @@ FULL_READ = ROOT / "results/official_fold/MATCHED_FULL_READ.json"
 AUDIT = ROOT / "results/official_fold/AUDIT_DECOMPOSITION.json"
 COST = ROOT / "results/architecture_sweep/RUNTIME_COST.json"
 INTERP = ROOT / "results/architecture_sweep/INTERPRETABLE_BASELINES.json"
+ENDPOINT = ROOT / "results/official_fold/ENDPOINT_STATUS.json"
 TRAIN_OP = ROOT / "results/architecture_sweep/TRAIN_OPERATING_POINTS.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
@@ -759,6 +760,44 @@ def build() -> str:
                 f"({warm_ratio}x), but Section 'What the method costs' is "
                 f"written as a withdrawal of exactly that claim; rewrite the "
                 f"paragraph before regenerating the macros")
+
+    if ENDPOINT.exists():
+        # Which endpoint is confirmatory. The manuscript used to lead with the
+        # trimmed mean; these macros exist so that the sentence demoting it
+        # carries the count that justifies the demotion, and so that the count
+        # cannot drift from the commit graph it was read off.
+        ep = json.loads(ENDPOINT.read_text())
+        L.append(f"\\newcommand{{\\EndReadsBefore}}"
+                 f"{{{ep['n_reads_before_the_preregistration']}}}")
+        L.append(f"\\newcommand{{\\EndLineageBefore}}"
+                 f"{{{sum(1 for r in ep['reads_before_the_preregistration']
+                          if 'table field' in (r['method'] or ''))}}}")
+        L.append(f"\\newcommand{{\\EndPriorBestAuc}}"
+                 f"{{{max(r['mean_residue_auc'] for r in
+                          ep['reads_before_the_preregistration']
+                          if r['mean_residue_auc'] is not None):.4f}}}")
+        c = ep["per_chain_outcome"]
+        L.append(f"\\newcommand{{\\EndWins}}{{{c['n_field_ahead']}}}")
+        L.append(f"\\newcommand{{\\EndLosses}}{{{c['n_baseline_ahead']}}}")
+        L.append(f"\\newcommand{{\\EndMedianDelta}}"
+                 f"{{{c['median_difference']:+.4f}}}")
+        L.append(f"\\newcommand{{\\EndWorstLosses}}"
+                 f"{{{c['worst_losses_mean']:+.4f}}}")
+        L.append(f"\\newcommand{{\\EndBestWins}}{{{c['best_wins_mean']:+.4f}}}")
+        L.append(f"\\newcommand{{\\EndNExploratory}}"
+                 f"{{{len(ep['exploratory_endpoints'])}}}")
+        L.append(f"\\newcommand{{\\EndNExploratoryResolving}}"
+                 f"{{{sum(1 for e in ep['exploratory_endpoints']
+                          if e['resolves'])}}}")
+        # The manuscript states the primary endpoint by name and says it does
+        # not resolve. Both have to remain true of the artifact.
+        prim = ep["primary_endpoint"]
+        if prim["statistic"] != "mean" or prim["resolves"]:
+            raise SystemExit(
+                f"the primary endpoint is now '{prim['statistic']}' and "
+                f"{'resolves' if prim['resolves'] else 'does not resolve'}; the "
+                f"abstract is written around an unresolved mean and has to be "
+                f"rewritten before the macros are regenerated")
 
     if INTERP.exists():
         # The readout ladder. The chapter's claim here is a negative one -- the

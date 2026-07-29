@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp
+verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -123,6 +123,14 @@ cost:
 # disagrees with its own intervals.
 interp:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/interpretable_baselines.py --check
+
+# Which endpoint the paper is entitled to lead with. The gate recomputes, from
+# the commit graph as it stands now, how many indexed fold reads precede the
+# preregistration, and fails if that count no longer justifies the demotion, if
+# the primary endpoint stops being the mean, or if the mean starts to resolve --
+# each of which is a different paper from the one written around it.
+endpoint:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/endpoint_status.py --check
 
 # The headline, rederived from the committed labels and raw per-residue scores by
 # code that imports nothing from the harness. The other gates check that the

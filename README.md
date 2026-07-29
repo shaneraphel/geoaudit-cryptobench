@@ -25,22 +25,45 @@ official CryptoBench receptor-only benchmark.
 - Primary metrics: per-residue `residue_auc`, `residue_pr_auc`, `residue_mcc`,
   `residue_f1`, each with a 95 % paired-bootstrap CI over the structures where both
   compared methods are defined.
-- Claimed: on ROC-AUC, under a 20 % trimmed mean fixed on the training partition
-  and committed before the fold was read for it, the table field is separable from
-  P2Rank 2.5.1 (+0.0281, 95 % CI [+0.0117, +0.0427], p=0.002). This is the one
-  resolved result, and it is threshold-free. See §4.5.
+- Claimed: parity with P2Rank 2.5.1 on predictive accuracy, exact decomposability
+  of every score, and a detector that is 1.79 MB of integers (0.39 MB gzipped)
+  with no floating-point model evaluated at inference. The **primary
+  endpoint is the mean paired per-residue ROC-AUC**, which is the summary this
+  comparison has been reported under since its first reading, and it does not
+  resolve: +0.0058 [−0.0163, +0.0271]. See §4.5b.
+- Exploratory, not claimed: under a 20 % trimmed mean fixed on the training
+  partition and committed before the fold was read for it, the table field is
+  separable from P2Rank (+0.0281, 95 % CI [+0.0117, +0.0427], p=0.002), as are
+  the median, the 10 % trimmed mean and the win rate. The preregistration is real
+  and checked by commit ancestry, but 4 indexed readings of the held-out fold
+  precede that commit, 3 of them by this architecture's own lineage, the last at
+  0.8010 mean AUC. Fixing the statistic in advance rules out choosing a functional
+  to fit the answer; it does not rule out the fold having shaped the architecture
+  the functional is applied to. `make endpoint` recomputes that ordering from the
+  commit graph and fails if it no longer holds. See §4.5 and
+  `results/official_fold/ENDPOINT_STATUS.json`.
+- The per-chain distribution behind the disagreement, reported rather than
+  summarised away: the field is ahead on 115 of 192 chains and behind on 77, with
+  a median difference of +0.0412, worst losses averaging −0.2319 against best wins
+  of +0.1757. It wins more often and loses harder, which is why the mean and the
+  trimmed mean disagree.
 - Withdrawn: the F1 advantage. It is +0.032 [+0.009, +0.054] with each detector at
   its own operating point, and +0.014 [−0.009, +0.036] once both are binarised by
   one rule at the *q* an identical grid search selects for each on the training
   fold. The F1 ordering is reported as depending on the operating-point
   convention. See §4.8, whose retraction branch was written before the read.
-- Parity elsewhere: on PR-AUC, on MCC, and on ROC-AUC *in the mean*, the point
-  estimates favour the field and the intervals contain zero. The mean ROC-AUC
-  margin is 0.36 of one standard error of a fold mean and is the maximum over 12
-  of our architectures scored on this fold, so it carries no ordering.
+- Parity elsewhere: on PR-AUC and on MCC the point estimates favour the field and
+  the intervals contain zero. The mean ROC-AUC margin is 0.36 of one standard
+  error of a fold mean and is the maximum over 12 of our architectures scored on
+  this fold, so even its sign carries no ordering.
+- Also not an advantage of the architecture: on the same 645 wires and the same
+  split, the counting field is not separable from a plain logistic regression
+  (+0.0038, CI crosses zero). Whatever accuracy there is belongs to the
+  invariants, not to the table machinery. See §4.7b.
 - Not claimed: superiority on PR-AUC or MCC, on ROC-AUC in the mean, or on F1
-  under any matched threshold; binding affinity; candidate efficacy; global
-  novelty. See `contracts/GEOAUDIT_PAPER_SCOPE.json`.
+  under any matched threshold; being faster than P2Rank in a served deployment
+  (§4.7c withdraws that); binding affinity; candidate efficacy; global novelty.
+  See `contracts/GEOAUDIT_PAPER_SCOPE.json`.
 - The architecture was chosen on one half of the training fold, and that choice is
   cross-validated on 29 other splits, none of which reads the test fold:
   CryptoBench's own four training folds, which are cluster-disjoint under its
@@ -466,9 +489,10 @@ all fail-closed.
 | Audit decomposition | `make audit` | the per-table terms stop summing to the score they claim to decompose, the cases drift from the committed selection, a residue's stated role disagrees with the committed calls, or the artifact starts declaring a test-fold read |
 | Readout comparison | `make interp` | the published arm stops scoring what the sensitivity sweep says the same configuration scores on the same half, a reported mean stops being the mean of the per-chain vector stored beside it, an arm loses its paired interval, or the list of arms the field cannot be separated from stops following from those intervals |
 | Controlled cost | `make cost` | the recorded verdict stops following from the ratios it was read off, the two ways of reading the steady state disagree without the artifact saying which one settles it, or the wall-clock conclusion favours whichever side was granted more cores than it asked for |
+| Endpoint status | `make endpoint` | the commit graph stops putting any indexed fold read before the preregistration, so the demotion loses its reason; the primary endpoint stops being the mean or starts to resolve; or an exploratory endpoint acquires primary status. Recomputed from the live graph on every run, because a rebase can move the ordering the conclusion rests on |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; 406 tests pass under both
+Current state: `verify_claims` all checks pass; 429 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:
 `tests/test_spatial.py` was written against `pytest` while CI runs `unittest`,
 so the five checks guarding the neighbour-search kernel — the one every gate,
@@ -628,7 +652,7 @@ pick half — matching the continuous linear form of the same ranks, not beating
 it. Beating P2Rank with a counting field therefore requires new invariants, not
 a better address or a better fan-out of the ones already in hand.
 
-### 4.5 The mean was the wrong functional, and the choice was committed first
+### 4.5 A robust functional was committed first, and it still does not make the result confirmatory
 
 The headline paired difference against P2Rank is +0.0058 with an interval that
 contains zero, and the paper draws the conservative conclusion from it. But the
@@ -678,6 +702,56 @@ are true at once: on the typical structure the field beats P2Rank and the fold
 now resolves that, and when the field fails it fails harder than P2Rank does,
 which is what the mean speaks to and why the mean stays in the paper unresolved
 beside the trimmed one.
+
+### 4.5b The preregistration fixed the statistic, not the architecture
+
+Everything in §4.5 is true and none of it makes that result confirmatory, and the
+gate that says so is `make endpoint`.
+
+A preregistration answers the question *was the functional chosen to fit the
+answer*. It does not answer *was the thing being measured chosen with the fold in
+the loop*. Here the second answer is no. `tools/endpoint_status.py` walks the
+indexed read ledger, asks `git merge-base --is-ancestor` of each read artifact's
+introducing commit against the preregistration commit `39e70d4`, and finds four
+readings of the held-out fold that precede it:
+
+| read | commit | what was read | mean AUC |
+| --- | --- | --- | --- |
+| 1 | `68194da5ff90` | table field variant | 0.7804 |
+| 2 | `68194da5ff90` | table field variant | 0.7952 |
+| 3 | `68194da5ff90` | table field variant | 0.8010 |
+| 4 | `716653171384` | algebraic field, S₆ quotient bank | 0.7647 |
+
+Three of the four are this architecture's own lineage, and each of them informed
+the diagnosis that produced the architecture now being reported. So the
+preregistered trimmed mean is a fixed functional applied to an object the fold
+helped select, which is exploratory evidence however clean the commit order is.
+
+The consequence, and it is a demotion rather than a retraction:
+
+- **Primary endpoint: mean paired per-residue ROC-AUC, +0.0058 [−0.0163,
+  +0.0271], unresolved.** It is the summary this comparison was reported under
+  from read 1, before any statistic was chosen for it. Nothing had to be
+  preregistered for it to be the default, which is what makes it the endpoint a
+  reader can hold the paper to.
+- **Exploratory: the 20 % trimmed mean, the median, the 10 % trimmed mean and the
+  win rate.** Four of the five robust summaries clear zero and they agree with
+  each other. That is a reason to run a locked external evaluation, not a reason
+  to believe one already has been.
+
+The ordering is recomputed on every CI run rather than recorded once: `check()`
+rebuilds the partition from the live commit graph and fails if the count has
+moved, if the primary endpoint stops being the mean, if the mean starts to
+resolve, or if any exploratory endpoint acquires primary status. A rebase that
+moved the preregistration earlier than the reads would change the conclusion, and
+the gate would rather fail than let the paper keep the old one. Artifact:
+`results/official_fold/ENDPOINT_STATUS.json`; 23 tests in
+`tests/test_endpoint_status.py`, five of which mutate the artifact and assert the
+gate rejects it.
+
+This costs the paper its only resolved accuracy claim. What is left is parity on
+the primary endpoint, exact decomposability (§4.10), and a 1.79 MB integer
+artifact — which is the version of the claim the evidence actually supports.
 
 ### 4.6 267 generated invariants lift the linear ceiling and buy the counting field nothing
 
