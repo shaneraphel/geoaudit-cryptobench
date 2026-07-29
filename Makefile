@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12 rule extset
+verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12 rule extset extplan
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -198,6 +198,11 @@ read11:
 # and touches no network. Rebuilding it needs the PDB and takes half an hour.
 extset:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/build_external_set.py --check
+
+# The plan for the external read. Must be committed, and must still describe its
+# inputs, before anything scores the external set.
+extplan:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/preregister_external.py --check
 
 # The labelling rule, recovered by fitting candidates against the benchmark's own
 # training records rather than assumed from its prose. An external validation set
