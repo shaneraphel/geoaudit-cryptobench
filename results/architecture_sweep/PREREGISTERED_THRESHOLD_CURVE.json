@@ -1,0 +1,71 @@
+{
+  "schema": "geoaudit.preregistered_threshold_curve.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T21:12:53+0800",
+  "for_test_fold_read_index": 12,
+  "written_before_the_read": true,
+  "code_sha256": "a93bedd058415772fe79fab15c4362cb8d62d0ce8a2db60eea623c51f9af8c0b",
+  "head_when_written": "68d3c52c2f7d57e740a6c086320a39892b3399f3",
+  "question": "over the whole range of per-chain calling fractions, not at three chosen points, how do precision, recall, positive-class F1 and MCC compare between the counting field and each baseline, and where does the paired difference cross zero",
+  "why_it_is_asked": "the F1 advantage over P2Rank survives a matched budget as a positive point estimate whose interval crosses zero, so the paper already concedes that the advantage depends on the operating point. Reporting three points invites the question of whether they were the flattering ones. The answer is the curve",
+  "status_declared_in_advance": "exploratory",
+  "why_exploratory_and_not_confirmatory": "the fold carries 9 indexed reads before this plan was written",
+  "nothing_is_selected_from_this_curve": {
+    "committed": true,
+    "what_that_forbids": [
+      "moving the deployed calling fraction, which the training fold fixed at 0.09 and which this read does not revisit",
+      "reporting the best point of any curve as a headline",
+      "letting any configuration, threshold or artifact downstream read a value off this output"
+    ],
+    "why": "a curve over 39 cut points is 39 opportunities to find a favourable one. Refusing to select from it is what keeps it a display of an already-published comparison rather than a search",
+    "how_it_is_enforced": "the read records that its output is consumed by no configuration, and the claims in the paper stay attached to the three operating points earlier reads fixed"
+  },
+  "grid": {
+    "quantity": "per-chain top-q by each method's own score",
+    "low": 0.02,
+    "high": 0.4,
+    "step": 0.01,
+    "n": 39,
+    "why_this_grid": "it is the grid the training-fold operating points were chosen on, so the curve and the choice are commensurable",
+    "tie_break": "a stable sort of the negated score, identical to the rule the counting field deploys"
+  },
+  "arms": {
+    "table_field_vs_p2rank": "the comparison the paper rests on",
+    "table_field_vs_pocketminer": "the cryptic-specific baseline, if its scores are present",
+    "table_field_vs_plmnn": "the benchmark's own supervised baseline, if its scores are present",
+    "note": "an arm is reported only if that baseline's scores exist; a missing baseline is recorded as missing and never as zero"
+  },
+  "metrics": [
+    "precision",
+    "recall",
+    "positive_class_f1",
+    "mcc"
+  ],
+  "summary_rule": "each metric is averaged over the units where it is defined, the same convention metric_of and the matched reads already use; a chain on which a method calls nothing has no precision and is not scored zero",
+  "statistic": {
+    "at_each_cut_point": "the mean paired per-unit difference with a pointwise 95% bootstrap interval",
+    "n_boot": 2000,
+    "why_fewer_draws_than_the_headline_reads": "39 cut points times four metrics times three arms is 468 intervals, and these are pointwise intervals on a display rather than the basis of a claim. The headline comparisons keep their 10000 draws",
+    "seed": 20260729,
+    "paired": "the same resampled chains enter both arms at every cut"
+  },
+  "multiplicity": {
+    "correction": "none, and deliberately",
+    "why": "no point on the curve carries a claim, so there is nothing to correct. Correcting 468 pointwise intervals would imply that some point of some curve was being asserted, which is exactly what this plan forbids",
+    "what_is_reported_instead": "the interval at each cut point, labelled pointwise, plus the range of cut points over which the difference in each metric keeps one sign, which is a property of the whole curve rather than of a chosen point"
+  },
+  "reproduction_guard": {
+    "must_match": "results/official_fold/MATCHED_FULL_READ.json",
+    "at": 0.09,
+    "positive_class_f1_ours": 0.333412,
+    "positive_class_f1_theirs": 0.319364,
+    "why": "at q = 0.09 this curve is recomputing a number the seventh read published. If it does not reproduce it to six decimals the curve is measuring something else and the read is void"
+  },
+  "what_will_be_written_under_each_outcome": {
+    "our_curve_is_above_theirs_throughout": "Across every calling fraction from 2% to 40%, the counting field's positive-class F1 is above P2Rank's, so the advantage reported at the deployed operating point is not an artefact of where the two methods were cut. The pointwise intervals still include zero over much of the range, so this is a statement about the sign of the difference and not about its significance.",
+    "the_curves_cross": "The two F1 curves cross within the grid, so which method is ahead depends on the calling fraction. The paper reports the crossing point and stops claiming an F1 advantage that is not a property of the ranking.",
+    "their_curve_is_above_ours_throughout": "P2Rank's positive-class F1 is above the counting field's at every calling fraction, which contradicts the matched-budget point estimate and would mean the earlier reads were driven by the one cut point they used. The F1 claim is withdrawn."
+  },
+  "reads_test_fold": false,
+  "note": "this file is the plan. Reading the fold under it is tools/threshold_curve.py, which refuses to run until this is committed"
+}
