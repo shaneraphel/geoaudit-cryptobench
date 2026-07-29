@@ -1,0 +1,2048 @@
+{
+  "schema": "geoaudit.pocketminer_scores.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T20:34:49+0800",
+  "question": "what does the official PocketMiner network predict for each residue of the 192 single-chain units",
+  "reads_a_label": false,
+  "why_no_label_is_read": "this file produces predictions; the comparison against ours and P2Rank's is a separate indexed read of the test fold",
+  "provenance": {
+    "source": "https://github.com/Mickdub/gvp/tree/pocket_pred (Meller et al., Nat. Commun. 2023, doi:10.1038/s41467-023-36699-3)",
+    "commit": "187062df3c94127e991669768009141a08fd5d8b",
+    "weight_sha256": {
+      "models/pocketminer.index": "09e36a62a987b14bc49cf7a1fa53fa734f85d85d088777f98c6aca253b47bf46",
+      "models/pocketminer.data-00000-of-00001": "6f5ab62b9fb38b54040053ac321f3362d616bae9b31569249a032dbb50890b70"
+    },
+    "architecture": {
+      "node_features": [
+        8,
+        50
+      ],
+      "edge_features": [
+        1,
+        32
+      ],
+      "hidden_dim": [
+        16,
+        100
+      ],
+      "num_layers": 4,
+      "dropout": 0.1,
+      "k_neighbors": 30,
+      "output": "Dense(1, activation='sigmoid') per residue"
+    }
+  },
+  "input": {
+    "receptors": "data/cryptobench_apo/official_receptors",
+    "identical_to_what_p2rank_and_the_field_were_given": true,
+    "coordinate_units": "nanometres, as mdtraj returns them"
+  },
+  "featurisation": {
+    "gathered_by_atom_name": [
+      "N",
+      "CA",
+      "C",
+      "O"
+    ],
+    "why_not_the_authors_reshape": "reshape(l, 4, 3) assumes four backbone atoms per residue; where that is false it shifts every later residue onto the wrong coordinates instead of failing",
+    "n_units_asserted_identical_to_the_authors_tensor": 188,
+    "n_units_where_it_could_not_be_asserted": 4,
+    "n_residues_dropped_for_incomplete_backbone": 7,
+    "n_resseq_collisions_from_insertion_codes": 5,
+    "what_a_collision_means": "the frozen pipeline keys residues by resseq, so an insertion code cannot be represented; the first occurrence is kept and the residue number is recorded here"
+  },
+  "restore": {
+    "assert_existing_objects_matched": true,
+    "every_live_tensor_is_byte_identical_to_the_checkpoint": true,
+    "why_both": "the assertion is TensorFlow's own bookkeeping; the byte comparison does not depend on it",
+    "n_model_variables": 177,
+    "n_checkpoint_entries_under_model": 531,
+    "n_scalars": 736155,
+    "mean_abs_weight": 0.09028409
+  },
+  "overlap_with_pocketminers_own_data": {
+    "trained_on": [
+      "1rtc"
+    ],
+    "selected_on": [
+      "3rwv",
+      "5uxa"
+    ],
+    "published_on": [
+      "1kx9",
+      "3nx1",
+      "3ugk"
+    ],
+    "how_it_was_determined": "exact PDB entry match against the 38 simulation systems in data/task2 and the val/test id lists in data/pm-dataset",
+    "caveat": "exact entry match is a floor, not a homology check; PocketMiner's training set was not clustered against CryptoBench's folds",
+    "what_the_read_does": "reports the fold with and without these six entries"
+  },
+  "n_units": 192,
+  "units": [
+    {
+      "unit": "1arl_A",
+      "n_residues_in_file": 307,
+      "n_scored": 307,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.962088,
+      "mean_score": 0.433651
+    },
+    {
+      "unit": "1bk2_A",
+      "n_residues_in_file": 57,
+      "n_scored": 57,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.609386,
+      "mean_score": 0.282048
+    },
+    {
+      "unit": "1bzj_A",
+      "n_residues_in_file": 297,
+      "n_scored": 297,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.914778,
+      "mean_score": 0.454985
+    },
+    {
+      "unit": "1cwq_A",
+      "n_residues_in_file": 238,
+      "n_scored": 238,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.845462,
+      "mean_score": 0.447505
+    },
+    {
+      "unit": "1dq2_A",
+      "n_residues_in_file": 224,
+      "n_scored": 224,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.777924,
+      "mean_score": 0.373189
+    },
+    {
+      "unit": "1e6k_A",
+      "n_residues_in_file": 130,
+      "n_scored": 130,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.821044,
+      "mean_score": 0.379156
+    },
+    {
+      "unit": "1evy_A",
+      "n_residues_in_file": 346,
+      "n_scored": 346,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.946156,
+      "mean_score": 0.527887
+    },
+    {
+      "unit": "1g1m_B",
+      "n_residues_in_file": 289,
+      "n_scored": 289,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.924716,
+      "mean_score": 0.529771
+    },
+    {
+      "unit": "1g59_A",
+      "n_residues_in_file": 468,
+      "n_scored": 468,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.910072,
+      "mean_score": 0.455776
+    },
+    {
+      "unit": "1h13_A",
+      "n_residues_in_file": 404,
+      "n_scored": 403,
+      "agrees_with_official_featurisation": null,
+      "dropped": [
+        {
+          "resseq": 404,
+          "resname": "PHE",
+          "why": "incomplete backbone, has only C/CA/N"
+        }
+      ],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.946499,
+      "mean_score": 0.469945
+    },
+    {
+      "unit": "1i7n_A",
+      "n_residues_in_file": 308,
+      "n_scored": 308,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.974341,
+      "mean_score": 0.513961
+    },
+    {
+      "unit": "1k47_D",
+      "n_residues_in_file": 314,
+      "n_scored": 314,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.960083,
+      "mean_score": 0.515244
+    },
+    {
+      "unit": "1ksg_B",
+      "n_residues_in_file": 128,
+      "n_scored": 128,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.901979,
+      "mean_score": 0.554007
+    },
+    {
+      "unit": "1kx9_A",
+      "n_residues_in_file": 108,
+      "n_scored": 108,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.771543,
+      "mean_score": 0.247887
+    },
+    {
+      "unit": "1kxr_A",
+      "n_residues_in_file": 320,
+      "n_scored": 320,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.896728,
+      "mean_score": 0.49605
+    },
+    {
+      "unit": "1lbe_B",
+      "n_residues_in_file": 248,
+      "n_scored": 248,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.916706,
+      "mean_score": 0.443309
+    },
+    {
+      "unit": "1m5w_D",
+      "n_residues_in_file": 242,
+      "n_scored": 242,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.935733,
+      "mean_score": 0.354394
+    },
+    {
+      "unit": "1nd7_A",
+      "n_residues_in_file": 374,
+      "n_scored": 374,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.925518,
+      "mean_score": 0.530408
+    },
+    {
+      "unit": "1p4o_B",
+      "n_residues_in_file": 314,
+      "n_scored": 314,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.976031,
+      "mean_score": 0.570608
+    },
+    {
+      "unit": "1p4v_A",
+      "n_residues_in_file": 295,
+      "n_scored": 295,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.947533,
+      "mean_score": 0.470918
+    },
+    {
+      "unit": "1p9o_A",
+      "n_residues_in_file": 269,
+      "n_scored": 269,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.924403,
+      "mean_score": 0.534462
+    },
+    {
+      "unit": "1pu5_C",
+      "n_residues_in_file": 161,
+      "n_scored": 161,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.957677,
+      "mean_score": 0.544751
+    },
+    {
+      "unit": "1q4k_A",
+      "n_residues_in_file": 222,
+      "n_scored": 222,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.9257,
+      "mean_score": 0.461354
+    },
+    {
+      "unit": "1rjb_A",
+      "n_residues_in_file": 298,
+      "n_scored": 298,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.930149,
+      "mean_score": 0.542096
+    },
+    {
+      "unit": "1rtc_A",
+      "n_residues_in_file": 268,
+      "n_scored": 268,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.887012,
+      "mean_score": 0.420149
+    },
+    {
+      "unit": "1se8_A",
+      "n_residues_in_file": 205,
+      "n_scored": 205,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.894695,
+      "mean_score": 0.471727
+    },
+    {
+      "unit": "1uka_A",
+      "n_residues_in_file": 271,
+      "n_scored": 271,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.959055,
+      "mean_score": 0.438442
+    },
+    {
+      "unit": "1ute_A",
+      "n_residues_in_file": 302,
+      "n_scored": 302,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.886977,
+      "mean_score": 0.437225
+    },
+    {
+      "unit": "1vsn_A",
+      "n_residues_in_file": 215,
+      "n_scored": 215,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.890932,
+      "mean_score": 0.458311
+    },
+    {
+      "unit": "1x2g_C",
+      "n_residues_in_file": 332,
+      "n_scored": 332,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.934704,
+      "mean_score": 0.523147
+    },
+    {
+      "unit": "1xgd_A",
+      "n_residues_in_file": 315,
+      "n_scored": 315,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.943374,
+      "mean_score": 0.448297
+    },
+    {
+      "unit": "1xjf_A",
+      "n_residues_in_file": 619,
+      "n_scored": 619,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.972962,
+      "mean_score": 0.484881
+    },
+    {
+      "unit": "1xqv_A",
+      "n_residues_in_file": 290,
+      "n_scored": 290,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.939261,
+      "mean_score": 0.449698
+    },
+    {
+      "unit": "1xtc_A",
+      "n_residues_in_file": 192,
+      "n_scored": 192,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.925979,
+      "mean_score": 0.496529
+    },
+    {
+      "unit": "1zm0_A",
+      "n_residues_in_file": 96,
+      "n_scored": 96,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.716796,
+      "mean_score": 0.364025
+    },
+    {
+      "unit": "2aka_A",
+      "n_residues_in_file": 764,
+      "n_scored": 764,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.979781,
+      "mean_score": 0.495238
+    },
+    {
+      "unit": "2d05_A",
+      "n_residues_in_file": 259,
+      "n_scored": 259,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.862914,
+      "mean_score": 0.383806
+    },
+    {
+      "unit": "2dfp_A",
+      "n_residues_in_file": 533,
+      "n_scored": 533,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.958202,
+      "mean_score": 0.521238
+    },
+    {
+      "unit": "2fem_A",
+      "n_residues_in_file": 212,
+      "n_scored": 212,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.969642,
+      "mean_score": 0.52985
+    },
+    {
+      "unit": "2fhz_B",
+      "n_residues_in_file": 93,
+      "n_scored": 93,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.807934,
+      "mean_score": 0.396767
+    },
+    {
+      "unit": "2h7s_A",
+      "n_residues_in_file": 405,
+      "n_scored": 405,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.949567,
+      "mean_score": 0.469294
+    },
+    {
+      "unit": "2i3a_D",
+      "n_residues_in_file": 347,
+      "n_scored": 347,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.966613,
+      "mean_score": 0.515614
+    },
+    {
+      "unit": "2i3r_A",
+      "n_residues_in_file": 286,
+      "n_scored": 286,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.875116,
+      "mean_score": 0.399954
+    },
+    {
+      "unit": "2iyt_A",
+      "n_residues_in_file": 175,
+      "n_scored": 175,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.875633,
+      "mean_score": 0.494551
+    },
+    {
+      "unit": "2nt1_B",
+      "n_residues_in_file": 497,
+      "n_scored": 497,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.904058,
+      "mean_score": 0.455627
+    },
+    {
+      "unit": "2phz_A",
+      "n_residues_in_file": 270,
+      "n_scored": 270,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.929605,
+      "mean_score": 0.484101
+    },
+    {
+      "unit": "2pkf_A",
+      "n_residues_in_file": 332,
+      "n_scored": 332,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.938591,
+      "mean_score": 0.49356
+    },
+    {
+      "unit": "2pwz_G",
+      "n_residues_in_file": 312,
+      "n_scored": 312,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.945219,
+      "mean_score": 0.504861
+    },
+    {
+      "unit": "2qbv_A",
+      "n_residues_in_file": 73,
+      "n_scored": 73,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.830536,
+      "mean_score": 0.481873
+    },
+    {
+      "unit": "2rfj_B",
+      "n_residues_in_file": 106,
+      "n_scored": 106,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.74637,
+      "mean_score": 0.370613
+    },
+    {
+      "unit": "2v6m_D",
+      "n_residues_in_file": 303,
+      "n_scored": 298,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [
+        132,
+        209,
+        209,
+        209,
+        210
+      ],
+      "max_score": 0.943828,
+      "mean_score": 0.489704
+    },
+    {
+      "unit": "2vl2_C",
+      "n_residues_in_file": 161,
+      "n_scored": 161,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.916423,
+      "mean_score": 0.53284
+    },
+    {
+      "unit": "2vqz_F",
+      "n_residues_in_file": 150,
+      "n_scored": 150,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.90823,
+      "mean_score": 0.443578
+    },
+    {
+      "unit": "2vyr_A",
+      "n_residues_in_file": 86,
+      "n_scored": 85,
+      "agrees_with_official_featurisation": null,
+      "dropped": [
+        {
+          "resseq": 110,
+          "resname": "ALA",
+          "why": "incomplete backbone, has only N"
+        }
+      ],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.750773,
+      "mean_score": 0.252472
+    },
+    {
+      "unit": "2w8n_A",
+      "n_residues_in_file": 480,
+      "n_scored": 480,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.95695,
+      "mean_score": 0.489424
+    },
+    {
+      "unit": "2x47_A",
+      "n_residues_in_file": 229,
+      "n_scored": 229,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.874133,
+      "mean_score": 0.476455
+    },
+    {
+      "unit": "2xsa_A",
+      "n_residues_in_file": 443,
+      "n_scored": 443,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.922424,
+      "mean_score": 0.390123
+    },
+    {
+      "unit": "2zcg_A",
+      "n_residues_in_file": 318,
+      "n_scored": 318,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.944391,
+      "mean_score": 0.465026
+    },
+    {
+      "unit": "2zj7_A",
+      "n_residues_in_file": 616,
+      "n_scored": 616,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.933099,
+      "mean_score": 0.453355
+    },
+    {
+      "unit": "3a0x_A",
+      "n_residues_in_file": 149,
+      "n_scored": 149,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.869621,
+      "mean_score": 0.376223
+    },
+    {
+      "unit": "3bjp_A",
+      "n_residues_in_file": 295,
+      "n_scored": 295,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.935184,
+      "mean_score": 0.497958
+    },
+    {
+      "unit": "3f4k_A",
+      "n_residues_in_file": 254,
+      "n_scored": 254,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.961691,
+      "mean_score": 0.432819
+    },
+    {
+      "unit": "3flg_A",
+      "n_residues_in_file": 135,
+      "n_scored": 135,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.797955,
+      "mean_score": 0.395147
+    },
+    {
+      "unit": "3fzo_A",
+      "n_residues_in_file": 262,
+      "n_scored": 262,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.952514,
+      "mean_score": 0.519754
+    },
+    {
+      "unit": "3gdg_B",
+      "n_residues_in_file": 267,
+      "n_scored": 267,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.967854,
+      "mean_score": 0.546865
+    },
+    {
+      "unit": "3h8a_B",
+      "n_residues_in_file": 430,
+      "n_scored": 430,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.963731,
+      "mean_score": 0.445806
+    },
+    {
+      "unit": "3i8s_B",
+      "n_residues_in_file": 261,
+      "n_scored": 261,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.872552,
+      "mean_score": 0.410313
+    },
+    {
+      "unit": "3idh_A",
+      "n_residues_in_file": 453,
+      "n_scored": 453,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.977177,
+      "mean_score": 0.442953
+    },
+    {
+      "unit": "3jzg_A",
+      "n_residues_in_file": 359,
+      "n_scored": 359,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.95879,
+      "mean_score": 0.503125
+    },
+    {
+      "unit": "3k01_A",
+      "n_residues_in_file": 391,
+      "n_scored": 391,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.959248,
+      "mean_score": 0.448697
+    },
+    {
+      "unit": "3lnz_C",
+      "n_residues_in_file": 82,
+      "n_scored": 82,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.632558,
+      "mean_score": 0.256767
+    },
+    {
+      "unit": "3lnz_O",
+      "n_residues_in_file": 83,
+      "n_scored": 83,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.646888,
+      "mean_score": 0.252642
+    },
+    {
+      "unit": "3ly8_A",
+      "n_residues_in_file": 323,
+      "n_scored": 323,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.933319,
+      "mean_score": 0.476303
+    },
+    {
+      "unit": "3mwg_B",
+      "n_residues_in_file": 272,
+      "n_scored": 272,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.909736,
+      "mean_score": 0.456888
+    },
+    {
+      "unit": "3n4u_A",
+      "n_residues_in_file": 301,
+      "n_scored": 301,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.888483,
+      "mean_score": 0.509459
+    },
+    {
+      "unit": "3nx1_B",
+      "n_residues_in_file": 165,
+      "n_scored": 165,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.853081,
+      "mean_score": 0.461669
+    },
+    {
+      "unit": "3pbf_A",
+      "n_residues_in_file": 145,
+      "n_scored": 145,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.7982,
+      "mean_score": 0.425937
+    },
+    {
+      "unit": "3pfp_A",
+      "n_residues_in_file": 464,
+      "n_scored": 462,
+      "agrees_with_official_featurisation": null,
+      "dropped": [
+        {
+          "resseq": -1,
+          "resname": "GLY",
+          "why": "incomplete backbone, has only C/CA/O"
+        },
+        {
+          "resseq": 462,
+          "resname": "ASP",
+          "why": "incomplete backbone, has only C/CA/N"
+        }
+      ],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.951053,
+      "mean_score": 0.491345
+    },
+    {
+      "unit": "3pfp_B",
+      "n_residues_in_file": 464,
+      "n_scored": 464,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.951896,
+      "mean_score": 0.489512
+    },
+    {
+      "unit": "3rwv_A",
+      "n_residues_in_file": 205,
+      "n_scored": 205,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.850297,
+      "mean_score": 0.40473
+    },
+    {
+      "unit": "3st6_C",
+      "n_residues_in_file": 424,
+      "n_scored": 424,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.948965,
+      "mean_score": 0.479052
+    },
+    {
+      "unit": "3t8b_A",
+      "n_residues_in_file": 237,
+      "n_scored": 234,
+      "agrees_with_official_featurisation": null,
+      "dropped": [
+        {
+          "resseq": 16,
+          "resname": "SER",
+          "why": "incomplete backbone, has only C/O"
+        },
+        {
+          "resseq": 133,
+          "resname": "ARG",
+          "why": "incomplete backbone, has only C/CA/O"
+        },
+        {
+          "resseq": 273,
+          "resname": "VAL",
+          "why": "incomplete backbone, has only N"
+        }
+      ],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.92472,
+      "mean_score": 0.484611
+    },
+    {
+      "unit": "3tpo_A",
+      "n_residues_in_file": 438,
+      "n_scored": 438,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.898165,
+      "mean_score": 0.423844
+    },
+    {
+      "unit": "3ugk_A",
+      "n_residues_in_file": 372,
+      "n_scored": 372,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.907479,
+      "mean_score": 0.492279
+    },
+    {
+      "unit": "3uyi_A",
+      "n_residues_in_file": 312,
+      "n_scored": 312,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.963289,
+      "mean_score": 0.512876
+    },
+    {
+      "unit": "3v55_A",
+      "n_residues_in_file": 368,
+      "n_scored": 368,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.939414,
+      "mean_score": 0.437635
+    },
+    {
+      "unit": "3vgm_A",
+      "n_residues_in_file": 312,
+      "n_scored": 312,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.959645,
+      "mean_score": 0.489671
+    },
+    {
+      "unit": "3w90_A",
+      "n_residues_in_file": 198,
+      "n_scored": 198,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.965256,
+      "mean_score": 0.51076
+    },
+    {
+      "unit": "3wb9_C",
+      "n_residues_in_file": 297,
+      "n_scored": 297,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.948501,
+      "mean_score": 0.52079
+    },
+    {
+      "unit": "4aem_A",
+      "n_residues_in_file": 126,
+      "n_scored": 126,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.855921,
+      "mean_score": 0.4084
+    },
+    {
+      "unit": "4amv_B",
+      "n_residues_in_file": 608,
+      "n_scored": 608,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.973524,
+      "mean_score": 0.51183
+    },
+    {
+      "unit": "4bg8_A",
+      "n_residues_in_file": 310,
+      "n_scored": 310,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.934295,
+      "mean_score": 0.392854
+    },
+    {
+      "unit": "4cmw_B",
+      "n_residues_in_file": 286,
+      "n_scored": 286,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.922925,
+      "mean_score": 0.516271
+    },
+    {
+      "unit": "4dnc_B",
+      "n_residues_in_file": 267,
+      "n_scored": 267,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.855106,
+      "mean_score": 0.405675
+    },
+    {
+      "unit": "4e1y_A",
+      "n_residues_in_file": 353,
+      "n_scored": 353,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.88872,
+      "mean_score": 0.490866
+    },
+    {
+      "unit": "4fkm_B",
+      "n_residues_in_file": 209,
+      "n_scored": 209,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.893117,
+      "mean_score": 0.512707
+    },
+    {
+      "unit": "4gpi_C",
+      "n_residues_in_file": 235,
+      "n_scored": 235,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.94526,
+      "mean_score": 0.4742
+    },
+    {
+      "unit": "4gv9_A",
+      "n_residues_in_file": 198,
+      "n_scored": 198,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.927849,
+      "mean_score": 0.5017
+    },
+    {
+      "unit": "4hye_A",
+      "n_residues_in_file": 200,
+      "n_scored": 200,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.862676,
+      "mean_score": 0.376593
+    },
+    {
+      "unit": "4ikv_A",
+      "n_residues_in_file": 492,
+      "n_scored": 492,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.951426,
+      "mean_score": 0.58111
+    },
+    {
+      "unit": "4ilg_A",
+      "n_residues_in_file": 321,
+      "n_scored": 321,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.887961,
+      "mean_score": 0.460629
+    },
+    {
+      "unit": "4j4e_F",
+      "n_residues_in_file": 101,
+      "n_scored": 101,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.869808,
+      "mean_score": 0.559322
+    },
+    {
+      "unit": "4jax_F",
+      "n_residues_in_file": 459,
+      "n_scored": 459,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.96461,
+      "mean_score": 0.463617
+    },
+    {
+      "unit": "4jfr_C",
+      "n_residues_in_file": 334,
+      "n_scored": 334,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.933706,
+      "mean_score": 0.442798
+    },
+    {
+      "unit": "4kmy_A",
+      "n_residues_in_file": 207,
+      "n_scored": 207,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.923256,
+      "mean_score": 0.487058
+    },
+    {
+      "unit": "4mwi_A",
+      "n_residues_in_file": 266,
+      "n_scored": 266,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.970206,
+      "mean_score": 0.502058
+    },
+    {
+      "unit": "4nzv_B",
+      "n_residues_in_file": 324,
+      "n_scored": 324,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.934253,
+      "mean_score": 0.491112
+    },
+    {
+      "unit": "4oqo_B",
+      "n_residues_in_file": 348,
+      "n_scored": 348,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.923506,
+      "mean_score": 0.43179
+    },
+    {
+      "unit": "4p2f_A",
+      "n_residues_in_file": 189,
+      "n_scored": 189,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.920549,
+      "mean_score": 0.450636
+    },
+    {
+      "unit": "4qvk_B",
+      "n_residues_in_file": 235,
+      "n_scored": 235,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.953012,
+      "mean_score": 0.521004
+    },
+    {
+      "unit": "4r0x_A",
+      "n_residues_in_file": 122,
+      "n_scored": 122,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.85347,
+      "mean_score": 0.377633
+    },
+    {
+      "unit": "4rvt_B",
+      "n_residues_in_file": 297,
+      "n_scored": 297,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.925777,
+      "mean_score": 0.448278
+    },
+    {
+      "unit": "4ttp_A",
+      "n_residues_in_file": 201,
+      "n_scored": 201,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.945214,
+      "mean_score": 0.45521
+    },
+    {
+      "unit": "4uc8_A",
+      "n_residues_in_file": 222,
+      "n_scored": 222,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.86785,
+      "mean_score": 0.48464
+    },
+    {
+      "unit": "4uum_A",
+      "n_residues_in_file": 334,
+      "n_scored": 334,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.954271,
+      "mean_score": 0.517904
+    },
+    {
+      "unit": "4zm7_A",
+      "n_residues_in_file": 180,
+      "n_scored": 180,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.903614,
+      "mean_score": 0.463916
+    },
+    {
+      "unit": "4zoe_B",
+      "n_residues_in_file": 724,
+      "n_scored": 724,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.915792,
+      "mean_score": 0.452881
+    },
+    {
+      "unit": "5acv_B",
+      "n_residues_in_file": 232,
+      "n_scored": 232,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.944156,
+      "mean_score": 0.394732
+    },
+    {
+      "unit": "5b0e_B",
+      "n_residues_in_file": 104,
+      "n_scored": 104,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.873403,
+      "mean_score": 0.366098
+    },
+    {
+      "unit": "5caz_A",
+      "n_residues_in_file": 161,
+      "n_scored": 161,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.775567,
+      "mean_score": 0.337335
+    },
+    {
+      "unit": "5e0v_A",
+      "n_residues_in_file": 249,
+      "n_scored": 249,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.859464,
+      "mean_score": 0.423393
+    },
+    {
+      "unit": "5ey7_B",
+      "n_residues_in_file": 291,
+      "n_scored": 291,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.915977,
+      "mean_score": 0.486385
+    },
+    {
+      "unit": "5hij_A",
+      "n_residues_in_file": 240,
+      "n_scored": 240,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.873469,
+      "mean_score": 0.488238
+    },
+    {
+      "unit": "5hto_E",
+      "n_residues_in_file": 305,
+      "n_scored": 305,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.947499,
+      "mean_score": 0.506714
+    },
+    {
+      "unit": "5i3t_E",
+      "n_residues_in_file": 363,
+      "n_scored": 363,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.89931,
+      "mean_score": 0.414368
+    },
+    {
+      "unit": "5igh_A",
+      "n_residues_in_file": 293,
+      "n_scored": 293,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.956786,
+      "mean_score": 0.505393
+    },
+    {
+      "unit": "5kcg_B",
+      "n_residues_in_file": 397,
+      "n_scored": 397,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.966488,
+      "mean_score": 0.49711
+    },
+    {
+      "unit": "5loc_A",
+      "n_residues_in_file": 320,
+      "n_scored": 320,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.937952,
+      "mean_score": 0.508211
+    },
+    {
+      "unit": "5o8b_A",
+      "n_residues_in_file": 243,
+      "n_scored": 243,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.924193,
+      "mean_score": 0.407765
+    },
+    {
+      "unit": "5sc2_A",
+      "n_residues_in_file": 150,
+      "n_scored": 150,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.883312,
+      "mean_score": 0.488547
+    },
+    {
+      "unit": "5tc0_B",
+      "n_residues_in_file": 250,
+      "n_scored": 250,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.921026,
+      "mean_score": 0.495906
+    },
+    {
+      "unit": "5tvi_V",
+      "n_residues_in_file": 90,
+      "n_scored": 90,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.789878,
+      "mean_score": 0.310561
+    },
+    {
+      "unit": "5uxa_A",
+      "n_residues_in_file": 301,
+      "n_scored": 301,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.915959,
+      "mean_score": 0.526514
+    },
+    {
+      "unit": "5wbm_B",
+      "n_residues_in_file": 302,
+      "n_scored": 302,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.935962,
+      "mean_score": 0.552757
+    },
+    {
+      "unit": "5yhb_A",
+      "n_residues_in_file": 178,
+      "n_scored": 178,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.857723,
+      "mean_score": 0.449064
+    },
+    {
+      "unit": "5yj2_C",
+      "n_residues_in_file": 302,
+      "n_scored": 302,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.945618,
+      "mean_score": 0.510589
+    },
+    {
+      "unit": "5yqp_A",
+      "n_residues_in_file": 185,
+      "n_scored": 185,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.884376,
+      "mean_score": 0.476888
+    },
+    {
+      "unit": "5ysb_B",
+      "n_residues_in_file": 385,
+      "n_scored": 385,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.942118,
+      "mean_score": 0.438074
+    },
+    {
+      "unit": "5z18_C",
+      "n_residues_in_file": 588,
+      "n_scored": 588,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.956933,
+      "mean_score": 0.524182
+    },
+    {
+      "unit": "5zj4_D",
+      "n_residues_in_file": 160,
+      "n_scored": 160,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.854547,
+      "mean_score": 0.44979
+    },
+    {
+      "unit": "6a98_C",
+      "n_residues_in_file": 201,
+      "n_scored": 201,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.966671,
+      "mean_score": 0.508735
+    },
+    {
+      "unit": "6bty_B",
+      "n_residues_in_file": 128,
+      "n_scored": 128,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.784155,
+      "mean_score": 0.372119
+    },
+    {
+      "unit": "6cqe_B",
+      "n_residues_in_file": 287,
+      "n_scored": 287,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.932443,
+      "mean_score": 0.521063
+    },
+    {
+      "unit": "6du4_A",
+      "n_residues_in_file": 287,
+      "n_scored": 287,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.943606,
+      "mean_score": 0.516237
+    },
+    {
+      "unit": "6eqj_A",
+      "n_residues_in_file": 245,
+      "n_scored": 245,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.922667,
+      "mean_score": 0.48198
+    },
+    {
+      "unit": "6f52_A",
+      "n_residues_in_file": 233,
+      "n_scored": 233,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.946465,
+      "mean_score": 0.466649
+    },
+    {
+      "unit": "6fc2_C",
+      "n_residues_in_file": 177,
+      "n_scored": 177,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.865156,
+      "mean_score": 0.465046
+    },
+    {
+      "unit": "6fgj_B",
+      "n_residues_in_file": 197,
+      "n_scored": 197,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.794697,
+      "mean_score": 0.455819
+    },
+    {
+      "unit": "6g6y_A",
+      "n_residues_in_file": 319,
+      "n_scored": 319,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.912504,
+      "mean_score": 0.466539
+    },
+    {
+      "unit": "6hei_A",
+      "n_residues_in_file": 346,
+      "n_scored": 346,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.886933,
+      "mean_score": 0.42941
+    },
+    {
+      "unit": "6isu_A",
+      "n_residues_in_file": 227,
+      "n_scored": 227,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.898655,
+      "mean_score": 0.512629
+    },
+    {
+      "unit": "6jq9_B",
+      "n_residues_in_file": 483,
+      "n_scored": 483,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.926843,
+      "mean_score": 0.450734
+    },
+    {
+      "unit": "6ksc_A",
+      "n_residues_in_file": 321,
+      "n_scored": 321,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.941776,
+      "mean_score": 0.465662
+    },
+    {
+      "unit": "6n5j_B",
+      "n_residues_in_file": 301,
+      "n_scored": 301,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.92762,
+      "mean_score": 0.413385
+    },
+    {
+      "unit": "6nei_B",
+      "n_residues_in_file": 339,
+      "n_scored": 339,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.970078,
+      "mean_score": 0.509947
+    },
+    {
+      "unit": "6o4f_H",
+      "n_residues_in_file": 509,
+      "n_scored": 509,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.956123,
+      "mean_score": 0.484547
+    },
+    {
+      "unit": "6tx0_B",
+      "n_residues_in_file": 479,
+      "n_scored": 479,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.894382,
+      "mean_score": 0.509276
+    },
+    {
+      "unit": "6vle_A",
+      "n_residues_in_file": 460,
+      "n_scored": 460,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.94202,
+      "mean_score": 0.513064
+    },
+    {
+      "unit": "6w10_A",
+      "n_residues_in_file": 223,
+      "n_scored": 223,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.820012,
+      "mean_score": 0.464223
+    },
+    {
+      "unit": "7c48_A",
+      "n_residues_in_file": 288,
+      "n_scored": 288,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.944109,
+      "mean_score": 0.496804
+    },
+    {
+      "unit": "7c63_A",
+      "n_residues_in_file": 416,
+      "n_scored": 416,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.87696,
+      "mean_score": 0.399837
+    },
+    {
+      "unit": "7de1_A",
+      "n_residues_in_file": 108,
+      "n_scored": 108,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.94068,
+      "mean_score": 0.666884
+    },
+    {
+      "unit": "7e5q_B",
+      "n_residues_in_file": 352,
+      "n_scored": 352,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.957781,
+      "mean_score": 0.507957
+    },
+    {
+      "unit": "7f2m_B",
+      "n_residues_in_file": 323,
+      "n_scored": 323,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.943518,
+      "mean_score": 0.474168
+    },
+    {
+      "unit": "7f4y_B",
+      "n_residues_in_file": 901,
+      "n_scored": 901,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.967521,
+      "mean_score": 0.512177
+    },
+    {
+      "unit": "7kay_A",
+      "n_residues_in_file": 583,
+      "n_scored": 583,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.97998,
+      "mean_score": 0.497177
+    },
+    {
+      "unit": "7nc8_D",
+      "n_residues_in_file": 237,
+      "n_scored": 237,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.9584,
+      "mean_score": 0.486836
+    },
+    {
+      "unit": "7ndl_B",
+      "n_residues_in_file": 655,
+      "n_scored": 655,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.959404,
+      "mean_score": 0.471332
+    },
+    {
+      "unit": "7nlx_A",
+      "n_residues_in_file": 290,
+      "n_scored": 290,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.948678,
+      "mean_score": 0.481024
+    },
+    {
+      "unit": "7o1i_A",
+      "n_residues_in_file": 726,
+      "n_scored": 726,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.964254,
+      "mean_score": 0.55524
+    },
+    {
+      "unit": "7qoq_A",
+      "n_residues_in_file": 302,
+      "n_scored": 302,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.976559,
+      "mean_score": 0.563916
+    },
+    {
+      "unit": "7qzr_D",
+      "n_residues_in_file": 463,
+      "n_scored": 463,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.916399,
+      "mean_score": 0.517799
+    },
+    {
+      "unit": "7v8k_B",
+      "n_residues_in_file": 474,
+      "n_scored": 474,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.942076,
+      "mean_score": 0.526544
+    },
+    {
+      "unit": "7w19_A",
+      "n_residues_in_file": 293,
+      "n_scored": 293,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.97336,
+      "mean_score": 0.498663
+    },
+    {
+      "unit": "7x0f_A",
+      "n_residues_in_file": 446,
+      "n_scored": 446,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.961817,
+      "mean_score": 0.468404
+    },
+    {
+      "unit": "7x0g_B",
+      "n_residues_in_file": 287,
+      "n_scored": 287,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.910443,
+      "mean_score": 0.380447
+    },
+    {
+      "unit": "7x0i_B",
+      "n_residues_in_file": 406,
+      "n_scored": 406,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.942332,
+      "mean_score": 0.383188
+    },
+    {
+      "unit": "7xgf_E",
+      "n_residues_in_file": 151,
+      "n_scored": 151,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.759098,
+      "mean_score": 0.345523
+    },
+    {
+      "unit": "7yjc_A",
+      "n_residues_in_file": 381,
+      "n_scored": 381,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.949268,
+      "mean_score": 0.517429
+    },
+    {
+      "unit": "8aeq_A",
+      "n_residues_in_file": 624,
+      "n_scored": 624,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.946487,
+      "mean_score": 0.441853
+    },
+    {
+      "unit": "8aqi_B",
+      "n_residues_in_file": 172,
+      "n_scored": 172,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.89015,
+      "mean_score": 0.446301
+    },
+    {
+      "unit": "8b9p_A",
+      "n_residues_in_file": 596,
+      "n_scored": 596,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.968074,
+      "mean_score": 0.418237
+    },
+    {
+      "unit": "8bre_B",
+      "n_residues_in_file": 351,
+      "n_scored": 351,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.960483,
+      "mean_score": 0.509198
+    },
+    {
+      "unit": "8gxj_C",
+      "n_residues_in_file": 184,
+      "n_scored": 184,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.972218,
+      "mean_score": 0.516588
+    },
+    {
+      "unit": "8h27_A",
+      "n_residues_in_file": 181,
+      "n_scored": 181,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.9104,
+      "mean_score": 0.517912
+    },
+    {
+      "unit": "8i84_B",
+      "n_residues_in_file": 285,
+      "n_scored": 285,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.94113,
+      "mean_score": 0.479121
+    },
+    {
+      "unit": "8ias_B",
+      "n_residues_in_file": 501,
+      "n_scored": 501,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.939609,
+      "mean_score": 0.47167
+    },
+    {
+      "unit": "8j11_X",
+      "n_residues_in_file": 173,
+      "n_scored": 173,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.739377,
+      "mean_score": 0.358297
+    },
+    {
+      "unit": "8onn_E",
+      "n_residues_in_file": 268,
+      "n_scored": 268,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.957412,
+      "mean_score": 0.555914
+    },
+    {
+      "unit": "8u3n_A",
+      "n_residues_in_file": 377,
+      "n_scored": 377,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.946993,
+      "mean_score": 0.479437
+    },
+    {
+      "unit": "8vxu_B",
+      "n_residues_in_file": 104,
+      "n_scored": 104,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.848114,
+      "mean_score": 0.435251
+    },
+    {
+      "unit": "9atc_A",
+      "n_residues_in_file": 310,
+      "n_scored": 310,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.950756,
+      "mean_score": 0.509102
+    }
+  ],
+  "runtime_minutes": 0.67
+}

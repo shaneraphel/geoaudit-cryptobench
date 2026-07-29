@@ -1,0 +1,456 @@
+{
+  "schema": "geoaudit.pocketminer_selftest.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-07-29T20:35:58+0800",
+  "question": "does the restored network reproduce PocketMiner's own residue-level discrimination on PocketMiner's own labelled apo structures",
+  "reads_our_test_fold": false,
+  "provenance": {
+    "source": "https://github.com/Mickdub/gvp/tree/pocket_pred (Meller et al., Nat. Commun. 2023, doi:10.1038/s41467-023-36699-3)",
+    "commit": "187062df3c94127e991669768009141a08fd5d8b",
+    "weight_sha256": {
+      "models/pocketminer.index": "09e36a62a987b14bc49cf7a1fa53fa734f85d85d088777f98c6aca253b47bf46",
+      "models/pocketminer.data-00000-of-00001": "6f5ab62b9fb38b54040053ac321f3362d616bae9b31569249a032dbb50890b70"
+    },
+    "architecture": {
+      "node_features": [
+        8,
+        50
+      ],
+      "edge_features": [
+        1,
+        32
+      ],
+      "hidden_dim": [
+        16,
+        100
+      ],
+      "num_layers": 4,
+      "dropout": 0.1,
+      "k_neighbors": 30,
+      "output": "Dense(1, activation='sigmoid') per residue"
+    }
+  },
+  "splits": {
+    "test": {
+      "n_structures": 35,
+      "n_misaligned": 0,
+      "misaligned": [],
+      "paired_by": "position in the id list and the label dictionary, as the authors' validate_performance_on_xtal_residues does",
+      "pairs_whose_names_do_not_agree": [],
+      "n_residues_scored": 1846,
+      "n_positive": 563,
+      "pooled_roc_auc": 0.86772,
+      "pooled_pr_auc": 0.813525,
+      "mean_per_protein_roc_auc": null,
+      "per_protein": [
+        {
+          "id": "6hb0A",
+          "n_scored": 15,
+          "n_positive": 15,
+          "roc_auc": null
+        },
+        {
+          "id": "2laoA",
+          "n_scored": 15,
+          "n_positive": 15,
+          "roc_auc": null
+        },
+        {
+          "id": "1urpA",
+          "n_scored": 13,
+          "n_positive": 13,
+          "roc_auc": null
+        },
+        {
+          "id": "6ypkA",
+          "n_scored": 24,
+          "n_positive": 24,
+          "roc_auc": null
+        },
+        {
+          "id": "3ugkA",
+          "n_scored": 42,
+          "n_positive": 42,
+          "roc_auc": null
+        },
+        {
+          "id": "5g1mA",
+          "n_scored": 19,
+          "n_positive": 19,
+          "roc_auc": null
+        },
+        {
+          "id": "5nzmA",
+          "n_scored": 27,
+          "n_positive": 27,
+          "roc_auc": null
+        },
+        {
+          "id": "4v38A",
+          "n_scored": 23,
+          "n_positive": 23,
+          "roc_auc": null
+        },
+        {
+          "id": "2w9tA",
+          "n_scored": 40,
+          "n_positive": 40,
+          "roc_auc": null
+        },
+        {
+          "id": "2hq8B",
+          "n_scored": 25,
+          "n_positive": 25,
+          "roc_auc": null
+        },
+        {
+          "id": "4r72A",
+          "n_scored": 24,
+          "n_positive": 24,
+          "roc_auc": null
+        },
+        {
+          "id": "5za4A",
+          "n_scored": 24,
+          "n_positive": 24,
+          "roc_auc": null
+        },
+        {
+          "id": "2ceyA",
+          "n_scored": 18,
+          "n_positive": 18,
+          "roc_auc": null
+        },
+        {
+          "id": "1kmoA",
+          "n_scored": 22,
+          "n_positive": 22,
+          "roc_auc": null
+        },
+        {
+          "id": "5niaA",
+          "n_scored": 27,
+          "n_positive": 27,
+          "roc_auc": null
+        },
+        {
+          "id": "2fjyA",
+          "n_scored": 19,
+          "n_positive": 19,
+          "roc_auc": null
+        },
+        {
+          "id": "3p53A",
+          "n_scored": 16,
+          "n_positive": 16,
+          "roc_auc": null
+        },
+        {
+          "id": "1kx9B",
+          "n_scored": 32,
+          "n_positive": 32,
+          "roc_auc": null
+        },
+        {
+          "id": "1tvqA",
+          "n_scored": 35,
+          "n_positive": 35,
+          "roc_auc": null
+        },
+        {
+          "id": "2zkuB",
+          "n_scored": 31,
+          "n_positive": 31,
+          "roc_auc": null
+        },
+        {
+          "id": "3nx1A",
+          "n_scored": 11,
+          "n_positive": 11,
+          "roc_auc": null
+        },
+        {
+          "id": "4i92A",
+          "n_scored": 19,
+          "n_positive": 19,
+          "roc_auc": null
+        },
+        {
+          "id": "3qxwB",
+          "n_scored": 20,
+          "n_positive": 20,
+          "roc_auc": null
+        },
+        {
+          "id": "5h9aA",
+          "n_scored": 22,
+          "n_positive": 22,
+          "roc_auc": null
+        },
+        {
+          "id": "2fd7A",
+          "n_scored": 46,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "4tqlA",
+          "n_scored": 215,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "2alpA",
+          "n_scored": 178,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "1ammA",
+          "n_scored": 148,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "4ape",
+          "n_scored": 102,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "5uoj",
+          "n_scored": 106,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "3gz0",
+          "n_scored": 51,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "1btp",
+          "n_scored": 111,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "2oss",
+          "n_scored": 80,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "5zn5",
+          "n_scored": 134,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "5x8ua",
+          "n_scored": 112,
+          "n_positive": 0,
+          "roc_auc": null
+        }
+      ]
+    },
+    "val": {
+      "n_structures": 26,
+      "n_misaligned": 0,
+      "misaligned": [],
+      "paired_by": "position in the id list and the label dictionary, as the authors' validate_performance_on_xtal_residues does",
+      "pairs_whose_names_do_not_agree": [],
+      "n_residues_scored": 811,
+      "n_positive": 436,
+      "pooled_roc_auc": 0.896801,
+      "pooled_pr_auc": 0.921925,
+      "mean_per_protein_roc_auc": null,
+      "per_protein": [
+        {
+          "id": "1s2oA",
+          "n_scored": 14,
+          "n_positive": 14,
+          "roc_auc": null
+        },
+        {
+          "id": "3ppnA",
+          "n_scored": 12,
+          "n_positive": 12,
+          "roc_auc": null
+        },
+        {
+          "id": "1ezmA",
+          "n_scored": 21,
+          "n_positive": 21,
+          "roc_auc": null
+        },
+        {
+          "id": "1j8fC",
+          "n_scored": 26,
+          "n_positive": 26,
+          "roc_auc": null
+        },
+        {
+          "id": "3kjeA",
+          "n_scored": 21,
+          "n_positive": 21,
+          "roc_auc": null
+        },
+        {
+          "id": "1y1aA",
+          "n_scored": 7,
+          "n_positive": 7,
+          "roc_auc": null
+        },
+        {
+          "id": "4p0iB",
+          "n_scored": 21,
+          "n_positive": 21,
+          "roc_auc": null
+        },
+        {
+          "id": "5uxaA",
+          "n_scored": 43,
+          "n_positive": 43,
+          "roc_auc": null
+        },
+        {
+          "id": "6rvmC",
+          "n_scored": 26,
+          "n_positive": 26,
+          "roc_auc": null
+        },
+        {
+          "id": "3fvjA",
+          "n_scored": 21,
+          "n_positive": 21,
+          "roc_auc": null
+        },
+        {
+          "id": "2oy4A",
+          "n_scored": 26,
+          "n_positive": 26,
+          "roc_auc": null
+        },
+        {
+          "id": "3rwvA",
+          "n_scored": 34,
+          "n_positive": 34,
+          "roc_auc": null
+        },
+        {
+          "id": "6e5dA",
+          "n_scored": 23,
+          "n_positive": 23,
+          "roc_auc": null
+        },
+        {
+          "id": "4ic4A",
+          "n_scored": 30,
+          "n_positive": 30,
+          "roc_auc": null
+        },
+        {
+          "id": "4w51A",
+          "n_scored": 17,
+          "n_positive": 17,
+          "roc_auc": null
+        },
+        {
+          "id": "1rrgA",
+          "n_scored": 10,
+          "n_positive": 10,
+          "roc_auc": null
+        },
+        {
+          "id": "2bu8A",
+          "n_scored": 16,
+          "n_positive": 16,
+          "roc_auc": null
+        },
+        {
+          "id": "2ohgA",
+          "n_scored": 23,
+          "n_positive": 23,
+          "roc_auc": null
+        },
+        {
+          "id": "2wgbA",
+          "n_scored": 12,
+          "n_positive": 12,
+          "roc_auc": null
+        },
+        {
+          "id": "1ok8A",
+          "n_scored": 17,
+          "n_positive": 17,
+          "roc_auc": null
+        },
+        {
+          "id": "1k3fB",
+          "n_scored": 16,
+          "n_positive": 16,
+          "roc_auc": null
+        },
+        {
+          "id": "4hjkA",
+          "n_scored": 69,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "1igdA",
+          "n_scored": 50,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "2zhv",
+          "n_scored": 133,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "5e4p",
+          "n_scored": 49,
+          "n_positive": 0,
+          "roc_auc": null
+        },
+        {
+          "id": "1hcl",
+          "n_scored": 74,
+          "n_positive": 0,
+          "roc_auc": null
+        }
+      ]
+    }
+  },
+  "restore": {
+    "assert_existing_objects_matched": true,
+    "every_live_tensor_is_byte_identical_to_the_checkpoint": true,
+    "why_both": "the assertion is TensorFlow's own bookkeeping; the byte comparison does not depend on it",
+    "n_model_variables": 177,
+    "n_checkpoint_entries_under_model": 531,
+    "n_scalars": 736155,
+    "mean_abs_weight": 0.09028409
+  },
+  "reproduction": {
+    "published": {
+      "roc_auc": 0.87,
+      "n_positive": 563,
+      "n_negative": 1283,
+      "quote": "In total, there were 563 residues that form cryptic pockets and 1283 residues that do not form cryptic pockets in our test set. ... our final model, referred to as PocketMiner, achieves very good performance at discriminating residues that form cryptic pockets from those that do not (ROC AUC: 0.87)",
+      "where": "Meller et al., Nat. Commun. 14, 1177 (2023)"
+    },
+    "ours": {
+      "roc_auc": 0.86772,
+      "n_positive": 563,
+      "n_negative": 1283
+    },
+    "residue_counts_match_exactly": true,
+    "roc_auc_rounds_to_the_published_value": true,
+    "what_this_licenses": "the network that scores our fold is the published one, restored from the published weights, fed the featurisation the authors intended, with residues in the order their labels assume. The two residue counts are what pin the last of those: an alignment off by one residue anywhere would not reproduce 563 and 1283.",
+    "floor_also_checked": 0.75
+  }
+}

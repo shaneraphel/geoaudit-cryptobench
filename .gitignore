@@ -38,6 +38,15 @@ data/cryptobench_apo/_scratch/
 results/baselines/PLMNN_WEIGHTS.npz
 results/baselines/_plmnn_checkpoint.jsonl
 
+# PocketMiner's own repository, sparse-checked-out at the commit
+# tools/pocketminer_run.py pins, and the interpreter it needs. 183 MB of weights,
+# source and their own labelled apo structures, plus a 1.5 GB TensorFlow that
+# cannot share an environment with the frozen pipeline because it pins an older
+# numpy. Both are rebuilt by the recipe in the tool's docstring; the two weight
+# files are verified by SHA-256 on every run.
+third_party/pocketminer/
+.venv-pocketminer/
+
 # P2Rank's per-residue scores on the 770 training receptors: an intermediate
 # behind P2RANK_TRAIN_OPERATING_POINT.json, which records its sha256 and the
 # decision it supports. Rebuilt by tools/p2rank_train_operating_point.py, which
