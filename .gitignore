@@ -84,3 +84,4 @@ data/baselines/pocketminer_train/
 results/baselines/POCKETMINER_TRAIN_SCORES.json
 
 data/external/_setb_probe_em_*.json
+data/cryptobench_apo/_aniso_cache_train.npz

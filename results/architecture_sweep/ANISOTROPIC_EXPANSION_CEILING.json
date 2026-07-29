@@ -1,0 +1,186 @@
+{
+ "schema": "geoaudit.anisotropic_expansion_ceiling.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "the expansion is the only axis measured to carry weight and it is isotropic; does resolving its neighbourhood statistics into a bulkward and an outward half lift the ceiling that bounds the counting field",
+ "why_this_axis": "local 35 to wide 645 is +0.025 on this measurement and wide 645 to 912 by adding 190 operator and 77 chain descriptors is +0.0005 at best and -0.0009 pooled. One axis carries essentially everything. That axis is a ball, and a ball has no direction, so the whole bank cannot tell a residue whose hydrophobic neighbours lie on one side from one whose hydrophobic neighbours surround it. The mouth of a cleft is a place where the protein is on one side and is not on the other",
+ "construction": {
+  "statistic": "mean of the wire over the bulkward half-neighbourhood minus its mean over the outward half",
+  "direction": "u_i = normalise(mean over neighbours of (c_j - c_i)), which points from the residue toward the centre of mass of its own neighbourhood",
+  "split": "sign of (c_j - c_i) . u_i",
+  "radii_angstrom": [
+   6.0,
+   14.0,
+   20.0
+  ],
+  "why_these_radii": "the three the isotropic difference and rank statistics already use, so the new column is the same neighbourhood seen with a direction rather than a different neighbourhood",
+  "operations": "a comparison, a dot product, a sum and a division; no fitted quantity, no random number, no iteration, so it stays inside what the counting construction reads",
+  "n_columns": 129
+ },
+ "degenerate_direction": {
+  "n_residues": 234838,
+  "n_degenerate_per_radius": {
+   "6.0": 325,
+   "14.0": 32,
+   "20.0": 2
+  },
+  "fraction_degenerate_per_radius": {
+   "6.0": 0.001384,
+   "14.0": 0.000136,
+   "20.0": 9e-06
+  },
+  "direction_floor_angstrom": 0.1,
+  "why_zero_and_not_missing": "a residue whose neighbourhood has no net displacement has no inside and outside to tell apart, so zero is the answer rather than a gap. The count is reported because a column that is zero on most residues is a column doing nothing, and only the count says so"
+ },
+ "baseline": {
+  "name": "wide 645",
+  "n_wires": 645
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "readout": "ridge Fisher discriminant fitted on the fit half, columns standardised there, evaluated on the pick half",
+  "ridge": 0.001,
+  "gate": "the multi-scale spatial gate the detectors use",
+  "metric": "mean per-unit ROC-AUC on the pick half",
+  "comparable_to": "results/architecture_sweep/WIDE_BANK_CEILING.json, same seeds, ridge, gate and metric",
+  "why_a_ceiling": "a Fisher discriminant solves for arbitrary real coefficients over unquantised inputs; a counting field bands every input into four levels and adds integers, so this bounds it rather than predicting it"
+ },
+ "ceilings": {
+  "wide 645": {
+   "mean": 0.784378,
+   "min": 0.760131,
+   "max": 0.794122
+  },
+  "wide+asym6 688": {
+   "mean": 0.784634,
+   "min": 0.760595,
+   "max": 0.793921
+  },
+  "wide+asym14 688": {
+   "mean": 0.787755,
+   "min": 0.763861,
+   "max": 0.798229
+  },
+  "wide+asym20 688": {
+   "mean": 0.787189,
+   "min": 0.76368,
+   "max": 0.797684
+  },
+  "wide+asym_all 774": {
+   "mean": 0.788082,
+   "min": 0.765457,
+   "max": 0.798392
+  }
+ },
+ "lift_over_the_wide_bank": {
+  "wide+asym6 688": {
+   "mean": 0.000256,
+   "min": -0.000201,
+   "max": 0.000837,
+   "n_splits_positive": 10,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "wide+asym14 688": {
+   "mean": 0.003377,
+   "min": 0.00267,
+   "max": 0.004107,
+   "n_splits_positive": 12,
+   "n_splits": 12,
+   "positive_on_every_split": true
+  },
+  "wide+asym20 688": {
+   "mean": 0.002811,
+   "min": 0.00125,
+   "max": 0.004355,
+   "n_splits_positive": 12,
+   "n_splits": 12,
+   "positive_on_every_split": true
+  },
+  "wide+asym_all 774": {
+   "mean": 0.003704,
+   "min": 0.001836,
+   "max": 0.00563,
+   "n_splits_positive": 12,
+   "n_splits": 12,
+   "positive_on_every_split": true
+  }
+ },
+ "per_split": {
+  "wide 645": [
+   0.788202,
+   0.787082,
+   0.787263,
+   0.787571,
+   0.785622,
+   0.776476,
+   0.794122,
+   0.783884,
+   0.786944,
+   0.78189,
+   0.793349,
+   0.760131
+  ],
+  "wide+asym6 688": [
+   0.788602,
+   0.787096,
+   0.787748,
+   0.788228,
+   0.78646,
+   0.776647,
+   0.793921,
+   0.783776,
+   0.787114,
+   0.782059,
+   0.793365,
+   0.760595
+  ],
+  "wide+asym14 688": [
+   0.791004,
+   0.790293,
+   0.791,
+   0.790515,
+   0.789331,
+   0.780568,
+   0.798229,
+   0.787415,
+   0.789885,
+   0.784937,
+   0.796019,
+   0.763861
+  ],
+  "wide+asym20 688": [
+   0.792321,
+   0.791437,
+   0.790512,
+   0.791593,
+   0.787668,
+   0.779305,
+   0.797684,
+   0.785338,
+   0.788744,
+   0.78314,
+   0.794841,
+   0.76368
+  ],
+  "wide+asym_all 774": [
+   0.793832,
+   0.7914,
+   0.791025,
+   0.792082,
+   0.788884,
+   0.781051,
+   0.798392,
+   0.78572,
+   0.789384,
+   0.78444,
+   0.795313,
+   0.765457
+  ]
+ },
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}
