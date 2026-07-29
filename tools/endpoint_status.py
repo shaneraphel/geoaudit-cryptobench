@@ -221,6 +221,17 @@ def check() -> int:
         if d.get(key) != live.get(key):
             bad.append(f"{key} is recorded as {d.get(key)} and the commit "
                        f"graph now gives {live.get(key)}")
+    # Comparing only the count missed a real staleness: a read added after the
+    # preregistration leaves the count alone while the artifact stops listing
+    # every read the ledger knows about, and the demotion is a statement about
+    # the whole read history rather than about a number.
+    for key in ("reads_before_the_preregistration",
+                "reads_after_the_preregistration"):
+        got = [r["read_index"] for r in d.get(key) or []]
+        want = [r["read_index"] for r in live[key]]
+        if got != want:
+            bad.append(f"{key} lists reads {got} and the ledger now gives "
+                       f"{want}; regenerate rather than editing")
     if d.get("n_reads_before_the_preregistration", 0) == 0:
         bad.append("no read precedes the preregistration, so the endpoint "
                    "demotion this artifact exists to justify no longer has a "

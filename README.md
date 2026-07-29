@@ -499,7 +499,7 @@ all fail-closed.
 | Eighth fold read | `make read8` | the partition stops reproducing read five's mean and win/loss counts, a band's size stops matching the preregistered one, band means stop reconstructing the overall mean, or a band that clears the corrected level stops carrying the trend test that qualifies it |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; 429 tests pass under both
+Current state: `verify_claims` all checks pass; 469 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:
 `tests/test_spatial.py` was written against `pytest` while CI runs `unittest`,
 so the five checks guarding the neighbour-search kernel — the one every gate,
