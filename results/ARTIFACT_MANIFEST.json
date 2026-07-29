@@ -10,11 +10,11 @@
   },
   "counts": {
     "exploration": 22,
-    "cited": 41,
-    "superseded": 5,
-    "fold_access": 7
+    "cited": 42,
+    "superseded": 7,
+    "fold_access": 8
   },
-  "n_artifacts": 75,
+  "n_artifacts": 79,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
@@ -241,6 +241,13 @@
       "bytes": 6774
     },
     {
+      "artifact": "results/architecture_sweep/PREREGISTERED_POCKETS.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.preregistered_pockets.v1",
+      "bytes": 8290
+    },
+    {
       "artifact": "results/architecture_sweep/PREREGISTERED_STATISTIC.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -302,6 +309,20 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.wide_bus_bank.v1",
       "bytes": 1841
+    },
+    {
+      "artifact": "results/baselines/PLMNN_NETWORK.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.plmnn_network.v1",
+      "bytes": 3552
+    },
+    {
+      "artifact": "results/baselines/PLMNN_SEQUENCES.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.plmnn_sequences.v1",
+      "bytes": 853771
     },
     {
       "artifact": "results/cryptobench_apo/APO_BENCHMARK.json",
@@ -399,7 +420,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.endpoint_status.v1",
-      "bytes": 6765
+      "bytes": 7042
     },
     {
       "artifact": "results/official_fold/FIGURE_PROVENANCE.json",
@@ -458,6 +479,13 @@
       "bytes": 86105
     },
     {
+      "artifact": "results/official_fold/POCKET_READ.json",
+      "class": "fold_access",
+      "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
+      "schema": "geoaudit.pocket_read.v1",
+      "bytes": 826856
+    },
+    {
       "artifact": "results/official_fold/PREREGISTERED_READ.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -504,7 +532,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 9030
+      "bytes": 9614
     },
     {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",
