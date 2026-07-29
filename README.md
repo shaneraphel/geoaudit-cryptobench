@@ -464,10 +464,11 @@ all fail-closed.
 | Seventh read's plan | `make match2` | the committed plan stops describing the thresholds it was written for, stops naming a sentence for an outcome the read can reach, or stops recording the code that wrote it |
 | Seventh fold read | `make read7` | the deployment rules stop reproducing the frozen bootstrap, the matched F1 delta moves away from what reading 6 published, precision and recall deltas disagree in sign at a matched budget, or a verdict stops following from its own interval |
 | Audit decomposition | `make audit` | the per-table terms stop summing to the score they claim to decompose, the cases drift from the committed selection, a residue's stated role disagrees with the committed calls, or the artifact starts declaring a test-fold read |
+| Readout comparison | `make interp` | the published arm stops scoring what the sensitivity sweep says the same configuration scores on the same half, a reported mean stops being the mean of the per-chain vector stored beside it, an arm loses its paired interval, or the list of arms the field cannot be separated from stops following from those intervals |
 | Controlled cost | `make cost` | the recorded verdict stops following from the ratios it was read off, the two ways of reading the steady state disagree without the artifact saying which one settles it, or the wall-clock conclusion favours whichever side was granted more cores than it asked for |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; 391 tests pass under both
+Current state: `verify_claims` all checks pass; 406 tests pass under both
 `unittest discover` and `pytest`, which now collect the same set. They did not:
 `tests/test_spatial.py` was written against `pytest` while CI runs `unittest`,
 so the five checks guarding the neighbour-search kernel — the one every gate,
@@ -841,7 +842,53 @@ contradiction. The two are now separate macros (`\NTabUsedFullFold`,
 own header, and `make numbers` refuses to emit either if the two tools that
 measured the selection half stop agreeing.
 
-### 4.7b The 13.8× speedup was not a measurement, and the controlled version reverses it
+### 4.7b The field cannot be separated from a logistic regression on the same wires
+
+Given the same 645 wires, would a logistic regression do as well? If it would,
+the interesting object is the feature construction and the table machinery is
+decoration. `tools/interpretable_baselines.py` puts six readouts on the same
+seeded cluster-disjoint halving of the training fold, with the same wires, the
+same bins where they bin, and the same gate search. Each carries a paired
+bootstrap interval against the published readout over the 384 pick-half chains
+both scored (4,000 draws, resampling chains).
+
+| readout | raw | gated | against the field |
+| --- | --- | --- | --- |
+| ridge (Fisher) direction on raw wires | 0.7505 | 0.7562 | +0.0484 [+0.0353, +0.0609] |
+| **logistic regression on raw wires** | 0.7975 | **0.8008** | **+0.0038 [−0.0057, +0.0125]** |
+| additive over the same bins | 0.7845 | 0.7943 | +0.0102 [+0.0044, +0.0161] |
+| pairs, one partition (322 tables) | 0.7822 | 0.7909 | +0.0136 [+0.0068, +0.0210] |
+| pairs, sixteen partitions (published) | 0.7873 | **0.8045** | — |
+| the same, without integer rounding | 0.7839 | 0.8023 | +0.0023 [+0.0012, +0.0033] |
+
+The published readout is the highest of the six, and exactly one interval
+contains zero: the logistic regression's. **On this half of this fold the
+counting field is not separable from a linear model reading the same
+quantities.** Every other rung is separable — the architecture beats its own
+simpler variants — but the architecture as a whole does not measurably beat a
+logistic fit. The accuracy is in the wires.
+
+This was easy to miss. The linear control used elsewhere in this repository is a
+Fisher discriminant, which reaches only 0.7562 here and makes the tables look
+decisive. That gap is about the estimator, not about linearity: fitting the same
+linear form to the likelihood instead recovers nearly all of it. A ceiling
+established with the weaker of two linear fits is not a ceiling.
+
+What the architecture does buy, with intervals that clear zero:
+
+- **repeated pair coverage, +0.0136** — one random pairing is *below* the
+  additive model; only sixteen partitions pull it back above.
+- **integer rounding, +0.0023** — the fan-out cap is a mild regulariser, so the
+  deployable form is also the slightly better one.
+- **the spatial mean, +0.0173** — larger than the field's entire margin over the
+  logistic regression, and it sits outside the table machinery altogether.
+
+None of this revises the frozen configuration. It revises what to claim for it:
+on accuracy a linear model on these wires is its equal on this evidence, and the
+case for the tables is the exact decomposition of §4.10, an inference path with
+no floating-point model in it, and a 1.79 MB integer artifact.
+
+### 4.7c The 13.8× speedup was not a measurement, and the controlled version reverses it
 
 This README used to claim inference was **13.8× cheaper** than P2Rank: 0.342 s per
 chain against 4.722 s. That came from telemetry collected while each method was

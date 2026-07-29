@@ -910,9 +910,13 @@ gap} fails if the manuscript's version of it stops following.
 overtake P2Rank on these invariants alone. The Fisher discriminant of the same
 \NAlgFeatures{} invariants scores \FisherAll{} on the official fold
 (\texttt{results/architecture\_sweep/FEATURE\_CEILING\_DIAGNOSIS.json}), below
-P2Rank at the matched point \AlgAucMatchedBase{}. So no linear readout of these
-invariants can close the gap that Section~\ref{sec:results} attributes to the
-counting field, and a bank of all $\binom{35}{2}=595$ two-digit tables over the
+P2Rank at the matched point \AlgAucMatchedBase{}. So no \emph{Fisher} readout of
+these invariants can close the gap that Section~\ref{sec:results} attributes to
+the counting field --- a qualifier this paragraph originally did without, and
+Section~\ref{sec:readouts} shows it cannot: on the widened wire set a logistic
+fit of the same linear form recovers almost the whole of the difference the
+Fisher direction leaves, so what is bounded here is the estimator and not
+linearity. A bank of all $\binom{35}{2}=595$ two-digit tables over the
 same ranks, fused by the solved integer fan-out, reaches only $0.7725$ on the
 training pick half --- matching the continuous linear form of those ranks
 ($0.7742$), not beating it. The counting field's ceiling under the present
@@ -1387,6 +1391,78 @@ best of the \SensSettings{}, which is a fact about the sweep and not a claim abo
 it: it was chosen before the sweep ran, and had a different row come out on top it
 would have been reported and not adopted.
 
+\subsection{Where the accuracy actually lives}
+\label{sec:readouts}
+A reader who has met a generalised additive model will ask the question this
+chapter has so far avoided: given the same \NTabWires{} wires, would a logistic
+regression do as well? If it would, the interesting object is the feature
+construction and the table machinery is decoration. The question is answered on
+the training partition, on the same seeded cluster-disjoint halving that selected
+the published configuration, with every readout given the same wires, the same
+quantisation where it quantises at all, and the same gate search. Six readouts
+are compared, and each carries its paired bootstrap interval against the
+published one over the \RdNPaired{} pick-half chains both scored,
+\RdBoot{} draws, resampling chains rather than residues.
+
+\begin{center}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+readout & raw & gated & against the field \\
+\midrule
+Ridge direction on raw wires & \RdRidgeRaw{} & \RdRidgeAuc{} & \RdRidgeDelta{} \RdRidgeCI{} \\
+Logistic regression on raw wires & \RdLogitRaw{} & \RdLogitAuc{} & \RdLogitDelta{} \RdLogitCI{} \\
+Additive over the same bins & \RdAdditiveRaw{} & \RdAdditiveAuc{} & \RdAdditiveDelta{} \RdAdditiveCI{} \\
+Pairs, one partition & \RdOneRoundRaw{} & \RdOneRoundAuc{} & \RdOneRoundDelta{} \RdOneRoundCI{} \\
+Pairs, sixteen partitions (published) & \RdFieldRaw{} & \RdFieldAuc{} & --- \\
+\quad the same, without integer rounding & \RdUnroundedRaw{} & \RdUnroundedAuc{} & \RdUnroundedDelta{} \RdUnroundedCI{} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The published readout is the highest of the six, and one interval in that last
+column contains zero. It is the one that matters. An L2-penalised logistic
+regression on the raw wires, converged in \RdNewtonSteps{} Newton steps, reaches
+\RdLogitAuc{} against the field's \RdFieldAuc{}: a paired difference of
+\RdLogitDelta{} \RdLogitCI{}. On this half of this fold the counting field
+cannot be separated from a linear model reading the same quantities. Every other
+rung of the ladder \emph{is} separable from it --- the architecture beats its own
+simpler variants by margins that clear zero --- but the whole architecture does
+not measurably beat a logistic regression. The accuracy is in the wires.
+
+That is worth stating plainly because this chapter could easily have avoided
+finding it. The linear control the earlier sections use is a Fisher discriminant,
+and on these wires that estimator reaches only \RdRidgeAuc{}, a gap of
+\RdRidgeDelta{} that looks like a decisive argument for the tables. It is
+instead an argument about the estimator: fitting the same linear form to the
+likelihood rather than to a class-separating direction recovers almost all of
+the difference. A linear ceiling established with the weaker of two linear fits
+is not a ceiling, and the earlier claim that no linear readout of these
+invariants can close the gap holds only for the fit that was tried.
+
+The internal steps are separable and worth their own accounting, since they say
+what the architecture does buy. Sixteen partitions over one are worth
+\RdOneRoundDelta{} \RdOneRoundCI{}, which is the single largest thing the
+construction does for itself: one random pairing of the wires
+(\RdOneRoundTables{} tables) is \emph{below} the additive model over the same
+bins, and only repeated coverage of the pair lattice (\RdNTables{} tables) pulls
+it back above. Rounding the fusion to integers is worth \RdUnroundedDelta{}
+\RdUnroundedCI{}, so the fan-out cap is a mild regulariser rather than the cost
+it might have been --- the deployable form is also the slightly better one.
+Quantising into four bins and reading tables costs, rather than buys, relative
+to the stronger linear fit. And the spatial mean is worth \RdFieldGain{} to the
+published readout, larger than the field's entire margin over the logistic
+regression, which places the biggest single term in the construction outside the
+table machinery altogether.
+
+None of this revises the published configuration, which was frozen long before
+this comparison existed. It does revise what the configuration should be claimed
+for. On accuracy the honest statement is that a linear model on these wires is
+its equal on this evidence; what the tables provide is the decomposition
+Section~\ref{sec:audit} takes apart, an inference path with no floating-point
+model in it, and a detector that is a small integer artifact. Those are
+properties a logistic regression does not have, and they are the ones the
+construction should be argued for.
+
 \subsection{What the method costs, measured rather than asserted}
 \label{sec:cost}
 Cost is the other question a table-based method invites, and an earlier version of
@@ -1446,6 +1522,19 @@ not be included because per-residue predictions are not published. The 38
 excluded multi-chain units mean the reported fold is a strict subset of the
 official test fold, and the result does not transfer to multi-chain assemblies
 without a chain-aware residue index.
+
+The counting field's accuracy is not separable from a logistic regression on the
+same wires. Section~\ref{sec:readouts} measures the paired difference at
+\RdLogitDelta{} \RdLogitCI{} on \RdNPaired{} training chains, and an interval
+that contains zero over a training half is weak evidence of parity rather than
+strong evidence of superiority --- but it is the direction of evidence that
+matters here, because it is the architecture's own comparison to make and it
+does not come out in the architecture's favour. Nothing in this paper should be
+read as a claim that arranging these quantities into tables predicts cryptic
+sites better than fitting a linear model to them. What the tables are for is
+what Sections~\ref{sec:audit} and~\ref{sec:cost} report: an exactly decomposable
+score and a small integer artifact. Those are not accuracy claims and are not
+offered as substitutes for one.
 
 Two of the four paired intervals between the table field and P2Rank contain
 zero, which licenses ``we cannot separate these on this fold'' and not ``these

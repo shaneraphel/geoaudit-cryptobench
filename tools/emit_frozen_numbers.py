@@ -100,6 +100,7 @@ MATCH_READ = ROOT / "results/official_fold/MATCHED_OPERATING_POINT_READ.json"
 FULL_READ = ROOT / "results/official_fold/MATCHED_FULL_READ.json"
 AUDIT = ROOT / "results/official_fold/AUDIT_DECOMPOSITION.json"
 COST = ROOT / "results/architecture_sweep/RUNTIME_COST.json"
+INTERP = ROOT / "results/architecture_sweep/INTERPRETABLE_BASELINES.json"
 TRAIN_OP = ROOT / "results/architecture_sweep/TRAIN_OPERATING_POINTS.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
@@ -758,6 +759,55 @@ def build() -> str:
                 f"({warm_ratio}x), but Section 'What the method costs' is "
                 f"written as a withdrawal of exactly that claim; rewrite the "
                 f"paragraph before regenerating the macros")
+
+    if INTERP.exists():
+        # The readout ladder. The chapter's claim here is a negative one -- the
+        # architecture cannot be separated from a logistic regression on the
+        # same wires -- so the interval that fails to exclude zero is as
+        # load-bearing as the ones that do, and both are emitted.
+        ib = json.loads(INTERP.read_text())
+        stems = {"ridge direction": "Ridge",
+                 "logistic regression": "Logit",
+                 "additive over bins": "Additive",
+                 "pairs, one round": "OneRound",
+                 "pairs, sixteen rounds": "Field",
+                 "pairs, sixteen rounds, unrounded": "Unrounded"}
+        by_arm = {r["arm"]: r for r in ib["rows"]}
+        for arm, stem in stems.items():
+            r = by_arm[arm]
+            L.append(f"\\newcommand{{\\Rd{stem}Auc}}"
+                     f"{{{r['pick_half_roc_auc']:.4f}}}")
+            L.append(f"\\newcommand{{\\Rd{stem}Raw}}"
+                     f"{{{r['pick_half_roc_auc_raw']:.4f}}}")
+            L.append(f"\\newcommand{{\\Rd{stem}Gain}}"
+                     f"{{{r['spatial_smoothing_gain']:+.4f}}}")
+            ci = ib["published_readout_against_each_other_arm"].get(arm)
+            if ci:
+                L.append(f"\\newcommand{{\\Rd{stem}Delta}}"
+                         f"{{{ci['delta']:+.4f}}}")
+                L.append(f"\\newcommand{{\\Rd{stem}CI}}"
+                         f"{{[{ci['ci95'][0]:+.4f}, {ci['ci95'][1]:+.4f}]}}")
+        L.append(f"\\newcommand{{\\RdNTables}}"
+                 f"{{{by_arm['pairs, sixteen rounds']['n_tables']:,}}}"
+                 .replace(",", "{,}"))
+        L.append(f"\\newcommand{{\\RdOneRoundTables}}"
+                 f"{{{by_arm['pairs, one round']['n_tables']}}}")
+        L.append(f"\\newcommand{{\\RdNPaired}}"
+                 f"{{{ib['published_readout_against_each_other_arm']
+                       ['logistic regression']['n_paired']}}}")
+        L.append(f"\\newcommand{{\\RdBoot}}"
+                 f"{{{ib['resampling']['draws']:,}}}".replace(",", "{,}"))
+        L.append(f"\\newcommand{{\\RdNewtonSteps}}"
+                 f"{{{by_arm['logistic regression']['newton_steps']}}}")
+        # The negative result is the point of the section, so the manuscript
+        # must not be able to keep its sentence if the interval moves off zero.
+        unresolved = ib["arms_it_cannot_be_separated_from"]
+        if unresolved != ["logistic regression"]:
+            raise SystemExit(
+                f"the readout comparison now cannot separate the field from "
+                f"{unresolved or 'nothing'}, but the manuscript says the one "
+                f"unresolved arm is the logistic regression; rewrite the "
+                f"section before regenerating the macros")
 
     if BANKS_CEILING.exists() and WIDE3.exists() and WIDE3_CONTROL.exists():
         # The generated banks: a lift on the linear ceiling that the counting
