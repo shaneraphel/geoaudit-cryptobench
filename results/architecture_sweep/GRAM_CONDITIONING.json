@@ -1,0 +1,559 @@
+{
+ "schema": "geoaudit.gram_conditioning.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "on the deployed wires the counting field beats a ridge solve by +0.0053, and on every column family appended to them the ordering reverses while a bank with twenty times the surviving interaction scores worse. Is the single ridge solve that assigns the integer multiplicities the binding constraint",
+ "what_would_falsify_the_conjecture": "the conditioning ordering not matching the AUC ordering. Both orderings are printed below so that is visible rather than argued",
+ "what_is_not_claimed": "that improving the conditioning would improve AUC. Nothing here changes the combination rule; this measures the rule that is deployed",
+ "protocol": {
+  "n_splits": 3,
+  "split": "cluster-disjoint halves, seeds 20260725..20260727",
+  "scatter_formed_on": "the fit half only, exactly as integer_fanout forms it",
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "why_three_splits_and_not_twelve": "conditioning is a property of the bank rather than of the labels, and the spread across splits is reported so a reader can see whether three was enough"
+ },
+ "bank_construction": {
+  "n_tables_over_the_old_wires": 5152,
+  "n_tables_over_the_new_columns": 608,
+  "n_tables_union": 5760,
+  "n_tables_widened": 5760,
+  "n_old_pairings_that_survive_widening": 339,
+  "read_this_against": "results/architecture_sweep/SELECTED_PAIRINGS.json, which measured one reseed of the random construction at -0.0026; a difference of that size between two banks cannot be attributed to pairing survival"
+ },
+ "summary": {
+  "deployed": {
+   "n_tables": 5152,
+   "auc_from_artifact": 0.79012,
+   "auc_source": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
+   "condition_number_with_ridge": {
+    "mean": 61472.656,
+    "min": 60713.024,
+    "max": 61988.62
+   },
+   "effective_rank_at_1e-6": {
+    "mean": 5078.666667,
+    "min": 5078.0,
+    "max": 5079.0
+   },
+   "trace_fraction_in_top_1_percent": {
+    "mean": 0.766466,
+    "min": 0.761783,
+    "max": 0.773074
+   },
+   "lambda_share_of_diagonal": {
+    "mean": 0.041238,
+    "min": 0.040851,
+    "max": 0.041489
+   },
+   "cosine_solution_to_mean_difference": {
+    "mean": 0.026699,
+    "min": 0.026266,
+    "max": 0.027181
+   },
+   "cosine_rounded_to_real": {
+    "mean": 0.999175,
+    "min": 0.999085,
+    "max": 0.999239
+   }
+  },
+  "another seed": {
+   "n_tables": 5152,
+   "auc_from_artifact": 0.78747,
+   "auc_source": "results/architecture_sweep/SELECTED_PAIRINGS.json",
+   "condition_number_with_ridge": {
+    "mean": 61491.464333,
+    "min": 60770.804,
+    "max": 61955.041
+   },
+   "effective_rank_at_1e-6": {
+    "mean": 5070.333333,
+    "min": 5070.0,
+    "max": 5071.0
+   },
+   "trace_fraction_in_top_1_percent": {
+    "mean": 0.765326,
+    "min": 0.760938,
+    "max": 0.771702
+   },
+   "lambda_share_of_diagonal": {
+    "mean": 0.041696,
+    "min": 0.041474,
+    "max": 0.041816
+   },
+   "cosine_solution_to_mean_difference": {
+    "mean": 0.02693,
+    "min": 0.026438,
+    "max": 0.027724
+   },
+   "cosine_rounded_to_real": {
+    "mean": 0.9991,
+    "min": 0.998868,
+    "max": 0.999318
+   }
+  },
+  "interaction-selected": {
+   "n_tables": 5152,
+   "auc_from_artifact": 0.787327,
+   "auc_source": "results/architecture_sweep/SELECTED_PAIRINGS.json",
+   "condition_number_with_ridge": {
+    "mean": 57439.571333,
+    "min": 56962.302,
+    "max": 57947.959
+   },
+   "effective_rank_at_1e-6": {
+    "mean": 4626.666667,
+    "min": 4623.0,
+    "max": 4632.0
+   },
+   "trace_fraction_in_top_1_percent": {
+    "mean": 0.73938,
+    "min": 0.737093,
+    "max": 0.743331
+   },
+   "lambda_share_of_diagonal": {
+    "mean": 0.041009,
+    "min": 0.040511,
+    "max": 0.041309
+   },
+   "cosine_solution_to_mean_difference": {
+    "mean": 0.024067,
+    "min": 0.023914,
+    "max": 0.024227
+   },
+   "cosine_rounded_to_real": {
+    "mean": 0.99911,
+    "min": 0.998805,
+    "max": 0.999323
+   }
+  },
+  "union 645+76": {
+   "n_tables": 5760,
+   "auc_from_artifact": 0.78926,
+   "auc_source": "results/architecture_sweep/COMPOSITION_WIRES.json",
+   "condition_number_with_ridge": {
+    "mean": 67160.426,
+    "min": 66382.425,
+    "max": 67600.43
+   },
+   "effective_rank_at_1e-6": {
+    "mean": 5613.0,
+    "min": 5604.0,
+    "max": 5619.0
+   },
+   "trace_fraction_in_top_1_percent": {
+    "mean": 0.767071,
+    "min": 0.763229,
+    "max": 0.773233
+   },
+   "lambda_share_of_diagonal": {
+    "mean": 0.042556,
+    "min": 0.042518,
+    "max": 0.042621
+   },
+   "cosine_solution_to_mean_difference": {
+    "mean": 0.025278,
+    "min": 0.024864,
+    "max": 0.025595
+   },
+   "cosine_rounded_to_real": {
+    "mean": 0.999173,
+    "min": 0.999142,
+    "max": 0.999227
+   }
+  }
+ },
+ "orderings": {
+  "by_auc_descending": [
+   "deployed",
+   "union 645+76",
+   "another seed",
+   "interaction-selected"
+  ],
+  "by_condition_number_ascending": [
+   "interaction-selected",
+   "deployed",
+   "another seed",
+   "union 645+76"
+  ],
+  "by_direction_cosine_descending": [
+   "another seed",
+   "deployed",
+   "union 645+76",
+   "interaction-selected"
+  ],
+  "auc_agrees_with_conditioning": false,
+  "auc_agrees_with_direction_cosine": false
+ },
+ "per_split": {
+  "deployed": [
+   {
+    "n_tables": 5152,
+    "eigenvalues": {
+     "max": 1.029089304378,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 61988.62,
+     "n_below_1e-12_times_max": 59,
+     "effective_rank_at_1e-6": 5079,
+     "effective_rank_at_1e-3": 222,
+     "trace_fraction_in_top_1_percent_of_directions": 0.76454
+    },
+    "ridge_dominance": {
+     "lambda": 1.660153e-05,
+     "median_diagonal": 0.000383537544,
+     "lambda_share_of_diagonal": 0.041489,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.026266,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999201,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 299,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   },
+   {
+    "n_tables": 5152,
+    "eigenvalues": {
+     "max": 1.118585217922,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 60713.024,
+     "n_below_1e-12_times_max": 61,
+     "effective_rank_at_1e-6": 5078,
+     "effective_rank_at_1e-3": 227,
+     "trace_fraction_in_top_1_percent_of_directions": 0.761783
+    },
+    "ridge_dominance": {
+     "lambda": 1.8424443e-05,
+     "median_diagonal": 0.000432591711,
+     "lambda_share_of_diagonal": 0.040851,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.027181,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999085,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 295,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   },
+   {
+    "n_tables": 5152,
+    "eigenvalues": {
+     "max": 1.135802313748,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 61716.324,
+     "n_below_1e-12_times_max": 61,
+     "effective_rank_at_1e-6": 5079,
+     "effective_rank_at_1e-3": 218,
+     "trace_fraction_in_top_1_percent_of_directions": 0.773074
+    },
+    "ridge_dominance": {
+     "lambda": 1.8403895e-05,
+     "median_diagonal": 0.000426423022,
+     "lambda_share_of_diagonal": 0.041373,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.026651,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999239,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 270,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   }
+  ],
+  "another seed": [
+   {
+    "n_tables": 5152,
+    "eigenvalues": {
+     "max": 1.030329583531,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 61955.041,
+     "n_below_1e-12_times_max": 68,
+     "effective_rank_at_1e-6": 5070,
+     "effective_rank_at_1e-3": 224,
+     "trace_fraction_in_top_1_percent_of_directions": 0.763338
+    },
+    "ridge_dominance": {
+     "lambda": 1.6630547e-05,
+     "median_diagonal": 0.000381080642,
+     "lambda_share_of_diagonal": 0.041816,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.026438,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999115,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 332,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   },
+   {
+    "n_tables": 5152,
+    "eigenvalues": {
+     "max": 1.120880935857,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 60770.804,
+     "n_below_1e-12_times_max": 68,
+     "effective_rank_at_1e-6": 5070,
+     "effective_rank_at_1e-3": 228,
+     "trace_fraction_in_top_1_percent_of_directions": 0.760938
+    },
+    "ridge_dominance": {
+     "lambda": 1.8444702e-05,
+     "median_diagonal": 0.000426283863,
+     "lambda_share_of_diagonal": 0.041474,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.027724,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999318,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 232,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   },
+   {
+    "n_tables": 5152,
+    "eigenvalues": {
+     "max": 1.137293930853,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 61748.548,
+     "n_below_1e-12_times_max": 68,
+     "effective_rank_at_1e-6": 5071,
+     "effective_rank_at_1e-3": 219,
+     "trace_fraction_in_top_1_percent_of_directions": 0.771702
+    },
+    "ridge_dominance": {
+     "lambda": 1.8418447e-05,
+     "median_diagonal": 0.000422240509,
+     "lambda_share_of_diagonal": 0.041798,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.026629,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.998868,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 341,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   }
+  ],
+  "interaction-selected": [
+   {
+    "n_tables": 5152,
+    "eigenvalues": {
+     "max": 1.287184385621,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 57947.959,
+     "n_below_1e-12_times_max": 264,
+     "effective_rank_at_1e-6": 4632,
+     "effective_rank_at_1e-3": 263,
+     "trace_fraction_in_top_1_percent_of_directions": 0.737715
+    },
+    "ridge_dominance": {
+     "lambda": 2.2213148e-05,
+     "median_diagonal": 0.000515514149,
+     "lambda_share_of_diagonal": 0.041309,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.023914,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999323,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 294,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   },
+   {
+    "n_tables": 5152,
+    "eigenvalues": {
+     "max": 1.403578599641,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 56962.302,
+     "n_below_1e-12_times_max": 260,
+     "effective_rank_at_1e-6": 4625,
+     "effective_rank_at_1e-3": 266,
+     "trace_fraction_in_top_1_percent_of_directions": 0.737093
+    },
+    "ridge_dominance": {
+     "lambda": 2.4640915e-05,
+     "median_diagonal": 0.000573346443,
+     "lambda_share_of_diagonal": 0.041206,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.024227,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999201,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 349,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   },
+   {
+    "n_tables": 5152,
+    "eigenvalues": {
+     "max": 1.393673885671,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 57408.453,
+     "n_below_1e-12_times_max": 271,
+     "effective_rank_at_1e-6": 4623,
+     "effective_rank_at_1e-3": 260,
+     "trace_fraction_in_top_1_percent_of_directions": 0.743331
+    },
+    "ridge_dominance": {
+     "lambda": 2.4276881e-05,
+     "median_diagonal": 0.000574995215,
+     "lambda_share_of_diagonal": 0.040511,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.024059,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.998805,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 352,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   }
+  ],
+  "union 645+76": [
+   {
+    "n_tables": 5760,
+    "eigenvalues": {
+     "max": 1.042428466114,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 67600.43,
+     "n_below_1e-12_times_max": 117,
+     "effective_rank_at_1e-6": 5619,
+     "effective_rank_at_1e-3": 233,
+     "trace_fraction_in_top_1_percent_of_directions": 0.76475
+    },
+    "ridge_dominance": {
+     "lambda": 1.542067e-05,
+     "median_diagonal": 0.000346385073,
+     "lambda_share_of_diagonal": 0.042621,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.024864,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999142,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 364,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   },
+   {
+    "n_tables": 5760,
+    "eigenvalues": {
+     "max": 1.131794091927,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 66382.425,
+     "n_below_1e-12_times_max": 119,
+     "effective_rank_at_1e-6": 5604,
+     "effective_rank_at_1e-3": 236,
+     "trace_fraction_in_top_1_percent_of_directions": 0.763229
+    },
+    "ridge_dominance": {
+     "lambda": 1.7049861e-05,
+     "median_diagonal": 0.000383861885,
+     "lambda_share_of_diagonal": 0.042528,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.025595,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999149,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 302,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   },
+   {
+    "n_tables": 5760,
+    "eigenvalues": {
+     "max": 1.149912549173,
+     "min": 0.0,
+     "condition_number_unridged": "singular",
+     "condition_number_with_ridge": 67498.423,
+     "n_below_1e-12_times_max": 119,
+     "effective_rank_at_1e-6": 5616,
+     "effective_rank_at_1e-3": 228,
+     "trace_fraction_in_top_1_percent_of_directions": 0.773233
+    },
+    "ridge_dominance": {
+     "lambda": 1.7036392e-05,
+     "median_diagonal": 0.000383648161,
+     "lambda_share_of_diagonal": 0.042518,
+     "why_it_matters": "if the ridge is most of the diagonal the solve is barely reading the scatter, and the multiplicities approach a scaled copy of the class mean difference"
+    },
+    "direction": {
+     "cosine_solution_to_mean_difference": 0.025375,
+     "why_it_matters": "at perfect conditioning the solved direction and the mean difference coincide up to scale. A small cosine means the inverse has rotated the direction into the small-eigenvalue subspace, which is what 'chasing the null space' means"
+    },
+    "integer_rounding": {
+     "cosine_rounded_to_real": 0.999227,
+     "fan_out_cap": 32,
+     "n_multiplicities_saturated_at_cap": 1,
+     "n_multiplicities_rounded_to_zero": 316,
+     "why_it_is_reported_separately": "rounding loss is intrinsic to the integer architecture and conditioning loss is not; blaming conditioning requires showing the rounding is not the cause"
+    }
+   }
+  ]
+ }
+}
