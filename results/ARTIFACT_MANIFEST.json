@@ -10,14 +10,21 @@
     "inventory": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it"
   },
   "counts": {
+    "superseded": 18,
     "exploration": 33,
     "cited": 52,
-    "superseded": 17,
     "inventory": 1,
     "fold_access": 10
   },
-  "n_artifacts": 113,
+  "n_artifacts": 114,
   "artifacts": [
+    {
+      "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.esr1_decomposability_showcase.v1",
+      "bytes": 150918
+    },
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
       "class": "exploration",
