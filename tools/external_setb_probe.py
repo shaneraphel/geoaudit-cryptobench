@@ -104,7 +104,47 @@ def _inventory():
     return inv
 
 
-def _pairable_from_cache(ceiling: float) -> dict:
+def _single_particle_ids(ceiling: float) -> list[str]:
+    """Entry IDs that are single-particle reconstructions, not merely electron.
+
+    SETB_POOL.json ends by saying a set built from this pool should filter on
+    ``em_experiment.reconstruction_method`` and that the count after that filter
+    had not been taken. This takes it. The same ceiling and cutoff as the pool
+    query, one extra terminal, and the same 10,000-row page the working inventory
+    uses -- asking for more does not error, it hangs.
+    """
+    inv = _inventory()
+    q = {"query": {"type": "group", "logical_operator": "and", "nodes": [
+        {"type": "terminal", "service": "text", "parameters": {
+            "attribute": "rcsb_accession_info.initial_release_date",
+            "operator": "greater", "value": CUTOFF}},
+        {"type": "terminal", "service": "text", "parameters": {
+            "attribute": "rcsb_entry_info.polymer_entity_count_protein",
+            "operator": "greater_or_equal", "value": 1}},
+        {"type": "terminal", "service": "text", "parameters": {
+            "attribute": "rcsb_entry_info.experimental_method",
+            "operator": "exact_match", "value": EM}},
+        {"type": "terminal", "service": "text", "parameters": {
+            "attribute": "rcsb_entry_info.resolution_combined",
+            "operator": "less_or_equal", "value": ceiling}},
+        {"type": "terminal", "service": "text", "parameters": {
+            "attribute": "em_experiment.reconstruction_method",
+            "operator": "exact_match", "value": "SINGLE PARTICLE"}}]},
+        "return_type": "entry",
+        "request_options": {"paginate": {"start": 0, "rows": 10000},
+                            "results_content_type": ["experimental"]}}
+    got = inv._post("https://search.rcsb.org/rcsbsearch/v2/query", q)
+    ids = [r["identifier"] for r in got.get("result_set", [])]
+    if not ids:
+        # A zero here would read as "no single-particle entries", which is the
+        # opposite of the truth and is exactly the failure SETB_POOL warns about.
+        raise SystemExit(
+            "the single-particle query returned nothing, which cannot be right "
+            "at this ceiling; check the attribute spelling before believing it")
+    return ids
+
+
+def _pairable_from_cache(ceiling: float, keep: set[str] | None = None) -> dict:
     """The same count, computed from the cached describe without a network call.
 
     Why this path exists. The probe was print-only, so the pool size it found is
@@ -126,6 +166,9 @@ def _pairable_from_cache(ceiling: float) -> dict:
     raw = cache.read_bytes()
     blob = json.loads(raw)
     rows = blob["rows"]
+    n_rows_before = len(rows)
+    if keep is not None:
+        rows = [r for r in rows if r["pdb"].upper() in keep]
     cb_accessions, a_clusters = _already_used()
     uni = json.loads((ROOT / "data/external/UNIREF50.json").read_text())
     cluster_of = uni.get("cluster_of") or uni.get("clusters") or {}
@@ -144,10 +187,12 @@ def _pairable_from_cache(ceiling: float) -> dict:
                              - a_clusters)
     return {
         "ceiling": ceiling,
+        "reconstruction_method": "SINGLE PARTICLE" if keep is not None else "any",
         "entry_count_source": "cache",
         "cache": str(cache.relative_to(ROOT)),
         "cache_sha256": hashlib.sha256(raw).hexdigest(),
         "n_entries": blob["n_entries"],
+        "n_chains_before_method_filter": n_rows_before,
         "n_chains": len(rows),
         "n_accessions": len({r["uniprot"] for r in rows}),
         "n_with_apo_and_holo": len(both),
@@ -335,7 +380,36 @@ def _write_pool(ceilings: tuple[float, ...], methods: bool = False) -> int:
     """
     rows = [_pairable_from_cache(c) for c in ceilings]
     mix = None
+    single = None
     if methods:
+        sp_ids = {i.upper() for i in _single_particle_ids(2.5)}
+        base = next((r for r in rows if r["ceiling"] == 2.5), None)
+        filt = _pairable_from_cache(2.5, keep=sp_ids)
+        single = {
+            "measured_on": time.strftime("%Y-%m-%d"),
+            "ceiling": 2.5,
+            "n_single_particle_entries": len(sp_ids),
+            "n_chains_kept": filt["n_chains"],
+            "n_chains_before": filt["n_chains_before_method_filter"],
+            "n_pool_unfiltered": base["n_pool"] if base else None,
+            "n_pool_single_particle": filt["n_pool"],
+            "n_accessions_the_filter_removes":
+                (base["n_pool"] - filt["n_pool"]) if base else None,
+            "pool_accessions": filt["pool_accessions"],
+            "what_this_answers": (
+                "the previous release of this artifact said the count after "
+                "filtering on em_experiment.reconstruction_method had not been "
+                "taken. It has now"),
+            "how_to_read_it": (
+                "the technique mix barely moves the pool size, and that was "
+                "never where the hazard was. Six accessions of 461 go, about one "
+                "in seventy. What the filter protects against is the selection "
+                "rule, not the census: MicroED occupies the top of any "
+                "resolution-ordered choice, so a set built by taking the "
+                "sharpest entries would draw a disproportionate share of its "
+                "units from the one technique the set does not exist to test, "
+                "while the pool it was drawn from looked almost unaffected"),
+        }
         counted = _method_mix(2.5)
         total = sum(v for v in counted.values() if v)
         cached = rows[0]["n_entries"] if rows else None
@@ -361,11 +435,48 @@ def _write_pool(ceilings: tuple[float, ...], methods: bool = False) -> int:
                 "density map at all, so a selection made by picking the "
                 "sharpest examples lands on the technique the set is not for"),
             "consequence_for_set_b": (
-                "the pool counts are an upper bound in one more respect than "
-                "was recorded: they mix techniques. A set built from them should "
+                "the pool counts mix techniques, so a set built from them must "
                 "filter on em_experiment.reconstruction_method and not on "
-                "experimental_method, and the count after that filter has not "
-                "been taken"),
+                "experimental_method. That count has now been taken and is in "
+                "single_particle_pool: the census barely moves, 461 to 455, "
+                "which is the point -- the filter is protection against the "
+                "selection rule and not against the census"),
+        }
+    # The per-ceiling rows report the cluster count as absent, because the cached
+    # UNIREF50.json was fetched for Set A's X-ray accessions and covers none of
+    # these. tools/setb_uniref.py maps the pool into its own file rather than
+    # overwriting one a frozen artifact reads. If it has run, say the answer here
+    # too, so this artifact does not keep reporting NOT MEASURED for something
+    # that has been measured.
+    setb_uniref = ROOT / "data/external/UNIREF50_SETB.json"
+    disjoint = None
+    if setb_uniref.is_file():
+        u = json.loads(setb_uniref.read_text())
+        disjoint = {
+            "source": str(setb_uniref.relative_to(ROOT)),
+            "n_pool_accessions": u["n_pool_accessions"],
+            "n_mapped": u["n_mapped"],
+            "n_unmapped": u["n_unmapped"],
+            "n_clusters": u["n_clusters"],
+            "n_clusters_colliding_with_set_a":
+                u["n_clusters_colliding_with_set_a"],
+            "n_clusters_colliding_with_cryptobench":
+                u["n_clusters_colliding_with_cryptobench"],
+            "n_clusters_free": u["n_clusters_free"],
+            "what_it_bounds": (
+                "the largest number of mutually independent units a "
+                "cluster-disjoint Set B could hold. It is a ceiling: each unit "
+                "still needs an apo form, a holo form and a cryptic pocket "
+                "surviving the labelling rule Set A used, and each of those only "
+                "removes candidates"),
+            "why_no_yield_is_projected_from_set_a": (
+                "Set A realised 57 units with a cryptic pocket beside 503 "
+                "without, but that ratio was measured on X-ray entries and this "
+                "pool is single-particle cryo-EM. The last time a per-unit ratio "
+                "was carried across those two populations it was wrong by two "
+                "orders of magnitude, because an X-ray entry carries 1.9 protein "
+                "chains and an EM entry 13.4. So the yield is left unmeasured "
+                "rather than extrapolated"),
         }
     doc = {
         "schema": SETB_SCHEMA,
@@ -402,6 +513,8 @@ def _write_pool(ceilings: tuple[float, ...], methods: bool = False) -> int:
                              "is an upper bound",
         "by_resolution_ceiling": rows,
         "reconstruction_method_mix": mix,
+        "single_particle_pool": single,
+        "cluster_disjointness": disjoint,
     }
     SETB_POOL.parent.mkdir(parents=True, exist_ok=True)
     SETB_POOL.write_text(json.dumps(doc, indent=1, allow_nan=False) + "\n")
