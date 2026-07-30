@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 32,
+    "exploration": 33,
     "cited": 47,
     "superseded": 17,
     "fold_access": 10
   },
-  "n_artifacts": 106,
+  "n_artifacts": 107,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
@@ -330,6 +330,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.runtime_cost.v1",
       "bytes": 87298
+    },
+    {
+      "artifact": "results/architecture_sweep/SELECTED_PAIRINGS.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.selected_pairings.v1",
+      "bytes": 15740
     },
     {
       "artifact": "results/architecture_sweep/SENSITIVITY_SWEEP.json",

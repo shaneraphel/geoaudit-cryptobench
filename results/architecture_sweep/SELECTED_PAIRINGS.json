@@ -1,0 +1,679 @@
+{
+ "schema": "geoaudit.selected_pairings.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "the deployed bank draws all 5,152 pairings from one seed, and two frozen artifacts say the counting field's margin lives in what paired wires say jointly. Does choosing the pairings on the fit half beat drawing them",
+ "criterion": {
+  "definition": "V = sum_c (k_c - p n_c)^2 / (n_c N) over the cells of a partition of the fit half, a rational function of integer counts and the Gini reduction the fan-out ranking already uses",
+  "interaction": "V_pair - V_u - V_v, the second-order variance ANOVA term; predicted by the argument because each wire already appears in 16 tables so its marginal is not scarce, interaction is",
+  "pair variance": "V_pair alone; run because the prediction is an argument and an argument measured against no alternative is a correlate",
+  "computed_by": "one Gram matrix of the level indicators per split, which yields every pair's 4x4 contingency table at once instead of 207,690 separate passes"
+ },
+ "controls": {
+  "another seed": "random pairings at seed 20260726; if selection wins by about what a redraw wins, the effect is seed sensitivity",
+  "anti-selected": "minimises the interaction criterion; if the criterion means anything this must lose"
+ },
+ "held_fixed_across_arms": {
+  "n_wires": 645,
+  "n_levels": 4,
+  "quantisation": "within-chain quartiles, the deployed ladder",
+  "table_width": 2,
+  "partition_rounds": 16,
+  "n_tables": 5152,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "what_changes": "only which wires are paired"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "select_pairings_on": "the fit half only, recomputed per split",
+  "compile_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC",
+  "baseline_was_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
+  "why_selection_is_not_a_leak": "the pairings are a compiled quantity of the fit half, like the cell counts, the integer fan-out and the residue propensity table already are. No pick-half row is read while choosing them"
+ },
+ "arms": {
+  "interaction": {
+   "mean": 0.787327,
+   "min": 0.761684,
+   "max": 0.806193
+  },
+  "pair variance": {
+   "mean": 0.786728,
+   "min": 0.764441,
+   "max": 0.805796
+  },
+  "another seed": {
+   "mean": 0.78747,
+   "min": 0.76496,
+   "max": 0.800123
+  },
+  "anti-selected": {
+   "mean": 0.78453,
+   "min": 0.759203,
+   "max": 0.801364
+  }
+ },
+ "deployed_arm_frozen": {
+  "mean": 0.79012,
+  "min": 0.761546,
+  "max": 0.805021
+ },
+ "minus_deployed": {
+  "interaction": {
+   "mean": -0.002793,
+   "min": -0.010242,
+   "max": 0.001172,
+   "n_splits_positive": 3,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "pair variance": {
+   "mean": -0.003392,
+   "min": -0.009283,
+   "max": 0.002895,
+   "n_splits_positive": 3,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "another seed": {
+   "mean": -0.002649,
+   "min": -0.008157,
+   "max": 0.003414,
+   "n_splits_positive": 2,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "anti-selected": {
+   "mean": -0.00559,
+   "min": -0.009335,
+   "max": -0.001906,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  }
+ },
+ "pairings_shared_with_the_deployed_bank": {
+  "interaction": {
+   "per_split": [
+    126,
+    132,
+    128,
+    118,
+    132,
+    141,
+    124,
+    125,
+    121,
+    139,
+    123,
+    131
+   ],
+   "of_n_tables": 5152
+  },
+  "pair variance": {
+   "per_split": [
+    116,
+    126,
+    123,
+    134,
+    140,
+    129,
+    113,
+    119,
+    121,
+    122,
+    114,
+    136
+   ],
+   "of_n_tables": 5152
+  },
+  "another seed": {
+   "per_split": [
+    145,
+    145,
+    145,
+    145,
+    145,
+    145,
+    145,
+    145,
+    145,
+    145,
+    145,
+    145
+   ],
+   "of_n_tables": 5152
+  },
+  "anti-selected": {
+   "per_split": [
+    160,
+    155,
+    143,
+    148,
+    145,
+    141,
+    153,
+    139,
+    138,
+    150,
+    145,
+    150
+   ],
+   "of_n_tables": 5152
+  }
+ },
+ "greedy_matching_on_split_1": {
+  "interaction": [
+   {
+    "round": 1,
+    "n_tables": 322,
+    "weight_captured": 0.07925945,
+    "unconstrained_ideal": 0.328681331,
+    "fraction_of_ideal": 0.241144
+   },
+   {
+    "round": 2,
+    "n_tables": 322,
+    "weight_captured": 0.076887512,
+    "unconstrained_ideal": 0.323125357,
+    "fraction_of_ideal": 0.237949
+   },
+   {
+    "round": 3,
+    "n_tables": 322,
+    "weight_captured": 0.074574365,
+    "unconstrained_ideal": 0.317300457,
+    "fraction_of_ideal": 0.235028
+   },
+   {
+    "round": 4,
+    "n_tables": 322,
+    "weight_captured": 0.072572782,
+    "unconstrained_ideal": 0.311517968,
+    "fraction_of_ideal": 0.232965
+   },
+   {
+    "round": 5,
+    "n_tables": 322,
+    "weight_captured": 0.070281016,
+    "unconstrained_ideal": 0.305243895,
+    "fraction_of_ideal": 0.230245
+   },
+   {
+    "round": 6,
+    "n_tables": 322,
+    "weight_captured": 0.069252494,
+    "unconstrained_ideal": 0.29940286,
+    "fraction_of_ideal": 0.231302
+   },
+   {
+    "round": 7,
+    "n_tables": 322,
+    "weight_captured": 0.066969762,
+    "unconstrained_ideal": 0.29322033,
+    "fraction_of_ideal": 0.228394
+   },
+   {
+    "round": 8,
+    "n_tables": 322,
+    "weight_captured": 0.066298455,
+    "unconstrained_ideal": 0.28733369,
+    "fraction_of_ideal": 0.230737
+   },
+   {
+    "round": 9,
+    "n_tables": 322,
+    "weight_captured": 0.064535823,
+    "unconstrained_ideal": 0.281311465,
+    "fraction_of_ideal": 0.229411
+   },
+   {
+    "round": 10,
+    "n_tables": 322,
+    "weight_captured": 0.063130631,
+    "unconstrained_ideal": 0.275605327,
+    "fraction_of_ideal": 0.229062
+   },
+   {
+    "round": 11,
+    "n_tables": 322,
+    "weight_captured": 0.062685685,
+    "unconstrained_ideal": 0.270233299,
+    "fraction_of_ideal": 0.231969
+   },
+   {
+    "round": 12,
+    "n_tables": 322,
+    "weight_captured": 0.061568162,
+    "unconstrained_ideal": 0.264256511,
+    "fraction_of_ideal": 0.232986
+   },
+   {
+    "round": 13,
+    "n_tables": 322,
+    "weight_captured": 0.060596663,
+    "unconstrained_ideal": 0.258622492,
+    "fraction_of_ideal": 0.234305
+   },
+   {
+    "round": 14,
+    "n_tables": 322,
+    "weight_captured": 0.058712056,
+    "unconstrained_ideal": 0.253033591,
+    "fraction_of_ideal": 0.232033
+   },
+   {
+    "round": 15,
+    "n_tables": 322,
+    "weight_captured": 0.058510828,
+    "unconstrained_ideal": 0.247703406,
+    "fraction_of_ideal": 0.236213
+   },
+   {
+    "round": 16,
+    "n_tables": 322,
+    "weight_captured": 0.057583361,
+    "unconstrained_ideal": 0.242514672,
+    "fraction_of_ideal": 0.237443
+   }
+  ],
+  "pair variance": [
+   {
+    "round": 1,
+    "n_tables": 322,
+    "weight_captured": 0.23378352,
+    "unconstrained_ideal": 0.961147196,
+    "fraction_of_ideal": 0.243234
+   },
+   {
+    "round": 2,
+    "n_tables": 322,
+    "weight_captured": 0.231956646,
+    "unconstrained_ideal": 0.955050366,
+    "fraction_of_ideal": 0.242874
+   },
+   {
+    "round": 3,
+    "n_tables": 322,
+    "weight_captured": 0.23053588,
+    "unconstrained_ideal": 0.94879717,
+    "fraction_of_ideal": 0.242977
+   },
+   {
+    "round": 4,
+    "n_tables": 322,
+    "weight_captured": 0.230554349,
+    "unconstrained_ideal": 0.94249355,
+    "fraction_of_ideal": 0.244622
+   },
+   {
+    "round": 5,
+    "n_tables": 322,
+    "weight_captured": 0.228530549,
+    "unconstrained_ideal": 0.935966947,
+    "fraction_of_ideal": 0.244165
+   },
+   {
+    "round": 6,
+    "n_tables": 322,
+    "weight_captured": 0.228307294,
+    "unconstrained_ideal": 0.929517404,
+    "fraction_of_ideal": 0.245619
+   },
+   {
+    "round": 7,
+    "n_tables": 322,
+    "weight_captured": 0.224830681,
+    "unconstrained_ideal": 0.923058077,
+    "fraction_of_ideal": 0.243572
+   },
+   {
+    "round": 8,
+    "n_tables": 322,
+    "weight_captured": 0.222943436,
+    "unconstrained_ideal": 0.91612823,
+    "fraction_of_ideal": 0.243354
+   },
+   {
+    "round": 9,
+    "n_tables": 322,
+    "weight_captured": 0.222168321,
+    "unconstrained_ideal": 0.909557896,
+    "fraction_of_ideal": 0.24426
+   },
+   {
+    "round": 10,
+    "n_tables": 322,
+    "weight_captured": 0.221151733,
+    "unconstrained_ideal": 0.902508537,
+    "fraction_of_ideal": 0.245041
+   },
+   {
+    "round": 11,
+    "n_tables": 322,
+    "weight_captured": 0.221374041,
+    "unconstrained_ideal": 0.895582803,
+    "fraction_of_ideal": 0.247184
+   },
+   {
+    "round": 12,
+    "n_tables": 322,
+    "weight_captured": 0.219237058,
+    "unconstrained_ideal": 0.888925731,
+    "fraction_of_ideal": 0.246631
+   },
+   {
+    "round": 13,
+    "n_tables": 321,
+    "weight_captured": 0.219910631,
+    "unconstrained_ideal": 0.882300918,
+    "fraction_of_ideal": 0.249247
+   },
+   {
+    "round": 14,
+    "n_tables": 321,
+    "weight_captured": 0.219490275,
+    "unconstrained_ideal": 0.876328507,
+    "fraction_of_ideal": 0.250466
+   },
+   {
+    "round": 15,
+    "n_tables": 321,
+    "weight_captured": 0.217445642,
+    "unconstrained_ideal": 0.870191304,
+    "fraction_of_ideal": 0.249883
+   },
+   {
+    "round": 16,
+    "n_tables": 321,
+    "weight_captured": 0.217998722,
+    "unconstrained_ideal": 0.864193249,
+    "fraction_of_ideal": 0.252257
+   }
+  ],
+  "another seed": [],
+  "anti-selected": [
+   {
+    "round": 1,
+    "n_tables": 322,
+    "weight_captured": -0.069552555,
+    "unconstrained_ideal": -0.384688123,
+    "fraction_of_ideal": 0.180802
+   },
+   {
+    "round": 2,
+    "n_tables": 322,
+    "weight_captured": -0.063874199,
+    "unconstrained_ideal": -0.380636449,
+    "fraction_of_ideal": 0.167809
+   },
+   {
+    "round": 3,
+    "n_tables": 322,
+    "weight_captured": -0.061338696,
+    "unconstrained_ideal": -0.377340025,
+    "fraction_of_ideal": 0.162555
+   },
+   {
+    "round": 4,
+    "n_tables": 322,
+    "weight_captured": -0.058592816,
+    "unconstrained_ideal": -0.374099052,
+    "fraction_of_ideal": 0.156624
+   },
+   {
+    "round": 5,
+    "n_tables": 322,
+    "weight_captured": -0.056531943,
+    "unconstrained_ideal": -0.371178709,
+    "fraction_of_ideal": 0.152304
+   },
+   {
+    "round": 6,
+    "n_tables": 322,
+    "weight_captured": -0.055232984,
+    "unconstrained_ideal": -0.368523445,
+    "fraction_of_ideal": 0.149876
+   },
+   {
+    "round": 7,
+    "n_tables": 322,
+    "weight_captured": -0.052789728,
+    "unconstrained_ideal": -0.365491541,
+    "fraction_of_ideal": 0.144435
+   },
+   {
+    "round": 8,
+    "n_tables": 321,
+    "weight_captured": -0.051330735,
+    "unconstrained_ideal": -0.362744872,
+    "fraction_of_ideal": 0.141506
+   },
+   {
+    "round": 9,
+    "n_tables": 322,
+    "weight_captured": -0.050466061,
+    "unconstrained_ideal": -0.359913637,
+    "fraction_of_ideal": 0.140217
+   },
+   {
+    "round": 10,
+    "n_tables": 322,
+    "weight_captured": -0.049017895,
+    "unconstrained_ideal": -0.357058192,
+    "fraction_of_ideal": 0.137283
+   },
+   {
+    "round": 11,
+    "n_tables": 322,
+    "weight_captured": -0.04834714,
+    "unconstrained_ideal": -0.354129625,
+    "fraction_of_ideal": 0.136524
+   },
+   {
+    "round": 12,
+    "n_tables": 322,
+    "weight_captured": -0.047500969,
+    "unconstrained_ideal": -0.35109937,
+    "fraction_of_ideal": 0.135292
+   },
+   {
+    "round": 13,
+    "n_tables": 322,
+    "weight_captured": -0.047106663,
+    "unconstrained_ideal": -0.348036012,
+    "fraction_of_ideal": 0.13535
+   },
+   {
+    "round": 14,
+    "n_tables": 322,
+    "weight_captured": -0.045971298,
+    "unconstrained_ideal": -0.345025907,
+    "fraction_of_ideal": 0.13324
+   },
+   {
+    "round": 15,
+    "n_tables": 322,
+    "weight_captured": -0.045533964,
+    "unconstrained_ideal": -0.342026053,
+    "fraction_of_ideal": 0.13313
+   },
+   {
+    "round": 16,
+    "n_tables": 322,
+    "weight_captured": -0.045214265,
+    "unconstrained_ideal": -0.339086608,
+    "fraction_of_ideal": 0.133341
+   }
+  ]
+ },
+ "cell_occupancy_on_split_1": {
+  "interaction": {
+   "n_cells": 82432,
+   "n_cells_never_addressed": 1094,
+   "fraction_never_addressed": 0.013272,
+   "median_count_of_addressed_cells": 7363,
+   "min_count_of_addressed_cells": 1
+  },
+  "pair variance": {
+   "n_cells": 82368,
+   "n_cells_never_addressed": 1124,
+   "fraction_never_addressed": 0.013646,
+   "median_count_of_addressed_cells": 7363,
+   "min_count_of_addressed_cells": 1
+  },
+  "another seed": {
+   "n_cells": 82432,
+   "n_cells_never_addressed": 1052,
+   "fraction_never_addressed": 0.012762,
+   "median_count_of_addressed_cells": 7385,
+   "min_count_of_addressed_cells": 1
+  },
+  "anti-selected": {
+   "n_cells": 82416,
+   "n_cells_never_addressed": 2417,
+   "fraction_never_addressed": 0.029327,
+   "median_count_of_addressed_cells": 7280,
+   "min_count_of_addressed_cells": 1
+  }
+ },
+ "does_the_chosen_interaction_survive_on_split_1": {
+  "what_this_asks": "a pairing chosen because its fit-half interaction is large may have been chosen partly because its noise is large. The same tables are re-measured on the pick half, which had no part in choosing them. A selected bank whose interaction collapses there, next to a random bank whose does not, is selection optimism and not a failure of the criterion to mean anything",
+  "banks": {
+   "interaction": {
+    "on_the_fit_half_it_was_chosen_from": {
+     "mean_interaction": 0.000206409,
+     "mean_pair_variance": 0.000759888
+    },
+    "on_the_pick_half_it_was_not": {
+     "mean_interaction": 0.000214722,
+     "mean_pair_variance": 0.000840274
+    },
+    "interaction_surviving": 1.040274
+   },
+   "pair variance": {
+    "on_the_fit_half_it_was_chosen_from": {
+     "mean_interaction": 0.00014175,
+     "mean_pair_variance": 0.000697401
+    },
+    "on_the_pick_half_it_was_not": {
+     "mean_interaction": 0.000144119,
+     "mean_pair_variance": 0.000771996
+    },
+    "interaction_surviving": 1.016713
+   },
+   "another seed": {
+    "on_the_fit_half_it_was_chosen_from": {
+     "mean_interaction": 1.0608e-05,
+     "mean_pair_variance": 0.000565079
+    },
+    "on_the_pick_half_it_was_not": {
+     "mean_interaction": 9.241e-06,
+     "mean_pair_variance": 0.000635825
+    },
+    "interaction_surviving": 0.871135
+   },
+   "anti-selected": {
+    "on_the_fit_half_it_was_chosen_from": {
+     "mean_interaction": -0.000164706,
+     "mean_pair_variance": 0.000390569
+    },
+    "on_the_pick_half_it_was_not": {
+     "mean_interaction": -0.000181518,
+     "mean_pair_variance": 0.000445945
+    },
+    "interaction_surviving": 1.102073
+   },
+   "deployed": {
+    "on_the_fit_half_it_was_chosen_from": {
+     "mean_interaction": 1.0031e-05,
+     "mean_pair_variance": 0.000564185
+    },
+    "on_the_pick_half_it_was_not": {
+     "mean_interaction": 8.99e-06,
+     "mean_pair_variance": 0.000635204
+    },
+    "interaction_surviving": 0.896222
+   }
+  }
+ },
+ "per_split": {
+  "interaction": [
+   0.800743,
+   0.786002,
+   0.787266,
+   0.780122,
+   0.784886,
+   0.78652,
+   0.795818,
+   0.789385,
+   0.791938,
+   0.777369,
+   0.806193,
+   0.761684
+  ],
+  "pair variance": [
+   0.797304,
+   0.784895,
+   0.788157,
+   0.783128,
+   0.78197,
+   0.784898,
+   0.795139,
+   0.789749,
+   0.787878,
+   0.777383,
+   0.805796,
+   0.764441
+  ],
+  "another seed": [
+   0.799908,
+   0.784373,
+   0.787324,
+   0.78706,
+   0.783096,
+   0.783402,
+   0.795115,
+   0.789564,
+   0.791782,
+   0.782938,
+   0.800123,
+   0.76496
+  ],
+  "anti-selected": [
+   0.795512,
+   0.784488,
+   0.780813,
+   0.784296,
+   0.781918,
+   0.782634,
+   0.79146,
+   0.787046,
+   0.785231,
+   0.780392,
+   0.801364,
+   0.759203
+  ]
+ },
+ "per_split_deployed_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}
