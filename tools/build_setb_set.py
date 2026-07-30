@@ -278,6 +278,100 @@ def candidates(ceiling: float = CEILING, refresh: bool = False,
     return units, meta
 
 
+def build(units: list[dict], meta: dict, ceiling: float) -> dict:
+    """Fetch and label, by the imported machinery, into a set that is not yet frozen.
+
+    Every structural step here is ``build_external_set``'s: the fetch with its
+    mmCIF fallback, the sequence correspondence, the contact rule, the pRMSD floor
+    and its guard band, the verdicts. None of it is reimplemented, which is what
+    makes a read on this set comparable to the read on Set A.
+
+    The mmCIF fallback matters more here than it did there. Set A's note says a
+    quarter of its entries were too large for the .pdb format; single-particle
+    entries carry 13.4 protein chains against an X-ray entry's 1.9, so the share
+    is higher and the artifact records what it turned out to be.
+    """
+    accepted = {r["ligand"] for v in
+                json.loads(A.CB_DATASET.read_text()).values() for r in v}
+    want = sorted({u["apo"]["pdb"] for u in units}
+                  | {p["pdb"] for u in units for p in u["partners"]})
+    print(f"{len(units)} candidate units, {len(want)} distinct entries", flush=True)
+    missing = A.fetch(want)
+
+    fmt = {"pdb": 0, "cif": 0, "absent": 0}
+    for pid in want:
+        p = A.path_of(pid)
+        fmt["absent" if p is None else p.suffix.lstrip(".")] += 1
+
+    labelled, empty = [], []
+    for i, u in enumerate(units, start=1):
+        got = A.label_unit(u["apo"]["pdb"], u["apo"]["chain"], u["partners"],
+                           accepted)
+        got.update({"uniprot": u["uniprot"], "cluster": u["cluster"],
+                    "resolution": u["apo"]["resolution"],
+                    "released": u["apo"]["released"],
+                    "n_partners_available": u["n_partners_available"]})
+        (labelled if got["residues"] else empty).append(got)
+        if i % 20 == 0 or i == len(units):
+            print(f"  labelled {i}/{len(units)}, "
+                  f"{len(labelled)} with a cryptic pocket", flush=True)
+
+    verdicts: dict[str, int] = {}
+    for u in labelled + empty:
+        for p in u["pairs"]:
+            verdicts[p["verdict"]] = verdicts.get(p["verdict"], 0) + 1
+    return {
+        "schema": "geoaudit.setb_set.v1",
+        "clinical_grade": False,
+        "reads_test_fold": False,
+        "no_method_has_been_run": True,
+        "is_a_frozen_set": False,
+        "why_not_frozen_yet": (
+            "freezing is a separate commit that hashes this file, and reading it "
+            "needs a preregistration naming the comparisons and the sentence to "
+            "write under each outcome. Neither exists yet"),
+        "question": ("does the counting field hold up on apo-holo pairs from a "
+                     "different experimental modality, which no part of its "
+                     "development could have seen"),
+        "modality": meta["modality"],
+        "externality": {
+            "temporal": f"both structures of every pair released after "
+                        f"{meta['cutoff']}, the newest release date in CryptoBench",
+            "sequence": "no accession and no UniRef50 cluster at 50% identity is "
+                        "shared with either CryptoBench fold or with Set A",
+            "modality": "single-particle cryo-EM, where Set A is X-ray, so a "
+                        "confirmation here is not a confirmation on the same kind "
+                        "of data twice",
+            "order": "labels exist before any method is run",
+        },
+        "rule": {
+            "contact_angstrom": A.CONTACT_ANGSTROM,
+            "hydrogens_count": A.COUNT_HYDROGENS,
+            "prmsd_floor": A.PRMSD_FLOOR,
+            "guard_band": A.PRMSD_GUARD_BAND,
+            "recovered_by": "tools/recover_cryptobench_rule.py",
+            "imported_from": "tools/build_external_set.py, unedited",
+        },
+        "resolution_ceiling": ceiling,
+        "file_formats_read": fmt,
+        "why_the_format_mix_is_recorded": (
+            "reading mmCIF is justified by the equivalence build_external_set "
+            "measures rather than assumed, and single-particle entries are larger "
+            "assemblies than X-ray ones so the mmCIF share is expected to be "
+            "higher than Set A's quarter"),
+        "selection": meta,
+        "n_units_with_a_cryptic_pocket": len(labelled),
+        "n_units_without_one": len(empty),
+        "n_pairs_examined": sum(len(u["pairs"]) for u in labelled + empty),
+        "pair_verdicts": verdicts,
+        "structures_unavailable": missing[:50],
+        "n_structures_unavailable": len(missing),
+        "units": labelled,
+        "units_without_a_cryptic_pocket": [
+            {k: v for k, v in u.items() if k != "pairs"} for u in empty],
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--candidates", action="store_true",
@@ -296,12 +390,13 @@ def main(argv: list[str] | None = None) -> int:
                          "inventory")
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--out", type=Path, default=OUT)
+    ap.add_argument("--build", action="store_true",
+                    help="fetch the structures and label, by the imported "
+                         "machinery. Selection is the default and costs no "
+                         "downloads; this does not freeze anything")
     a = ap.parse_args(argv)
-    if not a.candidates:
-        raise SystemExit(
-            "only --candidates is implemented. Selection is separated from "
-            "fetching and labelling on purpose: the candidate count decides "
-            "whether the set is worth building, and it costs no downloads")
+    if not (a.candidates or a.build):
+        raise SystemExit("pass --candidates to select, or --build to label")
 
     excl: set[str] = set()
     excl_src = None
@@ -356,10 +451,25 @@ def main(argv: list[str] | None = None) -> int:
         "selection": meta,
         "units": units,
     }
+    if a.build:
+        doc = build(units, meta, a.ceiling)
+
     out = a.out if a.out.is_absolute() else ROOT / a.out
     if a.write:
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(doc, indent=1) + "\n")
+
+    if a.build:
+        print(f"\n  {doc['n_units_with_a_cryptic_pocket']} units with a cryptic "
+              f"pocket, {doc['n_units_without_one']} without, from "
+              f"{doc['n_pairs_examined']} pairs examined")
+        print(f"  formats read: {doc['file_formats_read']}")
+        print(f"  pair verdicts: {doc['pair_verdicts']}")
+        if doc["n_structures_unavailable"]:
+            print(f"  {doc['n_structures_unavailable']} structures unavailable")
+        if a.write:
+            print(f"\nwrote {out.relative_to(ROOT)}")
+        return 0
 
     print(f"  inventory: {meta['modality']}, ceiling {meta['max_resolution']} A, "
           f"cutoff {meta['cutoff']}")

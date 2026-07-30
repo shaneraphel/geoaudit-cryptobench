@@ -1,0 +1,3364 @@
+{
+ "schema": "geoaudit.setb_set.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "no_method_has_been_run": true,
+ "is_a_frozen_set": false,
+ "why_not_frozen_yet": "freezing is a separate commit that hashes this file, and reading it needs a preregistration naming the comparisons and the sentence to write under each outcome. Neither exists yet",
+ "question": "does the counting field hold up on apo-holo pairs from a different experimental modality, which no part of its development could have seen",
+ "modality": "single-particle cryo-EM",
+ "externality": {
+  "temporal": "both structures of every pair released after 2025-01-01, the newest release date in CryptoBench",
+  "sequence": "no accession and no UniRef50 cluster at 50% identity is shared with either CryptoBench fold or with Set A",
+  "modality": "single-particle cryo-EM, where Set A is X-ray, so a confirmation here is not a confirmation on the same kind of data twice",
+  "order": "labels exist before any method is run"
+ },
+ "rule": {
+  "contact_angstrom": 4.5,
+  "hydrogens_count": true,
+  "prmsd_floor": 2.0,
+  "guard_band": 0.5,
+  "recovered_by": "tools/recover_cryptobench_rule.py",
+  "imported_from": "tools/build_external_set.py, unedited"
+ },
+ "resolution_ceiling": 2.5,
+ "file_formats_read": {
+  "pdb": 110,
+  "cif": 37,
+  "absent": 0
+ },
+ "why_the_format_mix_is_recorded": "reading mmCIF is justified by the equivalence build_external_set measures rather than assumed, and single-particle entries are larger assemblies than X-ray ones so the mmCIF share is expected to be higher than Set A's quarter",
+ "selection": {
+  "reasons": {
+   "the accession has no apo chain and holo chain together": 3959,
+   "the accession shares a UniRef50 cluster with Set A, which would make the two reads correlated": 4,
+   "the accession shares a UniRef50 cluster with CryptoBench": 5,
+   "the accession itself appears in CryptoBench": 6,
+   "a second accession in an already-represented cluster": 5
+  },
+  "accepted_ligand_codes": 2404,
+  "n_clusters": 82,
+  "cutoff": "2025-01-01",
+  "max_resolution": 2.5,
+  "modality": "single-particle cryo-EM",
+  "how_this_differs_from_set_a": {
+   "inventory": "single-particle cryo-EM rather than X-ray",
+   "cluster_map": "data/external/UNIREF50_SETB.json",
+   "extra_exclusion": "the UniRef50 clusters Set A spent, so that a read on this set is independent of the read on that one"
+  },
+  "what_is_identical_to_set_a": [
+   "the accepted ligand codes, taken from CryptoBench's own dataset",
+   "the apo and holo definitions",
+   "one unit per UniRef50 cluster",
+   "the apo chain choice and the partner cap, imported not reimplemented"
+  ]
+ },
+ "n_units_with_a_cryptic_pocket": 8,
+ "n_units_without_one": 74,
+ "n_pairs_examined": 382,
+ "pair_verdicts": {
+  "cryptic": 27,
+  "not cryptic": 289,
+  "inside the guard band, not labelled either way": 66
+ },
+ "structures_unavailable": [],
+ "n_structures_unavailable": 0,
+ "units": [
+  {
+   "apo_pdb": "8jyl",
+   "apo_chain": "A",
+   "residues": [
+    [
+     175,
+     ""
+    ],
+    [
+     226,
+     ""
+    ],
+    [
+     295,
+     ""
+    ],
+    [
+     296,
+     ""
+    ],
+    [
+     297,
+     ""
+    ],
+    [
+     298,
+     ""
+    ],
+    [
+     317,
+     ""
+    ],
+    [
+     318,
+     ""
+    ],
+    [
+     319,
+     ""
+    ],
+    [
+     320,
+     ""
+    ],
+    [
+     321,
+     ""
+    ],
+    [
+     322,
+     ""
+    ],
+    [
+     409,
+     ""
+    ],
+    [
+     411,
+     ""
+    ],
+    [
+     423,
+     ""
+    ],
+    [
+     426,
+     ""
+    ],
+    [
+     522,
+     ""
+    ]
+   ],
+   "pairs": [
+    {
+     "holo": "8jyu",
+     "holo_chain": "A",
+     "ligand": "AMP",
+     "ligand_chain": "A",
+     "ligand_index": "602",
+     "prmsd": 5.6428,
+     "identity": 1.0,
+     "n_pocket_residues": 17,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "8jyu",
+     "holo_chain": "B",
+     "ligand": "AMP",
+     "ligand_chain": "B",
+     "ligand_index": "602",
+     "prmsd": 5.6429,
+     "identity": 1.0,
+     "n_pocket_residues": 17,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "8jyu",
+     "holo_chain": "C",
+     "ligand": "AMP",
+     "ligand_chain": "C",
+     "ligand_index": "602",
+     "prmsd": 5.6429,
+     "identity": 1.0,
+     "n_pocket_residues": 17,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "8jyu",
+     "holo_chain": "D",
+     "ligand": "AMP",
+     "ligand_chain": "D",
+     "ligand_index": "602",
+     "prmsd": 5.6428,
+     "identity": 1.0,
+     "n_pocket_residues": 17,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "8jyu",
+     "holo_chain": "E",
+     "ligand": "AMP",
+     "ligand_chain": "E",
+     "ligand_index": "602",
+     "prmsd": 5.6428,
+     "identity": 1.0,
+     "n_pocket_residues": 17,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "8jyu",
+     "holo_chain": "F",
+     "ligand": "AMP",
+     "ligand_chain": "F",
+     "ligand_index": "602",
+     "prmsd": 5.6428,
+     "identity": 1.0,
+     "n_pocket_residues": 17,
+     "verdict": "cryptic"
+    }
+   ],
+   "dropped": [],
+   "uniprot": "Q00IB3",
+   "cluster": "UniRef50_A0ABP2NG03",
+   "resolution": 2.33,
+   "released": "2024-07-10",
+   "n_partners_available": 6
+  },
+  {
+   "apo_pdb": "9t97",
+   "apo_chain": "A3a",
+   "residues": [
+    [
+     94,
+     ""
+    ],
+    [
+     123,
+     ""
+    ],
+    [
+     138,
+     ""
+    ],
+    [
+     163,
+     ""
+    ],
+    [
+     165,
+     ""
+    ],
+    [
+     169,
+     ""
+    ],
+    [
+     170,
+     ""
+    ],
+    [
+     171,
+     ""
+    ],
+    [
+     172,
+     ""
+    ],
+    [
+     173,
+     ""
+    ],
+    [
+     175,
+     ""
+    ],
+    [
+     207,
+     ""
+    ],
+    [
+     208,
+     ""
+    ],
+    [
+     209,
+     ""
+    ],
+    [
+     210,
+     ""
+    ],
+    [
+     211,
+     ""
+    ],
+    [
+     213,
+     ""
+    ],
+    [
+     215,
+     ""
+    ],
+    [
+     239,
+     ""
+    ],
+    [
+     242,
+     ""
+    ],
+    [
+     243,
+     ""
+    ],
+    [
+     282,
+     ""
+    ],
+    [
+     284,
+     ""
+    ],
+    [
+     294,
+     ""
+    ],
+    [
+     295,
+     ""
+    ],
+    [
+     297,
+     ""
+    ],
+    [
+     299,
+     ""
+    ],
+    [
+     448,
+     ""
+    ]
+   ],
+   "pairs": [
+    {
+     "holo": "9yx4",
+     "holo_chain": "A",
+     "ligand": "ATP",
+     "ligand_chain": "A",
+     "ligand_index": "603",
+     "prmsd": 3.6525,
+     "identity": 1.0,
+     "n_pocket_residues": 21,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9yx4",
+     "holo_chain": "A",
+     "ligand": "BTN",
+     "ligand_chain": "A",
+     "ligand_index": "601",
+     "prmsd": 1.0542,
+     "identity": 1.0,
+     "n_pocket_residues": 10,
+     "verdict": "not cryptic"
+    },
+    {
+     "holo": "9yx4",
+     "holo_chain": "B",
+     "ligand": "ATP",
+     "ligand_chain": "B",
+     "ligand_index": "601",
+     "prmsd": 3.9082,
+     "identity": 0.9979,
+     "n_pocket_residues": 21,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9yx4",
+     "holo_chain": "C",
+     "ligand": "ATP",
+     "ligand_chain": "C",
+     "ligand_index": "601",
+     "prmsd": 3.3534,
+     "identity": 0.9979,
+     "n_pocket_residues": 17,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9yx4",
+     "holo_chain": "D",
+     "ligand": "ATP",
+     "ligand_chain": "D",
+     "ligand_index": "601",
+     "prmsd": 4.0101,
+     "identity": 0.9979,
+     "n_pocket_residues": 21,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9yx4",
+     "holo_chain": "Q",
+     "ligand": "ATP",
+     "ligand_chain": "Q",
+     "ligand_index": "603",
+     "prmsd": 3.8525,
+     "identity": 1.0,
+     "n_pocket_residues": 22,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9yx4",
+     "holo_chain": "Q",
+     "ligand": "BTN",
+     "ligand_chain": "Q",
+     "ligand_index": "601",
+     "prmsd": 1.0589,
+     "identity": 1.0,
+     "n_pocket_residues": 10,
+     "verdict": "not cryptic"
+    },
+    {
+     "holo": "9yx4",
+     "holo_chain": "R",
+     "ligand": "ATP",
+     "ligand_chain": "R",
+     "ligand_index": "601",
+     "prmsd": 4.0868,
+     "identity": 0.9979,
+     "n_pocket_residues": 22,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9yx4",
+     "holo_chain": "S",
+     "ligand": "ATP",
+     "ligand_chain": "S",
+     "ligand_index": "601",
+     "prmsd": 3.7981,
+     "identity": 0.9979,
+     "n_pocket_residues": 22,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9yx4",
+     "holo_chain": "T",
+     "ligand": "ATP",
+     "ligand_chain": "T",
+     "ligand_index": "601",
+     "prmsd": 3.9395,
+     "identity": 0.9979,
+     "n_pocket_residues": 23,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9tdm",
+     "holo_chain": "A3a",
+     "ligand": "ATP",
+     "ligand_chain": "A3a",
+     "ligand_index": "601",
+     "prmsd": 3.1824,
+     "identity": 0.993,
+     "n_pocket_residues": 19,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9tdm",
+     "holo_chain": "A3e",
+     "ligand": "ATP",
+     "ligand_chain": "A3e",
+     "ligand_index": "601",
+     "prmsd": 3.1823,
+     "identity": 0.993,
+     "n_pocket_residues": 20,
+     "verdict": "cryptic"
+    }
+   ],
+   "dropped": [
+    {
+     "holo": "9yx4",
+     "ligand": "BTN601",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9yx4",
+     "ligand": "BTN601",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9yx4",
+     "ligand": "BTN601",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9yx4",
+     "ligand": "BTN601",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "A0QTE1",
+   "cluster": "UniRef50_A0ABR5KD56",
+   "resolution": 2.35,
+   "released": "2026-06-10",
+   "n_partners_available": 14
+  },
+  {
+   "apo_pdb": "9vhe",
+   "apo_chain": "D",
+   "residues": [
+    [
+     75,
+     ""
+    ],
+    [
+     76,
+     ""
+    ],
+    [
+     94,
+     ""
+    ],
+    [
+     95,
+     ""
+    ],
+    [
+     96,
+     ""
+    ],
+    [
+     97,
+     ""
+    ],
+    [
+     98,
+     ""
+    ],
+    [
+     99,
+     ""
+    ],
+    [
+     100,
+     ""
+    ],
+    [
+     101,
+     ""
+    ],
+    [
+     131,
+     ""
+    ],
+    [
+     132,
+     ""
+    ],
+    [
+     133,
+     ""
+    ],
+    [
+     134,
+     ""
+    ],
+    [
+     135,
+     ""
+    ],
+    [
+     395,
+     ""
+    ],
+    [
+     396,
+     ""
+    ],
+    [
+     425,
+     ""
+    ],
+    [
+     427,
+     ""
+    ]
+   ],
+   "pairs": [
+    {
+     "holo": "9vhe",
+     "holo_chain": "C",
+     "ligand": "ATP",
+     "ligand_chain": "C",
+     "ligand_index": "601",
+     "prmsd": 2.5177,
+     "identity": 0.9643,
+     "n_pocket_residues": 17,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9vhe",
+     "holo_chain": "E",
+     "ligand": "ATP",
+     "ligand_chain": "E",
+     "ligand_index": "601",
+     "prmsd": 2.7312,
+     "identity": 0.9907,
+     "n_pocket_residues": 17,
+     "verdict": "cryptic"
+    }
+   ],
+   "dropped": [
+    {
+     "holo": "9vhe",
+     "why": "alignment below 0.90",
+     "identity": 0.8663
+    },
+    {
+     "holo": "9vhe",
+     "ligand": "ATP601",
+     "why": "the apo pocket is already occupied by ATP_E601"
+    }
+   ],
+   "uniprot": "P0DV91",
+   "cluster": "UniRef50_P0DV91",
+   "resolution": 2.5,
+   "released": "2025-12-31",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9m1j",
+   "apo_chain": "G",
+   "residues": [
+    [
+     24,
+     ""
+    ],
+    [
+     25,
+     ""
+    ],
+    [
+     26,
+     ""
+    ],
+    [
+     27,
+     ""
+    ],
+    [
+     28,
+     ""
+    ],
+    [
+     29,
+     ""
+    ],
+    [
+     30,
+     ""
+    ],
+    [
+     31,
+     ""
+    ],
+    [
+     44,
+     ""
+    ],
+    [
+     46,
+     ""
+    ],
+    [
+     47,
+     ""
+    ],
+    [
+     66,
+     ""
+    ],
+    [
+     67,
+     ""
+    ],
+    [
+     68,
+     ""
+    ],
+    [
+     69,
+     ""
+    ],
+    [
+     70,
+     ""
+    ],
+    [
+     125,
+     ""
+    ],
+    [
+     126,
+     ""
+    ],
+    [
+     128,
+     ""
+    ],
+    [
+     129,
+     ""
+    ],
+    [
+     158,
+     ""
+    ],
+    [
+     159,
+     ""
+    ],
+    [
+     160,
+     ""
+    ]
+   ],
+   "pairs": [
+    {
+     "holo": "9m1m",
+     "holo_chain": "G",
+     "ligand": "GDP",
+     "ligand_chain": "G",
+     "ligand_index": "1500",
+     "prmsd": 3.6642,
+     "identity": 1.0,
+     "n_pocket_residues": 18,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9m1n",
+     "holo_chain": "G",
+     "ligand": "GDP",
+     "ligand_chain": "G",
+     "ligand_index": "1500",
+     "prmsd": 3.5921,
+     "identity": 1.0,
+     "n_pocket_residues": 18,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9m1k",
+     "holo_chain": "G",
+     "ligand": "GTP",
+     "ligand_chain": "G",
+     "ligand_index": "1500",
+     "prmsd": 4.1154,
+     "identity": 1.0,
+     "n_pocket_residues": 22,
+     "verdict": "cryptic"
+    }
+   ],
+   "dropped": [],
+   "uniprot": "P36404",
+   "cluster": "UniRef50_P36404",
+   "resolution": 2.14,
+   "released": "2025-10-22",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "8udl",
+   "apo_chain": "A",
+   "residues": [
+    [
+     853,
+     ""
+    ],
+    [
+     890,
+     ""
+    ],
+    [
+     891,
+     ""
+    ],
+    [
+     892,
+     ""
+    ],
+    [
+     893,
+     ""
+    ],
+    [
+     894,
+     ""
+    ],
+    [
+     895,
+     ""
+    ],
+    [
+     932,
+     ""
+    ],
+    [
+     943,
+     ""
+    ],
+    [
+     947,
+     ""
+    ],
+    [
+     948,
+     ""
+    ],
+    [
+     951,
+     ""
+    ],
+    [
+     955,
+     ""
+    ],
+    [
+     1135,
+     ""
+    ]
+   ],
+   "pairs": [
+    {
+     "holo": "9ggc",
+     "holo_chain": "A",
+     "ligand": "DCP",
+     "ligand_chain": "A",
+     "ligand_index": "1302",
+     "prmsd": 3.5762,
+     "identity": 0.9957,
+     "n_pocket_residues": 14,
+     "verdict": "cryptic"
+    }
+   ],
+   "dropped": [],
+   "uniprot": "P54098",
+   "cluster": "UniRef50_P54098",
+   "resolution": 2.37,
+   "released": "2024-06-05",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9sgy",
+   "apo_chain": "A",
+   "residues": [
+    [
+     100,
+     ""
+    ],
+    [
+     101,
+     ""
+    ],
+    [
+     103,
+     ""
+    ],
+    [
+     104,
+     ""
+    ],
+    [
+     107,
+     ""
+    ],
+    [
+     248,
+     ""
+    ],
+    [
+     252,
+     ""
+    ],
+    [
+     265,
+     ""
+    ],
+    [
+     266,
+     ""
+    ],
+    [
+     269,
+     ""
+    ],
+    [
+     270,
+     ""
+    ],
+    [
+     272,
+     ""
+    ],
+    [
+     343,
+     ""
+    ],
+    [
+     380,
+     ""
+    ],
+    [
+     408,
+     ""
+    ],
+    [
+     412,
+     ""
+    ]
+   ],
+   "pairs": [
+    {
+     "holo": "9sgl",
+     "holo_chain": "A",
+     "ligand": "HEM",
+     "ligand_chain": "A",
+     "ligand_index": "801",
+     "prmsd": 2.9793,
+     "identity": 1.0,
+     "n_pocket_residues": 16,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9sgl",
+     "holo_chain": "B",
+     "ligand": "HEM",
+     "ligand_chain": "B",
+     "ligand_index": "801",
+     "prmsd": 2.9603,
+     "identity": 1.0,
+     "n_pocket_residues": 16,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9sgy",
+     "holo_chain": "B",
+     "ligand": "HEM",
+     "ligand_chain": "B",
+     "ligand_index": "801",
+     "prmsd": 2.9878,
+     "identity": 0.9699,
+     "n_pocket_residues": 16,
+     "verdict": "cryptic"
+    }
+   ],
+   "dropped": [],
+   "uniprot": "P9WIE5",
+   "cluster": "UniRef50_P9WIE5",
+   "resolution": 2.34,
+   "released": "2026-01-14",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9u6f",
+   "apo_chain": "B",
+   "residues": [
+    [
+     209,
+     ""
+    ],
+    [
+     229,
+     ""
+    ],
+    [
+     230,
+     ""
+    ],
+    [
+     231,
+     ""
+    ],
+    [
+     232,
+     ""
+    ],
+    [
+     233,
+     ""
+    ],
+    [
+     234,
+     ""
+    ],
+    [
+     235,
+     ""
+    ],
+    [
+     236,
+     ""
+    ],
+    [
+     257,
+     ""
+    ],
+    [
+     258,
+     ""
+    ],
+    [
+     261,
+     ""
+    ],
+    [
+     385,
+     ""
+    ],
+    [
+     419,
+     ""
+    ],
+    [
+     420,
+     ""
+    ],
+    [
+     497,
+     ""
+    ],
+    [
+     498,
+     ""
+    ],
+    [
+     499,
+     ""
+    ],
+    [
+     500,
+     ""
+    ]
+   ],
+   "pairs": [
+    {
+     "holo": "9u6f",
+     "holo_chain": "A",
+     "ligand": "ADP",
+     "ligand_chain": "A",
+     "ligand_index": "602",
+     "prmsd": 1.2499,
+     "identity": 1.0,
+     "n_pocket_residues": 15,
+     "verdict": "not cryptic"
+    },
+    {
+     "holo": "9u6f",
+     "holo_chain": "C",
+     "ligand": "ATP",
+     "ligand_chain": "C",
+     "ligand_index": "602",
+     "prmsd": 2.6835,
+     "identity": 1.0,
+     "n_pocket_residues": 19,
+     "verdict": "cryptic"
+    }
+   ],
+   "dropped": [],
+   "uniprot": "Q56403",
+   "cluster": "UniRef50_Q56403",
+   "resolution": 2.2,
+   "released": "2025-10-29",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9uks",
+   "apo_chain": "D",
+   "residues": [
+    [
+     704,
+     ""
+    ],
+    [
+     706,
+     ""
+    ],
+    [
+     737,
+     ""
+    ],
+    [
+     739,
+     ""
+    ],
+    [
+     741,
+     ""
+    ],
+    [
+     1029,
+     ""
+    ],
+    [
+     1238,
+     ""
+    ]
+   ],
+   "pairs": [
+    {
+     "holo": "9ult",
+     "holo_chain": "D",
+     "ligand": "C5P",
+     "ligand_chain": "D",
+     "ligand_index": "1607",
+     "prmsd": 0.3945,
+     "identity": 0.9978,
+     "n_pocket_residues": 5,
+     "verdict": "not cryptic"
+    },
+    {
+     "holo": "9ult",
+     "holo_chain": "D",
+     "ligand": "UTP",
+     "ligand_chain": "D",
+     "ligand_index": "1608",
+     "prmsd": 3.7516,
+     "identity": 0.9978,
+     "n_pocket_residues": 7,
+     "verdict": "cryptic"
+    },
+    {
+     "holo": "9uls",
+     "holo_chain": "D",
+     "ligand": "C5P",
+     "ligand_chain": "D",
+     "ligand_index": "1606",
+     "prmsd": 0.4225,
+     "identity": 1.0,
+     "n_pocket_residues": 5,
+     "verdict": "not cryptic"
+    }
+   ],
+   "dropped": [],
+   "uniprot": "Q8RQE8",
+   "cluster": "UniRef50_Q8RQE8",
+   "resolution": 2.33,
+   "released": "2025-10-22",
+   "n_partners_available": 2
+  }
+ ],
+ "units_without_a_cryptic_pocket": [
+  {
+   "apo_pdb": "9ex6",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "G2FID1",
+   "cluster": "UniRef50_A0A0T5YXS8",
+   "resolution": 2.35,
+   "released": "2025-03-26",
+   "n_partners_available": 5
+  },
+  {
+   "apo_pdb": "8zam",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q8RUT8",
+   "cluster": "UniRef50_A0A2K3CXC9",
+   "resolution": 2.5,
+   "released": "2024-09-11",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "8ud1",
+   "apo_chain": "1i",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "A0A4X1UIV8",
+   "cluster": "UniRef50_A0A480KM09",
+   "resolution": 2.1,
+   "released": "2024-06-19",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9pqj",
+   "apo_chain": "D",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9pqj",
+     "ligand": "AGS402",
+     "why": "the apo pocket is already occupied by AGS_C402"
+    },
+    {
+     "holo": "9pqj",
+     "ligand": "AGS401",
+     "why": "the apo pocket is already occupied by AGS_E401"
+    },
+    {
+     "holo": "9pqj",
+     "ligand": "AGS401",
+     "why": "the apo pocket is already occupied by AGS_C402"
+    },
+    {
+     "holo": "9pqj",
+     "ligand": "AGS401",
+     "why": "the apo pocket is already occupied by AGS_E401"
+    },
+    {
+     "holo": "9pqj",
+     "ligand": "AGS401",
+     "why": "the apo pocket is already occupied by AGS_C402"
+    },
+    {
+     "holo": "9pqj",
+     "ligand": "AGS402",
+     "why": "the apo pocket is already occupied by AGS_E401"
+    },
+    {
+     "holo": "9pqj",
+     "ligand": "AGS401",
+     "why": "the apo pocket is already occupied by AGS_C402"
+    },
+    {
+     "holo": "9pqj",
+     "ligand": "AGS402",
+     "why": "the apo pocket is already occupied by AGS_E401"
+    }
+   ],
+   "uniprot": "A0A4D6K5Y8",
+   "cluster": "UniRef50_A0A4D6K5Y8",
+   "resolution": 2.36,
+   "released": "2026-02-25",
+   "n_partners_available": 4
+  },
+  {
+   "apo_pdb": "9vdp",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "A0A628R156",
+   "cluster": "UniRef50_A0A628R156",
+   "resolution": 2.27,
+   "released": "2025-11-12",
+   "n_partners_available": 6
+  },
+  {
+   "apo_pdb": "9wcy",
+   "apo_chain": "r",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "B1MGY1",
+   "cluster": "UniRef50_A0A7V8LJX7",
+   "resolution": 2.26,
+   "released": "2026-07-01",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9qef",
+   "apo_chain": "R",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9qef",
+     "ligand": "PLM610",
+     "why": "the apo pocket is already occupied by PLM_W203"
+    }
+   ],
+   "uniprot": "A0A2U9PNL2",
+   "cluster": "UniRef50_A0ABW1F508",
+   "resolution": 2.5,
+   "released": "2026-01-21",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9pj8",
+   "apo_chain": "s",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9pj7",
+     "ligand": "DXT201",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "A0A2C6LEQ5",
+   "cluster": "UniRef50_A0QSD3",
+   "resolution": 2.5,
+   "released": "2026-05-13",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9kqb",
+   "apo_chain": "F",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9kqb",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_E101"
+    }
+   ],
+   "uniprot": "Q4G381",
+   "cluster": "UniRef50_A0T0U1",
+   "resolution": 2.22,
+   "released": "2025-05-07",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "8rvv",
+   "apo_chain": "E",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "D9PY03",
+   "cluster": "UniRef50_F1SVF6",
+   "resolution": 2.2,
+   "released": "2025-05-14",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9dak",
+   "apo_chain": "B",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9ea0",
+     "why": "alignment below 0.90",
+     "identity": 0.7865
+    },
+    {
+     "holo": "9ea0",
+     "why": "alignment below 0.90",
+     "identity": 0.7865
+    },
+    {
+     "holo": "9ea0",
+     "why": "alignment below 0.90",
+     "identity": 0.7865
+    },
+    {
+     "holo": "9eh8",
+     "why": "alignment below 0.90",
+     "identity": 0.7812
+    },
+    {
+     "holo": "9eh8",
+     "why": "alignment below 0.90",
+     "identity": 0.7812
+    },
+    {
+     "holo": "9eh8",
+     "why": "alignment below 0.90",
+     "identity": 0.7812
+    },
+    {
+     "holo": "9kr8",
+     "why": "alignment below 0.90",
+     "identity": 0.7917
+    },
+    {
+     "holo": "9kr8",
+     "why": "alignment below 0.90",
+     "identity": 0.7917
+    },
+    {
+     "holo": "9kr8",
+     "why": "alignment below 0.90",
+     "identity": 0.7917
+    }
+   ],
+   "uniprot": "A3EXD0",
+   "cluster": "UniRef50_K9N5Q8",
+   "resolution": 2.4,
+   "released": "2025-02-19",
+   "n_partners_available": 9
+  },
+  {
+   "apo_pdb": "9l0u",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "O14494",
+   "cluster": "UniRef50_O14494",
+   "resolution": 2.28,
+   "released": "2025-12-17",
+   "n_partners_available": 4
+  },
+  {
+   "apo_pdb": "9rhg",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "O75084",
+   "cluster": "UniRef50_O75084",
+   "resolution": 2.5,
+   "released": "2025-12-24",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9bwj",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9bwb",
+     "ligand": "PIO503",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO505",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO510",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO503",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO505",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO510",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO503",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO505",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO510",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO503",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO505",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO510",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO504",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO506",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9bwb",
+     "ligand": "PIO508",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "O75311",
+   "cluster": "UniRef50_O75311",
+   "resolution": 2.21,
+   "released": "2024-11-13",
+   "n_partners_available": 10
+  },
+  {
+   "apo_pdb": "9dms",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9dmg",
+     "ligand": "BMA3",
+     "why": "the apo pocket is already occupied by BMA_H3"
+    },
+    {
+     "holo": "9dmg",
+     "ligand": "MAN502",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9dmg",
+     "ligand": "MAN4",
+     "why": "the apo pocket is already occupied by BMA_H3"
+    }
+   ],
+   "uniprot": "P02708",
+   "cluster": "UniRef50_P02708",
+   "resolution": 1.92,
+   "released": "2025-04-09",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9jqc",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P02794",
+   "cluster": "UniRef50_P02794",
+   "resolution": 1.73,
+   "released": "2024-11-27",
+   "n_partners_available": 24
+  },
+  {
+   "apo_pdb": "9rrs",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9rm5",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "AGS401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "AGS401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "AGS401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "AGS401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "AGS401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "AGS401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "AGS401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "AGS401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rm5",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q89269",
+   "cluster": "UniRef50_P03132",
+   "resolution": 1.88,
+   "released": "2026-02-04",
+   "n_partners_available": 6
+  },
+  {
+   "apo_pdb": "9rwg",
+   "apo_chain": "B",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9rrs",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9rwg",
+     "ligand": "ADP2000",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q8JQF8",
+   "cluster": "UniRef50_P03135",
+   "resolution": 2.19,
+   "released": "2026-02-04",
+   "n_partners_available": 11
+  },
+  {
+   "apo_pdb": "9smg",
+   "apo_chain": "L",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9smi",
+     "ligand": "CHD704",
+     "why": "the apo pocket is already occupied by CHD_i201"
+    }
+   ],
+   "uniprot": "P03920",
+   "cluster": "UniRef50_P03915",
+   "resolution": 2.42,
+   "released": "2026-03-18",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9zwm",
+   "apo_chain": "B",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P03960",
+   "cluster": "UniRef50_P03960",
+   "resolution": 2.25,
+   "released": "2026-04-01",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9w8v",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P04050",
+   "cluster": "UniRef50_P04050",
+   "resolution": 2.23,
+   "released": "2026-06-24",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9fx1",
+   "apo_chain": "B",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9fx1",
+     "why": "alignment below 0.90",
+     "identity": 0.2244
+    }
+   ],
+   "uniprot": "P07210",
+   "cluster": "UniRef50_P04936",
+   "resolution": 1.76,
+   "released": "2024-12-18",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9etz",
+   "apo_chain": "D",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P07143",
+   "cluster": "UniRef50_P07143",
+   "resolution": 2.4,
+   "released": "2024-10-02",
+   "n_partners_available": 6
+  },
+  {
+   "apo_pdb": "9pqz",
+   "apo_chain": "G",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9p4v",
+     "why": "alignment below 0.90",
+     "identity": 0.8474
+    },
+    {
+     "holo": "9p4v",
+     "why": "alignment below 0.90",
+     "identity": 0.8474
+    },
+    {
+     "holo": "9p4v",
+     "why": "alignment below 0.90",
+     "identity": 0.8474
+    },
+    {
+     "holo": "9p4v",
+     "why": "alignment below 0.90",
+     "identity": 0.8474
+    },
+    {
+     "holo": "9p4v",
+     "why": "alignment below 0.90",
+     "identity": 0.8474
+    },
+    {
+     "holo": "9p4v",
+     "why": "alignment below 0.90",
+     "identity": 0.8474
+    },
+    {
+     "holo": "9p4w",
+     "ligand": "FMN2101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9p4w",
+     "ligand": "FMN2101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9p4w",
+     "ligand": "FMN2101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9p4w",
+     "ligand": "FMN2101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9p4w",
+     "ligand": "FMN2101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9p4w",
+     "ligand": "FMN2101",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "P07149",
+   "cluster": "UniRef50_P07149",
+   "resolution": 2.22,
+   "released": "2025-12-10",
+   "n_partners_available": 12
+  },
+  {
+   "apo_pdb": "9phw",
+   "apo_chain": "F",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9eh5",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_E104"
+    },
+    {
+     "holo": "9eh5",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_E104"
+    }
+   ],
+   "uniprot": "P09191",
+   "cluster": "UniRef50_P09191",
+   "resolution": 1.99,
+   "released": "2025-10-22",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "V",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P0A386",
+   "cluster": "UniRef50_P0A386",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9g6f",
+     "ligand": "FME1",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM415",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM102",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM104",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM631",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "FME1",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM627",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM104",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "FME1",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM418",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM626",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "FME1",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM628",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM413",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM101",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "FME1",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM413",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM622",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "FME1",
+     "why": "the apo pocket is already occupied by FME_I1"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM625",
+     "why": "the apo pocket is already occupied by FME_I1"
+    }
+   ],
+   "uniprot": "P0A444",
+   "cluster": "UniRef50_P0A444",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 6
+  },
+  {
+   "apo_pdb": "9b05",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P12532",
+   "cluster": "UniRef50_P12277",
+   "resolution": 2.4,
+   "released": "2025-02-12",
+   "n_partners_available": 24
+  },
+  {
+   "apo_pdb": "9ifm",
+   "apo_chain": "e",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9ifm",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_f101"
+    }
+   ],
+   "uniprot": "P13554",
+   "cluster": "UniRef50_P13554",
+   "resolution": 2.2,
+   "released": "2026-01-28",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "H",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9g6f",
+     "ligand": "PLM405",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM105",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM623",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q8DJ43",
+   "cluster": "UniRef50_P14835",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9rgd",
+   "apo_chain": "D",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9rgd",
+     "ligand": "PLM4208",
+     "why": "the apo pocket is already occupied by PLM_C508"
+    },
+    {
+     "holo": "9eqg",
+     "ligand": "MAN6",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9eqg",
+     "ligand": "PLM510",
+     "why": "the apo pocket is already occupied by PLM_C508"
+    },
+    {
+     "holo": "9eqg",
+     "ligand": "MAN6",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9eqg",
+     "ligand": "MAN9",
+     "why": "the apo pocket is already occupied by MAN_F8"
+    },
+    {
+     "holo": "9eqg",
+     "ligand": "PLM502",
+     "why": "the apo pocket is already occupied by PLM_C508"
+    },
+    {
+     "holo": "9fas",
+     "ligand": "PIO3702",
+     "why": "the apo pocket is already occupied by PLM_C508"
+    },
+    {
+     "holo": "9fas",
+     "ligand": "PLM3708",
+     "why": "the apo pocket is already occupied by PLM_C508"
+    },
+    {
+     "holo": "9fas",
+     "ligand": "MAN6",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9fas",
+     "ligand": "MAN9",
+     "why": "the apo pocket is already occupied by MAN_F8"
+    },
+    {
+     "holo": "9fas",
+     "ligand": "PIO3901",
+     "why": "the apo pocket is already occupied by PLM_C508"
+    },
+    {
+     "holo": "9fas",
+     "ligand": "PLM507",
+     "why": "the apo pocket is already occupied by PLM_C508"
+    }
+   ],
+   "uniprot": "P14867",
+   "cluster": "UniRef50_P14867",
+   "resolution": 2.0,
+   "released": "2026-06-17",
+   "n_partners_available": 5
+  },
+  {
+   "apo_pdb": "9otq",
+   "apo_chain": "L",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9otp",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9otp",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9otp",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9otp",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9otp",
+     "ligand": "ADP1000",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9otp",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9otp",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9otp",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9otp",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9oto",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9oto",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9oto",
+     "ligand": "ADP1001",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9oto",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9oto",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9oto",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9oto",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9oto",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9oto",
+     "ligand": "ADP401",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "P15104",
+   "cluster": "UniRef50_P15104",
+   "resolution": 2.27,
+   "released": "2025-07-02",
+   "n_partners_available": 60
+  },
+  {
+   "apo_pdb": "9qkt",
+   "apo_chain": "B",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P21127",
+   "cluster": "UniRef50_P21127",
+   "resolution": 2.4,
+   "released": "2026-03-18",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9y7p",
+   "apo_chain": "E",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P23416",
+   "cluster": "UniRef50_P23416",
+   "resolution": 2.5,
+   "released": "2026-03-18",
+   "n_partners_available": 4
+  },
+  {
+   "apo_pdb": "8zp2",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P23975",
+   "cluster": "UniRef50_P23975",
+   "resolution": 2.4,
+   "released": "2024-09-11",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9z7u",
+   "apo_chain": "B",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P27105",
+   "cluster": "UniRef50_P27105",
+   "resolution": 2.0,
+   "released": "2026-02-25",
+   "n_partners_available": 4
+  },
+  {
+   "apo_pdb": "9zpv",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9zq0",
+     "ligand": "PIO709",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9zq0",
+     "ligand": "PIO710",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9zq1",
+     "ligand": "PIO708",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9zq1",
+     "ligand": "PIO709",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9zq1",
+     "ligand": "PIO710",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9zq1",
+     "ligand": "PIO708",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "P29973",
+   "cluster": "UniRef50_P29973",
+   "resolution": 2.07,
+   "released": "2026-01-14",
+   "n_partners_available": 10
+  },
+  {
+   "apo_pdb": "8zru",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P30084",
+   "cluster": "UniRef50_P30084",
+   "resolution": 2.18,
+   "released": "2025-04-30",
+   "n_partners_available": 6
+  },
+  {
+   "apo_pdb": "8x1q",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P40879",
+   "cluster": "UniRef50_P40879",
+   "resolution": 2.29,
+   "released": "2025-05-14",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "8ztf",
+   "apo_chain": "C",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "8zt2",
+     "ligand": "ATP501",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8zt2",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8zt2",
+     "ligand": "ATP501",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8zt2",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8zt2",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8zt2",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8zt8",
+     "ligand": "ATP401",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8zt8",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8zt8",
+     "ligand": "ATP401",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8zt8",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8zt8",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8zt8",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8zt5",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8zt5",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8zt5",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8zt5",
+     "ligand": "ATP401",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8zt5",
+     "ligand": "ATP401",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8zt5",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8ztf",
+     "ligand": "ATP401",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    },
+    {
+     "holo": "8ztf",
+     "ligand": "ATP405",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8ztf",
+     "ligand": "ATP401",
+     "why": "the apo pocket is already occupied by ATP_B502"
+    },
+    {
+     "holo": "8ztf",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_A405"
+    }
+   ],
+   "uniprot": "P51576",
+   "cluster": "UniRef50_P47824",
+   "resolution": 2.43,
+   "released": "2025-06-11",
+   "n_partners_available": 11
+  },
+  {
+   "apo_pdb": "9bqh",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9c48",
+     "ligand": "BMA3",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9c48",
+     "ligand": "BMA3",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9c48",
+     "ligand": "BMA3",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q99571",
+   "cluster": "UniRef50_P51577",
+   "resolution": 2.27,
+   "released": "2025-01-29",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "J",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9g6g",
+     "ligand": "PLM102",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM102",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "P59087",
+   "cluster": "UniRef50_P59087",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "8qr1",
+   "apo_chain": "B",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P60709",
+   "cluster": "UniRef50_P60709",
+   "resolution": 2.4,
+   "released": "2024-08-07",
+   "n_partners_available": 15
+  },
+  {
+   "apo_pdb": "9ifm",
+   "apo_chain": "F",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9ifm",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_E101"
+    }
+   ],
+   "uniprot": "P62096",
+   "cluster": "UniRef50_P62095",
+   "resolution": 2.2,
+   "released": "2026-01-28",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9p7z",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "P63096",
+   "cluster": "UniRef50_P63096",
+   "resolution": 2.1,
+   "released": "2026-03-25",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9ghd",
+   "apo_chain": "W",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9ti8",
+     "ligand": "FUA703",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9ti8",
+     "ligand": "GDP701",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9ghb",
+     "ligand": "FUA703",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9ghb",
+     "ligand": "GDP701",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9gha",
+     "ligand": "FUA703",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9gha",
+     "ligand": "GDP701",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q2G0N1",
+   "cluster": "UniRef50_P80868",
+   "resolution": 2.41,
+   "released": "2025-03-26",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9qef",
+   "apo_chain": "b",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "8ovd",
+     "ligand": "PLM203",
+     "why": "the apo pocket is already occupied by PLM_L610"
+    },
+    {
+     "holo": "8ovd",
+     "ligand": "PLM202",
+     "why": "the apo pocket is already occupied by PLM_L610"
+    },
+    {
+     "holo": "9qef",
+     "ligand": "PLM203",
+     "why": "the apo pocket is already occupied by PLM_L610"
+    }
+   ],
+   "uniprot": "A0R562",
+   "cluster": "UniRef50_P9WK63",
+   "resolution": 2.5,
+   "released": "2026-01-21",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "8qwc",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q6NGV6",
+   "cluster": "UniRef50_P9WL45",
+   "resolution": 2.27,
+   "released": "2025-02-05",
+   "n_partners_available": 5
+  },
+  {
+   "apo_pdb": "8yd0",
+   "apo_chain": "C",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "8yd0",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_D502"
+    },
+    {
+     "holo": "8yd0",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_B501"
+    },
+    {
+     "holo": "8yd0",
+     "ligand": "ATP501",
+     "why": "the apo pocket is already occupied by ATP_D502"
+    },
+    {
+     "holo": "8yd0",
+     "ligand": "ATP501",
+     "why": "the apo pocket is already occupied by ATP_D502"
+    },
+    {
+     "holo": "8yd0",
+     "ligand": "ATP502",
+     "why": "the apo pocket is already occupied by ATP_B501"
+    },
+    {
+     "holo": "8yd0",
+     "ligand": "ADP501",
+     "why": "the apo pocket is already occupied by ATP_D502"
+    },
+    {
+     "holo": "8yd0",
+     "ligand": "ATP501",
+     "why": "the apo pocket is already occupied by ATP_B501"
+    },
+    {
+     "holo": "8yd0",
+     "ligand": "ADP501",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "8yd0",
+     "ligand": "ADP501",
+     "why": "the apo pocket is already occupied by ATP_D502"
+    }
+   ],
+   "uniprot": "P9WPB9",
+   "cluster": "UniRef50_P9WPB9",
+   "resolution": 2.24,
+   "released": "2025-03-19",
+   "n_partners_available": 5
+  },
+  {
+   "apo_pdb": "9smi",
+   "apo_chain": "i",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9smg",
+     "ligand": "CHD201",
+     "why": "the apo pocket is already occupied by CHD_L704"
+    },
+    {
+     "holo": "9smg",
+     "ligand": "FME1",
+     "why": "the apo pocket is already occupied by FME_L1"
+    },
+    {
+     "holo": "8q48",
+     "ligand": "CHD201",
+     "why": "the apo pocket is already occupied by CHD_L704"
+    },
+    {
+     "holo": "8q48",
+     "ligand": "FME1",
+     "why": "the apo pocket is already occupied by FME_L1"
+    }
+   ],
+   "uniprot": "Q02367",
+   "cluster": "UniRef50_Q02367",
+   "resolution": 2.01,
+   "released": "2026-03-18",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "11ee",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q14764",
+   "cluster": "UniRef50_Q14764",
+   "resolution": 1.87,
+   "released": "2026-05-20",
+   "n_partners_available": 84
+  },
+  {
+   "apo_pdb": "8ugp",
+   "apo_chain": "1P",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "8ud1",
+     "ligand": "NDP403",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "8ugh",
+     "ligand": "NDP501",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "8ugi",
+     "ligand": "NDP402",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "8ugj",
+     "ligand": "NDP402",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "A0A4X1ULW2",
+   "cluster": "UniRef50_Q16795",
+   "resolution": 2.0,
+   "released": "2024-06-19",
+   "n_partners_available": 4
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "L",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9g6g",
+     "ligand": "FME1",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "FME1",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q8DIN8",
+   "cluster": "UniRef50_Q55354",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9pj8",
+   "apo_chain": "r",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9pj7",
+     "ligand": "DXT201",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "A0A2B7ITY5",
+   "cluster": "UniRef50_Q6A6N1",
+   "resolution": 2.5,
+   "released": "2026-05-13",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9wcy",
+   "apo_chain": "L",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9wcy",
+     "ligand": "PLM609",
+     "why": "the apo pocket is already occupied by PLM_q301"
+    }
+   ],
+   "uniprot": "B1MDZ6",
+   "cluster": "UniRef50_Q79VD7",
+   "resolution": 2.26,
+   "released": "2026-07-01",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "8z8z",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q7Z3F1",
+   "cluster": "UniRef50_Q7Z3F1",
+   "resolution": 2.11,
+   "released": "2025-01-01",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "D",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9g6f",
+     "ligand": "PLM105",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM415",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM623",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM103",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM629",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM104",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q8CM25",
+   "cluster": "UniRef50_Q8CM25",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 5
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "M",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q8DHA7",
+   "cluster": "UniRef50_Q8DHA7",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "C",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9g6f",
+     "ligand": "PLM520",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "HEM201",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM519",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM520",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM102",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "HEM201",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM520",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM522",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "HEM201",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM520",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM523",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q8DIF8",
+   "cluster": "UniRef50_Q8DIF8",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 5
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "F",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9m5a",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_E105"
+    },
+    {
+     "holo": "9m5a",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_E105"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_E105"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_E105"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "HEM102",
+     "why": "the apo pocket is already occupied by HEM_E105"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "HEM104",
+     "why": "the apo pocket is already occupied by HEM_E105"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM103",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM102",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q8DIN9",
+   "cluster": "UniRef50_Q8DIN9",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 6
+  },
+  {
+   "apo_pdb": "9m5a",
+   "apo_chain": "E",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9evx",
+     "ligand": "HEM105",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9evx",
+     "ligand": "HEM105",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM101",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "HEM101",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6f",
+     "ligand": "PLM101",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "HEM105",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM102",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM107",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "HEM104",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM103",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM102",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "HEM103",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM101",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM102",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM103",
+     "why": "the apo pocket is already occupied by HEM_F101"
+    }
+   ],
+   "uniprot": "Q8DIP0",
+   "cluster": "UniRef50_Q8DIP0",
+   "resolution": 1.88,
+   "released": "2026-07-01",
+   "n_partners_available": 7
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "T",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q8DIQ0",
+   "cluster": "UniRef50_Q8DIQ0",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "B",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9g6f",
+     "ligand": "PLM622",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM413",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM410",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM622",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q8DIQ1",
+   "cluster": "UniRef50_Q8DIQ1",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 6
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "I",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9g6f",
+     "ligand": "PLM101",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6g",
+     "ligand": "PLM101",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q8DJZ6",
+   "cluster": "UniRef50_Q8DJZ6",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "8vgx",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "O81959",
+   "cluster": "UniRef50_Q8LLW7",
+   "resolution": 2.19,
+   "released": "2025-03-12",
+   "n_partners_available": 4
+  },
+  {
+   "apo_pdb": "8uvd",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q8WWT9",
+   "cluster": "UniRef50_Q8WWT9",
+   "resolution": 2.16,
+   "released": "2024-12-25",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9q87",
+   "apo_chain": "r",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9pih",
+     "ligand": "DXT3213",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "P61175",
+   "cluster": "UniRef50_Q8ZJA7",
+   "resolution": 1.55,
+   "released": "2025-05-14",
+   "n_partners_available": 1
+  },
+  {
+   "apo_pdb": "9qef",
+   "apo_chain": "Y",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "8ovd",
+     "ligand": "PLM301",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "8ovd",
+     "ligand": "PLM301",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9qef",
+     "ligand": "PLM301",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "A0QQQ1",
+   "cluster": "UniRef50_Q9AGW2",
+   "resolution": 2.5,
+   "released": "2026-01-21",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "K",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q9F1K9",
+   "cluster": "UniRef50_Q9F1K9",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 2
+  },
+  {
+   "apo_pdb": "9evx",
+   "apo_chain": "X",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9g6h",
+     "ligand": "PLM402",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9g6h",
+     "ligand": "PLM410",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q9F1R6",
+   "cluster": "UniRef50_Q9F1R6",
+   "resolution": 1.71,
+   "released": "2024-06-12",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9uww",
+   "apo_chain": "A",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q9UBL9",
+   "cluster": "UniRef50_Q9UBL9",
+   "resolution": 2.19,
+   "released": "2026-03-11",
+   "n_partners_available": 9
+  },
+  {
+   "apo_pdb": "8qr1",
+   "apo_chain": "D",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9ema",
+     "ligand": "ATP500",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9ema",
+     "ligand": "ATP501",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9ema",
+     "ligand": "ATP501",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q9Y230",
+   "cluster": "UniRef50_Q9Y230",
+   "resolution": 2.4,
+   "released": "2024-08-07",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "8qr1",
+   "apo_chain": "E",
+   "residues": [],
+   "dropped": [
+    {
+     "holo": "9ema",
+     "ligand": "ATP801",
+     "why": "fewer than three contact residues map to the apo chain"
+    },
+    {
+     "holo": "9ema",
+     "ligand": "ATP801",
+     "why": "fewer than three contact residues map to the apo chain"
+    }
+   ],
+   "uniprot": "Q9Y265",
+   "cluster": "UniRef50_Q9Y265",
+   "resolution": 2.4,
+   "released": "2024-08-07",
+   "n_partners_available": 3
+  },
+  {
+   "apo_pdb": "9rdk",
+   "apo_chain": "C",
+   "residues": [],
+   "dropped": [],
+   "uniprot": "Q9Y4A5",
+   "cluster": "UniRef50_Q9Y4A5",
+   "resolution": 2.41,
+   "released": "2026-04-01",
+   "n_partners_available": 1
+  }
+ ]
+}
