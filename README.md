@@ -235,21 +235,39 @@ and fails if it no longer holds. On that set the margin over P2Rank is **+0.0443
 [+0.0162, +0.0724]** (`results/external/EXTERNAL_READ.json`). The set is now spent
 and the repository says so.
 
-**5. A saturation result, which is a contribution in its own right.** Six
-training-fold sweeps varied every global parameter of the construction and found
-each at or near its optimum: the quantisation ladder, the pairing draw, the
-attachment of appended columns, the integer rounding, the table count, and whether
-the multiplicity assignment is global at all. Two of those sweeps refuted
-hypotheses raised by the sweeps before them, and both refutations are recorded
-with the measurement that killed them. The tables turn out to be
-**interchangeable** — random subsets match subsets ranked by importance — so the
-bank is a saturated exchangeable ensemble, and the one thing it is *not*
-indifferent to is regional structure: chain-level routing beats a random
-per-chain router by **+0.0029 to +0.0054 on 11–12 of 12 splits**, while costing
-more than it earns through the correction machinery available
-(`results/architecture_sweep/HIERARCHICAL_MULTIPLICITIES.json`). Negative and
-saturation results are usually unpublished; here they are the map of which roads
-are shut, and each names the artifact that shut it.
+**5. A saturation result, which is a contribution in its own right.** Eight
+training-fold sweeps varied every parameter the readout has and found each at or
+past its optimum: the quantisation ladder, the pairing draw, the attachment of
+appended columns, the integer rounding, the table count, whether the multiplicity
+assignment is global at all, whether the spatial gate's weight is, and how wide a
+table is. Three of those sweeps refuted hypotheses raised by the sweeps before
+them, and each refutation is recorded with the measurement that killed it.
+
+Two of the eight are worth stating in full because they are two-sided rather than
+merely null. The tables are **interchangeable** — random subsets match subsets
+ranked by importance — so the bank is a saturated exchangeable ensemble. And the
+table width is an **interior optimum**: widening to three-wire tables, which makes
+three-way interactions expressible for the first time, costs **−0.0036 to −0.0066
+and wins on 0 of 12 splits** under either way of holding the budget fixed, while
+narrowing to one-wire tables with no interaction at all costs **−0.0053**. The
+median residues behind an addressed cell runs 29,673 / 7,385 / 1,763 / 401 across
+widths one to four, so what widening buys in expressiveness it loses four times
+over in counting evidence (`results/architecture_sweep/TABLE_WIDTH.json`).
+
+The one thing the construction is *not* indifferent to is regional structure, and
+that is stated against the baseline it was measured on: chain-level routing beats
+a **random per-chain router** by **+0.0029 to +0.0054 on 11–12 of 12 splits**,
+while against the deployed detector the best routed arm is **+0.0005 on 6 of 12**,
+under the reseed noise floor and therefore not a lift
+(`results/architecture_sweep/HIERARCHICAL_MULTIPLICITIES.json`,
+`GATE_WEIGHT_ROUTING.json`). The heterogeneity is real; converting it into
+accuracy did not happen at either price tried, three orders of magnitude apart.
+
+Taken together the eight say something sharper than eight nulls: anything further
+has to change **what a table reads**, not how tables are built, addressed, chosen,
+weighted, subdivided or shaped. Negative and saturation results are usually
+unpublished; here they are the map of which roads are shut, and each names the
+artifact that shut it.
 
 Two habits make the above checkable rather than assertable, and they are part of
 what is new. Every number in the manuscript is a macro generated from a frozen
