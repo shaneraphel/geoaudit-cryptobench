@@ -207,10 +207,30 @@ contact graph, and in which pairs among the contacts — 76 integer columns, no
 database, no alignment, nothing fetched. First reading of the Fisher correlate
 was **+0.0010 on 3/3** splits.
 
-**The last linear object.** `integer_fanout` rounds one ridge solve. Everything
-else in the inference path is integer. A combinatorial assignment of the
-multiplicities would remove it, and the direction the repository is committed to
-is combinatorial rather than fitted.
+**The last linear object — measured, and it stays.** `integer_fanout` rounds one
+ridge solve; everything else in the inference path is integer. The obvious move is
+to replace it with a counting rule, and that was tried five ways
+(`COMBINATORIAL_MULTIPLICITIES.json`). Deleting the off-diagonal of the scatter —
+the only thing a per-table rule cannot see — costs **−0.0953 on 0/12**, about
+thirty-six times the reseed floor, where every other sweep here moves by
+thousandths. Standardised difference −0.0909, quartile bands −0.0913, sign alone
+−0.0959. Which per-table statistic you use does not matter.
+
+**And the reason matters more than the refusal.** The solved direction sits at
+cosine **0.030, 0.023, 0.019, 0.036** to those four rules — nearly orthogonal to
+every statement a table can make about itself. With `cos(m, Δμ) = 0.025` from
+`GRAM_CONDITIONING.json`, the reading is consistent: **the multiplicities are
+almost purely a decorrelation, not a weighting.** 5,152 tables come from repeated
+random partitions of 645 wires, so each wire sits in ~16 tables and they restate
+each other heavily; the solve is mostly the correction for that restatement. This
+is also why the ridge was never cosmetic — the same repetition drove the direction
+into the null space when the pool grew without it.
+
+So a combinatorial replacement cannot be a better per-table score; none can exist,
+because the target is nearly orthogonal to all of them. It would have to be an
+**integer decorrelation of the bank**, which is a different object from anything
+tried and is the one open item on this axis. Do not propose per-table weighting
+schemes here again.
 
 ## 4. Habits that have actually failed in this repository
 
