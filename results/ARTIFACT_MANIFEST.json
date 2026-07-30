@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 31,
+    "exploration": 32,
     "cited": 47,
     "superseded": 17,
     "fold_access": 10
   },
-  "n_artifacts": 105,
+  "n_artifacts": 106,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
@@ -309,6 +309,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.preregistered_threshold_curve.v1",
       "bytes": 5519
+    },
+    {
+      "artifact": "results/architecture_sweep/QUANTISATION_LADDER.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.quantisation_ladder.v1",
+      "bytes": 6476
     },
     {
       "artifact": "results/architecture_sweep/REPEATED_TRAIN_SELECTION.json",

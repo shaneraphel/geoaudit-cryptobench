@@ -1,0 +1,286 @@
+{
+ "schema": "geoaudit.quantisation_ladder.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "the deployed quantisation cuts every wire at within-chain quartiles, and measured on the training cache the extreme 2 % of the strongest wires is about twice as rich in cryptic residues as the extreme quartile containing it. Does moving the cut points to resolve the tail lift the counting field, at the same bank and the same cell count",
+ "what_the_screen_measured": {
+  "base_positive_rate": 0.0576,
+  "examples": {
+   "void": {
+    "top_2_percent": 0.2934,
+    "top_25_percent": 0.1291
+   },
+   "void~d20": {
+    "top_2_percent": 0.2579,
+    "top_25_percent": 0.1201
+   },
+   "depth~d20": {
+    "bottom_2_percent": 0.2187,
+    "bottom_25_percent": 0.1235
+   },
+   "angle_deficit~d6": {
+    "bottom_2_percent": 0.2147,
+    "bottom_25_percent": 0.1006
+   }
+  },
+  "what_it_bounds": "the frequency spread inside one cell, which no integer weight over that cell can express",
+  "what_it_does_not_predict": "the ROC-AUC lift, which is what the arms below measure"
+ },
+ "held_fixed_across_arms": {
+  "n_wires": 645,
+  "table_width": 2,
+  "partition_rounds": 16,
+  "partition_seed": 20260725,
+  "n_tables": 5152,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "what_changes": "only the within-chain rank fractions at which the digit increments, and for the six-level arm the number of levels and therefore the cell count"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC",
+  "baseline_was_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
+  "banding": "per chain against that chain's own order statistics, computed over the whole fold before splitting because it cannot see the split"
+ },
+ "ladders": {
+  "uniform quartiles (deployed)": [
+   0.25,
+   0.5,
+   0.75
+  ],
+  "tails at 10 %": [
+   0.1,
+   0.5,
+   0.9
+  ],
+  "tails at 5 %": [
+   0.05,
+   0.5,
+   0.95
+  ],
+  "tails at 2 %": [
+   0.02,
+   0.5,
+   0.98
+  ],
+  "six levels, tails at 2 and 10 %": [
+   0.02,
+   0.1,
+   0.5,
+   0.9,
+   0.98
+  ]
+ },
+ "arms": {
+  "uniform quartiles (deployed)": {
+   "mean": 0.79012,
+   "min": 0.761546,
+   "max": 0.805021
+  },
+  "tails at 10 %": {
+   "mean": 0.786046,
+   "min": 0.762699,
+   "max": 0.799279
+  },
+  "tails at 5 %": {
+   "mean": 0.78463,
+   "min": 0.764131,
+   "max": 0.796532
+  },
+  "tails at 2 %": {
+   "mean": 0.783228,
+   "min": 0.758112,
+   "max": 0.796321
+  },
+  "six levels, tails at 2 and 10 %": {
+   "mean": 0.783752,
+   "min": 0.760684,
+   "max": 0.796852
+  }
+ },
+ "deployed_arm_frozen": {
+  "mean": 0.79012,
+  "min": 0.761546,
+  "max": 0.805021
+ },
+ "minus_deployed": {
+  "uniform quartiles (deployed)": {
+   "mean": -0.0,
+   "min": -0.0,
+   "max": 0.0,
+   "n_splits_positive": 6,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "tails at 10 %": {
+   "mean": -0.004074,
+   "min": -0.007985,
+   "max": 0.001153,
+   "n_splits_positive": 1,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "tails at 5 %": {
+   "mean": -0.00549,
+   "min": -0.009106,
+   "max": 0.002585,
+   "n_splits_positive": 1,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "tails at 2 %": {
+   "mean": -0.006891,
+   "min": -0.011055,
+   "max": -0.002864,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "six levels, tails at 2 and 10 %": {
+   "mean": -0.006368,
+   "min": -0.010406,
+   "max": -0.000862,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  }
+ },
+ "cell_occupancy_on_split_1": {
+  "uniform quartiles (deployed)": {
+   "n_cells": 82432,
+   "n_cells_never_addressed": 1028,
+   "fraction_never_addressed": 0.012471,
+   "median_count_of_addressed_cells": 7385,
+   "min_count_of_addressed_cells": 1
+  },
+  "tails at 10 %": {
+   "n_cells": 82432,
+   "n_cells_never_addressed": 2067,
+   "fraction_never_addressed": 0.025075,
+   "median_count_of_addressed_cells": 4701,
+   "min_count_of_addressed_cells": 1
+  },
+  "tails at 5 %": {
+   "n_cells": 82432,
+   "n_cells_never_addressed": 3924,
+   "fraction_never_addressed": 0.047603,
+   "median_count_of_addressed_cells": 2703,
+   "min_count_of_addressed_cells": 1
+  },
+  "tails at 2 %": {
+   "n_cells": 82432,
+   "n_cells_never_addressed": 5844,
+   "fraction_never_addressed": 0.070895,
+   "median_count_of_addressed_cells": 1226,
+   "min_count_of_addressed_cells": 1
+  },
+  "six levels, tails at 2 and 10 %": {
+   "n_cells": 185472,
+   "n_cells_never_addressed": 12212,
+   "fraction_never_addressed": 0.065843,
+   "median_count_of_addressed_cells": 917,
+   "min_count_of_addressed_cells": 1
+  }
+ },
+ "reproduction_check": {
+  "recomputed_the_deployed_ladder": true,
+  "max_absolute_difference_from_frozen": 4.01e-07,
+  "reproduces_frozen_arm": true,
+  "why_this_is_here": "this tool reimplements banding, addressing, compilation and fan-out locally rather than editing table_bank.py, which a code digest pins. Running the deployed ladder through the local copy and requiring the frozen numbers back is what makes the other arms comparable to them"
+ },
+ "per_split": {
+  "uniform quartiles (deployed)": [
+   0.804622,
+   0.786394,
+   0.787979,
+   0.790364,
+   0.791253,
+   0.7884,
+   0.800117,
+   0.790124,
+   0.791757,
+   0.78386,
+   0.805021,
+   0.761546
+  ],
+  "tails at 10 %": [
+   0.799279,
+   0.784384,
+   0.779994,
+   0.785375,
+   0.787424,
+   0.782229,
+   0.79539,
+   0.783015,
+   0.791075,
+   0.782812,
+   0.798878,
+   0.762699
+  ],
+  "tails at 5 %": [
+   0.796016,
+   0.782683,
+   0.779644,
+   0.785082,
+   0.783632,
+   0.779943,
+   0.796532,
+   0.785014,
+   0.788574,
+   0.778397,
+   0.795915,
+   0.764131
+  ],
+  "tails at 2 %": [
+   0.793567,
+   0.77927,
+   0.779133,
+   0.785952,
+   0.781879,
+   0.780455,
+   0.793531,
+   0.786249,
+   0.788893,
+   0.775381,
+   0.796321,
+   0.758112
+  ],
+  "six levels, tails at 2 and 10 %": [
+   0.796852,
+   0.778918,
+   0.783908,
+   0.782233,
+   0.784733,
+   0.778717,
+   0.793618,
+   0.785266,
+   0.786117,
+   0.779366,
+   0.794615,
+   0.760684
+  ]
+ },
+ "per_split_deployed_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}
