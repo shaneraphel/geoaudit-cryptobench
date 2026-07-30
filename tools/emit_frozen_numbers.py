@@ -112,6 +112,15 @@ PMSELF = ROOT / "results/baselines/POCKETMINER_SELFTEST.json"
 CURVE = ROOT / "results/official_fold/THRESHOLD_CURVE.json"
 PLMNN_SCORES = ROOT / "results/baselines/PLMNN_SCORES.json"
 TRAIN_OP = ROOT / "results/architecture_sweep/TRAIN_OPERATING_POINTS.json"
+# The five training-fold sweeps that measured the construction's own parameters.
+# Grouped because the manuscript reports them as one finding: each varies a
+# choice applied identically to all tables, and the ensemble is indifferent to
+# every one of them except the quantisation.
+LADDER = ROOT / "results/architecture_sweep/QUANTISATION_LADDER.json"
+PAIRSEL = ROOT / "results/architecture_sweep/SELECTED_PAIRINGS.json"
+COMPWIRE = ROOT / "results/architecture_sweep/COMPOSITION_WIRES.json"
+GRAMCOND = ROOT / "results/architecture_sweep/GRAM_CONDITIONING.json"
+TRUNC = ROOT / "results/architecture_sweep/BANK_TRUNCATION.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
 
@@ -1667,6 +1676,10 @@ def build() -> str:
             L.append(f"\\newcommand{{\\{stem}{msuf}NS}}"
                      f"{{{'' if cz is None else ('~ns' if cz else '~\\textbf{sig}')}}}")
         L.append("")
+
+    L.append("% The five training-fold sweeps of the construction's own knobs.")
+    L += _saturation_macros()
+    L.append("")
     return "\n".join(L) + "\n"
 
 
@@ -1735,6 +1748,168 @@ def _dangling_refs() -> list[str]:
             refs.setdefault(name, tex.name)
     return [f"{where} cites \\ref{{{name}}}, which is never labelled"
             for name, where in sorted(refs.items()) if name not in labels]
+
+
+def _saturation_macros() -> list[str]:
+    """Macros for the five sweeps that measured the construction's own knobs.
+
+    Every value here is a training-fold quantity and none reads the test fold or
+    an external unit; the artifacts each declare that and the emitter refuses to
+    quote one that does not. The macros are grouped by artifact rather than by
+    number so that a reader tracing a sentence back lands in one file.
+
+    One rule is enforced here rather than left to prose. The reseed magnitude
+    from SELECTED_PAIRINGS.json is the noise floor for any comparison between two
+    banks, so ``\\SatReseed`` is emitted next to every bank-versus-bank
+    difference the manuscript quotes, and the union-versus-widened difference is
+    emitted with it deliberately: that difference is smaller than the floor and
+    the sentence citing it has to say so.
+    """
+    L: list[str] = []
+    for path in (LADDER, PAIRSEL, COMPWIRE, GRAMCOND, TRUNC):
+        if not path.exists():
+            continue
+        doc = json.loads(path.read_text())
+        if doc.get("reads_test_fold") is not False:
+            raise SystemExit(
+                f"{path.relative_to(ROOT)} does not declare "
+                f"reads_test_fold: false; it may not feed the manuscript")
+        if doc.get("reads_any_external_unit") is not False:
+            raise SystemExit(
+                f"{path.relative_to(ROOT)} does not declare "
+                f"reads_any_external_unit: false")
+
+    if LADDER.exists():
+        d = json.loads(LADDER.read_text())
+        md = d["minus_deployed"]
+        occ = d["cell_occupancy_on_split_1"]
+        dep = "uniform quartiles (deployed)"
+        for stem, key in (("Ten", "tails at 10 %"), ("Five", "tails at 5 %"),
+                          ("Two", "tails at 2 %")):
+            L.append(f"\\newcommand{{\\LadderTail{stem}}}"
+                     f"{{{_signed(md[key]['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\LadderTail{stem}Splits}}"
+                     f"{{{md[key]['n_splits_positive']}}}")
+        L.append(f"\\newcommand{{\\LadderSplits}}"
+                 f"{{{md[dep]['n_splits']}}}")
+        L.append(f"\\newcommand{{\\LadderCellsDeployed}}"
+                 f"{{{occ[dep]['median_count_of_addressed_cells']}}}")
+        L.append(f"\\newcommand{{\\LadderCellsTwo}}"
+                 f"{{{occ['tails at 2 %']['median_count_of_addressed_cells']}}}")
+        L.append(f"\\newcommand{{\\LadderEmptyDeployed}}"
+                 f"{{{100 * occ[dep]['fraction_never_addressed']:.2f}}}")
+        L.append(f"\\newcommand{{\\LadderEmptyTwo}}"
+                 f"{{{100 * occ['tails at 2 %']['fraction_never_addressed']:.2f}}}")
+        rep = d.get("reproduction_check") or {}
+        # The ladder artifact names this field differently from the later ones.
+        # Reading the wrong key silently emitted 0.0e+00, which would have made
+        # the manuscript claim a perfect reproduction it had not measured.
+        gap = rep.get("max_absolute_difference_from_frozen")
+        if gap is None:
+            raise SystemExit(
+                f"{LADDER.relative_to(ROOT)} carries no reproduction gap; the "
+                f"manuscript may not quote one")
+        L.append(f"\\newcommand{{\\LadderRepro}}{{{gap:.1e}}}")
+
+    if PAIRSEL.exists():
+        d = json.loads(PAIRSEL.read_text())
+        md = d["minus_deployed"]
+        for stem, key in (("Inter", "interaction"), ("Var", "pair variance"),
+                          ("Reseed", "another seed"),
+                          ("Anti", "anti-selected")):
+            L.append(f"\\newcommand{{\\Pair{stem}}}"
+                     f"{{{_signed(md[key]['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\Pair{stem}Splits}}"
+                     f"{{{md[key]['n_splits_positive']}}}")
+        # The noise floor. Quoted as a magnitude because it is used as one.
+        L.append(f"\\newcommand{{\\SatReseed}}"
+                 f"{{{abs(md['another seed']['mean']):.4f}}}")
+        surv = d["does_the_chosen_interaction_survive_on_split_1"]["banks"]
+        L.append(f"\\newcommand{{\\PairSurviveSelected}}"
+                 f"{{{surv['interaction']['interaction_surviving']:.2f}}}")
+        L.append(f"\\newcommand{{\\PairSurviveRandom}}"
+                 f"{{{surv['another seed']['interaction_surviving']:.2f}}}")
+        fit = surv["interaction"]["on_the_fit_half_it_was_chosen_from"][
+            "mean_interaction"]
+        rnd = surv["another seed"]["on_the_fit_half_it_was_chosen_from"][
+            "mean_interaction"]
+        L.append(f"\\newcommand{{\\PairInteractionRatio}}{{{fit / rnd:.0f}}}")
+        L.append(f"\\newcommand{{\\PairGreedyIdeal}}"
+                 f"{{{d['greedy_matching_on_split_1']['interaction'][0]['fraction_of_ideal']:.2f}}}")
+
+    if COMPWIRE.exists():
+        d = json.loads(COMPWIRE.read_text())
+        L.append(f"\\newcommand{{\\CompCols}}{{{d['columns']['n']}}}")
+        L.append(f"\\newcommand{{\\CompClasses}}"
+                 f"{{{len(d['columns']['classes'])}}}")
+        for stem, key in (("Widened", "widened"), ("Union", "union")):
+            md = d["minus_deployed"][key]
+            L.append(f"\\newcommand{{\\Comp{stem}}}"
+                     f"{{{_signed(md['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\Comp{stem}Splits}}"
+                     f"{{{md['n_splits_positive']}}}")
+        uw = d["union_minus_widened"]
+        L.append(f"\\newcommand{{\\CompUnionMinusWidened}}"
+                 f"{{{_signed(uw['mean'], 4)}}}")
+        L.append(f"\\newcommand{{\\CompUnionMinusWidenedSplits}}"
+                 f"{{{uw['n_splits_positive']}}}")
+        f = d["fisher_lift_from_composition"]
+        L.append(f"\\newcommand{{\\CompFisher}}{{{_signed(f['mean'], 4)}}}")
+        L.append(f"\\newcommand{{\\CompFisherSplits}}"
+                 f"{{{f['n_splits_positive']}}}")
+        L.append(f"\\newcommand{{\\CompSurvived}}"
+                 f"{{{d['bank']['n_old_pairings_that_survive_widening']}}}")
+        L.append(f"\\newcommand{{\\CompTablesFull}}"
+                 f"{{{d['bank']['n_tables_over_the_old_wires']}}}")
+
+    if GRAMCOND.exists():
+        d = json.loads(GRAMCOND.read_text())
+        s = d["summary"]["deployed"]
+        L.append(f"\\newcommand{{\\GramCos}}"
+                 f"{{{s['cosine_solution_to_mean_difference']['mean']:.3f}}}")
+        L.append(f"\\newcommand{{\\GramRound}}"
+                 f"{{{s['cosine_rounded_to_real']['mean']:.4f}}}")
+        L.append(f"\\newcommand{{\\GramRidgeShare}}"
+                 f"{{{100 * s['lambda_share_of_diagonal']['mean']:.1f}}}")
+        L.append(f"\\newcommand{{\\GramTraceTop}}"
+                 f"{{{100 * s['trace_fraction_in_top_1_percent']['mean']:.1f}}}")
+        L.append(f"\\newcommand{{\\GramEffRank}}"
+                 f"{{{s['effective_rank_at_1e-6']['mean']:.0f}}}")
+        sel = d["summary"]["interaction-selected"]
+        L.append(f"\\newcommand{{\\GramEffRankSelected}}"
+                 f"{{{sel['effective_rank_at_1e-6']['mean']:.0f}}}")
+        L.append(f"\\newcommand{{\\GramSplits}}"
+                 f"{{{d['protocol']['n_splits']}}}")
+        o = d["orderings"]
+        L.append("\\newcommand{\\GramAgrees}"
+                 f"{{{'yes' if o['auc_agrees_with_conditioning'] else 'no'}}}")
+
+    if TRUNC.exists():
+        d = json.loads(TRUNC.read_text())
+        # Sizes are spelled, not digits: a TeX control sequence is letters only,
+        # so \TruncMult52 compiles as \TruncMult followed by a literal 52. That
+        # happened once with \NLocP2 and tests/test_frozen_numbers.py forbids it.
+        # The size itself is emitted as its own macro so the prose can cite the
+        # number without typing it.
+        for k, word in ((52, "Fifty"), (208, "TwoHundred"),
+                        (1664, "SixteenHundred")):
+            L.append(f"\\newcommand{{\\TruncK{word}}}{{{k}}}")
+            for stem, rule in (("Mult", "by multiplicity"),
+                               ("Gini", "by gini"), ("Rand", "random")):
+                c = d["curves"][rule][str(k)]
+                L.append(f"\\newcommand{{\\Trunc{stem}{word}}}"
+                         f"{{{_signed(c['delta_mean'], 4)}}}")
+        L.append(f"\\newcommand{{\\TruncFull}}"
+                 f"{{{d['held_fixed']['n_tables_full']}}}")
+        tol = d["smallest_bank_within_tolerance"]["0.001"]
+        L.append(f"\\newcommand{{\\TruncWithinMilli}}"
+                 f"{{{tol['by multiplicity']}}}")
+        L.append(f"\\newcommand{{\\TruncWithinMilliRand}}"
+                 f"{{{tol['random']}}}")
+        rep = d.get("reproduction_check") or {}
+        L.append(f"\\newcommand{{\\TruncRepro}}"
+                 f"{{{rep.get('max_absolute_difference', 0):.1e}}}")
+    return L
 
 
 def main(argv: list[str] | None = None) -> int:

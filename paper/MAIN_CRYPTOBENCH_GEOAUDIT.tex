@@ -2043,6 +2043,132 @@ accuracy claim and more useful than none: the residue scores carry enough spatia
 structure that clustering them recovers a site, which does not follow from a
 per-residue ROC-AUC and could not have been read off one.
 
+\subsection{Five sweeps of the construction's own parameters, and what their
+agreement means}
+\label{sec:saturation}
+Everything above varies what the tables \emph{read}. This subsection varies how
+they are built, addressed, chosen and combined --- five sweeps, all on
+\LadderSplits{} accession-disjoint halvings of the training fold, none reading the
+test fold or an external unit, each holding every parameter but one. They were run
+to find a lift. None is a lift, and their agreement is the result.
+
+Two conventions are fixed before the numbers. First, each sweep reimplements a
+piece of the pipeline rather than editing \texttt{table\_bank.py}, which a code
+digest pins over eight files, so each runs the \emph{deployed} configuration
+through its own copy and is required to return the frozen numbers: the
+quantisation sweep reproduces them to \LadderRepro{} and the truncation sweep to
+\TruncRepro{}. Second, one of the sweeps measures the cost of redrawing the bank
+at a different seed, \SatReseed{}, and that is the noise floor for any comparison
+between two banks. No difference smaller than it is attributed to a mechanism
+anywhere below.
+
+\paragraph{The quantisation ladder is at its optimum, and the optimum is a
+count.} Every wire becomes a quaternary digit by within-chain rank cut at
+quartiles, so its extreme level is the extreme quarter of a chain while cryptic
+residues are \AlgOperatingPct{}~\% of the fold at the operating point and fewer
+still by base rate. Measured on the training cache, the extreme two per cent of
+the strongest wires is about twice as rich as the extreme quartile containing it,
+and a cell holding both a rich band and a poor one states one frequency for both.
+Moving the cuts to resolve that costs \LadderTailTen{} at ten per cent tails,
+\LadderTailFive{} at five and \LadderTailTwo{} at two, positive on
+\LadderTailTenSplits{}, \LadderTailFiveSplits{} and \LadderTailTwoSplits{} of
+\LadderSplits{} splits. Monotone in how hard the tail is resolved. The reason is
+in the same artifact: the median residues behind an addressed cell falls from
+\LadderCellsDeployed{} to \LadderCellsTwo{} and the never-addressed fraction rises
+from \LadderEmptyDeployed{}~\% to \LadderEmptyTwo{}~\%. Resolution is at best
+linear in the enrichment; precision is inverse in the occupancy, and the occupancy
+thins multiplicatively across a pair. The deployed quartiles are not an arbitrary
+default.
+
+\paragraph{Which wires are paired is seed noise.} All \CompTablesFull{} pairings
+come from one seed. Choosing them instead --- sixteen edge-disjoint greedy
+maximum-weight matchings on each pair's second-order variance term, fitted per
+split on the fit half --- gives \PairInter{} on \PairInterSplits{} of
+\LadderSplits{}, against \PairReseed{} on \PairReseedSplits{} for the same
+construction at a different seed. Selection buys nothing over chance. It is not
+that the criterion is empty: minimising it gives \PairAnti{} on
+\PairAntiSplits{} splits, so pairing badly on purpose hurts, and hurts more than a
+redraw. Nor is it selection optimism, which was the first hypothesis and is
+measurable: the selected bank's mean per-table interaction is
+\PairInteractionRatio{} times the random bank's and survives from the half it was
+chosen on to the half it was not at a ratio of \PairSurviveSelected{}, against
+\PairSurviveRandom{} for the random bank. The chosen interaction is real and it
+generalises, and the field is worse for having it. What the matching cannot do is
+spread: interaction concentrates on few wires, and a matching may use each wire
+once per round, so a round captures only \PairGreedyIdeal{} of the weight an
+unconstrained choice of the same size would.
+
+\paragraph{Appended columns are seen by a solve and not collected by the field.}
+\CompCols{} integer columns count which of \CompClasses{} chemical classes sits in
+which shell, at which walk distance on the contact graph, and in which pairs among
+the contacts --- counts over residues of the same receptor, so no alignment runs
+and no database is read. Attached by widening the bus they cost \CompWidened{} on
+\CompWidenedSplits{} splits; attached by holding the existing pairings and adding
+tables over the new columns alone, \CompUnion{} on \CompUnionSplits{}. The
+difference between the two attachments is \CompUnionMinusWidened{} on
+\CompUnionMinusWidenedSplits{} of \LadderSplits{}, which is smaller than
+\SatReseed{} and is therefore reported as a difference and not as a mechanism,
+even though widening retains only \CompSurvived{} of \CompTablesFull{} pairings
+and the temptation to explain it that way is strong. A ridge discriminant over the
+same columns moves \CompFisher{} on \CompFisherSplits{} of \LadderSplits{}. So the
+information is present and the field does not take it, and this is the second
+column family of that shape: the wire-asymmetry columns of
+Section~\ref{sec:banks} behave the same way, and the two families are of different
+mathematical character. The two readouts are not generally ordered this way ---
+on the deployed wires the field exceeds the solve --- so the asymmetry belongs to
+\emph{appended} columns specifically.
+
+\paragraph{Integer rounding is free and the ridge is not doing the work.} The
+multiplicities are the rounded solution of one ridge system against the
+within-class scatter of the table outputs, and that solve is the only object in
+the inference path that is not integer arithmetic. Two of its properties are
+reassuring. The cosine between the real solution and its integer rounding is
+\GramRound{}, so quantising the multiplicities costs essentially nothing --- the
+exactness is not paid for. And the ridge contributes \GramRidgeShare{}~\% of the
+diagonal, so the solve reads the scatter rather than a regularised copy of the
+class mean difference.
+
+\paragraph{The bank is not compressible, and no table matters.} \GramTraceTop{}~\%
+of the trace of that scatter lies in the top one per cent of its directions, about
+fifty of \TruncFull{}, and the solved direction sits at cosine \GramCos{} to the
+class mean difference. Read as an effective dimension that predicts a bank two
+orders of magnitude smaller, and the prediction is false: ranking tables by the
+multiplicity the full solve gives them and re-solving on the top \(K'\) costs
+\TruncMultFifty{} at fifty-two tables, \TruncMultTwoHundred{} at two hundred and eight and
+\TruncMultSixteenHundred{} at one thousand six hundred and sixty-four, smooth in \(K'\) with
+no knee. The control decides what that means. Random subsets of the same sizes
+cost \TruncRandFifty{}, \TruncRandTwoHundred{} and \TruncRandSixteenHundred{}, which is the ranked
+curve, and at two hundred and eight tables random is ahead; ranking by each
+table's own variance is worse than random everywhere, at \TruncGiniFifty{},
+\TruncGiniTwoHundred{} and \TruncGiniSixteenHundred{}. The tables are interchangeable. Any
+\TruncWithinMilli{} of them reach within a thousandth of all of them, and
+\TruncWithinMilliRand{} drawn at random do the same. A trace concentration cannot
+distinguish information spread thinly over thousands of directions from
+redundancy, and here it is the former.
+
+\paragraph{What the five together say.} A saturated exchangeable ensemble is
+indifferent to which of its members are chosen, to how they are paired, to whether
+a few hundred more are appended, and to how they are individually weighted. Each
+of those indifferences was measured separately and each holds. The quantisation is
+the one axis on which the construction is not indifferent, because thinning cells
+degrades every member at once rather than exchanging members --- and it is at its
+optimum. The five are therefore not five failures to find a lift; they are one
+statement about what the construction is, and it is the statement that explains
+why the appended column families are invisible. At this bank size the marginal
+return per table is nil, and it is the count that has been buying accuracy, not
+the content of any table.
+
+Two hypotheses were raised in the course of these sweeps and both were refuted by
+the same runs that raised them, which is recorded here because a bound argued and
+not measured is a correlate. That the conditioning of the solve orders the banks:
+the ordering by condition number does not match the ordering by accuracy
+(\GramAgrees{}), across \GramSplits{} splits on which every conditioning quantity
+varies by less than a part in three hundred. One part of it survives as a fact
+rather than an ordering --- selecting for interaction really does cost the bank
+independent directions, \GramEffRank{} falling to \GramEffRankSelected{} --- but it
+is not what sets the score. And that the bank is effectively fifty-dimensional,
+which the truncation curve above refutes directly.
+
 \section{Limitations}
 The clearest limitation is the one Sections~\ref{sec:plmnn}
 and~\ref{sec:external} measure twice: the method is less accurate than the
