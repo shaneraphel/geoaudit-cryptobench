@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 58,
-    "exploration": 33,
+    "exploration": 34,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 125,
+  "n_artifacts": 126,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -47,6 +47,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.appended_block_geometry.v1",
       "bytes": 7800
+    },
+    {
+      "artifact": "results/architecture_sweep/APPENDED_FAMILY_LIFT.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.appended_family_lift.v1",
+      "bytes": 3526
     },
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",

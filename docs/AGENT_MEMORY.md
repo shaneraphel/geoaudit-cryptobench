@@ -176,7 +176,7 @@ the same twelve splits under the same gate. Read this before proposing a fifth.
 | deployed 645 wires | **+1.06e-05** | 0.79012 | 0.78483 (field ahead **+0.0053**) |
 | composition 76 | +5.96e-06 | −0.0009 on 2/12 | +0.0011 on 10/12 |
 | asymmetry 129 | **−9.69e-06** | +0.0010 on 9/12 | **+0.0038 on 12/12** |
-| graph invariants 225 | +6.42e-06 | *screened before measuring; see §3* | |
+| graph invariants 225 | +6.42e-06 | **−0.0061 on 0/12** | **−0.0027 on 1/12** |
 
 **The deployed wires are the only family the field reads better than a solve does.**
 Two explanations for the other two are excluded, one by arithmetic and one by
@@ -186,14 +186,32 @@ either — varying an appended block's cell budget twenty-one-fold, 2,064 to 44,
 moves the lift by a seventh of the reseed floor and in the wrong direction
 (`APPENDED_BLOCK_GEOMETRY.json`).
 
-**A screen, and be careful which statistic.** The dimensionless version — mean of
-interaction over `V_pair`, the *share* — was named before the run and is **falsified**:
-it puts composition first, where the field does worst. Composition's first-order term
-is a third of the others, so a modest interaction becomes a large fraction of a small
-total and the denominator did the ordering. The **unnormalised** mean pairwise
-interaction orders all three correctly. That statistic was chosen *after* seeing the
-ordering, on three families, so it is a hypothesis and not a result
-(`COLLECTABILITY_SCREEN.json`).
+**The screen is falsified in both of its forms. Do not screen a fifth family with
+it.** The dimensionless version — mean of interaction over `V_pair`, the *share* —
+was named before the run and fell first: it puts composition first, where the field
+does worst, because composition's first-order term is a third of the others and the
+denominator did the ordering. The **unnormalised** mean pairwise interaction ordered
+the three correctly, but it was chosen *after* seeing that ordering, which made it a
+hypothesis owed a prospective test. Graph invariants 225 was that test, its value
+`+6.42e-06` and its predicted range were recorded before the run, and the run
+refutes it two ways (`APPENDED_FAMILY_LIFT.json`):
+
+- **Wrong on magnitude.** Predicted no material field lift, between −0.002 and
+  +0.001. Measured **−0.0061 on 0 of 12**, which is more than twice the 0.0026
+  reseed floor below the bottom of the range. A family can be actively harmful and
+  no internal statistic of it said so.
+- **Wrong on order, and exactly backwards.** By the unnormalised statistic the three
+  appended families rank graph invariants, composition, asymmetry. By measured field
+  lift they rank asymmetry (+0.0010), composition (−0.0009), graph invariants
+  (−0.0061) — the reverse, on all three. Three points, so a reversal is one ordering
+  in six by chance; suggestive of an inverted screen, not proof of one.
+
+**And the category itself is gone.** What made "belongs to a solve" meaningful was
+that the solve *gained* what the field did not, +0.0011 and +0.0038 on the two
+earlier families. Here the solve loses **−0.0027 on 1/12** as well. The family is
+collectible by neither readout, and the screen has no category for that. A linear
+solve with 225 extra columns should be able to zero them; it does worse than without
+them, which is a conditioning cost and not a missing signal.
 
 **Where the interaction lives, which is the actionable part.** Splitting the deployed
 bus's 207,690 pairs by whether they share a local quantity:
@@ -264,10 +282,25 @@ only ~112 tables, too small a block for a null to mean anything.
 
 The screen put it at **+6.42e-06**, beside composition and nowhere near the deployed
 bank, so the prediction committed before the run was **no material field lift, between
-−0.002 and +0.001**, with a lift above the 0.0026 reseed floor falsifying the screen.
-Check `APPENDED_FAMILY_LIFT.json` for what happened; the first split came in at
-−0.0091, which is outside the predicted range, so if that held the screen is wrong on
-magnitude even where it is right on sign.
+−0.002 and +0.001**, with a lift outside that range falsifying the screen.
+
+**Measured, and it is closed as an axis and as a screen** (`APPENDED_FAMILY_LIFT.json`,
+12 splits): field **−0.0061 on 0/12** under the union attachment and −0.0064 widened,
+solve **−0.0027 on 1/12**. The first split's −0.0091 held up. Both readouts lose, so
+the fifteen invariants are not a family the bank was missing — see §2c for what that
+does to the screen, which is that it does not survive it. The build rule the family
+was constructed under, fifteen different invariants of one graph rather than one
+invariant swept, is *not* what failed here: that rule came from the same-quantity
+decomposition, which is a separate measurement and still stands. What failed is the
+belief that an internal interaction statistic can tell you in advance whether a family
+is worth attaching.
+
+The one quantity that was never computed, and the only remaining candidate
+explanation, is the **cross interaction between the new columns and the deployed 645
+wires**. A family can have positive internal interaction and still be redundant with
+the bus, and the union attachment forms no straddling tables at all, so redundancy
+arrives as tables whose content is already present for the fan-out to decorrelate
+away. Nothing has computed it yet, and it is the next thing to compute on this axis.
 
 **Chemical composition of the neighbourhood.** Four of 645 wires carry residue
 identity. pLM-NN reads a language model of the sequence. `composition_wires.py`
