@@ -1,0 +1,329 @@
+{
+ "schema": "geoaudit.composition_wires.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "pLM-NN leads by 0.0243 and reads a language model of the sequence; four of this detector's 645 wires carry residue identity at all. Does counting which chemistry sits in the neighbourhood close any of that, and does it matter whether the columns are attached by widening the bus or by extending the bank",
+ "what_this_is_not": "not conservation. A profile states how a position varies across a family and needs a database; these columns state what is nearby in this one structure and need nothing. The sequence-wire docstring's claim of no profile database and no network is unaffected",
+ "columns": {
+  "n": 76,
+  "classes": {
+   "aliphatic": [
+    "ALA",
+    "VAL",
+    "LEU",
+    "ILE",
+    "MET"
+   ],
+   "aromatic": [
+    "PHE",
+    "TRP",
+    "TYR"
+   ],
+   "polar": [
+    "SER",
+    "THR",
+    "ASN",
+    "GLN"
+   ],
+   "positive": [
+    "LYS",
+    "ARG",
+    "HIS"
+   ],
+   "negative": [
+    "ASP",
+    "GLU"
+   ],
+   "glycine": [
+    "GLY"
+   ],
+   "proline": [
+    "PRO"
+   ],
+   "cysteine": [
+    "CYS"
+   ]
+  },
+  "shell_radii_angstrom": [
+   6.0,
+   10.0,
+   14.0
+  ],
+  "contact_radius_angstrom": 8.0,
+  "walk_lengths": [
+   2,
+   3
+  ],
+  "families": {
+   "shell": "residues of each class with centroid inside a ball",
+   "walk": "walks of the given length on the 8 A contact graph ending on each class; an exact entry of a power of a 0/1 matrix",
+   "pair": "unordered class pairs among the residue's contacts; quadratic in the neighbour multiset, which neither other family can express"
+  },
+  "every_value_is_a_count_before_quantisation": true,
+  "names": [
+   "shell6~aliphatic",
+   "shell6~aromatic",
+   "shell6~polar",
+   "shell6~positive",
+   "shell6~negative",
+   "shell6~glycine",
+   "shell6~proline",
+   "shell6~cysteine",
+   "shell10~aliphatic",
+   "shell10~aromatic",
+   "shell10~polar",
+   "shell10~positive",
+   "shell10~negative",
+   "shell10~glycine",
+   "shell10~proline",
+   "shell10~cysteine",
+   "shell14~aliphatic",
+   "shell14~aromatic",
+   "shell14~polar",
+   "shell14~positive",
+   "shell14~negative",
+   "shell14~glycine",
+   "shell14~proline",
+   "shell14~cysteine",
+   "walk2~aliphatic",
+   "walk2~aromatic",
+   "walk2~polar",
+   "walk2~positive",
+   "walk2~negative",
+   "walk2~glycine",
+   "walk2~proline",
+   "walk2~cysteine",
+   "walk3~aliphatic",
+   "walk3~aromatic",
+   "walk3~polar",
+   "walk3~positive",
+   "walk3~negative",
+   "walk3~glycine",
+   "walk3~proline",
+   "walk3~cysteine",
+   "pair~aliphatic+aliphatic",
+   "pair~aliphatic+aromatic",
+   "pair~aliphatic+polar",
+   "pair~aliphatic+positive",
+   "pair~aliphatic+negative",
+   "pair~aliphatic+glycine",
+   "pair~aliphatic+proline",
+   "pair~aliphatic+cysteine",
+   "pair~aromatic+aromatic",
+   "pair~aromatic+polar",
+   "pair~aromatic+positive",
+   "pair~aromatic+negative",
+   "pair~aromatic+glycine",
+   "pair~aromatic+proline",
+   "pair~aromatic+cysteine",
+   "pair~polar+polar",
+   "pair~polar+positive",
+   "pair~polar+negative",
+   "pair~polar+glycine",
+   "pair~polar+proline",
+   "pair~polar+cysteine",
+   "pair~positive+positive",
+   "pair~positive+negative",
+   "pair~positive+glycine",
+   "pair~positive+proline",
+   "pair~positive+cysteine",
+   "pair~negative+negative",
+   "pair~negative+glycine",
+   "pair~negative+proline",
+   "pair~negative+cysteine",
+   "pair~glycine+glycine",
+   "pair~glycine+proline",
+   "pair~glycine+cysteine",
+   "pair~proline+proline",
+   "pair~proline+cysteine",
+   "pair~cysteine+cysteine"
+  ]
+ },
+ "bank": {
+  "n_tables_over_the_old_wires": 5152,
+  "n_tables_over_the_new_columns": 608,
+  "n_tables_union": 5760,
+  "n_tables_widened": 5760,
+  "n_old_pairings_that_survive_widening": 339,
+  "read_this_against": "results/architecture_sweep/SELECTED_PAIRINGS.json, which measured one reseed of the random construction at -0.0026; a difference of that size between two banks cannot be attributed to pairing survival"
+ },
+ "held_fixed": {
+  "n_old_wires": 645,
+  "table_width": 2,
+  "partition_rounds": 16,
+  "partition_seed": 20260725,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "quantisation": "within-chain quartiles, the deployed ladder"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC",
+  "baseline_was_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json"
+ },
+ "arms": {
+  "fisher": {
+   "mean": 0.785979,
+   "min": 0.7615,
+   "max": 0.798575
+  },
+  "widened": {
+   "mean": 0.787867,
+   "min": 0.764564,
+   "max": 0.803426
+  },
+  "union": {
+   "mean": 0.78926,
+   "min": 0.762085,
+   "max": 0.80629
+  }
+ },
+ "deployed_arm_frozen": {
+  "mean": 0.79012,
+  "min": 0.761546,
+  "max": 0.805021
+ },
+ "fisher_narrow_per_split": [
+  0.791008,
+  0.788266,
+  0.784691,
+  0.785854,
+  0.785634,
+  0.777463,
+  0.79681,
+  0.783684,
+  0.786576,
+  0.781409,
+  0.79705,
+  0.760263
+ ],
+ "minus_deployed": {
+  "widened": {
+   "mean": -0.002253,
+   "min": -0.008661,
+   "max": 0.003018,
+   "n_splits_positive": 2,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "union": {
+   "mean": -0.00086,
+   "min": -0.003034,
+   "max": 0.001269,
+   "n_splits_positive": 2,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  }
+ },
+ "cell_occupancy_on_split_1": {
+  "widened": {
+   "n_cells": 92160,
+   "n_cells_never_addressed": 1686,
+   "fraction_never_addressed": 0.018294,
+   "median_count_of_addressed_cells": 7356,
+   "min_count_of_addressed_cells": 1
+  },
+  "union": {
+   "n_cells": 92160,
+   "n_cells_never_addressed": 1768,
+   "fraction_never_addressed": 0.019184,
+   "median_count_of_addressed_cells": 7361,
+   "min_count_of_addressed_cells": 1
+  }
+ },
+ "per_split": {
+  "fisher": [
+   0.792032,
+   0.788868,
+   0.78616,
+   0.787254,
+   0.788859,
+   0.778202,
+   0.796053,
+   0.783508,
+   0.788305,
+   0.782427,
+   0.798575,
+   0.7615
+  ],
+  "widened": [
+   0.795961,
+   0.785452,
+   0.784284,
+   0.793065,
+   0.786662,
+   0.787093,
+   0.794213,
+   0.78739,
+   0.791113,
+   0.781181,
+   0.803426,
+   0.764564
+  ],
+  "union": [
+   0.803454,
+   0.785359,
+   0.786763,
+   0.788949,
+   0.791224,
+   0.785366,
+   0.798107,
+   0.78925,
+   0.791158,
+   0.783116,
+   0.80629,
+   0.762085
+  ]
+ },
+ "per_split_deployed_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524,
+ "union_minus_widened": {
+  "mean": 0.001393,
+  "min": -0.004117,
+  "max": 0.007493,
+  "n_splits_positive": 8,
+  "n_splits": 12,
+  "positive_on_every_split": false
+ },
+ "fisher_lift_from_composition": {
+  "mean": 0.001086,
+  "min": -0.000756,
+  "max": 0.003225,
+  "n_splits_positive": 10,
+  "n_splits": 12,
+  "positive_on_every_split": false,
+  "fisher_at_645_mean": 0.784892,
+  "reproduction_check": {
+   "source": "results/architecture_sweep/IS_FISHER_A_CEILING.json",
+   "max_absolute_difference": 0.000237365,
+   "reproduces_the_frozen_arm": false,
+   "tolerance": 0.0001,
+   "mean_offset": 6.6858e-05,
+   "what_to_do_when_it_fails": "the gap is a systematic offset in one direction plus per-split scatter, and the reported lift is a paired difference between two arms computed in this same code path, so the offset cancels from it to first order. That is checkable rather than assertable: fisher_narrow_per_split holds the 645-wire arm split by split beside per_split.fisher, so a reader can form the difference themselves and compare its scatter to the gap. Do not quote the absolute 645-wire value from this artifact; quote it from the reference",
+   "why_the_tolerance_is_not_machine_epsilon": "the reference solves over the float32 cache directly and this tool concatenates it with the composition columns into float64 first, so column means and standard deviations accumulate differently. The residual is order 1e-5 in ROC-AUC, four orders below the effect being measured, and it is recorded rather than rounded away",
+   "why_this_is_here": "the first version of this tool wrote its own solve, did not standardise the columns, scored the 645-wire arm 0.03 below the frozen one, and reported a negative lift that was an artefact of the solve rather than of the columns"
+  },
+  "why_it_is_a_correlate_and_not_a_bound": "IS_FISHER_A_CEILING.json measured the counting field above this solve by +0.0053 on the same wires, so a null here does not close the axis and a lift here does not promise one"
+ }
+}

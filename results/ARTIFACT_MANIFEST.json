@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 33,
+    "exploration": 34,
     "cited": 47,
     "superseded": 17,
     "fold_access": 10
   },
-  "n_artifacts": 107,
+  "n_artifacts": 108,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
@@ -36,6 +36,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.bank_fusion.v1",
       "bytes": 2611
+    },
+    {
+      "artifact": "results/architecture_sweep/COMPOSITION_WIRES.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.composition_wires.v1",
+      "bytes": 8672
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_COVERING.json",
