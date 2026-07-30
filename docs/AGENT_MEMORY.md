@@ -166,6 +166,57 @@ eight at or past their optimum, and it exhausts the readout. Anything further ha
 to change the wires — what a table reads — not how the tables are built,
 addressed, chosen, weighted, subdivided or shaped.
 
+## 2c. The wires, which is the only axis left, and what is known about them
+
+Four column families now have both a counting-field lift and a linear-solve lift on
+the same twelve splits under the same gate. Read this before proposing a fifth.
+
+| family | mean pairwise interaction | field | solve |
+|---|---|---|---|
+| deployed 645 wires | **+1.06e-05** | 0.79012 | 0.78483 (field ahead **+0.0053**) |
+| composition 76 | +5.96e-06 | −0.0009 on 2/12 | +0.0011 on 10/12 |
+| asymmetry 129 | **−9.69e-06** | +0.0010 on 9/12 | **+0.0038 on 12/12** |
+| graph invariants 225 | +6.42e-06 | *screened before measuring; see §3* | |
+
+**The deployed wires are the only family the field reads better than a solve does.**
+Two explanations for the other two are excluded, one by arithmetic and one by
+measurement. Not an interaction the field misses: the solve is *linear*, so what it
+extracts is a linear function of the raw columns. Not the field's estimation cost
+either — varying an appended block's cell budget twenty-one-fold, 2,064 to 44,032,
+moves the lift by a seventh of the reseed floor and in the wrong direction
+(`APPENDED_BLOCK_GEOMETRY.json`).
+
+**A screen, and be careful which statistic.** The dimensionless version — mean of
+interaction over `V_pair`, the *share* — was named before the run and is **falsified**:
+it puts composition first, where the field does worst. Composition's first-order term
+is a third of the others, so a modest interaction becomes a large fraction of a small
+total and the denominator did the ordering. The **unnormalised** mean pairwise
+interaction orders all three correctly. That statistic was chosen *after* seeing the
+ordering, on three families, so it is a hypothesis and not a result
+(`COLLECTABILITY_SCREEN.json`).
+
+**Where the interaction lives, which is the actionable part.** Splitting the deployed
+bus's 207,690 pairs by whether they share a local quantity:
+
+| pair kind | mean interaction | pairs |
+|---|---|---|
+| same quantity, different statistic | **−6.29e-05** | 4,515 |
+| same statistic, different quantity | +1.08e-05 | 13,545 |
+| different in both | +1.24e-05 | 189,630 |
+
+Same-quantity is the only negative category and six times more negative than the
+asymmetry family as a whole. **Reading one operator at several radii produces wires
+whose joint says less than their marginals added**, which is the shape a solve
+collects and a counting field cannot. That explains the asymmetry family completely:
+129 columns from one operator at several radii *are* that category as a whole family.
+
+So the design rule, and it is measured rather than argued: **a new family is worth
+building only if its members are different quantities.** A parameter sweep of one
+operator will not be collectible however good the operator is, and its lift will
+appear in a solve. It also explains where the deployed bus's returns went — adding
+statistics of existing quantities adds wires from the harmful category; adding
+quantities does not.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the
@@ -199,6 +250,24 @@ enough. Two practical notes: `partition_tables` takes `width` already, so no
 digest-pinned file needs editing, and it ends with a filter dropping groups of
 fewer than two wires, so width 1 must be built locally and 645 wires give 322
 pairs per round rather than 322 and a singleton.
+
+**Integer graph invariants of the contact lining — built, screened, being measured.**
+Fifteen invariants of the 7 Å pinch lining that G2's `betti0` and `betti1` use:
+triangles through the residue and in the wall, four-cycles, k-core number,
+eccentricity, largest clique containing it, induced P4s, two-step expansion, and of
+the wall alone its girth, diameter, Wiener index, bridges, articulation points, leaves
+and bipartiteness. All counts. Built to the §2c rule — fifteen different invariants of
+one graph, not one invariant of fifteen graphs — and each at one radius, because
+sweeping a radius is the harmful category. 87 s to build over 234,838 residues;
+expanded through the fifteen deployed statistics to 225 wires because 15 columns make
+only ~112 tables, too small a block for a null to mean anything.
+
+The screen put it at **+6.42e-06**, beside composition and nowhere near the deployed
+bank, so the prediction committed before the run was **no material field lift, between
+−0.002 and +0.001**, with a lift above the 0.0026 reseed floor falsifying the screen.
+Check `APPENDED_FAMILY_LIFT.json` for what happened; the first split came in at
+−0.0091, which is outside the predicted range, so if that held the screen is wrong on
+magnitude even where it is right on sign.
 
 **Chemical composition of the neighbourhood.** Four of 645 wires carry residue
 identity. pLM-NN reads a language model of the sequence. `composition_wires.py`
@@ -281,6 +350,29 @@ content check until the commit that tracks it. Separately, do not register an
 artifact in the manifest while a run is still rewriting it — the digest pinned
 will be the wrong one.
 
+**Stage by path, and `git add -A` failed again.** A commit that froze Set B swept in
+a sweep's artifact because it was staged with `git add -A` while that run had just
+finished writing. The artifact landed in the freeze commit and its analysis in the
+next one, which is the wrong way round and makes both diffs harder to read. `AGENTS.md`
+already has this rule from a 292 MB incident; this is the second recorded instance and
+the failure mode is background runs finishing between staging and committing.
+
+**Measure a solve against a solve.** A tool built to compare what a counting field
+and a linear solve each take from a new column family first reported the solve arm
+against the frozen *counting field*, so its −0.019 was mostly the two readouts
+differing — which on the deployed wires is +0.0053 — and not anything the family
+contributed. The lift of a readout has to be measured against the same readout
+without the addition: `fisher(old + new) − fisher(old)`, never `fisher(old + new) −
+field(old)`. Caught in a smoke test because the number was implausibly large.
+
+**A field can exist and still not mean what you assume.** A diagnostic summed pair
+verdicts by walking a set's units and reading `u["pairs"]`. The builder strips
+`pairs` from `units_without_a_cryptic_pocket`, so it counted only the pairs of units
+that ended up with a pocket and reported Set B as 84 % cryptic. The right source was
+`pair_verdicts`, which the builder computes over every pair it examined. The tell was
+that 84 % is absurd; the lesson is that a present field can be a narrower population
+than its name suggests, and the tool now refuses rather than falling back.
+
 **Check your own SMARTS, regex and column specs against a case you know.** Five
 instrument defects this session, each caught by a gate or a test rather than by
 reading: an unstandardised discriminant that inverted the sign of a live axis; a
@@ -342,11 +434,43 @@ confirmatory result; it destroys the first one. There is no undo. If a
 counterattack lands, it must be confirmed on a set that was frozen *before* the
 method was finalised.
 
-Set B has been costed and not built: the cryo-EM pool is **461 candidate
-accessions**, not the six an earlier extrapolation guessed, because an X-ray
-entry carries 1.9 protein chains and a cryo-EM entry carries 13.4. The order is
-not negotiable — build, freeze, hash, preregister, *then* finalise the method,
-*then* read once.
+**Set B and Set C are built and frozen, and neither has been read.** Both are
+single-particle cryo-EM past CryptoBench's cutoff, cluster-disjoint from CryptoBench,
+from Set A and from each other, with Set A's labelling machinery imported unedited so
+a read on either is comparable to the read on Set A.
+
+| set | ceiling | candidates | units | residues | digest |
+|---|---|---|---|---|---|
+| Set B | 2.5 Å | 82 | **8** | 143 | `09381b40…` |
+| Set C | 3.0 Å | 217 | **38** | 584 | `ff112a60…` |
+
+They were frozen *before* any method change, which is the whole point: because they
+are unread, a read at any future time is still valid. Do not read either to see how
+it goes. A read spends it, and with no improvement to confirm it buys nothing —
+8 units would give an interval far too wide to conclude from.
+
+Two counts on the way there were wrong and both were caught by running the real
+selection instead of extrapolating a pool number. `SETB_POOL.json`'s 455 accessions
+"with apo and holo" counts *any* ligand on the chain; Set A's rule wants one of
+CryptoBench's 2,404 accepted codes, which is 102 on the same inventory — the loose
+rule over-counts by 4.5×. And the first strict counts came back 40 at 2.5 Å and 46 at
+3.0 Å, whose near-equality was the tell: the cached UniRef50 map covered only the
+2.5 Å pool, so 281 accessions were dropped as "UniProt cannot cluster it" when they
+were merely absent from the map.
+
+**A cryo-EM label is not resolution-neutral, and the direction is knowable.** Pairs
+the recovered rule declines to label run 9.2 % for X-ray Set A, 17.3 % for Set B and
+31.9 % for Set C — a third of Set C cannot be decided. The cryptic share rises with
+it, 6.0 → 7.1 → 12.2 %. Over 11,437 pairs of units with different labels the coarser
+one is the cryptic one 56.0 % of the time against 50 for no relation, and the finest
+25 units yield no cryptic call at all. That is real, weak and not monotone, so it does
+not establish that Set C's higher yield is coordinate noise inflating pRMSD — but
+resolution is a covariate of the label and belongs in front of anyone reading either
+set (`CRYOEM_LABEL_SENSITIVITY.json`).
+
+The order is not negotiable and has been followed: build, freeze, hash, *then*
+preregister, *then* read once. No preregistration exists for either set yet, which is
+correct while there is nothing to confirm.
 
 ## 6. Direction of the mathematics
 
