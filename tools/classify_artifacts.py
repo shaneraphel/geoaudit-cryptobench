@@ -69,6 +69,11 @@ REASONS = {
     "inventory": "a pinned inventory of candidate inputs; declares "
                  "is_a_frozen_set false, and nothing has been selected, "
                  "labelled, hashed or preregistered from it",
+    # Added when Set B was frozen. See the comment at the assignment.
+    "frozen_unread": "a frozen external set that no method has been run on. Its "
+                     "one read is unspent; scoring a method that changed after "
+                     "this digest was pinned destroys the confirmation rather "
+                     "than producing a second one",
 }
 
 
@@ -151,6 +156,19 @@ def build() -> dict:
             cls = "fold_access"
         elif doc.get("is_a_frozen_set") is False:
             cls = "inventory"
+        elif (doc.get("is_a_frozen_set") is True
+              and doc.get("no_method_has_been_run") is True
+              and rel not in cited):
+            # Added when Set B was frozen and the path fall-through labelled it
+            # "an earlier frozen state, kept for the record" -- the same defect
+            # the inventory class was added for, one stage later in the same
+            # set's life. It is neither earlier nor superseded: it is a frozen
+            # set that has never been read, which is the most consequential thing
+            # an artifact here can be, and calling it superseded in a registered
+            # manifest would invite spending it by accident. Set A is `cited`
+            # instead because paper numbers derive from it, which is what having
+            # been read looks like from this side.
+            cls = "frozen_unread"
         elif rel in cited:
             cls = "cited"
         elif rel.startswith("results/architecture_sweep/"):

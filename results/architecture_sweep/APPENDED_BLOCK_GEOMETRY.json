@@ -1,0 +1,308 @@
+{
+ "schema": "geoaudit.appended_block_geometry.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "whether the counting field's failure to collect the asymmetry columns is the number of frequencies it has to estimate for them, rather than what it can represent",
+ "the_gap_under_attack": {
+  "a_linear_solve_finds": {
+   "mean": 0.003826,
+   "n_splits_positive": 12,
+   "n_splits": 12,
+   "under_the_multiscale_gate": 0.003728,
+   "note": "if these two differ much, the anisotropic lift was partly a property of the gate rather than of the columns"
+  },
+  "the_field_finds_when_the_bus_is_widened": "-0.0007, on 5 of 12",
+  "the_field_finds_under_the_union_attachment": "+0.0010, on 9 of 12",
+  "source": [
+   "results/architecture_sweep/IS_FISHER_A_CEILING.json",
+   "results/architecture_sweep/UNION_BANK_COUNTING_FIELD.json"
+  ]
+ },
+ "what_is_already_excluded": {
+  "an_interaction_the_field_misses": "the solve is linear, so what it extracts is a linear function of the raw columns and cannot be an interaction",
+  "bank_dilution": "the union attachment holds the 5,152 deployed pairings exactly and still reaches only +0.0010"
+ },
+ "hypothesis": "for a weak appended block the field estimates about 16,000 cell frequencies to carry what a solve carries in 129 coefficients, and a bad exchange rate would look exactly like a small positive that misses the noise floor",
+ "what_would_falsify_it": "no geometry lifting the field materially above the +0.0010 the deployed union attachment reaches. The surviving explanations would then be the banding of these columns and the fan-out's treatment of a small weakly-correlated sub-bank",
+ "why_this_is_not_a_claim_that_narrow_tables_are_better": "width 1 over the whole bank costs -0.0053 (TABLE_WIDTH.json). The claim under test is only about a weak appended block, where there is little interaction to capture and the frequencies are noisy",
+ "what_cannot_be_held_fixed": {
+  "multiplicities": "fan-out solves over the whole bank, so adding tables reshuffles the 5,152. A property of the construction, not a choice made here",
+  "total_bank_size": "an arm with fewer new tables has a smaller total bank, and BANK_TRUNCATION.json shows accuracy is smooth in table count. Far smaller than the gap under attack, and not zero",
+  "cells_and_tables_move_together": "narrowing a table divides its cells by four and multiplies the table count by about two, so no single arm varies the cell budget alone. Two pairs separate them: width 1 against width 2 at 4 rounds holds the total bank near 5,500 while halving the new cells, and the same pair at 16 rounds halves the cells while the bank grows. If the cell budget is what matters both pairs move the same way; if the table count is, they disagree"
+ },
+ "held_fixed": {
+  "n_old_wires": 645,
+  "n_new_columns": 129,
+  "old_bank": "16 rounds at width 2, seed 20260725, unchanged in every arm",
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "banding": "within-chain rank quartiles, the deployed rule, over the concatenated columns"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_and_solve_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC, gate applied as deployed",
+  "geometries": [
+   [
+    2,
+    16
+   ],
+   [
+    1,
+    16
+   ],
+   [
+    1,
+    4
+   ],
+   [
+    2,
+    4
+   ],
+   [
+    3,
+    16
+   ]
+  ]
+ },
+ "reference_arm": "width 2, 16 rounds",
+ "banks": {
+  "width 2, 16 rounds": {
+   "width": 2,
+   "rounds": 16,
+   "n_tables_old": 5152,
+   "n_tables_new": 1024,
+   "n_tables_total": 6176,
+   "n_cells_new_block": 16384
+  },
+  "width 1, 16 rounds": {
+   "width": 1,
+   "rounds": 16,
+   "n_tables_old": 5152,
+   "n_tables_new": 2064,
+   "n_tables_total": 7216,
+   "n_cells_new_block": 8256
+  },
+  "width 1, 4 rounds": {
+   "width": 1,
+   "rounds": 4,
+   "n_tables_old": 5152,
+   "n_tables_new": 516,
+   "n_tables_total": 5668,
+   "n_cells_new_block": 2064
+  },
+  "width 2, 4 rounds": {
+   "width": 2,
+   "rounds": 4,
+   "n_tables_old": 5152,
+   "n_tables_new": 256,
+   "n_tables_total": 5408,
+   "n_cells_new_block": 4096
+  },
+  "width 3, 16 rounds": {
+   "width": 3,
+   "rounds": 16,
+   "n_tables_old": 5152,
+   "n_tables_new": 688,
+   "n_tables_total": 5840,
+   "n_cells_new_block": 44032
+  }
+ },
+ "arms": {
+  "width 2, 16 rounds": {
+   "mean": 0.791097,
+   "min": 0.766683,
+   "max": 0.80604
+  },
+  "width 1, 16 rounds": {
+   "mean": 0.790258,
+   "min": 0.758465,
+   "max": 0.808179
+  },
+  "width 1, 4 rounds": {
+   "mean": 0.790398,
+   "min": 0.762628,
+   "max": 0.805621
+  },
+  "width 2, 4 rounds": {
+   "mean": 0.791486,
+   "min": 0.766547,
+   "max": 0.80919
+  },
+  "width 3, 16 rounds": {
+   "mean": 0.790446,
+   "min": 0.764478,
+   "max": 0.807792
+  }
+ },
+ "minus_narrow": {
+  "width 2, 16 rounds": {
+   "mean": 0.000977,
+   "n_splits_positive": 9,
+   "n_splits": 12
+  },
+  "width 1, 16 rounds": {
+   "mean": 0.000138,
+   "n_splits_positive": 5,
+   "n_splits": 12
+  },
+  "width 1, 4 rounds": {
+   "mean": 0.000278,
+   "n_splits_positive": 7,
+   "n_splits": 12
+  },
+  "width 2, 4 rounds": {
+   "mean": 0.001366,
+   "n_splits_positive": 8,
+   "n_splits": 12
+  },
+  "width 3, 16 rounds": {
+   "mean": 0.000327,
+   "n_splits_positive": 7,
+   "n_splits": 12
+  }
+ },
+ "minus_the_deployed_union_attachment": {
+  "width 2, 16 rounds": {
+   "mean": 0.0,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  },
+  "width 1, 16 rounds": {
+   "mean": -0.000839,
+   "n_splits_positive": 5,
+   "n_splits": 12
+  },
+  "width 1, 4 rounds": {
+   "mean": -0.0007,
+   "n_splits_positive": 4,
+   "n_splits": 12
+  },
+  "width 2, 4 rounds": {
+   "mean": 0.000389,
+   "n_splits_positive": 9,
+   "n_splits": 12
+  },
+  "width 3, 16 rounds": {
+   "mean": -0.000651,
+   "n_splits_positive": 5,
+   "n_splits": 12
+  }
+ },
+ "reproduction_check": {
+  "arm": "width 2, 16 rounds",
+  "frozen_source": "results/architecture_sweep/UNION_BANK_COUNTING_FIELD.json",
+  "gated_on": "mean, min and max over the 12 splits",
+  "why_not_split_by_split": "that artifact records no per-split list. A mean can agree while the splits do not, so this gate is weaker than the ones elsewhere in this repository and is labelled as such rather than implied to be equivalent",
+  "recomputed": {
+   "mean": 0.791097,
+   "min": 0.766683,
+   "max": 0.80604
+  },
+  "frozen": {
+   "mean": 0.791097,
+   "min": 0.766683,
+   "max": 0.80604
+  },
+  "absolute_differences": {
+   "mean": 0.0,
+   "min": 0.0,
+   "max": 0.0
+  },
+  "reproduces_the_deployed_union_arm": true
+ },
+ "per_split": {
+  "width 2, 16 rounds": [
+   0.802631,
+   0.785677,
+   0.79098,
+   0.79171,
+   0.791674,
+   0.787732,
+   0.802152,
+   0.791393,
+   0.791855,
+   0.78464,
+   0.80604,
+   0.766683
+  ],
+  "width 1, 16 rounds": [
+   0.803153,
+   0.785801,
+   0.788529,
+   0.793546,
+   0.789812,
+   0.786477,
+   0.80325,
+   0.791204,
+   0.791696,
+   0.782984,
+   0.808179,
+   0.758465
+  ],
+  "width 1, 4 rounds": [
+   0.804666,
+   0.788195,
+   0.786473,
+   0.790162,
+   0.791096,
+   0.787447,
+   0.801177,
+   0.791923,
+   0.790683,
+   0.784702,
+   0.805621,
+   0.762628
+  ],
+  "width 2, 4 rounds": [
+   0.804238,
+   0.785958,
+   0.7878,
+   0.791741,
+   0.790715,
+   0.788902,
+   0.802558,
+   0.792014,
+   0.792513,
+   0.785657,
+   0.80919,
+   0.766547
+  ],
+  "width 3, 16 rounds": [
+   0.799946,
+   0.784848,
+   0.787876,
+   0.789764,
+   0.791738,
+   0.788363,
+   0.800552,
+   0.792111,
+   0.79392,
+   0.78397,
+   0.807792,
+   0.764478
+  ]
+ },
+ "per_split_narrow_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}

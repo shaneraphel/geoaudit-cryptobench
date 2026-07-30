@@ -3,8 +3,7 @@
  "clinical_grade": false,
  "reads_test_fold": false,
  "no_method_has_been_run": true,
- "is_a_frozen_set": false,
- "why_not_frozen_yet": "freezing is a separate commit that hashes this file, and reading it needs a preregistration naming the comparisons and the sentence to write under each outcome. Neither exists yet",
+ "is_a_frozen_set": true,
  "question": "does the counting field hold up on apo-holo pairs from a different experimental modality, which no part of its development could have seen",
  "modality": "single-particle cryo-EM",
  "externality": {
@@ -3360,5 +3359,28 @@
    "released": "2026-04-01",
    "n_partners_available": 1
   }
- ]
+ ],
+ "frozen": {
+  "name": "Set B",
+  "frozen_on": "2026-07-31T01:29:09+0800",
+  "head_when_frozen": "60d4ba67c2f1d9f7246545e1c2e464deb28020c1",
+  "n_units": 8,
+  "n_units_without_a_cryptic_pocket": 74,
+  "n_positive_residues": 143,
+  "n_uniref50_clusters": 8,
+  "one_unit_per_cluster": true,
+  "labelling_rule": "results/external/CRYPTOBENCH_RULE.json",
+  "labelling_rule_sha256": "cbfbaf382e7fdd08f8183559be4cd7144113b1987c056820e1a9f041409ec4d7",
+  "checks_recomputed_at_freeze_time": [
+   "no unit shares a UniRef50 cluster with CryptoBench",
+   "no unit shares a cluster with Set A, whose read is spent",
+   "no unit's accession appears in CryptoBench",
+   "one unit per cluster",
+   "every unit in units carries at least one labelled residue",
+   "no key anywhere in the artifact looks like a score or a metric"
+  ],
+  "why_recomputed_rather_than_trusted": "the builder asserted these too. A set is frozen once and a preregistration will be written against this digest, so a property broken by a later edit or a different cluster map has to be caught before the digest enters history, not after",
+  "what_freezing_does_not_do": "it does not preregister and it does not read. The comparisons, the statistic and the sentence to write under each outcome are a separate artifact in a later commit, and that artifact must exist before any method touches these units",
+  "what_spends_this_set": "one read. Scoring a method that was improved after this digest was pinned does not produce a second confirmation, it destroys the first"
+ }
 }
