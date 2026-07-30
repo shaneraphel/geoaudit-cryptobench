@@ -1,0 +1,85 @@
+{
+ "schema": "geoaudit.union_bank_counting_field.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "the asymmetry columns carry +0.0038 for a linear solve and -0.0007 for the counting field, whose edge over that solve falls from +0.0053 to +0.0008 when the bus is widened. If bank dilution is why, extending the bank instead of redrawing it should recover the lift",
+ "bank": {
+  "n_tables_over_the_old_wires": 5152,
+  "n_tables_over_the_new_columns": 1024,
+  "n_tables_total": 6176,
+  "n_tables_if_the_bus_were_widened_instead": 6192,
+  "n_old_pairings_that_survive_widening": 296,
+  "why_that_last_number_matters": "it is how much of the 645-wire bank the 774-wire arm actually kept. If it is small then widening the bus rebuilt the bank rather than extending it, which is the dilution this arm is designed to avoid",
+  "no_table_mixes_old_and_new": true,
+  "why_not": "pairing an asymmetry column with an isotropic wire is the one thing that differs between this arm and the 774 arm. Allowing it here would make the two indistinguishable and the comparison uninterpretable"
+ },
+ "held_fixed": {
+  "table_width": 2,
+  "partition_rounds": 16,
+  "partition_seed": 20260725,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0
+ },
+ "what_this_arm_cannot_hold_fixed": "fan-out multiplicity is the integer rank of a table's compiled Gini among the whole bank, so adding tables reshuffles the ranks of the ones already there. That is the construction and not a choice. It means a null result here would not exonerate dilution: it would leave rank reshuffling as the surviving explanation, and a further arm would be needed to separate them",
+ "anisotropic_columns": {
+  "n": 129,
+  "radii_angstrom": [
+   6.0,
+   14.0,
+   20.0
+  ],
+  "degenerate_fraction_per_radius": {
+   "6.0": 0.001384,
+   "14.0": 0.000136,
+   "20.0": 9e-06
+  }
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC",
+  "baselines_were_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json"
+ },
+ "arms": {
+  "union bank over 645 + 129": {
+   "mean": 0.791097,
+   "min": 0.766683,
+   "max": 0.80604
+  },
+  "counting field over 645 wires": {
+   "mean": 0.79012
+  },
+  "counting field over 774 wires": {
+   "mean": 0.78943
+  }
+ },
+ "union_minus_narrow": {
+  "mean": 0.000977,
+  "min": -0.001991,
+  "max": 0.005137,
+  "n_splits_positive": 9,
+  "n_splits": 12,
+  "positive_on_every_split": false
+ },
+ "union_minus_widened": {
+  "mean": 0.001667,
+  "min": -0.003363,
+  "max": 0.00524,
+  "n_splits_positive": 9,
+  "n_splits": 12,
+  "positive_on_every_split": false
+ },
+ "fisher_lift_for_reference": {
+  "mean": 0.003816,
+  "n_splits_positive": 12,
+  "source": "results/architecture_sweep/IS_FISHER_A_CEILING.json, deployed gate"
+ },
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}

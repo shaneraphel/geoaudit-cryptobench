@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 30,
+    "exploration": 31,
     "cited": 47,
     "superseded": 15,
     "fold_access": 10
   },
-  "n_artifacts": 102,
+  "n_artifacts": 103,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
@@ -351,6 +351,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.train_operating_points.v1",
       "bytes": 25686
+    },
+    {
+      "artifact": "results/architecture_sweep/UNION_BANK_COUNTING_FIELD.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.union_bank_counting_field.v1",
+      "bytes": 3026
     },
     {
       "artifact": "results/architecture_sweep/WIDE_BANK_CEILING.json",
