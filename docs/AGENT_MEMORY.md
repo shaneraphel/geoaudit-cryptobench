@@ -83,11 +83,13 @@ no linear solve over raw wires can express. Use the solve as a cheap correlate
 that separates "the information is absent" from "the construction does not
 collect it". Never quote it as a bound.
 
-## 2b. Five measurements that together say the architecture is at a local optimum
+## 2b. Seven measurements that together say the architecture is at a local optimum
 
 Added after a session that closed four axes and refuted two of its own
-hypotheses. Read this block before proposing anything that reweights, reselects
-or requantises the present construction, because all three have now been measured.
+hypotheses; extended by the two that closed the per-region idea this section used
+to propose. Read this block before suggesting anything that reweights, reselects,
+requantises or subdivides the present construction, because all four have now
+been measured.
 
 | Measurement | Result | Artifact |
 |---|---|---|
@@ -96,6 +98,8 @@ or requantises the present construction, because all three have now been measure
 | Appended column families | solve sees them, field does not, on two families of different character | `COMPOSITION_WIRES.json` |
 | Integer rounding of multiplicities | free, cos = 0.9992 | `GRAM_CONDITIONING.json` |
 | Bank size | not compressible; smooth in `K'`, no knee, −0.0324 at `K'`=52 | `BANK_TRUNCATION.json` |
+| Per-region multiplicities | about +0.005 exists, at 20,608 fitted numbers; not a bargain | `HIERARCHICAL_MULTIPLICITIES.json` |
+| Per-region gate weight | −0.0010 and −0.0003 against one global weight; four numbers is already too many | `GATE_WEIGHT_ROUTING.json` |
 
 **Two hypotheses were raised and killed in the same session. Do not raise them
 again without new evidence.**
@@ -117,14 +121,40 @@ than the whole pLM-NN deficit. The residual 23.5 % of the trace is spread over
 thousands of directions that each contribute little and together contribute a lot,
 and a spectrum cannot tell that from redundancy. Withdrawn.
 
-**What the five measurements do not exclude.** Every parameter varied so far is a
-*global* choice applied identically to all 5,152 tables: one ladder, one pairing
-draw, one attachment, one ridge solve, one table count. The untried structural
-change is a combination rule that is not a single global solve — a per-region or
-hierarchical assignment in which a table contributes where it is informative
-rather than everywhere at one weight. `cos(m, Δμ) = 0.025` is the reason to
-suspect it: the one global direction is nearly orthogonal to the class mean, which
-is what a single direction fitted to heterogeneous regions looks like.
+**The per-region idea this section used to propose has now been tested, twice.**
+The argument was that every parameter varied up to that point was a *global*
+choice applied identically to all 5,152 tables, and that `cos(m, Δμ) = 0.025`
+looks like one direction fitted to heterogeneous regions. The signal is real:
+letting each region carry its own multiplicities is worth about +0.005. The price
+is 20,608 fitted numbers, which is not a bargain. Routing only the gate weight
+instead — four numbers, the one stage where a chain-level quantity multiplies the
+field — loses to a single global weight, −0.0010 by chain size and −0.0003 by
+chain polarity on twelve splits.
+
+Read those two together rather than separately. The routers do beat a *random*
+per-chain router, by +0.0010 and +0.0017 on 7 and 9 of 12, so chain-level
+structure genuinely carries information about the right weight. It carries less
+than a four-way split costs. The constraint is granularity, not absence of signal:
+a correction that pays has to be cheaper per region than anything tried, and no
+such rule has been proposed.
+
+**A caution about the deployed arm in both of those.** Every fitted arm also
+loses to the deployed `w = 1.0`, and that is not evidence that a declared constant
+beats a compiled one. The pair `r = 18, w = 1.0` was chosen over
+{14, 18} × {0.5, 1.0} by pick-half ROC-AUC on halvings of this same training fold
+— `FINAL_READOUT_SELECTION.json` and `PAIRWISE_READOUT_SELECTION.json` record it,
+and both of those in fact selected `w = 0.5`. So the deployed weight has seen
+pick-half information that every fitted arm is denied, and the bias cuts in its
+favour. When an arm loses to deployed, check what selected deployed before
+reporting the loss as a property of the arm.
+
+**What remains untested is the table topology itself.** Everything above acts
+downstream of it. `TABLE_WIDTH` has been 2 since the beginning, so every cell is a
+joint state of two quantised wires and the field is a sum of pairwise terms.
+`partition_tables` already takes `width` as an argument, so this needs no edit to
+a digest-pinned file — but note that it ends with a filter dropping any group of
+fewer than two wires, which is why 645 wires give 322 pairs per round and not 322
+and a singleton, and why width 1 has to be built locally.
 
 ## 3. What is open, and why each is thought to be open
 
@@ -234,6 +264,18 @@ before building a skeleton.
 problem. The same host over the same protocol worked for the sibling repository
 in the same second. The actual cause was that the remote repository was empty
 and had no refs, which the API says plainly as HTTP 409.
+
+**A figure joins the provenance chain or it does not go in.** An image dropped
+into `figures/` fails `make verify`, and the gate wants four things, not one: the
+filename must appear in `make_official_figures.py` as `FIGDIR / "..."`, the image
+must be listed in `FIGURE_PROVENANCE.json` with its sha256, the artifacts it was
+drawn from must be in `SOURCES` so a change in them fails the digest check, and
+the caption must be recorded there and appear verbatim in `README.md`. The gate
+exists because `fig_baseline_comparison.png` sat in the tree for weeks plotting a
+non-cluster-disjoint pilot with method names from no manuscript, showing every
+detector at zero. Build the caption from the artifact rather than typing it, and
+keep backticks and straight double quotes out of it — the same string becomes a
+LaTeX macro, where both come out as the wrong glyph.
 
 **Writing a contamination down does not protect you from it.** `SETB_POOL.json`
 records that RCSB's `experimental_method == "EM"` also returns electron
