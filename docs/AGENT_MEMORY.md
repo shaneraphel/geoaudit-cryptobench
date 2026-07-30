@@ -83,13 +83,16 @@ no linear solve over raw wires can express. Use the solve as a cheap correlate
 that separates "the information is absent" from "the construction does not
 collect it". Never quote it as a bound.
 
-## 2b. Seven measurements that together say the architecture is at a local optimum
+## 2b. Eight measurements that together say the architecture is at a local optimum
 
 Added after a session that closed four axes and refuted two of its own
 hypotheses; extended by the two that closed the per-region idea this section used
-to propose. Read this block before suggesting anything that reweights, reselects,
-requantises or subdivides the present construction, because all four have now
-been measured.
+to propose, and then by the one that closed the table topology. Read this block
+before suggesting anything that reweights, reselects, requantises, subdivides or
+reshapes the present construction, because all five have now been measured. The
+readout is exhausted: every axis it has is at or past its optimum, and the only
+untried direction left is the wires themselves — what a table reads, rather than
+how the tables are built, addressed, chosen, weighted, subdivided or shaped.
 
 | Measurement | Result | Artifact |
 |---|---|---|
@@ -100,6 +103,7 @@ been measured.
 | Bank size | not compressible; smooth in `K'`, no knee, −0.0324 at `K'`=52 | `BANK_TRUNCATION.json` |
 | Per-region multiplicities | best arm +0.0005 on 6/12 over deployed, under the noise floor; +0.0054 on 12/12 over a *random* router | `HIERARCHICAL_MULTIPLICITIES.json` |
 | Per-region gate weight | −0.0010 and −0.0003 against one global weight; four numbers is already too many | `GATE_WEIGHT_ROUTING.json` |
+| Table width | interior optimum at 2; width 3 loses on 0/12 either matching, width 1 by −0.0053 | `TABLE_WIDTH.json` |
 
 **Two hypotheses were raised and killed in the same session. Do not raise them
 again without new evidence.**
@@ -154,13 +158,13 @@ pick-half information that every fitted arm is denied, and the bias cuts in its
 favour. When an arm loses to deployed, check what selected deployed before
 reporting the loss as a property of the arm.
 
-**What remains untested is the table topology itself.** Everything above acts
-downstream of it. `TABLE_WIDTH` has been 2 since the beginning, so every cell is a
-joint state of two quantised wires and the field is a sum of pairwise terms.
-`partition_tables` already takes `width` as an argument, so this needs no edit to
-a digest-pinned file — but note that it ends with a filter dropping any group of
-fewer than two wires, which is why 645 wires give 322 pairs per round and not 322
-and a singleton, and why width 1 has to be built locally.
+**The table topology has since been tested too, and it is also closed.** See the
+width entry in Section 3: two is an interior optimum, three loses on 0 of 12
+splits under either matching, and the reason is the same count-versus-resolution
+trade the quantisation ladder found. That makes eight parameters measured and
+eight at or past their optimum, and it exhausts the readout. Anything further has
+to change the wires — what a table reads — not how the tables are built,
+addressed, chosen, weighted, subdivided or shaped.
 
 ## 3. What is open, and why each is thought to be open
 
@@ -182,10 +186,19 @@ use each wire once per round. Cell occupancy was checked and is not the cause.
 The live hypothesis is selection optimism, and `selected_pairings.py` now
 re-measures the chosen banks on the half they were not chosen from.
 
-**Table width.** Fixed at 2. `table_bank.py`'s own docstring says a three-wire
-table has 64 cells and that at 235k training residues a cell still holds
-thousands. Three-way interaction is unreachable at width 2 and has never been
-run.
+**Table width — closed, and it is an interior optimum.** Width 3 costs −0.0036 at
+a matched cell budget and −0.0066 at matched rounds, on **0 of 12** splits either
+way; width 4 costs −0.0127; width 1, a per-wire lookup with no interaction at all,
+costs −0.0053, which is what the pairing is worth (`TABLE_WIDTH.json`). Two is a
+peak with both neighbours below it, not the edge of a plateau. The mechanism is
+the quantisation ladder's, seen along a second axis: median residues behind an
+addressed cell runs 29,673 / 7,385 / 1,763 / 401 for widths 1 to 4, a factor of
+four per step. `table_bank.py`'s docstring guessed that a width-3 cell would still
+hold thousands at 235k residues — it holds 1,763 on a fit half, and that is not
+enough. Two practical notes: `partition_tables` takes `width` already, so no
+digest-pinned file needs editing, and it ends with a filter dropping groups of
+fewer than two wires, so width 1 must be built locally and 645 wires give 322
+pairs per round rather than 322 and a singleton.
 
 **Chemical composition of the neighbourhood.** Four of 645 wires carry residue
 identity. pLM-NN reads a language model of the sequence. `composition_wires.py`
