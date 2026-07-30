@@ -37,6 +37,11 @@ data/cryptobench_apo/_holo/
 # Depositions fetched to label the external set. 1.6 GB of public PDB
 # and mmCIF files, refetchable by name from the committed manifest.
 data/external/_structures/
+# EMDB density volumes, tens to hundreds of MB each, refetchable by accession
+# from the figure provenance. Ignored before the first one finished downloading:
+# a 292 MB set of third-party binaries reached this repository's history once and
+# is still in it, and the rule that would have stopped it is this one.
+data/external/_emdb/
 # The pinned P2Rank distribution: 292 MB of third-party binaries, one file
 # over GitHub's limit. What makes the baseline auditable is the archived CSVs,
 # the recorded command, version banner and digests, all of which are tracked.
