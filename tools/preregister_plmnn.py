@@ -85,7 +85,7 @@ def _git(*a: str) -> str:
                           text=True).stdout.strip()
 
 
-def _reads_before_this_plan() -> int:
+def _reads_before_this_plan() -> int | None:
     """How many indexed reads the fold carried when this plan was frozen.
 
     Taken from the ledger as it stood at the commit that froze the plan, not as it
@@ -94,6 +94,14 @@ def _reads_before_this_plan() -> int:
     make an untouched plan look edited every time a later read lands -- and would
     quietly invite someone to "fix" the drift by rewriting the plan, which is the
     one thing a preregistration may not do.
+
+    Returns None when there is no history to read: an export without .git, which
+    is how most reviewers receive this repository. This used to fall through to
+    the current ledger instead, which turned a historical claim into a present
+    measurement and failed the gate with "the committed plan no longer describes
+    its inputs" -- accusing an untouched plan of having been edited, purely
+    because two more reads had landed since. A fallback that silently changes
+    what a number means is worse than no fallback.
     """
     rel = str(LEDGER.relative_to(ROOT))
     at = _git("log", "-1", "--format=%H", "--", str(OUT.relative_to(ROOT)))
@@ -102,16 +110,49 @@ def _reads_before_this_plan() -> int:
                               capture_output=True)
         if blob.returncode == 0:
             return int(json.loads(blob.stdout)["n_indexed_reads"])
-    return int(json.loads(LEDGER.read_text())["n_indexed_reads"])
+    return None
 
-def build() -> dict:
+
+def _what_the_ledger_says() -> dict[str, int | str]:
+    """The read this plan governs, established from the ledger alone.
+
+    No git, so an export can check it. The ledger names the artifact for every
+    indexed read, so whether read 10 is the pLM-NN read is a fact the ledger
+    settles by itself, and it is the fact worth checking: the plan's read index
+    was never cross-checked against the ledger, only asserted.
+    """
+    d = json.loads(LEDGER.read_text())
+    seq = d["indexed_read_sequence"]
+    mine = [e for e in seq if int(e["read_index"]) == READ_INDEX]
+    if len(mine) != 1:
+        raise SystemExit(f"the ledger has {len(mine)} reads at index "
+                         f"{READ_INDEX}; this plan claims to govern exactly one")
+    if "PLMNN_READ" not in str(mine[0]["artifact"]):
+        raise SystemExit(f"the ledger's read {READ_INDEX} is "
+                         f"{mine[0]['artifact']}, not the pLM-NN read this plan "
+                         f"governs")
+    return {
+        "strictly_before": sum(1 for e in seq
+                               if int(e["read_index"]) < READ_INDEX),
+        "total_now": int(d["n_indexed_reads"]),
+        "artifact": str(mine[0]["artifact"]),
+    }
+
+
+def build(n_prior: int | None = None) -> dict:
     if not SCORES.exists():
         raise SystemExit(
             f"missing {SCORES.relative_to(ROOT)}; the baseline has to be run "
             "before its comparison can be planned, because the plan pins the "
             "scores it will read")
     sc = json.loads(SCORES.read_text())
-    n_prior = _reads_before_this_plan()
+    if n_prior is None:
+        n_prior = _reads_before_this_plan()
+    if n_prior is None:
+        raise SystemExit(
+            "the ledger's state at the commit that froze this plan is not "
+            "readable here, so the plan cannot be rebuilt. Pass the frozen "
+            "count explicitly, or run in a clone with history")
     v = sc["validation_against_the_published_example"]
 
     return {
@@ -342,9 +383,23 @@ def build() -> dict:
     }
 
 
-def _report(d: dict) -> None:
-    print(f"plan for read {d['for_test_fold_read_index']}, declared "
-          f"{d['status_declared_in_advance']}")
+def _report(d: dict, hist: dict | None = None,
+            history_from: str = "") -> None:
+    idx = d["for_test_fold_read_index"]
+    if hist:
+        # Spelled out because "plan for read 10" has been read as "ten reads in
+        # total". It is an index, the fold now carries more, and the frozen
+        # sentence's count is the ledger total at the time, which already
+        # included read 10 itself -- so nine reads strictly precede this plan.
+        print(f"plan for read {idx} of the {hist['total_now']} now indexed, "
+              f"declared {d['status_declared_in_advance']}")
+        print(f"  ledger read {idx} is {Path(str(hist['artifact'])).name}; "
+              f"{hist['strictly_before']} reads strictly precede this plan")
+        if history_from:
+            print(f"  read count checked against {history_from}")
+    else:
+        print(f"plan for read {idx}, declared "
+              f"{d['status_declared_in_advance']}")
     b = d["the_baseline"]
     print(f"  baseline {b['n_units_scored']} units, layer {b['encoder_layer']}, "
           f"{b['encoder_dtype']}, scores {b['scores_artifact_sha256'][:12]}")
@@ -377,7 +432,17 @@ def _check() -> int:
               "precede it and nothing after them is confirmatory")
         return 1
 
-    want = build()
+    hist = _what_the_ledger_says()
+    n_prior = _reads_before_this_plan()
+    history_from = "the ledger as it stood at the commit that froze this plan"
+    if n_prior is None:
+        # Nothing to read the history from. The frozen count is a claim about a
+        # past state, so it is held to the ledger's own account of which read
+        # this plan governs rather than replaced by today's total.
+        n_prior = READ_INDEX
+        history_from = ("the ledger's read index, because this tree carries no "
+                        "git history")
+    want = build(n_prior)
     rel = str(Path(__file__).relative_to(ROOT))
     plan_commit = _git("log", "-1", "--format=%H", "--",
                        str(OUT.relative_to(ROOT)))
@@ -407,7 +472,7 @@ def _check() -> int:
         print(f"FAILED: the outcome sentences are {sorted(said)}, expected "
               f"{sorted(need)}")
         return 1
-    _report(have)
+    _report(have, hist, history_from)
     print(f"OK {OUT.relative_to(ROOT)}")
     return 0
 

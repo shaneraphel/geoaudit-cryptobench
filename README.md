@@ -592,11 +592,23 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; 469 tests pass under both
-`unittest discover` and `pytest`, which now collect the same set. They did not:
-`tests/test_spatial.py` was written against `pytest` while CI runs `unittest`,
-so the five checks guarding the neighbour-search kernel — the one every gate,
-context transform and topology descriptor calls — were never executed by CI.
+Current state: `verify_claims` all checks pass; `make test` runs 614 tests and
+504 subtests, all passing. `unittest`'s discovery finds 529 of them, because it
+collects only methods of `TestCase` subclasses; the other 85 are written as
+plain functions and are reachable only through `pytest`.
+
+That gap is why `make test` invokes `pytest` rather than `unittest`. This README
+previously recorded the same failure and claimed it fixed: `tests/test_spatial.py`
+was written against `pytest` while CI ran `unittest`, so the five checks guarding
+the neighbour-search kernel were never executed. The sets were reconciled once
+and drifted apart again, and by the time it was noticed the 85 unrun tests were
+the ones guarding the external validation set, its preregistration, its
+confirmatory read, the recovered labelling rule, the PocketMiner read and the
+threshold curve — that is, every test standing behind the one confirmatory result
+in the paper. `make counts` now fails if `pytest` stops covering what `unittest`
+discovers, or if the numbers in this paragraph stop matching what the runners
+collect, because the previous version of this claim was true when written and
+rotted in silence.
 
 ### 4.1 Reproducing the published P2Rank row
 

@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12 rule extset extplan extscore extread
+verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12 rule extset extplan extscore extprov extread counts
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -210,6 +210,21 @@ extplan:
 extscore:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/external_score.py --check
 
+# What produced each score, checked against the sources of record rather than
+# against itself: the P2Rank release against every archived run, the counting
+# field's code digest against the working tree, each receptor digest against the
+# manifest. The aggregates carried nulls in both fields until this gate existed.
+extprov:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/backfill_prediction_provenance.py --check
+
+# The order the external validation happened in, read off the commit graph
+# rather than off the artifacts' own account of themselves. Needs a clone with
+# full history and says so instead of passing when it cannot look, which is why
+# it is not part of `make verify`: an export can check the artifacts, only a
+# clone can check when they were written.
+extorder:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/external_order.py --check
+
 # The one confirmatory comparison in the paper.
 extread:
 	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/external_read.py --check
@@ -325,5 +340,21 @@ readme:
 strict-json:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/check_strict_json.py
 
+# pytest, not unittest, because unittest's discovery collects only TestCase
+# methods and 85 of these tests are written as plain functions -- among them
+# every test guarding the external set, its preregistration and its confirmatory
+# read. Running unittest here meant CI never executed them. `make counts` fails
+# if pytest ever stops covering what unittest finds.
 test:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m pytest tests -q
+
+# The suite as unittest sees it, kept because CI ran it for most of this
+# project's history and a module that stops importing under it is worth knowing
+# about.
+test-unittest:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -v
+
+# Neither runner may quietly stop seeing part of the suite, and the README may
+# not state a count that neither produces.
+counts:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/count_tests.py --check

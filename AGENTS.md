@@ -122,8 +122,8 @@ limit, and the 292 MB is still in the history. Look at `git status` before stagi
 and if a commit is about one experiment, its diff should be about one experiment.
 
 **Never put an absolute path in an artifact.** A diagnostic string in
-`EXTERNAL_SET.json` carried `/Users/<somebody>/...` because a writer named its
-destination in an error message. The builder now strips the checkout root; a reader
+`EXTERNAL_SET.json` carried somebody's home directory, spelled out from the
+filesystem root, because a writer named its destination in an error message. The builder now strips the checkout root; a reader
 cannot use somebody's home directory and the gate
 `no_local_absolute_paths_in_primary_docs` now fails on it. The one surviving instance
 is exempted by name in `tools/verify_claims.py` because rewriting the artifact would
@@ -144,10 +144,14 @@ enough to redirect the next attempt.
 
 ## What is deliberately not in this repository
 
-Do not add EDA pipelines, AIG netlists, chip or GCU sources, NCGD, or PINEFK. The
-gate `no_proprietary_engine_names_public` in `tools/verify_claims.py` enforces the
-names; the judgement about what counts is yours. The vendored P2Rank distribution is
-also excluded — `bin/install-p2rank.sh` reinstalls the pinned 2.5.1, and what makes
+No hardware-design pipelines, netlist tooling, accelerator sources, or the private
+learning engines developed in the sibling repositories. The gate
+`no_proprietary_engine_names_public` in `tools/verify_claims.py` holds the list of
+names and fails any primary document that prints one, so consult the gate rather
+than restating the list here — the first version of this section named all five and
+failed its own check, which is a neat demonstration that a rule written carelessly
+can leak the thing it protects. The judgement about what counts is yours. The
+vendored P2Rank distribution is also excluded — `bin/install-p2rank.sh` reinstalls the pinned 2.5.1, and what makes
 the baseline auditable is the archived CSVs, the recorded command, the version
 banners and the per-file digests, all of which are tracked.
 

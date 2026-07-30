@@ -1,0 +1,33 @@
+{
+  "schema": "geoaudit.prediction_provenance.v1",
+  "clinical_grade": false,
+  "fold": "external",
+  "what_this_is": "the two fields the scorer left null, copied from the sources that already held them at the time of the run. No method was rerun and no per-residue score changed; the tool refuses to write if any byte outside those fields moves.",
+  "scoring_commit": "3571c338a59aec4715dbebd52b81aac1f687d423",
+  "sources": {
+    "input_receptor_sha256": "data/external/external_manifest.json, entries[].receptor_sha256, which the scorer had already checked against the receptor on disk before scoring it",
+    "p2rank.tool_version": "results/external/p2rank_raw/*/run.json, tool_version, identical across all archived runs",
+    "table_field.tool_version": "table_field.code_sha256(), rebuilt from the git blobs at the scoring commit and required to equal the working tree"
+  },
+  "p2rank_jvm": "openjdk version \"17.0.20\" 2026-07-21",
+  "table_field_code_sha256_verified_at_scoring_commit": true,
+  "files": [
+    {
+      "file": "predictions/p2rank.json",
+      "method": "p2rank",
+      "tool_version": "2.5.1",
+      "n_units_filled": 57,
+      "sha256_before": "bc9504284f04c6d2a919de6b44e0d1ce04a6da59541b951b61d6bcf4a3dd9f84",
+      "sha256_after": "b087d559a93971889aca80001087f2f393dbfc2de40c9570ff16afe47e37e4f6"
+    },
+    {
+      "file": "predictions/table_field.json",
+      "method": "table_field",
+      "tool_version": "code_sha256:fdfe2f27642974f544dd548693a18aac3845a512ccf2de01a4c3e944846e7571",
+      "n_units_filled": 57,
+      "sha256_before": "c1ea126012feb1a198a8f87a76f1757c308f118795d78edcaee1b374451f766b",
+      "sha256_after": "3ab10b1b828a0634093c1cfab0be8c7feb9b8636fdbfd401140a5fba834e32c8"
+    }
+  ],
+  "index_sha256": "d862ccf0144341f01dd035ea4de7df626bbcdb69dedd7d7c0c93fac260dac8ab"
+}

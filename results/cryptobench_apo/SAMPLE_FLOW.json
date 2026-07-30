@@ -1,0 +1,25 @@
+{
+  "schema": "geoaudit.sample_flow.v1",
+  "clinical_grade": false,
+  "what_this_is": "the sample flow recounted from the CryptoBench OSF deposit, cached because the deposit is not redistributed with this repository. A tree that has the deposit recomputes this and overwrites it; a tree without it reads these figures and still checks them against the committed manifests and the receptors on disk.",
+  "recounted_from": {
+    "data/cryptobench_apo/_osf/folds.json": "ced97a50b55504007216165167a1b3995312434ee50f7f93f8728fca3c6ac67d",
+    "data/cryptobench_apo/_osf/dataset.json": "79519369a1d32b63efd86b907013cacb5e02a68e4d711cdde20a23cdfe16ba7c"
+  },
+  "flow": {
+    "train": {
+      "pdbs": 885,
+      "units": 905,
+      "multichain": 123,
+      "skipped": 12,
+      "evaluated": 770
+    },
+    "test": {
+      "pdbs": 222,
+      "units": 231,
+      "multichain": 38,
+      "skipped": 1,
+      "evaluated": 192
+    }
+  }
+}

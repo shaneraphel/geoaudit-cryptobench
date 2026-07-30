@@ -1,0 +1,67 @@
+{
+  "schema": "geoaudit.external_order.v1",
+  "clinical_grade": false,
+  "head": "c264c6c5c204e454ebb2b9c5c223e7eb64f2ee00",
+  "stages": [
+    {
+      "stage": "set_frozen",
+      "artifact": "results/external/EXTERNAL_SET.json",
+      "introduced_in": "993e3c3885a963b497b2fdd96529177abf0809a1",
+      "at": "2026-07-30T00:23:11+08:00"
+    },
+    {
+      "stage": "plan_committed",
+      "artifact": "results/external/PREREGISTERED_EXTERNAL.json",
+      "introduced_in": "23b4d2d1937cefd89526c88ba77eb7182ae7662a",
+      "at": "2026-07-30T00:24:34+08:00"
+    },
+    {
+      "stage": "predictions_generated",
+      "artifact": "results/external/predictions/p2rank.json",
+      "introduced_in": "3571c338a59aec4715dbebd52b81aac1f687d423",
+      "at": "2026-07-30T01:27:42+08:00"
+    },
+    {
+      "stage": "result_read",
+      "artifact": "results/external/EXTERNAL_READ.json",
+      "introduced_in": "3571c338a59aec4715dbebd52b81aac1f687d423",
+      "at": "2026-07-30T01:27:42+08:00"
+    }
+  ],
+  "links": [
+    {
+      "from": "set_frozen",
+      "to": "plan_committed",
+      "same_commit": false,
+      "ordered_by_the_graph": true,
+      "how": "993e3c3885a9 is an ancestor of 23b4d2d1937c"
+    },
+    {
+      "from": "plan_committed",
+      "to": "predictions_generated",
+      "same_commit": false,
+      "ordered_by_the_graph": true,
+      "how": "23b4d2d1937c is an ancestor of 3571c338a59a"
+    },
+    {
+      "from": "predictions_generated",
+      "to": "result_read",
+      "same_commit": true,
+      "ordered_by_the_graph": false,
+      "how": "both artifacts entered the history in one commit, so the graph does not order them"
+    }
+  ],
+  "digest_pins": {
+    "plan_pins_the_set_as_frozen": true,
+    "read_pins_the_set_as_frozen": true,
+    "read_pins_the_plan_as_committed": true,
+    "read_names_the_plan_commit": true
+  },
+  "n_links_the_graph_orders": 2,
+  "n_links_it_does_not": 1,
+  "what_the_graph_does_not_settle": [
+    "predictions_generated -> result_read"
+  ],
+  "how_the_remaining_link_is_established": "the predictions and the read entered the history together, so their order is not a property of the graph. What stands in its place is recomputation: tools/external_read.py --check derives the frozen read from those exact prediction files and reproduces it byte for byte, so the read is a function of those inputs and of nothing else. This is weaker than a timestamp in one respect -- it cannot exclude the predictions having been produced and inspected before the read was run -- and stronger in another, since a timestamp would not show the read used those inputs at all.",
+  "verdict": "confirmatory: the set was frozen and the plan committed before anything was scored, and both are pinned by digest"
+}

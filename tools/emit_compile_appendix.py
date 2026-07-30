@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import hashlib
 import json
 from pathlib import Path
 
@@ -34,9 +35,14 @@ TEST_MANIFEST = ROOT / "data/cryptobench_apo/official_manifest.json"
 PROVENANCE = ROOT / "data/cryptobench_apo/PROVENANCE.json"
 OSF_FOLDS = ROOT / "data/cryptobench_apo/_osf/folds.json"
 OSF_DATASET = ROOT / "data/cryptobench_apo/_osf/dataset.json"
+SAMPLE_FLOW = ROOT / "results/cryptobench_apo/SAMPLE_FLOW.json"
 OUT = ROOT / "paper/appendix_c_compile.tex"
 
 TRAIN_FOLDS = ("train-0", "train-1", "train-2", "train-3")
+
+# Set by main(): under --check nothing on disk may be rewritten, including the
+# cache that stands in for the undistributed deposit.
+_CHECK_ONLY = False
 
 
 def _tex(s: str) -> str:
@@ -58,6 +64,9 @@ def _sample_flow() -> dict:
     published side of the flow is measured rather than restated, and the
     manifest figures become a check on it rather than its source.
     """
+    if not (OSF_FOLDS.is_file() and OSF_DATASET.is_file()):
+        return _sample_flow_from_cache()
+
     folds = json.loads(OSF_FOLDS.read_text())
     dataset = json.loads(OSF_DATASET.read_text())
 
@@ -81,27 +90,96 @@ def _sample_flow() -> dict:
         skipped = man.get(skip_key, man.get("n_skipped", 0))
         row = {"pdbs": n_pdbs, "units": n_pairs, "multichain": n_multi,
                "skipped": skipped, "evaluated": man["n_entries"]}
-        # Three independent statements have to agree: the deposit we recount,
-        # the manifest's own post-exclusion count, and the number of receptors
-        # actually on disk. A column that does not close means one of the three
-        # moved, and printing it anyway is how a supplement acquires a number
-        # nobody can reproduce.
-        if n_pairs - n_multi != man["n_fold_units"]:
-            raise SystemExit(
-                f"{side}: the deposit has {n_pairs} apo chain units of which "
-                f"{n_multi} are multi-chain, leaving {n_pairs - n_multi}, but "
-                f"the manifest records n_fold_units={man['n_fold_units']}")
-        if n_pairs - n_multi - skipped != row["evaluated"]:
-            raise SystemExit(
-                f"{side}: {n_pairs} units less {n_multi} multi-chain less "
-                f"{skipped} unfetchable is {n_pairs - n_multi - skipped}, but "
-                f"{row['evaluated']} were evaluated")
-        if len(man["entries"]) != row["evaluated"]:
-            raise SystemExit(
-                f"{side}: the manifest claims {row['evaluated']} entries and "
-                f"lists {len(man['entries'])}")
+        _agree(side, row, man)
         out[side] = row
+    _write_sample_flow_cache(out)
     return out
+
+
+def _agree(side: str, row: dict, man: dict) -> None:
+    """Three independent statements about one fold have to agree.
+
+    The deposit we recount, the manifest's own post-exclusion count, and the
+    number of receptors actually on disk. A column that does not close means one
+    of the three moved, and printing it anyway is how a supplement acquires a
+    number nobody can reproduce.
+
+    Kept apart from the recount so that the same three checks run against the
+    cached figures in a clone without the deposit. Two of the three sources are
+    committed, so the cache is checked there rather than believed.
+    """
+    net = row["units"] - row["multichain"]
+    if net != man["n_fold_units"]:
+        raise SystemExit(
+            f"{side}: the deposit has {row['units']} apo chain units of which "
+            f"{row['multichain']} are multi-chain, leaving {net}, but "
+            f"the manifest records n_fold_units={man['n_fold_units']}")
+    if net - row["skipped"] != row["evaluated"]:
+        raise SystemExit(
+            f"{side}: {row['units']} units less {row['multichain']} "
+            f"multi-chain less {row['skipped']} unfetchable is "
+            f"{net - row['skipped']}, but {row['evaluated']} were evaluated")
+    if len(man["entries"]) != row["evaluated"]:
+        raise SystemExit(
+            f"{side}: the manifest claims {row['evaluated']} entries and "
+            f"lists {len(man['entries'])}")
+
+
+def _write_sample_flow_cache(flow: dict) -> None:
+    """Commit the recounted figures so a clone without the deposit can check them.
+
+    The OSF deposit is not redistributable here and is gitignored, so every
+    reviewer who follows the README gets a tree in which this appendix could not
+    be verified at all: the gate died on a missing file before reaching anything
+    it could check. The recount is cached with the digests of the two files it
+    came from, so the deposit remains the source and the cache remains traceable
+    to it.
+    """
+    payload = {
+        "schema": "geoaudit.sample_flow.v1",
+        "clinical_grade": False,
+        "what_this_is": (
+            "the sample flow recounted from the CryptoBench OSF deposit, cached "
+            "because the deposit is not redistributed with this repository. A "
+            "tree that has the deposit recomputes this and overwrites it; a tree "
+            "without it reads these figures and still checks them against the "
+            "committed manifests and the receptors on disk."),
+        "recounted_from": {
+            "data/cryptobench_apo/_osf/folds.json": _digest(OSF_FOLDS),
+            "data/cryptobench_apo/_osf/dataset.json": _digest(OSF_DATASET),
+        },
+        "flow": flow,
+    }
+    text = json.dumps(payload, indent=2) + "\n"
+    if SAMPLE_FLOW.is_file() and SAMPLE_FLOW.read_text() == text:
+        return
+    if _CHECK_ONLY:
+        # Rewriting the cache under --check would let a changed deposit refresh
+        # the committed figures without anyone being told.
+        raise SystemExit(
+            f"STALE {SAMPLE_FLOW.relative_to(ROOT)}: the deposit here recounts "
+            f"to something other than the committed cache. Regenerate with "
+            f"`make compileapp` and look at what moved before committing it")
+    SAMPLE_FLOW.parent.mkdir(parents=True, exist_ok=True)
+    SAMPLE_FLOW.write_text(text)
+
+
+def _sample_flow_from_cache() -> dict:
+    """The cached recount, checked against the two sources that are committed."""
+    if not SAMPLE_FLOW.is_file():
+        raise SystemExit(
+            f"the CryptoBench OSF deposit is not here and neither is "
+            f"{SAMPLE_FLOW.relative_to(ROOT)}. One of the two has to exist: "
+            f"fetch the deposit with `make data`, or check out the cached "
+            f"recount that ships with the repository")
+    flow = json.loads(SAMPLE_FLOW.read_text())["flow"]
+    for side, man_path in (("train", TRAIN_MANIFEST), ("test", TEST_MANIFEST)):
+        _agree(side, flow[side], json.loads(man_path.read_text()))
+    return flow
+
+
+def _digest(p: Path) -> str:
+    return hashlib.sha256(p.read_bytes()).hexdigest()
 
 
 def _verify_boundaries() -> None:
@@ -477,6 +555,8 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args(argv)
+    global _CHECK_ONLY
+    _CHECK_ONLY = bool(args.check)
     want = build()
     if args.check:
         if not OUT.is_file():

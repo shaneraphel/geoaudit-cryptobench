@@ -115,9 +115,15 @@ jobs:
         run: make extplan
       - name: Every method must still cover every external unit
         run: make extscore
+      - name: Every external score must still name what produced it
+        run: make extprov
+      - name: The external validation must still have happened in the right order
+        run: make extorder
       - name: The one confirmatory comparison must still follow its plan
         run: make extread
       - name: Verify repository scope and benchmark claims
         run: make verify
+      - name: Neither test runner may quietly stop seeing part of the suite
+        run: make counts
       - name: Unit tests without external pocket tools
         run: make test

@@ -11,10 +11,10 @@
   "counts": {
     "exploration": 31,
     "cited": 47,
-    "superseded": 15,
+    "superseded": 18,
     "fold_access": 10
   },
-  "n_artifacts": 103,
+  "n_artifacts": 106,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
@@ -451,6 +451,13 @@
       "bytes": 9529
     },
     {
+      "artifact": "results/cryptobench_apo/SAMPLE_FLOW.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.sample_flow.v1",
+      "bytes": 927
+    },
+    {
       "artifact": "results/cryptobench_apo/TELEMETRY.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -486,6 +493,13 @@
       "bytes": 6058
     },
     {
+      "artifact": "results/external/EXTERNAL_ORDER.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.external_order.v1",
+      "bytes": 2740
+    },
+    {
       "artifact": "results/external/EXTERNAL_READ.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -505,6 +519,13 @@
       "reason": "an earlier frozen state, kept for the record",
       "schema": null,
       "bytes": 3424
+    },
+    {
+      "artifact": "results/external/PREDICTION_PROVENANCE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.prediction_provenance.v1",
+      "bytes": 1825
     },
     {
       "artifact": "results/external/PREREGISTERED_EXTERNAL.json",

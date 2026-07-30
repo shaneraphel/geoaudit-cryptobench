@@ -54,14 +54,47 @@ def universe(receptor: Path) -> list[int]:
     return seen
 
 
-def _row(pred: dict, universe_: list[int]) -> dict:
+def _tool_version(method: str, pred: dict) -> str:
+    """What produced the numbers, in the terms each tool can be held to.
+
+    P2Rank reports a release; its wrapper reads it off the install rather than
+    from a constant. The counting field has no release, so its version is the
+    digest of every source file its numbers depend on, which is the thing a
+    reader would have to hold fixed to reproduce them.
+    """
+    if method == "table_field":
+        return f"code_sha256:{table_field.code_sha256()}"
+    reported = (pred.get("tool_version")
+                or (pred.get("extra") or {}).get("tool_version"))
+    if not reported:
+        raise SystemExit(f"{method} did not report a version, and a null here "
+                         f"is how the aggregates lost P2Rank's version once "
+                         f"already")
+    return str(reported)
+
+
+def _row(pred: dict, universe_: list[int], *, receptor_sha256: str,
+         tool_version: str) -> dict:
+    """One unit's prediction, with its provenance stamped rather than hoped for.
+
+    Both provenance fields used to be read off whatever the method happened to
+    return, and neither method returned them, so all 57 units recorded null on
+    both. They are passed in now: the receptor digest from the manifest entry
+    the caller has already checked against the file, the version from the tool
+    itself. A method that reports its own version has to agree with the one
+    passed in, so the two cannot drift apart silently.
+    """
     scores = pred.get("residue_scores") or {}
+    reported = (pred.get("tool_version")
+                or (pred.get("extra") or {}).get("tool_version"))
+    if reported and reported != tool_version:
+        raise SystemExit(f"the method reports version {reported!r} but the "
+                         f"caller recorded {tool_version!r}")
     return {
         "status": pred.get("status"),
         "runtime_s": pred.get("runtime_s"),
-        "input_receptor_sha256": pred.get("input_receptor_sha256"),
-        "tool_version": (pred.get("tool_version")
-                         or (pred.get("extra") or {}).get("tool_version")),
+        "input_receptor_sha256": receptor_sha256,
+        "tool_version": tool_version,
         "n_universe": len(universe_),
         "operating_q": pred.get("operating_q"),
         "residue_scores": {str(k): float(v) for k, v in scores.items()} or None,
@@ -97,7 +130,8 @@ def run() -> dict:
                 pred = p2rank_wrap.predict(rec, pdb_id=e["pdb"],
                                            chain=e["chain"],
                                            archive_dir=ARCHIVE)
-            row = _row(pred, uni)
+            row = _row(pred, uni, receptor_sha256=e["receptor_sha256"],
+                       tool_version=_tool_version(method, pred))
             if not row["residue_scores"]:
                 failures.append({"unit": unit, "method": method,
                                  "status": row["status"],
@@ -162,8 +196,23 @@ def check() -> int:
                   f"{man['n_entries']} units")
             return 1
         scored = sum(1 for u in doc["units"].values() if u["residue_scores"])
+        # This line used to print the version without checking it, and printed
+        # None for every unit in every fold for as long as the aggregates
+        # existed. Printing a field is not the same as gating on it.
+        blank = [u for u, r in doc["units"].items()
+                 if not r.get("tool_version")
+                 or not r.get("input_receptor_sha256")]
+        if blank:
+            print(f"FAILED: {method} has {len(blank)} units with no version or "
+                  f"no receptor digest, e.g. {blank[:3]}. Run "
+                  f"tools/backfill_prediction_provenance.py")
+            return 1
+        versions = {r["tool_version"] for r in doc["units"].values()}
+        if len(versions) != 1:
+            print(f"FAILED: {method} was scored by {len(versions)} versions")
+            return 1
         print(f"  {method}: {scored}/{doc['n_units']} units with per-residue "
-              f"scores, version {next(iter(doc['units'].values()))['tool_version']}")
+              f"scores, version {versions.pop()}")
     if d["n_failures"]:
         print(f"  {d['n_failures']} unit-method pairs produced no scores: "
               f"{d['failures'][:3]}")

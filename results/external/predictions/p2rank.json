@@ -9,8 +9,8 @@
     "11gx_A": {
       "status": "OK",
       "runtime_s": 2.954322042001877,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "731ed0b3522d54b0cf5fe63e63a70d79c8ffb47ef11258384db2ce7001680509",
+      "tool_version": "2.5.1",
       "n_universe": 620,
       "residue_scores": {
         "1": 0.0052,
@@ -881,8 +881,8 @@
     "7i7y_A": {
       "status": "OK",
       "runtime_s": 2.7906439999933355,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "29cfa50ab0dd8ce986e207104c6605979f98387ca8a25523c7dcd3eefcff8870",
+      "tool_version": "2.5.1",
       "n_universe": 327,
       "residue_scores": {
         "3": 0.0004,
@@ -1303,8 +1303,8 @@
     "8hzy_A": {
       "status": "OK",
       "runtime_s": 3.690383249981096,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "3d3b79bf381e86c26123fe5242bde1f4a627e5495c25616197bb2d4e3b6273ea",
+      "tool_version": "2.5.1",
       "n_universe": 462,
       "residue_scores": {
         "10": 0.0006,
@@ -1923,8 +1923,8 @@
     "8r9a_A": {
       "status": "OK",
       "runtime_s": 3.1476481660210993,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "c4d201fe1da7d91b0bf27df6d809e5af7840c58d3f64404b33389f590bbd35d7",
+      "tool_version": "2.5.1",
       "n_universe": 285,
       "residue_scores": {
         "10": 0.0439,
@@ -2361,8 +2361,8 @@
     "8s38_B": {
       "status": "OK",
       "runtime_s": 3.0690790829830803,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "b15456b54bcb9d04365a627cf6ec5650a6ad154f57a842b4008f57aa0f5c1722",
+      "tool_version": "2.5.1",
       "n_universe": 414,
       "residue_scores": {
         "-2": 0.0009,
@@ -2907,8 +2907,8 @@
     "8v35_A": {
       "status": "OK",
       "runtime_s": 3.2833107499754988,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "2e9c427cc682d8f576e7ca9ee96d4daf837e6349090b4c1b95664f47e9542ffb",
+      "tool_version": "2.5.1",
       "n_universe": 431,
       "residue_scores": {
         "0": 0.0017,
@@ -3467,8 +3467,8 @@
     "8vir_A": {
       "status": "OK",
       "runtime_s": 3.251234958996065,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "63c3e51dc5ecc94a782bd3c2bcbc1889313959e93e56874642c24080d126ee26",
+      "tool_version": "2.5.1",
       "n_universe": 211,
       "residue_scores": {
         "0": 0.001,
@@ -3719,8 +3719,8 @@
     "8wdq_A": {
       "status": "OK",
       "runtime_s": 3.0868081250227988,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "00f5a1cabe1d8d7956b212afce388204975661045fb39c9894ab7ec9feae6df3",
+      "tool_version": "2.5.1",
       "n_universe": 273,
       "residue_scores": {
         "-1": 0.0101,
@@ -4105,8 +4105,8 @@
     "8weu_A": {
       "status": "OK",
       "runtime_s": 3.327264166000532,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "d71617bc88f08ac14209e209a84d6c251818323b6ff06f60b950efd4bca06443",
+      "tool_version": "2.5.1",
       "n_universe": 481,
       "residue_scores": {
         "1": 0.0081,
@@ -4757,8 +4757,8 @@
     "8x6a_A": {
       "status": "OK",
       "runtime_s": 2.9868788339954335,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "197c944c4d09358dec88f46e913bef0f8d73250a044465c0cac2b77669833554",
+      "tool_version": "2.5.1",
       "n_universe": 376,
       "residue_scores": {
         "35": 0.0013,
@@ -5255,8 +5255,8 @@
     "8xj9_A": {
       "status": "OK",
       "runtime_s": 3.2798385420173872,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "777e5d7184b717122d79f508ff29dc3ff90309208a034c49c41e5df1df7ef664",
+      "tool_version": "2.5.1",
       "n_universe": 204,
       "residue_scores": {
         "29": 0.0031,
@@ -5591,8 +5591,8 @@
     "8xxd_B": {
       "status": "OK",
       "runtime_s": 2.6123192090017255,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "a7189c25015c822cce13427deb8f22b39d69338463d179b8a99ca314ac5223c6",
+      "tool_version": "2.5.1",
       "n_universe": 449,
       "residue_scores": {
         "1": 0.0035,
@@ -6103,8 +6103,8 @@
     "8ylg_A": {
       "status": "OK",
       "runtime_s": 2.4598669999977574,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "919a41f5d04007d8a42a064643fa098da27ffa0bd2543ac5430572b36f9acd60",
+      "tool_version": "2.5.1",
       "n_universe": 161,
       "residue_scores": {
         "1": 0.0005,
@@ -6276,8 +6276,8 @@
     "8yyr_A": {
       "status": "OK",
       "runtime_s": 2.762297082983423,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "dc15be906030e34099642e73c83bb3b01cc5a74c5c2fa6d06c3944cb71447388",
+      "tool_version": "2.5.1",
       "n_universe": 496,
       "residue_scores": {
         "9": 0.0103,
@@ -6951,8 +6951,8 @@
     "9bb9_A": {
       "status": "OK",
       "runtime_s": 2.6701423329941463,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "a57b1f3fab5425d9795efaa21dc7f46068928c9307f9f56ed25667dc1adfa3b3",
+      "tool_version": "2.5.1",
       "n_universe": 475,
       "residue_scores": {
         "34": 0.0022,
@@ -7655,8 +7655,8 @@
     "9bkq_B": {
       "status": "OK",
       "runtime_s": 3.095776083006058,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "6228d502dc0a92c77a4542185aaff376cbbb8668af80e7304f34bba14d98966b",
+      "tool_version": "2.5.1",
       "n_universe": 201,
       "residue_scores": {
         "3": 0.0005,
@@ -7937,8 +7937,8 @@
     "9c9c_B": {
       "status": "OK",
       "runtime_s": 3.160804499988444,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "3ae9698e0b3ae654ae8d77a2b3f5e71b5f114afeeeeddb6eec5614cffdf0049f",
+      "tool_version": "2.5.1",
       "n_universe": 189,
       "residue_scores": {
         "5": 0.0009,
@@ -8177,8 +8177,8 @@
     "9cir_A": {
       "status": "OK",
       "runtime_s": 2.704575167008443,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "747f2fb68ba43928de1d0d1b8790176bbb41caf5dc883acb2090406241c01d4d",
+      "tool_version": "2.5.1",
       "n_universe": 385,
       "residue_scores": {
         "0": 0.0009,
@@ -8700,8 +8700,8 @@
     "9cx8_A": {
       "status": "OK",
       "runtime_s": 3.2353615000029095,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "5cf26cce2ed10106763908a16f12fd35764e38f29366bc7a36f7cc9eb4de3705",
+      "tool_version": "2.5.1",
       "n_universe": 291,
       "residue_scores": {
         "0": 0.0004,
@@ -9123,8 +9123,8 @@
     "9d5f_A": {
       "status": "OK",
       "runtime_s": 2.742781750013819,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "b8ff925009acde40a9715bc992905422a91a3ddd40a82a3d319ee58efc34a395",
+      "tool_version": "2.5.1",
       "n_universe": 271,
       "residue_scores": {
         "182": 0.0006,
@@ -9567,8 +9567,8 @@
     "9d7l_A": {
       "status": "OK",
       "runtime_s": 2.867774415994063,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "54b983d546f9bf43e42694e841ed9c744cc4ec26afaa39f8fa30e8f548e3ff11",
+      "tool_version": "2.5.1",
       "n_universe": 380,
       "residue_scores": {
         "27": 0.0037,
@@ -10132,8 +10132,8 @@
     "9dih_A": {
       "status": "OK",
       "runtime_s": 2.561358708975604,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "aa19b054a80eba00e1c218d3f52edfaca81a522cd5380c7ac786fe1db861f0e7",
+      "tool_version": "2.5.1",
       "n_universe": 370,
       "residue_scores": {
         "13": 0.001,
@@ -10541,8 +10541,8 @@
     "9eb7_A": {
       "status": "OK",
       "runtime_s": 4.127229250007076,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "561301824493e658166ca40ed82eff688e90203ef55718b4d138f7d82469f5da",
+      "tool_version": "2.5.1",
       "n_universe": 468,
       "residue_scores": {
         "44": 0.0287,
@@ -11109,8 +11109,8 @@
     "9fsg_A": {
       "status": "OK",
       "runtime_s": 2.6410616660141386,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "aa16a549d5ac3174c39c8ac9c7536326679d2dfe55db006588d7013b5ae0411d",
+      "tool_version": "2.5.1",
       "n_universe": 378,
       "residue_scores": {
         "2": 0.0004,
@@ -11608,8 +11608,8 @@
     "9gcy_A": {
       "status": "OK",
       "runtime_s": 3.197995249996893,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "aab6240323a1183a33645da273f46303b0c3e68e7915697cc1216280882f45b6",
+      "tool_version": "2.5.1",
       "n_universe": 424,
       "residue_scores": {
         "34": 0.0003,
@@ -12191,8 +12191,8 @@
     "9gu8_B": {
       "status": "OK",
       "runtime_s": 2.581430749996798,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "e4a6680fd1f5f6cdac8f00aa4cc5118a18120d65756dab2d04902de77e1147a9",
+      "tool_version": "2.5.1",
       "n_universe": 162,
       "residue_scores": {
         "5": 0.0366,
@@ -12427,8 +12427,8 @@
     "9hib_A": {
       "status": "OK",
       "runtime_s": 2.8597488749946933,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "c805bec6bd80b65d0b29025acbeb4e4629d4767757d460c460810f09e6fb1149",
+      "tool_version": "2.5.1",
       "n_universe": 504,
       "residue_scores": {
         "14": 0.0007,
@@ -13049,8 +13049,8 @@
     "9hkb_B": {
       "status": "OK",
       "runtime_s": 2.7082667499780655,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "4fc5f76b499c6a61f63761b5f9e6edc267099cf5663039155e43645b64b8685a",
+      "tool_version": "2.5.1",
       "n_universe": 356,
       "residue_scores": {
         "-7": 0.001,
@@ -13537,8 +13537,8 @@
     "9hln_A": {
       "status": "OK",
       "runtime_s": 3.2328063340100925,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "c8625d3c6b10d0185e0dab4117ac3ad6dcb8e8b3f5586790d55058074ac62e60",
+      "tool_version": "2.5.1",
       "n_universe": 368,
       "residue_scores": {
         "3": 0.0009,
@@ -14033,8 +14033,8 @@
     "9i9g_A": {
       "status": "OK",
       "runtime_s": 2.804370875004679,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "9922c031ef20babfb49325d52327d97874ab6b1a4964da26d623cad0ce54c2de",
+      "tool_version": "2.5.1",
       "n_universe": 167,
       "residue_scores": {
         "240": 0.0019,
@@ -14267,8 +14267,8 @@
     "9ifk_A": {
       "status": "OK",
       "runtime_s": 2.5658597910078242,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "72b866c29884d6b37886179a2d786be77dbfce479a727aa788e8092ab7f4782f",
+      "tool_version": "2.5.1",
       "n_universe": 169,
       "residue_scores": {
         "2": 0.0005,
@@ -14486,8 +14486,8 @@
     "9j2z_A": {
       "status": "OK",
       "runtime_s": 3.127902665990405,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "20506a89d817ee2e8184f86191b521067a8e38974634f7934a6df04e2e5115d6",
+      "tool_version": "2.5.1",
       "n_universe": 360,
       "residue_scores": {
         "147": 0.0006,
@@ -14960,8 +14960,8 @@
     "9jju_A": {
       "status": "OK",
       "runtime_s": 2.7397658330155537,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "e24d6e3463af113ea0e61915f6065410da7ef119e972b68328c779f3b88da069",
+      "tool_version": "2.5.1",
       "n_universe": 354,
       "residue_scores": {
         "148": 0.0135,
@@ -15434,8 +15434,8 @@
     "9jpk_A": {
       "status": "OK",
       "runtime_s": 2.8995187919936143,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "d39d27d3f7def3940e3d5e220e0511991c0993e9f7fe6f148a4490f6ee3f4978",
+      "tool_version": "2.5.1",
       "n_universe": 151,
       "residue_scores": {
         "82": 0.0006,
@@ -15647,8 +15647,8 @@
     "9jvd_B": {
       "status": "OK",
       "runtime_s": 2.406376500002807,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "a2dd82eab28362339f821e198f4d0deb9acbcceb726ee11163cacf47dc11f1b5",
+      "tool_version": "2.5.1",
       "n_universe": 104,
       "residue_scores": {
         "154": 0.0145,
@@ -15783,8 +15783,8 @@
     "9jzw_A": {
       "status": "OK",
       "runtime_s": 2.637026042008074,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "0dc6aae51229e07b8754aadec168a2b69ed4f87d5897ee9ca40081fd716a4afd",
+      "tool_version": "2.5.1",
       "n_universe": 341,
       "residue_scores": {
         "5": 0.0003,
@@ -16174,8 +16174,8 @@
     "9k00_A": {
       "status": "OK",
       "runtime_s": 3.1153960829833522,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "5eda3b514f0b1d8c7ff3a6b9c53541734ddc82444120138619ad6b65cb5f8107",
+      "tool_version": "2.5.1",
       "n_universe": 321,
       "residue_scores": {
         "14": 0.0015,
@@ -16582,8 +16582,8 @@
     "9kuq_A": {
       "status": "OK",
       "runtime_s": 2.60834433400305,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "0b845dfcc203a4e473f757a9c38cd9e7b0021166f8853715add8d8edfe82a562",
+      "tool_version": "2.5.1",
       "n_universe": 309,
       "residue_scores": {
         "4": 0.0013,
@@ -16972,8 +16972,8 @@
     "9ky9_A": {
       "status": "OK",
       "runtime_s": 2.6973262910032645,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "e67cedba6554faeaf80078e0dd3d5303634d6015fb2bc1fbd67a253e2b99e514",
+      "tool_version": "2.5.1",
       "n_universe": 326,
       "residue_scores": {
         "3": 0.0024,
@@ -17422,8 +17422,8 @@
     "9l92_A": {
       "status": "OK",
       "runtime_s": 3.057444250007393,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "fdfb023a18ec4d9de8bffc69ab274f85edb29a00e6121c03134078da1bb3cffb",
+      "tool_version": "2.5.1",
       "n_universe": 206,
       "residue_scores": {
         "850": 0.0236,
@@ -17698,8 +17698,8 @@
     "9lio_A": {
       "status": "OK",
       "runtime_s": 3.293458665983053,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "2eea6310523603ded54d6744965072fee61bbfc81c28870c02cbdb969807493c",
+      "tool_version": "2.5.1",
       "n_universe": 344,
       "residue_scores": {
         "161": 0.0546,
@@ -18234,8 +18234,8 @@
     "9lmg_A": {
       "status": "OK",
       "runtime_s": 3.0092854580143467,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "31d7434ab15ba8fef22e27ce2be153b58fe62af6c3896de540482ba17e5e5966",
+      "tool_version": "2.5.1",
       "n_universe": 527,
       "residue_scores": {
         "3": 0.0006,
@@ -19050,8 +19050,8 @@
     "9m1q_A": {
       "status": "OK",
       "runtime_s": 3.2501774999836925,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "3dcb060f477aff07e5fac77cc84a941eb8aee9272805b771e0b3dea5a2b34b95",
+      "tool_version": "2.5.1",
       "n_universe": 156,
       "residue_scores": {
         "16": 0.0006,
@@ -19255,8 +19255,8 @@
     "9mhb_A": {
       "status": "OK",
       "runtime_s": 3.0220018749823794,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "3911de35a488c08c102293b333b05fbf4ca95e5a437d62d969470e213efaa20d",
+      "tool_version": "2.5.1",
       "n_universe": 336,
       "residue_scores": {
         "4": 0.0089,
@@ -19761,8 +19761,8 @@
     "9n4c_A": {
       "status": "OK",
       "runtime_s": 2.5663604170258623,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "40a5115c23bd16cd20a77f66f57305074e9afc25504550c7b0ffb412c28aab37",
+      "tool_version": "2.5.1",
       "n_universe": 179,
       "residue_scores": {
         "3": 0.0005,
@@ -19982,8 +19982,8 @@
     "9o9q_A": {
       "status": "OK",
       "runtime_s": 3.40808058300172,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "5f54cbca449faf97b5e0edd75f895c4f393ffb30b2c95e05cc907b07e092e4c0",
+      "tool_version": "2.5.1",
       "n_universe": 1289,
       "residue_scores": {
         "168": 0.0062,
@@ -21670,8 +21670,8 @@
     "9ql9_A": {
       "status": "OK",
       "runtime_s": 3.200233333016513,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "cb055580f867a17c467b17f328b0349cbfd54584831098a57b8f40e6fa9dd3a0",
+      "tool_version": "2.5.1",
       "n_universe": 154,
       "residue_scores": {
         "6": 0.008,
@@ -21870,8 +21870,8 @@
     "9qyz_A": {
       "status": "OK",
       "runtime_s": 3.1639877909910865,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "61507883989977441ed975b7a8d86f0fbe1b8f92ec6534dbb73eb5fd475cc97f",
+      "tool_version": "2.5.1",
       "n_universe": 398,
       "residue_scores": {
         "21": 0.0056,
@@ -22459,8 +22459,8 @@
     "9r7o_B": {
       "status": "OK",
       "runtime_s": 2.6054321250121575,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "387ff2f19537dbf1e3cab5e5e6fda4d65646599fe20afe29a8f9291d44aa0dd9",
+      "tool_version": "2.5.1",
       "n_universe": 323,
       "residue_scores": {
         "-2": 0.0067,
@@ -22887,8 +22887,8 @@
     "9tfd_A": {
       "status": "OK",
       "runtime_s": 2.6428407079947647,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "a7129106e0bc26c79d67e7838bac1c4d50df740922706d95bc27a26f8b6fd249",
+      "tool_version": "2.5.1",
       "n_universe": 291,
       "residue_scores": {
         "566": 0.0005,
@@ -23256,8 +23256,8 @@
     "9tkv_A": {
       "status": "OK",
       "runtime_s": 3.4866994170006365,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "4043b64765cdd89502624eb09f970e2525e0dd2d208c646f57239db98990bd44",
+      "tool_version": "2.5.1",
       "n_universe": 674,
       "residue_scores": {
         "244": 0.0063,
@@ -24202,8 +24202,8 @@
     "9v67_B": {
       "status": "OK",
       "runtime_s": 2.8247550830128603,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "60ded6128e7c606c56ca824021a339d45c423f560b81675e7eae786c7ab5979b",
+      "tool_version": "2.5.1",
       "n_universe": 508,
       "residue_scores": {
         "2": 0.0202,
@@ -24842,8 +24842,8 @@
     "9vis_A": {
       "status": "OK",
       "runtime_s": 2.565669749979861,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "dae41e5188f1bbb07d395d2231388d41cea1c46c2bdbd91b8af4a7db7d58cf96",
+      "tool_version": "2.5.1",
       "n_universe": 185,
       "residue_scores": {
         "-2": 0.0416,
@@ -25107,8 +25107,8 @@
     "9whf_A": {
       "status": "OK",
       "runtime_s": 2.5588355000072625,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "1a8919b5b49fca8b38203eef3506d52186e498c36e089eb342ebece33bcf298c",
+      "tool_version": "2.5.1",
       "n_universe": 180,
       "residue_scores": {
         "157": 0.0021,
@@ -25316,8 +25316,8 @@
     "9x6i_A": {
       "status": "OK",
       "runtime_s": 2.435614959016675,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "d017ffd3b83ffb60ba9d448668685fe26df0bc1b021fb56ec5fd3964a8323c62",
+      "tool_version": "2.5.1",
       "n_universe": 242,
       "residue_scores": {
         "2": 0.0028,
@@ -25653,8 +25653,8 @@
     "9xau_A": {
       "status": "OK",
       "runtime_s": 3.282410375017207,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "3bb2aa21eaf2df0cd5579afd27278d1a25cd6c2a9ffdc153d6464b5311edcc30",
+      "tool_version": "2.5.1",
       "n_universe": 437,
       "residue_scores": {
         "44": 0.0003,
@@ -26246,8 +26246,8 @@
     "9yi3_A": {
       "status": "OK",
       "runtime_s": 2.62613879199489,
-      "input_receptor_sha256": null,
-      "tool_version": null,
+      "input_receptor_sha256": "4746de5215280eb9baf25a6ef81e8892507e2eb7077c849e8b956da6293435a6",
+      "tool_version": "2.5.1",
       "n_universe": 272,
       "residue_scores": {
         "9": 0.0087,

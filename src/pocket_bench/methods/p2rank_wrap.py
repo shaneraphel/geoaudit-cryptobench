@@ -342,9 +342,14 @@ def predict(
                 )
             pred_csvs = sorted(out.rglob("*_predictions.csv"))
             pockets = _parse_predictions_csv(pred_csvs[0]) if pred_csvs else []
+            # The version goes into the returned prediction as well as the
+            # archive: aggregates read it off the prediction, and for a while
+            # every aggregate in this repository recorded a null because the
+            # only copy lived in the archive.
+            meta["tool_version"] = _version() or ""
             meta["raw_output_sha256"] = _archive_raw(
                 out, archive_dir, pdb_id, chain, command=command,
-                stdout=proc.stdout or "", tool_version=_version() or "")
+                stdout=proc.stdout or "", tool_version=meta["tool_version"])
             meta["n_residues_scored"] = len(residue_scores)
             meta["n_residues_positive"] = len(residue_positive)
             meta["n_pockets"] = len(pockets)
