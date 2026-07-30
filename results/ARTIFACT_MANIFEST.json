@@ -590,7 +590,7 @@
       "class": "inventory",
       "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
       "schema": "geoaudit.setb_pool.v1",
-      "bytes": 26072
+      "bytes": 27453
     },
     {
       "artifact": "results/gf4_ablation/GF4_ALLELE_ABLATION.json",

@@ -1655,5 +1655,21 @@
    "cluster_count_is_absent_not_zero": true,
    "what_to_run_for_the_cluster_count": "tools/external_uniref.py over pool_accessions; the cached UniRef50 mapping was fetched for Set A's X-ray accessions and covers none of these, so the cluster count is unavailable rather than zero"
   }
- ]
+ ],
+ "reconstruction_method_mix": {
+  "measured_on": "2026-07-30",
+  "ceiling": 2.5,
+  "by_reconstruction_method": {
+   "SINGLE PARTICLE": 1555,
+   "CRYSTALLOGRAPHY": 47,
+   "HELICAL": 111,
+   "SUBTOMOGRAM AVERAGING": 1
+  },
+  "total_over_methods": 1714,
+  "entries_in_the_cached_describe": 1706,
+  "cache_drift": 8,
+  "what_the_filter_actually_admits": "experimental_method == 'EM' is an electron-method filter and not a cryo-EM filter. CRYSTALLOGRAPHY here means electron diffraction from nanocrystals -- MicroED -- which behaves like X-ray crystallography rather than like single-particle imaging and is therefore not the different structural modality a second external set would exist to provide. HELICAL is filament reconstruction, a third sample class",
+  "why_the_percentage_understates_it": "MicroED is a small fraction by entry and occupies the top of any resolution-ordered selection. Both of the two sharpest entries in this pool are MicroED and one of them deposited no density map at all, so a selection made by picking the sharpest examples lands on the technique the set is not for",
+  "consequence_for_set_b": "the pool counts are an upper bound in one more respect than was recorded: they mix techniques. A set built from them should filter on em_experiment.reconstruction_method and not on experimental_method, and the count after that filter has not been taken"
+ }
 }

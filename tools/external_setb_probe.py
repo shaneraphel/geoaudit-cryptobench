@@ -271,8 +271,59 @@ def _already_used() -> tuple[set[str], set[str]]:
 SETB_POOL = ROOT / "results/external/SETB_POOL.json"
 SETB_SCHEMA = "geoaudit.setb_pool.v1"
 
+# What `experimental_method == "EM"` actually admits, counted rather than assumed.
+# Recorded because the filter's name misled: it is not a cryo-EM filter, it is an
+# electron-method filter, and three of the four techniques below are different
+# sample classes. Measured live against RCSB on the date in the artifact; the
+# counts are a property of the archive at that moment and will drift.
+EM_METHODS = ("SINGLE PARTICLE", "CRYSTALLOGRAPHY", "HELICAL",
+              "SUBTOMOGRAM AVERAGING")
 
-def _write_pool(ceilings: tuple[float, ...]) -> int:
+
+def _method_mix(ceiling: float) -> dict:
+    """Entry counts by reconstruction method at one resolution ceiling.
+
+    The distinction is not pedantry. ``CRYSTALLOGRAPHY`` here means electron
+    diffraction from nanocrystals -- MicroED -- which behaves like X-ray
+    crystallography rather than like single-particle imaging, so it is not the
+    different structural modality a second external set would be for. And the
+    counts alone understate the hazard: MicroED is 2.7 per cent of the pool by
+    entry and occupies the top of any resolution-ordered selection from it, so
+    the first entries anyone picks as "the sharpest examples" are the ones that
+    are not cryo-EM. Both of the two sharpest in this pool are MicroED, and one
+    of those deposited no density map at all.
+    """
+    out: dict[str, int | None] = {}
+    for meth in EM_METHODS:
+        q = {"query": {"type": "group", "logical_operator": "and", "nodes": [
+            {"type": "terminal", "service": "text", "parameters": {
+                "attribute": "rcsb_entry_info.experimental_method",
+                "operator": "exact_match", "value": EM}},
+            {"type": "terminal", "service": "text", "parameters": {
+                "attribute": "rcsb_accession_info.initial_release_date",
+                "operator": "greater", "value": CUTOFF}},
+            {"type": "terminal", "service": "text", "parameters": {
+                "attribute": "rcsb_entry_info.resolution_combined",
+                "operator": "less_or_equal", "value": ceiling}},
+            {"type": "terminal", "service": "text", "parameters": {
+                "attribute": "em_experiment.reconstruction_method",
+                "operator": "exact_match", "value": meth}},
+        ]}, "return_type": "entry",
+            "request_options": {"paginate": {"start": 0, "rows": 1}}}
+        url = ("https://search.rcsb.org/rcsbsearch/v2/query?json="
+               + urllib.parse.quote(json.dumps(q)))
+        try:
+            with urllib.request.urlopen(
+                    urllib.request.Request(
+                        url, headers={"User-Agent": "geoaudit/1.0"}),
+                    timeout=90) as r:
+                out[meth] = json.loads(r.read()).get("total_count")
+        except Exception:  # noqa: BLE001
+            out[meth] = None
+    return out
+
+
+def _write_pool(ceilings: tuple[float, ...], methods: bool = False) -> int:
     """Pin the pool Set B would be drawn from, and nothing else.
 
     This artifact is an inventory. It is not a set, it is not frozen, and it
@@ -283,6 +334,39 @@ def _write_pool(ceilings: tuple[float, ...]) -> int:
     for a second frozen set.
     """
     rows = [_pairable_from_cache(c) for c in ceilings]
+    mix = None
+    if methods:
+        counted = _method_mix(2.5)
+        total = sum(v for v in counted.values() if v)
+        cached = rows[0]["n_entries"] if rows else None
+        mix = {
+            "measured_on": time.strftime("%Y-%m-%d"),
+            "ceiling": 2.5,
+            "by_reconstruction_method": counted,
+            "total_over_methods": total,
+            "entries_in_the_cached_describe": cached,
+            "cache_drift": (total - cached) if (total and cached) else None,
+            "what_the_filter_actually_admits": (
+                "experimental_method == 'EM' is an electron-method filter and "
+                "not a cryo-EM filter. CRYSTALLOGRAPHY here means electron "
+                "diffraction from nanocrystals -- MicroED -- which behaves like "
+                "X-ray crystallography rather than like single-particle imaging "
+                "and is therefore not the different structural modality a "
+                "second external set would exist to provide. HELICAL is "
+                "filament reconstruction, a third sample class"),
+            "why_the_percentage_understates_it": (
+                "MicroED is a small fraction by entry and occupies the top of "
+                "any resolution-ordered selection. Both of the two sharpest "
+                "entries in this pool are MicroED and one of them deposited no "
+                "density map at all, so a selection made by picking the "
+                "sharpest examples lands on the technique the set is not for"),
+            "consequence_for_set_b": (
+                "the pool counts are an upper bound in one more respect than "
+                "was recorded: they mix techniques. A set built from them should "
+                "filter on em_experiment.reconstruction_method and not on "
+                "experimental_method, and the count after that filter has not "
+                "been taken"),
+        }
     doc = {
         "schema": SETB_SCHEMA,
         "clinical_grade": False,
@@ -317,6 +401,7 @@ def _write_pool(ceilings: tuple[float, ...]) -> int:
                              "those only removes candidates, so every count here "
                              "is an upper bound",
         "by_resolution_ceiling": rows,
+        "reconstruction_method_mix": mix,
     }
     SETB_POOL.parent.mkdir(parents=True, exist_ok=True)
     SETB_POOL.write_text(json.dumps(doc, indent=1, allow_nan=False) + "\n")
@@ -345,6 +430,9 @@ def main() -> int:
     ap.add_argument("--from-cache", action="store_true",
                     help="compute from the cached describe without a network "
                          "call, recording the cache digest")
+    ap.add_argument("--methods", action="store_true",
+                    help="also count the pool by reconstruction method, which "
+                         "needs the network and records the date it was taken")
     a = ap.parse_args()
     if a.write:
         if not a.from_cache:
@@ -353,7 +441,7 @@ def main() -> int:
                 "reverifies the entry count and has not been wired to the "
                 "writer, and an artifact that mixes the two provenances without "
                 "saying which is worse than one that says cache")
-        return _write_pool((2.5, 3.0))
+        return _write_pool((2.5, 3.0), methods=a.methods)
 
     print(f"protein entries released after {CUTOFF}\n")
     print(f"{'ceiling':>9}  {'EM':>10}  {'X-ray':>10}")
