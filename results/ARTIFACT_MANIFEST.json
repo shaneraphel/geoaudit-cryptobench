@@ -10,9 +10,9 @@
     "inventory": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it"
   },
   "counts": {
-    "superseded": 18,
-    "exploration": 33,
-    "cited": 52,
+    "cited": 54,
+    "exploration": 32,
+    "superseded": 17,
     "inventory": 1,
     "fold_access": 10
   },
@@ -20,8 +20,8 @@
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
-      "class": "superseded",
-      "reason": "an earlier frozen state, kept for the record",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.esr1_decomposability_showcase.v1",
       "bytes": 150918
     },
@@ -230,8 +230,8 @@
     },
     {
       "artifact": "results/architecture_sweep/HIERARCHICAL_MULTIPLICITIES.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.hierarchical_multiplicities.v1",
       "bytes": 18043
     },

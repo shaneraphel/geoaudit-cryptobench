@@ -186,8 +186,73 @@ pocket — campaign material that the scope contract no longer admits.
 
 Appendices are excluded from the primary claim and from every generalization
 statement: **Appendix A** is a retrospective ESR1 receptor-only pilot (invalidated
-pending label regeneration); **Appendix B** is a finite-field allele-conditioning
-ablation retained as future work (algebraic negative control only).
+pending label regeneration) alongside a decomposability showcase that carries no
+accuracy number; **Appendix B** is a finite-field allele-conditioning ablation
+retained as future work (algebraic negative control only).
+
+---
+
+## What is new here, and what each claim rests on
+
+Five things in this repository are not in the literature it is measured against.
+Each is stated with the artifact that carries it, and none of them is an accuracy
+claim — the accuracy position is stated plainly above and is behind the
+benchmark's own supervised baseline.
+
+**1. A score that decomposes exactly, and a measurement of how exactly.** Every
+prediction is a sum of integer table contributions and can be taken apart residue
+by residue and by descriptor family. The parts add back to the score with a worst
+relative error of **5.4 × 10⁻¹⁶** over four case units a committed tool had
+already selected (`results/official_fold/AUDIT_DECOMPOSITION.json`). This is not
+an attribution method applied after the fact and it is not a saliency estimate: it
+is the identity the score is defined by. A sequence encoder's prediction is not a
+sum over interpretable parts and cannot be decomposed this way at any accuracy,
+which is a difference in what the two constructions *are* rather than in how well
+they score.
+
+**2. No floating-point model at inference.** The deployed detector is **1.79 MB of
+integers**, 0.39 MB gzipped: cell counts and integer multiplicities, addressed by
+rank-quantised descriptors. Nothing is evaluated in floating point when a
+structure is scored.
+
+**3. Exactness turns out to be free, and that was measured rather than assumed.**
+The integer multiplicities are the rounded solution of one real-valued system, so
+the obvious worry is that rounding costs accuracy. The cosine between the real
+solution and its integer rounding onto [−32, 32] is **0.9992** on every bank
+tried (`results/architecture_sweep/GRAM_CONDITIONING.json`). Whatever limits this
+architecture, quantising its weights is not it.
+
+**4. A confirmatory result whose ordering a machine checks.** 57 apo–holo units
+were built from depositions released after CryptoBench's newest structure, frozen
+and hashed; the preregistration naming three co-primary comparisons and the
+sentence to write under each of six outcomes was committed next; only then was
+anything scored. `make extorder` recomputes that ordering from the commit graph
+and fails if it no longer holds. On that set the margin over P2Rank is **+0.0443
+[+0.0162, +0.0724]** (`results/external/EXTERNAL_READ.json`). The set is now spent
+and the repository says so.
+
+**5. A saturation result, which is a contribution in its own right.** Six
+training-fold sweeps varied every global parameter of the construction and found
+each at or near its optimum: the quantisation ladder, the pairing draw, the
+attachment of appended columns, the integer rounding, the table count, and whether
+the multiplicity assignment is global at all. Two of those sweeps refuted
+hypotheses raised by the sweeps before them, and both refutations are recorded
+with the measurement that killed them. The tables turn out to be
+**interchangeable** — random subsets match subsets ranked by importance — so the
+bank is a saturated exchangeable ensemble, and the one thing it is *not*
+indifferent to is regional structure: chain-level routing beats a random
+per-chain router by **+0.0029 to +0.0054 on 11–12 of 12 splits**, while costing
+more than it earns through the correction machinery available
+(`results/architecture_sweep/HIERARCHICAL_MULTIPLICITIES.json`). Negative and
+saturation results are usually unpublished; here they are the map of which roads
+are shut, and each names the artifact that shut it.
+
+Two habits make the above checkable rather than assertable, and they are part of
+what is new. Every number in the manuscript is a macro generated from a frozen
+JSON — no literal is typed, so a figure in the prose cannot survive a change in
+the artifact it came from. And each of the 26 CI gates was verified by planting a
+violation and watching it fail, because a gate that has never failed is
+indistinguishable from one that cannot.
 
 ---
 
@@ -1495,9 +1560,23 @@ generalization statement. Machine-enforced by
 | Item | Status | Boundary |
 |---|---|---|
 | **Appendix A** — ESR1 receptor-only pilot | `retrospective_pilot_only`, invalidated pending label regeneration | `comparative_claim_allowed=false`; contributes nothing to the CryptoBench result |
+| **Appendix A** — ESR1 decomposability showcase | six molecules, complete chemistry fields, **no accuracy number** | `results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json`. Demonstrates the identity of §"What is new here" item 1 and nothing else. A decomposition needs no labels, so it survives the pilot's invalidation; the pilot's accuracy does not. Admitted by a capped, field-checked exception to the candidate-dump prohibition — see `no_bulk_candidate_dump_in_paper_tree` and `esr1_showcase_is_complete_and_non_comparative` |
 | **Appendix B** — finite-field allele-conditioning ablation | `algebraic_ablation_future_work` | Algebraic negative control; no chemical, binding, or efficacy claim |
 | Candidate generation / structure-defined modalities | future work | Bulk evidence lives in the companion tree `gf4-allele-conditioned-evidence` (`data/manifests/COMPANION_EVIDENCE.json`); not a claim of this repository |
 | Localized anisotropic shear for void-absent pockets | future work | Global low-frequency modes caused surface drift; see `results/cryptobench_apo/` |
+
+### 5.1 Future work the six sweeps named
+
+Each item below exists because a measurement pointed at it, and each names the
+artifact that did. None is a promise about an outcome.
+
+| Direction | Why it is open, and what would settle it |
+|---|---|
+| A correction rule cheaper than the regional signal it collects | Chain-level routing carries a real signal — **+0.0029 to +0.0054 against a random per-chain router on 11–12 of 12 splits** — but applying it through a per-region correction of all 5,152 multiplicities costs more than it earns, and the gain only appears as the correction vanishes. A correction over a subset of tables, or over the spatial gate instead of the multiplicities, would cost less. `HIERARCHICAL_MULTIPLICITIES.json` |
+| A second external set, built and frozen **before** the method is finalised | Set A is spent: scoring an improved method on it destroys the confirmatory result rather than producing a second one. The cryo-EM pool is pinned at **461 accessions at 2.5 Å and 1,143 at 3.0 Å**, none of them in CryptoBench. The cluster count that would bound the set is **absent, not zero** — the cached UniRef50 mapping covers none of them. Order: map, build, freeze, hash, preregister, finalise, read once. `SETB_POOL.json` |
+| The 365-operator bank, designed and unmeasured | Non-backtracking walk counts, Sachs coefficients of the induced local subgraph, orbit counts and irreducible-character projections under the tetrahedral, octahedral and icosahedral groups, deformation-subgroup conjugacy labels, Krawtchouk transforms of shell occupancy, 𝔽₄ and 𝔽₁₆ point counts of the quantised local variety, p-adic valuation profiles, three-dimensional block-Toeplitz minors, and colour-refined short-cycle counts. Each has an integrality argument; **none has been measured**, and the admission protocol is fixed in advance: attach by union, hold every other parameter, report twelve splits, and state the 0.0026 reseed floor beside any smaller difference |
+| Width-3 tables | `table_bank.py`'s own docstring notes that a three-wire table has 64 cells and that at 235k training residues a cell still holds thousands. Three-way interaction is unreachable at width 2 and has never been run |
+| ESR1 pilot regeneration | The label builder is fixed (chain- and instance-scoped, with a regression test) but the pilot has not been re-run. P2Rank 2.5.1 and its JVM are installed; **fpocket and DeepPocket are not**, and until all five methods re-run, no number in `RETROSPECTIVE_PILOT_REPORT.json` is citable |
 
 Numerical record: all counts and metrics are read from the JSON artifacts
 (`results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json`,
