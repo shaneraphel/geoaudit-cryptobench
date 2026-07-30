@@ -2169,6 +2169,64 @@ independent directions, \GramEffRank{} falling to \GramEffRankSelected{} --- but
 is not what sets the score. And that the bank is effectively fifty-dimensional,
 which the truncation curve above refutes directly.
 
+\subsection{The one thing those five left open, and what closed it}
+\label{sec:regional}
+The five sweeps all vary a \emph{global} choice applied identically to every one
+of \CompTablesFull{} tables: one ladder, one pairing draw, one attachment, one
+solve, one table count. Their artifacts name what that leaves untried, and the
+reason to try it is in Section~\ref{sec:saturation} already --- the solved
+direction sits at cosine \GramCos{} to the class mean difference, which is what
+one direction fitted to heterogeneous regions looks like. So: let a table
+contribute where it is informative instead of everywhere at one weight. Two
+experiments were run on that idea, on the same \LadderSplits{} halvings, and
+between them they close it.
+
+\paragraph{Regional multiplicities: the heterogeneity is real and it does not
+become accuracy.} Chains are routed into \GateRouteRegions{} regions by size, by
+polarity, or at random, and each region receives its own damped correction to the
+global multiplicities --- \HierArms{} arms over three routers and four damping
+strengths, reproducing the deployed numbers to \HierRepro{}. The answer depends
+entirely on which baseline the question is asked against, and this is the reason
+both are quoted here rather than one.
+
+Against a random per-chain router, the informed routers win: \HierBestVsRandom{}
+on \HierBestVsRandomSplits{} of \LadderSplits{} splits. Twelve of twelve is not
+noise, and it says the router is reading real structure --- chains of different
+size genuinely want different multiplicities. Against the deployed global solve,
+the best of the \HierArms{} arms is \HierBestVsDeployed{} on
+\HierBestVsDeployedSplits{} of \LadderSplits{}, which is below the \SatReseed{}
+reseed floor and is therefore not a lift, and the rest run down to
+\HierWorstVsDeployed{}. The price of establishing that was \(\GateRouteRegions{}
+\times \CompTablesFull{}\) fitted numbers.
+
+\paragraph{The cheapest correction the construction admits, and it also fails.}
+If the signal is regional but the correction is too expensive, the natural move is
+a cheaper one. The spatial gate is the only stage in the readout where a
+chain-level quantity multiplies the field, so its weight can be routed for
+\GateRouteRegions{} numbers rather than \(\GateRouteRegions{} \times
+\CompTablesFull{}\). It does not pay either. Against a single global weight
+chosen on the same fit half from the same grid --- the comparison that holds
+everything but the regional freedom fixed --- routing by chain size gives
+\GateRouteSize{} on \GateRouteSizeSplits{} of \LadderSplits{} and by polarity
+\GateRoutePolarity{} on \GateRoutePolaritySplits{}. The same two routers beat the
+random one, \GateRouteSizeVsRandom{} and \GateRoutePolarityVsRandom{} on
+\GateRouteSizeVsRandomSplits{} and \GateRoutePolarityVsRandomSplits{} splits. Both
+readings again, and together they say what neither says alone: the constraint is
+granularity and not absence of signal. Subdividing costs more than the
+subdivision earns, at both prices tried, three orders of magnitude apart.
+
+\paragraph{One comparison in that experiment is not fair, and the direction it
+leans is ours.} Every fitted weight also loses to the deployed
+\(w=\TabGateWeight{}\), the global one by \GateRouteGlobalVsDeployed{}. That is
+not evidence that a declared constant beats a compiled one. The deployed pair was
+not declared a priori: radius and weight were chosen together over a small grid by
+pick-half ROC-AUC on halvings of this same training fold, and two of those
+selections in fact returned \(w=\LinGateWeight{}\). The deployed weight has
+therefore seen pick-half information that every arm above is denied, the bias runs
+in its favour, and the honest verdict rests on the global-versus-routed comparison
+where both sides see the fit half only. Stated here rather than in a footnote
+because a reader cannot see it from the numbers.
+
 \section{Limitations}
 The clearest limitation is the one Sections~\ref{sec:plmnn}
 and~\ref{sec:external} measure twice: the method is less accurate than the

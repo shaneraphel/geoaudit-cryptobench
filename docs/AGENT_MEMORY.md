@@ -130,8 +130,8 @@ looks like one direction fitted to heterogeneous regions.
 answer differs by baseline.** Against a *random* per-chain router, routing on
 chain size is worth +0.0054 on 12 of 12 splits, so the router is reading real
 structure and this is not noise. Against the *deployed* global solve, the best of
-thirteen routed arms is +0.0005 on 6 of 12 — below the 0.0026 reseed floor, which
-is to say nothing — and the other twelve are negative, down to −0.0148. An earlier
+twelve routed arms is +0.0005 on 6 of 12 — below the 0.0026 reseed floor, which
+is to say nothing — and the other eleven are negative, down to −0.0148. An earlier
 version of this table said the per-region correction "is worth about +0.005",
 which reads as a gain over the deployed detector and is not what was measured.
 The regional heterogeneity is real; converting it into accuracy did not happen,

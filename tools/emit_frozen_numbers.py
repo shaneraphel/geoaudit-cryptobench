@@ -121,6 +121,9 @@ PAIRSEL = ROOT / "results/architecture_sweep/SELECTED_PAIRINGS.json"
 COMPWIRE = ROOT / "results/architecture_sweep/COMPOSITION_WIRES.json"
 GRAMCOND = ROOT / "results/architecture_sweep/GRAM_CONDITIONING.json"
 TRUNC = ROOT / "results/architecture_sweep/BANK_TRUNCATION.json"
+HIER = ROOT / "results/architecture_sweep/HIERARCHICAL_MULTIPLICITIES.json"
+GATEROUTE = ROOT / "results/architecture_sweep/GATE_WEIGHT_ROUTING.json"
+TABWIDTH = ROOT / "results/architecture_sweep/TABLE_WIDTH.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
 
@@ -1766,7 +1769,8 @@ def _saturation_macros() -> list[str]:
     the sentence citing it has to say so.
     """
     L: list[str] = []
-    for path in (LADDER, PAIRSEL, COMPWIRE, GRAMCOND, TRUNC):
+    for path in (LADDER, PAIRSEL, COMPWIRE, GRAMCOND, TRUNC, HIER, GATEROUTE,
+                 TABWIDTH):
         if not path.exists():
             continue
         doc = json.loads(path.read_text())
@@ -1908,6 +1912,83 @@ def _saturation_macros() -> list[str]:
                  f"{{{tol['random']}}}")
         rep = d.get("reproduction_check") or {}
         L.append(f"\\newcommand{{\\TruncRepro}}"
+                 f"{{{rep.get('max_absolute_difference', 0):.1e}}}")
+
+    if HIER.exists():
+        d = json.loads(HIER.read_text())
+        md, mr = d["minus_deployed"], d["minus_random_per_chain"]
+        # Both baselines, emitted together and deliberately. This artifact holds
+        # three of them and the answer differs by which is used: the best routed
+        # arm is +0.0005 over the deployed solve and the same family is +0.0054
+        # over a random router. A sentence quoting one while the reader supplies
+        # the other is the failure this pairing is meant to make awkward.
+        best = max(md, key=lambda k: md[k]["mean"] if k != "global" else -9)
+        L.append(f"\\newcommand{{\\HierBestArm}}"
+                 f"{{{best.replace('R=4, ', '').replace('d=', 'damping ')}}}")
+        L.append(f"\\newcommand{{\\HierBestVsDeployed}}"
+                 f"{{{_signed(md[best]['mean'], 4)}}}")
+        L.append(f"\\newcommand{{\\HierBestVsDeployedSplits}}"
+                 f"{{{md[best]['n_splits_positive']}}}")
+        worst = min(md, key=lambda k: md[k]["mean"])
+        L.append(f"\\newcommand{{\\HierWorstVsDeployed}}"
+                 f"{{{_signed(md[worst]['mean'], 4)}}}")
+        top = max(mr, key=lambda k: mr[k]["mean"])
+        L.append(f"\\newcommand{{\\HierBestVsRandom}}"
+                 f"{{{_signed(mr[top]['mean'], 4)}}}")
+        L.append(f"\\newcommand{{\\HierBestVsRandomSplits}}"
+                 f"{{{mr[top]['n_splits_positive']}}}")
+        L.append(f"\\newcommand{{\\HierArms}}{{{len(md) - 1}}}")
+        L.append(f"\\newcommand{{\\HierSplits}}{{{d['protocol']['n_splits']}}}")
+        rep = d.get("reproduction_check") or {}
+        L.append(f"\\newcommand{{\\HierRepro}}"
+                 f"{{{rep.get('max_absolute_difference', 0):.1e}}}")
+
+    if GATEROUTE.exists():
+        d = json.loads(GATEROUTE.read_text())
+        mg, mr = d["minus_global_fitted"], d["minus_random_per_chain"]
+        for stem, key in (("Size", "chain size"), ("Polarity", "chain polarity")):
+            L.append(f"\\newcommand{{\\GateRoute{stem}}}"
+                     f"{{{_signed(mg[key]['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\GateRoute{stem}Splits}}"
+                     f"{{{mg[key]['n_splits_positive']}}}")
+            L.append(f"\\newcommand{{\\GateRoute{stem}VsRandom}}"
+                     f"{{{_signed(mr[key]['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\GateRoute{stem}VsRandomSplits}}"
+                     f"{{{mr[key]['n_splits_positive']}}}")
+        L.append(f"\\newcommand{{\\GateRouteGlobalVsDeployed}}"
+                 f"{{{_signed(d['global_fitted_minus_deployed']['mean'], 4)}}}")
+        # The region count is read off a router's own weight vector rather than
+        # parsed out of the prose in n_parameters, which is where it also appears.
+        L.append(f"\\newcommand{{\\GateRouteRegions}}"
+                 f"{{{len(d['weights_chosen']['chain size'][0]['weights'])}}}")
+        rep = d.get("reproduction_check") or {}
+        L.append(f"\\newcommand{{\\GateRouteRepro}}"
+                 f"{{{rep.get('max_absolute_difference', 0):.1e}}}")
+
+    if TABWIDTH.exists():
+        d = json.loads(TABWIDTH.read_text())
+        md, arms = d["minus_deployed"], d["arms"]
+        occ = d["cell_occupancy_first_split"]
+        # Named by width and matching rule, spelled out, because a control
+        # sequence is letters only.
+        for name, stem in (("width 1, matched tables", "OneTables"),
+                           ("width 3, matched cells", "ThreeCells"),
+                           ("width 3, matched rounds", "ThreeRounds"),
+                           ("width 4, matched cells", "FourCells")):
+            if name not in md:
+                continue
+            L.append(f"\\newcommand{{\\Width{stem}}}"
+                     f"{{{_signed(md[name]['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\Width{stem}Splits}}"
+                     f"{{{md[name]['n_splits_positive']}}}")
+            L.append(f"\\newcommand{{\\Width{stem}Cells}}"
+                     f"{{{occ[name]['median_count_of_addressed_cells']}}}")
+        dep = d["deployed_arm"]
+        L.append(f"\\newcommand{{\\WidthTwoCells}}"
+                 f"{{{occ[dep]['median_count_of_addressed_cells']}}}")
+        L.append(f"\\newcommand{{\\WidthTwoTables}}{{{arms[dep]['n_tables']}}}")
+        rep = d.get("reproduction_check") or {}
+        L.append(f"\\newcommand{{\\WidthRepro}}"
                  f"{{{rep.get('max_absolute_difference', 0):.1e}}}")
     return L
 

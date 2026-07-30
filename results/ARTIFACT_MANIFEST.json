@@ -10,8 +10,8 @@
     "inventory": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it"
   },
   "counts": {
-    "cited": 54,
-    "exploration": 33,
+    "cited": 55,
+    "exploration": 32,
     "superseded": 17,
     "inventory": 2,
     "fold_access": 10
@@ -223,8 +223,8 @@
     },
     {
       "artifact": "results/architecture_sweep/GATE_WEIGHT_ROUTING.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.gate_weight_routing.v1",
       "bytes": 58584
     },

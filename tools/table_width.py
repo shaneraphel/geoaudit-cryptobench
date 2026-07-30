@@ -168,6 +168,12 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--splits", type=int, default=0)
     ap.add_argument("--out", type=str, default=str(OUT))
+    ap.add_argument("--arms", type=str, default="",
+                    help="semicolon-separated arm names to run; the default runs "
+                         "every arm the table cap admits. Semicolons because the "
+                         "names contain commas. Cost scales with the number of "
+                         "tables, and the full set takes about 36 minutes over "
+                         "12 splits")
     a = ap.parse_args(argv)
 
     cdoc = json.loads(COUNTING.read_text())
@@ -203,9 +209,29 @@ def main(argv: list[str] | None = None) -> int:
             arms[name] = {"width": w, "rounds": r, "n_tables": tabs,
                           "n_cells": cells}
 
-    dropped = {k: v for k, v in arms.items() if v["n_tables"] > MAX_TABLES}
+    dropped = {k: {**v, "why": f"more than {MAX_TABLES} tables"}
+               for k, v in arms.items() if v["n_tables"] > MAX_TABLES}
     arms = {k: v for k, v in arms.items() if v["n_tables"] <= MAX_TABLES}
+
     deployed = f"width {TABLE_WIDTH}, matched rounds"
+    if a.arms:
+        want = [s.strip() for s in a.arms.split(";") if s.strip()]
+        unknown = [w for w in want if w not in arms]
+        if unknown:
+            raise SystemExit(f"unknown arms {unknown}; known: {list(arms)}")
+        # Named selection, and the arms it leaves out are recorded with the
+        # reason. The falsification condition names width 3 at matched cells and
+        # at matched rounds, so a selection that drops either of those is
+        # refused rather than run into an unanswerable artifact.
+        for need in (deployed, "width 3, matched cells", "width 3, matched rounds"):
+            if need in arms and need not in want:
+                raise SystemExit(
+                    f"{need!r} is named in what_would_falsify_it; a run without "
+                    f"it cannot answer the question this tool asks")
+        dropped |= {k: {**v, "why": "not selected by --arms; cost. Not named in "
+                                    "the falsification condition"}
+                    for k, v in arms.items() if k not in want}
+        arms = {k: v for k, v in arms.items() if k in want}
     if deployed not in arms:
         raise SystemExit("the deployed arm was dropped; the harness is wrong")
 
@@ -218,8 +244,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  {k:28s} r={v['rounds']:2d}  K={v['n_tables']:5d}  "
               f"cells={v['n_cells']:7d}", flush=True)
     for k, v in dropped.items():
-        print(f"  {k:28s} dropped: K={v['n_tables']} over {MAX_TABLES}",
-              flush=True)
+        print(f"  {k:28s} not run (K={v['n_tables']}): {v['why']}", flush=True)
 
     built = {k: build_tables(n_wires, v["width"], v["rounds"])
              for k, v in arms.items()}
@@ -328,7 +353,8 @@ def main(argv: list[str] | None = None) -> int:
             "evaluate_on": "the pick half",
             "metric": "mean per-unit ROC-AUC, gate applied as deployed",
             "max_tables": MAX_TABLES,
-            "arms_dropped_for_cost": {k: v["n_tables"] for k, v in dropped.items()},
+            "arms_not_run": {k: {"n_tables": v["n_tables"], "why": v["why"]}
+                             for k, v in dropped.items()},
         },
         "deployed_arm": deployed,
         "arms": {k: {**arms[k], **summarise(v)} for k, v in got.items()},
