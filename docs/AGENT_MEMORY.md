@@ -235,6 +235,21 @@ problem. The same host over the same protocol worked for the sibling repository
 in the same second. The actual cause was that the remote repository was empty
 and had no refs, which the API says plainly as HTTP 409.
 
+**Writing a contamination down does not protect you from it.** `SETB_POOL.json`
+records that RCSB's `experimental_method == "EM"` also returns electron
+crystallography, and states the practical risk in as many words: MicroED entries
+occupy the top of any resolution-ordered selection. Within the same session,
+EMD-46871 was chosen as "the high-resolution cryo-EM example" by taking the best
+resolution available, and it is `electronCrystallography` at 1.09 Å — the entry
+title is *Structure of proteinase K from energy-filtered MicroED data*. Two
+signals in the file itself would have caught it before the download: a 0.2677 Å
+voxel over a 55x59x61 Å cell is a crystallographic unit cell, not a
+single-particle box, and the axis order was 3/2/1 rather than 1/2/3. The lesson
+is not "remember the contamination". It is that a filter recorded in prose is not
+a filter: ask EMDB for `structure_determination.method` and assert on the value,
+because the map header and the entry metadata will both answer and neither is
+expensive.
+
 ## 5. The frozen sets, and the one irreversible mistake
 
 `results/external/EXTERNAL_SET.json` was frozen and hashed in one commit, the

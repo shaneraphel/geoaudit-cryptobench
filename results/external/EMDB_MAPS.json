@@ -1,0 +1,129 @@
+{
+  "schema": "geoaudit.emdb_maps.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": false,
+  "is_a_frozen_set": false,
+  "what_this_is": "provenance for the EMDB density maps held under data/external/_emdb, with the experimental method asserted against EMDB metadata rather than inferred from the entry title or the resolution",
+  "what_this_is_not": "not an input to the benchmark. No number in the primary claim reads a density map; the detector consumes apo coordinates. Nothing here supports a claim about a ligand pose or a binding affinity",
+  "why_the_method_is_asserted": "SETB_POOL.json records that RCSB's experimental_method == 'EM' also returns electron crystallography, and that MicroED entries occupy the top of any resolution-ordered selection. EMD-46871 was then selected as a high-resolution cryo-EM example by exactly that ordering. The declaration in MAPS now carries the expected method and a mismatch raises",
+  "crystallographic_voxel_ceiling_angstrom": 0.4,
+  "n_maps": 2,
+  "n_single_particle_cryo_em": 1,
+  "maps_are_gitignored": true,
+  "why_gitignored": "139 MB of density volumes; .gitignore excludes data/external/_emdb/ and this file carries the URL and sha256 so a reader can refetch and check byte identity",
+  "maps": [
+    {
+      "emd_id": "EMD-55233",
+      "declared_method": "singleParticle",
+      "why_this_entry": "a VHL-recruiting PROTAC ternary complex containing ERa (EloB/EloC/VHL/CV2a/14-3-3zeta/ERa, local refinement), which is the experimental counterpart of the degrader modality in the ESR1 appendix. Its 4.3 A resolution is the reason it is here: at 4.3 A individual ligand atoms are not placeable, so it is evidence for the appendix's refusal to assert a binding pose rather than evidence of one",
+      "emdb_metadata": {
+        "method": "singleParticle",
+        "aggregation_state": "particle",
+        "resolution_angstrom": 4.3,
+        "resolution_type": "BY AUTHOR",
+        "title": "Local refinement of EloB/EloC/VHL/CV2a/14-3-3zeta/ERa from pose 1"
+      },
+      "map_header": {
+        "grid": [
+          300,
+          300,
+          300
+        ],
+        "mode": 2,
+        "intervals": [
+          300,
+          300,
+          300
+        ],
+        "cell_angstrom": [
+          248.7,
+          248.7,
+          248.7
+        ],
+        "cell_angles_degrees": [
+          90.0,
+          90.0,
+          90.0
+        ],
+        "axis_order_col_row_sec": [
+          1,
+          2,
+          3
+        ],
+        "voxel_angstrom": [
+          0.829,
+          0.829,
+          0.829
+        ],
+        "voxel_is_cubic": true,
+        "axis_order_is_canonical": true
+      },
+      "header_says_crystallographic": false,
+      "header_consistent_with_method": true,
+      "is_single_particle_cryo_em": true,
+      "source_url": "https://ftp.ebi.ac.uk/pub/databases/emdb/structures/EMD-55233/map/emd_55233.map.gz",
+      "metadata_url": "https://www.ebi.ac.uk/emdb/api/entry/EMD-55233",
+      "bytes": 101209231,
+      "sha256": "60cbdcd2c3360bf6157bbf5e8ef4fa2d73f40006ae3ee6a8e8afd8864402586d",
+      "path": "data/external/_emdb/emd_55233.map.gz",
+      "tracked_in_git": false
+    },
+    {
+      "emd_id": "EMD-46871",
+      "declared_method": "electronCrystallography",
+      "why_this_entry": "not cryo-EM, and kept for that reason. Proteinase K from energy-filtered MicroED at 1.09 A is the entry that was mistaken for a high-resolution cryo-EM example by ordering candidates on resolution. It stays as the recorded instance of the contamination SETB_POOL.json describes, and as the contrast that shows how far the label EM stretches: 1.09 A here against 4.3 A for a single-particle reconstruction, a factor of four in the same word",
+      "emdb_metadata": {
+        "method": "electronCrystallography",
+        "aggregation_state": "threeDArray",
+        "resolution_angstrom": 1.09,
+        "resolution_type": "BY AUTHOR",
+        "title": "Structure of proteinase K from energy-filtered MicroED data"
+      },
+      "map_header": {
+        "grid": [
+          227,
+          220,
+          206
+        ],
+        "mode": 2,
+        "intervals": [
+          206,
+          220,
+          227
+        ],
+        "cell_angstrom": [
+          55.1462,
+          58.894,
+          60.7679
+        ],
+        "cell_angles_degrees": [
+          90.0,
+          90.0,
+          90.0
+        ],
+        "axis_order_col_row_sec": [
+          3,
+          2,
+          1
+        ],
+        "voxel_angstrom": [
+          0.2677,
+          0.2677,
+          0.2677
+        ],
+        "voxel_is_cubic": true,
+        "axis_order_is_canonical": false
+      },
+      "header_says_crystallographic": true,
+      "header_consistent_with_method": true,
+      "is_single_particle_cryo_em": false,
+      "source_url": "https://ftp.ebi.ac.uk/pub/databases/emdb/structures/EMD-46871/map/emd_46871.map.gz",
+      "metadata_url": "https://www.ebi.ac.uk/emdb/api/entry/EMD-46871",
+      "bytes": 38120371,
+      "sha256": "3e9d231cabd0ce880c75696d19f5f72f6bcc3dbf9d09a870d81bc031544fa7dd",
+      "path": "data/external/_emdb/emd_46871.map.gz",
+      "tracked_in_git": false
+    }
+  ]
+}
