@@ -83,6 +83,49 @@ no linear solve over raw wires can express. Use the solve as a cheap correlate
 that separates "the information is absent" from "the construction does not
 collect it". Never quote it as a bound.
 
+## 2b. Five measurements that together say the architecture is at a local optimum
+
+Added after a session that closed four axes and refuted two of its own
+hypotheses. Read this block before proposing anything that reweights, reselects
+or requantises the present construction, because all three have now been measured.
+
+| Measurement | Result | Artifact |
+|---|---|---|
+| Quantisation cut points | at optimum; resolving the tail is monotonically worse, −0.0041 to −0.0069 | `QUANTISATION_LADDER.json` |
+| Pairing choice | seed noise; a reseed costs −0.0026 and selection costs −0.0028 | `SELECTED_PAIRINGS.json` |
+| Appended column families | solve sees them, field does not, on two families of different character | `COMPOSITION_WIRES.json` |
+| Integer rounding of multiplicities | free, cos = 0.9992 | `GRAM_CONDITIONING.json` |
+| Bank size | not compressible; smooth in `K'`, no knee, −0.0324 at `K'`=52 | `BANK_TRUNCATION.json` |
+
+**Two hypotheses were raised and killed in the same session. Do not raise them
+again without new evidence.**
+
+*Conditioning orders the banks.* Proposed because the field beats a linear solve
+on the deployed wires by +0.0053 and loses on every bank with columns appended.
+Measured: the ordering by condition number is `interaction-selected, deployed,
+another seed, union` and by accuracy is `deployed, union, another seed,
+interaction-selected`. They do not agree and neither does the direction cosine.
+Withdrawn. What survives is a fact and not an ordering: selection really does cost
+447 of 5,152 independent directions.
+
+*The bank is effectively fifty-dimensional.* Proposed because 76.5 % of the
+scatter trace sits in the top 1 % of its directions, about 52 of 5,152, and
+`cos(m, Δμ)` is 0.025 on every bank including the deployed one. That predicted a
+detector two orders of magnitude smaller. Measured: accuracy is smooth and roughly
+logarithmic in `K'` with no plateau, and at `K'`=52 the loss is 0.0324 — larger
+than the whole pLM-NN deficit. The residual 23.5 % of the trace is spread over
+thousands of directions that each contribute little and together contribute a lot,
+and a spectrum cannot tell that from redundancy. Withdrawn.
+
+**What the five measurements do not exclude.** Every parameter varied so far is a
+*global* choice applied identically to all 5,152 tables: one ladder, one pairing
+draw, one attachment, one ridge solve, one table count. The untried structural
+change is a combination rule that is not a single global solve — a per-region or
+hierarchical assignment in which a table contributes where it is informative
+rather than everywhere at one weight. `cos(m, Δμ) = 0.025` is the reason to
+suspect it: the one global direction is nearly orthogonal to the class mean, which
+is what a single direction fitted to heterogeneous regions looks like.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the
@@ -143,7 +186,41 @@ and why.
 **One split is not twelve, and the smoke test's ordering is not a finding.**
 Stated in `AGENTS.md` because a monotone reading from two splits had to be
 withdrawn at twelve. It nearly happened again this session with the pairing
-arms.
+arms. The one licensed exception is when the effect is an order of magnitude
+larger than any split variation the tree has produced — the truncation curve's
+−0.067 at `K'`=13 is safe from one split — and even then the qualitative reading
+is quoted and the numbers are not called final until twelve.
+
+**Write the falsification condition into the tool before you run it.** Both
+hypotheses killed this session were killed by a sentence their own tool's
+docstring contained in advance: the conditioning tool printed both orderings and a
+boolean for whether they agreed, and the truncation tool said that a smooth
+fall-off rather than a plateau would mean the trace concentration was misleading.
+Neither result could be talked around afterwards. A tool that can only confirm is
+not an instrument.
+
+**Author in `/tmp`, copy into the repository, commit, then run.** Two tools were
+authored, run to completion, and then deleted along with every other untracked
+file by a failed workspace switch, while their artifacts survived. An artifact
+whose tool is gone is not reproducible, which is the one property this repository
+claims. One had to be re-authored from its own artifact's recorded specification
+and required to reproduce it exactly before being committed.
+
+**Stage, then verify, then commit.** Two commits in one session landed with
+`make verify` red. The gate walks `git ls-files`, so a new file passes every
+content check until the commit that tracks it. Separately, do not register an
+artifact in the manifest while a run is still rewriting it — the digest pinned
+will be the wrong one.
+
+**Check your own SMARTS, regex and column specs against a case you know.** Five
+instrument defects this session, each caught by a gate or a test rather than by
+reading: an unstandardised discriminant that inverted the sign of a live axis; a
+five-membered succinimide labelled as a six-membered glutarimide, which rejected
+every correct molecule in a release; hydrogen-bond donors that excluded amide
+nitrogen and acceptors that omitted carbonyl oxygen, so a molecule full of ureas
+reported zero of both; a pattern that did not compile and was displayed beside
+genuine hits; and a home-directory regex inside the tool written to remove
+home-directory paths.
 
 **Check that the repository you are about to create already exists.**
 `foliation-transfer-atlas` had a GitHub repository, an empty one, and a local
