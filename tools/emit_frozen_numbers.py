@@ -125,6 +125,7 @@ HIER = ROOT / "results/architecture_sweep/HIERARCHICAL_MULTIPLICITIES.json"
 GATEROUTE = ROOT / "results/architecture_sweep/GATE_WEIGHT_ROUTING.json"
 TABWIDTH = ROOT / "results/architecture_sweep/TABLE_WIDTH.json"
 COMBMULT = ROOT / "results/architecture_sweep/COMBINATORIAL_MULTIPLICITIES.json"
+APPBLOCK = ROOT / "results/architecture_sweep/APPENDED_BLOCK_GEOMETRY.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
 
@@ -1771,7 +1772,7 @@ def _saturation_macros() -> list[str]:
     """
     L: list[str] = []
     for path in (LADDER, PAIRSEL, COMPWIRE, GRAMCOND, TRUNC, HIER, GATEROUTE,
-                 TABWIDTH, COMBMULT):
+                 TABWIDTH, COMBMULT, APPBLOCK):
         if not path.exists():
             continue
         doc = json.loads(path.read_text())
@@ -2019,6 +2020,46 @@ def _saturation_macros() -> list[str]:
         rep = d.get("reproduction_check") or {}
         L.append(f"\\newcommand{{\\CombRepro}}"
                  f"{{{rep.get('max_absolute_difference', 0):.1e}}}")
+
+    if APPBLOCK.exists():
+        d = json.loads(APPBLOCK.read_text())
+        mn, mu, banks = (d["minus_narrow"], d["minus_the_deployed_union_attachment"],
+                         d["banks"])
+        for name, stem in (("width 2, 16 rounds", "WTwoSixteen"),
+                           ("width 1, 16 rounds", "WOneSixteen"),
+                           ("width 1, 4 rounds", "WOneFour"),
+                           ("width 2, 4 rounds", "WTwoFour"),
+                           ("width 3, 16 rounds", "WThreeSixteen")):
+            if name not in mn:
+                continue
+            L.append(f"\\newcommand{{\\Blk{stem}}}"
+                     f"{{{_signed(mn[name]['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\Blk{stem}Splits}}"
+                     f"{{{mn[name]['n_splits_positive']}}}")
+            L.append(f"\\newcommand{{\\Blk{stem}Cells}}"
+                     f"{{{banks[name]['n_cells_new_block']}}}")
+            L.append(f"\\newcommand{{\\Blk{stem}VsUnion}}"
+                     f"{{{_signed(mu[name]['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\Blk{stem}VsUnionSplits}}"
+                     f"{{{mu[name]['n_splits_positive']}}}")
+        fl = d["the_gap_under_attack"]["a_linear_solve_finds"] or {}
+        if fl:
+            L.append(f"\\newcommand{{\\BlkFisher}}"
+                     f"{{{_signed(fl['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\BlkFisherSplits}}"
+                     f"{{{fl['n_splits_positive']}}}")
+        # The spread of the cell budget the arms cover, so the prose can say how
+        # far it was varied without typing either end.
+        cells = [banks[k]["n_cells_new_block"] for k in mn]
+        L.append(f"\\newcommand{{\\BlkCellsMin}}{{{min(cells)}}}")
+        L.append(f"\\newcommand{{\\BlkCellsMax}}{{{max(cells)}}}")
+        L.append(f"\\newcommand{{\\BlkCellsRatio}}"
+                 f"{{{max(cells) / max(min(cells), 1):.0f}}}")
+        L.append(f"\\newcommand{{\\BlkNewColumns}}"
+                 f"{{{d['held_fixed']['n_new_columns']}}}")
+        rep = d.get("reproduction_check") or {}
+        worst = max((rep.get("absolute_differences") or {"x": 0.0}).values())
+        L.append(f"\\newcommand{{\\BlkRepro}}{{{worst:.1e}}}")
     return L
 
 

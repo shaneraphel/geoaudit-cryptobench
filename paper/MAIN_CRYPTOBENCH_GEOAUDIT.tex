@@ -2335,6 +2335,65 @@ nearly orthogonal to all of them. It would have to be an integer decorrelation o
 the bank itself, which is a different object from anything tried here and is left
 open rather than claimed.
 
+\subsection{The one quantity known to be present and uncollected, and where it is
+not hiding}
+\label{sec:appended}
+Section~\ref{sec:banks} leaves a number on the table and says so. A ridge Fisher
+solve gains \BlkFisher{} on \BlkFisherSplits{} of \LadderSplits{} splits from the
+\BlkNewColumns{} wire-asymmetry columns under the deployed gate; the counting field
+gains \CompWidened{} from the same columns when the bus is widened and
+\BlkWTwoSixteen{} on \BlkWTwoSixteenSplits{} when the bank is extended instead. The
+information is demonstrably there and the field does not take it. With every readout
+axis measured to its optimum, this is the largest identified quantity left, and it
+is worth knowing what it is not before guessing what it is.
+
+Two candidate explanations can be dismissed without an experiment. It is not an
+interaction the field fails to see, by arithmetic: the solve is linear, so whatever
+it extracts is a linear function of the raw columns. And it is not bank dilution,
+since the union attachment holds all \CompTablesFull{} deployed pairings and still
+reaches only \BlkWTwoSixteen{}.
+
+What remains is variance. A counting field can represent a monotone signal, but it
+cannot estimate cell frequencies for free, and the union attachment asks it to
+estimate about sixteen thousand of them to carry what the solve carries in
+\BlkNewColumns{} coefficients. For a weak signal that is a poor exchange, and it
+would produce exactly the observed shape. So the appended block's geometry was
+varied over a range of \BlkCellsRatio{}-fold in the number of cells it costs, from
+\BlkCellsMin{} to \BlkCellsMax{}, with the \CompTablesFull{} deployed pairings, the
+gate, the ridge, the cap and the banding held. The deployed union arm reproduces its
+frozen mean, minimum and maximum to \BlkRepro{}.
+
+It is not variance either. Cutting the cell budget by a factor of eight, from
+\BlkWTwoSixteenCells{} to \BlkWOneFourCells{}, moves the lift from
+\BlkWTwoSixteen{} to \BlkWOneFour{} --- the wrong way. The best arm is
+\BlkWTwoFour{} on \BlkWTwoFourSplits{} of \LadderSplits{}, which is
+\BlkWTwoFourVsUnion{} against the deployed union attachment on
+\BlkWTwoFourVsUnionSplits{} splits: consistent in sign and about a seventh of
+\SatReseed{} in size, so it is reported as a difference and not as a lift. Nothing
+here closes a meaningful part of the distance to \BlkFisher{}.
+
+The ordering says something the null alone would not. Accuracy is not monotone in
+the cell budget at all --- \BlkWTwoSixteenCells{}, \BlkWOneSixteenCells{},
+\BlkWOneFourCells{}, \BlkWTwoFourCells{} and \BlkWThreeSixteenCells{} cells give
+\BlkWTwoSixteen{}, \BlkWOneSixteen{}, \BlkWOneFour{}, \BlkWTwoFour{} and
+\BlkWThreeSixteen{} --- but it is ordered by width. The two width-2 arms are the
+best two and the two width-1 arms the worst two, with width 3 between them, which is
+the same interior optimum at width 2 that Section~\ref{sec:width} found for the
+whole bank. The appended block is not a special case wanting special treatment; it
+behaves like any other block of wires.
+
+That is the useful conclusion, and it relocates the gap rather than closing it. The
+asymmetry columns carry information that aggregates linearly across many columns,
+each contributing little. A solve with one coefficient per column is an efficient
+aggregator of exactly that; a bank of quartile cells is not, and no arrangement of
+the same cells makes it one. Two possibilities survive, and both are untried. The
+banding of these columns specifically: every sweep of the cut points so far moved
+all \NTabWires{} wires at once, which thins all \CompTablesFull{} tables' cells, and
+resolving only a \BlkNewColumns{}-column block would confine that cost to a small
+sub-bank. Or this class of information belongs to a different readout, in which case
+the honest statement is that a counting field and a linear solve are good at
+different things and the paper already measures both.
+
 \section{Limitations}
 The clearest limitation is the one Sections~\ref{sec:plmnn}
 and~\ref{sec:external} measure twice: the method is less accurate than the

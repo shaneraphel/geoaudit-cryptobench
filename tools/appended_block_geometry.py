@@ -353,9 +353,10 @@ def main(argv: list[str] | None = None) -> int:
               f"{c['n_splits_positive']}/{c['n_splits']}   "
               f"{built[k][2]['n_cells_new_block']:7d} new cells")
     if repro:
+        worst = max(repro["absolute_differences"].values())
         print(f"\n  reproduces the deployed union arm: "
               f"{repro['reproduces_the_deployed_union_arm']} "
-              f"(max |diff| {repro['max_absolute_difference']:.2e})")
+              f"(worst of mean/min/max: {worst:.2e})")
     else:
         print("\n  no per-split union numbers found to reproduce against; the "
               "reference arm is unverified")
