@@ -1,0 +1,766 @@
+{
+ "schema": "geoaudit.bank_truncation.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "GRAM_CONDITIONING.json found 76.5 per cent of the scatter trace in the top one per cent of its directions and a solved-direction cosine of 0.025 on every bank including the deployed one. If the readout uses only a small effective subspace, how many of the 5,152 tables does it need",
+ "why_it_matters": "if a bank of order 52 to 200 matches 5,152, the deployed detector carries two orders of magnitude more table than it uses, and 1.79 MB of integers becomes tens of kilobytes at the same accuracy. That is a stronger claim than the lifts being chased",
+ "what_would_falsify_it": "accuracy falling off smoothly with K' instead of plateauing early, which would mean the trace concentration was misleading and the tables do distributed work the spectrum does not see",
+ "selection_rules": {
+  "by multiplicity": "absolute integer multiplicity from the full 5,152-table solve; the rule the spectrum suggests, fit-half only, but it needs the full solve to exist",
+  "by gini": "each table's own V = sum_c (k_c - p n_c)^2 / (n_c N), the integer-count functional the fan-out ranking already uses. Needs no full solve, so a bank chosen this way could be compiled directly at any target size. This is the rule that would ship",
+  "random": "a subset of the same size at seed 20260730. Without it a plateau proves nothing: if random subsets also match the full bank then the tables are interchangeable and neither ranking is doing work"
+ },
+ "held_fixed": {
+  "n_wires": 645,
+  "n_levels": 4,
+  "table_width": 2,
+  "partition_rounds": 16,
+  "partition_seed": 20260725,
+  "n_tables_full": 5152,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "cells_compiled_once": "cell frequencies are compiled over the whole bank per split and the subsets read the same numbers, so truncation changes which cells the score sums over and the multiplicities, and nothing about a cell"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "select_and_solve_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC",
+  "baseline_was_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json"
+ },
+ "sizes": [
+  13,
+  26,
+  52,
+  104,
+  208,
+  416,
+  832,
+  1664,
+  3328,
+  5152
+ ],
+ "deployed_arm_frozen": {
+  "mean": 0.79012
+ },
+ "curves": {
+  "by multiplicity": {
+   "13": {
+    "mean": 0.743014,
+    "delta_mean": -0.047105,
+    "delta_min": -0.067004,
+    "delta_max": -0.027457,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "26": {
+    "mean": 0.754878,
+    "delta_mean": -0.035241,
+    "delta_min": -0.050665,
+    "delta_max": -0.016661,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "52": {
+    "mean": 0.761995,
+    "delta_mean": -0.028125,
+    "delta_min": -0.039156,
+    "delta_max": -0.01906,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "104": {
+    "mean": 0.76944,
+    "delta_mean": -0.020679,
+    "delta_min": -0.026242,
+    "delta_max": -0.01541,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "208": {
+    "mean": 0.776986,
+    "delta_mean": -0.013134,
+    "delta_min": -0.01866,
+    "delta_max": -0.00688,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "416": {
+    "mean": 0.782529,
+    "delta_mean": -0.007591,
+    "delta_min": -0.011359,
+    "delta_max": -0.005066,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "832": {
+    "mean": 0.786906,
+    "delta_mean": -0.003214,
+    "delta_min": -0.009548,
+    "delta_max": 0.001111,
+    "n_splits_positive": 2,
+    "n_splits": 12
+   },
+   "1664": {
+    "mean": 0.789121,
+    "delta_mean": -0.000999,
+    "delta_min": -0.003972,
+    "delta_max": 0.000873,
+    "n_splits_positive": 5,
+    "n_splits": 12
+   },
+   "3328": {
+    "mean": 0.790188,
+    "delta_mean": 6.8e-05,
+    "delta_min": -0.002906,
+    "delta_max": 0.003606,
+    "n_splits_positive": 5,
+    "n_splits": 12
+   },
+   "5152": {
+    "mean": 0.79012,
+    "delta_mean": -0.0,
+    "delta_min": -0.0,
+    "delta_max": 0.0,
+    "n_splits_positive": 6,
+    "n_splits": 12
+   }
+  },
+  "by gini": {
+   "13": {
+    "mean": 0.739721,
+    "delta_mean": -0.050399,
+    "delta_min": -0.059812,
+    "delta_max": -0.042424,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "26": {
+    "mean": 0.749244,
+    "delta_mean": -0.040876,
+    "delta_min": -0.049307,
+    "delta_max": -0.029753,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "52": {
+    "mean": 0.753173,
+    "delta_mean": -0.036947,
+    "delta_min": -0.045324,
+    "delta_max": -0.026472,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "104": {
+    "mean": 0.761241,
+    "delta_mean": -0.028879,
+    "delta_min": -0.035189,
+    "delta_max": -0.020074,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "208": {
+    "mean": 0.768448,
+    "delta_mean": -0.021672,
+    "delta_min": -0.0301,
+    "delta_max": -0.01437,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "416": {
+    "mean": 0.775558,
+    "delta_mean": -0.014562,
+    "delta_min": -0.019749,
+    "delta_max": -0.007766,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "832": {
+    "mean": 0.782117,
+    "delta_mean": -0.008003,
+    "delta_min": -0.013613,
+    "delta_max": -0.002304,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "1664": {
+    "mean": 0.786865,
+    "delta_mean": -0.003255,
+    "delta_min": -0.007166,
+    "delta_max": 0.000333,
+    "n_splits_positive": 1,
+    "n_splits": 12
+   },
+   "3328": {
+    "mean": 0.789442,
+    "delta_mean": -0.000678,
+    "delta_min": -0.004581,
+    "delta_max": 0.001606,
+    "n_splits_positive": 7,
+    "n_splits": 12
+   },
+   "5152": {
+    "mean": 0.79012,
+    "delta_mean": -0.0,
+    "delta_min": -0.0,
+    "delta_max": 0.0,
+    "n_splits_positive": 6,
+    "n_splits": 12
+   }
+  },
+  "random": {
+   "13": {
+    "mean": 0.734875,
+    "delta_mean": -0.055245,
+    "delta_min": -0.062533,
+    "delta_max": -0.047889,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "26": {
+    "mean": 0.755276,
+    "delta_mean": -0.034844,
+    "delta_min": -0.044746,
+    "delta_max": -0.02583,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "52": {
+    "mean": 0.759971,
+    "delta_mean": -0.030149,
+    "delta_min": -0.037721,
+    "delta_max": -0.021031,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "104": {
+    "mean": 0.771338,
+    "delta_mean": -0.018781,
+    "delta_min": -0.026039,
+    "delta_max": -0.011962,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "208": {
+    "mean": 0.779524,
+    "delta_mean": -0.010595,
+    "delta_min": -0.016989,
+    "delta_max": -0.005924,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "416": {
+    "mean": 0.781698,
+    "delta_mean": -0.008422,
+    "delta_min": -0.013612,
+    "delta_max": -0.002734,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "832": {
+    "mean": 0.782919,
+    "delta_mean": -0.007201,
+    "delta_min": -0.010846,
+    "delta_max": -0.003129,
+    "n_splits_positive": 0,
+    "n_splits": 12
+   },
+   "1664": {
+    "mean": 0.788793,
+    "delta_mean": -0.001327,
+    "delta_min": -0.004605,
+    "delta_max": 0.002579,
+    "n_splits_positive": 4,
+    "n_splits": 12
+   },
+   "3328": {
+    "mean": 0.789665,
+    "delta_mean": -0.000455,
+    "delta_min": -0.00385,
+    "delta_max": 0.004155,
+    "n_splits_positive": 4,
+    "n_splits": 12
+   },
+   "5152": {
+    "mean": 0.79012,
+    "delta_mean": -0.0,
+    "delta_min": -0.0,
+    "delta_max": 0.0,
+    "n_splits_positive": 6,
+    "n_splits": 12
+   }
+  }
+ },
+ "smallest_bank_within_tolerance": {
+  "0.001": {
+   "by multiplicity": 1664,
+   "by gini": 3328,
+   "random": 3328
+  },
+  "0.002": {
+   "by multiplicity": 1664,
+   "by gini": 3328,
+   "random": 1664
+  },
+  "0.005": {
+   "by multiplicity": 832,
+   "by gini": 1664,
+   "random": 1664
+  }
+ },
+ "reproduction_check": {
+  "arm": "by multiplicity, K'=5152",
+  "max_absolute_difference": 4.01e-07,
+  "reproduces_the_deployed_arm": true,
+  "why_this_is_here": "the largest subset is the whole bank, so this arm must return the frozen deployed numbers. Running it rather than assuming it is what makes the truncated arms comparable to them"
+ },
+ "per_split": {
+  "by multiplicity": {
+   "13": [
+    0.737618,
+    0.725117,
+    0.730071,
+    0.741676,
+    0.74591,
+    0.745236,
+    0.74103,
+    0.75455,
+    0.755872,
+    0.755437,
+    0.749566,
+    0.734089
+   ],
+   "26": [
+    0.761698,
+    0.752822,
+    0.737314,
+    0.748178,
+    0.754528,
+    0.74854,
+    0.758093,
+    0.761083,
+    0.757165,
+    0.760519,
+    0.773714,
+    0.744885
+   ],
+   "52": [
+    0.772234,
+    0.757216,
+    0.756885,
+    0.759096,
+    0.757089,
+    0.749244,
+    0.778226,
+    0.768604,
+    0.76605,
+    0.7648,
+    0.772659,
+    0.741839
+   ],
+   "104": [
+    0.77838,
+    0.765025,
+    0.767835,
+    0.773205,
+    0.766767,
+    0.763435,
+    0.778632,
+    0.772226,
+    0.772649,
+    0.76845,
+    0.783192,
+    0.743489
+   ],
+   "208": [
+    0.785962,
+    0.768406,
+    0.77435,
+    0.779023,
+    0.775484,
+    0.773476,
+    0.783722,
+    0.778622,
+    0.784877,
+    0.773668,
+    0.794978,
+    0.75126
+   ],
+   "416": [
+    0.793263,
+    0.778231,
+    0.782138,
+    0.780366,
+    0.78278,
+    0.777466,
+    0.792331,
+    0.785058,
+    0.786065,
+    0.778226,
+    0.798425,
+    0.756001
+   ],
+   "832": [
+    0.795074,
+    0.782408,
+    0.785923,
+    0.785169,
+    0.785553,
+    0.785462,
+    0.795849,
+    0.790876,
+    0.788657,
+    0.781394,
+    0.80385,
+    0.762657
+   ],
+   "1664": [
+    0.80065,
+    0.785519,
+    0.785374,
+    0.791237,
+    0.787448,
+    0.787101,
+    0.800416,
+    0.790607,
+    0.789505,
+    0.784209,
+    0.804968,
+    0.762415
+   ],
+   "3328": [
+    0.801716,
+    0.785317,
+    0.789981,
+    0.789087,
+    0.788688,
+    0.788347,
+    0.79973,
+    0.790617,
+    0.791423,
+    0.784514,
+    0.807685,
+    0.765152
+   ],
+   "5152": [
+    0.804622,
+    0.786394,
+    0.787979,
+    0.790364,
+    0.791253,
+    0.7884,
+    0.800117,
+    0.790124,
+    0.791757,
+    0.78386,
+    0.805021,
+    0.761546
+   ]
+  },
+  "by gini": {
+   "13": [
+    0.750256,
+    0.73663,
+    0.735313,
+    0.737796,
+    0.737531,
+    0.728588,
+    0.750451,
+    0.741433,
+    0.73887,
+    0.741423,
+    0.75924,
+    0.719122
+   ],
+   "26": [
+    0.755315,
+    0.745036,
+    0.744537,
+    0.743386,
+    0.746988,
+    0.73975,
+    0.760533,
+    0.75169,
+    0.750197,
+    0.754107,
+    0.768965,
+    0.73042
+   ],
+   "52": [
+    0.760449,
+    0.749844,
+    0.748456,
+    0.754648,
+    0.750703,
+    0.743076,
+    0.758447,
+    0.755893,
+    0.756754,
+    0.757388,
+    0.772888,
+    0.729525
+   ],
+   "104": [
+    0.770101,
+    0.757675,
+    0.760718,
+    0.760769,
+    0.757159,
+    0.753211,
+    0.772718,
+    0.761785,
+    0.758395,
+    0.761156,
+    0.779733,
+    0.741472
+   ],
+   "208": [
+    0.77827,
+    0.763518,
+    0.766073,
+    0.769171,
+    0.7665,
+    0.7583,
+    0.777867,
+    0.767713,
+    0.771618,
+    0.768777,
+    0.78639,
+    0.747176
+   ],
+   "416": [
+    0.785787,
+    0.768573,
+    0.775442,
+    0.774023,
+    0.771504,
+    0.770621,
+    0.786719,
+    0.775626,
+    0.77783,
+    0.776094,
+    0.791761,
+    0.752712
+   ],
+   "832": [
+    0.791009,
+    0.778688,
+    0.778877,
+    0.780348,
+    0.779584,
+    0.776627,
+    0.79654,
+    0.779576,
+    0.786352,
+    0.779076,
+    0.799484,
+    0.759242
+   ],
+   "1664": [
+    0.798192,
+    0.781792,
+    0.782989,
+    0.783865,
+    0.784087,
+    0.78347,
+    0.79981,
+    0.790457,
+    0.790574,
+    0.781626,
+    0.804572,
+    0.760941
+   ],
+   "3328": [
+    0.801245,
+    0.787102,
+    0.786177,
+    0.78889,
+    0.788216,
+    0.790006,
+    0.800614,
+    0.7911,
+    0.787176,
+    0.784211,
+    0.805932,
+    0.762638
+   ],
+   "5152": [
+    0.804622,
+    0.786394,
+    0.787979,
+    0.790364,
+    0.791253,
+    0.7884,
+    0.800117,
+    0.790124,
+    0.791757,
+    0.78386,
+    0.805021,
+    0.761546
+   ]
+  },
+  "random": {
+   "13": [
+    0.742315,
+    0.733482,
+    0.732231,
+    0.735409,
+    0.732464,
+    0.725867,
+    0.741658,
+    0.739343,
+    0.73722,
+    0.735971,
+    0.749249,
+    0.713291
+   ],
+   "26": [
+    0.760922,
+    0.756045,
+    0.754223,
+    0.753928,
+    0.751244,
+    0.743654,
+    0.763672,
+    0.758506,
+    0.759037,
+    0.755677,
+    0.770687,
+    0.735716
+   ],
+   "52": [
+    0.769454,
+    0.760008,
+    0.757448,
+    0.757509,
+    0.754186,
+    0.750679,
+    0.768393,
+    0.763928,
+    0.764892,
+    0.758611,
+    0.774023,
+    0.740515
+   ],
+   "104": [
+    0.778583,
+    0.767138,
+    0.769999,
+    0.767394,
+    0.765928,
+    0.763767,
+    0.782401,
+    0.77644,
+    0.778223,
+    0.768976,
+    0.787627,
+    0.749584
+   ],
+   "208": [
+    0.787633,
+    0.776612,
+    0.778346,
+    0.779368,
+    0.775612,
+    0.772194,
+    0.789549,
+    0.781694,
+    0.784573,
+    0.776368,
+    0.796723,
+    0.755622
+   ],
+   "416": [
+    0.79101,
+    0.779129,
+    0.779572,
+    0.782427,
+    0.777878,
+    0.775076,
+    0.791973,
+    0.782179,
+    0.785133,
+    0.778769,
+    0.79841,
+    0.758812
+   ],
+   "832": [
+    0.794923,
+    0.778751,
+    0.781018,
+    0.783578,
+    0.780407,
+    0.779132,
+    0.792247,
+    0.783166,
+    0.784454,
+    0.780731,
+    0.799337,
+    0.757282
+   ],
+   "1664": [
+    0.802702,
+    0.78355,
+    0.78728,
+    0.788233,
+    0.786648,
+    0.785384,
+    0.795536,
+    0.792703,
+    0.789752,
+    0.784239,
+    0.806709,
+    0.762781
+   ],
+   "3328": [
+    0.802805,
+    0.784586,
+    0.785933,
+    0.788302,
+    0.787403,
+    0.787923,
+    0.799786,
+    0.792381,
+    0.791911,
+    0.782863,
+    0.806386,
+    0.765701
+   ],
+   "5152": [
+    0.804622,
+    0.786394,
+    0.787979,
+    0.790364,
+    0.791253,
+    0.7884,
+    0.800117,
+    0.790124,
+    0.791757,
+    0.78386,
+    0.805021,
+    0.761546
+   ]
+  }
+ },
+ "per_split_deployed_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}
