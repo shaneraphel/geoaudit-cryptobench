@@ -97,6 +97,7 @@ OUT = ROOT / "results/architecture_sweep/COLLECTABILITY_SCREEN.json"
 FISHER = ROOT / "results/architecture_sweep/IS_FISHER_A_CEILING.json"
 UNION = ROOT / "results/architecture_sweep/UNION_BANK_COUNTING_FIELD.json"
 COMPWIRE = ROOT / "results/architecture_sweep/COMPOSITION_WIRES.json"
+GRAPHINV = ROOT / "data/cryptobench_apo/_graphinv_cache_train.npz"
 
 # The measured field-minus-solve difference for each family, read from the frozen
 # artifacts rather than typed, so the thing the screen has to reproduce cannot
@@ -290,6 +291,23 @@ def main(argv: list[str] | None = None) -> int:
         "asymmetry 129": np.asarray(A, dtype=np.float64),
         "composition 76": np.asarray(C, dtype=np.float64),
     }
+    # The prospective test. This family has no measured field lift yet, so it
+    # appears with the screen's value and no lift beside it: the prediction is
+    # recorded here and the lift is measured afterwards, which is the only way
+    # round that tests a screen fitted to three families after the fact.
+    if GRAPHINV.is_file():
+        from graph_invariant_wires import (
+            build_or_load as build_graphinv,
+            build_wide_or_load as build_graphinv_wide,
+        )
+        G, _gnames = build_graphinv()
+        families["graph invariants 15"] = np.asarray(G, dtype=np.float64)
+        # The 225-wire expansion is what a union attachment would actually add;
+        # fifteen columns make about 112 tables against the asymmetry family's
+        # 1,024, too small a block for a null on it to mean anything. Both are
+        # screened so the expansion's own cost is visible.
+        GW, _gwnames = build_graphinv_wide()
+        families["graph invariants 225"] = np.asarray(GW, dtype=np.float64)
     print(f"built the three families in {time.perf_counter() - t0:.0f}s: "
           + ", ".join(f"{k} ({v.shape[1]})" for k, v in families.items()),
           flush=True)
@@ -339,7 +357,12 @@ def main(argv: list[str] | None = None) -> int:
                             ["share_over_all_pairs_mean_across_splits"])
     order_by_abs = sorted(fam, key=lambda k: -fam[k]
                           ["second_order_over_all_pairs"]["mean"])
+    # Only families with a measured lift can order anything. A family present for
+    # the prospective test contributes its screen value and nothing else, and must
+    # not silently enter the agreement check it exists to test later.
     have = [k for k in fam if (lifts.get(k) or {}).get("field_minus_solve") is not None]
+    order_by_share = [k for k in order_by_share if k in have]
+    order_by_abs = [k for k in order_by_abs if k in have]
     order_by_lift = sorted(have, key=lambda k: -lifts[k]["field_minus_solve"])
     agrees = order_by_share[:len(order_by_lift)] == order_by_lift
     agrees_abs = order_by_abs[:len(order_by_lift)] == order_by_lift
@@ -393,6 +416,27 @@ def main(argv: list[str] | None = None) -> int:
                         f"{PARTITION_SEED}, drawn within each family",
         },
         "families": fam,
+        "prospective_test": {
+            "family": "graph invariants 225",
+            "also_screened_unexpanded": "graph invariants 15",
+            "why_it_exists": (
+                "the screen was fitted to three families after the fact, so it is "
+                "a hypothesis. This family is built to the rule the screen "
+                "implies -- fifteen different invariants of one graph rather than "
+                "one invariant of fifteen graphs -- and its interaction is "
+                "measured here before its field lift is measured anywhere"),
+            "screen_value": (fam.get("graph invariants 225") or {}).get(
+                "second_order_over_all_pairs"),
+            "screen_value_unexpanded": (fam.get("graph invariants 15") or {}).get(
+                "second_order_over_all_pairs"),
+            "what_the_screen_predicts": (
+                "a mean pairwise interaction of the order of the deployed bank's "
+                "+1.06e-05 means the counting field should collect this family and "
+                "the union attachment should lift. A negative one like the "
+                "asymmetry family's -9.69e-06 means it should not, and the lift "
+                "should appear in a linear solve instead"),
+            "field_lift_measured": False,
+        } if "graph invariants 225" in fam else None,
         "where_the_deployed_bank_s_interaction_lives": split_by_kind,
         "why_that_decomposition_was_run": (
             "the asymmetry family is one operator swept over radii and its mean "
@@ -452,9 +496,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  {k:22s} {fam[k]['share_over_all_pairs_mean_across_splits']:+.4f}"
               f"          {fam[k]['share_over_the_bank_mean_across_splits']:+.4f}"
               f"       {'n/a' if fms is None else f'{fms:+.4f}'}")
-    print("\n  absolute mean pairwise interaction:")
-    for k in order_by_abs:
-        print(f"    {k:22s} {fam[k]['second_order_over_all_pairs']['mean']:+.3e}")
+    print("\n  absolute mean pairwise interaction (families with a measured lift "
+          "first, then the ones awaiting one):")
+    for k in order_by_abs + [x for x in fam if x not in order_by_abs]:
+        flag = "" if k in order_by_abs else "   <- no field lift measured yet"
+        print(f"    {k:22s} "
+              f"{fam[k]['second_order_over_all_pairs']['mean']:+.3e}{flag}")
     print(f"\n  by share:            {order_by_share}")
     print(f"  by absolute 2nd order: {order_by_abs}")
     print(f"  by measured lift:      {order_by_lift}")

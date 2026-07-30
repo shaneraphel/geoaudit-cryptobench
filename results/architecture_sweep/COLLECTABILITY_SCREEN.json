@@ -139,7 +139,84 @@
     "artifact": "results/architecture_sweep/COMPOSITION_WIRES.json",
     "how": "union minus deployed for the field, fisher lift for the solve"
    }
+  },
+  "graph invariants 15": {
+   "n_columns": 15,
+   "n_pairs_all": 105,
+   "n_pairs_in_the_bank": 112,
+   "first_order_per_column": {
+    "mean": 0.000103018,
+    "median": 5.8351e-05
+   },
+   "second_order_over_all_pairs": {
+    "mean": 5.046e-06,
+    "median": 7.204e-06
+   },
+   "non_additive_share_over_all_pairs": {
+    "mean": 0.081328,
+    "median": 0.057439,
+    "p10": -0.170493,
+    "p90": 0.336763,
+    "fraction_negative": 0.219
+   },
+   "non_additive_share_over_the_bank": {
+    "mean": 0.0922,
+    "median": 0.054753,
+    "p10": -0.171934,
+    "p90": 0.35107,
+    "fraction_negative": 0.2232
+   },
+   "share_over_the_bank_mean_across_splits": 0.0922,
+   "share_over_all_pairs_mean_across_splits": 0.081328,
+   "measured_lifts": null,
+   "lift_source": null
+  },
+  "graph invariants 225": {
+   "n_columns": 225,
+   "n_pairs_all": 25200,
+   "n_pairs_in_the_bank": 1792,
+   "first_order_per_column": {
+    "mean": 0.000115744,
+    "median": 8.142e-05
+   },
+   "second_order_over_all_pairs": {
+    "mean": 6.422e-06,
+    "median": 7.015e-06
+   },
+   "non_additive_share_over_all_pairs": {
+    "mean": 0.071315,
+    "median": 0.051425,
+    "p10": -0.105677,
+    "p90": 0.277052,
+    "fraction_negative": 0.24
+   },
+   "non_additive_share_over_the_bank": {
+    "mean": 0.074246,
+    "median": 0.051322,
+    "p10": -0.097758,
+    "p90": 0.281818,
+    "fraction_negative": 0.2388
+   },
+   "share_over_the_bank_mean_across_splits": 0.074246,
+   "share_over_all_pairs_mean_across_splits": 0.071315,
+   "measured_lifts": null,
+   "lift_source": null
   }
+ },
+ "prospective_test": {
+  "family": "graph invariants 225",
+  "also_screened_unexpanded": "graph invariants 15",
+  "why_it_exists": "the screen was fitted to three families after the fact, so it is a hypothesis. This family is built to the rule the screen implies -- fifteen different invariants of one graph rather than one invariant of fifteen graphs -- and its interaction is measured here before its field lift is measured anywhere",
+  "screen_value": {
+   "mean": 6.422e-06,
+   "median": 7.015e-06
+  },
+  "screen_value_unexpanded": {
+   "mean": 5.046e-06,
+   "median": 7.204e-06
+  },
+  "what_the_screen_predicts": "a mean pairwise interaction of the order of the deployed bank's +1.06e-05 means the counting field should collect this family and the union attachment should lift. A negative one like the asymmetry family's -9.69e-06 means it should not, and the lift should appear in a linear solve instead",
+  "field_lift_measured": false
  },
  "where_the_deployed_bank_s_interaction_lives": {
   "layout": "wire w is quantity w % 43 under statistic w // 43, from wide_descriptors.build_wide",

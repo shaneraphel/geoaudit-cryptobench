@@ -14,11 +14,11 @@
     "cited": 58,
     "exploration": 33,
     "superseded": 17,
-    "inventory": 4,
+    "inventory": 5,
     "frozen_unread": 1,
     "fold_access": 10
   },
-  "n_artifacts": 123,
+  "n_artifacts": 124,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -67,7 +67,7 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.collectability_screen.v1",
-      "bytes": 8958
+      "bytes": 11461
     },
     {
       "artifact": "results/architecture_sweep/COMBINATORIAL_MULTIPLICITIES.json",
@@ -656,6 +656,13 @@
       "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
       "schema": "geoaudit.setb_candidates.v1",
       "bytes": 907399
+    },
+    {
+      "artifact": "results/external/SETC_SET.json",
+      "class": "inventory",
+      "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
+      "schema": "geoaudit.setb_set.v1",
+      "bytes": 259550
     },
     {
       "artifact": "results/gf4_ablation/GF4_ALLELE_ABLATION.json",
