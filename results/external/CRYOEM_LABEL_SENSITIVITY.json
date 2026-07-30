@@ -1,0 +1,117 @@
+{
+ "schema": "geoaudit.cryoem_label_sensitivity.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "no_method_has_been_run": true,
+ "is_a_frozen_set": false,
+ "what_this_is": "how the recovered cryptic-pocket labelling behaves as cryo-EM resolution loosens, measured from the two cryo-EM sets themselves",
+ "why_it_is_not_inside_either_set": "Set B is frozen at a digest a preregistration will pin. Editing it to add a diagnostic would change that digest, so a finding about a frozen set is filed beside it rather than in it",
+ "pair_verdicts_by_set": {
+  "Set A, X-ray": {
+   "artifact": "results/external/EXTERNAL_SET.json",
+   "n_pairs": 2672,
+   "counts": {
+    "cryptic": 161,
+    "not cryptic": 2264,
+    "inside the guard band, not labelled either way": 247
+   },
+   "percent": {
+    "cryptic": 6.0,
+    "inside the guard band, not labelled either way": 9.2,
+    "not cryptic": 84.7
+   }
+  },
+  "Set B, cryo-EM 2.5 A": {
+   "artifact": "results/external/SETB_SET.json",
+   "n_pairs": 382,
+   "counts": {
+    "cryptic": 27,
+    "not cryptic": 289,
+    "inside the guard band, not labelled either way": 66
+   },
+   "percent": {
+    "cryptic": 7.1,
+    "inside the guard band, not labelled either way": 17.3,
+    "not cryptic": 75.7
+   }
+  },
+  "Set C, cryo-EM 3.0 A": {
+   "artifact": "results/external/SETC_SET.json",
+   "n_pairs": 1059,
+   "counts": {
+    "not cryptic": 592,
+    "cryptic": 129,
+    "inside the guard band, not labelled either way": 338
+   },
+   "percent": {
+    "cryptic": 12.2,
+    "inside the guard band, not labelled either way": 31.9,
+    "not cryptic": 55.9
+   }
+  }
+ },
+ "the_two_readings": "the share of pairs inside the guard band roughly doubles from X-ray to 2.5 A and again to 3.0 A, and the share called cryptic rises with it. Either these proteins move more, or coordinate error inflates the pRMSD and pushes pairs over the floor, in which case the extra labels are measurement noise read as conformational change. The two mean opposite things for a benchmark",
+ "n_cryo_em_units": 299,
+ "resolution_range_angstrom": [
+  1.55,
+  3.0
+ ],
+ "called_cryptic_by_resolution_band": [
+  {
+   "band_angstrom": [
+    1.5,
+    2.0
+   ],
+   "n_units": 25,
+   "n_called_cryptic": 0,
+   "percent_called_cryptic": 0.0
+  },
+  {
+   "band_angstrom": [
+    2.0,
+    2.3
+   ],
+   "n_units": 47,
+   "n_called_cryptic": 4,
+   "percent_called_cryptic": 8.5
+  },
+  {
+   "band_angstrom": [
+    2.3,
+    2.6
+   ],
+   "n_units": 82,
+   "n_called_cryptic": 19,
+   "percent_called_cryptic": 23.2
+  },
+  {
+   "band_angstrom": [
+    2.6,
+    2.8
+   ],
+   "n_units": 58,
+   "n_called_cryptic": 8,
+   "percent_called_cryptic": 13.8
+  },
+  {
+   "band_angstrom": [
+    2.8,
+    3.01
+   ],
+   "n_units": 87,
+   "n_called_cryptic": 15,
+   "percent_called_cryptic": 17.2
+  }
+ ],
+ "rank_test": {
+  "what_it_counts": "over pairs of units with different labels, how often the one called cryptic is the coarser of the two",
+  "n_discordant_pairs": 11437,
+  "n_coarser_called_cryptic": 6401,
+  "percent": 56.0,
+  "no_relation_would_be": 50.0,
+  "why_a_rank_test_as_well": "a bin boundary is a choice and this is not; it is an integer count of comparisons and needs no model"
+ },
+ "monotone_in_resolution": false,
+ "what_this_supports": "the labelling of a cryo-EM external set is not resolution-neutral. The dependence is 56.0 per cent against 50 for no relation and it is not monotone across bands, which is too weak to establish that the higher yield at 3.0 A is noise. What it does establish is that resolution is a covariate of the label, which a reader of any future result on either set needs in front of them",
+ "what_this_does_not_support": "a correction. Nothing here adjusts a label or a set; the sets are frozen as built and this is a statement about how to read them"
+}

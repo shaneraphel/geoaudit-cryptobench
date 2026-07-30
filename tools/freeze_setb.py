@@ -52,6 +52,11 @@ SCHEMA_SUFFIX = ".frozen"
 SET_A = ROOT / "results/external/EXTERNAL_SET.json"
 UNIREF_A = ROOT / "data/external/UNIREF50.json"
 RULE = ROOT / "results/external/CRYPTOBENCH_RULE.json"
+# Every external set already frozen. A new one must be disjoint from all of them,
+# not only from Set A: two frozen sets sharing a cluster would make their two
+# reads correlated, which is the one thing a second set exists to avoid. Listed
+# by path and checked by recomputation, so adding a third set means adding it here.
+ALREADY_FROZEN = (SET_A, ROOT / "results/external/SETB_SET.json")
 
 # Substrings that must not appear as keys anywhere in a set being frozen. A set
 # that carries a metric has been read, and freezing it as unread would make the
@@ -65,6 +70,11 @@ ALLOWED = {"n_positive_residues", "prediction_provenance"}
 
 class NotFreezable(RuntimeError):
     """A property that makes this a valid external set does not hold."""
+
+
+# The set being frozen, so the disjointness check does not compare it with itself
+# and report every one of its own clusters as a collision.
+_TARGET: dict[str, Path] = {}
 
 
 def sha256_of(path: Path) -> str:
@@ -107,10 +117,15 @@ def check_disjoint(doc: dict) -> list[str]:
         u = json.loads(UNIREF_A.read_text())
         cb_acc = set(u.get("cryptobench") or {})
         cb_clusters = set((u.get("cryptobench") or {}).values())
-    a = json.loads(SET_A.read_text())
-    a_clusters = {x["cluster"] for x in a["units"]}
-    a_clusters |= {x["cluster"] for x in a.get("units_without_a_cryptic_pocket", [])
-                   if "cluster" in x}
+    spent: dict[str, set[str]] = {}
+    for p in ALREADY_FROZEN:
+        if not p.is_file() or p.resolve() == _TARGET.get("path"):
+            continue
+        other = json.loads(p.read_text())
+        cl = {x["cluster"] for x in other["units"]}
+        cl |= {x["cluster"] for x in other.get("units_without_a_cryptic_pocket", [])
+               if "cluster" in x}
+        spent[str(p.relative_to(ROOT))] = cl
 
     seen: dict[str, str] = {}
     for x in all_units:
@@ -120,9 +135,10 @@ def check_disjoint(doc: dict) -> list[str]:
             continue
         if clu in cb_clusters:
             bad.append(f"{acc}: cluster {clu} is shared with CryptoBench")
-        if clu in a_clusters:
-            bad.append(f"{acc}: cluster {clu} is shared with Set A, whose read is "
-                       f"already spent, so the two reads would be correlated")
+        for where, cl in spent.items():
+            if clu in cl:
+                bad.append(f"{acc}: cluster {clu} is shared with {where}, so the "
+                           f"two sets' reads would be correlated")
         if acc in cb_acc:
             bad.append(f"{acc}: the accession itself appears in CryptoBench")
         if clu in seen and seen[clu] != acc:
@@ -155,6 +171,7 @@ def main(argv: list[str] | None = None) -> int:
     a = ap.parse_args(argv)
 
     path = a.set if a.set.is_absolute() else ROOT / a.set
+    _TARGET["path"] = path.resolve()
     doc = json.loads(path.read_text())
 
     problems = check_no_read(doc) + check_disjoint(doc)

@@ -15,10 +15,10 @@
     "exploration": 33,
     "superseded": 17,
     "inventory": 5,
-    "frozen_unread": 1,
+    "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 124,
+  "n_artifacts": 125,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -574,6 +574,13 @@
       "bytes": 1806506
     },
     {
+      "artifact": "results/external/CRYOEM_LABEL_SENSITIVITY.json",
+      "class": "inventory",
+      "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
+      "schema": "geoaudit.cryoem_label_sensitivity.v1",
+      "bytes": 3785
+    },
+    {
       "artifact": "results/external/CRYPTOBENCH_RULE.json",
       "class": "superseded",
       "reason": "an earlier frozen state, kept for the record",
@@ -659,10 +666,10 @@
     },
     {
       "artifact": "results/external/SETC_SET.json",
-      "class": "inventory",
-      "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
+      "class": "frozen_unread",
+      "reason": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one",
       "schema": "geoaudit.setb_set.v1",
-      "bytes": 259550
+      "bytes": 260879
     },
     {
       "artifact": "results/gf4_ablation/GF4_ALLELE_ABLATION.json",
