@@ -209,6 +209,61 @@ def shares(D: np.ndarray, y: np.ndarray, tables) -> dict:
     }
 
 
+# The deployed bus is 43 local quantities under 15 statistics, laid out
+# statistic-major by wide_descriptors.build_wide, so wire w is quantity w % 43
+# read under statistic w // 43.
+N_QUANTITIES = 43
+N_STATISTICS = 15
+
+
+def within_versus_across(D: np.ndarray, y: np.ndarray) -> dict:
+    """Split the deployed bank's pairs by whether they share a local quantity.
+
+    Predicted before computing, and written here rather than in the summary so
+    the order is on record. The asymmetry family is one operator swept over
+    radii and its mean interaction is negative: pairs of it restate each other.
+    Fifteen of the deployed bus's statistics are also a sweep -- five radii of a
+    mean, three of a dispersion, three of a centred difference, three of a local
+    rank -- so pairs that share a quantity should behave like the asymmetry
+    family, and the bank's positive interaction should be carried by pairs of
+    different quantities. If instead the two are alike, then what distinguishes
+    the asymmetry columns is not that they are a sweep and the reading of the
+    screen above is wrong.
+    """
+    n_wires = int(D.shape[1])
+    if n_wires != N_QUANTITIES * N_STATISTICS:
+        return {"skipped": f"{n_wires} wires is not {N_QUANTITIES} x "
+                           f"{N_STATISTICS}; the layout assumption does not hold"}
+    p = float(y.mean())
+    tot, pos = joint_counts(D, y)
+    v_wire, v_pair = variance_terms(tot, pos, n_wires, p, int(len(y)))
+    iu = np.triu_indices(n_wires, k=1)
+    inter = v_pair[iu] - v_wire[iu[0]] - v_wire[iu[1]]
+    same_q = (iu[0] % N_QUANTITIES) == (iu[1] % N_QUANTITIES)
+    same_s = (iu[0] // N_QUANTITIES) == (iu[1] // N_QUANTITIES)
+
+    def summ(mask, what):
+        x = inter[mask]
+        return {"what": what, "n_pairs": int(mask.sum()),
+                "mean_interaction": round(float(x.mean()), 12),
+                "median_interaction": round(float(np.median(x)), 12),
+                "fraction_negative": round(float((x < 0).mean()), 4)}
+
+    return {
+        "layout": f"wire w is quantity w % {N_QUANTITIES} under statistic "
+                  f"w // {N_QUANTITIES}, from wide_descriptors.build_wide",
+        "all pairs": summ(np.ones_like(same_q), "every pair in the bus"),
+        "same quantity, different statistic": summ(
+            same_q & ~same_s, "one local quantity read at several radii or under "
+                              "several statistics -- the same shape as the "
+                              "asymmetry family"),
+        "same statistic, different quantity": summ(
+            same_s & ~same_q, "two different local quantities read the same way"),
+        "different quantity and statistic": summ(
+            ~same_q & ~same_s, "unrelated in both coordinates"),
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--splits", type=int, default=1,
@@ -255,6 +310,17 @@ def main(argv: list[str] | None = None) -> int:
                   f"  share(all pairs) "
                   f"{got[name][-1]['non_additive_share_over_all_pairs']['mean']:+.4f}",
                   flush=True)
+
+    is_fit0, _ = cluster_half_split(units, cluster_of, SEED)
+    split_by_kind = within_versus_across(
+        chain_digits(families["deployed 645 wires"], n_res)[is_fit0[row]],
+        y[is_fit0[row]])
+    print()
+    for k, v in split_by_kind.items():
+        if isinstance(v, dict) and "mean_interaction" in v:
+            print(f"  {k:38s} {v['mean_interaction']:+.3e}  "
+                  f"({v['n_pairs']:6d} pairs, "
+                  f"{100 * v['fraction_negative']:.0f}% negative)", flush=True)
 
     lifts = known_lifts()
     fam = {}
@@ -327,6 +393,15 @@ def main(argv: list[str] | None = None) -> int:
                         f"{PARTITION_SEED}, drawn within each family",
         },
         "families": fam,
+        "where_the_deployed_bank_s_interaction_lives": split_by_kind,
+        "why_that_decomposition_was_run": (
+            "the asymmetry family is one operator swept over radii and its mean "
+            "interaction is negative. Fourteen of the deployed bus's fifteen "
+            "statistics are also a sweep, so if being a sweep is what makes a "
+            "family redundant then the bank's own same-quantity pairs should look "
+            "like the asymmetry family and its positive interaction should be "
+            "carried by pairs of different quantities. Predicted in the "
+            "function's docstring before it was computed"),
         "order_by_non_additive_share": order_by_share,
         "order_by_absolute_second_order_term": order_by_abs,
         "order_by_measured_field_minus_solve": order_by_lift,

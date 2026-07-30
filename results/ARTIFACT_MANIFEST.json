@@ -67,7 +67,7 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.collectability_screen.v1",
-      "bytes": 7390
+      "bytes": 8958
     },
     {
       "artifact": "results/architecture_sweep/COMBINATORIAL_MULTIPLICITIES.json",

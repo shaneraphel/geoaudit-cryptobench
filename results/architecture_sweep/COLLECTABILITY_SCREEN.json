@@ -15,8 +15,8 @@
  "what_is_reused": "joint_counts and variance_terms from selected_pairings.py. The interaction is the same quantity that tool selected pairings by, and that selection failed at -0.0028. The recorded reason does not transfer: interaction concentrates on few wires and a matching may use each wire once per round, so a round captured a fraction of the available weight. Nothing here forms a matching, and the question is not which pairs to make but whether a family is readable at all",
  "what_would_falsify_it": "the share failing to separate the three families, or ordering them against the measured field-minus-solve difference",
  "protocol": {
-  "n_splits": 3,
-  "split": "cluster-disjoint halves, seeds 20260725..20260727",
+  "n_splits": 1,
+  "split": "cluster-disjoint halves, seeds 20260725..20260725",
   "computed_on": "the fit half only",
   "banding": "within-chain rank quartiles, the deployed rule, applied within each family separately",
   "pairings": "16 rounds at width 2, seed 20260725, drawn within each family"
@@ -48,8 +48,8 @@
     "p90": 0.263728,
     "fraction_negative": 0.3302
    },
-   "share_over_the_bank_mean_across_splits": 0.049425,
-   "share_over_all_pairs_mean_across_splits": 0.052723,
+   "share_over_the_bank_mean_across_splits": 0.052676,
+   "share_over_all_pairs_mean_across_splits": 0.056598,
    "measured_lifts": {
     "field": 0.79012,
     "solve": 0.784826,
@@ -88,8 +88,8 @@
     "p90": 0.180031,
     "fraction_negative": 0.4658
    },
-   "share_over_the_bank_mean_across_splits": -0.003414,
-   "share_over_all_pairs_mean_across_splits": 0.000761,
+   "share_over_the_bank_mean_across_splits": 0.003793,
+   "share_over_all_pairs_mean_across_splits": 0.008796,
    "measured_lifts": {
     "field": 0.000977,
     "solve": 0.003826,
@@ -127,8 +127,8 @@
     "p90": 0.344882,
     "fraction_negative": 0.1957
    },
-   "share_over_the_bank_mean_across_splits": 0.116715,
-   "share_over_all_pairs_mean_across_splits": 0.112897,
+   "share_over_the_bank_mean_across_splits": 0.111107,
+   "share_over_all_pairs_mean_across_splits": 0.106933,
    "measured_lifts": {
     "field": -0.00086,
     "solve": 0.001086,
@@ -141,6 +141,38 @@
    }
   }
  },
+ "where_the_deployed_bank_s_interaction_lives": {
+  "layout": "wire w is quantity w % 43 under statistic w // 43, from wide_descriptors.build_wide",
+  "all pairs": {
+   "what": "every pair in the bus",
+   "n_pairs": 207690,
+   "mean_interaction": 1.0621075e-05,
+   "median_interaction": 9.72234e-06,
+   "fraction_negative": 0.3149
+  },
+  "same quantity, different statistic": {
+   "what": "one local quantity read at several radii or under several statistics -- the same shape as the asymmetry family",
+   "n_pairs": 4515,
+   "mean_interaction": -6.288509e-05,
+   "median_interaction": 3.034474e-06,
+   "fraction_negative": 0.4614
+  },
+  "same statistic, different quantity": {
+   "what": "two different local quantities read the same way",
+   "n_pairs": 13545,
+   "mean_interaction": 1.0810447e-05,
+   "median_interaction": 1.1055376e-05,
+   "fraction_negative": 0.3322
+  },
+  "different quantity and statistic": {
+   "what": "unrelated in both coordinates",
+   "n_pairs": 189630,
+   "mean_interaction": 1.2357695e-05,
+   "median_interaction": 9.789277e-06,
+   "fraction_negative": 0.3102
+  }
+ },
+ "why_that_decomposition_was_run": "the asymmetry family is one operator swept over radii and its mean interaction is negative. Fourteen of the deployed bus's fifteen statistics are also a sweep, so if being a sweep is what makes a family redundant then the bank's own same-quantity pairs should look like the asymmetry family and its positive interaction should be carried by pairs of different quantities. Predicted in the function's docstring before it was computed",
  "order_by_non_additive_share": [
   "composition 76",
   "deployed 645 wires",
