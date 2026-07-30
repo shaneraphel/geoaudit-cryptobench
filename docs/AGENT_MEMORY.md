@@ -98,7 +98,7 @@ been measured.
 | Appended column families | solve sees them, field does not, on two families of different character | `COMPOSITION_WIRES.json` |
 | Integer rounding of multiplicities | free, cos = 0.9992 | `GRAM_CONDITIONING.json` |
 | Bank size | not compressible; smooth in `K'`, no knee, −0.0324 at `K'`=52 | `BANK_TRUNCATION.json` |
-| Per-region multiplicities | about +0.005 exists, at 20,608 fitted numbers; not a bargain | `HIERARCHICAL_MULTIPLICITIES.json` |
+| Per-region multiplicities | best arm +0.0005 on 6/12 over deployed, under the noise floor; +0.0054 on 12/12 over a *random* router | `HIERARCHICAL_MULTIPLICITIES.json` |
 | Per-region gate weight | −0.0010 and −0.0003 against one global weight; four numbers is already too many | `GATE_WEIGHT_ROUTING.json` |
 
 **Two hypotheses were raised and killed in the same session. Do not raise them
@@ -124,19 +124,25 @@ and a spectrum cannot tell that from redundancy. Withdrawn.
 **The per-region idea this section used to propose has now been tested, twice.**
 The argument was that every parameter varied up to that point was a *global*
 choice applied identically to all 5,152 tables, and that `cos(m, Δμ) = 0.025`
-looks like one direction fitted to heterogeneous regions. The signal is real:
-letting each region carry its own multiplicities is worth about +0.005. The price
-is 20,608 fitted numbers, which is not a bargain. Routing only the gate weight
-instead — four numbers, the one stage where a chain-level quantity multiplies the
-field — loses to a single global weight, −0.0010 by chain size and −0.0003 by
-chain polarity on twelve splits.
+looks like one direction fitted to heterogeneous regions.
 
-Read those two together rather than separately. The routers do beat a *random*
-per-chain router, by +0.0010 and +0.0017 on 7 and 9 of 12, so chain-level
-structure genuinely carries information about the right weight. It carries less
-than a four-way split costs. The constraint is granularity, not absence of signal:
-a correction that pays has to be cheaper per region than anything tried, and no
-such rule has been proposed.
+**Say which comparison, because these two artifacts have three baselines and the
+answer differs by baseline.** Against a *random* per-chain router, routing on
+chain size is worth +0.0054 on 12 of 12 splits, so the router is reading real
+structure and this is not noise. Against the *deployed* global solve, the best of
+thirteen routed arms is +0.0005 on 6 of 12 — below the 0.0026 reseed floor, which
+is to say nothing — and the other twelve are negative, down to −0.0148. An earlier
+version of this table said the per-region correction "is worth about +0.005",
+which reads as a gain over the deployed detector and is not what was measured.
+The regional heterogeneity is real; converting it into accuracy did not happen,
+and it cost 20,608 fitted numbers to find that out.
+
+The gate-weight arm says the same thing at a hundredth of the price. Four numbers,
+the one stage where a chain-level quantity multiplies the field: the routers beat
+a random router by +0.0010 and +0.0017 on 7 and 9 of 12, and lose to a *single
+global weight* by −0.0010 and −0.0003. The constraint is granularity, not absence
+of signal. A correction that pays has to be cheaper per region than anything
+tried, and no such rule has been proposed.
 
 **A caution about the deployed arm in both of those.** Every fitted arm also
 loses to the deployed `w = 1.0`, and that is not evidence that a declared constant
