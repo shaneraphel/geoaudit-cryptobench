@@ -80,6 +80,9 @@ class CovariatesTouchNoScore(unittest.TestCase):
             self.assertLess(max(s["group_sizes"]) - min(s["group_sizes"]),
                             0.15 * s["n_defined"])
 
+    @unittest.skipUnless(
+        (ROOT / "data/cryptobench_apo/_osf/test.json").is_file(),
+        "the CryptoBench deposit is not redistributed with this repository")
     def test_prmsd_is_the_deposits_own_number(self):
         osf = json.loads(
             (ROOT / "data/cryptobench_apo/_osf/test.json").read_text())

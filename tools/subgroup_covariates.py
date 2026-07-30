@@ -198,14 +198,24 @@ def check() -> int:
         bad.append("covariates must not claim a read index")
     # Recomputed rather than trusted: the covariates are what the subgroup
     # boundaries are drawn from, so a drift here silently redraws the groups.
-    live = build()
-    if d.get("rows") != live["rows"]:
-        moved = [a["unit_id"] for a, b in zip(d.get("rows", []), live["rows"])
-                 if a != b]
-        bad.append(f"{len(moved)} covariate rows no longer follow from the "
-                   f"deposit and the labels: {moved[:5]}")
-    if d.get("distributions") != live["distributions"]:
-        bad.append("the tertile cuts have moved, which redraws every subgroup")
+    # The deposit those covariates come from is gitignored and not
+    # redistributed, so in a clone this died before reaching the checks below,
+    # which need only the artifact.
+    live = build() if OSF_TEST.is_file() else None
+    if live is None:
+        print(f"note: {OSF_TEST.relative_to(ROOT)} is not distributed with the "
+              f"repository, so the covariates cannot be recomputed here. The "
+              f"checks below are the artifact's internal ones; the "
+              f"recomputation runs wherever the deposit is present.")
+    else:
+        if d.get("rows") != live["rows"]:
+            moved = [a["unit_id"]
+                     for a, b in zip(d.get("rows", []), live["rows"]) if a != b]
+            bad.append(f"{len(moved)} covariate rows no longer follow from the "
+                       f"deposit and the labels: {moved[:5]}")
+        if d.get("distributions") != live["distributions"]:
+            bad.append("the tertile cuts have moved, which redraws every "
+                       "subgroup")
     for c in d.get("covariates", []):
         s = d["distributions"][c]
         if sum(s["group_sizes"]) != s["n_defined"]:

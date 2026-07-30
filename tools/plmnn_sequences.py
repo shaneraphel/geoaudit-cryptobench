@@ -178,6 +178,11 @@ def _report(d: dict) -> None:
     print(f"  sequence digest {d['sequence_sha256'][:16]}")
 
 
+def _receptors_present(man: dict) -> bool:
+    """Whether every receptor the rederivation would read is on this disk."""
+    return all((ROOT / e["receptor_path"]).is_file() for e in man["entries"])
+
+
 def check() -> int:
     if not OUT.exists():
         print(f"MISSING {OUT.relative_to(ROOT)}")
@@ -188,12 +193,21 @@ def check() -> int:
         bad.append("unexpected schema")
     if d.get("test_fold_read_index") is not None:
         bad.append("sequences must not claim a read index")
-    live = build()
-    if d.get("sequence_sha256") != live["sequence_sha256"]:
+    # The 192 official receptors are gitignored and not redistributed, so in a
+    # clone this gate used to die on the first missing file before running any
+    # of the checks it could have run. What follows the recomputation needs only
+    # the artifact, and those checks are worth having on their own.
+    live = build() if _receptors_present(json.loads(MANIFEST.read_text())) else None
+    if live is None:
+        print("note: the official receptors are not distributed with the "
+              "repository, so the sequences cannot be rederived here. The "
+              "checks below are the artifact's internal ones; the rederivation "
+              "runs wherever the receptors are present.")
+    elif d.get("sequence_sha256") != live["sequence_sha256"]:
         bad.append(f"the sequences no longer follow from the receptors: digest "
                    f"{d.get('sequence_sha256', '')[:12]} against "
                    f"{live['sequence_sha256'][:12]}")
-    if d.get("rows") != live["rows"]:
+    elif d.get("rows") != live["rows"]:
         moved = [a["unit_id"] for a, b in zip(d.get("rows", []), live["rows"])
                  if a != b]
         bad.append(f"{len(moved)} sequence rows changed: {moved[:5]}")
