@@ -36,6 +36,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -99,12 +100,34 @@ def _is_fold_access(doc: dict) -> bool:
     return False
 
 
+def _on_this_disk_only() -> set[str]:
+    """Files under results/ that git ignores, and so are not distributed.
+
+    The manifest describes the repository a reader receives, not the working
+    tree of whoever last regenerated it. Counting a gitignored intermediate --
+    a set of baseline weights, a checkpoint -- makes the manifest one that can
+    never be green in a clean clone, which is where it was found: every gate
+    passed here and `make verify` died on a stale manifest for anyone who
+    cloned. An export has no .git and no ignored files either, so the empty set
+    is the right answer there.
+    """
+    p = subprocess.run(
+        ["git", "-C", str(ROOT), "ls-files", "--others", "--ignored",
+         "--exclude-standard", "results/"], capture_output=True, text=True)
+    if p.returncode != 0:
+        return set()
+    return {line.strip() for line in p.stdout.splitlines() if line.strip()}
+
+
 def build() -> dict:
     cited = _referenced_paths()
+    undistributed = _on_this_disk_only()
     entries = []
     for p in sorted(RESULTS.rglob("*.json")):
         rel = str(p.relative_to(ROOT))
         if "/predictions/" in rel or "/p2rank_raw/" in rel:
+            continue
+        if rel in undistributed:
             continue
         if p.resolve() == OUT.resolve():
             continue
