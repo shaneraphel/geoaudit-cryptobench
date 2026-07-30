@@ -436,6 +436,13 @@ def main(argv: list[str] | None = None) -> int:
         },
         "arms": {k: summarise(v) for k, v in got.items() if v},
         "deployed_arm_frozen": summarise(base),
+        # The narrow Fisher arm is stored per split as well as summarised. The
+        # lift is a paired difference taken inside one code path, so a
+        # systematic offset against the frozen reference cancels from it to
+        # first order -- but that is an argument, and storing both arms makes it
+        # a checkable one instead.
+        "fisher_narrow_per_split": [round(float(x), 6) for x in fis_narrow]
+        if fis_narrow else None,
         "minus_deployed": {k: compare(got[k], base) for k in counting_arms},
         "cell_occupancy_on_split_1": occupancy,
         "per_split": {k: [round(float(x), 6) for x in v]
@@ -461,6 +468,19 @@ def main(argv: list[str] | None = None) -> int:
                     "max_absolute_difference": round(gap, 9),
                     "reproduces_the_frozen_arm": bool(gap < 1e-4),
                     "tolerance": 1e-4,
+                    "mean_offset": round(
+                        float(np.mean(fis_narrow) - rv.mean()), 9),
+                    "what_to_do_when_it_fails": (
+                        "the gap is a systematic offset in one direction plus "
+                        "per-split scatter, and the reported lift is a paired "
+                        "difference between two arms computed in this same code "
+                        "path, so the offset cancels from it to first order. "
+                        "That is checkable rather than assertable: "
+                        "fisher_narrow_per_split holds the 645-wire arm split "
+                        "by split beside per_split.fisher, so a reader can form "
+                        "the difference themselves and compare its scatter to "
+                        "the gap. Do not quote the absolute 645-wire value from "
+                        "this artifact; quote it from the reference"),
                     "why_the_tolerance_is_not_machine_epsilon": (
                         "the reference solves over the float32 cache directly "
                         "and this tool concatenates it with the composition "
