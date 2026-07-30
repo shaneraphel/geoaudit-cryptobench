@@ -300,7 +300,10 @@ explanation, is the **cross interaction between the new columns and the deployed
 wires**. A family can have positive internal interaction and still be redundant with
 the bus, and the union attachment forms no straddling tables at all, so redundancy
 arrives as tables whose content is already present for the fan-out to decorrelate
-away. Nothing has computed it yet, and it is the next thing to compute on this axis.
+away. `collectability_screen.py --cross` computes it and is the next thing to run on
+this axis. It has not produced a number yet: the arm is implemented and checked
+against the canonical path, and three launches were killed by the kernel for memory
+before reaching it (see §4).
 
 **Chemical composition of the neighbourhood.** Four of 645 wires carry residue
 identity. pLM-NN reads a language model of the sequence. `composition_wires.py`
@@ -347,6 +350,34 @@ artefact of the reimplementation, and it would have closed a live axis. Every
 tool that reimplements a piece of the pipeline must run the deployed
 configuration through the local copy and require the frozen numbers back.
 `quantisation_ladder.py` does this and reproduced 12 of 12 exactly.
+
+**A run that dies with no traceback was killed, and the first suspect is the machine
+and not your code.** `collectability_screen.py --cross` was launched three times and
+each time the log stopped after the family-build line with no exception, no exit
+status and no artifact. Nothing was wrong with the tool. The host is 16 GB; Cursor
+was holding 6.3 GB in one renderer, Chrome 3.2 GB, total RSS 14.6 GB and swap 7.2 of
+8 GB, leaving about 250 MB. The kernel takes whatever grows into that and takes it
+with `SIGKILL`, which is why the log ends mid-run. Read `vm_stat` and
+`sysctl vm.swapusage` before reading your own diff. Note also that the same tool's
+heavier sibling, `appended_family_lift.py`, completed twelve splits on this machine
+two hours earlier — the tool did not get bigger, the machine got smaller.
+
+Two of the changes made to fit it are worth keeping whatever the memory situation,
+and both are the reimplementation rule applied to arithmetic rather than to a solve:
+
+- **Digitise once, release the float columns, and do not upcast.** The wide cache is
+  234,838 × 645 float32, 578 MB, and `np.asarray(..., dtype=np.float64)` doubles it
+  to 1,156 MB — the single largest allocation the tool makes. `chain_digits` ranks
+  within each chain over all of that chain's residues, so its output does not depend
+  on the split, and nothing downstream reads the floats. Skipping the upcast is exact,
+  because float32 to float64 preserves both order and equality and so both the stable
+  argsort and the tie grouping see the same thing. The tool checks that on 40 chains
+  and refuses rather than assuming it.
+- **Form only the block you read.** The cross term needs the straddling block of a
+  Gram over 645 + n columns. Building the whole joint Gram and slicing it allocates
+  two `(645+n)² × 16` tensors for an answer that is a tenth of one: about 1.1 GB of
+  transient for 18 MB of result. The rectangular product is formed directly and is
+  required to reproduce `joint_counts` on a 24 × 12 subset.
 
 **Do not edit a file a digest pins.** `TABLE_FIELD.json` carries a
 `code_sha256` over eight files including `table_bank.py`. Adding a parameter to
