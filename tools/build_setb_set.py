@@ -169,8 +169,10 @@ def spent_clusters() -> tuple[set[str], set[str]]:
     return cb, a_clusters
 
 
-def candidates(ceiling: float = CEILING,
-               refresh: bool = False) -> tuple[list[dict], dict]:
+def candidates(ceiling: float = CEILING, refresh: bool = False,
+               exclude_clusters: set[str] | None = None,
+               exclude_source: str | None = None
+               ) -> tuple[list[dict], dict]:
     """Set A's selection rule, on the cryo-EM inventory, with Set A also excluded.
 
     The body mirrors build_external_set.candidates so that the two sets are
@@ -229,6 +231,14 @@ def candidates(ceiling: float = CEILING,
             drop("the accession shares a UniRef50 cluster with Set A, which "
                  "would make the two reads correlated")
             continue
+        # A ceiling of 2.5 A selects a subset of what 3.0 A selects, so two sets
+        # cut at two ceilings are not two sets -- the tighter one is inside the
+        # wider one and reading both would read its units twice. Excluding the
+        # clusters an earlier selection already took makes the second one
+        # genuinely disjoint.
+        if exclude_clusters and clu in exclude_clusters:
+            drop(f"the cluster is already taken by {exclude_source}")
+            continue
         per_cluster.setdefault(clu, []).append((acc, v))
 
     units: list[dict] = []
@@ -276,6 +286,11 @@ def main(argv: list[str] | None = None) -> int:
                     help="apo resolution ceiling in Angstrom. 2.5 gives 40 "
                          "candidate units, 3.0 gives several times that at coarser "
                          "maps; the choice changes what the set means")
+    ap.add_argument("--exclude-clusters-from", type=Path, default=None,
+                    help="a SETB_CANDIDATES artifact whose clusters this "
+                         "selection must not reuse. Needed because a tighter "
+                         "ceiling selects a subset of a wider one, so without it "
+                         "the two selections overlap and are not two sets")
     ap.add_argument("--refresh", action="store_true",
                     help="refetch the single-particle id list and rebuild the "
                          "inventory")
@@ -288,7 +303,29 @@ def main(argv: list[str] | None = None) -> int:
             "fetching and labelling on purpose: the candidate count decides "
             "whether the set is worth building, and it costs no downloads")
 
-    units, meta = candidates(a.ceiling, a.refresh)
+    excl: set[str] = set()
+    excl_src = None
+    if a.exclude_clusters_from is not None:
+        prior = json.loads(a.exclude_clusters_from.read_text())
+        excl = {u["cluster"] for u in prior["units"]}
+        excl_src = str(a.exclude_clusters_from.name)
+    units, meta = candidates(a.ceiling, a.refresh, excl, excl_src)
+    if excl:
+        overlap = excl & {u["cluster"] for u in units}
+        if overlap:
+            raise SystemExit(
+                f"{len(overlap)} clusters appear in both selections; the "
+                f"exclusion did not take and the two sets are not disjoint")
+        meta["disjoint_from"] = {
+            "artifact": excl_src,
+            "n_clusters_excluded": len(excl),
+            "checked": "no cluster appears in both selections",
+            "why_it_is_needed": "a 2.5 A ceiling selects a subset of what 3.0 A "
+                                "selects, so two selections cut at two ceilings "
+                                "share their tighter half. Reading both without "
+                                "this exclusion would read those units twice and "
+                                "the second read would not be independent",
+        }
     res = sorted(u["apo"]["resolution"] for u in units
                  if u["apo"]["resolution"] is not None)
     doc = {
@@ -319,9 +356,10 @@ def main(argv: list[str] | None = None) -> int:
         "selection": meta,
         "units": units,
     }
+    out = a.out if a.out.is_absolute() else ROOT / a.out
     if a.write:
-        a.out.parent.mkdir(parents=True, exist_ok=True)
-        a.out.write_text(json.dumps(doc, indent=1) + "\n")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(doc, indent=1) + "\n")
 
     print(f"  inventory: {meta['modality']}, ceiling {meta['max_resolution']} A, "
           f"cutoff {meta['cutoff']}")
@@ -333,7 +371,7 @@ def main(argv: list[str] | None = None) -> int:
     for why, n in sorted(meta["reasons"].items(), key=lambda kv: -kv[1]):
         print(f"    {n:6d}  {why}")
     if a.write:
-        print(f"\nwrote {a.out.relative_to(ROOT)}")
+        print(f"\nwrote {out.relative_to(ROOT)}")
     else:
         print("\n(not written; pass --write)")
     return 0

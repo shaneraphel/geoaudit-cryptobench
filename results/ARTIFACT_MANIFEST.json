@@ -13,10 +13,10 @@
     "cited": 57,
     "exploration": 32,
     "superseded": 17,
-    "inventory": 2,
+    "inventory": 4,
     "fold_access": 10
   },
-  "n_artifacts": 118,
+  "n_artifacts": 120,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -614,11 +614,25 @@
       "bytes": 14052
     },
     {
+      "artifact": "results/external/SETB_CANDIDATES.json",
+      "class": "inventory",
+      "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
+      "schema": "geoaudit.setb_candidates.v1",
+      "bytes": 517639
+    },
+    {
       "artifact": "results/external/SETB_POOL.json",
       "class": "inventory",
       "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
       "schema": "geoaudit.setb_pool.v1",
       "bytes": 35765
+    },
+    {
+      "artifact": "results/external/SETC_CANDIDATES.json",
+      "class": "inventory",
+      "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
+      "schema": "geoaudit.setb_candidates.v1",
+      "bytes": 907399
     },
     {
       "artifact": "results/gf4_ablation/GF4_ALLELE_ABLATION.json",
