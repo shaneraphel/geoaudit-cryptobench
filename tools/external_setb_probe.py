@@ -16,6 +16,8 @@ Usage: PYTHONPATH=src:tools python3.12 tools/external_setb_probe.py
 """
 from __future__ import annotations
 
+import argparse
+import hashlib
 import json
 import time
 import urllib.parse
@@ -100,6 +102,68 @@ def _inventory():
 
     inv._post = patient
     return inv
+
+
+def _pairable_from_cache(ceiling: float) -> dict:
+    """The same count, computed from the cached describe without a network call.
+
+    Why this path exists. The probe was print-only, so the pool size it found is
+    quoted in AGENTS.md and in a commit message and stands behind no registered
+    artifact -- a number in this repository's own law that a reader cannot check.
+    Set B has to be drawn from that pool, and a set frozen against an unpinned
+    inventory is not auditable, so the inventory is pinned first.
+
+    The network path verifies the cache by comparing its entry count against a
+    fresh search. This path cannot, so it records the cache's SHA-256 and says
+    plainly that the entry count is the cached one. A reader who wants it
+    reverified runs the probe without --from-cache.
+    """
+    cache = ROOT / f"data/external/_setb_probe_em_{ceiling:.1f}.json"
+    if not cache.exists():
+        raise SystemExit(
+            f"{cache.relative_to(ROOT)} is absent; run the probe without "
+            f"--from-cache to fetch it")
+    raw = cache.read_bytes()
+    blob = json.loads(raw)
+    rows = blob["rows"]
+    cb_accessions, a_clusters = _already_used()
+    uni = json.loads((ROOT / "data/external/UNIREF50.json").read_text())
+    cluster_of = uni.get("cluster_of") or uni.get("clusters") or {}
+
+    apo: dict[str, set[str]] = {}
+    holo: dict[str, set[str]] = {}
+    for r in rows:
+        on_this_chain = any(r["chain"] in lig["chains"] for lig in r["ligands"])
+        (holo if on_this_chain else apo).setdefault(r["uniprot"], set()).add(
+            f'{r["pdb"]}_{r["chain"]}')
+
+    both = sorted(set(apo) & set(holo))
+    fresh = [a for a in both if a not in cb_accessions]
+    unmapped = [a for a in fresh if a not in cluster_of]
+    mapped_clusters = sorted({cluster_of[a] for a in fresh if a in cluster_of}
+                             - a_clusters)
+    return {
+        "ceiling": ceiling,
+        "entry_count_source": "cache",
+        "cache": str(cache.relative_to(ROOT)),
+        "cache_sha256": hashlib.sha256(raw).hexdigest(),
+        "n_entries": blob["n_entries"],
+        "n_chains": len(rows),
+        "n_accessions": len({r["uniprot"] for r in rows}),
+        "n_with_apo_and_holo": len(both),
+        "n_in_cryptobench": len(both) - len(fresh),
+        "n_pool": len(fresh),
+        "pool_accessions": fresh,
+        "n_unmapped_to_uniref50": len(unmapped),
+        "n_clusters_new_to_set_a": (len(mapped_clusters)
+                                    if len(unmapped) < len(fresh) else None),
+        "cluster_count_is_absent_not_zero": len(unmapped) == len(fresh),
+        "what_to_run_for_the_cluster_count": (
+            "tools/external_uniref.py over pool_accessions; the cached UniRef50 "
+            "mapping was fetched for Set A's X-ray accessions and covers none of "
+            "these, so the cluster count is unavailable rather than zero"
+        ) if len(unmapped) == len(fresh) else None,
+    }
 
 
 def _pairable(ceiling: float) -> dict:
@@ -204,7 +268,93 @@ def _already_used() -> tuple[set[str], set[str]]:
     return cb, a_clusters
 
 
+SETB_POOL = ROOT / "results/external/SETB_POOL.json"
+SETB_SCHEMA = "geoaudit.setb_pool.v1"
+
+
+def _write_pool(ceilings: tuple[float, ...]) -> int:
+    """Pin the pool Set B would be drawn from, and nothing else.
+
+    This artifact is an inventory. It is not a set, it is not frozen, and it
+    carries no prediction, no score and no label. Recording that distinction in
+    the artifact matters here more than usual: results/external/EXTERNAL_SET.json
+    is frozen, hashed, pinned by a preregistration and spent, and a second file
+    under the same directory naming external accessions must not be mistakable
+    for a second frozen set.
+    """
+    rows = [_pairable_from_cache(c) for c in ceilings]
+    doc = {
+        "schema": SETB_SCHEMA,
+        "clinical_grade": False,
+        "reads_test_fold": False,
+        "reads_any_external_unit": False,
+        "is_a_frozen_set": False,
+        "what_this_is": "an inventory of the cryo-EM accessions a second "
+                        "external set could be drawn from, pinned so that the "
+                        "set can be built against a checkable pool",
+        "what_this_is_not": [
+            "not a frozen set: no accession here has been selected, labelled, "
+            "hashed or preregistered",
+            "not a measurement of anything about Set A, which remains spent",
+            "not a claim that Set B is viable; the cluster count that would "
+            "bound it is unavailable and the artifact says so",
+        ],
+        "why_it_exists": "the probe that found this pool was print-only, so the "
+                         "pool size is quoted in AGENTS.md and in a commit "
+                         "message and stands behind no registered artifact. A "
+                         "set frozen against an unpinned inventory is not "
+                         "auditable, and the order that makes Set B worth "
+                         "building is inventory, freeze, hash, preregister, then "
+                         "read once",
+        "cutoff": CUTOFF,
+        "method": EM,
+        "apo_and_holo_test": "a chain counts as apo-capable when the deposit "
+                             "assigns it no ligand and holo-capable when it "
+                             "assigns it one. That is looser than the builder's "
+                             "test, which additionally requires a CryptoBench-"
+                             "accepted ligand, heavy-atom contact within 4.5 A "
+                             "and a pocket movement of at least 2.5 A. Each of "
+                             "those only removes candidates, so every count here "
+                             "is an upper bound",
+        "by_resolution_ceiling": rows,
+    }
+    SETB_POOL.parent.mkdir(parents=True, exist_ok=True)
+    SETB_POOL.write_text(json.dumps(doc, indent=1, allow_nan=False) + "\n")
+    for r in rows:
+        print(f"EM at {r['ceiling']:.1f} A  entries {r['n_entries']:,} "
+              f"(from {r['entry_count_source']})  chains {r['n_chains']:,}  "
+              f"accessions {r['n_accessions']:,}")
+        print(f"    apo+holo {r['n_with_apo_and_holo']:,}  "
+              f"in CryptoBench {r['n_in_cryptobench']:,}  "
+              f"pool {r['n_pool']:,}")
+        if r["cluster_count_is_absent_not_zero"]:
+            print(f"    clusters new to Set A: NOT MEASURED "
+                  f"({r['n_unmapped_to_uniref50']:,} of {r['n_pool']:,} have no "
+                  f"cached UniRef50 mapping)")
+        else:
+            print(f"    clusters new to Set A: "
+                  f"{r['n_clusters_new_to_set_a']:,}")
+    print(f"\nwrote {SETB_POOL.relative_to(ROOT)}")
+    return 0
+
+
 def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--write", action="store_true",
+                    help="emit results/external/SETB_POOL.json")
+    ap.add_argument("--from-cache", action="store_true",
+                    help="compute from the cached describe without a network "
+                         "call, recording the cache digest")
+    a = ap.parse_args()
+    if a.write:
+        if not a.from_cache:
+            raise SystemExit(
+                "--write currently requires --from-cache; the network path "
+                "reverifies the entry count and has not been wired to the "
+                "writer, and an artifact that mixes the two provenances without "
+                "saying which is worse than one that says cache")
+        return _write_pool((2.5, 3.0))
+
     print(f"protein entries released after {CUTOFF}\n")
     print(f"{'ceiling':>9}  {'EM':>10}  {'X-ray':>10}")
     for ceiling in LADDER:

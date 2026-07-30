@@ -11,10 +11,10 @@
   "counts": {
     "exploration": 32,
     "cited": 52,
-    "superseded": 17,
+    "superseded": 18,
     "fold_access": 10
   },
-  "n_artifacts": 111,
+  "n_artifacts": 112,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
@@ -568,6 +568,13 @@
       "reason": "an earlier frozen state, kept for the record",
       "schema": "geoaudit.preregistered_external.v1",
       "bytes": 14052
+    },
+    {
+      "artifact": "results/external/SETB_POOL.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setb_pool.v1",
+      "bytes": 26072
     },
     {
       "artifact": "results/gf4_ablation/GF4_ALLELE_ABLATION.json",
