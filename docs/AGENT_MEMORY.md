@@ -235,6 +235,62 @@ appear in a solve. It also explains where the deployed bus's returns went — ad
 statistics of existing quantities adds wires from the harmful category; adding
 quantities does not.
 
+## 2d. The cross term, and the arm nobody has built
+
+The quantity §2c said was missing is now measured on the same fit half, under the
+same decomposition, with the straddling block of the Gram formed directly and
+required to reproduce `joint_counts` exactly — it does, to `0.0e+00`
+(`COLLECTABILITY_SCREEN.json`, `interaction_with_the_deployed_bus`).
+
+| family | internal | **cross with the 645-wire bus** | straddling pairs | field lift |
+|---|---|---|---|---|
+| deployed 645 wires | +1.06e-05 | — | — | (the bank) |
+| asymmetry 129 | −9.69e-06 | **−1.24e-06** | 83,205 | **+0.0010** |
+| composition 76 | +5.96e-06 | **+1.15e-05** | 49,020 | −0.0009 |
+| graph invariants 225 | +6.42e-06 | **+1.23e-05** | 145,125 | **−0.0061** |
+| graph invariants 15 | +5.05e-06 | **+1.93e-05** | 9,675 | not measured |
+
+**Two facts, and they are the useful part of this whole line.**
+
+*The cross term is larger than the internal one, for every family that has both a
+positive value and a measured lift.* Composition's synergy with the bus is nearly
+twice its synergy with itself, and it is **above the deployed bank's own mean
+pairwise interaction of +1.06e-05** — the bank whose tables support a field that
+beats a linear solve by +0.0053. Graph invariants sit just above it too.
+
+*The union attachment forms none of those pairs.* `appended_family_lift.py` builds
+`union = old + [[c + n_old for c in t] for t in new]`: 5,152 tables over old wires,
+1,792 over new columns alone, and **zero straddling**. Widening does form them and
+is not an alternative, because `partition_tables` redraws every pairing at the new
+width and only 281 of 5,152 old tables survive. So the strongest collectible
+structure these families have is the structure both existing attachments discard —
+one by construction, the other by destroying the bank to reach it.
+
+**The reading, stated so it can be wrong.** More synergy with the bus goes with a
+worse field lift, exactly reversed, on the three families with both numbers. That is
+what you would see if the synergy is real but unreachable: the attachment cannot pair
+across, so a family whose value lives in the crossing contributes only its weak
+self-pairs while diluting the fan-out's decorrelation. It is also what you would see
+if high-cross families are simply bad families for an unrelated reason. Three points
+cannot separate those, and **this statistic was computed after the lifts were known**,
+which is the same mistake the internal statistic made. It is a correlate until an
+experiment moves the mechanism rather than another family being screened by it.
+
+**The experiment that moves it, and its prediction, recorded before it is run.**
+A third attachment: keep all 5,152 old tables unchanged, and add tables that each
+pair one deployed wire with one new column. Never built here — `rg straddl` finds
+only prose. Run on composition 76, whose straddling interaction is the highest of
+the families with a measured lift.
+
+- If the synergy is reachable, straddling beats the union arm by more than the
+  0.0026 reseed floor, and composition's −0.0009 turns positive.
+- If it does not, the cross term joins the internal one as a correlate and the whole
+  screening programme is over: two statistics will have ordered the families and
+  neither will have moved a number. **Say so and stop screening.**
+- Secondary, same run: graph invariants 15 carries the highest cross term of all
+  (+1.93e-05) over only 9,675 pairs, so if the mechanism is real it should give the
+  largest lift per added table of any family here.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the
@@ -300,10 +356,8 @@ explanation, is the **cross interaction between the new columns and the deployed
 wires**. A family can have positive internal interaction and still be redundant with
 the bus, and the union attachment forms no straddling tables at all, so redundancy
 arrives as tables whose content is already present for the fan-out to decorrelate
-away. `collectability_screen.py --cross` computes it and is the next thing to run on
-this axis. It has not produced a number yet: the arm is implemented and checked
-against the canonical path, and three launches were killed by the kernel for memory
-before reaching it (see §4).
+away. **Now measured, and it points at the attachment rather than at the columns —
+see §2d.**
 
 **Chemical composition of the neighbourhood.** Four of 645 wires carry residue
 identity. pLM-NN reads a language model of the sequence. `composition_wires.py`

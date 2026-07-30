@@ -72,6 +72,7 @@ from pathlib import Path
 
 import numpy as np
 
+import digit_cache  # noqa: E402
 from anisotropic_expansion_ceiling import build_or_load as build_asymmetry  # noqa: E402
 from composition_wires import build_or_load as build_composition  # noqa: E402
 from expand_invariant_bank import SEED  # noqa: E402
@@ -504,9 +505,9 @@ def main(argv: list[str] | None = None) -> int:
     # digits are the only thing any later stage needs and they are a tenth of the
     # size. Building lazily bounds the peak at one family rather than five, and
     # changes no number, because the digits of a family do not depend on which
-    # other families exist.
+    # other families exist. The deployed bus skips the float stage entirely and
+    # is handled below.
     builders: dict[str, object] = {
-        "deployed 645 wires": lambda: z["X"],
         "asymmetry 129": lambda: build_asymmetry(8)[0],
         "composition 76": lambda: build_composition()[0],
     }
@@ -532,6 +533,16 @@ def main(argv: list[str] | None = None) -> int:
     full: dict[str, np.ndarray] = {}
     widths: dict[str, int] = {}
     dtype_check = None
+
+    # The deployed bus comes from the streamed digit cache rather than from the
+    # float columns. digit_cache.py builds it one chain at a time straight into
+    # a memory-mapped int8 and requires the result to equal chain_digits, so
+    # this is the same array by a route that never makes the 578 MB float
+    # resident. It stays memory-mapped: every reader below indexes it by a fit
+    # mask, which materialises only the half it asks for.
+    full["deployed 645 wires"] = digit_cache.load(n_res)
+    widths["deployed 645 wires"] = int(full["deployed 645 wires"].shape[1])
+
     for name, build in builders.items():
         F = np.asarray(build())
         widths[name] = int(F.shape[1])
@@ -584,12 +595,14 @@ def main(argv: list[str] | None = None) -> int:
         for name in list(full):
             if name == "deployed 645 wires":
                 continue
+            Dnew = full[name][fit0]
             if checked is None:
                 checked = _check_straddling_against_the_canonical_path(
                     Dold, Dnew, yf)
                 print(f"  lean cross path reproduces joint_counts to "
                       f"{checked['max_absolute_disagreement']:.2e}", flush=True)
             cross[name] = cross_interaction(Dold, Dnew, yf)
+            del Dnew
             print(f"  cross with the deployed bus: {name:22s} "
                   f"{cross[name]['mean_interaction']:+.3e}  "
                   f"({100 * cross[name]['fraction_negative']:.0f}% negative)",

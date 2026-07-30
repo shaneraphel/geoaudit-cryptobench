@@ -30,6 +30,9 @@ data/cryptobench_apo/train_receptors/
 #   tools/build_cascade_cache.py, tools/build_expanded_cache.py
 data/cryptobench_apo/_*.npz
 data/cryptobench_apo/_*.npy
+# Sidecar recording what a derived cache was built from, so a stale one is
+# rebuilt rather than trusted. tools/digit_cache.py writes it beside the .npy.
+data/cryptobench_apo/_*.json
 data/cryptobench_apo/_scratch/
 # Holo depositions fetched to recover the labelling rule. 300 MB of
 # public PDB files, refetchable by name from the committed sample seed.
