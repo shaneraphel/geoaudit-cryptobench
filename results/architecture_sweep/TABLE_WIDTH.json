@@ -1,0 +1,263 @@
+{
+ "schema": "geoaudit.table_width.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "whether a three-wire table expresses something a bank of two-wire tables cannot, and whether that is worth the four-fold thinning of every cell it causes",
+ "why_this_is_the_named_next_experiment": "seven readout parameters have been varied and all seven came back null, and every one of them was downstream of the table topology. TABLE_WIDTH has never moved. partition_tables already takes width as an argument, so no digest-pinned file is edited",
+ "why_width_could_help": "a counting field is linear in the indicators of table cells, not in the wires. A width-3 table represents a three-way interaction that no arrangement of pairwise tables can express -- the same argument by which the counting field beats the Fisher solve in IS_FISHER_A_CEILING",
+ "why_width_could_hurt": "cells thin by a factor of four per unit of width at fixed rounds, and a cell that holds few residues states a noisy frequency. QUANTISATION_LADDER measured the same trade on the cut points and found the deployed setting at its optimum",
+ "why_no_single_arm_isolates_the_width": "width, rounds and cell budget are three quantities over two degrees of freedom. Matching cells costs rounds and so costs coverage of each wire; matching rounds lets the cell budget grow. Both are run and neither alone is the control",
+ "matching_rules": {
+  "matched rounds": "16 rounds, as deployed",
+  "matched cells": "rounds chosen so the cell count is nearest 82432",
+  "matched tables": "rounds chosen so the table count is nearest 5152",
+  "search": "rounds searched rather than solved, because a width that does not divide the wire count leaves a short group and the closed form would be wrong by that group"
+ },
+ "what_would_falsify_it": "width 3 failing to beat width 2 on both the matched-cells and the matched-rounds arm. That would say the table topology is not the constraint either and the readout is finished as a source of accuracy",
+ "held_fixed": {
+  "n_wires": 645,
+  "n_levels": 4,
+  "partition_seed": 20260725,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "banding": "within-chain rank quartiles, the deployed rule; the banding is per wire and does not depend on the topology, so it is computed once and shared by every arm"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_and_solve_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC, gate applied as deployed",
+  "max_tables": 6000,
+  "arms_not_run": {
+   "width 1, matched rounds": {
+    "n_tables": 10320,
+    "why": "more than 6000 tables"
+   },
+   "width 1, matched cells": {
+    "n_tables": 20640,
+    "why": "more than 6000 tables"
+   },
+   "width 3, matched tables": {
+    "n_tables": 5160,
+    "why": "not selected by --arms; cost. Not named in the falsification condition"
+   },
+   "width 4, matched rounds": {
+    "n_tables": 2576,
+    "why": "not selected by --arms; cost. Not named in the falsification condition"
+   },
+   "width 4, matched tables": {
+    "n_tables": 5152,
+    "why": "not selected by --arms; cost. Not named in the falsification condition"
+   }
+  }
+ },
+ "deployed_arm": "width 2, matched rounds",
+ "arms": {
+  "width 1, matched tables": {
+   "width": 1,
+   "rounds": 8,
+   "n_tables": 5160,
+   "n_cells": 20640,
+   "mean": 0.784855,
+   "min": 0.762633,
+   "max": 0.803975
+  },
+  "width 2, matched rounds": {
+   "width": 2,
+   "rounds": 16,
+   "n_tables": 5152,
+   "n_cells": 82432,
+   "mean": 0.79012,
+   "min": 0.761546,
+   "max": 0.805021
+  },
+  "width 3, matched rounds": {
+   "width": 3,
+   "rounds": 16,
+   "n_tables": 3440,
+   "n_cells": 220160,
+   "mean": 0.783506,
+   "min": 0.757351,
+   "max": 0.796302
+  },
+  "width 3, matched cells": {
+   "width": 3,
+   "rounds": 6,
+   "n_tables": 1290,
+   "n_cells": 82560,
+   "mean": 0.786564,
+   "min": 0.759602,
+   "max": 0.802702
+  },
+  "width 4, matched cells": {
+   "width": 4,
+   "rounds": 2,
+   "n_tables": 322,
+   "n_cells": 82432,
+   "mean": 0.777429,
+   "min": 0.754859,
+   "max": 0.793552
+  }
+ },
+ "minus_deployed": {
+  "width 1, matched tables": {
+   "mean": -0.005265,
+   "n_splits_positive": 1,
+   "n_splits": 12
+  },
+  "width 2, matched rounds": {
+   "mean": 0.0,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  },
+  "width 3, matched rounds": {
+   "mean": -0.006613,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  },
+  "width 3, matched cells": {
+   "mean": -0.003556,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  },
+  "width 4, matched cells": {
+   "mean": -0.012691,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  }
+ },
+ "cell_occupancy_first_split": {
+  "width 1, matched tables": {
+   "n_cells": 20640,
+   "n_cells_never_addressed": 120,
+   "fraction_never_addressed": 0.005814,
+   "median_count_of_addressed_cells": 29673,
+   "min_count_of_addressed_cells": 52
+  },
+  "width 2, matched rounds": {
+   "n_cells": 82432,
+   "n_cells_never_addressed": 1028,
+   "fraction_never_addressed": 0.012471,
+   "median_count_of_addressed_cells": 7385,
+   "min_count_of_addressed_cells": 1
+  },
+  "width 3, matched rounds": {
+   "n_cells": 220160,
+   "n_cells_never_addressed": 4463,
+   "fraction_never_addressed": 0.020272,
+   "median_count_of_addressed_cells": 1763,
+   "min_count_of_addressed_cells": 1
+  },
+  "width 3, matched cells": {
+   "n_cells": 82560,
+   "n_cells_never_addressed": 1608,
+   "fraction_never_addressed": 0.019477,
+   "median_count_of_addressed_cells": 1760,
+   "min_count_of_addressed_cells": 1
+  },
+  "width 4, matched cells": {
+   "n_cells": 82432,
+   "n_cells_never_addressed": 2767,
+   "fraction_never_addressed": 0.033567,
+   "median_count_of_addressed_cells": 401,
+   "min_count_of_addressed_cells": 1
+  }
+ },
+ "reproduction_check": {
+  "arm": "width 2, matched rounds",
+  "frozen_source": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
+  "max_absolute_difference": 4.0066772533098316e-07,
+  "reproduces_the_deployed_arm": true
+ },
+ "per_split": {
+  "width 1, matched tables": [
+   0.794196,
+   0.781383,
+   0.781967,
+   0.786312,
+   0.77811,
+   0.781648,
+   0.79407,
+   0.789877,
+   0.784719,
+   0.77937,
+   0.803975,
+   0.762633
+  ],
+  "width 2, matched rounds": [
+   0.804622,
+   0.786394,
+   0.787979,
+   0.790364,
+   0.791253,
+   0.7884,
+   0.800117,
+   0.790124,
+   0.791757,
+   0.78386,
+   0.805021,
+   0.761546
+  ],
+  "width 3, matched rounds": [
+   0.792962,
+   0.781539,
+   0.784091,
+   0.785459,
+   0.780823,
+   0.783028,
+   0.790778,
+   0.785346,
+   0.786666,
+   0.777731,
+   0.796302,
+   0.757351
+  ],
+  "width 3, matched cells": [
+   0.797604,
+   0.782494,
+   0.784605,
+   0.789893,
+   0.784354,
+   0.784073,
+   0.79397,
+   0.789505,
+   0.789842,
+   0.780118,
+   0.802702,
+   0.759602
+  ],
+  "width 4, matched cells": [
+   0.788499,
+   0.770721,
+   0.775841,
+   0.77803,
+   0.774516,
+   0.773189,
+   0.782627,
+   0.782926,
+   0.781288,
+   0.773095,
+   0.793552,
+   0.754859
+  ]
+ },
+ "per_split_deployed_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}

@@ -10,13 +10,13 @@
     "inventory": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it"
   },
   "counts": {
-    "cited": 55,
+    "cited": 56,
     "exploration": 32,
     "superseded": 17,
     "inventory": 2,
     "fold_access": 10
   },
-  "n_artifacts": 116,
+  "n_artifacts": 117,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -395,6 +395,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.sensitivity_sweep.v1",
       "bytes": 6060
+    },
+    {
+      "artifact": "results/architecture_sweep/TABLE_WIDTH.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.table_width.v1",
+      "bytes": 7259
     },
     {
       "artifact": "results/architecture_sweep/THRESHOLD_GATE.json",

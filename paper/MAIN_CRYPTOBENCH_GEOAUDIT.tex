@@ -2227,6 +2227,57 @@ in its favour, and the honest verdict rests on the global-versus-routed comparis
 where both sides see the fit half only. Stated here rather than in a footnote
 because a reader cannot see it from the numbers.
 
+\subsection{The table topology, which everything above is downstream of}
+\label{sec:width}
+Seven measurements now say the readout is at a local optimum, and every one of
+them varied something a table \emph{does}: how its wires are cut, which wires it
+holds, how many tables there are, how they are weighted, whether the weighting
+may vary by region. None varied what a table \emph{is}. Every cell in the
+deployed bank is a joint state of two quantised wires, so the field is a sum of
+pairwise terms and a three-way interaction is not merely unfitted but
+inexpressible. That is not a small class of function to be missing. A counting
+field is linear in the indicators of its cells and not in the wires, so widening a
+table enlarges the function class it can represent rather than only the number of
+quantities fitted --- which is the one kind of change none of the seven sweeps
+above could make.
+
+Against that, widening thins. A width-\(w\) table holds \(4^w\) cells, so each
+unit of width divides the residues behind a cell by four, and the ladder result
+above says the construction is not indifferent to that axis.
+
+Three quantities compete for two degrees of freedom --- width, rounds, cell
+budget --- so no single arm isolates the width, and both matchings are run. At a
+matched cell budget the rounds fall and each wire is covered fewer times; at
+matched rounds the budget grows. The deployed arm is the deployed code and returns
+the frozen per-split numbers to \WidthRepro{}.
+
+Width two is an interior optimum and both neighbours are worse. Narrowing to
+one-wire tables --- a per-wire lookup with no interaction at all, matched on table
+count --- costs \WidthOneTables{}, positive on \WidthOneTablesSplits{} of
+\LadderSplits{} splits, which is what the pairing is worth. Widening to three
+costs \WidthThreeCells{} at a matched cell budget and \WidthThreeRounds{} at
+matched rounds, on \WidthThreeCellsSplits{} and \WidthThreeRoundsSplits{} of
+\LadderSplits{}. Not one split of twelve, under either matching. Width four costs
+\WidthFourCells{}.
+
+The occupancy says why, and it is the same mechanism as the quantisation ladder
+seen along a second axis. The median residues behind an addressed cell runs
+\WidthOneTablesCells{}, \WidthTwoCells{}, \WidthThreeRoundsCells{},
+\WidthFourCellsCells{} for widths one to four --- a clean factor of four per step,
+as the arithmetic requires. At width one there are counts to spare and no
+interaction to spend them on; at width three the interaction is expressible and
+each cell states a frequency from a quarter as much evidence. Two is where those
+cross. The construction is not indifferent to its topology, it is at an optimum in
+it, and this is the eighth parameter to say so.
+
+One difference inside the width-three pair is worth stating and not explaining.
+The matched-cells arm, with fewer tables from fewer rounds, beats the
+matched-rounds arm by a margin only just above the \SatReseed{} floor. More rounds
+at fixed width means each wire appears in more tables and the tables repeat each
+other more, which is the condition under which the fan-out solve is known here to
+degrade. That is a plausible mechanism and it is not measured, so it is recorded
+as a difference.
+
 \section{Limitations}
 The clearest limitation is the one Sections~\ref{sec:plmnn}
 and~\ref{sec:external} measure twice: the method is less accurate than the
