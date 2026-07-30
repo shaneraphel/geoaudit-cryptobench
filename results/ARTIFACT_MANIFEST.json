@@ -9,12 +9,12 @@
     "superseded": "an earlier frozen state, kept for the record"
   },
   "counts": {
-    "exploration": 36,
-    "cited": 47,
+    "exploration": 32,
+    "cited": 52,
     "superseded": 17,
     "fold_access": 10
   },
-  "n_artifacts": 110,
+  "n_artifacts": 111,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
@@ -39,15 +39,15 @@
     },
     {
       "artifact": "results/architecture_sweep/BANK_TRUNCATION.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.bank_truncation.v1",
       "bytes": 14131
     },
     {
       "artifact": "results/architecture_sweep/COMPOSITION_WIRES.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.composition_wires.v1",
       "bytes": 8672
     },
@@ -214,8 +214,8 @@
     },
     {
       "artifact": "results/architecture_sweep/GRAM_CONDITIONING.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.gram_conditioning.v1",
       "bytes": 22256
     },
@@ -333,8 +333,8 @@
     },
     {
       "artifact": "results/architecture_sweep/QUANTISATION_LADDER.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.quantisation_ladder.v1",
       "bytes": 6476
     },
@@ -346,6 +346,13 @@
       "bytes": 56556
     },
     {
+      "artifact": "results/architecture_sweep/ROUTED_MULTIPLICITIES.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.routed_multiplicities.v1",
+      "bytes": 7570
+    },
+    {
       "artifact": "results/architecture_sweep/RUNTIME_COST.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -354,8 +361,8 @@
     },
     {
       "artifact": "results/architecture_sweep/SELECTED_PAIRINGS.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.selected_pairings.v1",
       "bytes": 15740
     },

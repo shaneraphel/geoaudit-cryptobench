@@ -1,0 +1,292 @@
+{
+ "schema": "geoaudit.routed_multiplicities.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "five measurements have found every global parameter of this construction at or near its optimum, and the solved direction is nearly orthogonal to the class mean difference on every bank including the deployed one. Does giving each region its own integer multiplicities recover anything",
+ "why_this_is_the_remaining_change": {
+  "quantisation": "results/architecture_sweep/QUANTISATION_LADDER.json",
+  "pairings": "results/architecture_sweep/SELECTED_PAIRINGS.json",
+  "appended_columns": "results/architecture_sweep/COMPOSITION_WIRES.json",
+  "rounding_and_ridge": "results/architecture_sweep/GRAM_CONDITIONING.json",
+  "bank_size": "results/architecture_sweep/BANK_TRUNCATION.json",
+  "what_they_share": "each varies a choice applied identically to all 5,152 tables. None varies the fact that the assignment is global",
+  "the_number_that_motivates_it": "cos(m, mu_1 - mu_0) = 0.025, which is what one direction fitted to heterogeneous regions looks like"
+ },
+ "construction": {
+  "n_regions": 4,
+  "region_of_a_residue": "the digit of one router wire, so the region index is read off the residue's own address and needs no information the detector does not already have",
+  "router_rule": "the single wire whose own between-cell label variance on the fit half is largest; stated, not tuned, and recorded per split",
+  "cell_frequencies": "compiled once on the whole fit half and shared by every region",
+  "why_frequencies_stay_global": "per-region frequencies would thin every cell by a factor of R, and QUANTISATION_LADDER.json showed cell thinning is the dominant effect when it happens. Holding them global isolates the assignment from count starvation",
+  "inference_cost": "4 integer vectors of 5152 entries instead of one; tens of kilobytes against the 1.79 MB the cell counts occupy",
+  "still_integer_at_inference": true
+ },
+ "controls": {
+  "random router": "residues partitioned into 4 regions at seed 20260731, ignoring geometry. R regions is also R times the parameters, so if random routing gains as much the gain is capacity and not structure. This arm decides whether the result means anything",
+  "chain-size router": "partition by chain-length quartile: a real partition with nothing to do with the local environment, which separates 'any partition helps' from 'this partition helps'"
+ },
+ "what_would_falsify_the_hypothesis": "informed routing failing to beat both the global arm and the random router. Then the global assignment is not the constraint either, every parameter of the construction has been measured at its optimum, and the deficit is not reachable from this architecture",
+ "held_fixed": {
+  "n_wires": 645,
+  "n_levels": 4,
+  "table_width": 2,
+  "partition_rounds": 16,
+  "partition_seed": 20260725,
+  "n_tables": 5152,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "route_and_solve_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC",
+  "baseline_was_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json"
+ },
+ "routers_chosen": [
+  {
+   "split": 1,
+   "wire_index": 134,
+   "wire_name": "concavity@14",
+   "own_variance": 0.001716983
+  },
+  {
+   "split": 2,
+   "wire_index": 134,
+   "wire_name": "concavity@14",
+   "own_variance": 0.001928114
+  },
+  {
+   "split": 3,
+   "wire_index": 1,
+   "wire_name": "void",
+   "own_variance": 0.001965547
+  },
+  {
+   "split": 4,
+   "wire_index": 134,
+   "wire_name": "concavity@14",
+   "own_variance": 0.001653423
+  },
+  {
+   "split": 5,
+   "wire_index": 1,
+   "wire_name": "void",
+   "own_variance": 0.001907357
+  },
+  {
+   "split": 6,
+   "wire_index": 134,
+   "wire_name": "concavity@14",
+   "own_variance": 0.001831045
+  },
+  {
+   "split": 7,
+   "wire_index": 134,
+   "wire_name": "concavity@14",
+   "own_variance": 0.001805346
+  },
+  {
+   "split": 8,
+   "wire_index": 1,
+   "wire_name": "void",
+   "own_variance": 0.001941455
+  },
+  {
+   "split": 9,
+   "wire_index": 134,
+   "wire_name": "concavity@14",
+   "own_variance": 0.001894859
+  },
+  {
+   "split": 10,
+   "wire_index": 1,
+   "wire_name": "void",
+   "own_variance": 0.001966329
+  },
+  {
+   "split": 11,
+   "wire_index": 1,
+   "wire_name": "void",
+   "own_variance": 0.001806072
+  },
+  {
+   "split": 12,
+   "wire_index": 134,
+   "wire_name": "concavity@14",
+   "own_variance": 0.002353154
+  }
+ ],
+ "arms": {
+  "global": {
+   "mean": 0.79012,
+   "min": 0.761546,
+   "max": 0.805021
+  },
+  "gini router": {
+   "mean": 0.725134,
+   "min": 0.682668,
+   "max": 0.769649
+  },
+  "random router": {
+   "mean": 0.755942,
+   "min": 0.729865,
+   "max": 0.779505
+  },
+  "chain-size router": {
+   "mean": 0.771303,
+   "min": 0.751377,
+   "max": 0.786558
+  }
+ },
+ "deployed_arm_frozen": {
+  "mean": 0.79012,
+  "min": 0.761546,
+  "max": 0.805021
+ },
+ "minus_deployed": {
+  "global": {
+   "mean": -0.0,
+   "min": -0.0,
+   "max": 0.0,
+   "n_splits_positive": 6,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "gini router": {
+   "mean": -0.064986,
+   "min": -0.101189,
+   "max": -0.025757,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "random router": {
+   "mean": -0.034178,
+   "min": -0.072394,
+   "max": -0.010272,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain-size router": {
+   "mean": -0.018817,
+   "min": -0.029126,
+   "max": -0.010169,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  }
+ },
+ "minus_random_router": {
+  "global": {
+   "mean": 0.034178,
+   "min": 0.010272,
+   "max": 0.072394,
+   "n_splits_positive": 12,
+   "n_splits": 12,
+   "positive_on_every_split": true
+  },
+  "gini router": {
+   "mean": -0.030808,
+   "min": -0.071442,
+   "max": 0.014369,
+   "n_splits_positive": 3,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain-size router": {
+   "mean": 0.015361,
+   "min": -0.005787,
+   "max": 0.043269,
+   "n_splits_positive": 10,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  }
+ },
+ "reproduction_check": {
+  "arm": "global",
+  "max_absolute_difference": 4.01e-07,
+  "reproduces_the_deployed_arm": true,
+  "why_this_is_here": "the global arm is one region and is therefore the deployed detector. It must return the frozen numbers, and running it rather than assuming it is what makes the routed arms comparable"
+ },
+ "per_split": {
+  "global": [
+   0.804622,
+   0.786394,
+   0.787979,
+   0.790364,
+   0.791253,
+   0.7884,
+   0.800117,
+   0.790124,
+   0.791757,
+   0.78386,
+   0.805021,
+   0.761546
+  ],
+  "gini router": [
+   0.713908,
+   0.708779,
+   0.752077,
+   0.697838,
+   0.753524,
+   0.687211,
+   0.710321,
+   0.759463,
+   0.708063,
+   0.758103,
+   0.769649,
+   0.682668
+  ],
+  "random router": [
+   0.732228,
+   0.769551,
+   0.764059,
+   0.732356,
+   0.774929,
+   0.729865,
+   0.776566,
+   0.754838,
+   0.779505,
+   0.743735,
+   0.7624,
+   0.751274
+  ],
+  "chain-size router": [
+   0.775496,
+   0.770645,
+   0.76967,
+   0.767788,
+   0.771034,
+   0.764621,
+   0.783157,
+   0.772842,
+   0.773718,
+   0.768731,
+   0.786558,
+   0.751377
+  ]
+ },
+ "per_split_deployed_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}
