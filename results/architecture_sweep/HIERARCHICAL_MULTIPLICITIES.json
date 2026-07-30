@@ -1,0 +1,786 @@
+{
+ "schema": "geoaudit.hierarchical_multiplicities.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "the flat per-region solve lost 0.019 to 0.065 because each region refit all 5,152 multiplicities from a fraction of the rows, and because a within-chain router makes a chain's scores incomparable under a within-chain metric. Does a global fit with a damped per-region correction, routed by whole chains, recover anything",
+ "construction": {
+  "global": "w = (S + lambda I)^-1 (mu_1 - mu_0) over all fit rows",
+  "correction": "delta_g = (S_g + lambda (N/n_g) I)^-1 (d_g - S_g w) over region g's rows, with both scatters row-normalised as the deployed fan-out normalises them",
+  "integerisation": "m_g = round((w + delta_g) / peak * cap)",
+  "the_one_choice_that_matters": "the region's ridge is the global one inflated by N / n_g, so a region holding a quarter of the rows is regularised four times as hard. Monotone in how little data the region has, stated, with no coefficient to tune",
+  "two_earlier_forms_that_were_wrong": "a global-scale ridge on a row-normalised scatter does not damp at all, because normalising removes the row-count dependence the damping needed; measured correction 1.6x the global norm. Removing the normalisation is worse, because mu_1 - mu_0 does not scale with rows while a raw scatter does, so the correction exceeds the global vector by exactly the region count; measured 3.1x at R=4. Both were caught by reporting |correction|/|global| rather than by inspection",
+  "why_it_cannot_lose_much": "with no regional structure the residual d_g - S_g w is near zero and the arm degrades to the global solve. That is the property the flat per-region design lacked, and the reason it could lose 0.065",
+  "still_integer_at_inference": true,
+  "inference_cost": "R integer vectors of 5152 entries instead of one"
+ },
+ "why_every_router_is_per_chain": "the metric is per-unit ROC-AUC and reads only the ranking within a chain. A router that varies inside a chain gives its residues different weight vectors and their scores stop being comparable, which ROUTED_MULTIPLICITIES.json measured as -0.065 for the most within-chain router and -0.019 for the only per-chain one",
+ "routers": {
+  "chain size": "length quartile",
+  "chain polarity": "quartile of the fraction of residues in the polar, cationic and anionic classes; a composition property of the whole receptor",
+  "random chains": "whole chains assigned at seed 20260801+split. R regions is R times the parameters, so if random per-chain routing gains as much the gain is capacity and not structure"
+ },
+ "what_would_falsify_it": "any informed router failing to beat both the global arm and the random per-chain router. The earlier sweeps would then stand as a complete saturation result: every parameter of this construction, including whether the assignment is global, measured at its optimum",
+ "held_fixed": {
+  "n_wires": 645,
+  "n_levels": 4,
+  "table_width": 2,
+  "partition_rounds": 16,
+  "partition_seed": 20260725,
+  "n_tables": 5152,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "cell_frequencies": "compiled once on the whole fit half and shared by every region, so truncating the data per region cannot thin a cell"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "route_and_solve_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC",
+  "baseline_was_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json"
+ },
+ "arms": {
+  "global": {
+   "mean": 0.79012,
+   "min": 0.761546,
+   "max": 0.805021
+  },
+  "chain size, R=4, d=1": {
+   "mean": 0.78067,
+   "min": 0.759016,
+   "max": 0.793467
+  },
+  "chain size, R=4, d=4": {
+   "mean": 0.785613,
+   "min": 0.763199,
+   "max": 0.798701
+  },
+  "chain size, R=4, d=16": {
+   "mean": 0.789063,
+   "min": 0.764517,
+   "max": 0.803441
+  },
+  "chain size, R=4, d=64": {
+   "mean": 0.790634,
+   "min": 0.764566,
+   "max": 0.806443
+  },
+  "chain polarity, R=4, d=1": {
+   "mean": 0.777506,
+   "min": 0.759865,
+   "max": 0.794173
+  },
+  "chain polarity, R=4, d=4": {
+   "mean": 0.784189,
+   "min": 0.763421,
+   "max": 0.799564
+  },
+  "chain polarity, R=4, d=16": {
+   "mean": 0.787114,
+   "min": 0.766252,
+   "max": 0.801289
+  },
+  "chain polarity, R=4, d=64": {
+   "mean": 0.788825,
+   "min": 0.765337,
+   "max": 0.802462
+  },
+  "random chains, R=4, d=1": {
+   "mean": 0.77532,
+   "min": 0.746657,
+   "max": 0.789834
+  },
+  "random chains, R=4, d=4": {
+   "mean": 0.781177,
+   "min": 0.753068,
+   "max": 0.793826
+  },
+  "random chains, R=4, d=16": {
+   "mean": 0.784918,
+   "min": 0.756161,
+   "max": 0.798169
+  },
+  "random chains, R=4, d=64": {
+   "mean": 0.787709,
+   "min": 0.761622,
+   "max": 0.802477
+  }
+ },
+ "deployed_arm_frozen": {
+  "mean": 0.79012,
+  "min": 0.761546,
+  "max": 0.805021
+ },
+ "minus_deployed": {
+  "global": {
+   "mean": -0.0,
+   "min": -0.0,
+   "max": 0.0,
+   "n_splits_positive": 6,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain size, R=4, d=1": {
+   "mean": -0.00945,
+   "min": -0.017546,
+   "max": -0.00253,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain size, R=4, d=4": {
+   "mean": -0.004507,
+   "min": -0.013343,
+   "max": 0.001653,
+   "n_splits_positive": 1,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain size, R=4, d=16": {
+   "mean": -0.001056,
+   "min": -0.007197,
+   "max": 0.002971,
+   "n_splits_positive": 4,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain size, R=4, d=64": {
+   "mean": 0.000514,
+   "min": -0.004914,
+   "max": 0.005025,
+   "n_splits_positive": 6,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain polarity, R=4, d=1": {
+   "mean": -0.012613,
+   "min": -0.019468,
+   "max": -0.001681,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain polarity, R=4, d=4": {
+   "mean": -0.005931,
+   "min": -0.011209,
+   "max": 0.001875,
+   "n_splits_positive": 1,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain polarity, R=4, d=16": {
+   "mean": -0.003006,
+   "min": -0.007571,
+   "max": 0.004706,
+   "n_splits_positive": 1,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain polarity, R=4, d=64": {
+   "mean": -0.001295,
+   "min": -0.003591,
+   "max": 0.003791,
+   "n_splits_positive": 1,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "random chains, R=4, d=1": {
+   "mean": -0.0148,
+   "min": -0.021202,
+   "max": -0.008829,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "random chains, R=4, d=4": {
+   "mean": -0.008943,
+   "min": -0.013031,
+   "max": -0.005967,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "random chains, R=4, d=16": {
+   "mean": -0.005202,
+   "min": -0.008669,
+   "max": -0.001948,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "random chains, R=4, d=64": {
+   "mean": -0.002411,
+   "min": -0.004439,
+   "max": 7.6e-05,
+   "n_splits_positive": 1,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  }
+ },
+ "minus_random_per_chain": {
+  "chain size, R=4, d=1": {
+   "mean": 0.00535,
+   "min": 0.000747,
+   "max": 0.012359,
+   "n_splits_positive": 12,
+   "n_splits": 12,
+   "positive_on_every_split": true
+  },
+  "chain size, R=4, d=4": {
+   "mean": 0.004435,
+   "min": -0.001881,
+   "max": 0.010131,
+   "n_splits_positive": 11,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain size, R=4, d=16": {
+   "mean": 0.004145,
+   "min": 0.000703,
+   "max": 0.010365,
+   "n_splits_positive": 12,
+   "n_splits": 12,
+   "positive_on_every_split": true
+  },
+  "chain size, R=4, d=64": {
+   "mean": 0.002925,
+   "min": -0.001047,
+   "max": 0.008765,
+   "n_splits_positive": 11,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain polarity, R=4, d=1": {
+   "mean": 0.002186,
+   "min": -0.00705,
+   "max": 0.013209,
+   "n_splits_positive": 9,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain polarity, R=4, d=4": {
+   "mean": 0.003012,
+   "min": -0.004214,
+   "max": 0.010353,
+   "n_splits_positive": 11,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain polarity, R=4, d=16": {
+   "mean": 0.002196,
+   "min": -0.004249,
+   "max": 0.010091,
+   "n_splits_positive": 9,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  },
+  "chain polarity, R=4, d=64": {
+   "mean": 0.001116,
+   "min": -0.000613,
+   "max": 0.003924,
+   "n_splits_positive": 8,
+   "n_splits": 12,
+   "positive_on_every_split": false
+  }
+ },
+ "damping_ladder": {
+  "multipliers": [
+   1.0,
+   4.0,
+   16.0,
+   64.0
+  ],
+  "what_it_interpolates": "the arm becomes the global solve as the damping grows and an independent per-region solve as it falls, so the whole ladder is reported and not a chosen point. If the curve rises monotonically toward zero without crossing it, no interior point gains and the globality of the assignment is settled",
+  "mean_correction_norm_over_global": {
+   "chain size, R=4, d=1": 0.6526,
+   "chain size, R=4, d=4": 0.2537,
+   "chain size, R=4, d=16": 0.097,
+   "chain size, R=4, d=64": 0.0372,
+   "chain polarity, R=4, d=1": 0.6718,
+   "chain polarity, R=4, d=4": 0.2571,
+   "chain polarity, R=4, d=16": 0.0976,
+   "chain polarity, R=4, d=64": 0.037,
+   "random chains, R=4, d=1": 0.6694,
+   "random chains, R=4, d=4": 0.2543,
+   "random chains, R=4, d=16": 0.0949,
+   "random chains, R=4, d=64": 0.0352
+  },
+  "crosses_zero_anywhere": true
+ },
+ "correction_size_on_split_1": {
+  "chain size, R=4, d=1": [
+   {
+    "region": 0,
+    "n_fit_rows": 12837,
+    "correction_norm_over_global_norm": 0.446954
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 24971,
+    "correction_norm_over_global_norm": 0.566796
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 28849,
+    "correction_norm_over_global_norm": 0.685105
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 52059,
+    "correction_norm_over_global_norm": 0.928373
+   }
+  ],
+  "chain size, R=4, d=4": [
+   {
+    "region": 0,
+    "n_fit_rows": 12837,
+    "correction_norm_over_global_norm": 0.169582
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 24971,
+    "correction_norm_over_global_norm": 0.217319
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 28849,
+    "correction_norm_over_global_norm": 0.26437
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 52059,
+    "correction_norm_over_global_norm": 0.369162
+   }
+  ],
+  "chain size, R=4, d=16": [
+   {
+    "region": 0,
+    "n_fit_rows": 12837,
+    "correction_norm_over_global_norm": 0.064834
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 24971,
+    "correction_norm_over_global_norm": 0.08445
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 28849,
+    "correction_norm_over_global_norm": 0.102306
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 52059,
+    "correction_norm_over_global_norm": 0.139174
+   }
+  ],
+  "chain size, R=4, d=64": [
+   {
+    "region": 0,
+    "n_fit_rows": 12837,
+    "correction_norm_over_global_norm": 0.02526
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 24971,
+    "correction_norm_over_global_norm": 0.033039
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 28849,
+    "correction_norm_over_global_norm": 0.039982
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 52059,
+    "correction_norm_over_global_norm": 0.052793
+   }
+  ],
+  "chain polarity, R=4, d=1": [
+   {
+    "region": 0,
+    "n_fit_rows": 27084,
+    "correction_norm_over_global_norm": 0.637353
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 28703,
+    "correction_norm_over_global_norm": 0.687526
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 35661,
+    "correction_norm_over_global_norm": 0.716096
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 27268,
+    "correction_norm_over_global_norm": 0.653849
+   }
+  ],
+  "chain polarity, R=4, d=4": [
+   {
+    "region": 0,
+    "n_fit_rows": 27084,
+    "correction_norm_over_global_norm": 0.245272
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 28703,
+    "correction_norm_over_global_norm": 0.258854
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 35661,
+    "correction_norm_over_global_norm": 0.280068
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 27268,
+    "correction_norm_over_global_norm": 0.250283
+   }
+  ],
+  "chain polarity, R=4, d=16": [
+   {
+    "region": 0,
+    "n_fit_rows": 27084,
+    "correction_norm_over_global_norm": 0.094324
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 28703,
+    "correction_norm_over_global_norm": 0.095694
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 35661,
+    "correction_norm_over_global_norm": 0.10747
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 27268,
+    "correction_norm_over_global_norm": 0.09476
+   }
+  ],
+  "chain polarity, R=4, d=64": [
+   {
+    "region": 0,
+    "n_fit_rows": 27084,
+    "correction_norm_over_global_norm": 0.035882
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 28703,
+    "correction_norm_over_global_norm": 0.034884
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 35661,
+    "correction_norm_over_global_norm": 0.039969
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 27268,
+    "correction_norm_over_global_norm": 0.035225
+   }
+  ],
+  "random chains, R=4, d=1": [
+   {
+    "region": 0,
+    "n_fit_rows": 28212,
+    "correction_norm_over_global_norm": 0.694218
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 30903,
+    "correction_norm_over_global_norm": 0.698101
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 30035,
+    "correction_norm_over_global_norm": 0.68994
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 29566,
+    "correction_norm_over_global_norm": 0.659189
+   }
+  ],
+  "random chains, R=4, d=4": [
+   {
+    "region": 0,
+    "n_fit_rows": 28212,
+    "correction_norm_over_global_norm": 0.264418
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 30903,
+    "correction_norm_over_global_norm": 0.261813
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 30035,
+    "correction_norm_over_global_norm": 0.258191
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 29566,
+    "correction_norm_over_global_norm": 0.247997
+   }
+  ],
+  "random chains, R=4, d=16": [
+   {
+    "region": 0,
+    "n_fit_rows": 28212,
+    "correction_norm_over_global_norm": 0.09768
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 30903,
+    "correction_norm_over_global_norm": 0.096023
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 30035,
+    "correction_norm_over_global_norm": 0.095052
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 29566,
+    "correction_norm_over_global_norm": 0.092117
+   }
+  ],
+  "random chains, R=4, d=64": [
+   {
+    "region": 0,
+    "n_fit_rows": 28212,
+    "correction_norm_over_global_norm": 0.036357
+   },
+   {
+    "region": 1,
+    "n_fit_rows": 30903,
+    "correction_norm_over_global_norm": 0.035861
+   },
+   {
+    "region": 2,
+    "n_fit_rows": 30035,
+    "correction_norm_over_global_norm": 0.03532
+   },
+   {
+    "region": 3,
+    "n_fit_rows": 29566,
+    "correction_norm_over_global_norm": 0.034517
+   }
+  ]
+ },
+ "reproduction_check": {
+  "arm": "global",
+  "max_absolute_difference": 4.01e-07,
+  "why_this_is_here": "the global arm is one region and is therefore the deployed detector; it must return the frozen numbers before any corrected arm is interpreted",
+  "reproduces_the_deployed_arm": true
+ },
+ "per_split": {
+  "global": [
+   0.804622,
+   0.786394,
+   0.787979,
+   0.790364,
+   0.791253,
+   0.7884,
+   0.800117,
+   0.790124,
+   0.791757,
+   0.78386,
+   0.805021,
+   0.761546
+  ],
+  "chain size, R=4, d=1": [
+   0.787076,
+   0.779524,
+   0.78127,
+   0.781959,
+   0.780264,
+   0.77492,
+   0.793087,
+   0.780704,
+   0.781123,
+   0.775626,
+   0.793467,
+   0.759016
+  ],
+  "chain size, R=4, d=4": [
+   0.791279,
+   0.783064,
+   0.787395,
+   0.786912,
+   0.785207,
+   0.779377,
+   0.797148,
+   0.787551,
+   0.786438,
+   0.781079,
+   0.798701,
+   0.763199
+  ],
+  "chain size, R=4, d=16": [
+   0.797425,
+   0.786884,
+   0.787271,
+   0.78965,
+   0.788675,
+   0.783969,
+   0.799695,
+   0.79275,
+   0.790263,
+   0.78422,
+   0.803441,
+   0.764517
+  ],
+  "chain size, R=4, d=64": [
+   0.799708,
+   0.788752,
+   0.787426,
+   0.789756,
+   0.790938,
+   0.788362,
+   0.801888,
+   0.795149,
+   0.790224,
+   0.784396,
+   0.806443,
+   0.764566
+  ],
+  "chain polarity, R=4, d=1": [
+   0.794173,
+   0.773178,
+   0.77571,
+   0.778962,
+   0.779986,
+   0.772752,
+   0.793073,
+   0.77453,
+   0.772289,
+   0.769761,
+   0.785798,
+   0.759865
+  ],
+  "chain polarity, R=4, d=4": [
+   0.799564,
+   0.780561,
+   0.781589,
+   0.783815,
+   0.785433,
+   0.77995,
+   0.79712,
+   0.782582,
+   0.780548,
+   0.77852,
+   0.797162,
+   0.763421
+  ],
+  "chain polarity, R=4, d=16": [
+   0.800849,
+   0.783847,
+   0.78458,
+   0.787456,
+   0.788413,
+   0.782774,
+   0.797789,
+   0.786159,
+   0.784186,
+   0.781771,
+   0.801289,
+   0.766252
+  ],
+  "chain polarity, R=4, d=64": [
+   0.801031,
+   0.786048,
+   0.786125,
+   0.788275,
+   0.789394,
+   0.786473,
+   0.799169,
+   0.789478,
+   0.788764,
+   0.783345,
+   0.802462,
+   0.765337
+  ],
+  "random chains, R=4, d=1": [
+   0.78633,
+   0.774944,
+   0.77915,
+   0.775428,
+   0.775686,
+   0.771041,
+   0.789834,
+   0.773308,
+   0.779339,
+   0.768306,
+   0.783819,
+   0.746657
+  ],
+  "random chains, R=4, d=4": [
+   0.79316,
+   0.780427,
+   0.781534,
+   0.782399,
+   0.783653,
+   0.776709,
+   0.793826,
+   0.77961,
+   0.784762,
+   0.772988,
+   0.79199,
+   0.753068
+  ],
+  "random chains, R=4, d=16": [
+   0.796723,
+   0.782994,
+   0.785983,
+   0.786215,
+   0.787687,
+   0.781165,
+   0.798169,
+   0.782384,
+   0.788435,
+   0.775191,
+   0.797906,
+   0.756161
+  ],
+  "random chains, R=4, d=64": [
+   0.800755,
+   0.783769,
+   0.786319,
+   0.788079,
+   0.790006,
+   0.785354,
+   0.799649,
+   0.786384,
+   0.788668,
+   0.779421,
+   0.802477,
+   0.761622
+  ]
+ },
+ "per_split_deployed_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}

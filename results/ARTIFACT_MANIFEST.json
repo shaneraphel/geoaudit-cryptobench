@@ -10,13 +10,13 @@
     "inventory": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it"
   },
   "counts": {
-    "exploration": 32,
+    "exploration": 33,
     "cited": 52,
     "superseded": 17,
     "inventory": 1,
     "fold_access": 10
   },
-  "n_artifacts": 112,
+  "n_artifacts": 113,
   "artifacts": [
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
@@ -220,6 +220,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.gram_conditioning.v1",
       "bytes": 22256
+    },
+    {
+      "artifact": "results/architecture_sweep/HIERARCHICAL_MULTIPLICITIES.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.hierarchical_multiplicities.v1",
+      "bytes": 18043
     },
     {
       "artifact": "results/architecture_sweep/INTERPRETABLE_BASELINES.json",
