@@ -10,13 +10,13 @@
     "inventory": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it"
   },
   "counts": {
-    "cited": 56,
+    "cited": 57,
     "exploration": 32,
     "superseded": 17,
     "inventory": 2,
     "fold_access": 10
   },
-  "n_artifacts": 117,
+  "n_artifacts": 118,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -52,6 +52,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.bank_truncation.v1",
       "bytes": 14131
+    },
+    {
+      "artifact": "results/architecture_sweep/COMBINATORIAL_MULTIPLICITIES.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.combinatorial_multiplicities.v1",
+      "bytes": 5044
     },
     {
       "artifact": "results/architecture_sweep/COMPOSITION_WIRES.json",

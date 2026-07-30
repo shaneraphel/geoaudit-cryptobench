@@ -124,6 +124,7 @@ TRUNC = ROOT / "results/architecture_sweep/BANK_TRUNCATION.json"
 HIER = ROOT / "results/architecture_sweep/HIERARCHICAL_MULTIPLICITIES.json"
 GATEROUTE = ROOT / "results/architecture_sweep/GATE_WEIGHT_ROUTING.json"
 TABWIDTH = ROOT / "results/architecture_sweep/TABLE_WIDTH.json"
+COMBMULT = ROOT / "results/architecture_sweep/COMBINATORIAL_MULTIPLICITIES.json"
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
 
@@ -1770,7 +1771,7 @@ def _saturation_macros() -> list[str]:
     """
     L: list[str] = []
     for path in (LADDER, PAIRSEL, COMPWIRE, GRAMCOND, TRUNC, HIER, GATEROUTE,
-                 TABWIDTH):
+                 TABWIDTH, COMBMULT):
         if not path.exists():
             continue
         doc = json.loads(path.read_text())
@@ -1989,6 +1990,34 @@ def _saturation_macros() -> list[str]:
         L.append(f"\\newcommand{{\\WidthTwoTables}}{{{arms[dep]['n_tables']}}}")
         rep = d.get("reproduction_check") or {}
         L.append(f"\\newcommand{{\\WidthRepro}}"
+                 f"{{{rep.get('max_absolute_difference', 0):.1e}}}")
+
+    if COMBMULT.exists():
+        d = json.loads(COMBMULT.read_text())
+        md, cos, arms = (d["minus_deployed"], d["cosine_with_the_deployed_direction"],
+                         d["arms"])
+        for name, stem in (("diagonal solve", "Diag"),
+                           ("standardised delta", "Std"),
+                           ("rank bands", "Bands"),
+                           ("sign only", "Sign"),
+                           ("random signs", "RandSign")):
+            L.append(f"\\newcommand{{\\Comb{stem}}}"
+                     f"{{{_signed(md[name]['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\Comb{stem}Splits}}"
+                     f"{{{md[name]['n_splits_positive']}}}")
+            L.append(f"\\newcommand{{\\Comb{stem}Cos}}{{{cos[name]:.3f}}}")
+            L.append(f"\\newcommand{{\\Comb{stem}Auc}}"
+                     f"{{{arms[name]['mean']:.4f}}}")
+        L.append(f"\\newcommand{{\\CombDeployedAuc}}"
+                 f"{{{arms['deployed ridge solve']['mean']:.4f}}}")
+        # The share of the margin over chance that survives when the off-diagonal
+        # is deleted. Computed here so the manuscript cannot round it by hand.
+        dep, best = arms["deployed ridge solve"]["mean"], arms["sign only"]["mean"]
+        L.append(f"\\newcommand{{\\CombSignShare}}"
+                 f"{{{100 * (best - 0.5) / (dep - 0.5):.0f}}}")
+        L.append(f"\\newcommand{{\\CombClosestRule}}{{{d['closest_rule']}}}")
+        rep = d.get("reproduction_check") or {}
+        L.append(f"\\newcommand{{\\CombRepro}}"
                  f"{{{rep.get('max_absolute_difference', 0):.1e}}}")
     return L
 

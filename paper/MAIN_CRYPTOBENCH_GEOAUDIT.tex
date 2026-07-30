@@ -2278,6 +2278,63 @@ other more, which is the condition under which the fan-out solve is known here t
 degrade. That is a plausible mechanism and it is not measured, so it is recorded
 as a difference.
 
+\subsection{The one fitted object, and what it turns out to be doing}
+\label{sec:decorrelation}
+Everything in the inference path is integer arithmetic over table cells except one
+step. The multiplicities are the rounded solution of a single ridge system against
+the within-class scatter of the table outputs, and that solve is the only
+real-valued fitted object the detector keeps. Section~\ref{sec:saturation} reports
+two reassuring facts about it --- rounding it costs nothing, and the ridge is a
+small share of the diagonal --- but neither says what it is \emph{for}. Given that
+the eight sweeps above found no accuracy anywhere else, and that a construction
+built from counting has an obvious reason to want its last fitted object gone, it
+is worth asking whether a counting rule can replace it.
+
+The question has a sharp form. A rule computed from each table separately can see
+that table's own separation and its own variance. The single thing it cannot see
+is how two tables covary, so the solve's entire additional content is the
+off-diagonal of the scatter. Five arms therefore delete one ingredient at a time,
+all rounding onto the same integer range so that inference is unchanged in cost:
+the full solve; the same expression with the off-diagonal deleted; a standardised
+mean difference; quartile bands, in which a table's weight is fixed by which
+quarter of an ordering it falls in and no real number survives; and the sign of
+the mean difference alone. A random-sign arm is the control. The deployed arm
+returns the frozen numbers to \CombRepro{}.
+
+The off-diagonal is not idle. It is load-bearing by a margin unlike anything else
+measured here. Deleting it costs \CombDiag{}, on \CombDiagSplits{} of
+\LadderSplits{} splits --- roughly thirty-six times the \SatReseed{} reseed floor,
+where every other sweep in this section moves by a few thousandths. The other
+three rules land in the same place: \CombStd{}, \CombBands{}, \CombSign{}, none
+positive on any split. It does not matter which per-table statistic is used, or
+whether the magnitude is kept at all. Sign alone reaches \CombSignAuc{} against
+the solve's \CombDeployedAuc{}, which is \CombSignShare{}~\% of the margin over
+chance, and random signs reach \CombRandSignAuc{}, so the signs do carry the bulk
+of it and the missing third is not recoverable by any weighting of tables one at a
+time.
+
+What the direction cosines say is the more interesting half. The solved direction
+sits at cosine \CombDiagCos{} to the diagonal solve, \CombStdCos{} to the
+standardised difference, \CombBandsCos{} to the bands and \CombSignCos{} to the
+signs. It is very nearly orthogonal to every statement a table can make about
+itself. Read with \(\cos(m,\Delta\mu)=\GramCos{}\) from
+Section~\ref{sec:saturation}, which says the same direction is nearly orthogonal
+to the class mean difference, the picture is consistent and it is not the one the
+word ``weighting'' suggests: the multiplicities are almost purely a decorrelation.
+\CompTablesFull{} tables are drawn from repeated random partitions of
+\NTabWires{} wires, so each wire sits in about sixteen tables and the tables restate
+each other heavily; what the solve computes is mostly the correction for that
+restatement, and only marginally an opinion about which table is informative.
+
+This is the one place in the construction where the fitted object earns its
+keep, and it is why the ridge was never cosmetic --- the same repetition that
+makes decorrelation valuable is what drove the direction into the null space when
+the pool grew without it. It also says what a combinatorial replacement would have
+to be. Not a better per-table score: no such score exists, since the target is
+nearly orthogonal to all of them. It would have to be an integer decorrelation of
+the bank itself, which is a different object from anything tried here and is left
+open rather than claimed.
+
 \section{Limitations}
 The clearest limitation is the one Sections~\ref{sec:plmnn}
 and~\ref{sec:external} measure twice: the method is less accurate than the

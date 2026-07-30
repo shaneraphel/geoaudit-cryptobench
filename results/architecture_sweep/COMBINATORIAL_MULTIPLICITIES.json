@@ -1,0 +1,223 @@
+{
+ "schema": "geoaudit.combinatorial_multiplicities.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "whether the one fitted linear object left in the inference path -- the ridge solve integer_fanout rounds -- can be replaced by a rule computed from each table on its own",
+ "what_the_solve_uniquely_has": "the off-diagonal of the within-class scatter, which decorrelates tables that count the same thing. No per-table statistic can see it, and 5,152 tables drawn from random partitions of 645 wires do repeat themselves -- without the ridge the direction chased the null space and the score fell from 0.7844 to 0.6846 as the pool grew",
+ "why_the_arms_are_ordered": "each arm deletes one more ingredient: the correlation, then the variance, then the magnitude, then everything but the sign. Where the accuracy falls off says which ingredient was doing the work, which no single comparison would",
+ "what_would_falsify_it": "the diagonal arm matching the deployed solve within reseed noise. That would say the off-diagonal carries nothing and the last fitted object can be removed",
+ "reseed_noise_for_scale": 0.002649,
+ "reseed_noise_source": "results/architecture_sweep/SELECTED_PAIRINGS.json",
+ "every_arm_is_integer_at_inference": true,
+ "why_that_matters_here": "all six arms round onto [-32, 32] and inference stays an integer weighted sum over cells. This measures how the weights are chosen, not what inference costs",
+ "held_fixed": {
+  "n_wires": 645,
+  "n_levels": 4,
+  "table_width": 2,
+  "partition_rounds": 16,
+  "partition_seed": 20260725,
+  "n_tables": 5152,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "cell_counts": "identical across arms; only the multiplicities move"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_and_solve_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC, gate applied as deployed",
+  "bands": [
+   4,
+   8,
+   16,
+   32
+  ],
+  "sign_seed": 20260803
+ },
+ "arms": {
+  "deployed ridge solve": {
+   "mean": 0.79012,
+   "min": 0.761546,
+   "max": 0.805021
+  },
+  "diagonal solve": {
+   "mean": 0.694807,
+   "min": 0.671168,
+   "max": 0.70934
+  },
+  "standardised delta": {
+   "mean": 0.699238,
+   "min": 0.675597,
+   "max": 0.713613
+  },
+  "rank bands": {
+   "mean": 0.698867,
+   "min": 0.675586,
+   "max": 0.713042
+  },
+  "sign only": {
+   "mean": 0.69426,
+   "min": 0.670574,
+   "max": 0.708811
+  },
+  "random signs": {
+   "mean": 0.549183,
+   "min": 0.309442,
+   "max": 0.700653
+  }
+ },
+ "minus_deployed": {
+  "deployed ridge solve": {
+   "mean": 0.0,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  },
+  "diagonal solve": {
+   "mean": -0.095313,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  },
+  "standardised delta": {
+   "mean": -0.090882,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  },
+  "rank bands": {
+   "mean": -0.091253,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  },
+  "sign only": {
+   "mean": -0.09586,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  },
+  "random signs": {
+   "mean": -0.240936,
+   "n_splits_positive": 0,
+   "n_splits": 12
+  }
+ },
+ "cosine_with_the_deployed_direction": {
+  "deployed ridge solve": 1.0,
+  "diagonal solve": 0.0299,
+  "standardised delta": 0.023,
+  "rank bands": 0.0186,
+  "sign only": 0.0359,
+  "random signs": 0.0005
+ },
+ "closest_rule": "standardised delta",
+ "reproduction_check": {
+  "arm": "deployed ridge solve",
+  "frozen_source": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",
+  "max_absolute_difference": 4.0066772533098316e-07,
+  "reproduces_the_deployed_arm": true
+ },
+ "per_split": {
+  "deployed ridge solve": [
+   0.804622,
+   0.786394,
+   0.787979,
+   0.790364,
+   0.791253,
+   0.7884,
+   0.800117,
+   0.790124,
+   0.791757,
+   0.78386,
+   0.805021,
+   0.761546
+  ],
+  "diagonal solve": [
+   0.70387,
+   0.695288,
+   0.693915,
+   0.692752,
+   0.693896,
+   0.68547,
+   0.700204,
+   0.701525,
+   0.692949,
+   0.697304,
+   0.70934,
+   0.671168
+  ],
+  "standardised delta": [
+   0.707916,
+   0.69949,
+   0.698655,
+   0.696822,
+   0.698301,
+   0.690047,
+   0.705442,
+   0.705819,
+   0.697293,
+   0.701854,
+   0.713613,
+   0.675597
+  ],
+  "rank bands": [
+   0.707617,
+   0.699476,
+   0.698368,
+   0.696832,
+   0.697781,
+   0.689633,
+   0.704818,
+   0.705014,
+   0.696719,
+   0.701519,
+   0.713042,
+   0.675586
+  ],
+  "sign only": [
+   0.703401,
+   0.694798,
+   0.69331,
+   0.692222,
+   0.693359,
+   0.684966,
+   0.699515,
+   0.701041,
+   0.692446,
+   0.696679,
+   0.708811,
+   0.670574
+  ],
+  "random signs": [
+   0.598725,
+   0.310277,
+   0.404157,
+   0.352444,
+   0.618988,
+   0.681594,
+   0.700653,
+   0.666338,
+   0.660136,
+   0.309442,
+   0.645426,
+   0.642021
+  ]
+ },
+ "per_split_deployed_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}
