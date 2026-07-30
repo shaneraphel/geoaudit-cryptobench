@@ -71,23 +71,56 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", type=Path, default=OUT)
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--ceiling", type=float, default=None,
+                    help="map every accession that has an apo and a holo chain "
+                         "under CryptoBench's ligand rule at this resolution "
+                         "ceiling, instead of the pool in SETB_POOL.json. The "
+                         "pool uses a looser holo definition -- any ligand on the "
+                         "chain -- and over-counts by about a factor of four, so "
+                         "a map built from it leaves the real candidates unmapped "
+                         "at any wider ceiling")
+    ap.add_argument("--merge", action="store_true",
+                    help="add to the existing map rather than replacing it, so a "
+                         "second ceiling does not discard the first")
     a = ap.parse_args(argv)
 
-    pool_doc = json.loads(POOL.read_text())
-    sp = pool_doc.get("single_particle_pool")
-    if not sp:
-        raise SystemExit(
-            "SETB_POOL.json carries no single_particle_pool; run "
-            "tools/external_setb_probe.py --write --from-cache --methods first")
-    accessions = sorted(sp["pool_accessions"])
+    if a.ceiling is not None:
+        import build_setb_set as B
+        inv = B.inventory(a.ceiling)
+        accepted = {r["ligand"] for v in
+                    json.loads(B.A.CB_DATASET.read_text()).values() for r in v}
+        apo: set[str] = set()
+        holo: set[str] = set()
+        for c in inv["chains"]:
+            rel = any(l["code"] in accepted and c["chain"] in l["chains"]
+                      for l in c["ligands"])
+            (holo if rel else apo).add(c["uniprot"])
+        accessions = sorted(apo & holo)
+        source = (f"accessions with an apo and a holo chain under CryptoBench's "
+                  f"ligand rule, single-particle, ceiling {a.ceiling} A")
+    else:
+        sp = json.loads(POOL.read_text()).get("single_particle_pool")
+        if not sp:
+            raise SystemExit(
+                "SETB_POOL.json carries no single_particle_pool; run "
+                "tools/external_setb_probe.py --write --from-cache --methods first")
+        accessions = sorted(sp["pool_accessions"])
+        source = "SETB_POOL.json single_particle_pool"
+    print(f"  source: {source}")
     a_clusters, cb_clusters = spent_clusters()
 
-    print(f"mapping {len(accessions)} single-particle pool accessions to "
-          f"UniRef50", flush=True)
-    got: dict[str, str] = {}
-    for i in range(0, len(accessions), BATCH):
-        got.update(_map(accessions[i:i + BATCH]))
-        print(f"  {len(got)}/{len(accessions)}", flush=True)
+    have: dict[str, str] = {}
+    if a.merge and a.out.is_file():
+        have = json.loads(a.out.read_text()).get("cluster_of") or {}
+    todo = [x for x in accessions if x not in have]
+    print(f"mapping {len(todo)} accessions to UniRef50"
+          f"{f' ({len(have)} already mapped, merging)' if have else ''}",
+          flush=True)
+    got: dict[str, str] = dict(have)
+    for i in range(0, len(todo), BATCH):
+        got.update(_map(todo[i:i + BATCH]))
+        print(f"  {len(got) - len(have)}/{len(todo)}", flush=True)
+    accessions = sorted(set(accessions) | set(have))
 
     unmapped = [x for x in accessions if x not in got]
     clusters = {}
