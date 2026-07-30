@@ -14,7 +14,8 @@
   },
   "packages": {
     "numpy": "2.5.1",
-    "scipy": "1.17.1"
+    "scipy": "1.17.1",
+    "rdkit": "2026.03.3"
   },
   "blas": {
     "name": "accelerate",
@@ -27,6 +28,6 @@
       "jvm": "openjdk version \"17.0.20\" 2026-07-21"
     }
   },
-  "git_commit": "2eeaeaa110b7f5755aec8aaba6e23b68ac1b4e60",
-  "environment_sha256": "d3219f8aab89712083d19c087d267d517735c29f7a134cb164bddf736e04c1fe"
+  "git_commit": "75093e320761a5d8a195e8f6d7c6b6eafb66ab6e",
+  "environment_sha256": "f777df3e4226e65fd9eb3af58be053bb8cd16d9aea1b20f1420ee8fe94d0cffc"
 }

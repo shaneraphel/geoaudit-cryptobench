@@ -58,8 +58,19 @@ PIN_RE = re.compile(r"\b(numpy|scipy)\s*(==|>=|=)\s*([0-9][0-9.]*[0-9]|[0-9])")
 
 
 def _pkg_versions() -> dict[str, str | None]:
+    """Versions of the packages this repository actually imports.
+
+    ``rdkit`` is recorded and is deliberately not required. Only the ESR1
+    appendix showcase imports it -- for canonical SMILES, InChIKey, formula, a
+    bond-graph rendering and the structural audit -- and nothing in the primary
+    claim touches it. Making it mandatory would oblige a reader who wants only to
+    reproduce the benchmark numbers to install a large cheminformatics toolkit,
+    which buys them nothing. So it is recorded as ``null`` when absent, the
+    requirements emitter skips unpinned packages, and the one tool that needs it
+    says so and exits rather than raising an import error from somewhere deep.
+    """
     out: dict[str, str | None] = {}
-    for name in ("numpy", "scipy"):
+    for name in ("numpy", "scipy", "rdkit"):
         try:
             mod = __import__(name)
             out[name] = getattr(mod, "__version__", None)
@@ -144,6 +155,13 @@ def build() -> dict:
     return rec
 
 
+# Packages no part of the primary claim imports. Recorded with their versions so
+# the declared environment is complete, and separated so that a reader who wants
+# the benchmark numbers is not obliged to install a large toolkit for an appendix.
+OPTIONAL = {"rdkit": "the ESR1 appendix showcase only: canonical SMILES, "
+                     "InChIKey, formula, bond-graph rendering, structural audit"}
+
+
 def requirements(rec: dict) -> str:
     lines = [
         "# GENERATED FILE -- regenerate with tools/emit_environment.py",
@@ -152,9 +170,21 @@ def requirements(rec: dict) -> str:
         "# 1.26.4, which an earlier pyproject demanded, segfaults on import in",
         "# this interpreter and is not usable here.",
     ]
+    extras: list[str] = []
     for name, ver in sorted(rec["packages"].items()):
-        if ver:
+        if not ver:
+            continue
+        if name in OPTIONAL:
+            extras.append(f"# {name}=={ver}  # {OPTIONAL[name]}")
+        else:
             lines.append(f"{name}=={ver}")
+    if extras:
+        lines += [
+            "",
+            "# Optional. Not imported by anything the primary claim depends on,",
+            "# commented so that `pip install -r` gives a reader the benchmark",
+            "# stack and nothing more. Install these to rebuild the appendix.",
+        ] + extras
     return "\n".join(lines) + "\n"
 
 
@@ -243,14 +273,38 @@ def _audit() -> int:
     if not p2.get("version") or not p2.get("jvm"):
         problems.append("p2rank version or JVM not recorded")
 
-    pinned = {}
+    # Two kinds of pin. A required package is an installable line; an optional one
+    # is a commented line carrying the same version, so the declared environment
+    # stays complete for a reader while `pip install -r` gives them the benchmark
+    # stack and nothing more. Both are parsed, because an optional package with no
+    # recorded version would be exactly the drift this tool exists to catch.
+    pinned: dict[str, str] = {}
+    commented: dict[str, str] = {}
     for line in REQ.read_text().splitlines():
         line = line.strip()
-        if line and not line.startswith("#") and "==" in line:
-            name, ver = line.split("==", 1)
-            pinned[name.strip()] = ver.strip()
+        if "==" not in line:
+            continue
+        body = line.lstrip("#").strip()
+        if "==" not in body:
+            continue
+        name, rest = body.split("==", 1)
+        ver = rest.split("#", 1)[0].strip()
+        (commented if line.startswith("#") else pinned)[name.strip()] = ver
     for name, ver in (rec.get("packages") or {}).items():
-        if ver and pinned.get(name) != ver:
+        if not ver:
+            continue
+        if name in OPTIONAL:
+            if commented.get(name) != ver:
+                problems.append(
+                    f"{name} is optional and must appear in requirements.txt as "
+                    f"a commented pin at the recorded version; found "
+                    f"{commented.get(name)!r}, record says {ver}")
+            if name in pinned:
+                problems.append(
+                    f"{name} is optional but requirements.txt installs it; a "
+                    f"reader reproducing the primary claim would be made to "
+                    f"install it for an appendix")
+        elif pinned.get(name) != ver:
             problems.append(f"requirements.txt pins {name}=={pinned.get(name)} "
                             f"but the record says {ver}")
     problems.extend(_rival_pins(rec.get("packages") or {}))

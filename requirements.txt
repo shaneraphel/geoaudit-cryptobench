@@ -5,3 +5,8 @@
 # this interpreter and is not usable here.
 numpy==2.5.1
 scipy==1.17.1
+
+# Optional. Not imported by anything the primary claim depends on,
+# commented so that `pip install -r` gives a reader the benchmark
+# stack and nothing more. Install these to rebuild the appendix.
+# rdkit==2026.03.3  # the ESR1 appendix showcase only: canonical SMILES, InChIKey, formula, bond-graph rendering, structural audit
