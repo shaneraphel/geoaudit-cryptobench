@@ -59,6 +59,16 @@ REASONS = {
     "fold_access": "an evaluation on the official test fold; also registered in "
                    "TEST_FOLD_ACCESS_LEDGER.json",
     "superseded": "an earlier frozen state, kept for the record",
+    # Added when the Set B pool inventory landed and the path fall-through
+    # labelled it "an earlier frozen state, kept for the record". It is neither
+    # earlier nor frozen: it is a forward-looking inventory of accessions a set
+    # has not yet been built from, and describing it as a superseded frozen state
+    # in a registered manifest is the kind of field defect this manifest exists to
+    # prevent. Detected by the artifact's own declaration rather than by its path,
+    # which is how reads_test_fold is already handled.
+    "inventory": "a pinned inventory of candidate inputs; declares "
+                 "is_a_frozen_set false, and nothing has been selected, "
+                 "labelled, hashed or preregistered from it",
 }
 
 
@@ -139,6 +149,8 @@ def build() -> dict:
 
         if _is_fold_access(doc):
             cls = "fold_access"
+        elif doc.get("is_a_frozen_set") is False:
+            cls = "inventory"
         elif rel in cited:
             cls = "cited"
         elif rel.startswith("results/architecture_sweep/"):
