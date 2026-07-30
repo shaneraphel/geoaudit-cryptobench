@@ -334,11 +334,36 @@ def main(argv: list[str] | None = None) -> int:
             "a correction over a subset of tables or over the spatial gate as "
             "what would cost less. This is the second of those",
         "what_would_falsify_it": "an informed router failing to beat both the "
-                                 "deployed arm and the random per-chain router. "
-                                 "Since this is the cheapest correction the "
-                                 "construction admits, a null would mean the "
-                                 "regional signal cannot be collected by "
-                                 "reweighting anything at all",
+                                 "single global fitted weight and the random "
+                                 "per-chain router. Since this is the cheapest "
+                                 "correction the construction admits, a null "
+                                 "would mean the regional signal cannot be "
+                                 "collected by reweighting anything at all",
+        "which_comparison_the_verdict_rests_on": {
+            "the_protocol_matched_one": "routers minus global fitted. Both choose "
+                                        "w on the fit half from the same grid and "
+                                        "are scored on the same pick half, so the "
+                                        "only difference is whether w is allowed "
+                                        "to vary by region. This is the "
+                                        "comparison the hypothesis is about",
+            "the_biased_one": "routers minus deployed, and global fitted minus "
+                              "deployed. The deployed gate is r=18, w=1.0, and "
+                              "that pair was not declared a priori: it was "
+                              "chosen over {14, 18} x {0.5, 1.0} by pick-half "
+                              "ROC-AUC on halvings of this same training fold, "
+                              "which FINAL_READOUT_SELECTION.json and "
+                              "PAIRWISE_READOUT_SELECTION.json record -- both of "
+                              "those in fact selected w=0.5. So the deployed "
+                              "weight has already seen pick-half information "
+                              "that every fitted arm here is denied",
+            "direction_the_bias_cuts": "in favour of deployed. A fitted arm "
+                                       "losing to deployed therefore does not "
+                                       "show that a declared constant beats a "
+                                       "compiled one; it is partly the deployed "
+                                       "value being tuned on the units it is "
+                                       "scored on. The reverse would have been "
+                                       "informative and did not happen",
+        },
         "held_fixed": {
             "n_wires": n_wires, "n_levels": N_LEVELS,
             "table_width": TABLE_WIDTH, "partition_rounds": PARTITION_ROUNDS,
@@ -361,6 +386,9 @@ def main(argv: list[str] | None = None) -> int:
         "minus_random_per_chain": {
             r: compare(got[r], got["random chains"])
             for r in ROUTERS if r != "random chains"
+        },
+        "minus_global_fitted": {
+            r: compare(got[r], got["global fitted"]) for r in ROUTERS
         },
         "global_fitted_minus_deployed": compare(got["global fitted"], base),
         "weights_chosen": chosen,
@@ -386,6 +414,11 @@ def main(argv: list[str] | None = None) -> int:
               f"{c['n_splits_positive']}/{c['n_splits']}")
     print("\n  against the random per-chain router:")
     for k, c in doc["minus_random_per_chain"].items():
+        print(f"    {k:16s} {c['mean']:+.6f}  on "
+              f"{c['n_splits_positive']}/{c['n_splits']}")
+    print("\n  against the single global fitted weight "
+          "(the protocol-matched comparison the verdict rests on):")
+    for k, c in doc["minus_global_fitted"].items():
         print(f"    {k:16s} {c['mean']:+.6f}  on "
               f"{c['n_splits_positive']}/{c['n_splits']}")
     print(f"\n  deployed arm reproduces the frozen numbers: "

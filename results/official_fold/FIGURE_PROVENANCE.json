@@ -14,7 +14,8 @@
     "results/official_fold/MATCHED_OPERATING_POINT_READ.json": "ba0f9f6b2c2e24ed8b9f9a7f0d69350afeea66c7c33642b57dd08e802764ea84",
     "results/official_fold/MATCHED_FULL_READ.json": "225d792958997bea4ac444bd5751b2196d464eb9e29fbe9ef4673383108c4ff5",
     "results/official_fold/SUBGROUP_READ.json": "8994ec100852f7b25462163f6cf46ce81448f40fec21404c75a5a5363fdaa9c3",
-    "results/official_fold/THRESHOLD_CURVE.json": "5c88a83aed0c9ba30d8f71a2406c2720f56e72a58580c16dcf67c0ca0d2707d6"
+    "results/official_fold/THRESHOLD_CURVE.json": "5c88a83aed0c9ba30d8f71a2406c2720f56e72a58580c16dcf67c0ca0d2707d6",
+    "results/external/EMDB_MAPS.json": "3e124f3d724c5638480a7dd328d864bf21b392db30b93182b1b4baa9f2410dcb"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -61,6 +62,11 @@
       "sha256": "24b0d360cafa50c5185377a7dc3ece1238735a3e5edf27a73987a96ac0178e9b",
       "bytes": 267075,
       "caption": "The two chains on which the methods disagree, 2d05_A and 6bty_B, chosen by the rule in CASE_STUDIES.json rather than by eye. Black rings are the labelled cryptic residues; filled points are what each method called. The camera looks from the chain's centroid towards the labelled pocket, so the view is fixed by the coordinates and not by the author. The right-hand panels decompose our own score on that chain into the five coarse families, separately for the labelled residues we found, the labelled residues we missed, and the residues we called that are not labelled, read from AUDIT_DECOMPOSITION.json."
+    },
+    "fig_emdb_resolution.png": {
+      "sha256": "1ef134fc78b898c4799d3c20dd526c663c05d022167cf9421858f78522ceaf61",
+      "bytes": 224802,
+      "caption": "How far the word resolution stretches across two entries that a single RCSB query returns together, both carrying the experimental method EM. Left, EMD-55233: single-particle cryo-EM at 4.3 A, a VHL-recruiting PROTAC ternary complex containing ERa. Right, EMD-46871: electron crystallography (MicroED) at 1.09 A, proteinase K -- not cryo-EM, and included because it is the entry this repository first mistook for one by ordering candidates on resolution. Top row, the densest slice of each map at a common physical scale; bottom row, 24 A across each, the scale at which a claim about how a ligand sits would have to be made. At 4.3 A there is no atom to point at, which is why the ESR1 appendix declines to assert a binding pose. No number in the benchmark reads a density map; the detector consumes apo coordinates. Volumes are gitignored, and results/external/EMDB_MAPS.json carries the URL, the asserted method and the sha256 of each."
     }
   }
 }

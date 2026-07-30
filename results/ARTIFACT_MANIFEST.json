@@ -11,12 +11,12 @@
   },
   "counts": {
     "cited": 54,
-    "exploration": 32,
+    "exploration": 33,
     "superseded": 17,
     "inventory": 2,
     "fold_access": 10
   },
-  "n_artifacts": 115,
+  "n_artifacts": 116,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -220,6 +220,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.gap_decomposition.v1",
       "bytes": 7606
+    },
+    {
+      "artifact": "results/architecture_sweep/GATE_WEIGHT_ROUTING.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.gate_weight_routing.v1",
+      "bytes": 58584
     },
     {
       "artifact": "results/architecture_sweep/GRAM_CONDITIONING.json",
@@ -660,7 +667,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 10355
+      "bytes": 11567
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
