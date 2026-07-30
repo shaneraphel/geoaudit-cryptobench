@@ -197,12 +197,22 @@ believing an unmeasured argument has been.
 
 ## 7. Publication boundary
 
-No EDA pipeline, netlist tooling, accelerator source, chip RTL, or private
-learning-engine source enters a public repository. The gate
-`no_proprietary_engine_names_public` in `tools/verify_claims.py` holds the list
-of names and fails any primary document that prints one — consult the gate
-rather than restating the list, because the first version of the section that
-described it named all five and failed its own check.
+Hardware-design pipelines, netlist tooling, accelerator sources and the private
+learning engines developed in the sibling repositories do not enter a public
+repository. Two gates in `tools/verify_claims.py` hold the actual lists —
+`no_proprietary_engine_names_public` for the engine names and
+`no_out_of_scope_paper_material` for the subject areas — and both fail any
+tracked primary document that prints a term from them. **Consult the gates; do
+not restate their contents here.**
+
+That instruction has now been ignored twice, once in `AGENTS.md` and once in
+this file, and the second time is worth recording because it also exposes a
+timing trap. The first version of this section spelled out the excluded
+categories, which put one of the forbidden terms into a document inside the
+paper tree. `make verify` was green when it was written and red as soon as it
+was committed, because the gate walks `git ls-files` and an untracked file is
+invisible to it. **A new document passes `verify` until the moment it is
+tracked.** Stage it, then run `make verify`, then commit.
 
 Business and IP material stays in a separate private repository, and the reason
 is not tidiness. Publishing the coordinates of a cryptic pocket on a named
