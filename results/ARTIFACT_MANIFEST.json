@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 58,
-    "exploration": 32,
+    "exploration": 33,
     "superseded": 17,
     "inventory": 4,
     "frozen_unread": 1,
     "fold_access": 10
   },
-  "n_artifacts": 122,
+  "n_artifacts": 123,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -61,6 +61,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.bank_truncation.v1",
       "bytes": 14131
+    },
+    {
+      "artifact": "results/architecture_sweep/COLLECTABILITY_SCREEN.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.collectability_screen.v1",
+      "bytes": 7390
     },
     {
       "artifact": "results/architecture_sweep/COMBINATORIAL_MULTIPLICITIES.json",

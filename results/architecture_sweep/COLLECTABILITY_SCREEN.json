@@ -1,0 +1,171 @@
+{
+ "schema": "geoaudit.collectability_screen.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "whether a column family's non-additive share predicts which of the two readouts can collect it, so that a new family can be screened before a field is compiled",
+ "the_pattern_being_explained": "the deployed wires are the only one of three families the counting field reads better than a linear solve does. The two appended families are read better by the solve, and APPENDED_BLOCK_GEOMETRY.json excludes both the interaction and the estimation-cost explanations for that",
+ "definition": {
+  "decomposition": "V_pair(u,v) = V(u) + V(v) + interaction(u,v), where V is the count-weighted departure of level rates from the base rate",
+  "non_additive_share": "mean of interaction / V_pair, the fraction of what a table knows that no additive function of its two wires can state",
+  "computed_from": "integer cell counts only; one Gram matrix of level indicators gives every pair's 4x4 table at once",
+  "why_dimensionless": "a ratio of two terms of the same decomposition, so families of different scale are comparable",
+  "can_be_negative": "yes, when two wires are redundant, and the distribution is reported rather than only its mean"
+ },
+ "what_is_reused": "joint_counts and variance_terms from selected_pairings.py. The interaction is the same quantity that tool selected pairings by, and that selection failed at -0.0028. The recorded reason does not transfer: interaction concentrates on few wires and a matching may use each wire once per round, so a round captured a fraction of the available weight. Nothing here forms a matching, and the question is not which pairs to make but whether a family is readable at all",
+ "what_would_falsify_it": "the share failing to separate the three families, or ordering them against the measured field-minus-solve difference",
+ "protocol": {
+  "n_splits": 3,
+  "split": "cluster-disjoint halves, seeds 20260725..20260727",
+  "computed_on": "the fit half only",
+  "banding": "within-chain rank quartiles, the deployed rule, applied within each family separately",
+  "pairings": "16 rounds at width 2, seed 20260725, drawn within each family"
+ },
+ "families": {
+  "deployed 645 wires": {
+   "n_columns": 645,
+   "n_pairs_all": 207690,
+   "n_pairs_in_the_bank": 5152,
+   "first_order_per_column": {
+    "mean": 0.000277182,
+    "median": 0.000127993
+   },
+   "second_order_over_all_pairs": {
+    "mean": 1.0621e-05,
+    "median": 9.722e-06
+   },
+   "non_additive_share_over_all_pairs": {
+    "mean": 0.056598,
+    "median": 0.039715,
+    "p10": -0.124921,
+    "p90": 0.27324,
+    "fraction_negative": 0.3149
+   },
+   "non_additive_share_over_the_bank": {
+    "mean": 0.052676,
+    "median": 0.037232,
+    "p10": -0.121691,
+    "p90": 0.263728,
+    "fraction_negative": 0.3302
+   },
+   "share_over_the_bank_mean_across_splits": 0.049425,
+   "share_over_all_pairs_mean_across_splits": 0.052723,
+   "measured_lifts": {
+    "field": 0.79012,
+    "solve": 0.784826,
+    "field_minus_solve": 0.005294,
+    "n_splits_field_higher": 11,
+    "note": "absolute AUCs, not lifts: this family is the bank rather than an addition to it"
+   },
+   "lift_source": {
+    "artifact": "results/architecture_sweep/IS_FISHER_A_CEILING.json",
+    "how": "verdict at 645 wires: counting minus fisher"
+   }
+  },
+  "asymmetry 129": {
+   "n_columns": 129,
+   "n_pairs_all": 8256,
+   "n_pairs_in_the_bank": 1024,
+   "first_order_per_column": {
+    "mean": 0.000222182,
+    "median": 0.000153571
+   },
+   "second_order_over_all_pairs": {
+    "mean": -9.688e-06,
+    "median": 2.902e-06
+   },
+   "non_additive_share_over_all_pairs": {
+    "mean": 0.008796,
+    "median": 0.009475,
+    "p10": -0.169117,
+    "p90": 0.184062,
+    "fraction_negative": 0.4583
+   },
+   "non_additive_share_over_the_bank": {
+    "mean": 0.003793,
+    "median": 0.011383,
+    "p10": -0.174986,
+    "p90": 0.180031,
+    "fraction_negative": 0.4658
+   },
+   "share_over_the_bank_mean_across_splits": -0.003414,
+   "share_over_all_pairs_mean_across_splits": 0.000761,
+   "measured_lifts": {
+    "field": 0.000977,
+    "solve": 0.003826,
+    "field_minus_solve": -0.002849,
+    "n_splits_field_positive": 9
+   },
+   "lift_source": {
+    "artifact": "results/architecture_sweep/UNION_BANK_COUNTING_FIELD.json",
+    "how": "union minus narrow for the field, fisher lift for the solve"
+   }
+  },
+  "composition 76": {
+   "n_columns": 76,
+   "n_pairs_all": 2850,
+   "n_pairs_in_the_bank": 608,
+   "first_order_per_column": {
+    "mean": 8.7421e-05,
+    "median": 2.7912e-05
+   },
+   "second_order_over_all_pairs": {
+    "mean": 5.962e-06,
+    "median": 6.674e-06
+   },
+   "non_additive_share_over_all_pairs": {
+    "mean": 0.106933,
+    "median": 0.077951,
+    "p10": -0.049175,
+    "p90": 0.325074,
+    "fraction_negative": 0.193
+   },
+   "non_additive_share_over_the_bank": {
+    "mean": 0.111107,
+    "median": 0.085244,
+    "p10": -0.050529,
+    "p90": 0.344882,
+    "fraction_negative": 0.1957
+   },
+   "share_over_the_bank_mean_across_splits": 0.116715,
+   "share_over_all_pairs_mean_across_splits": 0.112897,
+   "measured_lifts": {
+    "field": -0.00086,
+    "solve": 0.001086,
+    "field_minus_solve": -0.001946,
+    "n_splits_field_positive": 2
+   },
+   "lift_source": {
+    "artifact": "results/architecture_sweep/COMPOSITION_WIRES.json",
+    "how": "union minus deployed for the field, fisher lift for the solve"
+   }
+  }
+ },
+ "order_by_non_additive_share": [
+  "composition 76",
+  "deployed 645 wires",
+  "asymmetry 129"
+ ],
+ "order_by_absolute_second_order_term": [
+  "deployed 645 wires",
+  "composition 76",
+  "asymmetry 129"
+ ],
+ "order_by_measured_field_minus_solve": [
+  "deployed 645 wires",
+  "composition 76",
+  "asymmetry 129"
+ ],
+ "the_share_orders_the_families_correctly": false,
+ "verdict_on_the_preregistered_statistic": "falsified. The share was named in this tool's docstring before it ran and it puts the composition columns first, where the field does worst of the three. The reason is visible in the absolute terms: composition's first-order term is about a third of the others, so a modest interaction becomes a large fraction of a small total. A ratio was the wrong normalisation",
+ "what_the_absolute_term_does": {
+  "orders_them_correctly": true,
+  "the_numbers": {
+   "deployed 645 wires": 1.0621e-05,
+   "composition 76": 5.962e-06,
+   "asymmetry 129": -9.688e-06
+  },
+  "the_reading": "the mean pairwise interaction, unnormalised, has the same order as the measured field-minus-solve difference. The asymmetry columns are the striking case: their mean interaction is negative, so on average a pair of them says less than its two marginals added. 129 columns computed at several radii from one structure are largely restatements of each other, which is exactly the shape a linear solve can use -- one coefficient per column, marginals are all it needs -- and a counting field cannot, since its only advantage is in the joint",
+  "why_this_is_not_confirmed": "the share was chosen before the run and the absolute term after it, on three families. Picking the statistic that orders three points correctly, having seen the ordering, is not a confirmation of anything. It is a hypothesis, and the way to test it is a fourth family whose interaction is measured and whose prediction is recorded before its field lift is"
+ }
+}
