@@ -126,6 +126,22 @@ GATEROUTE = ROOT / "results/architecture_sweep/GATE_WEIGHT_ROUTING.json"
 TABWIDTH = ROOT / "results/architecture_sweep/TABLE_WIDTH.json"
 COMBMULT = ROOT / "results/architecture_sweep/COMBINATORIAL_MULTIPLICITIES.json"
 APPBLOCK = ROOT / "results/architecture_sweep/APPENDED_BLOCK_GEOMETRY.json"
+
+# The wire-family ladder. Each entry is (macro stem, artifact), and the stems are
+# the ones the manuscript spells; a family measured but not listed here cannot be
+# quoted, which is the point. The permuted arms sit beside the families they
+# control so that a sentence quoting one and not the other is visible in the diff.
+FAMILY_LADDER = (
+    ("FamChem", ROOT / "results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json"),
+    ("FamBkbNarrow", ROOT / "results/architecture_sweep/BACKBONE_WIRES_LIFT.json"),
+    ("FamBkb", ROOT / "results/architecture_sweep/BACKBONE_WIDE_LIFT.json"),
+    ("FamBkbPerm",
+     ROOT / "results/architecture_sweep/BACKBONE_WIDE_PERMUTED_LIFT.json"),
+    ("FamSide", ROOT / "results/architecture_sweep/SIDECHAIN_WIDE_LIFT.json"),
+    ("FamSidePerm",
+     ROOT / "results/architecture_sweep/SIDECHAIN_PERMUTED_LIFT.json"),
+    ("FamConf", ROOT / "results/architecture_sweep/CONFORMATION_LIFT.json"),
+)
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
 
@@ -1685,6 +1701,9 @@ def build() -> str:
     L.append("% The five training-fold sweeps of the construction's own knobs.")
     L += _saturation_macros()
     L.append("")
+    L.append("% The wire-family ladder: what a table is allowed to read.")
+    L += _family_ladder_macros()
+    L.append("")
     return "\n".join(L) + "\n"
 
 
@@ -1753,6 +1772,55 @@ def _dangling_refs() -> list[str]:
             refs.setdefault(name, tex.name)
     return [f"{where} cites \\ref{{{name}}}, which is never labelled"
             for name, where in sorted(refs.items()) if name not in labels]
+
+
+def _family_ladder_macros() -> list[str]:
+    """Macros for the wire-family ladder, one artifact per family.
+
+    A family is admitted to the manuscript through this function and nowhere
+    else, and the shape of what it emits is the same for every family so that a
+    reader can compare two rows without checking whether they mean the same
+    thing. For each family: the union arm's lift over the deployed detector, the
+    splits it is positive on, the sign-test p-value, the bootstrap interval, the
+    number of new columns, and the ``more_old`` control arm that adds the same
+    number of tables from wires already deployed.
+
+    The control is not optional. Four of the earliest families were measured
+    without one and their small positives cannot now be separated from bank size,
+    so ``\\FamXControl`` is emitted as ``n/a`` rather than omitted when an
+    artifact has no ``more_old`` arm --- a missing control should print as a
+    missing control and not as a gap in a table.
+    """
+    L: list[str] = []
+    for stem, path in FAMILY_LADDER:
+        if not path.exists():
+            continue
+        d = json.loads(path.read_text())
+        if d.get("reads_test_fold") is not False:
+            raise SystemExit(
+                f"{path.relative_to(ROOT)} does not declare "
+                f"reads_test_fold: false; it may not feed the manuscript")
+        if d.get("reads_any_external_unit") is not False:
+            raise SystemExit(
+                f"{path.relative_to(ROOT)} does not declare "
+                f"reads_any_external_unit: false")
+        mn = d["minus_narrow"]
+        u = mn["union"]
+        L.append(f"\\newcommand{{\\{stem}}}{{{_signed(u['mean'], 4)}}}")
+        L.append(f"\\newcommand{{\\{stem}Splits}}{{{u['n_splits_positive']}}}")
+        L.append(f"\\newcommand{{\\{stem}Of}}{{{u['n_splits']}}}")
+        L.append(f"\\newcommand{{\\{stem}CI}}"
+                 f"{{[{_signed(u['ci95'][0], 4)}, {_signed(u['ci95'][1], 4)}]}}")
+        p = u["sign_test_p_one_sided"]
+        L.append(f"\\newcommand{{\\{stem}P}}"
+                 f"{{{f'{p:.4f}' if p >= 0.0001 else '<0.0001'}}}")
+        L.append(f"\\newcommand{{\\{stem}Cols}}{{{d['n_new_columns']}}}")
+        ctrl = mn.get("more_old")
+        L.append(f"\\newcommand{{\\{stem}Control}}"
+                 f"{{{'n/a' if ctrl is None else _signed(ctrl['mean'], 4)}}}")
+        L.append(f"\\newcommand{{\\{stem}ControlSplits}}"
+                 f"{{{'n/a' if ctrl is None else ctrl['n_splits_positive']}}}")
+    return L
 
 
 def _saturation_macros() -> list[str]:

@@ -679,7 +679,7 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 732 tests and
+Current state: `verify_claims` all checks pass; `make test` runs 775 tests and
 504 subtests, all passing. `unittest`'s discovery finds 647 of them, because it
 collects only methods of `TestCase` subclasses; the other 85 are written as
 plain functions and are reachable only through `pytest`.
@@ -1596,27 +1596,51 @@ artifact that did. None is a promise about an outcome.
 |---|---|
 | A correction rule cheaper than the regional signal it collects | Chain-level routing carries a real signal — **+0.0029 to +0.0054 against a random per-chain router on 11–12 of 12 splits** — but applying it through a per-region correction of all 5,152 multiplicities costs more than it earns, and the gain only appears as the correction vanishes. A correction over a subset of tables, or over the spatial gate instead of the multiplicities, would cost less. `HIERARCHICAL_MULTIPLICITIES.json` |
 | A second external set, built and frozen **before** the method is finalised | Set A is spent: scoring an improved method on it destroys the confirmatory result rather than producing a second one. The cryo-EM pool is pinned at **461 accessions at 2.5 Å and 1,143 at 3.0 Å**, none of them in CryptoBench. The cluster count that would bound the set is **absent, not zero** — the cached UniRef50 mapping covers none of them. Order: map, build, freeze, hash, preregister, finalise, read once. `SETB_POOL.json` |
-| The 365-operator bank, designed and unmeasured | Non-backtracking walk counts, Sachs coefficients of the induced local subgraph, orbit counts and irreducible-character projections under the tetrahedral, octahedral and icosahedral groups, deformation-subgroup conjugacy labels, Krawtchouk transforms of shell occupancy, 𝔽₄ and 𝔽₁₆ point counts of the quantised local variety, p-adic valuation profiles, three-dimensional block-Toeplitz minors, and colour-refined short-cycle counts. Each has an integrality argument; **none has been measured**, and the admission protocol is fixed in advance: attach by union, hold every other parameter, report twelve splits, and state the 0.0026 reseed floor beside any smaller difference. **Read §5.2 first**: five families have now been through that protocol and none moved the detector |
+| The 365-operator bank, designed and unmeasured | Non-backtracking walk counts, Sachs coefficients of the induced local subgraph, orbit counts and irreducible-character projections under the tetrahedral, octahedral and icosahedral groups, deformation-subgroup conjugacy labels, Krawtchouk transforms of shell occupancy, 𝔽₄ and 𝔽₁₆ point counts of the quantised local variety, p-adic valuation profiles, three-dimensional block-Toeplitz minors, and colour-refined short-cycle counts. Each has an integrality argument; **none has been measured**, and the admission protocol is fixed in advance: attach by union, hold every other parameter, report twelve splits, and state the 0.0026 reseed floor beside any smaller difference. **Read §5.2 first**, and apply its screen before building any of them: every one of these 365 is a function of the contact graph and the centroids, which is data the pipeline already reads, and every family of that kind measured so far is null. The two families that are not null read atom positions the pipeline discards |
 | Width-3 tables | `table_bank.py`'s own docstring notes that a three-wire table has 64 cells and that at 235k training residues a cell still holds thousands. Three-way interaction is unreachable at width 2 and has never been run |
 | ESR1 pilot regeneration | The label builder is fixed (chain- and instance-scoped, with a regression test) but the pilot has not been re-run. P2Rank 2.5.1 and its JVM are installed; **fpocket and DeepPocket are not**, and until all five methods re-run, no number in `RETROSPECTIVE_PILOT_REPORT.json` is citable |
 
-### 5.2 What the wire axis was, and why it is now closed
+### 5.2 What the wire axis is, and the one rule that separates a null family from a live one
 
 Eight parameters of the readout were measured and each sits at or past its optimum:
 quantisation cut points, pairing choice, appended column families, integer rounding of
 multiplicities, bank size, per-region multiplicities, per-region gate weight and table
 width. That exhausted everything about *how the tables are built* and left one axis —
-the wires themselves, meaning what a table reads. Five column families and all three
-attachments have since been measured on the same twelve cluster-disjoint splits, under
-the admission protocol above.
+the wires themselves, meaning what a table reads.
 
-| Family | What it adds | Field lift, union attachment |
-|---|---|---|
-| composition 76 | chemical class of the neighbourhood, by shell and walk | −0.0009 on 2/12 |
-| asymmetry 129 | one anisotropy operator swept over radii | +0.0010 on 9/12 |
-| graph invariants 225 | fifteen integer invariants of the 7 Å contact lining | **−0.0061 on 0/12** |
-| chemistry 42 | fourteen chemical quantities per side chain, three aggregations | +0.0002 on 7/12 |
-| *(control)* | the same table count, **no new columns at all** | +0.0004 on 7/12 |
+**This section previously concluded that the wire axis was closed too, and that
+conclusion was wrong.** It rested on six families measured null, and six nulls with no
+account of why is a habit rather than a screen. The account arrived afterwards and it
+predicts which families are null before they are run:
+
+> **Every null family is a function of data the deployed pipeline already reads.**
+> A residue is a centroid to that pipeline, and neighbourhoods are centroid distances.
+> Before proposing a family, ask whether it reads bytes the pipeline currently throws
+> away. If it does not, it is a re-encoding, and six measurements say re-encodings are
+> worth nothing.
+
+Chemistry 42 is the cleanest case, and the arithmetic is checkable rather than
+rhetorical. The bank already carries seven constants that are functions of residue type
+— `kd`, `volume`, `aromatic`, `charge`, `hbd`, `hba`, `chi` — and unquantised those
+seven are **injective on the twenty types**, so residue identity is already fully
+determined by deployed wires. Quantised at four bands they resolve 17 of 20, the three
+collisions being `ALA/GLY`, `ARG/LYS` and `ILE/LEU`. Chemistry 42 fills exactly that
+gap and filling it is worth +0.000165, behind a control that adds the same number of
+tables from old wires. Resolving every collision the quantiser creates buys nothing.
+
+Every family measured on the same twelve cluster-disjoint splits, under the admission
+protocol above:
+
+| Family | What it adds | Reads discarded bytes? | Field lift, union attachment |
+|---|---|---|---|
+| composition 76 | chemical class of the neighbourhood, by shell and walk | no | −0.0009 on 2/12 |
+| asymmetry 129 | one anisotropy operator swept over radii | no | +0.0010 on 9/12 |
+| graph invariants 225 | fifteen integer invariants of the 7 Å contact lining | no | **−0.0061 on 0/12** |
+| chemistry 42 | fourteen chemical quantities per side chain, three aggregations | no | +0.0002 on 7/12 |
+| operator bank / expanded / wide | 267 generated descriptors | no | +0.0005 at best, §4.6 |
+| **backbone 39** | thirteen quantities from N, CA, C, O, CB | **yes** | **+0.00196 on 8/12** |
+| **backbone 132** | the same axis taken seriously: 44 quantities | **yes** | **+0.00441 on 12/12**, CI [+0.0033, +0.0055] |
+| *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 |
 
 | Attachment | What it does | Result |
 |---|---|---|
@@ -1624,14 +1648,27 @@ the admission protocol above.
 | widened | every pairing redrawn at the new width | keeps 281 of 5,152; worse than union |
 | straddling | deployed tables held, new tables pair one deployed wire with one new column | +0.0009 over union, **+0.0000 over deployed** |
 
-Three things are worth carrying out of that.
+Four things are worth carrying out of that.
 
 **The control arm changes how the other rows read.** `more_old` adds the same number
-of tables over the deployed wires with the new family absent entirely, and on the one
-family measured with it, it scored *higher* than the family did. The four earlier
-families have no such arm, so their small positives cannot be separated from bank size
-after the fact — asymmetry's +0.0010 in particular should not be quoted as though it
-can. Any further family must carry the control.
+of tables over the deployed wires with the new family absent entirely. On chemistry 42
+it scored *higher* than the family did, and on backbone 132 it is −0.0001 crossing zero
+while the family gains +0.0044 on the same splits. Cell budget is not the mechanism in
+either direction. The four earliest families have no such arm, so their small positives
+cannot be separated from bank size after the fact — asymmetry's +0.0010 in particular
+should not be quoted as though it can. Any further family must carry the control.
+
+**A family that reads discarded bytes needs a second control, and it is a permutation.**
+`more_old` does not catch a family whose columns carry ordinary per-residue information
+that happens not to be about the backbone. The permuted arm is the same 44 quantities,
+aggregated identically, with rows shuffled inside each chain under a fixed seed: every
+column's multiset of values over the chain is unchanged, so every marginal is identical
+by construction, and the only thing destroyed is which residue each row describes.
+Permuted, the family is worth **−0.00213 on 3/12** — *worse than nothing*, because
+columns of that shape attached to the wrong residue cost cells and carry noise. The gap
+between the two arms, **+0.00654 on 12/12**, is the sharpest available statement that
+the lift is the backbone conformation of the residue being scored and not the shape of a
+column.
 
 **Two screening statistics ordered the families correctly and neither moved a number.**
 Mean pairwise interaction within a family ordered the first three and was falsified by
@@ -1639,18 +1676,17 @@ the fourth, which it placed second and which finished last. Interaction with the
 deployed bus then ordered all of them, and an attachment built to collect exactly that
 interaction recovered the union attachment's own loss and gained nothing over the
 deployed detector. A statistic that orders outcomes without moving one is a correlate.
+The discarded-bytes rule is the screen that replaced them, and it is the only one that
+has predicted a sign in advance.
 
-**A good argument is not evidence.** The chemistry family was proposed on reasoning
-rather than on either statistic: a cryptic pocket is closed and opens, side chains open
-it, and neither the geometric wires nor the eight composition classes can see
-conformational freedom — the aliphatic class holds ALA, VAL, LEU, ILE and MET whose
-rotameric dihedral counts run 0, 1, 2, 2, 3. Every step of that is true and the
-detector did not move.
-
-The measured consequence for anyone reading this section as a starting point: the
-largest effect anywhere on this axis is **+0.0010**, and the deficit against pLM-NN is
-**0.0243**. Closing that gap is not an attachment problem and, on this evidence, not a
-wire-family problem either.
+**None of this closes the deficit, and the arithmetic is stated rather than implied.**
+pLM-NN is ahead by **0.0243** on the official fold and **0.0340** externally. The gate
+radius is worth +0.0025 and backbone 132 is worth +0.0044; if they add, which is
+unmeasured, that is +0.0069, or **28% of the official-fold deficit**. It is the largest
+honest number this line of work has produced and it is not a win. Nothing here is
+deployed: moving the architecture would make `EXTERNAL_READ.json`'s +0.0443 a result
+about a detector that no longer exists, which is why Set B and Set C are frozen and
+unread.
 
 Numerical record: all counts and metrics are read from the JSON artifacts
 (`results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json`,
@@ -1677,7 +1713,7 @@ that answers it.
 | **The residue chemistry dictionary** | `src/pocket_bench/methods/residue_chemistry.py`: fourteen integer quantities per side chain — rotameric dihedrals, side-chain donors and acceptors, formal charge at pH 7.4, aromatic ring atoms, heavy-atom composition, β-branching, metal-ligating and nucleophilic capability, volume — each with the reasoning for why it is a quantity and not a class |
 | **The wire definitions** | `paper/appendix_a_wire_definitions.tex`, generated by `make wires` from the code rather than written beside it |
 | **The architecture sweeps** | `results/architecture_sweep/`. The ones that closed an axis: `QUANTISATION_LADDER.json`, `TABLE_WIDTH.json`, `BANK_TRUNCATION.json`, `HIERARCHICAL_MULTIPLICITIES.json`, `GATE_WEIGHT_ROUTING.json`, `SELECTED_PAIRINGS.json`, `GRAM_CONDITIONING.json`, `COMBINATORIAL_MULTIPLICITIES.json` |
-| **Why the wire axis is closed** | §5.2 above, and `APPENDED_FAMILY_LIFT.json`, `STRADDLING_ATTACHMENT.json`, `CHEMISTRY_WIRES_LIFT.json` |
+| **Which wire families are null, and the rule that predicts it** | §5.2 above. The nulls: `APPENDED_FAMILY_LIFT.json`, `STRADDLING_ATTACHMENT.json`, `CHEMISTRY_WIRES_LIFT.json`, `WIDE_BANK_CEILING.json`. The first family that is not null, and its permutation control: `BACKBONE_WIDE_LIFT.json`, `BACKBONE_WIDE_PERMUTED_LIFT.json` |
 | **Where the detector actually fails** | `FAILURE_TAIL.json` — per unit rather than per mean, which is how a quarter of the fold at 0.60 stayed invisible through eight parameter sweeps — then `QUANTISATION_BY_STRATUM.json` and `GATE_BY_STRATUM.json`, which eliminate two candidate causes |
 | **The frozen external sets** | `results/external/EXTERNAL_SET.json` (Set A, spent), and Set B and Set C, both frozen, hashed and **unread** |
 | **Candidate molecules, SMILES, pharmacophores, bond graphs** | **Not in this repository.** They live in the companion evidence tree, `gf4-allele-conditioned-evidence`, pointed to by `data/manifests/COMPANION_EVIDENCE.json`. `no_bulk_candidate_dump_in_paper_tree` in `tools/verify_claims.py` fails this repository if they appear here |

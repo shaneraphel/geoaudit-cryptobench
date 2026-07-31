@@ -11,8 +11,8 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "cited": 63,
-    "exploration": 44,
+    "cited": 66,
+    "exploration": 41,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
@@ -71,22 +71,22 @@
     },
     {
       "artifact": "results/architecture_sweep/BACKBONE_WIDE_LIFT.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.straddling_attachment.v1",
       "bytes": 3647
     },
     {
       "artifact": "results/architecture_sweep/BACKBONE_WIDE_PERMUTED_LIFT.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.straddling_attachment.v1",
       "bytes": 3669
     },
     {
       "artifact": "results/architecture_sweep/BACKBONE_WIRES_LIFT.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.straddling_attachment.v1",
       "bytes": 3338
     },

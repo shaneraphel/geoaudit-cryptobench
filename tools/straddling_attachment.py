@@ -143,14 +143,14 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         from backbone_wires import build_or_load
         X, _n = build_or_load(permuted=True)
         return np.asarray(X), "tools/backbone_wires.py --permuted"
-    if name == "sidechain 258":
-        # 86 quantities at three aggregations. AGENT_MEMORY 2j-bis names this
+    if name == "sidechain 261":
+        # 87 quantities at three aggregations. AGENT_MEMORY 2j-bis names this
         # family on 2i's rule -- a residue centroid does not determine chi1 --
         # and it is the second family that reads bytes the pipeline discards.
         from sidechain_wires import build_or_load
         X, _n = build_or_load()
         return np.asarray(X), "tools/sidechain_wires.py"
-    if name == "sidechain permuted 258":
+    if name == "sidechain permuted 261":
         # Same columns, rows shuffled inside each chain: every marginal is the
         # same multiset and only the correspondence between a row and its
         # residue is destroyed. Beating more_old says the columns carry
@@ -159,6 +159,22 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         from sidechain_wires import build_or_load
         X, _n = build_or_load(permuted=True)
         return np.asarray(X), "tools/sidechain_wires.py --permuted"
+    if name == "conformation 393":
+        # Backbone 132 and side-chain 261 as one block. The two were each
+        # measured against the same deployed baseline and each is worth about
+        # +0.0045, and two lifts of that size measured separately are not
+        # evidence that they add: they are both conformation, they are computed
+        # from overlapping atom sets, and a residue in a strained rotamer is
+        # often a residue in an irregular backbone. This arm is the only thing
+        # that answers whether the sum survives, and it has to be measured
+        # rather than added.
+        import numpy as _np
+        from backbone_wires import build_or_load as bb
+        from sidechain_wires import build_or_load as sc
+        A, _a = bb()
+        B, _b = sc()
+        return _np.concatenate([_np.asarray(A), _np.asarray(B)], axis=1), (
+            "tools/backbone_wires.py + tools/sidechain_wires.py")
     if name == "composition 76":
         from composition_wires import build_or_load
         X, _n = build_or_load()

@@ -2394,6 +2394,94 @@ sub-bank. Or this class of information belongs to a different readout, in which 
 the honest statement is that a counting field and a linear solve are good at
 different things and the paper already measures both.
 
+\subsection{What a table is allowed to read, and a rule that predicts a null
+family before it is measured}
+\label{sec:families}
+Every subsection above this one varies how the tables are built. This one varies
+what they are built from, which is the only axis the others leave untouched, and
+it is the axis on which we were wrong.
+
+Six families of columns were appended to the deployed bus and measured under one
+protocol: attach by union so all \CompTablesFull{} deployed pairings are held,
+hold the gate, the ridge, the fan-out cap and the banding, and report the mean
+per-unit ROC-AUC over \LadderSplits{} cluster-disjoint halvings of the training
+fold. All six were null. Chemical class of the neighbourhood by shell and walk,
+one anisotropy operator swept over radii, fifteen integer invariants of the
+\(7\)~\AA{} contact lining, \FamChemCols{} chemical quantities per side chain,
+and \GenTotal{} generated descriptors under two generators: the largest of them
+is \(+0.0010\), none is separated from a control that adds the same number of
+tables over columns already deployed, and one of them is
+\(-0.0061\) on \(0\) of \LadderSplits{}. We concluded that the axis was closed,
+and printed that conclusion.
+
+Six nulls with no account of why they are null is a habit and not a screen, and
+the account, once written down, contradicts the conclusion it was meant to
+explain. It is one sentence: \emph{every null family is a function of data the
+pipeline already reads.} The detector's input is a residue centroid and a
+neighbourhood of centroids. A family that reads only those, however it
+transforms them, is a re-encoding, and six measurements say the counting field
+does not pay for re-encodings.
+
+The \FamChemCols{}-column chemistry family is the case where this can be checked
+by arithmetic rather than argued. The deployed bus already carries seven
+constants that are functions of residue type alone --- Kyte--Doolittle
+hydropathy, side-chain volume, aromatic ring atoms, formal charge at pH 7.4,
+donor count, acceptor count and rotameric dihedral count. Unquantised, that
+seven-tuple is \emph{injective on the twenty standard types}, so residue
+identity is already determined by wires the detector reads. Quantised into four
+bands, which is what a table sees, it resolves \(17\) of \(20\): the surviving
+collisions are ALA/GLY, ARG/LYS and ILE/LEU. The chemistry family's whole
+contribution is to resolve those three, and resolving them is worth
+\FamChem{} on \FamChemSplits{} of \FamChemOf{} splits, behind a control arm at
+\FamChemControl{}. Nothing was wrong with the reasoning that proposed it --- a
+cryptic pocket opens by side-chain motion, and the eight composition classes
+cannot see conformational freedom, since the aliphatic class holds ALA, VAL,
+LEU, ILE and MET with rotameric dihedral counts \(0,1,2,2,3\). Every step of
+that is true. It was a proposal to resolve a quantiser's collisions, and the
+quantiser's collisions are not where the missing accuracy is.
+
+The rule's content is that it is falsifiable in the useful direction: it names
+which family should \emph{not} be null. A residue's backbone has four heavy
+atoms and a \(\beta\)-carbon whose positions the pipeline reduces to one point
+and then discards. Those bytes are on disk, they are not a function of the
+centroid, and the conformational state that opens a cryptic pocket is written in
+them. Measured under the protocol above, \FamBkbNarrowCols{} such quantities
+give \FamBkbNarrow{} on \FamBkbNarrowSplits{} of \FamBkbNarrowOf{}
+(\(p=\FamBkbNarrowP{}\), which is not significant), and the same axis taken
+seriously --- \FamBkbCols{} columns from \(44\) quantities under three
+aggregations --- gives \FamBkb{}, \FamBkbCI{}, positive on \FamBkbSplits{} of
+\FamBkbOf{} splits, \(p=\FamBkbP{}\). Its control arm is \FamBkbControl{} on
+\FamBkbControlSplits{} of \FamBkbOf{}, crossing zero: the added cells are not
+the mechanism.
+
+A family that reads discarded bytes needs a second control, because
+\texttt{more\_old} does not catch a family whose columns carry ordinary
+per-residue information that happens not to be about the backbone. That control
+is a permutation. The same \(44\) quantities are computed, aggregated
+identically, and their rows are shuffled within each chain under a fixed seed,
+so every column's multiset of values over the chain is unchanged and every
+marginal is identical by construction. The only thing destroyed is which residue
+each row describes. Permuted, the family is worth \FamBkbPerm{} on
+\FamBkbPermSplits{} of \FamBkbPermOf{} --- worse than adding nothing, because
+columns of that shape attached to the wrong residue consume cells and carry
+noise. The \(+0.0065\) gap between the two arms is the sharpest statement
+available that what the field gained is the backbone conformation of the residue
+being scored, and not the shape of a column.
+
+Three things bound what this is worth. It is a training-fold measurement and
+nothing here is deployed: moving the architecture would make the external read
+of Section~\ref{sec:external} a result about a detector that no longer exists,
+which is why the two remaining external sets are frozen and unread. The lift is
+above the \SatReseed{} reseed floor but of the same order, and it is quoted with
+its interval for that reason. And it does not close the deficit: the supervised
+sequence baseline of Section~\ref{sec:plmnn} leaves the deployed detector at
+\PlmAucDelta{} \PlmAucCI{} on the official fold, and \FamBkb{} is a fifth of
+that gap. What changed is not the standing
+of the method but the standing of a claim: the wire axis is not closed, the
+screen that says which families are null is stated and has predicted a sign in
+advance once, and the direction it points at is atom positions rather than
+further functions of the contact graph.
+
 \section{Limitations}
 The clearest limitation is the one Sections~\ref{sec:plmnn}
 and~\ref{sec:external} measure twice: the method is less accurate than the
