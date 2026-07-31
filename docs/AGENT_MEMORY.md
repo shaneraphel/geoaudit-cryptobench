@@ -178,6 +178,27 @@ last attachment. **The axis is closed; read §2d before proposing a fifth family
 | composition 76 | +5.96e-06 | −0.0009 on 2/12 | +0.0011 on 10/12 |
 | asymmetry 129 | **−9.69e-06** | +0.0010 on 9/12 | **+0.0038 on 12/12** |
 | graph invariants 225 | +6.42e-06 | **−0.0061 on 0/12** | **−0.0027 on 1/12** |
+| chemistry 42 | not screened | **+0.0002 on 7/12** | not measured |
+
+**The fifth family, and the first one with a control arm** (`CHEMISTRY_WIRES_LIFT.json`).
+`residue_chemistry.py` replaces `composition_wires.py`'s eight class labels with
+fourteen chemical quantities per side chain — rotameric dihedrals, side-chain donors
+and acceptors separately, formal charge at pH 7.4, pH-switchability, aromatic ring
+atoms, carbon and polar-atom counts, β-branching, backbone flexibility and
+constraint, metal-ligating and nucleophilic capability, Zamyatnin volume — over three
+aggregations each.
+
+The motivating quantity is `chi_rotatable` and the argument for it was good: a
+cryptic pocket is closed and opens, side chains open it, the 645 deployed wires are
+invariants of atom *positions* and cannot see conformational freedom, and the eight
+classes cannot either, since the aliphatic class holds ALA/VAL/LEU/ILE/MET whose χ
+runs 0, 1, 2, 2, 3. **The argument was good and the measurement is nothing:**
++0.00016 [−0.00065, +0.00098] on 7 of 12, inside the range committed before the run.
+
+What makes it unambiguous is the control, which no earlier family had. Adding the
+same 336 tables over the deployed wires with the family **absent entirely** gives
++0.00043 — as much or more. The small positive is bank size, not chemistry. **Every
+future family must carry that arm**; without it this run reports a lift.
 
 **The deployed wires are the only family the field reads better than a solve does.**
 Two explanations for the other two are excluded, one by arithmetic and one by
@@ -300,12 +321,21 @@ comparison here whose interval excludes zero; straddling recovers **exactly** th
 cost and lands at +0.00001 against the deployed detector. The crossing was worth
 having only because the attachment was throwing it away. There is no gain.
 
-**So the wire axis is closed, by the same standard as the other eight.** Four families
+**So the wire axis is closed, by the same standard as the other eight.** Five families
 and now all three attachments have been measured. Nothing moves the deployed detector.
 Two statistics ordered the families — internal interaction, then cross interaction —
-and neither moved a number when acted on. **Stop screening families.** Proposing a
-fifth needs a reason that is not an interaction statistic, and proposing a fourth
-attachment needs one that is not "the tables sit somewhere else".
+and neither moved a number when acted on. **Stop screening families.** The fifth was
+proposed on a chemical argument rather than on either statistic, which was the right
+kind of reason and produced the same null; so proposing a sixth needs more than a good
+argument, and proposing a fourth attachment needs a reason that is not "the tables sit
+somewhere else".
+
+**And the one procedural thing that did change: run the control.** `more_old` adds
+the same number of tables over the deployed wires with the new family absent. On the
+chemistry family it scored higher than the family did. Four earlier families were
+measured without it, so their small positives and negatives cannot be separated from
+bank size after the fact — asymmetry's +0.0010 in particular has no control beside it
+and should not be quoted as though it does.
 
 Keep the size in view: the largest effect anywhere on this axis is +0.0010, and the
 pLM-NN deficit is **0.0243**, twenty-four times it. That gap is not an attachment

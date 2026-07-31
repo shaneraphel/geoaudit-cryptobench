@@ -122,6 +122,10 @@ PREDICTION = {
 
 def load_family(name: str) -> tuple[np.ndarray, str]:
     """The same registry ``appended_family_lift.py`` uses, plus composition."""
+    if name == "chemistry 42":
+        from chemistry_wires import build_or_load
+        X, _n = build_or_load()
+        return np.asarray(X), "tools/chemistry_wires.py"
     if name == "composition 76":
         from composition_wires import build_or_load
         X, _n = build_or_load()
@@ -525,7 +529,33 @@ def main(argv: list[str] | None = None) -> int:
             None if "more_old" not in got
             else float(np.mean(np.asarray(got["straddle"], dtype=float)
                                - np.asarray(got["more_old"], dtype=float))) > 0)
-        if not beats_union:
+        # The decisive comparison depends on what is being asked. For the family
+        # this tool was written for, composition 76, the question was whether
+        # straddling reaches an interaction the union attachment discards. For a
+        # family measured here for the first time it is a different question --
+        # does the family contribute anything at all -- and the arm that answers
+        # it is more_old, which adds the same number of tables with the family
+        # absent. The first version of this block printed the cross-term reading
+        # for every family, so a null on a new family came back describing an
+        # experiment it was not part of.
+        union_vs_narrow = minus_narrow.get("union") or {}
+        control_vs_narrow = minus_narrow.get("more_old") or {}
+        family_adds_nothing = (
+            "more_old" in got
+            and union_vs_narrow.get("crosses_zero", True)
+            and control_vs_narrow.get("mean", 0.0)
+            >= union_vs_narrow.get("mean", 0.0))
+        if family_adds_nothing:
+            reading = (
+                f"the family contributes nothing. Its union attachment moves "
+                f"the detector by {union_vs_narrow.get('mean', 0.0):+.5f} with "
+                f"an interval that crosses zero, and adding the same number of "
+                f"tables over the deployed wires with the family absent "
+                f"entirely moves it by {control_vs_narrow.get('mean', 0.0):+.5f}"
+                f" -- as much or more. Whatever small positive there is, is bank "
+                f"size and not these columns. The control arm is what makes this "
+                f"unambiguous and a run without it would have reported a lift")
+        elif not beats_union:
             reading = (
                 "the cross term does not survive being acted on. It ordered the "
                 "families and moving the attachment to use it changes nothing "

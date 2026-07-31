@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 58,
-    "exploration": 35,
+    "exploration": 36,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 127,
+  "n_artifacts": 128,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -68,6 +68,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.bank_truncation.v1",
       "bytes": 14131
+    },
+    {
+      "artifact": "results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 6054
     },
     {
       "artifact": "results/architecture_sweep/COLLECTABILITY_SCREEN.json",
