@@ -1669,7 +1669,10 @@ Permuted, the family is worth **−0.00213 on 3/12** — *worse than nothing*, b
 columns of that shape attached to the wrong residue cost cells and carry noise. The gap
 between the two arms, **+0.00654 on 12/12**, is the sharpest available statement that
 the lift is the backbone conformation of the residue being scored and not the shape of a
-column.
+column. The side-chain family repeats the signature and sharpens it: **+0.00476 on
+11/12** intact against **−0.00326 on 0/12** permuted, a gap of **+0.0080**. Two families
+proposed on the same one-sentence screen, measured under the same protocol, carrying the
+same two controls, and behaving the same way under both.
 
 **Two screening statistics ordered the families correctly and neither moved a number.**
 Mean pairwise interaction within a family ordered the first three and was falsified by

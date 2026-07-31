@@ -7,6 +7,30 @@ pipeline throws away. Backbone and side-chain conformation were the first two
 such families. This is the third, and it reads something different again: not the
 positions of the atoms but the *topology of the space between them*.
 
+That rule is the whole justification, and it is worth saying what this family is
+**not** built for, because the first draft of this docstring said it and was
+wrong. FAILURE_TAIL.json puts the field at 0.5991 on the 188 units with fewer
+than ten cryptic residues against 0.8766 on the largest stratum, which makes a
+family whose headline quantity is the size of the void a residue lines look like
+a family built for that failure. It is not one. AGENT_MEMORY 2g measured the
+dilution hypothesis directly: order statistics over the gate's neighbourhood,
+which cannot dilute, are worse on that stratum by about 0.04 and slightly better
+on the two largest, so the small-pocket stratum is noise-limited rather than
+dilution-limited. AGENT_MEMORY 2h then measured whether anyone else does better
+there and PocketMiner, a graph network sharing no architecture, no featurisation
+and no fitting procedure with this detector, scores 0.5985 against our 0.5958.
+Two methods that agree to 0.0027 while agreeing on nothing else are not both
+failing for a reason one of them can fix. The conclusion recorded there is that
+the tail is not headroom and operators should not be built for it, and this file
+does not overturn it.
+
+What survives is smaller and sufficient: this family reads discarded bytes, and
+one of its integers -- the number of residues lining the largest alpha-sphere
+cluster the residue belongs to -- has a mean within-chain ROC-AUC against the
+cryptic label of 0.7124 on the first sixty training chains with nothing fitted
+at all. Whether that survives attachment to a bank already at 0.79 is what the
+twelve splits are for, and no argument here substitutes for them.
+
 The construction, and why each constant is not a fitted threshold
 -----------------------------------------------------------------
 Take the Delaunay tetrahedralisation of the chain's heavy-atom centres. Each

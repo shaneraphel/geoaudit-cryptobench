@@ -14,36 +14,33 @@ comparison of the quantities and not of the attachment.
 
 Why this family and not another
 -------------------------------
-Two rules had to agree before this was built, and they do.
+One rule, and it is ``AGENT_MEMORY`` 2i: a family is worth measuring only if it
+reads bytes the pipeline throws away. Six families that failed that screen
+measured null; backbone and side-chain conformation passed it and are worth
++0.0044 and +0.0048. Void topology passes it differently from either. It is not
+another function of where the atoms are -- it is a function of where they are
+*not*, and the object it computes, the connectivity of the empty space, is not
+determined by any per-residue quantity at all.
 
-The first is ``AGENT_MEMORY`` 2i: a family is worth measuring only if it reads
-bytes the pipeline throws away. Six families that failed that screen measured
-null; backbone and side-chain conformation passed it and are worth +0.0044 and
-+0.0048. Void topology passes it differently from either. It is not another
-function of where the atoms are -- it is a function of where they are *not*, and
-the object it computes, the connectivity of the empty space, is not determined by
-any per-residue quantity at all.
+A second justification was drafted and withdrawn, and the withdrawal is the part
+worth keeping. ``FAILURE_TAIL.json`` puts the field at 0.5991 on the 188 units
+with fewer than ten cryptic residues against 0.8766 on the 201 with more than
+twenty-two, which makes a family whose headline quantity is the size of the void
+a residue lines look like a family aimed at that failure. Two artifacts say it is
+not. ``GATE_FORM.json`` (``AGENT_MEMORY`` 2g) tested dilution directly: order
+statistics over the gate's neighbourhood cannot dilute and are worse on that
+stratum by about 0.04, so it is noise-limited and not dilution-limited.
+``BASELINE_BY_STRATUM.json`` (2h) then asked whether anyone does better there and
+PocketMiner scores 0.5985 against our 0.5958 -- two methods sharing no
+architecture, no featurisation and no fitting procedure, landing 0.0027 apart.
+The conclusion recorded there is that the tail is not headroom and operators
+should not be built for it.
 
-The second is the instruction that an operator built after a failure should be
-built for the observable the failure correlates with.
-``FAILURE_TAIL.json`` finds that observable: the field scores 0.5991 on the 188
-units with fewer than ten cryptic residues against 0.8766 on the 201 with more
-than twenty-two, and the spread within the small-pocket stratum is 2.63 times the
-sampling error of an AUC at that many positives, so this is not the metric being
-noisy. ``GATE_BY_STRATUM.json`` then finds the mechanism: the deployed 18 A
-spatial gate's optimum radius by stratum is 0, 14, 14, 14. On a chain whose
-pocket is five residues, an 18 A ball around a cryptic residue is almost entirely
-non-cryptic and the gate averages the signal away; on a chain whose pocket is
-thirty, the same ball is enriched and the gate reinforces. That artifact closes
-with the observation that a radius chosen by stratum cannot ship, because the
-stratum is the label.
-
-The size of the void a residue lines is that stratum, computed from coordinates
-alone. ``best_void_residues`` has a mean within-chain ROC-AUC against the cryptic
-label of 0.7124 on the first sixty training chains, from one integer with nothing
-fitted, and ``ball_gate_purity_permille`` -- the share of the deployed gate's own
-ball that lines the same void -- is the dilution factor itself, per residue,
-without the label.
+So this family is offered on the screen alone, plus one measured fact that is not
+an argument: ``best_void_residues`` has a mean within-chain ROC-AUC against the
+cryptic label of 0.7124 on the first sixty training chains, from one integer with
+nothing fitted. Whether that survives attachment to a bank already at 0.79 is
+what the twelve splits decide.
 
 The controls, and there are two
 -------------------------------
