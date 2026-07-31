@@ -52,7 +52,8 @@ ROOT = Path(__file__).resolve().parents[1]
 TAIL = ROOT / "results/architecture_sweep/FAILURE_TAIL.json"
 GATE = ROOT / "results/architecture_sweep/GATE_BY_STRATUM.json"
 QUANT = ROOT / "results/architecture_sweep/QUANTISATION_BY_STRATUM.json"
-SOURCES = (TAIL, GATE, QUANT)
+RECOVERED = ROOT / "results/architecture_sweep/RECOVERED_UNITS_TRAIN.json"
+SOURCES = (TAIL, GATE, QUANT, RECOVERED)
 FIGDIR = ROOT / "figures"
 PROVENANCE = ROOT / "results/architecture_sweep/ARCHITECTURE_FIGURE_PROVENANCE.json"
 README = ROOT / "README.md"
@@ -228,6 +229,121 @@ def render_readme(drawn: list[tuple[Path, str]]) -> None:
     README.write_text(text)
 
 
+def fig_recovered_units(doc: dict) -> tuple[Path, str]:
+    """Where the three methods disagree, in both directions at once.
+
+    The left panel is every training unit as one point: our within-unit ROC-AUC
+    against the better of the two baselines on that same unit. The two shaded
+    corners are the rule -- the upper left is a unit we rank well and both
+    baselines rank at chance, the lower right is the mirror. Drawing both corners
+    is the point of the figure. A version showing only the corner in our favour
+    would be a selection presented as a result, and the reader could not see that
+    the mirror is empty at this setting, which is the actual finding.
+
+    The right panel is the threshold ladder, because one row of it is a choice
+    and the whole ladder is a measurement.
+    """
+    import numpy as np
+
+    per = doc["per_unit"]
+    ours = np.array([r["ours"] for r in per])
+    best = np.array([max(r["p2rank"], r["pocketminer"]) for r in per])
+    found = doc["rule"]["found_at_or_above"]
+    missed = doc["rule"]["missed_at_or_below"]
+    named = {r["unit"] for r in doc["recovered"]}
+    caveat = {r["unit"] for r in doc.get(
+        "recovered_but_the_file_is_parsed_differently", [])}
+
+    fig, (ax, axl) = plt.subplots(
+        1, 2, figsize=(12.2, 4.6), gridspec_kw={"width_ratios": [1.25, 1.0]})
+
+    ax.axhspan(found, 1.0, xmin=0.0, xmax=(missed - 0.2) / 0.8,
+               color="#c6e2c6", alpha=0.55, lw=0)
+    ax.axvspan(found, 1.0, ymin=0.0, ymax=(missed - 0.2) / 0.8,
+               color="#f2c9c9", alpha=0.55, lw=0)
+    ax.plot([0.2, 1.0], [0.2, 1.0], color="#999999", lw=0.9, ls="--")
+    ax.axhline(0.5, color="#bbbbbb", lw=0.7)
+    ax.axvline(0.5, color="#bbbbbb", lw=0.7)
+
+    plain = np.array([r["unit"] not in named and r["unit"] not in caveat
+                      for r in per])
+    ax.plot(best[plain], ours[plain], "o", ms=3.0, color="#7fb1d3",
+            alpha=0.55, mew=0)
+    # Offsets alternate so that two units a hundredth apart in ROC-AUC do not
+    # print their labels on top of each other; 8c3u_A and 5f3k_B did.
+    offsets = ((10, 4), (10, -10), (-12, 9), (-12, -12), (10, 10), (10, -16))
+    for k, r in enumerate(doc["recovered"]):
+        x, y = max(r["p2rank"], r["pocketminer"]), r["ours"]
+        dx, dy = offsets[k % len(offsets)]
+        ax.plot(x, y, "o", ms=7, color="#1a6b1a", zorder=3)
+        ax.annotate(f"{r['unit']}  ({r['n_cryptic']} cryptic)", (x, y),
+                    textcoords="offset points", xytext=(dx, dy), fontsize=8.4,
+                    ha="left" if dx > 0 else "right")
+    for r in doc.get("recovered_but_the_file_is_parsed_differently", []):
+        x, y = max(r["p2rank"], r["pocketminer"]), r["ours"]
+        ax.plot(x, y, "s", ms=7, mfc="none", mec="#1a6b1a", mew=1.4, zorder=3)
+        ax.annotate(f"{r['unit']}  parsed differently", (x, y),
+                    textcoords="offset points", xytext=(0, 13), fontsize=8.4,
+                    ha="center", color="#555555")
+    ax.set_xlabel("the better of P2Rank and PocketMiner on that unit, ROC-AUC",
+                  fontsize=9.5)
+    ax.set_ylabel("counting field, ROC-AUC within the unit", fontsize=9.5)
+    ax.set_xlim(0.2, 1.0)
+    ax.set_ylim(0.2, 1.0)
+    # Below the shaded corner rather than inside it: the corner holds the named
+    # points and their labels, and a caption placed there sits on top of them.
+    ax.text(0.03, 0.70, f"we rank it, both baselines do not\n"
+                        f"{doc['n_recovered']} units",
+            transform=ax.transAxes, va="top", fontsize=8.6, color="#1a6b1a")
+    ax.text(0.97, 0.03, f"both rank it, we do not\n{doc['n_mirror']} units",
+            transform=ax.transAxes, va="bottom", ha="right", fontsize=8.6,
+            color="#8b1a1a")
+    ax.grid(alpha=0.2, lw=0.5)
+    ax.set_axisbelow(True)
+
+    lad = doc["threshold_ladder"]
+    y = np.arange(len(lad))[::-1]
+    axl.barh(y + 0.19, [r["n_recovered"] for r in lad], height=0.36,
+             color="#1a6b1a", label="we rank it, both baselines do not")
+    axl.barh(y - 0.19, [r["n_mirror"] for r in lad], height=0.36,
+             color="#8b1a1a", label="both rank it, we do not")
+    axl.set_yticks(y)
+    axl.set_yticklabels([f"{r['found_at_or_above']:.2f} / "
+                         f"{r['missed_at_or_below']:.2f}" for r in lad],
+                        fontsize=8.6)
+    axl.set_xlabel(f"units, of {doc['n_units_compared']}", fontsize=9.5)
+    axl.set_ylabel("found \u2265  /  missed \u2264", fontsize=9.5)
+    axl.set_xlim(0, max(r["n_recovered"] for r in lad) * 1.45)
+    axl.legend(fontsize=8.3, loc="upper right", frameon=False)
+    axl.grid(axis="x", alpha=0.2, lw=0.5)
+    axl.set_axisbelow(True)
+
+    fig.tight_layout()
+    out = FIGDIR / "fig_recovered_units.png"
+    fig.savefig(out, dpi=200)
+    plt.close(fig)
+
+    strict = lad[0]
+    caption = (
+        f"Training-fold disagreements between the counting field and the two "
+        f"published baselines it can be compared against there, in both "
+        f"directions. Left: every one of the {doc['n_units_compared']} units as "
+        f"one point, our within-unit ROC-AUC against the better of P2Rank and "
+        f"PocketMiner on that same unit. The green corner is the rule fixed "
+        f"before the counts were read \u2014 ours \u2265 {strict['found_at_or_above']:.2f} "
+        f"with both baselines \u2264 {strict['missed_at_or_below']:.2f}, chance "
+        f"being 0.50 \u2014 and the red corner is its mirror, which holds "
+        f"{doc['n_mirror']} units. {doc['n_recovered']} units are named; "
+        f"4m7p_A is drawn hollow and not counted because its deposit carries "
+        f"twenty alternate conformers and the three methods do not parse it "
+        f"alike. Right: the same two counts at eight strictness settings, "
+        f"reported whole because one row of a ladder is a choice. pLM-NN is "
+        f"absent: it has never been run on the training fold, so this compares "
+        f"against two baselines and not three. Exploratory, training fold only, "
+        f"no test-fold read.")
+    return out, caption
+
+
 def main() -> int:
     missing = [str(p.relative_to(ROOT)) for p in SOURCES if not p.exists()]
     if missing:
@@ -235,13 +351,16 @@ def main() -> int:
     FIGDIR.mkdir(exist_ok=True)
     tail = json.loads(TAIL.read_text())
     gate = json.loads(GATE.read_text())
-    for name, doc in (("FAILURE_TAIL", tail), ("GATE_BY_STRATUM", gate)):
+    rec = json.loads(RECOVERED.read_text())
+    for name, doc in (("FAILURE_TAIL", tail), ("GATE_BY_STRATUM", gate),
+                      ("RECOVERED_UNITS_TRAIN", rec)):
         if doc.get("reads_test_fold") is not False:
             raise SystemExit(
                 f"{name} does not declare reads_test_fold false; this "
                 f"generator draws training-fold figures only")
 
-    drawn = [fig_failure_tail(tail), fig_gate_by_stratum(gate)]
+    drawn = [fig_failure_tail(tail), fig_gate_by_stratum(gate),
+             fig_recovered_units(rec)]
     render_readme(drawn)
     PROVENANCE.write_text(json.dumps({
         "schema": "geoaudit.architecture_figure_provenance.v1",

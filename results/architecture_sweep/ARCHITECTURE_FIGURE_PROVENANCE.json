@@ -8,7 +8,8 @@
  "sources": {
   "results/architecture_sweep/FAILURE_TAIL.json": "f93fb8e19602c5951d04ff386e68d7839dfbeb68b2f10063ef9b5067019a2921",
   "results/architecture_sweep/GATE_BY_STRATUM.json": "49cbcebe27eeee5b971a12bad6a32eceff6788258b7804b1945b759580060c5d",
-  "results/architecture_sweep/QUANTISATION_BY_STRATUM.json": "70fcb9a02d0f7788544563aad0fa502c40b18df3b4b86d631fd1cb885edabb54"
+  "results/architecture_sweep/QUANTISATION_BY_STRATUM.json": "70fcb9a02d0f7788544563aad0fa502c40b18df3b4b86d631fd1cb885edabb54",
+  "results/architecture_sweep/RECOVERED_UNITS_TRAIN.json": "8c85c2655c2174e946ce67e1a7d80bd2052404d1f9db9127c44ee8fb7c348c0c"
  },
  "figures": {
   "fig_failure_tail.png": {
@@ -20,6 +21,11 @@
    "sha256": "293e2347ee8d7b6d6b8a9bea7c48566a5ddaa07473920fc544b4853543f85e41",
    "bytes": 91919,
    "caption": "The spatial gate swept per pocket size on the training fold, thirteen arms sharing one compile per split. Left, per-unit ROC-AUC against gate radius at weight 1.0, one line per stratum; the deployed radius is marked and is the best for no stratum. Right, the paired difference between r=14 and the deployed r=18 on the same units, with 95% intervals and the count of units improved: +0.00250 pooled, interval [+0.00060, +0.00441], 436 of 769 units better, and the same size in every stratum rather than concentrated in the small pockets the sweep was launched to investigate. Choosing the arm on six splits and scoring it on the other six selects the same arm both ways round and gives margins of +0.00175 and +0.00320, so the choice replicates and the size is uncertain within that range. Nothing is changed on the strength of this: the constant is still r=18 and moving it would spend the external confirmation."
+  },
+  "fig_recovered_units.png": {
+   "sha256": "8461e0f5e0573b91c833039e3ee69ad9b9d783028ebe95a3fc5d8fb524a2c72f",
+   "bytes": 196901,
+   "caption": "Training-fold disagreements between the counting field and the two published baselines it can be compared against there, in both directions. Left: every one of the 769 units as one point, our within-unit ROC-AUC against the better of P2Rank and PocketMiner on that same unit. The green corner is the rule fixed before the counts were read \u2014 ours \u2265 0.80 with both baselines \u2264 0.55, chance being 0.50 \u2014 and the red corner is its mirror, which holds 0 units. 4 units are named; 4m7p_A is drawn hollow and not counted because its deposit carries twenty alternate conformers and the three methods do not parse it alike. Right: the same two counts at eight strictness settings, reported whole because one row of a ladder is a choice. pLM-NN is absent: it has never been run on the training fold, so this compares against two baselines and not three. Exploratory, training fold only, no test-fold read."
   }
  }
 }

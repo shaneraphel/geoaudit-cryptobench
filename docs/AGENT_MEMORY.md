@@ -800,6 +800,68 @@ ratio, and atom-level rather than residue-level packing counts. None of those is
 a function of residue type, which is the test §2i imposes and the test chemistry
 42 failed.
 
+## 2l. Units both published baselines rank at chance, and the mirror count
+
+`RECOVERED_UNITS_TRAIN.json`, 769 training units, no read of the held-out fold.
+The request was "find a case the baselines missed and we found", and searching
+769 units for one is also the most reliable way to manufacture it. Two things
+make this a measurement instead: the rule is fixed in the tool before the counts
+are read, and **the mirror set is reported beside it** — the units where both
+baselines rank the cryptic residues well and we are at chance.
+
+Rule: a **recovery** is `ours >= 0.80` with `p2rank <= 0.55` and
+`pocketminer <= 0.55`, per-unit ROC-AUC, chance 0.50. The **mirror** swaps the
+roles. Two thresholds rather than one, because a unit where everybody scores 0.7
+is not a disagreement.
+
+| found ≥ | missed ≤ | ours | mirror | difference |
+|---|---|---|---|---|
+| 0.80 | 0.55 | 5 | **0** | +5 |
+| 0.80 | 0.60 | 8 | **0** | +8 |
+| 0.75 | 0.60 | 12 | 2 | +10 |
+| 0.75 | 0.65 | 17 | 7 | +10 |
+| 0.70 | 0.60 | 16 | 5 | +11 |
+| 0.70 | 0.65 | 24 | 11 | +13 |
+| 0.65 | 0.60 | 23 | 11 | +12 |
+| 0.65 | 0.65 | 31 | 19 | +12 |
+
+**The whole ladder is reported because reporting one row of it would be a
+search.** The asymmetry is positive at every setting and the mirror is exactly
+zero at the two strictest, which is the strongest form the statement takes.
+
+**The four clean cases**, after removing one for a reason given below:
+
+| unit | residues | cryptic | ours | P2Rank | PocketMiner |
+|---|---|---|---|---|---|
+| `2xur_B` | 364 | 4 | 0.952 | 0.536 | 0.515 |
+| `8bdi_I` | 141 | 3 | 0.890 | 0.335 | 0.408 |
+| `5f3k_B` | 203 | 15 | 0.828 | 0.542 | 0.532 |
+| `8c3u_A` | 152 | 13 | 0.814 | 0.409 | 0.516 |
+
+**`4m7p_A` is excluded and the exclusion is the useful part.** It is the largest
+disagreement in the fold — 0.918 against 0.439 and 0.214 — and it is not evidence
+about pocket detection. The deposit is an ensemble refinement: 60,040 ATOM lines,
+twenty alternate conformers `A`..`T` of 3,002 atoms each. PocketMiner drops 6,905
+conformer residues there, which is **every one of the 6,905 it drops in the whole
+fold**, reports 505 resseq collisions from insertion codes, and records
+`agrees_with_official_featurisation: null` — it could not be checked against the
+authors' own tensor. A win on a chain the three methods parse differently is a
+win about parsing, and a reviewer will say so before we do. The tool now
+separates any unit failing that check into its own list.
+
+**Two of the four have very few cryptic residues.** `2xur_B` has four and
+`8bdi_I` three, which is §2e's small-`n1` regime where the null sampling error of
+a per-unit AUC is about 0.11. `8c3u_A` and `5f3k_B`, at 13 and 15, are the two
+that do not lean on it. Say which is which when these are shown.
+
+**What this is not.** pLM-NN is not in it. It has never been run on the training
+fold — that is a five-hour encoder pass, not a lookup — so every count above is
+against **two** baselines. Any sentence about "P2Rank and pLM both missed it"
+needs the official fold, where all four methods' per-residue scores are already
+frozen, and that is a read of the held-out set: it needs a plan and an index
+before it is run, and the rule must be the one fixed here rather than one chosen
+after looking.
+
 ## 2k. The ledger was under-counting, and a gate that greps one spelling grades spelling
 
 Not a measurement of the method — a measurement of the accounting, and it found
