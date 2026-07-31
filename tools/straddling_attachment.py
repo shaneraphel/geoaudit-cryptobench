@@ -231,24 +231,39 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         from displacement_wires import build_or_load
         X, _n = build_or_load(permuted=True)
         return np.asarray(X), "tools/displacement_wires.py --permuted"
-    if name == "geometry 672":
-        # All four live-or-tested families as one block: 132 backbone + 261
-        # side-chain + 135 void + 144 displacement. Run only if displacement
-        # clears its own controls; a stack containing a null family measures the
-        # stack without it plus noise.
+    if name == "geometry 624":
+        # The four live families, minus the part of the fourth that measured
+        # null. 132 backbone + 261 side-chain + 135 void + 96 displacement-B.
+        #
+        # The 48 alternate-conformer and occupancy columns are left out because
+        # they were measured and are not there: `displacement alt 48` scored
+        # +0.00052 against its own `more_old` control at +0.00052 -- the same
+        # number to five decimals, which is what cell budget looks like when the
+        # separation is exact. Carrying them would spend 384 tables on nothing.
+        #
+        # It is also what makes this arm runnable. All 672 columns exceed the
+        # 645 deployed wires, and the harness refuses that draw: a round pairs
+        # each new column with a *distinct* wire, which needs the new family to
+        # be the smaller side. Dropping the null sub-family is the right answer
+        # to both constraints at once, and it is the attribution that says which
+        # 48 to drop rather than the column budget.
         import numpy as _np
         from backbone_wires import build_or_load as bb
         from sidechain_wires import build_or_load as sc
         from void_wires import build_or_load as vd
         from displacement_wires import build_or_load as dp
+        from pocket_bench.methods.displacement import N_COLUMNS as Q
         A, _a = bb()
         B, _b = sc()
         C, _c = vd()
         D, _d = dp()
+        take = [a * Q + q for a in range(3) for q in range(32)]
         return _np.concatenate(
-            [_np.asarray(A), _np.asarray(B), _np.asarray(C), _np.asarray(D)],
+            [_np.asarray(A), _np.asarray(B), _np.asarray(C),
+             _np.asarray(D)[:, take]],
             axis=1), ("tools/backbone_wires.py + tools/sidechain_wires.py + "
-                      "tools/void_wires.py + tools/displacement_wires.py")
+                      "tools/void_wires.py + tools/displacement_wires.py "
+                      "quantities 0..31")
     if name == "geometry 528":
         # All three live families as one block: 132 backbone + 261 side-chain +
         # 135 void. Measured because the pairwise result does not settle the

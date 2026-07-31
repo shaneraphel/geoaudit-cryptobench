@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "cited": 74,
+    "cited": 76,
     "exploration": 43,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 151,
+  "n_artifacts": 153,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -271,6 +271,20 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.counterattack_wide3.v1",
       "bytes": 4389
+    },
+    {
+      "artifact": "results/architecture_sweep/DISPLACEMENT_ALT_LIFT.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 3661
+    },
+    {
+      "artifact": "results/architecture_sweep/DISPLACEMENT_B_LIFT.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 3665
     },
     {
       "artifact": "results/architecture_sweep/DISPLACEMENT_LIFT.json",

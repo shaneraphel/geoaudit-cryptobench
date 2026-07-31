@@ -152,6 +152,7 @@ FAMILY_LADDER = (
      ROOT / "results/architecture_sweep/DISPLACEMENT_ALT_LIFT.json"),
     ("FamGeomFour",
      ROOT / "results/architecture_sweep/GEOMETRY_FOUR_LIFT.json"),
+    ("FamGeomSix", ROOT / "results/architecture_sweep/GEOMETRY_624_LIFT.json"),
 )
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"

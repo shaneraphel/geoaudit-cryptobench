@@ -1126,15 +1126,44 @@ function of where an atom sits relative to solvent. **Reasoning from "X
 correlates with Y" to "X is mostly Y" is the step that failed**, and it is the
 same step §2i's screen was invented to avoid making about re-encodings.
 
-**What was right, and it is not nothing.** The falsification route was named in
-advance and is now the thing to run: "a raw lift above +0.004 falsifies the
-reasoning in an interesting direction and the place to look is group E,
-alternate conformers, which is not a function of exposure." Splitting the family
-at that seam — `displacement B 96` (groups A–D, the B-factor quantities) against
-`displacement alt 48` (groups E–F, alternates and occupancy) — is running. Only
-1.3 % of residues carry an alternate, so if group E carries the lift it does so
-through the shell aggregations rather than through its own rows, and that is a
-different claim worth separating.
+**The falsification route was named in advance, was run, and was also wrong.**
+The prediction said: "above +0.004, the place to look is group E, alternate
+conformers, which is not a function of exposure." Splitting the family at exactly
+that seam:
+
+| arm | lift | splits | its own `more_old` control |
+|---|---|---|---|
+| `displacement 144`, all of it | +0.00700 | 12/12 | −0.00007, 6/12 |
+| **`displacement B 96`**, groups A–D | **+0.00630** | **12/12** | −0.00045, 5/12 |
+| `displacement alt 48`, groups E–F | +0.00052 | 9/12, **crosses zero** | **+0.00052**, 7/12 |
+
+**The B-factor carries 90 % of the family. The alternate conformers carry
+nothing.** The alt arm is the cleanest null this repository has produced: its
+lift and its own control arm land on **the same number to five decimal places**,
+which is what "this is cell budget and not information" looks like when it is
+unambiguous. B 96 and alt 48 sum to +0.00682 against the full family's +0.00700,
+so the two parts are additive and the second part is zero.
+
+So the miss was double. **Wrong about the magnitude, by 3×. And wrong about
+where the magnitude would come from if the magnitude was wrong.** The quantity
+argued to be "mostly exposure, therefore mostly redundant" is the quantity that
+carries the largest single family in this repository, on its own, at +0.0063.
+
+> **Naming a falsification route in advance is worth doing even when the route
+> is also wrong.** It cost one sentence and produced two measurements that
+> settle the attribution, and the attribution is what the next family gets built
+> from: the live input here is the deposited temperature factor, universally
+> present and never read, and *not* the crystallographer's explicit statement of
+> alternate occupancy, which is present on 43 % of chains and worth nothing after
+> the tables it costs. Without the split, "displacement 144 is +0.0070" would
+> have been carried forward as a fact about disorder, and the next family would
+> have been built on alternates.
+>
+> Note what makes the alt arm's null trustworthy and the earlier families' nulls
+> less so: **it has a control arm, and the control landed on the same number.**
+> §2c's four earliest families were measured with no control at all, which is why
+> their small positives cannot be separated from bank size after the fact. Here
+> the separation is exact.
 
 > **A prediction that fails is worth more than one that is not made.** This one
 > cost nothing to write, was wrong by 3×, and turned into a specific next

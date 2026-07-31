@@ -1681,7 +1681,25 @@ weights, none of which is a function of where an atom sits relative to solvent.
 What the prediction got right was naming its own falsification route in advance —
 "above +0.004, look at the alternate-conformer group, which is not a function of
 exposure" — so the miss produced a specific next measurement instead of a shrug.
-That attribution arm splits the family at exactly that seam and is running.
+**That route was run, and it was also wrong:**
+
+| arm | lift | splits | its own control |
+|---|---|---|---|
+| `displacement 144`, all of it | +0.00700 | 12/12 | −0.00007, 6/12 |
+| **`displacement B 96`**, the B-factor groups | **+0.00630** | **12/12** | −0.00045, 5/12 |
+| `displacement alt 48`, alternates and occupancy | +0.00052 | 9/12, crosses zero | **+0.00052**, 7/12 |
+
+**The B-factor carries 90% of the family; the alternate conformers carry nothing.**
+The alt arm is the cleanest null here: its lift and its own control land on the same
+number to five decimal places, which is what cell budget looks like when the
+separation is exact. So the miss was double — wrong about the magnitude, and wrong
+about where the magnitude would come from if the magnitude was wrong. The quantity
+argued to be "mostly exposure, therefore mostly redundant" is the one carrying the
+largest single family in this repository, on its own.
+
+That attribution is what the shipping stack is built from: `geometry 624` is the four
+families with the null 48 columns left out, because carrying them would spend 384
+tables on a measured zero.
 
 | Attachment | What it does | Result |
 |---|---|---|

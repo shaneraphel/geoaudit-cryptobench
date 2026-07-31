@@ -1,0 +1,142 @@
+{
+ "schema": "geoaudit.straddling_attachment.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "whether tables that pair a deployed wire with a new column collect the straddling interaction that both existing attachments discard",
+ "family": "displacement B 96",
+ "built_by": "tools/displacement_wires.py, quantities 0..31",
+ "n_new_columns": 96,
+ "why_this_attachment": "COLLECTABILITY_SCREEN.json measures the interaction of straddling pairs as larger than each family's interaction with itself, and above the deployed bank's own +1.06e-05 for composition. The union attachment forms no straddling tables and widening forms them only by redrawing every pairing, which keeps 281 of 5,152",
+ "held_fixed": {
+  "n_old_wires": 645,
+  "old_bank": "16 rounds at width 2, seed 20260725, held identically by every arm",
+  "gate": "as deployed",
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "banding": "within-chain rank quartiles, per column"
+ },
+ "bank": {
+  "n_deployed_tables": 5152,
+  "n_tables_added_by_each_arm": 768,
+  "n_straddling_in_the_straddle_arm": 0,
+  "why_matched": "the arms differ in where the added tables sit and not in how many there are, so a difference between them is not a difference in cell budget"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_and_solve_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC, gate applied as deployed",
+  "baseline_was_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json"
+ },
+ "checks": {
+  "separate_digitisation_matches_the_concatenated_one": {
+   "checked_on": "the first 24 chains, 7603 residues, 741 columns",
+   "identical": true
+  },
+  "digit_cache": "tools/digit_cache.py, which requires equality with chain_digits on the leading chains",
+  "lean_fanout_matches_integer_fanout": {
+   "checked_on": "512 of 5920 tables, 118716 rows",
+   "multiplicities_identical": true,
+   "why_only_a_subset": "the canonical routine peaks near 2.4 GB at the full table count on this host, which is the reason the lean one exists; the claim is about the arithmetic and is testable where both run"
+  }
+ },
+ "arms": {
+  "union": {
+   "mean": 0.79642,
+   "min": 0.772184,
+   "max": 0.811534
+  },
+  "more_old": {
+   "mean": 0.78967,
+   "min": 0.762147,
+   "max": 0.804175
+  }
+ },
+ "minus_narrow": {
+  "union": {
+   "mean": 0.0063,
+   "n_splits_positive": 12,
+   "n_splits": 12,
+   "paired_se": 0.000727,
+   "ci95": [
+    0.004876,
+    0.007725
+   ],
+   "crosses_zero": false,
+   "sign_test_p_one_sided": 0.0002
+  },
+  "more_old": {
+   "mean": -0.00045,
+   "n_splits_positive": 5,
+   "n_splits": 12,
+   "paired_se": 0.000467,
+   "ci95": [
+    -0.001364,
+    0.000465
+   ],
+   "crosses_zero": true,
+   "sign_test_p_one_sided": 0.8062
+  }
+ },
+ "versus_union": {
+  "more_old": {
+   "mean": -0.00675,
+   "n_splits_positive": 0,
+   "n_splits": 12,
+   "paired_se": 0.000683,
+   "ci95": [
+    -0.008088,
+    -0.005411
+   ],
+   "crosses_zero": false,
+   "sign_test_p_one_sided": 1.0
+  }
+ },
+ "verdict": null,
+ "per_split": {
+  "union": [
+   0.80813,
+   0.789295,
+   0.796415,
+   0.793856,
+   0.794248,
+   0.795648,
+   0.807153,
+   0.798125,
+   0.799985,
+   0.790465,
+   0.811534,
+   0.772184
+  ],
+  "more_old": [
+   0.802462,
+   0.786863,
+   0.786305,
+   0.789561,
+   0.788527,
+   0.78914,
+   0.801284,
+   0.788561,
+   0.794577,
+   0.782438,
+   0.804175,
+   0.762147
+  ]
+ },
+ "per_split_narrow_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ]
+}
