@@ -407,6 +407,12 @@ stronger measurement than the one that closed it first.
 
 That elimination leaves the 0.5991-against-0.8766 gap standing and unexplained.
 
+**Read §2h before acting on this section.** The gap is real and this section
+measures it correctly, but the inference everyone drew from it — that a quarter of
+the fold is sitting there as recoverable headroom — is refuted: an unrelated rival
+scores 0.5985 on the same units. The size of the effect is not the size of the
+opportunity, and two sweeps (§2f, §2g) were spent before anyone checked.
+
 ## 2f. The gate radius has no provenance, and 14 beats 18 everywhere
 
 `GATE_BY_STRATUM.json` sweeps seven radii and two weights, per unit and per
@@ -477,6 +483,122 @@ variable is the number of cryptic residues, which is the **label**. Nothing that
 conditions on it can ship. A fix has to condition on something observable — chain
 size separates only weakly here, P(tail>rest)=0.393, so it is not a substitute —
 and finding that observable is the actual problem.
+
+## 2g. The tail is a noise problem, not a dilution problem
+
+`GATE_FORM.json`, 12 splits, 769 units. The gate's *form* had never been varied:
+§2b's eight parameters are all about the table bank, and §2f swept only the gate's
+radius and weight. The form is "add back the neighbourhood **mean**, rescaled to
+the raw field's spread", and the argument for changing it was mechanical. An
+18 Å ball around a residue holds a couple of hundred residues. If eight of them
+are cryptic the mean barely moves; if forty are, it moves a lot. That is exactly
+the shape of §2e's failure, so the aggregation looked like the cause and an order
+statistic looked like the cure. Prediction written into the tool before the run:
+`max` and `top-k` beat `mean` on the 0–9 stratum, the gap narrows on 23–76, and
+`median` is worst everywhere.
+
+**Every clause of that is wrong, and the way it is wrong is the useful part.**
+
+| arm | pooled | 0–9 | 10–15 | 16–22 | 23–76 |
+|---|---|---|---|---|---|
+| `mean` r=14 | **+0.00250** | +0.0023 | +0.0024 | +0.0027 | +0.0025 |
+| `median` r=18 | −0.00479 | **+0.0071** | −0.0051 | −0.0084 | −0.0120 |
+| `top5` r=18 | −0.01216 | −0.0420 | −0.0105 | **+0.0012** | **+0.0010** |
+| `max` r=18 | −0.01549 | **−0.0376** | −0.0151 | −0.0040 | −0.0066 |
+| `count` r=18 | −0.02546 | −0.0553 | −0.0225 | −0.0118 | −0.0139 |
+
+Order statistics do not help the small-site stratum. **Their entire cost is
+incurred there**: on the two largest strata `top5` is very slightly *ahead* of the
+deployed mean (+0.0012, +0.0010) and `max` is behind by under 0.007, while on 0–9
+both are behind by about 0.04. The predicted magnitude ordering is exactly
+inverted, which is more informative than a null would have
+been: it says the neighbourhood's peak is *less* trustworthy when there are few
+positives, not more. With eight positives the largest score in the ball is
+usually a high-scoring negative; with forty it is usually a real one. So the
+0–9 stratum is **noise-limited, not dilution-limited**, and the gate earns its
+keep by averaging noise away rather than by finding a peak.
+
+`median` is the one arm that agrees with that reading rather than the old one: the
+most outlier-robust form, +0.0071 on 0–9 with a CI of [+0.0011, +0.0131], and a
+loss on every other stratum that grows monotonically with pocket size. **Do not
+quote that as a win.** The sign test is 96/188, p=0.41 — the stratum mean moved
+because a few units moved a lot, which is precisely the small-`n1` variance §2f
+already caught doing this to an analyst. It is a direction, not a result.
+
+Two things follow, and both are recorded as untried rather than promising:
+
+* A **trimmed neighbourhood mean** is the form this reading actually predicts —
+  averaging (which the mean has and the max lacks) plus outlier robustness (which
+  the median has and the mean lacks). Neither swept arm has both. If the reading
+  is right it beats both; if it lands between them the reading is decoration.
+* Nothing here can be selected per stratum, for §2f's reason: the stratifying
+  variable is the label. A blend of two gate forms is deployable; a switch
+  between them is not.
+
+The reproduction check matters more than usual here, because every arm is a
+reimplementation of a pinned function: `mean` at the deployed radius reproduces
+the frozen per-split numbers to **4.01e-07**, so the differences above are the
+aggregation and nothing else. `table_field.py` was not touched — it is one of the
+eight files under `TABLE_FIELD.json`'s `code_sha256`, and a local copy of the gate
+costs nothing while an edit would invalidate the compiled field.
+
+## 2h. The tail is not headroom. A rival collapses on it too, by the same amount
+
+`BASELINE_BY_STRATUM.json`, 752 units where both methods cover the same residues
+and agree on the positive count. §2e made the small-site stratum look like the
+whole game — a quarter of the fold at 0.5991 against 0.8766, carrying 46% of the
+total deviation, and arithmetically enough to cover the 0.0243 deficit against
+pLM-NN twice over. §2f and §2g then spent two sweeps trying to fix it. The
+question nobody had asked first is whether anyone else can do better there.
+
+| stratum | ours | PocketMiner | ours − PocketMiner |
+|---|---|---|---|
+| 0–9 | 0.5958 | **0.5985** | **−0.0027** [−0.0355, +0.0300] |
+| 10–15 | 0.8149 | 0.7637 | +0.0512 [+0.0298, +0.0726] |
+| 16–22 | 0.8550 | 0.7976 | +0.0573 [+0.0415, +0.0732] |
+| 23–76 | 0.8754 | 0.7993 | +0.0761 [+0.0620, +0.0903] |
+| pooled | 0.7873 | 0.7412 | +0.0461 [+0.0349, +0.0572] |
+
+**On the stratum that looked like the target, the two methods are indistinguishable
+and both are near chance.** PocketMiner is a graph network over structure and we
+are a counting field over quantised invariants; they share no architecture, no
+featurisation and no fitting procedure, and they land 0.0027 apart. Its own fall
+from its largest stratum to its smallest is −0.2008 against our −0.2796, so the
+collapse is not a quirk of one design.
+
+**Both biases in this comparison flatter PocketMiner**, which is what makes the
+reading survive a hostile test rather than a friendly one. Its training set was
+never clustered against CryptoBench's folds and six training entries match its own
+by exact PDB id, which is a floor and not a homology check; and it drops residues
+it cannot featurise, so on some units it is scored on an easier universe — the 17
+units where that happens are excluded from the table above and included in the
+artifact's second block. It is advantaged, and it still cannot beat 0.60 there.
+
+**So the tail is not headroom, and the operators should not be built for it.**
+A unit with seven cryptic residues in three hundred is an ambiguous labelling
+problem before it is a detection problem, and 0.60 is roughly what a good method
+gets. §2e's sentence naming it "the largest effect in this repository" is correct
+about the *size* of the effect and was about to be wrong about what to do with it.
+
+Two things this does *not* say, both of which will be tempting:
+
+* It does not say the stratum is at its information limit — two structural
+  methods can share a blind spot. It says no evidence of headroom exists, which
+  is the standard §2c applied to five wire families.
+* It does not locate the pLM-NN deficit. pLM-NN reads evolutionary information
+  that neither method here has, and whether *its* profile also collapses on 0–9
+  is unmeasured. That is now the question worth the compute: if pLM-NN also sits
+  near 0.60 there, its whole advantage lives in the large strata, where we are
+  already 0.076 ahead of PocketMiner, and that is a very specific target. This
+  costs no test-fold read — the baseline can be run on the training fold, and
+  nothing pins its tools by `code_sha256`.
+
+Method note worth keeping: this cost **zero** compute on the rival, because its
+per-residue training-fold predictions were already on disk under
+`data/baselines/pocketminer_train/`. The tempting version of this measurement was
+to stratify the *test-fold* pLM-NN comparison, which would have spent a read from
+the ledger on an exploratory question. Check what is already on disk before
+spending a frozen resource.
 
 ## 3. What is open, and why each is thought to be open
 
@@ -853,7 +975,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 640 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 651 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

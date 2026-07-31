@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 61,
-    "exploration": 36,
+    "exploration": 39,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 131,
+  "n_artifacts": 134,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -56,6 +56,13 @@
       "bytes": 3526
     },
     {
+      "artifact": "results/architecture_sweep/ARCHITECTURE_FIGURE_PROVENANCE.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.architecture_figure_provenance.v1",
+      "bytes": 3142
+    },
+    {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
@@ -68,6 +75,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.bank_truncation.v1",
       "bytes": 14131
+    },
+    {
+      "artifact": "results/architecture_sweep/BASELINE_BY_STRATUM.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.baseline_by_stratum.v1",
+      "bytes": 8069
     },
     {
       "artifact": "results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json",
@@ -271,6 +285,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.gate_by_stratum.v1",
       "bytes": 24447
+    },
+    {
+      "artifact": "results/architecture_sweep/GATE_FORM.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.gate_form.v1",
+      "bytes": 20410
     },
     {
       "artifact": "results/architecture_sweep/GATE_WEIGHT_ROUTING.json",

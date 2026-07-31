@@ -1,0 +1,253 @@
+{
+ "schema": "geoaudit.baseline_by_stratum.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "whether a rival cryptic-site method also collapses on training units with few cryptic residues, which decides whether that stratum is headroom or is ambiguous for everyone",
+ "prediction": {
+  "committed_before_the_run": true,
+  "if_the_stratum_is_intrinsically_hard": "PocketMiner's mean AUC on the small-site stratum is also far below its own large-site mean, and the paired gap between the methods is roughly flat across strata",
+  "if_the_deficit_is_ours": "PocketMiner's profile across strata is much flatter than ours and the paired gap widens sharply toward small sites",
+  "what_would_redirect_the_work": "a paired gap that widens toward small sites names the small-site stratum as real headroom; a flat gap says the stratum is ambiguous for everyone and the operators should be built elsewhere"
+ },
+ "rival": {
+  "method": "PocketMiner",
+  "scores": "data/baselines/pocketminer_train",
+  "manifest": "results/baselines/POCKETMINER_TRAIN_SCORES.json",
+  "biases_and_their_direction": [
+   "PocketMiner's training set was never clustered against CryptoBench's folds and six training entries match its own by exact PDB id, which is a floor and not a homology check. This flatters PocketMiner here.",
+   "PocketMiner drops residues it cannot featurise, so on some units it is scored on an easier universe than we are. This also flatters PocketMiner, and the headline block below removes those units."
+  ],
+  "why_this_matters_for_the_reading": "both biases push the same way, so a PocketMiner collapse on the small-site stratum is observed despite the advantage rather than because of a handicap"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "ours": "the deployed detector, per-unit ROC-AUC averaged over the splits in which the unit sat on the pick side",
+  "pocketminer": "one forward pass over the whole fold, so its per-unit ROC-AUC has no split structure",
+  "why_that_is_comparable": "the statistic is computed within a unit in both cases, which is the same statistic the official-fold comparison uses",
+  "strata_from": "results/architecture_sweep/FAILURE_TAIL.json"
+ },
+ "join": {
+  "n_units_ours": 769,
+  "n_units_joined": 769,
+  "n_units_pocketminer_absent": 0,
+  "n_units_residue_count_disagrees": 17,
+  "n_units_positive_count_disagrees": 3,
+  "n_units_matched_on_both": 752,
+  "units_where_the_positive_count_disagrees": [
+   "1b0i_A",
+   "1lug_A",
+   "1py3_C"
+  ],
+  "why_this_is_checked": "a unit whose positive count differs between the two sources would be placed in different strata for the two methods, and the paired difference would not be paired"
+ },
+ "headline_matched_universe": {
+  "which_units": "both methods cover the same residues and agree on the positive count",
+  "n_units": 752,
+  "ours_pooled_mean_auc": 0.787264,
+  "pocketminer_pooled_mean_auc": 0.74118,
+  "paired_pooled": {
+   "n_units": 752,
+   "mean": 0.046084,
+   "median": 0.053451,
+   "ci95": [
+    0.034938,
+    0.05723
+   ],
+   "excludes_zero": true,
+   "n_units_ours_ahead": 537,
+   "sign_test_p_one_sided": 0.0
+  },
+  "by_stratum": [
+   {
+    "n_cryptic_from": 0,
+    "n_cryptic_below": 10,
+    "n_units": 185,
+    "ours_mean_auc": 0.595793,
+    "pocketminer_mean_auc": 0.598515,
+    "paired_ours_minus_pocketminer": {
+     "n_units": 185,
+     "mean": -0.002722,
+     "median": 0.02297,
+     "ci95": [
+      -0.035468,
+      0.030025
+     ],
+     "excludes_zero": false,
+     "n_units_ours_ahead": 101,
+     "sign_test_p_one_sided": 0.119689
+    }
+   },
+   {
+    "n_cryptic_from": 10,
+    "n_cryptic_below": 16,
+    "n_units": 175,
+    "ours_mean_auc": 0.814879,
+    "pocketminer_mean_auc": 0.763692,
+    "paired_ours_minus_pocketminer": {
+     "n_units": 175,
+     "mean": 0.051187,
+     "median": 0.055619,
+     "ci95": [
+      0.029823,
+      0.072552
+     ],
+     "excludes_zero": true,
+     "n_units_ours_ahead": 124,
+     "sign_test_p_one_sided": 0.0
+    }
+   },
+   {
+    "n_cryptic_from": 16,
+    "n_cryptic_below": 23,
+    "n_units": 194,
+    "ours_mean_auc": 0.854963,
+    "pocketminer_mean_auc": 0.797619,
+    "paired_ours_minus_pocketminer": {
+     "n_units": 194,
+     "mean": 0.057344,
+     "median": 0.058823,
+     "ci95": [
+      0.041478,
+      0.07321
+     ],
+     "excludes_zero": true,
+     "n_units_ours_ahead": 144,
+     "sign_test_p_one_sided": 0.0
+    }
+   },
+   {
+    "n_cryptic_from": 23,
+    "n_cryptic_below": 77,
+    "n_units": 198,
+    "ours_mean_auc": 0.875426,
+    "pocketminer_mean_auc": 0.799284,
+    "paired_ours_minus_pocketminer": {
+     "n_units": 198,
+     "mean": 0.076143,
+     "median": 0.064677,
+     "ci95": [
+      0.061963,
+      0.090322
+     ],
+     "excludes_zero": true,
+     "n_units_ours_ahead": 168,
+     "sign_test_p_one_sided": 0.0
+    }
+   }
+  ],
+  "profile_across_strata": {
+   "ours_small_minus_large": -0.279633,
+   "pocketminer_small_minus_large": -0.200769,
+   "gap_small_minus_gap_large": -0.078865,
+   "how_to_read": "the first number is how far our own score falls from the largest stratum to the smallest, the second is how far PocketMiner's does. If they are close, the stratum is hard for both. The third is whether the distance between the methods depends on the stratum at all"
+  }
+ },
+ "all_joined_units": {
+  "which_units": "every unit both methods scored, including those where PocketMiner covers fewer residues",
+  "n_units": 769,
+  "ours_pooled_mean_auc": 0.788442,
+  "pocketminer_pooled_mean_auc": 0.741595,
+  "paired_pooled": {
+   "n_units": 769,
+   "mean": 0.046847,
+   "median": 0.054412,
+   "ci95": [
+    0.03589,
+    0.057805
+   ],
+   "excludes_zero": true,
+   "n_units_ours_ahead": 551,
+   "sign_test_p_one_sided": 0.0
+  },
+  "by_stratum": [
+   {
+    "n_cryptic_from": 0,
+    "n_cryptic_below": 10,
+    "n_units": 188,
+    "ours_mean_auc": 0.599136,
+    "pocketminer_mean_auc": 0.59914,
+    "paired_ours_minus_pocketminer": {
+     "n_units": 188,
+     "mean": -4e-06,
+     "median": 0.030493,
+     "ci95": [
+      -0.032373,
+      0.032365
+     ],
+     "excludes_zero": false,
+     "n_units_ours_ahead": 104,
+     "sign_test_p_one_sided": 0.082831
+    }
+   },
+   {
+    "n_cryptic_from": 10,
+    "n_cryptic_below": 16,
+    "n_units": 180,
+    "ours_mean_auc": 0.81441,
+    "pocketminer_mean_auc": 0.762412,
+    "paired_ours_minus_pocketminer": {
+     "n_units": 180,
+     "mean": 0.051998,
+     "median": 0.055715,
+     "ci95": [
+      0.030932,
+      0.073064
+     ],
+     "excludes_zero": true,
+     "n_units_ours_ahead": 127,
+     "sign_test_p_one_sided": 0.0
+    }
+   },
+   {
+    "n_cryptic_from": 16,
+    "n_cryptic_below": 23,
+    "n_units": 200,
+    "ours_mean_auc": 0.854423,
+    "pocketminer_mean_auc": 0.797668,
+    "paired_ours_minus_pocketminer": {
+     "n_units": 200,
+     "mean": 0.056754,
+     "median": 0.058823,
+     "ci95": [
+      0.041246,
+      0.072263
+     ],
+     "excludes_zero": true,
+     "n_units_ours_ahead": 149,
+     "sign_test_p_one_sided": 0.0
+    }
+   },
+   {
+    "n_cryptic_from": 23,
+    "n_cryptic_below": 77,
+    "n_units": 201,
+    "ours_mean_auc": 0.876598,
+    "pocketminer_mean_auc": 0.8004,
+    "paired_ours_minus_pocketminer": {
+     "n_units": 201,
+     "mean": 0.076198,
+     "median": 0.064939,
+     "ci95": [
+      0.062212,
+      0.090185
+     ],
+     "excludes_zero": true,
+     "n_units_ours_ahead": 171,
+     "sign_test_p_one_sided": 0.0
+    }
+   }
+  ],
+  "profile_across_strata": {
+   "ours_small_minus_large": -0.277462,
+   "pocketminer_small_minus_large": -0.20126,
+   "gap_small_minus_gap_large": -0.076202,
+   "how_to_read": "the first number is how far our own score falls from the largest stratum to the smallest, the second is how far PocketMiner's does. If they are close, the stratum is hard for both. The third is whether the distance between the methods depends on the stratum at all"
+  }
+ },
+ "reproduction_check": {
+  "max_absolute_difference_from_frozen_per_split": 0.0,
+  "reproduces_the_frozen_arm": true
+ }
+}
