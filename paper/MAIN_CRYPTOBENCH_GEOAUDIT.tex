@@ -2487,6 +2487,29 @@ families now, proposed on the same one-sentence screen, measured under the same
 protocol, carrying the same two controls and the same signature on both, where
 six earlier families were null.
 
+Two lifts of that size measured separately are not evidence that they add. They
+are equally consistent with one signal reached by two routes, which is what this
+repository found the last time it asked: the generated descriptors of
+Section~\ref{sec:banks} were worth \GenCeilLift{} against the Fisher
+ceiling of the hand-built bank and \GenWireDelta{} against the
+\GenWiresBase{}-wire counting field that actually ships, because that lift had
+been the spatial expansion arriving a second way. The two conformation families are a
+strong candidate for the same reading --- both are conformation, they are
+computed from overlapping atom sets, and a residue in a strained rotamer is
+frequently a residue in an irregular backbone --- so the question is settled by
+measurement rather than addition. Concatenated into one block of
+\FamConfCols{} columns and run on the same \FamAddOf{} halvings against the same
+frozen per-split baseline (mean \FamAddNarrow{}), the two families give
+\FamConf{}, \FamConfCI{}, positive on \FamConfSplits{} of \FamConfOf{} splits
+(\(p=\FamConfP{}\)), against \FamAddSum{} had they been independent. The stack
+therefore recovers \FamAddRecovered{} of the additive sum and \FamAddShared{} is
+shared, and the combination beats the backbone family alone by \FamAddOverBkb{}
+on \FamAddOverBkbSplits{} of \FamAddOf{} and the side-chain family alone by
+\FamAddOverSide{} on \FamAddOverSideSplits{} of \FamAddOf{}. Neither family is
+redundant given the other, and the shortfall of \FamAddShortfall{} is the part
+that was being counted twice. The control arm remains null at
+\FamConfControl{} on \FamConfControlSplits{} of \FamConfOf{}.
+
 Three things bound what this is worth. It is a training-fold measurement and
 nothing here is deployed: moving the architecture would make the external read
 of Section~\ref{sec:external} a result about a detector that no longer exists,
@@ -2494,8 +2517,10 @@ which is why the two remaining external sets are frozen and unread. The lift is
 above the \SatReseed{} reseed floor but of the same order, and it is quoted with
 its interval for that reason. And it does not close the deficit: the supervised
 sequence baseline of Section~\ref{sec:plmnn} leaves the deployed detector at
-\PlmAucDelta{} \PlmAucCI{} on the official fold, and \FamBkb{} is a fifth of
-that gap. What changed is not the standing
+\PlmAucDelta{} \PlmAucCI{} on the official fold, and the combined family's
+\FamConf{} is under a third of that gap even before asking whether a
+training-fold lift transfers to the official one, which is not measured here and
+is not assumed. What changed is not the standing
 of the method but the standing of a claim: the wire axis is not closed, the
 screen that says which families are null is stated and has predicted a sign in
 advance once, and the direction it points at is atom positions rather than

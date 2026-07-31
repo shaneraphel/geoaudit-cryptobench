@@ -800,6 +800,68 @@ ratio, and atom-level rather than residue-level packing counts. None of those is
 a function of residue type, which is the test §2i imposes and the test chemistry
 42 failed.
 
+## 2m. The side-chain family landed, and the two families are 79 % additive
+
+§2j-bis ended by naming the family that §2i's rule said should be live and that
+nobody had built. It was built, and so was the arm that decides whether two
+lifts of the same size are one lift counted twice.
+
+All three measurements below share **one narrow baseline, per split, frozen at
+0.790120 mean** — verified identical across the three artifacts rather than
+assumed — so the families can be compared to each other and not only to the
+detector.
+
+| family | columns | lift over deployed | splits | paired SE | `more_old` control |
+|---|---|---|---|---|---|
+| backbone 132 | 132 | +0.00441 | 12/12 | 0.00056 | −0.00014, 6/12 |
+| **sidechain 261** | 261 | **+0.00476** | 11/12 | 0.00081 | −0.00040, 7/12 |
+| **conformation 393** | 393 | **+0.00723** | **12/12** | 0.00086 | +0.00017, 6/12 |
+| backbone + sidechain, *if additive* | — | +0.00917 | 12/12 | 0.00113 | — |
+
+**The side-chain family is real and the permutation says why.** 261 columns is
+87 quantities at three aggregations. Row-permuted inside each chain — identical
+marginals, correspondence between row and residue destroyed — it scores
+**−0.00326 on 0/12 splits**, so the intact and permuted arms are separated by
+**+0.0080**, wider than the backbone family's separation at 132 columns. Columns
+of this shape attached to the wrong residue are worse than nothing, twice over.
+
+**They add, but not fully.** Measured combined lift is +0.00723 against +0.00917
+if the two were independent: the stack recovers **78.8 % of the additive sum**,
+leaving 21.2 % shared. That is the expected direction and it had to be measured —
+both families are conformation, they are computed from overlapping atom sets,
+and a residue in a strained rotamer is often a residue in an irregular backbone.
+The combination beats backbone alone by +0.00282 on **10/12** and side-chain
+alone by +0.00246 on **11/12**, so neither is redundant given the other.
+
+> **Two lifts of the same size measured separately are not evidence that they
+> add.** They are evidence that something of that size is available twice, which
+> is also what one signal reached by two routes looks like. §"Measure against the
+> thing that ships" in `AGENTS.md` is the same rule at the level of baselines;
+> this is it at the level of families. The combined arm costs one run and is the
+> only thing that distinguishes the two readings. Here it came out 79 % additive.
+> `WIDE_BANK_CEILING.json` is the case where the same question came out the other
+> way — 267 descriptors worth +0.0081 against a 35-wire baseline collapsed to
+> −0.0009 against the 645-wire one, because the lift was the spatial expansion
+> arriving by a second route.
+
+**Where the deficit stands, stated without decoration.** pLM-NN leads by 0.0243
+on the official fold and 0.0340 externally. This is +0.0072 on twelve
+training-fold halvings, or **30 % of the official-fold deficit if it transfers,
+which is unmeasured**. The gate radius is a further +0.0025 and whether it adds
+to this is also unmeasured. **Nothing here has been deployed and no official or
+external fold has been read.** §5's rule stands: reading the frozen external set
+with an improved method destroys the confirmatory result rather than producing a
+second one.
+
+**What is running and what it decides.** A third family, `void 135` — 45
+quantities of the connectivity of the empty space, the only one of the three
+that is not a function of the scored residue's own atom positions — measured
+**+0.0026 on 11/12** on a first pass that carried no control arm and was not
+written to disk, so it is being re-run with `more_old`, with its row-permuted
+arm, and inside a `geometry 528` stack. Until the control lands that +0.0026 is
+a number and not a result, because the union arm adds 1,072 tables and "more
+tables help" is exactly what `more_old` exists to rule out.
+
 ## 2l. Units both published baselines rank at chance, and the mirror count
 
 `RECOVERED_UNITS_TRAIN.json`, 769 training units, no read of the held-out fold.
@@ -939,6 +1001,82 @@ one spelling.
 declaration from the generator, takes the *direction* from the ledger so a file
 the ledger records as an access can never be stamped `false`, and runs in
 `make verify`. The audit is closed: 27 of 27 declared, 7 of them `true`.
+
+## 2k-bis. A gate that had never been red, and an exception that had never been used
+
+§2k is about a gate that measured a spelling. This is the level below it: a gate
+that was green because it was reading nothing, and an exception written to admit
+a file the gate had never been able to see.
+
+**How it surfaced.** The candidate-upload rule was being widened from one
+hard-coded path to a registry, `contracts/CANDIDATE_SHOWCASES.json`. Widening a
+prohibition is exactly when to check that the prohibition works, so five
+negative tests were run against `no_bulk_candidate_dump_in_paper_tree`: strip a
+required field, drop an audit key, declare the repository public, shrink the cap
+below the record count, and **remove the showcase from the registry entirely**.
+Four went red. The fifth stayed green.
+
+De-registering a file that the gate is supposed to forbid must make the gate
+fail. It did not — because the prohibition matched on two directory names
+(`evidence/`, `candidates/`) and four marker strings, and
+`results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json` is under neither directory
+and carries none of the four. **The exception admitting it had therefore never
+done any work.** The gate was not passing because the exception let the file
+through; it was passing because the file was invisible to it. The exception had
+been written, reviewed, documented in the README and cited in the paper's
+appendix, and it had never once been the reason for anything.
+
+**What else was invisible.** A structural probe — count files carrying a *SMILES
+string value*, not files whose names or schemas look like candidates — found
+three of 2007 primary files, of which two hold molecules:
+the registered showcase (12 SMILES) and `data/appendix_esr1/SHOWCASE_INPUT.json`
+(6 SMILES). The second is six molecules with their stability alerts, liability
+alerts, metabolic soft spots and unassigned-stereocentre counts, sitting in the
+tree since it was written, **read by no completeness gate at all**. Not admitted
+by exception either. Simply never seen.
+
+**A second hole, of a different kind.** With the prohibition made structural, a
+new file carrying a SMILES still passed, because the enumeration came from
+`git ls-files`, which lists tracked files only. So the sequence *write the dump →
+`make verify` green → commit* passed: at verify time the file was untracked, and
+nothing re-ran at commit time. The enumeration is now
+`--cached --others --exclude-standard`, which adds untracked-but-unignored files
+and keeps the gitignored virtualenv that motivated the tracked-only version out.
+Two files were newly in scope when this changed, both written the same hour.
+
+**The fix, and why it is not another denylist.** The comment above the old rule
+says a denylist of three filenames "is the wrong shape for the rule it is meant
+to enforce" — and then the replacement was a denylist of two directories and
+four strings, which failed the same way for the same reason. The rule is now
+keyed on the thing that makes a file candidate evidence: it names a molecule. A
+SMILES value is a molecule's identity, so a file holding one is candidate
+evidence wherever it sits and whatever its schema, and must appear in the
+registry. A tool that names the field without holding a value stays clean —
+`tools/emit_esr1_showcase.py` mentions all three identifier fields and is not
+caught, while the same tool with one molecule hard-coded into it would be.
+
+> **A gate that has never been red is a hypothesis, not a control.** Before
+> relying on one — and especially before *relaxing* one — construct the input it
+> is supposed to reject and confirm it rejects it. If it cannot be made to fail,
+> it is not protecting anything, and the exception you are about to write into
+> it will protect nothing either. `AGENTS.md` says to run a query with a value
+> you know is populated before believing a zero; a gate is a query whose zero
+> nobody ever checks.
+>
+> The two follow-on habits, both of which cost one command here. **Ask what the
+> gate enumerates, not just what it matches** — a perfect pattern over the wrong
+> file list finds nothing, and `git ls-files` is the wrong file list for any
+> question about what is about to be committed. And **when a rule is rewritten
+> because its shape was wrong, check that the new one has a different shape**;
+> broadening a denylist feels like a structural fix and is not one.
+
+Both gates now fail on all six constructed inputs and pass on the tree as it
+stands. `candidate_showcases_are_registered_and_complete` replaces the
+single-path `esr1_showcase_is_complete_and_non_comparative`; the registry states
+per showcase what it is admitted to demonstrate, its record cap, its required
+fields, and — for an input file, whose records legitimately carry identifiers
+and a verdict rather than derived chemistry — a written reason for overriding
+the default field list, absent which the override itself fails.
 
 ## 3. What is open, and why each is thought to be open
 
@@ -1315,7 +1453,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 795 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 818 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

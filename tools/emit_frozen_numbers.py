@@ -141,6 +141,9 @@ FAMILY_LADDER = (
     ("FamSidePerm",
      ROOT / "results/architecture_sweep/SIDECHAIN_PERMUTED_LIFT.json"),
     ("FamConf", ROOT / "results/architecture_sweep/CONFORMATION_LIFT.json"),
+    ("FamVoid", ROOT / "results/architecture_sweep/VOID_LIFT.json"),
+    ("FamVoidPerm", ROOT / "results/architecture_sweep/VOID_PERMUTED_LIFT.json"),
+    ("FamGeom", ROOT / "results/architecture_sweep/GEOMETRY_LIFT.json"),
 )
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"
@@ -1820,7 +1823,64 @@ def _family_ladder_macros() -> list[str]:
                  f"{{{'n/a' if ctrl is None else _signed(ctrl['mean'], 4)}}}")
         L.append(f"\\newcommand{{\\{stem}ControlSplits}}"
                  f"{{{'n/a' if ctrl is None else ctrl['n_splits_positive']}}}")
+    L.extend(_additivity_macros())
     return L
+
+
+def _additivity_macros() -> list[str]:
+    """How much of two families' separate lifts survives measuring them together.
+
+    Derived here rather than written into prose because it is a quantity over
+    three artifacts and nothing else recomputes it. Two lifts of similar size
+    measured separately are equally consistent with two signals that add and
+    with one signal reached by two routes, and only the combined arm tells them
+    apart; a number that decides that much should not be a figure somebody typed
+    into a paragraph and then had to remember to change.
+
+    The three families are required to share a per-split narrow baseline. They
+    do --- each artifact carries ``per_split_narrow_frozen`` --- and if a rerun
+    ever changed one of them, adding lifts measured against different baselines
+    would silently produce a plausible wrong answer, so it is checked rather
+    than assumed.
+    """
+    paths = {
+        "A": ROOT / "results/architecture_sweep/BACKBONE_WIDE_LIFT.json",
+        "B": ROOT / "results/architecture_sweep/SIDECHAIN_WIDE_LIFT.json",
+        "AB": ROOT / "results/architecture_sweep/CONFORMATION_LIFT.json",
+    }
+    if not all(p.exists() for p in paths.values()):
+        return []
+    docs = {k: json.loads(p.read_text()) for k, p in paths.items()}
+    narrows = [tuple(d["per_split_narrow_frozen"]) for d in docs.values()]
+    if len(set(narrows)) != 1:
+        raise SystemExit(
+            "the backbone, side-chain and conformation artifacts do not share a "
+            "per-split narrow baseline, so their lifts are not on one scale and "
+            "the additivity macros would be meaningless; rerun them together")
+    narrow = list(narrows[0])
+    lift = {k: [u - n for u, n in zip(d["per_split"]["union"], narrow)]
+            for k, d in docs.items()}
+    n = len(narrow)
+    summed = [a + b for a, b in zip(lift["A"], lift["B"])]
+    shortfall = [s - c for s, c in zip(summed, lift["AB"])]
+    over_a = [c - a for c, a in zip(lift["AB"], lift["A"])]
+    over_b = [c - b for c, b in zip(lift["AB"], lift["B"])]
+    mean = lambda v: sum(v) / len(v)  # noqa: E731
+    recovered = mean(lift["AB"]) / mean(summed)
+    return [
+        f"\\newcommand{{\\FamAddSum}}{{{_signed(mean(summed), 4)}}}",
+        f"\\newcommand{{\\FamAddShortfall}}{{{_signed(mean(shortfall), 4)}}}",
+        f"\\newcommand{{\\FamAddRecovered}}{{{recovered * 100:.1f}\\%}}",
+        f"\\newcommand{{\\FamAddShared}}{{{(1 - recovered) * 100:.1f}\\%}}",
+        f"\\newcommand{{\\FamAddOverBkb}}{{{_signed(mean(over_a), 4)}}}",
+        f"\\newcommand{{\\FamAddOverBkbSplits}}"
+        f"{{{sum(1 for x in over_a if x > 0)}}}",
+        f"\\newcommand{{\\FamAddOverSide}}{{{_signed(mean(over_b), 4)}}}",
+        f"\\newcommand{{\\FamAddOverSideSplits}}"
+        f"{{{sum(1 for x in over_b if x > 0)}}}",
+        f"\\newcommand{{\\FamAddOf}}{{{n}}}",
+        f"\\newcommand{{\\FamAddNarrow}}{{{mean(narrow):.4f}}}",
+    ]
 
 
 def _saturation_macros() -> list[str]:

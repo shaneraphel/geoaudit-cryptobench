@@ -191,6 +191,28 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         B, _b = sc()
         return _np.concatenate([_np.asarray(A), _np.asarray(B)], axis=1), (
             "tools/backbone_wires.py + tools/sidechain_wires.py")
+    if name == "geometry 528":
+        # All three live families as one block: 132 backbone + 261 side-chain +
+        # 135 void. Measured because the pairwise result does not settle the
+        # triple. Backbone and side-chain recovered 78.8 % of their additive sum
+        # over 12 splits, so they share about a fifth of what they carry; void
+        # is the one family here that is not a function of atom positions in the
+        # residue being scored, which is a reason to expect it to overlap less
+        # and not a measurement that it does. If this arm lands near the sum of
+        # the three it is the stack that ships; if it lands near conformation
+        # 393 then void was buriedness arriving by a third route and the 1072
+        # tables it costs buy nothing.
+        import numpy as _np
+        from backbone_wires import build_or_load as bb
+        from sidechain_wires import build_or_load as sc
+        from void_wires import build_or_load as vd
+        A, _a = bb()
+        B, _b = sc()
+        C, _c = vd()
+        return _np.concatenate(
+            [_np.asarray(A), _np.asarray(B), _np.asarray(C)], axis=1), (
+            "tools/backbone_wires.py + tools/sidechain_wires.py + "
+            "tools/void_wires.py")
     if name == "composition 76":
         from composition_wires import build_or_load
         X, _n = build_or_load()

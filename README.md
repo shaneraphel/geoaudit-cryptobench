@@ -679,8 +679,8 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 795 tests and
-553 subtests, all passing. `unittest`'s discovery finds 667 of them, because it
+Current state: `verify_claims` all checks pass; `make test` runs 818 tests and
+563 subtests, all passing. `unittest`'s discovery finds 690 of them, because it
 collects only methods of `TestCase` subclasses; the other 85 are written as
 plain functions and are reachable only through `pytest`.
 
@@ -1582,7 +1582,8 @@ generalization statement. Machine-enforced by
 | Item | Status | Boundary |
 |---|---|---|
 | **Appendix A** — ESR1 receptor-only pilot | `retrospective_pilot_only`, invalidated pending label regeneration | `comparative_claim_allowed=false`; contributes nothing to the CryptoBench result |
-| **Appendix A** — ESR1 decomposability showcase | six molecules, complete chemistry fields, **no accuracy number** | `results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json`. Demonstrates the identity of §"What is new here" item 1 and nothing else. A decomposition needs no labels, so it survives the pilot's invalidation; the pilot's accuracy does not. Admitted by a capped, field-checked exception to the candidate-dump prohibition — see `no_bulk_candidate_dump_in_paper_tree` and `esr1_showcase_is_complete_and_non_comparative` |
+| **Appendix A** — ESR1 decomposability showcase | six molecules, complete chemistry fields, **no accuracy number** | `results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json`. Demonstrates the identity of §"What is new here" item 1 and nothing else. A decomposition needs no labels, so it survives the pilot's invalidation; the pilot's accuracy does not. Admitted by the candidate-showcase registry, `contracts/CANDIDATE_SHOWCASES.json`, and gated by `no_bulk_candidate_dump_in_paper_tree` and `candidate_showcases_are_registered_and_complete` |
+| **Candidate showcases generally** | registry-admitted, capped at 12 records each and 40 in the tree | `contracts/CANDIDATE_SHOWCASES.json` names every admitted showcase, what it is admitted to demonstrate, and the fields every record must carry: isomeric and canonical SMILES, InChIKey, formula, heavy-atom and bond counts, elements, bond-graph SVG, topological pharmacophore, stereochemistry, a structural audit that states its stability alerts, liability alerts, metabolic soft spots and unassigned stereocentres, and its non-claims. A file not in the registry fails the prohibition exactly as any other candidate file does. The exception rests on this repository being private; if it is ever made public, every showcase in it becomes a publication and the filing order AGENTS.md requires has to be settled first |
 | **Appendix B** — finite-field allele-conditioning ablation | `algebraic_ablation_future_work` | Algebraic negative control; no chemical, binding, or efficacy claim |
 | Candidate generation / structure-defined modalities | future work | Bulk evidence lives in the companion tree `gf4-allele-conditioned-evidence` (`data/manifests/COMPANION_EVIDENCE.json`); not a claim of this repository |
 | Localized anisotropic shear for void-absent pockets | future work | Global low-frequency modes caused surface drift; see `results/cryptobench_apo/` |
@@ -1641,7 +1642,8 @@ protocol above:
 | **backbone 39** | thirteen quantities from N, CA, C, O, CB | **yes** | **+0.00196 on 8/12** |
 | **backbone 132** | the same axis taken seriously: 44 quantities | **yes** | **+0.00441 on 12/12**, CI [+0.0033, +0.0055] |
 | **sidechain 261** | 87 quantities of side-chain conformation: torsions and rotamer wells, deposit completeness, extension and curl, free directions to a van der Waals wall, hydrogen-bond satisfaction, two chiral centres, χ₁–φ/ψ coupling | **yes** | **+0.00476 on 11/12**, CI [+0.0032, +0.0063] |
-| *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 (backbone), −0.0004 on 7/12 (side-chain) |
+| **conformation 393** | backbone 132 and sidechain 261 concatenated, measured rather than added | **yes** | **+0.00723 on 12/12**, CI [+0.0055, +0.0089] |
+| *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 (backbone), −0.0004 on 7/12 (side-chain), +0.0002 on 6/12 (conformation) |
 
 | Attachment | What it does | Result |
 |---|---|---|
@@ -1683,17 +1685,30 @@ deployed detector. A statistic that orders outcomes without moving one is a corr
 The discarded-bytes rule is the screen that replaced them, and it is the only one that
 has predicted a sign in advance.
 
-**None of this closes the deficit, and the arithmetic is stated rather than implied.**
-pLM-NN is ahead by **0.0243** on the official fold and **0.0340** externally. The gate
-radius is worth +0.0025, backbone 132 is worth +0.0044 and side-chain 261 is worth
-+0.0048. Whether any two of those add is a question that has to be measured and not
-summed — they are all conformation, computed from overlapping atom sets, and a residue
-in a strained rotamer is often a residue in an irregular backbone. `conformation 393`,
-the two families as one block, is the arm that answers it. Until it lands, the honest
-statement is that the largest single measured effect on this axis is +0.0048 against a
-deficit of 0.0243, which is a fifth of it. Nothing here is deployed: moving the
-architecture would make `EXTERNAL_READ.json`'s +0.0443 a result about a detector that
-no longer exists, which is why Set B and Set C are frozen and unread.
+**The two families add, and 79% of the sum survives being measured together.** Whether
+two lifts of the same size add had to be measured and not summed: they are both
+conformation, computed from overlapping atom sets, and a residue in a strained rotamer
+is often a residue in an irregular backbone. This repository has been wrong about
+exactly this before — 267 generated descriptors worth +0.0081 against a 35-invariant
+baseline were worth −0.0009 against the 645-wire detector that ships, because the lift
+was the spatial expansion arriving a second way (§4.6). So `conformation 393` was run:
+the two families as one block, same twelve halvings, same frozen per-split baseline
+(mean 0.7901, verified identical across all three artifacts rather than assumed).
+
+It gives **+0.00723 on 12/12** against **+0.00917** had they been independent — the
+stack recovers **78.8%** of the additive sum and **21.2%** is shared. It beats backbone
+alone by +0.00282 on 10/12 and side-chain alone by +0.00246 on 11/12, so neither family
+is redundant given the other, and the control arm stays null at +0.0002 on 6/12.
+
+**It still does not close the deficit, and the arithmetic is stated rather than implied.**
+pLM-NN is ahead by **0.0243** on the official fold and **0.0340** externally. The
+combined family is **+0.0072**, which is under a third of the official-fold gap — and
+that comparison is generous to us, because +0.0072 is a training-fold number and
+whether a training-fold lift transfers to the official fold has not been measured.
+The gate radius is a further +0.0025 and whether it adds on top of this is also
+unmeasured. Nothing here is deployed: moving the architecture would make
+`EXTERNAL_READ.json`'s +0.0443 a result about a detector that no longer exists, which is
+why Set B and Set C are frozen and unread.
 
 Numerical record: all counts and metrics are read from the JSON artifacts
 (`results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json`,
