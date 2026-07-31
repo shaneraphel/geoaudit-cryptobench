@@ -2482,10 +2482,43 @@ the coupling of \(\chi_1\) to \(\phi\) and \(\psi\) --- give \FamSide{},
 \FamSideControlSplits{} of \FamSideOf{}. Permuted under the same rule as the
 backbone family, it is worth \FamSidePerm{} on \FamSidePermSplits{} of
 \FamSidePermOf{}: the same eight-thousandth swing from best-measured to
-worse-than-nothing, produced by shuffling rows and changing no marginal. Two
-families now, proposed on the same one-sentence screen, measured under the same
-protocol, carrying the same two controls and the same signature on both, where
+worse-than-nothing, produced by shuffling rows and changing no marginal.
+
+A third family passes the same screen by reading something that is not a
+function of the scored residue's atom positions at all. Delaunay-tetrahedralise
+a chain's heavy atoms, keep the tetrahedra whose circumradius lies in
+\([3.0, 6.0]\)~\AA{}, cluster the resulting alpha spheres by single linkage at
+\(1.73\)~\AA{}, and the connectivity of the empty space is available as
+\(45\) integer and rational quantities per residue: the size and sphere count of
+the void it lines, how contiguous that lining is in sequence, its graph distance
+to the rim, and its burial measured against the chain's own convex hull rather
+than a sphere. None of that survives reducing a residue to its centroid, which
+is what the deployed pipeline does. At the same three aggregations,
+\FamVoidCols{} columns give \FamVoid{}, \FamVoidCI{}, on \FamVoidSplits{} of
+\FamVoidOf{} splits (\(p=\FamVoidP{}\)), against a control at
+\FamVoidControl{} on \FamVoidControlSplits{} of \FamVoidOf{} and a permuted arm
+at \FamVoidPerm{} on \FamVoidPermSplits{} of \FamVoidPermOf{}. Three families
+now, proposed on the same one-sentence screen, measured under the same protocol,
+carrying the same two controls, and negative under permutation every time, where
 six earlier families were null.
+
+One implementation detail is reported because it was checked rather than
+assumed. Band membership is a comparison of a circumradius against two
+constants, and a circumradius is a ratio whose denominator is six times the
+tetrahedron's volume, so a nearly-coplanar tetrahedron carries an amplified
+error and can sit anywhere relative to the band. The decision is therefore made
+in floating point and re-made in exact integer arithmetic --- deposited
+coordinates carry three decimals, so scaling by \(1000\) is lossless and the
+numerator and denominator are integers --- whenever the radius comes within
+\(10^{-6}\)~\AA{} of an edge. Over the training partition's \(12{,}113{,}689\)
+tetrahedra the exact path fires nine times and has never changed a decision,
+and it still does not at a margin a thousand times wider. What makes that safe
+rather than fortunate is measurable: the nearest any circumradius comes to a
+band edge is \(5.57 \times 10^{-8}\)~\AA{}, and the largest error found by
+recomputing the flattest tetrahedra in every chain as exact rationals is
+\(5.01 \times 10^{-9}\)~\AA{}, a factor of \(11\). The fallback is retained at
+one comparison per million tetrahedra because that factor is a property of this
+corpus's coordinate precision and not of the construction.
 
 Two lifts of that size measured separately are not evidence that they add. They
 are equally consistent with one signal reached by two routes, which is what this

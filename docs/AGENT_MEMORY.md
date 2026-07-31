@@ -853,14 +853,64 @@ external fold has been read.** §5's rule stands: reading the frozen external se
 with an improved method destroys the confirmatory result rather than producing a
 second one.
 
-**What is running and what it decides.** A third family, `void 135` — 45
-quantities of the connectivity of the empty space, the only one of the three
-that is not a function of the scored residue's own atom positions — measured
-**+0.0026 on 11/12** on a first pass that carried no control arm and was not
-written to disk, so it is being re-run with `more_old`, with its row-permuted
-arm, and inside a `geometry 528` stack. Until the control lands that +0.0026 is
-a number and not a result, because the union arm adds 1,072 tables and "more
-tables help" is exactly what `more_old` exists to rule out.
+**A third family landed, smaller and with the same signature.** `void 135` — 45
+quantities of the connectivity of the empty space at three aggregations, the
+only one of the three that is not a function of the scored residue's own atom
+positions — gives **+0.00258 on 11/12**, CI [+0.0012, +0.0039], p = 0.0032,
+against a `more_old` control at **−0.00015 on 6/12** crossing zero. About half
+the size of the two conformation families and on the same one-sentence screen.
+Its first pass ran one arm and no `--write`, and that number was not quotable
+until the control landed: the union arm adds 1,072 tables and "more tables help"
+is exactly what `more_old` exists to rule out. `geometry 528`, all three
+families as one block, is the arm that says whether void is a third signal or
+buriedness arriving by a third route; it and the row-permuted void arm are
+running.
+
+## 2m-bis. The exact-arithmetic path in the void family has never corrected anything
+
+Not a measurement of the method. A measurement of a constant that had been
+chosen by reasoning and never checked, and of a fallback that reported success
+identically whether or not it worked — the same shape as §2k-bis, one level down.
+
+`void_topology` decides whether a tetrahedron's circumradius lies in the alpha
+band [3.0, 6.0] in float64, and re-decides in exact integer arithmetic when the
+radius comes within `EXACT_MARGIN = 1e-6` of an edge. Over the whole training
+fold — **12,113,689 tetrahedra, 770 chains, 30 seconds** — the exact path fires
+**nine** times and has **never changed a decision**, and it still does not at a
+margin a thousand times wider, where 5,523 tetrahedra qualify.
+
+**The trigger asks the wrong question, and that had to be measured separately.**
+It fires on proximity to a band edge. But the float error does not come from
+proximity, it comes from conditioning: the circumradius is a ratio whose
+denominator is six times the tetrahedron's volume, so a nearly-coplanar
+tetrahedron has an amplified error and can sit anywhere relative to the band. So
+the flattest thirty tetrahedra per chain were recomputed as exact rationals —
+PDB coordinates carry three decimals, so scaling by 1,000 is lossless and the
+integer numerator and denominator are the true values. Worst relative error in
+r²: **1.671e-09**, on a tetrahedron at 6V/|A||B||C| = 2.5e-07. Zero flips.
+
+| quantity | value |
+|---|---|
+| nearest any circumradius came to a band edge | 5.570e-08 Å |
+| worst float error in r, at the upper edge | 5.013e-09 Å |
+| **headroom** | **11.1×** |
+| `EXACT_MARGIN` over the worst error | 199× |
+
+> **A partial scan under-reported the worst case by eight-fold.** 150 chains gave
+> a worst relative error of 2.18e-10 and a headroom of about 100×; the full fold
+> gives 1.67e-09 and **11×**. The 100× was stated in prose before the full run
+> and had to be withdrawn — which is `AGENTS.md`'s "two splits are not twelve"
+> arriving in a place that looks like numerics rather than like model selection.
+> Extreme-value quantities are exactly the ones a subset under-estimates, because
+> the subset's job is to contain the maximum and it usually does not.
+
+The constant stays and so does the fallback: it costs one comparison per million
+tetrahedra, and 199× is the right kind of conservative for a bound that depends
+on this corpus's coordinate precision rather than on the method. What changed is
+that `EXACT_MARGIN` now has a measured reason. `VOID_EXACT_MARGIN.json`, and
+`tests/test_void_exact_margin.py` holds the fallback against constructed
+tetrahedra, because the corpus contains no case that separates the two
+predicates — which is the finding, and also why the corpus cannot test it.
 
 ## 2l. Units both published baselines rank at chance, and the mirror count
 
@@ -1453,7 +1503,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 818 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 829 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

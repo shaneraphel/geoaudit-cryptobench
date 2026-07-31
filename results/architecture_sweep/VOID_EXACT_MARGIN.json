@@ -1,0 +1,41 @@
+{
+  "schema": "geoaudit.void_exact_margin.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": false,
+  "question": "whether the exact-arithmetic re-decision in void_topology ever changes a band membership, and whether EXACT_MARGIN is large enough to cover the float error that actually occurs",
+  "why_two_measurements": "the deployed trigger fires on proximity to a band edge, but the float error comes from conditioning: the circumradius is a ratio whose denominator is six times the volume, so a nearly-coplanar tetrahedron has an amplified error and can sit anywhere relative to the band. Measuring only proximity would confirm the constant without testing what threatens it",
+  "scan": {
+    "n_chains": 770,
+    "n_tetrahedra": 12113689,
+    "closest_any_circumradius_came_to_a_band_edge": 5.56982793220584e-08,
+    "on_unit": "2xtp_A",
+    "n_within_the_deployed_margin": 9,
+    "deployed_margin": 1e-06,
+    "n_within_a_margin_1000x_wider": 5523,
+    "wide_margin": 0.001,
+    "n_band_decisions_where_float_and_exact_differ": 0
+  },
+  "conditioning": {
+    "n_near_degenerate_tetrahedra_verified_exactly": 23100,
+    "selection": "the 30 flattest per chain by 6V/(|A||B||C|), which is the quantity that amplifies the error",
+    "flattest_seen": 2.5487710932896574e-07,
+    "worst_relative_error_in_r_squared": 1.670927493994468e-09,
+    "worst_case": {
+      "unit": "4gvr_A",
+      "degeneracy_6V_over_abc": 2.5487710932896574e-07,
+      "float_r": 794778.6823088814,
+      "exact_r": 794778.6816448726,
+      "relative_error_in_r_squared": 1.670927493994468e-09
+    },
+    "n_band_decisions_flipped": 0
+  },
+  "verdict": {
+    "worst_absolute_error_in_r_angstrom_at_the_upper_edge": 5.012782481983404e-09,
+    "closest_approach_to_an_edge_angstrom": 5.56982793220584e-08,
+    "headroom_factor": 11.111249993839808,
+    "margin_over_worst_error": 199.49000452226497,
+    "reading": "the exact path is insurance and not a correction: it has never changed a band decision, at the deployed margin or at one a thousand times wider. What makes that safe rather than lucky is the ratio above -- the nearest any circumradius comes to a band edge is far larger than the largest error measured on the worst-conditioned tetrahedra in the fold. EXACT_MARGIN is correspondingly conservative, and that is now a measured property of the constant rather than a choice with no reason attached",
+    "what_would_change_this": "coordinates at finer than three decimals, a different alpha band, or a structure with genuinely coplanar heavy atoms. The exact path stays because it costs one comparison per million tetrahedra and the conditions above are properties of this corpus, not of the method"
+  }
+}

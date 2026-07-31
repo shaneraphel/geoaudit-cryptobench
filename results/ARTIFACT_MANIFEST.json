@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "cited": 69,
-    "exploration": 41,
+    "cited": 71,
+    "exploration": 42,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 144,
+  "n_artifacts": 147,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -579,6 +579,27 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.union_bank_counting_field.v1",
       "bytes": 3026
+    },
+    {
+      "artifact": "results/architecture_sweep/VOID_EXACT_MARGIN.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.void_exact_margin.v1",
+      "bytes": 2732
+    },
+    {
+      "artifact": "results/architecture_sweep/VOID_LIFT.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 3639
+    },
+    {
+      "artifact": "results/architecture_sweep/VOID_PERMUTED_LIFT.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 2956
     },
     {
       "artifact": "results/architecture_sweep/WIDE_BANK_CEILING.json",

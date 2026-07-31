@@ -679,8 +679,8 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 818 tests and
-563 subtests, all passing. `unittest`'s discovery finds 690 of them, because it
+Current state: `verify_claims` all checks pass; `make test` runs 829 tests and
+576 subtests, all passing. `unittest`'s discovery finds 701 of them, because it
 collects only methods of `TestCase` subclasses; the other 85 are written as
 plain functions and are reachable only through `pytest`.
 
@@ -1642,8 +1642,26 @@ protocol above:
 | **backbone 39** | thirteen quantities from N, CA, C, O, CB | **yes** | **+0.00196 on 8/12** |
 | **backbone 132** | the same axis taken seriously: 44 quantities | **yes** | **+0.00441 on 12/12**, CI [+0.0033, +0.0055] |
 | **sidechain 261** | 87 quantities of side-chain conformation: torsions and rotamer wells, deposit completeness, extension and curl, free directions to a van der Waals wall, hydrogen-bond satisfaction, two chiral centres, χ₁–φ/ψ coupling | **yes** | **+0.00476 on 11/12**, CI [+0.0032, +0.0063] |
+| **void 135** | 45 quantities of the connectivity of the empty space: alpha spheres in the Delaunay band [3, 6] Å, single-linkage voids, lining contiguity, depth to the rim, burial against the chain's own convex hull | **yes** | **+0.00258 on 11/12**, CI [+0.0012, +0.0039] |
 | **conformation 393** | backbone 132 and sidechain 261 concatenated, measured rather than added | **yes** | **+0.00723 on 12/12**, CI [+0.0055, +0.0089] |
-| *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 (backbone), −0.0004 on 7/12 (side-chain), +0.0002 on 6/12 (conformation) |
+| *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 (backbone), −0.0004 on 7/12 (side-chain), −0.0001 on 6/12 (void), +0.0002 on 6/12 (conformation) |
+
+Three families, proposed on the same one-sentence screen, and all three behave the
+same way under both controls. The permuted arm shuffles rows inside each chain under
+a fixed seed, so every column's multiset over the chain is unchanged and the only
+thing destroyed is which residue each row describes:
+
+| Family | intact | row-permuted | gap |
+|---|---|---|---|
+| backbone 132 | +0.00441 on 12/12 | **−0.00213 on 3/12** | +0.0065 |
+| sidechain 261 | +0.00476 on 11/12 | **−0.00326 on 0/12** | +0.0080 |
+| void 135 | +0.00258 on 11/12 | **−0.00140 on 2/12** | +0.0040 |
+
+Every permuted arm is *negative*: columns of these shapes attached to the wrong
+residue are worse than adding nothing, because they cost cells and carry noise. That
+is the sharpest available statement that what the field gains is a property of the
+residue being scored rather than the shape of a column, and it now holds three times
+on three independently motivated families rather than once.
 
 | Attachment | What it does | Result |
 |---|---|---|
@@ -1672,9 +1690,12 @@ columns of that shape attached to the wrong residue cost cells and carry noise. 
 between the two arms, **+0.00654 on 12/12**, is the sharpest available statement that
 the lift is the backbone conformation of the residue being scored and not the shape of a
 column. The side-chain family repeats the signature and sharpens it: **+0.00476 on
-11/12** intact against **−0.00326 on 0/12** permuted, a gap of **+0.0080**. Two families
-proposed on the same one-sentence screen, measured under the same protocol, carrying the
-same two controls, and behaving the same way under both.
+11/12** intact against **−0.00326 on 0/12** permuted, a gap of **+0.0080**. The void
+family repeats it a third time at half the size: **+0.00258 on 11/12** against
+**−0.00140 on 2/12**, a gap of **+0.0040**. Three families proposed on the same
+one-sentence screen, measured under the same protocol, carrying the same two controls,
+and behaving the same way under both — and the third reads no atom position of the
+residue being scored at all, only the shape of the space around it.
 
 **Two screening statistics ordered the families correctly and neither moved a number.**
 Mean pairwise interaction within a family ordered the first three and was falsified by
