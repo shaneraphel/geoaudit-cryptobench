@@ -1,0 +1,217 @@
+{
+ "schema": "geoaudit.straddling_attachment.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "whether tables that pair a deployed wire with a new column collect the straddling interaction that both existing attachments discard",
+ "family": "composition 76",
+ "built_by": "tools/composition_wires.py",
+ "n_new_columns": 76,
+ "why_this_attachment": "COLLECTABILITY_SCREEN.json measures the interaction of straddling pairs as larger than each family's interaction with itself, and above the deployed bank's own +1.06e-05 for composition. The union attachment forms no straddling tables and widening forms them only by redrawing every pairing, which keeps 281 of 5,152",
+ "held_fixed": {
+  "n_old_wires": 645,
+  "old_bank": "16 rounds at width 2, seed 20260725, held identically by every arm",
+  "gate": "as deployed",
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "banding": "within-chain rank quartiles, per column"
+ },
+ "bank": {
+  "n_deployed_tables": 5152,
+  "n_tables_added_by_each_arm": 608,
+  "n_straddling_in_the_straddle_arm": 608,
+  "why_matched": "the arms differ in where the added tables sit and not in how many there are, so a difference between them is not a difference in cell budget"
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_and_solve_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC, gate applied as deployed",
+  "baseline_was_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json"
+ },
+ "checks": {
+  "separate_digitisation_matches_the_concatenated_one": {
+   "checked_on": "the first 24 chains, 7603 residues, 721 columns",
+   "identical": true
+  },
+  "digit_cache": "tools/digit_cache.py, which requires equality with chain_digits on the leading chains",
+  "lean_fanout_matches_integer_fanout": null
+ },
+ "arms": {
+  "union": {
+   "mean": 0.78926,
+   "min": 0.762085,
+   "max": 0.80629
+  },
+  "straddle": {
+   "mean": 0.790134,
+   "min": 0.762589,
+   "max": 0.804627
+  },
+  "more_old": {
+   "mean": 0.789475,
+   "min": 0.762939,
+   "max": 0.805332
+  }
+ },
+ "minus_narrow": {
+  "union": {
+   "mean": -0.00086,
+   "n_splits_positive": 2,
+   "n_splits": 12,
+   "paired_se": 0.000324,
+   "ci95": [
+    -0.001495,
+    -0.000224
+   ],
+   "crosses_zero": false,
+   "sign_test_p_one_sided": 0.9968
+  },
+  "straddle": {
+   "mean": 1.4e-05,
+   "n_splits_positive": 5,
+   "n_splits": 12,
+   "paired_se": 0.000479,
+   "ci95": [
+    -0.000925,
+    0.000953
+   ],
+   "crosses_zero": true,
+   "sign_test_p_one_sided": 0.8062
+  },
+  "more_old": {
+   "mean": -0.000645,
+   "n_splits_positive": 4,
+   "n_splits": 12,
+   "paired_se": 0.00039,
+   "ci95": [
+    -0.001409,
+    0.00012
+   ],
+   "crosses_zero": true,
+   "sign_test_p_one_sided": 0.927
+  }
+ },
+ "versus_union": {
+  "straddle": {
+   "mean": 0.000874,
+   "n_splits_positive": 9,
+   "n_splits": 12,
+   "paired_se": 0.000478,
+   "ci95": [
+    -6.4e-05,
+    0.001811
+   ],
+   "crosses_zero": true,
+   "sign_test_p_one_sided": 0.073
+  },
+  "more_old": {
+   "mean": 0.000215,
+   "n_splits_positive": 6,
+   "n_splits": 12,
+   "paired_se": 0.000387,
+   "ci95": [
+    -0.000544,
+    0.000974
+   ],
+   "crosses_zero": true,
+   "sign_test_p_one_sided": 0.6128
+  }
+ },
+ "verdict": {
+  "straddle_minus_union": {
+   "mean": 0.000874,
+   "n_splits_positive": 9,
+   "n_splits": 12,
+   "paired_se": 0.000478,
+   "ci95": [
+    -6.4e-05,
+    0.001811
+   ],
+   "crosses_zero": true,
+   "sign_test_p_one_sided": 0.073
+  },
+  "straddle_minus_the_deployed_detector": {
+   "mean": 1.4e-05,
+   "n_splits_positive": 5,
+   "n_splits": 12,
+   "paired_se": 0.000479,
+   "ci95": [
+    -0.000925,
+    0.000953
+   ],
+   "crosses_zero": true,
+   "sign_test_p_one_sided": 0.8062
+  },
+  "beats_union_above_the_reseed_floor": false,
+  "beats_the_more_old_control": true,
+  "prediction": {
+   "recorded": "docs/AGENT_MEMORY.md 2d, in the commit that measured the cross term, before this tool existed",
+   "reseed_floor": 0.0026,
+   "supports_the_mechanism": "straddle minus union above the reseed floor, and straddle minus narrow positive for composition 76",
+   "ends_the_screening_programme": "straddle minus union at or below the reseed floor: two statistics will have ordered the families and neither moved a number",
+   "third_outcome_the_control_exists_for": "straddle above union but not above more_old, which would make the lift bank size and not the crossing"
+  },
+  "the_reading": "the cross term does not survive being acted on. It ordered the families and moving the attachment to use it changes nothing above the reseed floor, which makes it a correlate exactly as the internal statistic was. Two statistics have now ordered these families and neither has moved a number: stop screening families and say so",
+  "what_the_two_comparisons_say_together": "straddle minus union is the mechanism question and straddle minus narrow is the one that decides whether anything ships. A positive first with a zero second means the attachment was costing something and the crossing recovers exactly that cost, which is a real effect and not a gain: the detector is no better than it was before the family was added at all"
+ },
+ "per_split": {
+  "union": [
+   0.803454,
+   0.785359,
+   0.786763,
+   0.788949,
+   0.791224,
+   0.785366,
+   0.798107,
+   0.78925,
+   0.791158,
+   0.783116,
+   0.80629,
+   0.762085
+  ],
+  "straddle": [
+   0.803035,
+   0.787533,
+   0.790282,
+   0.789461,
+   0.792764,
+   0.788122,
+   0.796284,
+   0.789999,
+   0.791621,
+   0.785289,
+   0.804627,
+   0.762589
+  ],
+  "more_old": [
+   0.802119,
+   0.786602,
+   0.78505,
+   0.788583,
+   0.790354,
+   0.787562,
+   0.799657,
+   0.788875,
+   0.791493,
+   0.785133,
+   0.805332,
+   0.762939
+  ]
+ },
+ "per_split_narrow_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ]
+}

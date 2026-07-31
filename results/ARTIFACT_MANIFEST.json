@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 58,
-    "exploration": 34,
+    "exploration": 35,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 126,
+  "n_artifacts": 127,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -425,6 +425,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.sensitivity_sweep.v1",
       "bytes": 6060
+    },
+    {
+      "artifact": "results/architecture_sweep/STRADDLING_ATTACHMENT.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 5958
     },
     {
       "artifact": "results/architecture_sweep/TABLE_WIDTH.json",

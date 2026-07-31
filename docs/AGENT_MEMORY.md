@@ -166,10 +166,11 @@ eight at or past their optimum, and it exhausts the readout. Anything further ha
 to change the wires — what a table reads — not how the tables are built,
 addressed, chosen, weighted, subdivided or shaped.
 
-## 2c. The wires, which is the only axis left, and what is known about them
+## 2c. The wires, which were the only axis left, and are now closed too
 
 Four column families now have both a counting-field lift and a linear-solve lift on
-the same twelve splits under the same gate. Read this before proposing a fifth.
+the same twelve splits under the same gate, and §2d has since measured the third and
+last attachment. **The axis is closed; read §2d before proposing a fifth family.**
 
 | family | mean pairwise interaction | field | solve |
 |---|---|---|---|
@@ -276,20 +277,39 @@ cannot separate those, and **this statistic was computed after the lifts were kn
 which is the same mistake the internal statistic made. It is a correlate until an
 experiment moves the mechanism rather than another family being screened by it.
 
-**The experiment that moves it, and its prediction, recorded before it is run.**
-A third attachment: keep all 5,152 old tables unchanged, and add tables that each
-pair one deployed wire with one new column. Never built here — `rg straddl` finds
-only prose. Run on composition 76, whose straddling interaction is the highest of
-the families with a measured lift.
+**The experiment that moves it — run, and it closes the axis.**
+A third attachment, never built here before: keep all 5,152 old tables unchanged and
+add 608 tables that each pair one deployed wire with one new column, matched in count
+to what the union arm adds, on composition 76. Twelve cluster-disjoint splits, a
+`more_old` control adding the same 608 tables over the deployed wires with the family
+absent, and the preregistered criterion above (`STRADDLING_ATTACHMENT.json`):
 
-- If the synergy is reachable, straddling beats the union arm by more than the
-  0.0026 reseed floor, and composition's −0.0009 turns positive.
-- If it does not, the cross term joins the internal one as a correlate and the whole
-  screening programme is over: two statistics will have ordered the families and
-  neither will have moved a number. **Say so and stop screening.**
-- Secondary, same run: graph invariants 15 carries the highest cross term of all
-  (+1.93e-05) over only 9,675 pairs, so if the mechanism is real it should give the
-  largest lift per added table of any family here.
+| comparison | mean | 95 % | splits | sign-test p |
+|---|---|---|---|---|
+| union − deployed | **−0.00086** | [−0.00150, −0.00022] | 2/12 | — |
+| straddle − union | +0.00087 | [−0.00006, +0.00181] | 9/12 | 0.073 |
+| straddle − `more_old` | +0.00066 | [−0.00047, +0.00179] | 9/12 | 0.073 |
+| **straddle − deployed** | **+0.00001** | [−0.00093, +0.00095] | 5/12 | 0.806 |
+
+**The mechanism is real and the size of it is nothing.** Straddling is above the union
+arm on 9 of 12 and above the control on 9 of 12, so the direction the cross term
+predicted is not noise — but both intervals cross zero, both are a third of the 0.0026
+reseed floor, and the preregistered criterion asked for more than the floor. The
+decisive row is the last one. The union attachment genuinely costs −0.00086, the one
+comparison here whose interval excludes zero; straddling recovers **exactly** that
+cost and lands at +0.00001 against the deployed detector. The crossing was worth
+having only because the attachment was throwing it away. There is no gain.
+
+**So the wire axis is closed, by the same standard as the other eight.** Four families
+and now all three attachments have been measured. Nothing moves the deployed detector.
+Two statistics ordered the families — internal interaction, then cross interaction —
+and neither moved a number when acted on. **Stop screening families.** Proposing a
+fifth needs a reason that is not an interaction statistic, and proposing a fourth
+attachment needs one that is not "the tables sit somewhere else".
+
+Keep the size in view: the largest effect anywhere on this axis is +0.0010, and the
+pLM-NN deficit is **0.0243**, twenty-four times it. That gap is not an attachment
+problem and it was never plausible that it was.
 
 ## 3. What is open, and why each is thought to be open
 
