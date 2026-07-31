@@ -26,6 +26,11 @@
    "sha256": "8461e0f5e0573b91c833039e3ee69ad9b9d783028ebe95a3fc5d8fb524a2c72f",
    "bytes": 196901,
    "caption": "Training-fold disagreements between the counting field and the two published baselines it can be compared against there, in both directions. Left: every one of the 769 units as one point, our within-unit ROC-AUC against the better of P2Rank and PocketMiner on that same unit. The green corner is the rule fixed before the counts were read \u2014 ours \u2265 0.80 with both baselines \u2264 0.55, chance being 0.50 \u2014 and the red corner is its mirror, which holds 0 units. 4 units are named; 4m7p_A is drawn hollow and not counted in that joint rule because its deposit is a twenty-conformer ensemble and not every baseline parses it alike \u2014 against P2Rank alone both score the same 390 residues (0.918 vs 0.439), reported separately as a training-fold case study. Right: the same two counts at eight strictness settings, reported whole because one row of a ladder is a choice. pLM-NN is absent: it has never been run on the training fold, so this compares against two baselines and not three. Exploratory, training fold only, no test-fold read."
+  },
+  "fig_four_recoveries.png": {
+   "sha256": "b46c3d7a6b98a0e0a1ddf53d3765a001f4576aa32ff7d90c52af20986ea04687",
+   "bytes": 169083,
+   "caption": "Four clean recoveries on the training fold, not hundreds. Left: the 4 units where the counting field scores within-unit ROC-AUC \u2265 0.80 while both P2Rank and PocketMiner sit \u2264 0.55 (chance 0.50), out of 769 units where all three methods are defined. Each unit shows all three scores; the dashed lines are the two cuts fixed before the counts were read. Right: the mirror under the same rule is empty (0 units), and 4m7p_A is shown only against P2Rank \u2014 0.918 vs 0.439 on the same 390 residues \u2014 as a training-fold case study, not one of the four. Exploratory, training fold only; pLM-NN is absent; clinical_grade is false."
   }
  }
 }
