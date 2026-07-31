@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 61,
-    "exploration": 41,
+    "exploration": 43,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 136,
+  "n_artifacts": 138,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -68,6 +68,20 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.straddling_attachment.v1",
       "bytes": 3656
+    },
+    {
+      "artifact": "results/architecture_sweep/BACKBONE_WIDE_LIFT.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 3647
+    },
+    {
+      "artifact": "results/architecture_sweep/BACKBONE_WIDE_PERMUTED_LIFT.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 3669
     },
     {
       "artifact": "results/architecture_sweep/BACKBONE_WIRES_LIFT.json",

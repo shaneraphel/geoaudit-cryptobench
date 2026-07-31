@@ -83,22 +83,31 @@ def _place(a: np.ndarray, b: np.ndarray, c: np.ndarray,
     return c + d @ m
 
 
-def ideal_peptide(n: int, phi: float, psi: float, omega: float = 180.0
+def ideal_peptide(n: int, phi, psi, omega: float = 180.0
                   ) -> dict[str, np.ndarray]:
-    """A backbone with every residue at the same (phi, psi)."""
+    """A backbone built forwards from internal coordinates.
+
+    ``phi`` and ``psi`` may each be a number, giving every residue the same
+    conformation, or a sequence of ``n`` numbers, which is how a chain with a
+    helix joined to a strand is built.
+    """
+    phis = [float(phi)] * n if np.isscalar(phi) else [float(v) for v in phi]
+    psis = [float(psi)] * n if np.isscalar(psi) else [float(v) for v in psi]
     N = [np.array([0.0, 0.0, 0.0])]
     CA = [np.array([BOND["N_CA"], 0.0, 0.0])]
     C = [CA[0] + np.array([BOND["CA_C"] * np.cos(np.radians(180 - ANGLE["N_CA_C"])),
                            BOND["CA_C"] * np.sin(np.radians(180 - ANGLE["N_CA_C"])),
                            0.0])]
-    for _ in range(n - 1):
-        N.append(_place(N[-1], CA[-1], C[-1], BOND["C_N"], ANGLE["CA_C_N"], psi))
+    for k in range(n - 1):
+        N.append(_place(N[-1], CA[-1], C[-1], BOND["C_N"], ANGLE["CA_C_N"],
+                        psis[k]))
         CA.append(_place(CA[-1], C[-1], N[-1], BOND["N_CA"], ANGLE["C_N_CA"],
                          omega))
-        C.append(_place(C[-1], N[-1], CA[-1], BOND["CA_C"], ANGLE["N_CA_C"], phi))
+        C.append(_place(C[-1], N[-1], CA[-1], BOND["CA_C"], ANGLE["N_CA_C"],
+                        phis[k + 1]))
     N, CA, C = np.array(N), np.array(CA), np.array(C)
     O = np.array([_place(N[i], CA[i], C[i], BOND["C_O"], ANGLE["CA_C_O"],
-                         psi + 180.0) for i in range(n)])
+                         psis[i] + 180.0) for i in range(n)])
     return as_chain(CA, N=N, C=C, O=O)
 
 
@@ -406,6 +415,255 @@ class TestConsistencyCatchesWhatItClaimsTo(unittest.TestCase):
 
     def test_a_clean_array_reports_nothing(self) -> None:
         self.assertEqual(bg.consistency(self._clean()), [])
+
+
+COL = {n: j for j, n in enumerate(bg.COLUMNS)}
+HELIX = (-57.0, -47.0)
+STRAND = (-139.0, 135.0)
+
+
+def _deg(x: np.ndarray, cos_name: str, sin_name: str) -> np.ndarray:
+    return np.degrees(np.arctan2(x[:, COL[sin_name]], x[:, COL[cos_name]]))
+
+
+class TestTheExpansionIsAdditive(unittest.TestCase):
+    """The first thirteen quantities are the family already measured."""
+
+    def test_the_original_block_comes_first_and_is_unchanged(self) -> None:
+        self.assertEqual(
+            bg.COLUMNS[:bg.N_ORIGINAL_COLUMNS],
+            ("rama_region", "cos_phi", "sin_phi", "cos_psi", "sin_psi",
+             "ca_turn", "cos_ca_tor", "sin_ca_tor", "hb_donated",
+             "hb_accepted", "hb_lag", "cb_radial", "ca_density"))
+
+    def test_every_column_is_named_once(self) -> None:
+        self.assertEqual(len(set(bg.COLUMNS)), bg.N_COLUMNS)
+
+
+class TestTheSequenceNeighbourhood(unittest.TestCase):
+
+    def test_a_trans_peptide_bond_reads_180(self) -> None:
+        x = bg.compute(ideal_peptide(8, *HELIX, omega=180.0))
+        w = _deg(x, "cos_omega", "sin_omega")[1:]
+        self.assertTrue(np.all(np.abs(np.abs(w) - 180.0) < 0.5), w)
+
+    def test_a_cis_peptide_bond_reads_zero(self) -> None:
+        """A cis bond is rare, is nearly always proline, and is not noise."""
+        x = bg.compute(ideal_peptide(8, *HELIX, omega=0.0))
+        w = _deg(x, "cos_omega", "sin_omega")[1:]
+        self.assertTrue(np.all(np.abs(w) < 0.5), w)
+
+    def test_the_torus_diagonals_are_the_sum_and_difference(self) -> None:
+        x = bg.compute(ideal_peptide(10, *HELIX))
+        phi = _deg(x, "cos_phi", "sin_phi")[1:-1]
+        psi = _deg(x, "cos_psi", "sin_psi")[1:-1]
+        s = _deg(x, "cos_phi_plus_psi", "sin_phi_plus_psi")[1:-1]
+        d = _deg(x, "cos_phi_minus_psi", "sin_phi_minus_psi")[1:-1]
+        wrap = lambda a: ((a + 180) % 360) - 180  # noqa: E731
+        self.assertTrue(np.all(np.abs(wrap(s - (phi + psi))) < 0.1))
+        self.assertTrue(np.all(np.abs(wrap(d - (phi - psi))) < 0.1))
+
+    def test_a_uniform_conformation_gives_a_long_run(self) -> None:
+        x = bg.compute(ideal_peptide(20, *HELIX))
+        self.assertTrue(np.all(x[2:-2, COL["rama_run"]] == bg.RUN_CAP))
+
+    def test_a_junction_shortens_the_run_and_is_found(self) -> None:
+        """A helix joined to a strand: the run breaks exactly at the join."""
+        n = 20
+        phi = [HELIX[0]] * 10 + [STRAND[0]] * 10
+        psi = [HELIX[1]] * 10 + [STRAND[1]] * 10
+        x = bg.compute(ideal_peptide(n, phi, psi))
+        cell = x[:, COL["rama_region"]]
+        self.assertIn(bg.RAMA_ALPHA_R, cell)
+        self.assertIn(bg.RAMA_BETA, cell)
+        change = int(np.flatnonzero(np.diff(cell) != 0)[-1]) + 1
+        self.assertLess(x[change - 1, COL["dist_to_cell_change"]],
+                        bg.RUN_CAP)
+        self.assertLess(x[change - 1, COL["rama_run"]], bg.RUN_CAP)
+
+    def test_the_previous_and_next_cells_are_the_neighbours(self) -> None:
+        x = bg.compute(ideal_peptide(12, *HELIX))
+        cell = x[:, COL["rama_region"]]
+        self.assertTrue(np.array_equal(x[1:, COL["rama_prev"]], cell[:-1]))
+        self.assertTrue(np.array_equal(x[:-1, COL["rama_next"]], cell[1:]))
+
+
+class TestTheCaTraceSpans(unittest.TestCase):
+    """span5 near 6.2 in a helix and near 13 in a strand is the classic split."""
+
+    def test_the_helix_and_the_strand_are_far_apart(self) -> None:
+        h = bg.compute(ideal_peptide(16, *HELIX))[3:-3, COL["ca_span5"]]
+        s = bg.compute(ideal_peptide(16, *STRAND))[3:-3, COL["ca_span5"]]
+        self.assertTrue(np.all(h < 7.5), h)
+        self.assertTrue(np.all(s > 12.0), s)
+        self.assertGreater(s.mean() / h.mean(), 1.8)
+
+    def test_the_longer_span_separates_them_too(self) -> None:
+        h = bg.compute(ideal_peptide(16, *HELIX))[4:-4, COL["ca_span7"]]
+        s = bg.compute(ideal_peptide(16, *STRAND))[4:-4, COL["ca_span7"]]
+        self.assertTrue(np.all(h < 12.0) and np.all(s > 18.0))
+
+    def test_the_edge_is_a_ca_to_ca_step(self) -> None:
+        x = bg.compute(ideal_peptide(10, *HELIX))
+        e = x[:-1, COL["ca_edge"]]
+        self.assertTrue(np.all(np.abs(e - 3.8) < 0.15), e)
+
+    def test_the_tetrahedron_volume_flips_under_reflection(self) -> None:
+        """The one quantity in group B that can see handedness."""
+        bbb = ideal_peptide(12, *HELIX)
+        v = bg.compute(bbb)[3:-3, COL["ca_tetra_volume"]]
+        mirrored = {k: a.copy() for k, a in bbb.items()}
+        for k in mirrored:
+            mirrored[k][:, 2] *= -1.0
+        w = bg.compute(mirrored)[3:-3, COL["ca_tetra_volume"]]
+        self.assertTrue(np.allclose(v, -w, atol=1e-6))
+        self.assertGreater(np.abs(v).min(), 1e-3)
+
+
+class TestSatisfiedAndUnsatisfiedPolarGroups(unittest.TestCase):
+
+    def test_the_helix_donates_backwards(self) -> None:
+        """i to i-4. A positive lag here would mean the sign is inverted."""
+        x = bg.compute(ideal_peptide(16, *HELIX))
+        s = x[:, COL["hb_lag_signed"]]
+        s = s[s != 0]
+        self.assertGreater(len(s), 4)
+        self.assertTrue(np.all(s < 0), s)
+
+    def test_the_signed_and_unsigned_lags_agree(self) -> None:
+        x = bg.compute(ideal_peptide(16, *HELIX))
+        self.assertTrue(np.allclose(np.abs(x[:, COL["hb_lag_signed"]]),
+                                    x[:, COL["hb_lag"]]))
+
+    def test_an_unsatisfied_donor_is_not_just_the_absence_of_a_bond(self) -> None:
+        """The distance to the nearest carbonyl carries what the flag cannot.
+
+        A nitrogen with a carbonyl at 3.4 A that points the wrong way and one
+        with nothing inside 8 A both fail the bond test. The second is a buried
+        unsatisfied donor, which is a position with nothing to hydrogen bond to;
+        the first is not. If this column were 1 minus hb_donated it would be a
+        re-encoding, which AGENT_MEMORY 2i closed.
+        """
+        x = bg.compute(ideal_peptide(16, *HELIX))
+        d = x[:, COL["n_nearest_acceptor"]]
+        no_bond = x[:, COL["hb_donated"]] == 0
+        self.assertGreater(len(np.unique(np.round(d[no_bond], 2))), 1,
+                           "every unbonded nitrogen has the same nearest "
+                           "acceptor distance, so the column carries nothing "
+                           "the flag does not")
+
+    def test_the_chain_end_has_the_farthest_acceptor(self) -> None:
+        x = bg.compute(ideal_peptide(16, *HELIX))
+        d = x[:, COL["n_nearest_acceptor"]]
+        self.assertGreater(d[0], d[8])
+
+    def test_the_window_count_is_largest_inside_the_helix(self) -> None:
+        x = bg.compute(ideal_peptide(20, *HELIX))
+        w = x[:, COL["hb_window_count"]]
+        self.assertGreater(w[10], w[0])
+        self.assertGreater(w[10], w[-1])
+
+
+class TestPackingLocalAgainstTertiary(unittest.TestCase):
+
+    def test_density_is_monotone_in_the_radius(self) -> None:
+        x = bg.compute(ideal_peptide(24, *HELIX))
+        self.assertTrue(np.all(x[:, COL["ca_density_6"]]
+                               <= x[:, COL["ca_density"]]))
+        self.assertTrue(np.all(x[:, COL["ca_density"]]
+                               <= x[:, COL["ca_density_12"]]))
+
+    def test_a_single_helix_has_no_tertiary_contacts(self) -> None:
+        """Everything within 8 A of a lone helix is within 8 in sequence."""
+        x = bg.compute(ideal_peptide(24, *HELIX))
+        self.assertTrue(np.all(x[:, COL["ca_longrange"]] == 0))
+        self.assertTrue(np.all(x[:, COL["ca_seq_span"]] <= bg.LONG_RANGE_LAG))
+
+    def test_a_hairpin_creates_them(self) -> None:
+        """Two strands folded back on each other are in contact at long lag."""
+        bbb = ideal_peptide(30, *STRAND)
+        ca = bbb["CA"].copy()
+        ca[15:] = ca[:15][::-1] + np.array([0.0, 5.0, 0.0])
+        bent = {k: a.copy() for k, a in bbb.items()}
+        bent["CA"] = ca
+        x = bg.compute(bent)
+        self.assertGreater(x[:, COL["ca_longrange"]].max(), 0)
+        self.assertGreater(x[:, COL["ca_seq_span"]].max(), bg.LONG_RANGE_LAG)
+
+
+class TestSideChainDirectionWithoutIdentity(unittest.TestCase):
+
+    def test_the_direction_cosines_are_cosines(self) -> None:
+        x = bg.compute(ideal_peptide(16, *HELIX))
+        for name in ("cb_tangent", "cb_binormal", "cb_radial"):
+            v = x[:, COL[name]]
+            self.assertTrue(np.all(np.abs(v) <= 1.0 + 1e-9), name)
+
+    def test_the_hemisphere_count_never_exceeds_the_ball(self) -> None:
+        x = bg.compute(ideal_peptide(24, *HELIX))
+        self.assertTrue(np.all(x[:, COL["cb_hemisphere"]]
+                               <= x[:, COL["cb_density"]] + 1))
+
+    def test_the_helix_points_its_side_chains_outward(self) -> None:
+        """A lone helix has every CB on the outside of its own axis."""
+        x = bg.compute(ideal_peptide(24, *HELIX))
+        self.assertGreater(float(np.median(x[2:-2, COL["cb_radial"]])), 0.0)
+
+
+class TestChainBreaksDoNotFabricateNeighbours(unittest.TestCase):
+
+    def _broken(self) -> dict[str, np.ndarray]:
+        bbb = ideal_peptide(16, *HELIX)
+        out = {k: a.copy() for k, a in bbb.items()}
+        for k in out:
+            out[k][8:] += np.array([80.0, 0.0, 0.0])
+        return out
+
+    def test_the_cell_of_a_neighbour_across_a_break_is_not_read(self) -> None:
+        x = bg.compute(self._broken())
+        self.assertEqual(x[8, COL["rama_prev"]], bg.RAMA_OTHER)
+        self.assertEqual(x[7, COL["rama_next"]], bg.RAMA_OTHER)
+
+    def test_a_span_is_not_measured_across_a_break(self) -> None:
+        x = bg.compute(self._broken())
+        self.assertEqual(x[7, COL["ca_span5"]], 0.0)
+        self.assertEqual(x[8, COL["ca_span5"]], 0.0)
+
+    def test_the_run_stops_at_the_break(self) -> None:
+        x = bg.compute(self._broken())
+        self.assertLessEqual(x[7, COL["rama_run"]], 8)
+
+    def test_consistency_passes_on_a_broken_chain(self) -> None:
+        self.assertEqual(bg.consistency(bg.compute(self._broken())), [])
+
+
+class TestConsistencyCoversTheExpansion(unittest.TestCase):
+
+    def test_a_signed_lag_disagreeing_with_the_unsigned_one_is_caught(self) -> None:
+        x = np.zeros((4, bg.N_COLUMNS))
+        x[1, COL["hb_lag_signed"]] = -4.0
+        x[1, COL["hb_lag"]] = 3.0
+        self.assertTrue(any("disagree about the same bond" in m
+                            for m in bg.consistency(x)))
+
+    def test_non_monotone_density_is_caught(self) -> None:
+        x = np.zeros((4, bg.N_COLUMNS))
+        x[0, COL["ca_density_6"]] = 5.0
+        self.assertTrue(any("exceeds ca_density" in m
+                            for m in bg.consistency(x)))
+
+    def test_a_bond_with_no_carbonyl_nearby_is_caught(self) -> None:
+        x = np.zeros((4, bg.N_COLUMNS))
+        x[2, COL["hb_donated"]] = 1.0
+        x[2, COL["hb_lag"]] = 4.0
+        x[2, COL["hb_lag_signed"]] = -4.0
+        self.assertTrue(any("no carbonyl near its nitrogen" in m
+                            for m in bg.consistency(x)))
+
+    def test_an_out_of_range_cell_label_is_caught(self) -> None:
+        x = np.zeros((4, bg.N_COLUMNS))
+        x[0, COL["rama_prev"]] = 9.0
+        self.assertTrue(any("rama_prev leaves" in m for m in bg.consistency(x)))
 
 
 if __name__ == "__main__":

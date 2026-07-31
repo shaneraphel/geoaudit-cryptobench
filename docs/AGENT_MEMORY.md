@@ -746,6 +746,60 @@ recomputed centroids against the cache's row by row: **agreement is exact,
 the first insertion code would have been attached to the wrong residue and
 nothing would have raised.
 
+## 2j-bis. Expanding the backbone family doubled it, and the permutation went negative
+
+Thirteen quantities was the conservative version. Forty-four is the same axis
+taken seriously, and the answer scales with it.
+
+`BACKBONE_WIDE_LIFT.json` and `BACKBONE_WIDE_PERMUTED_LIFT.json`, same twelve
+halvings, same attachment, 132 columns against the earlier 39. The expansion is
+**strictly additive**: the first thirteen quantities produce bit-identical
+columns before and after, checked against the retained old cache, so §2j remains
+a statement about a subset of this family rather than about a different one.
+
+| comparison | mean | 95% CI | splits | sign p |
+|---|---|---|---|---|
+| backbone 132 − deployed | **+0.00441** | [+0.00331, +0.00551] | **12/12** | 2.0e-04 |
+| **backbone 132 − row-permuted** | **+0.00654** | [+0.00506, +0.00801] | **12/12** | 2.4e-04 |
+| row-permuted − deployed | **−0.00213** | [−0.00365, −0.00061] | 3/12 | — |
+| `more_old` control − deployed | −0.00014 | [−0.00131, +0.00103] | 6/12 | — |
+
+Three things worth keeping.
+
+**The permutation now goes negative.** At 39 columns it was −0.0007 and crossed
+zero; at 132 it is −0.0021 and does not. Columns of this shape, attached to the
+wrong residue, are *worse than nothing* — they cost cells and carry noise. That
+is the sharpest available statement that the +0.0044 is the backbone
+conformation of the residue being scored and not the shape of a column.
+
+**Adding tables is still worth nothing.** `more_old` adds the same 1,056 tables
+from the deployed wires and lands at −0.00014 crossing zero, on the same splits
+where the family gains 0.0044. Cell budget is not the mechanism.
+
+**The axis scales.** Thirteen quantities gave +0.00196; forty-four give +0.00441.
+Two points do not make a law and §2c's table is the standing warning about
+reading a trend off two measurements, but the axis is plainly not exhausted, and
+the expansion cost one afternoon of reasoning and 26 seconds of rebuild.
+
+**Where this leaves the deficit, stated without decoration.** pLM-NN is ahead by
+0.0243 on the official fold and 0.0340 externally. The gate radius is worth
++0.0025 and this is worth +0.0044; if they add, which is unmeasured, that is
++0.0069, or **28% of the official-fold deficit**. It is the largest honest number
+this line of work has produced and it is not a win. Nothing here has been
+deployed, and deploying either makes `EXTERNAL_READ.json`'s +0.0443 a result
+about a detector that no longer exists.
+
+**What is on the same rule and not yet built.** §2i's question is whether a family
+reads bytes the pipeline throws away. Side-chain *conformation* does: the centroid
+of a residue's heavy atoms does not determine χ₁, so a leucine in gauche⁺ and one
+in trans are different geometry with identical identity, and rotamer strain is a
+recognised signature of a site that opens. That family is torsions, rotamer bins
+as combinatorial labels, strain against the nearest canonical rotamer, the
+direction and burial of the terminal atom, an identity-normalised extension
+ratio, and atom-level rather than residue-level packing counts. None of those is
+a function of residue type, which is the test §2i imposes and the test chemistry
+42 failed.
+
 ## 2k. The ledger was under-counting, and a gate that greps one spelling grades spelling
 
 Not a measurement of the method — a measurement of the accounting, and it found
@@ -1174,7 +1228,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 701 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 732 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

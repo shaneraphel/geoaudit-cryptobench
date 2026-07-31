@@ -28,7 +28,13 @@ The quantities, and why each is its own thing
 ---------------------------------------------
 A family whose members are near-duplicates cannot be told apart from a family
 that is simply larger, so these are chosen to be different kinds of measurement
-rather than thirteen versions of one:
+rather than forty-four versions of one. Forty-four is the count after the
+expansion; the first thirteen are listed here and are the block measured in
+``BACKBONE_WIRES_LIFT.json``, and the six groups after them are described where
+they are computed, in ``_expand``. The expansion is strictly additive: the first
+thirteen columns are bit-identical before and after it, so the earlier
+measurement remains a statement about a subset of this family and not about a
+different one.
 
 ``rama_region``       a combinatorial label. The Ramachandran torus is partitioned
                       into four named cells -- right-handed helical, extended,
@@ -119,7 +125,21 @@ HBOND_LAG_CAP = 30          # beyond this the lag is "far" and the value saturat
 CA_DENSITY_RADIUS = 8.0     # angstrom
 CB_BOND = 1.53              # angstrom, CA to CB
 
+RUN_CAP = 12                # residues; a helix longer than this is "long"
+WINDOW = 4                  # residues each side, one alpha turn
+SEQ_SPAN_CAP = 60           # residues; beyond this a contact is simply "distant"
+DIST_CAP = 8.0              # angstrom; the ceiling for a nearest-partner distance
+CA_RADII = (6.0, 8.0, 12.0)
+LONG_RANGE_LAG = 8          # |i-j| above which a contact is tertiary, not local
+
+# The first thirteen are the family measured in BACKBONE_WIRES_LIFT.json and
+# their order is fixed so that a rebuild reproduces that column block exactly.
+# Everything after them is the expansion, and it is grouped by *kind* of
+# measurement rather than by convenience: a family whose members are near
+# duplicates cannot be told apart from a family that is merely larger, which is
+# the rule five null families produced.
 COLUMNS = (
+    # torsion and conformation
     "rama_region",
     "cos_phi", "sin_phi",
     "cos_psi", "sin_psi",
@@ -128,8 +148,26 @@ COLUMNS = (
     "hb_donated", "hb_accepted", "hb_lag",
     "cb_radial",
     "ca_density",
+    # A. the conformation of the neighbourhood in sequence, not in space
+    "cos_omega", "sin_omega",
+    "cos_phi_plus_psi", "sin_phi_plus_psi",
+    "cos_phi_minus_psi", "sin_phi_minus_psi",
+    "rama_prev", "rama_next",
+    "rama_run", "rama_variety", "dist_to_cell_change",
+    # B. discrete differential geometry of the CA trace
+    "ca_span5", "ca_span7", "ca_tetra_volume", "ca_edge",
+    # C. hydrogen bonding: saturation, direction, and what is unsatisfied
+    "hb_lag_signed", "hb_accept_lag", "hb_window_count",
+    "n_nearest_acceptor", "o_nearest_donor", "hb_carbonyls_near_n",
+    # D. where the side chain points, without asking which side chain it is
+    "cb_tangent", "cb_binormal", "cb_density", "cb_hemisphere",
+    # E. packing split into the local and the tertiary
+    "ca_density_6", "ca_density_12", "ca_longrange", "ca_seq_span",
+    # F. the peptide plane
+    "plane_radial", "plane_twist",
 )
 N_COLUMNS = len(COLUMNS)
+N_ORIGINAL_COLUMNS = 13
 
 BACKBONE_ATOMS = ("N", "CA", "C", "O")
 
@@ -205,6 +243,298 @@ def chain_backbone(atoms: list[dict], resseq_order: list[tuple[int, str]]
 def _bonded(c: np.ndarray, nxt_n: np.ndarray) -> np.ndarray:
     d = np.linalg.norm(nxt_n - c, axis=-1)
     return np.isfinite(d) & (d <= PEPTIDE_BOND_MAX)
+
+
+def _segments(link: np.ndarray, n: int) -> np.ndarray:
+    """A segment label per residue; a chain break starts a new one.
+
+    Every sequence-local quantity below is computed inside a segment. Reading a
+    previous residue's conformation across a break would describe two pieces of
+    protein that are not joined, and on a chain with three gaps that is three
+    fabricated neighbours rather than a rounding error.
+    """
+    seg = np.zeros(n, dtype=np.int64)
+    for i in range(1, n):
+        seg[i] = seg[i - 1] + (0 if (i - 1 < len(link) and link[i - 1]) else 1)
+    return seg
+
+
+def _shift(v: np.ndarray, k: int, seg: np.ndarray, fill: float) -> np.ndarray:
+    """``v`` moved ``k`` places along the chain, neutral across a break."""
+    n = len(v)
+    out = np.full(n, fill, dtype=np.float64)
+    idx = np.arange(n)
+    src = idx - k
+    ok = (src >= 0) & (src < n)
+    ok[ok] &= seg[src[ok]] == seg[idx[ok]]
+    out[ok] = v[src[ok]]
+    return out
+
+
+def _expand(out: np.ndarray, col: dict, N, CA, C, O, cb, link) -> None:
+    """The thirty-one quantities beyond the first thirteen.
+
+    Grouped by kind rather than by convenience, because a family of near
+    duplicates is indistinguishable from a family that is merely bigger. Each
+    group answers a different question about the same backbone:
+
+    A. what conformation do the residues *next to this one in sequence* have,
+       which is what turns a residue in helical conformation into a helix;
+    B. what does the CA trace do over four and six steps, which is the classic
+       discriminator between a helix (span5 near 6.2 A) and a strand (near 13);
+    C. which backbone polar groups are satisfied and which are not, since an
+       unsatisfied buried donor or carbonyl is a position that has nothing to
+       hydrogen bond to and is a recognised signature of a site that opens;
+    D. where the side chain points, asked of the backbone rather than of the
+       residue's identity, which AGENT_MEMORY 2i closed as a source of anything
+       new;
+    E. packing split into the local and the tertiary, because a residue packed
+       by its own helix and one packed by a distant strand have the same
+       neighbour count and are not in the same situation;
+    F. the peptide plane, whose orientation is the one backbone degree of
+       freedom that neither torsion captures.
+    """
+    n = len(CA)
+    seg = _segments(link, n)
+    fin = lambda a: np.isfinite(a).all(1)  # noqa: E731
+
+    # --- A. conformation in the sequence neighbourhood -----------------------
+    # omega is the torsion of the peptide bond *preceding* this residue, the
+    # same convention phi follows, so a cis-proline shows on the residue whose
+    # bond is cis rather than on its predecessor.
+    if n > 1:
+        ok = link & fin(CA[:-1]) & fin(C[:-1]) & fin(N[1:]) & fin(CA[1:])
+        i = np.flatnonzero(ok)
+        if len(i):
+            cs, sn = _dihedral(CA[i], C[i], N[i + 1], CA[i + 1])
+            out[i + 1, col["cos_omega"]] = cs
+            out[i + 1, col["sin_omega"]] = sn
+
+    # The torus has two natural diagonals. phi+psi separates the extended region
+    # from the helical one along a different axis from either angle alone, and
+    # under a rank quantiser that is a different partition of the same points,
+    # not a relabelling of it.
+    cph, sph = out[:, col["cos_phi"]], out[:, col["sin_phi"]]
+    cps, sps = out[:, col["cos_psi"]], out[:, col["sin_psi"]]
+    live = (np.hypot(cph, sph) > 0.5) & (np.hypot(cps, sps) > 0.5)
+    out[live, col["cos_phi_plus_psi"]] = (cph * cps - sph * sps)[live]
+    out[live, col["sin_phi_plus_psi"]] = (sph * cps + cph * sps)[live]
+    out[live, col["cos_phi_minus_psi"]] = (cph * cps + sph * sps)[live]
+    out[live, col["sin_phi_minus_psi"]] = (sph * cps - cph * sps)[live]
+
+    cell = out[:, col["rama_region"]]
+    out[:, col["rama_prev"]] = _shift(cell, 1, seg, RAMA_OTHER)
+    out[:, col["rama_next"]] = _shift(cell, -1, seg, RAMA_OTHER)
+
+    # How long the run of this conformation is, and how far the nearest change
+    # sits. A helix is a run; a single residue in helical conformation inside a
+    # loop is not, and no per-residue torsion can tell them apart.
+    run = np.ones(n, dtype=np.float64)
+    dist = np.full(n, float(RUN_CAP), dtype=np.float64)
+    for i in range(n):
+        same = 1
+        for d in (1, -1):
+            j = i + d
+            while (0 <= j < n and seg[j] == seg[i] and cell[j] == cell[i]
+                   and same < RUN_CAP):
+                same += 1
+                j += d
+            k = i + d
+            step = 1
+            while 0 <= k < n and seg[k] == seg[i] and step <= RUN_CAP:
+                if cell[k] != cell[i]:
+                    dist[i] = min(dist[i], step)
+                    break
+                k += d
+                step += 1
+        run[i] = min(same, RUN_CAP)
+    out[:, col["rama_run"]] = run
+    out[:, col["dist_to_cell_change"]] = dist
+
+    lo = np.maximum(np.arange(n) - 2, 0)
+    hi = np.minimum(np.arange(n) + 3, n)
+    out[:, col["rama_variety"]] = [
+        len({cell[k] for k in range(lo[i], hi[i]) if seg[k] == seg[i]})
+        for i in range(n)]
+
+    # --- B. the CA trace over four and six steps ----------------------------
+    okca = fin(CA)
+    for k, name in ((2, "ca_span5"), (3, "ca_span7")):
+        if n > 2 * k:
+            i = np.arange(k, n - k)
+            good = okca[i - k] & okca[i + k] & (seg[i - k] == seg[i + k])
+            j = i[good]
+            if len(j):
+                out[j, col[name]] = np.linalg.norm(CA[j + k] - CA[j - k],
+                                                   axis=1)
+    if n > 4:
+        i = np.arange(2, n - 2)
+        good = (okca[i - 2] & okca[i - 1] & okca[i + 1] & okca[i + 2]
+                & (seg[i - 2] == seg[i + 2]))
+        j = i[good]
+        if len(j):
+            a, b, c = CA[j - 1] - CA[j - 2], CA[j + 1] - CA[j - 2], \
+                CA[j + 2] - CA[j - 2]
+            out[j, col["ca_tetra_volume"]] = (
+                np.einsum("ij,ij->i", a, np.cross(b, c)) / 6.0)
+    if n > 1:
+        i = np.arange(n - 1)
+        good = okca[i] & okca[i + 1] & (seg[i] == seg[i + 1])
+        j = i[good]
+        if len(j):
+            out[j, col["ca_edge"]] = np.linalg.norm(CA[j + 1] - CA[j], axis=1)
+
+    # --- C. hydrogen bonding, satisfaction and its absence ------------------
+    okN, okO = fin(N), fin(O) & fin(C)
+    idxN, idxO = np.flatnonzero(okN), np.flatnonzero(okO)
+    if len(idxN) and len(idxO):
+        d = np.linalg.norm(N[idxN][:, None, :] - O[idxO][None, :, :], axis=-1)
+        lag = np.abs(idxN[:, None] - idxO[None, :])
+        far = lag >= HBOND_MIN_LAG
+        # The nearest possible partner regardless of geometry. This is not one
+        # minus "did it bond": a nitrogen with an acceptor at 3.6 A and one with
+        # nothing inside 8 A both fail the bond test and are not in the same
+        # situation, and the second is the buried unsatisfied donor that marks a
+        # position with nothing to hydrogen bond to.
+        dn = np.where(far, d, np.inf)
+        out[idxN, col["n_nearest_acceptor"]] = np.minimum(
+            dn.min(axis=1), DIST_CAP)
+        out[idxO, col["o_nearest_donor"]] = np.minimum(
+            dn.min(axis=0), DIST_CAP)
+        out[idxN, col["hb_carbonyls_near_n"]] = (
+            (dn <= HBOND_MAX_NO).sum(axis=1).astype(np.float64))
+
+        co = O[idxO] - C[idxO]
+        con = co / np.maximum(np.linalg.norm(co, axis=1, keepdims=True), 1e-9)
+        to_n = N[idxN][:, None, :] - O[idxO][None, :, :]
+        to_n = to_n / np.maximum(np.linalg.norm(to_n, axis=-1, keepdims=True),
+                                 1e-9)
+        ok = ((d <= HBOND_MAX_NO) & far
+              & ((to_n * con[None, :, :]).sum(-1) > HBOND_MIN_COS))
+        if ok.any():
+            dd = np.where(ok, d, np.inf)
+            best = dd.argmin(axis=1)
+            has = np.isfinite(dd[np.arange(len(idxN)), best])
+            rows = idxN[has]
+            signed = (idxO[best] - idxN)[has]
+            out[rows, col["hb_lag_signed"]] = np.clip(
+                signed, -HBOND_LAG_CAP, HBOND_LAG_CAP)
+            # The acceptor's own view: how far away, in sequence, is the donor
+            # it accepts from. A carbonyl accepting at lag 4 is inside a helix;
+            # one accepting at lag 30 is holding a sheet together.
+            da = np.where(ok, d, np.inf)
+            bestd = da.argmin(axis=0)
+            hasd = np.isfinite(da[bestd, np.arange(len(idxO))])
+            out[idxO[hasd], col["hb_accept_lag"]] = np.minimum(
+                np.abs(idxO - idxN[bestd])[hasd], HBOND_LAG_CAP)
+
+    donated = out[:, col["hb_donated"]]
+    accepted = np.minimum(out[:, col["hb_accepted"]], 4.0)
+    tot = donated + accepted
+    win = np.zeros(n, dtype=np.float64)
+    for i in range(n):
+        a = max(0, i - WINDOW)
+        b = min(n, i + WINDOW + 1)
+        m = seg[a:b] == seg[i]
+        win[i] = tot[a:b][m].sum()
+    out[:, col["hb_window_count"]] = win
+
+    # --- D. where the side chain points -------------------------------------
+    okcb = fin(cb) & okca
+    if okcb.any():
+        v = np.zeros((n, 3))
+        v[okcb] = cb[okcb] - CA[okcb]
+        vn = np.linalg.norm(v, axis=1)
+        vhat = np.zeros_like(v)
+        nz = vn > 1e-9
+        vhat[nz] = v[nz] / vn[nz, None]
+        tang = np.zeros((n, 3))
+        if n > 2:
+            i = np.arange(1, n - 1)
+            good = okca[i - 1] & okca[i + 1] & (seg[i - 1] == seg[i + 1])
+            j = i[good]
+            tang[j] = CA[j + 1] - CA[j - 1]
+        tn = np.linalg.norm(tang, axis=1)
+        that = np.zeros_like(tang)
+        nz2 = tn > 1e-9
+        that[nz2] = tang[nz2] / tn[nz2, None]
+        out[:, col["cb_tangent"]] = np.clip((vhat * that).sum(1), -1.0, 1.0)
+        binorm = np.zeros((n, 3))
+        if n > 2:
+            i = np.arange(1, n - 1)
+            good = okca[i - 1] & okca[i + 1] & (seg[i - 1] == seg[i + 1])
+            j = i[good]
+            binorm[j] = np.cross(CA[j] - CA[j - 1], CA[j + 1] - CA[j])
+        bn = np.linalg.norm(binorm, axis=1)
+        bhat = np.zeros_like(binorm)
+        nz3 = bn > 1e-9
+        bhat[nz3] = binorm[nz3] / bn[nz3, None]
+        out[:, col["cb_binormal"]] = np.clip((vhat * bhat).sum(1), -1.0, 1.0)
+
+        idx = np.flatnonzero(okcb)
+        P = cb[idx]
+        for s in range(0, len(idx), 512):
+            e = min(s + 512, len(idx))
+            dv = P[None, :, :] - P[s:e, None, :]
+            d2 = (dv ** 2).sum(-1)
+            out[idx[s:e], col["cb_density"]] = (d2 <= 64.0).sum(1) - 1
+            # Of the side chains within 10 A, how many lie in the half space
+            # this one points into. A residue whose side chain points into a
+            # crowd is in a different situation from one pointing out of it,
+            # and the two have the same neighbour count.
+            near = d2 <= 100.0
+            proj = np.einsum("ijk,ik->ij", dv, vhat[idx[s:e]])
+            out[idx[s:e], col["cb_hemisphere"]] = (near & (proj > 0)).sum(1)
+
+    # --- E. packing, local against tertiary ---------------------------------
+    idx = np.flatnonzero(okca)
+    if len(idx) > 1:
+        P = CA[idx]
+        lagm = np.abs(idx[:, None] - idx[None, :])
+        for s in range(0, len(idx), 512):
+            e = min(s + 512, len(idx))
+            d2 = ((P[s:e, None, :] - P[None, :, :]) ** 2).sum(-1)
+            for r, name in zip(CA_RADII, ("ca_density_6", "ca_density",
+                                          "ca_density_12")):
+                out[idx[s:e], col[name]] = (d2 <= r * r).sum(1) - 1
+            close = d2 <= 64.0
+            out[idx[s:e], col["ca_longrange"]] = (
+                close & (lagm[s:e] > LONG_RANGE_LAG)).sum(1)
+            spans = np.where(close, lagm[s:e], 0).max(axis=1)
+            out[idx[s:e], col["ca_seq_span"]] = np.minimum(spans, SEQ_SPAN_CAP)
+
+    # --- F. the peptide plane ------------------------------------------------
+    if n > 1:
+        ok = link & fin(CA[:-1]) & fin(C[:-1]) & fin(N[1:])
+        i = np.flatnonzero(ok)
+        if len(i):
+            nrm = np.cross(C[i] - CA[i], N[i + 1] - C[i])
+            ln = np.linalg.norm(nrm, axis=1)
+            good = ln > 1e-9
+            j, nh = i[good], nrm[good] / ln[good, None]
+            centre = np.nanmean(CA[okca], axis=0) if okca.any() else np.zeros(3)
+            rad = CA[j] - centre
+            rn = np.maximum(np.linalg.norm(rad, axis=1), 1e-9)
+            out[j, col["plane_radial"]] = np.clip(
+                np.abs((nh * (rad / rn[:, None])).sum(1)), -1.0, 1.0)
+            keep = np.zeros((n, 3))
+            keep[j] = nh
+            nxt = _shift_rows(keep, -1, seg)
+            both = (np.linalg.norm(keep, axis=1) > 0) & (
+                np.linalg.norm(nxt, axis=1) > 0)
+            out[both, col["plane_twist"]] = np.clip(
+                (keep[both] * nxt[both]).sum(1), -1.0, 1.0)
+
+
+def _shift_rows(v: np.ndarray, k: int, seg: np.ndarray) -> np.ndarray:
+    n = len(v)
+    out = np.zeros_like(v)
+    idx = np.arange(n)
+    src = idx - k
+    ok = (src >= 0) & (src < n)
+    ok[ok] &= seg[src[ok]] == seg[idx[ok]]
+    out[ok] = v[src[ok]]
+    return out
 
 
 def compute(bb: dict[str, np.ndarray]) -> np.ndarray:
@@ -359,6 +689,8 @@ def compute(bb: dict[str, np.ndarray]) -> np.ndarray:
             d2 = ((P[s:e, None, :] - P[None, :, :]) ** 2).sum(-1)
             dens[s:e] = (d2 <= r2).sum(1) - 1
         out[idx, col["ca_density"]] = dens
+
+    _expand(out, col, N, CA, C, O, cb, link)
     return out
 
 
@@ -394,8 +726,49 @@ def consistency(x: np.ndarray) -> list[str]:
         bad.append("a donated bond is closer in sequence than the rule allows")
     # A cosine and a sine that are both zero mean undefined, which is the only
     # way the pair may leave the unit circle.
+    for name in ("cos_omega", "sin_omega", "cos_phi_plus_psi",
+                 "sin_phi_plus_psi", "cos_phi_minus_psi", "sin_phi_minus_psi",
+                 "cb_tangent", "cb_binormal", "plane_radial", "plane_twist"):
+        v = x[:, col[name]]
+        if np.any(np.abs(v) > 1 + 1e-9):
+            bad.append(f"{name} leaves [-1, 1]")
+    for name, lo, hi in (("rama_prev", 0.0, 3.0), ("rama_next", 0.0, 3.0),
+                         ("rama_run", 0.0, float(RUN_CAP)),
+                         ("rama_variety", 0.0, 5.0),
+                         ("dist_to_cell_change", 0.0, float(RUN_CAP)),
+                         ("hb_lag_signed", -float(HBOND_LAG_CAP),
+                          float(HBOND_LAG_CAP)),
+                         ("hb_accept_lag", 0.0, float(HBOND_LAG_CAP)),
+                         ("n_nearest_acceptor", 0.0, DIST_CAP),
+                         ("o_nearest_donor", 0.0, DIST_CAP),
+                         ("ca_seq_span", 0.0, float(SEQ_SPAN_CAP))):
+        v = x[:, col[name]]
+        if np.any(v < lo - 1e-9) or np.any(v > hi + 1e-9):
+            bad.append(f"{name} leaves [{lo}, {hi}]")
+    for name in ("hb_window_count", "hb_carbonyls_near_n", "cb_density",
+                 "cb_hemisphere", "ca_density_6", "ca_density_12",
+                 "ca_longrange", "ca_edge", "ca_span5", "ca_span7"):
+        if np.any(x[:, col[name]] < 0):
+            bad.append(f"{name} is negative")
+    # Packing is monotone in the radius by construction, and a violation means
+    # the three counts were not computed over the same point set.
+    if np.any(x[:, col["ca_density_6"]] > x[:, col["ca_density"]] + 1e-9):
+        bad.append("ca_density_6 exceeds ca_density at the larger radius")
+    if np.any(x[:, col["ca_density"]] > x[:, col["ca_density_12"]] + 1e-9):
+        bad.append("ca_density exceeds ca_density_12")
+    # A signed lag and the unsigned one describe the same bond.
+    signed = x[:, col["hb_lag_signed"]]
+    if np.any(np.abs(signed) - x[:, col["hb_lag"]] > 1e-9):
+        bad.append("hb_lag_signed and hb_lag disagree about the same bond")
+    # A donor with a partner inside the bonding distance cannot be recorded as
+    # having no carbonyl nearby.
+    don = x[:, col["hb_donated"]] > 0
+    if np.any(x[don, col["hb_carbonyls_near_n"]] < 1):
+        bad.append("a residue donates a bond with no carbonyl near its nitrogen")
     for a, b in (("cos_phi", "sin_phi"), ("cos_psi", "sin_psi"),
-                 ("cos_ca_tor", "sin_ca_tor")):
+                 ("cos_ca_tor", "sin_ca_tor"), ("cos_omega", "sin_omega"),
+                 ("cos_phi_plus_psi", "sin_phi_plus_psi"),
+                 ("cos_phi_minus_psi", "sin_phi_minus_psi")):
         r = np.hypot(x[:, col[a]], x[:, col[b]])
         live = r > 1e-9
         if np.any(np.abs(r[live] - 1.0) > 1e-6):

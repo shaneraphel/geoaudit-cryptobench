@@ -126,11 +126,15 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         from chemistry_wires import build_or_load
         X, _n = build_or_load()
         return np.asarray(X), "tools/chemistry_wires.py"
-    if name == "backbone 39":
+    if name in ("backbone 39", "backbone 132"):
+        # 39 was the first thirteen quantities at three aggregations; the
+        # expansion to forty-four leaves those columns bit-identical and appends
+        # the rest, so BACKBONE_WIRES_LIFT.json remains a statement about a
+        # subset of this family rather than about a different one.
         from backbone_wires import build_or_load
         X, _n = build_or_load()
         return np.asarray(X), "tools/backbone_wires.py"
-    if name == "backbone permuted 39":
+    if name in ("backbone permuted 39", "backbone permuted 132"):
         # The family-specific control: identical columns, rows shuffled inside
         # each chain, so every marginal is the same multiset and only the
         # correspondence between a row and its residue is destroyed. Beating
