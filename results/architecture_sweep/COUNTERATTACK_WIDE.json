@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.counterattack_wide.v1",
+  "reads_test_fold": false,
   "clinical_grade": false,
   "n_wires": 516,
   "wire_families": [

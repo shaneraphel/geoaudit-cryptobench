@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12 rule extset extplan extscore extprov extread counts
+verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts declarations recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12 rule extset extplan extscore extprov extread counts
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -321,6 +321,13 @@ ledger:
 # a figure's input changed underneath it, which needs no plotting library.
 artifacts:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/classify_artifacts.py --check
+
+# Every artifact in the training-fold directory says whether it read the held-out
+# fold. Twenty-seven said nothing until an audit derived the answer from each
+# generator; seven of those had read it, and six were invisible to the ledger
+# because its rule looked for one spelling of a per-unit table.
+declarations:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/train_fold_declarations.py --check
 
 # Redraw the README's images from the frozen artifacts. Needs matplotlib, which
 # is why it is a separate target: CI checks the images, it does not redraw them.

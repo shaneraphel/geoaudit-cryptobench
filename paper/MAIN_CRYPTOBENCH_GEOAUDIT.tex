@@ -2521,6 +2521,31 @@ three times, a figure typed from memory of the three probes that produced the
 main result. The ledger is generated precisely because that is the sentence in
 any paper least worth taking on trust, and it was wrong.
 
+It was wrong a second time, and this is the more instructive failure because the
+generator was already in place. The ledger identified an access by two signals:
+an artifact carrying a table of per-unit metrics over the official units, or one
+declaring a read index. An audit of the field names actually present in the tree
+found seven artifacts that satisfied neither and had read the fold anyway.
+\texttt{FULL\_EXPANSION.json} is the plainest: its generator loads the test-side
+feature cache, takes its labels, and reports twelve ROC-AUCs over
+\texttt{n\_test\_units: 192}, storing only the aggregates, so there was no
+per-unit table to find and no index was claimed. \texttt{DUAL\_TRACK\_AB.json}
+is the sharper one: it \emph{does} carry a table of $192$ per-unit ROC-AUCs, and
+escaped because it spells the row identifier \texttt{unit} rather than
+\texttt{unit\_id} and the metric \texttt{A\_resolved} rather than anything
+containing \texttt{auc} --- and because every one of its \texttt{unit} values is
+\texttt{null}, so it scored the held-out fold without recording which units it
+scored. The count of standalone probes rises from $13$ to
+\NStandaloneProbes{} once a third signal is added, namely that an artifact
+reporting a metric while naming the fold's unit count has taken a number off it
+whatever shape it stored the number in. The count of distinct \emph{architectures}
+is unchanged at \NArchOnFold{}, because all seven are variants already
+represented, so the arithmetic below is unaffected; what changed is how much of
+the looking was visible. A gate that searches for one spelling of a field is a
+gate that measures the spelling, and the six spellings of ``did this touch the
+held-out fold'' that this tree contains are now enumerated in one place and
+checked together.
+
 The arithmetic this forces should be done by us rather than left to the reader.
 The standard error of a mean ROC-AUC over \NUnits{} units on this fold is
 \FoldSE{}. The margin over P2Rank is \TabAucD{}, or \LeadInSE{} of one standard

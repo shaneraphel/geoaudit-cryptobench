@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.counterattack_fusion.v1",
+  "reads_test_fold": false,
   "clinical_grade": false,
   "split": {
     "criterion": "cluster_id, seeded shuffle, disjoint halves",

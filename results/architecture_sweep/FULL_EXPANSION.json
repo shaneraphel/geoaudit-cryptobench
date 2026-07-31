@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.full_expansion.v1",
+  "reads_test_fold": true,
   "clinical_grade": false,
   "fusion": "unweighted sum over the complete family of wire subsets; every coefficient is exactly 1; no selection, no weight",
   "n_test_units": 192,

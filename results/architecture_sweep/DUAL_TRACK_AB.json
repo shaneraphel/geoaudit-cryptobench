@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.dual_track_ab.v1",
+  "reads_test_fold": true,
   "clinical_grade": false,
   "recompiled": false,
   "fold": "cryptobench official test fold",

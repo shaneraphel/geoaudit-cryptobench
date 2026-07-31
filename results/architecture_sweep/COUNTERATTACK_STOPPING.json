@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.counterattack_stopping.v1",
+  "reads_test_fold": false,
   "clinical_grade": false,
   "motivation": "the halt-on-first-non-improving rule stopped at the sampling-noise floor of the subsampled criterion, and kept fewer tables on more data",
   "split": {

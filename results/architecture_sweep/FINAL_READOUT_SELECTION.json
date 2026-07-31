@@ -1,5 +1,7 @@
 {
   "schema": "final_readout_selection/v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
   "split": "training fold, cluster-disjoint fit/pick halves",
   "seed": 20260725,
   "top_k_wires": 90,

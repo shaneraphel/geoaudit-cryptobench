@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.wide_bus_bank.v1",
+  "reads_test_fold": true,
   "clinical_grade": false,
   "invariant": "levels**wires_per_table is held near 4096 so every configuration has the same cell occupancy",
   "n_test_units": 192,

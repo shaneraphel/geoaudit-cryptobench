@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.runtime_cost.v1",
+  "reads_test_fold": false,
   "clinical_grade": false,
   "generated_at": "2026-07-29T13:39:58+0800",
   "question": "what each method costs per chain when both are given the same boundary, the same thread count, the same machine and the same structures",

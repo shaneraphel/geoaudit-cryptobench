@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.train_only_architecture_selection.v1",
+  "reads_test_fold": false,
   "clinical_grade": false,
   "why": "the architecture is chosen without reading the official test fold, so the reported test score is not the maximum of several test-fold estimates",
   "split": {

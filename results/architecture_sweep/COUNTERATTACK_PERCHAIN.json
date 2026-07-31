@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.counterattack_perchain.v1",
+  "reads_test_fold": false,
   "clinical_grade": false,
   "question": "what does making the fusion self-contained per chain cost",
   "split": {

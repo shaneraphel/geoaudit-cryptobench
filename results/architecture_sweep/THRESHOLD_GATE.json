@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.threshold_gate.v1",
+  "reads_test_fold": true,
   "clinical_grade": false,
   "multiplicity": "integer rank of each table's compiled train Gini; fan-out replication, not a real coefficient",
   "table_gini": [

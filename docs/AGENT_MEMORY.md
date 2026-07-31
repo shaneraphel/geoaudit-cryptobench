@@ -746,6 +746,59 @@ recomputed centroids against the cache's row by row: **agreement is exact,
 the first insertion code would have been attached to the wrong residue and
 nothing would have raised.
 
+## 2k. The ledger was under-counting, and a gate that greps one spelling grades spelling
+
+Not a measurement of the method — a measurement of the accounting, and it found
+a hole in the thing the paper's honesty section is built on.
+
+**What was found.** `results/architecture_sweep/` is the training-fold directory,
+and `AGENTS.md` requires every training-fold artifact to say
+`"reads_test_fold": false` and mean it. Twenty-seven artifacts there said nothing
+at all, the whole `COUNTERATTACK_*` series among them, and three also lacked
+`clinical_grade`. Deriving the declaration from each artifact's generator rather
+than stamping it — the generator is located by requiring that it *binds the path
+and writes through it*, since `emit_frozen_numbers.py` binds nearly every path in
+the repository and counting readers as writers made seventeen artifacts look
+guilty — gave twenty that no generator could have read the fold in, and **seven
+that did**.
+
+**Those seven were invisible to the test-fold access ledger.** Its rule was: a
+per-unit table of at least 150 rows keyed `unit_id` with a column containing
+`auc`, or a declared `test_fold_read_index`. Two ways through it:
+
+* `FULL_EXPANSION.json` — `run_full_expansion.py` loads `_cascade_cache_test.npz`,
+  takes `yte`, and reports twelve ROC-AUCs over `n_test_units: 192`. It stores
+  only aggregates, so there is no table to find.
+* `DUAL_TRACK_AB.json` — carries 192 per-unit ROC-AUCs and still escapes, because
+  the row key is `unit` not `unit_id` and the metric is `A_resolved` not anything
+  containing `auc`. **Every one of its `unit` values is `null`**, so it scored the
+  held-out fold without recording which units it scored.
+
+A third signal now catches both: an artifact reporting a metric while naming the
+fold's unit count has taken a number off it, in whatever shape. Standalone probes
+**13 → 20**; six of them scored the fold. `n_distinct_architectures_evaluated`
+stays at **12**, because all seven are table-field variants already represented,
+so the figure caption and the selection-bias arithmetic in the paper are
+unchanged. Only `\NStandaloneProbes` moved.
+
+**The generalisable part.** The tree spells "did this touch a held-out set"
+**eighteen** different ways, six of which answer this exact question:
+`reads_test_fold`, `test_fold_touched`, `test_fold_read`, `test_fold_reads`,
+`reads_our_test_fold`, `reads_cryptobench_test_fold`. `GAP_DECOMPOSITION.json`
+was honest — it says `test_fold_reads: 0` — and looked silent to a gate that knew
+one spelling.
+
+> **A gate that greps for one field name measures the field name.** Before
+> trusting a gate that reports zero, enumerate the spellings actually present in
+> the tree and check that the gate's is the one they use. `AGENTS.md` already
+> says a query returning zero has not told you there is nothing there; this is
+> that rule applied to our own gates rather than to RCSB.
+
+`tools/train_fold_declarations.py` holds the synonym list, derives the
+declaration from the generator, takes the *direction* from the ledger so a file
+the ledger records as an access can never be stamped `false`, and runs in
+`make verify`. The audit is closed: 27 of 27 declared, 7 of them `true`.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the
@@ -1121,7 +1174,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 682 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 701 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

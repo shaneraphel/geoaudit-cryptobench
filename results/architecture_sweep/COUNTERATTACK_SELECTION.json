@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.counterattack_selection.v1",
+  "reads_test_fold": false,
   "clinical_grade": false,
   "wires": 172,
   "split": {

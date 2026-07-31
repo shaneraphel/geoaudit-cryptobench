@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.bank_fusion.v1",
+  "reads_test_fold": true,
   "clinical_grade": false,
   "fusion": "unweighted sum of table cell fractions; all coefficients are exactly 1; no fitted weight, no discriminant",
   "n_test_units": 192,

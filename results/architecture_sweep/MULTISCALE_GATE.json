@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.multiscale_gate.v1",
+  "reads_test_fold": true,
   "clinical_grade": false,
   "radii": [
     6.0,

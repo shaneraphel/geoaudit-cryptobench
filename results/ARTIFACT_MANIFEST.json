@@ -81,7 +81,7 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.bank_fusion.v1",
-      "bytes": 2611
+      "bytes": 2639
     },
     {
       "artifact": "results/architecture_sweep/BANK_TRUNCATION.json",
@@ -130,35 +130,35 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_covering.v1",
-      "bytes": 10085
+      "bytes": 10113
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_FUSION.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_fusion.v1",
-      "bytes": 12016
+      "bytes": 12044
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_GREEDY.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_greedy.v1",
-      "bytes": 5127
+      "bytes": 5155
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_PERCHAIN.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_perchain.v1",
-      "bytes": 537
+      "bytes": 565
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_QUANTIZED.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_quantized.v1",
-      "bytes": 10367
+      "bytes": 10395
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_QUOTIENT.json",
@@ -172,70 +172,70 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_refine.v1",
-      "bytes": 2361
+      "bytes": 2389
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_RIDGE.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_ridge.v1",
-      "bytes": 10067
+      "bytes": 10095
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_RIDGE2.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_ridge2.v1",
-      "bytes": 9182
+      "bytes": 9210
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_SELECTION.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_selection.v1",
-      "bytes": 3452
+      "bytes": 3480
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_STABILITY.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_stability.v1",
-      "bytes": 2145
+      "bytes": 2173
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_STABILITY_LARGE.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_stability_large.v1",
-      "bytes": 732
+      "bytes": 760
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_STOPPING.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_stopping.v1",
-      "bytes": 4430
+      "bytes": 4458
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_THRESHOLD.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_threshold.v1",
-      "bytes": 4764
+      "bytes": 4792
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_WIDE.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.counterattack_wide.v1",
-      "bytes": 2834
+      "bytes": 2862
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_WIDE2.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.counterattack_wide2.v1",
-      "bytes": 5419
+      "bytes": 5447
     },
     {
       "artifact": "results/architecture_sweep/COUNTERATTACK_WIDE3.json",
@@ -256,7 +256,7 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.dual_track_ab.v1",
-      "bytes": 87162
+      "bytes": 87190
     },
     {
       "artifact": "results/architecture_sweep/FAILURE_TAIL.json",
@@ -270,21 +270,21 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.feature_ceiling.v1",
-      "bytes": 2145
+      "bytes": 2173
     },
     {
       "artifact": "results/architecture_sweep/FINAL_READOUT_SELECTION.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "final_readout_selection/v1",
-      "bytes": 1701
+      "bytes": 1756
     },
     {
       "artifact": "results/architecture_sweep/FULL_EXPANSION.json",
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.full_expansion.v1",
-      "bytes": 2193
+      "bytes": 2221
     },
     {
       "artifact": "results/architecture_sweep/GAP_DECOMPOSITION.json",
@@ -347,7 +347,7 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.multiscale_gate.v1",
-      "bytes": 1342
+      "bytes": 1370
     },
     {
       "artifact": "results/architecture_sweep/OPERATOR_BANK_CEILING.json",
@@ -361,7 +361,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.p2rank_train_fold.v1",
-      "bytes": 610250
+      "bytes": 610305
     },
     {
       "artifact": "results/architecture_sweep/P2RANK_TRAIN_OPERATING_POINT.json",
@@ -375,7 +375,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "pairwise_readout_selection/v1",
-      "bytes": 6225
+      "bytes": 6280
     },
     {
       "artifact": "results/architecture_sweep/POCKETMINER_TRAIN_OPERATING_POINT.json",
@@ -473,7 +473,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.runtime_cost.v1",
-      "bytes": 87298
+      "bytes": 87326
     },
     {
       "artifact": "results/architecture_sweep/SELECTED_PAIRINGS.json",
@@ -508,14 +508,14 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.threshold_gate.v1",
-      "bytes": 1037
+      "bytes": 1065
     },
     {
       "artifact": "results/architecture_sweep/TRAIN_ONLY_SELECTION.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.train_only_architecture_selection.v1",
-      "bytes": 2035
+      "bytes": 2063
     },
     {
       "artifact": "results/architecture_sweep/TRAIN_OPERATING_POINTS.json",
@@ -543,7 +543,7 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.wide_bus_bank.v1",
-      "bytes": 1841
+      "bytes": 1869
     },
     {
       "artifact": "results/baselines/PLMNN_EXTERNAL_SCORES.json",
@@ -928,7 +928,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 11405
+      "bytes": 13752
     },
     {
       "artifact": "results/official_fold/THRESHOLD_CURVE.json",

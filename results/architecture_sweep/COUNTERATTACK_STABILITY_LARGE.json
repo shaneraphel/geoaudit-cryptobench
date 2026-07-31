@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.counterattack_stability_large.v1",
+  "reads_test_fold": false,
   "clinical_grade": false,
   "note": "signed stagewise only; the solved fusion neither fits in memory nor holds its value at these pool sizes",
   "candidates": [

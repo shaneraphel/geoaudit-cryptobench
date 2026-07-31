@@ -1,5 +1,6 @@
 {
   "schema": "geoaudit.feature_ceiling.v1",
+  "reads_test_fold": true,
   "clinical_grade": false,
   "note": "diagnostic only; (b) uses a continuous discriminant and is excluded from the combinational claim",
   "n_test_units": 192,

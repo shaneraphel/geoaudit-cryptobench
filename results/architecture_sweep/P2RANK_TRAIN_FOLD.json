@@ -1,5 +1,7 @@
 {
+  "reads_test_fold": false,
   "schema": "geoaudit.p2rank_train_fold.v1",
+  "clinical_grade": false,
   "generated_at": "2026-07-28T18:34:50+0800",
   "what_this_is": "P2Rank 2.5.1 scored on the 770 CryptoBench training receptors. Exists so that the choice of summary statistic for the paired comparison against P2Rank can be fixed on the training partition before the held-out fold is consulted.",
   "test_fold_touched": false,

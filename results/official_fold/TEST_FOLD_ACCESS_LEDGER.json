@@ -32,6 +32,69 @@
   "n_our_detectors": 9,
   "standalone_probe_artifacts": [
     {
+      "artifact": "results/architecture_sweep/BANK_FUSION.json",
+      "n_units": null,
+      "method": "table field variant",
+      "read_index": null,
+      "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/architecture_sweep/DUAL_TRACK_AB.json",
+      "n_units": 192,
+      "method": "table field variant",
+      "read_index": null,
+      "kind": "scored the fold",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json",
+      "n_units": null,
+      "method": "table field variant",
+      "read_index": null,
+      "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/architecture_sweep/FULL_EXPANSION.json",
+      "n_units": null,
+      "method": "table field variant",
+      "read_index": null,
+      "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/architecture_sweep/MULTISCALE_GATE.json",
+      "n_units": null,
+      "method": "table field variant",
+      "read_index": null,
+      "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/architecture_sweep/THRESHOLD_GATE.json",
+      "n_units": null,
+      "method": "table field variant",
+      "read_index": null,
+      "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/architecture_sweep/WIDE_BUS_BANK.json",
+      "n_units": null,
+      "method": "table field variant",
+      "read_index": null,
+      "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
       "artifact": "results/official_fold/COUNTERATTACK_FINAL_PROBE.json",
       "n_units": 192,
       "method": "table field variant",
@@ -157,7 +220,7 @@
       "selection_provenance": "cluster-disjoint halves of the training fold; this is the first and only evaluation of this architecture on the official test fold"
     }
   ],
-  "n_standalone_probes": 13,
+  "n_standalone_probes": 20,
   "n_distinct_architectures_evaluated": 12,
   "indexed_read_sequence": [
     {
@@ -278,7 +341,7 @@
     }
   ],
   "n_indexed_reads": 12,
-  "n_probes_that_scored_the_fold": 5,
-  "n_probes_that_only_resummarised": 8,
-  "honest_summary": "9 of our detectors appear in the frozen telemetry. 13 standalone artifacts are further accesses: 5 of them scored the 192 units again, and 8 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 12 carry a read index, 11 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
+  "n_probes_that_scored_the_fold": 6,
+  "n_probes_that_only_resummarised": 14,
+  "honest_summary": "9 of our detectors appear in the frozen telemetry. 20 standalone artifacts are further accesses: 6 of them scored the 192 units again, and 14 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 12 carry a read index, 11 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
 }

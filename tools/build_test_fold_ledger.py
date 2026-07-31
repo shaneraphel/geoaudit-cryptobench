@@ -47,16 +47,62 @@ OUT = RESULTS / "official_fold/TEST_FOLD_ACCESS_LEDGER.json"
 # at the test set on our behalf, it is the comparison the test set exists for.
 EXTERNAL = {"p2rank", "random_bbox"}
 
+# The official fold's size. An artifact that reports a metric and names this
+# count has taken a number off it.
+N_OFFICIAL_UNITS = 192
+_UNIT_KEYS = ("n_test_units", "n_units", "n_paired_units",
+              "n_units_scored", "n_units_in_manifest", "n_units_compared")
+# Named exemptions from the third signal, each with the reason. A rule broad
+# enough to excuse these by shape would also excuse a real access.
+_NOT_AN_ACCESS = {
+    "PLMNN_SCORES.json": "a rival's per-residue predictions; no label is opened "
+                         "and no metric is computed, which the artifact argues "
+                         "in why_this_is_not_an_indexed_read",
+    "ENDPOINT_STATUS.json": "the endpoint declaration, which summarises reads "
+                            "this ledger already counts",
+    "TEST_FOLD_ACCESS_LEDGER.json": "this file. It quotes the fold's size and "
+                                    "the metrics of the reads it lists, so the "
+                                    "third signal matches it and it would "
+                                    "otherwise enter its own inventory",
+}
+
+
+def _reports_a_fold_metric(path: Path, d: dict) -> bool:
+    if path.name in _NOT_AN_ACCESS:
+        return False
+    if not any(d.get(k) == N_OFFICIAL_UNITS for k in _UNIT_KEYS):
+        return False
+    return "auc" in json.dumps(d).lower()
+
 
 def _per_unit_artifacts() -> list[dict]:
     """Artifacts under results/ that are an access to the official fold.
 
-    Two things qualify. One is carrying per-unit metrics over the official
+    Three things qualify. One is carrying per-unit metrics over the official
     units, which is what scoring the fold produces. The other is declaring a
     read index, which catches an artifact that draws a fresh inference from
     per-unit numbers an earlier read already froze. The second kind re-scores
     nothing, and leaving it out would let the fold be used again for free every
     time a new summary of the same numbers is wanted.
+
+    The third was added after an audit found seven artifacts that satisfied
+    neither. ``FULL_EXPANSION.json`` is the clearest: ``run_full_expansion.py``
+    loads ``_cascade_cache_test.npz``, takes its labels, and reports twelve
+    ROC-AUCs over ``n_test_units: 192``. It stores no per-unit table and claims
+    no index, so both original signals missed it, and the fold had been read.
+    An artifact that reports a metric while naming the fold's unit count has
+    taken a number off the held-out set whatever shape it stored it in, so that
+    is now the third signal. It is deliberately blunt: it will also catch an
+    artifact that merely *quotes* a fold number, and being listed with
+    ``kind: reports a fold metric`` and no index is the correct outcome for
+    that too -- the ledger's job is to make every look at the fold visible, not
+    to grade them.
+
+    Two artifacts match the third signal and are not accesses, and they are
+    named rather than filtered by a rule that would also excuse a real one:
+    ``PLMNN_SCORES.json`` is a rival's predictions with no label opened, which
+    the file itself argues, and ``ENDPOINT_STATUS.json`` is the endpoint
+    declaration that summarises reads already counted here.
     """
     found = []
     for p in sorted(RESULTS.rglob("*.json")):
@@ -71,13 +117,21 @@ def _per_unit_artifacts() -> list[dict]:
         rows = None
         for key in ("per_structure", "per_unit"):
             v = d.get(key)
+            # The identifier and the metric are each spelled more than one way.
+            # DUAL_TRACK_AB.json carries 192 per-unit ROC-AUCs on the official
+            # fold under the keys "unit" and "A_resolved", and matched neither
+            # half of the original rule; it is also the artifact whose "unit" is
+            # null on every row, so it scored the fold without recording which
+            # units it scored.
             if (isinstance(v, list) and len(v) >= 150
-                    and isinstance(v[0], dict) and "unit_id" in v[0]
-                    and any("auc" in k for k in v[0])):
+                    and isinstance(v[0], dict)
+                    and any(k in v[0] for k in ("unit_id", "unit", "pdb"))
+                    and any(("auc" in k or "resolved" in k) for k in v[0])):
                 rows = v
                 break
         declares = d.get("test_fold_read_index") is not None
-        if rows is None and not declares:
+        reports = _reports_a_fold_metric(p, d)
+        if rows is None and not declares and not reports:
             continue
         found.append({
             "artifact": str(p.relative_to(ROOT)),
@@ -89,7 +143,10 @@ def _per_unit_artifacts() -> list[dict]:
             "method": d.get("method") or "table field variant",
             "read_index": d.get("test_fold_read_index"),
             "kind": "scored the fold" if rows is not None
-            else "new inference over per-unit numbers an earlier read froze",
+            else ("new inference over per-unit numbers an earlier read froze"
+                  if declares else
+                  "reports a fold metric and declares no index; found by the "
+                  "audit that added the third signal"),
             "mean_residue_auc": d.get("residue_auc_mean")
             or (d.get("means") or {}).get("residue_auc")
             or d.get("mean_method"),
