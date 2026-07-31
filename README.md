@@ -679,8 +679,8 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 775 tests and
-504 subtests, all passing. `unittest`'s discovery finds 647 of them, because it
+Current state: `verify_claims` all checks pass; `make test` runs 795 tests and
+553 subtests, all passing. `unittest`'s discovery finds 667 of them, because it
 collects only methods of `TestCase` subclasses; the other 85 are written as
 plain functions and are reachable only through `pytest`.
 
@@ -1640,7 +1640,8 @@ protocol above:
 | operator bank / expanded / wide | 267 generated descriptors | no | +0.0005 at best, §4.6 |
 | **backbone 39** | thirteen quantities from N, CA, C, O, CB | **yes** | **+0.00196 on 8/12** |
 | **backbone 132** | the same axis taken seriously: 44 quantities | **yes** | **+0.00441 on 12/12**, CI [+0.0033, +0.0055] |
-| *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 |
+| **sidechain 261** | 87 quantities of side-chain conformation: torsions and rotamer wells, deposit completeness, extension and curl, free directions to a van der Waals wall, hydrogen-bond satisfaction, two chiral centres, χ₁–φ/ψ coupling | **yes** | **+0.00476 on 11/12**, CI [+0.0032, +0.0063] |
+| *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 (backbone), −0.0004 on 7/12 (side-chain) |
 
 | Attachment | What it does | Result |
 |---|---|---|
@@ -1681,12 +1682,15 @@ has predicted a sign in advance.
 
 **None of this closes the deficit, and the arithmetic is stated rather than implied.**
 pLM-NN is ahead by **0.0243** on the official fold and **0.0340** externally. The gate
-radius is worth +0.0025 and backbone 132 is worth +0.0044; if they add, which is
-unmeasured, that is +0.0069, or **28% of the official-fold deficit**. It is the largest
-honest number this line of work has produced and it is not a win. Nothing here is
-deployed: moving the architecture would make `EXTERNAL_READ.json`'s +0.0443 a result
-about a detector that no longer exists, which is why Set B and Set C are frozen and
-unread.
+radius is worth +0.0025, backbone 132 is worth +0.0044 and side-chain 261 is worth
++0.0048. Whether any two of those add is a question that has to be measured and not
+summed — they are all conformation, computed from overlapping atom sets, and a residue
+in a strained rotamer is often a residue in an irregular backbone. `conformation 393`,
+the two families as one block, is the arm that answers it. Until it lands, the honest
+statement is that the largest single measured effect on this axis is +0.0048 against a
+deficit of 0.0243, which is a fifth of it. Nothing here is deployed: moving the
+architecture would make `EXTERNAL_READ.json`'s +0.0443 a result about a detector that
+no longer exists, which is why Set B and Set C are frozen and unread.
 
 Numerical record: all counts and metrics are read from the JSON artifacts
 (`results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json`,

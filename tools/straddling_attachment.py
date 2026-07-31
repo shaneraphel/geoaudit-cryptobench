@@ -159,6 +159,23 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         from sidechain_wires import build_or_load
         X, _n = build_or_load(permuted=True)
         return np.asarray(X), "tools/sidechain_wires.py --permuted"
+    if name == "void 135":
+        # 45 quantities at three aggregations. The third family to pass 2i's
+        # screen and the first to pass it by reading something that is not a
+        # function of atom positions at all: the connectivity of the empty
+        # space between them. It is also the first family built for a named
+        # failure rather than for the axis in general -- FAILURE_TAIL.json puts
+        # the field at 0.5991 on units with fewer than ten cryptic residues and
+        # GATE_BY_STRATUM.json puts the deployed gate's optimum radius at 0 on
+        # that stratum, and the size of the void a residue lines is that
+        # stratum computed without the label.
+        from void_wires import build_or_load
+        X, _n = build_or_load()
+        return np.asarray(X), "tools/void_wires.py"
+    if name == "void permuted 135":
+        from void_wires import build_or_load
+        X, _n = build_or_load(permuted=True)
+        return np.asarray(X), "tools/void_wires.py --permuted"
     if name == "conformation 393":
         # Backbone 132 and side-chain 261 as one block. The two were each
         # measured against the same deployed baseline and each is worth about
