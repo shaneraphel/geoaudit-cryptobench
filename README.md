@@ -1596,12 +1596,67 @@ artifact that did. None is a promise about an outcome.
 |---|---|
 | A correction rule cheaper than the regional signal it collects | Chain-level routing carries a real signal — **+0.0029 to +0.0054 against a random per-chain router on 11–12 of 12 splits** — but applying it through a per-region correction of all 5,152 multiplicities costs more than it earns, and the gain only appears as the correction vanishes. A correction over a subset of tables, or over the spatial gate instead of the multiplicities, would cost less. `HIERARCHICAL_MULTIPLICITIES.json` |
 | A second external set, built and frozen **before** the method is finalised | Set A is spent: scoring an improved method on it destroys the confirmatory result rather than producing a second one. The cryo-EM pool is pinned at **461 accessions at 2.5 Å and 1,143 at 3.0 Å**, none of them in CryptoBench. The cluster count that would bound the set is **absent, not zero** — the cached UniRef50 mapping covers none of them. Order: map, build, freeze, hash, preregister, finalise, read once. `SETB_POOL.json` |
-| The 365-operator bank, designed and unmeasured | Non-backtracking walk counts, Sachs coefficients of the induced local subgraph, orbit counts and irreducible-character projections under the tetrahedral, octahedral and icosahedral groups, deformation-subgroup conjugacy labels, Krawtchouk transforms of shell occupancy, 𝔽₄ and 𝔽₁₆ point counts of the quantised local variety, p-adic valuation profiles, three-dimensional block-Toeplitz minors, and colour-refined short-cycle counts. Each has an integrality argument; **none has been measured**, and the admission protocol is fixed in advance: attach by union, hold every other parameter, report twelve splits, and state the 0.0026 reseed floor beside any smaller difference |
+| The 365-operator bank, designed and unmeasured | Non-backtracking walk counts, Sachs coefficients of the induced local subgraph, orbit counts and irreducible-character projections under the tetrahedral, octahedral and icosahedral groups, deformation-subgroup conjugacy labels, Krawtchouk transforms of shell occupancy, 𝔽₄ and 𝔽₁₆ point counts of the quantised local variety, p-adic valuation profiles, three-dimensional block-Toeplitz minors, and colour-refined short-cycle counts. Each has an integrality argument; **none has been measured**, and the admission protocol is fixed in advance: attach by union, hold every other parameter, report twelve splits, and state the 0.0026 reseed floor beside any smaller difference. **Read §5.2 first**: five families have now been through that protocol and none moved the detector |
 | Width-3 tables | `table_bank.py`'s own docstring notes that a three-wire table has 64 cells and that at 235k training residues a cell still holds thousands. Three-way interaction is unreachable at width 2 and has never been run |
 | ESR1 pilot regeneration | The label builder is fixed (chain- and instance-scoped, with a regression test) but the pilot has not been re-run. P2Rank 2.5.1 and its JVM are installed; **fpocket and DeepPocket are not**, and until all five methods re-run, no number in `RETROSPECTIVE_PILOT_REPORT.json` is citable |
 
+### 5.2 What the wire axis was, and why it is now closed
+
+Eight parameters of the readout were measured and each sits at or past its optimum:
+quantisation cut points, pairing choice, appended column families, integer rounding of
+multiplicities, bank size, per-region multiplicities, per-region gate weight and table
+width. That exhausted everything about *how the tables are built* and left one axis —
+the wires themselves, meaning what a table reads. Five column families and all three
+attachments have since been measured on the same twelve cluster-disjoint splits, under
+the admission protocol above.
+
+| Family | What it adds | Field lift, union attachment |
+|---|---|---|
+| composition 76 | chemical class of the neighbourhood, by shell and walk | −0.0009 on 2/12 |
+| asymmetry 129 | one anisotropy operator swept over radii | +0.0010 on 9/12 |
+| graph invariants 225 | fifteen integer invariants of the 7 Å contact lining | **−0.0061 on 0/12** |
+| chemistry 42 | fourteen chemical quantities per side chain, three aggregations | +0.0002 on 7/12 |
+| *(control)* | the same table count, **no new columns at all** | +0.0004 on 7/12 |
+
+| Attachment | What it does | Result |
+|---|---|---|
+| union | deployed 5,152 tables held, new tables over new columns only | the deployed arm above |
+| widened | every pairing redrawn at the new width | keeps 281 of 5,152; worse than union |
+| straddling | deployed tables held, new tables pair one deployed wire with one new column | +0.0009 over union, **+0.0000 over deployed** |
+
+Three things are worth carrying out of that.
+
+**The control arm changes how the other rows read.** `more_old` adds the same number
+of tables over the deployed wires with the new family absent entirely, and on the one
+family measured with it, it scored *higher* than the family did. The four earlier
+families have no such arm, so their small positives cannot be separated from bank size
+after the fact — asymmetry's +0.0010 in particular should not be quoted as though it
+can. Any further family must carry the control.
+
+**Two screening statistics ordered the families correctly and neither moved a number.**
+Mean pairwise interaction within a family ordered the first three and was falsified by
+the fourth, which it placed second and which finished last. Interaction with the
+deployed bus then ordered all of them, and an attachment built to collect exactly that
+interaction recovered the union attachment's own loss and gained nothing over the
+deployed detector. A statistic that orders outcomes without moving one is a correlate.
+
+**A good argument is not evidence.** The chemistry family was proposed on reasoning
+rather than on either statistic: a cryptic pocket is closed and opens, side chains open
+it, and neither the geometric wires nor the eight composition classes can see
+conformational freedom — the aliphatic class holds ALA, VAL, LEU, ILE and MET whose
+rotameric dihedral counts run 0, 1, 2, 2, 3. Every step of that is true and the
+detector did not move.
+
+The measured consequence for anyone reading this section as a starting point: the
+largest effect anywhere on this axis is **+0.0010**, and the deficit against pLM-NN is
+**0.0243**. Closing that gap is not an attachment problem and, on this evidence, not a
+wire-family problem either.
+
 Numerical record: all counts and metrics are read from the JSON artifacts
-(`results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json`,
+(`results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json`,
+`results/architecture_sweep/STRADDLING_ATTACHMENT.json`,
+`results/architecture_sweep/APPENDED_FAMILY_LIFT.json`,
+`results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP.json`,
 `results/gf4_ablation/GF4_ALLELE_ABLATION.json`,
 `data/manifests/COMPANION_EVIDENCE.json`). Where earlier narrative text disagreed with
 those artifacts, the narrative has been deleted rather than reconciled; the JSON is the

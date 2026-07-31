@@ -11,8 +11,8 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "cited": 58,
-    "exploration": 36,
+    "cited": 61,
+    "exploration": 33,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
@@ -50,8 +50,8 @@
     },
     {
       "artifact": "results/architecture_sweep/APPENDED_FAMILY_LIFT.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.appended_family_lift.v1",
       "bytes": 3526
     },
@@ -71,8 +71,8 @@
     },
     {
       "artifact": "results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.straddling_attachment.v1",
       "bytes": 6054
     },
@@ -435,8 +435,8 @@
     },
     {
       "artifact": "results/architecture_sweep/STRADDLING_ATTACHMENT.json",
-      "class": "exploration",
-      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.straddling_attachment.v1",
       "bytes": 5958
     },
