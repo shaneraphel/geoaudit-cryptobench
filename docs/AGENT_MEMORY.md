@@ -341,6 +341,62 @@ Keep the size in view: the largest effect anywhere on this axis is +0.0010, and 
 pLM-NN deficit is **0.0243**, twenty-four times it. That gap is not an attachment
 problem and it was never plausible that it was.
 
+## 2e. The largest effect in this repository, and nobody had looked
+
+Every sweep in §2b and every family in §2c was scored by a **mean over units**.
+`FAILURE_TAIL.json` scores the deployed field per unit on the pick half of all
+twelve splits and reproduces the frozen per-split numbers exactly on the way
+through, so this is the same detector read a different way. Read that way it is
+two different detectors.
+
+| cryptic residues in the unit | units | mean AUC | median | sd | null se | sd/se | share below 0.5 |
+|---|---|---|---|---|---|---|---|
+| 0–9 | 188 | **0.5991** | 0.6238 | 0.2914 | 0.1110 | 2.63 | **34.0 %** |
+| 10–15 | 180 | 0.8144 | 0.8731 | 0.1821 | 0.0852 | 2.14 | 9.4 % |
+| 16–22 | 200 | 0.8544 | 0.8983 | 0.1332 | 0.0687 | 1.94 | 2.5 % |
+| 23–76 | 201 | 0.8766 | 0.9024 | 0.0989 | 0.0566 | 1.75 | 0.5 % |
+
+Overall the mean per-unit AUC is 0.7884 and the **median is 0.8712**. The worst
+fifth of units sits at 0.4135 against 0.8823 for the rest and carries 46 % of the
+total deviation; 87 units score below 0.5, which is worse than a coin toss on
+their own residues.
+
+**Both explanations are true and only one of them matters.** Within-unit AUC over
+`n1` positives has a null sampling standard error of about
+`sqrt((n1+n0+1)/(12·n1·n0))`, so a unit with eight positives is noisy whatever the
+detector does, and the observed spread is 2.63 times that null at small `n1`
+against 1.75 at large. That is real. But sampling noise is **symmetric**: it
+inflates a standard deviation, it does not move a mean, and the mean falls from
+0.8766 to 0.5991 across the strata. A quarter of the training fold is at 0.60 and
+the rest is at 0.81–0.88.
+
+**What this reframes.** The official fold's mean paired difference against P2Rank
+is +0.0058 and crosses zero while its 20 % trimmed mean is +0.0281 at p=0.002, and
+the two withdrawn claims — F1 and MCC — are both threshold metrics, which are more
+sensitive at small `n1` than AUC is. A deficit concentrated in small-pocket units
+would produce all three of those observations. Whether it does is a question about
+the official fold and **must not be answered by looking at it**: the stratification
+above is on training units, and repeating it on the test fold to see whether the
+story holds is method development against held-out data.
+
+**The mechanism to test first, and it is on the one axis §3 still lists as open.**
+Every wire is cut at within-chain quartiles, so the extreme level is the extreme
+25 % of a chain. In a 230-residue chain with 8 cryptic residues that level holds
+57 residues for 8 positives — a seven-fold dilution — where a unit at the top
+stratum has 40 positives in the same 57. §3 already records that the extreme 2 % of
+the strongest wires is about twice as rich as the quartile containing it, and
+`QUANTISATION_LADDER.json` found the cuts at optimum with finer cuts monotonically
+worse by −0.0041 to −0.0069 — but that sweep was scored by the same mean over
+units, so a cut that helps the bottom stratum and hurts the top would have
+cancelled inside it. **Re-run the ladder stratified before concluding anything
+about it.**
+
+One caution that will matter as soon as a fix is proposed. The stratifying
+variable is the number of cryptic residues, which is the **label**. Nothing that
+conditions on it can ship. A fix has to condition on something observable — chain
+size separates only weakly here, P(tail>rest)=0.393, so it is not a substitute —
+and finding that observable is the actual problem.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the

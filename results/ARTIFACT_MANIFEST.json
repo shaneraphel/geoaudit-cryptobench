@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 61,
-    "exploration": 33,
+    "exploration": 34,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 128,
+  "n_artifacts": 129,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -229,6 +229,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.dual_track_ab.v1",
       "bytes": 87162
+    },
+    {
+      "artifact": "results/architecture_sweep/FAILURE_TAIL.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.failure_tail.v1",
+      "bytes": 9077
     },
     {
       "artifact": "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json",
