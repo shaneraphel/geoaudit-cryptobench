@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 61,
-    "exploration": 34,
+    "exploration": 35,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 129,
+  "n_artifacts": 130,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -397,6 +397,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.preregistered_threshold_curve.v1",
       "bytes": 5519
+    },
+    {
+      "artifact": "results/architecture_sweep/QUANTISATION_BY_STRATUM.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.quantisation_by_stratum.v1",
+      "bytes": 6024
     },
     {
       "artifact": "results/architecture_sweep/QUANTISATION_LADDER.json",

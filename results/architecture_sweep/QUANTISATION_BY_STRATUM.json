@@ -1,0 +1,235 @@
+{
+ "schema": "geoaudit.quantisation_by_stratum.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "question": "whether the quantisation cuts have a different optimum for units with few cryptic residues than for units with many, which a mean over units cannot show",
+ "why_re_run": "QUANTISATION_LADDER.json found the deployed cuts at optimum with finer tails monotonically worse, scored by a mean over units. FAILURE_TAIL.json then found the deployed field at 0.5991 on the 188 units with fewer than ten cryptic residues against 0.8766 on the 201 with more than twenty-two, so a cut helping one stratum and hurting the other cancels inside that mean",
+ "prediction": {
+  "committed_before_the_run": true,
+  "expected": "finer tails help the small-pocket stratum and hurt the large-pocket one, so the deployed ladder is best only in the pooled mean",
+  "would_close_the_axis": "finer tails hurting every stratum, which would mean the small-pocket deficit is not a resolution problem and the ladder is shut for a second time by a stronger measurement",
+  "reseed_floor": 0.0026,
+  "note": "the strata are defined by the label and nothing conditioning on them can ship; this measures whether there is anything to reach"
+ },
+ "strata_from": "results/architecture_sweep/FAILURE_TAIL.json",
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_on": "the fit half",
+  "evaluate_on": "the pick half",
+  "metric": "ROC-AUC within a unit, averaged over the splits in which the unit sat on the pick side",
+  "held_fixed": "645 wires, width 2, 16 rounds, seed 20260725"
+ },
+ "reproduction_check": {
+  "recomputed_arm": "uniform quartiles (deployed)",
+  "max_absolute_difference_from_frozen_per_split": 0.0,
+  "reproduces_frozen_arm": true,
+  "why_this_is_here": "a tool that reimplements part of the pipeline must return the frozen numbers before any new number it produces is believed"
+ },
+ "arms": {
+  "uniform quartiles (deployed)": {
+   "n_levels": 4,
+   "cuts": [
+    0.25,
+    0.5,
+    0.75
+   ],
+   "pooled_mean_auc": 0.788442,
+   "by_stratum": [
+    {
+     "n_cryptic_from": 0,
+     "n_cryptic_below": 10,
+     "n_units": 188,
+     "mean_auc": 0.599136,
+     "median_auc": 0.623807,
+     "share_below_one_half": 0.3404
+    },
+    {
+     "n_cryptic_from": 10,
+     "n_cryptic_below": 16,
+     "n_units": 180,
+     "mean_auc": 0.81441,
+     "median_auc": 0.873068,
+     "share_below_one_half": 0.0944
+    },
+    {
+     "n_cryptic_from": 16,
+     "n_cryptic_below": 23,
+     "n_units": 200,
+     "mean_auc": 0.854423,
+     "median_auc": 0.898261,
+     "share_below_one_half": 0.025
+    },
+    {
+     "n_cryptic_from": 23,
+     "n_cryptic_below": 77,
+     "n_units": 201,
+     "mean_auc": 0.876598,
+     "median_auc": 0.902417,
+     "share_below_one_half": 0.005
+    }
+   ]
+  },
+  "tails at 5 %": {
+   "n_levels": 4,
+   "cuts": [
+    0.05,
+    0.5,
+    0.95
+   ],
+   "pooled_mean_auc": 0.782876,
+   "by_stratum": [
+    {
+     "n_cryptic_from": 0,
+     "n_cryptic_below": 10,
+     "n_units": 188,
+     "mean_auc": 0.595906,
+     "median_auc": 0.614179,
+     "share_below_one_half": 0.3564
+    },
+    {
+     "n_cryptic_from": 10,
+     "n_cryptic_below": 16,
+     "n_units": 180,
+     "mean_auc": 0.807883,
+     "median_auc": 0.868128,
+     "share_below_one_half": 0.1
+    },
+    {
+     "n_cryptic_from": 16,
+     "n_cryptic_below": 23,
+     "n_units": 200,
+     "mean_auc": 0.846686,
+     "median_auc": 0.892506,
+     "share_below_one_half": 0.03
+    },
+    {
+     "n_cryptic_from": 23,
+     "n_cryptic_below": 77,
+     "n_units": 201,
+     "mean_auc": 0.871866,
+     "median_auc": 0.897241,
+     "share_below_one_half": 0.01
+    }
+   ]
+  },
+  "tails at 2 %": {
+   "n_levels": 4,
+   "cuts": [
+    0.02,
+    0.5,
+    0.98
+   ],
+   "pooled_mean_auc": 0.781771,
+   "by_stratum": [
+    {
+     "n_cryptic_from": 0,
+     "n_cryptic_below": 10,
+     "n_units": 188,
+     "mean_auc": 0.59425,
+     "median_auc": 0.62645,
+     "share_below_one_half": 0.3777
+    },
+    {
+     "n_cryptic_from": 10,
+     "n_cryptic_below": 16,
+     "n_units": 180,
+     "mean_auc": 0.807252,
+     "median_auc": 0.864576,
+     "share_below_one_half": 0.1
+    },
+    {
+     "n_cryptic_from": 16,
+     "n_cryptic_below": 23,
+     "n_units": 200,
+     "mean_auc": 0.846887,
+     "median_auc": 0.890529,
+     "share_below_one_half": 0.04
+    },
+    {
+     "n_cryptic_from": 23,
+     "n_cryptic_below": 77,
+     "n_units": 201,
+     "mean_auc": 0.869554,
+     "median_auc": 0.898913,
+     "share_below_one_half": 0.01
+    }
+   ]
+  }
+ },
+ "minus_the_deployed_ladder": {
+  "tails at 5 %": {
+   "pooled": -0.005566,
+   "0-9": -0.00323,
+   "10-15": -0.006527,
+   "16-22": -0.007737,
+   "23-76": -0.004732
+  },
+  "tails at 2 %": {
+   "pooled": -0.006671,
+   "0-9": -0.004886,
+   "10-15": -0.007158,
+   "16-22": -0.007536,
+   "23-76": -0.007044
+  }
+ },
+ "per_split_pooled_mean": {
+  "uniform quartiles (deployed)": [
+   0.8046221173151391,
+   0.7863938660969285,
+   0.7879788870495227,
+   0.7903641083362003,
+   0.7912532032482043,
+   0.7884001071666359,
+   0.8001167906835528,
+   0.7901237509448119,
+   0.7917570080129245,
+   0.7838595993322747,
+   0.8050208764087566,
+   0.7615463411099682
+  ],
+  "tails at 5 %": [
+   0.7960163668630481,
+   0.7826825581297491,
+   0.7796437478668401,
+   0.7850817570677663,
+   0.7836317370793533,
+   0.7799429357666143,
+   0.7965321352352601,
+   0.7850136542063446,
+   0.7885740002855058,
+   0.7783970918370452,
+   0.7959145777596367,
+   0.764131360422323
+  ],
+  "tails at 2 %": [
+   0.793567193865413,
+   0.7792697030410757,
+   0.7791332497897082,
+   0.7859518474110497,
+   0.7818785853202581,
+   0.7804551625147157,
+   0.7935306397913099,
+   0.7862485204184768,
+   0.7888933987848511,
+   0.7753808728426806,
+   0.7963206108425754,
+   0.7581119008621885
+  ]
+ },
+ "per_split_deployed_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ]
+}

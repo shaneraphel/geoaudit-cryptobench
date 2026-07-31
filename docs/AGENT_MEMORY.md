@@ -388,8 +388,30 @@ the strongest wires is about twice as rich as the quartile containing it, and
 `QUANTISATION_LADDER.json` found the cuts at optimum with finer cuts monotonically
 worse by −0.0041 to −0.0069 — but that sweep was scored by the same mean over
 units, so a cut that helps the bottom stratum and hurts the top would have
-cancelled inside it. **Re-run the ladder stratified before concluding anything
-about it.**
+cancelled inside it.
+
+**Re-run stratified, and the prediction is falsified** (`QUANTISATION_BY_STRATUM.json`,
+deployed arm reproduced to 4.0e-07):
+
+| arm | pooled | 0–9 | 10–15 | 16–22 | 23–76 |
+|---|---|---|---|---|---|
+| uniform quartiles (deployed) | 0.7884 | 0.5991 | 0.8144 | 0.8544 | 0.8766 |
+| tails at 5 % | −0.0056 | **−0.0032** | −0.0065 | −0.0077 | −0.0047 |
+| tails at 2 % | −0.0067 | **−0.0049** | −0.0072 | −0.0075 | −0.0070 |
+
+Finer tails hurt **every** stratum. The small-pocket stratum is hurt least, which
+is the predicted direction and is still a loss, so the dilution argument is sound
+about the arithmetic and wrong about the cause. **The small-pocket deficit is not
+a quantisation-resolution problem**, and the ladder is closed a second time by a
+stronger measurement than the one that closed it first.
+
+That elimination leaves the 0.5991-against-0.8766 gap standing and unexplained.
+The next suspect is the **spatial gate**, and it is the same trap: `r = 18, w = 1.0`
+was chosen over {14, 18} × {0.5, 1.0} by pick-half ROC-AUC — a mean over units —
+so a radius that suits a forty-residue site and drowns an eight-residue one would
+have been selected without anyone seeing it. An 18 Å gate around a site with eight
+cryptic residues averages over a neighbourhood that is almost entirely negative.
+Sweep it stratified before proposing anything else.
 
 One caution that will matter as soon as a fix is proposed. The stratifying
 variable is the number of cryptic residues, which is the **label**. Nothing that
