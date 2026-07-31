@@ -444,11 +444,23 @@ compare them.**
 
 **Two limits, and neither is optional when this is written up.**
 
-*Selection optimism.* `r=14, w=1` is the best of thirteen arms chosen on the same
-pick halves it is scored on, so +0.0025 is an optimistic estimate of its own
-effect. §3 records the identical concern for pairings and the identical remedy:
-re-measure the chosen arm on halves it was not chosen from. **Do that before
-changing a constant.**
+*Selection optimism — measured, and it is present but does not eat the effect.*
+`r=14, w=1` is the best of thirteen arms chosen on the same pick halves it is
+scored on, so the remedy §3 records for pairings was applied: choose on six
+splits, score on the other six, both ways round.
+
+| chosen on | arm chosen | margin there | margin on the other half |
+|---|---|---|---|
+| first 6 | `r=14 w=1` | +0.00320 | +0.00175, CI [−0.0002, +0.0037] |
+| second 6 | `r=14 w=1` | +0.00175 | +0.00320, CI [+0.0011, +0.0053] |
+
+**Both halves independently choose the same arm**, so the choice is not an
+artifact of where it was selected. The margin differs between halves, +0.0032
+against +0.0018, and one of the two intervals crosses zero — which is what six
+splits buy. The tool prints `margin survives: False` because it requires both
+directions to exclude zero, and that boolean is too crude to quote on its own:
+what the numbers say is that the *choice* replicates and the *size* is somewhere
+between +0.0018 and +0.0032, pooled +0.0025.
 
 *The magnitude sits on the reseed floor.* +0.0025 against a 0.0026 floor. The
 paired p is 1.15e-04 and the floor is about pairing-seed noise rather than about

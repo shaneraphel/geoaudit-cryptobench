@@ -1160,6 +1160,39 @@
    "best_radius": 14.0
   }
  },
+ "selection_check": {
+  "chose_on_splits_0_scored_on_1": {
+   "splits_chosen_on": "first 6",
+   "arm_chosen": "r=14 w=1",
+   "margin_where_it_was_chosen": 0.0032,
+   "margin_where_it_was_not": 0.001746,
+   "ci95_where_it_was_not": [
+    -0.000228,
+    0.00372
+   ],
+   "crosses_zero_where_it_was_not": true,
+   "n_units": 760,
+   "shrinkage": 0.001454
+  },
+  "chose_on_splits_1_scored_on_0": {
+   "splits_chosen_on": "second 6",
+   "arm_chosen": "r=14 w=1",
+   "margin_where_it_was_chosen": 0.001746,
+   "margin_where_it_was_not": 0.0032,
+   "ci95_where_it_was_not": [
+    0.001134,
+    0.005266
+   ],
+   "crosses_zero_where_it_was_not": false,
+   "n_units": 756,
+   "shrinkage": -0.001454
+  },
+  "verdict": {
+   "both_halves_choose_the_same_arm": true,
+   "margin_survives_on_the_half_it_was_not_chosen_from": false,
+   "why_this_is_here": "the best of thirteen arms was chosen on the same pick halves it was scored on. A margin that is real keeps most of its size on splits that did not select it; one that is selection optimism collapses. This is the remedy AGENT_MEMORY 3 already records for the pairing selection, applied to the gate"
+  }
+ },
  "verdict": {
   "optimum_radius_by_stratum": [
    0.0,

@@ -188,6 +188,15 @@ def main(argv: list[str] | None = None) -> int:
     arms = [(r, w) for r in RADII for w in WEIGHTS if not (r == 0.0 and w != 1.0)]
     seen = {k: np.zeros(len(n_res), dtype=np.int64) for k in arms}
     total = {k: np.zeros(len(n_res), dtype=np.float64) for k in arms}
+    # Accumulated separately over the first and second half of the splits, so
+    # the arm can be chosen on one half and scored on the other. Choosing the
+    # best of thirteen arms and quoting its margin on the same numbers is
+    # selection optimism, and section 3 of the memory records the identical
+    # concern for pairings with this identical remedy.
+    half_seen = [{k: np.zeros(len(n_res), dtype=np.int64) for k in arms}
+                 for _ in (0, 1)]
+    half_total = [{k: np.zeros(len(n_res), dtype=np.float64) for k in arms}
+                  for _ in (0, 1)]
     deployed_per_split: list[float] = []
 
     t0 = time.perf_counter()
@@ -208,6 +217,9 @@ def main(argv: list[str] | None = None) -> int:
             ok = ~np.isnan(per)
             seen[(r, w)][idx[ok]] += 1
             total[(r, w)][idx[ok]] += per[ok]
+            h = 0 if s < n_splits // 2 else 1
+            half_seen[h][(r, w)][idx[ok]] += 1
+            half_total[h][(r, w)][idx[ok]] += per[ok]
             if (r, w) == (GATE_RADIUS, GATE_WEIGHT):
                 deployed_per_split.append(float(np.nanmean(per)))
         print(f"  split {s + 1}/{n_splits}  deployed "
@@ -296,6 +308,59 @@ def main(argv: list[str] | None = None) -> int:
             "best_radius": ranked[0][1]["radius"],
         }
 
+    # Choose on one half of the splits, score on the other, both ways round.
+    # An arm that is best only because it was chosen where it was scored shows
+    # here as a margin that collapses; an arm that is genuinely better keeps it.
+    def half_means(h: int) -> dict:
+        out = {}
+        for k in arms:
+            sc = half_seen[h][k] > 0
+            m = np.full(len(n_res), np.nan)
+            m[sc] = half_total[h][k][sc] / half_seen[h][k][sc]
+            out[k] = m
+        return out
+
+    hm = [half_means(0), half_means(1)]
+    selection_check = {}
+    for choose_on, score_on in ((0, 1), (1, 0)):
+        ranked = sorted(arms, key=lambda k: -float(
+            np.nanmean(hm[choose_on][k])))
+        pick = ranked[0]
+        d = hm[score_on][pick] - hm[score_on][(GATE_RADIUS, GATE_WEIGHT)]
+        d = d[~np.isnan(d)]
+        n = len(d)
+        se = float(d.std(ddof=1) / np.sqrt(n)) if n > 1 else float("nan")
+        on_choose = hm[choose_on][pick] - hm[choose_on][(GATE_RADIUS,
+                                                        GATE_WEIGHT)]
+        on_choose = on_choose[~np.isnan(on_choose)]
+        selection_check[f"chose_on_splits_{choose_on}_scored_on_{score_on}"] = {
+            "splits_chosen_on": ("first" if choose_on == 0 else "second")
+                                + f" {n_splits // 2}",
+            "arm_chosen": f"r={pick[0]:g} w={pick[1]:g}",
+            "margin_where_it_was_chosen": round(float(on_choose.mean()), 6),
+            "margin_where_it_was_not": round(float(d.mean()), 6),
+            "ci95_where_it_was_not": [round(float(d.mean() - 1.96 * se), 6),
+                                      round(float(d.mean() + 1.96 * se), 6)],
+            "crosses_zero_where_it_was_not": bool(abs(d.mean()) < 1.96 * se),
+            "n_units": int(n),
+            "shrinkage": round(float(on_choose.mean() - d.mean()), 6),
+        }
+    both_pick_same = len({v["arm_chosen"]
+                          for v in selection_check.values()}) == 1
+    survives = all(not v["crosses_zero_where_it_was_not"]
+                   and v["margin_where_it_was_not"] > 0
+                   for v in selection_check.values())
+    selection_check["verdict"] = {
+        "both_halves_choose_the_same_arm": bool(both_pick_same),
+        "margin_survives_on_the_half_it_was_not_chosen_from": bool(survives),
+        "why_this_is_here": (
+            "the best of thirteen arms was chosen on the same pick halves it "
+            "was scored on. A margin that is real keeps most of its size on "
+            "splits that did not select it; one that is selection optimism "
+            "collapses. This is the remedy AGENT_MEMORY 3 already records for "
+            "the pairing selection, applied to the gate"),
+    }
+
     radii_by_stratum = [best[sn]["best_radius"] for sn in strat_names]
     rises = all(x <= y_ for x, y_ in zip(radii_by_stratum, radii_by_stratum[1:]))
     same = len(set(radii_by_stratum)) == 1
@@ -334,6 +399,7 @@ def main(argv: list[str] | None = None) -> int:
             "difference of stratum means. An unpaired comparison here would "
             "be dominated by which units a stratum happens to hold"),
         "best_arm_per_stratum": best,
+        "selection_check": selection_check,
         "verdict": {
             "optimum_radius_by_stratum": radii_by_stratum,
             "rises_with_pocket_size": bool(rises and not same),
@@ -387,6 +453,19 @@ def main(argv: list[str] | None = None) -> int:
                   f"{v['n_units_better']}/{v['n_units']} units better  "
                   f"p={v['sign_test_p_one_sided']:.2e}  "
                   f"crosses_zero={v['crosses_zero']}")
+    print("\n  selection check -- chosen on one half of the splits, scored on the other:")
+    for k, v in selection_check.items():
+        if k == "verdict":
+            continue
+        print(f"    {v['arm_chosen']:12s} chosen on the {v['splits_chosen_on']} "
+              f"splits: {v['margin_where_it_was_chosen']:+.5f} there, "
+              f"{v['margin_where_it_was_not']:+.5f} on the other half "
+              f"CI {v['ci95_where_it_was_not']} "
+              f"crosses_zero={v['crosses_zero_where_it_was_not']}")
+    sv = selection_check["verdict"]
+    print(f"    both halves choose the same arm: "
+          f"{sv['both_halves_choose_the_same_arm']}; margin survives: "
+          f"{sv['margin_survives_on_the_half_it_was_not_chosen_from']}")
     print(f"\n  {doc['verdict']['the_reading']}")
     if a.write:
         print(f"\nwrote {out.relative_to(ROOT)}")
