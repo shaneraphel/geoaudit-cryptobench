@@ -143,6 +143,22 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         from backbone_wires import build_or_load
         X, _n = build_or_load(permuted=True)
         return np.asarray(X), "tools/backbone_wires.py --permuted"
+    if name == "sidechain 258":
+        # 86 quantities at three aggregations. AGENT_MEMORY 2j-bis names this
+        # family on 2i's rule -- a residue centroid does not determine chi1 --
+        # and it is the second family that reads bytes the pipeline discards.
+        from sidechain_wires import build_or_load
+        X, _n = build_or_load()
+        return np.asarray(X), "tools/sidechain_wires.py"
+    if name == "sidechain permuted 258":
+        # Same columns, rows shuffled inside each chain: every marginal is the
+        # same multiset and only the correspondence between a row and its
+        # residue is destroyed. Beating more_old says the columns carry
+        # something; beating this says what they carry is the side-chain
+        # conformation of the residue being scored.
+        from sidechain_wires import build_or_load
+        X, _n = build_or_load(permuted=True)
+        return np.asarray(X), "tools/sidechain_wires.py --permuted"
     if name == "composition 76":
         from composition_wires import build_or_load
         X, _n = build_or_load()
