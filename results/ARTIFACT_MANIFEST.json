@@ -830,7 +830,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.endpoint_status.v1",
-      "bytes": 7892
+      "bytes": 8172
     },
     {
       "artifact": "results/official_fold/FIGURE_PROVENANCE.json",
