@@ -166,20 +166,38 @@ eight at or past their optimum, and it exhausts the readout. Anything further ha
 to change the wires — what a table reads — not how the tables are built,
 addressed, chosen, weighted, subdivided or shaped.
 
-## 2c. The wires, which were the only axis left, and are now closed too
+## 2c. The wires: six null families, then a rule, then three live ones
 
-Four column families now have both a counting-field lift and a linear-solve lift on
-the same twelve splits under the same gate, and §2d has since measured the third and
-last attachment. **The axis is closed; read §2d before proposing a fifth family.**
+**This section's heading used to read "the only axis left, and now closed too",
+and that was wrong.** The heading is corrected rather than annotated because a
+heading is what gets read; the record of the mistake is below, where it is
+useful, instead of at the top where it misleads. What follows is the original
+closure argument, kept intact, and then what actually happened.
 
-**Reopened, narrowly — read §2i and §2j.** The closure held for six families and
-the account of *why* arrived later: every one of them was a function of data the
-pipeline already reads. The seventh reads bytes it throws away — backbone atom
-positions — and is worth +0.00196 against the deployed detector and +0.00267
-against its own marginal-preserving permutation, both with intervals excluding
-zero. So the sentence above is right about re-encodings and was wrong to
-generalise from them to wires as such. It is still right that +0.002 does not
-close a 0.0243 deficit.
+The closure was: four column families have both a counting-field lift and a
+linear-solve lift on the same twelve splits under the same gate, §2d measured the
+third and last attachment, and nothing was left to vary. Six families were null.
+
+**What was wrong with it.** Six nulls with no account of *why* they were null is
+not a closed axis, it is an unexplained pattern. The account arrived later (§2i):
+every one of the six was a function of data the pipeline already reads, so none
+of them could add information — they were re-encodings. The generalisation from
+"these six re-encodings are null" to "wires as such are exhausted" was the error.
+
+**Where it stands now.** Three families that read bytes the pipeline discards are
+live, each with a null control arm and a *negative* row-permuted arm (§2j, §2j-bis,
+§2m):
+
+| family | lift | splits | permuted |
+|---|---|---|---|
+| backbone 132 | +0.00441 | 12/12 | −0.00213 on 3/12 |
+| sidechain 261 | +0.00476 | 11/12 | −0.00326 on 0/12 |
+| void 135 | +0.00258 | 11/12 | −0.00140 on 2/12 |
+| conformation 393 (first two combined) | +0.00723 | 12/12 | — |
+
+The one sentence in the original that survives unchanged: **this does not close
+the 0.0243 deficit.** The best combined training-fold number is +0.0072, and
+whether a training-fold lift transfers to the official fold is unmeasured.
 
 | family | mean pairwise interaction | field | solve |
 |---|---|---|---|
@@ -330,14 +348,20 @@ comparison here whose interval excludes zero; straddling recovers **exactly** th
 cost and lands at +0.00001 against the deployed detector. The crossing was worth
 having only because the attachment was throwing it away. There is no gain.
 
-**So the wire axis is closed, by the same standard as the other eight.** Five families
-and now all three attachments have been measured. Nothing moves the deployed detector.
-Two statistics ordered the families — internal interaction, then cross interaction —
-and neither moved a number when acted on. **Stop screening families.** The fifth was
-proposed on a chemical argument rather than on either statistic, which was the right
-kind of reason and produced the same null; so proposing a sixth needs more than a good
-argument, and proposing a fourth attachment needs a reason that is not "the tables sit
-somewhere else".
+**This paragraph concluded "the wire axis is closed" and that conclusion is
+withdrawn — see §2c, §2i and §2m.** What it got right is narrower and still
+holds: *these* five families and all three attachments are null, and the two
+statistics that ordered them — internal interaction, then cross interaction —
+never moved a number when acted on, which makes both correlates. What it got
+wrong was the scope. Five nulls with no account of why they were null cannot
+close an axis, and the account (§2i: all five were functions of data the pipeline
+already reads) is what let three later families be proposed with their sign
+called in advance.
+
+The attachment conclusion is unaffected: all three attachments were measured, the
+union attachment costs −0.00086, straddling recovers exactly that and gains
+nothing beyond it, and a fourth attachment still needs a reason that is not "the
+tables sit somewhere else".
 
 **And the one procedural thing that did change: run the control.** `more_old` adds
 the same number of tables over the deployed wires with the new family absent. On the
@@ -346,9 +370,13 @@ measured without it, so their small positives and negatives cannot be separated 
 bank size after the fact — asymmetry's +0.0010 in particular has no control beside it
 and should not be quoted as though it does.
 
-Keep the size in view: the largest effect anywhere on this axis is +0.0010, and the
-pLM-NN deficit is **0.0243**, twenty-four times it. That gap is not an attachment
-problem and it was never plausible that it was.
+Keep the size in view. When this was written the largest effect anywhere on the
+axis was +0.0010 against a pLM-NN deficit of **0.0243**, twenty-four times it.
+It is now +0.0072 (`conformation 393`), which is three and a third times smaller
+rather than twenty-four — a different situation, and still not a win, and still
+a training-fold number. The sentence that survives untouched is the one about
+attachments: the gap is not an attachment problem and it was never plausible
+that it was.
 
 ## 2e. The largest effect in this repository, and nobody had looked
 
@@ -596,11 +624,9 @@ Two things this does *not* say, both of which will be tempting:
   is the standard §2c applied to five wire families.
 * It does not locate the pLM-NN deficit. pLM-NN reads evolutionary information
   that neither method here has, and whether *its* profile also collapses on 0–9
-  is unmeasured. That is now the question worth the compute: if pLM-NN also sits
-  near 0.60 there, its whole advantage lives in the large strata, where we are
-  already 0.076 ahead of PocketMiner, and that is a very specific target. This
-  costs no test-fold read — the baseline can be run on the training fold, and
-  nothing pins its tools by `code_sha256`.
+  is unmeasured. ~~That is now the question worth the compute: the baseline can be
+  run on the training fold, which costs no test-fold read.~~ **That plan is dead
+  and §2h-bis says why.** The question is still open; the route to it is not.
 
 Method note worth keeping: this cost **zero** compute on the rival, because its
 per-residue training-fold predictions were already on disk under
@@ -608,6 +634,75 @@ per-residue training-fold predictions were already on disk under
 to stratify the *test-fold* pLM-NN comparison, which would have spent a read from
 the ledger on an exploratory question. Check what is already on disk before
 spending a frozen resource.
+
+## 2h-bis. "It costs no test-fold read" is not the same as "it is a measurement"
+
+§2h ended by naming the pLM-NN stratification as the question worth the compute,
+and the argument for it was that running the rival on the **training** fold
+spends nothing from the ledger. That argument is correct and irrelevant, and the
+run was started and killed four minutes in.
+
+**pLM-NN's head is CryptoBench's published `best_trained`, fitted by the authors
+on their training folds. `TRAIN_MANIFEST.json` records our training partition as
+exactly those folds — `train-0` through `train-3`. The 770 chains are the
+model's own fitting set.**
+
+Sixty chains were scored to put a number on it — twenty minutes rather than the
+four and a half hours the full pass would have cost — and
+`PLMNN_TRAIN_IS_ITS_OWN_FIT_SET.json` holds the result:
+
+| | mean per-unit ROC-AUC |
+|---|---|
+| pLM-NN, official test fold (`PLMNN_READ.json`) | **0.8235** |
+| pLM-NN, 60 chains of its own fitting set | **0.9622** |
+| difference | **+0.1387** |
+
+Median 0.9796, max 0.9974, **46 of 60 at or above 0.95, one below 0.80**.
+
+A model evaluated on its own fitting set does not "collapse" on a hard stratum;
+it has memorised it. Whatever profile came out of four and a half hours would
+have described fit, not generalisation, and it would have looked like an answer.
+
+The spread does not rescue it, and it is reported rather than the mean alone
+because it is the thing that tempts a rescue. The minimum is 0.6557, so some
+chains genuinely fit worse — but "where a model happened to fit less well" and
+"where a model is weak" are different questions wearing the same units, and
+nothing after the fact separates them.
+
+**It would also have poisoned a second measurement.**
+`found_where_three_baselines_missed.py` was written the same afternoon to add
+pLM-NN as a third baseline to the recovery count, whose rule asks whether a
+baseline sits *at chance* on a unit. A memorising baseline is never at chance, so
+the recovery count would have gone to zero — and been read as "the four cases do
+not survive a third method" when it means "the third method was shown the answer
+key". The tool now refuses, prints the two numbers above, and says what would
+make the measurement possible. A confidently wrong number is worse than none.
+
+> **A cost argument is not a validity argument, and cheapness is what makes it
+> hard to notice.** "This costs no test-fold read" was true, and it was doing the
+> work of "this measures what I want", which nobody checked. Before running
+> anything against a published baseline, ask which data that baseline was fitted
+> on — and check it against the manifest rather than recalling it. The check here
+> was one `grep` in `TRAIN_MANIFEST.json` and one number already sitting in
+> `PLMNN_READ.json`, and it was available before the run rather than after.
+>
+> The tell was visible in the first five lines of output: AUCs of 0.9946, 0.9551,
+> 0.9760, 0.9907, 0.9783 for a method whose published performance on this
+> benchmark is 0.82. **A rival that suddenly looks far better than its own paper
+> is measuring something else.** This repository already has the mirror-image
+> rule for its own numbers — §5 on the frozen sets, and every gate that refuses a
+> result too good for its protocol — and had no habit of applying it to a
+> baseline, because a baseline scoring well is not the direction anybody guards
+> against.
+
+**What is still open, and what it would now cost.** Whether pLM-NN's advantage is
+concentrated in the large strata is unanswered. Three routes, none free: retrain
+the published architecture on a split excluding the units scored, which makes it
+our model and not the published baseline and needs its own preregistration;
+spend an external set, which destroys the confirmatory result it exists for; or
+stratify the official-fold comparison, which is a ledger read for an exploratory
+question — the thing §2h's method note records avoiding. The honest default is
+that it stays open.
 
 ## 2i. Why six families were null, stated as a rule you can apply before running
 
@@ -784,10 +879,18 @@ the expansion cost one afternoon of reasoning and 26 seconds of rebuild.
 **Where this leaves the deficit, stated without decoration.** pLM-NN is ahead by
 0.0243 on the official fold and 0.0340 externally. The gate radius is worth
 +0.0025 and this is worth +0.0044; if they add, which is unmeasured, that is
-+0.0069, or **28% of the official-fold deficit**. It is the largest honest number
-this line of work has produced and it is not a win. Nothing here has been
++0.0069, or **28% of the official-fold deficit**. It was the largest honest
+number this line of work had produced and it is not a win. Nothing here has been
 deployed, and deploying either makes `EXTERNAL_READ.json`'s +0.0443 a result
 about a detector that no longer exists.
+
+*Superseded as an arithmetic, not as a caution.* §2m measured the addition this
+paragraph could only speculate about — for two families rather than for the gate
+— and `conformation 393` is **+0.0072 on 12/12**, so a measured sum now stands
+where a hypothetical one did. The caution is unchanged and applies to the new
+number exactly as it applied to this one: it is a training-fold measurement,
+nothing is deployed, and whether any of it transfers to the official fold has
+not been measured.
 
 **What is on the same rule and not yet built.** §2i's question is whether a family
 reads bytes the pipeline throws away. Side-chain *conformation* does: the centroid
@@ -857,14 +960,39 @@ second one.
 quantities of the connectivity of the empty space at three aggregations, the
 only one of the three that is not a function of the scored residue's own atom
 positions — gives **+0.00258 on 11/12**, CI [+0.0012, +0.0039], p = 0.0032,
-against a `more_old` control at **−0.00015 on 6/12** crossing zero. About half
-the size of the two conformation families and on the same one-sentence screen.
-Its first pass ran one arm and no `--write`, and that number was not quotable
-until the control landed: the union arm adds 1,072 tables and "more tables help"
-is exactly what `more_old` exists to rule out. `geometry 528`, all three
-families as one block, is the arm that says whether void is a third signal or
-buriedness arriving by a third route; it and the row-permuted void arm are
-running.
+against a `more_old` control at **−0.00015 on 6/12** crossing zero, and a
+row-permuted arm at **−0.00140 on 2/12**. About half the size of the two
+conformation families and on the same one-sentence screen. Its first pass ran
+one arm and no `--write`, and that number was not quotable until the control
+landed: the union arm adds 1,072 tables and "more tables help" is exactly what
+`more_old` exists to rule out.
+
+**And void is nearly orthogonal to both, which is the first magnitude the screen
+called in advance.** The pairwise result does not settle the triple. All three
+as one block:
+
+| stack | lift | splits | vs sum if independent | recovered |
+|---|---|---|---|---|
+| conformation 393 (backbone + sidechain) | +0.00723 | 12/12 | +0.00917 | 78.8 % |
+| **geometry 528 (all three)** | **+0.00949** | **12/12** | +0.01175 | **80.8 %** |
+
+`geometry 528` CI [+0.0081, +0.0109], p = 0.0002, control **−0.00097 on 5/12**
+crossing zero. The marginal quantity is the one that matters: adding void on top
+of both conformation families is worth **+0.00227 on 10/12**, which is **88 % of
+its standalone +0.00258**. Two families computed from overlapping atom sets share
+about a fifth of what they carry; the family computed from the space *between*
+those atoms keeps nearly all of its own.
+
+> The screen in §2i had predicted signs. This is the first time it predicted a
+> **magnitude**: a family reading bytes the pipeline discards should overlap
+> less with families reading the residue's own atoms, and it overlaps by 12 %
+> against their 21 %. A screen that calls a magnitude is worth more than one that
+> calls a sign, and this is one instance and not a law — the next family to test
+> it should have its expected overlap written down before the stack is run.
+
+**Where the deficit stands.** pLM-NN leads by 0.0243 officially and 0.0340
+externally; **+0.0095 is 39 % of the official gap** and is a training-fold
+number whose transfer is unmeasured. Nothing is deployed.
 
 ## 2m-bis. The exact-arithmetic path in the void family has never corrected anything
 

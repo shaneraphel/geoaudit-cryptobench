@@ -1847,6 +1847,8 @@ def _additivity_macros() -> list[str]:
         "A": ROOT / "results/architecture_sweep/BACKBONE_WIDE_LIFT.json",
         "B": ROOT / "results/architecture_sweep/SIDECHAIN_WIDE_LIFT.json",
         "AB": ROOT / "results/architecture_sweep/CONFORMATION_LIFT.json",
+        "C": ROOT / "results/architecture_sweep/VOID_LIFT.json",
+        "ABC": ROOT / "results/architecture_sweep/GEOMETRY_LIFT.json",
     }
     if not all(p.exists() for p in paths.values()):
         return []
@@ -1867,6 +1869,15 @@ def _additivity_macros() -> list[str]:
     over_b = [c - b for c, b in zip(lift["AB"], lift["B"])]
     mean = lambda v: sum(v) / len(v)  # noqa: E731
     recovered = mean(lift["AB"]) / mean(summed)
+
+    # The three-way stack. The pairwise answer does not settle it: void is the
+    # one family that is not a function of the scored residue's own atoms, so
+    # how much of it survives being stacked on the two that are is a separate
+    # question and is what decides whether it ships.
+    summed3 = [a + b + c for a, b, c in zip(lift["A"], lift["B"], lift["C"])]
+    over_ab = [g - ab for g, ab in zip(lift["ABC"], lift["AB"])]
+    recovered3 = mean(lift["ABC"]) / mean(summed3)
+    void_kept = mean(over_ab) / mean(lift["C"])
     return [
         f"\\newcommand{{\\FamAddSum}}{{{_signed(mean(summed), 4)}}}",
         f"\\newcommand{{\\FamAddShortfall}}{{{_signed(mean(shortfall), 4)}}}",
@@ -1880,6 +1891,14 @@ def _additivity_macros() -> list[str]:
         f"{{{sum(1 for x in over_b if x > 0)}}}",
         f"\\newcommand{{\\FamAddOf}}{{{n}}}",
         f"\\newcommand{{\\FamAddNarrow}}{{{mean(narrow):.4f}}}",
+        f"\\newcommand{{\\FamAddSumThree}}{{{_signed(mean(summed3), 4)}}}",
+        f"\\newcommand{{\\FamAddRecoveredThree}}{{{recovered3 * 100:.1f}\\%}}",
+        f"\\newcommand{{\\FamAddSharedThree}}"
+        f"{{{(1 - recovered3) * 100:.1f}\\%}}",
+        f"\\newcommand{{\\FamAddOverConf}}{{{_signed(mean(over_ab), 4)}}}",
+        f"\\newcommand{{\\FamAddOverConfSplits}}"
+        f"{{{sum(1 for x in over_ab if x > 0)}}}",
+        f"\\newcommand{{\\FamAddVoidKept}}{{{void_kept * 100:.0f}\\%}}",
     ]
 
 

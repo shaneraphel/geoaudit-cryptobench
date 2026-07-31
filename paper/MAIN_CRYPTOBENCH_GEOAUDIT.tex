@@ -2559,6 +2559,22 @@ redundant given the other, and the shortfall of \FamAddShortfall{} is the part
 that was being counted twice. The control arm remains null at
 \FamConfControl{} on \FamConfControlSplits{} of \FamConfOf{}.
 
+The pairwise answer does not settle the triple, and the third family is the one
+with a reason to behave differently: void is not a function of the scored
+residue's own atom positions, where the other two are computed from overlapping
+atom sets. All three concatenated --- \FamGeomCols{} columns --- give
+\FamGeom{}, \FamGeomCI{}, on \FamGeomSplits{} of \FamGeomOf{} splits
+(\(p=\FamGeomP{}\)) against \FamAddSumThree{} if the three were independent, so
+the stack recovers \FamAddRecoveredThree{} of the three-way sum against
+\FamAddRecovered{} for the pair. The marginal quantity is the informative one:
+adding void to the two conformation families is worth \FamAddOverConf{} on
+\FamAddOverConfSplits{} of \FamAddOf{}, which is \FamAddVoidKept{} of its
+standalone \FamVoid{}. The two families computed from the same atoms share about
+a fifth of what they carry; the family computed from the space between them
+keeps nearly all of its own. That is what the screen predicted and it is the
+first time the screen has predicted a magnitude rather than a sign. The control
+arm is null at \FamGeomControl{} on \FamGeomControlSplits{} of \FamGeomOf{}.
+
 Three things bound what this is worth. It is a training-fold measurement and
 nothing here is deployed: moving the architecture would make the external read
 of Section~\ref{sec:external} a result about a detector that no longer exists,
@@ -2566,8 +2582,8 @@ which is why the two remaining external sets are frozen and unread. The lift is
 above the \SatReseed{} reseed floor but of the same order, and it is quoted with
 its interval for that reason. And it does not close the deficit: the supervised
 sequence baseline of Section~\ref{sec:plmnn} leaves the deployed detector at
-\PlmAucDelta{} \PlmAucCI{} on the official fold, and the combined family's
-\FamConf{} is under a third of that gap even before asking whether a
+\PlmAucDelta{} \PlmAucCI{} on the official fold, and the full stack's
+\FamGeom{} is under two fifths of that gap even before asking whether a
 training-fold lift transfers to the official one, which is not measured here and
 is not assumed. What changed is not the standing
 of the method but the standing of a claim: the wire axis is not closed, the

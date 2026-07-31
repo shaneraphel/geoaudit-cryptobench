@@ -15,10 +15,34 @@ them at chance. It carries a field named ``plmnn_absent`` saying what it is not:
 So "P2Rank and pLM-NN both missed it" has had no support anywhere. On the
 training fold pLM-NN had never been run; on the official fold it had, and the
 preregistered read came back **0 recoveries against 1 mirror**
-(``RECOVERY_READ.json``), which is the answer and is negative. The only way to
-say anything more is to run pLM-NN on the *training* fold, which
-``plmnn_by_stratum.py --embed`` does for a different question and which this
-tool then joins against. **No test-fold or external unit is read here.**
+(``RECOVERY_READ.json``), which is the answer and is negative.
+
+**This tool cannot supply the missing arm, and the reason is recorded here
+because it is the reason somebody will try again.**
+
+The plan was to run pLM-NN over the training fold and join those per-unit AUCs
+in as a third baseline. It costs no test-fold read, so it looked free. It is not
+a measurement. The head is CryptoBench's published ``best_trained``, fitted by
+the authors on their training folds, and ``TRAIN_MANIFEST.json`` says our
+training partition *is* ``train-0`` through ``train-3``. The 770 chains are the
+model's own fitting set.
+
+The numbers say it plainly: pLM-NN scores **0.8235** mean per-unit ROC-AUC on
+the official fold (``PLMNN_READ.json``) and **0.98** on the chains it was fitted
+on. The recovery rule asks whether a baseline sits *at chance* on a unit, and a
+model that has memorised a chain is never at chance on it. Feeding these scores
+in would drive the recovery count to zero — not because the four cases fail
+against a third method, but because the third method was shown the answer key.
+That is a confidently wrong answer, which is worse than no answer, so the tool
+refuses rather than producing it. See ``AGENT_MEMORY`` 2h-bis.
+
+**What would make the measurement possible.** A pLM-NN whose fitting set is
+disjoint from the units being scored. Three routes, none of them free: retrain
+the published architecture on a split that excludes the units of interest, which
+makes it our model and not the published baseline; use the external sets, which
+are frozen and spending one destroys the confirmatory result it exists for; or
+accept ``RECOVERY_READ.json``'s official-fold answer, which was preregistered,
+already read, and negative. The third is the honest default.
 
 The rule is read, not restated
 ------------------------------
@@ -65,6 +89,46 @@ CKPT = ROOT / "results/baselines/_plmnn_train_checkpoint.jsonl"
 OUT = ROOT / "results/architecture_sweep/RECOVERED_UNITS_TRAIN_THREE.json"
 
 BASELINES = ("p2rank", "pocketminer", "plmnn")
+
+
+FIT_SET_REFUSAL = """\
+This tool will not run, and the refusal is the result.
+
+It was written to add pLM-NN as a third baseline to the training-fold recovery
+count. That cannot be done with the checkpoint it reads, because the pLM-NN head
+is CryptoBench's published best_trained, fitted by the authors on their training
+folds, and data/cryptobench_apo/TRAIN_MANIFEST.json records our training
+partition as exactly those folds: train-0 through train-3. Every chain in the
+checkpoint is a chain the model was fitted on.
+
+  pLM-NN, official test fold   0.8235   (results/official_fold/PLMNN_READ.json)
+  pLM-NN, its own fitting set  {mean:.4f}   ({n} chains scored)
+  difference                   {gap:+.4f}
+
+The recovery rule asks whether a baseline sits at chance on a unit. A model that
+has memorised a chain is never at chance on it, so these scores would drive the
+count to zero for a reason that has nothing to do with the method under test.
+Producing that number would be worse than producing none.
+
+What would make the measurement possible, none of it free:
+
+  * retrain the published architecture on a split excluding the units scored,
+    which makes it our model rather than the published baseline;
+  * use an external set, which is frozen, and spending one destroys the
+    confirmatory result it exists for;
+  * accept results/official_fold/RECOVERY_READ.json, which asked this question
+    under a preregistered plan against all three baselines and returned
+    0 recoveries against 1 mirror. It is negative and it is the honest default.
+"""
+
+
+def _refuse_on_fit_set(plm: dict[str, float]) -> None:
+    """Stop before turning a memorised baseline into a recovery count."""
+    if not plm:
+        return
+    mean = sum(plm.values()) / len(plm)
+    raise SystemExit(FIT_SET_REFUSAL.format(
+        mean=mean, n=len(plm), gap=mean - 0.823469))
 
 
 def _plmnn() -> dict[str, float]:
@@ -120,6 +184,7 @@ def build(write: bool) -> int:
         raise SystemExit("the source artifact reads the test fold")
 
     plm = _plmnn()
+    _refuse_on_fit_set(plm)
     joined, unmatched = [], []
     for r in two["per_unit"]:
         if r["unit"] in plm:

@@ -1,0 +1,33 @@
+{
+  "schema": "geoaudit.plmnn_train_is_its_own_fit_set.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": false,
+  "question": "whether pLM-NN can be run on our training fold to answer an exploratory question about it, given that the published head was fitted somewhere",
+  "answer": "no, because it was fitted here",
+  "why": {
+    "head": "CryptoBench's published best_trained, read out of the authors' SavedModel; see results/baselines/PLMNN_NETWORK.json",
+    "our_training_partition": "data/cryptobench_apo/TRAIN_MANIFEST.json records fold = train-0..train-3, which are the folds that head was fitted on",
+    "so": "every chain scored below is in the model's own fitting set"
+  },
+  "measured": {
+    "n_chains_scored": 60,
+    "mean_per_unit_roc_auc_on_its_fit_set": 0.962186,
+    "median": 0.979638,
+    "min": 0.655738,
+    "max": 0.997423,
+    "n_at_or_above_0_95": 46,
+    "n_below_0_80": 1,
+    "published_mean_on_the_official_test_fold": 0.823469,
+    "gap": 0.138717,
+    "source_of_the_official_number": "results/official_fold/PLMNN_READ.json, reproduction_gate"
+  },
+  "why_the_sample_is_partial": "the run was stopped at 60 chains of 770 once the gap was established. Continuing would have cost four more hours to measure a quantity that cannot be used, and the gap is not a marginal effect that a larger sample could overturn",
+  "why_the_spread_does_not_rescue_it": "not every chain is memorised equally and some sit well below the mean, so the distribution is reported rather than the mean alone. That does not make the set usable: the recovery rule and the stratification both ask where a baseline is weak, and a fit set answers where it happened to fit less well, which is a different question wearing the same units",
+  "what_this_is_evidence_for": [
+    "docs/AGENT_MEMORY.md section 2h-bis",
+    "the refusal in tools/found_where_three_baselines_missed.py",
+    "the refusal in tools/plmnn_by_stratum.py --stratify"
+  ],
+  "what_remains_open": "whether pLM-NN's advantage is concentrated in the large-pocket strata. Routes: retrain the architecture on a split excluding the units scored, which makes it our model and needs its own preregistration; spend an external set, which destroys the confirmatory result; or stratify the official-fold comparison, which is a ledger read for an exploratory question"
+}

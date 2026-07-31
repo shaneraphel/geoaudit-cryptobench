@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "cited": 71,
-    "exploration": 42,
+    "cited": 72,
+    "exploration": 43,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 147,
+  "n_artifacts": 149,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -336,6 +336,13 @@
       "bytes": 58584
     },
     {
+      "artifact": "results/architecture_sweep/GEOMETRY_LIFT.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 3692
+    },
+    {
       "artifact": "results/architecture_sweep/GRAM_CONDITIONING.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -397,6 +404,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "pairwise_readout_selection/v1",
       "bytes": 6280
+    },
+    {
+      "artifact": "results/architecture_sweep/PLMNN_TRAIN_IS_ITS_OWN_FIT_SET.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.plmnn_train_is_its_own_fit_set.v1",
+      "bytes": 2370
     },
     {
       "artifact": "results/architecture_sweep/POCKETMINER_TRAIN_OPERATING_POINT.json",

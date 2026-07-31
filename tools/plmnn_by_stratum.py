@@ -1,8 +1,47 @@
 #!/usr/bin/env python3
 """Does the supervised sequence baseline collapse on small pockets too?
 
-The question, and why it is the one worth the compute
------------------------------------------------------
+THIS TOOL CANNOT ANSWER THAT, AND THE REASON IS THE POINT
+---------------------------------------------------------
+Read this before running anything below. The plan was to run pLM-NN over the
+training fold, where scoring costs nothing from the test-fold ledger, and
+stratify it by cryptic-pocket size. The cost argument was correct. It was also
+doing the work of a validity argument that nobody had made.
+
+**pLM-NN's head is CryptoBench's published ``best_trained``, fitted by the
+authors on their training folds, and ``TRAIN_MANIFEST.json`` records our
+training partition as exactly those folds --- ``train-0`` through ``train-3``.
+The 770 chains here are the model's own fitting set.** It scores 0.8235 mean
+per-unit ROC-AUC on the official test fold and about 0.98 on these. A model
+evaluated on what it was fitted on does not collapse on a hard stratum; it has
+memorised it, and the profile that came out would have described fit rather than
+generalisation while looking exactly like an answer.
+
+The tell was in the first five lines of output --- 0.9946, 0.9551, 0.9760,
+0.9907, 0.9783, for a method whose published number on this benchmark is 0.82.
+A rival that suddenly looks far better than its own paper is measuring something
+else. The check was one field in a manifest and one number already on disk, and
+it was available before the run rather than four minutes into it.
+
+``--embed`` and ``--fit-set-audit`` are retained because the audit is worth
+having as an artifact: it is the evidence for ``AGENT_MEMORY`` 2h-bis and for the
+refusal in ``found_where_three_baselines_missed.py``, which would otherwise have
+turned a memorising baseline into a recovery count of zero and read it as a
+result about our method. ``--stratify`` is retained and refuses.
+
+**The question in the title is still open.** What is closed is this route to it.
+Three remain, none free: retrain the published architecture on a split excluding
+the units scored, which makes it our model rather than the published baseline and
+needs its own preregistration; spend an external set, which destroys the
+confirmatory result it exists for; or stratify the official-fold comparison,
+which is a ledger read for an exploratory question and is the thing 2h's own
+method note records avoiding.
+
+What follows is the original argument, kept because the reasoning was sound
+everywhere except at the step nobody checked.
+
+The question, and why it looked like the one worth the compute
+---------------------------------------------------------------
 ``AGENT_MEMORY`` 2h settled that the small-pocket stratum is not headroom for
 *this* detector: PocketMiner, a graph network sharing no architecture, no
 featurisation and no fitting procedure with the counting field, scores 0.5985 on
@@ -301,7 +340,113 @@ def _ours_per_unit(n_splits: int) -> tuple[dict[str, float], np.ndarray,
     return ours, n_pos, units, n_res, repro
 
 
+OFFICIAL_PLMNN_AUC = 0.823469   # results/official_fold/PLMNN_READ.json
+FIT_SET = ROOT / "results/architecture_sweep/PLMNN_TRAIN_IS_ITS_OWN_FIT_SET.json"
+
+
+def fit_set_audit(write: bool) -> int:
+    """Compare pLM-NN on chains it was fitted on against its published number.
+
+    This is the whole of what the training-fold pass can honestly produce. It is
+    written as an artifact rather than left in a commit message because two other
+    tools refuse on the strength of it, and a refusal whose evidence is not on
+    disk is an assertion.
+    """
+    rows = list(_done().values())
+    aucs = sorted(r["auc"] for r in rows if r["auc"] == r["auc"])
+    if len(aucs) < 20:
+        raise SystemExit(
+            f"only {len(aucs)} chains scored; run --embed --limit 60 first. "
+            f"Twenty is the floor at which the gap below is worth writing down")
+    n = len(aucs)
+    mean = sum(aucs) / n
+    doc = {
+        "schema": "geoaudit.plmnn_train_is_its_own_fit_set.v1",
+        "clinical_grade": False,
+        "reads_test_fold": False,
+        "reads_any_external_unit": False,
+        "question": (
+            "whether pLM-NN can be run on our training fold to answer an "
+            "exploratory question about it, given that the published head was "
+            "fitted somewhere"),
+        "answer": "no, because it was fitted here",
+        "why": {
+            "head": ("CryptoBench's published best_trained, read out of the "
+                     "authors' SavedModel; see results/baselines/"
+                     "PLMNN_NETWORK.json"),
+            "our_training_partition": ("data/cryptobench_apo/TRAIN_MANIFEST.json "
+                                       "records fold = train-0..train-3, which "
+                                       "are the folds that head was fitted on"),
+            "so": "every chain scored below is in the model's own fitting set",
+        },
+        "measured": {
+            "n_chains_scored": n,
+            "mean_per_unit_roc_auc_on_its_fit_set": round(mean, 6),
+            "median": round(aucs[n // 2], 6),
+            "min": round(aucs[0], 6),
+            "max": round(aucs[-1], 6),
+            "n_at_or_above_0_95": sum(1 for a in aucs if a >= 0.95),
+            "n_below_0_80": sum(1 for a in aucs if a < 0.80),
+            "published_mean_on_the_official_test_fold": OFFICIAL_PLMNN_AUC,
+            "gap": round(mean - OFFICIAL_PLMNN_AUC, 6),
+            "source_of_the_official_number":
+                "results/official_fold/PLMNN_READ.json, reproduction_gate",
+        },
+        "why_the_sample_is_partial": (
+            f"the run was stopped at {n} chains of 770 once the gap was "
+            f"established. Continuing would have cost four more hours to "
+            f"measure a quantity that cannot be used, and the gap is not a "
+            f"marginal effect that a larger sample could overturn"),
+        "why_the_spread_does_not_rescue_it": (
+            "not every chain is memorised equally and some sit well below the "
+            "mean, so the distribution is reported rather than the mean alone. "
+            "That does not make the set usable: the recovery rule and the "
+            "stratification both ask where a baseline is weak, and a fit set "
+            "answers where it happened to fit less well, which is a different "
+            "question wearing the same units"),
+        "what_this_is_evidence_for": [
+            "docs/AGENT_MEMORY.md section 2h-bis",
+            "the refusal in tools/found_where_three_baselines_missed.py",
+            "the refusal in tools/plmnn_by_stratum.py --stratify",
+        ],
+        "what_remains_open": (
+            "whether pLM-NN's advantage is concentrated in the large-pocket "
+            "strata. Routes: retrain the architecture on a split excluding the "
+            "units scored, which makes it our model and needs its own "
+            "preregistration; spend an external set, which destroys the "
+            "confirmatory result; or stratify the official-fold comparison, "
+            "which is a ledger read for an exploratory question"),
+    }
+    print(f"pLM-NN on {n} chains of its own fitting set")
+    print(f"  mean   {mean:.4f}   median {aucs[n // 2]:.4f}   "
+          f"min {aucs[0]:.4f}   max {aucs[-1]:.4f}")
+    print(f"  at or above 0.95: {doc['measured']['n_at_or_above_0_95']}"
+          f"   below 0.80: {doc['measured']['n_below_0_80']}")
+    print(f"  published on the official test fold: {OFFICIAL_PLMNN_AUC:.4f}")
+    print(f"  gap: {mean - OFFICIAL_PLMNN_AUC:+.4f}")
+    if write:
+        FIT_SET.write_text(json.dumps(doc, indent=2, allow_nan=False) + "\n")
+        print(f"\nwrote {FIT_SET.relative_to(ROOT)}")
+    else:
+        print("\n(not written; pass --write)")
+    return 0
+
+
 def stratify(n_splits: int, out: str, write: bool) -> int:
+    raise SystemExit(
+        "--stratify will not run. The scores in the checkpoint are pLM-NN "
+        "evaluated on its own fitting set: the head is CryptoBench's published "
+        "best_trained, fitted on train-0..train-3, and TRAIN_MANIFEST.json "
+        "records our training partition as exactly those folds. It scores "
+        f"{OFFICIAL_PLMNN_AUC:.4f} on the official test fold and about 0.98 "
+        "here. A stratification of a fit set describes where a model happened "
+        "to fit less well, not where it is weak, and the two are not "
+        "distinguishable after the fact. Run --fit-set-audit for the evidence, "
+        "and read AGENT_MEMORY 2h-bis for what would make the real measurement "
+        "possible.")
+
+
+def _stratify_unreachable(n_splits: int, out: str, write: bool) -> int:
     plm = _done()
     if len(plm) < 100:
         raise SystemExit(
@@ -452,7 +597,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--embed", action="store_true",
                     help="run the encoder over the training fold (hours)")
     ap.add_argument("--stratify", action="store_true",
-                    help="join the scores against ours and PocketMiner")
+                    help="refuses; the checkpoint is the model's own fit set")
+    ap.add_argument("--fit-set-audit", action="store_true",
+                    help="write the evidence that it is")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--splits", type=int, default=0)
     ap.add_argument("--out", type=str, default=str(OUT))
@@ -462,7 +609,9 @@ def main(argv: list[str] | None = None) -> int:
         return embed(a.limit)
     if a.stratify:
         return stratify(a.splits, a.out, a.write)
-    ap.error("choose --embed or --stratify")
+    if a.fit_set_audit:
+        return fit_set_audit(a.write)
+    ap.error("choose --embed, --fit-set-audit or --stratify")
     return 2
 
 

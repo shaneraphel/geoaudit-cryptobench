@@ -1644,7 +1644,8 @@ protocol above:
 | **sidechain 261** | 87 quantities of side-chain conformation: torsions and rotamer wells, deposit completeness, extension and curl, free directions to a van der Waals wall, hydrogen-bond satisfaction, two chiral centres, χ₁–φ/ψ coupling | **yes** | **+0.00476 on 11/12**, CI [+0.0032, +0.0063] |
 | **void 135** | 45 quantities of the connectivity of the empty space: alpha spheres in the Delaunay band [3, 6] Å, single-linkage voids, lining contiguity, depth to the rim, burial against the chain's own convex hull | **yes** | **+0.00258 on 11/12**, CI [+0.0012, +0.0039] |
 | **conformation 393** | backbone 132 and sidechain 261 concatenated, measured rather than added | **yes** | **+0.00723 on 12/12**, CI [+0.0055, +0.0089] |
-| *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 (backbone), −0.0004 on 7/12 (side-chain), −0.0001 on 6/12 (void), +0.0002 on 6/12 (conformation) |
+| **geometry 528** | all three live families as one block | **yes** | **+0.00949 on 12/12**, CI [+0.0081, +0.0109] |
+| *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 (backbone), −0.0004 on 7/12 (side-chain), −0.0001 on 6/12 (void), +0.0002 on 6/12 (conformation), −0.0010 on 5/12 (geometry) |
 
 Three families, proposed on the same one-sentence screen, and all three behave the
 same way under both controls. The permuted arm shuffles rows inside each chain under
@@ -1721,15 +1722,27 @@ stack recovers **78.8%** of the additive sum and **21.2%** is shared. It beats b
 alone by +0.00282 on 10/12 and side-chain alone by +0.00246 on 11/12, so neither family
 is redundant given the other, and the control arm stays null at +0.0002 on 6/12.
 
+**Void is nearly orthogonal to both, and that is the one magnitude the screen called
+in advance.** The pairwise answer does not settle the triple, and void is the family
+with a reason to behave differently: it is not a function of the scored residue's own
+atom positions, where the other two are computed from overlapping atom sets. All three
+as one block — `geometry 528` — give **+0.00949 on 12/12**, CI [+0.0081, +0.0109],
+against +0.01175 if independent, so **80.8%** of the three-way sum survives against
+78.8% for the pair. The marginal number is the informative one: adding void on top of
+both conformation families is worth **+0.00227 on 10/12**, which is **88% of its
+standalone +0.00258**. Two families computed from the same atoms share a fifth of what
+they carry; the family computed from the space between them keeps nearly all of its
+own. Control arm null at −0.0010 on 5/12.
+
 **It still does not close the deficit, and the arithmetic is stated rather than implied.**
-pLM-NN is ahead by **0.0243** on the official fold and **0.0340** externally. The
-combined family is **+0.0072**, which is under a third of the official-fold gap — and
-that comparison is generous to us, because +0.0072 is a training-fold number and
-whether a training-fold lift transfers to the official fold has not been measured.
-The gate radius is a further +0.0025 and whether it adds on top of this is also
-unmeasured. Nothing here is deployed: moving the architecture would make
-`EXTERNAL_READ.json`'s +0.0443 a result about a detector that no longer exists, which is
-why Set B and Set C are frozen and unread.
+pLM-NN is ahead by **0.0243** on the official fold and **0.0340** externally. The full
+stack is **+0.0095**, which is under two fifths of the official-fold gap — and that
+comparison is generous to us, because +0.0095 is a training-fold number and whether a
+training-fold lift transfers to the official fold has not been measured. The gate
+radius is a further +0.0025 and whether it adds on top of this is also unmeasured.
+Nothing here is deployed: moving the architecture would make `EXTERNAL_READ.json`'s
++0.0443 a result about a detector that no longer exists, which is why Set B and Set C
+are frozen and unread.
 
 Numerical record: all counts and metrics are read from the JSON artifacts
 (`results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json`,
