@@ -1694,7 +1694,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 829 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 863 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

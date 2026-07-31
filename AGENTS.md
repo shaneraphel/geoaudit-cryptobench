@@ -8,7 +8,7 @@ it gets skipped and a rule with one does not.
 
 The repository's whole claim is that its numbers can be checked by someone who does
 not trust us. That property is not maintained by intention. It is maintained by
-gates that run in `make verify`, by 829 tests, and by the habits below.
+gates that run in `make verify`, by 863 tests, and by the habits below.
 
 ## Before you believe a number you just produced
 
@@ -131,8 +131,8 @@ change its hash and break the confirmatory claim.
 
 ## What must be true before you commit
 
-`make verify` green and `python3.12 -m pytest tests -q` green — currently 829 tests
-and 576 subtests. New artifacts must be registered by `tools/classify_artifacts.py`,
+`make verify` green and `python3.12 -m pytest tests -q` green — currently 863 tests
+and 613 subtests. New artifacts must be registered by `tools/classify_artifacts.py`,
 which `make verify` checks; a new file under `results/` that is not in
 `ARTIFACT_MANIFEST.json` fails the build. Any artifact produced on training folds
 must say `"reads_test_fold": false` and mean it.
