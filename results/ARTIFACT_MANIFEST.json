@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 62,
-    "exploration": 43,
+    "exploration": 44,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 139,
+  "n_artifacts": 140,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -432,6 +432,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.preregistered_pockets.v1",
       "bytes": 8290
+    },
+    {
+      "artifact": "results/architecture_sweep/PREREGISTERED_RECOVERY.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.preregistered_recovery.v1",
+      "bytes": 7045
     },
     {
       "artifact": "results/architecture_sweep/PREREGISTERED_STATISTIC.json",

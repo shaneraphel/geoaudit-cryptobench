@@ -1,0 +1,104 @@
+{
+  "schema": "geoaudit.preregistered_recovery.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "for_test_fold_read_index": 13,
+  "written_before_the_read": true,
+  "code_sha256": "2fcfed413bafd84986482c7f634291da410f4aab16dc22cf7e8ea77d16432711",
+  "head_when_written": "0fc667c96d79ff0be1b5a43a7cd6e63de6c35e0c",
+  "question": "on the 192 single-chain units of the official test fold, how many chains does the counting field rank the cryptic binding residues well on while P2Rank, pLM-NN and PocketMiner all rank them at chance, and how many are the other way round",
+  "status_declared_in_advance": "exploratory",
+  "why_exploratory_and_not_confirmatory": "the fold carries 12 indexed reads before this plan was written. Nothing read after that is confirmatory, whichever direction it points, and fixing the status here stops a favourable outcome being promoted afterwards",
+  "the_rule": {
+    "recovery": "ours >= 0.80 and p2rank <= 0.55 and plmnn <= 0.55 and pocketminer <= 0.55",
+    "mirror": "p2rank >= 0.80 and plmnn >= 0.80 and pocketminer >= 0.80 and ours <= 0.55",
+    "statistic": "ROC-AUC within a unit over that unit's evaluation universe, chance 0.50",
+    "why_two_thresholds": "a unit where every method scores 0.7 is not a disagreement and a single cut would call it one",
+    "ladder": [
+      [
+        0.8,
+        0.55
+      ],
+      [
+        0.8,
+        0.6
+      ],
+      [
+        0.75,
+        0.6
+      ],
+      [
+        0.75,
+        0.65
+      ],
+      [
+        0.7,
+        0.6
+      ],
+      [
+        0.7,
+        0.65
+      ],
+      [
+        0.65,
+        0.6
+      ],
+      [
+        0.65,
+        0.65
+      ]
+    ],
+    "where_the_rule_comes_from": {
+      "tool": "tools/found_where_baselines_missed.py",
+      "tool_sha256": "e0f0e97c9315ec8c0833b7c7a76424dfe36d85eecc9a0598e28cda387dc1b5e7",
+      "artifact": "results/architecture_sweep/RECOVERED_UNITS_TRAIN.json",
+      "artifact_sha256": "8c85c2655c2174e946ce67e1a7d80bd2052404d1f9db9127c44ee8fb7c348c0c",
+      "fold": "training",
+      "why_this_matters": "the thresholds were fixed and published on the training fold before this plan, so they cannot have been tuned on the fold this read opens, and the commit history shows the order",
+      "training_fold_outcome": {
+        "n_units": 769,
+        "n_recovered": 4,
+        "n_mirror": 0,
+        "baselines_available_there": [
+          "p2rank",
+          "pocketminer"
+        ],
+        "plmnn_absent_there": "never run on the training fold"
+      }
+    }
+  },
+  "where_each_number_comes_from": {
+    "table_field": "the frozen per-structure telemetry, field residue_auc; not recomputed, so this read cannot disagree with numbers already published from it",
+    "p2rank": "the same frozen telemetry",
+    "plmnn": "computed here from results/baselines/PLMNN_SCORES.json and the official labels, with pocket_bench.metrics.roc_auc over the sorted-resseq universe, because no artifact stores its per-unit numbers",
+    "pocketminer": "computed here from results/baselines/POCKETMINER_SCORES.json the same way, for the same reason",
+    "telemetry_sha256": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
+    "plmnn_scores_sha256": "786109e3423201b9c84d9fc2f6cd72cb5054f1bf6f1004033034ea32cadb007d",
+    "pocketminer_scores_sha256": "fa96b2691b0f181a98579096863f9bb437c0069fe2d8cf6a04bb6f7ed1ef6e82"
+  },
+  "exclusion_fixed_in_advance": {
+    "rule": "a unit is reported separately and not counted when the methods cannot be shown to have been given the same residues: PocketMiner's featurisation unverified against the authors' tensor, or residues dropped as conformer copies, or resseq collisions from insertion codes",
+    "why": "a win on a chain the methods parse differently is a win about parsing",
+    "precedent": "on the training fold this removed 4m7p_A, which was the largest disagreement of all at 0.918 against 0.439 and 0.214, on a deposit carrying twenty alternate conformers and 60,040 ATOM lines for 3,002 atoms"
+  },
+  "guards_the_read_must_pass": [
+    "this plan's commit is an ancestor of HEAD, checked with git",
+    "the telemetry, the pLM-NN scores and the PocketMiner scores still hash to what is recorded here, so no input can have been regenerated between the plan and the read",
+    "the training-fold tool and artifact still hash to what is recorded here, so the rule cannot have been edited after the plan",
+    "our own per-unit numbers are read from the telemetry and not recomputed, and the read asserts the unit set matches",
+    "the mirror count is computed and reported whatever it is",
+    "the full ladder is computed and reported, not one row of it"
+  ],
+  "decision_rules": {
+    "if_recoveries_exceed_mirrors_at_every_ladder_setting": "it is reported as the strongest per-unit evidence in the paper that the counting field is not a weaker copy of the baselines, still labelled exploratory, and stated together with the mirror counts and the number of cryptic residues in each named unit. It does not license the word state-of-the-art and it is not a claim that a pocket exists which the baselines cannot see",
+    "if_the_two_counts_are_comparable": "it is reported as a null: the three methods disagree in both directions about equally, which is what similar average accuracy predicts, and no case study is drawn from it",
+    "if_mirrors_exceed_recoveries": "it is reported in the paper in those words, in the same section, at the same length"
+  },
+  "what_will_be_written_under_each_outcome": {
+    "recoveries_exceed_mirrors": "On the 192 units of the official test fold there are chains whose cryptic binding residues the counting field ranks at ROC-AUC 0.80 or better while P2Rank, pLM-NN and PocketMiner all rank them at 0.55 or worse, chance being 0.50, and fewer chains the other way round. The rule was fixed on the training fold before this read. The comparison is exploratory: the fold had been read twelve times before it was planned.",
+    "comparable": "On the 192 units of the official test fold, the chains where the counting field ranks the cryptic residues and all three baselines do not are about as numerous as the chains where the reverse holds. Four methods of similar average accuracy disagree in both directions, and on this fold at this sample size the disagreement is symmetric.",
+    "mirrors_exceed_recoveries": "On the 192 units of the official test fold there are more chains whose cryptic binding residues all three baselines rank and the counting field does not than chains the other way round. The rule was fixed on the training fold before this read, and it is reported here because it was."
+  },
+  "what_this_cannot_show": "ROC-AUC within a unit is a statement about the ranking of that unit's residues. Nothing here is a claim that a pocket exists which the baselines cannot see, that any site is druggable, or that any of it is clinical",
+  "note": "this file is the plan. Reading the fold under it is tools/recovery_read.py, which refuses to run until this is committed."
+}
