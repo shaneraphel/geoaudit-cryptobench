@@ -1,6 +1,10 @@
 {
  "schema": "geoaudit.esr1_showcase_input.v1",
  "clinical_grade": false,
+ "comparative_claim": false,
+ "efficacy_or_affinity_claim": false,
+ "repository_is_private": true,
+ "why_these_declarations_appeared_late": "this file held six molecules and their toxicology verdicts from the day it was written, and no gate read it. The prohibition on candidate evidence in tools/verify_claims.py matched on two directory names and four marker strings, and this file sits under data/ with none of them, so it was never an admitted exception -- it was invisible. The rule is now structural: a file carrying a SMILES value is candidate evidence wherever it sits and under whatever name, and contracts/CANDIDATE_SHOWCASES.json admits this one as an input with its own field list, because an input carries identifiers and a verdict and not the derived chemistry its product carries. All three declarations were true of this file before they were written down; what changed is that something now fails if they are not.",
  "what_this_is": "the six candidate identifiers the appendix showcase is built from, with the structural-audit verdict each carried in the companion repository at the pinned commit. Nothing here is a measurement and nothing here is scored",
  "why_the_verdicts_are_carried_rather_than_recomputed": "the audit's rule tables -- stability motifs, metabolic routes, liability families, chemotype signatures -- live in one place in the companion repository and are covered by its tests. Duplicating a SMARTS table into this repository would create two copies that can drift, and a drifted screen is worse than an absent one. So the verdict travels as pinned input with the commit that produced it, and this repository recomputes only what needs no rule table: canonical SMILES, InChIKey, formula, the bond graph, the topological pharmacophore and the stereocentres, all of which are RDKit primitives",
  "companion_repository": {

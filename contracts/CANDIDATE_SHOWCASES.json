@@ -1,0 +1,93 @@
+{
+  "schema": "geoaudit.candidate_showcases.v1",
+  "clinical_grade": false,
+  "what_this_is": "the registry of candidate showcases admitted to this repository, and the conditions each is admitted under. tools/verify_claims.py reads it; a showcase that is not listed here fails no_bulk_candidate_dump_in_paper_tree exactly as any other candidate file does",
+  "why_this_exists": [
+    "The prohibition it relaxes is not decoration. A bulk dump of thousands of candidate records is unreviewable, and its presence in a paper tree invites the affinity and efficacy claims contracts/GEOAUDIT_PAPER_SCOPE.json forbids. Both objections are about volume and about claims, and neither applies to a small, field-complete, individually audited set admitted for one stated purpose.",
+    "This began as one hard-coded path for the ESR1 decomposability showcase. A second showcase then had to be admitted, and hard-coding a second path would have made the third one easy and the tenth one invisible. A registry is harder to widen than a list of paths in code: adding a showcase is a diff to a contract that states what it is admitted for, what it may not claim, and how many records it may hold.",
+    "The premise the whole exception rests on is that this repository is private, so nothing in it is a publication and no prior art is created against a composition claim in an absolute-novelty jurisdiction. AGENTS.md states that hazard and it is the only irreversible one here. Every showcase must declare repository_is_private, and repository_visibility_confirmed_at records when that declaration was last checked against the remote rather than believed."
+  ],
+  "global": {
+    "total_record_cap": 40,
+    "why_a_total_cap": "per-showcase caps do not bound the tree. Ten showcases of twelve records each is a dump assembled one contract diff at a time, and the total is what the reviewability argument is actually about",
+    "required_declarations": {
+      "clinical_grade": false,
+      "comparative_claim": false,
+      "efficacy_or_affinity_claim": false,
+      "repository_is_private": true
+    },
+    "why_each_declaration": {
+      "clinical_grade": "no number in this repository supports a therapeutic decision, and a candidate record is the file most likely to be read as though it does",
+      "comparative_claim": "the scope contract forbids comparing method classes, and the measured pLM-NN deficit contradicts any such claim regardless",
+      "efficacy_or_affinity_claim": "nothing here measures binding. A structure, a pharmacophore and an alert profile are computed properties of a molecule and not evidence that it works",
+      "repository_is_private": "the exception's premise. If this repository becomes public, every showcase in it becomes a publication and the filing order AGENTS.md requires has to be settled first"
+    },
+    "default_required_fields_on_every_record": [
+      "candidate_id",
+      "modality",
+      "isomeric_smiles",
+      "canonical_smiles",
+      "inchi_key",
+      "formula",
+      "n_heavy_atoms",
+      "n_bonds",
+      "elements",
+      "bond_graph_svg",
+      "topological_pharmacophore",
+      "stereochemistry",
+      "structural_audit",
+      "non_claims"
+    ],
+    "why_field_completeness_is_the_condition": "completeness is the whole basis on which the exception was granted, so it is enforced field by field rather than trusted. A record without its bond graph is a name, a record without its stereochemistry is ambiguous as a chemical object, and a record without its structural audit is a proposal with no statement of what is wrong with it",
+    "why_the_default_can_be_overridden": "the list above is the shape of a finished showcase. An input file carries the same molecules at an earlier stage -- identifiers and the audit verdict, no derived chemistry -- and demanding a bond graph of it would either fail honest files or push their authors to fabricate the field. An entry may therefore state its own required_fields_on_every_record, but it must also state why_its_own_fields, and the audit keys below are required of every role because the reason to withdraw a record does not depend on which file it sits in",
+    "what_structural_audit_must_carry": [
+      "stability_alerts",
+      "liability_alerts",
+      "metabolic_soft_spots",
+      "n_unassigned_stereocentres"
+    ],
+    "why_those_four": "a candidate that is cheap to make and cheap to assay is not a candidate if it degrades on the shelf, carries a known toxicophore, is cleared before it reaches anything, or is a mixture of stereoisomers one of which was never intended. Each of the four is a reason to withdraw a record, and a showcase that cannot state them has not audited anything"
+  },
+  "showcases": [
+    {
+      "path": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
+      "role": "showcase",
+      "schema": "geoaudit.esr1_decomposability_showcase.v1",
+      "record_cap": 12,
+      "admitted_for": "demonstrating that a score decomposes exactly, which is a property of the detector and not of any molecule",
+      "additional_required_fields": [],
+      "additional_required_declarations": {
+        "decomposition_reconstruction_error_is_recorded": true
+      },
+      "why_that_extra_declaration": "the reconstruction error is the only thing this showcase is admitted to demonstrate, so a version of it that does not record the error is admitted for nothing"
+    },
+    {
+      "path": "data/appendix_esr1/SHOWCASE_INPUT.json",
+      "role": "input",
+      "schema": "geoaudit.esr1_showcase_input.v1",
+      "record_cap": 12,
+      "admitted_for": "naming the six identifiers the showcase is built from, with the audit verdict each carried in the companion repository at the pinned commit, so that the showcase's inputs can be read without cloning that repository",
+      "required_fields_on_every_record": [
+        "candidate_id",
+        "modality",
+        "isomeric_smiles",
+        "audit_verdict"
+      ],
+      "why_its_own_fields": "this file is the input and not the product. Its records carry an identifier, a modality and the verdict; the canonical SMILES, formula, bond graph, pharmacophore and stereochemistry are derived downstream by tools/emit_esr1_showcase.py and are checked on the showcase itself. Requiring them here would require the input to duplicate its own output.",
+      "audit_field": "audit_verdict",
+      "why_it_was_not_registered_sooner": "it was not registered because it was never caught. Until the prohibition became structural it matched no candidate directory and no marker string, so six molecules with their toxicology verdicts sat in the tree with no completeness gate reading them. The registry did not miss this file; the rule the registry hangs off did.",
+      "additional_required_declarations": {}
+    }
+  ],
+  "how_to_add_one": [
+    "Append an entry here naming the path, the schema, the cap and what the showcase is admitted for. 'admitted_for' has to name a property the showcase demonstrates; 'a set of candidates for target X' is not one, because it does not say what a reader learns.",
+    "If the showcase carries a structure figure -- a cryo-EM map, a deposited experimental structure, a docked pose -- list its field in additional_required_fields together with the field naming its provenance, so a figure cannot appear without the accession or the method that produced it.",
+    "Run make verify. The gate fails closed on every clause: a missing field, a record over the cap, a total over the global cap, an undeclared claim, or a path not in this registry."
+  ],
+  "repository_visibility_confirmed_at": {
+    "checked": "2026-07-31",
+    "result": "private",
+    "how": "gh repo view shaneraphel/geoaudit-cryptobench --json isPrivate",
+    "why_recorded": "a self-declared repository_is_private is exactly the kind of unchecked claim this repository does not accept elsewhere. The gate cannot reach the network during make verify, so the declaration is enforced by the gate and its truth is recorded here with the command that established it"
+  }
+}

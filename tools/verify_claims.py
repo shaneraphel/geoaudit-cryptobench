@@ -62,6 +62,210 @@ CREDENTIAL = re.compile(
 TARGET_PANEL = {"ESR1", "KRAS", "FLT3", "PIM1", "PIK3CA", "CDK4/6"}
 
 
+def candidate_showcase_checks(
+        root: Path, primary_files: list[Path]) -> tuple[list[str], list[str]]:
+    """Which files are candidate evidence, and which admitted ones are incomplete.
+
+    Returns ``(offenders, problems)``: files holding candidate evidence that no
+    registry entry admits, and complaints about the admitted ones. Both empty is
+    the passing state.
+
+    This lives outside ``main`` so it can be run against a constructed tree, and
+    that is not tidiness. The rule it replaced was green for its whole life while
+    doing nothing --- the showcase it was written to admit sat outside every
+    pattern it matched --- and nobody noticed, because the only way to exercise
+    it was to run the whole verifier over the real repository, where the answer
+    is "no offenders" whether the gate works or not. A gate that cannot be
+    pointed at a synthetic failure cannot be shown to catch a real one.
+    """
+    # Candidate evidence belongs to the companion repository, and the scope
+    # contract says so. This used to be a denylist of three filenames, which is
+    # the wrong shape for the rule it is meant to enforce: it passed for months
+    # while evidence/kras_g12d_sm/ sat in the tree with curated candidates, a
+    # DFT metrics table and a toxicology report, none of which happened to be
+    # named one of the three. A structural rule instead -- no candidate-evidence
+    # directory, and no file that declares itself a candidate record.
+    candidate_dirs = {"evidence", "candidates"}
+    candidate_markers = (
+        '"schema": "foliation.er100.candidate',
+        '"chemistry_ready_records"',
+        '"slot_records"',
+        "CURATED_TOP",
+    )
+    # The third rule, and the one that makes the other two nearly redundant.
+    #
+    # The two above are still denylists: a directory name and four strings. They
+    # were written after a denylist of three filenames passed for months while
+    # curated candidates sat in the tree, and the replacement had the same shape
+    # as the thing it replaced -- so it failed the same way. Removing the ESR1
+    # showcase from the registry and re-running left this gate green, because
+    # the showcase is not under evidence/ and carries none of the four markers.
+    # The exception admitting it had therefore never done any work; the file was
+    # simply never seen. The probe that found this also found
+    # data/appendix_esr1/SHOWCASE_INPUT.json, six molecules that no completeness
+    # gate had ever read.
+    #
+    # A structural rule instead, keyed on the thing that actually makes a file
+    # candidate evidence: it names a molecule. A SMILES string is a molecule's
+    # identity, so a file holding one is candidate evidence whatever it is
+    # called and wherever it sits, and has to be registered. A tool that names
+    # the field without holding a value is not caught, which is the intended
+    # boundary -- tools/emit_esr1_showcase.py mentions all three identifier
+    # fields and stays clean, while the same tool with one molecule hard-coded
+    # into it would not.
+    smiles_value = re.compile(
+        r'"(?:isomeric_|canonical_|input_|parent_)?smiles"\s*:\s*"([^"]{4,})"',
+        re.IGNORECASE)
+
+    def _names_a_molecule(text: str) -> bool:
+        return bool(smiles_value.search(text))
+    # The exception, and it is a registry rather than a path in this file.
+    #
+    # The prohibition above exists because a bulk dump of thousands of candidate
+    # records is unreviewable and because its presence invites the affinity and
+    # efficacy claims this paper's scope contract forbids. Both objections are
+    # about volume and about claims. Neither applies to a small, field-complete,
+    # individually audited set admitted for one stated purpose, so such a set is
+    # admitted -- and gated harder than the rule it relaxes.
+    #
+    # This was one hard-coded path until a second showcase had to be admitted.
+    # Hard-coding the second would have made the third easy and the tenth
+    # invisible, so the admitted set now lives in
+    # contracts/CANDIDATE_SHOWCASES.json: adding one is a diff to a contract
+    # that has to say what the showcase demonstrates, what it may not claim, and
+    # how many records it may hold. A file not in that registry fails exactly as
+    # any other candidate file does, including a showcase at a new path.
+    #
+    # What the exception rests on, and it is the only irreversible thing here:
+    # the repository is private, so nothing in it is a publication and no prior
+    # art is created against a composition claim. Every showcase must declare
+    # that, and the registry records when the declaration was last checked
+    # against the remote instead of believed.
+    registry_path = root / "contracts/CANDIDATE_SHOWCASES.json"
+    registry: dict = {}
+    registry_problems: list[str] = []
+    if registry_path.exists():
+        try:
+            registry = json.loads(registry_path.read_text())
+        except Exception as exc:  # noqa: BLE001
+            registry_problems.append(f"registry is not valid JSON: {exc}")
+    else:
+        registry_problems.append(
+            "contracts/CANDIDATE_SHOWCASES.json is missing; with no registry "
+            "no showcase is admitted and the prohibition applies to all of them")
+    admitted = {s["path"]: s for s in (registry.get("showcases") or [])}
+    glob_rules = registry.get("global") or {}
+
+    def _is_admitted_showcase(path: Path) -> bool:
+        rel = path.relative_to(root).as_posix()
+        entry = admitted.get(rel)
+        if entry is None:
+            return False
+        try:
+            doc = json.loads(path.read_text())
+        except Exception:  # noqa: BLE001
+            return False
+        return doc.get("schema") == entry.get("schema")
+
+    offenders = []
+    for path in primary_files:
+        if _is_admitted_showcase(path):
+            continue
+        rel = path.relative_to(root).as_posix()
+        if rel == "tools/verify_claims.py":
+            continue  # this file quotes the patterns it searches for
+        text = path.read_text(errors="ignore")
+        if (candidate_dirs & set(path.relative_to(root).parts[:-1])
+                or any(mark in text[:4000] for mark in candidate_markers)
+                or _names_a_molecule(text)):
+            offenders.append(rel)
+
+    # Each admitted showcase's own gate. It fails closed on every clause: a
+    # missing field, a record over its cap, the tree over the global cap, a
+    # claim the scope contract forbids, or a required declaration absent. A
+    # showcase that is registered and missing from disk is not an error -- the
+    # registry may run ahead of the tree -- but one that is present and
+    # incomplete is.
+    showcase_problems: list[str] = list(registry_problems)
+    total_records = 0
+    for rel, entry in sorted(admitted.items()):
+        path = root / rel
+        if not path.exists():
+            continue
+        try:
+            doc = json.loads(path.read_text())
+        except Exception as exc:  # noqa: BLE001
+            showcase_problems.append(f"{rel} is not valid JSON: {exc}")
+            continue
+        if doc.get("schema") != entry.get("schema"):
+            showcase_problems.append(
+                f"{rel}: schema is {doc.get('schema')!r}, not "
+                f"{entry.get('schema')!r}")
+        for key, want in (glob_rules.get("required_declarations") or {}).items():
+            if doc.get(key) is not want:
+                showcase_problems.append(
+                    f"{rel}: {key} is {doc.get(key)!r}, not {want!r}")
+        for key, want in (entry.get("additional_required_declarations")
+                          or {}).items():
+            if doc.get(key) is not want:
+                showcase_problems.append(
+                    f"{rel}: {key} is {doc.get(key)!r}, not {want!r}")
+        records = doc.get("records") or []
+        total_records += len(records)
+        if not records:
+            showcase_problems.append(f"{rel}: carries no records")
+        cap = int(entry.get("record_cap", 0))
+        if len(records) > cap:
+            showcase_problems.append(
+                f"{rel}: {len(records)} records exceeds its cap of {cap}; the "
+                f"exception was argued for a showcase, not for a dump")
+        # An entry may state its own field list, because an input file carries
+        # the same molecules at an earlier stage than a finished showcase and
+        # demanding a bond graph of it would either fail an honest file or push
+        # its author to fabricate the field. Overriding costs a written reason:
+        # a list without why_its_own_fields is a silent relaxation.
+        own_fields = entry.get("required_fields_on_every_record")
+        if own_fields is not None and not entry.get("why_its_own_fields"):
+            showcase_problems.append(
+                f"{rel}: states its own required_fields_on_every_record without "
+                f"why_its_own_fields; an override with no reason is how the "
+                f"default becomes optional")
+        required = tuple(
+            own_fields
+            if own_fields is not None
+            else glob_rules.get("default_required_fields_on_every_record") or ()
+        ) + tuple(entry.get("additional_required_fields") or ())
+        # The audit keys are required of every role. Which file a molecule sits
+        # in does not change the reasons to withdraw it.
+        audit_field = entry.get("audit_field", "structural_audit")
+        audit_keys = tuple(glob_rules.get("what_structural_audit_must_carry")
+                           or ())
+        for i, rec in enumerate(records):
+            missing = [k for k in required if not rec.get(k)]
+            if missing:
+                showcase_problems.append(
+                    f"{rel} record {i} ({rec.get('candidate_id')}) is missing "
+                    f"{missing}")
+            audit = rec.get(audit_field)
+            if not isinstance(audit, dict):
+                showcase_problems.append(
+                    f"{rel} record {i} ({rec.get('candidate_id')}): {audit_field}"
+                    f" is absent or is not an object")
+                continue
+            gaps = [k for k in audit_keys if k not in audit]
+            if gaps:
+                showcase_problems.append(
+                    f"{rel} record {i} ({rec.get('candidate_id')}): "
+                    f"{audit_field} does not state {gaps}")
+    total_cap = int(glob_rules.get("total_record_cap", 0))
+    if total_records > total_cap:
+        showcase_problems.append(
+            f"{total_records} candidate records across all showcases exceeds "
+            f"the global cap of {total_cap}; per-showcase caps do not bound the "
+            f"tree and the reviewability argument is about the total")
+    return offenders, showcase_problems
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path("."))
@@ -333,8 +537,19 @@ def main() -> int:
         # and scope gates on numpy's docstrings and pygments' token types --- a
         # gate that fires on somebody else's vendored code is telling the reader
         # nothing about this paper.
-        proc = subprocess.run(["git", "ls-files", "-z"], cwd=root,
-                              capture_output=True)
+        #
+        # --others --exclude-standard adds files that are untracked but not
+        # ignored, and it is there because the tracked-only version had an
+        # ordering hole: writing a candidate dump, running make verify green and
+        # then committing passed, because at verify time the file was untracked
+        # and at commit time nothing re-ran. An untracked, unignored file is one
+        # git add away from being published, and AGENTS.md records the commit
+        # where git add -A swept 600 files and 292 MB into the history. Ignored
+        # paths stay excluded, so the virtualenv that motivated this function is
+        # still out.
+        proc = subprocess.run(
+            ["git", "ls-files", "-z", "--cached", "--others",
+             "--exclude-standard"], cwd=root, capture_output=True)
         if proc.returncode != 0:
             return None
         return [root / p for p in proc.stdout.decode().split("\0") if p]
@@ -376,122 +591,14 @@ def main() -> int:
     checks["no_credential_patterns_in_primary_docs"] = (
         CREDENTIAL.search(tree_text) is None
     )
-    # Candidate evidence belongs to the companion repository, and the scope
-    # contract says so. This used to be a denylist of three filenames, which is
-    # the wrong shape for the rule it is meant to enforce: it passed for months
-    # while evidence/kras_g12d_sm/ sat in the tree with curated candidates, a
-    # DFT metrics table and a toxicology report, none of which happened to be
-    # named one of the three. A structural rule instead -- no candidate-evidence
-    # directory, and no file that declares itself a candidate record.
-    candidate_dirs = {"evidence", "candidates"}
-    candidate_markers = (
-        '"schema": "foliation.er100.candidate',
-        '"chemistry_ready_records"',
-        '"slot_records"',
-        "CURATED_TOP",
-    )
-    # One narrow exception, added deliberately and gated harder than the rule it
-    # relaxes. The prohibition above exists because a bulk dump of thousands of
-    # candidate records is unreviewable and because its presence invites the
-    # affinity and efficacy claims this paper's scope contract forbids. Neither
-    # objection applies to a small, field-complete, individually audited showcase
-    # whose purpose is to demonstrate that a score decomposes exactly -- which is
-    # a property of the detector and not a property of any molecule.
-    #
-    # What the exception costs and does not cost. The repository is private, so
-    # nothing here is a publication and no prior art is created; that is the only
-    # irreversible consideration and it is checked below rather than assumed. The
-    # scope contract's ban on comparative and efficacy claims is untouched: the
-    # showcase is admitted for decomposability alone, and a second gate requires
-    # it to say so.
-    #
-    # The exception is deliberately hard to widen. A showcase must sit at the one
-    # declared path, carry the one declared schema, hold no more records than the
-    # cap, and pass its own completeness gate. Anything else in the tree that
-    # looks like candidate evidence still fails, including a second showcase at a
-    # different path.
-    showcase_rel = "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json"
-    showcase_schema = "geoaudit.esr1_decomposability_showcase.v1"
-    showcase_cap = 12
-    showcase = root / showcase_rel
-
-    def _is_admitted_showcase(path: Path) -> bool:
-        if path.relative_to(root).as_posix() != showcase_rel:
-            return False
-        try:
-            doc = json.loads(path.read_text())
-        except Exception:  # noqa: BLE001
-            return False
-        return doc.get("schema") == showcase_schema
-
-    offenders = [
-        path.relative_to(root).as_posix()
-        for path in primary_files
-        if not _is_admitted_showcase(path)
-        and (candidate_dirs & set(path.relative_to(root).parts[:-1])
-             or any(mark in path.read_text(errors="ignore")[:4000]
-                    for mark in candidate_markers))
-    ]
+    offenders, showcase_problems = candidate_showcase_checks(root, primary_files)
     checks["no_bulk_candidate_dump_in_paper_tree"] = not offenders
     if offenders:
         checks["_candidate_evidence_offenders"] = offenders[:10]
-
-    # The showcase's own gate. It fails closed: if the file is absent the check
-    # is vacuously true, but if it is present every clause below must hold, so
-    # the exception cannot be used to smuggle in a record that is incomplete, a
-    # claim the scope contract forbids, or more molecules than were argued for.
-    showcase_problems: list[str] = []
-    if showcase.exists():
-        try:
-            doc = json.loads(showcase.read_text())
-        except Exception as exc:  # noqa: BLE001
-            showcase_problems.append(f"is not valid JSON: {exc}")
-            doc = {}
-        if doc.get("schema") != showcase_schema:
-            showcase_problems.append(
-                f"schema is {doc.get('schema')!r}, not {showcase_schema!r}")
-        if doc.get("clinical_grade") is not False:
-            showcase_problems.append("clinical_grade is not false")
-        if doc.get("comparative_claim") is not False:
-            showcase_problems.append(
-                "comparative_claim is not declared false; Appendix A's contract "
-                "forbids comparing method classes and the measured pLM-NN "
-                "deficit contradicts any such claim")
-        if doc.get("efficacy_or_affinity_claim") is not False:
-            showcase_problems.append(
-                "efficacy_or_affinity_claim is not declared false")
-        records = doc.get("records") or []
-        if not records:
-            showcase_problems.append("carries no records")
-        if len(records) > showcase_cap:
-            showcase_problems.append(
-                f"{len(records)} records exceeds the cap of {showcase_cap}; the "
-                f"exception was argued for a showcase, not for a dump")
-        # Every field the showcase promises must be present on every record.
-        # "Complete fields" is the whole basis on which the exception was
-        # granted, so it is enforced field by field rather than trusted.
-        required = ("candidate_id", "isomeric_smiles", "inchi_key", "formula",
-                    "bond_graph_svg", "topological_pharmacophore",
-                    "stereochemistry", "structural_audit", "non_claims")
-        for i, rec in enumerate(records):
-            missing = [k for k in required if not rec.get(k)]
-            if missing:
-                showcase_problems.append(
-                    f"record {i} ({rec.get('candidate_id')}) is missing "
-                    f"{missing}")
-        if not doc.get("decomposition_reconstruction_error_is_recorded"):
-            showcase_problems.append(
-                "does not record the decomposition reconstruction error, which "
-                "is the only thing the showcase is admitted to demonstrate")
-        if doc.get("repository_is_private") is not True:
-            showcase_problems.append(
-                "does not declare repository_is_private; the exception rests on "
-                "this repository not being a publication, and that has to be "
-                "stated where a reader will see it")
-    checks["esr1_showcase_is_complete_and_non_comparative"] = (
+    checks["candidate_showcases_are_registered_and_complete"] = (
         not showcase_problems)
     if showcase_problems:
-        checks["_esr1_showcase_problems"] = showcase_problems[:10]
+        checks["_candidate_showcase_problems"] = showcase_problems[:10]
 
     # Fail-closed cluster-disjoint split ledger: groups that require disjointness
     # must be disjoint; groups that are not disjoint must declare it (no hiding).
