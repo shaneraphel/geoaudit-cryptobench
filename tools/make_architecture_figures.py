@@ -53,7 +53,20 @@ TAIL = ROOT / "results/architecture_sweep/FAILURE_TAIL.json"
 GATE = ROOT / "results/architecture_sweep/GATE_BY_STRATUM.json"
 QUANT = ROOT / "results/architecture_sweep/QUANTISATION_BY_STRATUM.json"
 RECOVERED = ROOT / "results/architecture_sweep/RECOVERED_UNITS_TRAIN.json"
-SOURCES = (TAIL, GATE, QUANT, RECOVERED)
+PLMNN = ROOT / "results/official_fold/PLMNN_READ.json"
+FAMILIES = {
+    "backbone 132": "BACKBONE_WIDE_LIFT",
+    "backbone 132 permuted": "BACKBONE_WIDE_PERMUTED_LIFT",
+    "sidechain 261": "SIDECHAIN_WIDE_LIFT",
+    "sidechain 261 permuted": "SIDECHAIN_PERMUTED_LIFT",
+    "void 135": "VOID_LIFT",
+    "void 135 permuted": "VOID_PERMUTED_LIFT",
+    "conformation 393": "CONFORMATION_LIFT",
+    "geometry 528": "GEOMETRY_LIFT",
+}
+FAMILY_PATHS = {k: ROOT / f"results/architecture_sweep/{v}.json"
+                for k, v in FAMILIES.items()}
+SOURCES = (TAIL, GATE, QUANT, RECOVERED) + tuple(FAMILY_PATHS.values())
 FIGDIR = ROOT / "figures"
 PROVENANCE = ROOT / "results/architecture_sweep/ARCHITECTURE_FIGURE_PROVENANCE.json"
 README = ROOT / "README.md"
@@ -517,10 +530,149 @@ def fig_recovered_units(doc: dict) -> tuple[Path, str]:
         f"it alike — against P2Rank alone both score the same 390 residues "
         f"(0.918 vs 0.439), reported separately as a training-fold case study. "
         f"Right: the same two counts at eight strictness settings, reported "
-        f"whole because one row of a ladder is a choice. pLM-NN is absent: it "
-        f"has never been run on the training fold, so this compares against two "
-        f"baselines and not three. Exploratory, training fold only, no "
-        f"test-fold read.")
+        f"whole because one row of a ladder is a choice. pLM-NN is absent and "
+        f"cannot be added here: its published head was fitted on these very "
+        f"chains, where it scores 0.96 against 0.82 on the official fold, and a "
+        f"rule asking whether a baseline sits at chance cannot be applied to a "
+        f"baseline that has memorised the unit. So this compares against two "
+        f"baselines and not three, and the three-baseline version of the "
+        f"question was answered on the official fold under a preregistered "
+        f"plan, where it returned 0 recoveries against 1 mirror. Exploratory, "
+        f"training fold only, no test-fold read.")
+    return out, caption
+
+
+def fig_family_ladder(fams: dict, plm: dict) -> tuple[Path, str]:
+    """Five families, both of their control arms, and the gap they are aimed at.
+
+    Left: the lift each family buys over the deployed detector, with its 95 %
+    interval, and beside each bar the two arms that exist to destroy it --- a
+    control spending the same table budget on wires already deployed, and a
+    permutation preserving every column's marginal while destroying which
+    residue a row describes. Drawing the arms on the same axis as the bar is the
+    point. A panel showing only the bars would be five numbers with no way to
+    see that the permutations are *negative*, which is the part that says the
+    lift belongs to the residue being scored.
+
+    Right: what happens when families are combined, against what would happen if
+    they were independent. This repository has read a family's lift the wrong
+    way before --- 267 generated descriptors worth +0.0081 against a 35-invariant
+    baseline were worth -0.0009 against the detector that ships --- so the
+    combined arms are measured rather than summed, and the shortfall between the
+    measured bar and the dashed marker is the part that was being counted twice.
+
+    The vertical rule on the left is the deficit all of this is aimed at. It is
+    drawn because the alternative is a panel of encouraging bars with no scale:
+    the largest of them is under two fifths of the gap, and a reader should see
+    that without doing arithmetic.
+    """
+    order = [("backbone 132", "FamBkb"), ("sidechain 261", "FamSide"),
+             ("void 135", "FamVoid"), ("conformation 393", "FamConf"),
+             ("geometry 528", "FamGeom")]
+    fig, (ax, axr) = plt.subplots(
+        1, 2, figsize=(12.6, 4.8), gridspec_kw={"width_ratios": [1.55, 1.0]})
+
+    y = np.arange(len(order))[::-1]
+    for k, (name, _stem) in enumerate(order):
+        d = fams[name]
+        u = d["minus_narrow"]["union"]
+        lo, hi = u["ci95"]
+        ax.barh(y[k], u["mean"], height=0.5, color=BLUE, zorder=2)
+        ax.plot([lo, hi], [y[k]] * 2, color="#0d3d57", lw=1.6, zorder=3)
+        ctrl = d["minus_narrow"].get("more_old")
+        if ctrl:
+            ax.plot(ctrl["mean"], y[k], "o", ms=6, mfc="white", mec=GREY,
+                    mew=1.5, zorder=4)
+        perm = fams.get(name + " permuted")
+        if perm:
+            ax.plot(perm["minus_narrow"]["union"]["mean"], y[k], "D", ms=5.5,
+                    color=RED, zorder=4)
+        ax.text(u["mean"] + 0.00035, y[k] + 0.20,
+                f"{u['mean']:+.5f}  {u['n_splits_positive']}/{u['n_splits']}",
+                fontsize=8.4, va="center")
+
+    deficit = abs(plm["primary_comparison"]["mean"])
+    ax.axvline(deficit, color=ORANGE, lw=1.6, ls="--", zorder=5)
+    # Rotated onto the rule itself. Laid horizontally at the top it sat over the
+    # first bar's annotation, and the two numbers a reader most needs to compare
+    # were the two that overlapped.
+    ax.text(deficit - 0.0006, len(order) / 2 - 0.5,
+            f"pLM-NN leads by {deficit:.4f} on the official fold",
+            fontsize=8.6, color=ORANGE, ha="center", va="center", rotation=90)
+    ax.axvline(0, color="#444444", lw=0.9)
+    ax.set_yticks(y)
+    ax.set_yticklabels([n for n, _ in order], fontsize=9.2)
+    ax.set_xlabel("mean per-unit ROC-AUC over the deployed detector, "
+                  "12 cluster-disjoint halvings", fontsize=9.5)
+    ax.set_xlim(-0.006, deficit * 1.16)
+    ax.grid(axis="x", alpha=0.2, lw=0.5)
+    ax.set_axisbelow(True)
+    handles = [
+        plt.Line2D([], [], marker="s", ls="", color=BLUE, ms=8,
+                   label="family, with 95 % interval"),
+        plt.Line2D([], [], marker="o", ls="", mfc="white", mec=GREY, mew=1.5,
+                   ms=7, label="control: same tables, deployed wires only"),
+        plt.Line2D([], [], marker="D", ls="", color=RED, ms=6,
+                   label="rows permuted within each chain"),
+    ]
+    # Anchored past where the bar annotations end, in the band between the
+    # longest label and the deficit rule. "Upper right" clipped the first bar's
+    # count and "lower right" sat on the last bar's; this is the gap between.
+    ax.legend(handles=handles, fontsize=8.2, loc="upper left", frameon=False,
+              bbox_to_anchor=(0.60, 1.0))
+
+    pairs = [("conformation 393", ("backbone 132", "sidechain 261")),
+             ("geometry 528", ("backbone 132", "sidechain 261", "void 135"))]
+    yy = np.arange(len(pairs))[::-1]
+    for k, (combo, parts) in enumerate(pairs):
+        got = fams[combo]["minus_narrow"]["union"]["mean"]
+        want = sum(fams[p]["minus_narrow"]["union"]["mean"] for p in parts)
+        axr.barh(yy[k], got, height=0.42, color=GREEN, zorder=2)
+        axr.plot([want] * 2, [yy[k] - 0.30, yy[k] + 0.30], color="#444444",
+                 lw=1.8, ls="--", zorder=4)
+        axr.text(want + 0.00055, yy[k], f"{got / want:.0%} of the sum",
+                 fontsize=8.6, va="center")
+    axr.set_yticks(yy)
+    axr.set_yticklabels([f"{c}\n= {' + '.join(p.split()[0] for p in parts)}"
+                         for c, parts in pairs], fontsize=8.8)
+    axr.set_xlabel("measured lift (bar), sum of parts (dashed)", fontsize=9.5)
+    axr.set_xlim(0, max(sum(fams[p]["minus_narrow"]["union"]["mean"]
+                            for p in parts) for _c, parts in pairs) * 1.42)
+    axr.grid(axis="x", alpha=0.2, lw=0.5)
+    axr.set_axisbelow(True)
+    # Matplotlib's default put eight ticks on a 0.017-wide axis and they ran
+    # together into one string of digits.
+    axr.xaxis.set_major_locator(matplotlib.ticker.MaxNLocator(4))
+    axr.tick_params(axis="x", labelsize=8.4)
+
+    fig.tight_layout()
+    out = FIGDIR / "fig_family_ladder.png"
+    fig.savefig(out, dpi=200)
+    plt.close(fig)
+
+    g = fams["geometry 528"]["minus_narrow"]["union"]
+    v = fams["void 135"]["minus_narrow"]["union"]["mean"]
+    c = fams["conformation 393"]["minus_narrow"]["union"]["mean"]
+    caption = (
+        f"The three wire families that are not null, their two control arms, "
+        f"and the two stacks built from them. Left: lift over the deployed "
+        f"detector on twelve cluster-disjoint halvings of the training fold, "
+        f"with the 95 % interval. Every family's control arm \u2014 the same "
+        f"number of added tables, drawn from wires already deployed \u2014 sits "
+        f"at zero, so added cells are not the mechanism; every permuted arm, "
+        f"which preserves each column's multiset over the chain and destroys "
+        f"only which residue a row describes, is *negative*, so columns of "
+        f"these shapes attached to the wrong residue are worse than adding "
+        f"nothing. Right: each stack against the sum of its parts. backbone and "
+        f"side-chain are computed from overlapping atom sets and share about a "
+        f"fifth of what they carry; void, which reads the connectivity of the "
+        f"empty space rather than the scored residue's own atoms, keeps "
+        f"{(g['mean'] - c) / v:.0%} of its standalone value when stacked on "
+        f"both. The dashed rule on the left is the gap this is aimed at: the "
+        f"largest bar, {g['mean']:+.5f} on {g['n_splits_positive']} of "
+        f"{g['n_splits']} splits, is {g['mean'] / deficit:.0%} of the "
+        f"official-fold deficit to pLM-NN. Training fold only; nothing here is "
+        f"deployed and no held-out set was read.")
     return out, caption
 
 
@@ -539,8 +691,18 @@ def main() -> int:
                 f"{name} does not declare reads_test_fold false; this "
                 f"generator draws training-fold figures only")
 
+    fams = {k: json.loads(p.read_text()) for k, p in FAMILY_PATHS.items()}
+    for k, d in fams.items():
+        if d.get("reads_test_fold") is not False:
+            raise SystemExit(f"{k} does not declare reads_test_fold false")
+    # The one number in this generator that comes off the held-out fold is the
+    # deficit the families are aimed at, and it is read from an artifact that is
+    # already in the ledger rather than recomputed. Drawing it costs no new read
+    # and omitting it would leave a panel of bars with no scale.
+    plm = json.loads(PLMNN.read_text())
+
     drawn = [fig_failure_tail(tail), fig_gate_by_stratum(gate),
-             fig_recovered_units(rec)]
+             fig_family_ladder(fams, plm), fig_recovered_units(rec)]
     case = fig_four_recoveries(rec)
     render_readme(drawn)
     render_case_figure(case)
@@ -559,7 +721,15 @@ def main() -> int:
             "fold, and one file drawing from two populations is how a figure "
             "ends up read against the wrong denominator"),
         "sources": {str(p.relative_to(ROOT)): _sha(p)
-                    for p in SOURCES if p.exists()},
+                    for p in SOURCES + (PLMNN,) if p.exists()},
+        "the_one_held_out_number_drawn": {
+            "what": "the pLM-NN deficit marked on the family-ladder panel",
+            "from": "results/official_fold/PLMNN_READ.json",
+            "why_this_is_not_a_new_read": (
+                "the number is already in the test-fold ledger under read "
+                "index 10 and is quoted, not recomputed. A panel of lifts with "
+                "no scale invites the reader to supply their own"),
+        },
         "figures": {p.name: {"sha256": _sha(p), "bytes": p.stat().st_size,
                              "caption": c} for p, c in all_figs},
     }, indent=1) + "\n")

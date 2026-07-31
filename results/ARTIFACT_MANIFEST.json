@@ -60,7 +60,7 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.architecture_figure_provenance.v1",
-      "bytes": 5271
+      "bytes": 8387
     },
     {
       "artifact": "results/architecture_sweep/BACKBONE_PERMUTED_LIFT.json",
