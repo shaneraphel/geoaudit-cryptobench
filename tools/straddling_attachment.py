@@ -191,6 +191,42 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         B, _b = sc()
         return _np.concatenate([_np.asarray(A), _np.asarray(B)], axis=1), (
             "tools/backbone_wires.py + tools/sidechain_wires.py")
+    if name == "displacement 144":
+        # 48 quantities at three aggregations, and the fourth family on 2i's
+        # screen. The first three all read coordinates; this one reads none of
+        # them -- the temperature factor, the occupancy and the alternate-
+        # location indicator, three fields of every ATOM record that pdb_io
+        # never extracts or extracts only in order to discard. 770 of 770
+        # training chains have a varying B-factor column and 332 carry an
+        # alternate. The prediction, written before the run and recorded in the
+        # module docstring and AGENT_MEMORY 2n: +0.001 to +0.003 raw, 30-50 %
+        # overlap with geometry 528, because a B-factor is largely a function
+        # of exposure and exposure is what the deployed wires already read.
+        from displacement_wires import build_or_load
+        X, _n = build_or_load()
+        return np.asarray(X), "tools/displacement_wires.py"
+    if name == "displacement permuted 144":
+        from displacement_wires import build_or_load
+        X, _n = build_or_load(permuted=True)
+        return np.asarray(X), "tools/displacement_wires.py --permuted"
+    if name == "geometry 672":
+        # All four live-or-tested families as one block: 132 backbone + 261
+        # side-chain + 135 void + 144 displacement. Run only if displacement
+        # clears its own controls; a stack containing a null family measures the
+        # stack without it plus noise.
+        import numpy as _np
+        from backbone_wires import build_or_load as bb
+        from sidechain_wires import build_or_load as sc
+        from void_wires import build_or_load as vd
+        from displacement_wires import build_or_load as dp
+        A, _a = bb()
+        B, _b = sc()
+        C, _c = vd()
+        D, _d = dp()
+        return _np.concatenate(
+            [_np.asarray(A), _np.asarray(B), _np.asarray(C), _np.asarray(D)],
+            axis=1), ("tools/backbone_wires.py + tools/sidechain_wires.py + "
+                      "tools/void_wires.py + tools/displacement_wires.py")
     if name == "geometry 528":
         # All three live families as one block: 132 backbone + 261 side-chain +
         # 135 void. Measured because the pairwise result does not settle the

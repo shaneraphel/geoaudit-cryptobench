@@ -1040,6 +1040,69 @@ that `EXACT_MARGIN` now has a measured reason. `VOID_EXACT_MARGIN.json`, and
 tetrahedra, because the corpus contains no case that separates the two
 predicates — which is the finding, and also why the corpus cannot test it.
 
+## 2n. The fourth family, and a prediction written before the run
+
+§2m closed by committing that the next family would have its expected overlap
+written down *before* its stack was run, because void turned §2i's screen from a
+sign-predictor into a magnitude-predictor and one instance is not a law. This
+section is that commitment being kept. **Everything below the horizontal rule
+was written before any measurement existed.**
+
+**The family.** `displacement 144` — 48 quantities at three aggregations, from
+three fields of every ATOM record that this pipeline has never read: the
+temperature factor in columns 61–66, the occupancy in 55–60, and the
+alternate-location indicator in column 17. `pdb_io.parse_pdb_atoms` does not
+extract the B-factor at all, and reads occupancy and altLoc only in order to
+*discard* alternates, keeping the highest-occupancy copy. The first three live
+families all read coordinates; this one reads none of them.
+
+**Coverage, measured before the family was built.** All **770 of 770** training
+chains have a varying B-factor column. **332 (43%)** carry at least one
+alternate conformer, over **2,983** residues. So a null result here cannot be
+explained by the input being absent, which is the check that would otherwise be
+run after the fact to explain the null away.
+
+**Why it should matter, stated so it can be wrong.** A cryptic site is defined by
+motion: a pocket absent in the apo structure and present in the holo one, whose
+residues are residues whose apo coordinates are not the whole story. A
+temperature factor is the refinement's own estimate of how badly an atom's
+position is determined; an alternate conformer is the crystallographer stating
+that one position was not enough. Both are per-atom statements about local
+disorder, made by the experiment, and both are discarded.
+
+**A constraint that shaped the whole quantity list.** A B-factor does not
+transfer between structures — it absorbs resolution, the refinement protocol, the
+scaling model, whether TLS was used. 30 Å² at 1.2 Å resolution and 30 Å² at 3.0 Å
+are different statements. So **no quantity in this family is a raw B in Å²**;
+every one is a within-chain rank, a ratio between two parts of the same residue,
+a difference against that chain's own median, or an integer count. That also
+makes the three aggregations meaningful: summing ranks over a contact shell sums
+comparable things.
+
+---
+
+**The prediction.**
+
+* **Raw lift +0.001 to +0.003**, below all three existing families.
+* **Overlap with `geometry 528`: 30–50%**, against void's 12% and the two
+  conformation families' 21% with each other.
+* **The permuted arm is negative** if the family is live at all.
+* **Reasoning:** B-factors correlate strongly with solvent exposure, and the
+  deployed 645-wire bank already reads burial through many wires. Much of what a
+  B-factor says is therefore already present by another route — which is exactly
+  the re-encoding failure mode §2i names, arriving through a field that is
+  nonetheless discarded. A family can read discarded bytes and still be largely
+  redundant, and this is the first family expected to sit in that position.
+* **What would falsify it interestingly:** a raw lift above +0.004. The place to
+  look would be group E, alternate conformers, which is not a function of
+  exposure and is a direct statement about multiple occupancy.
+
+---
+
+*Result to be filled in when `DISPLACEMENT_LIFT.json` lands. If the prediction is
+wrong, it stays as written and the correction goes below it; a prediction edited
+after the fact is a description.*
+
 ## 2l. Units both published baselines rank at chance, and the mirror count
 
 `RECOVERED_UNITS_TRAIN.json`, 769 training units, no read of the held-out fold.
