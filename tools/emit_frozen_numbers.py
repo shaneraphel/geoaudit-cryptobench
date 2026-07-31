@@ -144,6 +144,14 @@ FAMILY_LADDER = (
     ("FamVoid", ROOT / "results/architecture_sweep/VOID_LIFT.json"),
     ("FamVoidPerm", ROOT / "results/architecture_sweep/VOID_PERMUTED_LIFT.json"),
     ("FamGeom", ROOT / "results/architecture_sweep/GEOMETRY_LIFT.json"),
+    ("FamDisp", ROOT / "results/architecture_sweep/DISPLACEMENT_LIFT.json"),
+    ("FamDispPerm",
+     ROOT / "results/architecture_sweep/DISPLACEMENT_PERMUTED_LIFT.json"),
+    ("FamDispB", ROOT / "results/architecture_sweep/DISPLACEMENT_B_LIFT.json"),
+    ("FamDispAlt",
+     ROOT / "results/architecture_sweep/DISPLACEMENT_ALT_LIFT.json"),
+    ("FamGeomFour",
+     ROOT / "results/architecture_sweep/GEOMETRY_FOUR_LIFT.json"),
 )
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"

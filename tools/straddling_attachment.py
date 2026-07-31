@@ -205,6 +205,28 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         from displacement_wires import build_or_load
         X, _n = build_or_load()
         return np.asarray(X), "tools/displacement_wires.py"
+    if name in ("displacement B 96", "displacement alt 48"):
+        # The attribution arm, and it is run because a prediction failed rather
+        # than because a number looked interesting. AGENT_MEMORY 2n predicted
+        # +0.001 to +0.003 for the whole family on the argument that a B-factor
+        # is largely a function of solvent exposure, which the deployed wires
+        # already read; it measured +0.0070 on 12/12. The same section names the
+        # falsification route in advance: if the lift exceeds +0.004 the place
+        # to look is the alternate-conformer group, which is not a function of
+        # exposure. Splitting the family at exactly that seam is what tests it.
+        #
+        # Quantities 0..31 are the B-factor groups A-D; 32..47 are the
+        # alternate-conformer and occupancy groups E-F. The 144 columns are
+        # laid out as aggregation-major, so a group is one slice per
+        # aggregation and neither arm is a re-aggregation of the other.
+        import numpy as _np
+        from displacement_wires import build_or_load
+        from pocket_bench.methods.displacement import N_COLUMNS as Q
+        X, _n = build_or_load()
+        lo, hi = (0, 32) if name == "displacement B 96" else (32, Q)
+        take = [a * Q + q for a in range(3) for q in range(lo, hi)]
+        return _np.asarray(X)[:, take], (
+            f"tools/displacement_wires.py, quantities {lo}..{hi - 1}")
     if name == "displacement permuted 144":
         from displacement_wires import build_or_load
         X, _n = build_or_load(permuted=True)

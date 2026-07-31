@@ -2518,6 +2518,37 @@ now, proposed on the same one-sentence screen, measured under the same protocol,
 carrying the same two controls, and negative under permutation every time, where
 six earlier families were null.
 
+A fourth family reads no coordinates at all, and it is reported here with the
+prediction that preceded it because the prediction was wrong. Every deposited
+\texttt{ATOM} record carries a temperature factor, an occupancy and an
+alternate-location indicator. This pipeline has never read the first; it reads
+the second and third only in order to \emph{discard} alternates, keeping the
+highest-occupancy copy. All \(770\) training chains carry a varying temperature
+factor column and \(332\) carry at least one alternate, over \(2{,}983\)
+residues, so the input is present. Because a temperature factor absorbs
+resolution, refinement protocol and scaling and therefore does not transfer
+between structures, no quantity in the family is a raw value: each is a
+within-chain rank, a ratio between two parts of one residue, a deviation from
+that chain's own median, or an integer count. \FamDispCols{} columns give
+\FamDisp{}, \FamDispCI{}, on \FamDispSplits{} of \FamDispOf{} splits
+(\(p=\FamDispP{}\)), against a control at \FamDispControl{} on
+\FamDispControlSplits{} of \FamDispOf{} and a permuted arm at \FamDispPerm{} on
+\FamDispPermSplits{} of \FamDispPermOf{}. It is the largest single family
+measured here.
+
+It was predicted, in writing and before the run, to be the smallest: \(+0.001\)
+to \(+0.003\), on the argument that a temperature factor is largely a function of
+solvent exposure and that exposure is what the deployed wires already read. That
+prediction is off by roughly a factor of three and the step that failed is worth
+naming, because it is the same step the screen exists to prevent: reasoning from
+\emph{X correlates with Y} to \emph{X is mostly Y}. A temperature factor takes in
+crystal packing, loop mobility, partial ordering and the refinement's own
+restraint weights, and none of those is a function of where an atom sits relative
+to solvent. The screen's record is now four families for four on the sign of the
+effect and one for two on its magnitude; it predicts whether a family is live
+better than it predicts how live, and that asymmetry is stated rather than
+smoothed over.
+
 One implementation detail is reported because it was checked rather than
 assumed. Band membership is a comparison of a circumradius against two
 constants, and a circumradius is a ratio whose denominator is six times the

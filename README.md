@@ -1643,6 +1643,7 @@ protocol above:
 | **backbone 132** | the same axis taken seriously: 44 quantities | **yes** | **+0.00441 on 12/12**, CI [+0.0033, +0.0055] |
 | **sidechain 261** | 87 quantities of side-chain conformation: torsions and rotamer wells, deposit completeness, extension and curl, free directions to a van der Waals wall, hydrogen-bond satisfaction, two chiral centres, χ₁–φ/ψ coupling | **yes** | **+0.00476 on 11/12**, CI [+0.0032, +0.0063] |
 | **void 135** | 45 quantities of the connectivity of the empty space: alpha spheres in the Delaunay band [3, 6] Å, single-linkage voids, lining contiguity, depth to the rim, burial against the chain's own convex hull | **yes** | **+0.00258 on 11/12**, CI [+0.0012, +0.0039] |
+| **displacement 144** | 48 quantities from three fields of every ATOM record the pipeline never reads: the temperature factor (never parsed at all), the occupancy, and the alternate-location indicator (parsed only in order to discard alternates). Within-chain ranks, never a raw B | **yes** | **+0.00700 on 12/12**, CI [+0.0050, +0.0090] |
 | **conformation 393** | backbone 132 and sidechain 261 concatenated, measured rather than added | **yes** | **+0.00723 on 12/12**, CI [+0.0055, +0.0089] |
 | **geometry 528** | all three live families as one block | **yes** | **+0.00949 on 12/12**, CI [+0.0081, +0.0109] |
 | *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 (backbone), −0.0004 on 7/12 (side-chain), −0.0001 on 6/12 (void), +0.0002 on 6/12 (conformation), −0.0010 on 5/12 (geometry) |
@@ -1657,12 +1658,30 @@ thing destroyed is which residue each row describes:
 | backbone 132 | +0.00441 on 12/12 | **−0.00213 on 3/12** | +0.0065 |
 | sidechain 261 | +0.00476 on 11/12 | **−0.00326 on 0/12** | +0.0080 |
 | void 135 | +0.00258 on 11/12 | **−0.00140 on 2/12** | +0.0040 |
+| displacement 144 | +0.00700 on 12/12 | **−0.00130 on 1/12** | +0.0083 |
 
 Every permuted arm is *negative*: columns of these shapes attached to the wrong
 residue are worse than adding nothing, because they cost cells and carry noise. That
 is the sharpest available statement that what the field gains is a property of the
-residue being scored rather than the shape of a column, and it now holds three times
-on three independently motivated families rather than once.
+residue being scored rather than the shape of a column, and it now holds four times
+on four independently motivated families rather than once.
+
+**The fourth family falsified its own prediction, which was committed first.** After
+void, the screen had predicted a magnitude as well as a sign, so `displacement 144`
+was required to carry a written prediction before it was run — it is in
+`docs/AGENT_MEMORY.md` §2n and in the module docstring, both committed before the
+measurement existed. It predicted **+0.001 to +0.003**, on the argument that a
+B-factor is largely a function of solvent exposure and exposure is what the deployed
+wires already read. It measured **+0.00700**, about three times the top of that
+range, and is the largest single family here. The step that failed is a common one:
+from *"X correlates with Y"* to *"X is mostly Y"*. A temperature factor takes in
+crystal packing, loop mobility, partial ordering and the refinement's own restraint
+weights, none of which is a function of where an atom sits relative to solvent.
+
+What the prediction got right was naming its own falsification route in advance —
+"above +0.004, look at the alternate-conformer group, which is not a function of
+exposure" — so the miss produced a specific next measurement instead of a shrug.
+That attribution arm splits the family at exactly that seam and is running.
 
 | Attachment | What it does | Result |
 |---|---|---|

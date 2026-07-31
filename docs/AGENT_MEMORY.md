@@ -1099,9 +1099,56 @@ comparable things.
 
 ---
 
-*Result to be filled in when `DISPLACEMENT_LIFT.json` lands. If the prediction is
-wrong, it stays as written and the correction goes below it; a prediction edited
-after the fact is a description.*
+**The prediction was wrong, by a factor of about three, in the direction it
+named as the interesting one.** It stays above exactly as written.
+
+| | |
+|---|---|
+| predicted raw lift | +0.001 to +0.003 |
+| **measured** | **+0.00700**, 12/12, CI [+0.0050, +0.0090], p = 0.0002 |
+| `more_old` control | −0.00007 on 6/12, crossing zero |
+
+Per split: +0.0027, +0.0063, +0.0107, +0.0051, +0.0023, +0.0071, +0.0073,
++0.0062, +0.0070, +0.0100, +0.0041, +0.0150.
+
+**This is the largest single family measured here** — larger than side-chain
+(+0.00476) and backbone (+0.00441), behind only the two stacks. The family that
+was predicted to be the weakest is the strongest.
+
+**What the wrong reasoning was.** The prediction rested on one step: "a B-factor
+is largely a function of solvent exposure, and the deployed bank already reads
+burial through many wires, so most of what it says is present by another route."
+The premise is a real correlation and the inference from it was too strong. A
+B-factor is a refinement's estimate of positional uncertainty, and exposure is
+only one of its inputs — crystal packing, loop mobility, partial ordering and
+the refinement's own restraint weights all enter it, and none of those is a
+function of where an atom sits relative to solvent. **Reasoning from "X
+correlates with Y" to "X is mostly Y" is the step that failed**, and it is the
+same step §2i's screen was invented to avoid making about re-encodings.
+
+**What was right, and it is not nothing.** The falsification route was named in
+advance and is now the thing to run: "a raw lift above +0.004 falsifies the
+reasoning in an interesting direction and the place to look is group E,
+alternate conformers, which is not a function of exposure." Splitting the family
+at that seam — `displacement B 96` (groups A–D, the B-factor quantities) against
+`displacement alt 48` (groups E–F, alternates and occupancy) — is running. Only
+1.3 % of residues carry an alternate, so if group E carries the lift it does so
+through the shell aggregations rather than through its own rows, and that is a
+different claim worth separating.
+
+> **A prediction that fails is worth more than one that is not made.** This one
+> cost nothing to write, was wrong by 3×, and turned into a specific next
+> measurement because it had named its own falsification route in advance. The
+> version of this section without a prediction would have recorded "+0.0070,
+> larger than expected" and pointed at nothing. **Write the falsification route
+> down with the prediction, not just the number** — the number being wrong is
+> common and useful; the route is what makes it actionable.
+>
+> The screen in §2i is undamaged and its record is now four for four on *signs*.
+> Its record on *magnitudes* is one for two: right about void keeping 88 %,
+> wrong about this family by 3×. One instance was not a law and two are not
+> either, but the direction of the miss is informative — the screen predicts
+> whether a family is live better than it predicts how live.
 
 ## 2l. Units both published baselines rank at chance, and the mirror count
 
