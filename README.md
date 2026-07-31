@@ -1885,28 +1885,106 @@ exactly the selection the preregistration exists to prevent.
 ## Repository layout
 
 ```text
-paper/        MAIN_CRYPTOBENCH_GEOAUDIT.tex (primary manuscript),
-              appendix_a_wire_definitions.tex (generated: the 43 quantities
-                and the 43x15=645 expansion; `make wires`),
-              appendix_b_gf4_ablation.tex (\input appendix, not standalone),
-              appendix_c_compile.tex (generated: the table bank and its seed,
-                the cell rule, the solve, the gate, the boundary cases and the
-                sample flow from the published folds; `make compileapp`)
-contracts/    GEOAUDIT_PAPER_SCOPE.json (scope contract)
-src/pocket_bench/
-  methods/    receptor-only detectors (firewalled) + anisotropic_shear_oracle
-  native.py   ctypes loader for optional Rust kernels (NumPy fallback)
-  metrics.py metrics_bootstrap.py telemetry.py adapters.py paths.py pdb_io.py
-native/       geoaudit_kernels (Rust cdylib: free-grid, buriedness, local_free_enclosed)
-tools/        run_cryptobench_apo.py, build_native.sh, run_official_fold.py,
-              fetch_official_data.py, run_pilot.py, build_labels.py,
-              build_split_ledger.py, gf4_allele_shuffle_ablation.py, verify_claims.py
-data/         cryptobench_apo/ (PROVENANCE.json + gitignored materialized fold),
-              manifests/, labels/
-results/      cryptobench_apo/, official_fold/, gf4_ablation/, pilot/
-tests/        firewall, native kernels, split-disjoint, denominator, bootstrap,
-              adapters, ablation
+paper/        MAIN_CRYPTOBENCH_GEOAUDIT.tex   primary manuscript
+              frozen_numbers.tex              generated: every number the prose
+                                              cites, emitted from the JSON
+                                              artifacts; `make numbers`. The
+                                              manuscript quotes macros, never
+                                              literals, so a stale number is a
+                                              build failure and not a typo
+              appendix_a_wire_definitions.tex generated: the 43 quantities and
+                                              the 43x15 = 645 expansion
+              appendix_b_gf4_ablation.tex     \input appendix, not standalone
+              appendix_c_compile.tex          generated: the table bank and its
+                                              seed, the cell rule, the solve,
+                                              the gate, the boundary cases
+contracts/    GEOAUDIT_PAPER_SCOPE.json       what this paper may and may not
+                                              claim
+              CANDIDATE_SHOWCASES.json        the registry of admitted candidate
+                                              showcases: their paths, caps,
+                                              required fields and non-claims
+```
+
+**Where the quantities are defined — the dictionary.** Each module below is the
+definition of a family of per-residue quantities; the tool beside it expands them
+into columns at three aggregations (own value, contact-shell mean, two-step walk)
+and caches the matrix.
+
+```text
+src/pocket_bench/methods/
+  backbone_geometry.py    44 quantities from N, CA, C, O, CB   -> tools/backbone_wires.py
+  sidechain_geometry.py   87 quantities of side-chain state    -> tools/sidechain_wires.py
+  void_topology.py        45 quantities of the empty space     -> tools/void_wires.py
+  residue_chemistry.py    14 chemical quantities per residue   -> tools/chemistry_wires.py
+  density_topology.py     contact-graph and shell invariants   -> tools/composition_wires.py
+  algebraic_descriptors.py  the 35 local invariants the deployed bank is built from
+  expanded_descriptors.py   wide_descriptors.py  operator_descriptors.py
+  chain_operator_descriptors.py                   generated invariant banks (S4.6)
+  sequence_wires.py         the 645 deployed wires: 43 quantities x 15 statistics
+  table_bank.py table_field.py quotient_tables.py cascade_lut.py quaternary_lut.py
+                            the counting field itself: bank construction, cell
+                            rule, integer fan-out, the solve
+  geometric_foundation.py algebraic_field.py      the two other detectors, named
+                            separately because they are different programs and
+                            get confused for one another
+  p2rank_wrap.py fpocket_wrap.py deeppocket_wrap.py    baselines, firewalled
+  firewall.py               refuses any input a receptor-only method may not see
+native/geoaudit_kernels/    Rust cdylib, 3 kernels (free-grid mask, buriedness,
+                            local free-enclosed count), ported operation-for-
+                            operation from the NumPy reference so results are
+                            bit-identical; loaded by src/pocket_bench/native.py
+                            with a NumPy fallback, built by tools/build_native.sh
+```
+
+**Where the numbers are.** `results/` holds one JSON per measurement and
+`results/ARTIFACT_MANIFEST.json` classifies every one of them; a file under
+`results/` that the manifest does not declare fails `make verify`.
+
+```text
+results/official_fold/      the held-out fold. Reads are ledgered and capped
+results/external/           EXTERNAL_SET.json (frozen, hashed) + EXTERNAL_READ
+results/architecture_sweep/ the training fold: every sweep, every wire family,
+                            every control arm. Nothing here reads a held-out set
+                            and each file declares `reads_test_fold: false`
+results/baselines/          P2Rank, PocketMiner and pLM-NN as executed here
+results/appendix_esr1/      DECOMPOSABILITY_SHOWCASE.json  <- the candidates
+results/pilot/ cryptobench_apo/ cryptobench_official/ gf4_ablation/
+```
+
+**Where the candidates are, and what governs them.** Six molecules, in
+`results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json`, with their inputs in
+`data/appendix_esr1/SHOWCASE_INPUT.json`. Every record carries isomeric and
+canonical SMILES, InChIKey, formula, heavy-atom and bond counts, elements, a
+bond-graph SVG, a topological pharmacophore, its stereochemistry, and a
+structural audit stating its stability alerts, liability alerts, metabolic soft
+spots and unassigned stereocentres. They are admitted by
+`contracts/CANDIDATE_SHOWCASES.json` and gated by
+`candidate_showcases_are_registered_and_complete`, which fails closed on a
+missing field, a record over the cap, a tree over the global cap of 40, or a
+missing non-claim declaration. **They demonstrate that a score decomposes
+exactly and nothing else** — no affinity, no efficacy, no comparison between
+method classes, and `clinical_grade: false` on every one. Any file in the tree
+carrying a SMILES value and not in that registry fails the build.
+
+```text
+data/cryptobench_apo/    the training partition: manifest, labels, wire caches
+data/baselines/          baseline predictions as the published tools emit them
+data/external/           the frozen external sets
+data/manifests/          provenance, split ledger, companion evidence, cluster
+                         ledger — the files that say where every structure came
+                         from and which units may share a split
+data/appendix_esr1/      SHOWCASE_INPUT.json (registered as a candidate input)
+figures/                 every figure in the README and the paper, each with a
+                         provenance record binding it to its generator, its
+                         source artifact digest and its caption
+tools/                   168 files: fold runners, wire builders, every sweep,
+                         the emitters, and verify_claims.py which holds the gates
+tests/                   829 tests, 576 subtests
+docs/AGENT_MEMORY.md     what has been tried, what closed it, and what is open
 ```
 
 Local-only material (never published) is gitignored (`*.local.*`, `_local/`) and
-excluded from scope gates.
+excluded from scope gates. Hardware-design pipelines, netlist tooling and the
+private learning engines developed in the sibling repositories are deliberately
+absent; `no_proprietary_engine_names_public` fails any primary document that
+names one.
