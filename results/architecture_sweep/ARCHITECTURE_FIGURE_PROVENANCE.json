@@ -1,0 +1,25 @@
+{
+ "schema": "geoaudit.architecture_figure_provenance.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "purpose": "training-fold architecture figures, drawn from the frozen sweep artifacts so a number in a figure cannot disagree with a number in a sentence",
+ "generator": "tools/make_architecture_figures.py",
+ "why_separate_from_the_official_fold_generator": "that generator draws the official-fold comparison and says so in its first line. These are cluster-disjoint halves of the training fold, and one file drawing from two populations is how a figure ends up read against the wrong denominator",
+ "sources": {
+  "results/architecture_sweep/FAILURE_TAIL.json": "f93fb8e19602c5951d04ff386e68d7839dfbeb68b2f10063ef9b5067019a2921",
+  "results/architecture_sweep/GATE_BY_STRATUM.json": "49cbcebe27eeee5b971a12bad6a32eceff6788258b7804b1945b759580060c5d",
+  "results/architecture_sweep/QUANTISATION_BY_STRATUM.json": "70fcb9a02d0f7788544563aad0fa502c40b18df3b4b86d631fd1cb885edabb54"
+ },
+ "figures": {
+  "fig_failure_tail.png": {
+   "sha256": "bbd964c9a788b642be39a13bcfb61681582f08337e0458773959e5a45538a48f",
+   "bytes": 67673,
+   "caption": "Where the detector fails, on 769 training units scored on the pick half of twelve cluster-disjoint splits. Left, per-unit ROC-AUC by the number of cryptic residues the unit contains: mean with one standard deviation in orange, median in blue, and in grey the sampling standard error a within-unit AUC has at that size under the null. The spread is inflated beyond that null at every size and most at the smallest, so part of the width is the metric rather than the detector; the mean is not, because sampling noise is symmetric and the mean falls from 0.8766 to 0.5991 across the strata. Right, the share of units in each stratum scoring below one half, which is worse than a coin toss on their own residues: 87 units do, and they are the population a threshold metric is destroyed by. Every architecture sweep in this repository was scored by a mean over units, which is 0.7884 here against a median of 0.8712."
+  },
+  "fig_gate_by_stratum.png": {
+   "sha256": "293e2347ee8d7b6d6b8a9bea7c48566a5ddaa07473920fc544b4853543f85e41",
+   "bytes": 91919,
+   "caption": "The spatial gate swept per pocket size on the training fold, thirteen arms sharing one compile per split. Left, per-unit ROC-AUC against gate radius at weight 1.0, one line per stratum; the deployed radius is marked and is the best for no stratum. Right, the paired difference between r=14 and the deployed r=18 on the same units, with 95% intervals and the count of units improved: +0.00250 pooled, interval [+0.00060, +0.00441], 436 of 769 units better, and the same size in every stratum rather than concentrated in the small pockets the sweep was launched to investigate. Choosing the arm on six splits and scoring it on the other six selects the same arm both ways round and gives margins of +0.00175 and +0.00320, so the choice replicates and the size is uncertain within that range. Nothing is changed on the strength of this: the constant is still r=18 and moving it would spend the external confirmation."
+  }
+ }
+}

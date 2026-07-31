@@ -93,3 +93,6 @@ results/baselines/POCKETMINER_TRAIN_SCORES.json
 
 data/external/_setb_probe_em_*.json
 data/cryptobench_apo/_aniso_cache_train.npz
+
+# Scratch logs from supervised long runs; nothing here is evidence.
+_tmp/

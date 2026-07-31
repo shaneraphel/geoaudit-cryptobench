@@ -203,8 +203,20 @@ def build() -> dict:
 
 
 FIGURES = ROOT / "figures"
-FIGURE_GENERATOR = "tools/make_official_figures.py"
-FIGURE_PROVENANCE = RESULTS / "official_fold/FIGURE_PROVENANCE.json"
+# One pair per family of figures: the committed generator that draws them and the
+# provenance file it writes. A second pair exists because training-fold findings
+# and official-fold results must not share a generator -- a figure drawn from a
+# frozen test-fold artifact and one drawn from a sweep over training halves carry
+# different licences, and keeping the generators apart keeps the licences apart.
+# Every image in figures/ must still come from one of these and match the sha and
+# the caption it recorded, so adding the pair widens the gate's knowledge and not
+# its tolerance.
+FIGURE_GENERATORS = (
+    ("tools/make_official_figures.py",
+     RESULTS / "official_fold/FIGURE_PROVENANCE.json"),
+    ("tools/make_architecture_figures.py",
+     RESULTS / "architecture_sweep/ARCHITECTURE_FIGURE_PROVENANCE.json"),
+)
 README = ROOT / "README.md"
 
 
@@ -226,50 +238,58 @@ def _figure_problems() -> list[str]:
     problems = []
     if not FIGURES.is_dir():
         return problems
-    gen = (ROOT / FIGURE_GENERATOR)
-    produced = set()
-    if gen.exists():
-        produced = set(re.findall(r'FIGDIR / "([^"]+)"', gen.read_text()))
-    prov = {}
-    if FIGURE_PROVENANCE.exists():
-        prov = json.loads(FIGURE_PROVENANCE.read_text())
-    recorded = prov.get("figures") or {}
 
-    for path, sha in (prov.get("sources") or {}).items():
-        p = ROOT / path
-        if not p.exists():
-            problems.append(f"{path}: a figure was drawn from it and it is gone")
-        elif _sha(p) != sha:
-            problems.append(
-                f"{path}: changed since the figures were drawn, so the images "
-                f"no longer show the current numbers; run make figures")
+    produced: dict[str, str] = {}
+    recorded: dict[str, dict] = {}
+    prov_name: dict[str, str] = {}
+    for gen_path, prov_path in FIGURE_GENERATORS:
+        gen = ROOT / gen_path
+        if gen.exists():
+            for name in re.findall(r'FIGDIR / "([^"]+)"', gen.read_text()):
+                produced[name] = gen_path
+        prov = json.loads(prov_path.read_text()) if prov_path.exists() else {}
+        for name, rec in (prov.get("figures") or {}).items():
+            recorded[name] = rec
+            prov_name[name] = prov_path.name
+        for path, sha in (prov.get("sources") or {}).items():
+            p = ROOT / path
+            if not p.exists():
+                problems.append(
+                    f"{path}: a figure was drawn from it and it is gone")
+            elif _sha(p) != sha:
+                problems.append(
+                    f"{path}: changed since the figures were drawn, so the "
+                    f"images no longer show the current numbers; run make "
+                    f"figures")
 
+    generators = " or ".join(g for g, _ in FIGURE_GENERATORS)
     for p in sorted(FIGURES.iterdir()):
         if p.name.startswith("."):
             continue
         if p.suffix.lower() in {".png", ".svg", ".pdf", ".jpg", ".jpeg"}:
             if p.name not in produced:
                 problems.append(
-                    f"figures/{p.name}: not produced by {FIGURE_GENERATOR}, so "
+                    f"figures/{p.name}: not produced by {generators}, so "
                     f"nothing ties it to a frozen artifact")
             elif p.name not in recorded:
                 problems.append(
-                    f"figures/{p.name}: absent from {FIGURE_PROVENANCE.name}, so "
-                    f"nothing records which data it was drawn from")
+                    f"figures/{p.name}: absent from the provenance file of "
+                    f"{produced[p.name]}, so nothing records which data it was "
+                    f"drawn from")
             elif _sha(p) != recorded[p.name]["sha256"]:
                 problems.append(
                     f"figures/{p.name}: bytes differ from the ones "
-                    f"{FIGURE_PROVENANCE.name} recorded")
+                    f"{prov_name[p.name]} recorded")
         elif p.suffix.lower() in {".json", ".py"}:
             problems.append(
                 f"figures/{p.name}: figures/ holds images only; data and "
                 f"generators live in results/ and tools/")
 
-    problems.extend(_caption_problems(recorded))
+    problems.extend(_caption_problems(recorded, prov_name))
     return problems
 
 
-def _caption_problems(recorded: dict) -> list[str]:
+def _caption_problems(recorded: dict, prov_name: dict) -> list[str]:
     """The caption under an image must be the one the generator emitted.
 
     Neither figure carries a title any more: the descriptive text is a caption,
@@ -285,14 +305,15 @@ def _caption_problems(recorded: dict) -> list[str]:
     text = README.read_text()
     for name, rec in sorted(recorded.items()):
         caption = (rec or {}).get("caption")
+        where = prov_name.get(name, "the provenance file")
         if not caption:
             problems.append(
-                f"figures/{name}: {FIGURE_PROVENANCE.name} records no caption, "
+                f"figures/{name}: {where} records no caption, "
                 f"so the text under the image is not tied to the artifacts")
         elif caption not in text:
             problems.append(
                 f"figures/{name}: the caption in README.md is not the one "
-                f"{FIGURE_PROVENANCE.name} recorded; run make figures")
+                f"{where} recorded; run make figures")
     return problems
 
 
