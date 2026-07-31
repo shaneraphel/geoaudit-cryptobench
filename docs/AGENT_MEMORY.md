@@ -172,6 +172,15 @@ Four column families now have both a counting-field lift and a linear-solve lift
 the same twelve splits under the same gate, and §2d has since measured the third and
 last attachment. **The axis is closed; read §2d before proposing a fifth family.**
 
+**Reopened, narrowly — read §2i and §2j.** The closure held for six families and
+the account of *why* arrived later: every one of them was a function of data the
+pipeline already reads. The seventh reads bytes it throws away — backbone atom
+positions — and is worth +0.00196 against the deployed detector and +0.00267
+against its own marginal-preserving permutation, both with intervals excluding
+zero. So the sentence above is right about re-encodings and was wrong to
+generalise from them to wires as such. It is still right that +0.002 does not
+close a 0.0243 deficit.
+
 | family | mean pairwise interaction | field | solve |
 |---|---|---|---|
 | deployed 645 wires | **+1.06e-05** | 0.79012 | 0.78483 (field ahead **+0.0053**) |
@@ -600,6 +609,143 @@ to stratify the *test-fold* pLM-NN comparison, which would have spent a read fro
 the ledger on an exploratory question. Check what is already on disk before
 spending a frozen resource.
 
+## 2i. Why six families were null, stated as a rule you can apply before running
+
+Six wire families have now been measured and every one is null: graph invariants
+(§2c), the operator bank, composition, the expanded and wide banks, and chemistry
+42 (`CHEMISTRY_WIRES_LIFT.json`: union +0.000165 crossing zero, straddle −0.000662,
+and the `more_old` control **ahead of both at +0.000430**). Six nulls with no
+account of why is a habit; with an account it is a screen. The account:
+
+> **Every one of those families is a function of data the deployed pipeline
+> already reads. Before proposing a family, ask whether it reads bytes the
+> pipeline currently throws away. If it does not, it is a re-encoding, and six
+> measurements say re-encodings are worth nothing.**
+
+Chemistry 42 is the cleanest case and it is worth having the arithmetic, because
+the argument is checkable rather than rhetorical:
+
+* The bank already carries seven constants that are functions of residue type —
+  `kd`, `volume`, `aromatic`, `charge`, `hbd`, `hba`, `chi`. **Unquantised, those
+  seven are injective on the twenty types**; `kd` and `volume` alone already are.
+  So residue identity is fully determined by wires that are already deployed, and
+  all fourteen chemistry columns are functions of residue type. Nothing about type
+  can be new.
+* **Quantised**, they are not injective. At four bands the seven resolve **17 of
+  20 types**, and the three collisions are `ALA/GLY`, `ARG/LYS`, `ILE/LEU`.
+  Summing over width-2 tables loses nothing further — separability under a sum
+  over all pairs is separability wire by wire — so 17 is what the deployed field
+  sees.
+* So there *was* a representational gap, it was nameable, and chemistry 42 fills
+  it: `sc_carbon`, `backbone_flexible` and `sc_volume` split `ALA/GLY`; `sc_hbd`,
+  `sc_polar_atoms` and `nucleophilic` split `ARG/LYS`; `beta_branched` splits
+  `ILE/LEU` and is the only one of the fourteen that does.
+* **Filling it is worth +0.000165, behind a control that adds the same number of
+  tables from old wires.** Resolving every collision the quantiser creates buys
+  nothing, so the detector's deficit is not about residue-type resolution.
+
+That closes per-residue-type dictionaries for the detector, by two independent
+routes: the representation argument and the measurement. Expanding a chemical
+dictionary remains useful for candidate triage in the sibling repository, where
+the quantity is read directly rather than through a quantiser. It is not a route
+to pLM-NN.
+
+**What the rule admits.** Reduce a residue to the centroid of its heavy atoms —
+which is what `c_i` is, in the appendix's own conventions — and the backbone stops
+existing. There is no φ, no ψ, no backbone hydrogen bond, no secondary structure,
+and no Cα→Cβ direction anywhere in the 35 algebraic quantities; `phi` in
+`geometric_foundation.py` is a spherical coordinate for probe directions and the
+`NEAR_LAG = 4` comment in `chain_operator_descriptors.py` is a centroid distance at
+sequence lag four, which is a helix proxy and not a torsion. Two different
+backbone conformations can present the same centroid set, because recovering a
+torsion needs N and C positions that the pipeline discards at parse time. So
+backbone geometry is the first proposed family that the rule above does not
+already refuse, and `pdb_io.parse_pdb_atoms` keeps the atom names, so the bytes
+are on disk.
+
+It is also the axis with a mechanism for the pLM-NN deficit rather than a hope:
+the best-replicated probing result about protein language models is that they
+encode secondary structure strongly, cryptic pockets open by backbone motion, and
+the residues lining them sit disproportionately in loops and at helix termini.
+That is a hypothesis with a named observable, which is the standard §2g failed and
+§2h was measured against — so it gets a control arm that destroys the backbone
+relation while preserving every marginal, not just a bigger bank.
+
+## 2j. The seventh family is the first that is not null, and the rule predicted it
+
+`BACKBONE_WIRES_LIFT.json` and `BACKBONE_PERMUTED_LIFT.json`, 12 cluster-disjoint
+halvings, the same protocol every other family was measured on.
+
+§2i said the deciding question is whether a family reads bytes the pipeline throws
+away. `src/pocket_bench/methods/backbone_geometry.py` is the first that does: N,
+CA, C, O and CB, from which it computes thirteen quantities the centroid
+representation cannot express — φ and ψ as points on the circle, the Ramachandran
+cell as a combinatorial label, the CA-trace turn and torsion, backbone hydrogen
+bonds donated and accepted, the sequence lag to the donated partner, the CA→CB
+direction against the outward radial, and CA packing with side chains removed.
+Aggregated own / contact / walk2 exactly as chemistry 42 was, giving 39 columns
+against its 42, so the two are a comparison of quantities and not of attachments.
+
+| comparison | mean | 95% CI | splits |
+|---|---|---|---|
+| backbone − deployed | **+0.00196** | [+0.00092, +0.00300] | 8/12 |
+| backbone − `more_old` control | **+0.00147** | [+0.00016, +0.00277] | 8/12 |
+| **backbone − row-permuted backbone** | **+0.00267** | [+0.00140, +0.00394] | **10/12, p=0.019** |
+| row-permuted backbone − deployed | −0.00071 | [−0.00170, +0.00029] | 5/12 |
+
+**The third row is the result and the fourth is why.** The permuted arm is the
+same thirteen quantities, aggregated identically, with rows shuffled inside each
+chain under a fixed seed: every column's multiset of values over the chain is
+unchanged, so every marginal is identical by construction and the only thing
+destroyed is which residue each row describes. Permuted, the family is worth
+nothing and slightly less than nothing. Unpermuted it is worth +0.002. So the
+gain is the backbone conformation *of the residue being scored*, not the shape of
+a column, not the extra cells, and not anything a bigger bank would supply.
+
+Compare chemistry 42, whose union arm gave +0.000165 with its own `more_old`
+control ahead at +0.000430. Backbone is twelve times the lift and reverses the
+sign against the control.
+
+**Four limits, and none of them is optional.**
+
+* **It is small.** +0.002 against a 0.0243 deficit to pLM-NN. Even added to §2f's
+  gate radius it is under a fifth of the gap. This does not beat pLM-NN and
+  saying it does would be the manoeuvre this repository has already retracted
+  once.
+* **It sits on the reseed floor.** The decisive +0.00267 clears 0.0026 by
+  0.00007. The floor is about pairing-seed noise on a different axis, so the two
+  are not the same quantity, but a margin the size of the noise elsewhere is a
+  coincidence to state rather than to argue past.
+* **The sign test is weaker than the interval.** 8/12 at p=0.19 for the headline
+  arm; only the permutation comparison reaches 10/12 at p=0.019. The intervals
+  are paired over splits and the split-to-split correlation is high, which is
+  what makes them narrower than the sign test is strong.
+* **Adopting it is not free.** The union attachment adds 304 tables to 5152, and
+  moving the architecture makes `EXTERNAL_READ.json`'s +0.0443 a result about a
+  detector that no longer exists. Set B and Set C are frozen and unread for
+  exactly this.
+
+**What was actually verified, because two of the three quantities were wrong
+first.** The dihedral's sine had the wrong sign, which exchanged the two helical
+cells and put 127 of one 254-residue chain's residues in the left-handed cell; a
+protein has a few percent. The hydrogen-bond direction test was inverted — it
+asked for the nitrogen on the carbonyl carbon's side of the oxygen rather than
+beyond it — and the modal donated lag through a helix came back as 2 where an α
+turn fixes 4. Neither raised. Both were caught by asking for a number whose value
+is known before the module runs, and `tests/test_backbone_geometry.py` now builds
+an ideal backbone forwards from bond lengths, angles and torsions and asks the
+module to read φ = −57° and ψ = −47° back. On real chains the CA turn comes out
+at 91.7° against a textbook 89° and the CA torsion at +50.4° against +50°.
+
+Alignment was the other place this could have failed silently. The wide cache's
+rows are the sorted set of *integer* resseq, while a torsion is a property of the
+polymer and needs the insertion code too; 1dc6_A has 330 polymer residues and 329
+cache rows. The builder derives both lists, maps between them, and checks its own
+recomputed centroids against the cache's row by row: **agreement is exact,
+0.00e+00, on all 234,838 rows.** Without that check every backbone quantity past
+the first insertion code would have been attached to the wrong residue and
+nothing would have raised.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the
@@ -975,7 +1121,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 651 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 682 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

@@ -126,6 +126,19 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         from chemistry_wires import build_or_load
         X, _n = build_or_load()
         return np.asarray(X), "tools/chemistry_wires.py"
+    if name == "backbone 39":
+        from backbone_wires import build_or_load
+        X, _n = build_or_load()
+        return np.asarray(X), "tools/backbone_wires.py"
+    if name == "backbone permuted 39":
+        # The family-specific control: identical columns, rows shuffled inside
+        # each chain, so every marginal is the same multiset and only the
+        # correspondence between a row and its residue is destroyed. Beating
+        # more_old says the columns carry something; beating this says what they
+        # carry is the backbone geometry of the residue being scored.
+        from backbone_wires import build_or_load
+        X, _n = build_or_load(permuted=True)
+        return np.asarray(X), "tools/backbone_wires.py --permuted"
     if name == "composition 76":
         from composition_wires import build_or_load
         X, _n = build_or_load()

@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 61,
-    "exploration": 39,
+    "exploration": 41,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 134,
+  "n_artifacts": 136,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -61,6 +61,20 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.architecture_figure_provenance.v1",
       "bytes": 3142
+    },
+    {
+      "artifact": "results/architecture_sweep/BACKBONE_PERMUTED_LIFT.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 3656
+    },
+    {
+      "artifact": "results/architecture_sweep/BACKBONE_WIRES_LIFT.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.straddling_attachment.v1",
+      "bytes": 3338
     },
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",

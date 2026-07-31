@@ -96,3 +96,6 @@ data/cryptobench_apo/_aniso_cache_train.npz
 
 # Scratch logs from supervised long runs; nothing here is evidence.
 _tmp/
+
+# Per-split checkpoints of long sweeps; the artifact is the evidence, not these.
+results/**/*.splits.jsonl
