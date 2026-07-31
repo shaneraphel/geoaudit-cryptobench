@@ -406,12 +406,59 @@ a quantisation-resolution problem**, and the ladder is closed a second time by a
 stronger measurement than the one that closed it first.
 
 That elimination leaves the 0.5991-against-0.8766 gap standing and unexplained.
-The next suspect is the **spatial gate**, and it is the same trap: `r = 18, w = 1.0`
-was chosen over {14, 18} × {0.5, 1.0} by pick-half ROC-AUC — a mean over units —
-so a radius that suits a forty-residue site and drowns an eight-residue one would
-have been selected without anyone seeing it. An 18 Å gate around a site with eight
-cryptic residues averages over a neighbourhood that is almost entirely negative.
-Sweep it stratified before proposing anything else.
+
+## 2f. The gate radius has no provenance, and 14 beats 18 everywhere
+
+`GATE_BY_STRATUM.json` sweeps seven radii and two weights, per unit and per
+stratum, sharing one compile per split so thirteen arms cost what one used to.
+Deployed arm reproduced to 4.0e-07.
+
+**The deployed gate was never selected for the architecture that ships.**
+`FINAL_READOUT_SELECTION.json` chose `r=18, w=0.5` under `top_k_wires=90`,
+`table_width=6`, `n_tables=15`, `ridge=1e-06` and a `lin_digits` linear readout.
+What ships is 645 wires, width 2, 5,152 tables, a counting field — and `w=1.0`,
+which that selection did not choose either. The radius is inherited from a
+configuration sharing almost nothing with the current one, and nobody re-swept it.
+
+**Paired against the deployed gate on the same units:**
+
+| arm | pooled | 0–9 | 10–15 | 16–22 | 23–76 |
+|---|---|---|---|---|---|
+| `r=14 w=1` | **+0.00250** [+0.0006, +0.0044] | +0.0023 | +0.0024 | +0.0027 | +0.0025 |
+| | 436/769 better, **p=1.15e-04** | crosses 0 | crosses 0 | excludes 0 | excludes 0 |
+
+A **uniform** gain of about +0.0025, the same size in every stratum. So the
+reading that "the optimum radius rises with pocket size" is *wrong*: `r=14` is
+best for three of four strata and by the same margin in all four. It is not a
+small-pocket fix, it is a better global radius, and it needs no label knowledge —
+which is what makes it the only thing measured in this whole line that could ship.
+
+**And the small-pocket gate idea is refused by the pairing.** Removing the gate
+entirely looks like +0.0117 on the 0–9 stratum by stratum means, which is 4.5× the
+reseed floor and reads as a lever. Paired, it is **+0.0117 [−0.0056, +0.0289] with
+83 of 188 units better** — fewer than half. The stratum mean moved because a few
+units moved a great deal, which is the small-`n1` variance of §2e biting the
+analyst instead of the detector. Every other stratum is hurt and hurt decisively
+(−0.0127, −0.0182, −0.0254, all excluding zero). **Compare arms paired or do not
+compare them.**
+
+**Two limits, and neither is optional when this is written up.**
+
+*Selection optimism.* `r=14, w=1` is the best of thirteen arms chosen on the same
+pick halves it is scored on, so +0.0025 is an optimistic estimate of its own
+effect. §3 records the identical concern for pairings and the identical remedy:
+re-measure the chosen arm on halves it was not chosen from. **Do that before
+changing a constant.**
+
+*The magnitude sits on the reseed floor.* +0.0025 against a 0.0026 floor. The
+paired p is 1.15e-04 and the floor is about pairing-seed noise rather than about
+this comparison, so the two are not the same quantity — but a gain the size of the
+noise on a different axis is a coincidence to state, not to argue past.
+
+*And changing it spends nothing but costs something.* The gate is part of the
+method. Moving it makes `EXTERNAL_READ.json`'s +0.0443 a result about a detector
+that no longer exists; confirmation would have to come from Set B or Set C, which
+are frozen and unread for exactly this situation.
 
 One caution that will matter as soon as a fix is proposed. The stratifying
 variable is the number of cryptic residues, which is the **label**. Nothing that

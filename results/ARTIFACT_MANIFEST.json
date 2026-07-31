@@ -12,13 +12,13 @@
   },
   "counts": {
     "cited": 61,
-    "exploration": 35,
+    "exploration": 36,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 130,
+  "n_artifacts": 131,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -264,6 +264,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.gap_decomposition.v1",
       "bytes": 7606
+    },
+    {
+      "artifact": "results/architecture_sweep/GATE_BY_STRATUM.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.gate_by_stratum.v1",
+      "bytes": 23299
     },
     {
       "artifact": "results/architecture_sweep/GATE_WEIGHT_ROUTING.json",
