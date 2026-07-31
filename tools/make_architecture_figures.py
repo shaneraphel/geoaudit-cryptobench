@@ -334,13 +334,15 @@ def fig_recovered_units(doc: dict) -> tuple[Path, str]:
         f"with both baselines \u2264 {strict['missed_at_or_below']:.2f}, chance "
         f"being 0.50 \u2014 and the red corner is its mirror, which holds "
         f"{doc['n_mirror']} units. {doc['n_recovered']} units are named; "
-        f"4m7p_A is drawn hollow and not counted because its deposit carries "
-        f"twenty alternate conformers and the three methods do not parse it "
-        f"alike. Right: the same two counts at eight strictness settings, "
-        f"reported whole because one row of a ladder is a choice. pLM-NN is "
-        f"absent: it has never been run on the training fold, so this compares "
-        f"against two baselines and not three. Exploratory, training fold only, "
-        f"no test-fold read.")
+        f"4m7p_A is drawn hollow and not counted in that joint rule because its "
+        f"deposit is a twenty-conformer ensemble and not every baseline parses "
+        f"it alike — against P2Rank alone both score the same 390 residues "
+        f"(0.918 vs 0.439), reported separately as a training-fold case study. "
+        f"Right: the same two counts at eight strictness settings, reported "
+        f"whole because one row of a ladder is a choice. pLM-NN is absent: it "
+        f"has never been run on the training fold, so this compares against two "
+        f"baselines and not three. Exploratory, training fold only, no "
+        f"test-fold read.")
     return out, caption
 
 

@@ -5,7 +5,7 @@
   "generator": "tools/make_official_figures.py",
   "sources": {
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
-    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "95d08cac8d3124d8f4185d1d684a542a32af94cf75ac14e0e9d563e5b21460b6",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "9fc7e2e174f97680c06445ba61066aac0ca2f38681f37fb7ebf3ea5bfa645a7f",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
     "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",

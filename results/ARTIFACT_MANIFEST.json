@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "cited": 62,
+    "cited": 63,
     "exploration": 44,
     "superseded": 17,
     "inventory": 5,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 140,
+  "n_artifacts": 141,
   "artifacts": [
     {
       "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
@@ -60,7 +60,7 @@
       "class": "exploration",
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.architecture_figure_provenance.v1",
-      "bytes": 4338
+      "bytes": 4476
     },
     {
       "artifact": "results/architecture_sweep/BACKBONE_PERMUTED_LIFT.json",
@@ -924,6 +924,13 @@
       "bytes": 1664
     },
     {
+      "artifact": "results/official_fold/RECOVERY_READ.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.recovery_read.v1",
+      "bytes": 29739
+    },
+    {
       "artifact": "results/official_fold/RESIDUE_IDENTITY_AUDIT.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -956,7 +963,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 13752
+      "bytes": 14342
     },
     {
       "artifact": "results/official_fold/THRESHOLD_CURVE.json",

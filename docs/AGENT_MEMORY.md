@@ -838,23 +838,48 @@ zero at the two strictest, which is the strongest form the statement takes.
 | `5f3k_B` | 203 | 15 | 0.828 | 0.542 | 0.532 |
 | `8c3u_A` | 152 | 13 | 0.814 | 0.409 | 0.516 |
 
-**`4m7p_A` is excluded and the exclusion is the useful part.** It is the largest
-disagreement in the fold — 0.918 against 0.439 and 0.214 — and it is not evidence
-about pocket detection. The deposit is an ensemble refinement: 60,040 ATOM lines,
-twenty alternate conformers `A`..`T` of 3,002 atoms each. PocketMiner drops 6,905
-conformer residues there, which is **every one of the 6,905 it drops in the whole
-fold**, reports 505 resseq collisions from insertion codes, and records
-`agrees_with_official_featurisation: null` — it could not be checked against the
-authors' own tensor. A win on a chain the three methods parse differently is a
-win about parsing, and a reviewer will say so before we do. The tool now
-separates any unit failing that check into its own list.
+**`4m7p_A` stays out of the joint recovery table; against P2Rank alone it is a
+case study.** The deposit is an ensemble refinement: 60,040 ATOM lines, twenty
+alternate conformers `A`..`T` of 3,002 atoms each. Not every published baseline
+parses that file the same way, so a multi-baseline "recovery" on it is a win
+about parsing — the tool still parks any unit failing that check in its own
+list. **P2Rank does share the residue universe:** both sides emit scores on the
+same 390 residues (`n_cryptic=29`), and the within-unit ROC-AUCs are **0.918
+(counting field) against 0.439 (P2Rank)**. Report that pairwise margin only as
+training-fold exploratory text; do not fold it into the four clean recoveries,
+do not imply a second confirmatory SOTA miss, and do not use it to soften read
+13 (0 recoveries on the official fold).
 
 **Two of the four have very few cryptic residues.** `2xur_B` has four and
 `8bdi_I` three, which is §2e's small-`n1` regime where the null sampling error of
 a per-unit AUC is about 0.11. `8c3u_A` and `5f3k_B`, at 13 and 15, are the two
 that do not lean on it. Say which is which when these are shown.
 
-**What this is not.** pLM-NN is not in it. It has never been run on the training
+**It does not replicate on the held-out fold, and that is read 13.**
+`RECOVERY_READ.json`, exploratory, under a plan that hashes the training-fold
+tool and artifact and refuses if either moved. Same rule, 192 official units, all
+three baselines this time: **0 recoveries, 1 mirror**, and the difference is
+negative at all eight ladder settings (0 against 1, 1, 1, 2, 2, 3, 4, 6).
+
+Two readings, and both belong in any sentence about it:
+
+* **The fold has almost no power here.** 4 in 769 is one per 192, so the expected
+  count on this fold is 1.0 and 0-against-1 is what that rate gives by chance
+  either way. The third baseline also makes the bar strictly harder: P2Rank is
+  below 0.55 on 17 units, pLM-NN on 25, PocketMiner on 26, **all three at once on
+  6**.
+* **On those six we are worse, and that is not a power problem.** Ahead on 1 of
+  6, mean 0.297 against a best-baseline mean of 0.446. `7e5q_B` 0.588 vs 0.532,
+  then `1rtc_A` 0.522, `4gv9_A` 0.272, `1vsn_A` 0.150, `7f2m_B` 0.137, `3ly8_A`
+  0.110. **The chains all three published methods fail on are chains this
+  detector fails on harder.**
+
+So the training-fold table is not evidence that the field sees sites the
+baselines cannot. Both results are in the README, because showing only the first
+is the selection the preregistration exists to prevent, and the sentence
+reporting the negative was fixed in the plan before the read.
+
+**What this is not.** pLM-NN is not in the training-fold counts. It has never been run on the training
 fold — that is a five-hour encoder pass, not a lookup — so every count above is
 against **two** baselines. Any sentence about "P2Rank and pLM both missed it"
 needs the official fold, where all four methods' per-residue scores are already

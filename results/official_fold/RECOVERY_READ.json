@@ -1,0 +1,1458 @@
+{
+  "schema": "geoaudit.recovery_read.v1",
+  "clinical_grade": false,
+  "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
+  "test_fold_read_index": 13,
+  "status": "exploratory",
+  "method": "table_field",
+  "question": "on the 192 single-chain units of the official test fold, how many chains does the counting field rank the cryptic binding residues well on while P2Rank, pLM-NN and PocketMiner all rank them at chance, and how many are the other way round",
+  "plan": {
+    "artifact": "results/architecture_sweep/PREREGISTERED_RECOVERY.json",
+    "commit": "7fe3dab59a2188b4378cec10f22a2216a991491d",
+    "committed_at": "2026-07-31T19:04:12+08:00",
+    "subject": "Preregister read 13: the recovery rule, fixed on the training fold, applied unchanged",
+    "is_ancestor_of_head": true
+  },
+  "plan_sha256": "ec5c44cc772880583063705ad503f69a1b101022375afa588d18b1be229bcb45",
+  "inputs_unchanged_since_the_plan": true,
+  "rule_source_unchanged_since_the_plan": true,
+  "rescored_anything": false,
+  "why_it_is_indexed_anyway": "no model is re-run and no threshold is re-fitted, but the labels are opened and a new statistic is formed over the held-out units. A ledger that counted only re-runs would make an unlimited number of such statements free",
+  "rule_applied": {
+    "found_at_or_above": 0.8,
+    "missed_at_or_below": 0.55,
+    "recovery": "ours >= 0.80 and p2rank <= 0.55 and plmnn <= 0.55 and pocketminer <= 0.55",
+    "mirror": "p2rank >= 0.80 and plmnn >= 0.80 and pocketminer >= 0.80 and ours <= 0.55",
+    "fixed_on": "the training fold, in tools/found_where_baselines_missed.py"
+  },
+  "n_units_compared": 192,
+  "n_recovered": 0,
+  "n_recovered_with_a_parsing_caveat": 0,
+  "n_mirror": 1,
+  "threshold_ladder": [
+    {
+      "found_at_or_above": 0.8,
+      "missed_at_or_below": 0.55,
+      "n_recovered": 0,
+      "n_mirror": 1,
+      "difference": -1
+    },
+    {
+      "found_at_or_above": 0.8,
+      "missed_at_or_below": 0.6,
+      "n_recovered": 0,
+      "n_mirror": 1,
+      "difference": -1
+    },
+    {
+      "found_at_or_above": 0.75,
+      "missed_at_or_below": 0.6,
+      "n_recovered": 0,
+      "n_mirror": 1,
+      "difference": -1
+    },
+    {
+      "found_at_or_above": 0.75,
+      "missed_at_or_below": 0.65,
+      "n_recovered": 0,
+      "n_mirror": 2,
+      "difference": -2
+    },
+    {
+      "found_at_or_above": 0.7,
+      "missed_at_or_below": 0.6,
+      "n_recovered": 0,
+      "n_mirror": 2,
+      "difference": -2
+    },
+    {
+      "found_at_or_above": 0.7,
+      "missed_at_or_below": 0.65,
+      "n_recovered": 0,
+      "n_mirror": 3,
+      "difference": -3
+    },
+    {
+      "found_at_or_above": 0.65,
+      "missed_at_or_below": 0.6,
+      "n_recovered": 0,
+      "n_mirror": 4,
+      "difference": -4
+    },
+    {
+      "found_at_or_above": 0.65,
+      "missed_at_or_below": 0.65,
+      "n_recovered": 0,
+      "n_mirror": 6,
+      "difference": -6
+    }
+  ],
+  "difference_positive_at_every_setting": false,
+  "recovered": [],
+  "recovered_but_the_file_is_parsed_differently": [],
+  "mirror": [
+    {
+      "unit": "1e6k_A",
+      "ours": 0.4793,
+      "p2rank": 0.8264,
+      "plmnn": 0.9513,
+      "pocketminer": 0.865,
+      "best_baseline": 0.9513,
+      "margin_over_the_best_baseline": -0.472,
+      "n_cryptic": 9,
+      "every_method_verified_on_the_same_residues": true,
+      "pocketminer_agrees_with_official_featurisation": true,
+      "n_dropped_by_pocketminer": 0,
+      "n_resseq_collisions": 0
+    }
+  ],
+  "outcome": "mirrors_exceed_recoveries",
+  "conclusion": "On the 192 units of the official test fold there are more chains whose cryptic binding residues all three baselines rank and the counting field does not than chains the other way round. The rule was fixed on the training fold before this read, and it is reported here because it was.",
+  "what_this_cannot_show": "ROC-AUC within a unit is a statement about the ranking of that unit's residues. Nothing here is a claim that a pocket exists which the baselines cannot see, that any site is druggable, or that any of it is clinical",
+  "per_unit": [
+    {
+      "unit": "1arl_A",
+      "ours": 0.9761,
+      "p2rank": 0.9968,
+      "plmnn": 0.9229,
+      "pocketminer": 0.8329
+    },
+    {
+      "unit": "1bk2_A",
+      "ours": 0.7346,
+      "p2rank": 0.7538,
+      "plmnn": 0.8423,
+      "pocketminer": 0.5115
+    },
+    {
+      "unit": "1bzj_A",
+      "ours": 0.507,
+      "p2rank": 0.5526,
+      "plmnn": 0.5491,
+      "pocketminer": 0.4626
+    },
+    {
+      "unit": "1cwq_A",
+      "ours": 0.0812,
+      "p2rank": 0.6545,
+      "plmnn": 0.2859,
+      "pocketminer": 0.1329
+    },
+    {
+      "unit": "1dq2_A",
+      "ours": 0.5907,
+      "p2rank": 0.7898,
+      "plmnn": 0.9646,
+      "pocketminer": 0.6936
+    },
+    {
+      "unit": "1e6k_A",
+      "ours": 0.4793,
+      "p2rank": 0.8264,
+      "plmnn": 0.9513,
+      "pocketminer": 0.865
+    },
+    {
+      "unit": "1evy_A",
+      "ours": 0.9152,
+      "p2rank": 0.906,
+      "plmnn": 0.9712,
+      "pocketminer": 0.9377
+    },
+    {
+      "unit": "1g1m_B",
+      "ours": 0.8117,
+      "p2rank": 0.9725,
+      "plmnn": 0.9667,
+      "pocketminer": 0.9025
+    },
+    {
+      "unit": "1g59_A",
+      "ours": 0.8943,
+      "p2rank": 0.8941,
+      "plmnn": 0.9572,
+      "pocketminer": 0.8724
+    },
+    {
+      "unit": "1h13_A",
+      "ours": 0.991,
+      "p2rank": 0.9815,
+      "plmnn": 0.9348,
+      "pocketminer": 0.9101
+    },
+    {
+      "unit": "1i7n_A",
+      "ours": 0.8975,
+      "p2rank": 0.7806,
+      "plmnn": 0.9823,
+      "pocketminer": 0.8465
+    },
+    {
+      "unit": "1k47_D",
+      "ours": 0.931,
+      "p2rank": 0.8329,
+      "plmnn": 0.9167,
+      "pocketminer": 0.9426
+    },
+    {
+      "unit": "1ksg_B",
+      "ours": 0.7838,
+      "p2rank": 0.8593,
+      "plmnn": 0.7602,
+      "pocketminer": 0.7762
+    },
+    {
+      "unit": "1kx9_A",
+      "ours": 0.7728,
+      "p2rank": 0.7713,
+      "plmnn": 0.7491,
+      "pocketminer": 0.7348
+    },
+    {
+      "unit": "1kxr_A",
+      "ours": 0.9586,
+      "p2rank": 0.8687,
+      "plmnn": 0.9614,
+      "pocketminer": 0.5664
+    },
+    {
+      "unit": "1lbe_B",
+      "ours": 0.9366,
+      "p2rank": 0.8675,
+      "plmnn": 0.9143,
+      "pocketminer": 0.8779
+    },
+    {
+      "unit": "1m5w_D",
+      "ours": 0.9334,
+      "p2rank": 0.9534,
+      "plmnn": 0.9244,
+      "pocketminer": 0.9011
+    },
+    {
+      "unit": "1nd7_A",
+      "ours": 0.2845,
+      "p2rank": 0.7426,
+      "plmnn": 0.4027,
+      "pocketminer": 0.5385
+    },
+    {
+      "unit": "1p4o_B",
+      "ours": 0.9528,
+      "p2rank": 0.8916,
+      "plmnn": 0.969,
+      "pocketminer": 0.8246
+    },
+    {
+      "unit": "1p4v_A",
+      "ours": 0.9832,
+      "p2rank": 0.9078,
+      "plmnn": 0.9756,
+      "pocketminer": 0.95
+    },
+    {
+      "unit": "1p9o_A",
+      "ours": 0.8404,
+      "p2rank": 0.8504,
+      "plmnn": 0.8644,
+      "pocketminer": 0.8878
+    },
+    {
+      "unit": "1pu5_C",
+      "ours": 0.8382,
+      "p2rank": 0.7179,
+      "plmnn": 0.7273,
+      "pocketminer": 0.8303
+    },
+    {
+      "unit": "1q4k_A",
+      "ours": 0.5517,
+      "p2rank": 0.7468,
+      "plmnn": 0.7902,
+      "pocketminer": 0.7089
+    },
+    {
+      "unit": "1rjb_A",
+      "ours": 0.8792,
+      "p2rank": 0.8898,
+      "plmnn": 0.9789,
+      "pocketminer": 0.7063
+    },
+    {
+      "unit": "1rtc_A",
+      "ours": 0.5223,
+      "p2rank": 0.5321,
+      "plmnn": 0.4338,
+      "pocketminer": 0.4695
+    },
+    {
+      "unit": "1se8_A",
+      "ours": 0.9703,
+      "p2rank": 0.8036,
+      "plmnn": 0.9521,
+      "pocketminer": 0.8531
+    },
+    {
+      "unit": "1uka_A",
+      "ours": 0.9138,
+      "p2rank": 0.9277,
+      "plmnn": 0.8182,
+      "pocketminer": 0.939
+    },
+    {
+      "unit": "1ute_A",
+      "ours": 0.1922,
+      "p2rank": 0.4658,
+      "plmnn": 0.2645,
+      "pocketminer": 0.6871
+    },
+    {
+      "unit": "1vsn_A",
+      "ours": 0.1505,
+      "p2rank": 0.51,
+      "plmnn": 0.401,
+      "pocketminer": 0.3162
+    },
+    {
+      "unit": "1x2g_C",
+      "ours": 0.8854,
+      "p2rank": 0.915,
+      "plmnn": 0.9054,
+      "pocketminer": 0.7975
+    },
+    {
+      "unit": "1xgd_A",
+      "ours": 0.9265,
+      "p2rank": 0.8635,
+      "plmnn": 0.9105,
+      "pocketminer": 0.8833
+    },
+    {
+      "unit": "1xjf_A",
+      "ours": 0.9848,
+      "p2rank": 0.9414,
+      "plmnn": 0.9567,
+      "pocketminer": 0.9498
+    },
+    {
+      "unit": "1xqv_A",
+      "ours": 0.9483,
+      "p2rank": 0.8849,
+      "plmnn": 0.9837,
+      "pocketminer": 0.9081
+    },
+    {
+      "unit": "1xtc_A",
+      "ours": 0.8662,
+      "p2rank": 0.6905,
+      "plmnn": 0.9275,
+      "pocketminer": 0.6727
+    },
+    {
+      "unit": "1zm0_A",
+      "ours": 0.9754,
+      "p2rank": 0.915,
+      "plmnn": 0.9679,
+      "pocketminer": 0.8342
+    },
+    {
+      "unit": "2aka_A",
+      "ours": 0.8119,
+      "p2rank": 0.8474,
+      "plmnn": 0.8894,
+      "pocketminer": 0.8717
+    },
+    {
+      "unit": "2d05_A",
+      "ours": 0.9868,
+      "p2rank": 0.9104,
+      "plmnn": 0.8928,
+      "pocketminer": 0.7954
+    },
+    {
+      "unit": "2dfp_A",
+      "ours": 0.9571,
+      "p2rank": 0.9157,
+      "plmnn": 0.9216,
+      "pocketminer": 0.8558
+    },
+    {
+      "unit": "2fem_A",
+      "ours": 0.821,
+      "p2rank": 0.8773,
+      "plmnn": 0.9012,
+      "pocketminer": 0.9032
+    },
+    {
+      "unit": "2fhz_B",
+      "ours": 0.8427,
+      "p2rank": 0.958,
+      "plmnn": 0.8698,
+      "pocketminer": 0.8526
+    },
+    {
+      "unit": "2h7s_A",
+      "ours": 0.9419,
+      "p2rank": 0.9006,
+      "plmnn": 0.9128,
+      "pocketminer": 0.8249
+    },
+    {
+      "unit": "2i3a_D",
+      "ours": 0.9353,
+      "p2rank": 0.9467,
+      "plmnn": 0.9532,
+      "pocketminer": 0.881
+    },
+    {
+      "unit": "2i3r_A",
+      "ours": 0.8259,
+      "p2rank": 0.9174,
+      "plmnn": 0.9136,
+      "pocketminer": 0.761
+    },
+    {
+      "unit": "2iyt_A",
+      "ours": 0.8262,
+      "p2rank": 0.8325,
+      "plmnn": 0.9713,
+      "pocketminer": 0.8063
+    },
+    {
+      "unit": "2nt1_B",
+      "ours": 0.9291,
+      "p2rank": 0.977,
+      "plmnn": 0.9699,
+      "pocketminer": 0.9433
+    },
+    {
+      "unit": "2phz_A",
+      "ours": 0.8393,
+      "p2rank": 0.5754,
+      "plmnn": 0.9289,
+      "pocketminer": 0.7547
+    },
+    {
+      "unit": "2pkf_A",
+      "ours": 0.9866,
+      "p2rank": 0.9401,
+      "plmnn": 0.9469,
+      "pocketminer": 0.9186
+    },
+    {
+      "unit": "2pwz_G",
+      "ours": 0.9222,
+      "p2rank": 0.8885,
+      "plmnn": 0.9724,
+      "pocketminer": 0.9319
+    },
+    {
+      "unit": "2qbv_A",
+      "ours": 0.8596,
+      "p2rank": 0.9709,
+      "plmnn": 0.8656,
+      "pocketminer": 0.8305
+    },
+    {
+      "unit": "2rfj_B",
+      "ours": 0.8037,
+      "p2rank": 0.6862,
+      "plmnn": 0.9716,
+      "pocketminer": 0.589
+    },
+    {
+      "unit": "2v6m_D",
+      "ours": 0.8757,
+      "p2rank": 0.8213,
+      "plmnn": 0.9707,
+      "pocketminer": 0.9062
+    },
+    {
+      "unit": "2vl2_C",
+      "ours": 0.9258,
+      "p2rank": 0.9116,
+      "plmnn": 0.904,
+      "pocketminer": 0.757
+    },
+    {
+      "unit": "2vqz_F",
+      "ours": 0.2018,
+      "p2rank": 0.3506,
+      "plmnn": 0.6963,
+      "pocketminer": 0.5375
+    },
+    {
+      "unit": "2vyr_A",
+      "ours": 0.6813,
+      "p2rank": 0.8231,
+      "plmnn": 0.8044,
+      "pocketminer": 0.7597
+    },
+    {
+      "unit": "2w8n_A",
+      "ours": 0.8655,
+      "p2rank": 0.7501,
+      "plmnn": 0.9512,
+      "pocketminer": 0.9481
+    },
+    {
+      "unit": "2x47_A",
+      "ours": 0.9668,
+      "p2rank": 0.8755,
+      "plmnn": 0.9759,
+      "pocketminer": 0.8513
+    },
+    {
+      "unit": "2xsa_A",
+      "ours": 0.9246,
+      "p2rank": 0.917,
+      "plmnn": 0.9696,
+      "pocketminer": 0.8548
+    },
+    {
+      "unit": "2zcg_A",
+      "ours": 0.9539,
+      "p2rank": 0.8977,
+      "plmnn": 0.977,
+      "pocketminer": 0.8494
+    },
+    {
+      "unit": "2zj7_A",
+      "ours": 0.913,
+      "p2rank": 0.7968,
+      "plmnn": 0.8507,
+      "pocketminer": 0.8674
+    },
+    {
+      "unit": "3a0x_A",
+      "ours": 0.9661,
+      "p2rank": 0.8722,
+      "plmnn": 0.9003,
+      "pocketminer": 0.8858
+    },
+    {
+      "unit": "3bjp_A",
+      "ours": 0.531,
+      "p2rank": 0.8979,
+      "plmnn": 0.3772,
+      "pocketminer": 0.1745
+    },
+    {
+      "unit": "3f4k_A",
+      "ours": 0.9082,
+      "p2rank": 0.6806,
+      "plmnn": 0.972,
+      "pocketminer": 0.8815
+    },
+    {
+      "unit": "3flg_A",
+      "ours": 0.9083,
+      "p2rank": 0.7553,
+      "plmnn": 0.8748,
+      "pocketminer": 0.6552
+    },
+    {
+      "unit": "3fzo_A",
+      "ours": 0.9334,
+      "p2rank": 0.8229,
+      "plmnn": 0.9619,
+      "pocketminer": 0.8097
+    },
+    {
+      "unit": "3gdg_B",
+      "ours": 0.9114,
+      "p2rank": 0.8297,
+      "plmnn": 0.9828,
+      "pocketminer": 0.9157
+    },
+    {
+      "unit": "3h8a_B",
+      "ours": 0.9872,
+      "p2rank": 0.9755,
+      "plmnn": 0.9833,
+      "pocketminer": 0.9186
+    },
+    {
+      "unit": "3i8s_B",
+      "ours": 0.5949,
+      "p2rank": 0.8084,
+      "plmnn": 0.9814,
+      "pocketminer": 0.5099
+    },
+    {
+      "unit": "3idh_A",
+      "ours": 0.7236,
+      "p2rank": 0.7971,
+      "plmnn": 0.4565,
+      "pocketminer": 0.6964
+    },
+    {
+      "unit": "3jzg_A",
+      "ours": 0.4805,
+      "p2rank": 0.6793,
+      "plmnn": 0.9743,
+      "pocketminer": 0.8703
+    },
+    {
+      "unit": "3k01_A",
+      "ours": 0.9711,
+      "p2rank": 0.902,
+      "plmnn": 0.9866,
+      "pocketminer": 0.8974
+    },
+    {
+      "unit": "3lnz_C",
+      "ours": 0.8671,
+      "p2rank": 0.9073,
+      "plmnn": 0.8614,
+      "pocketminer": 0.7909
+    },
+    {
+      "unit": "3lnz_O",
+      "ours": 0.8559,
+      "p2rank": 0.9018,
+      "plmnn": 0.863,
+      "pocketminer": 0.7168
+    },
+    {
+      "unit": "3ly8_A",
+      "ours": 0.1104,
+      "p2rank": 0.2825,
+      "plmnn": 0.2678,
+      "pocketminer": 0.2325
+    },
+    {
+      "unit": "3mwg_B",
+      "ours": 0.9326,
+      "p2rank": 0.8083,
+      "plmnn": 0.9502,
+      "pocketminer": 0.8506
+    },
+    {
+      "unit": "3n4u_A",
+      "ours": 0.9375,
+      "p2rank": 0.8491,
+      "plmnn": 0.8596,
+      "pocketminer": 0.8384
+    },
+    {
+      "unit": "3nx1_B",
+      "ours": 0.8994,
+      "p2rank": 0.6758,
+      "plmnn": 0.9316,
+      "pocketminer": 0.82
+    },
+    {
+      "unit": "3pbf_A",
+      "ours": 0.5455,
+      "p2rank": 0.5735,
+      "plmnn": 0.619,
+      "pocketminer": 0.3954
+    },
+    {
+      "unit": "3pfp_A",
+      "ours": 0.9442,
+      "p2rank": 0.7455,
+      "plmnn": 0.4639,
+      "pocketminer": 0.7141
+    },
+    {
+      "unit": "3pfp_B",
+      "ours": 0.9432,
+      "p2rank": 0.7486,
+      "plmnn": 0.4639,
+      "pocketminer": 0.6959
+    },
+    {
+      "unit": "3rwv_A",
+      "ours": 0.8268,
+      "p2rank": 0.6034,
+      "plmnn": 0.863,
+      "pocketminer": 0.8015
+    },
+    {
+      "unit": "3st6_C",
+      "ours": 0.6382,
+      "p2rank": 0.8026,
+      "plmnn": 0.8168,
+      "pocketminer": 0.7625
+    },
+    {
+      "unit": "3t8b_A",
+      "ours": 0.6961,
+      "p2rank": 0.6297,
+      "plmnn": 0.9102,
+      "pocketminer": 0.6326
+    },
+    {
+      "unit": "3tpo_A",
+      "ours": 0.9253,
+      "p2rank": 0.7419,
+      "plmnn": 0.8994,
+      "pocketminer": 0.8547
+    },
+    {
+      "unit": "3ugk_A",
+      "ours": 0.9623,
+      "p2rank": 0.8536,
+      "plmnn": 0.959,
+      "pocketminer": 0.8693
+    },
+    {
+      "unit": "3uyi_A",
+      "ours": 0.9478,
+      "p2rank": 0.8353,
+      "plmnn": 0.9263,
+      "pocketminer": 0.8037
+    },
+    {
+      "unit": "3v55_A",
+      "ours": 0.3291,
+      "p2rank": 0.668,
+      "plmnn": 0.3818,
+      "pocketminer": 0.4187
+    },
+    {
+      "unit": "3vgm_A",
+      "ours": 0.9007,
+      "p2rank": 0.8378,
+      "plmnn": 0.9495,
+      "pocketminer": 0.8717
+    },
+    {
+      "unit": "3w90_A",
+      "ours": 0.9453,
+      "p2rank": 0.8887,
+      "plmnn": 0.9391,
+      "pocketminer": 0.8853
+    },
+    {
+      "unit": "3wb9_C",
+      "ours": 0.9259,
+      "p2rank": 0.8849,
+      "plmnn": 0.966,
+      "pocketminer": 0.82
+    },
+    {
+      "unit": "4aem_A",
+      "ours": 0.9097,
+      "p2rank": 0.8688,
+      "plmnn": 0.9972,
+      "pocketminer": 0.7417
+    },
+    {
+      "unit": "4amv_B",
+      "ours": 0.9732,
+      "p2rank": 0.9166,
+      "plmnn": 0.9465,
+      "pocketminer": 0.8437
+    },
+    {
+      "unit": "4bg8_A",
+      "ours": 0.8006,
+      "p2rank": 0.8833,
+      "plmnn": 0.8788,
+      "pocketminer": 0.9033
+    },
+    {
+      "unit": "4cmw_B",
+      "ours": 0.9172,
+      "p2rank": 0.9025,
+      "plmnn": 0.889,
+      "pocketminer": 0.834
+    },
+    {
+      "unit": "4dnc_B",
+      "ours": 0.9486,
+      "p2rank": 0.8523,
+      "plmnn": 0.7593,
+      "pocketminer": 0.768
+    },
+    {
+      "unit": "4e1y_A",
+      "ours": 0.9621,
+      "p2rank": 0.817,
+      "plmnn": 0.8414,
+      "pocketminer": 0.6253
+    },
+    {
+      "unit": "4fkm_B",
+      "ours": 0.9388,
+      "p2rank": 0.9809,
+      "plmnn": 0.8112,
+      "pocketminer": 0.794
+    },
+    {
+      "unit": "4gpi_C",
+      "ours": 0.8464,
+      "p2rank": 0.7239,
+      "plmnn": 0.7186,
+      "pocketminer": 0.6848
+    },
+    {
+      "unit": "4gv9_A",
+      "ours": 0.2715,
+      "p2rank": 0.3984,
+      "plmnn": 0.2145,
+      "pocketminer": 0.3845
+    },
+    {
+      "unit": "4hye_A",
+      "ours": 0.9311,
+      "p2rank": 0.8801,
+      "plmnn": 0.7156,
+      "pocketminer": 0.8036
+    },
+    {
+      "unit": "4ikv_A",
+      "ours": 0.9382,
+      "p2rank": 0.9596,
+      "plmnn": 0.9604,
+      "pocketminer": 0.8902
+    },
+    {
+      "unit": "4ilg_A",
+      "ours": 0.63,
+      "p2rank": 0.7503,
+      "plmnn": 0.6156,
+      "pocketminer": 0.5306
+    },
+    {
+      "unit": "4j4e_F",
+      "ours": 0.0813,
+      "p2rank": 0.3648,
+      "plmnn": 0.7198,
+      "pocketminer": 0.5495
+    },
+    {
+      "unit": "4jax_F",
+      "ours": 0.9865,
+      "p2rank": 0.9443,
+      "plmnn": 0.9402,
+      "pocketminer": 0.9173
+    },
+    {
+      "unit": "4jfr_C",
+      "ours": 0.9949,
+      "p2rank": 0.914,
+      "plmnn": 0.9839,
+      "pocketminer": 0.9225
+    },
+    {
+      "unit": "4kmy_A",
+      "ours": 0.9602,
+      "p2rank": 0.9096,
+      "plmnn": 0.8048,
+      "pocketminer": 0.9037
+    },
+    {
+      "unit": "4mwi_A",
+      "ours": 0.8885,
+      "p2rank": 0.7352,
+      "plmnn": 0.9574,
+      "pocketminer": 0.7432
+    },
+    {
+      "unit": "4nzv_B",
+      "ours": 0.9321,
+      "p2rank": 0.883,
+      "plmnn": 0.6567,
+      "pocketminer": 0.7082
+    },
+    {
+      "unit": "4oqo_B",
+      "ours": 0.7711,
+      "p2rank": 0.8008,
+      "plmnn": 0.6633,
+      "pocketminer": 0.5751
+    },
+    {
+      "unit": "4p2f_A",
+      "ours": 0.9419,
+      "p2rank": 0.6008,
+      "plmnn": 0.9352,
+      "pocketminer": 0.6196
+    },
+    {
+      "unit": "4qvk_B",
+      "ours": 0.6876,
+      "p2rank": 0.791,
+      "plmnn": 0.9619,
+      "pocketminer": 0.7632
+    },
+    {
+      "unit": "4r0x_A",
+      "ours": 0.8191,
+      "p2rank": 0.7481,
+      "plmnn": 0.8424,
+      "pocketminer": 0.8765
+    },
+    {
+      "unit": "4rvt_B",
+      "ours": 0.8638,
+      "p2rank": 0.8021,
+      "plmnn": 0.971,
+      "pocketminer": 0.5213
+    },
+    {
+      "unit": "4ttp_A",
+      "ours": 0.651,
+      "p2rank": 0.8524,
+      "plmnn": 0.8899,
+      "pocketminer": 0.6801
+    },
+    {
+      "unit": "4uc8_A",
+      "ours": 0.7884,
+      "p2rank": 0.5769,
+      "plmnn": 0.8204,
+      "pocketminer": 0.6058
+    },
+    {
+      "unit": "4uum_A",
+      "ours": 0.9206,
+      "p2rank": 0.879,
+      "plmnn": 0.9834,
+      "pocketminer": 0.932
+    },
+    {
+      "unit": "4zm7_A",
+      "ours": 0.9389,
+      "p2rank": 0.8134,
+      "plmnn": 0.8935,
+      "pocketminer": 0.6226
+    },
+    {
+      "unit": "4zoe_B",
+      "ours": 0.9421,
+      "p2rank": 0.9554,
+      "plmnn": 0.971,
+      "pocketminer": 0.8402
+    },
+    {
+      "unit": "5acv_B",
+      "ours": 0.9857,
+      "p2rank": 0.943,
+      "plmnn": 0.9112,
+      "pocketminer": 0.9825
+    },
+    {
+      "unit": "5b0e_B",
+      "ours": 0.712,
+      "p2rank": 0.7628,
+      "plmnn": 0.8141,
+      "pocketminer": 0.6758
+    },
+    {
+      "unit": "5caz_A",
+      "ours": 0.7553,
+      "p2rank": 0.712,
+      "plmnn": 0.4852,
+      "pocketminer": 0.5992
+    },
+    {
+      "unit": "5e0v_A",
+      "ours": 0.7063,
+      "p2rank": 0.7134,
+      "plmnn": 0.8077,
+      "pocketminer": 0.7077
+    },
+    {
+      "unit": "5ey7_B",
+      "ours": 0.9044,
+      "p2rank": 0.7018,
+      "plmnn": 0.9065,
+      "pocketminer": 0.7099
+    },
+    {
+      "unit": "5hij_A",
+      "ours": 0.9128,
+      "p2rank": 0.9008,
+      "plmnn": 0.9452,
+      "pocketminer": 0.9069
+    },
+    {
+      "unit": "5hto_E",
+      "ours": 0.8714,
+      "p2rank": 0.9056,
+      "plmnn": 0.9464,
+      "pocketminer": 0.9231
+    },
+    {
+      "unit": "5i3t_E",
+      "ours": 0.1393,
+      "p2rank": 0.7737,
+      "plmnn": 0.4053,
+      "pocketminer": 0.2403
+    },
+    {
+      "unit": "5igh_A",
+      "ours": 0.8685,
+      "p2rank": 0.7792,
+      "plmnn": 0.7184,
+      "pocketminer": 0.8608
+    },
+    {
+      "unit": "5kcg_B",
+      "ours": 0.9252,
+      "p2rank": 0.9663,
+      "plmnn": 0.9314,
+      "pocketminer": 0.8793
+    },
+    {
+      "unit": "5loc_A",
+      "ours": 0.9021,
+      "p2rank": 0.8403,
+      "plmnn": 0.9539,
+      "pocketminer": 0.8368
+    },
+    {
+      "unit": "5o8b_A",
+      "ours": 0.1119,
+      "p2rank": 0.4163,
+      "plmnn": 0.8086,
+      "pocketminer": 0.3337
+    },
+    {
+      "unit": "5sc2_A",
+      "ours": 0.76,
+      "p2rank": 0.7372,
+      "plmnn": 0.8166,
+      "pocketminer": 0.8248
+    },
+    {
+      "unit": "5tc0_B",
+      "ours": 0.9353,
+      "p2rank": 0.8497,
+      "plmnn": 0.9532,
+      "pocketminer": 0.8966
+    },
+    {
+      "unit": "5tvi_V",
+      "ours": 0.7939,
+      "p2rank": 0.5245,
+      "plmnn": 0.5025,
+      "pocketminer": 0.9637
+    },
+    {
+      "unit": "5uxa_A",
+      "ours": 0.9294,
+      "p2rank": 0.8517,
+      "plmnn": 0.9426,
+      "pocketminer": 0.8503
+    },
+    {
+      "unit": "5wbm_B",
+      "ours": 0.9396,
+      "p2rank": 0.893,
+      "plmnn": 0.9076,
+      "pocketminer": 0.9367
+    },
+    {
+      "unit": "5yhb_A",
+      "ours": 0.4312,
+      "p2rank": 0.3595,
+      "plmnn": 0.259,
+      "pocketminer": 0.5942
+    },
+    {
+      "unit": "5yj2_C",
+      "ours": 0.5145,
+      "p2rank": 0.567,
+      "plmnn": 0.2139,
+      "pocketminer": 0.5208
+    },
+    {
+      "unit": "5yqp_A",
+      "ours": 0.9297,
+      "p2rank": 0.8711,
+      "plmnn": 0.9663,
+      "pocketminer": 0.7275
+    },
+    {
+      "unit": "5ysb_B",
+      "ours": 0.9936,
+      "p2rank": 0.9013,
+      "plmnn": 0.9871,
+      "pocketminer": 0.9224
+    },
+    {
+      "unit": "5z18_C",
+      "ours": 0.9492,
+      "p2rank": 0.9548,
+      "plmnn": 0.9634,
+      "pocketminer": 0.8902
+    },
+    {
+      "unit": "5zj4_D",
+      "ours": 0.9622,
+      "p2rank": 0.7688,
+      "plmnn": 0.8804,
+      "pocketminer": 0.7291
+    },
+    {
+      "unit": "6a98_C",
+      "ours": 0.957,
+      "p2rank": 0.9546,
+      "plmnn": 0.822,
+      "pocketminer": 0.7811
+    },
+    {
+      "unit": "6bty_B",
+      "ours": 0.6741,
+      "p2rank": 0.7498,
+      "plmnn": 0.8702,
+      "pocketminer": 0.8207
+    },
+    {
+      "unit": "6cqe_B",
+      "ours": 0.8784,
+      "p2rank": 0.9065,
+      "plmnn": 0.9726,
+      "pocketminer": 0.6446
+    },
+    {
+      "unit": "6du4_A",
+      "ours": 0.7093,
+      "p2rank": 0.6645,
+      "plmnn": 0.9219,
+      "pocketminer": 0.8065
+    },
+    {
+      "unit": "6eqj_A",
+      "ours": 0.9704,
+      "p2rank": 0.8506,
+      "plmnn": 0.9157,
+      "pocketminer": 0.9165
+    },
+    {
+      "unit": "6f52_A",
+      "ours": 0.9153,
+      "p2rank": 0.854,
+      "plmnn": 0.9147,
+      "pocketminer": 0.9196
+    },
+    {
+      "unit": "6fc2_C",
+      "ours": 0.8783,
+      "p2rank": 0.9025,
+      "plmnn": 0.9672,
+      "pocketminer": 0.7909
+    },
+    {
+      "unit": "6fgj_B",
+      "ours": 0.881,
+      "p2rank": 0.643,
+      "plmnn": 0.9082,
+      "pocketminer": 0.5699
+    },
+    {
+      "unit": "6g6y_A",
+      "ours": 0.4284,
+      "p2rank": 0.5357,
+      "plmnn": 0.7505,
+      "pocketminer": 0.601
+    },
+    {
+      "unit": "6hei_A",
+      "ours": 0.8837,
+      "p2rank": 0.8897,
+      "plmnn": 0.7778,
+      "pocketminer": 0.8627
+    },
+    {
+      "unit": "6isu_A",
+      "ours": 0.7271,
+      "p2rank": 0.6606,
+      "plmnn": 0.8167,
+      "pocketminer": 0.7196
+    },
+    {
+      "unit": "6jq9_B",
+      "ours": 0.9706,
+      "p2rank": 0.958,
+      "plmnn": 0.9583,
+      "pocketminer": 0.8935
+    },
+    {
+      "unit": "6ksc_A",
+      "ours": 0.6424,
+      "p2rank": 0.7952,
+      "plmnn": 0.6712,
+      "pocketminer": 0.6672
+    },
+    {
+      "unit": "6n5j_B",
+      "ours": 0.9481,
+      "p2rank": 0.9622,
+      "plmnn": 0.9641,
+      "pocketminer": 0.8939
+    },
+    {
+      "unit": "6nei_B",
+      "ours": 0.8193,
+      "p2rank": 0.9008,
+      "plmnn": 0.9745,
+      "pocketminer": 0.8204
+    },
+    {
+      "unit": "6o4f_H",
+      "ours": 0.96,
+      "p2rank": 0.9576,
+      "plmnn": 0.9493,
+      "pocketminer": 0.8932
+    },
+    {
+      "unit": "6tx0_B",
+      "ours": 0.0779,
+      "p2rank": 0.6705,
+      "plmnn": 0.1726,
+      "pocketminer": 0.4716
+    },
+    {
+      "unit": "6vle_A",
+      "ours": 0.853,
+      "p2rank": 0.8768,
+      "plmnn": 0.9403,
+      "pocketminer": 0.6969
+    },
+    {
+      "unit": "6w10_A",
+      "ours": 0.9242,
+      "p2rank": 0.7769,
+      "plmnn": 0.9813,
+      "pocketminer": 0.7158
+    },
+    {
+      "unit": "7c48_A",
+      "ours": 0.9327,
+      "p2rank": 0.9432,
+      "plmnn": 0.9267,
+      "pocketminer": 0.9598
+    },
+    {
+      "unit": "7c63_A",
+      "ours": 0.8714,
+      "p2rank": 0.6562,
+      "plmnn": 0.8879,
+      "pocketminer": 0.9289
+    },
+    {
+      "unit": "7de1_A",
+      "ours": 0.4138,
+      "p2rank": 0.5631,
+      "plmnn": 0.63,
+      "pocketminer": 0.3912
+    },
+    {
+      "unit": "7e5q_B",
+      "ours": 0.5877,
+      "p2rank": 0.5316,
+      "plmnn": 0.5202,
+      "pocketminer": 0.382
+    },
+    {
+      "unit": "7f2m_B",
+      "ours": 0.1374,
+      "p2rank": 0.3486,
+      "plmnn": 0.0945,
+      "pocketminer": 0.4241
+    },
+    {
+      "unit": "7f4y_B",
+      "ours": 0.8941,
+      "p2rank": 0.8229,
+      "plmnn": 0.9893,
+      "pocketminer": 0.5749
+    },
+    {
+      "unit": "7kay_A",
+      "ours": 0.8892,
+      "p2rank": 0.9273,
+      "plmnn": 0.8438,
+      "pocketminer": 0.8266
+    },
+    {
+      "unit": "7nc8_D",
+      "ours": 0.9043,
+      "p2rank": 0.7534,
+      "plmnn": 0.9397,
+      "pocketminer": 0.8065
+    },
+    {
+      "unit": "7ndl_B",
+      "ours": 0.9107,
+      "p2rank": 0.7334,
+      "plmnn": 0.4489,
+      "pocketminer": 0.577
+    },
+    {
+      "unit": "7nlx_A",
+      "ours": 0.961,
+      "p2rank": 0.9463,
+      "plmnn": 0.9108,
+      "pocketminer": 0.9387
+    },
+    {
+      "unit": "7o1i_A",
+      "ours": 0.752,
+      "p2rank": 0.7961,
+      "plmnn": 0.7738,
+      "pocketminer": 0.7418
+    },
+    {
+      "unit": "7qoq_A",
+      "ours": 0.8455,
+      "p2rank": 0.4714,
+      "plmnn": 0.6825,
+      "pocketminer": 0.7373
+    },
+    {
+      "unit": "7qzr_D",
+      "ours": 0.6399,
+      "p2rank": 0.5275,
+      "plmnn": 0.5732,
+      "pocketminer": 0.2587
+    },
+    {
+      "unit": "7v8k_B",
+      "ours": 0.9663,
+      "p2rank": 0.8501,
+      "plmnn": 0.9744,
+      "pocketminer": 0.9714
+    },
+    {
+      "unit": "7w19_A",
+      "ours": 0.9031,
+      "p2rank": 0.8741,
+      "plmnn": 0.9472,
+      "pocketminer": 0.8274
+    },
+    {
+      "unit": "7x0f_A",
+      "ours": 0.4248,
+      "p2rank": 0.427,
+      "plmnn": 0.483,
+      "pocketminer": 0.6328
+    },
+    {
+      "unit": "7x0g_B",
+      "ours": 0.9234,
+      "p2rank": 0.8565,
+      "plmnn": 0.9843,
+      "pocketminer": 0.919
+    },
+    {
+      "unit": "7x0i_B",
+      "ours": 0.9637,
+      "p2rank": 0.9259,
+      "plmnn": 0.9754,
+      "pocketminer": 0.9315
+    },
+    {
+      "unit": "7xgf_E",
+      "ours": 0.8509,
+      "p2rank": 0.6968,
+      "plmnn": 0.729,
+      "pocketminer": 0.6458
+    },
+    {
+      "unit": "7yjc_A",
+      "ours": 0.2991,
+      "p2rank": 0.7024,
+      "plmnn": 0.5951,
+      "pocketminer": 0.3547
+    },
+    {
+      "unit": "8aeq_A",
+      "ours": 0.9543,
+      "p2rank": 0.8801,
+      "plmnn": 0.9645,
+      "pocketminer": 0.9377
+    },
+    {
+      "unit": "8aqi_B",
+      "ours": 0.8318,
+      "p2rank": 0.7749,
+      "plmnn": 0.8684,
+      "pocketminer": 0.8291
+    },
+    {
+      "unit": "8b9p_A",
+      "ours": 0.7926,
+      "p2rank": 0.681,
+      "plmnn": 0.7005,
+      "pocketminer": 0.5536
+    },
+    {
+      "unit": "8bre_B",
+      "ours": 0.9415,
+      "p2rank": 0.8861,
+      "plmnn": 0.8975,
+      "pocketminer": 0.8167
+    },
+    {
+      "unit": "8gxj_C",
+      "ours": 0.9244,
+      "p2rank": 0.8761,
+      "plmnn": 0.8893,
+      "pocketminer": 0.8573
+    },
+    {
+      "unit": "8h27_A",
+      "ours": 0.8814,
+      "p2rank": 0.8107,
+      "plmnn": 0.9796,
+      "pocketminer": 0.6804
+    },
+    {
+      "unit": "8i84_B",
+      "ours": 0.9155,
+      "p2rank": 0.9299,
+      "plmnn": 0.967,
+      "pocketminer": 0.7509
+    },
+    {
+      "unit": "8ias_B",
+      "ours": 0.753,
+      "p2rank": 0.7951,
+      "plmnn": 0.8919,
+      "pocketminer": 0.8283
+    },
+    {
+      "unit": "8j11_X",
+      "ours": 0.7647,
+      "p2rank": 0.6471,
+      "plmnn": 0.7039,
+      "pocketminer": 0.298
+    },
+    {
+      "unit": "8onn_E",
+      "ours": 0.9274,
+      "p2rank": 0.9314,
+      "plmnn": 0.9276,
+      "pocketminer": 0.9178
+    },
+    {
+      "unit": "8u3n_A",
+      "ours": 0.3198,
+      "p2rank": 0.7219,
+      "plmnn": 0.2673,
+      "pocketminer": 0.7087
+    },
+    {
+      "unit": "8vxu_B",
+      "ours": 0.6003,
+      "p2rank": 0.4746,
+      "plmnn": 0.4518,
+      "pocketminer": 0.5742
+    },
+    {
+      "unit": "9atc_A",
+      "ours": 0.9847,
+      "p2rank": 0.8422,
+      "plmnn": 0.9611,
+      "pocketminer": 0.9117
+    }
+  ]
+}
