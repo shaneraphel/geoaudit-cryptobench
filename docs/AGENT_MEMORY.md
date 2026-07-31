@@ -627,6 +627,33 @@ solve is allowed as a screen and is used as one; it is not allowed in the
 inference path, and the one place it still touches the path — the integer
 fan-out — is listed above as open work for exactly that reason.
 
+**A protein language model is not covered by that allowance, in either
+direction.** The ridge solve is allowed as a screen because it is arithmetic
+this repository performs on its own inputs. An encoder trained elsewhere on
+millions of sequences is not: reading it as a diagnostic, quantising it into
+wires to see whether the pLM-NN deficit is information or readout, distilling it
+into anything — all of it is out, and the reason is not purity for its own sake.
+A number produced with an encoder in the loop cannot be checked by someone who
+does not trust us without them obtaining the same 5.7 GB of weights, which is
+the property the whole repository exists to have.
+
+`pLM-NN` stays as a **baseline**: CryptoBench published it, it beats us by
+0.0243 on the official fold and 0.0340 externally, and reporting a method that
+wins is the honest thing to do. It is rebuilt under `tools/plmnn_*.py`, it never
+touches `src/`, and since this was previously true-but-unchecked there is now a
+gate. `detector_reads_no_learned_model` in `tools/verify_claims.py` walks every
+module under `src/` and fails on an import of a learning framework or a
+reference to the cached encoder's artifacts; `tests/test_detector_purity.py`
+holds it, including a case asserting the gate still catches a violation and one
+asserting that `sequence_wires.py` may keep *saying* ESM-2 is excluded. The rule
+matches artifact names rather than the model family precisely so that
+documenting the exclusion stays legal and performing a read does not.
+
+The temptation this guards against is specific and will recur: the encoder is
+already in the iCloud cache, the deficit is the only open number, and every
+session that reaches for it will find the shortest path runs through weights
+somebody else fitted. Take the long way or leave the number where it is.
+
 Be generous with operators. Being timid has not been the failure mode here;
 believing an unmeasured argument has been.
 
@@ -659,7 +686,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 25 gates, 614 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 618 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

@@ -542,6 +542,55 @@ def main() -> int:
     )
     checks["leakage_firewall_enforced"] = imports_clean and guarded
 
+    # No learned model anywhere on the detector's datapath.
+    #
+    # The repository's central claim is that the shipped detector contains no
+    # trained network and no fitted real-valued transform, and until now that
+    # was a property of the code that nobody checked -- true, but promised
+    # rather than enforced. pLM-NN is rebuilt here and reported as a baseline,
+    # which is the honest thing to do with a method that beats us; the risk is
+    # that a future session, reaching for the 0.0243 deficit, quietly lets an
+    # embedding into a wire builder and the claim silently stops holding. This
+    # walks every module under src/ and fails on an import of a learning
+    # framework or an embedding library, and separately on any reference to the
+    # cached encoder or its artifacts.
+    #
+    # scipy is permitted and named rather than pattern-matched: it is used for
+    # the confidence intervals in the reporting path, not on the datapath, and
+    # a blanket rule would have to either allow every numerical package or ban
+    # the one that computes a Wilson interval.
+    learned = {"torch", "tensorflow", "jax", "flax", "keras", "esm",
+               "transformers", "sklearn", "xgboost", "lightgbm", "catboost",
+               "fairseq", "sentencepiece", "onnxruntime"}
+    embedding_refs = ("esm2_t36_3B", "PLMNN_WEIGHTS", "_plmnn", "ESM2_CACHE")
+    detector_clean = True
+    offenders: list[str] = []
+    for py in sorted((root / "src").rglob("*.py")):
+        text = py.read_text()
+        rel = str(py.relative_to(root))
+        for node in ast.walk(ast.parse(text)):
+            mods = []
+            if isinstance(node, ast.Import):
+                mods = [a.name for a in node.names]
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                mods = [node.module]
+            for m in mods:
+                if m.split(".")[0] in learned:
+                    detector_clean = False
+                    offenders.append(f"{rel} imports {m}")
+        # A docstring may name ESM-2 to say it is excluded, which is exactly
+        # what sequence_wires.py does and is worth keeping. Code may not.
+        for line in text.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("#") or not stripped:
+                continue
+            if any(ref in stripped for ref in embedding_refs):
+                detector_clean = False
+                offenders.append(f"{rel}: {stripped[:60]}")
+    checks["detector_reads_no_learned_model"] = detector_clean
+    if offenders:
+        checks["_detector_learned_model_offenders"] = offenders
+
     failed = sorted(name for name, ok in checks.items() if not ok)
     print(json.dumps({"ok": not failed, "checks": checks, "failed": failed}, indent=2))
     return 0 if not failed else 2
