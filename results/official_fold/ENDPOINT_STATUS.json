@@ -176,6 +176,14 @@
       "method": "table_field",
       "mean_residue_auc": null,
       "first_committed_in": "4bf17feaec33"
+    },
+    {
+      "read_index": 13,
+      "artifact": "results/official_fold/RECOVERY_READ.json",
+      "kind": "new inference over per-unit numbers an earlier read froze",
+      "method": "table_field",
+      "mean_residue_auc": null,
+      "first_committed_in": "d3c5c91184cf"
     }
   ],
   "n_reads_before_the_preregistration": 4,
