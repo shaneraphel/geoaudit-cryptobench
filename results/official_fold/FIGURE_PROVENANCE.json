@@ -19,7 +19,8 @@
     "results/external/EXTERNAL_SET_DIFFICULTY.json": "a2934ce7132bd8a42b56226c0c6caf402264ce5cb6a1cd527c79fc9f1bbaf103",
     "results/external/SETBC_READ.json": "b57843f335a14c1e14c8c94ed464a3bd03edd0360658b428313af83dcde8f56b",
     "results/external/SETBC_DIFFICULTY.json": "19b322731dcf5f61dc4eb155501fd11822d7e83b34997db3f4daa06e4fed0db5",
-    "results/external/WHERE_WE_BEAT_PLMNN.json": "7883b98974644497d245840c1fe54499b69b74115140075cc97244229a615dfb"
+    "results/external/WHERE_WE_BEAT_PLMNN.json": "7883b98974644497d245840c1fe54499b69b74115140075cc97244229a615dfb",
+    "results/external/RHOA_CASE_STUDY.json": "566f692a5d22c9ad60b057d0aed929ecda1b7b7d2759d05bcac8688edbdd7ec3"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -86,6 +87,11 @@
       "sha256": "37d507d3595e0f7037f2d37b4961b90a4dfe159375715aae2fc3f9d9b989b52d",
       "bytes": 23222,
       "caption": "Per-unit ROC-AUC difference against pLM-NN on the 57 spent external units, sorted. Green bars clear a fixed margin (\u0394\u22650.10 and ours\u22650.85); red bars are the mirror. 7 clear-margin wins for the counting field, 9 for pLM-NN. The confirmatory mean remains \u22120.0340 \u2014 this panel names the 27/30 split already published, it does not reverse it. RhoA (P61586, 9n4c_A) is one clear-margin unit; nothing here is clinical."
+    },
+    "fig_rhoa_case.png": {
+      "sha256": "a8e40c2ad9141881aa315778b761371408c9a459adfcf57f1bd23e58da29afb6",
+      "bytes": 36277,
+      "caption": "RhoA (UniProt P61586, PDB 9n4c_A): each point is one of 26 labelled cryptic residues. Shaded region: counting field \u226580% of the chain and pLM-NN \u226450%. Residues [30, 32, 33] meet the rule; the mirror is empty. Residue 30 is ours 84.4% vs pLM-NN 1.7%. Unit-level ROC-AUC is 0.966 against 0.803. Spent external set; not a second confirmatory read; clinical_grade is false."
     }
   }
 }

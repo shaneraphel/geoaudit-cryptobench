@@ -140,7 +140,10 @@ def build() -> dict:
     entries = []
     for p in sorted(RESULTS.rglob("*.json")):
         rel = str(p.relative_to(ROOT))
-        if "/predictions/" in rel or "/p2rank_raw/" in rel:
+        # setn_p2rank_raw / setbc_p2rank_raw share the stem; require the stem,
+        # not the slash-bounded substring, or a live baseline run makes the
+        # manifest permanently stale for anyone scoring Set N.
+        if "/predictions/" in rel or "p2rank_raw" in rel:
             continue
         if rel in undistributed:
             continue

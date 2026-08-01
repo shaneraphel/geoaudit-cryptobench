@@ -1,0 +1,1 @@
+CC/C(=C(\c1ccc(O)c(C)c1)c1ccc(OCCN2CCCC2)c(Cl)c1)c1ccc(C#N)cc1

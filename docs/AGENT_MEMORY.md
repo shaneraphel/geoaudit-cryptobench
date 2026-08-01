@@ -1689,6 +1689,15 @@ show is the proteins: one clear-margin unit is **RhoA (P61586, 9n4c_A)**, ours 0
 against pLM-NN 0.803. RAC1 (P63000, 9ifk_A) is ahead by +0.097 and sits just under
 the bar. Nothing here is clinical; the labels are deposited holo partners.
 
+## 2u. RhoA residue 30: labelled cryptic, ours 84th percentile, pLM-NN 1.7th
+
+On the spent external unit `9n4c_A` (P61586 RhoA), three cryptic residues (30, 32, 33)
+sit in our top fifth of the chain and in pLM-NN's bottom half under a rule fixed
+before the names were emphasised. Residue 30 is the headline: 84.4% vs 1.7%. The
+mirror is empty. Unit AUC 0.966 vs 0.803. This is residue-level content for the
+"we have, they do not" request; it does not reverse the mean deficit (−0.034).
+Artifact: `results/external/RHOA_CASE_STUDY.json`, Figure 14.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the

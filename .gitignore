@@ -106,3 +106,7 @@ _tmp/
 
 # Per-split checkpoints of long sweeps; the artifact is the evidence, not these.
 results/**/*.splits.jsonl
+
+# Set N / Set B-C P2Rank intermediates (rewritten while scoring)
+results/external/setn_p2rank_raw/
+results/external/setbc_p2rank_raw/
