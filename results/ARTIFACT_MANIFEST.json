@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "superseded": 41,
+    "superseded": 42,
     "cited": 87,
     "exploration": 44,
     "inventory": 7,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 191,
+  "n_artifacts": 192,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -1019,7 +1019,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.setn_read.v1",
-      "bytes": 2234
+      "bytes": 3074
     },
     {
       "artifact": "results/external/SETN_SET.json",
@@ -1075,7 +1075,14 @@
       "class": "superseded",
       "reason": "an earlier frozen state, kept for the record",
       "schema": "geoaudit.raw_predictions_index.v1",
-      "bytes": 1180
+      "bytes": 1377
+    },
+    {
+      "artifact": "results/external/setn_predictions/geometry_field.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setn_prediction.v1",
+      "bytes": 4123291
     },
     {
       "artifact": "results/external/setn_predictions/p2rank.json",

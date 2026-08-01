@@ -60,10 +60,15 @@ def _tool_version(method: str, pred: dict) -> str:
     P2Rank reports a release; its wrapper reads it off the install rather than
     from a constant. The counting field has no release, so its version is the
     digest of every source file its numbers depend on, which is the thing a
-    reader would have to hold fixed to reproduce them.
+    reader would have to hold fixed to reproduce them. The geometry field is
+    the same idea over a different compiled artifact: its version is the
+    digest of that artifact's bytes, because that is what ``predict`` loads.
     """
     if method == "table_field":
         return f"code_sha256:{table_field.code_sha256()}"
+    if method == "geometry_field":
+        p = ROOT / "data/cryptobench_apo/GEOMETRY_FIELD.json"
+        return f"geometry_field_sha256:{hashlib.sha256(p.read_bytes()).hexdigest()}"
     reported = (pred.get("tool_version")
                 or (pred.get("extra") or {}).get("tool_version"))
     if not reported:

@@ -110,3 +110,5 @@ results/**/*.splits.jsonl
 # Set N / Set B-C P2Rank intermediates (rewritten while scoring)
 results/external/setn_p2rank_raw/
 results/external/setbc_p2rank_raw/
+# Set N geometry_field sequential resume
+results/baselines/_geometry_setn_checkpoint.jsonl

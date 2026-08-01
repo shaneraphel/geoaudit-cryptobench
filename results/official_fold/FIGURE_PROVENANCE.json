@@ -22,7 +22,7 @@
     "results/external/WHERE_WE_BEAT_PLMNN.json": "7883b98974644497d245840c1fe54499b69b74115140075cc97244229a615dfb",
     "results/external/RHOA_CASE_STUDY.json": "566f692a5d22c9ad60b057d0aed929ecda1b7b7d2759d05bcac8688edbdd7ec3",
     "results/external/RESIDUE_RECOVERIES_VS_PLMNN.json": "938c9eff58f0f557b7405aaaf2d88b27cb72edb6ec5b764e00a5f45396f20ec9",
-    "results/external/SETN_READ.json": "ba05292b869a578a7bb54d41f63667076d6a1b923103d5a5712e9f83334e03c0"
+    "results/external/SETN_READ.json": "ccf37657db37903fb9add45f05efb666db951fe86c362afcd080ef5ebc2cea54"
   },
   "figures": {
     "fig_official_fold_metrics.png": {

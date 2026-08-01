@@ -1938,9 +1938,7 @@ baseline crosses zero. The point estimate against pLM-NN is −0.0757
 [−0.2308, +0.0745]. The plan's pre-written sentence for this outcome is the one
 printed in the artifact: the question is real; this set is too small to answer it
 at the corrected level. The chain-length control sits above the counting field and
-below pLM-NN — methods must beat size as well as chance. `geometry_field` was not
-in the primary and had no scores at read time, so the secondary is empty rather
-than invented. `clinical_grade` is false.
+below pLM-NN — methods must beat size as well as chance. `geometry_field` was not in the primary. Its Set-N-only secondary was filled on a recorded reread after sequential scoring (mean top-10 on the 327 negatives: counting field 235.84, geometry field 600.15 — descriptive only; the scores are not on a common scale). The co-primary numbers are those of the first read. `clinical_grade` is false.
 
 One risk was named before the read and still stands: Set N's chains all have
 ligand-binding sites — they are chains that *could* be paired with a holo structure —

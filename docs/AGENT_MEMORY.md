@@ -1717,9 +1717,7 @@ point estimate is −0.0757. Pre-written sentence: the question is real, the set
 too small to answer at the corrected level. PocketMiner per-residue scores live
 in `data/baselines/pocketminer_setn/` (the aggregate JSON is summaries only —
 `setn_read` was fixed to load the directory, same failure mode `setbc_read`
-already documented). `geometry_field` secondary empty at read time; forks of that
-scorer hung at 0% CPU under memory pressure from ESM2 and were killed — not a
-measured secondary. Figure 16.
+already documented). `geometry_field` secondary filled on a recorded reread after sequential scoring fixed a `_tool_version` SystemExit that had made every forked worker die silently (mean top-10 on Set N: table_field 235.84 vs geometry_field 600.15, descriptive only). Co-primary CIs restored from the first read. Figure 16.
 
 ## 3. What is open, and why each is thought to be open
 

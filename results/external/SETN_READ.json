@@ -61,7 +61,15 @@
    "excludes_zero": false
   }
  },
- "secondary": {},
+ "secondary": {
+  "geometry_field_on_set_n_only": {
+   "n_units": 327,
+   "mean_top_k_table_field": 235.843496,
+   "mean_top_k_geometry_field": 600.147397,
+   "reads": "Set N only",
+   "level": "descriptive; the two fields' scores are not on a common scale"
+  }
+ },
  "units_dropped": 0,
  "why_units_were_dropped": [],
  "outcome": "none_resolved",
@@ -69,5 +77,11 @@
  "what_this_cannot_show": [
   "that a Set N chain has no pocket. It has no pocket that a holo structure deposited before the cutoff reveals",
   "anything about affinity, druggability, or any clinical property"
- ]
+ ],
+ "reread": {
+  "reason": "geometry_field Set N scores now exist; fill the plan's Set-N-only secondary without changing the co-primary arms",
+  "why_this_is_recorded": "a read that can be repeated silently is not a read",
+  "what_changed": "only the Set-N-only geometry_field secondary was filled; the co-primary AUCs, deltas and bootstrap CIs are those of the first read, restored byte-for-byte from commit f786fe7, because recomputing the bootstrap on a reread would silently move published intervals",
+  "geometry_field_archive": "results/external/setn_predictions/geometry_field.json"
+ }
 }
