@@ -56,6 +56,12 @@ data/external/_emdb/
 #   tools/export_plmnn_weights.py
 results/baselines/PLMNN_WEIGHTS.npz
 results/baselines/_plmnn_checkpoint.jsonl
+# The same resumable scratch for the two later encoder passes: the training-fold
+# fit-set audit and the Set B/C read. Both are summarised completely by the
+# artifacts they produce, and a half-finished pass is meaningful only to the
+# process that was running it.
+results/baselines/_plmnn_train_checkpoint.jsonl
+results/baselines/_plmnn_setbc_checkpoint.jsonl
 
 # PocketMiner's own repository, sparse-checked-out at the commit
 # tools/pocketminer_run.py pins, and the interpreter it needs. 183 MB of weights,

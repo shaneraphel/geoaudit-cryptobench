@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "superseded": 73,
-    "cited": 78,
+    "superseded": 75,
+    "cited": 81,
     "exploration": 43,
     "inventory": 6,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 212,
+  "n_artifacts": 217,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -707,6 +707,13 @@
       "bytes": 853771
     },
     {
+      "artifact": "results/baselines/PLMNN_SETBC_SCORES.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.plmnn_scores.v1",
+      "bytes": 813432
+    },
+    {
       "artifact": "results/baselines/PLMNN_SETBC_SEQUENCES.json",
       "class": "superseded",
       "reason": "an earlier frozen state, kept for the record",
@@ -733,6 +740,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.pocketminer_selftest.v1",
       "bytes": 11144
+    },
+    {
+      "artifact": "results/baselines/POCKETMINER_SETBC_SCORES.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.pocketminer_scores.v1",
+      "bytes": 15888
     },
     {
       "artifact": "results/cryptobench_apo/APO_BENCHMARK.json",
@@ -855,15 +869,15 @@
     },
     {
       "artifact": "results/external/PREREGISTERED_SETBC.json",
-      "class": "superseded",
-      "reason": "an earlier frozen state, kept for the record",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.preregistered_setbc.v1",
       "bytes": 8814
     },
     {
       "artifact": "results/external/SETBC_DIFFICULTY.json",
-      "class": "superseded",
-      "reason": "an earlier frozen state, kept for the record",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.setbc_difficulty.v1",
       "bytes": 10061
     },
@@ -880,6 +894,13 @@
       "reason": "an earlier frozen state, kept for the record",
       "schema": null,
       "bytes": 2709
+    },
+    {
+      "artifact": "results/external/SETBC_READ.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.setbc_read.v1",
+      "bytes": 6441
     },
     {
       "artifact": "results/external/SETBC_SCORES.json",
@@ -1258,6 +1279,20 @@
       "reason": "an earlier frozen state, kept for the record",
       "schema": "geoaudit.setbc_prediction.p2rank.v1",
       "bytes": 624151
+    },
+    {
+      "artifact": "results/external/setbc_predictions/plmnn.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setbc_prediction.plmnn.v1",
+      "bytes": 687088
+    },
+    {
+      "artifact": "results/external/setbc_predictions/pocketminer.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setbc_prediction.pocketminer.v1",
+      "bytes": 11448
     },
     {
       "artifact": "results/external/setbc_predictions/table_field.json",

@@ -100,7 +100,25 @@ def _truth() -> dict[str, set[int]]:
     return out
 
 
+POCKETMINER_DIR = ROOT / "data/baselines/pocketminer_setbc"
+
+
 def _archive(method: str) -> dict[str, dict]:
+    """Per-unit scores for one method, normalised to one shape.
+
+    Three shapes reach this function and the read must not care which. Our two
+    detectors and P2Rank archive a dict keyed by unit. pLM-NN archives a list of
+    rows carrying ``unit_id`` and a ``scores`` map. PocketMiner archives a list of
+    per-unit summaries with no per-residue scores at all --- those live in one
+    file per unit beside the run --- so its rows would have looked present and
+    scored nothing.
+
+    The loaders are the ones ``external_read.py`` uses for Set A, reproduced with
+    the paths swapped, so the two reads compute the same quantity from the same
+    shapes. The first version of this function assumed every archive was a dict
+    and raised on the second one, which is the good case: it raised before any
+    AUC was computed, so nothing was read.
+    """
     p = PREDS / f"{method}.json"
     if not p.is_file():
         raise SystemExit(
@@ -108,7 +126,25 @@ def _archive(method: str) -> dict[str, dict]:
             f"co-primary comparisons and this read will not run on a subset: "
             f"computing some, looking, and then computing the rest is "
             f"sequential peeking and the Bonferroni level is over four")
-    return json.loads(p.read_text())["units"]
+    units = json.loads(p.read_text())["units"]
+    if isinstance(units, dict):
+        return units
+    if method == "plmnn":
+        return {u["unit_id"]: {"residue_scores": u["scores"],
+                               "residue_positive": []} for u in units}
+    if method == "pocketminer":
+        out = {}
+        for f in sorted(POCKETMINER_DIR.glob("*.json")):
+            d = json.loads(f.read_text())
+            out[f.stem] = {"residue_scores": d["residue_scores"],
+                           "residue_positive": []}
+        if not out:
+            raise SystemExit(
+                f"{POCKETMINER_DIR.relative_to(ROOT)} holds no per-unit files, "
+                f"so PocketMiner has summaries and no scores. Its archive would "
+                f"have looked present and contributed nothing")
+        return out
+    raise SystemExit(f"{method}'s archive is a list and no loader knows its shape")
 
 
 def _auc(keys: list[int], scores: dict[int, float], pos: set[int],
@@ -210,7 +246,14 @@ def build(reason: str | None, write: bool) -> int:
     aucs = _per_unit(units)
     st = plan["statistic"]
     seed, n_boot = st["seed"], st["n_boot"]
-    corrected = 1.0 - (1.0 - st["ci_level"]) / len(plan["co_primary_comparisons"])
+    # The per-comparison alpha, not the level. _interval reads this as an alpha
+    # and takes _quantiles(boot, 1.0 - corrected); passing the level 0.9875
+    # produced a 1.25% band, so every Bonferroni interval came out *narrower*
+    # than its own 95% interval -- structurally impossible, which is how it was
+    # caught. Set A's plan stores the same quantity as 0.016667 = 0.05/3 under
+    # the name "corrected_level", and that naming is what made the error easy.
+    n_co = len(plan["co_primary_comparisons"])
+    corrected = (1.0 - st["ci_level"]) / n_co
 
     co = {}
     for i, spec in enumerate(plan["co_primary_comparisons"]):
@@ -274,9 +317,17 @@ def build(reason: str | None, write: bool) -> int:
         "levels": {m: round(float(np.mean(list(aucs[m].values()))), 6)
                    for m in METHODS},
         "co_primary": co,
-        "multiplicity": {"n_comparisons": len(co),
-                         "corrected_ci_level": round(corrected, 6),
-                         "correction": plan["multiplicity"]["correction"]},
+        "multiplicity": {
+            "n_comparisons": len(co),
+            "per_comparison_alpha": round(corrected, 6),
+            "family_wise_alpha": round(1.0 - st["ci_level"], 6),
+            "corrected_interval_level": round(1.0 - corrected, 6),
+            "correction": plan["multiplicity"]["correction"],
+            "why_both_names_are_given": (
+                "the quantity is an alpha and the helper that consumes it calls "
+                "it a level. The first run of this read passed the level and got "
+                "Bonferroni intervals narrower than its own 95% intervals"),
+        },
         "secondary_per_set": per_set,
         "secondary_by_pocket_size": strata,
         "the_confound_named_before_this_read": {
@@ -300,7 +351,8 @@ def build(reason: str | None, write: bool) -> int:
     print("mean per-unit ROC-AUC on the shared universe")
     for m in METHODS:
         print(f"  {m:<16} {doc['levels'][m]:.6f}  (n={len(aucs[m])})")
-    print(f"\nco-primary, Bonferroni level {corrected:.4f}")
+    print(f"\nco-primary, per-comparison alpha {corrected:.4f} "
+          f"(Bonferroni interval level {1.0 - corrected:.4f})")
     for key, b in co.items():
         print(f"  {key}")
         print(f"    {b['mean']:+.6f}  95% [{b['ci'][0]:+.4f}, {b['ci'][1]:+.4f}]"

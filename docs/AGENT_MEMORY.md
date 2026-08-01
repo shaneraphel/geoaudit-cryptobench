@@ -512,8 +512,9 @@ noise on a different axis is a coincidence to state, not to argue past.
 
 *And changing it spends nothing but costs something.* The gate is part of the
 method. Moving it makes `EXTERNAL_READ.json`'s +0.0443 a result about a detector
-that no longer exists; confirmation would have to come from Set B or Set C, which
-are frozen and unread for exactly this situation.
+that no longer exists; confirmation would have had to come from Set B or Set C.
+Both have since been spent (§2p) and nothing frozen remains, so a gate change now
+needs a set built from scratch before it can be confirmed.
 
 One caution that will matter as soon as a fix is proposed. The stratifying
 variable is the number of cryptic residues, which is the **label**. Nothing that
@@ -817,7 +818,7 @@ sign against the control.
   what makes them narrower than the sign test is strong.
 * **Adopting it is not free.** The union attachment adds 304 tables to 5152, and
   moving the architecture makes `EXTERNAL_READ.json`'s +0.0443 a result about a
-  detector that no longer exists. Set B and Set C are frozen and unread for
+  detector that no longer exists. Set B and Set C were frozen and unread for
   exactly this.
 
 **What was actually verified, because two of the three quantities were wrong
@@ -1232,6 +1233,102 @@ different objections and only the second one was checkable.
 > cost to any ledger, and nobody had computed it in the weeks Set A had existed.
 > The power half is not answerable at all and is answered by saying so. Splitting
 > the objection before trying to rebut it is what made one half tractable.
+
+## 2p. The read was taken. The training-fold lift is not confirmed.
+
+The four-family stack was worth +0.0121 on twelve cluster-disjoint halvings of
+the training fold, 12 of 12 positive, two null control arms per family. Sets B
+and C were frozen on 31 July, before any of those families existed, and had never
+been read. `PREREGISTERED_SETBC.json` pinned both digests, the compiled field's
+digest, the 45-unit coverage, the statistic, four co-primary comparisons and six
+outcome sentences. Then the read ran once. `SETBC_READ.json`.
+
+| method | mean per-unit ROC-AUC, 45 units |
+|---|---|
+| pLM-NN | 0.8672 |
+| **geometry_field** (the stack) | **0.7980** |
+| table_field (deployed) | 0.7917 |
+| P2Rank | 0.7523 |
+| PocketMiner | 0.7136 |
+
+| comparison | point | 95 % | ahead/behind | predicted | verdict |
+|---|---|---|---|---|---|
+| **geometry − table_field** | **+0.0063** | **[−0.0255, +0.0385]** | 27/18 | +0.0121 | **does not resolve** |
+| geometry − pLM-NN | −0.0692 | [−0.1163, −0.0257] | 17/28 | −0.0219 | behind |
+| geometry − P2Rank | +0.0457 | [−0.0100, +0.0935] | 35/10 | +0.0564 | unresolved |
+| geometry − PocketMiner | +0.0844 | [+0.0384, +0.1271] | 37/8 | +0.0799 | leads |
+
+**The primary comparison does not resolve, and the plan's sentence for that
+outcome is the one that stands.** The point estimate is +0.0063, in the right
+direction and about half the training-fold value, on an interval far too wide to
+conclude from. 45 units and an effect of this size gave the read limited power,
+which is a statement about the read and not evidence that the lift is absent —
+and equally not evidence that it is present. **Nothing about the four families'
+standing on held-out data is established by this repository.**
+
+Both sets are now spent. There is no second read of them.
+
+### What the read did establish, which is not what it was for
+
+The confound written down before it (`SETBC_DIFFICULTY.json`) was that these
+chains are 1.6× the official fold's at the median and `geometry_field` reads
+further than `table_field`, so their difference might be *inflated* by set shape.
+P2Rank was the pinned control. **The control went the other way, and hard:**
+
+| method | what it reads | vs the official fold |
+|---|---|---|
+| P2Rank | local surface geometry | **−0.0410** |
+| PocketMiner | structure graph | **−0.0387** |
+| table_field | 645 wires over coordinates | −0.0074 |
+| pLM-NN | whole sequence | **+0.0437** |
+
+Going from X-ray Set A to cryo-EM Set B+C costs P2Rank 0.0445, PocketMiner
+0.0598 and `table_field` 0.0495, and costs pLM-NN 0.0079.
+
+> **Every method that reads coordinates loses on cryo-EM and the one that reads
+> sequence gains.** That is not "the set is easier" and it is not the context
+> gradient Set A showed. The reading it supports: cryo-EM coordinates carry less
+> usable *local* geometry than X-ray coordinates at comparable nominal
+> resolution — side chains are modelled rather than resolved, and local
+> resolution varies across a map — so a detector reading atom positions pays for
+> the modality and a detector reading sequence does not.
+
+**This does not rescue the primary result and must not be used to.** The primary
+comparison is between two detectors *within* one modality, so a modality effect
+largely cancels in the difference. +0.0063 with an interval crossing zero is what
+it is. The modality finding explains the *levels* and says nothing about the
+*difference*.
+
+It does say something about what a fourth external set should be. **A confirmatory
+set for a coordinate-reading detector should be X-ray**, and `SETD_POOL.json`
+counted that band: 2,682 entries at 2.5–3.0 Å after the same cutoff against Set
+A's 17,332, plus 2,838 free UniRef50 clusters reachable if the holo partner is
+allowed any release date. Neither was built.
+
+### Two errors in taking it, both caught by structure rather than by care
+
+**The read tool assumed every score archive was a dict keyed by unit.** pLM-NN
+archives a list of rows and PocketMiner archives per-unit *summaries* with the
+per-residue scores in separate files, so its rows would have looked present and
+scored nothing. It raised in the loader, **before any AUC existed**, so the sets
+were not spent by it. The loaders are now the ones `external_read.py` uses for Set
+A with the paths swapped, so the two reads compute the same quantity.
+
+**The first completed run's Bonferroni intervals were narrower than its own 95 %
+intervals.** `_interval` consumes a per-comparison *alpha* and the argument is
+named `corrected_level`; the level 0.9875 was passed where 0.05/4 = 0.0125 was
+meant, so `1 − 0.9875` produced a 1.25 % band. A corrected interval that is
+narrower than the uncorrected one is structurally impossible, which is the only
+reason it was noticed — the numbers themselves were plausible. Recomputed from
+the same archived scores under the tool's own `--reason` guard.
+
+> **A parameter named for the wrong quantity is a bug with a long half-life.**
+> Set A's plan stores this as `corrected_level: 0.016667`, which is an alpha
+> wearing the word "level", and that naming is what made the mistake easy twice.
+> When two numbers must stand in a fixed order — corrected wider than
+> uncorrected, test below train, permuted below intact — **assert the order** and
+> let the assertion find the misuse, because the values will look reasonable
+> either way.
 
 ## 2l. Units both published baselines rank at chance, and the mirror count
 
@@ -1710,20 +1807,31 @@ confirmatory result; it destroys the first one. There is no undo. If a
 counterattack lands, it must be confirmed on a set that was frozen *before* the
 method was finalised.
 
-**Set B and Set C are built and frozen, and neither has been read.** Both are
-single-particle cryo-EM past CryptoBench's cutoff, cluster-disjoint from CryptoBench,
-from Set A and from each other, with Set A's labelling machinery imported unedited so
-a read on either is comparable to the read on Set A.
+**Set B and Set C are built, frozen, and now spent — read once, together, on
+1 August.** Read §2p for the result and read this for what they were. Both are
+single-particle cryo-EM past CryptoBench's cutoff, cluster-disjoint from
+CryptoBench, from Set A and from each other, with Set A's labelling machinery
+imported unedited so a read on either is comparable to the read on Set A.
 
 | set | ceiling | candidates | units | residues | digest |
 |---|---|---|---|---|---|
 | Set B | 2.5 Å | 82 | **8** | 143 | `09381b40…` |
 | Set C | 3.0 Å | 217 | **38** | 584 | `ff112a60…` |
 
-They were frozen *before* any method change, which is the whole point: because they
-are unread, a read at any future time is still valid. Do not read either to see how
-it goes. A read spends it, and with no improvement to confirm it buys nothing —
-8 units would give an interval far too wide to conclude from.
+They were frozen *before* any method change, which is what made the read valid
+when it came: the labels could not have been influenced by families that did not
+yet exist. **They were read together on 45 scorable units under
+`PREREGISTERED_SETBC.json`, and the primary comparison did not resolve.** There is
+no second read of either. The paragraph that used to stand here said "do not read
+either to see how it goes; a read spends it, and with no improvement to confirm it
+buys nothing" — the improvement arrived, the read was spent on it, and the answer
+was that 45 units cannot resolve an effect of that size.
+
+**What that costs the next attempt.** Nothing frozen remains. A further
+confirmation needs a set built from scratch, and §2p records what its modality
+should be: every coordinate-reading method lost about 0.04 on these cryo-EM units
+while the sequence model gained 0.044, so a confirmatory set for a
+coordinate-reading detector should be X-ray. `SETD_POOL.json` counts that pool.
 
 Two counts on the way there were wrong and both were caught by running the real
 selection instead of extrapolating a pool number. `SETB_POOL.json`'s 455 accessions

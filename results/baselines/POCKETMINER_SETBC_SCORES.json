@@ -1,0 +1,538 @@
+{
+  "schema": "geoaudit.pocketminer_scores.v1",
+  "clinical_grade": false,
+  "generated_at": "2026-08-01T14:35:44+0800",
+  "fold": "external",
+  "question": "what does the official PocketMiner network predict for each residue of the 45 single-chain test units",
+  "reads_a_label": false,
+  "why_no_label_is_read": "this file produces predictions; the comparison against ours and P2Rank's is a separate indexed read of the test fold",
+  "provenance": {
+    "source": "https://github.com/Mickdub/gvp/tree/pocket_pred (Meller et al., Nat. Commun. 2023, doi:10.1038/s41467-023-36699-3)",
+    "commit": "187062df3c94127e991669768009141a08fd5d8b",
+    "weight_sha256": {
+      "models/pocketminer.index": "09e36a62a987b14bc49cf7a1fa53fa734f85d85d088777f98c6aca253b47bf46",
+      "models/pocketminer.data-00000-of-00001": "6f5ab62b9fb38b54040053ac321f3362d616bae9b31569249a032dbb50890b70"
+    },
+    "architecture": {
+      "node_features": [
+        8,
+        50
+      ],
+      "edge_features": [
+        1,
+        32
+      ],
+      "hidden_dim": [
+        16,
+        100
+      ],
+      "num_layers": 4,
+      "dropout": 0.1,
+      "k_neighbors": 30,
+      "output": "Dense(1, activation='sigmoid') per residue"
+    }
+  },
+  "input": {
+    "receptors": "data/external/setbc_receptors",
+    "identical_to_what_p2rank_and_the_field_were_given": true,
+    "coordinate_units": "nanometres, as mdtraj returns them"
+  },
+  "featurisation": {
+    "gathered_by_atom_name": [
+      "N",
+      "CA",
+      "C",
+      "O"
+    ],
+    "why_not_the_authors_reshape": "reshape(l, 4, 3) assumes four backbone atoms per residue; where that is false it shifts every later residue onto the wrong coordinates instead of failing",
+    "n_units_asserted_identical_to_the_authors_tensor": 45,
+    "n_units_where_it_could_not_be_asserted": 0,
+    "n_residues_dropped_for_incomplete_backbone": 0,
+    "n_residues_dropped_as_alternate_conformers": 0,
+    "n_residues_dropped_for_residue_type": 0,
+    "alternate_conformer_ca_cutoff_angstrom": 2.0,
+    "why_conformers_are_dropped_before_featurisation": "a conformer copy is not a residue the protein has twice; left in, it takes nearest-neighbour edges away from the residue's real neighbours. 4m7p_A in the training fold carries twenty copies of all 390 of its residues",
+    "n_resseq_collisions_from_insertion_codes": 0,
+    "what_a_collision_means": "the frozen pipeline keys residues by resseq, so an insertion code cannot be represented; the first occurrence is kept and the residue number is recorded here"
+  },
+  "restore": {
+    "assert_existing_objects_matched": true,
+    "every_live_tensor_is_byte_identical_to_the_checkpoint": true,
+    "why_both": "the assertion is TensorFlow's own bookkeeping; the byte comparison does not depend on it",
+    "n_model_variables": 177,
+    "n_checkpoint_entries_under_model": 531,
+    "n_scalars": 736155,
+    "mean_abs_weight": 0.09028409
+  },
+  "overlap_with_pocketminers_own_data": {
+    "trained_on": [
+      "1rtc"
+    ],
+    "selected_on": [
+      "3rwv",
+      "5uxa"
+    ],
+    "published_on": [
+      "1kx9",
+      "3nx1",
+      "3ugk"
+    ],
+    "how_it_was_determined": "exact PDB entry match against the 38 simulation systems in data/task2 and the val/test id lists in data/pm-dataset",
+    "caveat": "exact entry match is a floor, not a homology check; PocketMiner's training set was not clustered against CryptoBench's folds",
+    "what_the_read_does": "reports the fold with and without these six entries"
+  },
+  "n_units": 45,
+  "units": [
+    {
+      "unit": "12ec_J",
+      "n_residues_in_file": 1338,
+      "n_scored": 1338,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.967408,
+      "mean_score": 0.522814
+    },
+    {
+      "unit": "29hb_e",
+      "n_residues_in_file": 563,
+      "n_scored": 563,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.885471,
+      "mean_score": 0.478991
+    },
+    {
+      "unit": "8j0s_E",
+      "n_residues_in_file": 469,
+      "n_scored": 469,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.93047,
+      "mean_score": 0.501392
+    },
+    {
+      "unit": "8jyl_A",
+      "n_residues_in_file": 527,
+      "n_scored": 527,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.983665,
+      "mean_score": 0.503279
+    },
+    {
+      "unit": "8k8y_A",
+      "n_residues_in_file": 719,
+      "n_scored": 719,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.895666,
+      "mean_score": 0.383622
+    },
+    {
+      "unit": "8udl_A",
+      "n_residues_in_file": 974,
+      "n_scored": 974,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.910236,
+      "mean_score": 0.561546
+    },
+    {
+      "unit": "8vrn_E",
+      "n_residues_in_file": 333,
+      "n_scored": 333,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.877819,
+      "mean_score": 0.43506
+    },
+    {
+      "unit": "8xxu_A",
+      "n_residues_in_file": 316,
+      "n_scored": 316,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.935751,
+      "mean_score": 0.550349
+    },
+    {
+      "unit": "8yh8_A",
+      "n_residues_in_file": 474,
+      "n_scored": 474,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.939575,
+      "mean_score": 0.546258
+    },
+    {
+      "unit": "9b0x_F",
+      "n_residues_in_file": 469,
+      "n_scored": 469,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.913204,
+      "mean_score": 0.518996
+    },
+    {
+      "unit": "9b77_A",
+      "n_residues_in_file": 313,
+      "n_scored": 313,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.953892,
+      "mean_score": 0.535134
+    },
+    {
+      "unit": "9bdq_A",
+      "n_residues_in_file": 1301,
+      "n_scored": 1301,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.930825,
+      "mean_score": 0.537254
+    },
+    {
+      "unit": "9bji_F",
+      "n_residues_in_file": 453,
+      "n_scored": 453,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.911957,
+      "mean_score": 0.524654
+    },
+    {
+      "unit": "9e26_C",
+      "n_residues_in_file": 422,
+      "n_scored": 422,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.934359,
+      "mean_score": 0.475186
+    },
+    {
+      "unit": "9ebt_A",
+      "n_residues_in_file": 604,
+      "n_scored": 604,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.94587,
+      "mean_score": 0.484608
+    },
+    {
+      "unit": "9efq_B",
+      "n_residues_in_file": 373,
+      "n_scored": 373,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.886045,
+      "mean_score": 0.477158
+    },
+    {
+      "unit": "9gcu_A",
+      "n_residues_in_file": 418,
+      "n_scored": 418,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.88836,
+      "mean_score": 0.52151
+    },
+    {
+      "unit": "9gxk_A",
+      "n_residues_in_file": 692,
+      "n_scored": 692,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.968652,
+      "mean_score": 0.528262
+    },
+    {
+      "unit": "9hnp_A",
+      "n_residues_in_file": 383,
+      "n_scored": 383,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.946198,
+      "mean_score": 0.530496
+    },
+    {
+      "unit": "9hve_O",
+      "n_residues_in_file": 460,
+      "n_scored": 460,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.961944,
+      "mean_score": 0.558923
+    },
+    {
+      "unit": "9isq_A",
+      "n_residues_in_file": 877,
+      "n_scored": 877,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.954869,
+      "mean_score": 0.541172
+    },
+    {
+      "unit": "9itj_D",
+      "n_residues_in_file": 466,
+      "n_scored": 466,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.952829,
+      "mean_score": 0.519484
+    },
+    {
+      "unit": "9j3j_A",
+      "n_residues_in_file": 490,
+      "n_scored": 490,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.927561,
+      "mean_score": 0.559691
+    },
+    {
+      "unit": "9j3o_A",
+      "n_residues_in_file": 496,
+      "n_scored": 496,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.92588,
+      "mean_score": 0.571663
+    },
+    {
+      "unit": "9jc1_D",
+      "n_residues_in_file": 464,
+      "n_scored": 464,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.938474,
+      "mean_score": 0.533302
+    },
+    {
+      "unit": "9jnz_K",
+      "n_residues_in_file": 525,
+      "n_scored": 525,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.927727,
+      "mean_score": 0.548135
+    },
+    {
+      "unit": "9k53_E",
+      "n_residues_in_file": 389,
+      "n_scored": 389,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.888335,
+      "mean_score": 0.524838
+    },
+    {
+      "unit": "9m1j_G",
+      "n_residues_in_file": 184,
+      "n_scored": 184,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.850288,
+      "mean_score": 0.526935
+    },
+    {
+      "unit": "9mrq_D",
+      "n_residues_in_file": 1269,
+      "n_scored": 1269,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.931563,
+      "mean_score": 0.500997
+    },
+    {
+      "unit": "9n6c_A",
+      "n_residues_in_file": 425,
+      "n_scored": 425,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.883563,
+      "mean_score": 0.49928
+    },
+    {
+      "unit": "9nkg_C",
+      "n_residues_in_file": 389,
+      "n_scored": 389,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.907431,
+      "mean_score": 0.527244
+    },
+    {
+      "unit": "9nmr_A",
+      "n_residues_in_file": 4397,
+      "n_scored": 4397,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.97237,
+      "mean_score": 0.523866
+    },
+    {
+      "unit": "9nye_A",
+      "n_residues_in_file": 307,
+      "n_scored": 307,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.930264,
+      "mean_score": 0.538835
+    },
+    {
+      "unit": "9p8s_A",
+      "n_residues_in_file": 453,
+      "n_scored": 453,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.906891,
+      "mean_score": 0.434611
+    },
+    {
+      "unit": "9pio_A",
+      "n_residues_in_file": 297,
+      "n_scored": 297,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.829845,
+      "mean_score": 0.484632
+    },
+    {
+      "unit": "9qh7_F",
+      "n_residues_in_file": 139,
+      "n_scored": 139,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.783472,
+      "mean_score": 0.425507
+    },
+    {
+      "unit": "9rgd_B",
+      "n_residues_in_file": 344,
+      "n_scored": 344,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.885327,
+      "mean_score": 0.444345
+    },
+    {
+      "unit": "9sgy_A",
+      "n_residues_in_file": 565,
+      "n_scored": 565,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.949686,
+      "mean_score": 0.539246
+    },
+    {
+      "unit": "9t0e_A",
+      "n_residues_in_file": 1671,
+      "n_scored": 1671,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.944299,
+      "mean_score": 0.509677
+    },
+    {
+      "unit": "9u6f_B",
+      "n_residues_in_file": 578,
+      "n_scored": 578,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.914505,
+      "mean_score": 0.50665
+    },
+    {
+      "unit": "9ud2_C",
+      "n_residues_in_file": 257,
+      "n_scored": 257,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.942532,
+      "mean_score": 0.509366
+    },
+    {
+      "unit": "9uks_D",
+      "n_residues_in_file": 1362,
+      "n_scored": 1362,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.935632,
+      "mean_score": 0.479409
+    },
+    {
+      "unit": "9vhe_D",
+      "n_residues_in_file": 429,
+      "n_scored": 429,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.843904,
+      "mean_score": 0.424389
+    },
+    {
+      "unit": "9waj_A",
+      "n_residues_in_file": 981,
+      "n_scored": 981,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.9596,
+      "mean_score": 0.560895
+    },
+    {
+      "unit": "9x94_B",
+      "n_residues_in_file": 747,
+      "n_scored": 747,
+      "agrees_with_official_featurisation": true,
+      "dropped": [],
+      "resseq_collisions_from_insertion_codes": [],
+      "max_score": 0.920978,
+      "mean_score": 0.520491
+    }
+  ],
+  "runtime_minutes": 0.24
+}

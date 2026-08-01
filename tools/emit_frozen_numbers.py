@@ -108,6 +108,8 @@ PLMNN = ROOT / "results/official_fold/PLMNN_READ.json"
 PMREAD = ROOT / "results/official_fold/POCKETMINER_READ.json"
 EXTREAD = ROOT / "results/external/EXTERNAL_READ.json"
 EXTDIFF = ROOT / "results/external/EXTERNAL_SET_DIFFICULTY.json"
+SETBCREAD = ROOT / "results/external/SETBC_READ.json"
+SETBCDIFF = ROOT / "results/external/SETBC_DIFFICULTY.json"
 EXTSET = ROOT / "results/external/EXTERNAL_SET.json"
 PMSELF = ROOT / "results/baselines/POCKETMINER_SELFTEST.json"
 CURVE = ROOT / "results/official_fold/THRESHOLD_CURVE.json"
@@ -1108,6 +1110,45 @@ def build() -> str:
                 "residue counts, so the comparison is against a baseline that "
                 "may have been rebuilt wrongly and cannot be quoted")
 
+    if SETBCREAD.exists():
+        # The read of the two frozen cryo-EM sets. Every macro is emitted with
+        # the verdict the plan assigned, because the primary comparison did not
+        # resolve and a point estimate quoted without that word would read as a
+        # result.
+        bc = json.loads(SETBCREAD.read_text())
+        L.append(f"\\newcommand{{\\BcN}}"
+                 f"{{{bc['coverage']['n_units_compared']}}}")
+        for m, stem in (("geometry_field", "Geo"), ("table_field", "Ours"),
+                        ("p2rank", "PtwoR"), ("pocketminer", "Pm"),
+                        ("plmnn", "Plm")):
+            L.append(f"\\newcommand{{\\BcLevel{stem}}}"
+                     f"{{{bc['levels'][m]:.4f}}}")
+        for key, stem in (("geometry_field_minus_table_field", "Ours"),
+                          ("geometry_field_minus_plmnn", "Plm"),
+                          ("geometry_field_minus_p2rank", "PtwoR"),
+                          ("geometry_field_minus_pocketminer", "Pm")):
+            b = bc["co_primary"][key]
+            L.append(f"\\newcommand{{\\Bc{stem}}}{{{_signed(b['mean'], 4)}}}")
+            L.append(f"\\newcommand{{\\Bc{stem}CI}}"
+                     f"{{[{_signed(b['ci'][0], 4)}, {_signed(b['ci'][1], 4)}]}}")
+            L.append(f"\\newcommand{{\\Bc{stem}Bonf}}"
+                     f"{{[{_signed(b['ci_bonferroni'][0], 4)}, "
+                     f"{_signed(b['ci_bonferroni'][1], 4)}]}}")
+            L.append(f"\\newcommand{{\\Bc{stem}Win}}"
+                     f"{{{b['n_first_ahead']}}}")
+            L.append(f"\\newcommand{{\\Bc{stem}Loss}}"
+                     f"{{{b['n_second_ahead']}}}")
+            L.append(f"\\newcommand{{\\Bc{stem}Pred}}"
+                     f"{{{_signed(b['predicted'], 4)}}}")
+            L.append(f"\\newcommand{{\\Bc{stem}Verdict}}"
+                     f"{{{b['verdict'].replace('_', ' ')}}}")
+        if SETBCDIFF.exists():
+            g = json.loads(SETBCDIFF.read_text())["label_geometry"]
+            pool = g["set_b_and_c_pooled"]
+            L.append(f"\\newcommand{{\\BcChain}}"
+                     f"{{{pool['chain_length']['median']:.0f}}}")
+            L.append(f"\\newcommand{{\\BcRate}}"
+                     f"{{{pool['positive_rate']['median'] * 100:.2f}}}")
     if EXTREAD.exists():
         # The only confirmatory comparison in the paper. Every macro here is
         # emitted in a group with the number that qualifies it, because each of

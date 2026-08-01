@@ -1719,8 +1719,77 @@ the same table budget on already-deployed wires actively hurts. Displacement-B a
 overlap prediction (30–50%) was close; the magnitude prediction was not.
 
 **Against the deficit: +0.0121 is 50% of the 0.0243 official-fold gap to pLM-NN.**
-That is a training-fold number and whether it transfers is unmeasured. Nothing is
-deployed.
+That is a training-fold number.
+
+### 5.3 The held-out read: it does not confirm the training-fold lift
+
+Whether it transfers is no longer unmeasured, and the answer is that 45 units could
+not settle it. Sets B and C — single-particle cryo-EM past CryptoBench's cutoff,
+cluster-disjoint from CryptoBench, from Set A and from each other — were frozen and
+hashed on 31 July, **before any of these four families existed**, and had never
+been read. That is what made a read of them valid whenever it came: labels fixed in
+advance cannot have been shaped by a method that did not yet exist.
+
+The order is checkable from outside. Sets frozen and hashed → the families built
+and the field compiled over 645 + 624 columns → a plan committed pinning both set
+digests, the compiled field's digest, the 45-unit coverage with its one declared
+drop, the statistic, four co-primary comparisons, two secondaries and **six outcome
+sentences, four of them outcomes where the work does not hold up** → the read, once.
+`results/external/PREREGISTERED_SETBC.json`, then `SETBC_READ.json`.
+
+| method | mean per-unit ROC-AUC, 45 units |
+|---|---|
+| pLM-NN | 0.8672 |
+| **geometry_field** (the stack) | **0.7980** |
+| table_field (deployed) | 0.7917 |
+| P2Rank | 0.7523 |
+| PocketMiner | 0.7136 |
+
+| against | difference | 95% CI | Bonferroni | ahead/behind | predicted | verdict |
+|---|---|---|---|---|---|---|
+| **deployed detector** | **+0.0063** | **[−0.0255, +0.0385]** | [−0.0330, +0.0471] | 27/18 | +0.0121 | **does not resolve** |
+| pLM-NN | −0.0692 | [−0.1163, −0.0257] | [−0.1312, −0.0141] | 17/28 | −0.0219 | behind |
+| P2Rank | +0.0457 | [−0.0100, +0.0935] | [−0.0264, +0.1041] | 35/10 | +0.0564 | unresolved |
+| PocketMiner | +0.0844 | [+0.0384, +0.1271] | [+0.0245, +0.1384] | 37/8 | +0.0799 | leads |
+
+**The primary comparison does not resolve.** The point estimate is +0.0063, in the
+right direction and about half the training-fold value, on an interval that
+contains both that value and its negation. The sentence the plan fixed for this
+outcome is the one that stands: 45 units and an effect of this size gave the read
+limited power, which is a statement about the read and **not evidence that the lift
+is absent — and equally not evidence that it is present**. Nothing about these four
+families' standing on held-out data is established by this repository. Both sets are
+spent; there is no second read of them.
+
+**The confound was named before the read and its control went the other way.**
+`SETBC_DIFFICULTY.json`, committed first, recorded that these chains are 469
+residues at the median against the official fold's 290 and that the stack reads
+further than the deployed detector, so the difference might be inflated by set
+shape — with P2Rank pinned as the arm that would show it. Against the official fold:
+
+| method | what it reads | vs official fold |
+|---|---|---|
+| P2Rank | local surface geometry | **−0.0410** |
+| PocketMiner | structure graph | **−0.0387** |
+| table_field | 645 wires over coordinates | −0.0074 |
+| pLM-NN | whole sequence | **+0.0437** |
+
+Every method that reads coordinates loses on cryo-EM and the one that reads sequence
+gains. That is about the modality, not the difficulty: cryo-EM coordinates carry
+less usable *local* geometry than X-ray at comparable nominal resolution — side
+chains modelled rather than resolved, local resolution varying across a map — so a
+detector reading atom positions pays for it and one reading sequence does not.
+
+**That explains the levels and says nothing about the difference**, and it is not
+offered as though it did: the primary comparison is between two detectors inside one
+modality, where a modality effect largely cancels. What it does settle is what a
+further confirmatory set should be. For a coordinate-reading detector, X-ray —
+`results/external/SETD_POOL.json` counts that pool at 2,682 entries in the 2.5–3.0 Å
+band Set A could not use, and 2,838 free UniRef50 clusters become reachable if the
+holo partner defining the label is allowed any release date, since the holo is never
+scored. Neither set has been built.
+
+Nothing is deployed.
 
 | Attachment | What it does | Result |
 |---|---|---|
@@ -1799,8 +1868,10 @@ comparison is generous to us, because +0.0095 is a training-fold number and whet
 training-fold lift transfers to the official fold has not been measured. The gate
 radius is a further +0.0025 and whether it adds on top of this is also unmeasured.
 Nothing here is deployed: moving the architecture would make `EXTERNAL_READ.json`'s
-+0.0443 a result about a detector that no longer exists, which is why Set B and Set C
-are frozen and unread.
++0.0443 a result about a detector that no longer exists. Set B and Set C were frozen
+for exactly this situation and have now been spent on it: read once, together, on 45
+units, where the stack's advantage over the deployed detector came out **+0.0063
+[−0.0255, +0.0385]** and did not resolve. See §5.3.
 
 Numerical record: all counts and metrics are read from the JSON artifacts
 (`results/architecture_sweep/CHEMISTRY_WIRES_LIFT.json`,

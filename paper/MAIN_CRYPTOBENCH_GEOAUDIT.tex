@@ -1675,6 +1675,93 @@ existed: no architecture, threshold, feature, quantisation rule or partition ban
 changes in response to this read. A method retuned against its own external
 validation set does not have one. Nothing changed.
 
+\subsection{A second external read, and what it did not confirm}
+\label{sec:setbc}
+The wire families of Section~\ref{sec:families} are the largest effect this paper
+reports and every number in that section comes from the training partition. That
+is not a confirmation, and the sets that could have supplied one were already
+spent: the official fold has been read \NTestReads{} times and Set A once, so
+neither can speak about a detector finalised afterwards.
+
+Two sets could. Both were assembled from single-particle cryo-EM entries released
+after CryptoBench's newest, sharing no UniRef50 cluster with CryptoBench, with Set
+A, or with each other, and both were frozen and hashed \emph{before any of these
+families existed} --- which is what makes a read of them valid whenever it is
+taken, since labels fixed in advance cannot have been shaped by a method that did
+not yet exist. Neither had been read.
+
+The order was the same as before and is checkable from outside. The sets were
+frozen and hashed; the four families were built and the field compiled over
+\(645+624\) columns; only then was a plan committed pinning both set digests, the
+compiled field's digest, the \BcN{}-unit coverage with its one declared drop, the
+statistic, four co-primary comparisons at a Bonferroni-corrected level, two
+secondary analyses, and the sentence to appear here under each of six outcomes ---
+four of which are outcomes in which the families do not hold up. Then the read
+ran once.
+
+Three things were conceded in the plan rather than discovered afterwards.
+\BcN{}~units is small. Both sets are cryo-EM, where the recovered labelling rule
+declines a larger share of pairs than it does on X-ray. And a confound was named
+with its own control: these chains are \BcChain{} residues at the median against
+the official fold's \ExtDiffLenOff{}, the stack reads further than the deployed
+detector does, so their difference might be inflated by set shape --- and P2Rank,
+which reads local surface geometry, was pinned as the arm that would show it.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The second external read: mean paired per-unit ROC-AUC, the
+\(645+624\)-column stack minus each other method, on \BcN{} cryo-EM units frozen
+before the families existed. \emph{Predicted} was pinned in the plan.
+\emph{Chains} is ahead/behind. Bonferroni is over the four comparisons.}
+\label{tab:setbc}
+\begin{tabular}{lrrrrl}
+\toprule
+Against & Difference & 95\% CI & Bonferroni & Chains & Verdict \\
+\midrule
+deployed detector & \BcOurs{} & \BcOursCI{} & \BcOursBonf{} &
+  \BcOursWin{}/\BcOursLoss{} & \BcOursVerdict{} \\
+pLM-NN & \BcPlm{} & \BcPlmCI{} & \BcPlmBonf{} &
+  \BcPlmWin{}/\BcPlmLoss{} & \BcPlmVerdict{} \\
+P2Rank & \BcPtwoR{} & \BcPtwoRCI{} & \BcPtwoRBonf{} &
+  \BcPtwoRWin{}/\BcPtwoRLoss{} & \BcPtwoRVerdict{} \\
+PocketMiner & \BcPm{} & \BcPmCI{} & \BcPmBonf{} &
+  \BcPmWin{}/\BcPmLoss{} & \BcPmVerdict{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{The primary comparison does not resolve.} Against the deployed detector
+the stack is \BcOurs{} \BcOursCI{}, ahead on \BcOursWin{} units of \BcN{} and
+behind on \BcOursLoss{}, against \BcOursPred{} pinned from the training fold. The
+point estimate is in the right direction and about half the training-fold value;
+the interval crosses zero and is wide enough to contain both that value and its
+negation. The sentence the plan fixed for this outcome is the one that stands:
+\BcN{}~units and an effect of this size gave the read limited power, which is a
+statement about the read and not evidence that the lift is absent --- and equally
+not evidence that it is present. \emph{Nothing about these families' standing on
+held-out data is established here.} Both sets are now spent; there is no second
+read of them.
+
+\textbf{The confound did not materialise, and its control went the other way.}
+Mean per-unit ROC-AUC on these units is \BcLevelPlm{} for pLM-NN, \BcLevelGeo{}
+for the stack, \BcLevelOurs{} for the deployed detector, \BcLevelPtwoR{} for
+P2Rank and \BcLevelPm{} for PocketMiner. Against the official fold that is
+\(-0.041\) for P2Rank, \(-0.039\) for PocketMiner, \(-0.007\) for the deployed
+detector and \(+0.044\) for pLM-NN. Every method that reads coordinates loses on
+these sets and the one that reads sequence gains. The reading that supports is
+about the modality rather than the difficulty: cryo-EM coordinates carry less
+usable \emph{local} geometry than X-ray coordinates at comparable nominal
+resolution, since side chains are modelled rather than resolved and local
+resolution varies across a map, so a detector reading atom positions pays for that
+and a detector reading sequence does not.
+
+That explains the levels and says nothing about the difference, and it must not be
+offered as though it did: the primary comparison is between two detectors inside
+one modality, where a modality effect largely cancels. What it does bear on is
+what a further confirmatory set should be. For a detector that reads coordinates,
+it should be X-ray.
+
 \subsection{Taking a score apart, and what the errors turn out to be}
 \label{sec:audit}
 Auditability has so far been an architectural claim: every table is a look-up, so
@@ -2656,8 +2743,10 @@ arm is null at \FamGeomControl{} on \FamGeomControlSplits{} of \FamGeomOf{}.
 
 Three things bound what this is worth. It is a training-fold measurement and
 nothing here is deployed: moving the architecture would make the external read
-of Section~\ref{sec:external} a result about a detector that no longer exists,
-which is why the two remaining external sets are frozen and unread. The lift is
+of Section~\ref{sec:external} a result about a detector that no longer exists.
+The two remaining external sets were frozen for that situation and have since been
+read under Section~\ref{sec:setbc}, where the stack's advantage over the deployed
+detector did not resolve. The lift is
 above the \SatReseed{} reseed floor but of the same order, and it is quoted with
 its interval for that reason. And it does not close the deficit: the supervised
 sequence baseline of Section~\ref{sec:plmnn} leaves the deployed detector at

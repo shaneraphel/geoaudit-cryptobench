@@ -1,0 +1,212 @@
+{
+  "schema": "geoaudit.setbc_read.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": true,
+  "status": "read taken, outcome negative or unresolved",
+  "plan": {
+    "artifact": "results/external/PREREGISTERED_SETBC.json",
+    "sha256": "6c779efbc5f23068f53e5395c09c8f7278f68705745feac0f15d68ca37733fa8",
+    "committed_in": "973021c05ad90c060372433a79d95b3cc3158561"
+  },
+  "sets": {
+    "set_b": {
+      "sha256": "09381b4064b0bfd4ab6b65bce3adbc166829f9f8b298776c1399ce56b0f45230",
+      "frozen_at_prefix": "09381b40"
+    },
+    "set_c": {
+      "sha256": "ff112a6025d116949e0aa37ead92318c5481edd1827db39d3d1a8a28139ec93b",
+      "frozen_at_prefix": "ff112a60"
+    }
+  },
+  "field_sha256": "29b5ce1476ee38450b1afa36ead54d0ca10c8e8ff8a7bef67101d3f706e803b9",
+  "coverage": {
+    "n_units_in_the_manifest": 45,
+    "n_units_compared": 45,
+    "units_skipped": [],
+    "n_units_losing_residues": 0,
+    "residues_not_shared": [],
+    "why": "the residues every method scored on that unit. A paired difference needs one universe, and a method that drops residues it cannot featurise would otherwise be scored on an easier one"
+  },
+  "levels": {
+    "geometry_field": 0.798006,
+    "table_field": 0.791665,
+    "p2rank": 0.752297,
+    "pocketminer": 0.713559,
+    "plmnn": 0.867202
+  },
+  "co_primary": {
+    "geometry_field_minus_table_field": {
+      "n": 45,
+      "mean": 0.00634,
+      "median": 0.007977,
+      "ci": [
+        -0.02548,
+        0.038539
+      ],
+      "ci_bonferroni": [
+        -0.033046,
+        0.047138
+      ],
+      "excludes_zero": false,
+      "n_first_ahead": 27,
+      "n_second_ahead": 18,
+      "level_first": 0.798006,
+      "level_second": 0.791665,
+      "predicted": 0.012122,
+      "verdict": "does_not_resolve"
+    },
+    "geometry_field_minus_plmnn": {
+      "n": 45,
+      "mean": -0.069197,
+      "median": -0.041539,
+      "ci": [
+        -0.116326,
+        -0.025687
+      ],
+      "ci_bonferroni": [
+        -0.1312,
+        -0.014083
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 17,
+      "n_second_ahead": 28,
+      "level_first": 0.798006,
+      "level_second": 0.867202,
+      "predicted": -0.021864,
+      "verdict": "behind"
+    },
+    "geometry_field_minus_p2rank": {
+      "n": 45,
+      "mean": 0.045709,
+      "median": 0.058287,
+      "ci": [
+        -0.009979,
+        0.093541
+      ],
+      "ci_bonferroni": [
+        -0.026395,
+        0.104119
+      ],
+      "excludes_zero": false,
+      "n_first_ahead": 35,
+      "n_second_ahead": 10,
+      "level_first": 0.798006,
+      "level_second": 0.752297,
+      "predicted": 0.056432,
+      "verdict": "unresolved"
+    },
+    "geometry_field_minus_pocketminer": {
+      "n": 45,
+      "mean": 0.084447,
+      "median": 0.091271,
+      "ci": [
+        0.038445,
+        0.127068
+      ],
+      "ci_bonferroni": [
+        0.024511,
+        0.138398
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 37,
+      "n_second_ahead": 8,
+      "level_first": 0.798006,
+      "level_second": 0.713559,
+      "predicted": 0.079854,
+      "verdict": "leads"
+    }
+  },
+  "multiplicity": {
+    "n_comparisons": 4,
+    "per_comparison_alpha": 0.0125,
+    "family_wise_alpha": 0.05,
+    "corrected_interval_level": 0.9875,
+    "correction": "Bonferroni over the four co-primary comparisons",
+    "why_both_names_are_given": "the quantity is an alpha and the helper that consumes it calls it a level. The first run of this read passed the level and got Bonferroni intervals narrower than its own 95% intervals"
+  },
+  "secondary_per_set": {
+    "set_b": {
+      "n": 7,
+      "mean": 0.064368,
+      "median": 0.011458,
+      "ci": [
+        -0.014712,
+        0.181997
+      ],
+      "ci_bonferroni": [
+        -0.023231,
+        0.225891
+      ],
+      "excludes_zero": false,
+      "n_first_ahead": 4,
+      "n_second_ahead": 3,
+      "level_first": 0.889254,
+      "level_second": 0.824886
+    },
+    "set_c": {
+      "n": 38,
+      "mean": -0.004349,
+      "median": 0.007229,
+      "ci": [
+        -0.036592,
+        0.025627
+      ],
+      "ci_bonferroni": [
+        -0.04578,
+        0.033048
+      ],
+      "excludes_zero": false,
+      "n_first_ahead": 23,
+      "n_second_ahead": 15,
+      "level_first": 0.781197,
+      "level_second": 0.785546
+    }
+  },
+  "secondary_by_pocket_size": {
+    "under_ten_cryptic": {
+      "n": 9,
+      "mean": -0.093413,
+      "median": -0.071196,
+      "ci": [
+        -0.17362,
+        -0.010037
+      ],
+      "ci_bonferroni": [
+        -0.19316,
+        0.01379
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 2,
+      "n_second_ahead": 7,
+      "level_first": 0.606366,
+      "level_second": 0.699779
+    },
+    "ten_or_more": {
+      "n": 36,
+      "mean": 0.031279,
+      "median": 0.01483,
+      "ci": [
+        0.003738,
+        0.062249
+      ],
+      "ci_bonferroni": [
+        -0.003305,
+        0.071765
+      ],
+      "excludes_zero": true,
+      "n_first_ahead": 25,
+      "n_second_ahead": 11,
+      "level_first": 0.845916,
+      "level_second": 0.814637
+    }
+  },
+  "the_confound_named_before_this_read": {
+    "artifact": "results/external/SETBC_DIFFICULTY.json",
+    "sha256": "19b322731dcf5f61dc4eb155501fd11822d7e83b34997db3f4daa06e4fed0db5",
+    "what": "these chains are 1.6x the official fold's at the median and geometry_field reads further than table_field, so the difference could be inflated by set shape rather than by the families generalising",
+    "control": "p2rank's movement, which was +0.0035 between the official fold and Set A"
+  },
+  "sentence_the_plan_fixed": "On N units the stack's advantage over the deployed detector is +X [a, b], crossing zero. The training-fold lift is not confirmed. With 45 units and an effect of this size the read had limited power, which is a statement about the read and not evidence that the lift is absent -- and it is also not evidence that it is present. Nothing about the four families' status on held-out data is established by this repository.",
+  "reread_reason": "the first run passed the Bonferroni level 0.9875 where _interval consumes an alpha, so every corrected interval came out narrower than its own 95% interval. Recomputed at alpha 0.05/4 from the same archived scores; no new data is touched, no choice is made in light of the outcome, and the primary verdict came from the 95% interval, which was computed correctly and is unchanged."
+}
