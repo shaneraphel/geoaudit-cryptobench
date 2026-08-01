@@ -1592,6 +1592,42 @@ Externally our margin is \ExtAucPm{} \ExtAucCIPm{} while P2Rank's is
 similar, which weakens that reading without establishing the alternative at this
 sample size.
 
+A set of \ExtN{} units invites the objection that it is simply easier than the
+benchmark, which would make the one confirmatory result here cheaper than it
+looks. That is checkable two ways and the two disagree, so both are given.
+
+\emph{By label geometry the external set is harder on every axis.} Three
+quantities control how hard a per-unit ranking problem is --- how many residues
+must be ranked, how sparse the positives are, and how large the pocket is --- and
+the third is not a guess. Stratifying the training partition by it
+(\texttt{FAILURE\_TAIL.json}) puts the deployed field at \(0.5991\) on units
+with fewer than ten cryptic residues against \(0.8766\) above twenty-two, a
+spread of \(0.28\) --- larger than every architectural effect in this paper
+combined, and the reason pocket size is the axis a difficulty argument has to
+be made on. At the median the external units are \ExtDiffLenExt{} residues
+long against \ExtDiffLenOff{} for the official fold, carry \ExtDiffCryExt{}
+cryptic residues against \ExtDiffCryOff{}, and are \ExtDiffRateExt{}\% positive
+against \ExtDiffRateOff{}\%. Longer chains, smaller pockets, sparser labels.
+
+\emph{By achieved accuracy three of four methods score higher on it}, which is
+the objection's evidence and it is real. The discriminating case is the fourth.
+P2Rank moves \ExtDiffMovedPtwoR{} between the two sets, PocketMiner
+\ExtDiffMovedPm{}, the counting field \ExtDiffMovedOurs{} and pLM-NN
+\ExtDiffMovedPlm{} --- an ordering that follows how much context each method
+reads, from a local surface detector through a structure graph to a
+whole-sequence model. \emph{A uniformly easier set lifts the local detector too.}
+This one does not, and its chains are \(46\) residues longer at the median, which
+is exactly the resource a context-reading method can spend and a local one
+cannot.
+
+So the set is not uniformly easier; it rewards context, and every method compared
+on it inherits that. What this does not settle is whether the same ordering
+appears on a set matched to the official fold for chain length, which is
+unmeasured and is the first thing a second external set should control for. The
+half of the objection that stands is the sample size: \ExtN{} positive units is
+small, and the interval on the confirmatory result is reported with it for that
+reason.
+
 Three findings run against us and none is in a footnote. At a matched
 top-\ExtQPct{}\% budget the F1 advantage over P2Rank does not resolve externally
 either: \ExtBudgetFDelta{} \ExtBudgetFCI{}, with MCC \ExtBudgetMDelta{}

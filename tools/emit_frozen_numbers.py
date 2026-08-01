@@ -107,6 +107,7 @@ POCKET = ROOT / "results/official_fold/POCKET_READ.json"
 PLMNN = ROOT / "results/official_fold/PLMNN_READ.json"
 PMREAD = ROOT / "results/official_fold/POCKETMINER_READ.json"
 EXTREAD = ROOT / "results/external/EXTERNAL_READ.json"
+EXTDIFF = ROOT / "results/external/EXTERNAL_SET_DIFFICULTY.json"
 EXTSET = ROOT / "results/external/EXTERNAL_SET.json"
 PMSELF = ROOT / "results/baselines/POCKETMINER_SELFTEST.json"
 CURVE = ROOT / "results/official_fold/THRESHOLD_CURVE.json"
@@ -1121,6 +1122,27 @@ def build() -> str:
                 f"manuscript calls it the paper's one confirmatory comparison and "
                 f"would have to be rewritten rather than regenerated")
         xs = json.loads(EXTSET.read_text())
+        if EXTDIFF.exists():
+            # Whether the external set is easier than the benchmark. The
+            # reviewer objection this answers is about a claim the paper makes,
+            # so the numbers belong in the same generated file as the claim and
+            # not in prose that can drift from the artifact.
+            df = json.loads(EXTDIFF.read_text())
+            g, ac = df["label_geometry"], df["achieved_accuracy"]
+            for stem, key in (("Len", "chain_length"),
+                              ("Cry", "cryptic_residues")):
+                L.append(f"\\newcommand{{\\ExtDiff{stem}Off}}"
+                         f"{{{g['official_test_fold'][key]['median']:.0f}}}")
+                L.append(f"\\newcommand{{\\ExtDiff{stem}Ext}}"
+                         f"{{{g['external_set_a'][key]['median']:.0f}}}")
+            L.append(f"\\newcommand{{\\ExtDiffRateOff}}"
+                     f"{{{g['official_test_fold']['positive_rate']['median'] * 100:.2f}}}")
+            L.append(f"\\newcommand{{\\ExtDiffRateExt}}"
+                     f"{{{g['external_set_a']['positive_rate']['median'] * 100:.2f}}}")
+            for m, stem in (("p2rank", "PtwoR"), ("pocketminer", "Pm"),
+                            ("table_field", "Ours"), ("plmnn", "Plm")):
+                L.append(f"\\newcommand{{\\ExtDiffMoved{stem}}}"
+                         f"{{{_signed(ac['external_minus_official'][m], 4)}}}")
         L.append(f"\\newcommand{{\\ExtN}}{{{ex['n_units_compared']}}}")
         L.append(f"\\newcommand{{\\ExtNPositives}}"
                  f"{{{sum(len(u['residues']) for u in xs['units'])}}}")

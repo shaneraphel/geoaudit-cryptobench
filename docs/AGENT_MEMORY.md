@@ -1179,6 +1179,60 @@ carries the largest single family in this repository, on its own, at +0.0063.
 > either, but the direction of the miss is informative — the screen predicts
 > whether a family is live better than it predicts how live.
 
+## 2o. Is the external set easier? Two answers, and they disagree
+
+A reviewer objected that Set A has only 57 positive units and may be easier than
+CryptoBench, which would make the paper's one confirmatory result cheaper than it
+looks. Half of that stands and half does not, and the half that does not is
+measurable. `EXTERNAL_SET_DIFFICULTY.json`, which reads frozen artifacts and
+label files only and spends no read of either set.
+
+**By label geometry Set A is harder on all three axes.** Medians:
+
+| axis | official fold | Set A | harder |
+|---|---|---|---|
+| chain length | 290 | **336** | Set A — more residues to rank against |
+| cryptic residues | 16 | **14** | Set A — and this is the axis with a measured 0.28 effect |
+| positive rate | 6.15 % | **4.35 %** | Set A — sparser positives |
+
+Pocket size is not a guess about difficulty. `FAILURE_TAIL.json` puts the
+deployed field at 0.5991 under ten cryptic residues against 0.8766 above
+twenty-two — **a 0.28 spread, larger than every architectural effect in this
+repository combined.** Set A sits lower on that axis than the benchmark does.
+
+**By achieved accuracy three of four methods score higher on Set A**, which is
+the objection's evidence and is real. The fourth is what settles it:
+
+| method | what it reads | official | Set A | moved |
+|---|---|---|---|---|
+| P2Rank | local surface geometry | 0.7933 | 0.7968 | **+0.0035** |
+| PocketMiner | structure graph | 0.7523 | 0.7734 | +0.0211 |
+| counting field | 645 wires out to 20 Å | 0.7991 | 0.8411 | +0.0420 |
+| pLM-NN | whole sequence | 0.8235 | 0.8751 | **+0.0517** |
+
+> **The gain rises monotonically with how much context a method reads, and a
+> uniformly easier set would lift the local detector too.** P2Rank moves by
+> +0.0035. Set A's chains are 46 residues longer at the median, which is exactly
+> the resource a context-reading method can spend and a local one cannot. So the
+> set is not uniformly easier: it *rewards context*, and every method compared on
+> it inherits that property including ours.
+
+**What this does not settle, and it is the design brief for Set B.** Whether the
+same ordering appears on a set matched to the official fold for chain length is
+unmeasured. **Set B should match chain-length distribution** — not just release
+date and sequence identity — because that is the confound Set A has and nobody had
+looked for. Matching it is cheap at selection time and impossible afterwards.
+
+**The half of the objection that stands.** 57 positive units is small. That is
+reported with the interval and is not answered by anything above; the two are
+different objections and only the second one was checkable.
+
+> **A "the set might be easier" objection has two halves and they need different
+> instruments.** The composition half is answerable from label metadata at zero
+> cost to any ledger, and nobody had computed it in the weeks Set A had existed.
+> The power half is not answerable at all and is answered by saying so. Splitting
+> the objection before trying to rebut it is what made one half tractable.
+
 ## 2l. Units both published baselines rank at chance, and the mirror count
 
 `RECOVERED_UNITS_TRAIN.json`, 769 training units, no read of the held-out fold.

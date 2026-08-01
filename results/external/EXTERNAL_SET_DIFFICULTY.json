@@ -1,0 +1,1597 @@
+{
+  "schema": "geoaudit.external_set_difficulty.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": false,
+  "why_this_declares_no_read": "every accuracy number here is quoted from an artifact whose read was already indexed. Chain lengths come from receptor coordinates, which are inputs. No prediction is computed and no label is compared against one",
+  "question": "is the external set easier than the official CryptoBench test fold, as a reviewer suspected of a 57-unit set",
+  "answer": "not uniformly, and the two ways of asking disagree. By label geometry it is harder on all three axes. By achieved accuracy three of four methods score higher on it -- but P2Rank moves by +0.004 where the two methods that read long-range context move by +0.04 and +0.05, and a uniformly easier set lifts a local surface detector too",
+  "label_geometry": {
+    "official_test_fold": {
+      "n_units": 192,
+      "chain_length": {
+        "median": 290.5,
+        "mean": 301.2291666666667
+      },
+      "cryptic_residues": {
+        "median": 16.0,
+        "mean": 17.192708333333332
+      },
+      "positive_rate": {
+        "median": 0.061526126587935305,
+        "mean": 0.06980681523610678
+      },
+      "share_under_ten_cryptic": 0.22395833333333334,
+      "share_over_twentytwo_cryptic": 0.23958333333333334
+    },
+    "external_set_a": {
+      "n_units": 57,
+      "chain_length": {
+        "median": 336.0,
+        "mean": 345.87719298245617
+      },
+      "cryptic_residues": {
+        "median": 14.0,
+        "mean": 15.87719298245614
+      },
+      "positive_rate": {
+        "median": 0.043478260869565216,
+        "mean": 0.055360053611961925
+      },
+      "share_under_ten_cryptic": 0.24561403508771928,
+      "share_over_twentytwo_cryptic": 0.22807017543859648
+    },
+    "axes_on_which_the_external_set_is_harder": [
+      {
+        "axis": "chain length",
+        "external": 336.0,
+        "official": 290.5,
+        "why_harder": "more residues to rank against"
+      },
+      {
+        "axis": "cryptic residues",
+        "external": 14.0,
+        "official": 16.0,
+        "why_harder": "smaller pockets, and pocket size is the axis with a measured 0.28 effect on per-unit ROC-AUC"
+      },
+      {
+        "axis": "positive rate",
+        "external": 0.043478260869565216,
+        "official": 0.061526126587935305,
+        "why_harder": "sparser positives"
+      }
+    ],
+    "why_pocket_size_is_not_a_guess": {
+      "source": "results/architecture_sweep/FAILURE_TAIL.json",
+      "under_ten_cryptic_residues": "see artifact",
+      "measured_effect": "0.5991 on units with under ten cryptic residues against 0.8766 on units with more than twenty-two"
+    }
+  },
+  "achieved_accuracy": {
+    "official_test_fold": {
+      "table_field": 0.799105,
+      "p2rank": 0.793291,
+      "pocketminer": 0.752297,
+      "plmnn": 0.823469
+    },
+    "external_set_a": {
+      "table_field": 0.84114,
+      "p2rank": 0.79683,
+      "plmnn": 0.875126,
+      "pocketminer": 0.773408
+    },
+    "external_minus_official": {
+      "p2rank": 0.003539,
+      "plmnn": 0.051657,
+      "pocketminer": 0.021111,
+      "table_field": 0.042035
+    },
+    "the_discriminating_case": {
+      "method": "p2rank",
+      "moved": 0.003539,
+      "reading": "P2Rank reads local surface geometry. It is the arm that distinguishes a set that is easier from a set that rewards context, and it barely moves. The external set's chains are longer at the median, which a context-reading method can use and a local one cannot"
+    },
+    "what_this_does_not_settle": "whether the same ordering would appear on a set matched to the official fold for chain length. That is unmeasured, and matching for it is what a second external set should do"
+  },
+  "the_objection_that_stands": "57 positive units is small. The interval on the confirmatory result reflects that and is reported with it; what this tool addresses is the second half of the objection, that the set is easier, and that half is not supported by the label geometry and only partly by the accuracy",
+  "per_unit": {
+    "official_test_fold": [
+      {
+        "unit": "1arl_A",
+        "n_residues": 307,
+        "n_cryptic": 17,
+        "positive_rate": 0.05537459283387622
+      },
+      {
+        "unit": "1bk2_A",
+        "n_residues": 57,
+        "n_cryptic": 5,
+        "positive_rate": 0.08771929824561403
+      },
+      {
+        "unit": "1bzj_A",
+        "n_residues": 297,
+        "n_cryptic": 56,
+        "positive_rate": 0.18855218855218855
+      },
+      {
+        "unit": "1cwq_A",
+        "n_residues": 238,
+        "n_cryptic": 6,
+        "positive_rate": 0.025210084033613446
+      },
+      {
+        "unit": "1dq2_A",
+        "n_residues": 224,
+        "n_cryptic": 11,
+        "positive_rate": 0.049107142857142856
+      },
+      {
+        "unit": "1e6k_A",
+        "n_residues": 130,
+        "n_cryptic": 9,
+        "positive_rate": 0.06923076923076923
+      },
+      {
+        "unit": "1evy_A",
+        "n_residues": 346,
+        "n_cryptic": 33,
+        "positive_rate": 0.0953757225433526
+      },
+      {
+        "unit": "1g1m_B",
+        "n_residues": 289,
+        "n_cryptic": 19,
+        "positive_rate": 0.0657439446366782
+      },
+      {
+        "unit": "1g59_A",
+        "n_residues": 468,
+        "n_cryptic": 15,
+        "positive_rate": 0.03205128205128205
+      },
+      {
+        "unit": "1h13_A",
+        "n_residues": 404,
+        "n_cryptic": 5,
+        "positive_rate": 0.012376237623762377
+      },
+      {
+        "unit": "1i7n_A",
+        "n_residues": 308,
+        "n_cryptic": 25,
+        "positive_rate": 0.08116883116883117
+      },
+      {
+        "unit": "1k47_D",
+        "n_residues": 314,
+        "n_cryptic": 14,
+        "positive_rate": 0.044585987261146494
+      },
+      {
+        "unit": "1ksg_B",
+        "n_residues": 128,
+        "n_cryptic": 31,
+        "positive_rate": 0.2421875
+      },
+      {
+        "unit": "1kx9_A",
+        "n_residues": 108,
+        "n_cryptic": 15,
+        "positive_rate": 0.1388888888888889
+      },
+      {
+        "unit": "1kxr_A",
+        "n_residues": 320,
+        "n_cryptic": 19,
+        "positive_rate": 0.059375
+      },
+      {
+        "unit": "1lbe_B",
+        "n_residues": 248,
+        "n_cryptic": 20,
+        "positive_rate": 0.08064516129032258
+      },
+      {
+        "unit": "1m5w_D",
+        "n_residues": 242,
+        "n_cryptic": 21,
+        "positive_rate": 0.08677685950413223
+      },
+      {
+        "unit": "1nd7_A",
+        "n_residues": 374,
+        "n_cryptic": 4,
+        "positive_rate": 0.0106951871657754
+      },
+      {
+        "unit": "1p4o_B",
+        "n_residues": 314,
+        "n_cryptic": 28,
+        "positive_rate": 0.08917197452229299
+      },
+      {
+        "unit": "1p4v_A",
+        "n_residues": 295,
+        "n_cryptic": 16,
+        "positive_rate": 0.05423728813559322
+      },
+      {
+        "unit": "1p9o_A",
+        "n_residues": 269,
+        "n_cryptic": 16,
+        "positive_rate": 0.05947955390334572
+      },
+      {
+        "unit": "1pu5_C",
+        "n_residues": 161,
+        "n_cryptic": 11,
+        "positive_rate": 0.06832298136645963
+      },
+      {
+        "unit": "1q4k_A",
+        "n_residues": 222,
+        "n_cryptic": 13,
+        "positive_rate": 0.05855855855855856
+      },
+      {
+        "unit": "1rjb_A",
+        "n_residues": 298,
+        "n_cryptic": 16,
+        "positive_rate": 0.053691275167785234
+      },
+      {
+        "unit": "1rtc_A",
+        "n_residues": 268,
+        "n_cryptic": 6,
+        "positive_rate": 0.022388059701492536
+      },
+      {
+        "unit": "1se8_A",
+        "n_residues": 205,
+        "n_cryptic": 3,
+        "positive_rate": 0.014634146341463415
+      },
+      {
+        "unit": "1uka_A",
+        "n_residues": 271,
+        "n_cryptic": 6,
+        "positive_rate": 0.02214022140221402
+      },
+      {
+        "unit": "1ute_A",
+        "n_residues": 302,
+        "n_cryptic": 8,
+        "positive_rate": 0.026490066225165563
+      },
+      {
+        "unit": "1vsn_A",
+        "n_residues": 215,
+        "n_cryptic": 5,
+        "positive_rate": 0.023255813953488372
+      },
+      {
+        "unit": "1x2g_C",
+        "n_residues": 332,
+        "n_cryptic": 15,
+        "positive_rate": 0.045180722891566265
+      },
+      {
+        "unit": "1xgd_A",
+        "n_residues": 315,
+        "n_cryptic": 51,
+        "positive_rate": 0.1619047619047619
+      },
+      {
+        "unit": "1xjf_A",
+        "n_residues": 619,
+        "n_cryptic": 15,
+        "positive_rate": 0.024232633279483037
+      },
+      {
+        "unit": "1xqv_A",
+        "n_residues": 290,
+        "n_cryptic": 22,
+        "positive_rate": 0.07586206896551724
+      },
+      {
+        "unit": "1xtc_A",
+        "n_residues": 192,
+        "n_cryptic": 18,
+        "positive_rate": 0.09375
+      },
+      {
+        "unit": "1zm0_A",
+        "n_residues": 96,
+        "n_cryptic": 11,
+        "positive_rate": 0.11458333333333333
+      },
+      {
+        "unit": "2aka_A",
+        "n_residues": 764,
+        "n_cryptic": 32,
+        "positive_rate": 0.041884816753926704
+      },
+      {
+        "unit": "2d05_A",
+        "n_residues": 259,
+        "n_cryptic": 22,
+        "positive_rate": 0.08494208494208494
+      },
+      {
+        "unit": "2dfp_A",
+        "n_residues": 533,
+        "n_cryptic": 36,
+        "positive_rate": 0.0675422138836773
+      },
+      {
+        "unit": "2fem_A",
+        "n_residues": 212,
+        "n_cryptic": 18,
+        "positive_rate": 0.08490566037735849
+      },
+      {
+        "unit": "2fhz_B",
+        "n_residues": 93,
+        "n_cryptic": 14,
+        "positive_rate": 0.15053763440860216
+      },
+      {
+        "unit": "2h7s_A",
+        "n_residues": 405,
+        "n_cryptic": 11,
+        "positive_rate": 0.027160493827160494
+      },
+      {
+        "unit": "2i3a_D",
+        "n_residues": 347,
+        "n_cryptic": 11,
+        "positive_rate": 0.03170028818443804
+      },
+      {
+        "unit": "2i3r_A",
+        "n_residues": 286,
+        "n_cryptic": 22,
+        "positive_rate": 0.07692307692307693
+      },
+      {
+        "unit": "2iyt_A",
+        "n_residues": 175,
+        "n_cryptic": 19,
+        "positive_rate": 0.10857142857142857
+      },
+      {
+        "unit": "2nt1_B",
+        "n_residues": 497,
+        "n_cryptic": 16,
+        "positive_rate": 0.03219315895372234
+      },
+      {
+        "unit": "2phz_A",
+        "n_residues": 270,
+        "n_cryptic": 17,
+        "positive_rate": 0.06296296296296296
+      },
+      {
+        "unit": "2pkf_A",
+        "n_residues": 332,
+        "n_cryptic": 18,
+        "positive_rate": 0.05421686746987952
+      },
+      {
+        "unit": "2pwz_G",
+        "n_residues": 312,
+        "n_cryptic": 31,
+        "positive_rate": 0.09935897435897435
+      },
+      {
+        "unit": "2qbv_A",
+        "n_residues": 73,
+        "n_cryptic": 14,
+        "positive_rate": 0.1917808219178082
+      },
+      {
+        "unit": "2rfj_B",
+        "n_residues": 106,
+        "n_cryptic": 18,
+        "positive_rate": 0.16981132075471697
+      },
+      {
+        "unit": "2v6m_D",
+        "n_residues": 298,
+        "n_cryptic": 34,
+        "positive_rate": 0.11409395973154363
+      },
+      {
+        "unit": "2vl2_C",
+        "n_residues": 161,
+        "n_cryptic": 10,
+        "positive_rate": 0.062111801242236024
+      },
+      {
+        "unit": "2vqz_F",
+        "n_residues": 150,
+        "n_cryptic": 7,
+        "positive_rate": 0.04666666666666667
+      },
+      {
+        "unit": "2vyr_A",
+        "n_residues": 86,
+        "n_cryptic": 21,
+        "positive_rate": 0.2441860465116279
+      },
+      {
+        "unit": "2w8n_A",
+        "n_residues": 480,
+        "n_cryptic": 11,
+        "positive_rate": 0.022916666666666665
+      },
+      {
+        "unit": "2x47_A",
+        "n_residues": 229,
+        "n_cryptic": 26,
+        "positive_rate": 0.11353711790393013
+      },
+      {
+        "unit": "2xsa_A",
+        "n_residues": 443,
+        "n_cryptic": 15,
+        "positive_rate": 0.033860045146726865
+      },
+      {
+        "unit": "2zcg_A",
+        "n_residues": 318,
+        "n_cryptic": 14,
+        "positive_rate": 0.0440251572327044
+      },
+      {
+        "unit": "2zj7_A",
+        "n_residues": 616,
+        "n_cryptic": 8,
+        "positive_rate": 0.012987012987012988
+      },
+      {
+        "unit": "3a0x_A",
+        "n_residues": 149,
+        "n_cryptic": 21,
+        "positive_rate": 0.14093959731543623
+      },
+      {
+        "unit": "3bjp_A",
+        "n_residues": 295,
+        "n_cryptic": 5,
+        "positive_rate": 0.01694915254237288
+      },
+      {
+        "unit": "3f4k_A",
+        "n_residues": 254,
+        "n_cryptic": 19,
+        "positive_rate": 0.07480314960629922
+      },
+      {
+        "unit": "3flg_A",
+        "n_residues": 135,
+        "n_cryptic": 9,
+        "positive_rate": 0.06666666666666667
+      },
+      {
+        "unit": "3fzo_A",
+        "n_residues": 262,
+        "n_cryptic": 34,
+        "positive_rate": 0.1297709923664122
+      },
+      {
+        "unit": "3gdg_B",
+        "n_residues": 267,
+        "n_cryptic": 32,
+        "positive_rate": 0.1198501872659176
+      },
+      {
+        "unit": "3h8a_B",
+        "n_residues": 430,
+        "n_cryptic": 18,
+        "positive_rate": 0.04186046511627907
+      },
+      {
+        "unit": "3i8s_B",
+        "n_residues": 261,
+        "n_cryptic": 16,
+        "positive_rate": 0.06130268199233716
+      },
+      {
+        "unit": "3idh_A",
+        "n_residues": 453,
+        "n_cryptic": 22,
+        "positive_rate": 0.04856512141280353
+      },
+      {
+        "unit": "3jzg_A",
+        "n_residues": 359,
+        "n_cryptic": 12,
+        "positive_rate": 0.033426183844011144
+      },
+      {
+        "unit": "3k01_A",
+        "n_residues": 391,
+        "n_cryptic": 28,
+        "positive_rate": 0.07161125319693094
+      },
+      {
+        "unit": "3lnz_C",
+        "n_residues": 82,
+        "n_cryptic": 24,
+        "positive_rate": 0.2926829268292683
+      },
+      {
+        "unit": "3lnz_O",
+        "n_residues": 83,
+        "n_cryptic": 24,
+        "positive_rate": 0.2891566265060241
+      },
+      {
+        "unit": "3ly8_A",
+        "n_residues": 323,
+        "n_cryptic": 11,
+        "positive_rate": 0.034055727554179564
+      },
+      {
+        "unit": "3mwg_B",
+        "n_residues": 272,
+        "n_cryptic": 16,
+        "positive_rate": 0.058823529411764705
+      },
+      {
+        "unit": "3n4u_A",
+        "n_residues": 301,
+        "n_cryptic": 20,
+        "positive_rate": 0.0664451827242525
+      },
+      {
+        "unit": "3nx1_B",
+        "n_residues": 165,
+        "n_cryptic": 10,
+        "positive_rate": 0.06060606060606061
+      },
+      {
+        "unit": "3pbf_A",
+        "n_residues": 145,
+        "n_cryptic": 7,
+        "positive_rate": 0.04827586206896552
+      },
+      {
+        "unit": "3pfp_A",
+        "n_residues": 464,
+        "n_cryptic": 13,
+        "positive_rate": 0.028017241379310345
+      },
+      {
+        "unit": "3pfp_B",
+        "n_residues": 464,
+        "n_cryptic": 13,
+        "positive_rate": 0.028017241379310345
+      },
+      {
+        "unit": "3rwv_A",
+        "n_residues": 205,
+        "n_cryptic": 18,
+        "positive_rate": 0.08780487804878048
+      },
+      {
+        "unit": "3st6_C",
+        "n_residues": 424,
+        "n_cryptic": 30,
+        "positive_rate": 0.07075471698113207
+      },
+      {
+        "unit": "3t8b_A",
+        "n_residues": 237,
+        "n_cryptic": 15,
+        "positive_rate": 0.06329113924050633
+      },
+      {
+        "unit": "3tpo_A",
+        "n_residues": 438,
+        "n_cryptic": 8,
+        "positive_rate": 0.0182648401826484
+      },
+      {
+        "unit": "3ugk_A",
+        "n_residues": 372,
+        "n_cryptic": 38,
+        "positive_rate": 0.10215053763440861
+      },
+      {
+        "unit": "3uyi_A",
+        "n_residues": 312,
+        "n_cryptic": 18,
+        "positive_rate": 0.057692307692307696
+      },
+      {
+        "unit": "3v55_A",
+        "n_residues": 368,
+        "n_cryptic": 29,
+        "positive_rate": 0.07880434782608696
+      },
+      {
+        "unit": "3vgm_A",
+        "n_residues": 312,
+        "n_cryptic": 19,
+        "positive_rate": 0.060897435897435896
+      },
+      {
+        "unit": "3w90_A",
+        "n_residues": 198,
+        "n_cryptic": 19,
+        "positive_rate": 0.09595959595959595
+      },
+      {
+        "unit": "3wb9_C",
+        "n_residues": 297,
+        "n_cryptic": 28,
+        "positive_rate": 0.09427609427609428
+      },
+      {
+        "unit": "4aem_A",
+        "n_residues": 126,
+        "n_cryptic": 6,
+        "positive_rate": 0.047619047619047616
+      },
+      {
+        "unit": "4amv_B",
+        "n_residues": 608,
+        "n_cryptic": 15,
+        "positive_rate": 0.024671052631578948
+      },
+      {
+        "unit": "4bg8_A",
+        "n_residues": 310,
+        "n_cryptic": 16,
+        "positive_rate": 0.05161290322580645
+      },
+      {
+        "unit": "4cmw_B",
+        "n_residues": 286,
+        "n_cryptic": 19,
+        "positive_rate": 0.06643356643356643
+      },
+      {
+        "unit": "4dnc_B",
+        "n_residues": 267,
+        "n_cryptic": 26,
+        "positive_rate": 0.09737827715355805
+      },
+      {
+        "unit": "4e1y_A",
+        "n_residues": 353,
+        "n_cryptic": 5,
+        "positive_rate": 0.014164305949008499
+      },
+      {
+        "unit": "4fkm_B",
+        "n_residues": 209,
+        "n_cryptic": 16,
+        "positive_rate": 0.07655502392344497
+      },
+      {
+        "unit": "4gpi_C",
+        "n_residues": 235,
+        "n_cryptic": 24,
+        "positive_rate": 0.10212765957446808
+      },
+      {
+        "unit": "4gv9_A",
+        "n_residues": 198,
+        "n_cryptic": 5,
+        "positive_rate": 0.025252525252525252
+      },
+      {
+        "unit": "4hye_A",
+        "n_residues": 200,
+        "n_cryptic": 4,
+        "positive_rate": 0.02
+      },
+      {
+        "unit": "4ikv_A",
+        "n_residues": 492,
+        "n_cryptic": 10,
+        "positive_rate": 0.02032520325203252
+      },
+      {
+        "unit": "4ilg_A",
+        "n_residues": 321,
+        "n_cryptic": 42,
+        "positive_rate": 0.1308411214953271
+      },
+      {
+        "unit": "4j4e_F",
+        "n_residues": 101,
+        "n_cryptic": 10,
+        "positive_rate": 0.09900990099009901
+      },
+      {
+        "unit": "4jax_F",
+        "n_residues": 459,
+        "n_cryptic": 15,
+        "positive_rate": 0.032679738562091505
+      },
+      {
+        "unit": "4jfr_C",
+        "n_residues": 334,
+        "n_cryptic": 14,
+        "positive_rate": 0.041916167664670656
+      },
+      {
+        "unit": "4kmy_A",
+        "n_residues": 207,
+        "n_cryptic": 20,
+        "positive_rate": 0.0966183574879227
+      },
+      {
+        "unit": "4mwi_A",
+        "n_residues": 266,
+        "n_cryptic": 29,
+        "positive_rate": 0.10902255639097744
+      },
+      {
+        "unit": "4nzv_B",
+        "n_residues": 324,
+        "n_cryptic": 18,
+        "positive_rate": 0.05555555555555555
+      },
+      {
+        "unit": "4oqo_B",
+        "n_residues": 348,
+        "n_cryptic": 19,
+        "positive_rate": 0.05459770114942529
+      },
+      {
+        "unit": "4p2f_A",
+        "n_residues": 189,
+        "n_cryptic": 10,
+        "positive_rate": 0.05291005291005291
+      },
+      {
+        "unit": "4qvk_B",
+        "n_residues": 235,
+        "n_cryptic": 25,
+        "positive_rate": 0.10638297872340426
+      },
+      {
+        "unit": "4r0x_A",
+        "n_residues": 122,
+        "n_cryptic": 29,
+        "positive_rate": 0.23770491803278687
+      },
+      {
+        "unit": "4rvt_B",
+        "n_residues": 297,
+        "n_cryptic": 31,
+        "positive_rate": 0.10437710437710437
+      },
+      {
+        "unit": "4ttp_A",
+        "n_residues": 201,
+        "n_cryptic": 16,
+        "positive_rate": 0.07960199004975124
+      },
+      {
+        "unit": "4uc8_A",
+        "n_residues": 222,
+        "n_cryptic": 3,
+        "positive_rate": 0.013513513513513514
+      },
+      {
+        "unit": "4uum_A",
+        "n_residues": 334,
+        "n_cryptic": 34,
+        "positive_rate": 0.10179640718562874
+      },
+      {
+        "unit": "4zm7_A",
+        "n_residues": 180,
+        "n_cryptic": 7,
+        "positive_rate": 0.03888888888888889
+      },
+      {
+        "unit": "4zoe_B",
+        "n_residues": 724,
+        "n_cryptic": 15,
+        "positive_rate": 0.020718232044198894
+      },
+      {
+        "unit": "5acv_B",
+        "n_residues": 232,
+        "n_cryptic": 4,
+        "positive_rate": 0.017241379310344827
+      },
+      {
+        "unit": "5b0e_B",
+        "n_residues": 104,
+        "n_cryptic": 21,
+        "positive_rate": 0.20192307692307693
+      },
+      {
+        "unit": "5caz_A",
+        "n_residues": 161,
+        "n_cryptic": 3,
+        "positive_rate": 0.018633540372670808
+      },
+      {
+        "unit": "5e0v_A",
+        "n_residues": 249,
+        "n_cryptic": 15,
+        "positive_rate": 0.060240963855421686
+      },
+      {
+        "unit": "5ey7_B",
+        "n_residues": 291,
+        "n_cryptic": 26,
+        "positive_rate": 0.08934707903780069
+      },
+      {
+        "unit": "5hij_A",
+        "n_residues": 240,
+        "n_cryptic": 21,
+        "positive_rate": 0.0875
+      },
+      {
+        "unit": "5hto_E",
+        "n_residues": 305,
+        "n_cryptic": 33,
+        "positive_rate": 0.10819672131147541
+      },
+      {
+        "unit": "5i3t_E",
+        "n_residues": 363,
+        "n_cryptic": 4,
+        "positive_rate": 0.011019283746556474
+      },
+      {
+        "unit": "5igh_A",
+        "n_residues": 293,
+        "n_cryptic": 24,
+        "positive_rate": 0.08191126279863481
+      },
+      {
+        "unit": "5kcg_B",
+        "n_residues": 397,
+        "n_cryptic": 17,
+        "positive_rate": 0.042821158690176324
+      },
+      {
+        "unit": "5loc_A",
+        "n_residues": 320,
+        "n_cryptic": 36,
+        "positive_rate": 0.1125
+      },
+      {
+        "unit": "5o8b_A",
+        "n_residues": 243,
+        "n_cryptic": 4,
+        "positive_rate": 0.01646090534979424
+      },
+      {
+        "unit": "5sc2_A",
+        "n_residues": 150,
+        "n_cryptic": 5,
+        "positive_rate": 0.03333333333333333
+      },
+      {
+        "unit": "5tc0_B",
+        "n_residues": 250,
+        "n_cryptic": 28,
+        "positive_rate": 0.112
+      },
+      {
+        "unit": "5tvi_V",
+        "n_residues": 90,
+        "n_cryptic": 16,
+        "positive_rate": 0.17777777777777778
+      },
+      {
+        "unit": "5uxa_A",
+        "n_residues": 301,
+        "n_cryptic": 25,
+        "positive_rate": 0.08305647840531562
+      },
+      {
+        "unit": "5wbm_B",
+        "n_residues": 302,
+        "n_cryptic": 13,
+        "positive_rate": 0.04304635761589404
+      },
+      {
+        "unit": "5yhb_A",
+        "n_residues": 178,
+        "n_cryptic": 5,
+        "positive_rate": 0.028089887640449437
+      },
+      {
+        "unit": "5yj2_C",
+        "n_residues": 302,
+        "n_cryptic": 8,
+        "positive_rate": 0.026490066225165563
+      },
+      {
+        "unit": "5yqp_A",
+        "n_residues": 185,
+        "n_cryptic": 25,
+        "positive_rate": 0.13513513513513514
+      },
+      {
+        "unit": "5ysb_B",
+        "n_residues": 385,
+        "n_cryptic": 14,
+        "positive_rate": 0.03636363636363636
+      },
+      {
+        "unit": "5z18_C",
+        "n_residues": 588,
+        "n_cryptic": 14,
+        "positive_rate": 0.023809523809523808
+      },
+      {
+        "unit": "5zj4_D",
+        "n_residues": 160,
+        "n_cryptic": 11,
+        "positive_rate": 0.06875
+      },
+      {
+        "unit": "6a98_C",
+        "n_residues": 201,
+        "n_cryptic": 13,
+        "positive_rate": 0.06467661691542288
+      },
+      {
+        "unit": "6bty_B",
+        "n_residues": 128,
+        "n_cryptic": 9,
+        "positive_rate": 0.0703125
+      },
+      {
+        "unit": "6cqe_B",
+        "n_residues": 287,
+        "n_cryptic": 26,
+        "positive_rate": 0.09059233449477352
+      },
+      {
+        "unit": "6du4_A",
+        "n_residues": 287,
+        "n_cryptic": 26,
+        "positive_rate": 0.09059233449477352
+      },
+      {
+        "unit": "6eqj_A",
+        "n_residues": 245,
+        "n_cryptic": 15,
+        "positive_rate": 0.061224489795918366
+      },
+      {
+        "unit": "6f52_A",
+        "n_residues": 233,
+        "n_cryptic": 15,
+        "positive_rate": 0.06437768240343347
+      },
+      {
+        "unit": "6fc2_C",
+        "n_residues": 177,
+        "n_cryptic": 12,
+        "positive_rate": 0.06779661016949153
+      },
+      {
+        "unit": "6fgj_B",
+        "n_residues": 197,
+        "n_cryptic": 17,
+        "positive_rate": 0.08629441624365482
+      },
+      {
+        "unit": "6g6y_A",
+        "n_residues": 319,
+        "n_cryptic": 22,
+        "positive_rate": 0.06896551724137931
+      },
+      {
+        "unit": "6hei_A",
+        "n_residues": 346,
+        "n_cryptic": 26,
+        "positive_rate": 0.07514450867052024
+      },
+      {
+        "unit": "6isu_A",
+        "n_residues": 227,
+        "n_cryptic": 20,
+        "positive_rate": 0.0881057268722467
+      },
+      {
+        "unit": "6jq9_B",
+        "n_residues": 483,
+        "n_cryptic": 7,
+        "positive_rate": 0.014492753623188406
+      },
+      {
+        "unit": "6ksc_A",
+        "n_residues": 321,
+        "n_cryptic": 10,
+        "positive_rate": 0.03115264797507788
+      },
+      {
+        "unit": "6n5j_B",
+        "n_residues": 301,
+        "n_cryptic": 21,
+        "positive_rate": 0.06976744186046512
+      },
+      {
+        "unit": "6nei_B",
+        "n_residues": 339,
+        "n_cryptic": 23,
+        "positive_rate": 0.06784660766961652
+      },
+      {
+        "unit": "6o4f_H",
+        "n_residues": 509,
+        "n_cryptic": 11,
+        "positive_rate": 0.021611001964636542
+      },
+      {
+        "unit": "6tx0_B",
+        "n_residues": 479,
+        "n_cryptic": 4,
+        "positive_rate": 0.008350730688935281
+      },
+      {
+        "unit": "6vle_A",
+        "n_residues": 460,
+        "n_cryptic": 19,
+        "positive_rate": 0.041304347826086954
+      },
+      {
+        "unit": "6w10_A",
+        "n_residues": 223,
+        "n_cryptic": 13,
+        "positive_rate": 0.05829596412556054
+      },
+      {
+        "unit": "7c48_A",
+        "n_residues": 288,
+        "n_cryptic": 23,
+        "positive_rate": 0.0798611111111111
+      },
+      {
+        "unit": "7c63_A",
+        "n_residues": 416,
+        "n_cryptic": 14,
+        "positive_rate": 0.03365384615384615
+      },
+      {
+        "unit": "7de1_A",
+        "n_residues": 108,
+        "n_cryptic": 8,
+        "positive_rate": 0.07407407407407407
+      },
+      {
+        "unit": "7e5q_B",
+        "n_residues": 352,
+        "n_cryptic": 6,
+        "positive_rate": 0.017045454545454544
+      },
+      {
+        "unit": "7f2m_B",
+        "n_residues": 323,
+        "n_cryptic": 7,
+        "positive_rate": 0.021671826625386997
+      },
+      {
+        "unit": "7f4y_B",
+        "n_residues": 901,
+        "n_cryptic": 17,
+        "positive_rate": 0.018867924528301886
+      },
+      {
+        "unit": "7kay_A",
+        "n_residues": 583,
+        "n_cryptic": 36,
+        "positive_rate": 0.06174957118353345
+      },
+      {
+        "unit": "7nc8_D",
+        "n_residues": 237,
+        "n_cryptic": 11,
+        "positive_rate": 0.046413502109704644
+      },
+      {
+        "unit": "7ndl_B",
+        "n_residues": 655,
+        "n_cryptic": 19,
+        "positive_rate": 0.02900763358778626
+      },
+      {
+        "unit": "7nlx_A",
+        "n_residues": 290,
+        "n_cryptic": 15,
+        "positive_rate": 0.05172413793103448
+      },
+      {
+        "unit": "7o1i_A",
+        "n_residues": 726,
+        "n_cryptic": 29,
+        "positive_rate": 0.03994490358126722
+      },
+      {
+        "unit": "7qoq_A",
+        "n_residues": 302,
+        "n_cryptic": 10,
+        "positive_rate": 0.033112582781456956
+      },
+      {
+        "unit": "7qzr_D",
+        "n_residues": 463,
+        "n_cryptic": 3,
+        "positive_rate": 0.0064794816414686825
+      },
+      {
+        "unit": "7v8k_B",
+        "n_residues": 474,
+        "n_cryptic": 5,
+        "positive_rate": 0.010548523206751054
+      },
+      {
+        "unit": "7w19_A",
+        "n_residues": 293,
+        "n_cryptic": 23,
+        "positive_rate": 0.07849829351535836
+      },
+      {
+        "unit": "7x0f_A",
+        "n_residues": 446,
+        "n_cryptic": 13,
+        "positive_rate": 0.02914798206278027
+      },
+      {
+        "unit": "7x0g_B",
+        "n_residues": 287,
+        "n_cryptic": 18,
+        "positive_rate": 0.0627177700348432
+      },
+      {
+        "unit": "7x0i_B",
+        "n_residues": 406,
+        "n_cryptic": 32,
+        "positive_rate": 0.07881773399014778
+      },
+      {
+        "unit": "7xgf_E",
+        "n_residues": 151,
+        "n_cryptic": 46,
+        "positive_rate": 0.304635761589404
+      },
+      {
+        "unit": "7yjc_A",
+        "n_residues": 381,
+        "n_cryptic": 6,
+        "positive_rate": 0.015748031496062992
+      },
+      {
+        "unit": "8aeq_A",
+        "n_residues": 624,
+        "n_cryptic": 8,
+        "positive_rate": 0.01282051282051282
+      },
+      {
+        "unit": "8aqi_B",
+        "n_residues": 172,
+        "n_cryptic": 14,
+        "positive_rate": 0.08139534883720931
+      },
+      {
+        "unit": "8b9p_A",
+        "n_residues": 596,
+        "n_cryptic": 5,
+        "positive_rate": 0.008389261744966443
+      },
+      {
+        "unit": "8bre_B",
+        "n_residues": 351,
+        "n_cryptic": 17,
+        "positive_rate": 0.04843304843304843
+      },
+      {
+        "unit": "8gxj_C",
+        "n_residues": 184,
+        "n_cryptic": 20,
+        "positive_rate": 0.10869565217391304
+      },
+      {
+        "unit": "8h27_A",
+        "n_residues": 181,
+        "n_cryptic": 27,
+        "positive_rate": 0.14917127071823205
+      },
+      {
+        "unit": "8i84_B",
+        "n_residues": 285,
+        "n_cryptic": 19,
+        "positive_rate": 0.06666666666666667
+      },
+      {
+        "unit": "8ias_B",
+        "n_residues": 501,
+        "n_cryptic": 18,
+        "positive_rate": 0.03592814371257485
+      },
+      {
+        "unit": "8j11_X",
+        "n_residues": 173,
+        "n_cryptic": 3,
+        "positive_rate": 0.017341040462427744
+      },
+      {
+        "unit": "8onn_E",
+        "n_residues": 268,
+        "n_cryptic": 22,
+        "positive_rate": 0.08208955223880597
+      },
+      {
+        "unit": "8u3n_A",
+        "n_residues": 377,
+        "n_cryptic": 8,
+        "positive_rate": 0.021220159151193633
+      },
+      {
+        "unit": "8vxu_B",
+        "n_residues": 104,
+        "n_cryptic": 8,
+        "positive_rate": 0.07692307692307693
+      },
+      {
+        "unit": "9atc_A",
+        "n_residues": 310,
+        "n_cryptic": 21,
+        "positive_rate": 0.06774193548387097
+      }
+    ],
+    "external_set_a": [
+      {
+        "unit": "9eb7_A",
+        "n_residues": 468,
+        "n_cryptic": 23,
+        "positive_rate": 0.049145299145299144
+      },
+      {
+        "unit": "9x6i_A",
+        "n_residues": 242,
+        "n_cryptic": 28,
+        "positive_rate": 0.11570247933884298
+      },
+      {
+        "unit": "8xxd_B",
+        "n_residues": 449,
+        "n_cryptic": 27,
+        "positive_rate": 0.060133630289532294
+      },
+      {
+        "unit": "9bb9_A",
+        "n_residues": 475,
+        "n_cryptic": 11,
+        "positive_rate": 0.023157894736842106
+      },
+      {
+        "unit": "9dih_A",
+        "n_residues": 370,
+        "n_cryptic": 8,
+        "positive_rate": 0.021621621621621623
+      },
+      {
+        "unit": "8ylg_A",
+        "n_residues": 161,
+        "n_cryptic": 7,
+        "positive_rate": 0.043478260869565216
+      },
+      {
+        "unit": "9jpk_A",
+        "n_residues": 151,
+        "n_cryptic": 14,
+        "positive_rate": 0.09271523178807947
+      },
+      {
+        "unit": "9r7o_B",
+        "n_residues": 323,
+        "n_cryptic": 16,
+        "positive_rate": 0.04953560371517028
+      },
+      {
+        "unit": "9fsg_A",
+        "n_residues": 378,
+        "n_cryptic": 16,
+        "positive_rate": 0.042328042328042326
+      },
+      {
+        "unit": "9jvd_B",
+        "n_residues": 104,
+        "n_cryptic": 4,
+        "positive_rate": 0.038461538461538464
+      },
+      {
+        "unit": "9tkv_A",
+        "n_residues": 674,
+        "n_cryptic": 13,
+        "positive_rate": 0.019287833827893175
+      },
+      {
+        "unit": "9jju_A",
+        "n_residues": 354,
+        "n_cryptic": 15,
+        "positive_rate": 0.0423728813559322
+      },
+      {
+        "unit": "9whf_A",
+        "n_residues": 180,
+        "n_cryptic": 13,
+        "positive_rate": 0.07222222222222222
+      },
+      {
+        "unit": "9vis_A",
+        "n_residues": 185,
+        "n_cryptic": 19,
+        "positive_rate": 0.10270270270270271
+      },
+      {
+        "unit": "8yyr_A",
+        "n_residues": 496,
+        "n_cryptic": 16,
+        "positive_rate": 0.03225806451612903
+      },
+      {
+        "unit": "9cir_A",
+        "n_residues": 385,
+        "n_cryptic": 10,
+        "positive_rate": 0.025974025974025976
+      },
+      {
+        "unit": "9l92_A",
+        "n_residues": 206,
+        "n_cryptic": 14,
+        "positive_rate": 0.06796116504854369
+      },
+      {
+        "unit": "9qyz_A",
+        "n_residues": 398,
+        "n_cryptic": 5,
+        "positive_rate": 0.01256281407035176
+      },
+      {
+        "unit": "9kuq_A",
+        "n_residues": 309,
+        "n_cryptic": 13,
+        "positive_rate": 0.042071197411003236
+      },
+      {
+        "unit": "9yi3_A",
+        "n_residues": 272,
+        "n_cryptic": 6,
+        "positive_rate": 0.022058823529411766
+      },
+      {
+        "unit": "9ky9_A",
+        "n_residues": 326,
+        "n_cryptic": 24,
+        "positive_rate": 0.0736196319018405
+      },
+      {
+        "unit": "9jzw_A",
+        "n_residues": 341,
+        "n_cryptic": 13,
+        "positive_rate": 0.03812316715542522
+      },
+      {
+        "unit": "9tfd_A",
+        "n_residues": 291,
+        "n_cryptic": 35,
+        "positive_rate": 0.12027491408934708
+      },
+      {
+        "unit": "11gx_A",
+        "n_residues": 620,
+        "n_cryptic": 5,
+        "positive_rate": 0.008064516129032258
+      },
+      {
+        "unit": "9hib_A",
+        "n_residues": 504,
+        "n_cryptic": 20,
+        "positive_rate": 0.03968253968253968
+      },
+      {
+        "unit": "9v67_B",
+        "n_residues": 508,
+        "n_cryptic": 18,
+        "positive_rate": 0.03543307086614173
+      },
+      {
+        "unit": "9hkb_B",
+        "n_residues": 356,
+        "n_cryptic": 3,
+        "positive_rate": 0.008426966292134831
+      },
+      {
+        "unit": "9o9q_A",
+        "n_residues": 1289,
+        "n_cryptic": 3,
+        "positive_rate": 0.0023273855702094647
+      },
+      {
+        "unit": "8r9a_A",
+        "n_residues": 285,
+        "n_cryptic": 19,
+        "positive_rate": 0.06666666666666667
+      },
+      {
+        "unit": "9i9g_A",
+        "n_residues": 167,
+        "n_cryptic": 8,
+        "positive_rate": 0.04790419161676647
+      },
+      {
+        "unit": "9n4c_A",
+        "n_residues": 179,
+        "n_cryptic": 26,
+        "positive_rate": 0.1452513966480447
+      },
+      {
+        "unit": "9gu8_B",
+        "n_residues": 162,
+        "n_cryptic": 16,
+        "positive_rate": 0.09876543209876543
+      },
+      {
+        "unit": "9ifk_A",
+        "n_residues": 169,
+        "n_cryptic": 21,
+        "positive_rate": 0.1242603550295858
+      },
+      {
+        "unit": "7i7y_A",
+        "n_residues": 327,
+        "n_cryptic": 14,
+        "positive_rate": 0.04281345565749235
+      },
+      {
+        "unit": "8x6a_A",
+        "n_residues": 376,
+        "n_cryptic": 10,
+        "positive_rate": 0.026595744680851064
+      },
+      {
+        "unit": "9lmg_A",
+        "n_residues": 527,
+        "n_cryptic": 42,
+        "positive_rate": 0.07969639468690702
+      },
+      {
+        "unit": "9d7l_A",
+        "n_residues": 380,
+        "n_cryptic": 3,
+        "positive_rate": 0.007894736842105263
+      },
+      {
+        "unit": "9m1q_A",
+        "n_residues": 156,
+        "n_cryptic": 21,
+        "positive_rate": 0.1346153846153846
+      },
+      {
+        "unit": "9d5f_A",
+        "n_residues": 271,
+        "n_cryptic": 13,
+        "positive_rate": 0.04797047970479705
+      },
+      {
+        "unit": "9mhb_A",
+        "n_residues": 336,
+        "n_cryptic": 28,
+        "positive_rate": 0.08333333333333333
+      },
+      {
+        "unit": "8vir_A",
+        "n_residues": 211,
+        "n_cryptic": 23,
+        "positive_rate": 0.10900473933649289
+      },
+      {
+        "unit": "8s38_B",
+        "n_residues": 414,
+        "n_cryptic": 26,
+        "positive_rate": 0.06280193236714976
+      },
+      {
+        "unit": "8v35_A",
+        "n_residues": 431,
+        "n_cryptic": 31,
+        "positive_rate": 0.07192575406032482
+      },
+      {
+        "unit": "9k00_A",
+        "n_residues": 321,
+        "n_cryptic": 14,
+        "positive_rate": 0.04361370716510903
+      },
+      {
+        "unit": "9bkq_B",
+        "n_residues": 201,
+        "n_cryptic": 7,
+        "positive_rate": 0.03482587064676617
+      },
+      {
+        "unit": "9gcy_A",
+        "n_residues": 424,
+        "n_cryptic": 9,
+        "positive_rate": 0.02122641509433962
+      },
+      {
+        "unit": "9j2z_A",
+        "n_residues": 360,
+        "n_cryptic": 28,
+        "positive_rate": 0.07777777777777778
+      },
+      {
+        "unit": "9ql9_A",
+        "n_residues": 154,
+        "n_cryptic": 14,
+        "positive_rate": 0.09090909090909091
+      },
+      {
+        "unit": "9c9c_B",
+        "n_residues": 189,
+        "n_cryptic": 6,
+        "positive_rate": 0.031746031746031744
+      },
+      {
+        "unit": "9lio_A",
+        "n_residues": 344,
+        "n_cryptic": 13,
+        "positive_rate": 0.0377906976744186
+      },
+      {
+        "unit": "9hln_A",
+        "n_residues": 368,
+        "n_cryptic": 15,
+        "positive_rate": 0.04076086956521739
+      },
+      {
+        "unit": "8weu_A",
+        "n_residues": 481,
+        "n_cryptic": 15,
+        "positive_rate": 0.031185031185031187
+      },
+      {
+        "unit": "9cx8_A",
+        "n_residues": 291,
+        "n_cryptic": 22,
+        "positive_rate": 0.07560137457044673
+      },
+      {
+        "unit": "8wdq_A",
+        "n_residues": 273,
+        "n_cryptic": 14,
+        "positive_rate": 0.05128205128205128
+      },
+      {
+        "unit": "9xau_A",
+        "n_residues": 437,
+        "n_cryptic": 6,
+        "positive_rate": 0.013729977116704805
+      },
+      {
+        "unit": "8hzy_A",
+        "n_residues": 462,
+        "n_cryptic": 19,
+        "positive_rate": 0.04112554112554113
+      },
+      {
+        "unit": "8xj9_A",
+        "n_residues": 204,
+        "n_cryptic": 23,
+        "positive_rate": 0.11274509803921569
+      }
+    ]
+  }
+}
