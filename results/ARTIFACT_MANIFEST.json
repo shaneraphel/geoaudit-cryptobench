@@ -1362,7 +1362,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 12951
+      "bytes": 14693
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",

@@ -16,7 +16,9 @@
     "results/official_fold/SUBGROUP_READ.json": "8994ec100852f7b25462163f6cf46ce81448f40fec21404c75a5a5363fdaa9c3",
     "results/official_fold/THRESHOLD_CURVE.json": "5c88a83aed0c9ba30d8f71a2406c2720f56e72a58580c16dcf67c0ca0d2707d6",
     "results/external/EMDB_MAPS.json": "3e124f3d724c5638480a7dd328d864bf21b392db30b93182b1b4baa9f2410dcb",
-    "results/external/EXTERNAL_SET_DIFFICULTY.json": "a2934ce7132bd8a42b56226c0c6caf402264ce5cb6a1cd527c79fc9f1bbaf103"
+    "results/external/EXTERNAL_SET_DIFFICULTY.json": "a2934ce7132bd8a42b56226c0c6caf402264ce5cb6a1cd527c79fc9f1bbaf103",
+    "results/external/SETBC_READ.json": "b57843f335a14c1e14c8c94ed464a3bd03edd0360658b428313af83dcde8f56b",
+    "results/external/SETBC_DIFFICULTY.json": "19b322731dcf5f61dc4eb155501fd11822d7e83b34997db3f4daa06e4fed0db5"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -68,6 +70,11 @@
       "sha256": "b7ce27fc4c683a54f63d65dcb74fe854adf81c624206a41aab256a719b49f415",
       "bytes": 126237,
       "caption": "Whether the external set is easier than the benchmark, asked two ways that disagree. Left: the three quantities controlling how hard a per-unit ranking problem is, as external-over-official ratios of medians; the external set has longer chains, smaller pockets and sparser positives, so by label geometry it is harder on all three. Pocket size is not a guess about difficulty \u2014 FAILURE_TAIL.json measures the deployed field at 0.5991 on units with under ten cryptic residues against 0.8766 above twenty-two. Right: what each method scored on each set, from reads already indexed and not recomputed. Three of four score higher externally, which is the reviewer's reading and has support; the discriminating case is that P2Rank, which reads local surface geometry, moves +0.0035 while pLM-NN, which reads the whole sequence, moves +0.0517. A uniformly easier set lifts a local detector too. The honest statement is that the set is not uniformly easier but rewards context, that any method compared on it inherits that, and that 57 positive units is small whichever way the difficulty goes."
+    },
+    "fig_setbc_read.png": {
+      "sha256": "ffabbb1143ec53fb8615d5fea0427acbef3fac3487aa43c68559de3daffc2e1e",
+      "bytes": 137252,
+      "caption": "The second external read, taken once on 45 single-particle cryo-EM units frozen before the four wire families existed, under a plan committed before it. Left: the four comparisons the plan fixed, with 95 % intervals in bold, the Bonferroni interval over four behind them, and the value pinned in the plan as an orange tick. **The comparison the read exists for is the top one and it does not resolve**: +0.0063 [-0.02548, 0.038539], ahead on 27 units of 45, on an interval containing both the training-fold estimate of +0.0121 and its negation. 45 units and an effect of this size gave the read limited power, which is a statement about the read and not evidence that the lift is absent \u2014 nor that it is present. Right: the confound named before the read was that these chains, 469 residues at the median against the official fold's 290, would inflate whichever detector reads further, with P2Rank pinned as the control. The control fell by 0.041 and so did every other coordinate-reading method, while the sequence model rose by 0.044. That is a modality effect \u2014 cryo-EM coordinates carry less usable local geometry than X-ray at comparable nominal resolution \u2014 and it explains the levels in the right panel while saying nothing about the difference in the left one, since the primary comparison is between two detectors inside one modality."
     },
     "fig_emdb_resolution.png": {
       "sha256": "1ef134fc78b898c4799d3c20dd526c663c05d022167cf9421858f78522ceaf61",
