@@ -1795,7 +1795,74 @@ scored. Neither set has been built.
 
 Nothing is deployed.
 
-### 5.4 Where the wall clock goes, and two Rust kernels that are honest about it
+### 5.4 Set N: 327 external chains shown to have no cryptic pocket — built, frozen, planned, **not yet read**
+
+Every accuracy number published on CryptoBench, this repository's included, is a
+within-chain ranking computed on chains that *have* a cryptic pocket. None of them
+can be low because a method calls a pocket on a chain that has none, because no such
+chain appears in any published evaluation. **Nobody has measured that on this
+benchmark.**
+
+The units to measure it with had been sitting in the repository, built and frozen,
+for two months. `EXTERNAL_SET.json` holds 57 units with a cryptic pocket and 503
+without one. Both halves came out of one funnel — X-ray, released after
+CryptoBench's newest structure, no UniRef50 cluster shared with CryptoBench, one
+unit per cluster — and were frozen and hashed in the same commit. Only the 57 were
+ever scored.
+
+The 503 could not be used as they stood. The labelling rule has three outcomes, not
+two, and the third is *not labelled either way*: a unit whose only pocket movement
+fell inside the guard band is recorded as negative and is in truth unknown.
+Subtracting the positives' verdicts from the set-wide totals says there are 186 such
+pairs but not which units carry them, because the frozen file strips the `pairs` key
+from the negatives. `tools/setn_inventory.py` re-derives every verdict from the
+3.8 GB of structures the original build cached, importing `build_external_set.py`
+unedited, and splits them:
+
+| | units |
+|---|---|
+| positive, has a cryptic pocket | 58 |
+| negative, **every pair decided `not cryptic`** | 333 |
+| negative, some pair inside the guard band | 82 |
+| negative, every partner dropped for a technical reason | 88 |
+
+Only the 333 are candidates, and 6 more are lost to receptors the legacy PDB format
+cannot hold, leaving **Set N: 327 units in 327 UniRef50 clusters, 1,706 pairs decided
+`not cryptic`** (`results/external/SETN_SET.json`).
+
+The re-derivation gates itself on reproducing Set A's 57 positives exactly, and the
+first run failed that check by finding 58. The extra unit is `9lym_CA`, which the
+frozen build labelled and then lost while writing its receptor: its chain
+identifiers are two characters wide and the PDB format gives a chain one column. So
+**the external positive set is 57 rather than 58 for a reason about a file format**,
+which is worth saying rather than absorbing. The check now subtracts by name the
+units the frozen build lost after labelling.
+
+`results/external/PREREGISTERED_SETN.json` was committed before any Set N score
+existed. The primary is rank-based and threshold-free — a unit's score is the mean of
+a method's ten highest residue scores, and the statistic is the ROC-AUC over 384
+units of separating those that have a pocket from those shown not to — because a raw
+false-alarm rate would confound each method's calibration with its discrimination.
+Chain length alone is fixed as a control in the same file, since Set N's chains are
+chains whose partners bind *without* moving a pocket and a method that merely reads
+size must not be able to look discriminating. `geometry_field` is excluded from the
+primary and confined to a Set N-only secondary: scoring an improved method on a spent
+set destroys the confirmatory result already read from it.
+
+**The read has not been run.** `table_field` is scored on all 327 units; pLM-NN's
+encoder pass is in progress and the other two arms are not finished, and a read
+executed with arms missing would spend the set to answer a smaller question than it
+was built for. The honest state of this section is a set, a plan, and no number.
+
+One risk is worth naming before the read rather than after: Set N's chains all have
+ligand-binding sites — they are chains that *could* be paired with a holo structure —
+and what distinguishes them is that the site does not move. Telling a pocket that
+opens from a pocket that does not is a question about dynamics, and a sequence model
+that has learned which families carry cryptic sites is not obviously at a
+disadvantage there. The plan's outcome sentences are written for a loss as well as a
+win.
+
+### 5.5 Where the wall clock goes, and two Rust kernels that are honest about it
 
 Nobody had profiled a split. The premise was that the pipeline is single-threaded
 because its hot loop is integer addressing and Accelerate is not involved in integer
@@ -2134,7 +2201,7 @@ native/geoaudit_kernels/    Rust cdylib, 5 kernels, all ported operation-for-
                             built by tools/build_native.sh. End to end a real
                             split runs 1.25x faster, not 13.8x — the pipeline is
                             dominated by a K-squared Gram accumulation that
-                            Accelerate already runs on every core, and §5.4 has
+                            Accelerate already runs on every core, and §5.5 has
                             the profile.
 ```
 

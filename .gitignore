@@ -62,6 +62,7 @@ results/baselines/_plmnn_checkpoint.jsonl
 # process that was running it.
 results/baselines/_plmnn_train_checkpoint.jsonl
 results/baselines/_plmnn_setbc_checkpoint.jsonl
+results/baselines/_plmnn_setn_checkpoint.jsonl
 
 # PocketMiner's own repository, sparse-checked-out at the commit
 # tools/pocketminer_run.py pins, and the interpreter it needs. 183 MB of weights,

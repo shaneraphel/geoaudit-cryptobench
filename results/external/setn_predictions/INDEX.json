@@ -1,0 +1,17 @@
+{
+  "schema": "geoaudit.raw_predictions_index.v1",
+  "clinical_grade": false,
+  "fold": "external_negative",
+  "carries_no_metric": true,
+  "why": "scoring is kept apart from comparing so that the comparison can be shown to have run once, under the plan",
+  "n_failures": 0,
+  "failures": [],
+  "methods": {
+    "table_field": {
+      "file": "table_field.json",
+      "n_units": 327,
+      "sha256": "535314211f9cad2d0348c84ea5cf42ac0e259518e54625d1b06f3b2aa0cde512",
+      "seconds": 146.5
+    }
+  }
+}

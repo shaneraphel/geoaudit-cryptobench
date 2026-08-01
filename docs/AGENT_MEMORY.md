@@ -1610,6 +1610,60 @@ fields, and — for an input file, whose records legitimately carry identifiers
 and a verdict rather than derived chemistry — a written reason for overriding
 the default field list, absent which the override itself fails.
 
+## 2r. A whole external half was sitting frozen and unscored, and what it cost to make it usable
+
+**Look at what a set already contains before building another one.** The plan for a
+fourth external set was to inventory X-ray entries in the 2.5–3.0 Å band, and the
+arithmetic says that band is not worth building: Set A drew 561 free clusters from
+17,332 entries and turned them into 57 positives, so 2,682 entries in the next band
+down yield on the order of nine units. Meanwhile `EXTERNAL_SET.json` already held
+**503 units with no cryptic pocket**, frozen and hashed in the same commit as the 57,
+and no method had ever scored a residue of them. They were nine times the positive
+set and cost nothing to obtain.
+
+They also answer a question the positives cannot. A per-unit ROC-AUC ranks a chain's
+residues against each other, so it exists only where there is something to rank
+towards; it cannot ask whether a method knows a chain has nothing to find. No
+published comparison on this benchmark asks that.
+
+**A three-valued label read as two-valued is a silent contamination.** The rule
+decides `cryptic`, `not cryptic`, or `inside the guard band, not labelled either
+way`. A unit whose only movement fell in the band is filed as a negative and is
+actually unknown. Set-wide totals minus the positives' verdicts give 186 such pairs
+among the negatives — enough to touch a third of them — and the frozen file cannot
+say which, because it strips `pairs` from the negatives (`if k != "pairs"`, in the
+builder). Re-deriving from the 2,442 cached structures splits them 333 decided / 82
+guard band / 88 never examined. Only the decided ones can carry the word "negative".
+
+**The re-derivation's reproduction check earned its place immediately.** It requires
+the 57 frozen positives back exactly and refuses to write otherwise; the first run
+returned 58 and it refused. The extra is `9lym_CA`, labelled by the frozen build and
+then lost while writing its receptor, because its chain identifiers are two
+characters and the PDB format gives a chain one column — the same loss as Set B's
+`9t97_A3a`. So the external positive set is 57 and not 58 for a formatting reason,
+and a check that had merely skipped disagreeing units would have hidden that instead
+of finding it. Losses downstream of labelling are now subtracted by name.
+
+**Set N is 327 units in 327 clusters**, disjoint from Set A by construction since the
+funnel takes one unit per cluster. `PREREGISTERED_SETN.json` is committed and the
+read is not run. The statistic is deliberately not a false-alarm rate: each method's
+operating point is its own choice, so a raw call count confounds calibration with
+discrimination. It is the ROC-AUC over 384 units of separating chains that have a
+pocket from chains shown to have none, with a unit scored by the mean of a method's
+ten highest residues, and chain length alone fixed as a control in the same file.
+
+**Name the risk before the read.** Set N's chains all have ligand-binding sites —
+being pairable with a holo structure is how they entered the funnel — and what makes
+them negative is that the site does not move. That makes the task "tell a pocket that
+opens from one that does not", which is about dynamics, and a sequence model that has
+learned which families carry cryptic sites is not obviously worse placed than a
+coordinate reader. Both outcome sentences are written.
+
+**`geometry_field` cannot be read on Set A and this is not a technicality.** It has
+never been scored on the 57, and scoring it there would replace a confirmatory result
+with a second look at a spent set. Set N is its first X-ray external evidence, and
+the plan confines it to a Set N-only secondary for exactly that reason.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the

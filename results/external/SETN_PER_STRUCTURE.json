@@ -1,0 +1,1637 @@
+[
+ {
+  "pdb": "10fs",
+  "chain": "A",
+  "n_universe": 172
+ },
+ {
+  "pdb": "10qg",
+  "chain": "A",
+  "n_universe": 500
+ },
+ {
+  "pdb": "10tw",
+  "chain": "A",
+  "n_universe": 482
+ },
+ {
+  "pdb": "11ao",
+  "chain": "A",
+  "n_universe": 358
+ },
+ {
+  "pdb": "21ej",
+  "chain": "A",
+  "n_universe": 117
+ },
+ {
+  "pdb": "24ao",
+  "chain": "A",
+  "n_universe": 322
+ },
+ {
+  "pdb": "24uh",
+  "chain": "A",
+  "n_universe": 342
+ },
+ {
+  "pdb": "27fm",
+  "chain": "A",
+  "n_universe": 333
+ },
+ {
+  "pdb": "35wd",
+  "chain": "A",
+  "n_universe": 58
+ },
+ {
+  "pdb": "36td",
+  "chain": "B",
+  "n_universe": 408
+ },
+ {
+  "pdb": "36zf",
+  "chain": "A",
+  "n_universe": 391
+ },
+ {
+  "pdb": "37eq",
+  "chain": "A",
+  "n_universe": 245
+ },
+ {
+  "pdb": "7g2w",
+  "chain": "A",
+  "n_universe": 789
+ },
+ {
+  "pdb": "7hbs",
+  "chain": "A",
+  "n_universe": 209
+ },
+ {
+  "pdb": "7hll",
+  "chain": "B",
+  "n_universe": 185
+ },
+ {
+  "pdb": "8hj6",
+  "chain": "A",
+  "n_universe": 606
+ },
+ {
+  "pdb": "8is6",
+  "chain": "A",
+  "n_universe": 275
+ },
+ {
+  "pdb": "8juq",
+  "chain": "I",
+  "n_universe": 350
+ },
+ {
+  "pdb": "8k1g",
+  "chain": "A",
+  "n_universe": 367
+ },
+ {
+  "pdb": "8kbe",
+  "chain": "A",
+  "n_universe": 124
+ },
+ {
+  "pdb": "8kfj",
+  "chain": "A",
+  "n_universe": 160
+ },
+ {
+  "pdb": "8pjf",
+  "chain": "A",
+  "n_universe": 180
+ },
+ {
+  "pdb": "8pne",
+  "chain": "A",
+  "n_universe": 199
+ },
+ {
+  "pdb": "8pu5",
+  "chain": "B",
+  "n_universe": 599
+ },
+ {
+  "pdb": "8qdg",
+  "chain": "A",
+  "n_universe": 196
+ },
+ {
+  "pdb": "8qfr",
+  "chain": "B",
+  "n_universe": 144
+ },
+ {
+  "pdb": "8qfw",
+  "chain": "B",
+  "n_universe": 286
+ },
+ {
+  "pdb": "8qj5",
+  "chain": "B",
+  "n_universe": 410
+ },
+ {
+  "pdb": "8qpm",
+  "chain": "A",
+  "n_universe": 329
+ },
+ {
+  "pdb": "8qr7",
+  "chain": "A",
+  "n_universe": 339
+ },
+ {
+  "pdb": "8qrj",
+  "chain": "A",
+  "n_universe": 257
+ },
+ {
+  "pdb": "8qsw",
+  "chain": "A",
+  "n_universe": 286
+ },
+ {
+  "pdb": "8qtx",
+  "chain": "A",
+  "n_universe": 527
+ },
+ {
+  "pdb": "8qvz",
+  "chain": "A",
+  "n_universe": 151
+ },
+ {
+  "pdb": "8qza",
+  "chain": "A",
+  "n_universe": 308
+ },
+ {
+  "pdb": "8r4z",
+  "chain": "A",
+  "n_universe": 341
+ },
+ {
+  "pdb": "8r6z",
+  "chain": "A",
+  "n_universe": 604
+ },
+ {
+  "pdb": "8rbe",
+  "chain": "A",
+  "n_universe": 271
+ },
+ {
+  "pdb": "8rd7",
+  "chain": "A",
+  "n_universe": 75
+ },
+ {
+  "pdb": "8re5",
+  "chain": "A",
+  "n_universe": 429
+ },
+ {
+  "pdb": "8rlk",
+  "chain": "E",
+  "n_universe": 385
+ },
+ {
+  "pdb": "8rly",
+  "chain": "B",
+  "n_universe": 279
+ },
+ {
+  "pdb": "8rma",
+  "chain": "A",
+  "n_universe": 263
+ },
+ {
+  "pdb": "8rmi",
+  "chain": "A",
+  "n_universe": 677
+ },
+ {
+  "pdb": "8rod",
+  "chain": "A",
+  "n_universe": 357
+ },
+ {
+  "pdb": "8rs8",
+  "chain": "A",
+  "n_universe": 210
+ },
+ {
+  "pdb": "8s0l",
+  "chain": "A",
+  "n_universe": 369
+ },
+ {
+  "pdb": "8sq7",
+  "chain": "B",
+  "n_universe": 240
+ },
+ {
+  "pdb": "8tcd",
+  "chain": "A",
+  "n_universe": 271
+ },
+ {
+  "pdb": "8tda",
+  "chain": "A",
+  "n_universe": 256
+ },
+ {
+  "pdb": "8te8",
+  "chain": "A",
+  "n_universe": 282
+ },
+ {
+  "pdb": "8tk6",
+  "chain": "A",
+  "n_universe": 181
+ },
+ {
+  "pdb": "8tww",
+  "chain": "A",
+  "n_universe": 238
+ },
+ {
+  "pdb": "8u0r",
+  "chain": "A",
+  "n_universe": 75
+ },
+ {
+  "pdb": "8u7c",
+  "chain": "C",
+  "n_universe": 62
+ },
+ {
+  "pdb": "8uas",
+  "chain": "A",
+  "n_universe": 352
+ },
+ {
+  "pdb": "8ub5",
+  "chain": "A",
+  "n_universe": 363
+ },
+ {
+  "pdb": "8uus",
+  "chain": "A",
+  "n_universe": 161
+ },
+ {
+  "pdb": "8v3n",
+  "chain": "A",
+  "n_universe": 489
+ },
+ {
+  "pdb": "8v5u",
+  "chain": "A",
+  "n_universe": 272
+ },
+ {
+  "pdb": "8v7g",
+  "chain": "A",
+  "n_universe": 430
+ },
+ {
+  "pdb": "8va3",
+  "chain": "A",
+  "n_universe": 763
+ },
+ {
+  "pdb": "8va5",
+  "chain": "A",
+  "n_universe": 467
+ },
+ {
+  "pdb": "8w6v",
+  "chain": "A",
+  "n_universe": 494
+ },
+ {
+  "pdb": "8w8u",
+  "chain": "A",
+  "n_universe": 358
+ },
+ {
+  "pdb": "8w9s",
+  "chain": "C",
+  "n_universe": 322
+ },
+ {
+  "pdb": "8wia",
+  "chain": "A",
+  "n_universe": 402
+ },
+ {
+  "pdb": "8wv3",
+  "chain": "A",
+  "n_universe": 172
+ },
+ {
+  "pdb": "8x5t",
+  "chain": "C",
+  "n_universe": 184
+ },
+ {
+  "pdb": "8x6k",
+  "chain": "A",
+  "n_universe": 150
+ },
+ {
+  "pdb": "8x9c",
+  "chain": "A",
+  "n_universe": 301
+ },
+ {
+  "pdb": "8xem",
+  "chain": "A",
+  "n_universe": 130
+ },
+ {
+  "pdb": "8xet",
+  "chain": "A",
+  "n_universe": 279
+ },
+ {
+  "pdb": "8xgx",
+  "chain": "A",
+  "n_universe": 210
+ },
+ {
+  "pdb": "8xht",
+  "chain": "B",
+  "n_universe": 286
+ },
+ {
+  "pdb": "8xjp",
+  "chain": "A",
+  "n_universe": 293
+ },
+ {
+  "pdb": "8xsc",
+  "chain": "A",
+  "n_universe": 157
+ },
+ {
+  "pdb": "8xsh",
+  "chain": "A",
+  "n_universe": 339
+ },
+ {
+  "pdb": "8xvp",
+  "chain": "A",
+  "n_universe": 517
+ },
+ {
+  "pdb": "8xwk",
+  "chain": "A",
+  "n_universe": 248
+ },
+ {
+  "pdb": "8xxc",
+  "chain": "E",
+  "n_universe": 434
+ },
+ {
+  "pdb": "8y4v",
+  "chain": "B",
+  "n_universe": 272
+ },
+ {
+  "pdb": "8y7r",
+  "chain": "A",
+  "n_universe": 248
+ },
+ {
+  "pdb": "8yav",
+  "chain": "A",
+  "n_universe": 246
+ },
+ {
+  "pdb": "8yeb",
+  "chain": "A",
+  "n_universe": 289
+ },
+ {
+  "pdb": "8yk8",
+  "chain": "A",
+  "n_universe": 174
+ },
+ {
+  "pdb": "8yox",
+  "chain": "A",
+  "n_universe": 367
+ },
+ {
+  "pdb": "8yrs",
+  "chain": "A",
+  "n_universe": 530
+ },
+ {
+  "pdb": "8yv4",
+  "chain": "A",
+  "n_universe": 171
+ },
+ {
+  "pdb": "8z0x",
+  "chain": "A",
+  "n_universe": 286
+ },
+ {
+  "pdb": "8z2w",
+  "chain": "A",
+  "n_universe": 387
+ },
+ {
+  "pdb": "8z43",
+  "chain": "A",
+  "n_universe": 528
+ },
+ {
+  "pdb": "8zad",
+  "chain": "A",
+  "n_universe": 344
+ },
+ {
+  "pdb": "8zaf",
+  "chain": "A",
+  "n_universe": 353
+ },
+ {
+  "pdb": "8zg5",
+  "chain": "A",
+  "n_universe": 474
+ },
+ {
+  "pdb": "8zie",
+  "chain": "A",
+  "n_universe": 268
+ },
+ {
+  "pdb": "8zlr",
+  "chain": "A",
+  "n_universe": 451
+ },
+ {
+  "pdb": "8znv",
+  "chain": "A",
+  "n_universe": 429
+ },
+ {
+  "pdb": "8zpe",
+  "chain": "A",
+  "n_universe": 385
+ },
+ {
+  "pdb": "8zpo",
+  "chain": "A",
+  "n_universe": 306
+ },
+ {
+  "pdb": "8zst",
+  "chain": "A",
+  "n_universe": 129
+ },
+ {
+  "pdb": "8zvd",
+  "chain": "A",
+  "n_universe": 412
+ },
+ {
+  "pdb": "8zwq",
+  "chain": "B",
+  "n_universe": 224
+ },
+ {
+  "pdb": "8zwr",
+  "chain": "A",
+  "n_universe": 267
+ },
+ {
+  "pdb": "8zxu",
+  "chain": "A",
+  "n_universe": 149
+ },
+ {
+  "pdb": "9ay8",
+  "chain": "C",
+  "n_universe": 654
+ },
+ {
+  "pdb": "9bf2",
+  "chain": "A",
+  "n_universe": 131
+ },
+ {
+  "pdb": "9bhz",
+  "chain": "A",
+  "n_universe": 507
+ },
+ {
+  "pdb": "9bjw",
+  "chain": "A",
+  "n_universe": 116
+ },
+ {
+  "pdb": "9bkf",
+  "chain": "A",
+  "n_universe": 197
+ },
+ {
+  "pdb": "9blv",
+  "chain": "B",
+  "n_universe": 465
+ },
+ {
+  "pdb": "9bn9",
+  "chain": "A",
+  "n_universe": 430
+ },
+ {
+  "pdb": "9bxh",
+  "chain": "A",
+  "n_universe": 239
+ },
+ {
+  "pdb": "9bzn",
+  "chain": "A",
+  "n_universe": 271
+ },
+ {
+  "pdb": "9cf4",
+  "chain": "A",
+  "n_universe": 464
+ },
+ {
+  "pdb": "9cky",
+  "chain": "A",
+  "n_universe": 212
+ },
+ {
+  "pdb": "9cpz",
+  "chain": "A",
+  "n_universe": 470
+ },
+ {
+  "pdb": "9csc",
+  "chain": "B",
+  "n_universe": 214
+ },
+ {
+  "pdb": "9csj",
+  "chain": "A",
+  "n_universe": 298
+ },
+ {
+  "pdb": "9csm",
+  "chain": "A",
+  "n_universe": 129
+ },
+ {
+  "pdb": "9csz",
+  "chain": "B",
+  "n_universe": 193
+ },
+ {
+  "pdb": "9cud",
+  "chain": "A",
+  "n_universe": 156
+ },
+ {
+  "pdb": "9cwu",
+  "chain": "A",
+  "n_universe": 314
+ },
+ {
+  "pdb": "9d71",
+  "chain": "D",
+  "n_universe": 328
+ },
+ {
+  "pdb": "9d8d",
+  "chain": "A",
+  "n_universe": 260
+ },
+ {
+  "pdb": "9dkr",
+  "chain": "A",
+  "n_universe": 349
+ },
+ {
+  "pdb": "9doj",
+  "chain": "A",
+  "n_universe": 200
+ },
+ {
+  "pdb": "9dq9",
+  "chain": "A",
+  "n_universe": 314
+ },
+ {
+  "pdb": "9dr9",
+  "chain": "A",
+  "n_universe": 367
+ },
+ {
+  "pdb": "9dsn",
+  "chain": "A",
+  "n_universe": 540
+ },
+ {
+  "pdb": "9dsq",
+  "chain": "A",
+  "n_universe": 321
+ },
+ {
+  "pdb": "9dsx",
+  "chain": "E",
+  "n_universe": 804
+ },
+ {
+  "pdb": "9dv8",
+  "chain": "A",
+  "n_universe": 453
+ },
+ {
+  "pdb": "9dwp",
+  "chain": "A",
+  "n_universe": 307
+ },
+ {
+  "pdb": "9dy3",
+  "chain": "A",
+  "n_universe": 296
+ },
+ {
+  "pdb": "9dyt",
+  "chain": "A",
+  "n_universe": 442
+ },
+ {
+  "pdb": "9dza",
+  "chain": "A",
+  "n_universe": 482
+ },
+ {
+  "pdb": "9dzc",
+  "chain": "B",
+  "n_universe": 302
+ },
+ {
+  "pdb": "9e56",
+  "chain": "A",
+  "n_universe": 385
+ },
+ {
+  "pdb": "9e79",
+  "chain": "A",
+  "n_universe": 193
+ },
+ {
+  "pdb": "9edq",
+  "chain": "A",
+  "n_universe": 297
+ },
+ {
+  "pdb": "9eez",
+  "chain": "A",
+  "n_universe": 270
+ },
+ {
+  "pdb": "9efr",
+  "chain": "A",
+  "n_universe": 354
+ },
+ {
+  "pdb": "9enn",
+  "chain": "A",
+  "n_universe": 536
+ },
+ {
+  "pdb": "9f09",
+  "chain": "A",
+  "n_universe": 157
+ },
+ {
+  "pdb": "9f0t",
+  "chain": "A",
+  "n_universe": 271
+ },
+ {
+  "pdb": "9f46",
+  "chain": "A",
+  "n_universe": 621
+ },
+ {
+  "pdb": "9f8n",
+  "chain": "A",
+  "n_universe": 154
+ },
+ {
+  "pdb": "9f96",
+  "chain": "A",
+  "n_universe": 285
+ },
+ {
+  "pdb": "9fbp",
+  "chain": "A",
+  "n_universe": 371
+ },
+ {
+  "pdb": "9fcg",
+  "chain": "A",
+  "n_universe": 257
+ },
+ {
+  "pdb": "9fdv",
+  "chain": "B",
+  "n_universe": 419
+ },
+ {
+  "pdb": "9fq5",
+  "chain": "A",
+  "n_universe": 305
+ },
+ {
+  "pdb": "9fs0",
+  "chain": "A",
+  "n_universe": 298
+ },
+ {
+  "pdb": "9fvl",
+  "chain": "A",
+  "n_universe": 229
+ },
+ {
+  "pdb": "9fvs",
+  "chain": "A",
+  "n_universe": 210
+ },
+ {
+  "pdb": "9fzn",
+  "chain": "A",
+  "n_universe": 360
+ },
+ {
+  "pdb": "9g43",
+  "chain": "A",
+  "n_universe": 618
+ },
+ {
+  "pdb": "9g64",
+  "chain": "A",
+  "n_universe": 270
+ },
+ {
+  "pdb": "9g88",
+  "chain": "A",
+  "n_universe": 525
+ },
+ {
+  "pdb": "9g8v",
+  "chain": "A",
+  "n_universe": 356
+ },
+ {
+  "pdb": "9gb9",
+  "chain": "A",
+  "n_universe": 275
+ },
+ {
+  "pdb": "9gci",
+  "chain": "A",
+  "n_universe": 460
+ },
+ {
+  "pdb": "9gfz",
+  "chain": "B",
+  "n_universe": 281
+ },
+ {
+  "pdb": "9ggi",
+  "chain": "A",
+  "n_universe": 450
+ },
+ {
+  "pdb": "9gjr",
+  "chain": "A",
+  "n_universe": 114
+ },
+ {
+  "pdb": "9gk0",
+  "chain": "A",
+  "n_universe": 244
+ },
+ {
+  "pdb": "9gk6",
+  "chain": "A",
+  "n_universe": 854
+ },
+ {
+  "pdb": "9gkv",
+  "chain": "A",
+  "n_universe": 310
+ },
+ {
+  "pdb": "9gmy",
+  "chain": "E",
+  "n_universe": 115
+ },
+ {
+  "pdb": "9gn6",
+  "chain": "A",
+  "n_universe": 370
+ },
+ {
+  "pdb": "9gpd",
+  "chain": "A",
+  "n_universe": 563
+ },
+ {
+  "pdb": "9gti",
+  "chain": "A",
+  "n_universe": 118
+ },
+ {
+  "pdb": "9gve",
+  "chain": "A",
+  "n_universe": 512
+ },
+ {
+  "pdb": "9gwu",
+  "chain": "A",
+  "n_universe": 259
+ },
+ {
+  "pdb": "9h0c",
+  "chain": "A",
+  "n_universe": 380
+ },
+ {
+  "pdb": "9h18",
+  "chain": "A",
+  "n_universe": 241
+ },
+ {
+  "pdb": "9h1e",
+  "chain": "A",
+  "n_universe": 578
+ },
+ {
+  "pdb": "9h37",
+  "chain": "A",
+  "n_universe": 385
+ },
+ {
+  "pdb": "9h3a",
+  "chain": "A",
+  "n_universe": 226
+ },
+ {
+  "pdb": "9h6h",
+  "chain": "A",
+  "n_universe": 887
+ },
+ {
+  "pdb": "9h8j",
+  "chain": "B",
+  "n_universe": 246
+ },
+ {
+  "pdb": "9haw",
+  "chain": "A",
+  "n_universe": 339
+ },
+ {
+  "pdb": "9hcz",
+  "chain": "A",
+  "n_universe": 204
+ },
+ {
+  "pdb": "9hdm",
+  "chain": "A",
+  "n_universe": 346
+ },
+ {
+  "pdb": "9hh7",
+  "chain": "A",
+  "n_universe": 131
+ },
+ {
+  "pdb": "9hpu",
+  "chain": "A",
+  "n_universe": 232
+ },
+ {
+  "pdb": "9hpx",
+  "chain": "A",
+  "n_universe": 397
+ },
+ {
+  "pdb": "9hrh",
+  "chain": "A",
+  "n_universe": 460
+ },
+ {
+  "pdb": "9hs1",
+  "chain": "D",
+  "n_universe": 448
+ },
+ {
+  "pdb": "9htx",
+  "chain": "A",
+  "n_universe": 335
+ },
+ {
+  "pdb": "9i32",
+  "chain": "A",
+  "n_universe": 360
+ },
+ {
+  "pdb": "9i7a",
+  "chain": "A",
+  "n_universe": 94
+ },
+ {
+  "pdb": "9i8x",
+  "chain": "A",
+  "n_universe": 509
+ },
+ {
+  "pdb": "9ib6",
+  "chain": "A",
+  "n_universe": 134
+ },
+ {
+  "pdb": "9ig4",
+  "chain": "A",
+  "n_universe": 280
+ },
+ {
+  "pdb": "9ijl",
+  "chain": "A",
+  "n_universe": 322
+ },
+ {
+  "pdb": "9ikf",
+  "chain": "T",
+  "n_universe": 72
+ },
+ {
+  "pdb": "9iq4",
+  "chain": "A",
+  "n_universe": 390
+ },
+ {
+  "pdb": "9iwm",
+  "chain": "A",
+  "n_universe": 263
+ },
+ {
+  "pdb": "9j07",
+  "chain": "A",
+  "n_universe": 299
+ },
+ {
+  "pdb": "9j1g",
+  "chain": "A",
+  "n_universe": 297
+ },
+ {
+  "pdb": "9j4p",
+  "chain": "B",
+  "n_universe": 427
+ },
+ {
+  "pdb": "9jac",
+  "chain": "A",
+  "n_universe": 194
+ },
+ {
+  "pdb": "9jlk",
+  "chain": "A",
+  "n_universe": 354
+ },
+ {
+  "pdb": "9k3o",
+  "chain": "A",
+  "n_universe": 430
+ },
+ {
+  "pdb": "9kbc",
+  "chain": "A",
+  "n_universe": 286
+ },
+ {
+  "pdb": "9keh",
+  "chain": "A",
+  "n_universe": 175
+ },
+ {
+  "pdb": "9kkh",
+  "chain": "A",
+  "n_universe": 309
+ },
+ {
+  "pdb": "9klx",
+  "chain": "A",
+  "n_universe": 253
+ },
+ {
+  "pdb": "9koi",
+  "chain": "A",
+  "n_universe": 507
+ },
+ {
+  "pdb": "9kpy",
+  "chain": "A",
+  "n_universe": 159
+ },
+ {
+  "pdb": "9kq6",
+  "chain": "A",
+  "n_universe": 222
+ },
+ {
+  "pdb": "9ks7",
+  "chain": "A",
+  "n_universe": 136
+ },
+ {
+  "pdb": "9kyh",
+  "chain": "B",
+  "n_universe": 103
+ },
+ {
+  "pdb": "9l1h",
+  "chain": "A",
+  "n_universe": 243
+ },
+ {
+  "pdb": "9l37",
+  "chain": "A",
+  "n_universe": 270
+ },
+ {
+  "pdb": "9l51",
+  "chain": "A",
+  "n_universe": 308
+ },
+ {
+  "pdb": "9l8v",
+  "chain": "A",
+  "n_universe": 533
+ },
+ {
+  "pdb": "9lb5",
+  "chain": "A",
+  "n_universe": 147
+ },
+ {
+  "pdb": "9ldd",
+  "chain": "A",
+  "n_universe": 177
+ },
+ {
+  "pdb": "9les",
+  "chain": "B",
+  "n_universe": 285
+ },
+ {
+  "pdb": "9lf9",
+  "chain": "A",
+  "n_universe": 295
+ },
+ {
+  "pdb": "9lkp",
+  "chain": "A",
+  "n_universe": 220
+ },
+ {
+  "pdb": "9lqg",
+  "chain": "A",
+  "n_universe": 124
+ },
+ {
+  "pdb": "9lzg",
+  "chain": "A",
+  "n_universe": 486
+ },
+ {
+  "pdb": "9m0t",
+  "chain": "A",
+  "n_universe": 329
+ },
+ {
+  "pdb": "9m2m",
+  "chain": "A",
+  "n_universe": 298
+ },
+ {
+  "pdb": "9m5o",
+  "chain": "A",
+  "n_universe": 502
+ },
+ {
+  "pdb": "9m9z",
+  "chain": "C",
+  "n_universe": 288
+ },
+ {
+  "pdb": "9mdm",
+  "chain": "A",
+  "n_universe": 437
+ },
+ {
+  "pdb": "9mgv",
+  "chain": "A",
+  "n_universe": 240
+ },
+ {
+  "pdb": "9mh6",
+  "chain": "A",
+  "n_universe": 143
+ },
+ {
+  "pdb": "9mk5",
+  "chain": "A",
+  "n_universe": 183
+ },
+ {
+  "pdb": "9muk",
+  "chain": "A",
+  "n_universe": 260
+ },
+ {
+  "pdb": "9mvk",
+  "chain": "A",
+  "n_universe": 298
+ },
+ {
+  "pdb": "9n5p",
+  "chain": "C",
+  "n_universe": 171
+ },
+ {
+  "pdb": "9nk3",
+  "chain": "A",
+  "n_universe": 154
+ },
+ {
+  "pdb": "9nsw",
+  "chain": "A",
+  "n_universe": 246
+ },
+ {
+  "pdb": "9nxg",
+  "chain": "A",
+  "n_universe": 472
+ },
+ {
+  "pdb": "9o05",
+  "chain": "A",
+  "n_universe": 265
+ },
+ {
+  "pdb": "9o9r",
+  "chain": "A",
+  "n_universe": 149
+ },
+ {
+  "pdb": "9oet",
+  "chain": "D",
+  "n_universe": 227
+ },
+ {
+  "pdb": "9omm",
+  "chain": "A",
+  "n_universe": 258
+ },
+ {
+  "pdb": "9op2",
+  "chain": "A",
+  "n_universe": 269
+ },
+ {
+  "pdb": "9p0r",
+  "chain": "A",
+  "n_universe": 276
+ },
+ {
+  "pdb": "9p2u",
+  "chain": "A",
+  "n_universe": 400
+ },
+ {
+  "pdb": "9p3h",
+  "chain": "A",
+  "n_universe": 273
+ },
+ {
+  "pdb": "9p9o",
+  "chain": "A",
+  "n_universe": 289
+ },
+ {
+  "pdb": "9paj",
+  "chain": "A",
+  "n_universe": 301
+ },
+ {
+  "pdb": "9pca",
+  "chain": "A",
+  "n_universe": 625
+ },
+ {
+  "pdb": "9pgq",
+  "chain": "B",
+  "n_universe": 335
+ },
+ {
+  "pdb": "9pl7",
+  "chain": "A",
+  "n_universe": 536
+ },
+ {
+  "pdb": "9pl8",
+  "chain": "A",
+  "n_universe": 514
+ },
+ {
+  "pdb": "9q4d",
+  "chain": "A",
+  "n_universe": 226
+ },
+ {
+  "pdb": "9q74",
+  "chain": "A",
+  "n_universe": 185
+ },
+ {
+  "pdb": "9q78",
+  "chain": "A",
+  "n_universe": 161
+ },
+ {
+  "pdb": "9qa2",
+  "chain": "A",
+  "n_universe": 598
+ },
+ {
+  "pdb": "9qdv",
+  "chain": "A",
+  "n_universe": 259
+ },
+ {
+  "pdb": "9qev",
+  "chain": "A",
+  "n_universe": 173
+ },
+ {
+  "pdb": "9qf7",
+  "chain": "A",
+  "n_universe": 339
+ },
+ {
+  "pdb": "9qk5",
+  "chain": "A",
+  "n_universe": 193
+ },
+ {
+  "pdb": "9qn2",
+  "chain": "A",
+  "n_universe": 225
+ },
+ {
+  "pdb": "9qt8",
+  "chain": "B",
+  "n_universe": 260
+ },
+ {
+  "pdb": "9quz",
+  "chain": "A",
+  "n_universe": 308
+ },
+ {
+  "pdb": "9r4k",
+  "chain": "A",
+  "n_universe": 362
+ },
+ {
+  "pdb": "9r52",
+  "chain": "A",
+  "n_universe": 392
+ },
+ {
+  "pdb": "9r71",
+  "chain": "A",
+  "n_universe": 214
+ },
+ {
+  "pdb": "9raz",
+  "chain": "C",
+  "n_universe": 475
+ },
+ {
+  "pdb": "9rfe",
+  "chain": "A",
+  "n_universe": 340
+ },
+ {
+  "pdb": "9rg4",
+  "chain": "A",
+  "n_universe": 334
+ },
+ {
+  "pdb": "9rgs",
+  "chain": "A",
+  "n_universe": 254
+ },
+ {
+  "pdb": "9rie",
+  "chain": "A",
+  "n_universe": 191
+ },
+ {
+  "pdb": "9rpz",
+  "chain": "A",
+  "n_universe": 137
+ },
+ {
+  "pdb": "9rr6",
+  "chain": "A",
+  "n_universe": 138
+ },
+ {
+  "pdb": "9rvf",
+  "chain": "A",
+  "n_universe": 451
+ },
+ {
+  "pdb": "9rvq",
+  "chain": "A",
+  "n_universe": 691
+ },
+ {
+  "pdb": "9s1q",
+  "chain": "A",
+  "n_universe": 418
+ },
+ {
+  "pdb": "9s3w",
+  "chain": "A",
+  "n_universe": 141
+ },
+ {
+  "pdb": "9s6b",
+  "chain": "A",
+  "n_universe": 577
+ },
+ {
+  "pdb": "9s85",
+  "chain": "A",
+  "n_universe": 487
+ },
+ {
+  "pdb": "9s8z",
+  "chain": "A",
+  "n_universe": 743
+ },
+ {
+  "pdb": "9s96",
+  "chain": "A",
+  "n_universe": 715
+ },
+ {
+  "pdb": "9sga",
+  "chain": "A",
+  "n_universe": 470
+ },
+ {
+  "pdb": "9sgf",
+  "chain": "A",
+  "n_universe": 213
+ },
+ {
+  "pdb": "9sjq",
+  "chain": "A",
+  "n_universe": 193
+ },
+ {
+  "pdb": "9sko",
+  "chain": "A",
+  "n_universe": 275
+ },
+ {
+  "pdb": "9sop",
+  "chain": "B",
+  "n_universe": 179
+ },
+ {
+  "pdb": "9sqg",
+  "chain": "A",
+  "n_universe": 225
+ },
+ {
+  "pdb": "9sxi",
+  "chain": "A",
+  "n_universe": 239
+ },
+ {
+  "pdb": "9t2d",
+  "chain": "A",
+  "n_universe": 128
+ },
+ {
+  "pdb": "9t9f",
+  "chain": "A",
+  "n_universe": 174
+ },
+ {
+  "pdb": "9tdu",
+  "chain": "A",
+  "n_universe": 534
+ },
+ {
+  "pdb": "9tm5",
+  "chain": "A",
+  "n_universe": 296
+ },
+ {
+  "pdb": "9tme",
+  "chain": "A",
+  "n_universe": 664
+ },
+ {
+  "pdb": "9tp9",
+  "chain": "B",
+  "n_universe": 123
+ },
+ {
+  "pdb": "9tsn",
+  "chain": "B",
+  "n_universe": 289
+ },
+ {
+  "pdb": "9ug6",
+  "chain": "A",
+  "n_universe": 581
+ },
+ {
+  "pdb": "9upq",
+  "chain": "A",
+  "n_universe": 280
+ },
+ {
+  "pdb": "9urf",
+  "chain": "A",
+  "n_universe": 745
+ },
+ {
+  "pdb": "9us2",
+  "chain": "B",
+  "n_universe": 203
+ },
+ {
+  "pdb": "9uu8",
+  "chain": "A",
+  "n_universe": 392
+ },
+ {
+  "pdb": "9uvl",
+  "chain": "A",
+  "n_universe": 166
+ },
+ {
+  "pdb": "9uwz",
+  "chain": "A",
+  "n_universe": 132
+ },
+ {
+  "pdb": "9v0m",
+  "chain": "A",
+  "n_universe": 360
+ },
+ {
+  "pdb": "9v4j",
+  "chain": "A",
+  "n_universe": 283
+ },
+ {
+  "pdb": "9v7r",
+  "chain": "A",
+  "n_universe": 302
+ },
+ {
+  "pdb": "9vf9",
+  "chain": "A",
+  "n_universe": 218
+ },
+ {
+  "pdb": "9vmj",
+  "chain": "A",
+  "n_universe": 782
+ },
+ {
+  "pdb": "9vvv",
+  "chain": "B",
+  "n_universe": 331
+ },
+ {
+  "pdb": "9vy2",
+  "chain": "A",
+  "n_universe": 318
+ },
+ {
+  "pdb": "9wdd",
+  "chain": "A",
+  "n_universe": 472
+ },
+ {
+  "pdb": "9wiu",
+  "chain": "B",
+  "n_universe": 355
+ },
+ {
+  "pdb": "9wyq",
+  "chain": "A",
+  "n_universe": 254
+ },
+ {
+  "pdb": "9x2v",
+  "chain": "A",
+  "n_universe": 347
+ },
+ {
+  "pdb": "9x4u",
+  "chain": "A",
+  "n_universe": 396
+ },
+ {
+  "pdb": "9x6n",
+  "chain": "B",
+  "n_universe": 241
+ },
+ {
+  "pdb": "9xey",
+  "chain": "A",
+  "n_universe": 384
+ },
+ {
+  "pdb": "9xfx",
+  "chain": "A",
+  "n_universe": 264
+ },
+ {
+  "pdb": "9xuj",
+  "chain": "A",
+  "n_universe": 195
+ },
+ {
+  "pdb": "9yce",
+  "chain": "B",
+  "n_universe": 475
+ },
+ {
+  "pdb": "9ygk",
+  "chain": "A",
+  "n_universe": 272
+ },
+ {
+  "pdb": "9yis",
+  "chain": "A",
+  "n_universe": 467
+ },
+ {
+  "pdb": "9ysf",
+  "chain": "A",
+  "n_universe": 262
+ },
+ {
+  "pdb": "9yut",
+  "chain": "A",
+  "n_universe": 326
+ },
+ {
+  "pdb": "9zk3",
+  "chain": "A",
+  "n_universe": 135
+ },
+ {
+  "pdb": "9zsc",
+  "chain": "A",
+  "n_universe": 295
+ }
+]
