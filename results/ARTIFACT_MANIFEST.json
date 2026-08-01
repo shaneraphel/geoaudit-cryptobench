@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "superseded": 36,
-    "cited": 85,
+    "superseded": 39,
+    "cited": 86,
     "exploration": 44,
     "inventory": 7,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 184,
+  "n_artifacts": 188,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -763,6 +763,13 @@
       "bytes": 15888
     },
     {
+      "artifact": "results/baselines/POCKETMINER_SETN_SCORES.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.pocketminer_scores.v1",
+      "bytes": 94012
+    },
+    {
       "artifact": "results/cryptobench_apo/APO_BENCHMARK.json",
       "class": "superseded",
       "reason": "an earlier frozen state, kept for the record",
@@ -894,6 +901,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.preregistered_setn.v1",
       "bytes": 6155
+    },
+    {
+      "artifact": "results/external/RESIDUE_RECOVERIES_VS_PLMNN.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.residue_recoveries_vs_plmnn.v1",
+      "bytes": 26233
     },
     {
       "artifact": "results/external/RHOA_CASE_STUDY.json",
@@ -1047,7 +1061,21 @@
       "class": "superseded",
       "reason": "an earlier frozen state, kept for the record",
       "schema": "geoaudit.raw_predictions_index.v1",
-      "bytes": 504
+      "bytes": 942
+    },
+    {
+      "artifact": "results/external/setn_predictions/p2rank.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setn_prediction.v1",
+      "bytes": 2949043
+    },
+    {
+      "artifact": "results/external/setn_predictions/pocketminer.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setbc_prediction.pocketminer.v1",
+      "bytes": 81492
     },
     {
       "artifact": "results/external/setn_predictions/table_field.json",
@@ -1117,7 +1145,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 16068
+      "bytes": 16776
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",

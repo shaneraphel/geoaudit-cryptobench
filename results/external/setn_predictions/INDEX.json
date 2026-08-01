@@ -12,6 +12,19 @@
       "n_units": 327,
       "sha256": "535314211f9cad2d0348c84ea5cf42ac0e259518e54625d1b06f3b2aa0cde512",
       "seconds": 146.5
+    },
+    "p2rank": {
+      "file": "p2rank.json",
+      "n_units": 327,
+      "sha256": "b8e23ef39f5ca3aef71aa28dd480f78bf28012a5c754faea30dbc31aa91797e2",
+      "seconds": 1630.6
+    },
+    "pocketminer": {
+      "file": "pocketminer.json",
+      "n_units": 327,
+      "sha256": "9ad9b9126c8d676e323f2f3573f4817a49e61ed0fcbd2a9d50ff38245578d7ae",
+      "seconds": null,
+      "source": "results/baselines/POCKETMINER_SETN_SCORES.json"
     }
   }
 }

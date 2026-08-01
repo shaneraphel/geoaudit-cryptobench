@@ -20,7 +20,8 @@
     "results/external/SETBC_READ.json": "b57843f335a14c1e14c8c94ed464a3bd03edd0360658b428313af83dcde8f56b",
     "results/external/SETBC_DIFFICULTY.json": "19b322731dcf5f61dc4eb155501fd11822d7e83b34997db3f4daa06e4fed0db5",
     "results/external/WHERE_WE_BEAT_PLMNN.json": "7883b98974644497d245840c1fe54499b69b74115140075cc97244229a615dfb",
-    "results/external/RHOA_CASE_STUDY.json": "566f692a5d22c9ad60b057d0aed929ecda1b7b7d2759d05bcac8688edbdd7ec3"
+    "results/external/RHOA_CASE_STUDY.json": "566f692a5d22c9ad60b057d0aed929ecda1b7b7d2759d05bcac8688edbdd7ec3",
+    "results/external/RESIDUE_RECOVERIES_VS_PLMNN.json": "938c9eff58f0f557b7405aaaf2d88b27cb72edb6ec5b764e00a5f45396f20ec9"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -92,6 +93,11 @@
       "sha256": "a8e40c2ad9141881aa315778b761371408c9a459adfcf57f1bd23e58da29afb6",
       "bytes": 36277,
       "caption": "RhoA (UniProt P61586, PDB 9n4c_A): each point is one of 26 labelled cryptic residues. Shaded region: counting field \u226580% of the chain and pLM-NN \u226450%. Residues [30, 32, 33] meet the rule; the mirror is empty. Residue 30 is ours 84.4% vs pLM-NN 1.7%. Unit-level ROC-AUC is 0.966 against 0.803. Spent external set; not a second confirmatory read; clinical_grade is false."
+    },
+    "fig_residue_recoveries.png": {
+      "sha256": "709fe1b56b7d70b3cc4239e23d9efe01aab8344d7992593cfd7c96b122c21fc5",
+      "bytes": 18464,
+      "caption": "Residue-level recoveries against pLM-NN on spent Set A under the rule fixed in the RhoA case (labelled cryptic, ours\u226580%, pLM-NN\u226450%). 14 recovered residues across 9 units; 24 mirror residues across 11 units. The asymmetry favours pLM-NN at residue granularity; the panel reports both directions. RhoA and RAC1 appear among the recoveries. Mean unit deficit remains \u22120.0340; clinical_grade is false."
     }
   }
 }

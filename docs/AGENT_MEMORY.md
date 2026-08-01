@@ -1698,6 +1698,23 @@ mirror is empty. Unit AUC 0.966 vs 0.803. This is residue-level content for the
 "we have, they do not" request; it does not reverse the mean deficit (−0.034).
 Artifact: `results/external/RHOA_CASE_STUDY.json`, Figure 14.
 
+## 2v. Same RhoA rule on all 57 Set A units: 14 recovered residues, 24 mirror
+
+`RESIDUE_RECOVERIES_VS_PLMNN.json` applies the RhoA rule (labelled cryptic, ours≥80th
+percentile of the chain, pLM-NN≤50th) to every spent Set A unit and reports the
+mirror. Result: **14 recovered residues across 9 units vs 24 mirror residues across
+11 units**. Residue asymmetry favours pLM-NN; do not narrate this as a win. Named
+oncology recoveries that survive the rule include RhoA P61586 and RAC1 P63000.
+Tool: `tools/external_residue_recoveries.py`. Figure 15. Mean unit deficit unchanged.
+
+## 2w. Set N scoring in flight (do not read until all primary arms exist)
+
+Primary arms for `setn_read.py`: `table_field` (done, 327), `p2rank`, `plmnn`,
+`pocketminer`. Secondary: `geometry_field` (Set N only). A duplicate `--plmnn`
+process was killed after it doubled the checkpoint; archive uses last-wins. Run
+PocketMiner through `.venv-pocketminer/bin/python` (system 3.12 has no TensorFlow).
+Do not invent a read from partial checkpoints.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the
@@ -2084,7 +2101,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 28 gates, 897 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 28 gates, 899 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

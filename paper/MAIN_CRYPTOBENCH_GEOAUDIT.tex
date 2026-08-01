@@ -1583,6 +1583,16 @@ parity, and it is not reported as parity here. A supervised network over a
 protein language model remains the more accurate method, on external data as on
 the benchmark.
 
+That mean does not name the residues. Applying a rule fixed on one spent unit
+(labelled cryptic, counting field at or above the 80th percentile of the chain,
+pLM-NN at or below the 50th) to every unit of the spent external set recovers
+fourteen residues across nine units and twenty-four mirror residues across eleven
+units (\texttt{RESIDUE\_RECOVERIES\_VS\_PLMNN.json}). Residue asymmetry favours
+pLM-NN; the inventory is reported because it is the content behind the
+twenty-seven / thirty unit split, not because it reverses the mean. Among the
+recoveries are residues of RhoA (P61586) and RAC1 (P63000) already carried by the
+frozen set. Nothing here is clinical.
+
 The PocketMiner margin loses the excuse it had. On the official fold
 Section~\ref{sec:pocketminer} declined to read \PmAucOurs{} as a ranking of
 methods, because P2Rank was ahead of PocketMiner by \PmAucPtwoR{} --- a similar
