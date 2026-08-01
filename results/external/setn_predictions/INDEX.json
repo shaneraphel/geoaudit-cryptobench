@@ -25,6 +25,13 @@
       "sha256": "9ad9b9126c8d676e323f2f3573f4817a49e61ed0fcbd2a9d50ff38245578d7ae",
       "seconds": null,
       "source": "results/baselines/POCKETMINER_SETN_SCORES.json"
+    },
+    "plmnn": {
+      "file": "plmnn.json",
+      "n_units": 327,
+      "sha256": "90de3dcb79e59ce1b9e76736b73c6f5ad27874930e28bb3e3dd3573f7130be68",
+      "seconds": null,
+      "source": "results/baselines/PLMNN_SETN_SCORES.json"
     }
   }
 }

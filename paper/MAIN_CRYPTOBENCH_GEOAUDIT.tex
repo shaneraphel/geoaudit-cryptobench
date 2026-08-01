@@ -1593,6 +1593,19 @@ twenty-seven / thirty unit split, not because it reverses the mean. Among the
 recoveries are residues of RhoA (P61586) and RAC1 (P63000) already carried by the
 frozen set. Nothing here is clinical.
 
+A second external question was also answered once. Set~N holds 327 chains whose
+every deposited holo partner leaves the site unmoved --- units no published
+CryptoBench comparison scores, because every published evaluation unit has a
+pocket. Under a plan committed before any Set~N score existed, a unit's score is
+the mean of its ten highest residue scores and the statistic is the ROC-AUC that
+separates the 57 spent positives from those 327 negatives. The outcome at the
+Bonferroni-corrected level is \texttt{none\_resolved}
+(\texttt{SETN\_READ.json}): point estimates are 0.5874 for pLM-NN, 0.5457 for
+chain length alone, 0.5344 for PocketMiner, 0.5117 for the counting field and
+0.4480 for P2Rank, and every corrected comparison of the counting field against a
+baseline crosses zero. The question is real; this set is too small to answer it
+at the corrected level. Nothing here is clinical.
+
 The PocketMiner margin loses the excuse it had. On the official fold
 Section~\ref{sec:pocketminer} declined to read \PmAucOurs{} as a ranking of
 methods, because P2Rank was ahead of PocketMiner by \PmAucPtwoR{} --- a similar

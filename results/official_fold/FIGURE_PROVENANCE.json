@@ -21,7 +21,8 @@
     "results/external/SETBC_DIFFICULTY.json": "19b322731dcf5f61dc4eb155501fd11822d7e83b34997db3f4daa06e4fed0db5",
     "results/external/WHERE_WE_BEAT_PLMNN.json": "7883b98974644497d245840c1fe54499b69b74115140075cc97244229a615dfb",
     "results/external/RHOA_CASE_STUDY.json": "566f692a5d22c9ad60b057d0aed929ecda1b7b7d2759d05bcac8688edbdd7ec3",
-    "results/external/RESIDUE_RECOVERIES_VS_PLMNN.json": "938c9eff58f0f557b7405aaaf2d88b27cb72edb6ec5b764e00a5f45396f20ec9"
+    "results/external/RESIDUE_RECOVERIES_VS_PLMNN.json": "938c9eff58f0f557b7405aaaf2d88b27cb72edb6ec5b764e00a5f45396f20ec9",
+    "results/external/SETN_READ.json": "ba05292b869a578a7bb54d41f63667076d6a1b923103d5a5712e9f83334e03c0"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -98,6 +99,11 @@
       "sha256": "709fe1b56b7d70b3cc4239e23d9efe01aab8344d7992593cfd7c96b122c21fc5",
       "bytes": 18464,
       "caption": "Residue-level recoveries against pLM-NN on spent Set A under the rule fixed in the RhoA case (labelled cryptic, ours\u226580%, pLM-NN\u226450%). 14 recovered residues across 9 units; 24 mirror residues across 11 units. The asymmetry favours pLM-NN at residue granularity; the panel reports both directions. RhoA and RAC1 appear among the recoveries. Mean unit deficit remains \u22120.0340; clinical_grade is false."
+    },
+    "fig_setn_read.png": {
+      "sha256": "5cd68abd888085059c7adcbcacfd15676c375831e04d97136a7f1118a4b43d8b",
+      "bytes": 41560,
+      "caption": "Set N specificity read (384 units: 57 with a cryptic pocket, 327 shown to have none). Unit score = mean of top-10 residue scores; statistic = ROC-AUC separating the halves. Outcome under the committed plan: none_resolved. Point estimates: pLM-NN 0.5874, PocketMiner 0.5344, chain-length control 0.5457, counting field 0.5117, P2Rank 0.4480. Every Bonferroni-corrected comparison of the counting field against a baseline crosses zero. clinical_grade is false."
     }
   }
 }

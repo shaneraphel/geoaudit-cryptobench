@@ -1707,13 +1707,19 @@ mirror. Result: **14 recovered residues across 9 units vs 24 mirror residues acr
 oncology recoveries that survive the rule include RhoA P61586 and RAC1 P63000.
 Tool: `tools/external_residue_recoveries.py`. Figure 15. Mean unit deficit unchanged.
 
-## 2w. Set N scoring in flight (do not read until all primary arms exist)
+## 2w. Set N read once: outcome `none_resolved`
 
-Primary arms for `setn_read.py`: `table_field` (done, 327), `p2rank`, `plmnn`,
-`pocketminer`. Secondary: `geometry_field` (Set N only). A duplicate `--plmnn`
-process was killed after it doubled the checkpoint; archive uses last-wins. Run
-PocketMiner through `.venv-pocketminer/bin/python` (system 3.12 has no TensorFlow).
-Do not invent a read from partial checkpoints.
+Primary arms all scored (327). `SETN_READ.json` exists; do not re-run without
+`--rerun REASON`. Unit-level AUCs: pLM-NN **0.5874**, chain-length control
+**0.5457**, PocketMiner **0.5344**, counting field **0.5117**, P2Rank **0.4480**.
+Every Bonferroni comparison of ours vs a baseline crosses zero; vs pLM-NN the
+point estimate is −0.0757. Pre-written sentence: the question is real, the set is
+too small to answer at the corrected level. PocketMiner per-residue scores live
+in `data/baselines/pocketminer_setn/` (the aggregate JSON is summaries only —
+`setn_read` was fixed to load the directory, same failure mode `setbc_read`
+already documented). `geometry_field` secondary empty at read time; forks of that
+scorer hung at 0% CPU under memory pressure from ESM2 and were killed — not a
+measured secondary. Figure 16.
 
 ## 3. What is open, and why each is thought to be open
 

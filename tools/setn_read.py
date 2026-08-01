@@ -43,7 +43,10 @@ A_PREDS = ROOT / "results/external/predictions"
 PLMNN_A = ROOT / "results/baselines/PLMNN_EXTERNAL_SCORES.json"
 PLMNN_N = ROOT / "results/baselines/PLMNN_SETN_SCORES.json"
 PM_A = ROOT / "data/baselines/pocketminer_external"
-PM_N = ROOT / "results/baselines/POCKETMINER_SETN_SCORES.json"
+# Per-residue scores live one file per unit; the aggregate JSON is summaries
+# only (same shape as Set B/C). Loading the aggregate would look present and
+# score nothing — setbc_read already recorded that failure mode.
+PM_N = ROOT / "data/baselines/pocketminer_setn"
 OUT = ROOT / "results/external/SETN_READ.json"
 SCHEMA = "geoaudit.setn_read.v1"
 
@@ -86,6 +89,11 @@ def _archive(path):
     raw = json.loads(path.read_text())
     units = raw.get("units") or raw.get("scores") or raw
     if isinstance(units, list):
+        # pLM-NN rows use unit_id; PocketMiner summaries use unit and carry no
+        # per-residue scores (those are beside the run). Refuse the latter here
+        # so a summary archive cannot look scored.
+        if units and "unit_id" not in units[0] and "scores" not in units[0]:
+            return None
         units = {u["unit_id"]: u for u in units}
     out = {}
     for uid, u in units.items():
@@ -94,7 +102,7 @@ def _archive(path):
             s = u.get("scores")
         if s:
             out[uid] = {int(k): float(v) for k, v in s.items()}
-    return out
+    return out or None
 
 
 def _pocketminer_dir(d):
@@ -122,7 +130,7 @@ def _scores() -> tuple[dict, dict, list[str]]:
             "geometry_field": _archive(N_PREDS / "geometry_field.json"),
             "p2rank": _archive(N_PREDS / "p2rank.json"),
             "plmnn": _archive(PLMNN_N),
-            "pocketminer": _archive(PM_N),
+            "pocketminer": _pocketminer_dir(PM_N),
         },
     }
     absent = [f"{half}/{m}" for half, d in halves.items()
