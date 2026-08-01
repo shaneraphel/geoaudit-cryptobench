@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "superseded": 19,
+    "superseded": 21,
     "cited": 78,
     "exploration": 43,
-    "inventory": 5,
+    "inventory": 6,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 157,
+  "n_artifacts": 160,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -847,6 +847,20 @@
       "bytes": 14052
     },
     {
+      "artifact": "results/external/PREREGISTERED_SETBC.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.preregistered_setbc.v1",
+      "bytes": 8814
+    },
+    {
+      "artifact": "results/external/SETBC_MATERIALISATION.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.frozen_set_materialisation.v1",
+      "bytes": 2991
+    },
+    {
       "artifact": "results/external/SETB_CANDIDATES.json",
       "class": "inventory",
       "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
@@ -880,6 +894,13 @@
       "reason": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one",
       "schema": "geoaudit.setb_set.v1",
       "bytes": 260879
+    },
+    {
+      "artifact": "results/external/SETD_POOL.json",
+      "class": "inventory",
+      "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
+      "schema": "geoaudit.setd_probe.v1",
+      "bytes": 34852
     },
     {
       "artifact": "results/gf4_ablation/GF4_ALLELE_ABLATION.json",

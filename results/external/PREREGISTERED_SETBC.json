@@ -1,0 +1,139 @@
+{
+  "schema": "geoaudit.preregistered_setbc.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": false,
+  "status": "plan",
+  "what_this_confirms_or_refutes": "whether the +0.0121 the four-family stack is worth on twelve cluster-disjoint halvings of the training fold survives on units no part of its development could have seen",
+  "why_set_a_cannot_be_used": "Set A has been read. Scoring a detector finalised afterwards on it destroys that read's confirmatory status rather than adding a second one, and the +0.0443 it recorded would become a number about a detector that no longer exists",
+  "sets": {
+    "set_b": {
+      "artifact": "results/external/SETB_SET.json",
+      "sha256": "09381b4064b0bfd4ab6b65bce3adbc166829f9f8b298776c1399ce56b0f45230",
+      "frozen_at_prefix": "09381b40",
+      "n_units_in_the_set": 8,
+      "n_units_scorable": 7,
+      "resolution_ceiling": 2.5
+    },
+    "set_c": {
+      "artifact": "results/external/SETC_SET.json",
+      "sha256": "ff112a6025d116949e0aa37ead92318c5481edd1827db39d3d1a8a28139ec93b",
+      "frozen_at_prefix": "ff112a60",
+      "n_units_in_the_set": 38,
+      "n_units_scorable": 38,
+      "resolution_ceiling": 3.0
+    }
+  },
+  "manifest": {
+    "path": "data/external/setbc_manifest.json",
+    "sha256": "789526b433b3d1920bcf6bc84fd169493d068df0270d34c9241f9b62e4529dbf",
+    "n_units": 45
+  },
+  "coverage_pinned_before_the_read": {
+    "n_units": 45,
+    "n_dropped": 1,
+    "dropped": [
+      "9t97_A3a"
+    ],
+    "why": "the deposition labels its chains with three characters and the legacy PDB format holds one, so no atom of that chain survives rendering. A format limitation, established before any method ran, and nothing about the protein",
+    "why_pinned": "a unit removed after scores are seen is a selection. This count cannot move afterwards"
+  },
+  "methods": {
+    "geometry_field": {
+      "artifact": "data/cryptobench_apo/GEOMETRY_FIELD.json",
+      "sha256": "29b5ce1476ee38450b1afa36ead54d0ca10c8e8ff8a7bef67101d3f706e803b9",
+      "n_columns": 1269,
+      "what_it_is": "the deployed 645 wires plus 624 columns from four families: backbone 132, side-chain 261, void 135, temperature-factor 96",
+      "finalised_before_this_plan": true,
+      "why_the_digest_is_pinned": "so the read refuses a field recompiled after the plan. A detector changed between plan and read is a different experiment wearing the plan's licence"
+    },
+    "table_field": {
+      "artifact": "data/cryptobench_apo/TABLE_FIELD.json",
+      "sha256": "6651180bf225ec2a26598ccb73f70d00c5c46cd3230f549028b1afa08eae232a",
+      "n_columns": 645,
+      "what_it_is": "the deployed detector, unchanged"
+    },
+    "baselines": [
+      "p2rank",
+      "pocketminer",
+      "plmnn"
+    ],
+    "why_the_baselines_are_run_here_too": "they have never been run on these units either, so a read that compared only our two detectors would leave the reader without the levels the comparison sits in"
+  },
+  "statistic": {
+    "primary": "mean paired per-unit ROC-AUC over the scorable units",
+    "why": "the same functional declared primary for the official fold and for Set A, so this comparison is on one scale with those. It is a ranking statistic, so no calling convention enters it",
+    "n_boot": 10000,
+    "seed": 20260801,
+    "ci_level": 0.95,
+    "residue_universe": "the residues every method scored on that unit. A paired difference needs one universe, and a method that drops residues it cannot featurise would otherwise be scored on an easier one"
+  },
+  "co_primary_comparisons": [
+    {
+      "key": "geometry_field_minus_table_field",
+      "question": "does the training-fold lift transfer to units nobody has read",
+      "predicted": 0.012122,
+      "predicted_from": "GEOMETRY_624_LIFT.json, twelve cluster-disjoint halvings of the training fold",
+      "predicted_ci": [
+        0.010332,
+        0.013913
+      ],
+      "transfers_if": "the 95% interval excludes zero",
+      "replicates_if": "the interval contains 0.0121, the training-fold point estimate"
+    },
+    {
+      "key": "geometry_field_minus_plmnn",
+      "question": "does the stack close the deficit to the supervised model",
+      "predicted": -0.021864,
+      "predicted_from": "Set A's levels plus the training-fold lift. This is an anchor and not a forecast: Set A is X-ray and these sets are cryo-EM",
+      "we_lead_if": "the interval excludes zero and is positive"
+    },
+    {
+      "key": "geometry_field_minus_p2rank",
+      "question": "does the advantage over P2Rank hold on a second set",
+      "predicted": 0.056432,
+      "predicted_from": "Set A's levels plus the training-fold lift"
+    },
+    {
+      "key": "geometry_field_minus_pocketminer",
+      "question": "the same against the cryptic-specific baseline",
+      "predicted": 0.079854,
+      "predicted_from": "Set A's levels plus the training-fold lift"
+    }
+  ],
+  "multiplicity": {
+    "n_comparisons": 4,
+    "correction": "Bonferroni over the four co-primary comparisons",
+    "reported": "both the uncorrected and the corrected interval for every comparison"
+  },
+  "secondary_pinned_now": [
+    {
+      "key": "per_set_split",
+      "what": "the same primary comparison on Set B's 7 units and Set C's 38 separately",
+      "why": "the two sets have different resolution ceilings and CRYOEM_LABEL_SENSITIVITY.json shows the label's decline rate rising with resolution, so pooling mixes two label regimes. Pooled is primary because it was fixed as primary; the split is reported so a reader can see whether the pooled number is carried by one regime"
+    },
+    {
+      "key": "stratify_by_pocket_size",
+      "what": "the primary comparison on units with fewer than ten cryptic residues and on the rest",
+      "why": "FAILURE_TAIL.json measures a 0.28 spread on that axis, the largest effect in this repository, so it is where a difference would hide"
+    }
+  ],
+  "sentences_fixed_before_the_read": {
+    "transfers_and_replicates": "The four-family stack's training-fold lift replicates on units no part of its development could have seen: +X [a, b] on N cryo-EM units frozen before the families existed, against a training-fold estimate of +0.0121. This is the first held-out confirmation of a wire-family result in this repository.",
+    "transfers_but_smaller": "The stack's advantage over the deployed detector survives externally at +X [a, b], below the +0.0121 the training fold estimated. A lift that shrinks on held-out data is the ordinary outcome and the training-fold figure should be read as an upper bound from here on.",
+    "does_not_resolve": "On N units the stack's advantage over the deployed detector is +X [a, b], crossing zero. The training-fold lift is not confirmed. With 45 units and an effect of this size the read had limited power, which is a statement about the read and not evidence that the lift is absent -- and it is also not evidence that it is present. Nothing about the four families' status on held-out data is established by this repository.",
+    "negative": "On N units the stack scores below the deployed detector by X [a, b]. The training-fold lift does not transfer. The four families are withdrawn as a deployment recommendation; what survives is the screen that predicted their signs on the training fold, and the record that it did not predict generalisation.",
+    "plmnn_still_ahead": "pLM-NN remains the more accurate method. The stack narrows the gap to X [a, b] from the -0.0340 the deployed detector recorded on Set A, and does not close it.",
+    "plmnn_caught_or_passed": "The stack reaches or passes pLM-NN on these units at X [a, b]. This is one read of 45 cryo-EM units against a supervised model that leads on both the official fold and Set A, so it is reported as a result on this set and not as a ranking of the two methods, and the resolution covariate of the cryo-EM label is reported with it."
+  },
+  "why_the_losing_sentences_are_here": "so that the reading is fixed by the plan rather than chosen by the outcome. Four of the six above are outcomes in which the thing this repository has spent a week building does not work",
+  "refusals_the_read_must_implement": [
+    "refuse if either set's digest differs from the pinned one",
+    "refuse if the manifest's digest differs",
+    "refuse if GEOMETRY_FIELD.json's digest differs from the pinned one",
+    "refuse if this plan is not committed, or is dirty in the working tree, or is not an ancestor of the commit that will carry the read",
+    "refuse to overwrite an existing read without a recorded reason"
+  ],
+  "committed_at_head": "1ef54293bf47115fcbcbfb88d8a11a733deafc38",
+  "what_this_plan_does_not_do": "it does not score anything. No prediction is computed and no label is compared against one until the read runs under this plan"
+}

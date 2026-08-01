@@ -1,0 +1,54 @@
+{
+  "schema": "geoaudit.frozen_set_materialisation.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": false,
+  "why_this_is_not_a_read": "no prediction is opened. Labels are copied into the shape the scorer's manifest expects and coordinates are inputs. Both sets remain unread and a preregistration must land before anything is scored",
+  "sets": {
+    "set_b": {
+      "source": "results/external/SETB_SET.json",
+      "digest_now": "09381b4064b0bfd4ab6b65bce3adbc166829f9f8b298776c1399ce56b0f45230",
+      "frozen_at_prefix": "09381b40",
+      "n_units_in_the_frozen_set": 8,
+      "n_units_materialised": 7,
+      "resolution_ceiling": 2.5,
+      "modality": "single-particle cryo-EM"
+    },
+    "set_c": {
+      "source": "results/external/SETC_SET.json",
+      "digest_now": "ff112a6025d116949e0aa37ead92318c5481edd1827db39d3d1a8a28139ec93b",
+      "frozen_at_prefix": "ff112a60",
+      "n_units_in_the_frozen_set": 38,
+      "n_units_materialised": 38,
+      "resolution_ceiling": 3.0,
+      "modality": "single-particle cryo-EM"
+    }
+  },
+  "n_units_materialised": 45,
+  "n_dropped": 1,
+  "dropped": [
+    {
+      "set": "set_b",
+      "unit": "9t97_A3a",
+      "why": "receptor too small (0 heavy atoms) for data/external/setbc_receptors/9t97_A3a_receptor.pdb",
+      "cause": "the deposition uses a chain identifier the legacy PDB format cannot hold in one column, so no atom of this chain survives rendering. Nothing about the protein",
+      "format_refusals": [
+        "chain identifier 'A3a' needs more than the one column the PDB format has",
+        "chain identifier 'A3b' needs more than the one column the PDB format has",
+        "chain identifier 'A3c' needs more than the one column the PDB format has",
+        "chain identifier 'A3d' needs more than the one column the PDB format has"
+      ],
+      "n_atoms_after_rendering": 0
+    }
+  ],
+  "why_a_drop_must_be_declared_before_the_read": "a unit removed after scores were seen is a selection. These drops are format limitations established before any method ran, and the preregistration has to pin this count so that coverage cannot move afterwards",
+  "manifest": "data/external/setbc_manifest.json",
+  "manifest_sha256": "789526b433b3d1920bcf6bc84fd169493d068df0270d34c9241f9b62e4529dbf",
+  "receptors_directory": "data/external/setbc_receptors",
+  "resolution_is_a_covariate_of_the_label": "CRYOEM_LABEL_SENSITIVITY.json records the recovered rule declining 9.2 % of pairs for X-ray Set A, 17.3 % for Set B and 31.9 % for Set C, with the cryptic share rising alongside. Any read of these sets carries that covariate and it belongs in front of the reader, not in a footnote",
+  "what_has_to_happen_next_and_in_this_order": [
+    "finalise the detector; a field compiled after the plan is a different experiment",
+    "preregister the read: pin both set digests and this manifest's, name the comparisons, fix the statistic, write the losing sentences",
+    "read once"
+  ]
+}

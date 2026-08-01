@@ -683,8 +683,8 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 863 tests and
-613 subtests, all passing. `unittest`'s discovery finds 735 of them, because it
+Current state: `verify_claims` all checks pass; `make test` runs 871 tests and
+646 subtests, all passing. `unittest`'s discovery finds 743 of them, because it
 collects only methods of `TestCase` subclasses; the other 85 are written as
 plain functions and are reachable only through `pytest`.
 
@@ -2054,7 +2054,7 @@ figures/                 every figure in the README and the paper, each with a
                          source artifact digest and its caption
 tools/                   168 files: fold runners, wire builders, every sweep,
                          the emitters, and verify_claims.py which holds the gates
-tests/                   863 tests, 613 subtests
+tests/                   871 tests, 646 subtests
 docs/AGENT_MEMORY.md     what has been tried, what closed it, and what is open
 ```
 

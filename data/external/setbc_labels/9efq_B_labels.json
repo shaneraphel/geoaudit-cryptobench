@@ -1,0 +1,37 @@
+{
+  "schema": "geoaudit.external_label.v1",
+  "clinical_grade": false,
+  "pdb_id": "9efq",
+  "chain": "B",
+  "cryptic_residues": [
+    70,
+    73,
+    74,
+    77,
+    114
+  ],
+  "residue_keys": [
+    [
+      70,
+      ""
+    ],
+    [
+      73,
+      ""
+    ],
+    [
+      74,
+      ""
+    ],
+    [
+      77,
+      ""
+    ],
+    [
+      114,
+      ""
+    ]
+  ],
+  "source_set": "results/external/SETC_SET.json",
+  "source_set_sha256": "ff112a6025d116949e0aa37ead92318c5481edd1827db39d3d1a8a28139ec93b"
+}
