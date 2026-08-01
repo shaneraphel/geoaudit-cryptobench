@@ -1330,6 +1330,70 @@ the same archived scores under the tool's own `--reason` guard.
 > let the assertion find the misuse, because the values will look reasonable
 > either way.
 
+## 2q. Where the wall clock actually goes, and why two Rust kernels bought 1.25×
+
+Nobody had profiled a split. The premise going in was that the pipeline is
+single-threaded because its hot loop is integer addressing and Accelerate is not
+involved in integer work. Half of that was right and the important half was wrong.
+
+**The profile**, one arm on a fit half at the deployed-plus-four-families shape —
+117,000 rows, 1,317 digit columns, 10,144 tables:
+
+| phase | seconds | share |
+|---|---|---|
+| `scatter_and_means` — builds a 10,144² Gram | 135.7 | **86.1 %** |
+| the 10,144² ridge solve | 11.8 | 7.5 % |
+| `score` | 5.7 | 3.6 % |
+| `compile_cells` | 4.4 | 2.8 % |
+
+> **The pipeline is dominated by a \(K^2\) Gram accumulation that Accelerate
+> already runs on every core.** The genuinely single-threaded integer part was
+> about 6 % of the time. "It only uses one core" was true of the code I went to
+> port and false of where the seconds are, and one profile settled it where an
+> afternoon of reasoning had not.
+
+**What the kernels are and what they bought.** Two additions to
+`native/geoaudit_kernels`, both integer throughout and both **bit-identical**
+rather than close:
+
+* `gk_table_addresses` — the port of `table_bank.addresses`, which every consumer
+  passes through. **13.8× on the function.**
+* `gk_table_cell_counts` — fuses addressing into the two reductions
+  `compile_cells` needs, so the `(8192, 10144)` address matrix (665 MB, written
+  once and read twice) is never built. **2.1×.**
+
+End to end on a real split of `geometry 624`: **162–165 s against 189–219 s
+before, about 1.25×.** Quoting the 13.8× as the pipeline number would be exactly
+the mistake §4.7c records — a speedup measured on one component and reported as
+though it were the system.
+
+**Why bit-identity was achievable on a threaded float sum**, which normally it is
+not. `compile_cells`'s positive count is a sum of the label; the label is exactly
+0 or 1; so the quantity is an integer, it is accumulated as `int64`, and an
+integer sum does not depend on the order its terms arrive in. Parallel equals
+serial exactly, and equals NumPy's `float64` bincount exactly, for any count below
+2⁵³. The division into frequencies stays in Python so the one place a float enters
+is the one place it must.
+
+The check that matters is not the unit test: **re-running `geometry 624` with both
+kernels reproduced the committed artifact's per-split union values exactly**
+(0.8158, 0.8009, …). A kernel that changed a measurement would have shown up
+there and nowhere else.
+
+**Where this says not to look next.** The 86 % is the ridge solve's scatter, and
+§"The one fitted object" already measured whether a counting rule can replace it:
+five arms, and deleting the off-diagonal costs about thirty-six times the reseed
+floor while every per-table rule lands negative on 0 of 12 splits. So the
+dominant cost is a fitted object that has been shown to be load-bearing. **Do not
+re-raise replacing it without new evidence, and do not port it for speed** — it is
+already on all cores.
+
+The remaining honest lever on wall clock is \(K\) itself, since the Gram is
+\(K^2\): the four-family stack quadrupled it. And the `more_old` control arms say
+more tables over already-deployed wires is worth nothing at +1,056 and
+**−0.0017 at +4,992**, so buying accuracy with bank size is closed in both
+directions — down by `BANK_TRUNCATION.json` and up by every control arm since.
+
 ## 2l. Units both published baselines rank at chance, and the mirror count
 
 `RECOVERED_UNITS_TRAIN.json`, 769 training units, no read of the held-out fold.
@@ -1932,7 +1996,7 @@ names a target.
 
 | Repository | What it is | State |
 |---|---|---|
-| `geoaudit-cryptobench` | this one; the benchmark paper | 27 gates, 871 tests, in sync |
+| `geoaudit-cryptobench` | this one; the benchmark paper | 28 gates, 897 tests, in sync |
 | `foliation-transfer-atlas` | zero-tuning transfer to 5 oncology targets | committed and pushed; no transfer run yet |
 
 The transfer atlas holds its own `AGENTS.md`, twelve gates and a three-grade

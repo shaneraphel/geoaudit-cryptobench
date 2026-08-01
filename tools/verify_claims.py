@@ -62,6 +62,56 @@ CREDENTIAL = re.compile(
 TARGET_PANEL = {"ESR1", "KRAS", "FLT3", "PIM1", "PIK3CA", "CDK4/6"}
 
 
+def frozen_field_digest_checks(root: Path) -> list[str]:
+    """Complaints if a compiled field's recorded ``code_sha256`` is no longer live.
+
+    ``table_field.code_sha256`` hashes the bytes of ten source files. Each compiled
+    field records the value it was built under, and every per-unit prediction under
+    ``results/external/`` carries the same string as ``tool_version``. The digest is
+    the reader's route from a frozen number back to the exact code that produced it,
+    so it is over bytes and not over behaviour: an edit that provably cannot move a
+    number still severs the link.
+
+    Two Rust kernels were once written straight into ``table_bank.py``. They were
+    bit-identical ports and the numbers did not move by so much as an ulp, and the
+    edit was still wrong, because ``TABLE_FIELD.json``, ``GEOMETRY_FIELD.json`` and
+    57 frozen external predictions all then pointed at source that no longer
+    existed. The failure surfaced as a per-unit version mismatch on one external
+    prediction --- true, but it names a unit rather than a cause, and it only fires
+    at all because Set A happens to have been read. This check states the rule
+    directly and names the file, and it fires on a fresh tree with no reads in it.
+
+    The fix is to revert the digested file and put the change beside it; see
+    ``src/pocket_bench/methods/table_bank_accel.py``. Recompiling the field instead
+    would move the digest to match the new code and quietly redefine what the frozen
+    external read was a read of.
+    """
+    import sys as _sys
+    src = root / "src"
+    if str(src) not in _sys.path:
+        _sys.path.insert(0, str(src))
+    try:
+        from pocket_bench.methods.table_field import code_sha256
+    except Exception as exc:  # pragma: no cover - import failure is its own alarm
+        return [f"cannot import table_field to recompute the digest: {exc}"]
+
+    live = code_sha256()
+    problems: list[str] = []
+    for rel in ("data/cryptobench_apo/TABLE_FIELD.json",
+                "data/cryptobench_apo/GEOMETRY_FIELD.json"):
+        path = root / rel
+        if not path.exists():
+            continue
+        recorded = (json.loads(path.read_text()).get("code_sha256") or "")
+        if recorded and recorded != live:
+            problems.append(
+                f"{rel} was compiled under code_sha256 {recorded[:16]}... but the "
+                f"eight digested sources now hash to {live[:16]}...; revert the "
+                f"edited file and put the change in a module the digest does not "
+                f"cover, or the frozen reads no longer name their own code")
+    return problems
+
+
 def candidate_showcase_checks(
         root: Path, primary_files: list[Path]) -> tuple[list[str], list[str]]:
     """Which files are candidate evidence, and which admitted ones are incomplete.
@@ -697,6 +747,11 @@ def main() -> int:
     checks["detector_reads_no_learned_model"] = detector_clean
     if offenders:
         checks["_detector_learned_model_offenders"] = offenders
+
+    digest_problems = frozen_field_digest_checks(root)
+    checks["frozen_fields_name_their_own_code"] = not digest_problems
+    if digest_problems:
+        checks["_frozen_field_digest_problems"] = digest_problems
 
     failed = sorted(name for name, ok in checks.items() if not ok)
     print(json.dumps({"ok": not failed, "checks": checks, "failed": failed}, indent=2))

@@ -74,6 +74,21 @@ def _bind(lib: ctypes.CDLL) -> None:
         dbl, ctypes.c_size_t, dbl, ctypes.c_size_t,
         ctypes.c_double, ctypes.c_double, ctypes.c_uint64,
     ]
+    i8 = ctypes.POINTER(ctypes.c_int8)
+    i32 = ctypes.POINTER(ctypes.c_int32)
+    i64 = ctypes.POINTER(ctypes.c_int64)
+    lib.gk_table_addresses.restype = ctypes.c_int32
+    lib.gk_table_addresses.argtypes = [
+        i8, ctypes.c_size_t, ctypes.c_size_t,
+        i32, ctypes.c_size_t, ctypes.c_size_t,
+        i64, ctypes.c_int64, i64,
+    ]
+    lib.gk_table_cell_counts.restype = ctypes.c_int32
+    lib.gk_table_cell_counts.argtypes = [
+        i8, ctypes.c_size_t, ctypes.c_size_t, u8,
+        i32, ctypes.c_size_t, ctypes.c_size_t,
+        i64, ctypes.c_int64, ctypes.c_size_t, i64, i64,
+    ]
 
 
 def available() -> bool:
@@ -133,3 +148,96 @@ def local_free_enclosed(pts: np.ndarray, coords: np.ndarray, atom_r: float,
         _p(pts_c), len(pts_c), _p(coords_c), len(coords_c),
         float(atom_r), float(enclose_cut), int(enclose_min),
     ))
+
+
+def table_addresses(D: np.ndarray, cols: np.ndarray, offsets: np.ndarray,
+                    n_levels: int, a: int, b: int) -> np.ndarray | None:
+    """``(b - a, n_tables)`` cell addresses, or None if native is unavailable.
+
+    The one function every consumer of the counting field passes through:
+    ``compile_cells`` calls it once per block, ``scatter_and_means`` twice and
+    ``score`` once. For 10,144 tables at width 2 that is 20,288 integer
+    multiply-accumulate passes over each block of 8,192 rows, and NumPy runs all
+    of it on one core -- Accelerate is not involved, because there is no
+    floating-point product in it.
+
+    Bit-identical to the NumPy loop rather than approximately equal. That is a
+    property of the port and not something to be checked with a tolerance: the
+    result indexes a cell array, so an address off by one is a different cell
+    entirely, with no numerical smallness to make the error visible.
+
+    Returns None when the library is absent, when the tables are not all the same
+    width, or when the kernel refuses a column index out of range -- in every
+    case the caller falls back to NumPy rather than guessing.
+    """
+    lib = _load()
+    if lib is None:
+        return None
+    cols = np.ascontiguousarray(cols, dtype=np.int32)
+    if cols.ndim != 2:
+        return None
+    n_tables, width = cols.shape
+    Dblk = np.ascontiguousarray(D[a:b], dtype=np.int8)
+    n_rows, n_cols = Dblk.shape
+    off = np.ascontiguousarray(offsets[:n_tables], dtype=np.int64)
+    out = np.empty((n_rows, n_tables), dtype=np.int64)
+    rc = lib.gk_table_addresses(
+        Dblk.ctypes.data_as(ctypes.POINTER(ctypes.c_int8)),
+        n_rows, n_cols,
+        cols.ctypes.data_as(ctypes.POINTER(ctypes.c_int32)),
+        n_tables, width,
+        off.ctypes.data_as(ctypes.POINTER(ctypes.c_int64)),
+        int(n_levels),
+        out.ctypes.data_as(ctypes.POINTER(ctypes.c_int64)),
+    )
+    if rc != 0:
+        return None
+    return out
+
+
+def table_cell_counts(D: np.ndarray, y: np.ndarray, cols: np.ndarray,
+                      offsets: np.ndarray, n_levels: int, n_cells: int
+                      ) -> tuple[np.ndarray, np.ndarray] | None:
+    """``(total, positive)`` counts per cell over every row, or None.
+
+    Fuses the addressing into the reduction, so the ``(n_rows, n_tables)`` address
+    matrix is never built. NumPy materialises it and calls ``bincount`` twice: at
+    8,192 rows and 10,144 tables that is 665 MB written once and read twice, with
+    both reductions on one core.
+
+    Bit-identical, and the reason it can be while splitting a sum across threads
+    is specific rather than general. The positive count is a sum of the label,
+    the label is exactly 0 or 1, so the quantity is an integer; it is accumulated
+    as ``int64`` here and an integer sum does not depend on the order its terms
+    arrive in. That makes the parallel result equal to the serial one exactly, and
+    equal to NumPy's ``float64`` bincount exactly, for any count below ``2**53``.
+    The division into frequencies stays in Python, so the one place a float enters
+    is the one place it has to.
+    """
+    lib = _load()
+    if lib is None:
+        return None
+    cols = np.ascontiguousarray(cols, dtype=np.int32)
+    if cols.ndim != 2:
+        return None
+    n_tables, width = cols.shape
+    Dc = np.ascontiguousarray(D, dtype=np.int8)
+    n_rows, n_cols = Dc.shape
+    yc = np.ascontiguousarray(y, dtype=np.uint8)
+    if yc.shape[0] != n_rows or not np.isin(yc, (0, 1)).all():
+        return None
+    off = np.ascontiguousarray(offsets[:n_tables], dtype=np.int64)
+    total = np.zeros(n_cells, dtype=np.int64)
+    pos = np.zeros(n_cells, dtype=np.int64)
+    rc = lib.gk_table_cell_counts(
+        Dc.ctypes.data_as(ctypes.POINTER(ctypes.c_int8)), n_rows, n_cols,
+        yc.ctypes.data_as(ctypes.POINTER(ctypes.c_uint8)),
+        cols.ctypes.data_as(ctypes.POINTER(ctypes.c_int32)), n_tables, width,
+        off.ctypes.data_as(ctypes.POINTER(ctypes.c_int64)), int(n_levels),
+        int(n_cells),
+        total.ctypes.data_as(ctypes.POINTER(ctypes.c_int64)),
+        pos.ctypes.data_as(ctypes.POINTER(ctypes.c_int64)),
+    )
+    if rc != 0:
+        return None
+    return total, pos

@@ -687,9 +687,9 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 871 tests and
-646 subtests, all passing. `unittest`'s discovery finds 743 of them, because it
-collects only methods of `TestCase` subclasses; the other 85 are written as
+Current state: `verify_claims` all checks pass; `make test` runs 897 tests and
+652 subtests, all passing. `unittest`'s discovery finds 769 of them, because it
+collects only methods of `TestCase` subclasses; the other 128 are written as
 plain functions and are reachable only through `pytest`.
 
 That gap is why `make test` invokes `pytest` rather than `unittest`. This README
@@ -1795,6 +1795,48 @@ scored. Neither set has been built.
 
 Nothing is deployed.
 
+### 5.4 Where the wall clock goes, and two Rust kernels that are honest about it
+
+Nobody had profiled a split. The premise was that the pipeline is single-threaded
+because its hot loop is integer addressing and Accelerate is not involved in integer
+work. Half of that was right and the important half was wrong. One arm on a fit half
+at the four-family shape — 117,000 rows, 1,317 digit columns, 10,144 tables:
+
+| phase | seconds | share |
+|---|---|---|
+| `scatter_and_means` — builds a 10,144² Gram | 135.7 | **86.1%** |
+| the 10,144² ridge solve | 11.8 | 7.5% |
+| `score` | 5.7 | 3.6% |
+| `compile_cells` | 4.4 | 2.8% |
+
+**The pipeline is dominated by a K² Gram accumulation that Accelerate already runs
+on every core.** The genuinely single-threaded integer part is about 6% of the time.
+
+Two kernels were added to `native/geoaudit_kernels` anyway, because 6% is still
+worth having and because both are **bit-identical** rather than close:
+`gk_table_addresses` ports `table_bank.addresses`, which every consumer passes
+through, at **13.8×** on the function; `gk_table_cell_counts` fuses addressing into
+the two reductions `compile_cells` needs so the (8192, 10144) address matrix — 665 MB,
+written once and read twice — is never built, at **2.1×**.
+
+**End to end a real split of `geometry 624` runs 162–165 s against 189–219 s, about
+1.25×.** Quoting the 13.8× as the pipeline number would be the mistake §4.7c records:
+a speedup measured on one component and reported as though it were the system.
+
+Bit-identity on a threaded float sum is normally not available, and the reason it is
+here is specific. `compile_cells`'s positive count is a sum of the label; the label
+is exactly 0 or 1; so the quantity is an integer, is accumulated as `int64`, and an
+integer sum does not depend on the order its terms arrive in. The check that matters
+is not the unit test but this: **re-running `geometry 624` with both kernels
+reproduced the committed artifact's per-split union values exactly** (0.8158, 0.8009,
+…). A kernel that changed a measurement would have shown up there and nowhere else.
+
+The 86% is the ridge solve's scatter, and §"the one fitted object" already measured
+whether a counting rule can replace it — five arms, and deleting the off-diagonal
+covariance costs about thirty-six times the reseed floor while every per-table rule
+lands negative on 0 of 12 splits. So the dominant cost is a fitted object shown to be
+load-bearing: it is not a target for optimisation and it is already on all cores.
+
 | Attachment | What it does | Result |
 |---|---|---|
 | union | deployed 5,152 tables held, new tables over new columns only | the deployed arm above |
@@ -2079,11 +2121,21 @@ src/pocket_bench/methods/
                             get confused for one another
   p2rank_wrap.py fpocket_wrap.py deeppocket_wrap.py    baselines, firewalled
   firewall.py               refuses any input a receptor-only method may not see
-native/geoaudit_kernels/    Rust cdylib, 3 kernels (free-grid mask, buriedness,
-                            local free-enclosed count), ported operation-for-
+native/geoaudit_kernels/    Rust cdylib, 5 kernels, all ported operation-for-
                             operation from the NumPy reference so results are
-                            bit-identical; loaded by src/pocket_bench/native.py
-                            with a NumPy fallback, built by tools/build_native.sh
+                            bit-identical, all parallel over disjoint outputs so
+                            the answer cannot depend on thread scheduling:
+                              free-grid mask, buriedness, local free-enclosed
+                              count  — the geometric foundation
+                              table addressing (13.8x) and fused cell counts
+                              (2.1x) — the counting field's integer hot loop
+                            Loaded by src/pocket_bench/native.py with a NumPy
+                            fallback for every case the kernels do not cover;
+                            built by tools/build_native.sh. End to end a real
+                            split runs 1.25x faster, not 13.8x — the pipeline is
+                            dominated by a K-squared Gram accumulation that
+                            Accelerate already runs on every core, and §5.4 has
+                            the profile.
 ```
 
 **Where the numbers are.** `results/` holds one JSON per measurement and
@@ -2129,7 +2181,7 @@ figures/                 every figure in the README and the paper, each with a
                          source artifact digest and its caption
 tools/                   168 files: fold runners, wire builders, every sweep,
                          the emitters, and verify_claims.py which holds the gates
-tests/                   871 tests, 646 subtests
+tests/                   897 tests, 652 subtests
 docs/AGENT_MEMORY.md     what has been tried, what closed it, and what is open
 ```
 

@@ -80,14 +80,16 @@ from expand_invariant_bank import SEED  # noqa: E402
 from select_architecture_on_train import cluster_half_split, per_unit_auc  # noqa: E402
 
 from pocket_bench.methods.table_bank import (
-    addresses,
     cell_offsets,
     chain_digits,
-    compile_cells,
     integer_fanout,
     partition_tables,
     score,
 )
+# The two hot loops come from the accelerator, which is a bit-identical port and
+# not an approximation. It is a separate module because table_bank.py is one of the
+# eight files under the frozen field's code digest; see its docstring.
+from pocket_bench.methods.table_bank_accel import addresses, compile_cells
 from pocket_bench.methods.table_field import (
     FAN_OUT_CAP,
     PARTITION_ROUNDS,
