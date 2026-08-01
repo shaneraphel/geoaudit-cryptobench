@@ -5,7 +5,7 @@
   "generator": "tools/make_official_figures.py",
   "sources": {
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
-    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "9fc7e2e174f97680c06445ba61066aac0ca2f38681f37fb7ebf3ea5bfa645a7f",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "a7c8d65fd5e363746b1538f293dba161ae8d327e39e153ee6e5093095e1eb5c2",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
     "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",
@@ -18,7 +18,8 @@
     "results/external/EMDB_MAPS.json": "3e124f3d724c5638480a7dd328d864bf21b392db30b93182b1b4baa9f2410dcb",
     "results/external/EXTERNAL_SET_DIFFICULTY.json": "a2934ce7132bd8a42b56226c0c6caf402264ce5cb6a1cd527c79fc9f1bbaf103",
     "results/external/SETBC_READ.json": "b57843f335a14c1e14c8c94ed464a3bd03edd0360658b428313af83dcde8f56b",
-    "results/external/SETBC_DIFFICULTY.json": "19b322731dcf5f61dc4eb155501fd11822d7e83b34997db3f4daa06e4fed0db5"
+    "results/external/SETBC_DIFFICULTY.json": "19b322731dcf5f61dc4eb155501fd11822d7e83b34997db3f4daa06e4fed0db5",
+    "results/external/WHERE_WE_BEAT_PLMNN.json": "7883b98974644497d245840c1fe54499b69b74115140075cc97244229a615dfb"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -80,6 +81,11 @@
       "sha256": "1ef134fc78b898c4799d3c20dd526c663c05d022167cf9421858f78522ceaf61",
       "bytes": 224802,
       "caption": "How far the word resolution stretches across two entries that a single RCSB query returns together, both carrying the experimental method EM. Left, EMD-55233: single-particle cryo-EM at 4.3 A, a VHL-recruiting PROTAC ternary complex containing ERa. Right, EMD-46871: electron crystallography (MicroED) at 1.09 A, proteinase K -- not cryo-EM, and included because it is the entry this repository first mistook for one by ordering candidates on resolution. Top row, the densest slice of each map at a common physical scale; bottom row, 24 A across each, the scale at which a claim about how a ligand sits would have to be made. At 4.3 A there is no atom to point at, which is why the ESR1 appendix declines to assert a binding pose. No number in the benchmark reads a density map; the detector consumes apo coordinates. Volumes are gitignored, and results/external/EMDB_MAPS.json carries the URL, the asserted method and the sha256 of each."
+    },
+    "fig_external_beat_plmnn.png": {
+      "sha256": "37d507d3595e0f7037f2d37b4961b90a4dfe159375715aae2fc3f9d9b989b52d",
+      "bytes": 23222,
+      "caption": "Per-unit ROC-AUC difference against pLM-NN on the 57 spent external units, sorted. Green bars clear a fixed margin (\u0394\u22650.10 and ours\u22650.85); red bars are the mirror. 7 clear-margin wins for the counting field, 9 for pLM-NN. The confirmatory mean remains \u22120.0340 \u2014 this panel names the 27/30 split already published, it does not reverse it. RhoA (P61586, 9n4c_A) is one clear-margin unit; nothing here is clinical."
     }
   }
 }

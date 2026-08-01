@@ -1664,6 +1664,31 @@ never been scored on the 57, and scoring it there would replace a confirmatory r
 with a second look at a spent set. Set N is its first X-ray external evidence, and
 the plan confines it to a Set N-only secondary for exactly that reason.
 
+## 2s. The pLM-NN deficit does not depend on resolution inside X-ray
+
+**Falsified.** The Set B/C modality effect (§2p) predicted the deficit would narrow
+on the better-resolved half of the official fold. Preregistered, then read once at
+the conventional 2.0 Å cut (98 high / 94 low): endpoint **−0.0073 [−0.0510, +0.0363],
+crosses zero**, and the point estimate points the wrong way
+(`results/official_fold/RESOLUTION_READ.json`).
+
+Every method gains in the high-resolution stratum, *including pLM-NN* (0.8406 vs
+0.8056), which never sees a coordinate. A stratum effect that moves a sequence model
+as much as a geometry counter is about the proteins (shorter chains, denser labels),
+not coordinate quality. The control agrees: P2Rank's endpoint (−0.0061) matches ours.
+Looking for a data-quality escape from the deficit *within X-ray* is closed.
+
+## 2t. Seven clear-margin wins against pLM-NN on the spent external set — and nine the other way
+
+**Decomposition, not a second confirmatory read.** EXTERNAL_READ already published
+27/30 and mean −0.0340. `WHERE_WE_BEAT_PLMNN.json` names every unit, attaches the
+UniProt accession the set already carries, and marks a fixed clear margin
+(Δ≥0.10 and ours≥0.85). Result: **7 clear-margin wins for us, 9 for them**. The
+asymmetry does not favour us; the mean is still a deficit. What the mean could not
+show is the proteins: one clear-margin unit is **RhoA (P61586, 9n4c_A)**, ours 0.966
+against pLM-NN 0.803. RAC1 (P63000, 9ifk_A) is ahead by +0.097 and sits just under
+the bar. Nothing here is clinical; the labels are deposited holo partners.
+
 ## 3. What is open, and why each is thought to be open
 
 **Quantisation cut points.** Every wire is cut at within-chain quartiles, so the

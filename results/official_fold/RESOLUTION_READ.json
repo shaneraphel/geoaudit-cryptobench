@@ -1,0 +1,95 @@
+{
+ "schema": "geoaudit.resolution_read.v1",
+ "clinical_grade": false,
+ "declared": "confirmatory for the primary, descriptive for the covariates",
+ "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
+ "method": "table_field",
+ "status": "exploratory",
+ "question": "does the counting field's deficit against pLM-NN narrow on the better-resolved half of the official test fold",
+ "hypothesis": "the deficit narrows as resolution improves, because a sequence model cannot be hurt by coordinate error and a geometry counter can",
+ "plan": {
+  "artifact": "results/architecture_sweep/PREREGISTERED_RESOLUTION.json",
+  "commit": "44609fa151de2a5381f079ce355d1767ec503145",
+  "committed_at": "2026-08-01T18:55:25+08:00",
+  "subject": "Preregister a resolution-stratified read of the pLM-NN deficit, before running it"
+ },
+ "plan_sha256": "3a713dbd5265f14e36a3802728b424752f8532000c0c97d20b496ab7fbb53e4a",
+ "rescored_anything": false,
+ "n_units": 192,
+ "units_without_a_resolution": [],
+ "strata": {
+  "high": {
+   "definition": "resolution <= 2.0 A",
+   "n": 98,
+   "mean_per_unit_auc": {
+    "ours": 0.812731,
+    "p2rank": 0.807453,
+    "plmnn": 0.840609,
+    "pocketminer": 0.771242
+   },
+   "covariates": {
+    "mean_chain_length": 276.48,
+    "mean_positive_rate": 0.07719,
+    "mean_resolution": 1.771
+   }
+  },
+  "low": {
+   "definition": "resolution > 2.0 A",
+   "n": 94,
+   "mean_per_unit_auc": {
+    "ours": 0.784994,
+    "p2rank": 0.778589,
+    "plmnn": 0.805597,
+    "pocketminer": 0.73255
+   },
+   "covariates": {
+    "mean_chain_length": 327.03,
+    "mean_positive_rate": 0.06211,
+    "mean_resolution": 2.219
+   }
+  }
+ },
+ "primary_ours_minus_plmnn": {
+  "high_margin": -0.027879,
+  "low_margin": -0.020603,
+  "endpoint": -0.007275,
+  "ci": [
+   -0.050961,
+   0.036308
+  ],
+  "excludes_zero": false,
+  "n_high": 98,
+  "n_low": 94
+ },
+ "control_p2rank_minus_plmnn": {
+  "high_margin": -0.033156,
+  "low_margin": -0.027007,
+  "endpoint": -0.006149,
+  "ci": [
+   -0.050933,
+   0.036747
+  ],
+  "excludes_zero": false,
+  "n_high": 98,
+  "n_low": 94
+ },
+ "covariate_screen": {
+  "high_over_low_chain_length": 0.845,
+  "high_over_low_positive_rate": 1.243,
+  "band_that_counts_as_comparable": [
+   0.7,
+   1.43
+  ],
+  "dominates": false,
+  "why_a_band_and_not_a_test": "the question is whether the two strata are similar enough for a stratum effect to be about resolution. A significance test on a covariate answers a different question and would pass or fail on the stratum sizes"
+ },
+ "outcome": "does_not_resolve",
+ "conclusion": "The difference between the two strata does not exclude zero. On 192 units split at 2.0 A the fold is too small to say whether the deficit depends on resolution, and the prediction from the cryo-EM read is neither supported nor refuted here.",
+ "what_this_cannot_show": [
+  "that the counting field beats pLM-NN anywhere. A narrower deficit is still a deficit unless the interval says otherwise",
+  "anything causal about resolution. Resolution travels with crystal quality, protein size and flexibility, and only two of those are reported here"
+ ],
+ "reread": {
+  "reason": "Third write, and the second reason was wrong. The artifact now declares method=table_field so the ledger stops labelling it 'table field variant'. The previous rerun claimed this had made the ledger count a twelfth architecture; it had not. The count was 12 before this read and is 12 after, and only the standalone-probe count moved, 21 to 22, which is correct for one added probe. No statistic, stratum, seed or number changed in any of the three writes"
+ }
+}

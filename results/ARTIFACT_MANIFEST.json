@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "superseded": 79,
-    "cited": 83,
-    "exploration": 43,
+    "superseded": 81,
+    "cited": 84,
+    "exploration": 44,
     "inventory": 7,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 224,
+  "n_artifacts": 228,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -504,6 +504,13 @@
       "bytes": 7045
     },
     {
+      "artifact": "results/architecture_sweep/PREREGISTERED_RESOLUTION.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.preregistered_resolution.v1",
+      "bytes": 5336
+    },
+    {
       "artifact": "results/architecture_sweep/PREREGISTERED_STATISTIC.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -987,6 +994,13 @@
       "bytes": 85230
     },
     {
+      "artifact": "results/external/WHERE_WE_BEAT_PLMNN.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.where_we_beat_plmnn.v1",
+      "bytes": 26940
+    },
+    {
       "artifact": "results/external/setbc_p2rank_raw/12ec_J/run.json",
       "class": "superseded",
       "reason": "an earlier frozen state, kept for the record",
@@ -1411,7 +1425,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 14693
+      "bytes": 15416
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
@@ -1454,6 +1468,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.bootstrap_report.v1",
       "bytes": 26503
+    },
+    {
+      "artifact": "results/official_fold/OFFICIAL_RESOLUTIONS.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.official_resolutions.v1",
+      "bytes": 23541
     },
     {
       "artifact": "results/official_fold/PER_STRUCTURE.json",
@@ -1519,6 +1540,13 @@
       "bytes": 64377
     },
     {
+      "artifact": "results/official_fold/RESOLUTION_READ.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.resolution_read.v1",
+      "bytes": 3581
+    },
+    {
       "artifact": "results/official_fold/SEED_SENSITIVITY.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -1544,7 +1572,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 14342
+      "bytes": 14674
     },
     {
       "artifact": "results/official_fold/THRESHOLD_CURVE.json",
