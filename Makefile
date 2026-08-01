@@ -2,7 +2,7 @@ PYTHON ?= python3.12
 export PYTHONPATH := src:$(PYTHONPATH)
 
 .PHONY: verify test consistency readme strict-json macros environment archive icloud ledger artifacts figures recompute residues published crossval cases freeze
-verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger artifacts declarations recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12 rule extset extplan extscore extprov extread counts
+verify: consistency strict-json readme wires compileapp macros environment archive icloud ledger ordering inputs artifacts declarations recompute residues published crossval cases quotient gap prereg read5 banks sens p2op match read6 trainop match2 read7 audit cost interp endpoint cov subplan read8 read9 plmw plmseq plmscore plmplan read10 pmplan read11 curveplan read12 rule extset extplan extscore extprov extread counts
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/verify_claims.py --root .
 
 # The four case studies are chosen by a stated rule from the labels and the raw
@@ -319,6 +319,22 @@ ledger:
 # sweeps beside a headline number must be a stated fact, not an inference.
 # This also holds the committed images to their sources: `artifacts` fails if
 # a figure's input changed underneath it, which needs no plotting library.
+# Every preregistration against the read it licensed, ordered by the git graph
+# rather than by the boolean each read records about itself. is_ancestor_of_head
+# is nearly vacuous -- every commit is an ancestor of HEAD -- so the check that
+# matters is whether the plan entered the history before the commit that added
+# the read. Refuses on a shallow clone rather than passing on a history it
+# cannot see.
+# Which pinned-but-gitignored inputs this checkout holds. A green suite can mean
+# everything passed or it can mean the real-structure tests skipped, and those
+# look identical in a summary line. Absent does not fail -- that is a fresh
+# clone's normal state. Present-and-wrong does.
+inputs:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/check_materialised_inputs.py
+
+ordering:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/check_read_ordering.py
+
 artifacts:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/classify_artifacts.py --check
 

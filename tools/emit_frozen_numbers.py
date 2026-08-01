@@ -150,9 +150,11 @@ FAMILY_LADDER = (
     ("FamDispB", ROOT / "results/architecture_sweep/DISPLACEMENT_B_LIFT.json"),
     ("FamDispAlt",
      ROOT / "results/architecture_sweep/DISPLACEMENT_ALT_LIFT.json"),
-    ("FamGeomFour",
-     ROOT / "results/architecture_sweep/GEOMETRY_FOUR_LIFT.json"),
-    ("FamGeomSix", ROOT / "results/architecture_sweep/GEOMETRY_624_LIFT.json"),
+    # geometry 672 was registered and never ran: 672 columns exceed the 645
+    # deployed wires and the harness refuses a draw where the new family is the
+    # larger side. geometry 624 is that stack with the measured-null
+    # alternate-conformer columns removed, which is the right stack anyway.
+    ("FamGeomAll", ROOT / "results/architecture_sweep/GEOMETRY_624_LIFT.json"),
 )
 OUT = ROOT / "paper/frozen_numbers.tex"
 SRC = ROOT / "paper"

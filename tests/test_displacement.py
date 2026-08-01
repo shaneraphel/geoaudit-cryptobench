@@ -407,23 +407,20 @@ class TestOnRealChains(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        import json
-        manifest = ROOT / "data/cryptobench_apo/TRAIN_MANIFEST.json"
-        if not manifest.is_file():
-            raise unittest.SkipTest("training manifest not materialised")
-        cls.entries = json.loads(manifest.read_text())["entries"][:25]
-        if not cls.entries:
-            raise unittest.SkipTest("no entries")
+        # The first version of this guard checked the manifest, which is
+        # committed, and then iterated entries whose receptors are not. With no
+        # receptors on disk it skipped none of them, found nothing, and failed
+        # its own count assertion -- a red test in a fresh clone for a missing
+        # 185 MB download. receptor_fixture skips with the command instead.
+        import receptor_fixture
+        cls.entries = receptor_fixture.entries(25)
 
     def test_the_invariants_hold_and_the_inputs_are_present(self) -> None:
         import displacement_wires as dw
         from pocket_bench.pdb_io import parse_pdb_atoms
         n_varying_b = 0
         for e in self.entries:
-            path = ROOT / e["receptor_path"]
-            if not path.is_file():
-                continue
-            text = path.read_text()
+            text = (ROOT / e["receptor_path"]).read_text()
             order, _ctr, take = dw._residue_rows(parse_pdb_atoms(text),
                                                  e["chain"])
             res = dp.parse_displacement(text, e["chain"])

@@ -33,6 +33,8 @@ from pocket_bench.methods.void_topology import (
 from pocket_bench.paths import ROOT
 from pocket_bench.pdb_io import parse_pdb_atoms
 
+import receptor_fixture
+
 MANIFEST = ROOT / "data/cryptobench_apo/TRAIN_MANIFEST.json"
 
 
@@ -320,7 +322,16 @@ _CACHE: dict[str, tuple] = {}
 
 
 def _entries(n: int) -> list[dict]:
-    return json.loads(MANIFEST.read_text())["entries"][:n]
+    """Manifest entries whose receptor is on disk and matches its pinned digest.
+
+    This used to be ``json.loads(MANIFEST.read_text())["entries"][:n]``, which
+    reads a committed manifest and hands back paths to gitignored coordinates.
+    In a fresh clone every test below it errored on FileNotFoundError instead of
+    skipping, so a reviewer running the suite got red tests and no statement of
+    what was missing or how to get it. receptor_fixture skips with the command,
+    and fails only if a receptor is present with the wrong digest.
+    """
+    return receptor_fixture.entries(n)
 
 
 def _chain_atoms(e: dict):

@@ -1,0 +1,39 @@
+{
+  "schema": "geoaudit.materialised_inputs.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": false,
+  "question": "which pinned-but-gitignored inputs does this checkout hold, and which tests therefore had nothing to run on",
+  "why_absent_does_not_fail": "a fresh clone holds none of these by design; they are gitignored because a committed SHA-256 makes them reproducible byte-for-byte. Failing on absence would make this gate useless on the case it exists to describe",
+  "why_present_and_wrong_does_fail": "a file that is present and does not match its pin is being used as though it were the deposit. Absent is a missing input and wrong is a broken one, and reporting them the same way is worse than reporting neither",
+  "digest_sample": 60,
+  "why_a_sample": "hashing every pinned file on every make verify is not paid for by what it catches. The sample is the front of each manifest, so it is deterministic rather than lucky, and the test fixture verifies every receptor it actually hands to a test",
+  "groups": [
+    {
+      "name": "training receptors",
+      "manifest": "data/cryptobench_apo/TRAIN_MANIFEST.json",
+      "n_pinned": 770,
+      "n_present": 770,
+      "n_absent": 0,
+      "n_digests_verified": 60,
+      "n_mismatched": 0,
+      "mismatched": [],
+      "state": "complete",
+      "materialise_with": "PYTHONPATH=src python3.12 tools/build_training_fold.py --folds train-0 train-1 train-2 train-3",
+      "what_depends_on_it": "the real-structure tests for void_topology, sidechain_geometry and displacement, and every wire-family cache build"
+    },
+    {
+      "name": "official test-fold receptors",
+      "manifest": "data/cryptobench_apo/official_manifest.json",
+      "n_pinned": 192,
+      "n_present": 192,
+      "n_absent": 0,
+      "n_digests_verified": 60,
+      "n_mismatched": 0,
+      "mismatched": [],
+      "state": "complete",
+      "materialise_with": "PYTHONPATH=src python3.12 tools/fetch_official_data.py",
+      "what_depends_on_it": "rescoring the held-out fold from coordinates. The frozen per-unit telemetry is committed, so every published number is checkable without these"
+    }
+  ]
+}

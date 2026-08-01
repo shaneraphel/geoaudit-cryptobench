@@ -1645,7 +1645,8 @@ protocol above:
 | **void 135** | 45 quantities of the connectivity of the empty space: alpha spheres in the Delaunay band [3, 6] Å, single-linkage voids, lining contiguity, depth to the rim, burial against the chain's own convex hull | **yes** | **+0.00258 on 11/12**, CI [+0.0012, +0.0039] |
 | **displacement 144** | 48 quantities from three fields of every ATOM record the pipeline never reads: the temperature factor (never parsed at all), the occupancy, and the alternate-location indicator (parsed only in order to discard alternates). Within-chain ranks, never a raw B | **yes** | **+0.00700 on 12/12**, CI [+0.0050, +0.0090] |
 | **conformation 393** | backbone 132 and sidechain 261 concatenated, measured rather than added | **yes** | **+0.00723 on 12/12**, CI [+0.0055, +0.0089] |
-| **geometry 528** | all three live families as one block | **yes** | **+0.00949 on 12/12**, CI [+0.0081, +0.0109] |
+| **geometry 528** | backbone + sidechain + void as one block | **yes** | **+0.00949 on 12/12**, CI [+0.0081, +0.0109] |
+| **geometry 624** | the same three plus the 96 B-factor columns, the null 48 left out | **yes** | **+0.01212 on 12/12**, CI [+0.0103, +0.0139] |
 | *(control)* | the same table count, **no new columns at all** | — | −0.0001 on 6/12 (backbone), −0.0004 on 7/12 (side-chain), −0.0001 on 6/12 (void), +0.0002 on 6/12 (conformation), −0.0010 on 5/12 (geometry) |
 
 Three families, proposed on the same one-sentence screen, and all three behave the
@@ -1699,7 +1700,23 @@ largest single family in this repository, on its own.
 
 That attribution is what the shipping stack is built from: `geometry 624` is the four
 families with the null 48 columns left out, because carrying them would spend 384
-tables on a measured zero.
+tables on a measured zero. It also made the arm runnable at all — all 672 columns
+exceed the 645 deployed wires and the harness refuses a draw where the new family is
+the larger side, since a round pairs each new column with a *distinct* wire. Dropping
+the measured-null sub-family answers both constraints, and it is the attribution that
+says which 48 rather than the column budget.
+
+**`geometry 624` is +0.01212 on 12/12**, CI [+0.0103, +0.0139], against +0.01805 if
+the four were independent — **67.2%** of the four-way sum, down from 80.8% for three.
+The control arm is −0.00171 on 4/12 and does *not* cross zero: at this size, spending
+the same table budget on already-deployed wires actively hurts. Displacement-B adds
+**+0.00263 on 10/12** on top of `geometry 528`, which is 42% of its standalone
++0.00630 — so it overlaps the coordinate families by 58%, against void's 12%. The
+overlap prediction (30–50%) was close; the magnitude prediction was not.
+
+**Against the deficit: +0.0121 is 50% of the 0.0243 official-fold gap to pLM-NN.**
+That is a training-fold number and whether it transfers is unmeasured. Nothing is
+deployed.
 
 | Attachment | What it does | Result |
 |---|---|---|
