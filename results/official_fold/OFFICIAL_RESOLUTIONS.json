@@ -1,0 +1,1362 @@
+{
+ "schema": "geoaudit.official_resolutions.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "why_this_does_not_read_the_fold": "a deposition's stated resolution is a property of the experiment, not of any label, prediction or score. Nothing here is compared to anything",
+ "source": "RCSB, rcsb_entry_info.resolution_combined, minimum where several",
+ "fetched_by": "tools/external_inventory.py describe_all, imported unedited",
+ "n_units": 192,
+ "n_with_a_resolution": 192,
+ "units_without_a_resolution": [],
+ "why_absent_is_listed": "a unit with no stated resolution cannot enter a resolution stratum and must be visible as excluded rather than silently absent",
+ "span": {
+  "min": 0.701,
+  "max": 2.495
+ },
+ "units": [
+  {
+   "unit": "1arl_A",
+   "pdb": "1arl",
+   "chain": "A",
+   "resolution": 1.88,
+   "experimental_method": null
+  },
+  {
+   "unit": "1bk2_A",
+   "pdb": "1bk2",
+   "chain": "A",
+   "resolution": 2.01,
+   "experimental_method": null
+  },
+  {
+   "unit": "1bzj_A",
+   "pdb": "1bzj",
+   "chain": "A",
+   "resolution": 2.25,
+   "experimental_method": null
+  },
+  {
+   "unit": "1cwq_A",
+   "pdb": "1cwq",
+   "chain": "A",
+   "resolution": 2.25,
+   "experimental_method": null
+  },
+  {
+   "unit": "1dq2_A",
+   "pdb": "1dq2",
+   "chain": "A",
+   "resolution": 2.05,
+   "experimental_method": null
+  },
+  {
+   "unit": "1e6k_A",
+   "pdb": "1e6k",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "1evy_A",
+   "pdb": "1evy",
+   "chain": "A",
+   "resolution": 1.75,
+   "experimental_method": null
+  },
+  {
+   "unit": "1g1m_B",
+   "pdb": "1g1m",
+   "chain": "B",
+   "resolution": 2.25,
+   "experimental_method": null
+  },
+  {
+   "unit": "1g59_A",
+   "pdb": "1g59",
+   "chain": "A",
+   "resolution": 2.4,
+   "experimental_method": null
+  },
+  {
+   "unit": "1h13_A",
+   "pdb": "1h13",
+   "chain": "A",
+   "resolution": 1.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "1i7n_A",
+   "pdb": "1i7n",
+   "chain": "A",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "1k47_D",
+   "pdb": "1k47",
+   "chain": "D",
+   "resolution": 2.42,
+   "experimental_method": null
+  },
+  {
+   "unit": "1ksg_B",
+   "pdb": "1ksg",
+   "chain": "B",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "1kx9_A",
+   "pdb": "1kx9",
+   "chain": "A",
+   "resolution": 1.65,
+   "experimental_method": null
+  },
+  {
+   "unit": "1kxr_A",
+   "pdb": "1kxr",
+   "chain": "A",
+   "resolution": 2.07,
+   "experimental_method": null
+  },
+  {
+   "unit": "1lbe_B",
+   "pdb": "1lbe",
+   "chain": "B",
+   "resolution": 2.4,
+   "experimental_method": null
+  },
+  {
+   "unit": "1m5w_D",
+   "pdb": "1m5w",
+   "chain": "D",
+   "resolution": 1.96,
+   "experimental_method": null
+  },
+  {
+   "unit": "1nd7_A",
+   "pdb": "1nd7",
+   "chain": "A",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "1p4o_B",
+   "pdb": "1p4o",
+   "chain": "B",
+   "resolution": 1.5,
+   "experimental_method": null
+  },
+  {
+   "unit": "1p4v_A",
+   "pdb": "1p4v",
+   "chain": "A",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "1p9o_A",
+   "pdb": "1p9o",
+   "chain": "A",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "1pu5_C",
+   "pdb": "1pu5",
+   "chain": "C",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "1q4k_A",
+   "pdb": "1q4k",
+   "chain": "A",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "1rjb_A",
+   "pdb": "1rjb",
+   "chain": "A",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "1rtc_A",
+   "pdb": "1rtc",
+   "chain": "A",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "1se8_A",
+   "pdb": "1se8",
+   "chain": "A",
+   "resolution": 1.8,
+   "experimental_method": null
+  },
+  {
+   "unit": "1uka_A",
+   "pdb": "1uka",
+   "chain": "A",
+   "resolution": 1.7,
+   "experimental_method": null
+  },
+  {
+   "unit": "1ute_A",
+   "pdb": "1ute",
+   "chain": "A",
+   "resolution": 1.55,
+   "experimental_method": null
+  },
+  {
+   "unit": "1vsn_A",
+   "pdb": "1vsn",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "1x2g_C",
+   "pdb": "1x2g",
+   "chain": "C",
+   "resolution": 2.4,
+   "experimental_method": null
+  },
+  {
+   "unit": "1xgd_A",
+   "pdb": "1xgd",
+   "chain": "A",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "1xjf_A",
+   "pdb": "1xjf",
+   "chain": "A",
+   "resolution": 2.4,
+   "experimental_method": null
+  },
+  {
+   "unit": "1xqv_A",
+   "pdb": "1xqv",
+   "chain": "A",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "1xtc_A",
+   "pdb": "1xtc",
+   "chain": "A",
+   "resolution": 2.4,
+   "experimental_method": null
+  },
+  {
+   "unit": "1zm0_A",
+   "pdb": "1zm0",
+   "chain": "A",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "2aka_A",
+   "pdb": "2aka",
+   "chain": "A",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "2d05_A",
+   "pdb": "2d05",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "2dfp_A",
+   "pdb": "2dfp",
+   "chain": "A",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "2fem_A",
+   "pdb": "2fem",
+   "chain": "A",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "2fhz_B",
+   "pdb": "2fhz",
+   "chain": "B",
+   "resolution": 1.15,
+   "experimental_method": null
+  },
+  {
+   "unit": "2h7s_A",
+   "pdb": "2h7s",
+   "chain": "A",
+   "resolution": 2.15,
+   "experimental_method": null
+  },
+  {
+   "unit": "2i3a_D",
+   "pdb": "2i3a",
+   "chain": "D",
+   "resolution": 2.15,
+   "experimental_method": null
+  },
+  {
+   "unit": "2i3r_A",
+   "pdb": "2i3r",
+   "chain": "A",
+   "resolution": 1.85,
+   "experimental_method": null
+  },
+  {
+   "unit": "2iyt_A",
+   "pdb": "2iyt",
+   "chain": "A",
+   "resolution": 1.47,
+   "experimental_method": null
+  },
+  {
+   "unit": "2nt1_B",
+   "pdb": "2nt1",
+   "chain": "B",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "2phz_A",
+   "pdb": "2phz",
+   "chain": "A",
+   "resolution": 2.15,
+   "experimental_method": null
+  },
+  {
+   "unit": "2pkf_A",
+   "pdb": "2pkf",
+   "chain": "A",
+   "resolution": 1.5,
+   "experimental_method": null
+  },
+  {
+   "unit": "2pwz_G",
+   "pdb": "2pwz",
+   "chain": "G",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "2qbv_A",
+   "pdb": "2qbv",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "2rfj_B",
+   "pdb": "2rfj",
+   "chain": "B",
+   "resolution": 2.05,
+   "experimental_method": null
+  },
+  {
+   "unit": "2v6m_D",
+   "pdb": "2v6m",
+   "chain": "D",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "2vl2_C",
+   "pdb": "2vl2",
+   "chain": "C",
+   "resolution": 1.925,
+   "experimental_method": null
+  },
+  {
+   "unit": "2vqz_F",
+   "pdb": "2vqz",
+   "chain": "F",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "2vyr_A",
+   "pdb": "2vyr",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "2w8n_A",
+   "pdb": "2w8n",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "2x47_A",
+   "pdb": "2x47",
+   "chain": "A",
+   "resolution": 1.7,
+   "experimental_method": null
+  },
+  {
+   "unit": "2xsa_A",
+   "pdb": "2xsa",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "2zcg_A",
+   "pdb": "2zcg",
+   "chain": "A",
+   "resolution": 2.223,
+   "experimental_method": null
+  },
+  {
+   "unit": "2zj7_A",
+   "pdb": "2zj7",
+   "chain": "A",
+   "resolution": 2.21,
+   "experimental_method": null
+  },
+  {
+   "unit": "3a0x_A",
+   "pdb": "3a0x",
+   "chain": "A",
+   "resolution": 1.89,
+   "experimental_method": null
+  },
+  {
+   "unit": "3bjp_A",
+   "pdb": "3bjp",
+   "chain": "A",
+   "resolution": 1.8,
+   "experimental_method": null
+  },
+  {
+   "unit": "3f4k_A",
+   "pdb": "3f4k",
+   "chain": "A",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "3flg_A",
+   "pdb": "3flg",
+   "chain": "A",
+   "resolution": 1.8,
+   "experimental_method": null
+  },
+  {
+   "unit": "3fzo_A",
+   "pdb": "3fzo",
+   "chain": "A",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "3gdg_B",
+   "pdb": "3gdg",
+   "chain": "B",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "3h8a_B",
+   "pdb": "3h8a",
+   "chain": "B",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "3i8s_B",
+   "pdb": "3i8s",
+   "chain": "B",
+   "resolution": 1.8,
+   "experimental_method": null
+  },
+  {
+   "unit": "3idh_A",
+   "pdb": "3idh",
+   "chain": "A",
+   "resolution": 2.14,
+   "experimental_method": null
+  },
+  {
+   "unit": "3jzg_A",
+   "pdb": "3jzg",
+   "chain": "A",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "3k01_A",
+   "pdb": "3k01",
+   "chain": "A",
+   "resolution": 1.35,
+   "experimental_method": null
+  },
+  {
+   "unit": "3lnz_C",
+   "pdb": "3lnz",
+   "chain": "C",
+   "resolution": 1.95,
+   "experimental_method": null
+  },
+  {
+   "unit": "3lnz_O",
+   "pdb": "3lnz",
+   "chain": "O",
+   "resolution": 1.95,
+   "experimental_method": null
+  },
+  {
+   "unit": "3ly8_A",
+   "pdb": "3ly8",
+   "chain": "A",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "3mwg_B",
+   "pdb": "3mwg",
+   "chain": "B",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "3n4u_A",
+   "pdb": "3n4u",
+   "chain": "A",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "3nx1_B",
+   "pdb": "3nx1",
+   "chain": "B",
+   "resolution": 2.4,
+   "experimental_method": null
+  },
+  {
+   "unit": "3pbf_A",
+   "pdb": "3pbf",
+   "chain": "A",
+   "resolution": 1.8,
+   "experimental_method": null
+  },
+  {
+   "unit": "3pfp_A",
+   "pdb": "3pfp",
+   "chain": "A",
+   "resolution": 2.35,
+   "experimental_method": null
+  },
+  {
+   "unit": "3pfp_B",
+   "pdb": "3pfp",
+   "chain": "B",
+   "resolution": 2.35,
+   "experimental_method": null
+  },
+  {
+   "unit": "3rwv_A",
+   "pdb": "3rwv",
+   "chain": "A",
+   "resolution": 1.5,
+   "experimental_method": null
+  },
+  {
+   "unit": "3st6_C",
+   "pdb": "3st6",
+   "chain": "C",
+   "resolution": 1.75,
+   "experimental_method": null
+  },
+  {
+   "unit": "3t8b_A",
+   "pdb": "3t8b",
+   "chain": "A",
+   "resolution": 1.649,
+   "experimental_method": null
+  },
+  {
+   "unit": "3tpo_A",
+   "pdb": "3tpo",
+   "chain": "A",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "3ugk_A",
+   "pdb": "3ugk",
+   "chain": "A",
+   "resolution": 2.01,
+   "experimental_method": null
+  },
+  {
+   "unit": "3uyi_A",
+   "pdb": "3uyi",
+   "chain": "A",
+   "resolution": 2.313,
+   "experimental_method": null
+  },
+  {
+   "unit": "3v55_A",
+   "pdb": "3v55",
+   "chain": "A",
+   "resolution": 1.81,
+   "experimental_method": null
+  },
+  {
+   "unit": "3vgm_A",
+   "pdb": "3vgm",
+   "chain": "A",
+   "resolution": 1.84,
+   "experimental_method": null
+  },
+  {
+   "unit": "3w90_A",
+   "pdb": "3w90",
+   "chain": "A",
+   "resolution": 1.65,
+   "experimental_method": null
+  },
+  {
+   "unit": "3wb9_C",
+   "pdb": "3wb9",
+   "chain": "C",
+   "resolution": 1.93,
+   "experimental_method": null
+  },
+  {
+   "unit": "4aem_A",
+   "pdb": "4aem",
+   "chain": "A",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "4amv_B",
+   "pdb": "4amv",
+   "chain": "B",
+   "resolution": 2.05,
+   "experimental_method": null
+  },
+  {
+   "unit": "4bg8_A",
+   "pdb": "4bg8",
+   "chain": "A",
+   "resolution": 1.96,
+   "experimental_method": null
+  },
+  {
+   "unit": "4cmw_B",
+   "pdb": "4cmw",
+   "chain": "B",
+   "resolution": 2.209,
+   "experimental_method": null
+  },
+  {
+   "unit": "4dnc_B",
+   "pdb": "4dnc",
+   "chain": "B",
+   "resolution": 2.05,
+   "experimental_method": null
+  },
+  {
+   "unit": "4e1y_A",
+   "pdb": "4e1y",
+   "chain": "A",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "4fkm_B",
+   "pdb": "4fkm",
+   "chain": "B",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "4gpi_C",
+   "pdb": "4gpi",
+   "chain": "C",
+   "resolution": 2.0817,
+   "experimental_method": null
+  },
+  {
+   "unit": "4gv9_A",
+   "pdb": "4gv9",
+   "chain": "A",
+   "resolution": 2.46,
+   "experimental_method": null
+  },
+  {
+   "unit": "4hye_A",
+   "pdb": "4hye",
+   "chain": "A",
+   "resolution": 1.7,
+   "experimental_method": null
+  },
+  {
+   "unit": "4ikv_A",
+   "pdb": "4ikv",
+   "chain": "A",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "4ilg_A",
+   "pdb": "4ilg",
+   "chain": "A",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "4j4e_F",
+   "pdb": "4j4e",
+   "chain": "F",
+   "resolution": 2.4,
+   "experimental_method": null
+  },
+  {
+   "unit": "4jax_F",
+   "pdb": "4jax",
+   "chain": "F",
+   "resolution": 2.26,
+   "experimental_method": null
+  },
+  {
+   "unit": "4jfr_C",
+   "pdb": "4jfr",
+   "chain": "C",
+   "resolution": 2.17,
+   "experimental_method": null
+  },
+  {
+   "unit": "4kmy_A",
+   "pdb": "4kmy",
+   "chain": "A",
+   "resolution": 1.795,
+   "experimental_method": null
+  },
+  {
+   "unit": "4mwi_A",
+   "pdb": "4mwi",
+   "chain": "A",
+   "resolution": 1.7,
+   "experimental_method": null
+  },
+  {
+   "unit": "4nzv_B",
+   "pdb": "4nzv",
+   "chain": "B",
+   "resolution": 1.901,
+   "experimental_method": null
+  },
+  {
+   "unit": "4oqo_B",
+   "pdb": "4oqo",
+   "chain": "B",
+   "resolution": 2.42,
+   "experimental_method": null
+  },
+  {
+   "unit": "4p2f_A",
+   "pdb": "4p2f",
+   "chain": "A",
+   "resolution": 2.05,
+   "experimental_method": null
+  },
+  {
+   "unit": "4qvk_B",
+   "pdb": "4qvk",
+   "chain": "B",
+   "resolution": 1.97,
+   "experimental_method": null
+  },
+  {
+   "unit": "4r0x_A",
+   "pdb": "4r0x",
+   "chain": "A",
+   "resolution": 1.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "4rvt_B",
+   "pdb": "4rvt",
+   "chain": "B",
+   "resolution": 2.4,
+   "experimental_method": null
+  },
+  {
+   "unit": "4ttp_A",
+   "pdb": "4ttp",
+   "chain": "A",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "4uc8_A",
+   "pdb": "4uc8",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "4uum_A",
+   "pdb": "4uum",
+   "chain": "A",
+   "resolution": 1.368,
+   "experimental_method": null
+  },
+  {
+   "unit": "4zm7_A",
+   "pdb": "4zm7",
+   "chain": "A",
+   "resolution": 0.701,
+   "experimental_method": null
+  },
+  {
+   "unit": "4zoe_B",
+   "pdb": "4zoe",
+   "chain": "B",
+   "resolution": 1.8,
+   "experimental_method": null
+  },
+  {
+   "unit": "5acv_B",
+   "pdb": "5acv",
+   "chain": "B",
+   "resolution": 1.963,
+   "experimental_method": null
+  },
+  {
+   "unit": "5b0e_B",
+   "pdb": "5b0e",
+   "chain": "B",
+   "resolution": 1.603,
+   "experimental_method": null
+  },
+  {
+   "unit": "5caz_A",
+   "pdb": "5caz",
+   "chain": "A",
+   "resolution": 1.8,
+   "experimental_method": null
+  },
+  {
+   "unit": "5e0v_A",
+   "pdb": "5e0v",
+   "chain": "A",
+   "resolution": 2.074,
+   "experimental_method": null
+  },
+  {
+   "unit": "5ey7_B",
+   "pdb": "5ey7",
+   "chain": "B",
+   "resolution": 2.461,
+   "experimental_method": null
+  },
+  {
+   "unit": "5hij_A",
+   "pdb": "5hij",
+   "chain": "A",
+   "resolution": 1.93,
+   "experimental_method": null
+  },
+  {
+   "unit": "5hto_E",
+   "pdb": "5hto",
+   "chain": "E",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "5i3t_E",
+   "pdb": "5i3t",
+   "chain": "E",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "5igh_A",
+   "pdb": "5igh",
+   "chain": "A",
+   "resolution": 1.55,
+   "experimental_method": null
+  },
+  {
+   "unit": "5kcg_B",
+   "pdb": "5kcg",
+   "chain": "B",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "5loc_A",
+   "pdb": "5loc",
+   "chain": "A",
+   "resolution": 2.04,
+   "experimental_method": null
+  },
+  {
+   "unit": "5o8b_A",
+   "pdb": "5o8b",
+   "chain": "A",
+   "resolution": 1.7,
+   "experimental_method": null
+  },
+  {
+   "unit": "5sc2_A",
+   "pdb": "5sc2",
+   "chain": "A",
+   "resolution": 1.208,
+   "experimental_method": null
+  },
+  {
+   "unit": "5tc0_B",
+   "pdb": "5tc0",
+   "chain": "B",
+   "resolution": 2.24,
+   "experimental_method": null
+  },
+  {
+   "unit": "5tvi_V",
+   "pdb": "5tvi",
+   "chain": "V",
+   "resolution": 1.87,
+   "experimental_method": null
+  },
+  {
+   "unit": "5uxa_A",
+   "pdb": "5uxa",
+   "chain": "A",
+   "resolution": 1.95,
+   "experimental_method": null
+  },
+  {
+   "unit": "5wbm_B",
+   "pdb": "5wbm",
+   "chain": "B",
+   "resolution": 2.16,
+   "experimental_method": null
+  },
+  {
+   "unit": "5yhb_A",
+   "pdb": "5yhb",
+   "chain": "A",
+   "resolution": 2.08,
+   "experimental_method": null
+  },
+  {
+   "unit": "5yj2_C",
+   "pdb": "5yj2",
+   "chain": "C",
+   "resolution": 1.71,
+   "experimental_method": null
+  },
+  {
+   "unit": "5yqp_A",
+   "pdb": "5yqp",
+   "chain": "A",
+   "resolution": 1.7,
+   "experimental_method": null
+  },
+  {
+   "unit": "5ysb_B",
+   "pdb": "5ysb",
+   "chain": "B",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "5z18_C",
+   "pdb": "5z18",
+   "chain": "C",
+   "resolution": 2.495,
+   "experimental_method": null
+  },
+  {
+   "unit": "5zj4_D",
+   "pdb": "5zj4",
+   "chain": "D",
+   "resolution": 1.49739273546,
+   "experimental_method": null
+  },
+  {
+   "unit": "6a98_C",
+   "pdb": "6a98",
+   "chain": "C",
+   "resolution": 1.82,
+   "experimental_method": null
+  },
+  {
+   "unit": "6bty_B",
+   "pdb": "6bty",
+   "chain": "B",
+   "resolution": 1.678,
+   "experimental_method": null
+  },
+  {
+   "unit": "6cqe_B",
+   "pdb": "6cqe",
+   "chain": "B",
+   "resolution": 1.886,
+   "experimental_method": null
+  },
+  {
+   "unit": "6du4_A",
+   "pdb": "6du4",
+   "chain": "A",
+   "resolution": 1.7,
+   "experimental_method": null
+  },
+  {
+   "unit": "6eqj_A",
+   "pdb": "6eqj",
+   "chain": "A",
+   "resolution": 2.18,
+   "experimental_method": null
+  },
+  {
+   "unit": "6f52_A",
+   "pdb": "6f52",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "6fc2_C",
+   "pdb": "6fc2",
+   "chain": "C",
+   "resolution": 1.92,
+   "experimental_method": null
+  },
+  {
+   "unit": "6fgj_B",
+   "pdb": "6fgj",
+   "chain": "B",
+   "resolution": 2.251,
+   "experimental_method": null
+  },
+  {
+   "unit": "6g6y_A",
+   "pdb": "6g6y",
+   "chain": "A",
+   "resolution": 1.8,
+   "experimental_method": null
+  },
+  {
+   "unit": "6hei_A",
+   "pdb": "6hei",
+   "chain": "A",
+   "resolution": 1.64,
+   "experimental_method": null
+  },
+  {
+   "unit": "6isu_A",
+   "pdb": "6isu",
+   "chain": "A",
+   "resolution": 1.866,
+   "experimental_method": null
+  },
+  {
+   "unit": "6jq9_B",
+   "pdb": "6jq9",
+   "chain": "B",
+   "resolution": 1.81,
+   "experimental_method": null
+  },
+  {
+   "unit": "6ksc_A",
+   "pdb": "6ksc",
+   "chain": "A",
+   "resolution": 2.4,
+   "experimental_method": null
+  },
+  {
+   "unit": "6n5j_B",
+   "pdb": "6n5j",
+   "chain": "B",
+   "resolution": 1.37,
+   "experimental_method": null
+  },
+  {
+   "unit": "6nei_B",
+   "pdb": "6nei",
+   "chain": "B",
+   "resolution": 1.85,
+   "experimental_method": null
+  },
+  {
+   "unit": "6o4f_H",
+   "pdb": "6o4f",
+   "chain": "H",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "6tx0_B",
+   "pdb": "6tx0",
+   "chain": "B",
+   "resolution": 2.01,
+   "experimental_method": null
+  },
+  {
+   "unit": "6vle_A",
+   "pdb": "6vle",
+   "chain": "A",
+   "resolution": 2.28,
+   "experimental_method": null
+  },
+  {
+   "unit": "6w10_A",
+   "pdb": "6w10",
+   "chain": "A",
+   "resolution": 1.80003386368,
+   "experimental_method": null
+  },
+  {
+   "unit": "7c48_A",
+   "pdb": "7c48",
+   "chain": "A",
+   "resolution": 1.6,
+   "experimental_method": null
+  },
+  {
+   "unit": "7c63_A",
+   "pdb": "7c63",
+   "chain": "A",
+   "resolution": 1.63,
+   "experimental_method": null
+  },
+  {
+   "unit": "7de1_A",
+   "pdb": "7de1",
+   "chain": "A",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "7e5q_B",
+   "pdb": "7e5q",
+   "chain": "B",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "7f2m_B",
+   "pdb": "7f2m",
+   "chain": "B",
+   "resolution": 2.20004160481,
+   "experimental_method": null
+  },
+  {
+   "unit": "7f4y_B",
+   "pdb": "7f4y",
+   "chain": "B",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "7kay_A",
+   "pdb": "7kay",
+   "chain": "A",
+   "resolution": 1.95,
+   "experimental_method": null
+  },
+  {
+   "unit": "7nc8_D",
+   "pdb": "7nc8",
+   "chain": "D",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "7ndl_B",
+   "pdb": "7ndl",
+   "chain": "B",
+   "resolution": 2.223,
+   "experimental_method": null
+  },
+  {
+   "unit": "7nlx_A",
+   "pdb": "7nlx",
+   "chain": "A",
+   "resolution": 2.234,
+   "experimental_method": null
+  },
+  {
+   "unit": "7o1i_A",
+   "pdb": "7o1i",
+   "chain": "A",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "7qoq_A",
+   "pdb": "7qoq",
+   "chain": "A",
+   "resolution": 1.93,
+   "experimental_method": null
+  },
+  {
+   "unit": "7qzr_D",
+   "pdb": "7qzr",
+   "chain": "D",
+   "resolution": 2.18,
+   "experimental_method": null
+  },
+  {
+   "unit": "7v8k_B",
+   "pdb": "7v8k",
+   "chain": "B",
+   "resolution": 2.47,
+   "experimental_method": null
+  },
+  {
+   "unit": "7w19_A",
+   "pdb": "7w19",
+   "chain": "A",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "7x0f_A",
+   "pdb": "7x0f",
+   "chain": "A",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "7x0g_B",
+   "pdb": "7x0g",
+   "chain": "B",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "7x0i_B",
+   "pdb": "7x0i",
+   "chain": "B",
+   "resolution": 1.7,
+   "experimental_method": null
+  },
+  {
+   "unit": "7xgf_E",
+   "pdb": "7xgf",
+   "chain": "E",
+   "resolution": 1.9,
+   "experimental_method": null
+  },
+  {
+   "unit": "7yjc_A",
+   "pdb": "7yjc",
+   "chain": "A",
+   "resolution": 2.3,
+   "experimental_method": null
+  },
+  {
+   "unit": "8aeq_A",
+   "pdb": "8aeq",
+   "chain": "A",
+   "resolution": 1.64,
+   "experimental_method": null
+  },
+  {
+   "unit": "8aqi_B",
+   "pdb": "8aqi",
+   "chain": "B",
+   "resolution": 1.99,
+   "experimental_method": null
+  },
+  {
+   "unit": "8b9p_A",
+   "pdb": "8b9p",
+   "chain": "A",
+   "resolution": 2.11,
+   "experimental_method": null
+  },
+  {
+   "unit": "8bre_B",
+   "pdb": "8bre",
+   "chain": "B",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "8gxj_C",
+   "pdb": "8gxj",
+   "chain": "C",
+   "resolution": 2.18,
+   "experimental_method": null
+  },
+  {
+   "unit": "8h27_A",
+   "pdb": "8h27",
+   "chain": "A",
+   "resolution": 2.04,
+   "experimental_method": null
+  },
+  {
+   "unit": "8i84_B",
+   "pdb": "8i84",
+   "chain": "B",
+   "resolution": 2.2,
+   "experimental_method": null
+  },
+  {
+   "unit": "8ias_B",
+   "pdb": "8ias",
+   "chain": "B",
+   "resolution": 2.0,
+   "experimental_method": null
+  },
+  {
+   "unit": "8j11_X",
+   "pdb": "8j11",
+   "chain": "X",
+   "resolution": 1.6,
+   "experimental_method": null
+  },
+  {
+   "unit": "8onn_E",
+   "pdb": "8onn",
+   "chain": "E",
+   "resolution": 2.1,
+   "experimental_method": null
+  },
+  {
+   "unit": "8u3n_A",
+   "pdb": "8u3n",
+   "chain": "A",
+   "resolution": 2.15,
+   "experimental_method": null
+  },
+  {
+   "unit": "8vxu_B",
+   "pdb": "8vxu",
+   "chain": "B",
+   "resolution": 2.29,
+   "experimental_method": null
+  },
+  {
+   "unit": "9atc_A",
+   "pdb": "9atc",
+   "chain": "A",
+   "resolution": 2.4,
+   "experimental_method": null
+  }
+ ]
+}

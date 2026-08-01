@@ -1,0 +1,73 @@
+{
+ "schema": "geoaudit.preregistered_resolution.v1",
+ "clinical_grade": false,
+ "declared": "confirmatory for the primary, descriptive for the covariates",
+ "reads_test_fold": true,
+ "written_before_any_stratified_number_existed": true,
+ "question": "does the counting field's deficit against pLM-NN narrow on the better-resolved half of the official test fold",
+ "hypothesis_and_its_source": {
+  "statement": "the deficit narrows as resolution improves, because a sequence model cannot be hurt by coordinate error and a geometry counter can",
+  "came_from": "results/external/SETBC_READ.json and AGENT_MEMORY 2p, where a modality effect was found on cryo-EM and confirmed by its own control. This read asks whether the same mechanism operates inside one modality",
+  "is_not": "a search over covariates. One covariate, one split, one direction, all named here"
+ },
+ "inputs": {
+  "per_unit_aucs": {
+   "artifact": "results/official_fold/RECOVERY_READ.json",
+   "sha256": "f795bcc70bf2485486eb6641396f940048681108d1897f1704253cdea7556819",
+   "why_this_one": "it already carries all four methods' per-unit ROC-AUC on the 192 units, computed through one harness, so no method is re-scored and no metric is recomputed"
+  },
+  "resolutions": {
+   "artifact": "results/official_fold/OFFICIAL_RESOLUTIONS.json",
+   "sha256": "f1e42b0f1edfedcef9fe5790714dffacdccb16b867618b95b1583b2f59ffa141"
+  }
+ },
+ "why_this_costs_a_read_index": "no model is re-run and no threshold is re-fitted, but a new statistic is formed over held-out units. A ledger that counted only re-runs would make an unlimited number of such statements free",
+ "strata": {
+  "cut_angstrom": 2.0,
+  "high": {
+   "definition": "resolution <= 2.0 A",
+   "n_units": 98
+  },
+  "low": {
+   "definition": "resolution > 2.0 A",
+   "n_units": 94
+  },
+  "why_two_and_not_a_ladder": "the fold's best conventional stratum, 1.5 A or better, holds 13 units and cannot carry an interval",
+  "what_was_inspected_before_fixing_the_cut": "the distribution of resolutions, which is a covariate. No score, label or difference was"
+ },
+ "primary": {
+  "statistic": "mean paired per-unit ROC-AUC difference, counting field minus pLM-NN, computed separately in each stratum",
+  "endpoint": "the difference of the two, high stratum minus low stratum. Positive means the deficit is smaller where the coordinates are better",
+  "n_bootstrap": 10000,
+  "seed": 20260801,
+  "resampling_unit": "the unit, resampled within its own stratum",
+  "alpha": 0.05,
+  "resolved_means": "the 95% interval of the difference excludes zero"
+ },
+ "control": {
+  "name": "p2rank_minus_plmnn_across_the_same_strata",
+  "what": "the identical endpoint with P2Rank in place of the counting field",
+  "why": "P2Rank reads coordinates too. If coordinate trustworthiness is the mechanism, its margin must move the same way",
+  "how_it_is_used": "if the counting field's endpoint resolves and P2Rank's has the opposite sign, the mechanism is not supported and the plan's sentence for that case is written below"
+ },
+ "covariates_reported_per_stratum": [
+  "mean chain length, because high-resolution structures are smaller and a per-unit AUC that rises on small chains reproduces this pattern with no coordinate argument",
+  "mean positive rate, because a stratum with denser labels is an easier ranking problem for every method"
+ ],
+ "outcome_sentences_written_in_advance": {
+  "narrows_and_the_control_agrees": "The deficit against pLM-NN narrows on the better-resolved half of the official test fold, and P2Rank's margin moves the same way. Both are consistent with the modality effect found on Set B and Set C: a sequence model is indifferent to coordinate error and a geometry counter is not. The deficit is therefore in part a property of the data, not only of the method.",
+  "narrows_but_the_control_disagrees": "The deficit against pLM-NN narrows on the better-resolved half, but P2Rank's margin does not move the same way. The coordinate-trustworthiness explanation is not supported by its own control, and the narrowing is recorded as an observation about this detector rather than as a mechanism.",
+  "does_not_resolve": "The difference between the two strata does not exclude zero. On 192 units split at 2.0 A the fold is too small to say whether the deficit depends on resolution, and the prediction from the cryo-EM read is neither supported nor refuted here.",
+  "widens": "The deficit against pLM-NN is larger on the better-resolved half of the fold, which is the opposite of what the cryo-EM modality effect predicts. The prediction is recorded as falsified.",
+  "a_covariate_explains_it": "The two strata differ in chain length or positive rate by enough that the stratum effect cannot be separated from them. The read is reported and no mechanism is claimed."
+ },
+ "changes_forbidden_after_this_file_is_committed": [
+  "the cut, the number of strata, the statistic, the seed or the bootstrap count",
+  "the substitution of a different covariate",
+  "any architecture or threshold of any method"
+ ],
+ "what_this_cannot_show": [
+  "that the counting field beats pLM-NN anywhere. A narrower deficit is still a deficit unless the interval says otherwise",
+  "anything causal about resolution. Resolution travels with crystal quality, protein size and flexibility, and only two of those are reported here"
+ ]
+}
