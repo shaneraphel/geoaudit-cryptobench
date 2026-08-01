@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "superseded": 21,
+    "superseded": 73,
     "cited": 78,
     "exploration": 43,
     "inventory": 6,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 160,
+  "n_artifacts": 212,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -707,6 +707,13 @@
       "bytes": 853771
     },
     {
+      "artifact": "results/baselines/PLMNN_SETBC_SEQUENCES.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.plmnn_sequences.v1",
+      "bytes": 317395
+    },
+    {
       "artifact": "results/baselines/POCKETMINER_EXTERNAL_SCORES.json",
       "class": "superseded",
       "reason": "an earlier frozen state, kept for the record",
@@ -854,11 +861,32 @@
       "bytes": 8814
     },
     {
+      "artifact": "results/external/SETBC_DIFFICULTY.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setbc_difficulty.v1",
+      "bytes": 10061
+    },
+    {
       "artifact": "results/external/SETBC_MATERIALISATION.json",
       "class": "superseded",
       "reason": "an earlier frozen state, kept for the record",
       "schema": "geoaudit.frozen_set_materialisation.v1",
       "bytes": 2991
+    },
+    {
+      "artifact": "results/external/SETBC_PER_STRUCTURE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": null,
+      "bytes": 2709
+    },
+    {
+      "artifact": "results/external/SETBC_SCORES.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setbc_scores.v1",
+      "bytes": 1429
     },
     {
       "artifact": "results/external/SETB_CANDIDATES.json",
@@ -901,6 +929,342 @@
       "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
       "schema": "geoaudit.setd_probe.v1",
       "bytes": 34852
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/12ec_J/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/29hb_e/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/8j0s_E/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/8jyl_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/8k8y_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/8udl_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/8vrn_E/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/8xxu_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/8yh8_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9b0x_F/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9b77_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9bdq_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9bji_F/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9e26_C/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9ebt_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9efq_B/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9gcu_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9gxk_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9hnp_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9hve_O/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9isq_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9itj_D/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9j3j_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9j3o_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9jc1_D/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9jnz_K/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9k53_E/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9m1j_G/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9mrq_D/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9n6c_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9nkg_C/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9nmr_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9nye_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9p8s_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9pio_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9qh7_F/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9rgd_B/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9sgy_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9t0e_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9u6f_B/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9ud2_C/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9uks_D/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9vhe_D/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9waj_A/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_p2rank_raw/9x94_B/run.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.p2rank_raw_run.v1",
+      "bytes": 1036
+    },
+    {
+      "artifact": "results/external/setbc_predictions/geometry_field.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setbc_prediction.geometry_field.v1",
+      "bytes": 945783
+    },
+    {
+      "artifact": "results/external/setbc_predictions/p2rank.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setbc_prediction.p2rank.v1",
+      "bytes": 624151
+    },
+    {
+      "artifact": "results/external/setbc_predictions/table_field.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setbc_prediction.table_field.v1",
+      "bytes": 957395
     },
     {
       "artifact": "results/gf4_ablation/GF4_ALLELE_ABLATION.json",

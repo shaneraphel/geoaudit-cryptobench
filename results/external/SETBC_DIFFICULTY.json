@@ -1,0 +1,422 @@
+{
+  "schema": "geoaudit.setbc_difficulty.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": false,
+  "why_this_declares_no_read": "label metadata and receptor coordinates only. No prediction is opened and nothing is compared against a label. It exists to be committed before the read",
+  "question": "what shape are the frozen cryo-EM sets, and does the confound found on Set A apply to them more strongly",
+  "label_geometry": {
+    "official_test_fold": {
+      "n_units": 192,
+      "chain_length": {
+        "median": 290.5,
+        "mean": 301.2291666666667
+      },
+      "cryptic_residues": {
+        "median": 16.0,
+        "mean": 17.192708333333332
+      },
+      "positive_rate": {
+        "median": 0.061526126587935305,
+        "mean": 0.06980681523610678
+      },
+      "share_under_ten_cryptic": 0.22395833333333334,
+      "share_over_twentytwo_cryptic": 0.23958333333333334
+    },
+    "external_set_a": {
+      "n_units": 57,
+      "chain_length": {
+        "median": 336.0,
+        "mean": 345.87719298245617
+      },
+      "cryptic_residues": {
+        "median": 14.0,
+        "mean": 15.87719298245614
+      },
+      "positive_rate": {
+        "median": 0.043478260869565216,
+        "mean": 0.055360053611961925
+      },
+      "share_under_ten_cryptic": 0.24561403508771928,
+      "share_over_twentytwo_cryptic": 0.22807017543859648
+    },
+    "set_b": {
+      "n_units": 7,
+      "chain_length": {
+        "median": 565.0,
+        "mean": 659.8571428571429,
+        "max": 1362.0
+      },
+      "cryptic_residues": {
+        "median": 17.0,
+        "mean": 16.428571428571427
+      },
+      "positive_rate": {
+        "median": 0.03225806451612903,
+        "mean": 0.04032155465156668
+      },
+      "share_under_ten_cryptic": 0.14285714285714285
+    },
+    "set_c": {
+      "n_units": 38,
+      "chain_length": {
+        "median": 465.0,
+        "mean": 670.6052631578947,
+        "max": 4397.0
+      },
+      "cryptic_residues": {
+        "median": 17.0,
+        "mean": 15.368421052631579
+      },
+      "positive_rate": {
+        "median": 0.03442801520348568,
+        "mean": 0.032924367014231216
+      },
+      "share_under_ten_cryptic": 0.21052631578947367
+    },
+    "set_b_and_c_pooled": {
+      "n_units": 45,
+      "chain_length": {
+        "median": 469.0,
+        "mean": 668.9333333333333,
+        "max": 4397.0
+      },
+      "cryptic_residues": {
+        "median": 17.0,
+        "mean": 15.533333333333333
+      },
+      "positive_rate": {
+        "median": 0.03260869565217391,
+        "mean": 0.03407504064670562
+      },
+      "share_under_ten_cryptic": 0.2
+    }
+  },
+  "the_confound_named_before_the_read": {
+    "what": "geometry_field reads more context than table_field: void topology is computed from a chain's whole Delaunay tetrahedralisation and convex hull, and the three aggregations reach two steps out on the contact graph. If a longer chain inflates whichever method reads further, then geometry_field minus table_field on these sets could exceed the training fold's +0.0121 for a reason unrelated to the four families generalising",
+    "why_it_applies_here_more_than_to_set_a": "the median chain is 469 residues against 290 for the official fold and 336 for Set A, and the median positive rate is 3.26% against 6.15%",
+    "the_control": {
+      "method": "p2rank",
+      "why": "it reads local surface geometry and moved +0.0035 between the official fold and Set A while pLM-NN moved +0.0517. If P2Rank jumps on these sets they are simply easier and no method's gain is informative; if it stays flat while the context-readers rise, the confound is live"
+    },
+    "where_it_would_show_up": "the per-unit comparison split by pocket size, already a secondary analysis in PREREGISTERED_SETBC.json. A context-driven inflation appears as an interaction rather than a level shift",
+    "what_no_analysis_here_can_fix": "45 units cannot separate a context effect from a generalisation effect. If the read is positive, the honest claim is that the stack transfers on sets of this shape, and this shape is not the benchmark's"
+  },
+  "per_unit": [
+    {
+      "unit": "8jyl_A",
+      "set": "set_b",
+      "n_residues": 527,
+      "n_cryptic": 17,
+      "resolution": 2.33
+    },
+    {
+      "unit": "9vhe_D",
+      "set": "set_b",
+      "n_residues": 429,
+      "n_cryptic": 19,
+      "resolution": 2.5
+    },
+    {
+      "unit": "9m1j_G",
+      "set": "set_b",
+      "n_residues": 184,
+      "n_cryptic": 23,
+      "resolution": 2.14
+    },
+    {
+      "unit": "8udl_A",
+      "set": "set_b",
+      "n_residues": 974,
+      "n_cryptic": 14,
+      "resolution": 2.37
+    },
+    {
+      "unit": "9sgy_A",
+      "set": "set_b",
+      "n_residues": 565,
+      "n_cryptic": 16,
+      "resolution": 2.34
+    },
+    {
+      "unit": "9u6f_B",
+      "set": "set_b",
+      "n_residues": 578,
+      "n_cryptic": 19,
+      "resolution": 2.2
+    },
+    {
+      "unit": "9uks_D",
+      "set": "set_b",
+      "n_residues": 1362,
+      "n_cryptic": 7,
+      "resolution": 2.33
+    },
+    {
+      "unit": "9ebt_A",
+      "set": "set_c",
+      "n_residues": 604,
+      "n_cryptic": 23,
+      "resolution": 2.36
+    },
+    {
+      "unit": "8k8y_A",
+      "set": "set_c",
+      "n_residues": 719,
+      "n_cryptic": 23,
+      "resolution": 2.54
+    },
+    {
+      "unit": "9p8s_A",
+      "set": "set_c",
+      "n_residues": 453,
+      "n_cryptic": 8,
+      "resolution": 2.37
+    },
+    {
+      "unit": "9b0x_F",
+      "set": "set_c",
+      "n_residues": 469,
+      "n_cryptic": 18,
+      "resolution": 2.6
+    },
+    {
+      "unit": "9n6c_A",
+      "set": "set_c",
+      "n_residues": 425,
+      "n_cryptic": 17,
+      "resolution": 2.99
+    },
+    {
+      "unit": "9bji_F",
+      "set": "set_c",
+      "n_residues": 453,
+      "n_cryptic": 17,
+      "resolution": 2.83
+    },
+    {
+      "unit": "29hb_e",
+      "set": "set_c",
+      "n_residues": 563,
+      "n_cryptic": 4,
+      "resolution": 2.8
+    },
+    {
+      "unit": "9waj_A",
+      "set": "set_c",
+      "n_residues": 981,
+      "n_cryptic": 22,
+      "resolution": 2.39
+    },
+    {
+      "unit": "9pio_A",
+      "set": "set_c",
+      "n_residues": 297,
+      "n_cryptic": 21,
+      "resolution": 2.61
+    },
+    {
+      "unit": "12ec_J",
+      "set": "set_c",
+      "n_residues": 1338,
+      "n_cryptic": 8,
+      "resolution": 2.6
+    },
+    {
+      "unit": "9gcu_A",
+      "set": "set_c",
+      "n_residues": 418,
+      "n_cryptic": 12,
+      "resolution": 2.8
+    },
+    {
+      "unit": "9ud2_C",
+      "set": "set_c",
+      "n_residues": 257,
+      "n_cryptic": 17,
+      "resolution": 2.59
+    },
+    {
+      "unit": "9x94_B",
+      "set": "set_c",
+      "n_residues": 747,
+      "n_cryptic": 18,
+      "resolution": 2.57
+    },
+    {
+      "unit": "8vrn_E",
+      "set": "set_c",
+      "n_residues": 333,
+      "n_cryptic": 4,
+      "resolution": 2.57
+    },
+    {
+      "unit": "9nmr_A",
+      "set": "set_c",
+      "n_residues": 4397,
+      "n_cryptic": 8,
+      "resolution": 2.91
+    },
+    {
+      "unit": "8yh8_A",
+      "set": "set_c",
+      "n_residues": 474,
+      "n_cryptic": 12,
+      "resolution": 2.7
+    },
+    {
+      "unit": "9rgd_B",
+      "set": "set_c",
+      "n_residues": 344,
+      "n_cryptic": 13,
+      "resolution": 2.0
+    },
+    {
+      "unit": "9jnz_K",
+      "set": "set_c",
+      "n_residues": 525,
+      "n_cryptic": 23,
+      "resolution": 3.0
+    },
+    {
+      "unit": "9hve_O",
+      "set": "set_c",
+      "n_residues": 460,
+      "n_cryptic": 15,
+      "resolution": 2.7
+    },
+    {
+      "unit": "9jc1_D",
+      "set": "set_c",
+      "n_residues": 464,
+      "n_cryptic": 19,
+      "resolution": 2.79
+    },
+    {
+      "unit": "9efq_B",
+      "set": "set_c",
+      "n_residues": 373,
+      "n_cryptic": 5,
+      "resolution": 2.96
+    },
+    {
+      "unit": "9nkg_C",
+      "set": "set_c",
+      "n_residues": 389,
+      "n_cryptic": 22,
+      "resolution": 2.8
+    },
+    {
+      "unit": "9k53_E",
+      "set": "set_c",
+      "n_residues": 389,
+      "n_cryptic": 5,
+      "resolution": 2.5
+    },
+    {
+      "unit": "9hnp_A",
+      "set": "set_c",
+      "n_residues": 383,
+      "n_cryptic": 19,
+      "resolution": 2.53
+    },
+    {
+      "unit": "9isq_A",
+      "set": "set_c",
+      "n_residues": 877,
+      "n_cryptic": 28,
+      "resolution": 2.52
+    },
+    {
+      "unit": "9b77_A",
+      "set": "set_c",
+      "n_residues": 313,
+      "n_cryptic": 15,
+      "resolution": 2.74
+    },
+    {
+      "unit": "9mrq_D",
+      "set": "set_c",
+      "n_residues": 1269,
+      "n_cryptic": 8,
+      "resolution": 2.97
+    },
+    {
+      "unit": "8j0s_E",
+      "set": "set_c",
+      "n_residues": 469,
+      "n_cryptic": 17,
+      "resolution": 2.58
+    },
+    {
+      "unit": "9j3j_A",
+      "set": "set_c",
+      "n_residues": 490,
+      "n_cryptic": 19,
+      "resolution": 2.83
+    },
+    {
+      "unit": "9gxk_A",
+      "set": "set_c",
+      "n_residues": 692,
+      "n_cryptic": 22,
+      "resolution": 2.97
+    },
+    {
+      "unit": "9qh7_F",
+      "set": "set_c",
+      "n_residues": 139,
+      "n_cryptic": 10,
+      "resolution": 2.9
+    },
+    {
+      "unit": "9nye_A",
+      "set": "set_c",
+      "n_residues": 307,
+      "n_cryptic": 18,
+      "resolution": 2.79
+    },
+    {
+      "unit": "9itj_D",
+      "set": "set_c",
+      "n_residues": 466,
+      "n_cryptic": 19,
+      "resolution": 2.84
+    },
+    {
+      "unit": "9t0e_A",
+      "set": "set_c",
+      "n_residues": 1671,
+      "n_cryptic": 15,
+      "resolution": 2.3
+    },
+    {
+      "unit": "9bdq_A",
+      "set": "set_c",
+      "n_residues": 1301,
+      "n_cryptic": 16,
+      "resolution": 2.26
+    },
+    {
+      "unit": "9e26_C",
+      "set": "set_c",
+      "n_residues": 422,
+      "n_cryptic": 18,
+      "resolution": 2.8
+    },
+    {
+      "unit": "9j3o_A",
+      "set": "set_c",
+      "n_residues": 496,
+      "n_cryptic": 13,
+      "resolution": 2.9
+    },
+    {
+      "unit": "8xxu_A",
+      "set": "set_c",
+      "n_residues": 316,
+      "n_cryptic": 13,
+      "resolution": 2.54
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "geoaudit.setbc_scores.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "reads_any_external_unit": true,
+  "what_this_is": "raw per-residue scores for five methods on the 45 units of the frozen cryo-EM sets, under the plan committed before it ran",
+  "no_comparison_is_made_here": "not one score is compared against a label in this file. The comparison is tools/setbc_read.py, kept separate so that a mistake in it does not cost the scoring",
+  "plan": {
+    "artifact": "results/external/PREREGISTERED_SETBC.json",
+    "sha256": "6c779efbc5f23068f53e5395c09c8f7278f68705745feac0f15d68ca37733fa8"
+  },
+  "manifest_sha256": "789526b433b3d1920bcf6bc84fd169493d068df0270d34c9241f9b62e4529dbf",
+  "n_units": 45,
+  "methods_archived": [
+    "geometry_field",
+    "p2rank",
+    "table_field"
+  ],
+  "archives": {
+    "geometry_field": {
+      "path": "results/external/setbc_predictions/geometry_field.json",
+      "sha256": "156c7014bfebe827d28c55047ffafff153462db556f9665d27c542595105922e"
+    },
+    "p2rank": {
+      "path": "results/external/setbc_predictions/p2rank.json",
+      "sha256": "7b688b8bfd9aa86b41b1c81b58d5a961805ac536d88bac43b9f728c9b59d0e75"
+    },
+    "table_field": {
+      "path": "results/external/setbc_predictions/table_field.json",
+      "sha256": "41f5e67589c0f3b4f20006ade1246f06494bbec51ff91c99ebc7e1fb7cd19c2a"
+    }
+  },
+  "head": "973021c05ad90c060372433a79d95b3cc3158561"
+}
