@@ -1,0 +1,3546 @@
+{
+ "schema": "geoaudit.setn_set.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "no_method_has_been_run": true,
+ "question": "on chains that were examined against every deposited holo partner and shown to have no cryptic pocket, how often does each method call one anyway",
+ "why_this_is_not_a_second_read_of_set_a": "these units are disjoint from Set A's 57 by construction --- one unit per UniRef50 cluster, and a cluster contributes either a positive or a negative and never both. Set A's preregistered read compared per-unit ROC-AUC over units that have positives; no residue of any unit here was part of it",
+ "provenance": {
+  "selected_by": "tools/build_external_set.py, imported unedited",
+  "verdicts_rederived_by": "tools/setn_inventory.py",
+  "inventory_sha256": "cfaadb0895298691e6f5436b13402cb6eba334589e438c174b179905fcdc6683",
+  "frozen_positives_reproduced_identically": true
+ },
+ "externality": {
+  "cutoff": "2024-05-08",
+  "no_uniref50_cluster_shared_with_cryptobench": true,
+  "clusters_disjoint_from_set_a": true
+ },
+ "n_units": 327,
+ "n_clusters": 327,
+ "n_pairs_decided_not_cryptic": 1706,
+ "receptors": {
+  "directory": "data/external/setn_receptors",
+  "n": 327,
+  "writer": "pocket_bench.pdb_io.write_receptor_only_pdb",
+  "dropped": [
+   {
+    "unit": "8rtr_AAA",
+    "why": "receptor too small (0 heavy atoms) for data/external/setn_receptors/8rtr_AAA_receptor.pdb"
+   },
+   {
+    "unit": "9glh_AAA",
+    "why": "receptor too small (0 heavy atoms) for data/external/setn_receptors/9glh_AAA_receptor.pdb"
+   },
+   {
+    "unit": "9ju0_AAA",
+    "why": "receptor too small (0 heavy atoms) for data/external/setn_receptors/9ju0_AAA_receptor.pdb"
+   },
+   {
+    "unit": "9sqj_CCC",
+    "why": "receptor too small (0 heavy atoms) for data/external/setn_receptors/9sqj_CCC_receptor.pdb"
+   },
+   {
+    "unit": "9t4y_AAA",
+    "why": "receptor too small (0 heavy atoms) for data/external/setn_receptors/9t4y_AAA_receptor.pdb"
+   },
+   {
+    "unit": "9thq_AAA",
+    "why": "receptor too small (0 heavy atoms) for data/external/setn_receptors/9thq_AAA_receptor.pdb"
+   }
+  ],
+  "atoms_the_legacy_format_could_not_hold": {
+   "24uh_A": [
+    "residue name 'A1MFS' or atom name 'C11' is wider than the format allows"
+   ],
+   "36td_B": [
+    "residue name 'A1DLL' or atom name 'O1' is wider than the format allows"
+   ],
+   "7hbs_A": [
+    "residue name 'A1AXX' or atom name 'C1' is wider than the format allows"
+   ],
+   "8rma_A": [
+    "residue name 'A1H1U' or atom name 'B2' is wider than the format allows"
+   ],
+   "8rmi_A": [
+    "residue name 'A1H1Z' or atom name 'C10' is wider than the format allows"
+   ],
+   "8rtr_AAA": [
+    "chain identifier 'AAA' needs more than the one column the PDB format has",
+    "chain identifier 'BBB' needs more than the one column the PDB format has",
+    "chain identifier 'AeA' needs more than the one column the PDB format has",
+    "chain identifier 'AhA' needs more than the one column the PDB format has",
+    "chain identifier 'BeB' needs more than the one column the PDB format has",
+    "chain identifier 'BhB' needs more than the one column the PDB format has"
+   ],
+   "8v3n_A": [
+    "residue name 'A1AAG' or atom name 'C01' is wider than the format allows"
+   ],
+   "8z2w_A": [
+    "residue name 'A1L0T' or atom name 'C1' is wider than the format allows"
+   ],
+   "8zxu_A": [
+    "residue name 'A1L2G' or atom name 'C01' is wider than the format allows"
+   ],
+   "9blv_B": [
+    "residue name 'A1A2Z' or atom name 'N' is wider than the format allows"
+   ],
+   "9bn9_A": [
+    "residue name 'A1AQS' or atom name 'C2' is wider than the format allows"
+   ],
+   "9cky_A": [
+    "residue name 'A1AXI' or atom name 'N1' is wider than the format allows"
+   ],
+   "9cpz_A": [
+    "residue name 'A1AZK' or atom name 'C4' is wider than the format allows"
+   ],
+   "9cud_A": [
+    "residue name 'A1A4W' or atom name 'N1' is wider than the format allows"
+   ],
+   "9doj_A": [
+    "residue name 'A1A8U' or atom name 'N1' is wider than the format allows"
+   ],
+   "9dsx_E": [
+    "residue name 'A1BCB' or atom name 'C10' is wider than the format allows"
+   ],
+   "9eez_A": [
+    "residue name 'A1BHT' or atom name 'C4' is wider than the format allows"
+   ],
+   "9efr_A": [
+    "residue name 'A1BHX' or atom name 'C13' is wider than the format allows"
+   ],
+   "9f09_A": [
+    "residue name 'A1H8P' or atom name 'C1' is wider than the format allows"
+   ],
+   "9f0t_A": [
+    "residue name 'A1H8S' or atom name 'O3' is wider than the format allows"
+   ],
+   "9f8n_A": [
+    "residue name 'A1IAD' or atom name 'C10' is wider than the format allows"
+   ],
+   "9f96_A": [
+    "residue name 'A1IAW' or atom name 'N1' is wider than the format allows"
+   ],
+   "9fs0_A": [
+    "residue name 'A1IFY' or atom name 'C10' is wider than the format allows"
+   ],
+   "9gjr_A": [
+    "residue name 'A1IMI' or atom name 'C5' is wider than the format allows"
+   ],
+   "9gk6_A": [
+    "residue name 'A1IMM' or atom name 'N1' is wider than the format allows"
+   ],
+   "9glh_AAA": [
+    "chain identifier 'AAA' needs more than the one column the PDB format has"
+   ],
+   "9gmy_E": [
+    "residue name 'A1IM9' or atom name 'C1' is wider than the format allows"
+   ],
+   "9h18_A": [
+    "residue name 'A1IYS' or atom name 'C23' is wider than the format allows"
+   ],
+   "9h1e_A": [
+    "residue name 'A1IRS' or atom name 'C02' is wider than the format allows"
+   ],
+   "9h37_A": [
+    "residue name 'A1IR0' or atom name 'N1' is wider than the format allows"
+   ],
+   "9hh7_A": [
+    "residue name 'A1IUW' or atom name 'N1' is wider than the format allows"
+   ],
+   "9hpx_A": [
+    "residue name 'A1IW2' or atom name 'C1' is wider than the format allows"
+   ],
+   "9ju0_AAA": [
+    "chain identifier 'AAA' needs more than the one column the PDB format has",
+    "chain identifier 'BBB' needs more than the one column the PDB format has",
+    "chain identifier 'CCC' needs more than the one column the PDB format has",
+    "chain identifier 'DDD' needs more than the one column the PDB format has",
+    "chain identifier 'AaA' needs more than the one column the PDB format has",
+    "chain identifier 'BaB' needs more than the one column the PDB format has",
+    "chain identifier 'CaC' needs more than the one column the PDB format has",
+    "chain identifier 'DaD' needs more than the one column the PDB format has"
+   ],
+   "9keh_A": [
+    "residue name 'A1L5R' or atom name 'C1' is wider than the format allows"
+   ],
+   "9klx_A": [
+    "residue name 'A1EKQ' or atom name 'C10' is wider than the format allows"
+   ],
+   "9kyh_B": [
+    "residue name 'A1EHT' or atom name 'N1' is wider than the format allows"
+   ],
+   "9l8v_A": [
+    "chain identifier 'B00Z' needs more than the one column the PDB format has"
+   ],
+   "9ldd_A": [
+    "residue name 'A1EJT' or atom name 'C1' is wider than the format allows"
+   ],
+   "9les_B": [
+    "residue name 'A1EKF' or atom name 'C02' is wider than the format allows"
+   ],
+   "9lqg_A": [
+    "residue name 'A1IJB' or atom name 'C1' is wider than the format allows"
+   ],
+   "9lzg_A": [
+    "residue name 'A1L8C' or atom name 'OAL' is wider than the format allows"
+   ],
+   "9mk5_A": [
+    "residue name 'A1BMH' or atom name 'C02' is wider than the format allows"
+   ],
+   "9omm_A": [
+    "residue name 'A1CCW' or atom name 'C15' is wider than the format allows"
+   ],
+   "9op2_A": [
+    "residue name 'A1IF9' or atom name 'C29' is wider than the format allows"
+   ],
+   "9p0r_A": [
+    "residue name 'A1CFJ' or atom name 'C12' is wider than the format allows"
+   ],
+   "9paj_A": [
+    "residue name 'A1CHJ' or atom name 'C1' is wider than the format allows"
+   ],
+   "9pca_A": [
+    "residue name 'A1CHO' or atom name 'C2' is wider than the format allows"
+   ],
+   "9qf7_A": [
+    "residue name 'A1IZI' or atom name 'C1' is wider than the format allows"
+   ],
+   "9rfe_A": [
+    "residue name 'A1JFJ' or atom name 'C4' is wider than the format allows"
+   ],
+   "9rg4_A": [
+    "residue name 'A1JHS' or atom name 'OAH' is wider than the format allows"
+   ],
+   "9rr6_A": [
+    "residue name 'A1JIR' or atom name 'N1' is wider than the format allows"
+   ],
+   "9s8z_A": [
+    "residue name 'A1JMH' or atom name 'C11' is wider than the format allows"
+   ],
+   "9s96_A": [
+    "residue name 'A1JMF' or atom name 'C1' is wider than the format allows"
+   ],
+   "9sga_A": [
+    "residue name 'A1JNU' or atom name 'C4' is wider than the format allows"
+   ],
+   "9sqj_CCC": [
+    "chain identifier 'AAA' needs more than the one column the PDB format has",
+    "chain identifier 'CCC' needs more than the one column the PDB format has",
+    "chain identifier 'BBB' needs more than the one column the PDB format has",
+    "chain identifier 'DDD' needs more than the one column the PDB format has"
+   ],
+   "9sxi_A": [
+    "residue name 'A1JSF' or atom name 'C1' is wider than the format allows"
+   ],
+   "9t4y_AAA": [
+    "chain identifier 'AAA' needs more than the one column the PDB format has",
+    "chain identifier 'BBB' needs more than the one column the PDB format has",
+    "chain identifier 'CCC' needs more than the one column the PDB format has",
+    "chain identifier 'DDD' needs more than the one column the PDB format has"
+   ],
+   "9t9f_A": [
+    "residue name 'A1JUR' or atom name 'C2' is wider than the format allows"
+   ],
+   "9thq_AAA": [
+    "chain identifier 'AAA' needs more than the one column the PDB format has"
+   ],
+   "9tme_A": [
+    "residue name 'A1JWS' or atom name 'N1' is wider than the format allows"
+   ],
+   "9tp9_B": [
+    "residue name 'A1JW8' or atom name 'C16' is wider than the format allows"
+   ],
+   "9wdd_A": [
+    "residue name 'A1MBG' or atom name 'C13' is wider than the format allows"
+   ],
+   "9x2v_A": [
+    "residue name 'A1MCG' or atom name 'C17' is wider than the format allows"
+   ],
+   "9xfx_A": [
+    "residue name 'A1MCI' or atom name 'N1' is wider than the format allows"
+   ]
+  }
+ },
+ "labels": {
+  "directory": "data/external/setn_labels",
+  "every_cryptic_residue_list_is_empty_by_construction": true
+ },
+ "manifest": "data/external/setn_manifest.json",
+ "units": [
+  {
+   "apo_pdb": "10fs",
+   "apo_chain": "A",
+   "uniprot": "P09769",
+   "cluster": "UniRef50_P07947",
+   "resolution": 1.3,
+   "released": "2026-07-15",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "10qg",
+   "apo_chain": "A",
+   "uniprot": "Q73QH2",
+   "cluster": "UniRef50_Q73QH2",
+   "resolution": 1.549,
+   "released": "2026-02-25",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "10tw",
+   "apo_chain": "A",
+   "uniprot": "P09242",
+   "cluster": "UniRef50_P09242",
+   "resolution": 2.12,
+   "released": "2026-04-22",
+   "n_partners_available": 11,
+   "n_pairs_decided_not_cryptic": 13
+  },
+  {
+   "apo_pdb": "11ao",
+   "apo_chain": "A",
+   "uniprot": "O70348",
+   "cluster": "UniRef50_O77932",
+   "resolution": 1.59,
+   "released": "2026-06-10",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "21ej",
+   "apo_chain": "A",
+   "uniprot": "Q9X1H0",
+   "cluster": "UniRef50_A0ABF7PFY6",
+   "resolution": 1.035,
+   "released": "2026-06-17",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "24ao",
+   "apo_chain": "A",
+   "uniprot": "Q9HB07",
+   "cluster": "UniRef50_Q9HB07",
+   "resolution": 1.81,
+   "released": "2026-04-22",
+   "n_partners_available": 11,
+   "n_pairs_decided_not_cryptic": 19
+  },
+  {
+   "apo_pdb": "24uh",
+   "apo_chain": "A",
+   "uniprot": "Q8TF76",
+   "cluster": "UniRef50_Q8TF76",
+   "resolution": 1.73,
+   "released": "2026-06-24",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "27fm",
+   "apo_chain": "A",
+   "uniprot": "P04406",
+   "cluster": "UniRef50_P04406",
+   "resolution": 1.46,
+   "released": "2026-07-15",
+   "n_partners_available": 7,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "35wd",
+   "apo_chain": "A",
+   "uniprot": "F6K7G0",
+   "cluster": "UniRef50_A0A318M6V1",
+   "resolution": 2.2,
+   "released": "2026-06-17",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "36td",
+   "apo_chain": "B",
+   "uniprot": "P48735",
+   "cluster": "UniRef50_P48735",
+   "resolution": 2.0,
+   "released": "2026-07-22",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "36zf",
+   "apo_chain": "A",
+   "uniprot": "Q13UJ9",
+   "cluster": "UniRef50_Q1LR34",
+   "resolution": 2.05,
+   "released": "2026-07-15",
+   "n_partners_available": 16,
+   "n_pairs_decided_not_cryptic": 16
+  },
+  {
+   "apo_pdb": "37eq",
+   "apo_chain": "A",
+   "uniprot": "Q4QIU2",
+   "cluster": "UniRef50_Q581Z0",
+   "resolution": 2.07,
+   "released": "2026-07-29",
+   "n_partners_available": 11,
+   "n_pairs_decided_not_cryptic": 11
+  },
+  {
+   "apo_pdb": "7g2w",
+   "apo_chain": "A",
+   "uniprot": "Q64610",
+   "cluster": "UniRef50_Q9R1E6",
+   "resolution": 1.25,
+   "released": "2024-12-18",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "7hbs",
+   "apo_chain": "A",
+   "uniprot": "P07900",
+   "cluster": "UniRef50_P08238",
+   "resolution": 1.38,
+   "released": "2025-03-26",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "7hll",
+   "apo_chain": "B",
+   "uniprot": "Q62191",
+   "cluster": "UniRef50_Q62191",
+   "resolution": 1.15,
+   "released": "2024-11-27",
+   "n_partners_available": 31,
+   "n_pairs_decided_not_cryptic": 19
+  },
+  {
+   "apo_pdb": "8hj6",
+   "apo_chain": "A",
+   "uniprot": "Q9XEI3",
+   "cluster": "UniRef50_A0AA38GL64",
+   "resolution": 1.79,
+   "released": "2024-12-25",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8is6",
+   "apo_chain": "A",
+   "uniprot": "B9UXM0",
+   "cluster": "UniRef50_A0ABM8YU23",
+   "resolution": 2.0,
+   "released": "2024-06-26",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "8juq",
+   "apo_chain": "I",
+   "uniprot": "L0RVU0",
+   "cluster": "UniRef50_L0RVU0",
+   "resolution": 2.21,
+   "released": "2024-07-03",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 11
+  },
+  {
+   "apo_pdb": "8k1g",
+   "apo_chain": "A",
+   "uniprot": "A6TGD6",
+   "cluster": "UniRef50_P0A9S5",
+   "resolution": 2.09,
+   "released": "2024-05-29",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8kbe",
+   "apo_chain": "A",
+   "uniprot": "P0DW58",
+   "cluster": "UniRef50_P0DW58",
+   "resolution": 2.16,
+   "released": "2024-08-07",
+   "n_partners_available": 15,
+   "n_pairs_decided_not_cryptic": 29
+  },
+  {
+   "apo_pdb": "8kfj",
+   "apo_chain": "A",
+   "uniprot": "P02185",
+   "cluster": "UniRef50_P02185",
+   "resolution": 1.9,
+   "released": "2024-08-21",
+   "n_partners_available": 8,
+   "n_pairs_decided_not_cryptic": 9
+  },
+  {
+   "apo_pdb": "8pjf",
+   "apo_chain": "A",
+   "uniprot": "P01903",
+   "cluster": "UniRef50_P01903",
+   "resolution": 1.48,
+   "released": "2024-06-19",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8pne",
+   "apo_chain": "A",
+   "uniprot": "P0A8Y3",
+   "cluster": "UniRef50_P0A8Y3",
+   "resolution": 1.9,
+   "released": "2024-07-10",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8pu5",
+   "apo_chain": "B",
+   "uniprot": "Q9I612",
+   "cluster": "UniRef50_A0A2U8FML9",
+   "resolution": 1.44,
+   "released": "2025-02-12",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "8qdg",
+   "apo_chain": "A",
+   "uniprot": "Q9Y5N5",
+   "cluster": "UniRef50_Q9Y5N5",
+   "resolution": 1.392,
+   "released": "2024-09-11",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8qfr",
+   "apo_chain": "B",
+   "uniprot": "A0A840P3H4",
+   "cluster": "UniRef50_A0A917RPD3",
+   "resolution": 2.2,
+   "released": "2024-09-11",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8qfw",
+   "apo_chain": "B",
+   "uniprot": "P60487",
+   "cluster": "UniRef50_Q96GD0",
+   "resolution": 2.0,
+   "released": "2024-06-12",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8qj5",
+   "apo_chain": "B",
+   "uniprot": "A0A2V0R8Q9",
+   "cluster": "UniRef50_A0A2V0R8Q9",
+   "resolution": 1.63,
+   "released": "2024-09-25",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8qpm",
+   "apo_chain": "A",
+   "uniprot": "Q58929",
+   "cluster": "UniRef50_Q58929",
+   "resolution": 1.8,
+   "released": "2024-05-29",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8qr7",
+   "apo_chain": "A",
+   "uniprot": "P63086",
+   "cluster": "UniRef50_P28482",
+   "resolution": 1.51,
+   "released": "2025-04-16",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "8qrj",
+   "apo_chain": "A",
+   "uniprot": "G9BY57",
+   "cluster": "UniRef50_G9BY57",
+   "resolution": 1.42,
+   "released": "2024-09-18",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8qsw",
+   "apo_chain": "A",
+   "uniprot": "Q5T280",
+   "cluster": "UniRef50_Q5T280",
+   "resolution": 2.5,
+   "released": "2024-10-23",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8qtx",
+   "apo_chain": "A",
+   "uniprot": "P06276",
+   "cluster": "UniRef50_P06276",
+   "resolution": 2.12,
+   "released": "2024-10-23",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "8qvz",
+   "apo_chain": "A",
+   "uniprot": "Q13232",
+   "cluster": "UniRef50_Q13232",
+   "resolution": 1.774,
+   "released": "2024-09-18",
+   "n_partners_available": 30,
+   "n_pairs_decided_not_cryptic": 20
+  },
+  {
+   "apo_pdb": "8qza",
+   "apo_chain": "A",
+   "uniprot": "Q2VEQ7",
+   "cluster": "UniRef50_Q2VEQ7",
+   "resolution": 2.252,
+   "released": "2025-08-06",
+   "n_partners_available": 8,
+   "n_pairs_decided_not_cryptic": 8
+  },
+  {
+   "apo_pdb": "8r4z",
+   "apo_chain": "A",
+   "uniprot": "D5FKJ3",
+   "cluster": "UniRef50_D5FKJ3",
+   "resolution": 1.54,
+   "released": "2024-07-03",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8r6z",
+   "apo_chain": "A",
+   "uniprot": "Q89ZG7",
+   "cluster": "UniRef50_Q89ZG7",
+   "resolution": 2.03,
+   "released": "2024-12-04",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 9
+  },
+  {
+   "apo_pdb": "8rbe",
+   "apo_chain": "A",
+   "uniprot": "P9WPB1",
+   "cluster": "UniRef50_P9WPB1",
+   "resolution": 1.9,
+   "released": "2024-12-11",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "8rd7",
+   "apo_chain": "A",
+   "uniprot": "Q7Z6Z7",
+   "cluster": "UniRef50_Q7Z6Z7",
+   "resolution": 1.31,
+   "released": "2024-07-31",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8re5",
+   "apo_chain": "A",
+   "uniprot": "Q12797",
+   "cluster": "UniRef50_Q12797",
+   "resolution": 1.7,
+   "released": "2024-12-18",
+   "n_partners_available": 15,
+   "n_pairs_decided_not_cryptic": 18
+  },
+  {
+   "apo_pdb": "8rlk",
+   "apo_chain": "E",
+   "uniprot": "Q9HT32",
+   "cluster": "UniRef50_Q9HT32",
+   "resolution": 2.0,
+   "released": "2024-08-14",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "8rly",
+   "apo_chain": "B",
+   "uniprot": "P0A6C1",
+   "cluster": "UniRef50_P0A6C1",
+   "resolution": 1.9,
+   "released": "2024-12-11",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8rma",
+   "apo_chain": "A",
+   "uniprot": "W1DN50",
+   "cluster": "UniRef50_P28585",
+   "resolution": 0.83,
+   "released": "2025-01-29",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8rmi",
+   "apo_chain": "A",
+   "uniprot": "Q9I116",
+   "cluster": "UniRef50_Q9I116",
+   "resolution": 2.48,
+   "released": "2024-11-20",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "8rod",
+   "apo_chain": "A",
+   "uniprot": "Q14683",
+   "cluster": "UniRef50_Q14683",
+   "resolution": 1.5,
+   "released": "2024-09-11",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "8rs8",
+   "apo_chain": "A",
+   "uniprot": "P38398",
+   "cluster": "UniRef50_P38398",
+   "resolution": 1.31,
+   "released": "2025-07-16",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8s0l",
+   "apo_chain": "A",
+   "uniprot": "O15393",
+   "cluster": "UniRef50_O15393",
+   "resolution": 1.8,
+   "released": "2024-06-26",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "8sq7",
+   "apo_chain": "B",
+   "uniprot": "A8HDA9",
+   "cluster": "UniRef50_Q2TR58",
+   "resolution": 1.78,
+   "released": "2024-05-22",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "8tcd",
+   "apo_chain": "A",
+   "uniprot": "A0A9P3ZKE6",
+   "cluster": "UniRef50_F5ITH6",
+   "resolution": 1.9,
+   "released": "2024-06-12",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 11
+  },
+  {
+   "apo_pdb": "8tda",
+   "apo_chain": "A",
+   "uniprot": "Q8A5T1",
+   "cluster": "UniRef50_Q8A5T1",
+   "resolution": 1.46,
+   "released": "2024-06-12",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8te8",
+   "apo_chain": "A",
+   "uniprot": "P25906",
+   "cluster": "UniRef50_P25906",
+   "resolution": 2.2,
+   "released": "2024-12-18",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "8tk6",
+   "apo_chain": "A",
+   "uniprot": "P51452",
+   "cluster": "UniRef50_P51452",
+   "resolution": 1.65,
+   "released": "2024-08-14",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8tww",
+   "apo_chain": "A",
+   "uniprot": "A0A861B387",
+   "cluster": "UniRef50_A0A861B387",
+   "resolution": 2.0,
+   "released": "2024-08-28",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8u0r",
+   "apo_chain": "A",
+   "uniprot": "P68711",
+   "cluster": "UniRef50_P68712",
+   "resolution": 2.3,
+   "released": "2024-09-04",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8u7c",
+   "apo_chain": "C",
+   "uniprot": "Q9Y6K9",
+   "cluster": "UniRef50_Q9Y6K9",
+   "resolution": 1.44,
+   "released": "2025-01-22",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8uas",
+   "apo_chain": "A",
+   "uniprot": "A0AAT8XUI2",
+   "cluster": "UniRef50_A0ABQ0H7F9",
+   "resolution": 2.2,
+   "released": "2024-07-03",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8ub5",
+   "apo_chain": "A",
+   "uniprot": "B1V1R3",
+   "cluster": "UniRef50_P15698",
+   "resolution": 1.8,
+   "released": "2024-09-04",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "8uus",
+   "apo_chain": "A",
+   "uniprot": "A0A2R2Q2I2",
+   "cluster": "UniRef50_Q6HAC6",
+   "resolution": 1.47,
+   "released": "2025-03-19",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8v3n",
+   "apo_chain": "A",
+   "uniprot": "Q8NDL9",
+   "cluster": "UniRef50_Q8NDL9",
+   "resolution": 2.3,
+   "released": "2024-07-17",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8v5u",
+   "apo_chain": "A",
+   "uniprot": "Q9NTG7",
+   "cluster": "UniRef50_Q9NTG7",
+   "resolution": 1.48,
+   "released": "2024-11-06",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8v7g",
+   "apo_chain": "A",
+   "uniprot": "Q9Y253",
+   "cluster": "UniRef50_Q9Y253",
+   "resolution": 1.52,
+   "released": "2024-05-15",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "8va3",
+   "apo_chain": "A",
+   "uniprot": "A0ABF7PQ32",
+   "cluster": "UniRef50_A7LXU3",
+   "resolution": 1.8,
+   "released": "2024-10-23",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8va5",
+   "apo_chain": "A",
+   "uniprot": "O00255",
+   "cluster": "UniRef50_O00255",
+   "resolution": 1.3,
+   "released": "2024-11-20",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8w6v",
+   "apo_chain": "A",
+   "uniprot": "Q9S7H8",
+   "cluster": "UniRef50_Q9S7H8",
+   "resolution": 1.8,
+   "released": "2024-05-22",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8w8u",
+   "apo_chain": "A",
+   "uniprot": "H3K419",
+   "cluster": "UniRef50_Q5B2E8",
+   "resolution": 0.8,
+   "released": "2025-03-12",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 9
+  },
+  {
+   "apo_pdb": "8w9s",
+   "apo_chain": "C",
+   "uniprot": "O52541",
+   "cluster": "UniRef50_Q7BUE3",
+   "resolution": 2.09,
+   "released": "2025-03-12",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8wia",
+   "apo_chain": "A",
+   "uniprot": "P0A8M3",
+   "cluster": "UniRef50_P0A8M3",
+   "resolution": 1.96,
+   "released": "2024-07-24",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8wv3",
+   "apo_chain": "A",
+   "uniprot": "I3EA59",
+   "cluster": "UniRef50_Q8KP10",
+   "resolution": 1.98,
+   "released": "2024-10-30",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8x5t",
+   "apo_chain": "C",
+   "uniprot": "Q5SHZ2",
+   "cluster": "UniRef50_Q5SHZ2",
+   "resolution": 1.6,
+   "released": "2024-11-20",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8x6k",
+   "apo_chain": "A",
+   "uniprot": "Q9HJN6",
+   "cluster": "UniRef50_Q9HJN6",
+   "resolution": 1.802,
+   "released": "2024-11-27",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8x9c",
+   "apo_chain": "A",
+   "uniprot": "A0A0A2JK86",
+   "cluster": "UniRef50_A0A1R3RZY5",
+   "resolution": 1.68,
+   "released": "2025-06-11",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8xem",
+   "apo_chain": "A",
+   "uniprot": "Q5ZRG2",
+   "cluster": "UniRef50_Q5ZRG2",
+   "resolution": 1.8,
+   "released": "2024-12-18",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "8xet",
+   "apo_chain": "A",
+   "uniprot": "A0A5S4TPK8",
+   "cluster": "UniRef50_Q9A198",
+   "resolution": 1.11,
+   "released": "2024-10-09",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8xgx",
+   "apo_chain": "A",
+   "uniprot": "A0A5D0ENI3",
+   "cluster": "UniRef50_Q03974",
+   "resolution": 2.41,
+   "released": "2024-12-11",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "8xht",
+   "apo_chain": "B",
+   "uniprot": "A0A241XEQ7",
+   "cluster": "UniRef50_A0A241XEQ7",
+   "resolution": 1.81953635204,
+   "released": "2025-05-28",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "8xjp",
+   "apo_chain": "A",
+   "uniprot": "A0A2P4SYK2",
+   "cluster": "UniRef50_P52847",
+   "resolution": 1.7,
+   "released": "2024-12-25",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "8xsc",
+   "apo_chain": "A",
+   "uniprot": "O26010",
+   "cluster": "UniRef50_O26010",
+   "resolution": 1.96,
+   "released": "2024-10-30",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "8xsh",
+   "apo_chain": "A",
+   "uniprot": "C5RYK2",
+   "cluster": "UniRef50_C5RYK2",
+   "resolution": 1.85,
+   "released": "2025-01-15",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8xvp",
+   "apo_chain": "A",
+   "uniprot": "Q8GP32",
+   "cluster": "UniRef50_P11701",
+   "resolution": 1.98,
+   "released": "2025-01-22",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8xwk",
+   "apo_chain": "A",
+   "uniprot": "A0AAE4G800",
+   "cluster": "UniRef50_Q8P3K4",
+   "resolution": 1.27,
+   "released": "2024-07-10",
+   "n_partners_available": 7,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "8xxc",
+   "apo_chain": "E",
+   "uniprot": "A0A7C6A739",
+   "cluster": "UniRef50_Q74E58",
+   "resolution": 2.03,
+   "released": "2025-01-22",
+   "n_partners_available": 14,
+   "n_pairs_decided_not_cryptic": 14
+  },
+  {
+   "apo_pdb": "8y4v",
+   "apo_chain": "B",
+   "uniprot": "A0A7Y0SGI3",
+   "cluster": "UniRef50_A0A0M0I3D5",
+   "resolution": 2.31,
+   "released": "2025-02-05",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8y7r",
+   "apo_chain": "A",
+   "uniprot": "A0A562MSV3",
+   "cluster": "UniRef50_D7VS68",
+   "resolution": 1.62,
+   "released": "2024-06-12",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8yav",
+   "apo_chain": "A",
+   "uniprot": "A0A1D7ZZ64",
+   "cluster": "UniRef50_A0A1D7ZZ64",
+   "resolution": 1.75,
+   "released": "2024-10-30",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8yeb",
+   "apo_chain": "A",
+   "uniprot": "A0A1L7NQ96",
+   "cluster": "UniRef50_A0A1L7NQ96",
+   "resolution": 2.2,
+   "released": "2025-02-12",
+   "n_partners_available": 16,
+   "n_pairs_decided_not_cryptic": 16
+  },
+  {
+   "apo_pdb": "8yk8",
+   "apo_chain": "A",
+   "uniprot": "A0A1I3YTB1",
+   "cluster": "UniRef50_A0AAU9ERB9",
+   "resolution": 1.5,
+   "released": "2025-01-01",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "8yox",
+   "apo_chain": "A",
+   "uniprot": "Q9BRQ8",
+   "cluster": "UniRef50_Q9BRQ8",
+   "resolution": 2.48,
+   "released": "2025-01-08",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "8yrs",
+   "apo_chain": "A",
+   "uniprot": "P46063",
+   "cluster": "UniRef50_P46063",
+   "resolution": 2.43,
+   "released": "2024-09-04",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8yv4",
+   "apo_chain": "A",
+   "uniprot": "A0A0A7GDU7",
+   "cluster": "UniRef50_A0A0A7GDU7",
+   "resolution": 1.87,
+   "released": "2025-04-02",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8z0x",
+   "apo_chain": "A",
+   "uniprot": "A0A6S6PLJ6",
+   "cluster": "UniRef50_A0A0U5BCF6",
+   "resolution": 1.6,
+   "released": "2024-10-23",
+   "n_partners_available": 12,
+   "n_pairs_decided_not_cryptic": 12
+  },
+  {
+   "apo_pdb": "8z2w",
+   "apo_chain": "A",
+   "uniprot": "Q7Z9L3",
+   "cluster": "UniRef50_Q7Z9L3",
+   "resolution": 1.75,
+   "released": "2024-11-06",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "8z43",
+   "apo_chain": "A",
+   "uniprot": "D6CYU7",
+   "cluster": "UniRef50_A0A6H0KWH0",
+   "resolution": 1.91,
+   "released": "2025-01-01",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8zad",
+   "apo_chain": "A",
+   "uniprot": "P0DY63",
+   "cluster": "UniRef50_A0A384JQC9",
+   "resolution": 2.1,
+   "released": "2024-12-11",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8zaf",
+   "apo_chain": "A",
+   "uniprot": "A0ABF7PQ81",
+   "cluster": "UniRef50_A0ABF7PQ81",
+   "resolution": 1.96,
+   "released": "2024-12-11",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8zg5",
+   "apo_chain": "A",
+   "uniprot": "A0A2P2GK84",
+   "cluster": "UniRef50_A0A2P2GK84",
+   "resolution": 1.83,
+   "released": "2025-05-21",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8zie",
+   "apo_chain": "A",
+   "uniprot": "P0DPA9",
+   "cluster": "UniRef50_P0DPA9",
+   "resolution": 1.6,
+   "released": "2025-04-02",
+   "n_partners_available": 15,
+   "n_pairs_decided_not_cryptic": 16
+  },
+  {
+   "apo_pdb": "8zlr",
+   "apo_chain": "A",
+   "uniprot": "A8J8W0",
+   "cluster": "UniRef50_A0A9W6BPV9",
+   "resolution": 2.15,
+   "released": "2025-05-14",
+   "n_partners_available": 21,
+   "n_pairs_decided_not_cryptic": 20
+  },
+  {
+   "apo_pdb": "8znv",
+   "apo_chain": "A",
+   "uniprot": "G1C1T5",
+   "cluster": "UniRef50_A0A2S1SZ05",
+   "resolution": 1.7,
+   "released": "2025-05-28",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8zpe",
+   "apo_chain": "A",
+   "uniprot": "P94494",
+   "cluster": "UniRef50_P94494",
+   "resolution": 2.3,
+   "released": "2025-01-01",
+   "n_partners_available": 16,
+   "n_pairs_decided_not_cryptic": 16
+  },
+  {
+   "apo_pdb": "8zpo",
+   "apo_chain": "A",
+   "uniprot": "Q97ML3",
+   "cluster": "UniRef50_Q97ML3",
+   "resolution": 1.36,
+   "released": "2025-04-09",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8zst",
+   "apo_chain": "A",
+   "uniprot": "P00698",
+   "cluster": "UniRef50_P00698",
+   "resolution": 0.8,
+   "released": "2025-05-28",
+   "n_partners_available": 11,
+   "n_pairs_decided_not_cryptic": 23
+  },
+  {
+   "apo_pdb": "8zvd",
+   "apo_chain": "A",
+   "uniprot": "A0A0H2Z117",
+   "cluster": "UniRef50_A0ABU6JRE2",
+   "resolution": 1.72,
+   "released": "2025-04-09",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "8zwq",
+   "apo_chain": "B",
+   "uniprot": "Q90030",
+   "cluster": "UniRef50_Q90030",
+   "resolution": 2.23,
+   "released": "2025-06-18",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "8zwr",
+   "apo_chain": "A",
+   "uniprot": "Q9Y2C3",
+   "cluster": "UniRef50_Q9Y2C3",
+   "resolution": 1.94,
+   "released": "2025-04-09",
+   "n_partners_available": 12,
+   "n_pairs_decided_not_cryptic": 27
+  },
+  {
+   "apo_pdb": "8zxu",
+   "apo_chain": "A",
+   "uniprot": "Q5HF61",
+   "cluster": "UniRef50_Q5HF61",
+   "resolution": 1.55,
+   "released": "2025-06-18",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9ay8",
+   "apo_chain": "C",
+   "uniprot": "P0DTR5",
+   "cluster": "UniRef50_P0DTR5",
+   "resolution": 2.0,
+   "released": "2024-12-18",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9bf2",
+   "apo_chain": "A",
+   "uniprot": "Q9UKV8",
+   "cluster": "UniRef50_Q9UKV8",
+   "resolution": 1.59,
+   "released": "2024-07-10",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9bhz",
+   "apo_chain": "A",
+   "uniprot": "A0A5P1UDB1",
+   "cluster": "UniRef50_Q6F8V1",
+   "resolution": 2.22,
+   "released": "2024-11-20",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9bjw",
+   "apo_chain": "A",
+   "uniprot": "A0A069Q0R8",
+   "cluster": "UniRef50_Q9HUA0",
+   "resolution": 1.54,
+   "released": "2024-09-04",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9bkf",
+   "apo_chain": "A",
+   "uniprot": "P00760",
+   "cluster": "UniRef50_P00760",
+   "resolution": 1.2,
+   "released": "2024-06-05",
+   "n_partners_available": 35,
+   "n_pairs_decided_not_cryptic": 21
+  },
+  {
+   "apo_pdb": "9blv",
+   "apo_chain": "B",
+   "uniprot": "P28796",
+   "cluster": "UniRef50_P28796",
+   "resolution": 1.78,
+   "released": "2025-02-12",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9bn9",
+   "apo_chain": "A",
+   "uniprot": "P14900",
+   "cluster": "UniRef50_P14900",
+   "resolution": 1.23,
+   "released": "2024-05-15",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9bxh",
+   "apo_chain": "A",
+   "uniprot": "A0A3N1P0S2",
+   "cluster": "UniRef50_A0ABQ5YQM5",
+   "resolution": 1.48,
+   "released": "2025-01-08",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9bzn",
+   "apo_chain": "A",
+   "uniprot": "A0A0H3LUA9",
+   "cluster": "UniRef50_A0A261SHX0",
+   "resolution": 1.05,
+   "released": "2024-06-12",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9cf4",
+   "apo_chain": "A",
+   "uniprot": "Q1QTY7",
+   "cluster": "UniRef50_E1V7V7",
+   "resolution": 1.499,
+   "released": "2025-03-12",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9cky",
+   "apo_chain": "A",
+   "uniprot": "P00784",
+   "cluster": "UniRef50_P00784",
+   "resolution": 1.4,
+   "released": "2025-06-04",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "9cpz",
+   "apo_chain": "A",
+   "uniprot": "Q8ZNC4",
+   "cluster": "UniRef50_Q8ZNC4",
+   "resolution": 1.54,
+   "released": "2025-08-06",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9csc",
+   "apo_chain": "B",
+   "uniprot": "A6LM39",
+   "cluster": "UniRef50_P76459",
+   "resolution": 2.0,
+   "released": "2025-02-05",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9csj",
+   "apo_chain": "A",
+   "uniprot": "Q9HC38",
+   "cluster": "UniRef50_Q9HC38",
+   "resolution": 2.33,
+   "released": "2025-08-13",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9csm",
+   "apo_chain": "A",
+   "uniprot": "Q9H1E1",
+   "cluster": "UniRef50_Q9H1E1",
+   "resolution": 1.77,
+   "released": "2025-07-30",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9csz",
+   "apo_chain": "B",
+   "uniprot": "Q41448",
+   "cluster": "UniRef50_P58514",
+   "resolution": 1.65,
+   "released": "2025-05-14",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9cud",
+   "apo_chain": "A",
+   "uniprot": "Q86WV6",
+   "cluster": "UniRef50_Q86WV6",
+   "resolution": 1.53,
+   "released": "2025-06-18",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9cwu",
+   "apo_chain": "A",
+   "uniprot": "Q9H477",
+   "cluster": "UniRef50_Q9H477",
+   "resolution": 1.45,
+   "released": "2025-08-06",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9d71",
+   "apo_chain": "D",
+   "uniprot": "Q14914",
+   "cluster": "UniRef50_Q29073",
+   "resolution": 2.0,
+   "released": "2025-08-20",
+   "n_partners_available": 21,
+   "n_pairs_decided_not_cryptic": 31
+  },
+  {
+   "apo_pdb": "9d8d",
+   "apo_chain": "A",
+   "uniprot": "A0A0X1KYD0",
+   "cluster": "UniRef50_A0A1R4LDV2",
+   "resolution": 2.11,
+   "released": "2025-09-03",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "9dkr",
+   "apo_chain": "A",
+   "uniprot": "E9JES9",
+   "cluster": "UniRef50_Q54357",
+   "resolution": 1.66,
+   "released": "2025-10-01",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9doj",
+   "apo_chain": "A",
+   "uniprot": "A0A646SQW7",
+   "cluster": "UniRef50_A0A646SQW7",
+   "resolution": 1.48,
+   "released": "2025-01-29",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9dq9",
+   "apo_chain": "A",
+   "uniprot": "O51114",
+   "cluster": "UniRef50_O51114",
+   "resolution": 2.1,
+   "released": "2025-03-12",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9dr9",
+   "apo_chain": "A",
+   "uniprot": "Q9UNA4",
+   "cluster": "UniRef50_Q9UNA4",
+   "resolution": 2.21,
+   "released": "2025-07-09",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9dsn",
+   "apo_chain": "A",
+   "uniprot": "P9WK11",
+   "cluster": "UniRef50_P9WK11",
+   "resolution": 2.3,
+   "released": "2025-04-16",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9dsq",
+   "apo_chain": "A",
+   "uniprot": "Q9WZV6",
+   "cluster": "UniRef50_Q9WZV6",
+   "resolution": 1.99,
+   "released": "2025-10-29",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9dsx",
+   "apo_chain": "E",
+   "uniprot": "P9WFU1",
+   "cluster": "UniRef50_P9WFU1",
+   "resolution": 2.05,
+   "released": "2025-06-04",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9dv8",
+   "apo_chain": "A",
+   "uniprot": "C8PR54",
+   "cluster": "UniRef50_Q9WYB1",
+   "resolution": 1.36,
+   "released": "2025-01-22",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9dwp",
+   "apo_chain": "A",
+   "uniprot": "Q9I561",
+   "cluster": "UniRef50_A0A4Q9R8Y7",
+   "resolution": 1.32,
+   "released": "2025-07-09",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9dy3",
+   "apo_chain": "A",
+   "uniprot": "Q9HU18",
+   "cluster": "UniRef50_Q9HU18",
+   "resolution": 1.3,
+   "released": "2025-07-09",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9dyt",
+   "apo_chain": "A",
+   "uniprot": "Q5UNV6",
+   "cluster": "UniRef50_Q5UNV6",
+   "resolution": 1.8,
+   "released": "2025-06-11",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 11
+  },
+  {
+   "apo_pdb": "9dza",
+   "apo_chain": "A",
+   "uniprot": "Q09E27",
+   "cluster": "UniRef50_A0ABT5D9W5",
+   "resolution": 1.4,
+   "released": "2025-10-08",
+   "n_partners_available": 8,
+   "n_pairs_decided_not_cryptic": 9
+  },
+  {
+   "apo_pdb": "9dzc",
+   "apo_chain": "B",
+   "uniprot": "A5K736",
+   "cluster": "UniRef50_A5K736",
+   "resolution": 2.4,
+   "released": "2025-02-26",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9e56",
+   "apo_chain": "A",
+   "uniprot": "F4Y2B0",
+   "cluster": "UniRef50_F4Y2B0",
+   "resolution": 1.94,
+   "released": "2025-02-26",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9e79",
+   "apo_chain": "A",
+   "uniprot": "P46971",
+   "cluster": "UniRef50_Q59X23",
+   "resolution": 1.64,
+   "released": "2025-10-15",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9edq",
+   "apo_chain": "A",
+   "uniprot": "A0A2S1TZT6",
+   "cluster": "UniRef50_A0A2S1TZT6",
+   "resolution": 1.63,
+   "released": "2025-03-05",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9eez",
+   "apo_chain": "A",
+   "uniprot": "P54829",
+   "cluster": "UniRef50_P54829",
+   "resolution": 1.6,
+   "released": "2024-12-11",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9efr",
+   "apo_chain": "A",
+   "uniprot": "F8W4B7",
+   "cluster": "UniRef50_A0A8C5F2A3",
+   "resolution": 1.24,
+   "released": "2024-12-04",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9enn",
+   "apo_chain": "A",
+   "uniprot": "S4S6Z0",
+   "cluster": "UniRef50_S4S6Z0",
+   "resolution": 1.8,
+   "released": "2024-08-14",
+   "n_partners_available": 16,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9f09",
+   "apo_chain": "A",
+   "uniprot": "Q9R5V5",
+   "cluster": "UniRef50_Q9R5V5",
+   "resolution": 2.37,
+   "released": "2024-12-04",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "9f0t",
+   "apo_chain": "A",
+   "uniprot": "Q9F663",
+   "cluster": "UniRef50_P52682",
+   "resolution": 0.98,
+   "released": "2025-07-09",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9f46",
+   "apo_chain": "A",
+   "uniprot": "A0A1I9RYV3",
+   "cluster": "UniRef50_A0A1S8TD36",
+   "resolution": 2.45,
+   "released": "2024-12-18",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9f8n",
+   "apo_chain": "A",
+   "uniprot": "Q396C9",
+   "cluster": "UniRef50_Q51788",
+   "resolution": 1.32,
+   "released": "2025-04-16",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9f96",
+   "apo_chain": "A",
+   "uniprot": "O69754",
+   "cluster": "UniRef50_Q51792",
+   "resolution": 1.27,
+   "released": "2024-10-09",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9fbp",
+   "apo_chain": "A",
+   "uniprot": "B1VBB0",
+   "cluster": "UniRef50_B1VBB0",
+   "resolution": 1.844,
+   "released": "2025-05-28",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9fcg",
+   "apo_chain": "A",
+   "uniprot": "G7IFI7",
+   "cluster": "UniRef50_G7IFI7",
+   "resolution": 1.54,
+   "released": "2024-09-04",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9fdv",
+   "apo_chain": "B",
+   "uniprot": "O66841",
+   "cluster": "UniRef50_O66841",
+   "resolution": 1.986,
+   "released": "2024-07-17",
+   "n_partners_available": 24,
+   "n_pairs_decided_not_cryptic": 28
+  },
+  {
+   "apo_pdb": "9fq5",
+   "apo_chain": "A",
+   "uniprot": "Q8YI30",
+   "cluster": "UniRef50_A9M649",
+   "resolution": 1.9,
+   "released": "2025-06-25",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9fs0",
+   "apo_chain": "A",
+   "uniprot": "P14756",
+   "cluster": "UniRef50_P14756",
+   "resolution": 1.3,
+   "released": "2025-07-02",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9fvl",
+   "apo_chain": "A",
+   "uniprot": "P63104",
+   "cluster": "UniRef50_P63104",
+   "resolution": 2.08,
+   "released": "2025-02-12",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9fvs",
+   "apo_chain": "A",
+   "uniprot": "P71119",
+   "cluster": "UniRef50_P71119",
+   "resolution": 1.4,
+   "released": "2024-10-16",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9fzn",
+   "apo_chain": "A",
+   "uniprot": "A0A7Z7MWD0",
+   "cluster": "UniRef50_A0A7Z7MWD0",
+   "resolution": 1.95,
+   "released": "2026-01-14",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9g43",
+   "apo_chain": "A",
+   "uniprot": "A0A024GZ97",
+   "cluster": "UniRef50_A0A918ILY3",
+   "resolution": 1.2,
+   "released": "2025-07-23",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9g64",
+   "apo_chain": "A",
+   "uniprot": "A0A561UC02",
+   "cluster": "UniRef50_Q5YWA6",
+   "resolution": 1.65,
+   "released": "2025-06-11",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9g88",
+   "apo_chain": "A",
+   "uniprot": "W3VHW6",
+   "cluster": "UniRef50_W3VHW6",
+   "resolution": 1.4,
+   "released": "2025-06-25",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9g8v",
+   "apo_chain": "A",
+   "uniprot": "Q93IQ4",
+   "cluster": "UniRef50_A0ABN7R483",
+   "resolution": 1.637,
+   "released": "2025-08-06",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9gb9",
+   "apo_chain": "A",
+   "uniprot": "D3KTZ6",
+   "cluster": "UniRef50_D3KTZ6",
+   "resolution": 1.85,
+   "released": "2024-11-27",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9gci",
+   "apo_chain": "A",
+   "uniprot": "A4XIG7",
+   "cluster": "UniRef50_E4Q361",
+   "resolution": 1.47,
+   "released": "2024-10-16",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9gfz",
+   "apo_chain": "B",
+   "uniprot": "Q6UD73",
+   "cluster": "UniRef50_Q6UD73",
+   "resolution": 2.5,
+   "released": "2024-11-27",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9ggi",
+   "apo_chain": "A",
+   "uniprot": "Q9LEU8",
+   "cluster": "UniRef50_Q9LEU8",
+   "resolution": 1.55,
+   "released": "2024-10-23",
+   "n_partners_available": 8,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9gjr",
+   "apo_chain": "A",
+   "uniprot": "E9AMX7",
+   "cluster": "UniRef50_Q4QHP9",
+   "resolution": 1.45,
+   "released": "2025-09-03",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9gk0",
+   "apo_chain": "A",
+   "uniprot": "Q53HV7",
+   "cluster": "UniRef50_Q53HV7",
+   "resolution": 0.95,
+   "released": "2026-03-11",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9gk6",
+   "apo_chain": "A",
+   "uniprot": "Q9NZ08",
+   "cluster": "UniRef50_Q9NZ08",
+   "resolution": 1.327,
+   "released": "2025-01-22",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9gkv",
+   "apo_chain": "A",
+   "uniprot": "A0A395TF31",
+   "cluster": "UniRef50_U3BXW3",
+   "resolution": 1.9,
+   "released": "2024-11-06",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9gmy",
+   "apo_chain": "E",
+   "uniprot": "P63043",
+   "cluster": "UniRef50_P63042",
+   "resolution": 1.97,
+   "released": "2025-09-10",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9gn6",
+   "apo_chain": "A",
+   "uniprot": "A0A377Z5F6",
+   "cluster": "UniRef50_Q9HXM1",
+   "resolution": 1.95,
+   "released": "2024-11-06",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9gpd",
+   "apo_chain": "A",
+   "uniprot": "A0A7C3MIF0",
+   "cluster": "UniRef50_A0A7C3MIF0",
+   "resolution": 1.35,
+   "released": "2025-09-17",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9gti",
+   "apo_chain": "A",
+   "uniprot": "P97300",
+   "cluster": "UniRef50_P97546",
+   "resolution": 2.03,
+   "released": "2025-08-06",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9gve",
+   "apo_chain": "A",
+   "uniprot": "Q1M964",
+   "cluster": "UniRef50_Q45087",
+   "resolution": 1.49,
+   "released": "2025-10-08",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9gwu",
+   "apo_chain": "A",
+   "uniprot": "P0DOV5",
+   "cluster": "UniRef50_P0DOV5",
+   "resolution": 1.7,
+   "released": "2025-02-12",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9h0c",
+   "apo_chain": "A",
+   "uniprot": "P11021",
+   "cluster": "UniRef50_P11021",
+   "resolution": 1.65,
+   "released": "2025-10-29",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9h18",
+   "apo_chain": "A",
+   "uniprot": "A0A0F6P2I5",
+   "cluster": "UniRef50_Q6XEC0",
+   "resolution": 1.33,
+   "released": "2025-09-03",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9h1e",
+   "apo_chain": "A",
+   "uniprot": "P12821",
+   "cluster": "UniRef50_P12821",
+   "resolution": 1.45,
+   "released": "2025-04-16",
+   "n_partners_available": 11,
+   "n_pairs_decided_not_cryptic": 16
+  },
+  {
+   "apo_pdb": "9h37",
+   "apo_chain": "A",
+   "uniprot": "P29274",
+   "cluster": "UniRef50_P30543",
+   "resolution": 1.715,
+   "released": "2025-06-18",
+   "n_partners_available": 8,
+   "n_pairs_decided_not_cryptic": 8
+  },
+  {
+   "apo_pdb": "9h3a",
+   "apo_chain": "A",
+   "uniprot": "D3KU00",
+   "cluster": "UniRef50_A0A4P1RRT7",
+   "resolution": 1.35,
+   "released": "2025-07-16",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9h6h",
+   "apo_chain": "A",
+   "uniprot": "A0A6N3VET1",
+   "cluster": "UniRef50_A0A840D9E1",
+   "resolution": 2.0,
+   "released": "2025-11-05",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9h8j",
+   "apo_chain": "B",
+   "uniprot": "A0A1E4R1F9",
+   "cluster": "UniRef50_A0A1Q2KXD4",
+   "resolution": 2.2,
+   "released": "2025-02-05",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "9haw",
+   "apo_chain": "A",
+   "uniprot": "B9L4G2",
+   "cluster": "UniRef50_A0A6G8Q488",
+   "resolution": 2.22,
+   "released": "2025-11-19",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9hcz",
+   "apo_chain": "A",
+   "uniprot": "P54274",
+   "cluster": "UniRef50_P54274",
+   "resolution": 1.55,
+   "released": "2025-11-19",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9hdm",
+   "apo_chain": "A",
+   "uniprot": "Q7SHQ5",
+   "cluster": "UniRef50_A0A084QH15",
+   "resolution": 1.55,
+   "released": "2025-02-26",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9hh7",
+   "apo_chain": "A",
+   "uniprot": "Q8IJ72",
+   "cluster": "UniRef50_Q8IJ72",
+   "resolution": 1.79,
+   "released": "2025-04-02",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9hpu",
+   "apo_chain": "A",
+   "uniprot": "Q6ZZZ2",
+   "cluster": "UniRef50_A0A5N3P3Y0",
+   "resolution": 1.8,
+   "released": "2025-12-24",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9hpx",
+   "apo_chain": "A",
+   "uniprot": "P07598",
+   "cluster": "UniRef50_P07598",
+   "resolution": 0.96,
+   "released": "2025-12-24",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9hrh",
+   "apo_chain": "A",
+   "uniprot": "P20711",
+   "cluster": "UniRef50_P14173",
+   "resolution": 1.7,
+   "released": "2025-05-14",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9hs1",
+   "apo_chain": "D",
+   "uniprot": "P0ADR8",
+   "cluster": "UniRef50_P0ADR8",
+   "resolution": 2.36,
+   "released": "2025-11-12",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9htx",
+   "apo_chain": "A",
+   "uniprot": "B3XPQ7",
+   "cluster": "UniRef50_F8KEJ1",
+   "resolution": 2.0,
+   "released": "2025-04-23",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 11
+  },
+  {
+   "apo_pdb": "9i32",
+   "apo_chain": "A",
+   "uniprot": "O06543",
+   "cluster": "UniRef50_O06543",
+   "resolution": 1.94,
+   "released": "2025-06-11",
+   "n_partners_available": 24,
+   "n_pairs_decided_not_cryptic": 40
+  },
+  {
+   "apo_pdb": "9i7a",
+   "apo_chain": "A",
+   "uniprot": "Q7Z4V5",
+   "cluster": "UniRef50_Q7Z4V5",
+   "resolution": 1.05,
+   "released": "2025-08-13",
+   "n_partners_available": 7,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9i8x",
+   "apo_chain": "A",
+   "uniprot": "P35222",
+   "cluster": "UniRef50_Q02248",
+   "resolution": 2.0,
+   "released": "2026-02-18",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9ib6",
+   "apo_chain": "A",
+   "uniprot": "Q7MZP1",
+   "cluster": "UniRef50_A0A1I5B8A8",
+   "resolution": 1.2,
+   "released": "2025-10-29",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9ig4",
+   "apo_chain": "A",
+   "uniprot": "A0A481WQ18",
+   "cluster": "UniRef50_A0A481WQ18",
+   "resolution": 2.1,
+   "released": "2026-03-04",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9ijl",
+   "apo_chain": "A",
+   "uniprot": "A0AAV2WF13",
+   "cluster": "UniRef50_A0A4Q9R211",
+   "resolution": 1.6,
+   "released": "2024-12-25",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9ikf",
+   "apo_chain": "T",
+   "uniprot": "P07471",
+   "cluster": "UniRef50_Q02221",
+   "resolution": 1.75,
+   "released": "2025-07-02",
+   "n_partners_available": 12,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9iq4",
+   "apo_chain": "A",
+   "uniprot": "A0A2X0RUW3",
+   "cluster": "UniRef50_Q65148",
+   "resolution": 2.42,
+   "released": "2025-08-13",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9iwm",
+   "apo_chain": "A",
+   "uniprot": "Q07869",
+   "cluster": "UniRef50_Q07869",
+   "resolution": 1.39,
+   "released": "2025-05-07",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9j07",
+   "apo_chain": "A",
+   "uniprot": "Q2UR69",
+   "cluster": "UniRef50_A0A0L1J5U5",
+   "resolution": 1.75,
+   "released": "2025-02-05",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9j1g",
+   "apo_chain": "A",
+   "uniprot": "G8TV28",
+   "cluster": "UniRef50_G8TV28",
+   "resolution": 1.5,
+   "released": "2024-12-25",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9j4p",
+   "apo_chain": "B",
+   "uniprot": "Q96QP1",
+   "cluster": "UniRef50_Q96QP1",
+   "resolution": 2.25,
+   "released": "2025-07-30",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9jac",
+   "apo_chain": "A",
+   "uniprot": "Q16774",
+   "cluster": "UniRef50_Q16774",
+   "resolution": 1.47,
+   "released": "2025-09-03",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9jlk",
+   "apo_chain": "A",
+   "uniprot": "C3PTT2",
+   "cluster": "UniRef50_A0A221W5N1",
+   "resolution": 2.33,
+   "released": "2025-06-18",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9k3o",
+   "apo_chain": "A",
+   "uniprot": "I3YQJ3",
+   "cluster": "UniRef50_A0A4R2EIZ2",
+   "resolution": 1.43,
+   "released": "2025-11-05",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9kbc",
+   "apo_chain": "A",
+   "uniprot": "A0A1C5HQ65",
+   "cluster": "UniRef50_A0A1C5HQ65",
+   "resolution": 2.0,
+   "released": "2025-07-30",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9keh",
+   "apo_chain": "A",
+   "uniprot": "Q04760",
+   "cluster": "UniRef50_Q04760",
+   "resolution": 1.72,
+   "released": "2025-11-12",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9kkh",
+   "apo_chain": "A",
+   "uniprot": "B4G043",
+   "cluster": "UniRef50_Q9M0V6",
+   "resolution": 1.1,
+   "released": "2025-01-29",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9klx",
+   "apo_chain": "A",
+   "uniprot": "A0A3R7FZU3",
+   "cluster": "UniRef50_A0A3R7FZU3",
+   "resolution": 1.80000915376,
+   "released": "2025-08-20",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9koi",
+   "apo_chain": "A",
+   "uniprot": "Q9I2C4",
+   "cluster": "UniRef50_P37685",
+   "resolution": 2.4,
+   "released": "2024-12-11",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9kpy",
+   "apo_chain": "A",
+   "uniprot": "A4W515",
+   "cluster": "UniRef50_B0VTH7",
+   "resolution": 2.2,
+   "released": "2024-12-11",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9kq6",
+   "apo_chain": "A",
+   "uniprot": "A0A831ERP2",
+   "cluster": "UniRef50_A0A831ERP2",
+   "resolution": 2.34,
+   "released": "2025-10-01",
+   "n_partners_available": 14,
+   "n_pairs_decided_not_cryptic": 28
+  },
+  {
+   "apo_pdb": "9ks7",
+   "apo_chain": "A",
+   "uniprot": "A0A3B5KEF3",
+   "cluster": "UniRef50_A0A3B5KEF3",
+   "resolution": 1.7,
+   "released": "2025-04-02",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9kyh",
+   "apo_chain": "B",
+   "uniprot": "P67603",
+   "cluster": "UniRef50_P67603",
+   "resolution": 1.54,
+   "released": "2025-08-20",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9l1h",
+   "apo_chain": "A",
+   "uniprot": "F2QX95",
+   "cluster": "UniRef50_A0A1B2J7M9",
+   "resolution": 2.1,
+   "released": "2025-12-17",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9l37",
+   "apo_chain": "A",
+   "uniprot": "A0A254UBZ6",
+   "cluster": "UniRef50_A0A317W3N2",
+   "resolution": 1.44,
+   "released": "2025-10-29",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9l51",
+   "apo_chain": "A",
+   "uniprot": "A0A6G1IFE0",
+   "cluster": "UniRef50_B8M9K5",
+   "resolution": 1.9,
+   "released": "2025-12-24",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9l8v",
+   "apo_chain": "A",
+   "uniprot": "A0A516ELE7",
+   "cluster": "UniRef50_A0A516ELE7",
+   "resolution": 2.23,
+   "released": "2025-12-31",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9lb5",
+   "apo_chain": "A",
+   "uniprot": "P29326",
+   "cluster": "UniRef50_P33426",
+   "resolution": 1.35,
+   "released": "2026-01-14",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9ldd",
+   "apo_chain": "A",
+   "uniprot": "Q5JFX3",
+   "cluster": "UniRef50_Q8U4K2",
+   "resolution": 1.82,
+   "released": "2025-11-12",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "9les",
+   "apo_chain": "B",
+   "uniprot": "B9WZX5",
+   "cluster": "UniRef50_Q4WAW9",
+   "resolution": 1.69,
+   "released": "2026-01-14",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9lf9",
+   "apo_chain": "A",
+   "uniprot": "A1U5Q9",
+   "cluster": "UniRef50_A0A159Z8N4",
+   "resolution": 1.68,
+   "released": "2025-11-26",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9lkp",
+   "apo_chain": "A",
+   "uniprot": "A0A6G4MPG4",
+   "cluster": "UniRef50_P78055",
+   "resolution": 1.63,
+   "released": "2025-07-30",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "9lqg",
+   "apo_chain": "A",
+   "uniprot": "A5I3U9",
+   "cluster": "UniRef50_A5I3U9",
+   "resolution": 1.28,
+   "released": "2025-11-26",
+   "n_partners_available": 12,
+   "n_pairs_decided_not_cryptic": 35
+  },
+  {
+   "apo_pdb": "9lzg",
+   "apo_chain": "A",
+   "uniprot": "A0A5K1V6Z1",
+   "cluster": "UniRef50_C4M1X8",
+   "resolution": 1.5,
+   "released": "2026-02-25",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9m0t",
+   "apo_chain": "A",
+   "uniprot": "O32264",
+   "cluster": "UniRef50_O32264",
+   "resolution": 1.2,
+   "released": "2026-01-21",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9m2m",
+   "apo_chain": "A",
+   "uniprot": "A0A2Z5U507",
+   "cluster": "UniRef50_A0A2Z5U507",
+   "resolution": 2.2,
+   "released": "2026-03-04",
+   "n_partners_available": 12,
+   "n_pairs_decided_not_cryptic": 12
+  },
+  {
+   "apo_pdb": "9m5o",
+   "apo_chain": "A",
+   "uniprot": "A5K9Y2",
+   "cluster": "UniRef50_Q8I2B1",
+   "resolution": 1.839,
+   "released": "2025-06-04",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9m9z",
+   "apo_chain": "C",
+   "uniprot": "P9WJ82",
+   "cluster": "UniRef50_P9WJ83",
+   "resolution": 2.31,
+   "released": "2026-03-18",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9mdm",
+   "apo_chain": "A",
+   "uniprot": "Q73QT1",
+   "cluster": "UniRef50_S3KDZ1",
+   "resolution": 1.63,
+   "released": "2025-02-12",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9mgv",
+   "apo_chain": "A",
+   "uniprot": "A2EU62",
+   "cluster": "UniRef50_Q9KNB2",
+   "resolution": 1.2,
+   "released": "2024-12-18",
+   "n_partners_available": 17,
+   "n_pairs_decided_not_cryptic": 23
+  },
+  {
+   "apo_pdb": "9mh6",
+   "apo_chain": "A",
+   "uniprot": "A0A0K2X0F2",
+   "cluster": "UniRef50_A0ABX8KTN7",
+   "resolution": 1.37,
+   "released": "2025-09-03",
+   "n_partners_available": 7,
+   "n_pairs_decided_not_cryptic": 9
+  },
+  {
+   "apo_pdb": "9mk5",
+   "apo_chain": "A",
+   "uniprot": "Q9JZ38",
+   "cluster": "UniRef50_Q8DST7",
+   "resolution": 1.9,
+   "released": "2025-09-03",
+   "n_partners_available": 14,
+   "n_pairs_decided_not_cryptic": 14
+  },
+  {
+   "apo_pdb": "9muk",
+   "apo_chain": "A",
+   "uniprot": "Q72GY4",
+   "cluster": "UniRef50_A0A399ECI0",
+   "resolution": 1.973,
+   "released": "2025-04-23",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "9mvk",
+   "apo_chain": "A",
+   "uniprot": "D3KDL2",
+   "cluster": "UniRef50_Q98VG9",
+   "resolution": 1.97,
+   "released": "2025-11-26",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9n5p",
+   "apo_chain": "C",
+   "uniprot": "P12318",
+   "cluster": "UniRef50_P31994",
+   "resolution": 2.01,
+   "released": "2025-12-03",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9nk3",
+   "apo_chain": "A",
+   "uniprot": "A0A0N9XAG5",
+   "cluster": "UniRef50_A0A0N9XAG5",
+   "resolution": 1.32,
+   "released": "2026-02-18",
+   "n_partners_available": 8,
+   "n_pairs_decided_not_cryptic": 12
+  },
+  {
+   "apo_pdb": "9nsw",
+   "apo_chain": "A",
+   "uniprot": "Q9L4P2",
+   "cluster": "UniRef50_Q9L4P2",
+   "resolution": 1.4,
+   "released": "2025-08-06",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9nxg",
+   "apo_chain": "A",
+   "uniprot": "A3DHB3",
+   "cluster": "UniRef50_G8LV12",
+   "resolution": 1.32,
+   "released": "2025-08-20",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9o05",
+   "apo_chain": "A",
+   "uniprot": "Q95460",
+   "cluster": "UniRef50_Q95460",
+   "resolution": 1.95,
+   "released": "2025-11-19",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9o9r",
+   "apo_chain": "A",
+   "uniprot": "Q5CR64",
+   "cluster": "UniRef50_B6ACQ5",
+   "resolution": 1.31,
+   "released": "2025-04-30",
+   "n_partners_available": 22,
+   "n_pairs_decided_not_cryptic": 24
+  },
+  {
+   "apo_pdb": "9oet",
+   "apo_chain": "D",
+   "uniprot": "A0A8M0FGT0",
+   "cluster": "UniRef50_A0ABQ2YM73",
+   "resolution": 1.9,
+   "released": "2025-11-19",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9omm",
+   "apo_chain": "A",
+   "uniprot": "A0A6P1C6J0",
+   "cluster": "UniRef50_A0A6P1C6J0",
+   "resolution": 2.25,
+   "released": "2025-10-29",
+   "n_partners_available": 14,
+   "n_pairs_decided_not_cryptic": 21
+  },
+  {
+   "apo_pdb": "9op2",
+   "apo_chain": "A",
+   "uniprot": "P05637",
+   "cluster": "UniRef50_P05637",
+   "resolution": 1.5,
+   "released": "2025-09-03",
+   "n_partners_available": 32,
+   "n_pairs_decided_not_cryptic": 25
+  },
+  {
+   "apo_pdb": "9p0r",
+   "apo_chain": "A",
+   "uniprot": "P32322",
+   "cluster": "UniRef50_P32322",
+   "resolution": 1.49,
+   "released": "2026-02-04",
+   "n_partners_available": 70,
+   "n_pairs_decided_not_cryptic": 27
+  },
+  {
+   "apo_pdb": "9p2u",
+   "apo_chain": "A",
+   "uniprot": "E5DUI5",
+   "cluster": "UniRef50_E5DUI5",
+   "resolution": 1.4,
+   "released": "2026-06-03",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 8
+  },
+  {
+   "apo_pdb": "9p3h",
+   "apo_chain": "A",
+   "uniprot": "B2FKX1",
+   "cluster": "UniRef50_Q8PBR3",
+   "resolution": 1.85,
+   "released": "2026-06-17",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9p9o",
+   "apo_chain": "A",
+   "uniprot": "P9WG83",
+   "cluster": "UniRef50_B2HKM3",
+   "resolution": 1.12,
+   "released": "2026-03-11",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9paj",
+   "apo_chain": "A",
+   "uniprot": "P0C6X1",
+   "cluster": "UniRef50_P0C6Y4",
+   "resolution": 1.32,
+   "released": "2026-05-06",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9pca",
+   "apo_chain": "A",
+   "uniprot": "O14744",
+   "cluster": "UniRef50_O14744",
+   "resolution": 2.2,
+   "released": "2025-09-10",
+   "n_partners_available": 17,
+   "n_pairs_decided_not_cryptic": 17
+  },
+  {
+   "apo_pdb": "9pgq",
+   "apo_chain": "B",
+   "uniprot": "Q7VZB9",
+   "cluster": "UniRef50_Q7VZB9",
+   "resolution": 1.5,
+   "released": "2025-07-16",
+   "n_partners_available": 9,
+   "n_pairs_decided_not_cryptic": 9
+  },
+  {
+   "apo_pdb": "9pl7",
+   "apo_chain": "A",
+   "uniprot": "A0AAW7WJM4",
+   "cluster": "UniRef50_Q8A3D9",
+   "resolution": 2.1,
+   "released": "2026-06-17",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9pl8",
+   "apo_chain": "A",
+   "uniprot": "A0A6H9QAX6",
+   "cluster": "UniRef50_I9EE98",
+   "resolution": 1.55,
+   "released": "2026-06-17",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9q4d",
+   "apo_chain": "A",
+   "uniprot": "P41212",
+   "cluster": "UniRef50_P41212",
+   "resolution": 1.302,
+   "released": "2025-10-01",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9q74",
+   "apo_chain": "A",
+   "uniprot": "Q38B99",
+   "cluster": "UniRef50_Q38B99",
+   "resolution": 1.57,
+   "released": "2026-01-21",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9q78",
+   "apo_chain": "A",
+   "uniprot": "A0A2V2VTW2",
+   "cluster": "UniRef50_Q57V43",
+   "resolution": 2.1,
+   "released": "2026-01-21",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9qa2",
+   "apo_chain": "A",
+   "uniprot": "Q10714",
+   "cluster": "UniRef50_Q10714",
+   "resolution": 1.9,
+   "released": "2025-05-14",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9qdv",
+   "apo_chain": "A",
+   "uniprot": "A0A918GGJ7",
+   "cluster": "UniRef50_A0A7W7RJC2",
+   "resolution": 0.89,
+   "released": "2025-09-10",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9qev",
+   "apo_chain": "A",
+   "uniprot": "G0V3M6",
+   "cluster": "UniRef50_I3ECA5",
+   "resolution": 1.11,
+   "released": "2025-12-10",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "9qf7",
+   "apo_chain": "A",
+   "uniprot": "Q3UKX1",
+   "cluster": "UniRef50_P55345",
+   "resolution": 2.27,
+   "released": "2026-03-25",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9qk5",
+   "apo_chain": "A",
+   "uniprot": "A0A3Q7HTY9",
+   "cluster": "UniRef50_A0A3Q7HTY9",
+   "resolution": 1.45,
+   "released": "2025-07-02",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9qn2",
+   "apo_chain": "A",
+   "uniprot": "Q9HVQ7",
+   "cluster": "UniRef50_Q9HVQ7",
+   "resolution": 1.9,
+   "released": "2026-04-08",
+   "n_partners_available": 20,
+   "n_pairs_decided_not_cryptic": 32
+  },
+  {
+   "apo_pdb": "9qt8",
+   "apo_chain": "B",
+   "uniprot": "A0AA82WPD4",
+   "cluster": "UniRef50_A0A0K8P6T7",
+   "resolution": 1.21,
+   "released": "2026-05-27",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9quz",
+   "apo_chain": "A",
+   "uniprot": "B8I0Y7",
+   "cluster": "UniRef50_B8I0Y7",
+   "resolution": 1.4,
+   "released": "2025-10-01",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9r4k",
+   "apo_chain": "A",
+   "uniprot": "G0S5Y9",
+   "cluster": "UniRef50_Q2H6B5",
+   "resolution": 2.02,
+   "released": "2025-07-16",
+   "n_partners_available": 7,
+   "n_pairs_decided_not_cryptic": 23
+  },
+  {
+   "apo_pdb": "9r52",
+   "apo_chain": "A",
+   "uniprot": "Q60338",
+   "cluster": "UniRef50_Q60338",
+   "resolution": 1.65,
+   "released": "2025-10-22",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9r71",
+   "apo_chain": "A",
+   "uniprot": "P69441",
+   "cluster": "UniRef50_P69441",
+   "resolution": 1.61,
+   "released": "2025-10-15",
+   "n_partners_available": 8,
+   "n_pairs_decided_not_cryptic": 17
+  },
+  {
+   "apo_pdb": "9raz",
+   "apo_chain": "C",
+   "uniprot": "Q99Z67",
+   "cluster": "UniRef50_Q99Z67",
+   "resolution": 1.38,
+   "released": "2025-07-30",
+   "n_partners_available": 10,
+   "n_pairs_decided_not_cryptic": 12
+  },
+  {
+   "apo_pdb": "9rfe",
+   "apo_chain": "A",
+   "uniprot": "Q9NX46",
+   "cluster": "UniRef50_Q9NX46",
+   "resolution": 1.85,
+   "released": "2025-09-24",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9rg4",
+   "apo_chain": "A",
+   "uniprot": "A0A4Q2DF39",
+   "cluster": "UniRef50_A0A0C9Y789",
+   "resolution": 1.7,
+   "released": "2026-04-01",
+   "n_partners_available": 13,
+   "n_pairs_decided_not_cryptic": 14
+  },
+  {
+   "apo_pdb": "9rgs",
+   "apo_chain": "A",
+   "uniprot": "P14604",
+   "cluster": "UniRef50_P14604",
+   "resolution": 1.68,
+   "released": "2026-05-13",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9rie",
+   "apo_chain": "A",
+   "uniprot": "P17301",
+   "cluster": "UniRef50_P17301",
+   "resolution": 1.305,
+   "released": "2026-06-24",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9rpz",
+   "apo_chain": "A",
+   "uniprot": "A0A086IRG1",
+   "cluster": "UniRef50_B5Y2G5",
+   "resolution": 1.11,
+   "released": "2025-10-15",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9rr6",
+   "apo_chain": "A",
+   "uniprot": "P17931",
+   "cluster": "UniRef50_P17931",
+   "resolution": 0.933,
+   "released": "2026-07-08",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9rvf",
+   "apo_chain": "A",
+   "uniprot": "A0A0D0G9C2",
+   "cluster": "UniRef50_A0A6M0QBY0",
+   "resolution": 1.6,
+   "released": "2026-07-22",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9rvq",
+   "apo_chain": "A",
+   "uniprot": "Q7VUZ3",
+   "cluster": "UniRef50_A0A1R1ICQ0",
+   "resolution": 2.075,
+   "released": "2026-05-20",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9s1q",
+   "apo_chain": "A",
+   "uniprot": "A0ABU2HCR3",
+   "cluster": "UniRef50_Q7WHI8",
+   "resolution": 2.0,
+   "released": "2026-02-18",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9s3w",
+   "apo_chain": "A",
+   "uniprot": "F9VPE5",
+   "cluster": "UniRef50_A0A6A5C541",
+   "resolution": 1.44,
+   "released": "2026-06-10",
+   "n_partners_available": 10,
+   "n_pairs_decided_not_cryptic": 8
+  },
+  {
+   "apo_pdb": "9s6b",
+   "apo_chain": "A",
+   "uniprot": "Q9YBQ2",
+   "cluster": "UniRef50_Q9YBQ2",
+   "resolution": 2.3,
+   "released": "2025-10-22",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9s85",
+   "apo_chain": "A",
+   "uniprot": "B2ULS2",
+   "cluster": "UniRef50_B2ULS2",
+   "resolution": 1.8,
+   "released": "2026-06-03",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9s8z",
+   "apo_chain": "A",
+   "uniprot": "O22476",
+   "cluster": "UniRef50_O22476",
+   "resolution": 2.35,
+   "released": "2025-09-10",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9s96",
+   "apo_chain": "A",
+   "uniprot": "Q9LJF3",
+   "cluster": "UniRef50_Q9LJF3",
+   "resolution": 2.31,
+   "released": "2025-09-03",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9sga",
+   "apo_chain": "A",
+   "uniprot": "O70038",
+   "cluster": "UniRef50_Q7CRA4",
+   "resolution": 1.5,
+   "released": "2026-02-18",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9sgf",
+   "apo_chain": "A",
+   "uniprot": "Q9HA47",
+   "cluster": "UniRef50_Q9HA47",
+   "resolution": 2.179,
+   "released": "2026-05-13",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9sjq",
+   "apo_chain": "A",
+   "uniprot": "P03377",
+   "cluster": "UniRef50_P03377",
+   "resolution": 1.5,
+   "released": "2026-05-13",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9sko",
+   "apo_chain": "A",
+   "uniprot": "A5I8L1",
+   "cluster": "UniRef50_P04439",
+   "resolution": 1.49,
+   "released": "2025-09-17",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9sop",
+   "apo_chain": "B",
+   "uniprot": "P01033",
+   "cluster": "UniRef50_P01033",
+   "resolution": 1.95,
+   "released": "2025-09-15",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9sqg",
+   "apo_chain": "A",
+   "uniprot": "Q9I5U0",
+   "cluster": "UniRef50_Q88QT2",
+   "resolution": 1.85,
+   "released": "2026-07-29",
+   "n_partners_available": 12,
+   "n_pairs_decided_not_cryptic": 12
+  },
+  {
+   "apo_pdb": "9sxi",
+   "apo_chain": "A",
+   "uniprot": "P28907",
+   "cluster": "UniRef50_P28907",
+   "resolution": 1.74,
+   "released": "2026-02-11",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9t2d",
+   "apo_chain": "A",
+   "uniprot": "O94953",
+   "cluster": "UniRef50_O94953",
+   "resolution": 1.8,
+   "released": "2025-12-03",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9t9f",
+   "apo_chain": "A",
+   "uniprot": "O14646",
+   "cluster": "UniRef50_O14646",
+   "resolution": 1.35,
+   "released": "2026-05-20",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9tdu",
+   "apo_chain": "A",
+   "uniprot": "A0A179H0Q0",
+   "cluster": "UniRef50_A0A6A5VXP5",
+   "resolution": 2.1,
+   "released": "2026-02-11",
+   "n_partners_available": 12,
+   "n_pairs_decided_not_cryptic": 48
+  },
+  {
+   "apo_pdb": "9tm5",
+   "apo_chain": "A",
+   "uniprot": "O60674",
+   "cluster": "UniRef50_O60674",
+   "resolution": 1.45,
+   "released": "2026-07-29",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 7
+  },
+  {
+   "apo_pdb": "9tme",
+   "apo_chain": "A",
+   "uniprot": "C6KSV3",
+   "cluster": "UniRef50_A0A7D9CYJ5",
+   "resolution": 1.813,
+   "released": "2026-01-28",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 12
+  },
+  {
+   "apo_pdb": "9tp9",
+   "apo_chain": "B",
+   "uniprot": "Q9NVD7",
+   "cluster": "UniRef50_Q9NVD7",
+   "resolution": 1.45,
+   "released": "2026-06-03",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9tsn",
+   "apo_chain": "B",
+   "uniprot": "A0A077LQB4",
+   "cluster": "UniRef50_Q8IDQ2",
+   "resolution": 2.15,
+   "released": "2026-05-13",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9ug6",
+   "apo_chain": "A",
+   "uniprot": "Q33CP8",
+   "cluster": "UniRef50_P46085",
+   "resolution": 2.23,
+   "released": "2025-11-05",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9upq",
+   "apo_chain": "A",
+   "uniprot": "Q9RAH6",
+   "cluster": "UniRef50_Q9RAH6",
+   "resolution": 1.75,
+   "released": "2026-04-29",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9urf",
+   "apo_chain": "A",
+   "uniprot": "A0AAN3A6K2",
+   "cluster": "UniRef50_Q8A1U1",
+   "resolution": 1.4,
+   "released": "2026-05-20",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9us2",
+   "apo_chain": "B",
+   "uniprot": "Q9K184",
+   "cluster": "UniRef50_G4CHV8",
+   "resolution": 1.8,
+   "released": "2025-08-06",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9uu8",
+   "apo_chain": "A",
+   "uniprot": "A2ZEX7",
+   "cluster": "UniRef50_Q2R3A1",
+   "resolution": 1.41,
+   "released": "2026-05-27",
+   "n_partners_available": 12,
+   "n_pairs_decided_not_cryptic": 12
+  },
+  {
+   "apo_pdb": "9uvl",
+   "apo_chain": "A",
+   "uniprot": "Q9UPQ3",
+   "cluster": "UniRef50_Q9UPQ3",
+   "resolution": 2.49,
+   "released": "2026-04-15",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 10
+  },
+  {
+   "apo_pdb": "9uwz",
+   "apo_chain": "A",
+   "uniprot": "Q87P37",
+   "cluster": "UniRef50_Q87P37",
+   "resolution": 2.2,
+   "released": "2025-06-25",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9v0m",
+   "apo_chain": "A",
+   "uniprot": "A0QTQ3",
+   "cluster": "UniRef50_P9WFW9",
+   "resolution": 2.45,
+   "released": "2026-05-27",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9v4j",
+   "apo_chain": "A",
+   "uniprot": "A0A0F7CMZ4",
+   "cluster": "UniRef50_A0A0C2JTL2",
+   "resolution": 2.0,
+   "released": "2025-10-01",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9v7r",
+   "apo_chain": "A",
+   "uniprot": "P24397",
+   "cluster": "UniRef50_Q9XJ43",
+   "resolution": 2.45004339752,
+   "released": "2026-06-03",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9vf9",
+   "apo_chain": "A",
+   "uniprot": "P09488",
+   "cluster": "UniRef50_P09488",
+   "resolution": 2.5,
+   "released": "2026-06-17",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9vmj",
+   "apo_chain": "A",
+   "uniprot": "Q8DMC7",
+   "cluster": "UniRef50_A0ABX2CWL3",
+   "resolution": 2.2,
+   "released": "2025-11-26",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9vvv",
+   "apo_chain": "B",
+   "uniprot": "Q9Y4E8",
+   "cluster": "UniRef50_Q9Y4E8",
+   "resolution": 2.304,
+   "released": "2026-06-24",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9vy2",
+   "apo_chain": "A",
+   "uniprot": "A0A024B384",
+   "cluster": "UniRef50_A0ABQ6ETS5",
+   "resolution": 2.32,
+   "released": "2026-07-22",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9wdd",
+   "apo_chain": "A",
+   "uniprot": "P43490",
+   "cluster": "UniRef50_P43490",
+   "resolution": 1.45,
+   "released": "2026-07-29",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 10
+  },
+  {
+   "apo_pdb": "9wiu",
+   "apo_chain": "B",
+   "uniprot": "A0A1B6PFV1",
+   "cluster": "UniRef50_A8QW52",
+   "resolution": 2.04,
+   "released": "2026-06-17",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9wyq",
+   "apo_chain": "A",
+   "uniprot": "A0A0P0XII1",
+   "cluster": "UniRef50_A0A0P0XII1",
+   "resolution": 1.7,
+   "released": "2026-01-28",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9x2v",
+   "apo_chain": "A",
+   "uniprot": "P49841",
+   "cluster": "UniRef50_Q9WV60",
+   "resolution": 1.39,
+   "released": "2025-12-31",
+   "n_partners_available": 10,
+   "n_pairs_decided_not_cryptic": 8
+  },
+  {
+   "apo_pdb": "9x4u",
+   "apo_chain": "A",
+   "uniprot": "A0A1C3YKE0",
+   "cluster": "UniRef50_A0A1C3YKE0",
+   "resolution": 1.67,
+   "released": "2026-05-20",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9x6n",
+   "apo_chain": "B",
+   "uniprot": "A0A318FHD8",
+   "cluster": "UniRef50_P00335",
+   "resolution": 1.56,
+   "released": "2026-04-29",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 4
+  },
+  {
+   "apo_pdb": "9xey",
+   "apo_chain": "A",
+   "uniprot": "P24300",
+   "cluster": "UniRef50_P24300",
+   "resolution": 1.65,
+   "released": "2025-11-12",
+   "n_partners_available": 9,
+   "n_pairs_decided_not_cryptic": 16
+  },
+  {
+   "apo_pdb": "9xfx",
+   "apo_chain": "A",
+   "uniprot": "Q01166",
+   "cluster": "UniRef50_P23954",
+   "resolution": 1.5,
+   "released": "2025-11-12",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9xuj",
+   "apo_chain": "A",
+   "uniprot": "A0A7H0DNF0",
+   "cluster": "UniRef50_Q8V4S4",
+   "resolution": 1.75,
+   "released": "2026-05-27",
+   "n_partners_available": 4,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9yce",
+   "apo_chain": "B",
+   "uniprot": "Q24SP7",
+   "cluster": "UniRef50_Q24SP7",
+   "resolution": 2.35,
+   "released": "2026-03-11",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9ygk",
+   "apo_chain": "A",
+   "uniprot": "Q7VTV0",
+   "cluster": "UniRef50_C3XAI3",
+   "resolution": 1.95,
+   "released": "2025-10-08",
+   "n_partners_available": 7,
+   "n_pairs_decided_not_cryptic": 5
+  },
+  {
+   "apo_pdb": "9yis",
+   "apo_chain": "A",
+   "uniprot": "A0A0K3AUK4",
+   "cluster": "UniRef50_P94598",
+   "resolution": 2.18,
+   "released": "2025-10-15",
+   "n_partners_available": 6,
+   "n_pairs_decided_not_cryptic": 6
+  },
+  {
+   "apo_pdb": "9ysf",
+   "apo_chain": "A",
+   "uniprot": "Q7L9B9",
+   "cluster": "UniRef50_Q7L9B9",
+   "resolution": 1.59,
+   "released": "2026-03-18",
+   "n_partners_available": 1,
+   "n_pairs_decided_not_cryptic": 1
+  },
+  {
+   "apo_pdb": "9yut",
+   "apo_chain": "A",
+   "uniprot": "A0A1A9EZ58",
+   "cluster": "UniRef50_A0A1A9EZ58",
+   "resolution": 1.422,
+   "released": "2026-07-22",
+   "n_partners_available": 3,
+   "n_pairs_decided_not_cryptic": 3
+  },
+  {
+   "apo_pdb": "9zk3",
+   "apo_chain": "A",
+   "uniprot": "A2EZR3",
+   "cluster": "UniRef50_A2EZR3",
+   "resolution": 1.35,
+   "released": "2025-12-17",
+   "n_partners_available": 2,
+   "n_pairs_decided_not_cryptic": 2
+  },
+  {
+   "apo_pdb": "9zsc",
+   "apo_chain": "A",
+   "uniprot": "A0A6L3MU55",
+   "cluster": "UniRef50_A0A3P4AYX7",
+   "resolution": 1.72,
+   "released": "2026-05-13",
+   "n_partners_available": 5,
+   "n_pairs_decided_not_cryptic": 5
+  }
+ ],
+ "what_a_unit_here_is_not": [
+  "a chain with no pocket. It is a chain that no holo structure deposited before the cutoff shows a cryptic pocket on",
+  "a negative control for druggability, affinity, or anything clinical"
+ ]
+}

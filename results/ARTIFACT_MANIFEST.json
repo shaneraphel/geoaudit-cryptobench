@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "superseded": 75,
+    "superseded": 77,
     "cited": 81,
     "exploration": 43,
-    "inventory": 6,
+    "inventory": 7,
     "frozen_unread": 2,
     "fold_access": 10
   },
-  "n_artifacts": 217,
+  "n_artifacts": 220,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -875,6 +875,13 @@
       "bytes": 8814
     },
     {
+      "artifact": "results/external/PREREGISTERED_SETN.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.preregistered_setn.v1",
+      "bytes": 6155
+    },
+    {
       "artifact": "results/external/SETBC_DIFFICULTY.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -950,6 +957,20 @@
       "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
       "schema": "geoaudit.setd_probe.v1",
       "bytes": 34852
+    },
+    {
+      "artifact": "results/external/SETN_INVENTORY.json",
+      "class": "inventory",
+      "reason": "a pinned inventory of candidate inputs; declares is_a_frozen_set false, and nothing has been selected, labelled, hashed or preregistered from it",
+      "schema": "geoaudit.setn_inventory.v1",
+      "bytes": 643554
+    },
+    {
+      "artifact": "results/external/SETN_SET.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.setn_set.v1",
+      "bytes": 85230
     },
     {
       "artifact": "results/external/setbc_p2rank_raw/12ec_J/run.json",

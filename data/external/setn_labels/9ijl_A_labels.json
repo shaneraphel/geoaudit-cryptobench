@@ -1,0 +1,16 @@
+{
+ "schema": "cryptobench.external_label.v1",
+ "clinical_grade": false,
+ "pdb_id": "9ijl",
+ "chain": "A",
+ "cryptic_residues": [],
+ "binding_residues": [],
+ "this_empty_list_is_a_measurement": "every deposited holo partner of this chain was examined and every pair was decided 'not cryptic'. It is not an absent label",
+ "n_pairs_decided_not_cryptic": 4,
+ "n_partners_available": 4,
+ "uniprot": "A0AAV2WF13",
+ "uniref50": "UniRef50_A0A4Q9R211",
+ "released": "2024-12-25",
+ "resolution": 1.6,
+ "rule": "tools/recover_cryptobench_rule.py, recovered from CryptoBench's own training records"
+}
