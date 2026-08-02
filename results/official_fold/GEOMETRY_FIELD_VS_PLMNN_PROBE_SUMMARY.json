@@ -1,0 +1,23 @@
+{
+  "schema": "geoaudit.geometry_field_vs_plmnn_official_probe.v1",
+  "clinical_grade": false,
+  "reads_test_fold": true,
+  "why_not_confirmatory": "the official fold has been read many times; this probe only asks whether geometry_field (645+624) closes any of the cached pLM-NN gap",
+  "n_jobs": 9,
+  "n_errors": 0,
+  "errors_sample": [],
+  "mean_geometry_field": 0.8230567903329818,
+  "mean_plmnn": 0.8234690336263281,
+  "mean_delta_geometry_minus_plmnn": -0.00041224329334635005,
+  "n_geometry_ahead": 95,
+  "n_plmnn_ahead": 97,
+  "ci95_delta": [
+    -0.020196954758444626,
+    0.018481891637726386
+  ],
+  "seconds": 43.73502625001129,
+  "figure": "figures/fig_geometry_field_vs_plmnn_official.png",
+  "vs_table_field_published_0.7992": 0.023856790332981825,
+  "method": "geometry_field",
+  "is_summary_of": "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json"
+}

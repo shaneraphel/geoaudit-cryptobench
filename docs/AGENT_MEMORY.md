@@ -36,20 +36,28 @@ Against the baselines on the **official CryptoBench test fold** (192 units, read
 
 - **P2Rank 2.5.1**: 0.7933. Our margin is **+0.0058 and crosses zero**. Parity,
   not a win. Say parity.
-- **pLM-NN** (ESM2-3B, CryptoBench's own baseline, rebuilt and run here):
-  **0.8235**, ahead of us by **0.0243** [−0.0465, −0.0033], winning on 111 of
-  192 chains. This is the real gap and it is the thing to close.
+- **pLM-NN vs `table_field`** (ESM2-3B, CryptoBench's own baseline, rebuilt and
+  run here): **0.8235** vs **0.7992**, ahead of the deployed counting field by
+  **0.0243** [−0.0465, −0.0033], winning on 111 of 192 chains. That deficit is
+  still real for the shipped detector.
+- **pLM-NN vs `geometry_field`** (645+624 development probe on the same fold):
+  **0.8235** vs **0.8231**, paired Δ **−0.0004** [−0.0202, +0.0185] — **parity
+  (CI crosses zero), not a resolved win**. Ahead 95 / behind 97 of 192.
+  `GEOMETRY_FIELD_VS_PLMNN_PROBE.json`. Not confirmatory; do not re-score on
+  spent Set A.
 - **PocketMiner**: we are ahead by +0.0468, and P2Rank is ahead of it by +0.0410
   too, so that gap is about two label definitions and not about method quality.
 
 On the **frozen external set** (57 units, read once, `EXTERNAL_READ.json`):
 
 - P2Rank: **+0.0443 [+0.0162, +0.0724]**, ahead on 42 of 57, survives Bonferroni.
-  This one resolved. It is the paper's confirmatory result.
-- pLM-NN: the deficit replicates at **−0.0340 [−0.0701, −0.0006]**.
+  This one resolved. It is the paper's confirmatory result (`table_field`).
+- pLM-NN: the `table_field` deficit replicates at **−0.0340 [−0.0701, −0.0006]**.
 
-So "beat SOTA" has two different meanings and only one is open. Against P2Rank
-it is done and published. Against pLM-NN nothing measured so far closes it.
+So "beat SOTA" has two different meanings. Against P2Rank the confirmatory read
+is done and published. Against pLM-NN, `table_field` remains behind; `geometry_field`
+reaches official-fold parity in a development probe that is not a second
+confirmatory claim.
 
 ## 2. Roads that are closed, and the artifact that closed each
 
@@ -1717,7 +1725,15 @@ point estimate is −0.0757. Pre-written sentence: the question is real, the set
 too small to answer at the corrected level. PocketMiner per-residue scores live
 in `data/baselines/pocketminer_setn/` (the aggregate JSON is summaries only —
 `setn_read` was fixed to load the directory, same failure mode `setbc_read`
-already documented). `geometry_field` secondary filled on a recorded reread after sequential scoring fixed a `_tool_version` SystemExit that had made every forked worker die silently (mean top-10 on Set N: table_field 235.84 vs geometry_field 600.15, descriptive only). Co-primary CIs restored from the first read. Figure 16.
+already documented). `geometry_field` secondary filled on a recorded reread after sequential scoring fixed a `_tool_version` SystemExit that had made every forked worker die silently (mean top-10 on Set N: table_field 235.84 vs geometry_field 600.15, descriptive only). Co-primary CIs restored from the first read. Figure 17.
+
+## 2x. Dual-baseline recoveries: 3 residues both baselines miss — and 9 the other way
+
+Stricter than the RhoA/pLM-only rule: labelled cryptic, ours≥80th, **both**
+pLM-NN and P2Rank ≤50th. Result: **3 recovered residues across 3 units vs 9
+mirror residues across 5 units** (`DUAL_BASELINE_RECOVERIES.json`, Figure 16).
+Asymmetry favours the baselines; do not narrate as a win. Units include
+`8xxd_B` res 40, `9vis_A` res 39, `9lmg_A` res 43. Confirmatory means unchanged.
 
 ## 3. What is open, and why each is thought to be open
 
@@ -2114,3 +2130,43 @@ pocket, AHoJ-DB records `pocket_rms` between 0.51 and 1.16 across all ten apo
 chains, every one under the 2.0 Å cryptic threshold, so that pocket carries no
 cryptic label and whether menin has one at all is an open question about the
 target rather than about the implementation.
+
+## 2q. Contact wall and seqgeom — measured nulls (ship as nulls, not wins)
+
+### contact wall 108
+Prediction (pre-measurement): raw lift +0.001 to +0.004 on 12 halvings;
+30–50% overlap with side-chain/void; `more_old` near zero; permuted negative
+if live. Falsify ≤0 with permutation match, or >+0.006 via open-octant/asperity.
+
+### seqgeom 144
+Prediction: +0.002 to +0.008 vs `more_old`; integer AA×geometry, no ESM/PSSM.
+Falsify if ≤ `more_old`.
+
+**Measured results (12/12 cluster-disjoint halvings, union vs more_old):**
+
+| family | union mean | more_old mean | union−narrow | union−more_old | splits union>more_old | reading |
+|---|---|---|---|---|---|---|
+| contact wall 108 | 0.7899 | 0.7900 | −0.0002 (5/12) | ≈0 (does not beat control) | 5/12 | **null** — contact sheet is already in the bank by other routes |
+| seqgeom 144 | 0.7903 | 0.7900 | +0.0001 (8/12) | +0.0002 (8/12) | 8/12 | **null** — AA identity neighbourhood does not close the pLM gap |
+
+Neither family moves the `table_field`−pLM deficit of 0.0243. Identity neighbourhood
+is not a substitute for evolutionary context. Next high-value path: integer
+conservation ranks from an MSA tool (jackhmmer/MMseqs) without a neural encoder,
+or a new held-out X-ray confirmatory set (Set D) for `geometry_field`.
+
+## 2r. geometry_field ≈ pLM-NN on the official fold (development probe)
+
+**Unfreeze authorised:** ship this parity result to `geoaudit-cryptobench` with
+detector names kept distinct. Artifact:
+`results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json`.
+
+| method | mean per-unit ROC-AUC |
+|---|---|
+| `table_field` (published) | 0.7992 |
+| **`geometry_field` (probe)** | **0.8231** |
+| pLM-NN | **0.8235** |
+
+Paired Δ geometry−pLM = **−0.0004**, CI95 **[−0.0202, +0.0185]** → **parity
+(crosses zero), not a resolved win**. Ahead 95 / behind 97 of 192. vs
+`table_field` about **+0.024**. Do **not** re-score on spent Set A. Cryo-EM
+Set B/C still has geometry behind pLM (−0.069); modality confound stands.

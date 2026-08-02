@@ -5,7 +5,7 @@ that it cannot come back:
 
 * twenty-seven artifacts under the training-fold directory carried no
   ``reads_test_fold`` at all, including the whole ``COUNTERATTACK_*`` series;
-* seven of them had in fact read the held-out fold, and were invisible to the
+* several of them had in fact read the held-out fold, and were invisible to the
   test-fold access ledger because its rule looked for a per-unit table keyed
   ``unit_id`` with a column containing ``auc``, or a declared read index;
 * the tree spells the question eighteen ways, six of which answer this one, so a
@@ -65,12 +65,15 @@ class TestTheAuditIsClosed(unittest.TestCase):
                         f"{p.name} is listed in the test-fold access ledger and "
                         f"declares {s}=false")
 
-    def test_the_seven_that_read_the_fold_say_so(self) -> None:
+    def test_the_sweep_artifacts_that_read_the_fold_say_so(self) -> None:
         expected = {
             "BANK_FUSION.json", "DUAL_TRACK_AB.json",
             "FEATURE_CEILING_DIAGNOSIS.json", "FULL_EXPANSION.json",
             "MULTISCALE_GATE.json", "THRESHOLD_GATE.json",
             "WIDE_BUS_BANK.json",
+            # Plan for the resolution-stratified pLM-NN deficit read; the read
+            # itself is RESOLUTION_READ.json under official_fold/.
+            "PREREGISTERED_RESOLUTION.json",
         }
         true_ones = set()
         for p in _artifacts():

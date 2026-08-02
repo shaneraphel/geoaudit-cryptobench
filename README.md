@@ -25,14 +25,21 @@ official CryptoBench receptor-only benchmark.
 - Primary metrics: per-residue `residue_auc`, `residue_pr_auc`, `residue_mcc`,
   `residue_f1`, each with a 95 % paired-bootstrap CI over the structures where both
   compared methods are defined.
-- **Less accurate than the benchmark's own supervised baseline.** pLM-NN
-  (ESM2-3B embeddings under a trained head, CryptoBench's own baseline, rebuilt
-  and run here) reaches 0.8235 mean per-unit ROC-AUC against our 0.7992 — a paired
-  difference of −0.0243 [−0.0465, −0.0033], losing on 111 of 192 chains. The F1
-  and MCC deficits at a common budget (−0.0522 and −0.0561) survive Bonferroni,
-  and pLM-NN is ahead at all 39 calling fractions swept, so the deficit is not a
-  threshold convention. The sentence saying so was written into the plan before
-  the fold was read under it. See §4.13.
+- **`table_field` is less accurate than the benchmark's own supervised baseline.**
+  pLM-NN (ESM2-3B embeddings under a trained head, CryptoBench's own baseline,
+  rebuilt and run here) reaches 0.8235 mean per-unit ROC-AUC against the deployed
+  counting field's 0.7992 — a paired difference of −0.0243 [−0.0465, −0.0033],
+  losing on 111 of 192 chains. The F1 and MCC deficits at a common budget
+  (−0.0522 and −0.0561) survive Bonferroni, and pLM-NN is ahead at all 39 calling
+  fractions swept, so that deficit is not a threshold convention. The sentence
+  saying so was written into the plan before the fold was read under it. See §4.13.
+- **`geometry_field` reaches parity with pLM-NN on the same fold (development
+  probe, not confirmatory).** Mean per-unit ROC-AUC 0.8231 vs 0.8235; paired
+  Δ=−0.0004 [−0.0202, +0.0185] (crosses zero); ahead on 95 of 192 units, behind
+  on 97. About +0.024 above published `table_field`. The official fold has been
+  read many times, so this is not a second confirmatory claim, and
+  `geometry_field` must not be scored on spent Set A for one. See
+  `GEOMETRY_FIELD_VS_PLMNN_PROBE.json` and Figure 18.
 - **Confirmatory: ahead of P2Rank on a set that has never been read.** 57
   apo–holo units built from depositions released after CryptoBench's newest
   structure (2024-05-08), one unit per UniRef50 cluster, no cluster shared with
@@ -100,16 +107,20 @@ official CryptoBench receptor-only benchmark.
   the same baseline is evidence about transfer between two label definitions —
   PocketMiner predicts pocket opening in simulation, CryptoBench labels ligand
   contact in a holo structure — rather than a ranking of methods. See §4.12.
-- The ordering on this fold, stated plainly: pLM-NN, then the counting field and
-  P2Rank within a few thousandths of each other, then PocketMiner. A reader
-  choosing on accuracy alone should run pLM-NN. What this method offers instead is
-  1.79 MB against a 3-billion-parameter encoder, no floating-point model at
-  inference, and a score that decomposes exactly.
+- The ordering on this fold, stated plainly: pLM-NN and `geometry_field` at
+  parity (~0.823), then the deployed counting field (`table_field`) and P2Rank
+  within a few thousandths of each other (~0.79), then PocketMiner. A reader
+  choosing on raw accuracy alone can run pLM-NN or the geometry stack; what the
+  counting field still offers is 1.79 MB of integers against a 3-billion-parameter
+  encoder, no floating-point model at inference, and a score that decomposes
+  exactly. Parity for `geometry_field` is a development probe on a heavily read
+  fold, not a confirmatory external win.
 - Not claimed: superiority on PR-AUC or MCC, on ROC-AUC in the mean, or on F1
-  under any matched threshold; superiority over pLM-NN on anything; being faster
-  than P2Rank in a served deployment
-  (§4.7c withdraws that); binding affinity; candidate efficacy; global novelty.
-  See `contracts/GEOAUDIT_PAPER_SCOPE.json`.
+  under any matched threshold; a resolved win of `geometry_field` over pLM-NN
+  (the CI crosses zero); superiority of `table_field` over pLM-NN on anything;
+  being faster than P2Rank in a served deployment (§4.7c withdraws that); binding
+  affinity; candidate efficacy; global novelty. See
+  `contracts/GEOAUDIT_PAPER_SCOPE.json`.
 - The architecture was chosen on one half of the training fold, and that choice is
   cross-validated on 29 other splits, none of which reads the test fold:
   CryptoBench's own four training folds, which are cluster-disjoint under its
@@ -134,7 +145,7 @@ official CryptoBench receptor-only benchmark.
 
 ![Figure 2](figures/fig_paired_vs_p2rank.png)
 
-**Figure 2.** Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is ±1 standard error of a fold mean (0.0161); 12 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not.
+**Figure 2.** Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is ±1 standard error of a fold mean (0.0161); 13 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not.
 
 ![Figure 3](figures/fig_functional_choice.png)
 
@@ -188,9 +199,17 @@ official CryptoBench receptor-only benchmark.
 
 **Figure 15.** Residue-level recoveries against pLM-NN on spent Set A under the rule fixed in the RhoA case (labelled cryptic, ours≥80%, pLM-NN≤50%). 14 recovered residues across 9 units; 24 mirror residues across 11 units. The asymmetry favours pLM-NN at residue granularity; the panel reports both directions. RhoA and RAC1 appear among the recoveries. Mean unit deficit remains −0.0340; clinical_grade is false.
 
-![Figure 16](figures/fig_setn_read.png)
+![Figure 16](figures/fig_dual_baseline_recoveries.png)
 
-**Figure 16.** Set N specificity read (384 units: 57 with a cryptic pocket, 327 shown to have none). Unit score = mean of top-10 residue scores; statistic = ROC-AUC separating the halves. Outcome under the committed plan: none_resolved. Point estimates: pLM-NN 0.5874, PocketMiner 0.5344, chain-length control 0.5457, counting field 0.5117, P2Rank 0.4480. Every Bonferroni-corrected comparison of the counting field against a baseline crosses zero. clinical_grade is false.
+**Figure 16.** Dual-baseline residue recoveries on spent Set A: labelled cryptic, counting field ≥80%, pLM-NN and P2Rank both ≤50%. 3 recovered residues across 3 units; 9 mirror residues across 5 units. Asymmetry favours the baselines; confirmatory means unchanged. clinical_grade is false.
+
+![Figure 17](figures/fig_setn_read.png)
+
+**Figure 17.** Set N specificity read (384 units: 57 with a cryptic pocket, 327 shown to have none). Unit score = mean of top-10 residue scores; statistic = ROC-AUC separating the halves. Outcome under the committed plan: none_resolved. Point estimates: pLM-NN 0.5874, PocketMiner 0.5344, chain-length control 0.5457, counting field 0.5117, P2Rank 0.4480. Every Bonferroni-corrected comparison of the counting field against a baseline crosses zero. clinical_grade is false.
+
+![Figure 18](figures/fig_geometry_field_vs_plmnn_official.png)
+
+**Figure 18.** Development probe on the official CryptoBench test fold (192 units): per-unit ROC-AUC difference geometry_field − pLM-NN, sorted. Mean levels 0.8231 vs 0.8235; paired Δ=-0.0004 [-0.0202, +0.0185] (crosses zero → parity, not a resolved win). Ahead on 95 units, behind on 97. The published table_field level on this fold is 0.7992 (Δ vs pLM-NN −0.0243). Not confirmatory; clinical_grade is false.
 
 <!-- END AUTOGENERATED: figures -->
 
@@ -1867,6 +1886,15 @@ this panel is the honest inventory behind the 27/30 unit split, not a claim that
 the mean deficit is closed. RhoA and RAC1 appear among the recoveries. The
 confirmatory −0.0340 is unchanged. `clinical_grade` is false.
 
+### 5.4e Dual-baseline recoveries — both pLM-NN and P2Rank miss
+
+A stricter rule than §5.4d: labelled cryptic, counting field ≥80th percentile,
+**and** both pLM-NN and P2Rank ≤50th. Result: **3 recovered residues across 3
+units** versus **9 mirror residues across 5 units**
+(`DUAL_BASELINE_RECOVERIES.json`, Figure 16). Residue asymmetry favours the
+baselines. Confirmatory means (−0.0340 vs pLM-NN, +0.0443 vs P2Rank) unchanged.
+`clinical_grade` is false.
+
 ### 5.4 Set N: 327 external chains shown to have no cryptic pocket — built, frozen, planned, **read once: none_resolved**
 
 Every accuracy number published on CryptoBench, this repository's included, is a
@@ -1922,7 +1950,7 @@ primary and confined to a Set N-only secondary: scoring an improved method on a 
 set destroys the confirmatory result already read from it.
 
 **The read has been run once** under the committed plan (`SETN_READ.json`,
-Figure 16). Outcome: **`none_resolved`**. Unit-level ROC-AUC on 384 units
+Figure 17). Outcome: **`none_resolved`**. Unit-level ROC-AUC on 384 units
 (57 positives from spent Set A + 327 Set N negatives):
 
 | method | unit-level ROC-AUC |
@@ -2298,6 +2326,9 @@ native/geoaudit_kernels/    Rust cdylib, 5 kernels, all ported operation-for-
 ```text
 results/official_fold/      the held-out fold. Reads are ledgered and capped
 results/external/           EXTERNAL_SET.json (frozen, hashed) + EXTERNAL_READ
+                            SETN_* / DUAL_BASELINE_RECOVERIES / residue cases
+results/appendix_esr1/      ESR1 showcase SMILES + bond-graph PNGs (interpretability)
+figures/                    committed SOTA / external / Set N panels for the README
 results/architecture_sweep/ the training fold: every sweep, every wire family,
                             every control arm. Nothing here reads a held-out set
                             and each file declares `reads_test_fold: false`

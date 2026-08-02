@@ -288,6 +288,29 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
             [_np.asarray(A), _np.asarray(B), _np.asarray(C)], axis=1), (
             "tools/backbone_wires.py + tools/sidechain_wires.py + "
             "tools/void_wires.py")
+    if name == "contact wall 108":
+        # 36 contact-wall quantities × 3 aggregations. Prediction written in
+        # tools/contact_wall_wires.py before this lift: +0.001 to +0.004 raw,
+        # 30–50 % overlap with side-chain/void; more_old near zero; permuted
+        # negative if live. Falsify at ≤0 with permutation match, or >+0.006
+        # via open-octant/asperity subgroup.
+        from contact_wall_wires import build_or_load
+        X, _n = build_or_load()
+        return np.asarray(X), "tools/contact_wall_wires.py"
+    if name == "contact wall permuted 108":
+        from contact_wall_wires import build_or_load
+        X, _n = build_or_load(permuted=True)
+        return np.asarray(X), "tools/contact_wall_wires.py --permuted"
+    if name == "seqgeom 144":
+        # Integer AA×geometry combinatorics without ESM/PSSM. Prediction in
+        # tools/seqgeom_wires.py: +0.002 to +0.008 vs more_old; permuted ≤ 0.
+        from seqgeom_wires import build_or_load
+        X, _n = build_or_load()
+        return np.asarray(X), "tools/seqgeom_wires.py"
+    if name == "seqgeom permuted 144":
+        from seqgeom_wires import build_or_load
+        X, _n = build_or_load(permuted=True)
+        return np.asarray(X), "tools/seqgeom_wires.py --permuted"
     if name == "composition 76":
         from composition_wires import build_or_load
         X, _n = build_or_load()

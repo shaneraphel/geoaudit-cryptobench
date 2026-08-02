@@ -82,17 +82,20 @@ is ahead of PocketMiner too (\PmAucPtwoR{} \PmAucCIPtwoR{}), which makes the gap
 evidence about transfer between two label definitions rather than a ranking of
 methods. Against pLM-NN --- CryptoBench's own supervised baseline, an ESM2-3B
 embedding under a trained network, reproduced here to a mean cosine of
-\PlmFidelity{} against the authors' published example --- the field is
-\emph{behind} by \PlmAucDelta{} \PlmAucCI{}, losing on \PlmLoss{} of \NUnits{}
-chains. That deficit is not a threshold convention either: it holds at every one
-of \CvN{} calling fractions, with intervals excluding zero throughout, and the F1
-and MCC deficits (\PlmBudgetFDelta{} and \PlmBudgetMDelta{} at a common budget)
-survive a Bonferroni correction that the ROC-AUC difference does not. So the
-accuracy claim in this paper is bounded by P2Rank and does not extend to the
-state of the art on this benchmark: a \FairModelOurs{}~MB table of integers is
-within a few points of a general-purpose pocket finder and several points short
-of a 3-billion-parameter language model with a trained head, which is the
-comparison a reader should carry away.
+\PlmFidelity{} against the authors' published example --- the deployed counting
+field (\texttt{table\_field}) is \emph{behind} by \PlmAucDelta{} \PlmAucCI{},
+losing on \PlmLoss{} of \NUnits{} chains. That deficit is not a threshold
+convention either: it holds at every one of \CvN{} calling fractions, with
+intervals excluding zero throughout, and the F1 and MCC deficits
+(\PlmBudgetFDelta{} and \PlmBudgetMDelta{} at a common budget) survive a
+Bonferroni correction that the ROC-AUC difference does not. A wider geometry
+stack (\texttt{geometry\_field}) reaches parity with the same baseline on this
+fold in a development probe --- \GeomFieldLevel{} against \GeomFieldPlmLevel{},
+paired difference \GeomFieldPlmDelta{} \GeomFieldPlmCI{} --- which is not a
+resolved win and is not a confirmatory external read. So the paper's confirmatory
+accuracy claim remains bounded by P2Rank for the counting field that ships; the
+geometry stack's official-fold parity with pLM-NN is reported as a development
+probe that names its detector, not as a second confirmatory result.
 
 Every number to this point comes from a fold this project read \NTestReads{}
 times while \NArchOnFold{} of its architectures were scored on it, so none of
@@ -1472,17 +1475,40 @@ point in the range at which the ordering reverses.
 It is worth being exact about what this costs the paper and what it does not. The
 sentence now in the abstract was written into the plan before the fold was read
 under it, precisely so that a losing outcome could not be reworded afterwards, and
-it says that the accuracy claim is limited to P2Rank and that the contribution is
-auditability and model size rather than predictive performance. That is the
-correct reading. pLM-NN is ahead of P2Rank as well, by \PlmAucCtxDelta{}
-\PlmAucCtxCI{}, so the ordering on this fold is pLM-NN, then the counting field
-and P2Rank within a few thousandths of each other, then PocketMiner. A reader
-deciding what to run for accuracy alone should run pLM-NN. What the counting field
-offers over it is a different axis entirely: \FairModelOurs{}~MB of integers
-against a 3-billion-parameter encoder, no floating-point model at inference, and a
-score that decomposes exactly into the terms that produced it. Whether that trade
-is worth making is a question about deployment constraints, and this paper's job
-is to report the trade accurately rather than to argue that it always favours us.
+it says that the accuracy claim for the counting field is limited to P2Rank and
+that the contribution is auditability and model size rather than predictive
+performance against a language-model baseline. That remains the correct reading
+for \texttt{table\_field}. pLM-NN is ahead of P2Rank as well, by \PlmAucCtxDelta{}
+\PlmAucCtxCI{}. Naming detectors: on this fold pLM-NN and \texttt{geometry\_field}
+sit at parity, then the counting field and P2Rank within a few thousandths of each
+other, then PocketMiner. A reader deciding what to run for raw accuracy alone can
+run pLM-NN or the geometry stack; what the counting field still offers is a
+different axis entirely: \FairModelOurs{}~MB of integers against a
+3-billion-parameter encoder, no floating-point model at inference, and a score
+that decomposes exactly into the terms that produced it. Whether that trade is
+worth making is a question about deployment constraints, and this paper's job is
+to report the trade accurately rather than to argue that it always favours us.
+
+\paragraph{A wider geometry stack on the same fold.}
+The deficit above is for \texttt{table\_field}. Scoring \texttt{geometry\_field}
+--- the 645-wire counting bank plus the 624-wire geometry expansion --- against
+the same cached pLM-NN scores on all \GeomFieldN{} units gives mean per-unit
+ROC-AUC \GeomFieldLevel{} against \GeomFieldPlmLevel{}, a paired difference of
+\GeomFieldPlmDelta{} with interval \GeomFieldPlmCI{}, ahead on \GeomFieldWin{}
+units and behind on \GeomFieldLoss{}. The interval crosses zero, so the honest
+reading is parity, not a resolved win, and about \GeomFieldVsTab{} above the
+published counting-field level on the same fold. The fold had already been read
+many times before this probe, so the number is a development measurement and not
+a confirmatory claim; the spent external set must not be re-opened for
+\texttt{geometry\_field} to manufacture a second confirmatory result. Figure
+\ref{fig:geom-plm} shows the per-unit differences.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_geometry_field_vs_plmnn_official.png}
+\caption{\FigCapGeometryFieldVsPlmnnOfficial{}}
+\label{fig:geom-plm}
+\end{figure}
 
 \subsection{A set that has never been read, and what it decided}
 \label{sec:external}
@@ -2771,30 +2797,36 @@ The two remaining external sets were frozen for that situation and have since be
 read under Section~\ref{sec:setbc}, where the stack's advantage over the deployed
 detector did not resolve. The lift is
 above the \SatReseed{} reseed floor but of the same order, and it is quoted with
-its interval for that reason. And it does not close the deficit: the supervised
-sequence baseline of Section~\ref{sec:plmnn} leaves the deployed detector at
-\PlmAucDelta{} \PlmAucCI{} on the official fold, and the full stack's
-\FamGeom{} is under two fifths of that gap even before asking whether a
-training-fold lift transfers to the official one, which is not measured here and
-is not assumed. What changed is not the standing
-of the method but the standing of a claim: the wire axis is not closed, the
-screen that says which families are null is stated and has predicted a sign in
-advance once, and the direction it points at is atom positions rather than
-further functions of the contact graph.
+its interval for that reason. Against the \texttt{table\_field} deficit the
+supervised sequence baseline of Section~\ref{sec:plmnn} still leaves the deployed
+detector at \PlmAucDelta{} \PlmAucCI{} on the official fold, and the training-
+fold stack's \FamGeom{} is under two fifths of that gap. A later official-fold
+probe of the same geometry stack against cached pLM-NN scores reaches parity
+(\GeomFieldPlmDelta{} \GeomFieldPlmCI{}); that probe is development evidence on
+a fold already read many times, not a transfer proof from the training-fold
+lift, and it is not assumed to settle the spent external set. What changed is
+not only the standing of a claim about wire families: the wire axis is not
+closed, the screen that says which families are null is stated and has predicted
+a sign in advance once, and the direction it points at is atom positions rather
+than further functions of the contact graph.
 
 \section{Limitations}
 The clearest limitation is the one Sections~\ref{sec:plmnn}
-and~\ref{sec:external} measure twice: the method is less accurate than the
-benchmark's own supervised baseline. On the official fold the deficit is
-\PlmAucDelta{} \PlmAucCI{} in mean per-unit ROC-AUC, larger on the thresholded
-metrics, and present at every calling fraction we examined; on an external set
-that could not have shaped this method it replicates at \ExtAucPlm{}
-\ExtAucCIPlm{}. Nothing in this paper should be read as a claim that a table of
-counted invariants predicts cryptic binding residues better than a protein
-language model with a trained head. The claims that survive are an advantage over
-P2Rank on external data, an exactly decomposable score, and a \FairModelOurs{}~MB
-integer artifact --- and the third of those is a deployment property rather than a
-scientific one.
+and~\ref{sec:external} measure twice for the deployed counting field: 
+\texttt{table\_field} is less accurate than the benchmark's own supervised
+baseline. On the official fold that deficit is \PlmAucDelta{} \PlmAucCI{} in mean
+per-unit ROC-AUC, larger on the thresholded metrics, and present at every calling
+fraction we examined; on an external set that could not have shaped this method
+it replicates at \ExtAucPlm{} \ExtAucCIPlm{}. A development probe of
+\texttt{geometry\_field} on the same official fold reaches parity with pLM-NN
+(\GeomFieldPlmDelta{} \GeomFieldPlmCI{}), which is not a resolved win and is not
+a confirmatory external read --- and must not be turned into one by re-scoring
+the spent Set~A. Nothing in this paper should be read as a claim that either
+detector has beaten a protein language model with a trained head on a fresh held-
+out set. The claims that survive are an advantage of the counting field over
+P2Rank on external data, an exactly decomposable score, and a
+\FairModelOurs{}~MB integer artifact --- and the third of those is a deployment
+property rather than a scientific one.
 
 The external advantage over P2Rank carries the load that the official fold could
 not, and it has limits of its own that are worth stating in one place.

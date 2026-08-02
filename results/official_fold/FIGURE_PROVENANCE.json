@@ -5,7 +5,7 @@
   "generator": "tools/make_official_figures.py",
   "sources": {
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
-    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "a7c8d65fd5e363746b1538f293dba161ae8d327e39e153ee6e5093095e1eb5c2",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "16a6611f26115617e8072459c9b9f985919f17da36edf64223820b39d4e58ad3",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
     "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",
@@ -22,7 +22,9 @@
     "results/external/WHERE_WE_BEAT_PLMNN.json": "7883b98974644497d245840c1fe54499b69b74115140075cc97244229a615dfb",
     "results/external/RHOA_CASE_STUDY.json": "566f692a5d22c9ad60b057d0aed929ecda1b7b7d2759d05bcac8688edbdd7ec3",
     "results/external/RESIDUE_RECOVERIES_VS_PLMNN.json": "938c9eff58f0f557b7405aaaf2d88b27cb72edb6ec5b764e00a5f45396f20ec9",
-    "results/external/SETN_READ.json": "ccf37657db37903fb9add45f05efb666db951fe86c362afcd080ef5ebc2cea54"
+    "results/external/SETN_READ.json": "ccf37657db37903fb9add45f05efb666db951fe86c362afcd080ef5ebc2cea54",
+    "results/external/DUAL_BASELINE_RECOVERIES.json": "271855ed7324e5923a0a90e75fbf6fb894352013499d130d931d05c47547576b",
+    "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json": "fee34287ff2d42313ceaf44d95f0c82278f78ae5c33382e741417137aa82ccac"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -33,7 +35,7 @@
     "fig_paired_vs_p2rank.png": {
       "sha256": "90058491d14770166a7f5e0af4ee38d779adf3f31bce57fd9a840e6baf1ed005",
       "bytes": 74390,
-      "caption": "Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is \u00b11 standard error of a fold mean (0.0161); 12 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not."
+      "caption": "Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is \u00b11 standard error of a fold mean (0.0161); 13 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not."
     },
     "fig_functional_choice.png": {
       "sha256": "86e28ffef98345a50ef7bc55b62bee4ca1fff391c8b51ed347a988a58837ac19",
@@ -100,10 +102,20 @@
       "bytes": 18464,
       "caption": "Residue-level recoveries against pLM-NN on spent Set A under the rule fixed in the RhoA case (labelled cryptic, ours\u226580%, pLM-NN\u226450%). 14 recovered residues across 9 units; 24 mirror residues across 11 units. The asymmetry favours pLM-NN at residue granularity; the panel reports both directions. RhoA and RAC1 appear among the recoveries. Mean unit deficit remains \u22120.0340; clinical_grade is false."
     },
+    "fig_dual_baseline_recoveries.png": {
+      "sha256": "9f3bff39e8c17a7ccb9eb4c7de0a4aa5ab4163e91a4987943dcc34470878a48a",
+      "bytes": 18688,
+      "caption": "Dual-baseline residue recoveries on spent Set A: labelled cryptic, counting field \u226580%, pLM-NN and P2Rank both \u226450%. 3 recovered residues across 3 units; 9 mirror residues across 5 units. Asymmetry favours the baselines; confirmatory means unchanged. clinical_grade is false."
+    },
     "fig_setn_read.png": {
       "sha256": "5cd68abd888085059c7adcbcacfd15676c375831e04d97136a7f1118a4b43d8b",
       "bytes": 41560,
       "caption": "Set N specificity read (384 units: 57 with a cryptic pocket, 327 shown to have none). Unit score = mean of top-10 residue scores; statistic = ROC-AUC separating the halves. Outcome under the committed plan: none_resolved. Point estimates: pLM-NN 0.5874, PocketMiner 0.5344, chain-length control 0.5457, counting field 0.5117, P2Rank 0.4480. Every Bonferroni-corrected comparison of the counting field against a baseline crosses zero. clinical_grade is false."
+    },
+    "fig_geometry_field_vs_plmnn_official.png": {
+      "sha256": "719e4732ff7031a33b269177c10c00625b26339251712ed545857ea7757c7756",
+      "bytes": 26431,
+      "caption": "Development probe on the official CryptoBench test fold (192 units): per-unit ROC-AUC difference geometry_field \u2212 pLM-NN, sorted. Mean levels 0.8231 vs 0.8235; paired \u0394=-0.0004 [-0.0202, +0.0185] (crosses zero \u2192 parity, not a resolved win). Ahead on 95 units, behind on 97. The published table_field level on this fold is 0.7992 (\u0394 vs pLM-NN \u22120.0243). Not confirmatory; clinical_grade is false."
     }
   }
 }

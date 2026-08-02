@@ -105,6 +105,7 @@ ENDPOINT = ROOT / "results/official_fold/ENDPOINT_STATUS.json"
 SUBGROUP = ROOT / "results/official_fold/SUBGROUP_READ.json"
 POCKET = ROOT / "results/official_fold/POCKET_READ.json"
 PLMNN = ROOT / "results/official_fold/PLMNN_READ.json"
+GEOM_PROBE = ROOT / "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json"
 PMREAD = ROOT / "results/official_fold/POCKETMINER_READ.json"
 EXTREAD = ROOT / "results/external/EXTERNAL_READ.json"
 EXTDIFF = ROOT / "results/external/EXTERNAL_SET_DIFFICULTY.json"
@@ -1044,6 +1045,38 @@ def build() -> str:
                 "the pLM-NN reproduction no longer clears its own floor, so the "
                 "comparison is against a baseline that may be broken and cannot "
                 "be quoted in either direction")
+
+    if GEOM_PROBE.exists():
+        # Development probe on a fold already read many times: geometry_field
+        # vs cached pLM-NN. Parity (CI crosses zero) is the honest reading;
+        # this is not a confirmatory claim and must not be confused with the
+        # table_field deficit emitted above from PLMNN_READ.
+        gp = json.loads(GEOM_PROBE.read_text())
+        L.append(f"\\newcommand{{\\GeomFieldLevel}}"
+                 f"{{{gp['mean_geometry_field']:.4f}}}")
+        L.append(f"\\newcommand{{\\GeomFieldPlmLevel}}"
+                 f"{{{gp['mean_plmnn']:.4f}}}")
+        L.append(f"\\newcommand{{\\GeomFieldPlmDelta}}"
+                 f"{{{gp['mean_delta_geometry_minus_plmnn']:+.4f}}}")
+        lo, hi = gp["ci95_delta"]
+        L.append(f"\\newcommand{{\\GeomFieldPlmCI}}"
+                 f"{{[{lo:+.4f}, {hi:+.4f}]}}")
+        L.append(f"\\newcommand{{\\GeomFieldWin}}{{{gp['n_geometry_ahead']}}}")
+        L.append(f"\\newcommand{{\\GeomFieldLoss}}{{{gp['n_plmnn_ahead']}}}")
+        L.append(f"\\newcommand{{\\GeomFieldN}}{{{gp['n_units_compared']}}}")
+        # Published table_field level on the same fold (PLMNN_READ's first arm).
+        tab = 0.7992
+        if PLMNN.exists():
+            tab = float(json.loads(PLMNN.read_text())["primary_comparison"]
+                        ["level_first"])
+        L.append(f"\\newcommand{{\\GeomFieldVsTab}}"
+                 f"{{{gp['mean_geometry_field'] - tab:+.4f}}}")
+        # Guard: a resolved win against pLM would need different prose.
+        if lo > 0:
+            raise SystemExit(
+                "geometry_field vs pLM-NN now resolves ahead of the baseline; "
+                "Section~\\ref{sec:plmnn} and the README parity sentence must "
+                "be rewritten, not regenerated")
 
     if PMREAD.exists():
         # The cryptic-specific baseline. Two macros here exist to stop the

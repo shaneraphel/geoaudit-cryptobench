@@ -139,6 +139,15 @@
       "selection_provenance": "training fold only; cluster-disjoint fit/pick halves; results/architecture_sweep/COUNTERATTACK_WIDE2.json"
     },
     {
+      "artifact": "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json",
+      "n_units": 192,
+      "method": "geometry_field",
+      "read_index": null,
+      "kind": "scored the fold",
+      "mean_residue_auc": 0.8230567903329818,
+      "selection_provenance": null
+    },
+    {
       "artifact": "results/official_fold/MATCHED_FULL_READ.json",
       "n_units": 192,
       "method": "table_field",
@@ -238,8 +247,8 @@
       "selection_provenance": "cluster-disjoint halves of the training fold; this is the first and only evaluation of this architecture on the official test fold"
     }
   ],
-  "n_standalone_probes": 22,
-  "n_distinct_architectures_evaluated": 12,
+  "n_standalone_probes": 23,
+  "n_distinct_architectures_evaluated": 13,
   "indexed_read_sequence": [
     {
       "artifact": "results/official_fold/COUNTERATTACK_TEST_PROBE.json",
@@ -368,7 +377,7 @@
     }
   ],
   "n_indexed_reads": 13,
-  "n_probes_that_scored_the_fold": 6,
+  "n_probes_that_scored_the_fold": 7,
   "n_probes_that_only_resummarised": 16,
-  "honest_summary": "9 of our detectors appear in the frozen telemetry. 22 standalone artifacts are further accesses: 6 of them scored the 192 units again, and 16 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 13 carry a read index, 12 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
+  "honest_summary": "9 of our detectors appear in the frozen telemetry. 23 standalone artifacts are further accesses: 7 of them scored the 192 units again, and 16 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 13 carry a read index, 12 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
 }

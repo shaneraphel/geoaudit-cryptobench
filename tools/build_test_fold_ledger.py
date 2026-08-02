@@ -64,6 +64,9 @@ _NOT_AN_ACCESS = {
                                     "the metrics of the reads it lists, so the "
                                     "third signal matches it and it would "
                                     "otherwise enter its own inventory",
+    "GEOMETRY_FIELD_VS_PLMNN_PROBE_SUMMARY.json": "a short quote of "
+        "GEOMETRY_FIELD_VS_PLMNN_PROBE.json for transfer-atlas / handoff; the "
+        "probe itself is the access",
 }
 
 
