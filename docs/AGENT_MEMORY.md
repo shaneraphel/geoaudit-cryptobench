@@ -2187,3 +2187,312 @@ zero, so this is **not a resolved stratum win**. Short chains sit the other way.
 Fold-mean parity unchanged. Say "point-estimate lead on long chains", not "beat
 pLM on long chains" without the CI.
 
+## 2t. seam_geometry_field point-estimate lead vs pLM-NN (development)
+
+Do **not** push this to `geoaudit-cryptobench` while frozen — sync to
+`foliation-transfer-atlas`. Artifact:
+`results/official_fold/SEAM_GEOMETRY_VS_PLMNN_PROBE.json`.
+
+| method | mean ROC-AUC | Δ vs pLM |
+|---|---|---|
+| geometry_field | 0.8231 | −0.0004 |
+| **seam_geometry_field** (+129) | **0.8249** | **+0.0014** |
+| pLM-NN | 0.8235 | — |
+
+CI95 [−0.0183, +0.0195] still crosses zero → point-estimate lead, not resolved.
+Short-chain deficit −0.044 → −0.034. Family: `nonlocal_seam.py` (43 qty × 3).
+
+
+
+## 2u. The crystal form was never read by anything, and reading it is worth +0.0005
+
+**The gap was real.** Measured over all 962 units of both folds, **zero**
+committed receptor files carry `CRYST1`, `SCALE`, `REMARK 290 SMTRY` or
+`ANISOU`. Every family written before this one is a function of one point cloud
+in an arbitrary frame. Two experimentally determined quantities — the lattice
+orbit of the chain, and the direction of each atom's displacement ellipsoid —
+were unavailable to all of them by any route, so §2i's null rule ("a family that
+is a function of data the pipeline already reads is null") did not apply and the
+prior was genuinely open.
+
+All 955 deposited entries were fetched, zero failures
+(`data/deposited_entries/DEPOSITED_ENTRY_MANIFEST.json`): 97.3 % carry a cell,
+96.8 % carry symmetry operators, **38.4 % carry ANISOU**, across 51 space
+groups. 43 quantities were built — lattice-orbit contact counts, the integer
+rotation trace read off the `GL(3,Z)` operator obtained by conjugating
+`REMARK 290` with `SCALE`, rotation order via the crystallographic restriction
+theorem, screw/glide detection from the intrinsic translation, a 32-ray
+occlusion count separating "blocked by my own chain" from "blocked only by a
+symmetry mate", and the polynomial invariants `tr(U)`, `tr(U²)`, `det(U)` of the
+displacement ellipsoid, which need no eigensolver.
+
+**Measured, 12 cluster-disjoint splits** (`CRYSTAL_FORM_LIFT.json`), against the
+frozen 645-wire per-split numbers, with the `more_old` control §2d says is not
+optional:
+
+| arm | mean | minus narrow | splits positive |
+|---|---|---|---|
+| narrow (deployed 645) | 0.790120 | — | — |
+| **union (+129)** | 0.790614 | **+0.000494** | **9/12** |
+| `more_old` control | 0.789433 | −0.000686 | 5/12 |
+| widened | 0.789663 | −0.000456 | 6/12 |
+| fisher (old+new) | 0.786591 | −0.003529 | 2/12 |
+| fisher_old | 0.784892 | −0.005227 | 1/12 |
+
+**Solve lift from the family: +0.001698 on 11 of 12 splits.**
+
+**The reading.** Nothing here is falsified. `PREREGISTERED_CRYSTAL_FORM.json`
+predicted +0.000 to +0.006 and named two falsifiers — `union ≤ more_old`, and
+`union < narrow`. Neither happened: union is above its own control by +0.00118
+and above narrow on 9 of 12. The solve sees the family on 11 of 12. So the
+information is **present and its sign is right**.
+
+And the size is a fifth of the reseed floor. +0.0005 against 0.0026 is not
+shippable, and the input class it costs is not small: a detector that reads a
+space group cannot be run on a predicted model, which is most of what anyone
+would want to run it on. **Do not build a second crystallographic family.** The
+next agent who notices that `CRYST1` is unread has now been told what it is
+worth.
+
+**What this does confirm, and it is the useful part.** The pattern from §2d
+repeats exactly: a family the solve can see at +0.0017 on 11/12 delivers +0.0005
+through the union attachment, because the union forms no tables straddling the
+new columns and the deployed bus. That is now three families showing the same
+gap between what is present and what the attachment collects, and
+`STRADDLING_ATTACHMENT.json` already measured that straddling recovers the
+union's cost and nothing beyond it. The bottleneck is not which bytes we read.
+
+**One thing that was checked and is worth keeping.** `n_dirs_blocked_self` — the
+same 32-ray occlusion counted against the chain's own atoms, carrying no
+crystallographic information — was built as the control for the confound named
+before the run (a patch that packs against a symmetry mate prefers an interface
+to solvent, which is what a cryptic site prefers too). With the family null the
+confound never had to be adjudicated, but the control exists and the next
+occlusion family should reuse it rather than rebuild it.
+
+## 2v. What 645 wires are for, measured three ways, and two explanations closed
+
+**The object.** Quantise every wire at within-chain quartiles and a residue is a
+digit row in `(Z/4)^645`. Two residues with equal rows have equal pre-gate
+scores for *every* table topology, *every* integer fan-out and *every* cell
+assignment, because all three are functions of the row. The classes of that
+relation give a Young subgroup of the symmetric group on the chain's residues —
+the deformation subgroup — and reading only the first `k` wires gives a
+filtration of it. `INDISTINGUISHABILITY_GROUP.json`.
+
+**Measured, 770 chains, 234,838 residues, 13,524 cryptic.** The subgroup is
+**trivial for every chain** at the deployed width. The filtration reaches the
+trivial group at **48 wires**, and **no cryptic residue shares a digit row with
+a non-cryptic one beyond 32**. The bank carries 645.
+
+| k | in a non-trivial block | cryptic label-straddling |
+|---|---|---|
+| 4 | 0.8795 | 0.8173 |
+| 8 | 0.2786 | 0.1706 |
+| 16 | 0.0617 | 0.0239 |
+| 32 | 0.0016 | **0.0001** |
+| 48 | **0.0001** | 0 |
+
+**Three measurements now say the same thing.** Separation saturates at 48 of 645
+wires. Table truncation needs 1,664 of 5,152 tables for 0.001, degrades
+*smoothly* rather than plateauing, and random selection matches principled
+selection (`BANK_TRUNCATION.json`). The fan-out sits at cosine 0.025–0.036 to
+every per-table statistic (`COMBINATORIAL_MULTIPLICITIES.json`). Interchangeable
+parts, value accumulating smoothly with count, weights that are a decorrelation:
+**the bank is an averaging device over correlated weak views, not a
+discriminating address space.** It holds thirteen times the addressing capacity
+the label consumes and does not spend the surplus on discrimination.
+
+That is the account of why every wire-axis lift for a year has been a fraction
+of a percent. A new family is another correlated view of a quantity already
+being averaged. **Stop proposing families and expecting the field to collect
+them**; §2d, §2u and this section are three independent routes to the same wall.
+
+**Two explanations closed by the same pair of runs.**
+
+*Ties are not the precision-at-top deficit.* There are none at 645 wires. The
+per-unit PR-AUC gap to pLM-NN (−0.0100) with a pooled-read lead (0.8535 vs
+0.8466) is about ranking direction, not resolution.
+
+*Composing the gated and raw orderings does not recover the top.*
+`ORDER_COMPOSITION_SCREEN.json`, 12 splits, three parameter-free compositions —
+raw alone, Borda over the two integer rank vectors, and lexicographic
+(top-q by gated, reordered by raw inside):
+
+| arm | PR-AUC | Δ vs gated | splits better | ROC-AUC | Δ |
+|---|---|---|---|---|---|
+| gated | 0.3694 | — | — | 0.7919 | — |
+| raw | 0.3496 | −0.0198 | **0/12** | 0.7773 | −0.0145 |
+| borda | 0.3607 | −0.0087 | **0/12** | 0.7882 | −0.0036 |
+| lex | 0.3616 | −0.0078 | **0/12** | 0.7914 | −0.0004 |
+
+The hypothesis was that the gate finds the patch and the raw score orders inside
+it. The falsifier named before the run was "the raw ordering is simply worse
+everywhere, including at the top", and that is what happened: raw is behind on
+both metrics on every split. The gate is not blurring a good ordering; it is
+producing one.
+
+## 2w. The polarity axis has no separator that survives its own multiple comparisons
+
+**The setup.** `max(seam, -seam)` per unit reaches 0.874 against pLM-NN's 0.8235,
+so the polarity headroom is +0.05 and is the largest unexploited effect anywhere
+in this repository. Nineteen units anti-rank their cryptic residues. A 1-D
+label-free switch failed at precision 0.2 (`POLARITY_SWITCH_SCREEN.json`), and
+the best separating covariate found there was `top10_mass` at Cohen's `d = 0.485`.
+
+**The hypothesis, and it was a good one.** Every spectral column in the bank is
+gauge-*fixed* — `nonlocal_seam` ranks `|v_2(i)|` — and an eigenvector's sign is
+arbitrary. If the sign the detector cannot choose is the sign the eigensolver
+cannot choose, a gauge-*invariant* statistic should separate the nineteen.
+
+`src/pocket_bench/methods/spectral_gauge.py` builds 26 such columns: projector
+diagonals and off-diagonals, discordance counts across the nodal partitions
+(integers, invariant because `v_a -> -v_a` fixes the product `v_a(i)v_a(j)`),
+resistance distances, and nodal-domain combinatorics. It ships with a self-test
+that recomputes everything under a randomly re-signed eigenbasis and requires
+bit-level agreement; `tests/test_spectral_gauge_invariance.py` plants
+`sign(v_2)` in a column and asserts the self-test **fails**, so the passing
+result means something.
+
+**The measurement, and then the check that matters.** 54 chain-level statistics,
+12 enumerated inverted units against 180 others:
+
+| covariate | Cohen's d | inverted | normal |
+|---|---|---|---|
+| `std~resist_to_centroid` | **+0.906** | 148.8 | 80.3 |
+| `std~nodal_domain_is_minority` | -0.678 | 0.461 | 0.483 |
+| `mean~nodal_domain_is_minority` | -0.493 | 0.364 | 0.407 |
+
+0.906 is nearly double the prior best and clears the `|d| > 0.6` falsifier that
+was written before the run. **It does not survive a permutation test.**
+
+Holding the covariate matrix fixed and shuffling which units are called
+inverted, 20 000 times: the null distribution of `max |d|` has **median 0.603**
+and a **95th percentile of 1.026**. The observed 0.906 gives a family-wise
+**p = 0.105**. With 54 covariates and a group of twelve, a maximum `|d|` near
+one is what the null produces on its own.
+
+**So the axis is closed, and closed harder than before.** Not "we have not found
+a separator yet" but "the best of 54 gauge-invariant statistics is inside the
+null band, and the previous best on this axis was never corrected either."
+`top10_mass` at 0.485 sits *below* this null's median; that screen tested 11
+covariates rather than 54 so its own null is lower, but nobody computed it, and
+**any future covariate proposed for this axis must arrive with a permutation
+test or it is not evidence.** Add one to the screen before quoting a `d` again.
+
+**What is still worth keeping.** The family is real, cheap (0.01 s per chain),
+provably gauge-invariant with a planted-violation test behind that claim, and it
+reads relations between residues that `|v_2|` discards. Its *field* lift is
+unmeasured and section 2v predicts null. The diagnostic it was built for has
+answered, and the answer is no.
+
+## 2x. `survey_targets.py` carries two bugs. The repo is frozen; do not fix it here.
+
+Found while generalising this tool into the pipeline sibling, where both bugs
+fired immediately. Recorded so that a future re-run ports the fixes rather than
+rediscovering them. **Do not patch or re-run the survey in this repository** —
+it is frozen, and `TARGET_SURVEY.json` is an input to committed downstream
+artifacts.
+
+**1. A zero-result search is recorded as an error.** RCSB answers a search with
+no hits using **HTTP 204 No Content** and an empty body. `entry_ids` calls
+`json.load` on it, which raises `Expecting value: line 1 column 1`, `_retry`
+burns four attempts, and the target lands in the survey with an `error` field.
+
+In the pipeline repo this hit fourteen targets across four domains and
+reproduced identically on a second run, which is what exposed it — a transient
+failure does not repeat exactly. Every one of the fourteen is a protein with no
+PDB entry at all, so the correct verdict is **`no structures`**, which is a
+finding about the target rather than about the network. One domain lost 7 of 26
+targets that way and its verdict was not a measurement of that domain.
+
+*Why it never fired here:* every one of the 52 blood-cancer accessions has at
+least one PDB entry.
+
+**2. The usability criterion has no minimum chain length.** `usable()` checks
+method and resolution only. An entry whose longest polymer is a hexapeptide
+counts as a single-chain apo structure.
+
+In the pipeline repo `MAPT` and `APP` read *usable* on sets containing `2ON9`,
+a six-residue VQIVYK peptide, and `4E0M`/`4E0N`, fourteen-residue cyclic
+pseudo-peptides. An aggregation target's PDB record is mostly fibril fragments.
+
+The floor is **52 residues**, measured as the shortest chain CryptoBench itself
+scores across all 962 units of both folds, with none below 50. Derived, not
+chosen — a structure shorter than the benchmark's own shortest unit is not
+something the compile set has an analogue of.
+
+*Why it never fired here:* no blood-cancer target's eligibility turned on short
+entries. It would change `n_apo_single_chain` for some targets in
+`TARGET_SURVEY.json`, but none of the seven eligible ones, so no committed
+downstream number moves.
+
+**Both fixes are in `foliation-multimodal-pipeline/tools/survey_domain.py`.**
+
+## 2y. The test-fold ledger under-counted itself by keying on the word "auc"
+
+Found 2026-08-03, while unfreezing the repository to revise the PSB submission.
+This is the worst shape a gate can have, and worse than the one AGENTS.md §2
+describes. That one is a gate that cannot fail. This one *answered*, the answer
+was wrong, and it had been wrong for the whole seam programme, while the number
+it returned was printed in the manuscript.
+
+**What it did.** `tools/build_test_fold_ledger.py` had three signals for "this
+artifact took a number off the held-out fold". All three keyed on how an
+artifact *spells* its metric: a per-unit table with a key containing `auc`, a
+declared `test_fold_read_index`, or the literal substring `auc` beside a unit
+count of 192.
+
+The seam probes store each method's per-unit ROC-AUC under the method's own
+name — `per_unit[i]["seam_msa_field"]` — and never write those three letters.
+**Eighteen artifacts were invisible**, including
+`GEO_SEAM_EQUALZ_FUSION_VS_PLMNN.json`, whose architecture is the best this
+project has produced.
+
+**What it cost.** The ledger reported 13 architectures over 27 artifacts. The
+true figures are **20 over 44**. `\NArchOnFold` is generated from it, so the
+manuscript's Figure 2 caption said 13 — a multiplicity understated by a third,
+in the one sentence whose whole job is to state the multiplicity honestly.
+
+**Why the fix is what it is.** Every one of the eighteen carries
+`reads_test_fold: true`, because `.cursor/rules/00-evidence-discipline.mdc`
+requires it. *The ledger was not reading the field the rule exists to produce.*
+That is now the fourth signal, and it is the only one independent of
+vocabulary. A second defect went with it: `method` defaulted to the string
+`"table field variant"`, so fifteen artifacts that name no architecture counted
+as one, and the total was an undercount by construction. Unnamed is now
+recorded as unnamed, an artifact evaluating ten methods contributes ten, and
+the summary sentence says the total is a lower bound.
+
+**The generalisable lesson.** A gate that recognises evidence by its *wording*
+is a gate that a new vocabulary walks past. Recognise it by the declaration the
+schema already requires. `tests/test_test_fold_ledger_signals.py` plants four
+violations, one of which disables the fourth signal to prove it is load-bearing
+rather than decorative, and a fifth test re-runs the disk-wide comparison that
+found the eighteen, so a nineteenth cannot appear the same way.
+
+## 2z. Seven captions would have stopped the LaTeX build, and nothing was watching
+
+Found in the same pass. The manuscript preamble loads `amsmath`, `amssymb`,
+`geometry`, `booktabs`, `graphicx` and `hyperref` — **no `inputenc`, no
+`fontenc`, no `newunicodechar`.** Under pdfLaTeX a character outside the font
+encoding is not a rendering wobble; it is `Unicode character ... not set up for
+use with LaTeX` and the build stops.
+
+Seven generated caption macros carried one: `≥`, `≤`, the true minus sign
+`−` (U+2212, not the hyphen), `→`, `Δ` and `ρ`. `_TEX_ESCAPES` already handled
+`±` and `Å`, so the hazard had been met before and the table was simply never
+extended when later captions introduced new glyphs.
+
+No Python test could see it. The strings are valid, the JSON is valid, the file
+writes successfully, and `make macros` passed throughout. This is exactly
+AGENTS.md §7 — *a generator that emits code for another language validates its
+own output in that language's terms* — and the existing implementation of that
+rule checked only for duplicate `\newcommand`.
+
+`_untypesettable()` now refuses to write a macro file containing any character
+above U+007F, naming the code point and the line. It found all seven on its
+first run. **There is no LaTeX toolchain on this machine** (`pdflatex`,
+`latexmk` and `xelatex` are all absent), so this check is the only thing
+standing between a generated caption and a submission that does not build —
+which is precisely why it has to be a byte-level gate and not a compile.

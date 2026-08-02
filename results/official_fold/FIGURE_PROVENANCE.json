@@ -5,7 +5,7 @@
   "generator": "tools/make_official_figures.py",
   "sources": {
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
-    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "8e8d3fbf6d4d37e55b2b07b645c41908c11ddd82f7e3941fc95012d30bda11f0",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "314298011dc956e213cf12e56d609778b08a19b3e66455f9f93dcecc6e054455",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
     "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",
@@ -36,7 +36,7 @@
     "fig_paired_vs_p2rank.png": {
       "sha256": "90058491d14770166a7f5e0af4ee38d779adf3f31bce57fd9a840e6baf1ed005",
       "bytes": 74390,
-      "caption": "Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is \u00b11 standard error of a fold mean (0.0161); 13 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not."
+      "caption": "Paired differences against P2Rank, on the structures where both are defined: one row per metric, showing the point estimate, the 95% bootstrap interval and the number of shared structures. The shaded band is \u00b11 standard error of a fold mean (0.0161); 20 of our architectures have been scored on this fold, so a margin inside that band is not an ordering. A row is called resolved only where the interval clears zero and the verdict survives every resampling seed, which is why three of the four are not."
     },
     "fig_functional_choice.png": {
       "sha256": "86e28ffef98345a50ef7bc55b62bee4ca1fff391c8b51ed347a988a58837ac19",

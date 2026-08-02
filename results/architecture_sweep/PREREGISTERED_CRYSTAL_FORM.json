@@ -1,0 +1,55 @@
+{
+  "schema": "geoaudit.preregistered_crystal_form.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "written_before_the_run": true,
+  "family": "crystal form 129",
+  "n_quantities": 43,
+  "n_quantities_definition": "entries of crystal_form.COLUMNS: distinct per-residue measurements, counted once each before aggregation. 31 read the lattice orbit or the residue's own occlusion, 9 read the displacement ellipsoid, 3 are within-chain ranks of load-bearing members of the first two groups.",
+  "n_columns": 129,
+  "n_columns_definition": "43 per-residue quantities under the three standard aggregations (own, contact-8A, walk2), matching every other wire family in this repository",
+
+  "what_this_family_reads_that_nothing_else_reads": [
+    "the space group and its symmetry operators, from REMARK 290 SMTRY of the deposited entry, conjugated by the SCALE matrix into the integer matrices of GL(3,Z) they are in the crystallographic basis",
+    "the Bravais lattice, from CRYST1, used to generate the images of the asymmetric unit that can reach this chain",
+    "the anisotropic displacement parameters, from ANISOU, reduced to the polynomial invariants tr(U), tr(U^2), det(U) and two directional angles"
+  ],
+  "why_the_null_rule_does_not_apply": "AGENT_MEMORY 2i says a family that is a function of data the pipeline already reads is null, and six families were null for exactly that reason. Measured over all 962 units of both folds, no committed receptor file carries CRYST1, SCALE, REMARK 290 or ANISOU, so none of the three inputs above is available to any existing family by any route.",
+
+  "coverage_at_the_time_of_the_prediction": {
+    "n_train_units": 770,
+    "n_with_symmetry_mate_contacts": 746,
+    "mate_coverage_fraction": 0.9688,
+    "n_with_anisou": 285,
+    "anisou_coverage_fraction": 0.3701,
+    "n_without_usable_deposited_entry": 19,
+    "why_coverage_is_quoted_here": "a lift must be read against the fraction of units that could have produced it; 63 % of chains contribute a constant ADP block that ranks flat and addresses one cell"
+  },
+
+  "prediction": {
+    "union_arm_lift_over_narrow": "between +0.000 and +0.006",
+    "reasoning": "the inputs are genuinely new, which removes the strongest reason to expect a null, but three things bound the size. The union attachment costs -0.00086 on its own (STRADDLING_ATTACHMENT). Only a few percent of residues in a typical chain touch a symmetry mate at all, so the mate columns are sparse. And ANISOU is absent on 63 % of chains, so the ellipsoid columns are constant there.",
+    "ordering_expected": "union > more_old, and permuted <= union",
+    "what_would_falsify_the_family": "union <= more_old, which would say the effect is bank size rather than the columns; or union < narrow, which would say the columns actively dilute the fan-out's decorrelation",
+    "what_would_falsify_the_reasoning_rather_than_the_family": "a lift above +0.006, which would mean the crystal environment carries more than a sparse correction and the bound above was wrong about which of the three inputs matters",
+    "reseed_floor": 0.0026,
+    "reseed_floor_definition": "the split-to-split standard deviation of the deployed field's mean per-unit ROC-AUC under reseeding alone; a lift below this is not distinguishable from the seed"
+  },
+
+  "the_confound_named_before_the_measurement": {
+    "statement": "a surface patch that packs against a symmetry mate is a patch that prefers an interface to bulk solvent, which is the same preference a cryptic site expresses. That is a real physical correlate of the label and also exactly the shape of a confound.",
+    "why_it_is_not_leakage": "the crystal form is a property of the apo entry, determined before any ligand is known, and the labels come from a holo structure superposed by TM-align. No holo information enters this family.",
+    "what_the_write_up_must_do": "if the family lifts, say whether the lift is the physical correlate or an artefact of which structures get solved in which space groups, or say that it cannot be told apart. The control that bears on this is n_dirs_blocked_self, which measures the same occlusion by the chain's own atoms and carries no crystallographic information.",
+    "applicability_cost": "a detector reading a space group cannot be run on a predicted model, and P2Rank and PocketMiner read coordinates only. This arm therefore never enters the receptor-only headline comparison."
+  },
+
+  "protocol": {
+    "n_splits": 12,
+    "split": "cluster-disjoint halves, seeds 20260725..20260736",
+    "compile_on": "the fit half only",
+    "evaluate_on": "the pick half",
+    "metric": "mean per-unit ROC-AUC",
+    "arms": ["union", "more_old", "widened", "fisher", "fisher_old"],
+    "baseline": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json, the frozen 645-wire per-split numbers on the same seeds, not recomputed"
+  }
+}

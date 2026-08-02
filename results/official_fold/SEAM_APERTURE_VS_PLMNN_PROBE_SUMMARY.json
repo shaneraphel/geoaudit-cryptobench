@@ -1,0 +1,20 @@
+{
+  "schema": "geoaudit.seam_aperture_vs_plmnn_probe.v1",
+  "clinical_grade": false,
+  "reads_test_fold": true,
+  "why_not_confirmatory": "development probe; fold heavily read",
+  "n_units": 192,
+  "mean_seam_aperture_field": 0.8228355334311787,
+  "mean_seam_geometry_field": 0.8262163414905728,
+  "mean_geometry_field": 0.8230567903329818,
+  "mean_plmnn": 0.8234690336263281,
+  "mean_delta_aperture_minus_plmnn": -0.0006335001951494555,
+  "ci95": [
+    -0.02052367960621269,
+    0.018401742080265585
+  ],
+  "n_ahead": 94,
+  "n_behind": 98,
+  "mean_delta_aperture_minus_seam": -0.003380808059394202,
+  "seconds": 255.67548683303175
+}

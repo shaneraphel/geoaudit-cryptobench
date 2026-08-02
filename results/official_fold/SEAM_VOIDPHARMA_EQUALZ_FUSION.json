@@ -1,0 +1,16 @@
+{
+  "schema": "geoaudit.seam_voidpharma_equalz_fusion.v1",
+  "clinical_grade": false,
+  "reads_test_fold": true,
+  "mean_seam": 0.8262163414905728,
+  "mean_vp": 0.8238100571234287,
+  "mean_fused": 0.8276945217709573,
+  "mean_plmnn": 0.8234690336263281,
+  "mean_delta": 0.004225488144629257,
+  "ci95": [
+    -0.015746352106339522,
+    0.02274711425780004
+  ],
+  "n_ahead": 99,
+  "n_behind": 93
+}

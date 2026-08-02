@@ -1,0 +1,1944 @@
+{
+  "schema": "geoaudit.seam_toeplitz_vs_plmnn_official_probe.v1",
+  "clinical_grade": false,
+  "method": "seam_toeplitz_field",
+  "reads_test_fold": true,
+  "why_not_confirmatory": "official fold heavily read; development probe",
+  "n_jobs": 9,
+  "n_units_compared": 192,
+  "n_errors": 0,
+  "errors_sample": [],
+  "mean_seam_toeplitz_field": 0.8217190650862567,
+  "mean_seam_geometry_field": 0.8262163414905728,
+  "mean_plmnn": 0.8234690336263281,
+  "mean_delta_tz_minus_plmnn": -0.0017499685400713505,
+  "ci95_delta_tz_minus_plmnn": [
+    -0.02252511122999873,
+    0.018151547910817703
+  ],
+  "n_tz_ahead_of_plmnn": 94,
+  "n_plmnn_ahead_of_tz": 97,
+  "seconds": 91.20247099996777,
+  "per_unit": [
+    {
+      "unit": "4j4e_F",
+      "seam_toeplitz_field": 0.0945054945054945,
+      "seam_geometry_field": 0.08461538461538462,
+      "plmnn": 0.7197802197802198,
+      "delta_tz_minus_plmnn": -0.6252747252747253,
+      "delta_tz_minus_seam": 0.009890109890109883,
+      "n": 101,
+      "n_pos": 10
+    },
+    {
+      "unit": "3jzg_A",
+      "seam_toeplitz_field": 0.3856868395773295,
+      "seam_geometry_field": 0.42987512007684914,
+      "plmnn": 0.9743035542747358,
+      "delta_tz_minus_plmnn": -0.5886167146974063,
+      "delta_tz_minus_seam": -0.04418828049951962,
+      "n": 359,
+      "n_pos": 12
+    },
+    {
+      "unit": "2vqz_F",
+      "seam_toeplitz_field": 0.25574425574425574,
+      "seam_geometry_field": 0.15684315684315683,
+      "plmnn": 0.6963036963036963,
+      "delta_tz_minus_plmnn": -0.4405594405594405,
+      "delta_tz_minus_seam": 0.09890109890109891,
+      "n": 150,
+      "n_pos": 7
+    },
+    {
+      "unit": "5i3t_E",
+      "seam_toeplitz_field": 0.0821727019498607,
+      "seam_geometry_field": 0.149025069637883,
+      "plmnn": 0.4052924791086351,
+      "delta_tz_minus_plmnn": -0.3231197771587744,
+      "delta_tz_minus_seam": -0.0668523676880223,
+      "n": 363,
+      "n_pos": 4
+    },
+    {
+      "unit": "6g6y_A",
+      "seam_toeplitz_field": 0.43954698500153044,
+      "seam_geometry_field": 0.49188858279767367,
+      "plmnn": 0.7505356596265687,
+      "delta_tz_minus_plmnn": -0.3109886746250382,
+      "delta_tz_minus_seam": -0.052341597796143224,
+      "n": 319,
+      "n_pos": 22
+    },
+    {
+      "unit": "1nd7_A",
+      "seam_toeplitz_field": 0.09594594594594594,
+      "seam_geometry_field": 0.23716216216216218,
+      "plmnn": 0.4027027027027027,
+      "delta_tz_minus_plmnn": -0.30675675675675673,
+      "delta_tz_minus_seam": -0.14121621621621624,
+      "n": 374,
+      "n_pos": 4
+    },
+    {
+      "unit": "6bty_B",
+      "seam_toeplitz_field": 0.5863678804855276,
+      "seam_geometry_field": 0.5966386554621849,
+      "plmnn": 0.8702147525676938,
+      "delta_tz_minus_plmnn": -0.2838468720821662,
+      "delta_tz_minus_seam": -0.010270774976657293,
+      "n": 128,
+      "n_pos": 9
+    },
+    {
+      "unit": "1vsn_A",
+      "seam_toeplitz_field": 0.13904761904761906,
+      "seam_geometry_field": 0.24571428571428572,
+      "plmnn": 0.40095238095238095,
+      "delta_tz_minus_plmnn": -0.26190476190476186,
+      "delta_tz_minus_seam": -0.10666666666666666,
+      "n": 215,
+      "n_pos": 5
+    },
+    {
+      "unit": "7yjc_A",
+      "seam_toeplitz_field": 0.3582222222222222,
+      "seam_geometry_field": 0.40800000000000003,
+      "plmnn": 0.5951111111111111,
+      "delta_tz_minus_plmnn": -0.23688888888888893,
+      "delta_tz_minus_seam": -0.04977777777777781,
+      "n": 381,
+      "n_pos": 6
+    },
+    {
+      "unit": "1q4k_A",
+      "seam_toeplitz_field": 0.5653294074346705,
+      "seam_geometry_field": 0.5447184394552815,
+      "plmnn": 0.7902097902097902,
+      "delta_tz_minus_plmnn": -0.22488038277511968,
+      "delta_tz_minus_seam": 0.020610967979388994,
+      "n": 222,
+      "n_pos": 13
+    },
+    {
+      "unit": "3v55_A",
+      "seam_toeplitz_field": 0.1581731258264673,
+      "seam_geometry_field": 0.16539517851693625,
+      "plmnn": 0.3817516020750687,
+      "delta_tz_minus_plmnn": -0.2235784762486014,
+      "delta_tz_minus_seam": -0.007222052690468939,
+      "n": 368,
+      "n_pos": 29
+    },
+    {
+      "unit": "5b0e_B",
+      "seam_toeplitz_field": 0.5920826161790017,
+      "seam_geometry_field": 0.627653471026965,
+      "plmnn": 0.8141135972461274,
+      "delta_tz_minus_plmnn": -0.2220309810671257,
+      "delta_tz_minus_seam": -0.035570854847963296,
+      "n": 104,
+      "n_pos": 21
+    },
+    {
+      "unit": "4ttp_A",
+      "seam_toeplitz_field": 0.6743243243243243,
+      "seam_geometry_field": 0.6983108108108108,
+      "plmnn": 0.8898648648648648,
+      "delta_tz_minus_plmnn": -0.2155405405405405,
+      "delta_tz_minus_seam": -0.02398648648648649,
+      "n": 201,
+      "n_pos": 16
+    },
+    {
+      "unit": "6ksc_A",
+      "seam_toeplitz_field": 0.4627009646302251,
+      "seam_geometry_field": 0.354983922829582,
+      "plmnn": 0.6712218649517686,
+      "delta_tz_minus_plmnn": -0.20852090032154352,
+      "delta_tz_minus_seam": 0.10771704180064307,
+      "n": 321,
+      "n_pos": 10
+    },
+    {
+      "unit": "4qvk_B",
+      "seam_toeplitz_field": 0.7702857142857142,
+      "seam_geometry_field": 0.8179047619047619,
+      "plmnn": 0.9619047619047618,
+      "delta_tz_minus_plmnn": -0.19161904761904758,
+      "delta_tz_minus_seam": -0.04761904761904767,
+      "n": 235,
+      "n_pos": 25
+    },
+    {
+      "unit": "4aem_A",
+      "seam_toeplitz_field": 0.8083333333333333,
+      "seam_geometry_field": 0.9277777777777777,
+      "plmnn": 0.9972222222222222,
+      "delta_tz_minus_plmnn": -0.18888888888888888,
+      "delta_tz_minus_seam": -0.11944444444444435,
+      "n": 126,
+      "n_pos": 6
+    },
+    {
+      "unit": "3ly8_A",
+      "seam_toeplitz_field": 0.08158508158508158,
+      "seam_geometry_field": 0.06060606060606061,
+      "plmnn": 0.26777389277389274,
+      "delta_tz_minus_plmnn": -0.18618881118881114,
+      "delta_tz_minus_seam": 0.020979020979020976,
+      "n": 323,
+      "n_pos": 11
+    },
+    {
+      "unit": "1cwq_A",
+      "seam_toeplitz_field": 0.10704022988505746,
+      "seam_geometry_field": 0.1695402298850575,
+      "plmnn": 0.285919540229885,
+      "delta_tz_minus_plmnn": -0.17887931034482757,
+      "delta_tz_minus_seam": -0.06250000000000003,
+      "n": 238,
+      "n_pos": 6
+    },
+    {
+      "unit": "1e6k_A",
+      "seam_toeplitz_field": 0.7860422405876951,
+      "seam_geometry_field": 0.7842056932966024,
+      "plmnn": 0.9513314967860422,
+      "delta_tz_minus_plmnn": -0.1652892561983471,
+      "delta_tz_minus_seam": 0.0018365472910927272,
+      "n": 130,
+      "n_pos": 9
+    },
+    {
+      "unit": "7f4y_B",
+      "seam_toeplitz_field": 0.8295847750865052,
+      "seam_geometry_field": 0.7711605003992548,
+      "plmnn": 0.9892866648922013,
+      "delta_tz_minus_plmnn": -0.1597018898056961,
+      "delta_tz_minus_seam": 0.05842427468725042,
+      "n": 901,
+      "n_pos": 17
+    },
+    {
+      "unit": "1bzj_A",
+      "seam_toeplitz_field": 0.40915826911677533,
+      "seam_geometry_field": 0.5808387670420866,
+      "plmnn": 0.5491256668642561,
+      "delta_tz_minus_plmnn": -0.1399673977474808,
+      "delta_tz_minus_seam": -0.17168049792531126,
+      "n": 297,
+      "n_pos": 56
+    },
+    {
+      "unit": "3i8s_B",
+      "seam_toeplitz_field": 0.8428571428571429,
+      "seam_geometry_field": 0.8826530612244897,
+      "plmnn": 0.9813775510204081,
+      "delta_tz_minus_plmnn": -0.13852040816326527,
+      "delta_tz_minus_seam": -0.03979591836734686,
+      "n": 261,
+      "n_pos": 16
+    },
+    {
+      "unit": "8ias_B",
+      "seam_toeplitz_field": 0.7540832758224063,
+      "seam_geometry_field": 0.7337244076374512,
+      "plmnn": 0.8918794570968483,
+      "delta_tz_minus_plmnn": -0.13779618127444204,
+      "delta_tz_minus_seam": 0.020358868184955137,
+      "n": 501,
+      "n_pos": 18
+    },
+    {
+      "unit": "2rfj_B",
+      "seam_toeplitz_field": 0.8339646464646465,
+      "seam_geometry_field": 0.8282828282828283,
+      "plmnn": 0.9715909090909091,
+      "delta_tz_minus_plmnn": -0.13762626262626254,
+      "delta_tz_minus_seam": 0.005681818181818232,
+      "n": 106,
+      "n_pos": 18
+    },
+    {
+      "unit": "6du4_A",
+      "seam_toeplitz_field": 0.7901562039493075,
+      "seam_geometry_field": 0.7875036840554082,
+      "plmnn": 0.9218980253463012,
+      "delta_tz_minus_plmnn": -0.13174182139699364,
+      "delta_tz_minus_seam": 0.0026525198938993633,
+      "n": 287,
+      "n_pos": 26
+    },
+    {
+      "unit": "7x0f_A",
+      "seam_toeplitz_field": 0.3515722153135548,
+      "seam_geometry_field": 0.40913128441996804,
+      "plmnn": 0.4830342867294368,
+      "delta_tz_minus_plmnn": -0.131462071415882,
+      "delta_tz_minus_seam": -0.05755906910641323,
+      "n": 446,
+      "n_pos": 13
+    },
+    {
+      "unit": "5e0v_A",
+      "seam_toeplitz_field": 0.6809116809116809,
+      "seam_geometry_field": 0.7216524216524216,
+      "plmnn": 0.8076923076923077,
+      "delta_tz_minus_plmnn": -0.12678062678062685,
+      "delta_tz_minus_seam": -0.040740740740740744,
+      "n": 249,
+      "n_pos": 15
+    },
+    {
+      "unit": "1g1m_B",
+      "seam_toeplitz_field": 0.8434697855750487,
+      "seam_geometry_field": 0.8764132553606236,
+      "plmnn": 0.9666666666666666,
+      "delta_tz_minus_plmnn": -0.12319688109161786,
+      "delta_tz_minus_seam": -0.03294346978557494,
+      "n": 289,
+      "n_pos": 19
+    },
+    {
+      "unit": "2fem_A",
+      "seam_toeplitz_field": 0.7815005727376861,
+      "seam_geometry_field": 0.8029782359679267,
+      "plmnn": 0.9012027491408934,
+      "delta_tz_minus_plmnn": -0.11970217640320724,
+      "delta_tz_minus_seam": -0.021477663230240585,
+      "n": 212,
+      "n_pos": 18
+    },
+    {
+      "unit": "4zm7_A",
+      "seam_toeplitz_field": 0.7861271676300577,
+      "seam_geometry_field": 0.842279108175062,
+      "plmnn": 0.893476465730801,
+      "delta_tz_minus_plmnn": -0.10734929810074323,
+      "delta_tz_minus_seam": -0.056151940545004275,
+      "n": 180,
+      "n_pos": 7
+    },
+    {
+      "unit": "2vyr_A",
+      "seam_toeplitz_field": 0.701098901098901,
+      "seam_geometry_field": 0.6791208791208792,
+      "plmnn": 0.8043956043956044,
+      "delta_tz_minus_plmnn": -0.10329670329670337,
+      "delta_tz_minus_seam": 0.0219780219780219,
+      "n": 86,
+      "n_pos": 21
+    },
+    {
+      "unit": "3st6_C",
+      "seam_toeplitz_field": 0.7187817258883249,
+      "seam_geometry_field": 0.7503384094754655,
+      "plmnn": 0.816751269035533,
+      "delta_tz_minus_plmnn": -0.09796954314720807,
+      "delta_tz_minus_seam": -0.03155668358714059,
+      "n": 424,
+      "n_pos": 30
+    },
+    {
+      "unit": "5o8b_A",
+      "seam_toeplitz_field": 0.7154811715481172,
+      "seam_geometry_field": 0.752092050209205,
+      "plmnn": 0.8085774058577405,
+      "delta_tz_minus_plmnn": -0.09309623430962333,
+      "delta_tz_minus_seam": -0.03661087866108781,
+      "n": 243,
+      "n_pos": 4
+    },
+    {
+      "unit": "1i7n_A",
+      "seam_toeplitz_field": 0.8969611307420494,
+      "seam_geometry_field": 0.8925795053003533,
+      "plmnn": 0.9823321554770317,
+      "delta_tz_minus_plmnn": -0.08537102473498226,
+      "delta_tz_minus_seam": 0.004381625441696069,
+      "n": 308,
+      "n_pos": 25
+    },
+    {
+      "unit": "2fhz_B",
+      "seam_toeplitz_field": 0.7875226039783002,
+      "seam_geometry_field": 0.7938517179023509,
+      "plmnn": 0.8698010849909584,
+      "delta_tz_minus_plmnn": -0.08227848101265822,
+      "delta_tz_minus_seam": -0.006329113924050667,
+      "n": 93,
+      "n_pos": 14
+    },
+    {
+      "unit": "6nei_B",
+      "seam_toeplitz_field": 0.8959823885525591,
+      "seam_geometry_field": 0.8981838194826637,
+      "plmnn": 0.974545954870666,
+      "delta_tz_minus_plmnn": -0.0785635663181069,
+      "delta_tz_minus_seam": -0.0022014309301046087,
+      "n": 339,
+      "n_pos": 23
+    },
+    {
+      "unit": "8h27_A",
+      "seam_toeplitz_field": 0.9016354016354016,
+      "seam_geometry_field": 0.9158249158249158,
+      "plmnn": 0.9795574795574796,
+      "delta_tz_minus_plmnn": -0.07792207792207806,
+      "delta_tz_minus_seam": -0.014189514189514196,
+      "n": 181,
+      "n_pos": 27
+    },
+    {
+      "unit": "4rvt_B",
+      "seam_toeplitz_field": 0.896192093136066,
+      "seam_geometry_field": 0.9044385156439486,
+      "plmnn": 0.9710162503031774,
+      "delta_tz_minus_plmnn": -0.07482415716711144,
+      "delta_tz_minus_seam": -0.008246422507882656,
+      "n": 297,
+      "n_pos": 31
+    },
+    {
+      "unit": "2i3a_D",
+      "seam_toeplitz_field": 0.8801406926406926,
+      "seam_geometry_field": 0.911525974025974,
+      "plmnn": 0.9531926406926408,
+      "delta_tz_minus_plmnn": -0.07305194805194815,
+      "delta_tz_minus_seam": -0.031385281385281405,
+      "n": 347,
+      "n_pos": 11
+    },
+    {
+      "unit": "1rjb_A",
+      "seam_toeplitz_field": 0.9115691489361702,
+      "seam_geometry_field": 0.9215425531914894,
+      "plmnn": 0.978945035460993,
+      "delta_tz_minus_plmnn": -0.06737588652482274,
+      "delta_tz_minus_seam": -0.009973404255319118,
+      "n": 298,
+      "n_pos": 16
+    },
+    {
+      "unit": "4gv9_A",
+      "seam_toeplitz_field": 0.14715025906735751,
+      "seam_geometry_field": 0.17098445595854925,
+      "plmnn": 0.21450777202072538,
+      "delta_tz_minus_plmnn": -0.06735751295336787,
+      "delta_tz_minus_seam": -0.023834196891191733,
+      "n": 198,
+      "n_pos": 5
+    },
+    {
+      "unit": "3vgm_A",
+      "seam_toeplitz_field": 0.8929405424824861,
+      "seam_geometry_field": 0.9223998562960303,
+      "plmnn": 0.949523980599964,
+      "delta_tz_minus_plmnn": -0.0565834381174779,
+      "delta_tz_minus_seam": -0.029459313813544163,
+      "n": 312,
+      "n_pos": 19
+    },
+    {
+      "unit": "4mwi_A",
+      "seam_toeplitz_field": 0.9028080896260731,
+      "seam_geometry_field": 0.9042630583442456,
+      "plmnn": 0.957369416557544,
+      "delta_tz_minus_plmnn": -0.05456132693147098,
+      "delta_tz_minus_seam": -0.0014549687181725224,
+      "n": 266,
+      "n_pos": 29
+    },
+    {
+      "unit": "3f4k_A",
+      "seam_toeplitz_field": 0.9184770436730123,
+      "seam_geometry_field": 0.93505039193729,
+      "plmnn": 0.9720044792833147,
+      "delta_tz_minus_plmnn": -0.053527435610302376,
+      "delta_tz_minus_seam": -0.0165733482642777,
+      "n": 254,
+      "n_pos": 19
+    },
+    {
+      "unit": "3rwv_A",
+      "seam_toeplitz_field": 0.8113487819370172,
+      "seam_geometry_field": 0.7667855020796197,
+      "plmnn": 0.8630421865715983,
+      "delta_tz_minus_plmnn": -0.05169340463458105,
+      "delta_tz_minus_seam": 0.0445632798573975,
+      "n": 205,
+      "n_pos": 18
+    },
+    {
+      "unit": "3t8b_A",
+      "seam_toeplitz_field": 0.8591591591591592,
+      "seam_geometry_field": 0.8576576576576577,
+      "plmnn": 0.9102102102102102,
+      "delta_tz_minus_plmnn": -0.05105105105105101,
+      "delta_tz_minus_seam": 0.0015015015015015232,
+      "n": 237,
+      "n_pos": 15
+    },
+    {
+      "unit": "6fgj_B",
+      "seam_toeplitz_field": 0.8588235294117647,
+      "seam_geometry_field": 0.884313725490196,
+      "plmnn": 0.9081699346405229,
+      "delta_tz_minus_plmnn": -0.04934640522875822,
+      "delta_tz_minus_seam": -0.025490196078431393,
+      "n": 197,
+      "n_pos": 17
+    },
+    {
+      "unit": "2i3r_A",
+      "seam_toeplitz_field": 0.8648415977961432,
+      "seam_geometry_field": 0.9044421487603307,
+      "plmnn": 0.9135674931129476,
+      "delta_tz_minus_plmnn": -0.04872589531680438,
+      "delta_tz_minus_seam": -0.039600550964187464,
+      "n": 286,
+      "n_pos": 22
+    },
+    {
+      "unit": "2iyt_A",
+      "seam_toeplitz_field": 0.9240890688259109,
+      "seam_geometry_field": 0.9099190283400809,
+      "plmnn": 0.9713225371120109,
+      "delta_tz_minus_plmnn": -0.04723346828609998,
+      "delta_tz_minus_seam": 0.014170040485830038,
+      "n": 175,
+      "n_pos": 19
+    },
+    {
+      "unit": "6tx0_B",
+      "seam_toeplitz_field": 0.12736842105263158,
+      "seam_geometry_field": 0.12,
+      "plmnn": 0.17263157894736844,
+      "delta_tz_minus_plmnn": -0.045263157894736866,
+      "delta_tz_minus_seam": 0.00736842105263158,
+      "n": 479,
+      "n_pos": 4
+    },
+    {
+      "unit": "3gdg_B",
+      "seam_toeplitz_field": 0.9386968085106383,
+      "seam_geometry_field": 0.9295212765957446,
+      "plmnn": 0.982845744680851,
+      "delta_tz_minus_plmnn": -0.04414893617021265,
+      "delta_tz_minus_seam": 0.009175531914893731,
+      "n": 267,
+      "n_pos": 32
+    },
+    {
+      "unit": "7x0g_B",
+      "seam_toeplitz_field": 0.9429987608426269,
+      "seam_geometry_field": 0.9444444444444444,
+      "plmnn": 0.9843040066088393,
+      "delta_tz_minus_plmnn": -0.04130524576621242,
+      "delta_tz_minus_seam": -0.0014456836018175157,
+      "n": 287,
+      "n_pos": 18
+    },
+    {
+      "unit": "5loc_A",
+      "seam_toeplitz_field": 0.9142214397496087,
+      "seam_geometry_field": 0.917057902973396,
+      "plmnn": 0.9539319248826291,
+      "delta_tz_minus_plmnn": -0.039710485133020446,
+      "delta_tz_minus_seam": -0.0028364632237872778,
+      "n": 320,
+      "n_pos": 36
+    },
+    {
+      "unit": "2w8n_A",
+      "seam_toeplitz_field": 0.9131614654002714,
+      "seam_geometry_field": 0.9092847451056406,
+      "plmnn": 0.9511533242876526,
+      "delta_tz_minus_plmnn": -0.037991858887381214,
+      "delta_tz_minus_seam": 0.00387672029463082,
+      "n": 480,
+      "n_pos": 11
+    },
+    {
+      "unit": "3wb9_C",
+      "seam_toeplitz_field": 0.9283058948486458,
+      "seam_geometry_field": 0.9378651088688262,
+      "plmnn": 0.9660116834838024,
+      "delta_tz_minus_plmnn": -0.03770578863515661,
+      "delta_tz_minus_seam": -0.009559214020180451,
+      "n": 297,
+      "n_pos": 28
+    },
+    {
+      "unit": "2v6m_D",
+      "seam_toeplitz_field": 0.9337121212121213,
+      "seam_geometry_field": 0.9180035650623886,
+      "plmnn": 0.9706996434937611,
+      "delta_tz_minus_plmnn": -0.03698752228163982,
+      "delta_tz_minus_seam": 0.015708556149732766,
+      "n": 298,
+      "n_pos": 34
+    },
+    {
+      "unit": "6w10_A",
+      "seam_toeplitz_field": 0.9454212454212454,
+      "seam_geometry_field": 0.9315018315018315,
+      "plmnn": 0.9813186813186814,
+      "delta_tz_minus_plmnn": -0.03589743589743599,
+      "delta_tz_minus_seam": 0.01391941391941387,
+      "n": 223,
+      "n_pos": 13
+    },
+    {
+      "unit": "7v8k_B",
+      "seam_toeplitz_field": 0.9415778251599147,
+      "seam_geometry_field": 0.9569296375266525,
+      "plmnn": 0.9744136460554371,
+      "delta_tz_minus_plmnn": -0.032835820895522394,
+      "delta_tz_minus_seam": -0.015351812366737771,
+      "n": 474,
+      "n_pos": 5
+    },
+    {
+      "unit": "1xtc_A",
+      "seam_toeplitz_field": 0.8955938697318007,
+      "seam_geometry_field": 0.9179438058748404,
+      "plmnn": 0.9275223499361431,
+      "delta_tz_minus_plmnn": -0.03192848020434247,
+      "delta_tz_minus_seam": -0.022349936143039706,
+      "n": 192,
+      "n_pos": 18
+    },
+    {
+      "unit": "4uum_A",
+      "seam_toeplitz_field": 0.9529411764705883,
+      "seam_geometry_field": 0.9552941176470588,
+      "plmnn": 0.9834313725490197,
+      "delta_tz_minus_plmnn": -0.030490196078431397,
+      "delta_tz_minus_seam": -0.0023529411764705577,
+      "n": 334,
+      "n_pos": 34
+    },
+    {
+      "unit": "4zoe_B",
+      "seam_toeplitz_field": 0.9415138692994829,
+      "seam_geometry_field": 0.955618241654913,
+      "plmnn": 0.9710390220968501,
+      "delta_tz_minus_plmnn": -0.029525152797367227,
+      "delta_tz_minus_seam": -0.014104372355430161,
+      "n": 724,
+      "n_pos": 15
+    },
+    {
+      "unit": "8i84_B",
+      "seam_toeplitz_field": 0.9376731301939057,
+      "seam_geometry_field": 0.9382667194301544,
+      "plmnn": 0.9669568658488327,
+      "delta_tz_minus_plmnn": -0.029283735654926923,
+      "delta_tz_minus_seam": -0.0005935892362486372,
+      "n": 285,
+      "n_pos": 19
+    },
+    {
+      "unit": "5hto_E",
+      "seam_toeplitz_field": 0.9191176470588235,
+      "seam_geometry_field": 0.9327094474153298,
+      "plmnn": 0.9464126559714795,
+      "delta_tz_minus_plmnn": -0.027295008912656016,
+      "delta_tz_minus_seam": -0.013591800356506312,
+      "n": 305,
+      "n_pos": 33
+    },
+    {
+      "unit": "2phz_A",
+      "seam_toeplitz_field": 0.9037893700787403,
+      "seam_geometry_field": 0.9111712598425197,
+      "plmnn": 0.9288877952755905,
+      "delta_tz_minus_plmnn": -0.025098425196850238,
+      "delta_tz_minus_seam": -0.007381889763779403,
+      "n": 270,
+      "n_pos": 16
+    },
+    {
+      "unit": "6n5j_B",
+      "seam_toeplitz_field": 0.9391156462585033,
+      "seam_geometry_field": 0.939795918367347,
+      "plmnn": 0.9641156462585034,
+      "delta_tz_minus_plmnn": -0.025000000000000133,
+      "delta_tz_minus_seam": -0.0006802721088436936,
+      "n": 301,
+      "n_pos": 21
+    },
+    {
+      "unit": "8u3n_A",
+      "seam_toeplitz_field": 0.24254742547425473,
+      "seam_geometry_field": 0.2784552845528455,
+      "plmnn": 0.2672764227642277,
+      "delta_tz_minus_plmnn": -0.024728997289972965,
+      "delta_tz_minus_seam": -0.03590785907859079,
+      "n": 377,
+      "n_pos": 8
+    },
+    {
+      "unit": "3lnz_C",
+      "seam_toeplitz_field": 0.8369252873563219,
+      "seam_geometry_field": 0.8139367816091954,
+      "plmnn": 0.8613505747126436,
+      "delta_tz_minus_plmnn": -0.024425287356321768,
+      "delta_tz_minus_seam": 0.02298850574712652,
+      "n": 82,
+      "n_pos": 24
+    },
+    {
+      "unit": "1xqv_A",
+      "seam_toeplitz_field": 0.9594640434192673,
+      "seam_geometry_field": 0.9523405698778833,
+      "plmnn": 0.9837177747625508,
+      "delta_tz_minus_plmnn": -0.02425373134328357,
+      "delta_tz_minus_seam": 0.0071234735413839845,
+      "n": 290,
+      "n_pos": 22
+    },
+    {
+      "unit": "4ikv_A",
+      "seam_toeplitz_field": 0.9365145228215767,
+      "seam_geometry_field": 0.9149377593360996,
+      "plmnn": 0.9603734439834024,
+      "delta_tz_minus_plmnn": -0.023858921161825752,
+      "delta_tz_minus_seam": 0.021576763485477102,
+      "n": 492,
+      "n_pos": 10
+    },
+    {
+      "unit": "2pwz_G",
+      "seam_toeplitz_field": 0.9486855699690048,
+      "seam_geometry_field": 0.9518998966823555,
+      "plmnn": 0.9724486281712778,
+      "delta_tz_minus_plmnn": -0.02376305820227298,
+      "delta_tz_minus_seam": -0.003214326713350757,
+      "n": 312,
+      "n_pos": 31
+    },
+    {
+      "unit": "2nt1_B",
+      "seam_toeplitz_field": 0.9473752598752598,
+      "seam_geometry_field": 0.9524428274428274,
+      "plmnn": 0.9698544698544698,
+      "delta_tz_minus_plmnn": -0.022479209979209935,
+      "delta_tz_minus_seam": -0.0050675675675675436,
+      "n": 497,
+      "n_pos": 16
+    },
+    {
+      "unit": "6vle_A",
+      "seam_toeplitz_field": 0.9189640768588136,
+      "seam_geometry_field": 0.9449815013724788,
+      "plmnn": 0.9403270079961809,
+      "delta_tz_minus_plmnn": -0.021362931137367203,
+      "delta_tz_minus_seam": -0.026017424513665177,
+      "n": 460,
+      "n_pos": 19
+    },
+    {
+      "unit": "2zcg_A",
+      "seam_toeplitz_field": 0.9570018796992481,
+      "seam_geometry_field": 0.9659304511278196,
+      "plmnn": 0.9769736842105262,
+      "delta_tz_minus_plmnn": -0.019971804511278113,
+      "delta_tz_minus_seam": -0.008928571428571508,
+      "n": 318,
+      "n_pos": 14
+    },
+    {
+      "unit": "2aka_A",
+      "seam_toeplitz_field": 0.8711577868852458,
+      "seam_geometry_field": 0.8230447404371585,
+      "plmnn": 0.8893869535519126,
+      "delta_tz_minus_plmnn": -0.01822916666666674,
+      "delta_tz_minus_seam": 0.04811304644808734,
+      "n": 764,
+      "n_pos": 32
+    },
+    {
+      "unit": "6fc2_C",
+      "seam_toeplitz_field": 0.95,
+      "seam_geometry_field": 0.9292929292929293,
+      "plmnn": 0.9671717171717172,
+      "delta_tz_minus_plmnn": -0.017171717171717282,
+      "delta_tz_minus_seam": 0.020707070707070674,
+      "n": 177,
+      "n_pos": 12
+    },
+    {
+      "unit": "8aeq_A",
+      "seam_toeplitz_field": 0.948051948051948,
+      "seam_geometry_field": 0.9561688311688312,
+      "plmnn": 0.9644886363636364,
+      "delta_tz_minus_plmnn": -0.01643668831168832,
+      "delta_tz_minus_seam": -0.008116883116883189,
+      "n": 624,
+      "n_pos": 8
+    },
+    {
+      "unit": "1dq2_A",
+      "seam_toeplitz_field": 0.9487836107554417,
+      "seam_geometry_field": 0.8647033717456253,
+      "plmnn": 0.9645753307725138,
+      "delta_tz_minus_plmnn": -0.015791720017072075,
+      "delta_tz_minus_seam": 0.08408023900981643,
+      "n": 224,
+      "n_pos": 11
+    },
+    {
+      "unit": "3fzo_A",
+      "seam_toeplitz_field": 0.9463364293085655,
+      "seam_geometry_field": 0.9446594427244581,
+      "plmnn": 0.9619453044375644,
+      "delta_tz_minus_plmnn": -0.01560887512899889,
+      "delta_tz_minus_seam": 0.0016769865841074205,
+      "n": 262,
+      "n_pos": 34
+    },
+    {
+      "unit": "8aqi_B",
+      "seam_toeplitz_field": 0.8530741410488247,
+      "seam_geometry_field": 0.8937613019891502,
+      "plmnn": 0.8684448462929475,
+      "delta_tz_minus_plmnn": -0.015370705244122762,
+      "delta_tz_minus_seam": -0.04068716094032543,
+      "n": 172,
+      "n_pos": 14
+    },
+    {
+      "unit": "3h8a_B",
+      "seam_toeplitz_field": 0.9693905070118661,
+      "seam_geometry_field": 0.96264832793959,
+      "plmnn": 0.9832793959007552,
+      "delta_tz_minus_plmnn": -0.013888888888889062,
+      "delta_tz_minus_seam": 0.006742179072276144,
+      "n": 430,
+      "n_pos": 18
+    },
+    {
+      "unit": "3k01_A",
+      "seam_toeplitz_field": 0.9729437229437229,
+      "seam_geometry_field": 0.9798307752853207,
+      "plmnn": 0.9866194411648959,
+      "delta_tz_minus_plmnn": -0.013675718221172972,
+      "delta_tz_minus_seam": -0.00688705234159781,
+      "n": 391,
+      "n_pos": 28
+    },
+    {
+      "unit": "2xsa_A",
+      "seam_toeplitz_field": 0.9565420560747664,
+      "seam_geometry_field": 0.9637071651090343,
+      "plmnn": 0.969626168224299,
+      "delta_tz_minus_plmnn": -0.013084112149532645,
+      "delta_tz_minus_seam": -0.007165109034267925,
+      "n": 443,
+      "n_pos": 15
+    },
+    {
+      "unit": "5yqp_A",
+      "seam_toeplitz_field": 0.9537500000000001,
+      "seam_geometry_field": 0.9272500000000001,
+      "plmnn": 0.96625,
+      "delta_tz_minus_plmnn": -0.012499999999999956,
+      "delta_tz_minus_seam": 0.026499999999999968,
+      "n": 185,
+      "n_pos": 25
+    },
+    {
+      "unit": "5hij_A",
+      "seam_toeplitz_field": 0.9367253750815395,
+      "seam_geometry_field": 0.9365079365079365,
+      "plmnn": 0.9452054794520548,
+      "delta_tz_minus_plmnn": -0.008480104370515273,
+      "delta_tz_minus_seam": 0.00021743857360301266,
+      "n": 240,
+      "n_pos": 21
+    },
+    {
+      "unit": "3lnz_O",
+      "seam_toeplitz_field": 0.8545197740112995,
+      "seam_geometry_field": 0.8375706214689266,
+      "plmnn": 0.8629943502824858,
+      "delta_tz_minus_plmnn": -0.008474576271186307,
+      "delta_tz_minus_seam": 0.016949152542372947,
+      "n": 83,
+      "n_pos": 24
+    },
+    {
+      "unit": "5ysb_B",
+      "seam_toeplitz_field": 0.9790142472083173,
+      "seam_geometry_field": 0.9851752021563343,
+      "plmnn": 0.9871005005775895,
+      "delta_tz_minus_plmnn": -0.008086253369272156,
+      "delta_tz_minus_seam": -0.006160954948016939,
+      "n": 385,
+      "n_pos": 14
+    },
+    {
+      "unit": "6cqe_B",
+      "seam_toeplitz_field": 0.9647804302976717,
+      "seam_geometry_field": 0.9572649572649574,
+      "plmnn": 0.9725906277630416,
+      "delta_tz_minus_plmnn": -0.007810197465369928,
+      "delta_tz_minus_seam": 0.0075154730327142705,
+      "n": 287,
+      "n_pos": 26
+    },
+    {
+      "unit": "4uc8_A",
+      "seam_toeplitz_field": 0.812785388127854,
+      "seam_geometry_field": 0.8508371385083715,
+      "plmnn": 0.8203957382039573,
+      "delta_tz_minus_plmnn": -0.007610350076103334,
+      "delta_tz_minus_seam": -0.03805175038051756,
+      "n": 222,
+      "n_pos": 3
+    },
+    {
+      "unit": "5ey7_B",
+      "seam_toeplitz_field": 0.8997097242380262,
+      "seam_geometry_field": 0.9010159651669086,
+      "plmnn": 0.9065312046444122,
+      "delta_tz_minus_plmnn": -0.006821480406385971,
+      "delta_tz_minus_seam": -0.0013062409288824295,
+      "n": 291,
+      "n_pos": 26
+    },
+    {
+      "unit": "7x0i_B",
+      "seam_toeplitz_field": 0.9695020053475936,
+      "seam_geometry_field": 0.9618148395721925,
+      "plmnn": 0.9754344919786097,
+      "delta_tz_minus_plmnn": -0.005932486631016087,
+      "delta_tz_minus_seam": 0.0076871657754010725,
+      "n": 406,
+      "n_pos": 32
+    },
+    {
+      "unit": "1p4o_B",
+      "seam_toeplitz_field": 0.9639110889110889,
+      "seam_geometry_field": 0.95516983016983,
+      "plmnn": 0.9690309690309691,
+      "delta_tz_minus_plmnn": -0.0051198801198801824,
+      "delta_tz_minus_seam": 0.008741258741258862,
+      "n": 314,
+      "n_pos": 28
+    },
+    {
+      "unit": "5tc0_B",
+      "seam_toeplitz_field": 0.9493243243243243,
+      "seam_geometry_field": 0.957046332046332,
+      "plmnn": 0.9531853281853282,
+      "delta_tz_minus_plmnn": -0.0038610038610038533,
+      "delta_tz_minus_seam": -0.007722007722007707,
+      "n": 250,
+      "n_pos": 28
+    },
+    {
+      "unit": "7nc8_D",
+      "seam_toeplitz_field": 0.9360418342719228,
+      "seam_geometry_field": 0.9288012872083669,
+      "plmnn": 0.9396621078037009,
+      "delta_tz_minus_plmnn": -0.003620273531778073,
+      "delta_tz_minus_seam": 0.007240547063555924,
+      "n": 237,
+      "n_pos": 11
+    },
+    {
+      "unit": "7c48_A",
+      "seam_toeplitz_field": 0.9237867395762133,
+      "seam_geometry_field": 0.9294258373205742,
+      "plmnn": 0.9266917293233082,
+      "delta_tz_minus_plmnn": -0.002904989747094966,
+      "delta_tz_minus_seam": -0.005639097744360888,
+      "n": 288,
+      "n_pos": 22
+    },
+    {
+      "unit": "5z18_C",
+      "seam_toeplitz_field": 0.9606769537083126,
+      "seam_geometry_field": 0.9588103534096565,
+      "plmnn": 0.9634146341463414,
+      "delta_tz_minus_plmnn": -0.0027376804380288,
+      "delta_tz_minus_seam": 0.0018666002986561514,
+      "n": 588,
+      "n_pos": 14
+    },
+    {
+      "unit": "4r0x_A",
+      "seam_toeplitz_field": 0.8409343715239155,
+      "seam_geometry_field": 0.8972932888394513,
+      "plmnn": 0.8424175009269558,
+      "delta_tz_minus_plmnn": -0.0014831294030402953,
+      "delta_tz_minus_seam": -0.05635891731553577,
+      "n": 122,
+      "n_pos": 29
+    },
+    {
+      "unit": "8vxu_B",
+      "seam_toeplitz_field": 0.45182291666666663,
+      "seam_geometry_field": 0.5234375,
+      "plmnn": 0.4518229166666667,
+      "delta_tz_minus_plmnn": -5.551115123125783e-17,
+      "delta_tz_minus_seam": -0.07161458333333337,
+      "n": 104,
+      "n_pos": 8
+    },
+    {
+      "unit": "3mwg_B",
+      "seam_toeplitz_field": 0.9501953125,
+      "seam_geometry_field": 0.9423828125,
+      "plmnn": 0.9501953125,
+      "delta_tz_minus_plmnn": 0.0,
+      "delta_tz_minus_seam": 0.0078125,
+      "n": 272,
+      "n_pos": 16
+    },
+    {
+      "unit": "1ksg_B",
+      "seam_toeplitz_field": 0.7628865979381443,
+      "seam_geometry_field": 0.7848353841037579,
+      "plmnn": 0.7602261390089791,
+      "delta_tz_minus_plmnn": 0.0026604589291652214,
+      "delta_tz_minus_seam": -0.021948786165613576,
+      "n": 128,
+      "n_pos": 31
+    },
+    {
+      "unit": "2dfp_A",
+      "seam_toeplitz_field": 0.9246127366609294,
+      "seam_geometry_field": 0.9327596098680437,
+      "plmnn": 0.9216293746414227,
+      "delta_tz_minus_plmnn": 0.0029833620195066635,
+      "delta_tz_minus_seam": -0.00814687320711438,
+      "n": 533,
+      "n_pos": 35
+    },
+    {
+      "unit": "2vl2_C",
+      "seam_toeplitz_field": 0.9072847682119205,
+      "seam_geometry_field": 0.8821192052980132,
+      "plmnn": 0.9039735099337748,
+      "delta_tz_minus_plmnn": 0.0033112582781457123,
+      "delta_tz_minus_seam": 0.025165562913907258,
+      "n": 161,
+      "n_pos": 10
+    },
+    {
+      "unit": "7w19_A",
+      "seam_toeplitz_field": 0.952657004830918,
+      "seam_geometry_field": 0.9376811594202898,
+      "plmnn": 0.9471819645732689,
+      "delta_tz_minus_plmnn": 0.005475040257649111,
+      "delta_tz_minus_seam": 0.01497584541062813,
+      "n": 293,
+      "n_pos": 23
+    },
+    {
+      "unit": "3ugk_A",
+      "seam_toeplitz_field": 0.964465805231642,
+      "seam_geometry_field": 0.9639142767097385,
+      "plmnn": 0.9589505200126064,
+      "delta_tz_minus_plmnn": 0.005515285219035659,
+      "delta_tz_minus_seam": 0.0005515285219035437,
+      "n": 372,
+      "n_pos": 38
+    },
+    {
+      "unit": "1p4v_A",
+      "seam_toeplitz_field": 0.9814068100358423,
+      "seam_geometry_field": 0.983646953405018,
+      "plmnn": 0.9755824372759856,
+      "delta_tz_minus_plmnn": 0.0058243727598567,
+      "delta_tz_minus_seam": -0.0022401433691756623,
+      "n": 295,
+      "n_pos": 16
+    },
+    {
+      "unit": "1evy_A",
+      "seam_toeplitz_field": 0.9797657082002129,
+      "seam_geometry_field": 0.9849937070384355,
+      "plmnn": 0.9712460063897763,
+      "delta_tz_minus_plmnn": 0.008519701810436597,
+      "delta_tz_minus_seam": -0.005227998838222558,
+      "n": 346,
+      "n_pos": 33
+    },
+    {
+      "unit": "6o4f_H",
+      "seam_toeplitz_field": 0.9581964220518437,
+      "seam_geometry_field": 0.9536327126688573,
+      "plmnn": 0.9492515516611904,
+      "delta_tz_minus_plmnn": 0.008944870390653392,
+      "delta_tz_minus_seam": 0.004563709382986447,
+      "n": 509,
+      "n_pos": 11
+    },
+    {
+      "unit": "3nx1_B",
+      "seam_toeplitz_field": 0.941290322580645,
+      "seam_geometry_field": 0.9490322580645162,
+      "plmnn": 0.9316129032258065,
+      "delta_tz_minus_plmnn": 0.009677419354838568,
+      "delta_tz_minus_seam": -0.007741935483871143,
+      "n": 165,
+      "n_pos": 10
+    },
+    {
+      "unit": "4jfr_C",
+      "seam_toeplitz_field": 0.9950892857142857,
+      "seam_geometry_field": 0.9953124999999999,
+      "plmnn": 0.9839285714285715,
+      "delta_tz_minus_plmnn": 0.01116071428571419,
+      "delta_tz_minus_seam": -0.00022321428571425717,
+      "n": 334,
+      "n_pos": 14
+    },
+    {
+      "unit": "1xgd_A",
+      "seam_toeplitz_field": 0.9229797979797979,
+      "seam_geometry_field": 0.9252822341057636,
+      "plmnn": 0.9105020796197268,
+      "delta_tz_minus_plmnn": 0.012477718360071055,
+      "delta_tz_minus_seam": -0.002302436125965701,
+      "n": 315,
+      "n_pos": 51
+    },
+    {
+      "unit": "1kxr_A",
+      "seam_toeplitz_field": 0.976219618814478,
+      "seam_geometry_field": 0.9858366847350936,
+      "plmnn": 0.9613568805735269,
+      "delta_tz_minus_plmnn": 0.01486273824095119,
+      "delta_tz_minus_seam": -0.009617065920615508,
+      "n": 320,
+      "n_pos": 19
+    },
+    {
+      "unit": "2x47_A",
+      "seam_toeplitz_field": 0.9909056460780599,
+      "seam_geometry_field": 0.9892004547176961,
+      "plmnn": 0.9759378552482001,
+      "delta_tz_minus_plmnn": 0.014967790829859773,
+      "delta_tz_minus_seam": 0.0017051913603637336,
+      "n": 229,
+      "n_pos": 26
+    },
+    {
+      "unit": "4p2f_A",
+      "seam_toeplitz_field": 0.9513966480446927,
+      "seam_geometry_field": 0.9452513966480447,
+      "plmnn": 0.9351955307262569,
+      "delta_tz_minus_plmnn": 0.016201117318435765,
+      "delta_tz_minus_seam": 0.0061452513966480105,
+      "n": 189,
+      "n_pos": 10
+    },
+    {
+      "unit": "7de1_A",
+      "seam_toeplitz_field": 0.64625,
+      "seam_geometry_field": 0.5962500000000001,
+      "plmnn": 0.63,
+      "delta_tz_minus_plmnn": 0.016249999999999987,
+      "delta_tz_minus_seam": 0.04999999999999993,
+      "n": 108,
+      "n_pos": 8
+    },
+    {
+      "unit": "1se8_A",
+      "seam_toeplitz_field": 0.9686468646864687,
+      "seam_geometry_field": 0.9801980198019802,
+      "plmnn": 0.9521452145214521,
+      "delta_tz_minus_plmnn": 0.01650165016501659,
+      "delta_tz_minus_seam": -0.011551155115511524,
+      "n": 205,
+      "n_pos": 3
+    },
+    {
+      "unit": "5uxa_A",
+      "seam_toeplitz_field": 0.9597101449275364,
+      "seam_geometry_field": 0.9666666666666667,
+      "plmnn": 0.942608695652174,
+      "delta_tz_minus_plmnn": 0.01710144927536239,
+      "delta_tz_minus_seam": -0.006956521739130306,
+      "n": 301,
+      "n_pos": 25
+    },
+    {
+      "unit": "7xgf_E",
+      "seam_toeplitz_field": 0.7467908902691511,
+      "seam_geometry_field": 0.7979296066252588,
+      "plmnn": 0.7289855072463768,
+      "delta_tz_minus_plmnn": 0.017805383022774346,
+      "delta_tz_minus_seam": -0.05113871635610767,
+      "n": 151,
+      "n_pos": 46
+    },
+    {
+      "unit": "1g59_A",
+      "seam_toeplitz_field": 0.9754231052244298,
+      "seam_geometry_field": 0.9658572479764532,
+      "plmnn": 0.9571743929359823,
+      "delta_tz_minus_plmnn": 0.01824871228844749,
+      "delta_tz_minus_seam": 0.00956585724797654,
+      "n": 468,
+      "n_pos": 15
+    },
+    {
+      "unit": "7c63_A",
+      "seam_toeplitz_field": 0.9072494669509594,
+      "seam_geometry_field": 0.9301705756929637,
+      "plmnn": 0.8878820184790334,
+      "delta_tz_minus_plmnn": 0.019367448471926063,
+      "delta_tz_minus_seam": -0.02292110874200426,
+      "n": 416,
+      "n_pos": 14
+    },
+    {
+      "unit": "9atc_A",
+      "seam_toeplitz_field": 0.9818751029823694,
+      "seam_geometry_field": 0.9803921568627451,
+      "plmnn": 0.9611138573076289,
+      "delta_tz_minus_plmnn": 0.02076124567474047,
+      "delta_tz_minus_seam": 0.0014829461196242955,
+      "n": 310,
+      "n_pos": 21
+    },
+    {
+      "unit": "3w90_A",
+      "seam_toeplitz_field": 0.9600117612466921,
+      "seam_geometry_field": 0.9388415172008233,
+      "plmnn": 0.939135548368127,
+      "delta_tz_minus_plmnn": 0.020876212878565115,
+      "delta_tz_minus_seam": 0.021170244045868758,
+      "n": 198,
+      "n_pos": 19
+    },
+    {
+      "unit": "7o1i_A",
+      "seam_toeplitz_field": 0.7948350071736011,
+      "seam_geometry_field": 0.791272943155395,
+      "plmnn": 0.7738089348439123,
+      "delta_tz_minus_plmnn": 0.021026072329688783,
+      "delta_tz_minus_seam": 0.0035620640182061347,
+      "n": 726,
+      "n_pos": 29
+    },
+    {
+      "unit": "1x2g_C",
+      "seam_toeplitz_field": 0.9263932702418507,
+      "seam_geometry_field": 0.940273396424816,
+      "plmnn": 0.9053627760252366,
+      "delta_tz_minus_plmnn": 0.02103049421661407,
+      "delta_tz_minus_seam": -0.013880126182965302,
+      "n": 332,
+      "n_pos": 15
+    },
+    {
+      "unit": "3tpo_A",
+      "seam_toeplitz_field": 0.9215116279069768,
+      "seam_geometry_field": 0.9046511627906977,
+      "plmnn": 0.8994186046511629,
+      "delta_tz_minus_plmnn": 0.02209302325581397,
+      "delta_tz_minus_seam": 0.016860465116279144,
+      "n": 438,
+      "n_pos": 8
+    },
+    {
+      "unit": "1xjf_A",
+      "seam_toeplitz_field": 0.9790286975717439,
+      "seam_geometry_field": 0.9811258278145696,
+      "plmnn": 0.9567328918322295,
+      "delta_tz_minus_plmnn": 0.022295805739514396,
+      "delta_tz_minus_seam": -0.002097130242825651,
+      "n": 619,
+      "n_pos": 15
+    },
+    {
+      "unit": "1zm0_A",
+      "seam_toeplitz_field": 0.9903743315508021,
+      "seam_geometry_field": 0.9850267379679144,
+      "plmnn": 0.9679144385026738,
+      "delta_tz_minus_plmnn": 0.022459893048128343,
+      "delta_tz_minus_seam": 0.005347593582887722,
+      "n": 96,
+      "n_pos": 11
+    },
+    {
+      "unit": "5kcg_B",
+      "seam_toeplitz_field": 0.9541795665634676,
+      "seam_geometry_field": 0.9469040247678018,
+      "plmnn": 0.9314241486068112,
+      "delta_tz_minus_plmnn": 0.022755417956656365,
+      "delta_tz_minus_seam": 0.0072755417956658075,
+      "n": 397,
+      "n_pos": 17
+    },
+    {
+      "unit": "3uyi_A",
+      "seam_toeplitz_field": 0.9503023431594859,
+      "seam_geometry_field": 0.9544595616024187,
+      "plmnn": 0.9263038548752834,
+      "delta_tz_minus_plmnn": 0.02399848828420248,
+      "delta_tz_minus_seam": -0.00415721844293282,
+      "n": 312,
+      "n_pos": 18
+    },
+    {
+      "unit": "6jq9_B",
+      "seam_toeplitz_field": 0.9837935174069627,
+      "seam_geometry_field": 0.9825930372148859,
+      "plmnn": 0.9582833133253301,
+      "delta_tz_minus_plmnn": 0.025510204081632626,
+      "delta_tz_minus_seam": 0.0012004801920768582,
+      "n": 483,
+      "n_pos": 7
+    },
+    {
+      "unit": "2h7s_A",
+      "seam_toeplitz_field": 0.9393170281495155,
+      "seam_geometry_field": 0.9464697738809414,
+      "plmnn": 0.912782648823258,
+      "delta_tz_minus_plmnn": 0.026534379326257462,
+      "delta_tz_minus_seam": -0.007152745731425991,
+      "n": 405,
+      "n_pos": 11
+    },
+    {
+      "unit": "1lbe_B",
+      "seam_toeplitz_field": 0.9429824561403509,
+      "seam_geometry_field": 0.9401315789473684,
+      "plmnn": 0.9142543859649123,
+      "delta_tz_minus_plmnn": 0.028728070175438658,
+      "delta_tz_minus_seam": 0.0028508771929824928,
+      "n": 248,
+      "n_pos": 20
+    },
+    {
+      "unit": "4bg8_A",
+      "seam_toeplitz_field": 0.9085884353741496,
+      "seam_geometry_field": 0.8930697278911565,
+      "plmnn": 0.8788265306122449,
+      "delta_tz_minus_plmnn": 0.029761904761904656,
+      "delta_tz_minus_seam": 0.01551870748299311,
+      "n": 310,
+      "n_pos": 16
+    },
+    {
+      "unit": "1k47_D",
+      "seam_toeplitz_field": 0.9466666666666667,
+      "seam_geometry_field": 0.9564285714285714,
+      "plmnn": 0.9166666666666667,
+      "delta_tz_minus_plmnn": 0.029999999999999916,
+      "delta_tz_minus_seam": -0.00976190476190475,
+      "n": 314,
+      "n_pos": 14
+    },
+    {
+      "unit": "4amv_B",
+      "seam_toeplitz_field": 0.9772906127037662,
+      "seam_geometry_field": 0.9797639123102866,
+      "plmnn": 0.9464867903316471,
+      "delta_tz_minus_plmnn": 0.030803822372119094,
+      "delta_tz_minus_seam": -0.0024732996065204294,
+      "n": 608,
+      "n_pos": 15
+    },
+    {
+      "unit": "8gxj_C",
+      "seam_toeplitz_field": 0.9216463414634146,
+      "seam_geometry_field": 0.9237804878048781,
+      "plmnn": 0.8893292682926829,
+      "delta_tz_minus_plmnn": 0.032317073170731736,
+      "delta_tz_minus_seam": -0.002134146341463472,
+      "n": 184,
+      "n_pos": 20
+    },
+    {
+      "unit": "8bre_B",
+      "seam_toeplitz_field": 0.9334272631208171,
+      "seam_geometry_field": 0.9256780556533991,
+      "plmnn": 0.8974991194082423,
+      "delta_tz_minus_plmnn": 0.0359281437125748,
+      "delta_tz_minus_seam": 0.007749207467418029,
+      "n": 351,
+      "n_pos": 17
+    },
+    {
+      "unit": "7nlx_A",
+      "seam_toeplitz_field": 0.9471515151515152,
+      "seam_geometry_field": 0.9512727272727273,
+      "plmnn": 0.9107878787878788,
+      "delta_tz_minus_plmnn": 0.036363636363636376,
+      "delta_tz_minus_seam": -0.004121212121212081,
+      "n": 290,
+      "n_pos": 15
+    },
+    {
+      "unit": "4jax_F",
+      "seam_toeplitz_field": 0.9767267267267267,
+      "seam_geometry_field": 0.981981981981982,
+      "plmnn": 0.9402402402402402,
+      "delta_tz_minus_plmnn": 0.03648648648648645,
+      "delta_tz_minus_seam": -0.005255255255255387,
+      "n": 459,
+      "n_pos": 15
+    },
+    {
+      "unit": "3flg_A",
+      "seam_toeplitz_field": 0.9118165784832452,
+      "seam_geometry_field": 0.9153439153439153,
+      "plmnn": 0.8747795414462081,
+      "delta_tz_minus_plmnn": 0.03703703703703709,
+      "delta_tz_minus_seam": -0.003527336860670194,
+      "n": 135,
+      "n_pos": 9
+    },
+    {
+      "unit": "8onn_E",
+      "seam_toeplitz_field": 0.9650776053215078,
+      "seam_geometry_field": 0.9722838137472284,
+      "plmnn": 0.9275683665927569,
+      "delta_tz_minus_plmnn": 0.03750923872875089,
+      "delta_tz_minus_seam": -0.007206208425720617,
+      "n": 268,
+      "n_pos": 22
+    },
+    {
+      "unit": "1p9o_A",
+      "seam_toeplitz_field": 0.9039031620553359,
+      "seam_geometry_field": 0.9063735177865613,
+      "plmnn": 0.8643774703557312,
+      "delta_tz_minus_plmnn": 0.03952569169960474,
+      "delta_tz_minus_seam": -0.0024703557312253377,
+      "n": 269,
+      "n_pos": 16
+    },
+    {
+      "unit": "1m5w_D",
+      "seam_toeplitz_field": 0.9659556130144366,
+      "seam_geometry_field": 0.9620771385477268,
+      "plmnn": 0.9243697478991596,
+      "delta_tz_minus_plmnn": 0.041585865115276954,
+      "delta_tz_minus_seam": 0.003878474466709747,
+      "n": 242,
+      "n_pos": 21
+    },
+    {
+      "unit": "2pkf_A",
+      "seam_toeplitz_field": 0.9899150743099788,
+      "seam_geometry_field": 0.9881457891012031,
+      "plmnn": 0.9469214437367305,
+      "delta_tz_minus_plmnn": 0.04299363057324834,
+      "delta_tz_minus_seam": 0.0017692852087757283,
+      "n": 332,
+      "n_pos": 18
+    },
+    {
+      "unit": "1arl_A",
+      "seam_toeplitz_field": 0.9667342799188641,
+      "seam_geometry_field": 0.9847870182555781,
+      "plmnn": 0.922920892494929,
+      "delta_tz_minus_plmnn": 0.043813387423935035,
+      "delta_tz_minus_seam": -0.018052738336714058,
+      "n": 307,
+      "n_pos": 17
+    },
+    {
+      "unit": "6f52_A",
+      "seam_toeplitz_field": 0.9596330275229358,
+      "seam_geometry_field": 0.946177370030581,
+      "plmnn": 0.9146788990825688,
+      "delta_tz_minus_plmnn": 0.04495412844036695,
+      "delta_tz_minus_seam": 0.013455657492354778,
+      "n": 233,
+      "n_pos": 15
+    },
+    {
+      "unit": "6eqj_A",
+      "seam_toeplitz_field": 0.9660869565217391,
+      "seam_geometry_field": 0.9678260869565218,
+      "plmnn": 0.9156521739130434,
+      "delta_tz_minus_plmnn": 0.050434782608695716,
+      "delta_tz_minus_seam": -0.0017391304347826875,
+      "n": 245,
+      "n_pos": 15
+    },
+    {
+      "unit": "5wbm_B",
+      "seam_toeplitz_field": 0.9590098482832046,
+      "seam_geometry_field": 0.9552834708544051,
+      "plmnn": 0.9076390737290392,
+      "delta_tz_minus_plmnn": 0.05137077455416539,
+      "delta_tz_minus_seam": 0.0037263774287994433,
+      "n": 302,
+      "n_pos": 13
+    },
+    {
+      "unit": "3a0x_A",
+      "seam_toeplitz_field": 0.953125,
+      "seam_geometry_field": 0.9624255952380952,
+      "plmnn": 0.9002976190476191,
+      "delta_tz_minus_plmnn": 0.05282738095238093,
+      "delta_tz_minus_seam": -0.009300595238095233,
+      "n": 149,
+      "n_pos": 21
+    },
+    {
+      "unit": "1h13_A",
+      "seam_toeplitz_field": 0.9884711779448621,
+      "seam_geometry_field": 0.9919799498746866,
+      "plmnn": 0.9348370927318296,
+      "delta_tz_minus_plmnn": 0.05363408521303248,
+      "delta_tz_minus_seam": -0.0035087719298245723,
+      "n": 404,
+      "n_pos": 5
+    },
+    {
+      "unit": "5sc2_A",
+      "seam_toeplitz_field": 0.8703448275862069,
+      "seam_geometry_field": 0.8951724137931034,
+      "plmnn": 0.816551724137931,
+      "delta_tz_minus_plmnn": 0.053793103448275925,
+      "delta_tz_minus_seam": -0.024827586206896513,
+      "n": 150,
+      "n_pos": 5
+    },
+    {
+      "unit": "5igh_A",
+      "seam_toeplitz_field": 0.7722240858772224,
+      "seam_geometry_field": 0.8248909761824891,
+      "plmnn": 0.7183830929218383,
+      "delta_tz_minus_plmnn": 0.053840992955384026,
+      "delta_tz_minus_seam": -0.05266689030526672,
+      "n": 293,
+      "n_pos": 22
+    },
+    {
+      "unit": "4cmw_B",
+      "seam_toeplitz_field": 0.9499310072935145,
+      "seam_geometry_field": 0.9495367632564558,
+      "plmnn": 0.8890203035679086,
+      "delta_tz_minus_plmnn": 0.06091070372560592,
+      "delta_tz_minus_seam": 0.0003942440370587885,
+      "n": 286,
+      "n_pos": 19
+    },
+    {
+      "unit": "2qbv_A",
+      "seam_toeplitz_field": 0.9285714285714286,
+      "seam_geometry_field": 0.8958837772397095,
+      "plmnn": 0.8656174334140436,
+      "delta_tz_minus_plmnn": 0.06295399515738498,
+      "delta_tz_minus_seam": 0.032687651331719136,
+      "n": 73,
+      "n_pos": 14
+    },
+    {
+      "unit": "1kx9_A",
+      "seam_toeplitz_field": 0.8143369175627241,
+      "seam_geometry_field": 0.8258064516129032,
+      "plmnn": 0.7491039426523298,
+      "delta_tz_minus_plmnn": 0.06523297491039426,
+      "delta_tz_minus_seam": -0.011469534050179142,
+      "n": 108,
+      "n_pos": 15
+    },
+    {
+      "unit": "1bk2_A",
+      "seam_toeplitz_field": 0.9076923076923078,
+      "seam_geometry_field": 0.9115384615384615,
+      "plmnn": 0.8423076923076923,
+      "delta_tz_minus_plmnn": 0.06538461538461549,
+      "delta_tz_minus_seam": -0.0038461538461537215,
+      "n": 57,
+      "n_pos": 5
+    },
+    {
+      "unit": "7f2m_B",
+      "seam_toeplitz_field": 0.1654611211573237,
+      "seam_geometry_field": 0.15596745027124775,
+      "plmnn": 0.09448462929475589,
+      "delta_tz_minus_plmnn": 0.07097649186256781,
+      "delta_tz_minus_seam": 0.009493670886075944,
+      "n": 323,
+      "n_pos": 7
+    },
+    {
+      "unit": "2zj7_A",
+      "seam_toeplitz_field": 0.9261924342105263,
+      "seam_geometry_field": 0.8764391447368421,
+      "plmnn": 0.8507401315789473,
+      "delta_tz_minus_plmnn": 0.07545230263157898,
+      "delta_tz_minus_seam": 0.04975328947368418,
+      "n": 616,
+      "n_pos": 8
+    },
+    {
+      "unit": "3n4u_A",
+      "seam_toeplitz_field": 0.9384341637010676,
+      "seam_geometry_field": 0.9311387900355872,
+      "plmnn": 0.8596085409252668,
+      "delta_tz_minus_plmnn": 0.07882562277580074,
+      "delta_tz_minus_seam": 0.007295373665480387,
+      "n": 301,
+      "n_pos": 20
+    },
+    {
+      "unit": "5zj4_D",
+      "seam_toeplitz_field": 0.9597315436241611,
+      "seam_geometry_field": 0.9621720561317877,
+      "plmnn": 0.8804148871262965,
+      "delta_tz_minus_plmnn": 0.07931665649786468,
+      "delta_tz_minus_seam": -0.0024405125076265577,
+      "n": 160,
+      "n_pos": 11
+    },
+    {
+      "unit": "6hei_A",
+      "seam_toeplitz_field": 0.8572115384615385,
+      "seam_geometry_field": 0.9165865384615385,
+      "plmnn": 0.7777644230769231,
+      "delta_tz_minus_plmnn": 0.07944711538461546,
+      "delta_tz_minus_seam": -0.059374999999999956,
+      "n": 346,
+      "n_pos": 26
+    },
+    {
+      "unit": "5acv_B",
+      "seam_toeplitz_field": 0.9934210526315789,
+      "seam_geometry_field": 1.0,
+      "plmnn": 0.9111842105263157,
+      "delta_tz_minus_plmnn": 0.08223684210526316,
+      "delta_tz_minus_seam": -0.006578947368421129,
+      "n": 232,
+      "n_pos": 4
+    },
+    {
+      "unit": "7kay_A",
+      "seam_toeplitz_field": 0.9276863700995328,
+      "seam_geometry_field": 0.9398232784887264,
+      "plmnn": 0.8437944342880357,
+      "delta_tz_minus_plmnn": 0.08389193581149712,
+      "delta_tz_minus_seam": -0.012136908389193568,
+      "n": 583,
+      "n_pos": 36
+    },
+    {
+      "unit": "2d05_A",
+      "seam_toeplitz_field": 0.9819716148830073,
+      "seam_geometry_field": 0.9854238588415803,
+      "plmnn": 0.8927886459532028,
+      "delta_tz_minus_plmnn": 0.08918296892980448,
+      "delta_tz_minus_seam": -0.0034522439585730202,
+      "n": 259,
+      "n_pos": 22
+    },
+    {
+      "unit": "7e5q_B",
+      "seam_toeplitz_field": 0.6107899807321773,
+      "seam_geometry_field": 0.5785163776493256,
+      "plmnn": 0.5202312138728323,
+      "delta_tz_minus_plmnn": 0.09055876685934494,
+      "delta_tz_minus_seam": 0.032273603082851654,
+      "n": 352,
+      "n_pos": 6
+    },
+    {
+      "unit": "4ilg_A",
+      "seam_toeplitz_field": 0.7072025942993685,
+      "seam_geometry_field": 0.7064345451442227,
+      "plmnn": 0.6156340672469706,
+      "delta_tz_minus_plmnn": 0.09156852705239793,
+      "delta_tz_minus_seam": 0.0007680491551458335,
+      "n": 321,
+      "n_pos": 42
+    },
+    {
+      "unit": "4gpi_C",
+      "seam_toeplitz_field": 0.8122037914691943,
+      "seam_geometry_field": 0.7902843601895735,
+      "plmnn": 0.7186018957345971,
+      "delta_tz_minus_plmnn": 0.0936018957345972,
+      "delta_tz_minus_seam": 0.021919431279620816,
+      "n": 235,
+      "n_pos": 24
+    },
+    {
+      "unit": "4dnc_B",
+      "seam_toeplitz_field": 0.8568464730290457,
+      "seam_geometry_field": 0.9146185764443026,
+      "plmnn": 0.7593360995850622,
+      "delta_tz_minus_plmnn": 0.0975103734439835,
+      "delta_tz_minus_seam": -0.05777210341525685,
+      "n": 267,
+      "n_pos": 26
+    },
+    {
+      "unit": "6isu_A",
+      "seam_toeplitz_field": 0.918840579710145,
+      "seam_geometry_field": 0.9217391304347826,
+      "plmnn": 0.8166666666666667,
+      "delta_tz_minus_plmnn": 0.10217391304347834,
+      "delta_tz_minus_seam": -0.0028985507246376274,
+      "n": 227,
+      "n_pos": 20
+    },
+    {
+      "unit": "8b9p_A",
+      "seam_toeplitz_field": 0.8257191201353637,
+      "seam_geometry_field": 0.7925549915397632,
+      "plmnn": 0.700507614213198,
+      "delta_tz_minus_plmnn": 0.1252115059221658,
+      "delta_tz_minus_seam": 0.033164128595600584,
+      "n": 596,
+      "n_pos": 5
+    },
+    {
+      "unit": "1uka_A",
+      "seam_toeplitz_field": 0.9509433962264151,
+      "seam_geometry_field": 0.9729559748427673,
+      "plmnn": 0.8182389937106918,
+      "delta_tz_minus_plmnn": 0.13270440251572335,
+      "delta_tz_minus_seam": -0.022012578616352196,
+      "n": 271,
+      "n_pos": 6
+    },
+    {
+      "unit": "4e1y_A",
+      "seam_toeplitz_field": 0.9810344827586206,
+      "seam_geometry_field": 0.971264367816092,
+      "plmnn": 0.8413793103448275,
+      "delta_tz_minus_plmnn": 0.1396551724137931,
+      "delta_tz_minus_seam": 0.009770114942528552,
+      "n": 353,
+      "n_pos": 5
+    },
+    {
+      "unit": "6a98_C",
+      "seam_toeplitz_field": 0.9644026186579377,
+      "seam_geometry_field": 0.9631751227495908,
+      "plmnn": 0.822013093289689,
+      "delta_tz_minus_plmnn": 0.14238952536824878,
+      "delta_tz_minus_seam": 0.0012274959083469206,
+      "n": 201,
+      "n_pos": 13
+    },
+    {
+      "unit": "3pbf_A",
+      "seam_toeplitz_field": 0.761904761904762,
+      "seam_geometry_field": 0.8333333333333333,
+      "plmnn": 0.6190476190476191,
+      "delta_tz_minus_plmnn": 0.1428571428571429,
+      "delta_tz_minus_seam": -0.07142857142857129,
+      "n": 145,
+      "n_pos": 7
+    },
+    {
+      "unit": "4fkm_B",
+      "seam_toeplitz_field": 0.9572538860103628,
+      "seam_geometry_field": 0.9601683937823834,
+      "plmnn": 0.8112046632124352,
+      "delta_tz_minus_plmnn": 0.14604922279792754,
+      "delta_tz_minus_seam": -0.0029145077720206247,
+      "n": 209,
+      "n_pos": 16
+    },
+    {
+      "unit": "8j11_X",
+      "seam_toeplitz_field": 0.8607843137254902,
+      "seam_geometry_field": 0.9411764705882353,
+      "plmnn": 0.703921568627451,
+      "delta_tz_minus_plmnn": 0.1568627450980392,
+      "delta_tz_minus_seam": -0.08039215686274503,
+      "n": 173,
+      "n_pos": 3
+    },
+    {
+      "unit": "4kmy_A",
+      "seam_toeplitz_field": 0.9679144385026738,
+      "seam_geometry_field": 0.9596256684491979,
+      "plmnn": 0.8048128342245989,
+      "delta_tz_minus_plmnn": 0.16310160427807485,
+      "delta_tz_minus_seam": 0.008288770053475836,
+      "n": 207,
+      "n_pos": 20
+    },
+    {
+      "unit": "3bjp_A",
+      "seam_toeplitz_field": 0.5455172413793103,
+      "seam_geometry_field": 0.5441379310344827,
+      "plmnn": 0.37724137931034485,
+      "delta_tz_minus_plmnn": 0.1682758620689655,
+      "delta_tz_minus_seam": 0.0013793103448276334,
+      "n": 295,
+      "n_pos": 5
+    },
+    {
+      "unit": "4hye_A",
+      "seam_toeplitz_field": 0.8877551020408164,
+      "seam_geometry_field": 0.9081632653061225,
+      "plmnn": 0.7155612244897959,
+      "delta_tz_minus_plmnn": 0.17219387755102056,
+      "delta_tz_minus_seam": -0.020408163265306034,
+      "n": 200,
+      "n_pos": 4
+    },
+    {
+      "unit": "5caz_A",
+      "seam_toeplitz_field": 0.6582278481012659,
+      "seam_geometry_field": 0.7953586497890296,
+      "plmnn": 0.4852320675105485,
+      "delta_tz_minus_plmnn": 0.1729957805907174,
+      "delta_tz_minus_seam": -0.1371308016877637,
+      "n": 161,
+      "n_pos": 3
+    },
+    {
+      "unit": "4oqo_B",
+      "seam_toeplitz_field": 0.840345544712846,
+      "seam_geometry_field": 0.8707406814909615,
+      "plmnn": 0.6632538793792994,
+      "delta_tz_minus_plmnn": 0.1770916653335466,
+      "delta_tz_minus_seam": -0.03039513677811556,
+      "n": 348,
+      "n_pos": 19
+    },
+    {
+      "unit": "7qoq_A",
+      "seam_toeplitz_field": 0.8626712328767124,
+      "seam_geometry_field": 0.8438356164383563,
+      "plmnn": 0.6825342465753425,
+      "delta_tz_minus_plmnn": 0.18013698630136998,
+      "delta_tz_minus_seam": 0.018835616438356184,
+      "n": 302,
+      "n_pos": 10
+    },
+    {
+      "unit": "1pu5_C",
+      "seam_toeplitz_field": 0.9078787878787878,
+      "seam_geometry_field": 0.8993939393939394,
+      "plmnn": 0.7272727272727273,
+      "delta_tz_minus_plmnn": 0.18060606060606055,
+      "delta_tz_minus_seam": 0.008484848484848428,
+      "n": 161,
+      "n_pos": 11
+    },
+    {
+      "unit": "1rtc_A",
+      "seam_toeplitz_field": 0.6316793893129771,
+      "seam_geometry_field": 0.5483460559796438,
+      "plmnn": 0.4338422391857506,
+      "delta_tz_minus_plmnn": 0.19783715012722647,
+      "delta_tz_minus_seam": 0.08333333333333326,
+      "n": 268,
+      "n_pos": 6
+    },
+    {
+      "unit": "7qzr_D",
+      "seam_toeplitz_field": 0.8101449275362319,
+      "seam_geometry_field": 0.7159420289855073,
+      "plmnn": 0.5731884057971014,
+      "delta_tz_minus_plmnn": 0.2369565217391305,
+      "delta_tz_minus_seam": 0.09420289855072461,
+      "n": 463,
+      "n_pos": 3
+    },
+    {
+      "unit": "5tvi_V",
+      "seam_toeplitz_field": 0.7668918918918919,
+      "seam_geometry_field": 0.7820945945945946,
+      "plmnn": 0.5025337837837838,
+      "delta_tz_minus_plmnn": 0.2643581081081081,
+      "delta_tz_minus_seam": -0.015202702702702742,
+      "n": 90,
+      "n_pos": 16
+    },
+    {
+      "unit": "1ute_A",
+      "seam_toeplitz_field": 0.5382653061224489,
+      "seam_geometry_field": 0.48681972789115646,
+      "plmnn": 0.26445578231292516,
+      "delta_tz_minus_plmnn": 0.2738095238095238,
+      "delta_tz_minus_seam": 0.05144557823129248,
+      "n": 302,
+      "n_pos": 8
+    },
+    {
+      "unit": "4nzv_B",
+      "seam_toeplitz_field": 0.9362745098039216,
+      "seam_geometry_field": 0.9192084241103848,
+      "plmnn": 0.6566811909949165,
+      "delta_tz_minus_plmnn": 0.27959331880900506,
+      "delta_tz_minus_seam": 0.017066085693536737,
+      "n": 324,
+      "n_pos": 18
+    },
+    {
+      "unit": "5yj2_C",
+      "seam_toeplitz_field": 0.5722789115646258,
+      "seam_geometry_field": 0.6743197278911565,
+      "plmnn": 0.21386054421768708,
+      "delta_tz_minus_plmnn": 0.35841836734693877,
+      "delta_tz_minus_seam": -0.10204081632653061,
+      "n": 302,
+      "n_pos": 8
+    },
+    {
+      "unit": "3idh_A",
+      "seam_toeplitz_field": 0.8506644167897068,
+      "seam_geometry_field": 0.8603670111790761,
+      "plmnn": 0.4565492512128243,
+      "delta_tz_minus_plmnn": 0.39411516557688253,
+      "delta_tz_minus_seam": -0.009702594389369268,
+      "n": 453,
+      "n_pos": 22
+    },
+    {
+      "unit": "3pfp_A",
+      "seam_toeplitz_field": 0.8852123486269827,
+      "seam_geometry_field": 0.8101654443117858,
+      "plmnn": 0.46392631758485414,
+      "delta_tz_minus_plmnn": 0.4212860310421286,
+      "delta_tz_minus_seam": 0.0750469043151969,
+      "n": 464,
+      "n_pos": 13
+    },
+    {
+      "unit": "7ndl_B",
+      "seam_toeplitz_field": 0.9097980801059253,
+      "seam_geometry_field": 0.9186527639854353,
+      "plmnn": 0.448857994041708,
+      "delta_tz_minus_plmnn": 0.4609400860642173,
+      "delta_tz_minus_seam": -0.00885468387950994,
+      "n": 655,
+      "n_pos": 19
+    },
+    {
+      "unit": "3pfp_B",
+      "seam_toeplitz_field": 0.9258059014156576,
+      "seam_geometry_field": 0.9094320313832509,
+      "plmnn": 0.46392631758485414,
+      "delta_tz_minus_plmnn": 0.4618795838308034,
+      "delta_tz_minus_seam": 0.016373870032406646,
+      "n": 464,
+      "n_pos": 13
+    },
+    {
+      "unit": "5yhb_A",
+      "seam_toeplitz_field": 0.7745664739884393,
+      "seam_geometry_field": 0.3421965317919075,
+      "plmnn": 0.2589595375722544,
+      "delta_tz_minus_plmnn": 0.5156069364161848,
+      "delta_tz_minus_seam": 0.43236994219653174,
+      "n": 178,
+      "n_pos": 5
+    }
+  ]
+}

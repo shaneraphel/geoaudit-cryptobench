@@ -1,0 +1,77 @@
+{
+  "schema": "geoaudit.polarity_switch_screen.v1",
+  "clinical_grade": false,
+  "reads_test_fold": true,
+  "n_units": 192,
+  "n_want_inv": 17,
+  "separation": {
+    "n": {
+      "mean_want_inv": 305.52941176470586,
+      "mean_normal": 300.84,
+      "cohen_d": 0.0372987606585814
+    },
+    "hull_frac": {
+      "mean_want_inv": 0.0947736810748009,
+      "mean_normal": 0.10172366834001435,
+      "cohen_d": -0.1704758064559689
+    },
+    "mean_hull_depth": {
+      "mean_want_inv": 4.822335025511623,
+      "mean_normal": 4.74585808833256,
+      "cohen_d": 0.048983399558339996
+    },
+    "core_seam_frac": {
+      "mean_want_inv": 0.7122364510284117,
+      "mean_normal": 0.7076658736086426,
+      "cohen_d": 0.05531865227335454
+    },
+    "fiedler_std": {
+      "mean_want_inv": 28.97975067765244,
+      "mean_normal": 28.99083221194921,
+      "cohen_d": -0.16905289867772047
+    },
+    "aperture_frac": {
+      "mean_want_inv": 0.1397937731791635,
+      "mean_normal": 0.13861660844324963,
+      "cohen_d": 0.026098686147743595
+    },
+    "mean_inv_pack": {
+      "mean_want_inv": 17.006584941062233,
+      "mean_normal": 16.756118050559785,
+      "cohen_d": 0.24150124004593393
+    },
+    "mean_kink": {
+      "mean_want_inv": 15.937323587811655,
+      "mean_normal": 15.682853179554845,
+      "cohen_d": 0.2924104797612381
+    },
+    "score_skew": {
+      "mean_want_inv": 0.7128174296983812,
+      "mean_normal": 0.7891274964254255,
+      "cohen_d": -0.15778431565393744
+    },
+    "score_kurt": {
+      "mean_want_inv": 3.9186249777812634,
+      "mean_normal": 3.598967798110638,
+      "cohen_d": 0.32516115124569245
+    },
+    "top10_mass": {
+      "mean_want_inv": 0.10268213799231873,
+      "mean_normal": 0.1039706975374528,
+      "cohen_d": -0.4847880314342825
+    }
+  },
+  "best_threshold_rule": {
+    "key": "mean_inv_pack",
+    "acc": 0.8802083333333334,
+    "thr": 15.562345618691936,
+    "direction": "lt",
+    "n_pred_inv": 10,
+    "precision": 0.2,
+    "recall": 0.11764705882352941
+  },
+  "mean_seam": 0.8262163414905728,
+  "mean_switched": 0.8019164981562975,
+  "mean_oracle": 0.8739538009846278,
+  "note": "Threshold was fit on the same fold it is scored on \u2014 upper bound on a 1-D rule, not a confirmatory result. If mean_switched >> mean_seam, the polarity axis is worth a train-only gate."
+}

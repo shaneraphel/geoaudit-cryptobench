@@ -1,0 +1,105 @@
+{
+  "schema": "geoaudit.seam_polargate_vs_plmnn_probe.v1",
+  "clinical_grade": false,
+  "reads_test_fold": true,
+  "why_not_confirmatory": "development probe; fold heavily read",
+  "n_units": 192,
+  "mean_seam_polargate_field": 0.8186635042013309,
+  "mean_seam_geometry_field": 0.8262163414905728,
+  "mean_plmnn": 0.8234690336263281,
+  "mean_delta_pg_minus_plmnn": -0.004805529424997184,
+  "ci95": [
+    -0.025022000251198412,
+    0.014456167684965503
+  ],
+  "n_ahead": 95,
+  "n_behind": 97,
+  "mean_delta_pg_minus_seam": -0.007552837289241932,
+  "anti_rank_subset": {
+    "units": [
+      "2vqz_F",
+      "3jzg_A",
+      "3ly8_A",
+      "4j4e_F",
+      "5i3t_E",
+      "6bty_B",
+      "6ksc_A"
+    ],
+    "mean_seam": 0.261798195724443,
+    "mean_polargate": 0.2956234829192271,
+    "mean_plmnn": 0.6578414942515203,
+    "per_unit": [
+      {
+        "unit": "2vqz_F",
+        "seam_polargate_field": 0.3116883116883117,
+        "seam_geometry_field": 0.15684315684315683,
+        "plmnn": 0.6963036963036963,
+        "n": 150,
+        "n_pos": 7,
+        "delta_pg_minus_plmnn": -0.3846153846153846,
+        "delta_pg_minus_seam": 0.15484515484515485
+      },
+      {
+        "unit": "3jzg_A",
+        "seam_polargate_field": 0.43515850144092216,
+        "seam_geometry_field": 0.42987512007684914,
+        "plmnn": 0.9743035542747358,
+        "n": 359,
+        "n_pos": 12,
+        "delta_pg_minus_plmnn": -0.5391450528338136,
+        "delta_pg_minus_seam": 0.005283381364073025
+      },
+      {
+        "unit": "3ly8_A",
+        "seam_polargate_field": 0.05594405594405594,
+        "seam_geometry_field": 0.06060606060606061,
+        "plmnn": 0.26777389277389274,
+        "n": 323,
+        "n_pos": 11,
+        "delta_pg_minus_plmnn": -0.2118298368298368,
+        "delta_pg_minus_seam": -0.004662004662004671
+      },
+      {
+        "unit": "4j4e_F",
+        "seam_polargate_field": 0.10329670329670328,
+        "seam_geometry_field": 0.08461538461538462,
+        "plmnn": 0.7197802197802198,
+        "n": 101,
+        "n_pos": 10,
+        "delta_pg_minus_plmnn": -0.6164835164835165,
+        "delta_pg_minus_seam": 0.018681318681318657
+      },
+      {
+        "unit": "5i3t_E",
+        "seam_polargate_field": 0.12813370473537605,
+        "seam_geometry_field": 0.149025069637883,
+        "plmnn": 0.4052924791086351,
+        "n": 363,
+        "n_pos": 4,
+        "delta_pg_minus_plmnn": -0.27715877437325903,
+        "delta_pg_minus_seam": -0.020891364902506954
+      },
+      {
+        "unit": "6bty_B",
+        "seam_polargate_field": 0.6573295985060691,
+        "seam_geometry_field": 0.5966386554621849,
+        "plmnn": 0.8702147525676938,
+        "n": 128,
+        "n_pos": 9,
+        "delta_pg_minus_plmnn": -0.21288515406162467,
+        "delta_pg_minus_seam": 0.06069094304388423
+      },
+      {
+        "unit": "6ksc_A",
+        "seam_polargate_field": 0.3778135048231512,
+        "seam_geometry_field": 0.354983922829582,
+        "plmnn": 0.6712218649517686,
+        "n": 321,
+        "n_pos": 10,
+        "delta_pg_minus_plmnn": -0.29340836012861743,
+        "delta_pg_minus_seam": 0.02282958199356916
+      }
+    ]
+  },
+  "seconds": 211.23177133395802
+}

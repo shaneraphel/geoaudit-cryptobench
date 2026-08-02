@@ -4,7 +4,7 @@
   "dataset": "cryptobench_official_mmseqs2_10pct_test_fold",
   "n_units": 192,
   "question": "how many times has this project scored the held-out fold, and with what",
-  "counting_rule": "Every artifact carrying per-unit metrics over the official units is an access, and so is every artifact that draws a new inference from per-unit numbers an earlier read froze, even though the second kind scores nothing again: a fresh summary of the same numbers is a fresh use of the fold and is indexed as one. Detectors in the frozen telemetry count once each. Baselines we did not design (p2rank, random_bbox) are not counted as looks at the test set on our behalf. Re-scoring a frozen detector is recorded separately and is not a fold read, provided its numbers do not move; tools/run_cryptobench_apo.py --merge has reproduced all of them to four decimals.",
+  "counting_rule": "Every artifact carrying per-unit metrics over the official units is an access, and so is every artifact that draws a new inference from per-unit numbers an earlier read froze, even though the second kind scores nothing again: a fresh summary of the same numbers is a fresh use of the fold and is indexed as one. An artifact that declares reads_test_fold is an access on its own word, whatever it calls its metric: the three earlier signals all keyed on the substring 'auc' and missed eighteen artifacts that store per-unit ROC-AUC under each method's name. Detectors in the frozen telemetry count once each. Baselines we did not design (p2rank, random_bbox, plmnn, pocketminer, chain_length_control) are not counted as looks at the test set on our behalf. Re-scoring a frozen detector is recorded separately and is not a fold read, provided its numbers do not move; tools/run_cryptobench_apo.py --merge has reproduced all of them to four decimals.",
   "detectors_in_frozen_telemetry": [
     "algebraic_field",
     "algebraic_field_linear",
@@ -33,8 +33,10 @@
   "standalone_probe_artifacts": [
     {
       "artifact": "results/architecture_sweep/BANK_FUSION.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": null,
-      "method": "table field variant",
+      "method": null,
       "read_index": null,
       "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
       "mean_residue_auc": null,
@@ -42,8 +44,10 @@
     },
     {
       "artifact": "results/architecture_sweep/DUAL_TRACK_AB.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": 192,
-      "method": "table field variant",
+      "method": null,
       "read_index": null,
       "kind": "scored the fold",
       "mean_residue_auc": null,
@@ -51,8 +55,10 @@
     },
     {
       "artifact": "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": null,
-      "method": "table field variant",
+      "method": null,
       "read_index": null,
       "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
       "mean_residue_auc": null,
@@ -60,8 +66,10 @@
     },
     {
       "artifact": "results/architecture_sweep/FULL_EXPANSION.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": null,
-      "method": "table field variant",
+      "method": null,
       "read_index": null,
       "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
       "mean_residue_auc": null,
@@ -69,17 +77,32 @@
     },
     {
       "artifact": "results/architecture_sweep/MULTISCALE_GATE.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": null,
-      "method": "table field variant",
+      "method": null,
       "read_index": null,
       "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
       "mean_residue_auc": null,
       "selection_provenance": null
     },
     {
-      "artifact": "results/architecture_sweep/THRESHOLD_GATE.json",
+      "artifact": "results/architecture_sweep/PREREGISTERED_RESOLUTION.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": null,
-      "method": "table field variant",
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/architecture_sweep/THRESHOLD_GATE.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": null,
+      "method": null,
       "read_index": null,
       "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
       "mean_residue_auc": null,
@@ -87,8 +110,10 @@
     },
     {
       "artifact": "results/architecture_sweep/WIDE_BUS_BANK.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": null,
-      "method": "table field variant",
+      "method": null,
       "read_index": null,
       "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
       "mean_residue_auc": null,
@@ -96,8 +121,10 @@
     },
     {
       "artifact": "results/official_fold/COUNTERATTACK_FINAL_PROBE.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": 192,
-      "method": "table field variant",
+      "method": null,
       "read_index": 2,
       "kind": "scored the fold",
       "mean_residue_auc": 0.7951676172712135,
@@ -105,6 +132,10 @@
     },
     {
       "artifact": "results/official_fold/COUNTERATTACK_QUOTIENT_PROBE.json",
+      "architectures": [
+        "algebraic field, S_6 quotient bank"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "algebraic field, S_6 quotient bank",
       "read_index": 4,
@@ -122,8 +153,10 @@
     },
     {
       "artifact": "results/official_fold/COUNTERATTACK_TEST_PROBE.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": 192,
-      "method": "table field variant",
+      "method": null,
       "read_index": 1,
       "kind": "scored the fold",
       "mean_residue_auc": 0.7804160159029193,
@@ -131,8 +164,10 @@
     },
     {
       "artifact": "results/official_fold/COUNTERATTACK_WIDE_PROBE.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": 192,
-      "method": "table field variant",
+      "method": null,
       "read_index": 3,
       "kind": "scored the fold",
       "mean_residue_auc": 0.8009908985545277,
@@ -140,6 +175,10 @@
     },
     {
       "artifact": "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json",
+      "architectures": [
+        "geometry_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "geometry_field",
       "read_index": null,
@@ -149,6 +188,10 @@
     },
     {
       "artifact": "results/official_fold/GEOMETRY_PLM_DELTA_COVARIATES.json",
+      "architectures": [
+        "geometry_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "geometry_field",
       "read_index": null,
@@ -157,7 +200,52 @@
       "selection_provenance": null
     },
     {
+      "artifact": "results/official_fold/GEO_SEAM_EQUALZ_FUSION_VS_PLMNN.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/GRAND_BASELINE_FIGURE_PROVENANCE.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/GRAND_BASELINE_READ.json",
+      "architectures": [
+        "geo_seam_equalz",
+        "geo_seam_equalz_r14",
+        "geometry_field",
+        "geometry_field_r14",
+        "seam_geometry_field",
+        "seam_geometry_field_r14",
+        "table_field"
+      ],
+      "architecture_is_named": true,
+      "n_units": null,
+      "method": null,
+      "read_index": null,
+      "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
       "artifact": "results/official_fold/MATCHED_FULL_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 7,
@@ -167,6 +255,10 @@
     },
     {
       "artifact": "results/official_fold/MATCHED_OPERATING_POINT_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 6,
@@ -176,8 +268,10 @@
     },
     {
       "artifact": "results/official_fold/PLMNN_READ.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": null,
-      "method": "table field variant",
+      "method": null,
       "read_index": 10,
       "kind": "new inference over per-unit numbers an earlier read froze",
       "mean_residue_auc": null,
@@ -185,6 +279,10 @@
     },
     {
       "artifact": "results/official_fold/POCKETMINER_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 11,
@@ -194,6 +292,10 @@
     },
     {
       "artifact": "results/official_fold/POCKET_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 186,
       "method": "table_field",
       "read_index": 9,
@@ -202,7 +304,33 @@
       "selection_provenance": null
     },
     {
+      "artifact": "results/official_fold/POLARITY_GAUGE_PROBE.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": null,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/POLARITY_SWITCH_SCREEN.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
       "artifact": "results/official_fold/PREREGISTERED_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 5,
@@ -212,6 +340,10 @@
     },
     {
       "artifact": "results/official_fold/RECOVERY_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": null,
       "method": "table_field",
       "read_index": 13,
@@ -221,6 +353,10 @@
     },
     {
       "artifact": "results/official_fold/RESOLUTION_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": null,
@@ -229,7 +365,151 @@
       "selection_provenance": null
     },
     {
+      "artifact": "results/official_fold/SEAM_APERTURE_VS_PLMNN_PROBE.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_APERTURE_VS_PLMNN_PROBE_SUMMARY.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_GEOMETRY_VS_PLMNN_PROBE.json",
+      "architectures": [
+        "seam_geometry_field"
+      ],
+      "architecture_is_named": true,
+      "n_units": null,
+      "method": "seam_geometry_field",
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_INVERT_ORACLE.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "reports a fold metric and declares no index; found by the audit that added the third signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_MSA_VS_PLMNN_PROBE.json",
+      "architectures": [
+        "seam_msa_field"
+      ],
+      "architecture_is_named": true,
+      "n_units": null,
+      "method": "seam_msa_field",
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_POLARGATE_EQUALZ_FUSION.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_POLARGATE_VS_PLMNN_PROBE.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_POLARGATE_VS_PLMNN_PROBE_SUMMARY.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_POLAR_RESCUE.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_TOEPLITZ_VS_PLMNN_PROBE.json",
+      "architectures": [
+        "seam_toeplitz_field"
+      ],
+      "architecture_is_named": true,
+      "n_units": null,
+      "method": "seam_toeplitz_field",
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_VOIDPHARMA_EQUALZ_FUSION.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": null,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/SEAM_VOIDPHARMA_VS_PLMNN_PROBE.json",
+      "architectures": [
+        "seam_voidpharma_field"
+      ],
+      "architecture_is_named": true,
+      "n_units": null,
+      "method": "seam_voidpharma_field",
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
       "artifact": "results/official_fold/SUBGROUP_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 8,
@@ -239,6 +519,10 @@
     },
     {
       "artifact": "results/official_fold/THRESHOLD_CURVE.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": null,
       "method": "table_field",
       "read_index": 12,
@@ -248,21 +532,101 @@
     },
     {
       "artifact": "results/official_fold/THRESHOLD_FIELD_TEST.json",
+      "architectures": [
+        "threshold_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "threshold_field",
       "read_index": null,
       "kind": "scored the fold",
       "mean_residue_auc": 0.7981988887890487,
       "selection_provenance": "cluster-disjoint halves of the training fold; this is the first and only evaluation of this architecture on the official test fold"
+    },
+    {
+      "artifact": "results/official_fold/TRIPLE_EQUALZ_FUSION_VS_PLMNN.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": 192,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
+    },
+    {
+      "artifact": "results/official_fold/WEIGHTED_SEAM_FUSION_VS_PLMNN.json",
+      "architectures": [],
+      "architecture_is_named": false,
+      "n_units": null,
+      "method": null,
+      "read_index": null,
+      "kind": "declares reads_test_fold and spells its metric by method name; found by the audit that added the fourth signal",
+      "mean_residue_auc": null,
+      "selection_provenance": null
     }
   ],
-  "n_standalone_probes": 24,
-  "n_distinct_architectures_evaluated": 13,
+  "n_standalone_probes": 44,
+  "n_distinct_architectures_evaluated": 20,
+  "distinct_architectures_evaluated": [
+    "algebraic field, S_6 quotient bank",
+    "algebraic_field",
+    "algebraic_field_linear",
+    "fstar_pocket",
+    "geo_seam_equalz",
+    "geo_seam_equalz_r14",
+    "geometric_foundation",
+    "geometry_field",
+    "geometry_field_r14",
+    "quaternary_lut",
+    "quaternary_lut_seq",
+    "seam_geometry_field",
+    "seam_geometry_field_r14",
+    "seam_msa_field",
+    "seam_toeplitz_field",
+    "seam_voidpharma_field",
+    "sstar_pocket",
+    "table_field",
+    "threshold_field",
+    "ultrametric_shear_oracle"
+  ],
+  "n_artifacts_with_unnamed_architecture": 26,
+  "artifacts_with_unnamed_architecture": [
+    "results/architecture_sweep/BANK_FUSION.json",
+    "results/architecture_sweep/DUAL_TRACK_AB.json",
+    "results/architecture_sweep/FEATURE_CEILING_DIAGNOSIS.json",
+    "results/architecture_sweep/FULL_EXPANSION.json",
+    "results/architecture_sweep/MULTISCALE_GATE.json",
+    "results/architecture_sweep/PREREGISTERED_RESOLUTION.json",
+    "results/architecture_sweep/THRESHOLD_GATE.json",
+    "results/architecture_sweep/WIDE_BUS_BANK.json",
+    "results/official_fold/COUNTERATTACK_FINAL_PROBE.json",
+    "results/official_fold/COUNTERATTACK_TEST_PROBE.json",
+    "results/official_fold/COUNTERATTACK_WIDE_PROBE.json",
+    "results/official_fold/GEO_SEAM_EQUALZ_FUSION_VS_PLMNN.json",
+    "results/official_fold/GRAND_BASELINE_FIGURE_PROVENANCE.json",
+    "results/official_fold/PLMNN_READ.json",
+    "results/official_fold/POLARITY_GAUGE_PROBE.json",
+    "results/official_fold/POLARITY_SWITCH_SCREEN.json",
+    "results/official_fold/SEAM_APERTURE_VS_PLMNN_PROBE.json",
+    "results/official_fold/SEAM_APERTURE_VS_PLMNN_PROBE_SUMMARY.json",
+    "results/official_fold/SEAM_INVERT_ORACLE.json",
+    "results/official_fold/SEAM_POLARGATE_EQUALZ_FUSION.json",
+    "results/official_fold/SEAM_POLARGATE_VS_PLMNN_PROBE.json",
+    "results/official_fold/SEAM_POLARGATE_VS_PLMNN_PROBE_SUMMARY.json",
+    "results/official_fold/SEAM_POLAR_RESCUE.json",
+    "results/official_fold/SEAM_VOIDPHARMA_EQUALZ_FUSION.json",
+    "results/official_fold/TRIPLE_EQUALZ_FUSION_VS_PLMNN.json",
+    "results/official_fold/WEIGHTED_SEAM_FUSION_VS_PLMNN.json"
+  ],
+  "unnamed_architecture_note": "these artifacts are accesses to the fold that do not record which architecture produced the number. They are counted as accesses and not as architectures, so the architecture total is a lower bound. Until 2026-08-03 they were all labelled 'table field variant' by a default in this tool, which asserted something none of them says.",
   "indexed_read_sequence": [
     {
       "artifact": "results/official_fold/COUNTERATTACK_TEST_PROBE.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": 192,
-      "method": "table field variant",
+      "method": null,
       "read_index": 1,
       "kind": "scored the fold",
       "mean_residue_auc": 0.7804160159029193,
@@ -270,8 +634,10 @@
     },
     {
       "artifact": "results/official_fold/COUNTERATTACK_FINAL_PROBE.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": 192,
-      "method": "table field variant",
+      "method": null,
       "read_index": 2,
       "kind": "scored the fold",
       "mean_residue_auc": 0.7951676172712135,
@@ -279,8 +645,10 @@
     },
     {
       "artifact": "results/official_fold/COUNTERATTACK_WIDE_PROBE.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": 192,
-      "method": "table field variant",
+      "method": null,
       "read_index": 3,
       "kind": "scored the fold",
       "mean_residue_auc": 0.8009908985545277,
@@ -288,6 +656,10 @@
     },
     {
       "artifact": "results/official_fold/COUNTERATTACK_QUOTIENT_PROBE.json",
+      "architectures": [
+        "algebraic field, S_6 quotient bank"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "algebraic field, S_6 quotient bank",
       "read_index": 4,
@@ -305,6 +677,10 @@
     },
     {
       "artifact": "results/official_fold/PREREGISTERED_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 5,
@@ -314,6 +690,10 @@
     },
     {
       "artifact": "results/official_fold/MATCHED_OPERATING_POINT_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 6,
@@ -323,6 +703,10 @@
     },
     {
       "artifact": "results/official_fold/MATCHED_FULL_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 7,
@@ -332,6 +716,10 @@
     },
     {
       "artifact": "results/official_fold/SUBGROUP_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 8,
@@ -341,6 +729,10 @@
     },
     {
       "artifact": "results/official_fold/POCKET_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 186,
       "method": "table_field",
       "read_index": 9,
@@ -350,8 +742,10 @@
     },
     {
       "artifact": "results/official_fold/PLMNN_READ.json",
+      "architectures": [],
+      "architecture_is_named": false,
       "n_units": null,
-      "method": "table field variant",
+      "method": null,
       "read_index": 10,
       "kind": "new inference over per-unit numbers an earlier read froze",
       "mean_residue_auc": null,
@@ -359,6 +753,10 @@
     },
     {
       "artifact": "results/official_fold/POCKETMINER_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": 192,
       "method": "table_field",
       "read_index": 11,
@@ -368,6 +766,10 @@
     },
     {
       "artifact": "results/official_fold/THRESHOLD_CURVE.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": null,
       "method": "table_field",
       "read_index": 12,
@@ -377,6 +779,10 @@
     },
     {
       "artifact": "results/official_fold/RECOVERY_READ.json",
+      "architectures": [
+        "table_field"
+      ],
+      "architecture_is_named": true,
       "n_units": null,
       "method": "table_field",
       "read_index": 13,
@@ -387,6 +793,6 @@
   ],
   "n_indexed_reads": 13,
   "n_probes_that_scored_the_fold": 7,
-  "n_probes_that_only_resummarised": 17,
-  "honest_summary": "9 of our detectors appear in the frozen telemetry. 24 standalone artifacts are further accesses: 7 of them scored the 192 units again, and 17 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 13 carry a read index, 12 of them readings of the architecture reported as the main result and 1 of a different lineage, and every one is reported with the reason it was taken. The wider programme has looked at this fold more often than that, which is what this ledger is for."
+  "n_probes_that_only_resummarised": 37,
+  "honest_summary": "9 of our detectors appear in the frozen telemetry. 44 standalone artifacts are further accesses: 7 of them scored the 192 units again, and 37 drew a new inference from per-unit numbers an earlier read had already frozen, which scores nothing but uses the fold again and is indexed as such. 13 carry a read index, 8 of them readings of the architecture reported as the main result and 5 of a different lineage, and every one is reported with the reason it was taken. 20 distinct architectures of ours carry a number from this fold, and that is a lower bound: 26 of the artifacts do not record which architecture produced theirs. The wider programme has looked at this fold more often than that, which is what this ledger is for."
 }

@@ -1,0 +1,472 @@
+{
+  "schema": "geoaudit.indistinguishability_group.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "definition_indistinguishable": "two residues of one chain whose 645-wire quartile digit rows are equal; their pre-gate scores are then identical for every table pairing, every integer fan-out and every cell content, because all of those are functions of the digit row alone",
+  "definition_deformation_subgroup": "the Young subgroup S_{B_1} x ... x S_{B_m} of the symmetric group on the chain's residues, where the B_r are the indistinguishability blocks; it is the exact group of residue rearrangements the wire bank cannot detect",
+  "why_it_is_a_ceiling": "every open item on the wire axis reorders or reweights functions of the digit matrix; none can separate two equal rows, so this bounds the pre-gate ordering independently of the table topology",
+  "what_it_does_not_bound": "the gated score, which adds each residue's neighbourhood mean and therefore separates indistinguishable residues whenever their neighbourhoods differ. The bound is on the wires, not on the detector, and the gap between the two is what the gate is worth",
+  "n_wires": 645,
+  "n_residues": 234838,
+  "n_residues_definition": "training-fold residues in the wide cache",
+  "n_units": 770,
+  "n_cryptic_residues": 13524,
+  "n_cryptic_residues_definition": "residues labelled cryptic-binding by CryptoBench in the training fold",
+  "residues_in_a_nontrivial_block": 0,
+  "residues_in_a_nontrivial_block_fraction": 0.0,
+  "cryptic_residues_in_a_nontrivial_block": 0,
+  "cryptic_residues_in_a_nontrivial_block_fraction": 0.0,
+  "residues_in_a_label_straddling_block": 0,
+  "residues_in_a_label_straddling_block_definition": "residues whose block holds at least one cryptic and at least one non-cryptic residue; the wires cannot order these two apart and no table work can",
+  "residues_in_a_label_straddling_block_fraction": 0.0,
+  "cryptic_residues_in_a_straddling_block": 0,
+  "cryptic_residues_in_a_straddling_block_fraction": 0.0,
+  "largest_block": 1,
+  "largest_block_unit": "1a4u_B",
+  "block_size_histogram": {},
+  "log10_total_group_order_over_the_fold": 0.0,
+  "log10_total_group_order_definition": "sum over chains of log10 of the Young subgroup order; a single number for the whole fold, quoted because it is the natural size of the object and not because it is actionable",
+  "filtration": [
+    {
+      "n_wires": 1,
+      "frac_residues_in_nontrivial_block": 1.0,
+      "frac_residues_label_straddling": 0.84379,
+      "frac_cryptic_label_straddling": 1.0
+    },
+    {
+      "n_wires": 2,
+      "frac_residues_in_nontrivial_block": 0.99939,
+      "frac_residues_label_straddling": 0.49058,
+      "frac_cryptic_label_straddling": 0.99837
+    },
+    {
+      "n_wires": 3,
+      "frac_residues_in_nontrivial_block": 0.96914,
+      "frac_residues_label_straddling": 0.29683,
+      "frac_cryptic_label_straddling": 0.94203
+    },
+    {
+      "n_wires": 4,
+      "frac_residues_in_nontrivial_block": 0.87954,
+      "frac_residues_label_straddling": 0.20037,
+      "frac_cryptic_label_straddling": 0.81729
+    },
+    {
+      "n_wires": 6,
+      "frac_residues_in_nontrivial_block": 0.59522,
+      "frac_residues_label_straddling": 0.08545,
+      "frac_cryptic_label_straddling": 0.44987
+    },
+    {
+      "n_wires": 8,
+      "frac_residues_in_nontrivial_block": 0.27861,
+      "frac_residues_label_straddling": 0.02622,
+      "frac_cryptic_label_straddling": 0.17059
+    },
+    {
+      "n_wires": 12,
+      "frac_residues_in_nontrivial_block": 0.13744,
+      "frac_residues_label_straddling": 0.01008,
+      "frac_cryptic_label_straddling": 0.06699
+    },
+    {
+      "n_wires": 16,
+      "frac_residues_in_nontrivial_block": 0.06175,
+      "frac_residues_label_straddling": 0.00335,
+      "frac_cryptic_label_straddling": 0.02388
+    },
+    {
+      "n_wires": 24,
+      "frac_residues_in_nontrivial_block": 0.01183,
+      "frac_residues_label_straddling": 0.0005,
+      "frac_cryptic_label_straddling": 0.00407
+    },
+    {
+      "n_wires": 32,
+      "frac_residues_in_nontrivial_block": 0.00158,
+      "frac_residues_label_straddling": 1e-05,
+      "frac_cryptic_label_straddling": 7e-05
+    },
+    {
+      "n_wires": 48,
+      "frac_residues_in_nontrivial_block": 9e-05,
+      "frac_residues_label_straddling": 0.0,
+      "frac_cryptic_label_straddling": 0.0
+    },
+    {
+      "n_wires": 64,
+      "frac_residues_in_nontrivial_block": 2e-05,
+      "frac_residues_label_straddling": 0.0,
+      "frac_cryptic_label_straddling": 0.0
+    },
+    {
+      "n_wires": 96,
+      "frac_residues_in_nontrivial_block": 0.0,
+      "frac_residues_label_straddling": 0.0,
+      "frac_cryptic_label_straddling": 0.0
+    },
+    {
+      "n_wires": 128,
+      "frac_residues_in_nontrivial_block": 0.0,
+      "frac_residues_label_straddling": 0.0,
+      "frac_cryptic_label_straddling": 0.0
+    },
+    {
+      "n_wires": 192,
+      "frac_residues_in_nontrivial_block": 0.0,
+      "frac_residues_label_straddling": 0.0,
+      "frac_cryptic_label_straddling": 0.0
+    },
+    {
+      "n_wires": 256,
+      "frac_residues_in_nontrivial_block": 0.0,
+      "frac_residues_label_straddling": 0.0,
+      "frac_cryptic_label_straddling": 0.0
+    },
+    {
+      "n_wires": 384,
+      "frac_residues_in_nontrivial_block": 0.0,
+      "frac_residues_label_straddling": 0.0,
+      "frac_cryptic_label_straddling": 0.0
+    },
+    {
+      "n_wires": 512,
+      "frac_residues_in_nontrivial_block": 0.0,
+      "frac_residues_label_straddling": 0.0,
+      "frac_cryptic_label_straddling": 0.0
+    },
+    {
+      "n_wires": 645,
+      "frac_residues_in_nontrivial_block": 0.0,
+      "frac_residues_label_straddling": 0.0,
+      "frac_cryptic_label_straddling": 0.0
+    }
+  ],
+  "filtration_definition": "reading only the first k wires gives a coarser digit row and a larger subgroup D_k; the sequence D_1 >= D_2 >= ... >= D_W is a filtration of the symmetric group by wire count, and these are its two summary curves",
+  "wires_at_which_the_subgroup_becomes_trivial": 96,
+  "wires_at_which_no_cryptic_residue_straddles": 48,
+  "why_the_second_number_is_the_interesting_one": "separating two residues the label agrees on costs address space and buys nothing; separating two it disagrees on is the task. The gap between these two counts is the address space the bank spends on distinctions the label does not care about",
+  "seconds": 62.2,
+  "per_unit": [
+    {
+      "unit": "1a4u_B",
+      "n": 254,
+      "n_blocks": 254,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1a8d_A",
+      "n": 452,
+      "n_blocks": 452,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1ad1_A",
+      "n": 264,
+      "n_blocks": 264,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1ak1_A",
+      "n": 308,
+      "n_blocks": 308,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1ayl_A",
+      "n": 532,
+      "n_blocks": 532,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1b0i_A",
+      "n": 448,
+      "n_blocks": 448,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1bfn_A",
+      "n": 490,
+      "n_blocks": 490,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1bhs_A",
+      "n": 284,
+      "n_blocks": 284,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1byi_A",
+      "n": 224,
+      "n_blocks": 224,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1c3k_A",
+      "n": 143,
+      "n_blocks": 143,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1cuz_A",
+      "n": 196,
+      "n_blocks": 196,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1dc6_A",
+      "n": 329,
+      "n_blocks": 329,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1dkl_A",
+      "n": 404,
+      "n_blocks": 404,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1dpj_A",
+      "n": 326,
+      "n_blocks": 326,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1dqz_A",
+      "n": 280,
+      "n_blocks": 280,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1dte_A",
+      "n": 269,
+      "n_blocks": 269,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1e3g_A",
+      "n": 250,
+      "n_blocks": 250,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1e5l_B",
+      "n": 449,
+      "n_blocks": 449,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1ecc_B",
+      "n": 492,
+      "n_blocks": 492,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1efh_B",
+      "n": 282,
+      "n_blocks": 282,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1esw_A",
+      "n": 500,
+      "n_blocks": 500,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1ezl_C",
+      "n": 128,
+      "n_blocks": 128,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1f47_B",
+      "n": 144,
+      "n_blocks": 144,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1f8a_B",
+      "n": 155,
+      "n_blocks": 155,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1fd9_A",
+      "n": 204,
+      "n_blocks": 204,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1fdp_A",
+      "n": 213,
+      "n_blocks": 213,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1ffh_A",
+      "n": 287,
+      "n_blocks": 287,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1fl1_B",
+      "n": 207,
+      "n_blocks": 207,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1fvr_A",
+      "n": 299,
+      "n_blocks": 299,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1fwk_C",
+      "n": 296,
+      "n_blocks": 296,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1g1o_A",
+      "n": 115,
+      "n_blocks": 115,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1g1o_D",
+      "n": 116,
+      "n_blocks": 116,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1g24_C",
+      "n": 211,
+      "n_blocks": 211,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1gqn_A",
+      "n": 252,
+      "n_blocks": 252,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1gqz_A",
+      "n": 274,
+      "n_blocks": 274,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1h3g_B",
+      "n": 574,
+      "n_blocks": 574,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1hav_A",
+      "n": 216,
+      "n_blocks": 216,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1hbq_A",
+      "n": 177,
+      "n_blocks": 177,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1hp1_A",
+      "n": 516,
+      "n_blocks": 516,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    },
+    {
+      "unit": "1ht6_A",
+      "n": 404,
+      "n_blocks": 404,
+      "n_in_nontrivial_block": 0,
+      "max_block": 1,
+      "log10_group_order": 0.0
+    }
+  ]
+}

@@ -113,3 +113,9 @@ results/external/setbc_p2rank_raw/
 # Set N geometry_field sequential resume
 results/baselines/_geometry_setn_checkpoint.jsonl
 data/msa_cache/
+
+# 956 deposited PDB archives, 190 MB, each a byte-identical copy of a public
+# RCSB download. DEPOSITED_ENTRY_MANIFEST.json pins every one by sha256 and
+# tools/fetch_deposited_entries.py re-fetches them, so the input is pinned
+# without the bytes riding in the repository.
+data/deposited_entries/*.gz

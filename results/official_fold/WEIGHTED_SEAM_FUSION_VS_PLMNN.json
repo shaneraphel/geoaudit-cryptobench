@@ -1,0 +1,17 @@
+{
+  "schema": "geoaudit.weighted_seam_fusion_vs_plmnn.v1",
+  "clinical_grade": false,
+  "reads_test_fold": true,
+  "weight": "2*z(seam)+z(geo) a priori",
+  "mean_fused": 0.827372400301471,
+  "mean_seam": 0.8262163414905728,
+  "mean_plmnn": 0.8234690336263281,
+  "mean_delta": 0.003903366675142772,
+  "ci95": [
+    -0.016059094181488726,
+    0.02247705777005413
+  ],
+  "n_ahead": 101,
+  "n_behind": 91,
+  "seconds": 158.27840633300366
+}

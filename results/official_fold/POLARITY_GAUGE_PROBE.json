@@ -1,0 +1,160 @@
+{
+  "schema": "geoaudit.polarity_gauge_probe.v1",
+  "clinical_grade": false,
+  "reads_test_fold": true,
+  "why_not_confirmatory": "diagnostic on a fold that has been read many times; a covariate that separates here has been found on the units it is scored on and would still need a train-fold rule and validation before it could be a method",
+  "question": "whether a gauge-invariant chain statistic separates the units whose cryptic residues the field anti-ranks",
+  "n_units_scored": 192,
+  "n_units_scored_definition": "official-fold units for which the spectral-gauge family returned a finite matrix",
+  "n_units_inverted": 12,
+  "n_units_inverted_definition": "units listed in SEAM_INVERT_ORACLE.worst_neg_corr, the ones whose label-score correlation is most negative; the oracle reports 19 negative-correlation units in total and this is the subset it enumerated",
+  "n_covariates_tested": 54,
+  "n_covariates_tested_definition": "chain-level float statistics derived from the 26 gauge-invariant residue columns: a mean and a standard deviation of each, plus two whole-chain nodal summaries",
+  "prior_best_separator_cohen_d": 0.4848,
+  "prior_best_separator": "top10_mass, from POLARITY_SWITCH_SCREEN.json",
+  "falsifier_written_before_the_run": "no gauge-invariant chain statistic reaches |d| > 0.6, which would leave the polarity axis where it is and say the gauge reading is wrong",
+  "best": {
+    "covariate": "std~resist_to_centroid_x1e3",
+    "cohen_d": 0.9055,
+    "mean_inverted": 148.77262755747674,
+    "mean_normal": 80.27352943707578
+  },
+  "beats_prior_best": true,
+  "clears_the_falsifier": true,
+  "permutation_test": {
+    "n_permutations": 20000,
+    "n_permutations_definition": "random reassignments of which units are called inverted, group sizes held fixed",
+    "statistic": "max over covariates of |Cohen's d|",
+    "observed": 0.9055,
+    "null_median": 0.6027,
+    "null_95th_percentile": 1.0255,
+    "family_wise_p": 0.10485,
+    "reading": "this p is family-wise over all covariates tested, so it already accounts for having chosen the best of them; it does NOT account for the covariates having been designed after the nineteen units were known to exist"
+  },
+  "survives_multiple_comparisons": false,
+  "top_20_separators": [
+    {
+      "covariate": "std~resist_to_centroid_x1e3",
+      "cohen_d": 0.9055,
+      "mean_inverted": 148.77262755747674,
+      "mean_normal": 80.27352943707578
+    },
+    {
+      "covariate": "std~nodal_domain_is_minority_v2",
+      "cohen_d": -0.6777,
+      "mean_inverted": 0.4604931071950407,
+      "mean_normal": 0.4830063400763148
+    },
+    {
+      "covariate": "mean~nodal_domain_is_minority_v2",
+      "cohen_d": -0.4932,
+      "mean_inverted": 0.3636986256313091,
+      "mean_normal": 0.40723523214723734
+    },
+    {
+      "covariate": "mean~resist_to_centroid_x1e3",
+      "cohen_d": 0.4805,
+      "mean_inverted": 119.90002061229558,
+      "mean_normal": 86.75662276625978
+    },
+    {
+      "covariate": "std~discord_v5_v8_sum",
+      "cohen_d": -0.4364,
+      "mean_inverted": 4.511828926892077,
+      "mean_normal": 4.749197375429729
+    },
+    {
+      "covariate": "std~discord_v2",
+      "cohen_d": -0.3996,
+      "mean_inverted": 1.1133000819636372,
+      "mean_normal": 1.2298518532467992
+    },
+    {
+      "covariate": "std~discord_total_k8",
+      "cohen_d": -0.3905,
+      "mean_inverted": 6.355057797946465,
+      "mean_normal": 6.711830398780397
+    },
+    {
+      "covariate": "std~n_modes_fully_concordant",
+      "cohen_d": -0.3532,
+      "mean_inverted": 1.674181443364974,
+      "mean_normal": 1.7271440512808287
+    },
+    {
+      "covariate": "std~proj_offdiag_negative_count",
+      "cohen_d": -0.3531,
+      "mean_inverted": 0.0,
+      "mean_normal": 0.012456152768782734
+    },
+    {
+      "covariate": "nodal_balance",
+      "cohen_d": -0.3477,
+      "mean_inverted": 0.6274700994581911,
+      "mean_normal": 0.7083813953911701
+    },
+    {
+      "covariate": "mean~proj_offdiag_negative_count",
+      "cohen_d": -0.3249,
+      "mean_inverted": 0.0,
+      "mean_normal": 0.001492980169191014
+    },
+    {
+      "covariate": "std~resist_mean_contacts_x1e3",
+      "cohen_d": 0.317,
+      "mean_inverted": 7.936075245077134,
+      "mean_normal": 6.3986412020004995
+    },
+    {
+      "covariate": "mean~discord_v5_v8_sum",
+      "cohen_d": -0.3014,
+      "mean_inverted": 5.322046491388407,
+      "mean_normal": 5.692592926800105
+    },
+    {
+      "covariate": "std~resist_max_contacts_x1e3",
+      "cohen_d": 0.2997,
+      "mean_inverted": 20.592210703905753,
+      "mean_normal": 17.775101112974998
+    },
+    {
+      "covariate": "std~nodal_domain_size_v2",
+      "cohen_d": 0.2741,
+      "mean_inverted": 32.25539095863336,
+      "mean_normal": 25.246231533860353
+    },
+    {
+      "covariate": "mean~discord_total_k8",
+      "cohen_d": -0.2581,
+      "mean_inverted": 8.521921544754152,
+      "mean_normal": 9.040856035885836
+    },
+    {
+      "covariate": "std~discord_v4",
+      "cohen_d": -0.2289,
+      "mean_inverted": 1.6025600486090548,
+      "mean_normal": 1.6476606147474049
+    },
+    {
+      "covariate": "std~proj_offdiag_sum_k8_x1e4",
+      "cohen_d": -0.2281,
+      "mean_inverted": 1217.9632553755662,
+      "mean_normal": 1280.653862105001
+    },
+    {
+      "covariate": "mean~discord_v2",
+      "cohen_d": -0.2093,
+      "mean_inverted": 0.4480647986057002,
+      "mean_normal": 0.49513690670903987
+    },
+    {
+      "covariate": "std~on_nodal_boundary_v2",
+      "cohen_d": -0.2042,
+      "mean_inverted": 0.3570559450236029,
+      "mean_normal": 0.3701038663797738
+    }
+  ],
+  "n_errors": 0,
+  "errors": {},
+  "seconds": 1.6
+}

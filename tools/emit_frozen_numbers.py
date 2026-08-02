@@ -38,6 +38,7 @@ WIDEPROBE = ROOT / "results/official_fold/COUNTERATTACK_WIDE_PROBE.json"
 LEDGER = ROOT / "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json"
 CROSSVAL = ROOT / "results/architecture_sweep/REPEATED_TRAIN_SELECTION.json"
 FIGPROV = ROOT / "results/official_fold/FIGURE_PROVENANCE.json"
+GRAND_FIGPROV = ROOT / "results/official_fold/GRAND_BASELINE_FIGURE_PROVENANCE.json"
 CASES = ROOT / "results/official_fold/CASE_STUDIES.json"
 QUOTIENT_SEL = ROOT / "results/architecture_sweep/COUNTERATTACK_QUOTIENT.json"
 QUOTIENT_PROBE = ROOT / "results/official_fold/COUNTERATTACK_QUOTIENT_PROBE.json"
@@ -52,6 +53,20 @@ _TEX_ESCAPES = {
     "#": r"\#", "_": r"\_", "{": r"\{", "}": r"\}", "~": r"\textasciitilde{}",
     "^": r"\textasciicircum{}", "\u00b1": r"$\pm$", "\u00c5": r"\AA{}",
     "\u2014": "---", "\u2013": "--",
+    # The preamble loads amsmath, amssymb, geometry, booktabs, graphicx and
+    # hyperref, and no inputenc, fontenc or newunicodechar. Under pdfLaTeX a
+    # character outside the font encoding is not a rendering wobble, it is
+    # "Unicode character X not set up for use with LaTeX" and the build stops.
+    # The table above already carried the plus-minus sign and the angstrom, so
+    # the hazard was known; seven captions written since then introduced these
+    # and no gate was watching, because emitting is not the same as emitting
+    # something valid (AGENTS.md §7).
+    "\u2212": "$-$", "\u2264": r"$\leq$", "\u2265": r"$\geq$",
+    "\u2192": r"$\rightarrow$", "\u0394": r"$\Delta$", "\u03c1": r"$\rho$",
+    "\u2295": r"$\oplus$", "\u00d7": r"$\times$", "\u2248": r"$\approx$",
+    "\u2260": r"$\neq$", "\u00b0": r"$^\circ$", "\u2026": r"\ldots{}",
+    "\u2018": "`", "\u2019": "'", "\u201c": "``", "\u201d": "''",
+    "\u00a0": "~",
 }
 
 
@@ -107,6 +122,7 @@ POCKET = ROOT / "results/official_fold/POCKET_READ.json"
 PLMNN = ROOT / "results/official_fold/PLMNN_READ.json"
 GEOM_PROBE = ROOT / "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json"
 GEOM_LEN = ROOT / "results/official_fold/GEOMETRY_PLM_DELTA_COVARIATES.json"
+GRAND = ROOT / "results/official_fold/GRAND_BASELINE_READ.json"
 PMREAD = ROOT / "results/official_fold/POCKETMINER_READ.json"
 EXTREAD = ROOT / "results/external/EXTERNAL_READ.json"
 EXTDIFF = ROOT / "results/external/EXTERNAL_SET_DIFFICULTY.json"
@@ -429,11 +445,16 @@ def build() -> str:
         # FigCaptionThree while position three had become another figure. A name
         # derived from the filename cannot slide, and _figure_captions_match
         # below refuses a manuscript that pairs one with the wrong image.
-        prov = json.loads(FIGPROV.read_text())
-        for name, rec in (prov.get("figures") or {}).items():
-            if rec.get("caption"):
-                L.append(f"\\newcommand{{\\{_caption_macro(name)}}}"
-                         f"{{{_tex(rec['caption'])}}}")
+        # Both provenance files, because the three-baseline figures are drawn by
+        # their own generator and their captions are as perishable as the rest.
+        for prov_path in (FIGPROV, GRAND_FIGPROV):
+            if not prov_path.exists():
+                continue
+            prov = json.loads(prov_path.read_text())
+            for name, rec in (prov.get("figures") or {}).items():
+                if rec.get("caption"):
+                    L.append(f"\\newcommand{{\\{_caption_macro(name)}}}"
+                             f"{{{_tex(rec['caption'])}}}")
 
     if CROSSVAL.exists():
         # Whether the frozen architecture survives splits other than the one
@@ -1078,6 +1099,76 @@ def build() -> str:
                 "geometry_field vs pLM-NN now resolves ahead of the baseline; "
                 "Section~\\ref{sec:plmnn} and the README parity sentence must "
                 "be rewritten, not regenerated")
+
+    if GRAND.exists():
+        # The three-baseline read: every architecture and all three published
+        # baselines on one residue universe in one pass, so that no row is
+        # averaged over a different set of units than the row beside it.
+        #
+        # Two metrics are emitted for every comparison because they disagree,
+        # and the disagreement is the result. Emitting only ROC-AUC here would
+        # be the exact failure `.cursor/rules/10-sota-comparison.mdc` names.
+        gr = json.loads(GRAND.read_text())
+        s = gr["summary"]
+        ours = [m for m in s if m not in ("p2rank", "plmnn", "pocketminer")]
+        best = max(ours, key=lambda m: s[m]["mean_per_unit_roc_auc"])
+        L.append(f"\\newcommand{{\\GrandBest}}"
+                 f"{{\\texttt{{{best.replace('_', chr(92) + '_')}}}}}")
+        L.append(f"\\newcommand{{\\GrandN}}"
+                 f"{{{s[best]['n_units_scored']}}}")
+        L.append(f"\\newcommand{{\\GrandBoot}}{{{gr['n_boot']:,}}}")
+        L.append(f"\\newcommand{{\\GrandSeed}}{{{gr['seed']}}}")
+        L.append(f"\\newcommand{{\\GrandNMethods}}{{{len(s)}}}")
+        for tag, m in (("Best", best), ("Plm", "plmnn"),
+                       ("PTwo", "p2rank"), ("Pm", "pocketminer"),
+                       ("Tab", "table_field")):
+            if m not in s:
+                continue
+            L.append(f"\\newcommand{{\\Grand{tag}Roc}}"
+                     f"{{{s[m]['mean_per_unit_roc_auc']:.4f}}}")
+            L.append(f"\\newcommand{{\\Grand{tag}Pr}}"
+                     f"{{{s[m]['mean_per_unit_pr_auc']:.4f}}}")
+            L.append(f"\\newcommand{{\\Grand{tag}Pooled}}"
+                     f"{{{s[m]['pooled_residue_roc_auc_on_rank_fractions']:.4f}}}")
+
+        resolved: dict[str, bool] = {}
+        for tag, base in (("Plm", "plmnn"), ("PTwo", "p2rank"),
+                          ("Pm", "pocketminer")):
+            pair = gr["paired"].get(f"{best}_minus_{base}")
+            if not pair:
+                continue
+            for mtag, key in (("Roc", "per_unit_roc_auc"),
+                              ("Pr", "per_unit_pr_auc")):
+                r = pair[key]
+                lo, hi = r["ci95"]
+                L.append(f"\\newcommand{{\\GrandD{tag}{mtag}}}"
+                         f"{{{r['mean_delta']:+.4f}}}")
+                L.append(f"\\newcommand{{\\GrandD{tag}{mtag}CI}}"
+                         f"{{[{lo:+.4f}, {hi:+.4f}]}}")
+                L.append(f"\\newcommand{{\\GrandD{tag}{mtag}Win}}"
+                         f"{{{r['n_ahead']}}}")
+                L.append(f"\\newcommand{{\\GrandD{tag}{mtag}Loss}}"
+                         f"{{{r['n_behind']}}}")
+                L.append(f"\\newcommand{{\\GrandD{tag}{mtag}NPaired}}"
+                         f"{{{r['n_paired']}}}")
+                resolved[f"{tag}{mtag}"] = r["excludes_zero"]
+
+        # Guards. Each one names the sentence that would have to be rewritten,
+        # because a changed outcome must not be absorbed by regenerating the
+        # macros under prose that still describes the old one.
+        if resolved.get("PlmRoc") or resolved.get("PlmPr"):
+            raise SystemExit(
+                f"{best} vs pLM-NN now resolves on a per-unit metric in the "
+                f"grand read. Section~\\ref{{sec:plmnn}} and the README call "
+                f"this parity in both directions; rewrite them rather than "
+                f"regenerating.")
+        for tag, name in (("PTwo", "P2Rank"), ("Pm", "PocketMiner")):
+            if f"{tag}Roc" in resolved and not (resolved[f"{tag}Roc"]
+                                                and resolved[f"{tag}Pr"]):
+                raise SystemExit(
+                    f"{best} vs {name} no longer resolves on both per-unit "
+                    f"metrics in the grand read; the text claims a resolved "
+                    f"lead on both and must be rewritten.")
 
     if GEOM_LEN.exists():
         # Length stratum of the same geometry vs pLM probe. Point estimate on
@@ -2350,6 +2441,32 @@ def _saturation_macros() -> list[str]:
     return L
 
 
+def _untypesettable(text: str) -> list[str]:
+    """Every character this file emits must be one pdfLaTeX can set.
+
+    The manuscript's preamble loads no ``inputenc``, no ``fontenc`` and no
+    ``newunicodechar``, so a character outside the font encoding halts the
+    build with "Unicode character ... not set up for use with LaTeX". No Python
+    test would notice: the macros are valid JSON-derived strings and the file
+    is written successfully. This is the check AGENTS.md §7 asks for, in the
+    other language's terms.
+
+    Planted violation: putting a literal U+2265 in any caption artifact makes
+    this return that line, and ``make macros`` exits 1. It found seven real
+    ones the first time it ran -- captions carrying the greater-or-equal sign,
+    the minus sign, the arrow, delta and rho -- all of which would have stopped
+    the submission build.
+    """
+    bad = []
+    for i, line in enumerate(text.splitlines(), 1):
+        chars = sorted({c for c in line if ord(c) > 127})
+        if chars:
+            names = ", ".join(f"U+{ord(c):04X} {c!r}" for c in chars)
+            bad.append(f"line {i}: {names} -- add it to _TEX_ESCAPES; "
+                       f"{line[:60]}...")
+    return bad
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true",
@@ -2372,6 +2489,12 @@ def main(argv: list[str] | None = None) -> int:
     if missing:
         print(f"INCOMPLETE {OUT.relative_to(ROOT)}:")
         for line in missing:
+            print(f"  - {line}")
+        return 1
+    untypesettable = _untypesettable(text)
+    if untypesettable:
+        print(f"UNTYPESETTABLE {OUT.relative_to(ROOT)}:")
+        for line in untypesettable:
             print(f"  - {line}")
         return 1
     if args.check:

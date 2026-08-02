@@ -1,0 +1,1944 @@
+{
+  "schema": "geoaudit.seam_voidpharma_vs_plmnn_official_probe.v1",
+  "clinical_grade": false,
+  "method": "seam_voidpharma_field",
+  "reads_test_fold": true,
+  "why_not_confirmatory": "official fold heavily read; development probe",
+  "n_jobs": 9,
+  "n_units_compared": 192,
+  "n_errors": 0,
+  "errors_sample": [],
+  "mean_seam_voidpharma_field": 0.8238100571234287,
+  "mean_seam_geometry_field": 0.8262163414905728,
+  "mean_plmnn": 0.8234690336263281,
+  "mean_delta_vp_minus_plmnn": 0.00034102349710076987,
+  "ci95_delta_vp_minus_plmnn": [
+    -0.018937660084885326,
+    0.019116498408581876
+  ],
+  "n_vp_ahead_of_plmnn": 98,
+  "n_plmnn_ahead_of_tz": 94,
+  "seconds": 146.2207790830289,
+  "per_unit": [
+    {
+      "unit": "2vqz_F",
+      "seam_voidpharma_field": 0.1678321678321678,
+      "seam_geometry_field": 0.15684315684315683,
+      "plmnn": 0.6963036963036963,
+      "delta_vp_minus_plmnn": -0.5284715284715285,
+      "delta_vp_minus_seam": 0.010989010989010978,
+      "n": 150,
+      "n_pos": 7
+    },
+    {
+      "unit": "4j4e_F",
+      "seam_voidpharma_field": 0.2164835164835165,
+      "seam_geometry_field": 0.08461538461538462,
+      "plmnn": 0.7197802197802198,
+      "delta_vp_minus_plmnn": -0.5032967032967033,
+      "delta_vp_minus_seam": 0.13186813186813187,
+      "n": 101,
+      "n_pos": 10
+    },
+    {
+      "unit": "3jzg_A",
+      "seam_voidpharma_field": 0.4879923150816523,
+      "seam_geometry_field": 0.42987512007684914,
+      "plmnn": 0.9743035542747358,
+      "delta_vp_minus_plmnn": -0.4863112391930835,
+      "delta_vp_minus_seam": 0.05811719500480317,
+      "n": 359,
+      "n_pos": 12
+    },
+    {
+      "unit": "6ksc_A",
+      "seam_voidpharma_field": 0.2864951768488746,
+      "seam_geometry_field": 0.354983922829582,
+      "plmnn": 0.6712218649517686,
+      "delta_vp_minus_plmnn": -0.384726688102894,
+      "delta_vp_minus_seam": -0.06848874598070742,
+      "n": 321,
+      "n_pos": 10
+    },
+    {
+      "unit": "6g6y_A",
+      "seam_voidpharma_field": 0.4961738598102235,
+      "seam_geometry_field": 0.49188858279767367,
+      "plmnn": 0.7505356596265687,
+      "delta_vp_minus_plmnn": -0.25436179981634516,
+      "delta_vp_minus_seam": 0.004285277012549826,
+      "n": 319,
+      "n_pos": 22
+    },
+    {
+      "unit": "4ttp_A",
+      "seam_voidpharma_field": 0.658445945945946,
+      "seam_geometry_field": 0.6983108108108108,
+      "plmnn": 0.8898648648648648,
+      "delta_vp_minus_plmnn": -0.23141891891891886,
+      "delta_vp_minus_seam": -0.039864864864864846,
+      "n": 201,
+      "n_pos": 16
+    },
+    {
+      "unit": "6bty_B",
+      "seam_voidpharma_field": 0.6442577030812324,
+      "seam_geometry_field": 0.5966386554621849,
+      "plmnn": 0.8702147525676938,
+      "delta_vp_minus_plmnn": -0.22595704948646134,
+      "delta_vp_minus_seam": 0.04761904761904756,
+      "n": 128,
+      "n_pos": 9
+    },
+    {
+      "unit": "5b0e_B",
+      "seam_voidpharma_field": 0.6024096385542168,
+      "seam_geometry_field": 0.627653471026965,
+      "plmnn": 0.8141135972461274,
+      "delta_vp_minus_plmnn": -0.2117039586919106,
+      "delta_vp_minus_seam": -0.025243832472748196,
+      "n": 104,
+      "n_pos": 21
+    },
+    {
+      "unit": "1q4k_A",
+      "seam_voidpharma_field": 0.5811556864188443,
+      "seam_geometry_field": 0.5447184394552815,
+      "plmnn": 0.7902097902097902,
+      "delta_vp_minus_plmnn": -0.2090541037909459,
+      "delta_vp_minus_seam": 0.036437246963562764,
+      "n": 222,
+      "n_pos": 13
+    },
+    {
+      "unit": "5i3t_E",
+      "seam_voidpharma_field": 0.19916434540389974,
+      "seam_geometry_field": 0.149025069637883,
+      "plmnn": 0.4052924791086351,
+      "delta_vp_minus_plmnn": -0.20612813370473534,
+      "delta_vp_minus_seam": 0.05013927576601673,
+      "n": 363,
+      "n_pos": 4
+    },
+    {
+      "unit": "7f4y_B",
+      "seam_voidpharma_field": 0.7932525951557093,
+      "seam_geometry_field": 0.7711605003992548,
+      "plmnn": 0.9892866648922013,
+      "delta_vp_minus_plmnn": -0.19603406973649196,
+      "delta_vp_minus_seam": 0.022092094756454572,
+      "n": 901,
+      "n_pos": 17
+    },
+    {
+      "unit": "4qvk_B",
+      "seam_voidpharma_field": 0.7687619047619048,
+      "seam_geometry_field": 0.8179047619047619,
+      "plmnn": 0.9619047619047618,
+      "delta_vp_minus_plmnn": -0.19314285714285706,
+      "delta_vp_minus_seam": -0.049142857142857155,
+      "n": 235,
+      "n_pos": 25
+    },
+    {
+      "unit": "1e6k_A",
+      "seam_voidpharma_field": 0.7584940312213039,
+      "seam_geometry_field": 0.7842056932966024,
+      "plmnn": 0.9513314967860422,
+      "delta_vp_minus_plmnn": -0.19283746556473835,
+      "delta_vp_minus_seam": -0.025711662075298514,
+      "n": 130,
+      "n_pos": 9
+    },
+    {
+      "unit": "3ly8_A",
+      "seam_voidpharma_field": 0.07692307692307691,
+      "seam_geometry_field": 0.06060606060606061,
+      "plmnn": 0.26777389277389274,
+      "delta_vp_minus_plmnn": -0.1908508158508158,
+      "delta_vp_minus_seam": 0.016317016317016306,
+      "n": 323,
+      "n_pos": 11
+    },
+    {
+      "unit": "1vsn_A",
+      "seam_voidpharma_field": 0.21523809523809528,
+      "seam_geometry_field": 0.24571428571428572,
+      "plmnn": 0.40095238095238095,
+      "delta_vp_minus_plmnn": -0.18571428571428567,
+      "delta_vp_minus_seam": -0.030476190476190435,
+      "n": 215,
+      "n_pos": 5
+    },
+    {
+      "unit": "1nd7_A",
+      "seam_voidpharma_field": 0.21756756756756757,
+      "seam_geometry_field": 0.23716216216216218,
+      "plmnn": 0.4027027027027027,
+      "delta_vp_minus_plmnn": -0.18513513513513513,
+      "delta_vp_minus_seam": -0.019594594594594616,
+      "n": 374,
+      "n_pos": 4
+    },
+    {
+      "unit": "1cwq_A",
+      "seam_voidpharma_field": 0.1135057471264368,
+      "seam_geometry_field": 0.1695402298850575,
+      "plmnn": 0.285919540229885,
+      "delta_vp_minus_plmnn": -0.17241379310344823,
+      "delta_vp_minus_seam": -0.05603448275862069,
+      "n": 238,
+      "n_pos": 6
+    },
+    {
+      "unit": "4uc8_A",
+      "seam_voidpharma_field": 0.6575342465753424,
+      "seam_geometry_field": 0.8508371385083715,
+      "plmnn": 0.8203957382039573,
+      "delta_vp_minus_plmnn": -0.16286149162861485,
+      "delta_vp_minus_seam": -0.19330289193302908,
+      "n": 222,
+      "n_pos": 3
+    },
+    {
+      "unit": "1g1m_B",
+      "seam_voidpharma_field": 0.8089668615984406,
+      "seam_geometry_field": 0.8764132553606236,
+      "plmnn": 0.9666666666666666,
+      "delta_vp_minus_plmnn": -0.157699805068226,
+      "delta_vp_minus_seam": -0.06744639376218309,
+      "n": 289,
+      "n_pos": 19
+    },
+    {
+      "unit": "7yjc_A",
+      "seam_voidpharma_field": 0.4391111111111111,
+      "seam_geometry_field": 0.40800000000000003,
+      "plmnn": 0.5951111111111111,
+      "delta_vp_minus_plmnn": -0.15600000000000003,
+      "delta_vp_minus_seam": 0.03111111111111109,
+      "n": 381,
+      "n_pos": 6
+    },
+    {
+      "unit": "5e0v_A",
+      "seam_voidpharma_field": 0.6561253561253562,
+      "seam_geometry_field": 0.7216524216524216,
+      "plmnn": 0.8076923076923077,
+      "delta_vp_minus_plmnn": -0.15156695156695155,
+      "delta_vp_minus_seam": -0.06552706552706544,
+      "n": 249,
+      "n_pos": 15
+    },
+    {
+      "unit": "8ias_B",
+      "seam_voidpharma_field": 0.7449965493443754,
+      "seam_geometry_field": 0.7337244076374512,
+      "plmnn": 0.8918794570968483,
+      "delta_vp_minus_plmnn": -0.14688290775247292,
+      "delta_vp_minus_seam": 0.011272141706924255,
+      "n": 501,
+      "n_pos": 18
+    },
+    {
+      "unit": "1dq2_A",
+      "seam_voidpharma_field": 0.8190354246692275,
+      "seam_geometry_field": 0.8647033717456253,
+      "plmnn": 0.9645753307725138,
+      "delta_vp_minus_plmnn": -0.14553990610328627,
+      "delta_vp_minus_seam": -0.045667947076397764,
+      "n": 224,
+      "n_pos": 11
+    },
+    {
+      "unit": "3i8s_B",
+      "seam_voidpharma_field": 0.8660714285714286,
+      "seam_geometry_field": 0.8826530612244897,
+      "plmnn": 0.9813775510204081,
+      "delta_vp_minus_plmnn": -0.11530612244897953,
+      "delta_vp_minus_seam": -0.016581632653061118,
+      "n": 261,
+      "n_pos": 16
+    },
+    {
+      "unit": "3v55_A",
+      "seam_voidpharma_field": 0.2692503305869189,
+      "seam_geometry_field": 0.16539517851693625,
+      "plmnn": 0.3817516020750687,
+      "delta_vp_minus_plmnn": -0.11250127148814981,
+      "delta_vp_minus_seam": 0.10385515206998264,
+      "n": 368,
+      "n_pos": 29
+    },
+    {
+      "unit": "5o8b_A",
+      "seam_voidpharma_field": 0.6966527196652721,
+      "seam_geometry_field": 0.752092050209205,
+      "plmnn": 0.8085774058577405,
+      "delta_vp_minus_plmnn": -0.11192468619246843,
+      "delta_vp_minus_seam": -0.05543933054393291,
+      "n": 243,
+      "n_pos": 4
+    },
+    {
+      "unit": "1i7n_A",
+      "seam_voidpharma_field": 0.875053003533569,
+      "seam_geometry_field": 0.8925795053003533,
+      "plmnn": 0.9823321554770317,
+      "delta_vp_minus_plmnn": -0.10727915194346271,
+      "delta_vp_minus_seam": -0.017526501766784386,
+      "n": 308,
+      "n_pos": 25
+    },
+    {
+      "unit": "6du4_A",
+      "seam_voidpharma_field": 0.8181550250515768,
+      "seam_geometry_field": 0.7875036840554082,
+      "plmnn": 0.9218980253463012,
+      "delta_vp_minus_plmnn": -0.10374300029472439,
+      "delta_vp_minus_seam": 0.03065134099616862,
+      "n": 287,
+      "n_pos": 26
+    },
+    {
+      "unit": "2rfj_B",
+      "seam_voidpharma_field": 0.8743686868686869,
+      "seam_geometry_field": 0.8282828282828283,
+      "plmnn": 0.9715909090909091,
+      "delta_vp_minus_plmnn": -0.09722222222222221,
+      "delta_vp_minus_seam": 0.04608585858585856,
+      "n": 106,
+      "n_pos": 18
+    },
+    {
+      "unit": "2vyr_A",
+      "seam_voidpharma_field": 0.712087912087912,
+      "seam_geometry_field": 0.6791208791208792,
+      "plmnn": 0.8043956043956044,
+      "delta_vp_minus_plmnn": -0.09230769230769242,
+      "delta_vp_minus_seam": 0.03296703296703285,
+      "n": 86,
+      "n_pos": 21
+    },
+    {
+      "unit": "2fem_A",
+      "seam_voidpharma_field": 0.8089919816723941,
+      "seam_geometry_field": 0.8029782359679267,
+      "plmnn": 0.9012027491408934,
+      "delta_vp_minus_plmnn": -0.09221076746849932,
+      "delta_vp_minus_seam": 0.006013745704467333,
+      "n": 212,
+      "n_pos": 18
+    },
+    {
+      "unit": "6nei_B",
+      "seam_voidpharma_field": 0.8837369290038526,
+      "seam_geometry_field": 0.8981838194826637,
+      "plmnn": 0.974545954870666,
+      "delta_vp_minus_plmnn": -0.09080902586681339,
+      "delta_vp_minus_seam": -0.014446890478811092,
+      "n": 339,
+      "n_pos": 23
+    },
+    {
+      "unit": "8h27_A",
+      "seam_voidpharma_field": 0.8982683982683983,
+      "seam_geometry_field": 0.9158249158249158,
+      "plmnn": 0.9795574795574796,
+      "delta_vp_minus_plmnn": -0.0812890812890813,
+      "delta_vp_minus_seam": -0.017556517556517437,
+      "n": 181,
+      "n_pos": 27
+    },
+    {
+      "unit": "3rwv_A",
+      "seam_voidpharma_field": 0.7822341057635175,
+      "seam_geometry_field": 0.7667855020796197,
+      "plmnn": 0.8630421865715983,
+      "delta_vp_minus_plmnn": -0.08080808080808077,
+      "delta_vp_minus_seam": 0.015448603683897777,
+      "n": 205,
+      "n_pos": 18
+    },
+    {
+      "unit": "3st6_C",
+      "seam_voidpharma_field": 0.7429780033840948,
+      "seam_geometry_field": 0.7503384094754655,
+      "plmnn": 0.816751269035533,
+      "delta_vp_minus_plmnn": -0.07377326565143816,
+      "delta_vp_minus_seam": -0.007360406091370675,
+      "n": 424,
+      "n_pos": 30
+    },
+    {
+      "unit": "2v6m_D",
+      "seam_voidpharma_field": 0.8988413547237076,
+      "seam_geometry_field": 0.9180035650623886,
+      "plmnn": 0.9706996434937611,
+      "delta_vp_minus_plmnn": -0.07185828877005351,
+      "delta_vp_minus_seam": -0.01916221033868093,
+      "n": 298,
+      "n_pos": 34
+    },
+    {
+      "unit": "2fhz_B",
+      "seam_voidpharma_field": 0.8019891500904159,
+      "seam_geometry_field": 0.7938517179023509,
+      "plmnn": 0.8698010849909584,
+      "delta_vp_minus_plmnn": -0.06781193490054249,
+      "delta_vp_minus_seam": 0.008137432188065064,
+      "n": 93,
+      "n_pos": 14
+    },
+    {
+      "unit": "1rjb_A",
+      "seam_voidpharma_field": 0.9137854609929078,
+      "seam_geometry_field": 0.9215425531914894,
+      "plmnn": 0.978945035460993,
+      "delta_vp_minus_plmnn": -0.06515957446808518,
+      "delta_vp_minus_seam": -0.007757092198581561,
+      "n": 298,
+      "n_pos": 16
+    },
+    {
+      "unit": "3t8b_A",
+      "seam_voidpharma_field": 0.8465465465465466,
+      "seam_geometry_field": 0.8576576576576577,
+      "plmnn": 0.9102102102102102,
+      "delta_vp_minus_plmnn": -0.0636636636636636,
+      "delta_vp_minus_seam": -0.011111111111111072,
+      "n": 237,
+      "n_pos": 15
+    },
+    {
+      "unit": "4rvt_B",
+      "seam_voidpharma_field": 0.9092893524132912,
+      "seam_geometry_field": 0.9044385156439486,
+      "plmnn": 0.9710162503031774,
+      "delta_vp_minus_plmnn": -0.06172689788988617,
+      "delta_vp_minus_seam": 0.004850836769342615,
+      "n": 297,
+      "n_pos": 31
+    },
+    {
+      "unit": "2iyt_A",
+      "seam_voidpharma_field": 0.9105937921727395,
+      "seam_geometry_field": 0.9099190283400809,
+      "plmnn": 0.9713225371120109,
+      "delta_vp_minus_plmnn": -0.060728744939271384,
+      "delta_vp_minus_seam": 0.0006747638326586314,
+      "n": 175,
+      "n_pos": 19
+    },
+    {
+      "unit": "3gdg_B",
+      "seam_voidpharma_field": 0.9269946808510638,
+      "seam_geometry_field": 0.9295212765957446,
+      "plmnn": 0.982845744680851,
+      "delta_vp_minus_plmnn": -0.055851063829787106,
+      "delta_vp_minus_seam": -0.0025265957446807263,
+      "n": 267,
+      "n_pos": 32
+    },
+    {
+      "unit": "2i3a_D",
+      "seam_voidpharma_field": 0.9023268398268398,
+      "seam_geometry_field": 0.911525974025974,
+      "plmnn": 0.9531926406926408,
+      "delta_vp_minus_plmnn": -0.05086580086580095,
+      "delta_vp_minus_seam": -0.009199134199134207,
+      "n": 347,
+      "n_pos": 11
+    },
+    {
+      "unit": "8i84_B",
+      "seam_voidpharma_field": 0.9163039176889591,
+      "seam_geometry_field": 0.9382667194301544,
+      "plmnn": 0.9669568658488327,
+      "delta_vp_minus_plmnn": -0.050652948159873534,
+      "delta_vp_minus_seam": -0.021962801741195248,
+      "n": 285,
+      "n_pos": 19
+    },
+    {
+      "unit": "4aem_A",
+      "seam_voidpharma_field": 0.95,
+      "seam_geometry_field": 0.9277777777777777,
+      "plmnn": 0.9972222222222222,
+      "delta_vp_minus_plmnn": -0.047222222222222276,
+      "delta_vp_minus_seam": 0.022222222222222254,
+      "n": 126,
+      "n_pos": 6
+    },
+    {
+      "unit": "6w10_A",
+      "seam_voidpharma_field": 0.9344322344322344,
+      "seam_geometry_field": 0.9315018315018315,
+      "plmnn": 0.9813186813186814,
+      "delta_vp_minus_plmnn": -0.04688644688644694,
+      "delta_vp_minus_seam": 0.00293040293040292,
+      "n": 223,
+      "n_pos": 13
+    },
+    {
+      "unit": "3tpo_A",
+      "seam_voidpharma_field": 0.8540697674418605,
+      "seam_geometry_field": 0.9046511627906977,
+      "plmnn": 0.8994186046511629,
+      "delta_vp_minus_plmnn": -0.045348837209302384,
+      "delta_vp_minus_seam": -0.05058139534883721,
+      "n": 438,
+      "n_pos": 8
+    },
+    {
+      "unit": "3f4k_A",
+      "seam_voidpharma_field": 0.9272116461366182,
+      "seam_geometry_field": 0.93505039193729,
+      "plmnn": 0.9720044792833147,
+      "delta_vp_minus_plmnn": -0.044792833146696465,
+      "delta_vp_minus_seam": -0.007838745800671787,
+      "n": 254,
+      "n_pos": 19
+    },
+    {
+      "unit": "4gv9_A",
+      "seam_voidpharma_field": 0.1699481865284974,
+      "seam_geometry_field": 0.17098445595854925,
+      "plmnn": 0.21450777202072538,
+      "delta_vp_minus_plmnn": -0.044559585492227965,
+      "delta_vp_minus_seam": -0.0010362694300518338,
+      "n": 198,
+      "n_pos": 5
+    },
+    {
+      "unit": "1xtc_A",
+      "seam_voidpharma_field": 0.8844189016602809,
+      "seam_geometry_field": 0.9179438058748404,
+      "plmnn": 0.9275223499361431,
+      "delta_vp_minus_plmnn": -0.04310344827586221,
+      "delta_vp_minus_seam": -0.03352490421455945,
+      "n": 192,
+      "n_pos": 18
+    },
+    {
+      "unit": "3lnz_C",
+      "seam_voidpharma_field": 0.8182471264367817,
+      "seam_geometry_field": 0.8139367816091954,
+      "plmnn": 0.8613505747126436,
+      "delta_vp_minus_plmnn": -0.04310344827586199,
+      "delta_vp_minus_seam": 0.004310344827586299,
+      "n": 82,
+      "n_pos": 24
+    },
+    {
+      "unit": "4zm7_A",
+      "seam_voidpharma_field": 0.8505367464905038,
+      "seam_geometry_field": 0.842279108175062,
+      "plmnn": 0.893476465730801,
+      "delta_vp_minus_plmnn": -0.04293971924029716,
+      "delta_vp_minus_seam": 0.008257638315441795,
+      "n": 180,
+      "n_pos": 7
+    },
+    {
+      "unit": "4mwi_A",
+      "seam_voidpharma_field": 0.9144478393714535,
+      "seam_geometry_field": 0.9042630583442456,
+      "plmnn": 0.957369416557544,
+      "delta_vp_minus_plmnn": -0.042921577186090576,
+      "delta_vp_minus_seam": 0.010184781027207879,
+      "n": 266,
+      "n_pos": 29
+    },
+    {
+      "unit": "3wb9_C",
+      "seam_voidpharma_field": 0.9231279872543813,
+      "seam_geometry_field": 0.9378651088688262,
+      "plmnn": 0.9660116834838024,
+      "delta_vp_minus_plmnn": -0.04288369622942112,
+      "delta_vp_minus_seam": -0.014737121614444959,
+      "n": 297,
+      "n_pos": 28
+    },
+    {
+      "unit": "2w8n_A",
+      "seam_voidpharma_field": 0.9085094010467145,
+      "seam_geometry_field": 0.9092847451056406,
+      "plmnn": 0.9511533242876526,
+      "delta_vp_minus_plmnn": -0.04264392324093813,
+      "delta_vp_minus_seam": -0.0007753440589260974,
+      "n": 480,
+      "n_pos": 11
+    },
+    {
+      "unit": "3lnz_O",
+      "seam_voidpharma_field": 0.8213276836158192,
+      "seam_geometry_field": 0.8375706214689266,
+      "plmnn": 0.8629943502824858,
+      "delta_vp_minus_plmnn": -0.04166666666666663,
+      "delta_vp_minus_seam": -0.016242937853107375,
+      "n": 83,
+      "n_pos": 24
+    },
+    {
+      "unit": "2phz_A",
+      "seam_voidpharma_field": 0.8892716535433071,
+      "seam_geometry_field": 0.9111712598425197,
+      "plmnn": 0.9288877952755905,
+      "delta_vp_minus_plmnn": -0.03961614173228345,
+      "delta_vp_minus_seam": -0.021899606299212615,
+      "n": 270,
+      "n_pos": 16
+    },
+    {
+      "unit": "2aka_A",
+      "seam_voidpharma_field": 0.849854849726776,
+      "seam_geometry_field": 0.8230447404371585,
+      "plmnn": 0.8893869535519126,
+      "delta_vp_minus_plmnn": -0.0395321038251365,
+      "delta_vp_minus_seam": 0.02681010928961758,
+      "n": 764,
+      "n_pos": 32
+    },
+    {
+      "unit": "5yqp_A",
+      "seam_voidpharma_field": 0.9272500000000001,
+      "seam_geometry_field": 0.9272500000000001,
+      "plmnn": 0.96625,
+      "delta_vp_minus_plmnn": -0.038999999999999924,
+      "delta_vp_minus_seam": 0.0,
+      "n": 185,
+      "n_pos": 25
+    },
+    {
+      "unit": "4uum_A",
+      "seam_voidpharma_field": 0.9448039215686274,
+      "seam_geometry_field": 0.9552941176470588,
+      "plmnn": 0.9834313725490197,
+      "delta_vp_minus_plmnn": -0.03862745098039233,
+      "delta_vp_minus_seam": -0.01049019607843149,
+      "n": 334,
+      "n_pos": 34
+    },
+    {
+      "unit": "6tx0_B",
+      "seam_voidpharma_field": 0.13421052631578945,
+      "seam_geometry_field": 0.12,
+      "plmnn": 0.17263157894736844,
+      "delta_vp_minus_plmnn": -0.038421052631578995,
+      "delta_vp_minus_seam": 0.014210526315789451,
+      "n": 479,
+      "n_pos": 4
+    },
+    {
+      "unit": "1bzj_A",
+      "seam_voidpharma_field": 0.5108921161825726,
+      "seam_geometry_field": 0.5808387670420866,
+      "plmnn": 0.5491256668642561,
+      "delta_vp_minus_plmnn": -0.03823355068168355,
+      "delta_vp_minus_seam": -0.06994665085951401,
+      "n": 297,
+      "n_pos": 56
+    },
+    {
+      "unit": "7x0g_B",
+      "seam_voidpharma_field": 0.9467162329615861,
+      "seam_geometry_field": 0.9444444444444444,
+      "plmnn": 0.9843040066088393,
+      "delta_vp_minus_plmnn": -0.037587773647253186,
+      "delta_vp_minus_seam": 0.002271788517141715,
+      "n": 287,
+      "n_pos": 18
+    },
+    {
+      "unit": "5loc_A",
+      "seam_voidpharma_field": 0.9168622848200312,
+      "seam_geometry_field": 0.917057902973396,
+      "plmnn": 0.9539319248826291,
+      "delta_vp_minus_plmnn": -0.03706964006259794,
+      "delta_vp_minus_seam": -0.00019561815336477384,
+      "n": 320,
+      "n_pos": 36
+    },
+    {
+      "unit": "3vgm_A",
+      "seam_voidpharma_field": 0.9148553978803664,
+      "seam_geometry_field": 0.9223998562960303,
+      "plmnn": 0.949523980599964,
+      "delta_vp_minus_plmnn": -0.03466858271959761,
+      "delta_vp_minus_seam": -0.007544458415663868,
+      "n": 312,
+      "n_pos": 19
+    },
+    {
+      "unit": "1xqv_A",
+      "seam_voidpharma_field": 0.9494572591587517,
+      "seam_geometry_field": 0.9523405698778833,
+      "plmnn": 0.9837177747625508,
+      "delta_vp_minus_plmnn": -0.03426051560379917,
+      "delta_vp_minus_seam": -0.0028833107191316154,
+      "n": 290,
+      "n_pos": 22
+    },
+    {
+      "unit": "7x0f_A",
+      "seam_voidpharma_field": 0.4494581630840291,
+      "seam_geometry_field": 0.40913128441996804,
+      "plmnn": 0.4830342867294368,
+      "delta_vp_minus_plmnn": -0.03357612364540774,
+      "delta_vp_minus_seam": 0.04032687866406104,
+      "n": 446,
+      "n_pos": 13
+    },
+    {
+      "unit": "6fc2_C",
+      "seam_voidpharma_field": 0.9353535353535354,
+      "seam_geometry_field": 0.9292929292929293,
+      "plmnn": 0.9671717171717172,
+      "delta_vp_minus_plmnn": -0.03181818181818186,
+      "delta_vp_minus_seam": 0.0060606060606061,
+      "n": 177,
+      "n_pos": 12
+    },
+    {
+      "unit": "2nt1_B",
+      "seam_voidpharma_field": 0.9387993762993763,
+      "seam_geometry_field": 0.9524428274428274,
+      "plmnn": 0.9698544698544698,
+      "delta_vp_minus_plmnn": -0.031055093555093505,
+      "delta_vp_minus_seam": -0.013643451143451113,
+      "n": 497,
+      "n_pos": 16
+    },
+    {
+      "unit": "6fgj_B",
+      "seam_voidpharma_field": 0.8774509803921569,
+      "seam_geometry_field": 0.884313725490196,
+      "plmnn": 0.9081699346405229,
+      "delta_vp_minus_plmnn": -0.030718954248366015,
+      "delta_vp_minus_seam": -0.006862745098039191,
+      "n": 197,
+      "n_pos": 17
+    },
+    {
+      "unit": "7v8k_B",
+      "seam_voidpharma_field": 0.9449893390191898,
+      "seam_geometry_field": 0.9569296375266525,
+      "plmnn": 0.9744136460554371,
+      "delta_vp_minus_plmnn": -0.02942430703624732,
+      "delta_vp_minus_seam": -0.011940298507462699,
+      "n": 474,
+      "n_pos": 5
+    },
+    {
+      "unit": "5hto_E",
+      "seam_voidpharma_field": 0.9170008912655971,
+      "seam_geometry_field": 0.9327094474153298,
+      "plmnn": 0.9464126559714795,
+      "delta_vp_minus_plmnn": -0.02941176470588236,
+      "delta_vp_minus_seam": -0.015708556149732655,
+      "n": 305,
+      "n_pos": 33
+    },
+    {
+      "unit": "4ikv_A",
+      "seam_voidpharma_field": 0.9348547717842324,
+      "seam_geometry_field": 0.9149377593360996,
+      "plmnn": 0.9603734439834024,
+      "delta_vp_minus_plmnn": -0.025518672199170034,
+      "delta_vp_minus_seam": 0.01991701244813282,
+      "n": 492,
+      "n_pos": 10
+    },
+    {
+      "unit": "6cqe_B",
+      "seam_voidpharma_field": 0.9470969643383437,
+      "seam_geometry_field": 0.9572649572649574,
+      "plmnn": 0.9725906277630416,
+      "delta_vp_minus_plmnn": -0.025493663424697943,
+      "delta_vp_minus_seam": -0.010167992926613745,
+      "n": 287,
+      "n_pos": 26
+    },
+    {
+      "unit": "5hij_A",
+      "seam_voidpharma_field": 0.9197651663405089,
+      "seam_geometry_field": 0.9365079365079365,
+      "plmnn": 0.9452054794520548,
+      "delta_vp_minus_plmnn": -0.02544031311154593,
+      "delta_vp_minus_seam": -0.016742770167427645,
+      "n": 240,
+      "n_pos": 21
+    },
+    {
+      "unit": "6vle_A",
+      "seam_voidpharma_field": 0.9160997732426304,
+      "seam_geometry_field": 0.9449815013724788,
+      "plmnn": 0.9403270079961809,
+      "delta_vp_minus_plmnn": -0.024227234753550486,
+      "delta_vp_minus_seam": -0.02888172812984846,
+      "n": 460,
+      "n_pos": 19
+    },
+    {
+      "unit": "2zcg_A",
+      "seam_voidpharma_field": 0.9591165413533835,
+      "seam_geometry_field": 0.9659304511278196,
+      "plmnn": 0.9769736842105262,
+      "delta_vp_minus_plmnn": -0.017857142857142683,
+      "delta_vp_minus_seam": -0.006813909774436078,
+      "n": 318,
+      "n_pos": 14
+    },
+    {
+      "unit": "3fzo_A",
+      "seam_voidpharma_field": 0.9474974200206397,
+      "seam_geometry_field": 0.9446594427244581,
+      "plmnn": 0.9619453044375644,
+      "delta_vp_minus_plmnn": -0.014447884416924683,
+      "delta_vp_minus_seam": 0.0028379772961816263,
+      "n": 262,
+      "n_pos": 34
+    },
+    {
+      "unit": "7x0i_B",
+      "seam_voidpharma_field": 0.9612299465240641,
+      "seam_geometry_field": 0.9618148395721925,
+      "plmnn": 0.9754344919786097,
+      "delta_vp_minus_plmnn": -0.014204545454545525,
+      "delta_vp_minus_seam": -0.0005848930481283654,
+      "n": 406,
+      "n_pos": 32
+    },
+    {
+      "unit": "2pwz_G",
+      "seam_voidpharma_field": 0.9585581448742969,
+      "seam_geometry_field": 0.9518998966823555,
+      "plmnn": 0.9724486281712778,
+      "delta_vp_minus_plmnn": -0.013890483296980838,
+      "delta_vp_minus_seam": 0.006658248191941385,
+      "n": 312,
+      "n_pos": 31
+    },
+    {
+      "unit": "4zoe_B",
+      "seam_voidpharma_field": 0.9574988246356371,
+      "seam_geometry_field": 0.955618241654913,
+      "plmnn": 0.9710390220968501,
+      "delta_vp_minus_plmnn": -0.013540197461213044,
+      "delta_vp_minus_seam": 0.0018805829807240215,
+      "n": 724,
+      "n_pos": 15
+    },
+    {
+      "unit": "5ey7_B",
+      "seam_voidpharma_field": 0.8957910014513788,
+      "seam_geometry_field": 0.9010159651669086,
+      "plmnn": 0.9065312046444122,
+      "delta_vp_minus_plmnn": -0.01074020319303337,
+      "delta_vp_minus_seam": -0.005224963715529829,
+      "n": 291,
+      "n_pos": 26
+    },
+    {
+      "unit": "8aeq_A",
+      "seam_voidpharma_field": 0.9567775974025974,
+      "seam_geometry_field": 0.9561688311688312,
+      "plmnn": 0.9644886363636364,
+      "delta_vp_minus_plmnn": -0.007711038961038974,
+      "delta_vp_minus_seam": 0.0006087662337661559,
+      "n": 624,
+      "n_pos": 8
+    },
+    {
+      "unit": "3k01_A",
+      "seam_voidpharma_field": 0.9793388429752066,
+      "seam_geometry_field": 0.9798307752853207,
+      "plmnn": 0.9866194411648959,
+      "delta_vp_minus_plmnn": -0.007280598189689291,
+      "delta_vp_minus_seam": -0.0004919323101141293,
+      "n": 391,
+      "n_pos": 28
+    },
+    {
+      "unit": "8u3n_A",
+      "seam_voidpharma_field": 0.26016260162601623,
+      "seam_geometry_field": 0.2784552845528455,
+      "plmnn": 0.2672764227642277,
+      "delta_vp_minus_plmnn": -0.0071138211382114624,
+      "delta_vp_minus_seam": -0.018292682926829285,
+      "n": 377,
+      "n_pos": 8
+    },
+    {
+      "unit": "6n5j_B",
+      "seam_voidpharma_field": 0.9583333333333333,
+      "seam_geometry_field": 0.939795918367347,
+      "plmnn": 0.9641156462585034,
+      "delta_vp_minus_plmnn": -0.005782312925170174,
+      "delta_vp_minus_seam": 0.018537414965986265,
+      "n": 301,
+      "n_pos": 21
+    },
+    {
+      "unit": "2dfp_A",
+      "seam_voidpharma_field": 0.9161216293746415,
+      "seam_geometry_field": 0.9327596098680437,
+      "plmnn": 0.9216293746414227,
+      "delta_vp_minus_plmnn": -0.0055077452667812166,
+      "delta_vp_minus_seam": -0.01663798049340226,
+      "n": 533,
+      "n_pos": 35
+    },
+    {
+      "unit": "3h8a_B",
+      "seam_voidpharma_field": 0.9788295577130529,
+      "seam_geometry_field": 0.96264832793959,
+      "plmnn": 0.9832793959007552,
+      "delta_vp_minus_plmnn": -0.004449838187702282,
+      "delta_vp_minus_seam": 0.016181229773462924,
+      "n": 430,
+      "n_pos": 18
+    },
+    {
+      "unit": "2xsa_A",
+      "seam_voidpharma_field": 0.9666666666666666,
+      "seam_geometry_field": 0.9637071651090343,
+      "plmnn": 0.969626168224299,
+      "delta_vp_minus_plmnn": -0.0029595015576324712,
+      "delta_vp_minus_seam": 0.002959501557632249,
+      "n": 443,
+      "n_pos": 15
+    },
+    {
+      "unit": "3mwg_B",
+      "seam_voidpharma_field": 0.94775390625,
+      "seam_geometry_field": 0.9423828125,
+      "plmnn": 0.9501953125,
+      "delta_vp_minus_plmnn": -0.00244140625,
+      "delta_vp_minus_seam": 0.00537109375,
+      "n": 272,
+      "n_pos": 16
+    },
+    {
+      "unit": "7nc8_D",
+      "seam_voidpharma_field": 0.9380530973451328,
+      "seam_geometry_field": 0.9288012872083669,
+      "plmnn": 0.9396621078037009,
+      "delta_vp_minus_plmnn": -0.0016090104585680942,
+      "delta_vp_minus_seam": 0.009251810136765903,
+      "n": 237,
+      "n_pos": 11
+    },
+    {
+      "unit": "8aqi_B",
+      "seam_voidpharma_field": 0.8670886075949368,
+      "seam_geometry_field": 0.8937613019891502,
+      "plmnn": 0.8684448462929475,
+      "delta_vp_minus_plmnn": -0.0013562386980107144,
+      "delta_vp_minus_seam": -0.02667269439421338,
+      "n": 172,
+      "n_pos": 14
+    },
+    {
+      "unit": "7w19_A",
+      "seam_voidpharma_field": 0.9462157809983898,
+      "seam_geometry_field": 0.9376811594202898,
+      "plmnn": 0.9471819645732689,
+      "delta_vp_minus_plmnn": -0.0009661835748790981,
+      "delta_vp_minus_seam": 0.008534621578099921,
+      "n": 293,
+      "n_pos": 23
+    },
+    {
+      "unit": "1p4o_B",
+      "seam_voidpharma_field": 0.9684065934065934,
+      "seam_geometry_field": 0.95516983016983,
+      "plmnn": 0.9690309690309691,
+      "delta_vp_minus_plmnn": -0.0006243756243756726,
+      "delta_vp_minus_seam": 0.013236763236763371,
+      "n": 314,
+      "n_pos": 28
+    },
+    {
+      "unit": "5ysb_B",
+      "seam_voidpharma_field": 0.9880631497882171,
+      "seam_geometry_field": 0.9851752021563343,
+      "plmnn": 0.9871005005775895,
+      "delta_vp_minus_plmnn": 0.0009626492106276086,
+      "delta_vp_minus_seam": 0.0028879476318828257,
+      "n": 385,
+      "n_pos": 14
+    },
+    {
+      "unit": "5tc0_B",
+      "seam_voidpharma_field": 0.9546332046332047,
+      "seam_geometry_field": 0.957046332046332,
+      "plmnn": 0.9531853281853282,
+      "delta_vp_minus_plmnn": 0.0014478764478764727,
+      "delta_vp_minus_seam": -0.0024131274131273805,
+      "n": 250,
+      "n_pos": 28
+    },
+    {
+      "unit": "5z18_C",
+      "seam_voidpharma_field": 0.9650323544051767,
+      "seam_geometry_field": 0.9588103534096565,
+      "plmnn": 0.9634146341463414,
+      "delta_vp_minus_plmnn": 0.0016177202588352202,
+      "delta_vp_minus_seam": 0.006222000995520172,
+      "n": 588,
+      "n_pos": 14
+    },
+    {
+      "unit": "2i3r_A",
+      "seam_voidpharma_field": 0.915289256198347,
+      "seam_geometry_field": 0.9044421487603307,
+      "plmnn": 0.9135674931129476,
+      "delta_vp_minus_plmnn": 0.001721763085399397,
+      "delta_vp_minus_seam": 0.010847107438016312,
+      "n": 286,
+      "n_pos": 22
+    },
+    {
+      "unit": "4bg8_A",
+      "seam_voidpharma_field": 0.8828656462585034,
+      "seam_geometry_field": 0.8930697278911565,
+      "plmnn": 0.8788265306122449,
+      "delta_vp_minus_plmnn": 0.004039115646258473,
+      "delta_vp_minus_seam": -0.010204081632653073,
+      "n": 310,
+      "n_pos": 16
+    },
+    {
+      "unit": "1zm0_A",
+      "seam_voidpharma_field": 0.972192513368984,
+      "seam_geometry_field": 0.9850267379679144,
+      "plmnn": 0.9679144385026738,
+      "delta_vp_minus_plmnn": 0.004278074866310266,
+      "delta_vp_minus_seam": -0.012834224598930355,
+      "n": 96,
+      "n_pos": 11
+    },
+    {
+      "unit": "6o4f_H",
+      "seam_voidpharma_field": 0.9543629061701351,
+      "seam_geometry_field": 0.9536327126688573,
+      "plmnn": 0.9492515516611904,
+      "delta_vp_minus_plmnn": 0.005111354508944732,
+      "delta_vp_minus_seam": 0.0007301935012777871,
+      "n": 509,
+      "n_pos": 11
+    },
+    {
+      "unit": "4p2f_A",
+      "seam_voidpharma_field": 0.9407821229050278,
+      "seam_geometry_field": 0.9452513966480447,
+      "plmnn": 0.9351955307262569,
+      "delta_vp_minus_plmnn": 0.005586592178770888,
+      "delta_vp_minus_seam": -0.004469273743016866,
+      "n": 189,
+      "n_pos": 10
+    },
+    {
+      "unit": "2vl2_C",
+      "seam_voidpharma_field": 0.9112582781456954,
+      "seam_geometry_field": 0.8821192052980132,
+      "plmnn": 0.9039735099337748,
+      "delta_vp_minus_plmnn": 0.007284768211920589,
+      "delta_vp_minus_seam": 0.029139072847682135,
+      "n": 161,
+      "n_pos": 10
+    },
+    {
+      "unit": "1p4v_A",
+      "seam_voidpharma_field": 0.983646953405018,
+      "seam_geometry_field": 0.983646953405018,
+      "plmnn": 0.9755824372759856,
+      "delta_vp_minus_plmnn": 0.008064516129032362,
+      "delta_vp_minus_seam": 0.0,
+      "n": 295,
+      "n_pos": 16
+    },
+    {
+      "unit": "5uxa_A",
+      "seam_voidpharma_field": 0.9536231884057972,
+      "seam_geometry_field": 0.9666666666666667,
+      "plmnn": 0.942608695652174,
+      "delta_vp_minus_plmnn": 0.011014492753623206,
+      "delta_vp_minus_seam": -0.01304347826086949,
+      "n": 301,
+      "n_pos": 25
+    },
+    {
+      "unit": "4jfr_C",
+      "seam_voidpharma_field": 0.9962053571428572,
+      "seam_geometry_field": 0.9953124999999999,
+      "plmnn": 0.9839285714285715,
+      "delta_vp_minus_plmnn": 0.012276785714285698,
+      "delta_vp_minus_seam": 0.0008928571428572507,
+      "n": 334,
+      "n_pos": 14
+    },
+    {
+      "unit": "3nx1_B",
+      "seam_voidpharma_field": 0.9451612903225807,
+      "seam_geometry_field": 0.9490322580645162,
+      "plmnn": 0.9316129032258065,
+      "delta_vp_minus_plmnn": 0.013548387096774195,
+      "delta_vp_minus_seam": -0.003870967741935516,
+      "n": 165,
+      "n_pos": 10
+    },
+    {
+      "unit": "7c48_A",
+      "seam_voidpharma_field": 0.9403622693096377,
+      "seam_geometry_field": 0.9294258373205742,
+      "plmnn": 0.9266917293233082,
+      "delta_vp_minus_plmnn": 0.0136705399863295,
+      "delta_vp_minus_seam": 0.010936431989063577,
+      "n": 288,
+      "n_pos": 22
+    },
+    {
+      "unit": "3ugk_A",
+      "seam_voidpharma_field": 0.9727387330601954,
+      "seam_geometry_field": 0.9639142767097385,
+      "plmnn": 0.9589505200126064,
+      "delta_vp_minus_plmnn": 0.013788213047589037,
+      "delta_vp_minus_seam": 0.008824456350456922,
+      "n": 372,
+      "n_pos": 38
+    },
+    {
+      "unit": "2x47_A",
+      "seam_voidpharma_field": 0.9897688518378174,
+      "seam_geometry_field": 0.9892004547176961,
+      "plmnn": 0.9759378552482001,
+      "delta_vp_minus_plmnn": 0.013830996589617284,
+      "delta_vp_minus_seam": 0.0005683971201212445,
+      "n": 229,
+      "n_pos": 26
+    },
+    {
+      "unit": "1xgd_A",
+      "seam_voidpharma_field": 0.9246880570409982,
+      "seam_geometry_field": 0.9252822341057636,
+      "plmnn": 0.9105020796197268,
+      "delta_vp_minus_plmnn": 0.014185977421271367,
+      "delta_vp_minus_seam": -0.0005941770647653888,
+      "n": 315,
+      "n_pos": 51
+    },
+    {
+      "unit": "5kcg_B",
+      "seam_voidpharma_field": 0.9465944272445821,
+      "seam_geometry_field": 0.9469040247678018,
+      "plmnn": 0.9314241486068112,
+      "delta_vp_minus_plmnn": 0.015170278637770873,
+      "delta_vp_minus_seam": -0.0003095975232196846,
+      "n": 397,
+      "n_pos": 17
+    },
+    {
+      "unit": "2h7s_A",
+      "seam_voidpharma_field": 0.9282418089524689,
+      "seam_geometry_field": 0.9464697738809414,
+      "plmnn": 0.912782648823258,
+      "delta_vp_minus_plmnn": 0.015459160129210892,
+      "delta_vp_minus_seam": -0.018227964928472562,
+      "n": 405,
+      "n_pos": 11
+    },
+    {
+      "unit": "3w90_A",
+      "seam_voidpharma_field": 0.9553072625698324,
+      "seam_geometry_field": 0.9388415172008233,
+      "plmnn": 0.939135548368127,
+      "delta_vp_minus_plmnn": 0.01617171420170549,
+      "delta_vp_minus_seam": 0.016465745369009133,
+      "n": 198,
+      "n_pos": 19
+    },
+    {
+      "unit": "1se8_A",
+      "seam_voidpharma_field": 0.9686468646864685,
+      "seam_geometry_field": 0.9801980198019802,
+      "plmnn": 0.9521452145214521,
+      "delta_vp_minus_plmnn": 0.01650165016501648,
+      "delta_vp_minus_seam": -0.011551155115511635,
+      "n": 205,
+      "n_pos": 3
+    },
+    {
+      "unit": "5sc2_A",
+      "seam_voidpharma_field": 0.8331034482758621,
+      "seam_geometry_field": 0.8951724137931034,
+      "plmnn": 0.816551724137931,
+      "delta_vp_minus_plmnn": 0.016551724137931156,
+      "delta_vp_minus_seam": -0.06206896551724128,
+      "n": 150,
+      "n_pos": 5
+    },
+    {
+      "unit": "1evy_A",
+      "seam_voidpharma_field": 0.98838222480395,
+      "seam_geometry_field": 0.9849937070384355,
+      "plmnn": 0.9712460063897763,
+      "delta_vp_minus_plmnn": 0.017136218414173676,
+      "delta_vp_minus_seam": 0.0033885177655145204,
+      "n": 346,
+      "n_pos": 33
+    },
+    {
+      "unit": "1kxr_A",
+      "seam_voidpharma_field": 0.9786675992306346,
+      "seam_geometry_field": 0.9858366847350936,
+      "plmnn": 0.9613568805735269,
+      "delta_vp_minus_plmnn": 0.01731071865710776,
+      "delta_vp_minus_seam": -0.0071690855044589386,
+      "n": 320,
+      "n_pos": 19
+    },
+    {
+      "unit": "1g59_A",
+      "seam_voidpharma_field": 0.9749816041206769,
+      "seam_geometry_field": 0.9658572479764532,
+      "plmnn": 0.9571743929359823,
+      "delta_vp_minus_plmnn": 0.017807211184694638,
+      "delta_vp_minus_seam": 0.009124356144223689,
+      "n": 468,
+      "n_pos": 15
+    },
+    {
+      "unit": "1ksg_B",
+      "seam_voidpharma_field": 0.778849351513136,
+      "seam_geometry_field": 0.7848353841037579,
+      "plmnn": 0.7602261390089791,
+      "delta_vp_minus_plmnn": 0.018623212504156883,
+      "delta_vp_minus_seam": -0.005986032590621915,
+      "n": 128,
+      "n_pos": 31
+    },
+    {
+      "unit": "1p9o_A",
+      "seam_voidpharma_field": 0.8851284584980238,
+      "seam_geometry_field": 0.9063735177865613,
+      "plmnn": 0.8643774703557312,
+      "delta_vp_minus_plmnn": 0.020750988142292592,
+      "delta_vp_minus_seam": -0.021245059288537482,
+      "n": 269,
+      "n_pos": 16
+    },
+    {
+      "unit": "1x2g_C",
+      "seam_voidpharma_field": 0.9263932702418507,
+      "seam_geometry_field": 0.940273396424816,
+      "plmnn": 0.9053627760252366,
+      "delta_vp_minus_plmnn": 0.02103049421661407,
+      "delta_vp_minus_seam": -0.013880126182965302,
+      "n": 332,
+      "n_pos": 15
+    },
+    {
+      "unit": "8bre_B",
+      "seam_voidpharma_field": 0.9189855582951743,
+      "seam_geometry_field": 0.9256780556533991,
+      "plmnn": 0.8974991194082423,
+      "delta_vp_minus_plmnn": 0.021486438886931913,
+      "delta_vp_minus_seam": -0.006692497358224858,
+      "n": 351,
+      "n_pos": 17
+    },
+    {
+      "unit": "6jq9_B",
+      "seam_voidpharma_field": 0.979891956782713,
+      "seam_geometry_field": 0.9825930372148859,
+      "plmnn": 0.9582833133253301,
+      "delta_vp_minus_plmnn": 0.021608643457382892,
+      "delta_vp_minus_seam": -0.0027010804321728754,
+      "n": 483,
+      "n_pos": 7
+    },
+    {
+      "unit": "3uyi_A",
+      "seam_voidpharma_field": 0.9480347694633409,
+      "seam_geometry_field": 0.9544595616024187,
+      "plmnn": 0.9263038548752834,
+      "delta_vp_minus_plmnn": 0.021730914588057426,
+      "delta_vp_minus_seam": -0.006424792139077873,
+      "n": 312,
+      "n_pos": 18
+    },
+    {
+      "unit": "9atc_A",
+      "seam_voidpharma_field": 0.9863239413412423,
+      "seam_geometry_field": 0.9803921568627451,
+      "plmnn": 0.9611138573076289,
+      "delta_vp_minus_plmnn": 0.025210084033613467,
+      "delta_vp_minus_seam": 0.005931784478497293,
+      "n": 310,
+      "n_pos": 21
+    },
+    {
+      "unit": "1xjf_A",
+      "seam_voidpharma_field": 0.9820088300220751,
+      "seam_geometry_field": 0.9811258278145696,
+      "plmnn": 0.9567328918322295,
+      "delta_vp_minus_plmnn": 0.025275938189845526,
+      "delta_vp_minus_seam": 0.0008830022075054789,
+      "n": 619,
+      "n_pos": 15
+    },
+    {
+      "unit": "7xgf_E",
+      "seam_voidpharma_field": 0.7559006211180124,
+      "seam_geometry_field": 0.7979296066252588,
+      "plmnn": 0.7289855072463768,
+      "delta_vp_minus_plmnn": 0.026915113871635588,
+      "delta_vp_minus_seam": -0.04202898550724643,
+      "n": 151,
+      "n_pos": 46
+    },
+    {
+      "unit": "7c63_A",
+      "seam_voidpharma_field": 0.9173773987206824,
+      "seam_geometry_field": 0.9301705756929637,
+      "plmnn": 0.8878820184790334,
+      "delta_vp_minus_plmnn": 0.029495380241648994,
+      "delta_vp_minus_seam": -0.012793176972281328,
+      "n": 416,
+      "n_pos": 14
+    },
+    {
+      "unit": "4cmw_B",
+      "seam_voidpharma_field": 0.9203627045140942,
+      "seam_geometry_field": 0.9495367632564558,
+      "plmnn": 0.8890203035679086,
+      "delta_vp_minus_plmnn": 0.03134240094618557,
+      "delta_vp_minus_seam": -0.029174058742361564,
+      "n": 286,
+      "n_pos": 19
+    },
+    {
+      "unit": "4amv_B",
+      "seam_voidpharma_field": 0.97796514896009,
+      "seam_geometry_field": 0.9797639123102866,
+      "plmnn": 0.9464867903316471,
+      "delta_vp_minus_plmnn": 0.03147835862844295,
+      "delta_vp_minus_seam": -0.001798763350196575,
+      "n": 608,
+      "n_pos": 15
+    },
+    {
+      "unit": "7f2m_B",
+      "seam_voidpharma_field": 0.126130198915009,
+      "seam_geometry_field": 0.15596745027124775,
+      "plmnn": 0.09448462929475589,
+      "delta_vp_minus_plmnn": 0.031645569620253125,
+      "delta_vp_minus_seam": -0.029837251356238742,
+      "n": 323,
+      "n_pos": 7
+    },
+    {
+      "unit": "1lbe_B",
+      "seam_voidpharma_field": 0.9480263157894737,
+      "seam_geometry_field": 0.9401315789473684,
+      "plmnn": 0.9142543859649123,
+      "delta_vp_minus_plmnn": 0.03377192982456145,
+      "delta_vp_minus_seam": 0.007894736842105288,
+      "n": 248,
+      "n_pos": 20
+    },
+    {
+      "unit": "1k47_D",
+      "seam_voidpharma_field": 0.9507142857142856,
+      "seam_geometry_field": 0.9564285714285714,
+      "plmnn": 0.9166666666666667,
+      "delta_vp_minus_plmnn": 0.03404761904761888,
+      "delta_vp_minus_seam": -0.005714285714285783,
+      "n": 314,
+      "n_pos": 14
+    },
+    {
+      "unit": "3flg_A",
+      "seam_voidpharma_field": 0.91005291005291,
+      "seam_geometry_field": 0.9153439153439153,
+      "plmnn": 0.8747795414462081,
+      "delta_vp_minus_plmnn": 0.03527336860670194,
+      "delta_vp_minus_seam": -0.005291005291005346,
+      "n": 135,
+      "n_pos": 9
+    },
+    {
+      "unit": "7nlx_A",
+      "seam_voidpharma_field": 0.9461818181818181,
+      "seam_geometry_field": 0.9512727272727273,
+      "plmnn": 0.9107878787878788,
+      "delta_vp_minus_plmnn": 0.03539393939393931,
+      "delta_vp_minus_seam": -0.005090909090909146,
+      "n": 290,
+      "n_pos": 15
+    },
+    {
+      "unit": "8onn_E",
+      "seam_voidpharma_field": 0.9652623798965262,
+      "seam_geometry_field": 0.9722838137472284,
+      "plmnn": 0.9275683665927569,
+      "delta_vp_minus_plmnn": 0.037694013303769314,
+      "delta_vp_minus_seam": -0.007021433850702197,
+      "n": 268,
+      "n_pos": 22
+    },
+    {
+      "unit": "8gxj_C",
+      "seam_voidpharma_field": 0.9283536585365854,
+      "seam_geometry_field": 0.9237804878048781,
+      "plmnn": 0.8893292682926829,
+      "delta_vp_minus_plmnn": 0.039024390243902474,
+      "delta_vp_minus_seam": 0.004573170731707266,
+      "n": 184,
+      "n_pos": 20
+    },
+    {
+      "unit": "6f52_A",
+      "seam_voidpharma_field": 0.9547400611620794,
+      "seam_geometry_field": 0.946177370030581,
+      "plmnn": 0.9146788990825688,
+      "delta_vp_minus_plmnn": 0.040061162079510604,
+      "delta_vp_minus_seam": 0.008562691131498434,
+      "n": 233,
+      "n_pos": 15
+    },
+    {
+      "unit": "2pkf_A",
+      "seam_voidpharma_field": 0.9879688605803255,
+      "seam_geometry_field": 0.9881457891012031,
+      "plmnn": 0.9469214437367305,
+      "delta_vp_minus_plmnn": 0.04104741684359503,
+      "delta_vp_minus_seam": -0.00017692852087758393,
+      "n": 332,
+      "n_pos": 18
+    },
+    {
+      "unit": "4jax_F",
+      "seam_voidpharma_field": 0.9818318318318318,
+      "seam_geometry_field": 0.981981981981982,
+      "plmnn": 0.9402402402402402,
+      "delta_vp_minus_plmnn": 0.04159159159159154,
+      "delta_vp_minus_seam": -0.00015015015015029665,
+      "n": 459,
+      "n_pos": 15
+    },
+    {
+      "unit": "3a0x_A",
+      "seam_voidpharma_field": 0.9438244047619048,
+      "seam_geometry_field": 0.9624255952380952,
+      "plmnn": 0.9002976190476191,
+      "delta_vp_minus_plmnn": 0.0435267857142857,
+      "delta_vp_minus_seam": -0.018601190476190466,
+      "n": 149,
+      "n_pos": 21
+    },
+    {
+      "unit": "1m5w_D",
+      "seam_voidpharma_field": 0.9722042663219135,
+      "seam_geometry_field": 0.9620771385477268,
+      "plmnn": 0.9243697478991596,
+      "delta_vp_minus_plmnn": 0.04783451842275388,
+      "delta_vp_minus_seam": 0.010127127774186673,
+      "n": 242,
+      "n_pos": 21
+    },
+    {
+      "unit": "6eqj_A",
+      "seam_voidpharma_field": 0.9666666666666667,
+      "seam_geometry_field": 0.9678260869565218,
+      "plmnn": 0.9156521739130434,
+      "delta_vp_minus_plmnn": 0.05101449275362324,
+      "delta_vp_minus_seam": -0.001159420289855162,
+      "n": 245,
+      "n_pos": 15
+    },
+    {
+      "unit": "7e5q_B",
+      "seam_voidpharma_field": 0.571290944123314,
+      "seam_geometry_field": 0.5785163776493256,
+      "plmnn": 0.5202312138728323,
+      "delta_vp_minus_plmnn": 0.051059730250481716,
+      "delta_vp_minus_seam": -0.007225433526011571,
+      "n": 352,
+      "n_pos": 6
+    },
+    {
+      "unit": "4r0x_A",
+      "seam_voidpharma_field": 0.8939562476826103,
+      "seam_geometry_field": 0.8972932888394513,
+      "plmnn": 0.8424175009269558,
+      "delta_vp_minus_plmnn": 0.05153874675565451,
+      "delta_vp_minus_seam": -0.0033370411568409697,
+      "n": 122,
+      "n_pos": 29
+    },
+    {
+      "unit": "5wbm_B",
+      "seam_voidpharma_field": 0.961671546446633,
+      "seam_geometry_field": 0.9552834708544051,
+      "plmnn": 0.9076390737290392,
+      "delta_vp_minus_plmnn": 0.054032472717593816,
+      "delta_vp_minus_seam": 0.006388075592227871,
+      "n": 302,
+      "n_pos": 13
+    },
+    {
+      "unit": "8vxu_B",
+      "seam_voidpharma_field": 0.5065104166666666,
+      "seam_geometry_field": 0.5234375,
+      "plmnn": 0.4518229166666667,
+      "delta_vp_minus_plmnn": 0.054687499999999944,
+      "delta_vp_minus_seam": -0.01692708333333337,
+      "n": 104,
+      "n_pos": 8
+    },
+    {
+      "unit": "1arl_A",
+      "seam_voidpharma_field": 0.9778904665314402,
+      "seam_geometry_field": 0.9847870182555781,
+      "plmnn": 0.922920892494929,
+      "delta_vp_minus_plmnn": 0.05496957403651115,
+      "delta_vp_minus_seam": -0.006896551724137945,
+      "n": 307,
+      "n_pos": 17
+    },
+    {
+      "unit": "4ilg_A",
+      "seam_voidpharma_field": 0.6731524150878989,
+      "seam_geometry_field": 0.7064345451442227,
+      "plmnn": 0.6156340672469706,
+      "delta_vp_minus_plmnn": 0.05751834784092835,
+      "delta_vp_minus_seam": -0.033282130056323744,
+      "n": 321,
+      "n_pos": 42
+    },
+    {
+      "unit": "1h13_A",
+      "seam_voidpharma_field": 0.9924812030075189,
+      "seam_geometry_field": 0.9919799498746866,
+      "plmnn": 0.9348370927318296,
+      "delta_vp_minus_plmnn": 0.057644110275689275,
+      "delta_vp_minus_seam": 0.0005012531328322245,
+      "n": 404,
+      "n_pos": 5
+    },
+    {
+      "unit": "1bk2_A",
+      "seam_voidpharma_field": 0.8999999999999999,
+      "seam_geometry_field": 0.9115384615384615,
+      "plmnn": 0.8423076923076923,
+      "delta_vp_minus_plmnn": 0.0576923076923076,
+      "delta_vp_minus_seam": -0.011538461538461608,
+      "n": 57,
+      "n_pos": 5
+    },
+    {
+      "unit": "1kx9_A",
+      "seam_voidpharma_field": 0.810752688172043,
+      "seam_geometry_field": 0.8258064516129032,
+      "plmnn": 0.7491039426523298,
+      "delta_vp_minus_plmnn": 0.06164874551971322,
+      "delta_vp_minus_seam": -0.01505376344086018,
+      "n": 108,
+      "n_pos": 15
+    },
+    {
+      "unit": "7o1i_A",
+      "seam_voidpharma_field": 0.8355513778261515,
+      "seam_geometry_field": 0.791272943155395,
+      "plmnn": 0.7738089348439123,
+      "delta_vp_minus_plmnn": 0.06174244298223919,
+      "delta_vp_minus_seam": 0.04427843467075654,
+      "n": 726,
+      "n_pos": 29
+    },
+    {
+      "unit": "7de1_A",
+      "seam_voidpharma_field": 0.6975,
+      "seam_geometry_field": 0.5962500000000001,
+      "plmnn": 0.63,
+      "delta_vp_minus_plmnn": 0.0675,
+      "delta_vp_minus_seam": 0.10124999999999995,
+      "n": 108,
+      "n_pos": 8
+    },
+    {
+      "unit": "2zj7_A",
+      "seam_voidpharma_field": 0.9183799342105263,
+      "seam_geometry_field": 0.8764391447368421,
+      "plmnn": 0.8507401315789473,
+      "delta_vp_minus_plmnn": 0.06763980263157898,
+      "delta_vp_minus_seam": 0.04194078947368418,
+      "n": 616,
+      "n_pos": 8
+    },
+    {
+      "unit": "5zj4_D",
+      "seam_voidpharma_field": 0.9487492373398414,
+      "seam_geometry_field": 0.9621720561317877,
+      "plmnn": 0.8804148871262965,
+      "delta_vp_minus_plmnn": 0.06833435021354495,
+      "delta_vp_minus_seam": -0.01342281879194629,
+      "n": 160,
+      "n_pos": 11
+    },
+    {
+      "unit": "3n4u_A",
+      "seam_voidpharma_field": 0.9290035587188612,
+      "seam_geometry_field": 0.9311387900355872,
+      "plmnn": 0.8596085409252668,
+      "delta_vp_minus_plmnn": 0.06939501779359436,
+      "delta_vp_minus_seam": -0.002135231316725994,
+      "n": 301,
+      "n_pos": 20
+    },
+    {
+      "unit": "8b9p_A",
+      "seam_voidpharma_field": 0.7752961082910321,
+      "seam_geometry_field": 0.7925549915397632,
+      "plmnn": 0.700507614213198,
+      "delta_vp_minus_plmnn": 0.07478849407783417,
+      "delta_vp_minus_seam": -0.01725888324873104,
+      "n": 596,
+      "n_pos": 5
+    },
+    {
+      "unit": "2qbv_A",
+      "seam_voidpharma_field": 0.9443099273607748,
+      "seam_geometry_field": 0.8958837772397095,
+      "plmnn": 0.8656174334140436,
+      "delta_vp_minus_plmnn": 0.07869249394673117,
+      "delta_vp_minus_seam": 0.048426150121065326,
+      "n": 73,
+      "n_pos": 14
+    },
+    {
+      "unit": "5acv_B",
+      "seam_voidpharma_field": 0.9945175438596491,
+      "seam_geometry_field": 1.0,
+      "plmnn": 0.9111842105263157,
+      "delta_vp_minus_plmnn": 0.08333333333333337,
+      "delta_vp_minus_seam": -0.005482456140350922,
+      "n": 232,
+      "n_pos": 4
+    },
+    {
+      "unit": "7kay_A",
+      "seam_voidpharma_field": 0.9331200487507617,
+      "seam_geometry_field": 0.9398232784887264,
+      "plmnn": 0.8437944342880357,
+      "delta_vp_minus_plmnn": 0.08932561446272602,
+      "delta_vp_minus_seam": -0.006703229737964667,
+      "n": 583,
+      "n_pos": 36
+    },
+    {
+      "unit": "2d05_A",
+      "seam_voidpharma_field": 0.9836977368622939,
+      "seam_geometry_field": 0.9854238588415803,
+      "plmnn": 0.8927886459532028,
+      "delta_vp_minus_plmnn": 0.09090909090909105,
+      "delta_vp_minus_seam": -0.0017261219792864546,
+      "n": 259,
+      "n_pos": 22
+    },
+    {
+      "unit": "6hei_A",
+      "seam_voidpharma_field": 0.8788461538461538,
+      "seam_geometry_field": 0.9165865384615385,
+      "plmnn": 0.7777644230769231,
+      "delta_vp_minus_plmnn": 0.10108173076923077,
+      "delta_vp_minus_seam": -0.03774038461538465,
+      "n": 346,
+      "n_pos": 26
+    },
+    {
+      "unit": "6isu_A",
+      "seam_voidpharma_field": 0.9185990338164252,
+      "seam_geometry_field": 0.9217391304347826,
+      "plmnn": 0.8166666666666667,
+      "delta_vp_minus_plmnn": 0.10193236714975851,
+      "delta_vp_minus_seam": -0.0031400966183574575,
+      "n": 227,
+      "n_pos": 20
+    },
+    {
+      "unit": "7qoq_A",
+      "seam_voidpharma_field": 0.7886986301369864,
+      "seam_geometry_field": 0.8438356164383563,
+      "plmnn": 0.6825342465753425,
+      "delta_vp_minus_plmnn": 0.10616438356164393,
+      "delta_vp_minus_seam": -0.05513698630136987,
+      "n": 302,
+      "n_pos": 10
+    },
+    {
+      "unit": "4gpi_C",
+      "seam_voidpharma_field": 0.8285939968404423,
+      "seam_geometry_field": 0.7902843601895735,
+      "plmnn": 0.7186018957345971,
+      "delta_vp_minus_plmnn": 0.10999210110584523,
+      "delta_vp_minus_seam": 0.03830963665086884,
+      "n": 235,
+      "n_pos": 24
+    },
+    {
+      "unit": "5igh_A",
+      "seam_voidpharma_field": 0.8314324052331432,
+      "seam_geometry_field": 0.8248909761824891,
+      "plmnn": 0.7183830929218383,
+      "delta_vp_minus_plmnn": 0.11304931231130488,
+      "delta_vp_minus_seam": 0.006541429050654135,
+      "n": 293,
+      "n_pos": 22
+    },
+    {
+      "unit": "7qzr_D",
+      "seam_voidpharma_field": 0.6891304347826086,
+      "seam_geometry_field": 0.7159420289855073,
+      "plmnn": 0.5731884057971014,
+      "delta_vp_minus_plmnn": 0.1159420289855072,
+      "delta_vp_minus_seam": -0.026811594202898692,
+      "n": 463,
+      "n_pos": 3
+    },
+    {
+      "unit": "1rtc_A",
+      "seam_voidpharma_field": 0.5597964376590331,
+      "seam_geometry_field": 0.5483460559796438,
+      "plmnn": 0.4338422391857506,
+      "delta_vp_minus_plmnn": 0.12595419847328249,
+      "delta_vp_minus_seam": 0.011450381679389277,
+      "n": 268,
+      "n_pos": 6
+    },
+    {
+      "unit": "4hye_A",
+      "seam_voidpharma_field": 0.8520408163265306,
+      "seam_geometry_field": 0.9081632653061225,
+      "plmnn": 0.7155612244897959,
+      "delta_vp_minus_plmnn": 0.13647959183673475,
+      "delta_vp_minus_seam": -0.056122448979591844,
+      "n": 200,
+      "n_pos": 4
+    },
+    {
+      "unit": "6a98_C",
+      "seam_voidpharma_field": 0.9586743044189853,
+      "seam_geometry_field": 0.9631751227495908,
+      "plmnn": 0.822013093289689,
+      "delta_vp_minus_plmnn": 0.1366612111292963,
+      "delta_vp_minus_seam": -0.0045008183306055605,
+      "n": 201,
+      "n_pos": 13
+    },
+    {
+      "unit": "4e1y_A",
+      "seam_voidpharma_field": 0.9793103448275862,
+      "seam_geometry_field": 0.971264367816092,
+      "plmnn": 0.8413793103448275,
+      "delta_vp_minus_plmnn": 0.13793103448275867,
+      "delta_vp_minus_seam": 0.008045977011494121,
+      "n": 353,
+      "n_pos": 5
+    },
+    {
+      "unit": "1uka_A",
+      "seam_voidpharma_field": 0.960377358490566,
+      "seam_geometry_field": 0.9729559748427673,
+      "plmnn": 0.8182389937106918,
+      "delta_vp_minus_plmnn": 0.1421383647798743,
+      "delta_vp_minus_seam": -0.012578616352201255,
+      "n": 271,
+      "n_pos": 6
+    },
+    {
+      "unit": "4fkm_B",
+      "seam_voidpharma_field": 0.9540155440414508,
+      "seam_geometry_field": 0.9601683937823834,
+      "plmnn": 0.8112046632124352,
+      "delta_vp_minus_plmnn": 0.1428108808290156,
+      "delta_vp_minus_seam": -0.006152849740932553,
+      "n": 209,
+      "n_pos": 16
+    },
+    {
+      "unit": "1pu5_C",
+      "seam_voidpharma_field": 0.8836363636363637,
+      "seam_geometry_field": 0.8993939393939394,
+      "plmnn": 0.7272727272727273,
+      "delta_vp_minus_plmnn": 0.15636363636363637,
+      "delta_vp_minus_seam": -0.015757575757575748,
+      "n": 161,
+      "n_pos": 11
+    },
+    {
+      "unit": "4kmy_A",
+      "seam_voidpharma_field": 0.9770053475935829,
+      "seam_geometry_field": 0.9596256684491979,
+      "plmnn": 0.8048128342245989,
+      "delta_vp_minus_plmnn": 0.172192513368984,
+      "delta_vp_minus_seam": 0.017379679144384985,
+      "n": 207,
+      "n_pos": 20
+    },
+    {
+      "unit": "5caz_A",
+      "seam_voidpharma_field": 0.6582278481012659,
+      "seam_geometry_field": 0.7953586497890296,
+      "plmnn": 0.4852320675105485,
+      "delta_vp_minus_plmnn": 0.1729957805907174,
+      "delta_vp_minus_seam": -0.1371308016877637,
+      "n": 161,
+      "n_pos": 3
+    },
+    {
+      "unit": "4dnc_B",
+      "seam_voidpharma_field": 0.9478135971911905,
+      "seam_geometry_field": 0.9146185764443026,
+      "plmnn": 0.7593360995850622,
+      "delta_vp_minus_plmnn": 0.1884774976061283,
+      "delta_vp_minus_seam": 0.03319502074688796,
+      "n": 267,
+      "n_pos": 26
+    },
+    {
+      "unit": "8j11_X",
+      "seam_voidpharma_field": 0.9,
+      "seam_geometry_field": 0.9411764705882353,
+      "plmnn": 0.703921568627451,
+      "delta_vp_minus_plmnn": 0.196078431372549,
+      "delta_vp_minus_seam": -0.04117647058823526,
+      "n": 173,
+      "n_pos": 3
+    },
+    {
+      "unit": "4oqo_B",
+      "seam_voidpharma_field": 0.8675411934090547,
+      "seam_geometry_field": 0.8707406814909615,
+      "plmnn": 0.6632538793792994,
+      "delta_vp_minus_plmnn": 0.2042873140297553,
+      "delta_vp_minus_seam": -0.0031994880819068428,
+      "n": 348,
+      "n_pos": 19
+    },
+    {
+      "unit": "3pbf_A",
+      "seam_voidpharma_field": 0.8426501035196687,
+      "seam_geometry_field": 0.8333333333333333,
+      "plmnn": 0.6190476190476191,
+      "delta_vp_minus_plmnn": 0.22360248447204967,
+      "delta_vp_minus_seam": 0.009316770186335477,
+      "n": 145,
+      "n_pos": 7
+    },
+    {
+      "unit": "1ute_A",
+      "seam_voidpharma_field": 0.5153061224489797,
+      "seam_geometry_field": 0.48681972789115646,
+      "plmnn": 0.26445578231292516,
+      "delta_vp_minus_plmnn": 0.2508503401360545,
+      "delta_vp_minus_seam": 0.028486394557823203,
+      "n": 302,
+      "n_pos": 8
+    },
+    {
+      "unit": "4nzv_B",
+      "seam_voidpharma_field": 0.920479302832244,
+      "seam_geometry_field": 0.9192084241103848,
+      "plmnn": 0.6566811909949165,
+      "delta_vp_minus_plmnn": 0.2637981118373275,
+      "delta_vp_minus_seam": 0.0012708787218591588,
+      "n": 324,
+      "n_pos": 18
+    },
+    {
+      "unit": "5tvi_V",
+      "seam_voidpharma_field": 0.7761824324324323,
+      "seam_geometry_field": 0.7820945945945946,
+      "plmnn": 0.5025337837837838,
+      "delta_vp_minus_plmnn": 0.2736486486486486,
+      "delta_vp_minus_seam": -0.005912162162162282,
+      "n": 90,
+      "n_pos": 16
+    },
+    {
+      "unit": "5yhb_A",
+      "seam_voidpharma_field": 0.5341040462427746,
+      "seam_geometry_field": 0.3421965317919075,
+      "plmnn": 0.2589595375722544,
+      "delta_vp_minus_plmnn": 0.27514450867052026,
+      "delta_vp_minus_seam": 0.19190751445086712,
+      "n": 178,
+      "n_pos": 5
+    },
+    {
+      "unit": "3bjp_A",
+      "seam_voidpharma_field": 0.7027586206896551,
+      "seam_geometry_field": 0.5441379310344827,
+      "plmnn": 0.37724137931034485,
+      "delta_vp_minus_plmnn": 0.32551724137931026,
+      "delta_vp_minus_seam": 0.1586206896551724,
+      "n": 295,
+      "n_pos": 5
+    },
+    {
+      "unit": "3idh_A",
+      "seam_voidpharma_field": 0.8402235815228855,
+      "seam_geometry_field": 0.8603670111790761,
+      "plmnn": 0.4565492512128243,
+      "delta_vp_minus_plmnn": 0.38367433031006115,
+      "delta_vp_minus_seam": -0.020143429656190648,
+      "n": 453,
+      "n_pos": 22
+    },
+    {
+      "unit": "5yj2_C",
+      "seam_voidpharma_field": 0.6041666666666666,
+      "seam_geometry_field": 0.6743197278911565,
+      "plmnn": 0.21386054421768708,
+      "delta_vp_minus_plmnn": 0.39030612244897955,
+      "delta_vp_minus_seam": -0.07015306122448983,
+      "n": 302,
+      "n_pos": 8
+    },
+    {
+      "unit": "3pfp_A",
+      "seam_voidpharma_field": 0.8703735289101142,
+      "seam_geometry_field": 0.8101654443117858,
+      "plmnn": 0.46392631758485414,
+      "delta_vp_minus_plmnn": 0.40644721132526007,
+      "delta_vp_minus_seam": 0.06020808459832838,
+      "n": 464,
+      "n_pos": 13
+    },
+    {
+      "unit": "7ndl_B",
+      "seam_voidpharma_field": 0.8948195961602119,
+      "seam_geometry_field": 0.9186527639854353,
+      "plmnn": 0.448857994041708,
+      "delta_vp_minus_plmnn": 0.4459616021185039,
+      "delta_vp_minus_seam": -0.023833167825223378,
+      "n": 655,
+      "n_pos": 19
+    },
+    {
+      "unit": "3pfp_B",
+      "seam_voidpharma_field": 0.9159133549377451,
+      "seam_geometry_field": 0.9094320313832509,
+      "plmnn": 0.46392631758485414,
+      "delta_vp_minus_plmnn": 0.4519870373528909,
+      "delta_vp_minus_seam": 0.006481323554494156,
+      "n": 464,
+      "n_pos": 13
+    }
+  ]
+}

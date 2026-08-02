@@ -11,14 +11,14 @@
     "frozen_unread": "a frozen external set that no method has been run on. Its one read is unspent; scoring a method that changed after this digest was pinned destroys the confirmation rather than producing a second one"
   },
   "counts": {
-    "superseded": 43,
-    "cited": 89,
-    "exploration": 46,
+    "superseded": 65,
+    "cited": 91,
+    "exploration": 51,
     "inventory": 7,
     "frozen_unread": 2,
     "fold_access": 11
   },
-  "n_artifacts": 198,
+  "n_artifacts": 227,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -287,6 +287,20 @@
       "bytes": 4389
     },
     {
+      "artifact": "results/architecture_sweep/CRYSTAL_FORM_COVERAGE.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.crystal_form_coverage.v1",
+      "bytes": 2437
+    },
+    {
+      "artifact": "results/architecture_sweep/CRYSTAL_FORM_LIFT.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.appended_family_lift.v1",
+      "bytes": 3824
+    },
+    {
       "artifact": "results/architecture_sweep/DISPLACEMENT_ALT_LIFT.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -406,6 +420,13 @@
       "bytes": 18043
     },
     {
+      "artifact": "results/architecture_sweep/INDISTINGUISHABILITY_GROUP.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.indistinguishability_group.v1",
+      "bytes": 12945
+    },
+    {
       "artifact": "results/architecture_sweep/INTERPRETABLE_BASELINES.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -432,6 +453,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.operator_bank_ceiling.v2",
       "bytes": 6212
+    },
+    {
+      "artifact": "results/architecture_sweep/ORDER_COMPOSITION_SCREEN.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.order_composition_screen.v1",
+      "bytes": 5484
     },
     {
       "artifact": "results/architecture_sweep/P2RANK_TRAIN_FOLD.json",
@@ -467,6 +495,13 @@
       "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
       "schema": "geoaudit.pocketminer_train_operating_point.v1",
       "bytes": 18824
+    },
+    {
+      "artifact": "results/architecture_sweep/PREREGISTERED_CRYSTAL_FORM.json",
+      "class": "exploration",
+      "reason": "a training-fold sweep; informed a design choice, cited by no paper number",
+      "schema": "geoaudit.preregistered_crystal_form.v1",
+      "bytes": 4893
     },
     {
       "artifact": "results/architecture_sweep/PREREGISTERED_MATCHED_FULL.json",
@@ -1218,6 +1253,27 @@
       "bytes": 73216
     },
     {
+      "artifact": "results/official_fold/GEO_SEAM_EQUALZ_FUSION_VS_PLMNN.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.geo_seam_equalz_fusion_vs_plmnn.v1",
+      "bytes": 552
+    },
+    {
+      "artifact": "results/official_fold/GRAND_BASELINE_FIGURE_PROVENANCE.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.grand_baseline_figure_provenance.v2",
+      "bytes": 3066
+    },
+    {
+      "artifact": "results/official_fold/GRAND_BASELINE_READ.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.grand_baseline_read.v1",
+      "bytes": 163410
+    },
+    {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -1295,6 +1351,20 @@
       "bytes": 826856
     },
     {
+      "artifact": "results/official_fold/POLARITY_GAUGE_PROBE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.polarity_gauge_probe.v1",
+      "bytes": 5657
+    },
+    {
+      "artifact": "results/official_fold/POLARITY_SWITCH_SCREEN.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.polarity_switch_screen.v1",
+      "bytes": 2323
+    },
+    {
       "artifact": "results/official_fold/PREREGISTERED_READ.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -1337,6 +1407,90 @@
       "bytes": 3581
     },
     {
+      "artifact": "results/official_fold/SEAM_APERTURE_VS_PLMNN_PROBE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_aperture_vs_plmnn_probe.v1",
+      "bytes": 70052
+    },
+    {
+      "artifact": "results/official_fold/SEAM_APERTURE_VS_PLMNN_PROBE_SUMMARY.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_aperture_vs_plmnn_probe.v1",
+      "bytes": 634
+    },
+    {
+      "artifact": "results/official_fold/SEAM_GEOMETRY_VS_PLMNN_PROBE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_geometry_vs_plmnn_official_probe.v1",
+      "bytes": 60386
+    },
+    {
+      "artifact": "results/official_fold/SEAM_INVERT_ORACLE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_invert_oracle.v1",
+      "bytes": 3084
+    },
+    {
+      "artifact": "results/official_fold/SEAM_MSA_VS_PLMNN_PROBE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_msa_vs_plmnn_official_probe.v1",
+      "bytes": 67285
+    },
+    {
+      "artifact": "results/official_fold/SEAM_POLARGATE_EQUALZ_FUSION.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_polargate_equalz_fusion.v1",
+      "bytes": 2072
+    },
+    {
+      "artifact": "results/official_fold/SEAM_POLARGATE_VS_PLMNN_PROBE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_polargate_vs_plmnn_probe.v1",
+      "bytes": 62094
+    },
+    {
+      "artifact": "results/official_fold/SEAM_POLARGATE_VS_PLMNN_PROBE_SUMMARY.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_polargate_vs_plmnn_probe.v1",
+      "bytes": 3175
+    },
+    {
+      "artifact": "results/official_fold/SEAM_POLAR_RESCUE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_polar_rescue.v1",
+      "bytes": 1454
+    },
+    {
+      "artifact": "results/official_fold/SEAM_TOEPLITZ_VS_PLMNN_PROBE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_toeplitz_vs_plmnn_official_probe.v1",
+      "bytes": 59476
+    },
+    {
+      "artifact": "results/official_fold/SEAM_VOIDPHARMA_EQUALZ_FUSION.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_voidpharma_equalz_fusion.v1",
+      "bytes": 395
+    },
+    {
+      "artifact": "results/official_fold/SEAM_VOIDPHARMA_VS_PLMNN_PROBE.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.seam_voidpharma_vs_plmnn_official_probe.v1",
+      "bytes": 59818
+    },
+    {
       "artifact": "results/official_fold/SEED_SENSITIVITY.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
@@ -1362,7 +1516,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 15310
+      "bytes": 29898
     },
     {
       "artifact": "results/official_fold/THRESHOLD_CURVE.json",
@@ -1377,6 +1531,55 @@
       "reason": "an evaluation on the official test fold; also registered in TEST_FOLD_ACCESS_LEDGER.json",
       "schema": "geoaudit.threshold_field_test.v1",
       "bytes": 43022
+    },
+    {
+      "artifact": "results/official_fold/TRIPLE_EQUALZ_FUSION_VS_PLMNN.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.triple_equalz_fusion_vs_plmnn.v1",
+      "bytes": 587
+    },
+    {
+      "artifact": "results/official_fold/WEIGHTED_SEAM_FUSION_VS_PLMNN.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.weighted_seam_fusion_vs_plmnn.v1",
+      "bytes": 436
+    },
+    {
+      "artifact": "results/official_fold/_method_scores/geometry_field.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.method_residue_scores.v1",
+      "bytes": 1503957
+    },
+    {
+      "artifact": "results/official_fold/_method_scores/geometry_field_r14.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.method_residue_scores.v1",
+      "bytes": 1516386
+    },
+    {
+      "artifact": "results/official_fold/_method_scores/seam_geometry_field.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.method_residue_scores.v1",
+      "bytes": 1510655
+    },
+    {
+      "artifact": "results/official_fold/_method_scores/seam_geometry_field_r14.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.method_residue_scores.v1",
+      "bytes": 1517210
+    },
+    {
+      "artifact": "results/official_fold/_method_scores/table_field.json",
+      "class": "superseded",
+      "reason": "an earlier frozen state, kept for the record",
+      "schema": "geoaudit.method_residue_scores.v1",
+      "bytes": 1535076
     },
     {
       "artifact": "results/pilot/CLAIMS.json",

@@ -1,0 +1,185 @@
+{
+ "schema": "geoaudit.appended_family_lift.v1",
+ "clinical_grade": false,
+ "reads_test_fold": false,
+ "reads_any_external_unit": false,
+ "family": "crystal form 129",
+ "built_by": "tools/crystal_form_wires.py",
+ "n_new_columns": 129,
+ "question": "what a counting field and a linear solve each take from this family, so that the screen's prediction can be tested",
+ "the_screen_said": null,
+ "what_the_screen_predicted": "a mean pairwise interaction near the deployed bank's +1.06e-05 means the field collects the family; one near composition's +5.96e-06 or the asymmetry family's -9.69e-06 means it does not and the lift goes to the solve. The prediction was committed before this ran",
+ "held_fixed": {
+  "n_old_wires": 645,
+  "old_bank": "16 rounds at width 2, seed 20260725",
+  "gate_radius": 18.0,
+  "gate_weight": 1.0,
+  "ridge": 0.03,
+  "fan_out_cap": 32,
+  "banding": "within-chain rank quartiles over the concatenated columns"
+ },
+ "bank": {
+  "n_tables_union": 6176,
+  "n_tables_over_the_new_columns": 1024,
+  "n_tables_widened": 6192,
+  "n_old_pairings_surviving_widening": 296
+ },
+ "protocol": {
+  "n_splits": 12,
+  "split": "cluster-disjoint halves, seeds 20260725..20260736",
+  "compile_and_solve_on": "the fit half only",
+  "evaluate_on": "the pick half",
+  "metric": "mean per-unit ROC-AUC, gate applied as deployed",
+  "baseline_was_not_recomputed": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json"
+ },
+ "arms": {
+  "union": {
+   "mean": 0.790614,
+   "min": 0.766598,
+   "max": 0.808172
+  },
+  "more_old": {
+   "mean": 0.789433,
+   "min": 0.765121,
+   "max": 0.805824
+  },
+  "widened": {
+   "mean": 0.789663,
+   "min": 0.762538,
+   "max": 0.810817
+  },
+  "fisher": {
+   "mean": 0.786591,
+   "min": 0.762456,
+   "max": 0.798383
+  },
+  "fisher_old": {
+   "mean": 0.784892,
+   "min": 0.760263,
+   "max": 0.79705
+  }
+ },
+ "minus_narrow": {
+  "union": {
+   "mean": 0.000494,
+   "n_splits_positive": 9,
+   "n_splits": 12
+  },
+  "more_old": {
+   "mean": -0.000686,
+   "n_splits_positive": 5,
+   "n_splits": 12
+  },
+  "widened": {
+   "mean": -0.000456,
+   "n_splits_positive": 6,
+   "n_splits": 12
+  },
+  "fisher": {
+   "mean": -0.003529,
+   "n_splits_positive": 2,
+   "n_splits": 12
+  },
+  "fisher_old": {
+   "mean": -0.005227,
+   "n_splits_positive": 1,
+   "n_splits": 12
+  }
+ },
+ "solve_lift_from_the_family": {
+  "mean": 0.001698,
+  "n_splits_positive": 11,
+  "n_splits": 12
+ },
+ "why_the_solve_lift_is_against_a_solve": "fisher(old + new) minus fisher(old). Comparing the solve against the counting field instead would measure the two readouts differing, which on the deployed wires is +0.0053, and drown what the family adds",
+ "field_minus_solve": -0.001204,
+ "per_split": {
+  "union": [
+   0.808172,
+   0.787596,
+   0.788089,
+   0.786917,
+   0.787665,
+   0.788913,
+   0.800174,
+   0.787847,
+   0.794052,
+   0.784116,
+   0.807232,
+   0.766598
+  ],
+  "more_old": [
+   0.800085,
+   0.787673,
+   0.787244,
+   0.79123,
+   0.789383,
+   0.786459,
+   0.796828,
+   0.788672,
+   0.790512,
+   0.784171,
+   0.805824,
+   0.765121
+  ],
+  "widened": [
+   0.808319,
+   0.789032,
+   0.78302,
+   0.786605,
+   0.782121,
+   0.787228,
+   0.798763,
+   0.791338,
+   0.795201,
+   0.780978,
+   0.810817,
+   0.762538
+  ],
+  "fisher": [
+   0.795078,
+   0.789998,
+   0.787742,
+   0.787441,
+   0.785986,
+   0.780228,
+   0.798383,
+   0.785386,
+   0.78921,
+   0.779298,
+   0.797884,
+   0.762456
+  ],
+  "fisher_old": [
+   0.791008,
+   0.788266,
+   0.784691,
+   0.785854,
+   0.785634,
+   0.777463,
+   0.79681,
+   0.783684,
+   0.786576,
+   0.781409,
+   0.79705,
+   0.760263
+  ]
+ },
+ "per_split_narrow_frozen": [
+  0.804622,
+  0.786394,
+  0.787979,
+  0.790364,
+  0.791253,
+  0.7884,
+  0.800117,
+  0.790124,
+  0.791757,
+  0.78386,
+  0.805021,
+  0.761546
+ ],
+ "n_units": 770,
+ "n_residues": 234838,
+ "n_positive_residues": 13524
+}

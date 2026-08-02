@@ -84,6 +84,14 @@ def load_family(name: str) -> tuple[np.ndarray, str]:
         from graph_invariant_wires import build_or_load
         X, _n = build_or_load()
         return np.asarray(X, dtype=np.float64), "tools/graph_invariant_wires.py"
+    if name == "crystal form 129":
+        from crystal_form_wires import build_or_load
+        X, _n = build_or_load()
+        return np.asarray(X, dtype=np.float64), "tools/crystal_form_wires.py"
+    if name == "crystal form 129 permuted":
+        from crystal_form_wires import build_or_load
+        X, _n = build_or_load(permuted=True)
+        return np.asarray(X, dtype=np.float64), "tools/crystal_form_wires.py"
     raise SystemExit(f"unknown family {name!r}")
 
 
@@ -126,8 +134,16 @@ def main(argv: list[str] | None = None) -> int:
                                PARTITION_SEED)
     wide_set = {tuple(sorted(r)) for r in widened}
     kept = sum(1 for t in old if tuple(sorted(t)) in wide_set)
+    # `more_old`: the same number of *added* tables as the union arm, drawn over
+    # the deployed columns with the family absent. Without it a small positive
+    # cannot be separated from bank size, and STRADDLING_ATTACHMENT found this
+    # control scoring above the family it was controlling for. AGENT_MEMORY 2d.
+    extra = partition_tables(n_old, TABLE_WIDTH, PARTITION_ROUNDS,
+                             PARTITION_SEED + 1)[:len(new)]
+    more_old = old + extra
     banks = {"union": (union, cell_offsets(union)),
-             "widened": (widened, cell_offsets(widened))}
+             "widened": (widened, cell_offsets(widened)),
+             "more_old": (more_old, cell_offsets(more_old))}
 
     t0 = time.perf_counter()
     Wf = np.asarray(W, dtype=np.float64)

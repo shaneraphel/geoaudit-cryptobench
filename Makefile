@@ -349,6 +349,7 @@ declarations:
 # is why it is a separate target: CI checks the images, it does not redraw them.
 figures:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/make_official_figures.py
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tools $(PYTHON) tools/fig_grand_baseline.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/classify_artifacts.py
 
 # Two frozen reports may never disagree about the same quantity.

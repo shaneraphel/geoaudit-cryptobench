@@ -1,0 +1,19 @@
+{
+  "schema": "geoaudit.geo_seam_equalz_fusion_vs_plmnn.v1",
+  "clinical_grade": false,
+  "reads_test_fold": true,
+  "why_not_confirmatory": "equal z-score fusion a priori; fold heavily read",
+  "n_units": 192,
+  "mean_geometry": 0.8230567903329818,
+  "mean_seam": 0.8262163414905728,
+  "mean_fused": 0.8274398613435693,
+  "mean_plmnn": 0.8234690336263281,
+  "mean_delta_fused_minus_plmnn": 0.003970827717241081,
+  "ci95": [
+    -0.015830638302652484,
+    0.022599248094041933
+  ],
+  "n_ahead": 101,
+  "n_behind": 91,
+  "seconds": 125.14193679200253
+}

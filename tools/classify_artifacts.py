@@ -219,6 +219,14 @@ FIGURE_GENERATORS = (
      RESULTS / "official_fold/FIGURE_PROVENANCE.json"),
     ("tools/make_architecture_figures.py",
      RESULTS / "architecture_sweep/ARCHITECTURE_FIGURE_PROVENANCE.json"),
+    # The three-baseline read. A third pair rather than a third family inside
+    # an existing generator, for the same reason the second pair exists: this
+    # one draws every method against every published baseline in a single pass,
+    # and its licence -- one residue universe, one n_paired per row -- is a
+    # property of that pass and should fail on its own if the pass is rerun
+    # without the figures.
+    ("tools/fig_grand_baseline.py",
+     RESULTS / "official_fold/GRAND_BASELINE_FIGURE_PROVENANCE.json"),
 )
 README = ROOT / "README.md"
 

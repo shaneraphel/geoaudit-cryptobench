@@ -1,0 +1,20 @@
+{
+  "schema": "geoaudit.triple_equalz_fusion_vs_plmnn.v1",
+  "clinical_grade": false,
+  "reads_test_fold": true,
+  "why_not_confirmatory": "a priori equal-z of three detectors; fold heavily read",
+  "n_units": 192,
+  "mean_table": 0.7991511872349851,
+  "mean_geo": 0.8230567903329818,
+  "mean_seam": 0.8262163414905728,
+  "mean_fused": 0.8229788865183677,
+  "mean_plmnn": 0.8234690336263281,
+  "mean_delta_fused_minus_plmnn": -0.0004901471079603389,
+  "ci95": [
+    -0.02011238143587686,
+    0.018450199444135052
+  ],
+  "n_ahead": 94,
+  "n_behind": 98,
+  "seconds": 167.30468562501483
+}

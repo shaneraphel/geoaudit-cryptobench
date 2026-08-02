@@ -28,6 +28,30 @@ selection bias:
   cannot leak anything that was not already leaked, provided the numbers do not
   move. The ledger records whether they moved.
 
+**The fourth signal, added 2026-08-03, and why the first three were not enough.**
+The three original signals all keyed on how an artifact *spells* its metric: a
+per-unit table with a key containing "auc", a declared read index, or the
+literal substring "auc" anywhere in the document beside a unit count of 192.
+The seam programme's probes store each method's per-unit ROC-AUC under the
+*method's own name* -- `per_unit[i]["seam_geometry_field"]` -- and never write
+the three letters. Eighteen artifacts were therefore invisible to a ledger whose
+entire purpose is that nothing be invisible to it, including
+`GEO_SEAM_EQUALZ_FUSION_VS_PLMNN.json`, whose method is the best one this
+project has produced.
+
+Every one of those eighteen carries `reads_test_fold: true`, because
+`.cursor/rules/00-evidence-discipline.mdc` requires it. The ledger was not
+reading the field the rule exists to produce. That is now the fourth signal, and
+it is the only one that does not depend on vocabulary: an artifact that says it
+read the fold is counted because it said so.
+
+**Architectures are no longer collapsed into one bucket.** `method` defaulted to
+the string `"table field variant"` whenever an artifact did not name one, so
+fifteen unnamed artifacts counted as a single architecture and the reported
+total was structurally an undercount. Unnamed is now recorded as unnamed and
+counted separately, and an artifact that evaluates several architectures --
+`GRAND_BASELINE_READ.json` scores ten -- contributes all of them.
+
 Usage:
   PYTHONPATH=src python3.12 tools/build_test_fold_ledger.py
   PYTHONPATH=src python3.12 tools/build_test_fold_ledger.py --check
@@ -45,7 +69,11 @@ OUT = RESULTS / "official_fold/TEST_FOLD_ACCESS_LEDGER.json"
 
 # Detectors that are not ours: a published tool run as a baseline is not a look
 # at the test set on our behalf, it is the comparison the test set exists for.
-EXTERNAL = {"p2rank", "random_bbox"}
+# pLM-NN and PocketMiner joined the list when artifacts began naming every
+# method they scored; both are rivals, and counting them as our architectures
+# would inflate the very number this ledger exists to keep honest.
+EXTERNAL = {"p2rank", "random_bbox", "plmnn", "plm_nn", "pocketminer",
+            "chain_length_control", "random"}
 
 # The official fold's size. An artifact that reports a metric and names this
 # count has taken a number off it.
@@ -76,6 +104,41 @@ def _reports_a_fold_metric(path: Path, d: dict) -> bool:
     if not any(d.get(k) == N_OFFICIAL_UNITS for k in _UNIT_KEYS):
         return False
     return "auc" in json.dumps(d).lower()
+
+
+def _declares_a_read(path: Path, d: dict) -> bool:
+    """The fourth signal: the artifact says it read the fold.
+
+    Independent of how the artifact spells its metric, which is what the other
+    three depend on and what let eighteen seam probes through. The named
+    exemptions still apply -- an artifact that quotes a read it did not take
+    says so in the same field.
+    """
+    return path.name not in _NOT_AN_ACCESS and d.get("reads_test_fold") is True
+
+
+def _architectures_named(d: dict) -> set[str]:
+    """Every architecture of ours this artifact puts a fold number against.
+
+    An artifact is not limited to one. ``GRAND_BASELINE_READ.json`` scores ten
+    methods in a single pass and names them as the keys of ``summary``; reading
+    only a top-level ``method`` field would have recorded that as one
+    architecture, or -- since it has no such field -- as none.
+    """
+    names: set[str] = set()
+    m = d.get("method")
+    if isinstance(m, str) and m:
+        names.add(m)
+    for key in ("methods_scored", "methods", "architectures"):
+        v = d.get(key)
+        if isinstance(v, list):
+            names.update(x for x in v if isinstance(x, str))
+    for key in ("summary", "per_unit_roc_auc", "per_unit_pr_auc", "means"):
+        v = d.get(key)
+        if isinstance(v, dict):
+            names.update(k for k, sub in v.items()
+                         if isinstance(sub, (dict, list)) and isinstance(k, str))
+    return {n for n in names if n.lower().replace("-", "_") not in EXTERNAL}
 
 
 def _per_unit_artifacts() -> list[dict]:
@@ -134,22 +197,32 @@ def _per_unit_artifacts() -> list[dict]:
                 break
         declares = d.get("test_fold_read_index") is not None
         reports = _reports_a_fold_metric(p, d)
-        if rows is None and not declares and not reports:
+        says_so = _declares_a_read(p, d)
+        if rows is None and not declares and not reports and not says_so:
             continue
+        archs = _architectures_named(d)
         found.append({
             "artifact": str(p.relative_to(ROOT)),
+            "architectures": sorted(archs),
+            "architecture_is_named": bool(archs),
             # A re-summarising read reports its own unit count, and the two
             # spellings both occur. Missing one left the ledger printing a
             # blank where the size of the read belonged.
             "n_units": (len(rows) if rows is not None
                         else d.get("n_paired_units") or d.get("n_units")),
-            "method": d.get("method") or "table field variant",
+            # No default. The old one was the string "table field variant",
+            # which turned "this artifact does not say" into a positive claim
+            # about which architecture ran and collapsed fifteen artifacts into
+            # one bucket.
+            "method": d.get("method"),
             "read_index": d.get("test_fold_read_index"),
             "kind": "scored the fold" if rows is not None
             else ("new inference over per-unit numbers an earlier read froze"
                   if declares else
                   "reports a fold metric and declares no index; found by the "
-                  "audit that added the third signal"),
+                  "audit that added the third signal" if reports else
+                  "declares reads_test_fold and spells its metric by method "
+                  "name; found by the audit that added the fourth signal"),
             "mean_residue_auc": d.get("residue_auc_mean")
             or (d.get("means") or {}).get("residue_auc")
             or d.get("mean_method"),
@@ -169,7 +242,10 @@ def build() -> dict:
     probes = _per_unit_artifacts()
     # A frozen detector and a probe of the same architecture are one access, not
     # two: the probe is what produced the number the frozen run reproduces.
-    probe_methods = {p["method"] for p in probes}
+    probe_methods: set[str] = set()
+    for p in probes:
+        probe_methods.update(p["architectures"])
+    unnamed = [p["artifact"] for p in probes if not p["architecture_is_named"]]
 
     # Reads are indexed across the whole counterattack programme, not per
     # lineage, so the fourth read is a counting-field probe while the first
@@ -181,7 +257,7 @@ def build() -> dict:
     # in others, and matching only the spaced form silently undercounted the
     # main architecture's readings.
     n_table = sum(1 for p in indexed
-                  if "table field" in p["method"].replace("_", " "))
+                  if "table field" in (p["method"] or "").replace("_", " "))
     n_scored = sum(1 for p in probes if p["kind"] == "scored the fold")
     n_resummary = len(probes) - n_scored
 
@@ -198,8 +274,13 @@ def build() -> dict:
             "from per-unit numbers an earlier read froze, even though the "
             "second kind scores nothing again: a fresh summary of the same "
             "numbers is a fresh use of the fold and is indexed as one. "
+            "An artifact that declares reads_test_fold is an access on its own "
+            "word, whatever it calls its metric: the three earlier signals all "
+            "keyed on the substring 'auc' and missed eighteen artifacts that "
+            "store per-unit ROC-AUC under each method's name. "
             "Detectors in the frozen telemetry count once each. "
-            "Baselines we did not design (p2rank, random_bbox) are not counted "
+            "Baselines we did not design (p2rank, random_bbox, plmnn, "
+            "pocketminer, chain_length_control) are not counted "
             "as looks at the test set on our behalf. Re-scoring a frozen "
             "detector is recorded separately and is not a fold read, provided "
             "its numbers do not move; tools/run_cryptobench_apo.py --merge has "
@@ -210,6 +291,16 @@ def build() -> dict:
         "standalone_probe_artifacts": probes,
         "n_standalone_probes": len(probes),
         "n_distinct_architectures_evaluated": len(set(ours) | probe_methods),
+        "distinct_architectures_evaluated": sorted(set(ours) | probe_methods),
+        "n_artifacts_with_unnamed_architecture": len(unnamed),
+        "artifacts_with_unnamed_architecture": unnamed,
+        "unnamed_architecture_note": (
+            "these artifacts are accesses to the fold that do not record which "
+            "architecture produced the number. They are counted as accesses "
+            "and not as architectures, so the architecture total is a lower "
+            "bound. Until 2026-08-03 they were all labelled 'table field "
+            "variant' by a default in this tool, which asserted something none "
+            "of them says."),
         "indexed_read_sequence": indexed,
         "n_indexed_reads": len(indexed),
         "n_probes_that_scored_the_fold": n_scored,
@@ -224,8 +315,12 @@ def build() -> dict:
             f"read index, {n_table} of them readings of the architecture "
             f"reported as the main result and {len(indexed) - n_table} of a "
             f"different lineage, and every one is reported with the reason it "
-            f"was taken. The wider programme has looked at this fold more "
-            f"often than that, which is what this ledger is for."),
+            f"was taken. {len(set(ours) | probe_methods)} distinct "
+            f"architectures of ours carry a number from this fold, and that is "
+            f"a lower bound: {len(unnamed)} of the artifacts do not record "
+            f"which architecture produced theirs. The wider programme has "
+            f"looked at this fold more often than that, which is what this "
+            f"ledger is for."),
     }
 
 
@@ -256,7 +351,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"standalone probe artifacts: {led['n_standalone_probes']}")
     for p in led["standalone_probe_artifacts"]:
         auc = p["mean_residue_auc"]
-        print(f"  {p['artifact']:52s} {p['method']:22s} "
+        arch = ", ".join(p["architectures"]) or "(architecture not recorded)"
+        print(f"  {p['artifact']:52s} {arch[:46]:46s} "
               f"{'' if auc is None else f'{auc:.4f}'}")
     print(f"distinct architectures evaluated on the fold: "
           f"{led['n_distinct_architectures_evaluated']}")
