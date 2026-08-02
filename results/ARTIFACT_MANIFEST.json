@@ -12,13 +12,13 @@
   },
   "counts": {
     "superseded": 43,
-    "cited": 88,
+    "cited": 89,
     "exploration": 46,
     "inventory": 7,
     "frozen_unread": 2,
     "fold_access": 11
   },
-  "n_artifacts": 197,
+  "n_artifacts": 198,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -1194,7 +1194,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.figure_provenance.v1",
-      "bytes": 18817
+      "bytes": 19552
     },
     {
       "artifact": "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json",
@@ -1209,6 +1209,13 @@
       "reason": "an earlier frozen state, kept for the record",
       "schema": "geoaudit.geometry_field_vs_plmnn_official_probe.v1",
       "bytes": 872
+    },
+    {
+      "artifact": "results/official_fold/GEOMETRY_PLM_DELTA_COVARIATES.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.geometry_plm_delta_covariates.v1",
+      "bytes": 73216
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",
@@ -1355,7 +1362,7 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.test_fold_access_ledger.v1",
-      "bytes": 14961
+      "bytes": 15310
     },
     {
       "artifact": "results/official_fold/THRESHOLD_CURVE.json",

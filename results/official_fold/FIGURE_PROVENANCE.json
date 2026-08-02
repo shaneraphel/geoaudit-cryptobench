@@ -5,7 +5,7 @@
   "generator": "tools/make_official_figures.py",
   "sources": {
     "results/official_fold/OFFICIAL_MULTI_METHOD_BOOTSTRAP_vs_P2RANK.json": "dbb27a073e86c8de5efa88a43323f3e12a015b9f33b433f1f54d1eb427c30b43",
-    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "16a6611f26115617e8072459c9b9f985919f17da36edf64223820b39d4e58ad3",
+    "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "8e8d3fbf6d4d37e55b2b07b645c41908c11ddd82f7e3941fc95012d30bda11f0",
     "results/cryptobench_official/TELEMETRY.json": "e12a2d10823dced8b4abdde6a9eddc3bb82aa9691e2a52073dbebe3723ad80ef",
     "results/official_fold/SEED_SENSITIVITY.json": "46027f6cd9d2fd11f881b5a3cc3e7d923b592816aaa77d1cc77efa7fc24d09d3",
     "results/official_fold/CASE_STUDIES.json": "0c5b9d6d7d738704f88ed3f8e51a9fb1cc49820267d89d9b8bb7b576be3b4b80",
@@ -24,7 +24,8 @@
     "results/external/RESIDUE_RECOVERIES_VS_PLMNN.json": "938c9eff58f0f557b7405aaaf2d88b27cb72edb6ec5b764e00a5f45396f20ec9",
     "results/external/SETN_READ.json": "ccf37657db37903fb9add45f05efb666db951fe86c362afcd080ef5ebc2cea54",
     "results/external/DUAL_BASELINE_RECOVERIES.json": "271855ed7324e5923a0a90e75fbf6fb894352013499d130d931d05c47547576b",
-    "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json": "fee34287ff2d42313ceaf44d95f0c82278f78ae5c33382e741417137aa82ccac"
+    "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json": "fee34287ff2d42313ceaf44d95f0c82278f78ae5c33382e741417137aa82ccac",
+    "results/official_fold/GEOMETRY_PLM_DELTA_COVARIATES.json": "081b8fab42b69ee7cf6fe1152ef1921ea56233516988a93672fef02ab03b0ebd"
   },
   "figures": {
     "fig_official_fold_metrics.png": {
@@ -116,6 +117,11 @@
       "sha256": "719e4732ff7031a33b269177c10c00625b26339251712ed545857ea7757c7756",
       "bytes": 26431,
       "caption": "Development probe on the official CryptoBench test fold (192 units): per-unit ROC-AUC difference geometry_field \u2212 pLM-NN, sorted. Mean levels 0.8231 vs 0.8235; paired \u0394=-0.0004 [-0.0202, +0.0185] (crosses zero \u2192 parity, not a resolved win). Ahead on 95 units, behind on 97. The published table_field level on this fold is 0.7992 (\u0394 vs pLM-NN \u22120.0243). Not confirmatory; clinical_grade is false."
+    },
+    "fig_geometry_vs_plmnn_by_length.png": {
+      "sha256": "6b04f48f8e633ab62b7af14dffbe067d96b1b546a01affbf4e3e85ee3d0db5e8",
+      "bytes": 40047,
+      "caption": "Official CryptoBench test fold stratified by chain length: mean per-unit ROC-AUC for geometry_field vs pLM-NN. On n\u2265300 (86 units) the point estimate leads (0.8183 vs 0.8039, \u0394=+0.0144 [-0.0160, +0.0452], ahead 48/38); the CI still crosses zero. Short chains (n<150, 22 units) sit the other way (\u0394=-0.0441 [-0.1213, +0.0266]). Fold-mean parity is unchanged. Development stratification; clinical_grade is false."
     }
   }
 }

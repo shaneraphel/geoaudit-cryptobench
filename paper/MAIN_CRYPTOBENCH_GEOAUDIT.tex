@@ -1510,6 +1510,27 @@ a confirmatory claim; the spent external set must not be re-opened for
 \label{fig:geom-plm}
 \end{figure}
 
+\paragraph{Where the point estimate leads.}
+The same paired differences, cut by chain length before the scores are
+summarised, reverse sign. On the \GeomLenLongN{} units with at least 300
+residues, mean per-unit ROC-AUC is \GeomLenLongGeo{} for
+\texttt{geometry\_field} against \GeomLenLongPlm{} for pLM-NN, a paired
+difference of \GeomLenLongDelta{} with interval \GeomLenLongCI{}, ahead on
+\GeomLenLongWin{} units and behind on \GeomLenLongLoss{}. The interval still
+crosses zero, so the long-chain lead is a point estimate and not a resolved
+stratum win. On the \GeomLenShortN{} units shorter than 150 residues the
+difference sits the other way at \GeomLenShortDelta{} \GeomLenShortCI{}. The
+fold mean remains the parity above; what the cut shows is where that parity is
+assembled from, not a second confirmatory claim. Figure~\ref{fig:geom-plm-len}
+draws the three strata.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_geometry_vs_plmnn_by_length.png}
+\caption{\FigCapGeometryVsPlmnnByLength{}}
+\label{fig:geom-plm-len}
+\end{figure}
+
 \subsection{A set that has never been read, and what it decided}
 \label{sec:external}
 Nothing above can settle anything, and the reason is in our own ledger:

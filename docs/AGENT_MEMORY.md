@@ -44,7 +44,8 @@ Against the baselines on the **official CryptoBench test fold** (192 units, read
   **0.8235** vs **0.8231**, paired Δ **−0.0004** [−0.0202, +0.0185] — **parity
   (CI crosses zero), not a resolved win**. Ahead 95 / behind 97 of 192.
   `GEOMETRY_FIELD_VS_PLMNN_PROBE.json`. Not confirmatory; do not re-score on
-  spent Set A.
+  spent Set A. Length cut: on n≥300 the point estimate is **+0.0144**
+  [−0.0160, +0.0452] (`GEOMETRY_PLM_DELTA_COVARIATES.json`) — still unresolved.
 - **PocketMiner**: we are ahead by +0.0468, and P2Rank is ahead of it by +0.0410
   too, so that gap is about two label definitions and not about method quality.
 
@@ -2170,3 +2171,19 @@ Paired Δ geometry−pLM = **−0.0004**, CI95 **[−0.0202, +0.0185]** → **pa
 (crosses zero), not a resolved win**. Ahead 95 / behind 97 of 192. vs
 `table_field` about **+0.024**. Do **not** re-score on spent Set A. Cryo-EM
 Set B/C still has geometry behind pLM (−0.069); modality confound stands.
+
+## 2s. Length stratum: geometry point-estimate lead on n≥300
+
+Artifact: `results/official_fold/GEOMETRY_PLM_DELTA_COVARIATES.json`. Figure 19.
+
+| stratum | n | mean geo | mean pLM | Δ | 95% CI |
+|---|---|---|---|---|---|
+| n&lt;150 | 22 | 0.7617 | 0.8059 | −0.0441 | [−0.1213, +0.0266] |
+| 150–300 | 84 | 0.8440 | 0.8481 | −0.0041 | [−0.0308, +0.0217] |
+| **n≥300** | **86** | **0.8183** | **0.8039** | **+0.0144** | **[−0.0160, +0.0452]** |
+
+On n≥300 the point estimate leads (48 ahead / 38 behind); the CI still crosses
+zero, so this is **not a resolved stratum win**. Short chains sit the other way.
+Fold-mean parity unchanged. Say "point-estimate lead on long chains", not "beat
+pLM on long chains" without the CI.
+

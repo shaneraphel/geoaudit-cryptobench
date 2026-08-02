@@ -106,6 +106,7 @@ SUBGROUP = ROOT / "results/official_fold/SUBGROUP_READ.json"
 POCKET = ROOT / "results/official_fold/POCKET_READ.json"
 PLMNN = ROOT / "results/official_fold/PLMNN_READ.json"
 GEOM_PROBE = ROOT / "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json"
+GEOM_LEN = ROOT / "results/official_fold/GEOMETRY_PLM_DELTA_COVARIATES.json"
 PMREAD = ROOT / "results/official_fold/POCKETMINER_READ.json"
 EXTREAD = ROOT / "results/external/EXTERNAL_READ.json"
 EXTDIFF = ROOT / "results/external/EXTERNAL_SET_DIFFICULTY.json"
@@ -1077,6 +1078,38 @@ def build() -> str:
                 "geometry_field vs pLM-NN now resolves ahead of the baseline; "
                 "Section~\\ref{sec:plmnn} and the README parity sentence must "
                 "be rewritten, not regenerated")
+
+    if GEOM_LEN.exists():
+        # Length stratum of the same geometry vs pLM probe. Point estimate on
+        # n>=300 leads; CI still crosses zero — macros carry both facts.
+        gl = json.loads(GEOM_LEN.read_text())
+        by = {b["bin"]: b for b in gl["length_bins"]}
+        long = by["n>=300"]
+        short = by["n<150"]
+        mid = by["150-300"]
+        L.append(f"\\newcommand{{\\GeomLenLongN}}{{{long['n_units']}}}")
+        L.append(f"\\newcommand{{\\GeomLenLongGeo}}{{{long['mean_geometry']:.4f}}}")
+        L.append(f"\\newcommand{{\\GeomLenLongPlm}}{{{long['mean_plmnn']:.4f}}}")
+        L.append(f"\\newcommand{{\\GeomLenLongDelta}}"
+                 f"{{{long['mean_delta']:+.4f}}}")
+        lo, hi = long["ci95_delta"]
+        L.append(f"\\newcommand{{\\GeomLenLongCI}}"
+                 f"{{[{lo:+.4f}, {hi:+.4f}]}}")
+        L.append(f"\\newcommand{{\\GeomLenLongWin}}{{{long['n_geometry_ahead']}}}")
+        L.append(f"\\newcommand{{\\GeomLenLongLoss}}{{{long['n_plmnn_ahead']}}}")
+        L.append(f"\\newcommand{{\\GeomLenShortN}}{{{short['n_units']}}}")
+        L.append(f"\\newcommand{{\\GeomLenShortDelta}}"
+                 f"{{{short['mean_delta']:+.4f}}}")
+        lo, hi = short["ci95_delta"]
+        L.append(f"\\newcommand{{\\GeomLenShortCI}}"
+                 f"{{[{lo:+.4f}, {hi:+.4f}]}}")
+        L.append(f"\\newcommand{{\\GeomLenMidN}}{{{mid['n_units']}}}")
+        L.append(f"\\newcommand{{\\GeomLenMidDelta}}"
+                 f"{{{mid['mean_delta']:+.4f}}}")
+        if long["mean_delta"] <= 0:
+            raise SystemExit(
+                "the n>=300 geometry−pLM point estimate is no longer positive; "
+                "the length-stratum sentence must be rewritten")
 
     if PMREAD.exists():
         # The cryptic-specific baseline. Two macros here exist to stop the
