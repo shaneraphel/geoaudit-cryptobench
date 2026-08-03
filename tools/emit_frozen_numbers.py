@@ -1806,6 +1806,27 @@ def build() -> str:
         L.append(f"\\newcommand{{\\NArchOnFold}}"
                  f"{{{led['n_distinct_architectures_evaluated']}}}")
         L.append(f"\\newcommand{{\\NOurDetectors}}{{{led['n_our_detectors']}}}")
+        # Three different quantities used to share one macro, `\NTestReads`,
+        # whose value is the read index frozen into COUNTERATTACK_WIDE_PROBE
+        # when it was written: 3. The abstract then said the fold had been read
+        # three times, while the ledger recorded 13 indexed reads across 44
+        # accesses. The sentence whose only job is to disclose held-out
+        # exposure understated it fourfold, and it did so because one number
+        # was standing for "this probe's index", "indexed readings" and "times
+        # the fold was read" at once. They are separate macros now, each read
+        # from the ledger, and `\NTestReads` is left to mean only the thing it
+        # actually is: the three reported readings whose values the manuscript
+        # lists one by one.
+        L.append(f"\\newcommand{{\\NIndexedReads}}"
+                 f"{{{led['n_indexed_reads']}}}")
+        L.append(f"\\newcommand{{\\NFoldAccesses}}"
+                 f"{{{led['n_standalone_probes']}}}")
+        L.append(f"\\newcommand{{\\NUnnamedArch}}"
+                 f"{{{led['n_artifacts_with_unnamed_architecture']}}}")
+        n_lineage = sum(
+            1 for p in led["indexed_read_sequence"]
+            if "table field" in (p.get("method") or "").replace("_", " "))
+        L.append(f"\\newcommand{{\\NLineageReads}}{{{n_lineage}}}")
         L.append(f"\\newcommand{{\\NStandaloneProbes}}"
                  f"{{{led['n_standalone_probes']}}}")
 

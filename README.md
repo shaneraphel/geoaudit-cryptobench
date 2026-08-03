@@ -57,7 +57,7 @@ official CryptoBench receptor-only benchmark.
   on 42 of 57 chains, surviving Bonferroni over the three comparisons
   ([+0.0102, +0.0792]). Being a ranking statistic it cannot be an artefact of the
   two methods' calling conventions. On the official fold the same comparison gave
-  +0.0058 and crossed zero, after 12 reads of that fold. The pLM-NN deficit
+  +0.0058 and crossed zero, after 44 accesses to that fold. The pLM-NN deficit
   replicates (−0.0340 [−0.0701, −0.0006] against −0.0243 internally), and no
   architecture, threshold or feature changed in response to any of it. See §4.14
   and `results/external/EXTERNAL_READ.json`.
@@ -99,8 +99,12 @@ official CryptoBench receptor-only benchmark.
   convention. See §4.8, whose retraction branch was written before the read.
 - Parity elsewhere: on PR-AUC and on MCC the point estimates favour the field and
   the intervals contain zero. The mean ROC-AUC margin is 0.36 of one standard
-  error of a fold mean and is the maximum over 12 of our architectures scored on
-  this fold, so even its sign carries no ordering.
+  error of a fold mean and is the maximum over 20 of our architectures scored on
+  this fold, so even its sign carries no ordering. That 20 is the ledger's count
+  as of 2026-08-03; it read 12 when this line was written and 13 for most of the
+  seam programme, because the ledger could not see an artifact that spelled its
+  metric by the method's name. The true exposure is 44 accesses to the fold, 13
+  of them carrying an explicit read index.
 - Also not an advantage of the architecture: on the same 645 wires and the same
   split, the counting field is not separable from a plain logistic regression
   (+0.0038, CI crosses zero). Whatever accuracy there is belongs to the
@@ -755,9 +759,9 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 911 tests and
+Current state: `verify_claims` all checks pass; `make test` runs 919 tests and
 661 subtests, all passing. `unittest`'s discovery finds 774 of them, because it
-collects only methods of `TestCase` subclasses; the other 137 are written as
+collects only methods of `TestCase` subclasses; the other 145 are written as
 plain functions and are reachable only through `pytest`.
 
 That gap is why `make test` invokes `pytest` rather than `unittest`. This README
