@@ -1564,15 +1564,30 @@ The comparisons above are pairwise and were taken at different times, which
 leaves two questions a reader cannot answer from them. Was every method scored
 on the same residues? And does a method that leads on ROC-AUC also lead on the
 metric that weights a sparse positive class? This subsection closes both by
-scoring all \GrandNMethods{} methods --- every architecture in this repository
-together with P2Rank 2.5.1, CryptoBench's own pLM-NN readout and PocketMiner ---
-in one pass over one residue universe on all \GrandN{} units. Every paired row
-below has $n_{\text{paired}} = \GrandDPlmRocNPaired{}$, so no difference here
+scoring \GrandNMethods{} methods in one pass over one residue universe on all
+\GrandN{} units: \GrandNOurs{} of ours --- the deployed counting field, the
+geometry and nonlocal-seam families at both gate radii, and their two equal-$z$
+fusions --- together with P2Rank 2.5.1, CryptoBench's own pLM-NN readout and
+PocketMiner. Every paired row below has
+$n_{\text{paired}} = \GrandDPlmRocNPaired{}$, so no difference here
 mixes \emph{which structures were scorable} into a number read as \emph{which
 method is better}. The reason to do this in a single pass rather than to
 assemble it from the reads already taken is that a cell missing now cannot be
 filled in later: the universe would have to be rebuilt, and the earlier numbers
 would no longer be commensurable with the new ones.
+
+The pass is complete in its columns and not in its rows, and the distinction
+matters. Every method named above is scored on every unit, so no cell of the
+table is missing. But \GrandNOurs{} is not all \NArchOnFold{} of the
+architectures that have taken a number off this fold; the others --- quotient
+banks, the algebraic fields, \texttt{threshold\_field}, the remaining seam
+variants --- were read in earlier probes and are not re-scored here. That is a
+deliberate refusal rather than an omission. Re-running them would be another
+sweep of the held-out fold, and a section whose argument is that this fold has
+already been worked too hard to settle anything cannot coherently work it
+harder to tidy its own table. Their readings stand where they were taken, in
+the ledger, with the multiplicity they imply already charged against every
+margin below.
 
 Three terms are new. The \textbf{nonlocal seam} family measures, per residue,
 whether a position is packed in the core while carrying long-range contact

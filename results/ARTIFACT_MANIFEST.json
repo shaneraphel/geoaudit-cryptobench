@@ -1264,14 +1264,14 @@
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.grand_baseline_figure_provenance.v2",
-      "bytes": 3066
+      "bytes": 3064
     },
     {
       "artifact": "results/official_fold/GRAND_BASELINE_READ.json",
       "class": "cited",
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.grand_baseline_read.v1",
-      "bytes": 163410
+      "bytes": 164257
     },
     {
       "artifact": "results/official_fold/INDEPENDENT_RECOMPUTATION.json",

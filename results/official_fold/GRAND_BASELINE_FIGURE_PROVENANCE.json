@@ -13,11 +13,11 @@
     }
   },
   "sources": {
-    "results/official_fold/GRAND_BASELINE_READ.json": "0788d6dcbc66a34ebdd4b6bfc4131cfcce48917487dd7cd264cb555deeac1c89",
+    "results/official_fold/GRAND_BASELINE_READ.json": "37e7f173384c626535f72e978204f0e5f470886ce89c1344c4a6a236a41cd979",
     "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json": "314298011dc956e213cf12e56d609778b08a19b3e66455f9f93dcecc6e054455"
   },
   "drawn_from": "results/official_fold/GRAND_BASELINE_READ.json",
-  "drawn_from_seconds": 142.5,
+  "drawn_from_seconds": 1.4,
   "n_units": 192,
   "n_units_definition": "units where every method returned a finite per-residue vector and ROC-AUC was defined; identical across all seven methods here, so every paired row has n_paired = this number",
   "n_boot": 10000,

@@ -759,9 +759,9 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 924 tests and
+Current state: `verify_claims` all checks pass; `make test` runs 925 tests and
 661 subtests, all passing. `unittest`'s discovery finds 774 of them, because it
-collects only methods of `TestCase` subclasses; the other 150 are written as
+collects only methods of `TestCase` subclasses; the other 151 are written as
 plain functions and are reachable only through `pytest`.
 
 That gap is why `make test` invokes `pytest` rather than `unittest`. This README

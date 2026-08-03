@@ -122,6 +122,34 @@ def test_the_withdrawn_claim_is_gone():
         f"architectures, and it is not: {hit}")
 
 
+def test_the_pass_does_not_claim_rows_it_does_not_have():
+    """"One pass" is a claim about columns, and it was written as one about rows.
+
+    The section said it scored "every architecture in this repository". The
+    ledger records 20 architectures on this fold and the pass has 7. Complete in
+    columns -- every method on every unit, no cell missing -- and incomplete in
+    rows, which is a different and weaker thing.
+    """
+    if not (MAIN.is_file() and GRAND.is_file()):
+        pytest.skip("manuscript or grand read not present")
+    doc = json.loads(GRAND.read_text())
+    cov = doc.get("row_coverage")
+    assert cov, (
+        "the artifact must record which architectures the pass covers, so the "
+        "next reader does not reconstruct it from the ledger")
+
+    ledger = ROOT / "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json"
+    if ledger.is_file():
+        n_all = json.loads(
+            ledger.read_text())["n_distinct_architectures_evaluated"]
+        if cov["n_architectures_in_this_pass"] < n_all:
+            text = " ".join(MAIN.read_text().split())
+            assert "every architecture in this repository" not in text, (
+                f"the pass covers {cov['n_architectures_in_this_pass']} of "
+                f"{n_all} architectures scored on this fold and the manuscript "
+                f"says it covers all of them")
+
+
 def test_the_shipped_detector_is_argued_for_on_a_different_property(standing):
     """Not accuracy --- decomposability. The paper has to say which.
 

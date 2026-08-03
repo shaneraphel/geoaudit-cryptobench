@@ -4707,5 +4707,20 @@
     }
   },
   "units_missing_per_method": {},
-  "seconds": 142.5
+  "row_coverage": {
+    "n_architectures_in_this_pass": 7,
+    "architectures_in_this_pass": [
+      "geo_seam_equalz",
+      "geo_seam_equalz_r14",
+      "geometry_field",
+      "geometry_field_r14",
+      "seam_geometry_field",
+      "seam_geometry_field_r14",
+      "table_field"
+    ],
+    "completeness_definition": "complete in columns, not in rows: every method listed here is scored on every unit of the residue universe, so no cell is missing; this is not every architecture that has been scored on this fold",
+    "architectures_elsewhere_on_this_fold": "see results/official_fold/TEST_FOLD_ACCESS_LEDGER.json, field distinct_architectures_evaluated",
+    "why_not_rescored": "each further architecture scored here would be another read of the held-out fold, which is the cost this section exists to account for rather than to incur"
+  },
+  "seconds": 1.4
 }

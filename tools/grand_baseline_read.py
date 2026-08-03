@@ -394,6 +394,34 @@ def main(argv: list[str] | None = None) -> int:
         "per_unit_pr_auc": {m: prc[m] for m in all_methods},
         "units_missing_per_method": {m: errors[m] for m in all_methods
                                      if errors[m]},
+        # What this pass does not cover, stated by the pass itself.
+        #
+        # "One pass, no cell missing" is true of the columns: every method here
+        # is scored on every unit. It is not true of the rows, and the
+        # manuscript said "every architecture in this repository" until
+        # 2026-08-03, when the ledger recorded 20 architectures against this
+        # pass's 7. The 13 absent ones were read in earlier probes and are
+        # deliberately not re-scored: re-running them would be a further sweep
+        # of the held-out fold, and a read whose own argument is that the fold
+        # has been worked too hard cannot coherently work it harder to fill in
+        # its table. Recording the gap in the artifact means the next reader
+        # does not have to reconstruct it from the ledger.
+        "row_coverage": {
+            "n_architectures_in_this_pass": len(OURS) + len(FUSIONS),
+            "architectures_in_this_pass": sorted(set(OURS) | set(FUSIONS)),
+            "completeness_definition": (
+                "complete in columns, not in rows: every method listed here is "
+                "scored on every unit of the residue universe, so no cell is "
+                "missing; this is not every architecture that has been scored "
+                "on this fold"),
+            "architectures_elsewhere_on_this_fold": (
+                "see results/official_fold/TEST_FOLD_ACCESS_LEDGER.json, field "
+                "distinct_architectures_evaluated"),
+            "why_not_rescored": (
+                "each further architecture scored here would be another read of "
+                "the held-out fold, which is the cost this section exists to "
+                "account for rather than to incur"),
+        },
         "seconds": round(time.perf_counter() - t0, 1),
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)
