@@ -43,6 +43,17 @@ AUDIT = {
     "n_unassigned_stereocentres": 0,
 }
 
+# The premise every test below the prohibition depends on. Held true here so
+# that each test fails for its own reason; TestThePremiseGate flips it.
+PRIVATE_VISIBILITY = {
+    "schema": "geoaudit.repository_visibility.v1",
+    "result": "private",
+    "checked_at": "2026-08-03T00:00:00+00:00",
+    "api": {"ok": True, "how": "gh repo view", "is_private": True},
+    "public_timeline": {"ok": True, "how": "gh api events",
+                        "n_public_events": 0},
+}
+
 GLOBAL = {
     "total_record_cap": 40,
     "required_declarations": {
@@ -120,6 +131,7 @@ class GateFixture(unittest.TestCase):
     def registry(self, **over) -> dict:
         return {"schema": "geoaudit.candidate_showcases.v1",
                 "global": dict(GLOBAL),
+                "repository_visibility_confirmed_at": dict(PRIVATE_VISIBILITY),
                 "showcases": [_entry(**over)]}
 
 
@@ -179,6 +191,77 @@ class TestTheProhibitionCatchesMolecules(GateFixture):
             self.registry(), _showcase(),
             extra={"evidence/kras/REPORT.json": {"what_this_is": "no smiles here"}})
         self.assertIn("evidence/kras/REPORT.json", offenders)
+
+
+class TestThePremiseGate(GateFixture):
+    """The exception's premise, planted false, watched failing.
+
+    What was planted, as the standing rule requires it be recorded: a registry
+    identical to the passing one in every respect except that its generated
+    visibility record reads ``public`` rather than ``private``. Before the
+    premise check existed, that tree passed with no offenders and no problems --
+    which is exactly what the real repository did for the three and a half days
+    six ESR1 compositions were on a public branch.
+
+    The distinction each test draws is between a *complete* disclosure and a
+    *permitted* one. Every clause elsewhere in this file checks completeness:
+    the fields are filled, the caps hold, the declarations are present. None of
+    them asks whether the file should exist at all, and a showcase can satisfy
+    all of them while being a worldwide publication.
+    """
+
+    def _public(self, **over) -> dict:
+        reg = self.registry(**over)
+        reg["repository_visibility_confirmed_at"] = {
+            **PRIVATE_VISIBILITY,
+            "result": "public",
+            "api": {"ok": True, "how": "gh repo view", "is_private": False},
+            "public_timeline": {"ok": True, "how": "gh api events",
+                                "n_public_events": 203},
+        }
+        return reg
+
+    def test_a_public_repository_admits_nothing(self) -> None:
+        offenders, problems = self.build(self._public(), _showcase())
+        self.assertEqual(offenders, ["results/show/SHOWCASE.json"],
+                         "a registered, complete, capped showcase is still a "
+                         "publication when the repository is public")
+        self.assertTrue(any("not 'private'" in p for p in problems), problems)
+
+    def test_the_complaint_names_what_is_exposed(self) -> None:
+        _, problems = self.build(self._public(), _showcase())
+        joined = " ".join(problems)
+        self.assertIn("results/show/SHOWCASE.json", joined,
+                      "an operator has to be told which files to withdraw")
+
+    def test_a_missing_visibility_record_admits_nothing(self) -> None:
+        # Absent must fail the same way as public. "Nobody checked" and
+        # "checked, and it was private" serialising identically is the shape of
+        # the original bug.
+        reg = self.registry()
+        reg.pop("repository_visibility_confirmed_at")
+        offenders, _ = self.build(reg, _showcase())
+        self.assertEqual(offenders, ["results/show/SHOWCASE.json"])
+
+    def test_indeterminate_is_not_private(self) -> None:
+        reg = self._public()
+        reg["repository_visibility_confirmed_at"]["result"] = "indeterminate"
+        offenders, _ = self.build(reg, _showcase())
+        self.assertEqual(offenders, ["results/show/SHOWCASE.json"],
+                         "two signals that disagree is not a licence")
+
+    def test_an_unreachable_network_is_not_private(self) -> None:
+        reg = self._public()
+        reg["repository_visibility_confirmed_at"]["result"] = "unknown"
+        offenders, _ = self.build(reg, _showcase())
+        self.assertEqual(offenders, ["results/show/SHOWCASE.json"],
+                         "a check that could not run must not read as a pass")
+
+    def test_a_private_repository_still_admits_the_showcase(self) -> None:
+        # The gate has to be capable of passing, or it is a prohibition wearing
+        # an exception's clothes and the next operator deletes it.
+        offenders, problems = self.build(self.registry(), _showcase())
+        self.assertEqual((offenders, problems), ([], []))
 
 
 class TestCompletenessOfAnAdmittedShowcase(GateFixture):
@@ -253,7 +336,9 @@ class TestOverridingTheDefaultFieldList(GateFixture):
             audit_field="audit_verdict")
         e.update(over)
         return {"schema": "geoaudit.candidate_showcases.v1",
-                "global": dict(GLOBAL), "showcases": [e]}
+                "global": dict(GLOBAL),
+                "repository_visibility_confirmed_at": dict(PRIVATE_VISIBILITY),
+                "showcases": [e]}
 
     def _input_doc(self) -> dict:
         return {"schema": "test.showcase.v1", "clinical_grade": False,
@@ -295,18 +380,59 @@ class TestTheRealRegistry(unittest.TestCase):
                                 "a showcase with no stated purpose is a dump "
                                 "with a cap")
 
-    def test_the_esr1_input_is_registered(self) -> None:
-        paths = {s["path"] for s in self.reg["showcases"]}
-        self.assertIn("data/appendix_esr1/SHOWCASE_INPUT.json", paths,
-                      "the six molecules that no gate read for the file's whole "
-                      "life must stay registered")
-
-    def test_the_visibility_check_records_how_it_was_established(self) -> None:
+    def test_no_molecule_is_admitted_while_the_repository_is_public(self) -> None:
+        # The inversion of a test that used to require the ESR1 input to stay
+        # registered. It was registered, it was complete, every field was read
+        # -- and it was published, because the exception admitting it rested on
+        # the repository being private and the repository never was.
         v = self.reg["repository_visibility_confirmed_at"]
-        self.assertEqual(v["result"], "private")
-        self.assertTrue(v.get("how"), "a self-declared private repository is "
-                                      "the unchecked claim the whole exception "
-                                      "rests on")
+        if v.get("result") != "private":
+            self.assertEqual(
+                self.reg["showcases"], [],
+                f"recorded visibility is {v.get('result')!r}; a showcase "
+                f"admitted here is a worldwide publication and a prior-art "
+                f"event against its own composition claims")
+
+    def test_the_esr1_material_is_gone_from_the_tree(self) -> None:
+        for rel in ("data/appendix_esr1/SHOWCASE_INPUT.json",
+                    "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
+                    "results/appendix_esr1/bond_graphs",
+                    "tools/emit_esr1_showcase.py"):
+            with self.subTest(path=rel):
+                self.assertFalse(
+                    (ROOT / rel).exists(),
+                    f"{rel} is candidate material in a public repository")
+
+    def test_visibility_is_generated_and_not_typed(self) -> None:
+        # What the predecessor of this test did, and why it is the whole lesson:
+        #
+        #     v = self.reg["repository_visibility_confirmed_at"]
+        #     self.assertEqual(v["result"], "private")
+        #
+        # It read a hand-written string and asserted it matched a hand-written
+        # expectation. Both were "private". The repository was public the entire
+        # time, its CreateEvent sitting in GitHub's public events timeline three
+        # and a half weeks before the field claimed a check had found it
+        # private. The test did not verify the premise; it pinned the wrong
+        # answer in place and turned a stale note into a guarded invariant.
+        #
+        # So this asserts the shape of a *measurement* -- that the record came
+        # from tools/record_repository_visibility.py, carries both probes, and
+        # names the command each ran -- and never asserts which answer it got.
+        # The answer is the world's to decide.
+        v = self.reg["repository_visibility_confirmed_at"]
+        self.assertEqual(v.get("schema"), "geoaudit.repository_visibility.v1",
+                         "the visibility record must be generated by "
+                         "tools/record_repository_visibility.py, not typed")
+        self.assertIn(v.get("result"),
+                      {"public", "private", "indeterminate", "unknown"})
+        self.assertTrue(v.get("checked_at"), "a generated record is timestamped")
+        for probe in ("api", "public_timeline"):
+            with self.subTest(probe=probe):
+                self.assertIn(probe, v, "both signals are recorded because "
+                                        "they fail differently")
+                self.assertTrue(v[probe].get("how"),
+                                "a probe records the command it ran")
 
     def test_the_tree_is_within_the_global_cap(self) -> None:
         total = 0

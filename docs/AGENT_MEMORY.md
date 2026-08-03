@@ -2593,3 +2593,80 @@ appear, so the disclosure cannot be satisfied by disparaging it instead.
 X we have" is a process claim with a shelf life, and the self-critical ones are
 the least likely to be re-read. Grep the manuscript for superlatives about our
 own work before every submission.
+
+## 3c. The gate's premise was cited, dated, and false — six molecules were published under it
+
+**What happened.** `results/appendix_esr1/` held six ESR1 candidate molecules
+with isomeric SMILES, bond-graph PNGs, and their pairing with a pocket
+decomposition. Four of the images were embedded in the README, rendering the
+structures on the repository front page. They were disclosed worldwide from
+2026-07-30T13:23Z until withdrawal on 2026-08-03, in a repository that has been
+public since 2026-07-05.
+
+**Why nothing caught it, which is the part worth remembering.** The controls
+around this material were unusually good. The prohibition on candidate evidence
+was structural rather than a denylist — it keyed on a file naming a molecule,
+which is the right predicate. The completeness gate read every required field on
+every record and failed closed on each. Per-showcase and whole-tree record caps
+were enforced. Every showcase had to declare `clinical_grade: false`,
+`comparative_claim: false`, `efficacy_or_affinity_claim: false` and
+`repository_is_private: true`, and absent had to fail like wrong.
+
+All of it granted an exception resting on one premise, stated in
+`verify_claims.py`: "the repository is private, so nothing in it is a
+publication and no prior art is created against a composition claim."
+
+Someone had already noticed that a self-declared `repository_is_private` is an
+unchecked claim, and added a field to fix it:
+
+```json
+"repository_visibility_confirmed_at": {
+  "checked": "2026-07-31", "result": "private",
+  "how": "gh repo view shaneraphel/geoaudit-cryptobench --json isPrivate"
+}
+```
+
+That command returns `isPrivate: false`. The repository's `CreateEvent` is in
+GitHub's public events timeline at 2026-07-05T04:49:13Z with continuous public
+pushes through 2026-08-03, including two on 2026-07-31 itself, and that timeline
+carries no events from private repositories. The recorded result was never true.
+
+And a unit test guarded the field:
+
+```python
+v = self.reg["repository_visibility_confirmed_at"]
+self.assertEqual(v["result"], "private")
+```
+
+It read a hand-written string and asserted it matched a hand-written
+expectation. That is not a test of the premise; it is a test that nobody has
+edited the note. It converted a stale observation into a guarded invariant, so
+the wrong answer became harder to change than if it had never been tested at
+all.
+
+**The generalisation, which is not "check visibility".** Rule 10 says a citation
+nobody verifies is decoration. This is worse than an uncited claim, because the
+field *named the command that refutes it*, and a field carrying its own method
+reads as more trustworthy than one that says nothing. The safeguard was the
+camouflage. Look for this shape: a `source:`, `checked:`, `confirmed_at:`,
+`verified_by:` or `sha256:` field whose value was typed by the same hand that
+typed the thing it vouches for.
+
+**The rule.** A premise that makes an irreversible hazard acceptable is
+re-established by execution at the moment of use, or the thing it permits does
+not happen. Not a dated note, not a declaration, and not a test asserting the
+note is unchanged. `tools/record_repository_visibility.py` now runs both probes
+and writes the result; `verify_claims.py` withholds the exception unless the
+generated value reads `private`; absent, `unknown` and `indeterminate` all read
+as not-private, because "nobody checked" must never serialise like "checked, and
+it was safe."
+
+**What the fix does not do.** It stops further exposure. It does not undo the
+disclosure — history retains the blobs, and CN and EP have no grace period. The
+window is recorded in the private companion repository's `FILING_ORDER.md`,
+whose own "nothing yet — ledger opened" row was written on 2026-08-02, three
+days after the disclosure it failed to mention.
+
+**Where else to look.** Every exception here that rests on a fact about the
+world rather than a fact about the tree. At least one more class exists:
+anything asserting that a remote artifact is unchanged since it was fetched.

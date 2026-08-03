@@ -12,13 +12,13 @@
   },
   "counts": {
     "superseded": 65,
-    "cited": 92,
     "exploration": 51,
+    "cited": 91,
     "inventory": 7,
     "frozen_unread": 2,
     "fold_access": 11
   },
-  "n_artifacts": 228,
+  "n_artifacts": 227,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -26,13 +26,6 @@
       "reason": "an earlier frozen state, kept for the record",
       "schema": "geoaudit.materialised_inputs.v1",
       "bytes": 2180
-    },
-    {
-      "artifact": "results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json",
-      "class": "cited",
-      "reason": "a number in the paper or README derives from this file",
-      "schema": "geoaudit.esr1_decomposability_showcase.v1",
-      "bytes": 150918
     },
     {
       "artifact": "results/architecture_sweep/ANISOTROPIC_COUNTING_FIELD.json",

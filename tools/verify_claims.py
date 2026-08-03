@@ -206,6 +206,51 @@ def candidate_showcase_checks(
     admitted = {s["path"]: s for s in (registry.get("showcases") or [])}
     glob_rules = registry.get("global") or {}
 
+    # The premise, enforced rather than believed, because believing it cost a
+    # real disclosure.
+    #
+    # Everything below this line grants an exception to a prohibition whose
+    # violation is irreversible. The argument for the exception was that this
+    # repository is private, so nothing in it is a publication and no prior art
+    # is created against a composition claim. The registry required every
+    # showcase to declare repository_is_private, and recorded a dated check of
+    # that declaration against the remote so it would not be merely asserted.
+    #
+    # The dated check said "2026-07-31, result: private" and named the command
+    # that established it. The command returns isPrivate false and has never
+    # returned anything else: the repository's CreateEvent is in GitHub's public
+    # events timeline at 2026-07-05T04:49:13Z, with continuous public pushes
+    # through 2026-08-03 including two on 2026-07-31 itself, and that timeline
+    # does not carry events from private repositories. The repository was public
+    # for its whole life. Six ESR1 compositions were disclosed worldwide for
+    # three and a half days while this gate ran green, because the gate checked
+    # that the declaration was *present* and trusted a hand-written note for
+    # whether it was *true*.
+    #
+    # So the premise is now a computed input. tools/record_repository_visibility.py
+    # runs the command and writes the result; make verify reads what it wrote and
+    # refuses to admit any showcase unless that result is "private". It fails
+    # closed when the record is absent, malformed, or stale, because "nobody
+    # checked" and "checked and it was private" must not serialise the same way.
+    # A dated observation of a mutable external fact is not evidence that the
+    # fact still holds, and here it was not evidence that it had ever held.
+    visibility = registry.get("repository_visibility_confirmed_at") or {}
+    vis_result = visibility.get("result")
+    if vis_result != "private":
+        if admitted:
+            registry_problems.append(
+                f"the candidate-showcase exception is unavailable: recorded "
+                f"repository visibility is {vis_result!r}, not 'private', so "
+                f"anything admitted here is a worldwide publication and a prior "
+                f"art event against its own composition claims. "
+                f"{len(admitted)} showcase(s) are admitted: "
+                f"{sorted(admitted)}. Remove them from the tree and from this "
+                f"registry, or make the repository private and re-record the "
+                f"visibility before re-admitting them")
+        # Nothing is admitted while the premise fails, so every candidate file
+        # in the tree is an offender and is reported as one.
+        admitted = {}
+
     def _is_admitted_showcase(path: Path) -> bool:
         rel = path.relative_to(root).as_posix()
         entry = admitted.get(rel)

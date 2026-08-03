@@ -303,8 +303,8 @@ pocket — campaign material that the scope contract no longer admits.
 
 Appendices are excluded from the primary claim and from every generalization
 statement: **Appendix A** is a retrospective ESR1 receptor-only pilot (invalidated
-pending label regeneration) alongside a decomposability showcase that carries no
-accuracy number; **Appendix B** is a finite-field allele-conditioning ablation
+pending label regeneration) whose decomposability showcase was withdrawn on
+2026-08-03 (see §5.4c); **Appendix B** is a finite-field allele-conditioning ablation
 retained as future work (algebraic negative control only).
 
 ---
@@ -792,8 +792,8 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 934 tests and
-661 subtests, all passing. `unittest`'s discovery finds 774 of them, because it
+Current state: `verify_claims` all checks pass; `make test` runs 941 tests and
+665 subtests, all passing. `unittest`'s discovery finds 781 of them, because it
 collects only methods of `TestCase` subclasses; the other 160 are written as
 plain functions and are reachable only through `pytest`.
 
@@ -1695,8 +1695,8 @@ generalization statement. Machine-enforced by
 | Item | Status | Boundary |
 |---|---|---|
 | **Appendix A** — ESR1 receptor-only pilot | `retrospective_pilot_only`, invalidated pending label regeneration | `comparative_claim_allowed=false`; contributes nothing to the CryptoBench result |
-| **Appendix A** — ESR1 decomposability showcase | six molecules, complete chemistry fields, **no accuracy number** | `results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json`. Demonstrates the identity of §"What is new here" item 1 and nothing else. A decomposition needs no labels, so it survives the pilot's invalidation; the pilot's accuracy does not. Admitted by the candidate-showcase registry, `contracts/CANDIDATE_SHOWCASES.json`, and gated by `no_bulk_candidate_dump_in_paper_tree` and `candidate_showcases_are_registered_and_complete` |
-| **Candidate showcases generally** | registry-admitted, capped at 12 records each and 40 in the tree | `contracts/CANDIDATE_SHOWCASES.json` names every admitted showcase, what it is admitted to demonstrate, and the fields every record must carry: isomeric and canonical SMILES, InChIKey, formula, heavy-atom and bond counts, elements, bond-graph SVG, topological pharmacophore, stereochemistry, a structural audit that states its stability alerts, liability alerts, metabolic soft spots and unassigned stereocentres, and its non-claims. A file not in the registry fails the prohibition exactly as any other candidate file does. The exception rests on this repository being private; if it is ever made public, every showcase in it becomes a publication and the filing order AGENTS.md requires has to be settled first |
+| **Appendix A** — ESR1 decomposability showcase | **withdrawn 2026-08-03**; six molecules, moved to the private companion repository | It was admitted by the candidate-showcase registry under an exception whose premise was that this repository is private. It is not, and was not: the `CreateEvent` sits in GitHub's public events timeline at 2026-07-05, three and a half weeks before the registry recorded a check finding it private. The compositions were public from 2026-07-30 to 2026-08-03. See §5.4c and the companion `FILING_ORDER.md`. The decomposition identity it demonstrated needs no molecule to state and is unaffected |
+| **Candidate showcases generally** | **no showcase is admitted while this repository is public**, and none is | `contracts/CANDIDATE_SHOWCASES.json` still defines what an admitted showcase must carry — isomeric and canonical SMILES, InChIKey, formula, heavy-atom and bond counts, elements, bond-graph SVG, topological pharmacophore, stereochemistry, a structural audit stating stability alerts, liability alerts, metabolic soft spots and unassigned stereocentres, and its non-claims — and its `showcases` list is empty. The exception rests on the repository being private, and that premise is no longer a declaration: `tools/record_repository_visibility.py` establishes it by running `gh repo view` and querying the public events timeline, and `candidate_showcases_are_registered_and_complete` withholds the exception unless the generated result reads `private`. Absent, `unknown` and `indeterminate` are all treated as not-private, because "nobody checked" must not serialise as "checked, and it was safe" |
 | **Appendix B** — finite-field allele-conditioning ablation | `algebraic_ablation_future_work` | Algebraic negative control; no chemical, binding, or efficacy claim |
 | Candidate generation / structure-defined modalities | future work | Bulk evidence lives in the companion tree `gf4-allele-conditioned-evidence` (`data/manifests/COMPANION_EVIDENCE.json`); not a claim of this repository |
 | Localized anisotropic shear for void-absent pockets | future work | Global low-frequency modes caused surface drift; see `results/cryptobench_apo/` |
@@ -1930,21 +1930,58 @@ percentile and pLM-NN's at the **1.7th**. The mirror under the same rule is empt
 Figure 14. Scores are the frozen Set A archives; this is a decomposition, not a
 second confirmatory read. `clinical_grade` is false.
 
-### 5.4c ESR1 showcase bond graphs (interpretability, not accuracy)
+### 5.4c ESR1 showcase bond graphs — withdrawn 2026-08-03
 
-Six registry-admitted ESR1 candidates sit under `results/appendix_esr1/`. Bond-graph
-PNGs recomputed from the showcase isomeric SMILES are at
-`results/appendix_esr1/bond_graphs/`. Two chemotypes appear by the selection rule,
-not by curation: four triarylethylenes (SERM-class) and two quinazolinones. The
-same triarylethylene substructure the companion FLT3 triage rejects as WRONG is
-CORRECT here — nuclear-receptor ligand, not kinase hinge. That is the
-anti-mediocrity point: one geometric/chemical rule, opposite verdicts by target.
-No ESR1 accuracy number is claimed; the pilot that would supply one is invalidated.
+Six ESR1 candidate molecules, with isomeric SMILES and bond-graph images, were
+here until 2026-08-03. They have been moved to the private companion repository
+and are not coming back while this repository is public.
 
-![ESR1 gpt56v7-sm-esr1-0133](results/appendix_esr1/bond_graphs/gpt56v7-sm-esr1-0133.png)
-![ESR1 gpt56v7-sm-esr1-0025](results/appendix_esr1/bond_graphs/gpt56v7-sm-esr1-0025.png)
-![ESR1 gpt56v7-sm-esr1-0139](results/appendix_esr1/bond_graphs/gpt56v7-sm-esr1-0139.png)
-![ESR1 gpt56v7-sm-esr1-0055](results/appendix_esr1/bond_graphs/gpt56v7-sm-esr1-0055.png)
+They were admitted by an exception in the candidate-showcase registry, and that
+exception was granted on one premise, quoted from `tools/verify_claims.py` as it
+stood: *"the repository is private, so nothing in it is a publication and no
+prior art is created against a composition claim."* The registry required every
+showcase to declare `repository_is_private`, and — because a self-declared field
+is the sort of unchecked claim this repository rejects everywhere else — it
+carried a sibling field recording when that declaration had last been tested
+against the remote. It read `checked: 2026-07-31, result: private`, and it named
+the command: `gh repo view shaneraphel/geoaudit-cryptobench --json isPrivate`.
+
+That command returns `isPrivate: false`, and there is no evidence it ever
+returned anything else. This repository's `CreateEvent` is in GitHub's public
+events timeline at 2026-07-05T04:49:13Z, with continuous public pushes through
+2026-08-03 including two on 2026-07-31 itself, and that timeline does not carry
+events from private repositories. The premise was false for the whole life of
+the exception.
+
+So the compositions were disclosed worldwide from 2026-07-30 until withdrawal.
+Removing them stops further exposure; it does not undo the disclosure, and the
+private repository's `FILING_ORDER.md` records the window rather than pretending
+otherwise.
+
+Every control worked except the one that mattered. The prohibition was
+structural rather than a denylist, the completeness gate read every required
+field on every record, the caps held, and the declarations were present and
+correct. All of it rested on a hand-written note about a mutable fact on someone
+else's server, and a unit test asserted that the note said `private` — reading a
+typed string and comparing it to a typed expectation, which verifies nothing
+about the world and froze the wrong answer in place.
+
+The premise is now a measurement. `tools/record_repository_visibility.py` runs
+both probes and writes the result; `verify_claims.py` withholds the exception
+unless the generated result reads `private`, and treats absent, `unknown` and
+`indeterminate` as not-private. `tests/test_candidate_showcase_gate.py` plants a
+registry that is complete and capped and correct in every respect except that
+its visibility reads `public`, and requires the gate to reject it.
+
+The chemistry point the showcase illustrated does not need the molecules
+published to be stated: the same triarylethylene substructure that the companion
+FLT3 triage rejects as wrong is correct against ESR1, because one is a
+nuclear-receptor ligand and the other a kinase hinge. One rule, opposite
+verdicts by target. No ESR1 accuracy number was ever claimed here, and the pilot
+that would have supplied one is invalidated.
+
+Four bond-graph images were embedded here, rendering the structures inline on
+the repository front page. They have been removed with the rest of the material.
 
 ### 5.4d Residue recoveries vs pLM-NN across all of spent Set A
 
@@ -2397,30 +2434,28 @@ native/geoaudit_kernels/    Rust cdylib, 5 kernels, all ported operation-for-
 results/official_fold/      the held-out fold. Reads are ledgered and capped
 results/external/           EXTERNAL_SET.json (frozen, hashed) + EXTERNAL_READ
                             SETN_* / DUAL_BASELINE_RECOVERIES / residue cases
-results/appendix_esr1/      ESR1 showcase SMILES + bond-graph PNGs (interpretability)
 figures/                    committed SOTA / external / Set N panels for the README
 results/architecture_sweep/ the training fold: every sweep, every wire family,
                             every control arm. Nothing here reads a held-out set
                             and each file declares `reads_test_fold: false`
 results/baselines/          P2Rank, PocketMiner and pLM-NN as executed here
-results/appendix_esr1/      DECOMPOSABILITY_SHOWCASE.json  <- the candidates
 results/pilot/ cryptobench_apo/ cryptobench_official/ gf4_ablation/
 ```
 
-**Where the candidates are, and what governs them.** Six molecules, in
-`results/appendix_esr1/DECOMPOSABILITY_SHOWCASE.json`, with their inputs in
-`data/appendix_esr1/SHOWCASE_INPUT.json`. Every record carries isomeric and
-canonical SMILES, InChIKey, formula, heavy-atom and bond counts, elements, a
-bond-graph SVG, a topological pharmacophore, its stereochemistry, and a
-structural audit stating its stability alerts, liability alerts, metabolic soft
-spots and unassigned stereocentres. They are admitted by
-`contracts/CANDIDATE_SHOWCASES.json` and gated by
-`candidate_showcases_are_registered_and_complete`, which fails closed on a
-missing field, a record over the cap, a tree over the global cap of 40, or a
-missing non-claim declaration. **They demonstrate that a score decomposes
-exactly and nothing else** — no affinity, no efficacy, no comparison between
-method classes, and `clinical_grade: false` on every one. Any file in the tree
-carrying a SMILES value and not in that registry fails the build.
+**Where the candidates are: nowhere in this repository, as of 2026-08-03.** Six
+ESR1 molecules were under `results/appendix_esr1/`, with inputs in
+`data/appendix_esr1/`, complete in every field the registry demanded — isomeric
+and canonical SMILES, InChIKey, formula, heavy-atom and bond counts, elements, a
+bond-graph SVG, a topological pharmacophore, stereochemistry, and a structural
+audit stating stability alerts, liability alerts, metabolic soft spots and
+unassigned stereocentres. They have been moved to the private companion
+repository; §5.4c gives the reason and the exposure window.
+
+The prohibition now has no exception in force. Any file in the tree carrying a
+SMILES value fails the build, and `contracts/CANDIDATE_SHOWCASES.json` lists no
+admitted showcase. Re-admitting one requires the repository to be private and
+`tools/record_repository_visibility.py` to have established that by running the
+command rather than by anyone recording that they ran it.
 
 ```text
 data/cryptobench_apo/    the training partition: manifest, labels, wire caches
@@ -2429,7 +2464,6 @@ data/external/           the frozen external sets
 data/manifests/          provenance, split ledger, companion evidence, cluster
                          ledger — the files that say where every structure came
                          from and which units may share a split
-data/appendix_esr1/      SHOWCASE_INPUT.json (registered as a candidate input)
 figures/                 every figure in the README and the paper, each with a
                          provenance record binding it to its generator, its
                          source artifact digest and its caption

@@ -1,1 +1,0 @@
-CCn1c(N2CC(C3CCOCC3)C2)nc2c([C@H](C)Nc3c(F)cc(Cl)nc3C(=O)O)cc(C)cc2c1=O
