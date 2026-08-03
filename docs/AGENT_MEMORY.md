@@ -2550,3 +2550,46 @@ values coincide today. Two quantities sharing a macro is a bug waiting for the
 values to diverge, and they diverged silently here: `\NTestReads` stayed 3 while
 the programme went from 3 accesses to 44, and nothing in the repository could
 notice, because both numbers were true.
+
+## 3b. A self-deprecating claim goes stale too, and nobody audits those
+
+Found immediately after §3a, by pulling the next thread in the same paragraph.
+
+The abstract discounted its own headline: `\TabAucD` "is the largest of
+`\NArchOnFold` architectures of ours that have been scored on these same units",
+therefore a maximum over correlated estimates, therefore biased upward,
+therefore treat the ordering as carrying no information. Good argument. The
+premise is false.
+
+In `GRAND_BASELINE_READ.json`, `table_field` is **eighth of ten**. Six of our
+seven architectures outscore it — `geo_seam_equalz_r14` at 0.8341 against its
+0.7992 — and pLM-NN sits between them at 0.8235. The sentence was true when
+written and six later architectures made it false.
+
+**Why it survived three audits of this paragraph.** Every stale-number habit in
+this repository is tuned for numbers that *flatter*. This one ran the other way:
+it called our shipped detector the best thing we had in order to argue for
+trusting it less. A claim that costs us something reads as evidence of care, so
+it is read as a virtue and not as a claim. It was still a false statement about
+our own process.
+
+**What replaced it.** The discount stands, because the search really did range
+over 20 architectures; what changed is that `\TabAucD` is not the maximum of
+that search, which widens the selection surface rather than narrowing it. The
+count `\GrandNAboveTab` is generated from the read. And the paragraph now says
+why `table_field` ships anyway — every score decomposes into the integer table
+terms that produced it — because stating "six of ours beat it" without that
+leaves the reader to conclude the shipped choice was an error.
+
+**The gate.** `tests/test_shipped_architecture_standing.py`. Whenever anything
+of ours outscores `table_field` in the grand read, the manuscript must state how
+many; the count is recomputed from the artifact rather than trusted; the
+withdrawn wording is denied by exact string, verified to fire against
+`git show b1a52a3:paper/MAIN_CRYPTOBENCH_GEOAUDIT.tex`, the version that was on
+GitHub an hour earlier; and the property `table_field` *is* argued for has to
+appear, so the disclosure cannot be satisfied by disparaging it instead.
+
+**Where else to look.** Any sentence of the form "this is the best/largest/only
+X we have" is a process claim with a shelf life, and the self-critical ones are
+the least likely to be re-read. Grep the manuscript for superlatives about our
+own work before every submission.

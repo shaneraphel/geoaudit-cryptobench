@@ -1119,6 +1119,18 @@ def build() -> str:
         L.append(f"\\newcommand{{\\GrandBoot}}{{{gr['n_boot']:,}}}")
         L.append(f"\\newcommand{{\\GrandSeed}}{{{gr['seed']}}}")
         L.append(f"\\newcommand{{\\GrandNMethods}}{{{len(s)}}}")
+        # How many of our own architectures outscore the one that ships. The
+        # abstract used to call table_field's fold reading "the largest of
+        # \NArchOnFold architectures of ours", which was true when written and
+        # is now false by six: it is eighth of ten in this read. The
+        # selection-bias argument that sentence makes is still the right
+        # argument, but it applies to the maximum, and table_field is no longer
+        # the maximum. Generated, so the claim cannot go stale a second time.
+        if "table_field" in s:
+            tab_roc = s["table_field"]["mean_per_unit_roc_auc"]
+            L.append(f"\\newcommand{{\\GrandNAboveTab}}"
+                     f"{{{sum(1 for m in ours if m != 'table_field' and s[m]['mean_per_unit_roc_auc'] > tab_roc)}}}")
+        L.append(f"\\newcommand{{\\GrandNOurs}}{{{len(ours)}}}")
         for tag, m in (("Best", best), ("Plm", "plmnn"),
                        ("PTwo", "p2rank"), ("Pm", "pocketminer"),
                        ("Tab", "table_field")):

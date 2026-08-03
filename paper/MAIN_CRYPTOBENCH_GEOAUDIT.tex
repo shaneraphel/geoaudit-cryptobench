@@ -164,12 +164,21 @@ Even the sign of that unresolved mean deserves less credence than an unresolved
 interval usually implies, and saying why is part of the same accounting. Over
 this fold the standard error of
 a mean ROC-AUC is \FoldSE{}, so \TabAucD{} is \LeadInSE{} of one standard error,
-and it is the largest of \NArchOnFold{} architectures of ours that have been
+drawn from a search over \NArchOnFold{} architectures of ours that have been
 scored on these same units --- a count taken from an artifact ledger rather than
 from memory, after a hand-written version of this disclosure proved wrong. A
 maximum over that many correlated estimates is biased upward by about the size
 of the margin, so we treat the ROC-AUC ordering as carrying no information and
-ask the reader to do the same.
+ask the reader to do the same. Until this revision the sentence said that
+\TabAucD{} \emph{was} that maximum. It was when it was written and it is no
+longer: in the single-pass read of Section~\ref{sec:grand}, \GrandNAboveTab{} of
+the \GrandNOurs{} architectures scored there sit above \texttt{table\_field},
+the highest at \GrandBestRoc{} against its \GrandTabRoc{}. The correction cuts
+against us twice over. It widens the selection surface the discount is meant to
+cover rather than narrowing it, and it says plainly that the architecture this
+paper ships is not the most accurate one the project has built --- it is the one
+whose every score decomposes into the integer table terms that produced it,
+which is a different property and the one being argued for.
 
 MCC is the one that needs saying out loud, because two defensible choices decide
 it and only one of them is honest. Each paired difference is taken on the
@@ -3119,8 +3128,10 @@ mean. None of this speaks to whether any of these margins would survive a
 different benchmark, which only a different benchmark can answer.
 
 The absolute values remain modest --- ROC-AUC \TabAuc{} and F1 \TabFOne{} for
-the strongest field here --- so the contribution is the construction rather than
-the accuracy. What the construction buys is auditability and a mechanically
+the field that ships, and \GrandBestRoc{} for the strongest architecture the
+project has built, which is not that one --- so the contribution is the
+construction rather than the accuracy. What the construction buys is
+auditability and a mechanically
 trivial inference path: every input is a closed-form algebraic, chemical or
 counting function of the receptor; the compiled state is
 \(\NTabCells{}\) pairs of integers plus \NTabTables{} integer multiplicities;
