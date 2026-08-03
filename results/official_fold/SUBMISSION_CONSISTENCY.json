@@ -1,0 +1,392 @@
+{
+  "schema": "geoaudit.submission_consistency.v1",
+  "clinical_grade": false,
+  "reads_test_fold": false,
+  "what_this_reads": "committed macros and the test-fold ledger. It computes no metric and touches no structure, so it is not a read of any fold.",
+  "built_at": "2026-08-03T09:09:38+0800",
+  "submission_title": "Auditable Algebraic Counting Field for Cryptic-Pocket Detection from Apo Structures",
+  "submission_commit": "5d1726a",
+  "submission_source_in_this_repository": false,
+  "submission_source_note": "the submitted 15-page paper was condensed from paper/MAIN_CRYPTOBENCH_GEOAUDIT.tex and its own LaTeX source is held elsewhere. This tool therefore compares the paper's printed values, transcribed into CLAIMS above, against the macros and artifacts that generated them.",
+  "claim_transcription_note": "the left-hand value of each CLAIMS row is typed from the PDF by hand and is the one thing here that no generator checks. It is the weakest link and is recorded as such rather than presented as machine-read.",
+  "n_claims_checked": 47,
+  "n_agreeing": 47,
+  "n_disagreeing": 0,
+  "n_unverifiable": 0,
+  "scientific_claims_agreeing": [
+    {
+      "section": "2.2 architecture",
+      "printed_in_submission": "645",
+      "macro": "NTabWires",
+      "repository_value": "645",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.2 architecture",
+      "printed_in_submission": "5152",
+      "macro": "NTabTables",
+      "repository_value": "5152",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.2 architecture",
+      "printed_in_submission": "82432",
+      "macro": "NTabCells",
+      "repository_value": "82432",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.2 architecture",
+      "printed_in_submission": "2",
+      "macro": "TabWidth",
+      "repository_value": "2",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.2 architecture",
+      "printed_in_submission": "16",
+      "macro": "TabRounds",
+      "repository_value": "16",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.2 architecture",
+      "printed_in_submission": "32",
+      "macro": "TabCap",
+      "repository_value": "32",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.2 architecture",
+      "printed_in_submission": "0.03",
+      "macro": "TabRidge",
+      "repository_value": "0.03",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.1 units",
+      "printed_in_submission": "192",
+      "macro": "NUnits",
+      "repository_value": "192",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.3 baselines",
+      "printed_in_submission": "0.9987",
+      "macro": "PlmFidelity",
+      "repository_value": "0.9987",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.3 operating point",
+      "printed_in_submission": "0.09",
+      "macro": "TabOperatingQ",
+      "repository_value": "0.09",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.3 operating point",
+      "printed_in_submission": "0.09",
+      "macro": "MatchOurQ",
+      "repository_value": "0.09",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.4 external",
+      "printed_in_submission": "57",
+      "macro": "ExtN",
+      "repository_value": "57",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.4 external",
+      "printed_in_submission": "905",
+      "macro": "ExtNPositives",
+      "repository_value": "905",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.4 external",
+      "printed_in_submission": "2024-05-08",
+      "macro": "ExtCutoff",
+      "repository_value": "2024-05-08",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 official fold",
+      "printed_in_submission": "0.799",
+      "macro": "TabAuc",
+      "repository_value": "0.799",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 official fold",
+      "printed_in_submission": "0.376",
+      "macro": "TabPr",
+      "repository_value": "0.376",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 official fold",
+      "printed_in_submission": "0.304",
+      "macro": "TabMcc",
+      "repository_value": "0.304",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 official fold",
+      "printed_in_submission": "0.333",
+      "macro": "TabFOne",
+      "repository_value": "0.333",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 official fold",
+      "printed_in_submission": "0.793",
+      "macro": "PtwoRAuc",
+      "repository_value": "0.793",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 official fold",
+      "printed_in_submission": "+0.0058",
+      "macro": "TabAucD",
+      "repository_value": "+0.0058",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 official fold",
+      "printed_in_submission": "[-0.0168, +0.0276]",
+      "macro": "TabAucDCI",
+      "repository_value": "[-0.0168, +0.0276]",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 official fold",
+      "printed_in_submission": "+0.0177",
+      "macro": "TabPrD",
+      "repository_value": "+0.0177",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 vs pLM-NN",
+      "printed_in_submission": "-0.0243",
+      "macro": "PlmAucDelta",
+      "repository_value": "-0.0243",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 vs pLM-NN",
+      "printed_in_submission": "[-0.0465, -0.0033]",
+      "macro": "PlmAucCI",
+      "repository_value": "[-0.0465, -0.0033]",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 vs pLM-NN",
+      "printed_in_submission": "111",
+      "macro": "PlmLoss",
+      "repository_value": "111",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 vs PocketMiner",
+      "printed_in_submission": "+0.0468",
+      "macro": "PmAucOurs",
+      "repository_value": "+0.0468",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 vs PocketMiner",
+      "printed_in_submission": "[+0.0251, +0.0682]",
+      "macro": "PmAucCIOurs",
+      "repository_value": "[+0.0251, +0.0682]",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 vs PocketMiner",
+      "printed_in_submission": "+0.0410",
+      "macro": "PmAucPtwoR",
+      "repository_value": "+0.0410",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 logistic",
+      "printed_in_submission": "+0.0038",
+      "macro": "RdLogitDelta",
+      "repository_value": "+0.0038",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.1 logistic",
+      "printed_in_submission": "[-0.0057, +0.0125]",
+      "macro": "RdLogitCI",
+      "repository_value": "[-0.0057, +0.0125]",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.2 F1 shipped",
+      "printed_in_submission": "+0.0315",
+      "macro": "TabFOneD",
+      "repository_value": "+0.0315",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.2 F1 matched",
+      "printed_in_submission": "+0.0140",
+      "macro": "MatchBDelta",
+      "repository_value": "+0.0140",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.2 F1 matched",
+      "printed_in_submission": "[-0.0085, +0.0364]",
+      "macro": "MatchBCI",
+      "repository_value": "[-0.0085, +0.0364]",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.2 thresholds",
+      "printed_in_submission": "39",
+      "macro": "CvN",
+      "repository_value": "39",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.3 Set A",
+      "printed_in_submission": "+0.0443",
+      "macro": "ExtAucPtwoR",
+      "repository_value": "+0.0443",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.3 Set A",
+      "printed_in_submission": "[+0.0162, +0.0724]",
+      "macro": "ExtAucCIPtwoR",
+      "repository_value": "[+0.0162, +0.0724]",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.3 Set A",
+      "printed_in_submission": "[+0.0102, +0.0792]",
+      "macro": "ExtAucBonfPtwoR",
+      "repository_value": "[+0.0102, +0.0792]",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.3 Set A",
+      "printed_in_submission": "42",
+      "macro": "ExtWinPtwoR",
+      "repository_value": "42",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.3 Set A",
+      "printed_in_submission": "-0.0340",
+      "macro": "ExtAucPlm",
+      "repository_value": "-0.0340",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.3 Set A",
+      "printed_in_submission": "[-0.0701, -0.0006]",
+      "macro": "ExtAucCIPlm",
+      "repository_value": "[-0.0701, -0.0006]",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.3 Set A",
+      "printed_in_submission": "[-0.0784, +0.0071]",
+      "macro": "ExtAucBonfPlm",
+      "repository_value": "[-0.0784, +0.0071]",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.3 Set A",
+      "printed_in_submission": "1",
+      "macro": "ExtAbstain",
+      "repository_value": "1",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.6 splits",
+      "printed_in_submission": "4",
+      "macro": "NSplitsCv",
+      "repository_value": "4",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.6 splits",
+      "printed_in_submission": "25",
+      "macro": "NSplitsRh",
+      "repository_value": "25",
+      "verdict": "agrees"
+    },
+    {
+      "section": "3.6 cost",
+      "printed_in_submission": "1.79",
+      "macro": "FairModelOurs",
+      "repository_value": "1.79",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.5 statistics",
+      "printed_in_submission": "4",
+      "macro": "EndReadsBefore",
+      "repository_value": "4",
+      "verdict": "agrees"
+    },
+    {
+      "section": "2.5 statistics",
+      "printed_in_submission": "3",
+      "macro": "EndLineageBefore",
+      "repository_value": "3",
+      "verdict": "agrees"
+    }
+  ],
+  "scientific_claims_disagreeing": [],
+  "scientific_claims_unverifiable": [],
+  "process_claims": [
+    {
+      "section": "4.2 limitations",
+      "printed_in_submission": 12,
+      "phrase": "12 indexed test reads",
+      "ledger_field": "n_indexed_reads",
+      "ledger_at_submission_commit": 13,
+      "ledger_today": 13,
+      "agreed_at_submission": false,
+      "agrees_today": false,
+      "verdict": "was already wrong when the paper was frozen, and is wrong now"
+    },
+    {
+      "section": "4.2 limitations",
+      "printed_in_submission": 12,
+      "phrase": "12 scored architectures",
+      "ledger_field": "n_distinct_architectures_evaluated",
+      "ledger_at_submission_commit": 12,
+      "ledger_today": 20,
+      "agreed_at_submission": true,
+      "agrees_today": false,
+      "verdict": "correct at the submission commit; the repository has moved"
+    }
+  ],
+  "results_beyond_the_submission": [
+    {
+      "result": "the geometry and nonlocal-seam architectures",
+      "artifact": "results/official_fold/GRAND_BASELINE_READ.json",
+      "why_it_matters": "the submitted paper evaluates one detector of ours, the counting field. Six further architectures score above it on the official fold."
+    },
+    {
+      "result": "the single-pass three-baseline read",
+      "artifact": "results/official_fold/GRAND_BASELINE_READ.json",
+      "why_it_matters": "all methods on one residue universe with no missing cell; the paper's comparisons are pairwise and were taken at different times."
+    },
+    {
+      "result": "parity with pLM-NN on the official fold",
+      "artifact": "results/official_fold/GRAND_BASELINE_READ.json",
+      "why_it_matters": "the paper states a resolved deficit against pLM-NN for the counting field, which remains true of that detector. A different architecture of ours is not separable from pLM-NN on the same units, which the paper does not say and a reader of the repository will find."
+    }
+  ],
+  "verdict": "every scientific number the submission prints is reproduced by this repository today; the divergence is confined to process counts and to results the submission does not mention",
+  "n_problems": 2
+}

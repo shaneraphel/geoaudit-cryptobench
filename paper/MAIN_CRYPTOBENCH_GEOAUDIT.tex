@@ -89,8 +89,10 @@ convention either: it holds at every one of \CvN{} calling fractions, with
 intervals excluding zero throughout, and the F1 and MCC deficits
 (\PlmBudgetFDelta{} and \PlmBudgetMDelta{} at a common budget) survive a
 Bonferroni correction that the ROC-AUC difference does not. A wider geometry
-stack reaches parity with the same baseline on this fold in a development
-probe. Scoring every architecture and all three baselines in one pass on one
+stack reaches parity with the same baseline on this fold in a development probe
+that postdates the conference submission and is set out in the supplement rather
+than claimed here. Scoring \GrandNOurs{} architectures of ours and all three
+baselines in one pass on one
 residue universe (Section~\ref{sec:grand}), the best of ours --- \GrandBest{},
 an unweighted sum of within-chain standardised geometry and nonlocal-seam
 scores, with no coefficient fitted --- reads \GrandBestRoc{} against pLM-NN's
@@ -1560,104 +1562,24 @@ draws the three strata.
 
 \subsection{All three baselines in one pass, and the metric that disagrees}
 \label{sec:grand}
-The comparisons above are pairwise and were taken at different times, which
-leaves two questions a reader cannot answer from them. Was every method scored
-on the same residues? And does a method that leads on ROC-AUC also lead on the
-metric that weights a sparse positive class? This subsection closes both by
-scoring \GrandNMethods{} methods in one pass over one residue universe on all
-\GrandN{} units: \GrandNOurs{} of ours --- the deployed counting field, the
-geometry and nonlocal-seam families at both gate radii, and their two equal-$z$
-fusions --- together with P2Rank 2.5.1, CryptoBench's own pLM-NN readout and
-PocketMiner. Every paired row below has
-$n_{\text{paired}} = \GrandDPlmRocNPaired{}$, so no difference here
-mixes \emph{which structures were scorable} into a number read as \emph{which
-method is better}. The reason to do this in a single pass rather than to
-assemble it from the reads already taken is that a cell missing now cannot be
-filled in later: the universe would have to be rebuilt, and the earlier numbers
-would no longer be commensurable with the new ones.
+This read is not part of the submitted paper, which evaluates one detector
+of ours against the three baselines pairwise. It scores \GrandNMethods{}
+methods --- \GrandNOurs{} of ours together with P2Rank 2.5.1, pLM-NN and
+PocketMiner --- in a single pass over one residue universe on all
+\GrandN{} units, so that no cell of the comparison is missing and no two
+rows are averaged over different structures. Its result is parity with
+pLM-NN on both per-unit metrics, with the two metrics disagreeing about
+the sign, and a resolved lead over the other two baselines.
 
-The pass is complete in its columns and not in its rows, and the distinction
-matters. Every method named above is scored on every unit, so no cell of the
-table is missing. But \GrandNOurs{} is not all \NArchOnFold{} of the
-architectures that have taken a number off this fold; the others --- quotient
-banks, the algebraic fields, \texttt{threshold\_field}, the remaining seam
-variants --- were read in earlier probes and are not re-scored here. That is a
-deliberate refusal rather than an omission. Re-running them would be another
-sweep of the held-out fold, and a section whose argument is that this fold has
-already been worked too hard to settle anything cannot coherently work it
-harder to tidy its own table. Their readings stand where they were taken, in
-the ledger, with the multiplicity they imply already charged against every
-margin below.
-
-Three terms are new. The \textbf{nonlocal seam} family measures, per residue,
-whether a position is packed in the core while carrying long-range contact
-support and conformational budget in its neighbourhood on a peelable depth
-layer --- the configuration of a site that can open without presenting as a
-surface pocket in the apo structure. It was written because
-\texttt{geometry\_field} reaches fold-mean parity while anti-ranking buried
-cryptic residues on a handful of chains, and it counts what the surface-facing
-families do not. An \textbf{equal-$z$ fusion} of two detectors replaces each
-score by its within-chain standardised value and adds the two, unweighted; no
-coefficient is fitted, and ``equal'' is the entire rule, so the fusion inherits
-the property that nothing in the inference path was tuned on any fold. The
-\textbf{$r{=}14$ gate} is the spatial gate applied at 14~\AA{} rather than the
-deployed 18~\AA{}. That radius was not chosen here: it was selected on twelve
-cluster-disjoint halves of the \emph{training} fold, with each half of the
-splits independently choosing the same arm, at a paired $+0.0025$ uniform across
-all four pocket-size strata. Scoring it is one read of a decision already made,
-and no other radius is scored on this fold.
-
-The best of our architectures under this read is \GrandBest{}. On mean per-unit
-ROC-AUC it reaches \GrandBestRoc{} against \GrandPlmRoc{} for pLM-NN, a paired
-difference of \GrandDPlmRoc{} with interval \GrandDPlmRocCI{}, ahead on
-\GrandDPlmRocWin{} units and behind on \GrandDPlmRocLoss{}. \textbf{On mean
-per-unit PR-AUC the ordering reverses}: \GrandBestPr{} against \GrandPlmPr{}, a
-paired difference of \GrandDPlmPr{} with interval \GrandDPlmPrCI{}, ahead on
-\GrandDPlmPrWin{} and behind on \GrandDPlmPrLoss{}. Both intervals contain zero.
-The honest statement is parity in both directions, and the two metrics
-disagreeing about the sign is the more informative half of it: PR-AUC weights
-the sparse positive class, so pLM-NN's advantage is concentrated where the
-labelled pocket is small, which is consistent with the length stratification
-above and with a sequence model carrying context that local geometry does not.
-Reporting only the ROC-AUC row would have converted a null into a lead.
-
-Against the other two baselines the lead is resolved on both metrics.
-\GrandBest{} exceeds P2Rank by \GrandDPTwoRoc{} \GrandDPTwoRocCI{} on ROC-AUC
-and \GrandDPTwoPr{} \GrandDPTwoPrCI{} on PR-AUC, and PocketMiner by
-\GrandDPmRoc{} \GrandDPmRocCI{} and \GrandDPmPr{} \GrandDPmPrCI{}. For
-comparison on the same units, the deployed \texttt{table\_field} sits at
-\GrandTabRoc{} and \GrandTabPr{}; the geometry and seam families are what move
-the standing against pLM-NN from a resolved deficit to a null, and they do not
-move it past one.
-
-None of this is confirmatory. \NArchOnFold{} of our architectures have now taken
-a number off this fold, and a margin of a hundredth on \GrandN{} units is well
-inside the multiplicity that implies; the fold's standard error on a single
-mean is $0.0161$. The confirmatory accuracy claim of this paper remains the one
-made for \texttt{table\_field} against P2Rank on the external set, and the
-spent external sets are not re-opened to manufacture a second one for these
-architectures. What the read establishes is narrower and still worth stating:
-on one residue universe, with no cell missing, a detector carrying no learned
-encoder and no floating-point discriminant is not separable from a supervised
-network over a 3-billion-parameter protein language model, and is separably
-ahead of both published pocket detectors. Figures~\ref{fig:grand-standing} and
-\ref{fig:grand-paired} show the standing and the paired differences; in the
-latter, a bar whose interval crosses zero is drawn grey whatever the sign of its
-point estimate, so that a parity cannot be read as a win.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\textwidth]{fig_grand_baseline_standing.png}
-\caption{\FigCapGrandBaselineStanding{}}
-\label{fig:grand-standing}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\textwidth]{fig_grand_baseline_paired.png}
-\caption{\FigCapGrandBaselinePaired{}}
-\label{fig:grand-paired}
-\end{figure}
+It is set out in full in \texttt{paper/supplement\_beyond\_submission.tex}
+rather than here. The submitted paper reports the deployed counting field as
+trailing pLM-NN by \PlmAucDelta{} \PlmAucCI{}, which remains true of that
+detector; the architectures that reach parity are different ones, and a
+reader who met both claims in the same document without being told which
+was submitted could not tell whether they had found a stronger result or an
+inconsistency. \texttt{tools/check\_submission\_consistency.py} enumerates
+every such divergence and writes
+\texttt{results/official\_fold/SUBMISSION\_CONSISTENCY.json}.
 
 \subsection{A set that has never been read, and what it decided}
 \label{sec:external}

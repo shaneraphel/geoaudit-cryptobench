@@ -6,6 +6,39 @@ Repository specification. This document defines scope, execution, data provenanc
 telemetry schema, and CI gates. It is not a paper and makes no comparative or
 clinical claim.
 
+## If you arrived here from the submitted paper
+
+The submission — *Auditable Algebraic Counting Field for Cryptic-Pocket
+Detection from Apo Structures* — names commit `5d1726a` as its frozen snapshot
+and asks you to audit the chronology from the commit graph. **The paper is
+authoritative for every claim it makes.** This repository has moved since that
+commit, and two things you will find here are not in it.
+
+**Two process counts in the paper are wrong, and both understate us.** The
+Limitations state "12 indexed test reads and 12 scored architectures". The
+ledger recorded **13** indexed reads at the submission commit itself, so that
+figure was already off by one at freeze; it is 13 today. The architecture count
+was right at `5d1726a` and is now **20** — partly new work, and partly because
+the ledger had three signals for detecting a held-out read and all three keyed
+on how an artifact *spelled* its metric, so eighteen artifacts naming their
+metric after the method were invisible to it. Both corrections widen the
+multiplicity the paper's small official-fold margins should be read against, so
+both cut against the paper's numbers rather than for them.
+
+**Architectures the paper does not evaluate.** The paper reports one detector of
+ours, the counting field, as trailing pLM-NN by −0.0243 [−0.0465, −0.0033]; that
+is still true of that detector. Six other architectures here score above it on
+the same units, and the best is not separable from pLM-NN on either per-unit
+metric — a development read on a fold already read too often to settle anything,
+not a correction to the paper. Set out in
+`paper/supplement_beyond_submission.tex`.
+
+Every one of the 47 scientific numbers the paper prints is still reproduced by
+this repository, checked one by one against the macro that generated it by
+`tools/check_submission_consistency.py`
+(`results/official_fold/SUBMISSION_CONSISTENCY.json`). The divergence is
+confined to the process counts and the scope above.
+
 **Scope (single claim).** Evaluating counting-only cryptic-pocket detectors on the
 official CryptoBench receptor-only benchmark.
 
@@ -759,9 +792,9 @@ all fail-closed.
 | Tenth fold read | `make read10` | the comparison stops reproducing, our own AUC stops recomputing through the baseline's own call, or the read prints a sentence its outcome did not select |
 | Figure/caption pairing | `make macros` | a figure carries the caption generated for a different image, or a `\ref` names a label that exists nowhere. Both used to be invisible: TeX renders a broken reference as `??` and exits zero, and a caption macro numbered by draw order slid onto the wrong plot when a figure was inserted ahead of it |
 
-Current state: `verify_claims` all checks pass; `make test` runs 925 tests and
+Current state: `verify_claims` all checks pass; `make test` runs 934 tests and
 661 subtests, all passing. `unittest`'s discovery finds 774 of them, because it
-collects only methods of `TestCase` subclasses; the other 151 are written as
+collects only methods of `TestCase` subclasses; the other 160 are written as
 plain functions and are reachable only through `pytest`.
 
 That gap is why `make test` invokes `pytest` rather than `unittest`. This README

@@ -12,13 +12,13 @@
   },
   "counts": {
     "superseded": 65,
-    "cited": 91,
+    "cited": 92,
     "exploration": 51,
     "inventory": 7,
     "frozen_unread": 2,
     "fold_access": 11
   },
-  "n_artifacts": 227,
+  "n_artifacts": 228,
   "artifacts": [
     {
       "artifact": "results/ARTIFACT_INPUTS.json",
@@ -1510,6 +1510,13 @@
       "reason": "a number in the paper or README derives from this file",
       "schema": "geoaudit.subgroup_read.v1",
       "bytes": 12322
+    },
+    {
+      "artifact": "results/official_fold/SUBMISSION_CONSISTENCY.json",
+      "class": "cited",
+      "reason": "a number in the paper or README derives from this file",
+      "schema": "geoaudit.submission_consistency.v1",
+      "bytes": 11829
     },
     {
       "artifact": "results/official_fold/TEST_FOLD_ACCESS_LEDGER.json",
