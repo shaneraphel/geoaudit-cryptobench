@@ -22,7 +22,6 @@
     "results/external/WHERE_WE_BEAT_PLMNN.json": "7883b98974644497d245840c1fe54499b69b74115140075cc97244229a615dfb",
     "results/external/RHOA_CASE_STUDY.json": "566f692a5d22c9ad60b057d0aed929ecda1b7b7d2759d05bcac8688edbdd7ec3",
     "results/external/RESIDUE_RECOVERIES_VS_PLMNN.json": "938c9eff58f0f557b7405aaaf2d88b27cb72edb6ec5b764e00a5f45396f20ec9",
-    "results/external/SETN_READ.json": "ccf37657db37903fb9add45f05efb666db951fe86c362afcd080ef5ebc2cea54",
     "results/external/DUAL_BASELINE_RECOVERIES.json": "271855ed7324e5923a0a90e75fbf6fb894352013499d130d931d05c47547576b",
     "results/official_fold/GEOMETRY_FIELD_VS_PLMNN_PROBE.json": "fee34287ff2d42313ceaf44d95f0c82278f78ae5c33382e741417137aa82ccac",
     "results/official_fold/GEOMETRY_PLM_DELTA_COVARIATES.json": "081b8fab42b69ee7cf6fe1152ef1921ea56233516988a93672fef02ab03b0ebd"
@@ -107,11 +106,6 @@
       "sha256": "9f3bff39e8c17a7ccb9eb4c7de0a4aa5ab4163e91a4987943dcc34470878a48a",
       "bytes": 18688,
       "caption": "Dual-baseline residue recoveries on spent Set A: labelled cryptic, counting field \u226580%, pLM-NN and P2Rank both \u226450%. 3 recovered residues across 3 units; 9 mirror residues across 5 units. Asymmetry favours the baselines; confirmatory means unchanged. clinical_grade is false."
-    },
-    "fig_setn_read.png": {
-      "sha256": "5cd68abd888085059c7adcbcacfd15676c375831e04d97136a7f1118a4b43d8b",
-      "bytes": 41560,
-      "caption": "Set N specificity read (384 units: 57 with a cryptic pocket, 327 shown to have none). Unit score = mean of top-10 residue scores; statistic = ROC-AUC separating the halves. Outcome under the committed plan: none_resolved. Point estimates: pLM-NN 0.5874, PocketMiner 0.5344, chain-length control 0.5457, counting field 0.5117, P2Rank 0.4480. Every Bonferroni-corrected comparison of the counting field against a baseline crosses zero. clinical_grade is false."
     },
     "fig_geometry_field_vs_plmnn_official.png": {
       "sha256": "719e4732ff7031a33b269177c10c00625b26339251712ed545857ea7757c7756",
